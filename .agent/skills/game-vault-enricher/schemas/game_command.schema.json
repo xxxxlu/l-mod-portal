@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GameCommand",
+  "description": "Industrial standard schema for console commands, GM scripts, and cheats in L-MOD Vault.",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "syntax_type",
+    "code",
+    "desc",
+    "min_version",
+    "framework_required"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the command (e.g., 'bmw_slomo_03', 'cp_god_mode').",
+      "pattern": "^[a-z0-9_-]+$"
+    },
+    "name": {
+      "type": "object",
+      "description": "Bilingual localized command name.",
+      "required": ["zh-CN", "en"],
+      "properties": {
+        "zh-CN": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Chinese simplified display name."
+        },
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "description": "English display name."
+        }
+      },
+      "additionalProperties": false
+    },
+    "syntax_type": {
+      "type": "string",
+      "description": "The execution environment and syntax paradigm of the command.",
+      "enum": [
+        "ue_console",
+        "gm_command",
+        "lua_function",
+        "creation_hex",
+        "redengine_cmd",
+        "unity_dev",
+        "reframework_action",
+        "trainer_hotkey"
+      ]
+    },
+    "code": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The exact executable command string, function invocation, or parameter format."
+    },
+    "desc": {
+      "type": "string",
+      "minLength": 5,
+      "description": "Detailed explanation of what the command does, benefits to player, and caveats."
+    },
+    "min_version": {
+      "type": "string",
+      "description": "Minimum verified game patch or framework version (e.g., 'v1.0.8+', 'CET 2.13', 'UE4SS 3.0+')."
+    },
+    "framework_required": {
+      "type": "string",
+      "description": "Prerequisite runtime framework or console injector (e.g., 'UE4SS', 'Cyber Engine Tweaks', 'None (Native Console)')."
+    }
+  },
+  "additionalProperties": true
+}

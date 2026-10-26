@@ -1,0 +1,11 @@
+# ==============================================================================
+# Cloudflare Pages Redirects & Rewrites for L-MOD Vault
+# ==============================================================================
+
+# Friendly shortlinks & route rewrites
+/radar          /radar.html       200
+/index          /index.html       200
+/home           /index.html       200
+
+# SPA Hash & Dynamic Deep-link Fallback
+/*              /index.html       200

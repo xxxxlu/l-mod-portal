@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TrainerInfo",
+  "description": "Standard schema for FLiNG and standalone trainer entries in L-MOD Vault.",
+  "type": "object",
+  "required": [
+    "author",
+    "version",
+    "officialUrl",
+    "cleanMirrorUrl",
+    "safeVerification",
+    "hotkeysCategorized"
+  ],
+  "properties": {
+    "author": {
+      "type": "string",
+      "description": "Trainer creator, e.g. '风灵月影 (FLiNG)'."
+    },
+    "version": {
+      "type": "string",
+      "description": "Target patch version string."
+    },
+    "officialUrl": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://flingtrainer\\.com/trainer/"
+    },
+    "cleanMirrorUrl": {
+      "type": "string",
+      "format": "uri"
+    },
+    "safeVerification": {
+      "type": "object",
+      "required": [
+        "isCleanVerified",
+        "hasBundledAds",
+        "virusTotalRatio",
+        "md5CheckSum",
+        "powershellExclusionCmd",
+        "troubleshootSteps"
+      ],
+      "properties": {
+        "isCleanVerified": { "type": "boolean" },
+        "hasBundledAds": { "type": "boolean" },
+        "virusTotalRatio": { "type": "string" },
+        "md5CheckSum": { "type": "string" },
+        "powershellExclusionCmd": { "type": "string", "minLength": 10 },
+        "troubleshootSteps": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 3
+        }
+      }
+    },
+    "hotkeysCategorized": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["category", "items"],
+        "properties": {
+          "category": { "type": "string" },
+          "items": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": ["key", "action"],
+              "properties": {
+                "key": { "type": "string" },
+                "action": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

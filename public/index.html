@@ -1,0 +1,3311 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>L-MOD Vault | 全球单机游戏 MOD · 纯净修改器 · 官方控制台代码库</title>
+  <!-- SEO & Standard Meta -->
+  <meta name="description" content="L-MOD Vault 全球单机游戏纯净智库：收录 100 款 3A 旗舰单机大作，提供场景化一键指令集、纯净免翻修改器直链、前置 Mod 生态框架与实时避坑雷达。零假代码，零外链广告，免后端极速分发。">
+  <meta name="keywords" content="单机游戏MOD,控制台代码,修改器下载,赛博朋克2077,黑神话悟空,巫师3,博德之门3,艾尔登法环,Steam补丁避坑,L-MOD Vault">
+  <meta name="author" content="L-MOD Team">
+  <meta name="theme-color" content="#0c0d0f">
+
+  <!-- Open Graph / WeChat / QQ / Discord -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://lmod-vault.pages.dev/">
+  <meta property="og:site_name" content="L-MOD Vault">
+  <meta property="og:title" content="L-MOD Vault | 全球单机游戏 MOD · 纯净修改器 · 官方控制台代码库">
+  <meta property="og:description" content="收录全球 Top 100 单机大作，全息采掘无假代码指令集，集成 Fling/Nexus 纯净免翻直链与 Steam 实时补丁雷达。">
+  <meta property="og:image" content="https://lmod-vault.pages.dev/avatar.jpg">
+  <meta property="og:image:width" content="600">
+  <meta property="og:image:height" content="600">
+  <meta property="og:image:alt" content="L-MOD Vault Brand Emblem">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="L-MOD Vault | 全球单机游戏 MOD · 纯净修改器 · 官方控制台代码库">
+  <meta name="twitter:description" content="收录全球 Top 100 单机大作，全息采掘无假代码指令集，集成 Fling/Nexus 纯净免翻直链与 Steam 实时补丁雷达。">
+  <meta name="twitter:image" content="https://lmod-vault.pages.dev/avatar.jpg">
+
+  <!-- Favicon & Touch Icons -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="apple-touch-icon" href="avatar.jpg">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Display"', '"SF Pro Text"', '"Google Sans"', '"Inter"', 'sans-serif'],
+            mono: ['"SF Mono"', '"JetBrains Mono"', 'Menlo', 'Consolas', 'monospace']
+          },
+          colors: {
+            brand: {
+              blue: '#0071e3',
+              purple: '#8b5cf6',
+              pink: '#ec4899',
+              green: '#10b981',
+              amber: '#f59e0b',
+              red: '#ef4444'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Google Sans", "Inter", sans-serif;
+    }
+
+    /* Apple-style Smooth Shimmer Brand Gradient */
+    .brand-gradient-text {
+      background: linear-gradient(135deg, #0071e3 0%, #8b5cf6 45%, #ec4899 85%, #f59e0b 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-gradient-bg {
+      background: linear-gradient(135deg, #0071e3 0%, #8b5cf6 45%, #ec4899 85%, #f59e0b 100%);
+    }
+
+    /* Custom Apple & Google hybrid scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(140, 140, 145, 0.3);
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(140, 140, 145, 0.5);
+    }
+
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Subtle logo crystal glow */
+    @keyframes crystalFloat {
+      0%, 100% { transform: translateY(0px) rotate(0deg); filter: drop-shadow(0 4px 12px rgba(139, 92, 246, 0.35)); }
+      50% { transform: translateY(-2px) rotate(1deg); filter: drop-shadow(0 8px 18px rgba(0, 113, 227, 0.45)); }
+    }
+    .animate-crystal {
+      animation: crystalFloat 5s infinite ease-in-out;
+    }
+
+    /* Apple glass transition */
+    .glass-surface {
+      transition: background-color 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+  </style>
+</head>
+<body class="bg-[#f5f6f8] dark:bg-[#0c0d0f] text-zinc-900 dark:text-zinc-100 min-h-screen flex flex-col md:flex-row transition-colors duration-300 selection:bg-blue-500 selection:text-white">
+
+  <!-- WeChat Legacy Thumbnail Sniffer -->
+  <img src="avatar.jpg" alt="L-MOD Vault" style="position:absolute;left:-9999px;top:-9999px;width:300px;height:300px;opacity:0;pointer-events:none;" />
+
+  <!-- ======================================================== -->
+  <!-- WECHAT SAFE GATEWAY BANNER (微信防拦截 & 浏览器拉起指引) -->
+  <!-- ======================================================== -->
+  <div id="wechat-safe-banner" class="hidden fixed top-0 left-0 right-0 z-[100] transform -translate-y-full transition-transform duration-500 ease-out">
+    <div class="bg-gradient-to-r from-amber-950/95 via-zinc-900/95 to-amber-900/95 backdrop-blur-xl border-b border-amber-500/30 text-amber-100 px-4 py-2.5 shadow-2xl">
+      <div class="max-w-7xl mx-auto flex items-center justify-between gap-3 text-xs sm:text-sm">
+        <div class="flex items-center space-x-2.5 min-w-0">
+          <span class="w-6 h-6 rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-300 flex items-center justify-center shrink-0 animate-pulse text-xs">💡</span>
+          <div class="truncate">
+            <span class="font-bold text-amber-200">【防拦截指引】</span>
+            <span class="opacity-95">为保证修改器与 Mod 正常下载，建议点击右上角</span>
+            <span class="inline-flex items-center px-1.5 py-0.5 rounded bg-amber-500/30 text-amber-100 font-mono font-bold mx-1">···</span>
+            <span class="opacity-95">选择</span>
+            <span class="font-semibold text-white underline decoration-amber-400 decoration-2 underline-offset-2">【在浏览器打开】</span>
+          </div>
+        </div>
+        <div class="flex items-center space-x-2 shrink-0">
+          <div class="hidden sm:flex items-center text-amber-300/80 text-[11px] font-mono">
+            <span>点击右上角</span>
+            <svg class="w-3.5 h-3.5 ml-1 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
+          </div>
+          <button onclick="dismissWeChatBanner()" class="p-1 rounded-full hover:bg-white/10 text-amber-300/80 hover:text-white transition-colors" title="关闭指引">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- TOAST NOTIFICATION (Apple Island / Material Floating)    -->
+  <!-- ======================================================== -->
+  <div id="toast" class="fixed top-6 left-1/2 -translate-x-1/2 z-50 transform -translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+    <div class="px-5 py-2.5 rounded-full shadow-2xl backdrop-blur-2xl bg-white/90 dark:bg-zinc-800/90 text-zinc-900 dark:text-zinc-100 text-xs sm:text-sm font-medium flex items-center space-x-2.5 border border-black/5 dark:border-white/10 ring-1 ring-black/5">
+      <div class="w-4 h-4 rounded-full bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+      </div>
+      <span id="toast-text">已复制到剪贴板</span>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- LEFT SIDEBAR NAVIGATION (Apple Frosted Rail + Google Pill) -->
+  <!-- ======================================================== -->
+  <aside id="app-sidebar" class="fixed md:sticky top-0 left-0 h-screen w-72 bg-white/80 dark:bg-[#141518]/85 backdrop-blur-2xl z-40 flex flex-col justify-between p-4 transition-all duration-300 transform -translate-x-full md:translate-x-0 border-r border-zinc-200/80 dark:border-white/[0.08]">
+    
+    <!-- Top Branding & Navigation -->
+    <div class="space-y-4">
+      
+      <!-- Brand Logo Bar -->
+      <div class="flex items-center justify-between px-2 py-1">
+        <a href="#/" class="flex items-center space-x-3 group">
+          <!-- Custom L Crystal Monogram Emblem (Not a Gemini clone) -->
+          <div class="w-9 h-9 rounded-2xl brand-gradient-bg p-[1.5px] shadow-sm animate-crystal flex items-center justify-center">
+            <div class="w-full h-full bg-white dark:bg-[#121316] rounded-[14px] flex items-center justify-center">
+              <svg class="w-5 h-5 text-blue-600 dark:text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 4v13a3 3 0 0 0 3 3h7" />
+              </svg>
+            </div>
+          </div>
+          <div>
+            <div class="flex items-center space-x-1.5">
+              <span class="font-bold text-lg tracking-tight text-zinc-900 dark:text-white">L-MOD</span>
+              <span class="text-[10px] bg-zinc-200/70 dark:bg-white/10 text-zinc-700 dark:text-zinc-300 px-2 py-0.5 rounded-full font-mono font-medium">Vault 2.5</span>
+            </div>
+            <div class="text-[10px] text-zinc-400 dark:text-zinc-500 tracking-wider">HYBRID GAME INTELLIGENCE</div>
+          </div>
+        </a>
+        <button onclick="toggleSidebar()" class="md:hidden text-zinc-500 hover:text-zinc-900 dark:hover:text-white p-1.5 rounded-full hover:bg-zinc-100 dark:hover:bg-white/10">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
+
+      <!-- Action: Explore All / Reset Button -->
+      <button onclick="resetToHome()" class="w-full flex items-center space-x-3 px-4 py-2.5 bg-zinc-100 hover:bg-zinc-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-zinc-800 dark:text-zinc-200 rounded-full text-sm font-medium transition-all group border border-zinc-200/50 dark:border-white/5">
+        <svg class="w-4 h-4 text-blue-600 dark:text-blue-400 group-hover:rotate-90 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"></path></svg>
+        <span id="sidebar-explore-label">探索全部 100 款游戏</span>
+      </button>
+
+      <!-- Curated Nav Topics (Apple Segmented Style List) -->
+      <div class="pt-2 space-y-1 text-xs">
+        <div class="px-3 text-zinc-400 dark:text-zinc-500 font-semibold tracking-wider uppercase text-[10px] mb-1.5">精选专题</div>
+        
+        <button onclick="setFilterAndNavigate('all')" class="sidebar-nav-btn w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-white/5 transition-all text-left font-medium active bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400" data-nav="all">
+          <span class="text-sm">🌟</span>
+          <span id="sidebar-nav-all">全部 100 款神作排行</span>
+        </button>
+
+        <button onclick="setFilterAndNavigate('certified')" class="sidebar-nav-btn w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-white/5 transition-all text-left font-medium" data-nav="certified">
+          <span class="text-sm">👑</span>
+          <span id="sidebar-nav-certified" class="font-bold text-amber-500 dark:text-amber-400">老L全息精测认证 (前14款)</span>
+        </button>
+
+        <button onclick="setFilterAndNavigate('mining')" class="sidebar-nav-btn w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-white/5 transition-all text-left font-medium" data-nav="mining">
+          <span class="text-sm">🛠️</span>
+          <span id="sidebar-nav-mining">持续排雷采掘中 (后续单机)</span>
+        </button>
+
+        <button onclick="setFilterAndNavigate('console')" class="sidebar-nav-btn w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-white/5 transition-all text-left font-medium" data-nav="console">
+          <span class="text-sm">⚡</span>
+          <span id="sidebar-nav-console">官方控制台作弊代码</span>
+        </button>
+
+        <button onclick="setFilterAndNavigate('mods')" class="sidebar-nav-btn w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-white/5 transition-all text-left font-medium" data-nav="mods">
+          <span class="text-sm">📦</span>
+          <span id="sidebar-nav-mods">N网爆款 MOD 与补丁</span>
+        </button>
+
+        <button onclick="setFilterAndNavigate('trainers')" class="sidebar-nav-btn w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-white/5 transition-all text-left font-medium" data-nav="trainers">
+          <span class="text-sm">🛡️</span>
+          <span id="sidebar-nav-trainers">纯净修改器 (Verified Clean)</span>
+        </button>
+
+        <!-- Steam Avoidance Radar Sidebar Entry -->
+        <a href="radar.html" class="sidebar-nav-btn w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-white/5 transition-all text-left font-medium group">
+          <div class="flex items-center space-x-3">
+            <span class="text-sm">📡</span>
+            <span id="sidebar-nav-radar" class="font-bold text-amber-500 dark:text-amber-400">Steam 避坑实时雷达</span>
+          </div>
+          <span class="flex items-center space-x-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
+            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-bold">LIVE</span>
+          </span>
+        </a>
+      </div>
+
+      <!-- Recents Section -->
+      <div class="pt-3 space-y-1 text-xs">
+        <div class="px-3 text-zinc-400 dark:text-zinc-500 font-semibold tracking-wider uppercase text-[10px] mb-1.5">近期浏览</div>
+        <div id="recent-games-list" class="space-y-0.5">
+          <div class="px-3 py-2 text-zinc-400 dark:text-zinc-600 italic text-xs">暂无历史记录</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Controls & User Info -->
+    <div class="pt-4 border-t border-zinc-200/80 dark:border-white/[0.08] space-y-3">
+      
+      <!-- Creator L Profile Chip -->
+      <div class="flex items-center justify-between p-2 rounded-2xl hover:bg-zinc-100 dark:hover:bg-white/5 transition-colors cursor-pointer group" onclick="showToast('主理人 L • 专属单机游戏模组空间')">
+        <div class="flex items-center space-x-3 min-w-0">
+          <div class="w-9 h-9 rounded-full overflow-hidden border border-black/10 dark:border-white/10 shrink-0">
+            <img src="avatar.jpg" alt="L" class="w-full h-full object-cover">
+          </div>
+          <div class="overflow-hidden min-w-0">
+            <div class="font-semibold text-xs text-zinc-900 dark:text-zinc-100 truncate">L • 游戏策展人</div>
+            <div class="text-[11px] text-zinc-500 dark:text-zinc-400 truncate">Hybrid Engine 2.5</div>
+          </div>
+        </div>
+        <div class="text-zinc-400 group-hover:text-blue-500 transition-colors pr-1 shrink-0">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+        </div>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- Mobile Sidebar Overlay -->
+  <div id="sidebar-overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/40 z-30 hidden md:hidden backdrop-blur-sm transition-opacity"></div>
+
+  <!-- ======================================================== -->
+  <!-- MAIN WORKSPACE CANVAS                                   -->
+  <!-- ======================================================== -->
+  <div class="flex-1 min-h-screen flex flex-col overflow-y-auto">
+
+    <!-- Top Emergency Broadcast Ticker (Synced with Steam Radar) -->
+    <div class="bg-gradient-to-r from-red-950/90 via-zinc-900/95 to-amber-950/90 border-b border-white/10 text-xs py-1.5 px-4 overflow-hidden z-40 relative">
+      <div class="max-w-7xl mx-auto flex items-center justify-between gap-3 text-[11px]">
+        <div class="flex items-center space-x-2 shrink-0 bg-red-500/20 text-red-300 px-2.5 py-0.5 rounded-full border border-red-500/30 font-semibold">
+          <span class="relative flex h-1.5 w-1.5">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500"></span>
+          </span>
+          <span id="broadcast-bar-title">Steam 补丁避坑紧急广播</span>
+        </div>
+        <div class="flex-1 overflow-hidden h-4">
+          <div class="truncate text-zinc-300 font-medium space-x-6">
+            <span class="text-red-400 font-bold">🔴【辐射4】</span><a href="radar.html?game=fallout-4" class="hover:underline">次世代大更新破坏近 10 年 Mod 体系，推荐使用 Downgrader 回退 1.10.163</a>
+            <span class="text-zinc-600">|</span>
+            <span class="text-amber-400 font-bold">🟡【上古卷轴5】</span><a href="radar.html?game=skyrim-se" class="hover:underline">v1.6.1170 前置需更新对齐！认准 SKSE64 2.2.6 与 Engine Fixes</a>
+            <span class="text-zinc-600">|</span>
+            <span class="text-emerald-400 font-bold">🟢【博德之门3】</span><a href="radar.html?game=baldurs-gate-3" class="hover:underline">Patch 7 官方工坊对齐实测通过！BG3SE v18+ 完全兼容</a>
+            <span class="text-zinc-600">|</span>
+            <span class="text-emerald-400 font-bold">🟢【艾尔登法环】</span><a href="radar.html?game=elden-ring" class="hover:underline">黄金树幽影 v1.14 离线免封方案已同步！ModEngine2 零封号</a>
+          </div>
+        </div>
+        <a href="radar.html" class="shrink-0 text-blue-400 hover:text-blue-300 font-bold flex items-center gap-1">
+          <span id="broadcast-bar-btn">进入避坑雷达看板</span>
+          <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Top Floating App Bar (Apple Frosted Glass) -->
+    <header class="sticky top-0 z-30 bg-[#f5f6f8]/80 dark:bg-[#0c0d0f]/80 backdrop-blur-2xl px-4 sm:px-8 h-16 flex items-center justify-between border-b border-zinc-200/60 dark:border-white/[0.06] transition-colors">
+      
+      <!-- Left: Mobile Menu & Breadcrumbs -->
+      <div class="flex items-center space-x-3">
+        <button onclick="toggleSidebar()" class="md:hidden text-zinc-600 dark:text-zinc-300 p-2 rounded-full hover:bg-zinc-200/60 dark:hover:bg-white/10 transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+
+        <!-- Brand Capsule Indicator -->
+        <div class="hidden sm:flex items-center space-x-2 bg-white/90 dark:bg-white/5 border border-zinc-200/80 dark:border-white/10 px-3.5 py-1.5 rounded-full shadow-sm text-xs">
+          <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
+          <span class="font-medium text-zinc-700 dark:text-zinc-300">L-MOD Vault</span>
+          <span class="text-zinc-400">/</span>
+          <span class="text-zinc-500 dark:text-zinc-400" id="header-breadcrumb-title">全球 100 款单机神作</span>
+        </div>
+      </div>
+
+      <!-- Right: Custom Dropdowns & Theme Toggles -->
+      <div class="flex items-center space-x-2.5">
+
+        <!-- STEAM RADAR ACCESS BADGE -->
+        <a 
+          href="radar.html" 
+          title="Steam 补丁变动与 Mod 兼容性实时避坑雷达"
+          class="flex items-center space-x-1.5 bg-gradient-to-r from-red-500/10 via-amber-500/10 to-emerald-500/10 hover:from-red-500/20 hover:to-emerald-500/20 text-zinc-800 dark:text-zinc-200 px-3 py-1.5 rounded-full text-xs font-bold border border-amber-500/30 dark:border-amber-400/30 shadow-sm transition-all"
+        >
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+          </span>
+          <span class="tracking-tight" id="header-radar-btn-text">📡 避坑雷达</span>
+        </a>
+        
+        <!-- ======================================================== -->
+        <!-- CUSTOM COMPONENT 1: APPLE-STYLE CUSTOM LANGUAGE DROPDOWN -->
+        <!-- ======================================================== -->
+        <div class="relative" id="custom-lang-dropdown">
+          <!-- Dropdown Trigger Button (Custom Frosted Pill) -->
+          <button 
+            type="button" 
+            onclick="toggleLangDropdown(event)"
+            class="flex items-center space-x-2 bg-white/90 dark:bg-white/5 hover:bg-white dark:hover:bg-white/10 text-zinc-800 dark:text-zinc-200 px-3.5 py-1.5 rounded-full text-xs font-medium border border-zinc-200/80 dark:border-white/10 shadow-sm transition-all cursor-pointer"
+            id="lang-trigger-btn"
+          >
+            <span id="current-lang-flag">🇨🇳</span>
+            <span id="current-lang-name">简体中文</span>
+            <svg class="w-3.5 h-3.5 text-zinc-400 transition-transform duration-200" id="lang-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </button>
+
+          <!-- Custom Floating Menu Panel (Apple Glass) -->
+          <div 
+            id="lang-menu" 
+            class="hidden absolute right-0 mt-2 w-52 bg-white/95 dark:bg-[#18191d]/95 backdrop-blur-2xl rounded-2xl p-1.5 shadow-2xl border border-zinc-200/80 dark:border-white/10 z-50 transform origin-top-right transition-all duration-200 text-xs"
+          >
+            <div class="px-3 py-1.5 text-[10px] uppercase tracking-wider text-zinc-400 font-semibold border-b border-zinc-100 dark:border-white/5 mb-1">
+              选择语言 · Select Language
+            </div>
+            <div class="space-y-0.5">
+              <button onclick="selectLanguage('zh-CN', '🇨🇳', '简体中文')" class="lang-option w-full flex items-center justify-between px-3 py-2 rounded-xl text-left hover:bg-blue-50 dark:hover:bg-white/10 transition-colors text-zinc-800 dark:text-zinc-200" data-lang="zh-CN">
+                <span class="flex items-center space-x-2"><span>🇨🇳</span><span>简体中文</span></span>
+                <span class="lang-check text-blue-600 dark:text-blue-400 font-bold">✓</span>
+              </button>
+              <button onclick="selectLanguage('en', '🇺🇸', 'English')" class="lang-option w-full flex items-center justify-between px-3 py-2 rounded-xl text-left hover:bg-blue-50 dark:hover:bg-white/10 transition-colors text-zinc-800 dark:text-zinc-200" data-lang="en">
+                <span class="flex items-center space-x-2"><span>🇺🇸</span><span>English</span></span>
+                <span class="lang-check hidden text-blue-600 dark:text-blue-400 font-bold">✓</span>
+              </button>
+              <button onclick="selectLanguage('zh-TW', '🇭🇰', '繁體中文')" class="lang-option w-full flex items-center justify-between px-3 py-2 rounded-xl text-left hover:bg-blue-50 dark:hover:bg-white/10 transition-colors text-zinc-800 dark:text-zinc-200" data-lang="zh-TW">
+                <span class="flex items-center space-x-2"><span>🇭🇰</span><span>繁體中文</span></span>
+                <span class="lang-check hidden text-blue-600 dark:text-blue-400 font-bold">✓</span>
+              </button>
+              <button onclick="selectLanguage('ja', '🇯🇵', '日本語')" class="lang-option w-full flex items-center justify-between px-3 py-2 rounded-xl text-left hover:bg-blue-50 dark:hover:bg-white/10 transition-colors text-zinc-800 dark:text-zinc-200" data-lang="ja">
+                <span class="flex items-center space-x-2"><span>🇯🇵</span><span>日本語</span></span>
+                <span class="lang-check hidden text-blue-600 dark:text-blue-400 font-bold">✓</span>
+              </button>
+              <button onclick="selectLanguage('ko', '🇰🇷', '한국어')" class="lang-option w-full flex items-center justify-between px-3 py-2 rounded-xl text-left hover:bg-blue-50 dark:hover:bg-white/10 transition-colors text-zinc-800 dark:text-zinc-200" data-lang="ko">
+                <span class="flex items-center space-x-2"><span>🇰🇷</span><span>한국어</span></span>
+                <span class="lang-check hidden text-blue-600 dark:text-blue-400 font-bold">✓</span>
+              </button>
+              <button onclick="selectLanguage('ru', '🇷🇺', 'Русский')" class="lang-option w-full flex items-center justify-between px-3 py-2 rounded-xl text-left hover:bg-blue-50 dark:hover:bg-white/10 transition-colors text-zinc-800 dark:text-zinc-200" data-lang="ru">
+                <span class="flex items-center space-x-2"><span>🇷🇺</span><span>Русский</span></span>
+                <span class="lang-check hidden text-blue-600 dark:text-blue-400 font-bold">✓</span>
+              </button>
+              <button onclick="selectLanguage('de', '🇩🇪', 'Deutsch')" class="lang-option w-full flex items-center justify-between px-3 py-2 rounded-xl text-left hover:bg-blue-50 dark:hover:bg-white/10 transition-colors text-zinc-800 dark:text-zinc-200" data-lang="de">
+                <span class="flex items-center space-x-2"><span>🇩🇪</span><span>Deutsch</span></span>
+                <span class="lang-check hidden text-blue-600 dark:text-blue-400 font-bold">✓</span>
+              </button>
+              <button onclick="selectLanguage('es', '🇪🇸', 'Español')" class="lang-option w-full flex items-center justify-between px-3 py-2 rounded-xl text-left hover:bg-blue-50 dark:hover:bg-white/10 transition-colors text-zinc-800 dark:text-zinc-200" data-lang="es">
+                <span class="flex items-center space-x-2"><span>🇪🇸</span><span>Español</span></span>
+                <span class="lang-check hidden text-blue-600 dark:text-blue-400 font-bold">✓</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ======================================================== -->
+        <!-- CUSTOM COMPONENT 2: DAY/NIGHT DUAL-THEME SWITCHER        -->
+        <!-- ======================================================== -->
+        <button 
+          onclick="toggleTheme()" 
+          id="theme-toggle-btn" 
+          title="切换白天 / 夜间模式 (跟随当前设备)"
+          class="flex items-center justify-center w-8 h-8 rounded-full bg-white/90 dark:bg-white/5 hover:bg-white dark:hover:bg-white/10 text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-white/10 shadow-sm transition-all"
+        >
+          <!-- Sun Icon (for Dark mode) -->
+          <svg class="w-4 h-4 hidden dark:block text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+          <!-- Moon Icon (for Light mode) -->
+          <svg class="w-4 h-4 block dark:hidden text-zinc-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+        </button>
+
+        <!-- View Mode Switcher (Gallery vs Clean Search List) -->
+        <div class="bg-zinc-200/60 dark:bg-white/5 p-1 rounded-full flex items-center space-x-1 border border-zinc-200/50 dark:border-white/5">
+          <button id="view-mode-gallery-btn" onclick="setViewMode('gallery')" title="画廊画卷视图" class="p-1 px-2.5 rounded-full text-xs font-medium bg-white dark:bg-blue-600 text-zinc-900 dark:text-white shadow-sm transition-all flex items-center space-x-1">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+            <span class="hidden sm:inline" id="view-mode-gallery-text">画廊</span>
+          </button>
+          <button id="view-mode-list-btn" onclick="setViewMode('list')" title="极简搜索列表" class="p-1 px-2.5 rounded-full text-xs font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-all flex items-center space-x-1">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            <span class="hidden sm:inline" id="view-mode-list-text">极简</span>
+          </button>
+        </div>
+
+      </div>
+
+    </header>
+
+    <!-- Main Workspace Container -->
+    <main class="flex-1 w-full max-w-5xl mx-auto px-4 sm:px-8 py-6">
+
+      <!-- ========================================== -->
+      <!-- VIEW 1: CATALOG VIEW                       -->
+      <!-- ========================================== -->
+      <section id="view-catalog" class="transition-opacity duration-200">
+
+        <!-- Modern Hero Section (Apple typography + subtle brand gradient) -->
+        <div class="pt-6 pb-8 text-center sm:text-left">
+          <div class="inline-flex items-center space-x-2 mb-3 px-3 py-1 rounded-full bg-white/90 dark:bg-white/5 text-xs text-blue-600 dark:text-blue-400 border border-zinc-200/80 dark:border-white/10 shadow-sm">
+            <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+            <span>L-MOD Vault • 单机全功能作弊与MOD集约平台</span>
+          </div>
+          <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight mb-3 text-zinc-900 dark:text-white">
+            <span>探索单机代码 ·</span>
+            <span class="brand-gradient-text">重塑游戏体验</span>
+          </h1>
+          <p class="text-zinc-600 dark:text-zinc-400 text-sm sm:text-base max-w-2xl leading-relaxed" id="hero-subtitle">
+            收录全球前 100 款热门单机。官方控制台代码、N网精选高分 MOD 与纯净修改器一键直达，告别垃圾广告与捆绑软件。
+          </p>
+        </div>
+
+        <!-- ======================================================== -->
+        <!-- STEAM RADAR LIVE STATUS BAR & COMPATIBILITY CAPSULE      -->
+        <!-- ======================================================== -->
+        <div class="mb-6 bg-gradient-to-r from-zinc-900 via-[#12141c] to-zinc-900 rounded-[24px] p-4 sm:p-5 border border-white/10 shadow-lg text-white space-y-3">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div class="flex items-center space-x-2.5">
+              <span class="relative flex h-2.5 w-2.5">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+              </span>
+              <span class="font-extrabold text-sm sm:text-base tracking-tight text-white flex items-center gap-1.5">
+                <span>📡 Steam 补丁变动与 Mod 兼容性实时避坑雷达</span>
+              </span>
+              <span class="bg-blue-500/20 text-blue-400 text-[10px] font-mono px-2 py-0.5 rounded-full border border-blue-500/30 font-bold">24h 智能巡检</span>
+            </div>
+
+            <!-- Link to Standalone Radar -->
+            <a 
+              href="radar.html"
+              class="self-start sm:self-auto px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white/10 hover:bg-white/20 text-zinc-200 border border-white/10 transition-all flex items-center gap-1.5 group cursor-pointer"
+            >
+              <span>进入全屏雷达看板</span>
+              <svg class="w-3.5 h-3.5 text-zinc-400 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            </a>
+          </div>
+
+          <!-- Status Indicators Row -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-1">
+            <div onclick="filterByRadarStatus('green')" class="bg-white/5 hover:bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-2.5 transition-all cursor-pointer">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] text-emerald-400 font-medium">🟢 完美兼容实测</span>
+                <span class="text-xs font-mono font-bold text-emerald-400">88 款</span>
+              </div>
+              <p class="text-[10px] text-zinc-400 mt-0.5 truncate">最新推送实测稳定运行，点击筛选</p>
+            </div>
+
+            <div onclick="filterByRadarStatus('yellow')" class="bg-white/5 hover:bg-amber-500/10 border border-amber-500/20 rounded-xl p-2.5 transition-all cursor-pointer">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] text-amber-400 font-medium">🟡 需更前置/降级</span>
+                <span class="text-xs font-mono font-bold text-amber-400">9 款</span>
+              </div>
+              <p class="text-[10px] text-zinc-400 mt-0.5 truncate">需升级 Script Extender 前置</p>
+            </div>
+
+            <div onclick="filterByRadarStatus('red')" class="bg-white/5 hover:bg-red-500/10 border border-red-500/30 rounded-xl p-2.5 transition-all cursor-pointer">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] text-red-400 font-medium">🔴 坏档暂停更新</span>
+                <span class="text-xs font-mono font-bold text-red-400">3 款</span>
+              </div>
+              <p class="text-[10px] text-zinc-400 mt-0.5 truncate">次世代破坏老Mod，需锁定更新</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Smart Omnibox Search Bar (Spotlight + Prompt hybrid) -->
+        <div class="mb-6">
+          <div class="bg-white/95 dark:bg-[#151619] hover:border-zinc-300 dark:hover:border-white/20 focus-within:border-blue-500 dark:focus-within:border-blue-400 focus-within:ring-4 focus-within:ring-blue-500/10 rounded-[28px] p-2.5 px-5 flex items-center transition-all shadow-sm border border-zinc-200/80 dark:border-white/[0.08]">
+            <div class="mr-3 text-blue-600 dark:text-blue-400 shrink-0">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            </div>
+            <input 
+              type="text" 
+              id="search-input"
+              oninput="handleSearch(this.value)"
+              onkeydown="if(event.key==='Enter') executeSmartSearch(this.value)"
+              placeholder="搜索游戏、物品或代码（如：赛博朋克加钱 / 黑神话地图 / 老滚5上帝代码）..."
+              class="w-full bg-transparent text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 dark:placeholder-zinc-500 text-sm sm:text-base focus:outline-none"
+            >
+            <div class="flex items-center space-x-1.5 shrink-0">
+              <button onclick="clearSearch()" id="clear-search-btn" class="hidden w-8 h-8 rounded-full hover:bg-zinc-100 dark:hover:bg-white/10 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 items-center justify-center transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+              </button>
+              <button onclick="executeSmartSearch(document.getElementById('search-input').value)" class="w-8 h-8 rounded-full bg-blue-600 hover:bg-blue-500 text-white flex items-center justify-center transition-all shadow-sm" title="智能检索">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Horizontal Scrollable Pill Chips (Apple fluid pills, no square boxes) -->
+          <div class="flex items-center gap-2 mt-3 overflow-x-auto no-scrollbar py-1 text-xs">
+            <span class="text-zinc-400 font-medium shrink-0 pl-1" id="quick-search-label">快速检索：</span>
+            
+            <button onclick="quickPrompt('赛博朋克2077 加钱指令与武器')" class="shrink-0 px-3.5 py-1.5 rounded-full bg-white/90 dark:bg-white/5 hover:bg-white dark:hover:bg-white/10 text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-white/10 shadow-sm transition-colors flex items-center space-x-1.5">
+              <span>⚔️</span>
+              <span>赛博朋克 2077【觉】与百万现金</span>
+            </button>
+
+            <button onclick="quickPrompt('黑神话悟空 3D地图MOD')" class="shrink-0 px-3.5 py-1.5 rounded-full bg-white/90 dark:bg-white/5 hover:bg-white dark:hover:bg-white/10 text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-white/10 shadow-sm transition-colors flex items-center space-x-1.5">
+              <span>🗺️</span>
+              <span>黑神话 3D 全景地图导航</span>
+            </button>
+
+            <button onclick="quickPrompt('巫师3 昆特牌全收集代码')" class="shrink-0 px-3.5 py-1.5 rounded-full bg-white/90 dark:bg-white/5 hover:bg-white dark:hover:bg-white/10 text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-white/10 shadow-sm transition-colors flex items-center space-x-1.5">
+              <span>🃏</span>
+              <span>巫师 3 昆特牌与学派套装代码</span>
+            </button>
+
+            <button onclick="quickPrompt('上古卷轴5 tgm上帝代码')" class="shrink-0 px-3.5 py-1.5 rounded-full bg-white/90 dark:bg-white/5 hover:bg-white dark:hover:bg-white/10 text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-white/10 shadow-sm transition-colors flex items-center space-x-1.5">
+              <span>🐉</span>
+              <span>上古卷轴 5 经典 tgm 上帝代码</span>
+            </button>
+
+            <button onclick="quickPrompt('生化危机4重制版 无限火箭筒')" class="shrink-0 px-3.5 py-1.5 rounded-full bg-white/90 dark:bg-white/5 hover:bg-white dark:hover:bg-white/10 text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-white/10 shadow-sm transition-colors flex items-center space-x-1.5">
+              <span>🧟</span>
+              <span>生化 4 无限火箭筒修改</span>
+            </button>
+
+            <button onclick="quickPrompt('艾尔登法环 纯净脱机修改器')" class="shrink-0 px-3.5 py-1.5 rounded-full bg-white/90 dark:bg-white/5 hover:bg-white dark:hover:bg-white/10 text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-white/10 shadow-sm transition-colors flex items-center space-x-1.5">
+              <span>🛡️</span>
+              <span>老头环 纯净脱机修改器</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- ======================================================== -->
+        <!-- SMART SEARCH INSTANT ANSWER CARD                         -->
+        <!-- ======================================================== -->
+        <div id="smart-ai-response-box" class="hidden mb-8 transition-all duration-300">
+          <div class="bg-white/95 dark:bg-[#151619] rounded-[28px] p-6 border border-blue-500/20 shadow-xl space-y-4">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-2.5">
+                <div class="w-6 h-6 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold text-xs">
+                  L
+                </div>
+                <span class="text-sm font-semibold text-zinc-900 dark:text-zinc-100">L-MOD 智能匹配解答</span>
+                <span class="text-[10px] bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 px-2 py-0.5 rounded-full font-mono font-medium">Verified Code</span>
+              </div>
+              <button onclick="dismissSmartResponse()" class="text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 p-1 rounded-full hover:bg-zinc-100 dark:hover:bg-white/10">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+              </button>
+            </div>
+
+            <div id="smart-ai-text" class="text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed space-y-2">
+              <!-- Injected by JS -->
+            </div>
+
+            <div id="smart-ai-action" class="pt-2 flex items-center justify-between border-t border-zinc-100 dark:border-white/5">
+              <!-- Injected by JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Filter Pills & Counts -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+          <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1" id="filter-container">
+            <button onclick="setFilter('all')" class="filter-btn active px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 shadow-sm transition-all shrink-0" data-filter="all" id="btn-filter-all">全部 100 款</button>
+            <button onclick="setFilter('certified')" class="filter-btn px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium bg-white/90 dark:bg-white/5 hover:bg-white dark:hover:bg-white/10 text-amber-600 dark:text-amber-400 border border-amber-500/30 transition-all shrink-0" data-filter="certified" id="btn-filter-certified">👑 老L全息精测认证 (前 14 款)</button>
+            <button onclick="setFilter('mining')" class="filter-btn px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium bg-white/90 dark:bg-white/5 hover:bg-white dark:hover:bg-white/10 text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-white/10 transition-all shrink-0" data-filter="mining" id="btn-filter-mining">🛠️ 持续排雷采掘中 (后续单机)</button>
+            <button onclick="setFilter('console')" class="filter-btn px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium bg-white/90 dark:bg-white/5 hover:bg-white dark:hover:bg-white/10 text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-white/10 transition-all shrink-0" data-filter="console" id="btn-filter-console">官方控制台支持</button>
+            <button onclick="setFilter('mods')" class="filter-btn px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium bg-white/90 dark:bg-white/5 hover:bg-white dark:hover:bg-white/10 text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-white/10 transition-all shrink-0" data-filter="mods" id="btn-filter-mods">精选 MOD 库</button>
+            <button onclick="setFilter('trainers')" class="filter-btn px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium bg-white/90 dark:bg-white/5 hover:bg-white dark:hover:bg-white/10 text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-white/10 transition-all shrink-0" data-filter="trainers" id="btn-filter-trainers">纯净修改器</button>
+          </div>
+
+          <div class="text-xs text-zinc-400 dark:text-zinc-500 shrink-0" id="games-count-display">
+            共收录 100 款单机神作
+          </div>
+        </div>
+
+        <!-- ======================================================== -->
+        <!-- MODE 1: SHOWCASE GALLERY VIEW                            -->
+        <!-- ======================================================== -->
+        <div id="games-gallery-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <!-- Injected by JavaScript -->
+        </div>
+
+        <!-- ======================================================== -->
+        <!-- MODE 2: MINIMALIST SEARCH LIST VIEW (Zero boxes)         -->
+        <!-- ======================================================== -->
+        <div id="games-list-container" class="hidden space-y-2">
+          <!-- Injected by JavaScript -->
+        </div>
+
+      </section>
+
+
+      <!-- ======================================================== -->
+      <!-- VIEW 2: SECONDARY DEEP-DIVE GAME VIEW (Zero Popups)      -->
+      <!-- ======================================================== -->
+      <section id="view-game-detail" class="hidden transition-opacity duration-200">
+        
+        <!-- Breadcrumb Bar -->
+        <div class="flex items-center justify-between mb-6 flex-wrap gap-3">
+          <a href="#/" onclick="navigateBackToCatalog(event)" class="inline-flex items-center gap-2 text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white p-1.5 pr-4 -ml-2 rounded-full hover:bg-zinc-200/60 dark:hover:bg-white/5 transition-colors group">
+            <div class="w-8 h-8 rounded-full bg-white dark:bg-white/10 shadow-sm flex items-center justify-center transition-colors">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+            </div>
+            <span id="detail-back-text">返回全部游戏库</span>
+          </a>
+          <div class="flex items-center space-x-2 text-xs text-zinc-400 dark:text-zinc-500 flex-wrap gap-y-1">
+            <span class="inline-flex items-center gap-1 text-emerald-600 dark:text-emerald-400 font-bold bg-emerald-50 dark:bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/20">
+              <svg class="w-3.5 h-3.5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+              <span id="detail-cert-text">老L·单机避坑局认证</span>
+            </span>
+            <span>•</span>
+            <span id="detail-breadcrumb-genre">Action RPG</span>
+            <span>•</span>
+            <span id="detail-breadcrumb-id" class="font-mono text-blue-600 dark:text-blue-400">cyberpunk-2077</span>
+          </div>
+        </div>
+
+        <!-- Immersive Game Hero Header -->
+        <div class="relative bg-white dark:bg-[#141518] rounded-[32px] overflow-hidden mb-6 border border-zinc-200/80 dark:border-white/10 shadow-sm">
+          <!-- Backdrop Banner Image -->
+          <div class="relative w-full h-48 sm:h-64 overflow-hidden">
+            <img id="detail-hero-img" src="" alt="Cover" class="w-full h-full object-cover filter brightness-90 dark:brightness-75">
+            <div class="absolute inset-0 bg-gradient-to-t from-white dark:from-[#141518] via-white/40 dark:via-[#141518]/60 to-transparent"></div>
+          </div>
+
+          <!-- Hero Details Floating Inside Container -->
+          <div class="relative -mt-20 p-6 sm:p-8 pt-0">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+              <div>
+                <div class="flex items-center gap-2 mb-2.5 flex-wrap">
+                  <span id="detail-rank-badge" class="px-3 py-1 rounded-full text-xs font-bold bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 shadow-sm">#1</span>
+                  <span id="detail-rating-badge" class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">92% Positive</span>
+                  <span id="detail-console-badge" class="px-3 py-1 rounded-full text-xs font-medium bg-zinc-100 dark:bg-white/10 text-zinc-700 dark:text-zinc-300 border border-zinc-200/60 dark:border-white/10">官方控制台支持</span>
+                  <!-- Trust Badges -->
+                  <span id="detail-patch-badge" class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 inline-flex items-center gap-1 shadow-sm">
+                    <svg class="w-3.5 h-3.5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    <span id="detail-patch-text">🛡️ 官方最新补丁实测认证</span>
+                  </span>
+                  <span id="detail-pure-badge" class="px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 inline-flex items-center gap-1 shadow-sm">
+                    <span id="detail-clean-guarantee">🚫 拒绝流氓木马 · 官方底层机制</span>
+                  </span>
+                </div>
+                <h1 id="detail-title" class="text-3xl sm:text-4xl font-extrabold text-zinc-900 dark:text-white tracking-tight mb-2">Cyberpunk 2077</h1>
+                <p id="detail-subtitle" class="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400">CD PROJEKT RED (2020) • Open World Action RPG</p>
+              </div>
+
+              <!-- Nexus Real Metrics Pills -->
+              <div class="flex items-center gap-2 bg-zinc-100/80 dark:bg-black/40 backdrop-blur-md p-2.5 rounded-2xl shrink-0 border border-zinc-200/80 dark:border-white/10">
+                <div class="px-3 text-center">
+                  <div class="text-[10px] text-zinc-400 font-medium" id="stat-label-downloads">N网总下载</div>
+                  <div id="detail-stat-downloads" class="text-sm sm:text-base font-bold text-blue-600 dark:text-blue-400">342.8M</div>
+                </div>
+                <div class="w-px h-7 bg-zinc-200 dark:bg-white/10"></div>
+                <div class="px-3 text-center">
+                  <div class="text-[10px] text-zinc-400 font-medium" id="stat-label-endorsements">玩家推荐</div>
+                  <div id="detail-stat-endorsements" class="text-sm sm:text-base font-bold text-purple-600 dark:text-purple-400">1.84M</div>
+                </div>
+                <div class="w-px h-7 bg-zinc-200 dark:bg-white/10"></div>
+                <div class="px-3 text-center">
+                  <div class="text-[10px] text-zinc-400 font-medium" id="stat-label-mods">精选模组</div>
+                  <div id="detail-stat-mods" class="text-sm sm:text-base font-bold text-zinc-800 dark:text-zinc-200">14,280</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Apple-style Segmented Control (Pill Tabs) -->
+        <div class="bg-zinc-200/60 dark:bg-white/5 p-1.5 rounded-full inline-flex gap-1 mb-8 overflow-x-auto no-scrollbar max-w-full border border-zinc-200/50 dark:border-white/5">
+          <button onclick="setDetailTab('console')" id="detail-tab-btn-console" class="detail-tab-btn px-5 py-2 rounded-full text-xs sm:text-sm font-semibold bg-white dark:bg-blue-600 text-zinc-900 dark:text-white transition-all shrink-0 shadow-sm">
+            <span id="tab-text-console">🎮 官方控制台与代码</span>
+          </button>
+          <button onclick="setDetailTab('mods')" id="detail-tab-btn-mods" class="detail-tab-btn px-5 py-2 rounded-full text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-all shrink-0">
+            <span id="tab-text-mods">📦 N网精选 MOD 库</span>
+          </button>
+          <button onclick="setDetailTab('trainers')" id="detail-tab-btn-trainers" class="detail-tab-btn px-5 py-2 rounded-full text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-all shrink-0">
+            <span id="tab-text-trainers">⚡ 纯净修改器与热键</span>
+          </button>
+          <button onclick="setDetailTab('reviews')" id="detail-tab-btn-reviews" class="detail-tab-btn px-5 py-2 rounded-full text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-all shrink-0">
+            <span id="tab-text-reviews">💬 玩家讨论与排错</span>
+          </button>
+          <button onclick="setDetailTab('social-cards')" id="detail-tab-btn-social-cards" class="detail-tab-btn px-5 py-2 rounded-full text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-all shrink-0 flex items-center gap-1.5">
+            <span>🎨</span>
+            <span id="tab-text-social-cards">官方 5 联高清卡片 (1080×1440)</span>
+          </button>
+        </div>
+
+        <!-- TAB 1: CONSOLE CHEATS -->
+        <div id="detail-content-console" class="space-y-6">
+          
+          <!-- Instructions Callout with 10-Second Lazy Door Button -->
+          <div class="bg-white dark:bg-[#141518] rounded-[24px] p-6 border border-zinc-200/80 dark:border-white/10 shadow-sm space-y-4">
+            <div class="flex items-center justify-between flex-wrap gap-3">
+              <h3 class="font-bold text-sm sm:text-base text-zinc-900 dark:text-white flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span id="detail-console-guide-title">控制台开启手把手教学 (官方原生 · 无封号风险)</span>
+              </h3>
+              <div class="flex items-center space-x-2 flex-wrap gap-2">
+                <!-- 10-Second Lazy Door Opener Button -->
+                <button 
+                  onclick="openLazyDoorModal()" 
+                  id="btn-open-lazy-door"
+                  class="px-4 py-2 rounded-full text-xs font-bold text-white bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 shadow-md shadow-blue-500/25 flex items-center gap-1.5 transition-all transform hover:scale-105 active:scale-95 cursor-pointer ring-2 ring-blue-500/20"
+                >
+                  <svg class="w-3.5 h-3.5 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                  <span id="detail-btn-lazy-door">🚀 懒人双击一键开门 (生成 .bat)</span>
+                </button>
+                <div class="flex items-center space-x-1.5 bg-zinc-100 dark:bg-white/10 px-3 py-1.5 rounded-full border border-zinc-200/60 dark:border-white/10">
+                  <span class="text-[11px] text-zinc-400" id="detail-shortcut-label">呼出键:</span>
+                  <span id="detail-shortcut-key" class="text-xs text-blue-600 dark:text-blue-400 font-mono font-bold">~ (Tilde)</span>
+                </div>
+              </div>
+            </div>
+            <div id="detail-enable-guide" class="text-xs sm:text-sm text-zinc-700 dark:text-zinc-300 whitespace-pre-line leading-relaxed bg-zinc-50 dark:bg-black/30 p-4 rounded-2xl border border-zinc-200/60 dark:border-white/5 font-mono">
+              加载指南中...
+            </div>
+          </div>
+
+          <!-- ======================================================== -->
+          <!-- SCENARIO FUNCTION BUNDLES (小白 10 秒一键爽到)           -->
+          <!-- ======================================================== -->
+          <div id="detail-scenario-bundles-container" class="space-y-4">
+            <!-- Injected by renderScenarioBundles() -->
+          </div>
+
+          <!-- ======================================================== -->
+          <!-- LAO L'S PITFALL BUREAU GUIDE (老L实验室避坑小贴士)        -->
+          <!-- ======================================================== -->
+          <div id="detail-pitfall-notes-container">
+            <!-- Injected by renderPitfallNotes() -->
+          </div>
+
+          <!-- In-Game Command Search Bar -->
+          <div class="flex items-center bg-white dark:bg-[#141518] rounded-2xl px-4 py-2.5 border border-zinc-200/80 dark:border-white/10 shadow-sm">
+            <svg class="w-4 h-4 text-zinc-400 mr-2.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            <input 
+              type="text" 
+              id="console-search-input"
+              oninput="filterConsoleCommands(this.value)"
+              placeholder="在当前代码库中搜索指令（如：武器、金钱、属性、无敌、传送、特权）..."
+              class="w-full bg-transparent text-xs sm:text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none"
+            >
+          </div>
+
+          <!-- Categorized Command Spawner -->
+          <div id="detail-console-categories" class="space-y-6">
+            <!-- Injected by JavaScript -->
+          </div>
+
+          <!-- ======================================================== -->
+          <!-- STEAM RADAR & COMMUNITY SECRET CODE CONVERSION CARD     -->
+          <!-- ======================================================== -->
+          <div id="detail-radar-container" class="pt-2">
+            <!-- Injected by renderRadarCard() -->
+          </div>
+
+          <!-- Visual 5-Card Teaser Banner -->
+          <div id="detail-cards-teaser" class="relative overflow-hidden bg-gradient-to-r from-purple-900/30 via-indigo-900/20 to-blue-900/30 rounded-[28px] p-5 sm:p-6 border border-purple-500/25 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-md">
+            <div class="flex items-center space-x-3.5">
+              <div class="w-12 h-12 rounded-2xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center text-2xl shrink-0">
+                🎨
+              </div>
+              <div class="space-y-1">
+                <div class="flex items-center space-x-2">
+                  <h4 class="font-extrabold text-sm sm:text-base text-zinc-900 dark:text-white">
+                    已就绪 5 联 1080×1440 工业级高清避坑卡片
+                  </h4>
+                  <span class="text-[10px] bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full font-mono font-bold">小红书/B站对齐</span>
+                </div>
+                <p class="text-xs text-zinc-500 dark:text-zinc-400">
+                  包含痛点避坑卡、小白开门卡、场景套餐卡与自取暗号，100% 通过 Anti-Shadowban 脱敏。
+                </p>
+              </div>
+            </div>
+            <button onclick="setDetailTab('social-cards')" class="shrink-0 px-5 py-2.5 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-bold transition-all shadow-md flex items-center gap-1.5 cursor-pointer self-start sm:self-auto">
+              <span>查看 5 联图套件</span>
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            </button>
+          </div>
+
+        </div>
+
+        <!-- TAB 2: CURATED MODS -->
+        <div id="detail-content-mods" class="hidden space-y-6">
+          <div class="bg-white dark:bg-[#141518] rounded-[24px] p-6 border border-zinc-200/80 dark:border-white/10 shadow-sm">
+            <div class="text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-2">Steam 默认 MOD 安装根目录</div>
+            <div class="flex items-center justify-between bg-zinc-50 dark:bg-black/30 rounded-2xl px-4 py-3 border border-zinc-200/60 dark:border-white/5">
+              <code id="detail-mod-path" class="text-xs sm:text-sm text-emerald-600 dark:text-emerald-400 font-mono select-all font-semibold">Cyberpunk 2077\archive\pc\mod</code>
+              <button onclick="copyText(document.getElementById('detail-mod-path').innerText)" class="ml-4 text-xs bg-white dark:bg-white/10 hover:bg-zinc-100 dark:hover:bg-white/20 text-zinc-800 dark:text-zinc-200 font-semibold px-4 py-1.5 rounded-full transition-colors shrink-0 shadow-sm border border-zinc-200/80 dark:border-white/10">
+                复制路径
+              </button>
+            </div>
+          </div>
+
+          <!-- In-Game MOD Search Bar -->
+          <div class="flex items-center bg-white dark:bg-[#141518] rounded-2xl px-4 py-2.5 border border-zinc-200/80 dark:border-white/10 shadow-sm">
+            <svg class="w-4 h-4 text-zinc-400 mr-2.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            <input 
+              type="text" 
+              id="mods-search-input"
+              oninput="filterCuratedMods(this.value)"
+              placeholder="搜索精选 MOD（如：地图、画质、UI、前置底座）..."
+              class="w-full bg-transparent text-xs sm:text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none"
+            >
+          </div>
+
+          <div id="detail-mods-list" class="space-y-4">
+            <!-- Injected by JS -->
+          </div>
+        </div>
+
+        <!-- TAB 3: TRAINERS (风灵月影 FLiNG 官方纯净专区) -->
+        <div id="detail-content-trainers" class="hidden space-y-6">
+          
+          <!-- FLiNG Official Hub Header Card -->
+          <div class="bg-white dark:bg-[#141518] rounded-[28px] p-6 sm:p-8 border border-zinc-200/80 dark:border-white/10 shadow-sm space-y-6">
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-zinc-100 dark:border-white/5">
+              <div>
+                <div class="flex items-center gap-2 mb-2 flex-wrap">
+                  <span class="px-3 py-1 rounded-full text-xs font-bold bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20">
+                    风灵月影 (FLiNG) 官方直连
+                  </span>
+                  <span id="trainer-patch-badge" class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                    最新版本适配
+                  </span>
+                  <span class="px-3 py-1 rounded-full text-xs font-medium bg-zinc-100 dark:bg-white/10 text-zinc-600 dark:text-zinc-400">
+                    VirusTotal 0/72 Clean
+                  </span>
+                </div>
+                <h3 class="text-xl sm:text-2xl font-extrabold text-zinc-900 dark:text-white tracking-tight">
+                  纯净单文件修改器 · 告别流氓捆绑
+                </h3>
+                <p class="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 mt-1.5 leading-relaxed">
+                  本站坚决抵制任何第三方恶意全家桶下载器与弹窗推广！提供原作者官方直源与经过 MD5 校验的纯净单文件。
+                </p>
+              </div>
+
+              <!-- Dual Safe Download Buttons -->
+              <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0">
+                <button 
+                  onclick="downloadCleanTrainer()" 
+                  class="inline-flex items-center justify-center space-x-2 px-6 py-3 rounded-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs sm:text-sm font-bold transition-all shadow-lg shadow-emerald-500/25 group cursor-pointer"
+                >
+                  <svg class="w-4 h-4 text-white group-hover:translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                  <span id="trainer-btn-direct-dl">⚡ 极速纯净一键直接下载 (ZIP)</span>
+                </button>
+                <a 
+                  id="trainer-official-link" 
+                  href="#" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center justify-center space-x-2 px-5 py-3 rounded-full bg-zinc-100 hover:bg-zinc-200/80 dark:bg-white/10 dark:hover:bg-white/20 text-zinc-700 dark:text-zinc-300 text-xs sm:text-sm font-semibold transition-all border border-zinc-200/80 dark:border-white/10 group cursor-pointer"
+                >
+                  <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                  <span id="trainer-btn-official-page">风灵月影官方页面 (备用通道)</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- 10-Second Windows Defender Exclusion Guide (Expandable / Clean) -->
+            <div class="bg-amber-500/10 rounded-2xl p-4 sm:p-5 border border-amber-500/20">
+              <div class="flex items-start space-x-3">
+                <div class="w-5 h-5 rounded-full bg-amber-500 text-white flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">
+                  !
+                </div>
+                <div class="flex-1 text-xs">
+                  <div class="font-bold text-amber-800 dark:text-amber-300 text-sm mb-1">
+                    防杀毒软件误报拦截 · 10 秒放行指南 (Windows Defender)
+                  </div>
+                  <p class="text-amber-900/80 dark:text-amber-200/80 leading-relaxed mb-3">
+                    修改器通过系统内存注入数值，所有主流杀毒软件均会触发特征误报（显示为 HackTool:Win32/GameHack），这属于游戏内存修改的通用机制，绝非病毒。
+                  </p>
+                  <div class="space-y-1.5 text-zinc-700 dark:text-zinc-300 font-medium">
+                    <div id="trainer-def-step1">1. 打开【Windows 安全中心】 -> 点击【病毒和威胁防护】 -> 【管理设置】</div>
+                    <div id="trainer-def-step2">2. 向下滑动找到【排除项】 -> 点击【添加或删除排除项】</div>
+                    <div id="trainer-def-step3">3. 添加文件夹 -> 选择你存放修改器的目录，即可一劳永逸正常运行不被误杀！</div>
+                  </div>
+                  <div class="mt-3 pt-3 border-t border-amber-500/20 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                    <span class="font-mono text-[11px] text-zinc-500 dark:text-zinc-400" id="trainer-def-cmd-label">PowerShell 一键放行指令:</span>
+                    <button onclick="copyTrainerCmd()" class="self-start text-[11px] bg-white dark:bg-black/40 hover:bg-amber-100 dark:hover:bg-amber-500/20 text-amber-800 dark:text-amber-300 px-3 py-1 rounded-full font-mono transition-colors border border-amber-500/30 cursor-pointer shadow-sm">
+                      复制一键放行命令
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Hotkeys Search Bar -->
+          <div class="flex items-center bg-white dark:bg-[#141518] rounded-2xl px-4 py-2.5 border border-zinc-200/80 dark:border-white/10 shadow-sm">
+            <svg class="w-4 h-4 text-zinc-400 mr-2.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            <input 
+              type="text" 
+              id="hotkeys-search-input"
+              oninput="filterTrainerHotkeys(this.value)"
+              placeholder="搜索修改器热键功能（如：生命、金钱、速度、耐力、一击必杀）..."
+              class="w-full bg-transparent text-xs sm:text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none"
+            >
+          </div>
+
+          <!-- Hotkeys Categorized Table Container -->
+          <div id="detail-hotkeys-table" class="space-y-6">
+            <!-- Injected by JS -->
+          </div>
+
+        </div>
+
+        <!-- TAB 4: REVIEWS & TROUBLESHOOTING -->
+        <div id="detail-content-reviews" class="hidden space-y-6">
+          <div class="flex items-center justify-between px-1">
+            <div>
+              <h3 class="text-base font-bold text-zinc-900 dark:text-white">玩家实测反馈与版本避坑问答</h3>
+              <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">针对当前补丁版本的安装经验、排错互助</p>
+            </div>
+            <button onclick="askSmartAssistant()" class="px-4 py-2 rounded-full bg-white dark:bg-white/10 hover:bg-zinc-50 dark:hover:bg-white/20 text-blue-600 dark:text-blue-400 text-xs font-semibold transition-colors flex items-center gap-1.5 border border-zinc-200/80 dark:border-white/10 shadow-sm">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              <span>在线排错建议</span>
+            </button>
+          </div>
+
+          <div id="detail-reviews-list" class="space-y-3">
+            <!-- Injected by JS -->
+          </div>
+        </div>
+
+        <!-- TAB 5: 5-CARD SOCIAL DISTRIBUTION MATRIX (1080x1440 HD CARDS) -->
+        <div id="detail-content-social-cards" class="hidden space-y-6">
+          <div id="detail-social-cards-container">
+            <!-- Injected by renderSocialCardsTab(game) -->
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- Clean Footer -->
+    <footer class="mt-auto py-8 border-t border-zinc-200/60 dark:border-white/[0.06] text-xs text-zinc-400 dark:text-zinc-500 transition-colors">
+      <div class="max-w-5xl mx-auto px-4 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center space-x-2">
+          <span class="text-zinc-800 dark:text-zinc-200 font-semibold" id="footer-brand">L-MOD Vault</span>
+          <span>•</span>
+          <span id="footer-note">Hybrid Design System · Apple Glass & Google Pill</span>
+        </div>
+        <div>
+          <span>8 Languages • 100 Games Ranked • Zero Popups</span>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- MODAL: 10-SECOND LAZY DOOR OPENER (AUTO-CONFIG SPAWNER) -->
+  <!-- ======================================================== -->
+  <div id="lazy-door-modal" onclick="if(event.target===this) closeLazyDoorModal()" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-md hidden flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white dark:bg-[#141518] rounded-[28px] max-w-2xl w-full border border-zinc-200/80 dark:border-white/10 shadow-2xl p-6 sm:p-8 space-y-5 my-8 transform transition-all duration-300 scale-95" id="lazy-door-card">
+      
+      <!-- Modal Header -->
+      <div class="flex items-start justify-between gap-4 pb-4 border-b border-zinc-100 dark:border-white/5">
+        <div class="flex items-center space-x-3.5">
+          <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 flex items-center justify-center text-white shadow-md shadow-blue-500/25 shrink-0">
+            <svg class="w-6 h-6 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+          </div>
+          <div>
+            <div class="flex items-center gap-2 flex-wrap">
+              <h3 class="text-lg sm:text-xl font-extrabold text-zinc-900 dark:text-white" id="lazy-modal-title">10秒懒人开门 · 游戏控制台一键激活器</h3>
+              <span class="text-[10px] bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 px-2.5 py-0.5 rounded-full font-bold border border-emerald-500/20" id="lazy-modal-tag">100% 开源纯批处理</span>
+            </div>
+            <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1" id="lazy-modal-subtitle">针对当前游戏生成零杀软误报、自动备份原配置的极简 .bat 脚本</p>
+          </div>
+        </div>
+        <button onclick="closeLazyDoorModal()" class="w-8 h-8 rounded-full bg-zinc-100 dark:bg-white/10 hover:bg-zinc-200 dark:hover:bg-white/20 text-zinc-500 hover:text-zinc-900 dark:hover:text-white flex items-center justify-center transition-colors shrink-0 cursor-pointer">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
+
+      <!-- Security & Reassurance Banner -->
+      <div class="bg-blue-50/80 dark:bg-blue-500/10 rounded-2xl p-4 border border-blue-500/20 text-xs text-zinc-700 dark:text-zinc-300 space-y-2">
+        <div class="font-bold text-blue-700 dark:text-blue-400 flex items-center gap-1.5 text-xs sm:text-sm">
+          <svg class="w-4 h-4 shrink-0 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+          <span id="lazy-safe-title">老L承诺：100% 原生纯净 · 自动备份原文件 (.bak) · 绝无木马捆绑</span>
+        </div>
+        <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed text-[11px] sm:text-xs" id="lazy-safe-desc">
+          本脚本为标准 Windows 批处理源码，仅修改游戏官方原生配置文件或预设快捷键，运行时自动生成 <code>.bak</code> 备份文件。代码完全公开透明，可用记事本随时查验，绝不写入任何未知可执行文件！
+        </p>
+      </div>
+
+      <!-- 3-Step Simple Guide -->
+      <div class="space-y-1.5 text-xs text-zinc-600 dark:text-zinc-400">
+        <div class="font-bold text-zinc-800 dark:text-zinc-200" id="lazy-steps-title">极简 3 步使用指引：</div>
+        <div class="flex items-center gap-2"><span class="w-4 h-4 rounded-full bg-blue-500/20 text-blue-600 dark:text-blue-400 text-[10px] font-bold flex items-center justify-center shrink-0">1</span><span id="lazy-step-1">点击下方【下载 .bat 脚本】将文件保存（或复制代码存为 <code>一键开门.bat</code>）；</span></div>
+        <div class="flex items-center gap-2"><span class="w-4 h-4 rounded-full bg-blue-500/20 text-blue-600 dark:text-blue-400 text-[10px] font-bold flex items-center justify-center shrink-0">2</span><span id="lazy-step-2">将 <code>.bat</code> 放置在该游戏安装根目录，双击运行（脚本自动备份并注入配置）；</span></div>
+        <div class="flex items-center gap-2"><span class="w-4 h-4 rounded-full bg-blue-500/20 text-blue-600 dark:text-blue-400 text-[10px] font-bold flex items-center justify-center shrink-0">3</span><span id="lazy-step-3">启动游戏，按快捷键呼出控制台，直接粘贴老L推荐套餐即可爽玩！</span></div>
+      </div>
+
+      <!-- Code Block Preview -->
+      <div class="relative bg-zinc-950 text-emerald-400 rounded-2xl p-4 font-mono text-xs overflow-x-auto max-h-56 no-scrollbar border border-zinc-800">
+        <div class="absolute top-2 right-2 text-[10px] text-zinc-500 font-sans">Batch Script Preview</div>
+        <pre id="lazy-modal-code" class="whitespace-pre">REM 正在生成针对当前游戏的极简开门脚本...</pre>
+      </div>
+
+      <!-- Modal Action Buttons -->
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2">
+        <div class="text-[11px] text-zinc-400">
+          <span id="lazy-adapted-label">已自动适配当前游戏：</span><span id="lazy-modal-game-name" class="font-bold text-zinc-800 dark:text-zinc-200">赛博朋克2077</span>
+        </div>
+        <div class="flex items-center gap-2 w-full sm:w-auto">
+          <button onclick="copyBatScript()" id="btn-copy-bat" class="flex-1 sm:flex-none px-4 py-2.5 rounded-full bg-zinc-100 hover:bg-zinc-200 dark:bg-white/10 dark:hover:bg-white/20 text-zinc-800 dark:text-zinc-200 text-xs font-semibold transition-colors flex items-center justify-center gap-1.5 border border-zinc-200/80 dark:border-white/10 cursor-pointer">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+            <span>复制代码</span>
+          </button>
+          <button onclick="downloadBatScript()" class="flex-1 sm:flex-none px-5 py-2.5 rounded-full bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition-all shadow-md shadow-blue-500/20 flex items-center justify-center gap-1.5 cursor-pointer">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+            <span>下载 .bat 脚本</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- MODAL: TRAINER DIRECT DOWNLOAD & DEFENDER EXCLUSION      -->
+  <!-- ======================================================== -->
+  <div id="trainer-download-modal" onclick="if(event.target===this) closeTrainerModal()" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-md hidden flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white dark:bg-[#141518] rounded-[28px] max-w-xl w-full border border-zinc-200/80 dark:border-white/10 shadow-2xl p-6 sm:p-8 space-y-5 my-8 transform transition-all duration-300 scale-95" id="trainer-download-card">
+      
+      <!-- Modal Header -->
+      <div class="flex items-start justify-between gap-4 pb-4 border-b border-zinc-100 dark:border-white/5">
+        <div class="flex items-center space-x-3.5">
+          <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-emerald-500 via-teal-600 to-blue-600 flex items-center justify-center text-white shadow-lg shadow-emerald-500/25 shrink-0">
+            <svg class="w-6 h-6 text-white animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+          </div>
+          <div>
+            <div class="flex items-center gap-2 flex-wrap">
+              <h3 class="text-lg sm:text-xl font-extrabold text-zinc-900 dark:text-white" id="trainer-modal-title">下载已在浏览器拉起</h3>
+              <span class="text-[10px] bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 px-2.5 py-0.5 rounded-full font-bold border border-emerald-500/20">纯净 ZIP 直连</span>
+            </div>
+            <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1" id="trainer-modal-subtitle">若浏览器弹出下载确认，请点击【保留 / 允许下载】· 零捆绑 · 零广告</p>
+          </div>
+        </div>
+        <button onclick="closeTrainerModal()" class="w-8 h-8 rounded-full bg-zinc-100 dark:bg-white/10 hover:bg-zinc-200 dark:hover:bg-white/20 text-zinc-500 hover:text-zinc-900 dark:hover:text-white flex items-center justify-center transition-colors shrink-0 cursor-pointer">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
+
+      <!-- Defender 10-Second Pass Box -->
+      <div class="bg-amber-500/10 dark:bg-amber-500/10 rounded-2xl p-4.5 border border-amber-500/20 space-y-3">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-2">
+            <div class="w-5 h-5 rounded-full bg-amber-500 text-white flex items-center justify-center font-bold text-xs shrink-0">!</div>
+            <span class="font-bold text-amber-800 dark:text-amber-300 text-xs sm:text-sm">附赠：Windows Defender 10秒防误杀放行指令</span>
+          </div>
+          <span class="text-[10px] text-amber-600 dark:text-amber-400 font-mono">PowerShell</span>
+        </div>
+        <p class="text-xs text-amber-900/80 dark:text-amber-200/80 leading-relaxed">
+          修改器修改游戏内存会触发杀软特征误报 (HackTool:Win32)。以管理员权限运行 PowerShell 贴入下方指令，即可 10 秒彻底放行：
+        </p>
+        <div class="relative bg-zinc-950 text-amber-300 rounded-xl p-3 font-mono text-xs overflow-x-auto border border-zinc-800 flex items-center justify-between gap-3">
+          <code id="trainer-modal-cmd" class="whitespace-nowrap overflow-x-auto no-scrollbar">Add-MpPreference -ExclusionProcess 'Trainer.exe'</code>
+          <button onclick="copyTrainerCmd()" id="btn-copy-trainer-cmd" class="px-3 py-1 rounded-lg bg-amber-500 hover:bg-amber-400 text-zinc-950 text-xs font-bold transition-all shrink-0 cursor-pointer shadow-sm">
+            一键复制指令
+          </button>
+        </div>
+      </div>
+
+      <!-- Dual Channel Actions -->
+      <div class="bg-zinc-50 dark:bg-black/30 rounded-2xl p-4 border border-zinc-200/80 dark:border-white/5 space-y-2.5">
+        <div class="text-xs font-bold text-zinc-800 dark:text-zinc-200" id="trainer-dual-label">双通道下载保障：</div>
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5">
+          <button onclick="retriggerTrainerDownload()" class="flex-1 px-4 py-2.5 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-sm shadow-emerald-600/20 cursor-pointer">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+            <span id="trainer-btn-retrigger">重新拉起直接下载 (ZIP)</span>
+          </button>
+          <a id="trainer-modal-backup-link" href="#" target="_blank" rel="noopener noreferrer" class="flex-1 px-4 py-2.5 rounded-full bg-zinc-100 hover:bg-zinc-200 dark:bg-white/10 dark:hover:bg-white/20 text-zinc-700 dark:text-zinc-300 text-xs font-semibold transition-all flex items-center justify-center gap-1.5 border border-zinc-200/80 dark:border-white/10 cursor-pointer">
+            <svg class="w-3.5 h-3.5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+            <span id="trainer-btn-backup">直达风灵月影官方页面 (备用)</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick 3 Steps -->
+      <div class="flex items-center justify-between pt-1 text-xs text-zinc-500 dark:text-zinc-400">
+        <span id="trainer-3step-hint">极简 3 步：保持单机离线 -> 运行放行指令 -> 解压启动即享</span>
+        <button onclick="closeTrainerModal()" class="px-5 py-2 rounded-full bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-bold text-xs transition-all shadow-sm cursor-pointer">
+          我知道了
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- MODAL: MOD REAL DIRECT DOWNLOAD & INSTALL GUIDANCE       -->
+  <!-- ======================================================== -->
+  <div id="mod-download-modal" onclick="if(event.target===this) closeModModal()" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-md hidden flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white dark:bg-[#141518] rounded-[28px] max-w-xl w-full border border-zinc-200/80 dark:border-white/10 shadow-2xl p-6 sm:p-8 space-y-5 my-8 transform transition-all duration-300 scale-95" id="mod-download-card">
+      
+      <!-- Modal Header -->
+      <div class="flex items-start justify-between gap-4 pb-4 border-b border-zinc-100 dark:border-white/5">
+        <div class="flex items-center space-x-3.5">
+          <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 flex items-center justify-center text-white shadow-lg shadow-blue-500/25 shrink-0">
+            <svg class="w-6 h-6 text-white animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+          </div>
+          <div>
+            <div class="flex items-center gap-2 flex-wrap">
+              <h3 class="text-lg sm:text-xl font-extrabold text-zinc-900 dark:text-white" id="mod-modal-title">MOD 下载已在浏览器拉起</h3>
+              <span class="text-[10px] bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 px-2.5 py-0.5 rounded-full font-bold border border-blue-500/20" id="mod-modal-type-badge">极速真直连</span>
+            </div>
+            <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1" id="mod-modal-subtitle">文件正在保存中 · 附全中文安装路径与部署指引</p>
+          </div>
+        </div>
+        <button onclick="closeModModal()" class="w-8 h-8 rounded-full bg-zinc-100 dark:bg-white/10 hover:bg-zinc-200 dark:hover:bg-white/20 text-zinc-500 hover:text-zinc-900 dark:hover:text-white flex items-center justify-center transition-colors shrink-0 cursor-pointer">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
+
+      <!-- File & Path Info Box -->
+      <div class="bg-blue-50/60 dark:bg-blue-500/10 rounded-2xl p-4 border border-blue-500/20 space-y-2 text-xs">
+        <div class="flex items-center justify-between">
+          <span class="text-zinc-500 dark:text-zinc-400" id="mod-modal-label-file">下载目标文件:</span>
+          <span class="font-mono font-bold text-blue-600 dark:text-blue-400" id="mod-modal-filename">CET_v1.34.0.zip</span>
+        </div>
+        <div class="flex items-center justify-between">
+          <span class="text-zinc-500 dark:text-zinc-400" id="mod-modal-label-path">建议安装路径:</span>
+          <div class="flex items-center gap-1.5 font-mono text-zinc-800 dark:text-zinc-200">
+            <span id="mod-modal-path" class="max-w-[220px] sm:max-w-xs truncate">bin/x64/plugins/</span>
+            <button onclick="copyModInstallPath()" id="mod-modal-btn-copy-path" class="text-blue-600 hover:underline text-[11px] shrink-0 font-sans">复制路径</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step by Step Install Guide -->
+      <div class="space-y-2 text-xs text-zinc-700 dark:text-zinc-300">
+        <div class="font-bold text-zinc-900 dark:text-white flex items-center gap-1.5">
+          <span id="mod-modal-steps-title">🛠️ 老L傻瓜式安装指引：</span>
+        </div>
+        <div id="mod-modal-steps" class="bg-zinc-50 dark:bg-black/30 rounded-2xl p-3.5 space-y-1.5 text-zinc-600 dark:text-zinc-400 border border-zinc-200/60 dark:border-white/5 font-sans leading-relaxed">
+          <!-- Injected by JS -->
+        </div>
+      </div>
+
+      <!-- Modal Action Buttons -->
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2">
+        <button onclick="retriggerModDownload()" class="w-full sm:w-auto px-5 py-2.5 rounded-full bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition-all shadow-md shadow-blue-500/20 flex items-center justify-center gap-1.5 cursor-pointer">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+          <span id="mod-modal-btn-retrigger">重新拉起下载</span>
+        </button>
+        <div class="flex items-center gap-2 w-full sm:w-auto">
+          <a id="mod-modal-nexus-link" href="#" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-none px-4 py-2.5 rounded-full bg-zinc-100 hover:bg-zinc-200 dark:bg-white/10 dark:hover:bg-white/20 text-zinc-700 dark:text-zinc-300 text-xs font-semibold transition-colors flex items-center justify-center gap-1.5 border border-zinc-200/80 dark:border-white/10 cursor-pointer">
+            <span id="mod-modal-btn-nexus">访问 Nexus 原页</span>
+          </a>
+          <button onclick="closeModModal()" id="mod-modal-btn-close" class="flex-1 sm:flex-none px-5 py-2.5 rounded-full bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-xs font-bold transition-all shadow-sm cursor-pointer">
+            我知道了
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Include Bundled Database -->
+  <script src="data.js"></script>
+
+  <!-- Application Logic -->
+  <script>
+    let currentLang = 'zh-CN';
+    let currentFilter = 'all';
+    let currentSearch = '';
+    let currentViewMode = 'gallery';
+    let allGames = window.GAMES_DATA || window.GAMES_DATABASE || [];
+    let translations = window.TRANSLATIONS_DATA || {};
+    let activeGame = null;
+    let sidebarOpen = false;
+    let savedCatalogScrollTop = 0;
+    let lastClickedGameId = null;
+    let currentRoute = 'catalog'; // 'catalog' or 'detail'
+
+    // ==========================================
+    // THEME MANAGEMENT (Dark / Light Dual Color)
+    // ==========================================
+    function initTheme() {
+      const savedTheme = localStorage.getItem('lmod_theme');
+      if (savedTheme) {
+        applyTheme(savedTheme);
+      } else {
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        applyTheme(systemPrefersDark ? 'dark' : 'light');
+      }
+
+      // Auto listen to device theme changes if user hasn't set manual preference
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+        if (!localStorage.getItem('lmod_theme')) {
+          applyTheme(e.matches ? 'dark' : 'light');
+        }
+      });
+    }
+
+    function toggleTheme() {
+      const isDark = document.documentElement.classList.contains('dark');
+      const newTheme = isDark ? 'light' : 'dark';
+      localStorage.setItem('lmod_theme', newTheme);
+      applyTheme(newTheme);
+      showToast(newTheme === 'dark' ? '已切换至深色模式 🌙' : '已切换至浅色模式 ☀️');
+    }
+
+    function applyTheme(theme) {
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    }
+
+    // ==========================================
+    // CUSTOM LANGUAGE DROPDOWN COMPONENT
+    // ==========================================
+    function toggleLangDropdown(event) {
+      event.stopPropagation();
+      const menu = document.getElementById('lang-menu');
+      const chevron = document.getElementById('lang-chevron');
+      const isHidden = menu.classList.contains('hidden');
+      
+      if (isHidden) {
+        menu.classList.remove('hidden');
+        chevron.classList.add('rotate-180');
+      } else {
+        menu.classList.add('hidden');
+        chevron.classList.remove('rotate-180');
+      }
+    }
+
+    function closeLangDropdown() {
+      const menu = document.getElementById('lang-menu');
+      const chevron = document.getElementById('lang-chevron');
+      if (menu && !menu.classList.contains('hidden')) {
+        menu.classList.add('hidden');
+        if (chevron) chevron.classList.remove('rotate-180');
+      }
+    }
+
+    const LANG_CONFIG = {
+      'zh-CN': { flag: '🇨🇳', name: '简体中文' },
+      'en': { flag: '🇺🇸', name: 'English' },
+      'zh-TW': { flag: '🇭🇰', name: '繁體中文' },
+      'ja': { flag: '🇯🇵', name: '日本語' },
+      'ko': { flag: '🇰🇷', name: '한국어' },
+      'ru': { flag: '🇷🇺', name: 'Русский' },
+      'de': { flag: '🇩🇪', name: 'Deutsch' },
+      'es': { flag: '🇪🇸', name: 'Español' }
+    };
+
+    function t(key, fallback = '') {
+      if (translations[currentLang] && translations[currentLang][key] !== undefined) {
+        return translations[currentLang][key];
+      }
+      if (translations['zh-CN'] && translations['zh-CN'][key] !== undefined) {
+        return translations['zh-CN'][key];
+      }
+      return fallback || key;
+    }
+
+    function initLanguage() {
+      const savedLang = localStorage.getItem('lmod_lang');
+      if (savedLang && LANG_CONFIG[savedLang]) {
+        currentLang = savedLang;
+        const flagEl = document.getElementById('current-lang-flag');
+        const nameEl = document.getElementById('current-lang-name');
+        if (flagEl) flagEl.innerText = LANG_CONFIG[savedLang].flag;
+        if (nameEl) nameEl.innerText = LANG_CONFIG[savedLang].name;
+        document.querySelectorAll('.lang-option').forEach(btn => {
+          const check = btn.querySelector('.lang-check');
+          if (check) {
+            if (btn.dataset.lang === savedLang) {
+              check.classList.remove('hidden');
+            } else {
+              check.classList.add('hidden');
+            }
+          }
+        });
+      }
+    }
+
+    function selectLanguage(langCode, flag, name) {
+      currentLang = langCode;
+      try {
+        localStorage.setItem('lmod_lang', langCode);
+      } catch (e) {}
+      
+      const flagEl = document.getElementById('current-lang-flag');
+      const nameEl = document.getElementById('current-lang-name');
+      if (flagEl) flagEl.innerText = flag;
+      if (nameEl) nameEl.innerText = name;
+      
+      // Update checkmark
+      document.querySelectorAll('.lang-option').forEach(btn => {
+        const check = btn.querySelector('.lang-check');
+        const btnLang = btn.getAttribute('data-lang') || (btn.dataset && btn.dataset.lang);
+        if (check) {
+          if (btnLang === langCode) {
+            check.classList.remove('hidden');
+          } else {
+            check.classList.add('hidden');
+          }
+        }
+      });
+
+      closeLangDropdown();
+      renderUI();
+      renderGames();
+      renderRecentSidebar();
+      if (activeGame) {
+        renderGameDetailView(activeGame);
+      }
+      showToast((t('toastLangSwitched') || '语言已切换至') + ` ${name}`);
+    }
+
+    // Global Click-away listener for custom dropdowns
+    document.addEventListener('click', function(e) {
+      const dropdown = document.getElementById('custom-lang-dropdown');
+      if (dropdown && !dropdown.contains(e.target)) {
+        closeLangDropdown();
+      }
+    });
+
+    // ==========================================
+    // LOCAL STORAGE RECENTS
+    // ==========================================
+    function getRecentGames() {
+      try {
+        return JSON.parse(localStorage.getItem('lmod_recents') || '[]');
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function addRecentGame(gameId) {
+      try {
+        let recents = getRecentGames().filter(id => id !== gameId);
+        recents.unshift(gameId);
+        if (recents.length > 5) recents = recents.slice(0, 5);
+        localStorage.setItem('lmod_recents', JSON.stringify(recents));
+        renderRecentSidebar();
+      } catch (e) {}
+    }
+
+    function renderRecentSidebar() {
+      const container = document.getElementById('recent-games-list');
+      const recents = getRecentGames();
+      if (!recents || recents.length === 0) {
+        container.innerHTML = `<div class="px-3 py-2 text-zinc-400 dark:text-zinc-600 italic text-xs">${t('recentsEmpty')}</div>`;
+        return;
+      }
+      container.innerHTML = '';
+      recents.forEach(id => {
+        const game = allGames.find(g => g.id === id);
+        if (game) {
+          const locTitle = (game.titles && game.titles[currentLang]) ? game.titles[currentLang] : game.title;
+          const btn = document.createElement('a');
+          btn.href = `#/game/${game.id}`;
+          btn.className = 'w-full flex items-center space-x-2 px-3 py-1.5 rounded-xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-white/5 transition-colors text-xs truncate';
+          btn.innerHTML = `
+            <span class="text-blue-600 dark:text-blue-400 font-mono text-[10px]">#${game.rank}</span>
+            <span class="truncate">${locTitle}</span>
+          `;
+          container.appendChild(btn);
+        }
+      });
+    }
+
+    // Toggle Left Drawer
+    function toggleSidebar() {
+      const sidebar = document.getElementById('app-sidebar');
+      const overlay = document.getElementById('sidebar-overlay');
+      sidebarOpen = !sidebarOpen;
+      if (sidebarOpen) {
+        sidebar.classList.remove('-translate-x-full');
+        overlay.classList.remove('hidden');
+      } else {
+        sidebar.classList.add('-translate-x-full');
+        overlay.classList.add('hidden');
+      }
+    }
+
+    // View Mode Toggle
+    function setViewMode(mode) {
+      currentViewMode = mode;
+      const galleryBtn = document.getElementById('view-mode-gallery-btn');
+      const listBtn = document.getElementById('view-mode-list-btn');
+      const galleryCon = document.getElementById('games-gallery-container');
+      const listCon = document.getElementById('games-list-container');
+
+      if (mode === 'gallery') {
+        galleryBtn.className = 'p-1 px-2.5 rounded-full text-xs font-medium bg-white dark:bg-blue-600 text-zinc-900 dark:text-white shadow-sm transition-all flex items-center space-x-1';
+        listBtn.className = 'p-1 px-2.5 rounded-full text-xs font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-all flex items-center space-x-1';
+        galleryCon.classList.remove('hidden');
+        listCon.classList.add('hidden');
+      } else {
+        listBtn.className = 'p-1 px-2.5 rounded-full text-xs font-medium bg-white dark:bg-blue-600 text-zinc-900 dark:text-white shadow-sm transition-all flex items-center space-x-1';
+        galleryBtn.className = 'p-1 px-2.5 rounded-full text-xs font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-all flex items-center space-x-1';
+        listCon.classList.remove('hidden');
+        galleryCon.classList.add('hidden');
+      }
+      renderGames();
+    }
+
+    // Save catalog scroll position and target game id
+    function saveCatalogScroll(gameId) {
+      savedCatalogScrollTop = window.scrollY || document.documentElement.scrollTop || 0;
+      if (gameId) lastClickedGameId = gameId;
+    }
+
+    function navigateBackToCatalog(event) {
+      if (event) event.preventDefault();
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        window.location.hash = '#/';
+      }
+    }
+
+    // Routing Logic
+    function handleRouting() {
+      const hash = window.location.hash || '#/';
+      if (hash.startsWith('#/game/') || hash.startsWith('#game-')) {
+        const gameId = hash.startsWith('#/game/') ? hash.replace('#/game/', '') : hash.replace('#game-', '');
+        const game = allGames.find(g => g.id === gameId);
+        if (game) {
+          if (currentRoute === 'catalog') {
+            saveCatalogScroll(gameId);
+          }
+          currentRoute = 'detail';
+          showDetailPage(game);
+          addRecentGame(gameId);
+          return;
+        }
+      }
+
+      // Navigating back to catalog
+      const wasInDetail = (currentRoute === 'detail');
+      currentRoute = 'catalog';
+      showCatalogPage({ restoreScroll: wasInDetail });
+    }
+
+    function showCatalogPage(options = {}) {
+      document.getElementById('view-catalog').classList.remove('hidden');
+      document.getElementById('view-game-detail').classList.add('hidden');
+      document.getElementById('header-breadcrumb-title').innerText = '全球 100 款单机神作';
+
+      const shouldRestore = options.restoreScroll !== false && savedCatalogScrollTop > 0;
+      if (shouldRestore) {
+        // Instant scroll restoration to ensure accurate position
+        requestAnimationFrame(() => {
+          window.scrollTo({ top: savedCatalogScrollTop, behavior: 'instant' });
+          setTimeout(() => {
+            window.scrollTo({ top: savedCatalogScrollTop, behavior: 'instant' });
+            
+            // Visual highlight on returned card
+            if (lastClickedGameId) {
+              const targetCard = document.getElementById(`game-card-${lastClickedGameId}`) ||
+                                 document.getElementById(`game-list-row-${lastClickedGameId}`);
+              if (targetCard) {
+                targetCard.classList.add('ring-2', 'ring-blue-500', 'ring-offset-2', 'dark:ring-offset-[#0c0d0f]', 'transition-all', 'duration-300');
+                setTimeout(() => {
+                  targetCard.classList.remove('ring-2', 'ring-blue-500', 'ring-offset-2', 'dark:ring-offset-[#0c0d0f]');
+                }, 1500);
+              }
+            }
+          }, 30);
+        });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    function showDetailPage(game) {
+      activeGame = game;
+      document.getElementById('view-catalog').classList.add('hidden');
+      document.getElementById('view-game-detail').classList.remove('hidden');
+      const locTitle = (game.titles && game.titles[currentLang]) ? game.titles[currentLang] : game.title;
+      document.getElementById('header-breadcrumb-title').innerText = locTitle;
+      renderGameDetailView(game);
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }
+
+    function resetToHome() {
+      savedCatalogScrollTop = 0;
+      lastClickedGameId = null;
+      window.location.hash = '#/';
+      currentSearch = '';
+      document.getElementById('search-input').value = '';
+      document.getElementById('clear-search-btn').classList.add('hidden');
+      dismissSmartResponse();
+      setFilter('all');
+      if (window.innerWidth < 768 && sidebarOpen) toggleSidebar();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function setFilterAndNavigate(filter) {
+      savedCatalogScrollTop = 0;
+      lastClickedGameId = null;
+      window.location.hash = '#/';
+      setFilter(filter);
+      if (window.innerWidth < 768 && sidebarOpen) toggleSidebar();
+    }
+
+    function renderUI() {
+      document.title = `${t('siteName')} | ${t('siteTagline')}`;
+
+      const setElText = (id, text) => {
+        const el = document.getElementById(id);
+        if (el && text !== undefined) el.innerText = text;
+      };
+
+      // Sidebar
+      setElText('sidebar-explore-label', t('navExplore'));
+      setElText('sidebar-nav-all', t('navAllRank'));
+      setElText('sidebar-nav-certified', t('filterCertified'));
+      setElText('sidebar-nav-mining', t('filterMining'));
+      setElText('sidebar-nav-console', t('navConsole'));
+      setElText('sidebar-nav-mods', t('navMods'));
+      setElText('sidebar-nav-trainers', t('navTrainers'));
+      setElText('sidebar-nav-radar', t('navRadar'));
+      setElText('sidebar-recents-label', t('navRecents'));
+
+      // Ticker & Header
+      setElText('broadcast-bar-title', t('broadcastTitle'));
+      setElText('broadcast-bar-btn', t('broadcastRadarBtn'));
+      setElText('header-breadcrumb-title', t('headerBreadcrumb'));
+      setElText('header-radar-btn-text', t('radarBtnHeader'));
+      setElText('view-mode-gallery-text', t('viewGallery'));
+      setElText('view-mode-list-text', t('viewList'));
+
+      // Hero
+      setElText('hero-subtitle', t('heroSubtitle'));
+      const searchInput = document.getElementById('search-input');
+      if (searchInput) searchInput.placeholder = t('searchPlaceholder');
+      setElText('quick-search-label', t('quickSearchLabel'));
+
+      // Filter Buttons
+      setElText('btn-filter-all', t('filterAll'));
+      setElText('btn-filter-certified', t('filterCertified'));
+      setElText('btn-filter-mining', t('filterMining'));
+      setElText('btn-filter-console', t('filterConsole'));
+      setElText('btn-filter-mods', t('filterMods'));
+      setElText('btn-filter-trainers', t('filterTrainers'));
+
+      // Detail Static Labels
+      setElText('detail-back-text', t('btnBackToCatalog'));
+      setElText('detail-cert-text', t('certificationText'));
+      setElText('detail-clean-guarantee', t('cleanGuarantee'));
+      setElText('stat-label-downloads', t('statNexusDownloads'));
+      setElText('stat-label-endorsements', t('statPlayerRec'));
+      setElText('stat-label-mods', t('statCuratedMods'));
+
+      // Detail Tabs
+      setElText('tab-text-console', t('tabConsole'));
+      setElText('tab-text-mods', t('tabMods'));
+      setElText('tab-text-trainers', t('tabTrainers'));
+      setElText('tab-text-reviews', t('tabReviews'));
+      setElText('tab-text-social-cards', t('tabSocialCards'));
+
+      // Detail Sub-sections
+      setElText('detail-console-guide-title', t('consoleGuideTitle'));
+      setElText('detail-btn-lazy-door', t('btnOpenLazyDoor'));
+      setElText('detail-shortcut-label', t('consoleShortcutLabel'));
+      setElText('detail-popular-cmd-title', t('popularCommandsTitle'));
+      setElText('detail-mod-path-title', t('modPathTitle'));
+      setElText('detail-musthave-mods-title', t('mustHaveModsTitle'));
+      setElText('detail-trainer-title', t('trainerTitle'));
+
+      // Trainer section in detail
+      setElText('trainer-sec-title', t('trainerHeaderTitle'));
+      setElText('trainer-sec-sub', t('trainerHeaderSubtitle'));
+      setElText('trainer-sec-desc', t('trainerHeaderDesc'));
+      setElText('trainer-btn-direct-dl', t('trainerDirectDownloadBtn'));
+      setElText('trainer-btn-official-page', t('trainerOfficialPageBtn'));
+      setElText('trainer-def-title', t('trainerDefenderTitle'));
+      setElText('trainer-def-desc', t('trainerDefenderDesc'));
+      setElText('trainer-def-step1', t('trainerDefenderStep1'));
+      setElText('trainer-def-step2', t('trainerDefenderStep2'));
+      setElText('trainer-def-step3', t('trainerDefenderStep3'));
+      setElText('trainer-def-cmd-label', t('trainerDefenderCmdLabel'));
+      setElText('trainer-btn-copy-def', t('trainerDefenderCopyCmdBtn'));
+
+      const hotkeysInput = document.getElementById('hotkeys-search-input');
+      if (hotkeysInput) hotkeysInput.placeholder = t('trainerSearchPlaceholder');
+
+      // Modals: Lazy Door
+      setElText('lazy-modal-title', t('activatorTitle'));
+      setElText('lazy-modal-tag', t('activatorTag'));
+      setElText('lazy-modal-subtitle', t('activatorDesc'));
+      setElText('lazy-safe-title', t('activatorSafeNotice'));
+      setElText('lazy-safe-desc', t('activatorSafeDesc'));
+      setElText('lazy-steps-title', t('activatorGuideTitle'));
+      setElText('lazy-step-1', t('activatorStep1'));
+      setElText('lazy-step-2', t('activatorStep2'));
+      setElText('lazy-step-3', t('activatorStep3'));
+      setElText('lazy-adapted-label', t('activatorAdapted'));
+      setElText('lazy-btn-copy', t('activatorCopyCode'));
+      setElText('lazy-btn-download', t('activatorDownloadBat'));
+      setElText('lazy-btn-close', t('activatorClose'));
+
+      // Modals: Trainer Download
+      setElText('trainer-modal-clean-tag', t('trainerModalCleanTag'));
+      setElText('trainer-modal-subtitle', t('trainerModalStarted'));
+      setElText('trainer-ex-title', t('trainerExclusionTitle'));
+      setElText('trainer-ex-desc', t('trainerExclusionDesc'));
+      setElText('trainer-ex-cmd-label', t('trainerExclusionCmdLabel'));
+      setElText('trainer-btn-copy-cmd', t('copyCmdBtn'));
+      setElText('trainer-dual-label', t('trainerDualChannels'));
+      setElText('trainer-btn-retrigger', t('trainerRetriggerBtn'));
+      setElText('trainer-btn-backup', t('trainerBackupMirror'));
+      setElText('trainer-3step-hint', t('trainer3StepHint'));
+      setElText('trainer-btn-close', t('trainerClose'));
+
+      // Modals: Mod Download
+      setElText('mod-modal-label-file', t('modModalTargetFile'));
+      setElText('mod-modal-label-path', t('modModalInstallPath'));
+      setElText('mod-modal-btn-copy-path', t('copyPathBtn'));
+      setElText('mod-modal-steps-title', t('modInstallStepsTitle'));
+      setElText('mod-modal-btn-retrigger', t('modRetriggerBtn'));
+      setElText('mod-modal-btn-nexus', t('modNexusBtn'));
+      setElText('mod-modal-btn-close', t('modClose'));
+
+      // Image Modal
+      setElText('image-modal-dl-text', t('downloadHdCard'));
+
+      // Footer
+      setElText('footer-note', t('footerNote'));
+    }
+
+    function setFilter(filter) {
+      currentFilter = filter;
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        const isThis = btn.dataset.filter === filter;
+        if (isThis) {
+          if (filter === 'certified') {
+            btn.className = 'filter-btn active px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold bg-amber-500 text-zinc-950 shadow-sm shadow-amber-500/25 transition-all shrink-0';
+          } else if (filter === 'mining') {
+            btn.className = 'filter-btn active px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold bg-zinc-700 text-white dark:bg-zinc-200 dark:text-zinc-900 shadow-sm transition-all shrink-0';
+          } else {
+            btn.className = 'filter-btn active px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 shadow-sm transition-all shrink-0';
+          }
+        } else {
+          if (btn.dataset.filter === 'certified') {
+            btn.className = 'filter-btn px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium bg-amber-500/10 hover:bg-amber-500/20 text-amber-600 dark:text-amber-400 border border-amber-500/30 transition-all shrink-0';
+          } else if (btn.dataset.filter === 'mining') {
+            btn.className = 'filter-btn px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium bg-white/90 dark:bg-white/5 hover:bg-white dark:hover:bg-white/10 text-zinc-600 dark:text-zinc-400 border border-zinc-200/80 dark:border-white/10 transition-all shrink-0';
+          } else {
+            btn.className = 'filter-btn px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium bg-white/90 dark:bg-white/5 hover:bg-white dark:hover:bg-white/10 text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-white/10 transition-all shrink-0';
+          }
+        }
+      });
+      document.querySelectorAll('.sidebar-nav-btn').forEach(btn => {
+        if (btn.dataset.nav === filter) {
+          btn.className = 'sidebar-nav-btn w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl transition-all text-left font-medium active bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400';
+        } else {
+          btn.className = 'sidebar-nav-btn w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-white/5 transition-all text-left font-medium';
+        }
+      });
+      renderGames();
+    }
+
+    function handleSearch(val) {
+      currentSearch = val.trim().toLowerCase();
+      const clearBtn = document.getElementById('clear-search-btn');
+      if (currentSearch) {
+        clearBtn.classList.remove('hidden');
+        clearBtn.classList.add('flex');
+      } else {
+        clearBtn.classList.add('hidden');
+        clearBtn.classList.remove('flex');
+      }
+      renderGames();
+    }
+
+    function clearSearch() {
+      document.getElementById('search-input').value = '';
+      currentSearch = '';
+      document.getElementById('clear-search-btn').classList.add('hidden');
+      dismissSmartResponse();
+      renderGames();
+    }
+
+    function quickPrompt(promptText) {
+      document.getElementById('search-input').value = promptText;
+      executeSmartSearch(promptText);
+    }
+
+    // Smart Search Matching Card
+    function executeSmartSearch(val) {
+      const query = (val || '').trim();
+      if (!query) return;
+
+      currentSearch = query.toLowerCase();
+      handleSearch(query);
+
+      let matchedGame = allGames.find(g => {
+        const titleEn = (g.title || '').toLowerCase();
+        const titleLoc = (g.titles && g.titles[currentLang] ? g.titles[currentLang] : '').toLowerCase();
+        return query.toLowerCase().includes(titleEn) || query.toLowerCase().includes(titleLoc) || titleEn.includes(query.toLowerCase()) || titleLoc.includes(query.toLowerCase());
+      });
+
+      if (!matchedGame) {
+        if (query.includes('赛博朋克') || query.includes('2077') || query.includes('觉')) matchedGame = allGames.find(g => g.id === 'cyberpunk-2077');
+        else if (query.includes('悟空') || query.includes('黑神话') || query.includes('地图')) matchedGame = allGames.find(g => g.id === 'black-myth-wukong');
+        else if (query.includes('巫师') || query.includes('昆特牌') || query.includes('杰洛特')) matchedGame = allGames.find(g => g.id === 'witcher-3');
+        else if (query.includes('老滚') || query.includes('天际') || query.includes('tgm')) matchedGame = allGames.find(g => g.id === 'skyrim-se');
+        else if (query.includes('生化') || query.includes('里昂') || query.includes('火箭筒')) matchedGame = allGames.find(g => g.id === 're4-remake');
+        else if (query.includes('法环') || query.includes('老头环')) matchedGame = allGames.find(g => g.id === 'elden-ring');
+        else matchedGame = allGames[0];
+      }
+
+      const resBox = document.getElementById('smart-ai-response-box');
+      const resText = document.getElementById('smart-ai-text');
+      const resAction = document.getElementById('smart-ai-action');
+
+      const locTitle = matchedGame.titles[currentLang] || matchedGame.title;
+      let primaryCode = '';
+      if (matchedGame.popularCommands && matchedGame.popularCommands.length > 0) {
+        primaryCode = matchedGame.popularCommands[0].command;
+      } else if (matchedGame.consoleCategories && matchedGame.consoleCategories[0]?.commands[0]?.code) {
+        primaryCode = matchedGame.consoleCategories[0].commands[0].code;
+      }
+
+      resText.innerHTML = `
+        <p>为你智能定位到<strong>《${locTitle}》</strong>的相关代码与方案：</p>
+        <div class="bg-zinc-50 dark:bg-black/40 p-4 rounded-2xl border border-zinc-200/60 dark:border-white/5 my-2">
+          <div class="flex items-center justify-between text-xs text-zinc-400 mb-1.5 font-mono">
+            <span>控制台快捷键 (${matchedGame.consoleShortcut || '~'})</span>
+            <button onclick="copyText('${primaryCode.replace(/'/g, "\\'")}')" class="text-blue-600 dark:text-blue-400 hover:underline flex items-center space-x-1 font-semibold">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+              <span id="trainer-btn-copy-cmd">一键复制指令</span>
+            </button>
+          </div>
+          <code class="text-xs sm:text-sm text-emerald-600 dark:text-emerald-400 font-mono font-bold select-all block">${primaryCode}</code>
+        </div>
+        <p class="text-xs text-zinc-500 dark:text-zinc-400">已整理该游戏的官方全套装备代码、核心前置 MOD 与纯净修改器。</p>
+      `;
+
+      resAction.innerHTML = `
+        <div class="text-xs text-zinc-400">已匹配最佳结果</div>
+        <a href="#/game/${matchedGame.id}" class="inline-flex items-center space-x-1.5 px-4 py-2 rounded-full bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold transition-all shadow-sm">
+          <span>进入《${locTitle}》专属二级页面</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+        </a>
+      `;
+
+      resBox.classList.remove('hidden');
+      resBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function dismissSmartResponse() {
+      document.getElementById('smart-ai-response-box').classList.add('hidden');
+    }
+
+    // Render Filtered Games
+    function renderGames() {
+      const galleryCon = document.getElementById('games-gallery-container');
+      const listCon = document.getElementById('games-list-container');
+      galleryCon.innerHTML = '';
+      listCon.innerHTML = '';
+
+      let filtered = allGames.filter(game => {
+        if (currentFilter === 'certified' && game.rank > 14) return false;
+        if (currentFilter === 'mining' && game.rank <= 14) return false;
+        if (currentFilter === 'console' && !game.hasConsole) return false;
+        if (currentFilter === 'mods' && !game.hasMods) return false;
+        if (currentFilter === 'trainers' && !game.hasTrainer) return false;
+
+        if (currentSearch) {
+          const matchTitleEn = (game.title || '').toLowerCase().includes(currentSearch);
+          const localizedTitle = (game.titles && game.titles[currentLang] ? game.titles[currentLang] : '').toLowerCase();
+          const matchTitleLoc = localizedTitle.includes(currentSearch);
+          const matchGenre = (game.genre || '').toLowerCase().includes(currentSearch);
+          const matchDev = (game.developer || '').toLowerCase().includes(currentSearch);
+          
+          let matchCmd = false;
+          if (game.popularCommands) {
+            matchCmd = game.popularCommands.some(c => (c.command || '').toLowerCase().includes(currentSearch) || (c.desc || '').toLowerCase().includes(currentSearch));
+          }
+          return matchTitleEn || matchTitleLoc || matchGenre || matchDev || matchCmd;
+        }
+        return true;
+      });
+
+      let filterTag = '';
+      if (currentFilter === 'certified') filterTag = ` (${t('filterCertified')})`;
+      else if (currentFilter === 'mining') filterTag = ` (${t('filterMining')})`;
+      else if (currentFilter === 'console') filterTag = ` (${t('filterConsole')})`;
+      else if (currentFilter === 'mods') filterTag = ` (${t('filterMods')})`;
+      else if (currentFilter === 'trainers') filterTag = ` (${t('filterTrainers')})`;
+
+      const countBadgeTemplate = t('catalogCountBadge') || '共收录 {total} 款单机神作 • 当前显示 {count} 款{filter}';
+      document.getElementById('games-count-display').innerText = countBadgeTemplate
+        .replace('{total}', allGames.length)
+        .replace('{count}', filtered.length)
+        .replace('{filter}', filterTag);
+
+      filtered.forEach(game => {
+        const localizedTitle = game.titles && game.titles[currentLang] ? game.titles[currentLang] : game.title;
+        const downloads = game.nexusStats ? game.nexusStats.totalDownloads : '10.5M';
+        const rating = (game.steamRating || '90%').split(' ')[0];
+        const isCertified = game.rank <= 14;
+
+        // 1. GALLERY CARD (Apple clean card with subtle shadow & hover lift)
+        const card = document.createElement('a');
+        card.id = `game-card-${game.id}`;
+        card.href = `#/game/${game.id}`;
+        card.onclick = () => saveCatalogScroll(game.id);
+        card.className = 'group relative bg-white dark:bg-[#141518] rounded-[24px] overflow-hidden transition-all duration-300 flex flex-col justify-between shadow-[0_2px_10px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_28px_rgba(0,0,0,0.08)] border border-zinc-200/80 dark:border-white/10 hover:border-blue-500/40 hover:-translate-y-1';
+
+        card.innerHTML = `
+          <div>
+            <!-- Game Media Header -->
+            <div class="relative w-full h-36 bg-zinc-100 dark:bg-black/40 overflow-hidden">
+              ${game.headerImage ? `
+                <img src="${game.headerImage}" alt="${game.title}" loading="lazy" class="w-full h-full object-cover filter brightness-95 dark:brightness-85 group-hover:scale-105 transition-transform duration-500" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+              ` : ''}
+              <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-zinc-200 to-zinc-100 dark:from-zinc-800 dark:to-zinc-900 text-3xl font-extrabold text-zinc-400 dark:text-zinc-600" style="${game.headerImage ? 'display:none' : 'display:flex'}">
+                ${game.title.charAt(0)}
+              </div>
+              <div class="absolute inset-0 bg-gradient-to-t from-white/90 dark:from-[#141518] via-transparent to-black/20"></div>
+              
+              <!-- Floating Rank & Status Badges -->
+              <div class="absolute top-3 left-3 flex items-center space-x-1.5">
+                <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 shadow-sm">#${game.rank}</span>
+                ${isCertified 
+                  ? `<span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-500 text-zinc-950 shadow-md flex items-center gap-1"><span>👑</span><span>精测认证</span></span>` 
+                  : `<span class="px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-zinc-900/80 text-zinc-300 backdrop-blur-md border border-white/10 flex items-center gap-1"><span>🛠️</span><span>排雷中</span></span>`}
+              </div>
+
+              <!-- Floating Rating -->
+              <div class="absolute top-3 right-3">
+                <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-white/90 dark:bg-black/70 text-emerald-600 dark:text-emerald-400 backdrop-blur-md shadow-sm border border-black/5 dark:border-white/10">${rating} 好评</span>
+              </div>
+            </div>
+
+            <!-- Card Body -->
+            <div class="p-5 pt-3">
+              <h3 class="font-bold text-base text-zinc-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-1 mb-1">${localizedTitle}</h3>
+              <p class="text-xs text-zinc-500 dark:text-zinc-400 line-clamp-1 mb-2.5">${game.title} • ${game.releaseYear}</p>
+              
+              ${isCertified ? `
+                <div class="text-[11px] text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-xl border border-emerald-500/15 mb-2.5 flex items-center gap-1.5 font-medium">
+                  <span>🛡️</span>
+                  <span class="truncate">${game.verifiedPatch || t('detailTestedPatch')} · ${t('cardTestedBadge')}</span>
+                </div>
+              ` : `
+                <div class="text-[11px] text-amber-600/90 dark:text-amber-400/90 bg-amber-500/10 px-2.5 py-1 rounded-xl border border-amber-500/15 mb-2.5 flex items-center gap-1.5 font-medium">
+                  <span>🛠️</span>
+                  <span class="truncate">${t('cardTestingBadge')}</span>
+                </div>
+              `}
+
+              <!-- Badges -->
+              <div class="flex items-center gap-1.5 flex-wrap">
+                ${game.hasConsole ? `<span class="text-[10px] bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 px-2 py-0.5 rounded-full font-semibold">⚡ ${t('tabConsole')}</span>` : ''}
+                ${game.hasMods ? `<span class="text-[10px] bg-purple-50 dark:bg-purple-500/10 text-purple-600 dark:text-purple-400 px-2 py-0.5 rounded-full font-semibold">📦 ${t('tabMods')}</span>` : ''}
+                ${game.hasTrainer ? `<span class="text-[10px] bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 px-2 py-0.5 rounded-full font-semibold">🛡️ ${t('filterTrainers')}</span>` : ''}
+              </div>
+            </div>
+          </div>
+
+          <!-- Card Bottom Info -->
+          <div class="px-5 pb-4 flex items-center justify-between text-xs text-zinc-400">
+            <div class="flex items-center space-x-1 text-zinc-600 dark:text-zinc-400 font-medium">
+              <svg class="w-3.5 h-3.5 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+              <span>${downloads} 下载</span>
+            </div>
+            <div class="w-7 h-7 rounded-full bg-zinc-100 dark:bg-white/10 group-hover:bg-blue-600 group-hover:text-white text-zinc-600 dark:text-zinc-300 flex items-center justify-center transition-all">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            </div>
+          </div>
+        `;
+        galleryCon.appendChild(card);
+
+        // 2. MINIMALIST LIST ROW
+        const listRow = document.createElement('a');
+        listRow.id = `game-list-row-${game.id}`;
+        listRow.href = `#/game/${game.id}`;
+        listRow.onclick = () => saveCatalogScroll(game.id);
+        listRow.className = 'group flex items-center justify-between p-3.5 px-4 rounded-2xl hover:bg-white dark:hover:bg-white/5 transition-all border border-transparent hover:border-zinc-200/80 dark:hover:border-white/10 shadow-none hover:shadow-sm';
+
+        listRow.innerHTML = `
+          <div class="flex items-center space-x-4 min-w-0">
+            <span class="w-8 text-center text-xs font-mono font-bold text-blue-600 dark:text-blue-400 shrink-0">#${game.rank}</span>
+            <div class="min-w-0">
+              <div class="flex items-center space-x-2">
+                <span class="font-bold text-sm text-zinc-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 truncate">${localizedTitle}</span>
+                <span class="text-xs text-zinc-400 hidden sm:inline truncate">(${game.title})</span>
+                ${isCertified 
+                  ? `<span class="text-[10px] bg-amber-500/15 text-amber-600 dark:text-amber-400 px-2.5 py-0.5 rounded-full font-bold border border-amber-500/30 shrink-0">👑 精测认证</span>`
+                  : `<span class="text-[10px] bg-zinc-100 dark:bg-white/10 text-zinc-500 dark:text-zinc-400 px-2.5 py-0.5 rounded-full font-medium shrink-0">🛠️ 实测排雷中</span>`}
+              </div>
+              <div class="text-[11px] text-zinc-500 dark:text-zinc-400 truncate">${game.developer} • ${game.genre} ${!isCertified ? '• <span class=\"text-amber-500\">实测排雷中</span>' : ''}</div>
+            </div>
+          </div>
+
+          <div class="flex items-center space-x-3 shrink-0 ml-4">
+            <div class="hidden md:flex items-center space-x-1.5">
+              ${game.hasConsole ? `<span class="text-[10px] bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 px-2 py-0.5 rounded-full font-semibold">控制台</span>` : ''}
+              ${game.hasMods ? `<span class="text-[10px] bg-purple-50 dark:bg-purple-500/10 text-purple-600 dark:text-purple-400 px-2 py-0.5 rounded-full font-semibold">MOD</span>` : ''}
+            </div>
+            <span class="text-xs text-emerald-600 dark:text-emerald-400 font-semibold hidden sm:inline">${rating}</span>
+            <div class="w-7 h-7 rounded-full flex items-center justify-center text-zinc-400 group-hover:text-blue-600 dark:group-hover:text-blue-400">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            </div>
+          </div>
+        `;
+        listCon.appendChild(listRow);
+      });
+    }
+
+    // Render Secondary Game Detail View
+    function renderGameDetailView(game) {
+      const localizedTitle = game.titles && game.titles[currentLang] ? game.titles[currentLang] : game.title;
+
+      document.getElementById('detail-breadcrumb-genre').innerText = game.genre;
+      document.getElementById('detail-breadcrumb-id').innerText = game.id;
+      document.getElementById('detail-rank-badge').innerText = `#${game.rank}`;
+      document.getElementById('detail-rating-badge').innerText = game.steamRating;
+      document.getElementById('detail-console-badge').innerText = game.hasConsole ? t('consoleStatusAvailable') : t('consoleStatusNone');
+      document.getElementById('detail-title').innerText = localizedTitle;
+      document.getElementById('detail-subtitle').innerText = `${game.title} • ${game.developer} (${game.releaseYear}) • ${game.genre}`;
+
+      // Update Patch Verified Trust Badge
+      const patchBadge = document.getElementById('detail-patch-badge');
+      const patchBadgeElem = document.getElementById('detail-patch-text');
+      if (patchBadgeElem) {
+        if (game.rank <= 14) {
+          patchBadgeElem.innerText = `${t('cardCertifiedBadge')} (${game.verifiedPatch || t('detailTestedPatch')} · ${t('cardTestedBadge')})`;
+          if (patchBadge) {
+            patchBadge.className = 'px-3 py-1 rounded-full text-xs font-bold bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/30 inline-flex items-center gap-1 shadow-sm';
+          }
+        } else {
+          patchBadgeElem.innerText = `${t('cardMiningBadge')} · ${t('cardTestingBadge')}`;
+          if (patchBadge) {
+            patchBadge.className = 'px-3 py-1 rounded-full text-xs font-medium bg-zinc-100 dark:bg-white/10 text-zinc-600 dark:text-zinc-400 border border-zinc-200/60 dark:border-white/10 inline-flex items-center gap-1 shadow-sm';
+          }
+        }
+      }
+
+      const heroImg = document.getElementById('detail-hero-img');
+      if (game.headerImage) {
+        heroImg.src = game.headerImage;
+        heroImg.style.display = 'block';
+      } else {
+        heroImg.style.display = 'none';
+      }
+
+      const stats = game.nexusStats || { totalDownloads: "15.0M", totalEndorsements: "120K", totalMods: "1,250" };
+      document.getElementById('detail-stat-downloads').innerText = stats.totalDownloads;
+      document.getElementById('detail-stat-endorsements').innerText = stats.totalEndorsements;
+      document.getElementById('detail-stat-mods').innerText = stats.totalMods;
+
+      // Reset In-Tab Search Inputs
+      const consoleInput = document.getElementById('console-search-input');
+      if (consoleInput) consoleInput.value = '';
+      const modsInput = document.getElementById('mods-search-input');
+      if (modsInput) modsInput.value = '';
+      const hotkeysInput = document.getElementById('hotkeys-search-input');
+      if (hotkeysInput) hotkeysInput.value = '';
+
+      // TAB 1: Console Setup
+      document.getElementById('detail-shortcut-key').innerText = game.consoleShortcut ? game.consoleShortcut.split(' ')[0] : '~';
+      const guideText = (game.consoleEnableGuide && game.consoleEnableGuide[currentLang]) ? game.consoleEnableGuide[currentLang] : (game.consoleEnableGuide?.['zh-CN'] || '在游戏中按 ~ 键开启控制台。');
+      document.getElementById('detail-enable-guide').innerText = guideText;
+      
+      // Render Scenario Bundles, Pitfall Notes, Radar Card, and 5-Card Matrix
+      renderScenarioBundles(game);
+      renderPitfallNotes(game);
+      renderRadarCard(game);
+      renderSocialCardsTab(game);
+      renderConsoleCategories(game.consoleCategories || []);
+
+      // TAB 2: Mods Setup
+      document.getElementById('detail-mod-path').innerText = game.modInstallPath || 'GameDirectory\\Mods';
+      renderCuratedMods(game.curatedMods || []);
+
+      // TAB 3: FLiNG Trainer Setup
+      if (game.trainerInfo) {
+        const offLink = document.getElementById('trainer-official-link');
+        if (offLink) offLink.href = game.trainerInfo.officialUrl;
+        const patchBadge = document.getElementById('trainer-patch-badge');
+        if (patchBadge) patchBadge.innerText = game.trainerInfo.version;
+        renderTrainerHotkeys(game.trainerInfo.hotkeysCategorized || []);
+      } else {
+        renderTrainerHotkeys([]);
+      }
+
+      // TAB 4: Reviews
+      const reviewsList = document.getElementById('detail-reviews-list');
+      reviewsList.innerHTML = '';
+      if (game.communityReviews && game.communityReviews.length > 0) {
+        game.communityReviews.forEach(rev => {
+          const rdiv = document.createElement('div');
+          rdiv.className = 'bg-white dark:bg-[#141518] rounded-[24px] p-6 space-y-2 border border-zinc-200/80 dark:border-white/10 shadow-sm';
+          rdiv.innerHTML = `
+            <div class="flex items-center justify-between text-xs text-zinc-400">
+              <span class="font-semibold text-zinc-800 dark:text-zinc-200">${rev.user}</span>
+              <span>${rev.date}</span>
+            </div>
+            <div class="text-xs text-amber-500 font-bold">${rev.rating}</div>
+            <h4 class="font-bold text-sm text-zinc-900 dark:text-white pt-1">${rev.title}</h4>
+            <p class="text-xs sm:text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">${rev.content}</p>
+          `;
+          reviewsList.appendChild(rdiv);
+        });
+      }
+
+      setDetailTab('console');
+    }
+
+    // Render Categorized Console Commands
+    function renderConsoleCategories(categories) {
+      const catContainer = document.getElementById('detail-console-categories');
+      catContainer.innerHTML = '';
+      if (categories && categories.length > 0) {
+        categories.forEach(cat => {
+          if (!cat.commands || cat.commands.length === 0) return;
+          const div = document.createElement('div');
+          div.className = 'space-y-3';
+          
+          let cmdCards = '';
+          cat.commands.forEach(cmd => {
+            const cmdName = cmd.name[currentLang] || cmd.name['zh-CN'] || cmd.name['en'] || cmd.name;
+            const escapedCode = cmd.code.replace(/'/g, "\\'");
+            cmdCards += `
+              <div class="bg-white dark:bg-[#141518] rounded-[20px] p-4 sm:p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all border border-zinc-200/80 dark:border-white/10 shadow-sm hover:border-blue-500/40">
+                <div class="flex-1">
+                  <div class="font-bold text-sm sm:text-base text-zinc-900 dark:text-white">${cmdName}</div>
+                  <div class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">${cmd.desc}</div>
+                  <div class="mt-2.5 inline-block bg-zinc-50 dark:bg-black/30 rounded-xl px-3.5 py-1.5 border border-zinc-200/60 dark:border-white/5">
+                    <code class="text-xs text-blue-600 dark:text-blue-400 font-mono font-bold select-all">${cmd.code}</code>
+                  </div>
+                </div>
+                <button onclick="copyText('${escapedCode}')" class="self-start md:self-center px-4 py-2 rounded-full bg-zinc-100 hover:bg-blue-600 dark:bg-white/10 dark:hover:bg-blue-600 text-zinc-800 dark:text-zinc-200 hover:text-white dark:hover:text-white font-semibold text-xs transition-colors shrink-0 flex items-center gap-1.5 shadow-sm">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+                  <span>${t('btnCopyCode')}</span>
+                </button>
+              </div>
+            `;
+          });
+
+          div.innerHTML = `
+            <div class="text-sm font-bold text-zinc-700 dark:text-zinc-300 px-1">${cat.category}</div>
+            <div class="space-y-2.5">${cmdCards}</div>
+          `;
+          catContainer.appendChild(div);
+        });
+      } else {
+        catContainer.innerHTML = `<div class="bg-white dark:bg-[#141518] rounded-[24px] p-8 text-center text-zinc-400 text-sm border border-zinc-200/80 dark:border-white/10">未找到匹配的控制台指令代码。可在上方搜索其他关键字，或切换至【修改器】Tab体验！</div>`;
+      }
+    }
+
+    // Filter Console Commands
+    function filterConsoleCommands(query) {
+      if (!activeGame || !activeGame.consoleCategories) return;
+      const q = (query || '').trim().toLowerCase();
+      if (!q) {
+        renderConsoleCategories(activeGame.consoleCategories);
+        return;
+      }
+      const filtered = [];
+      activeGame.consoleCategories.forEach(cat => {
+        const matchedCmds = cat.commands.filter(cmd => {
+          const name = (cmd.name[currentLang] || cmd.name['zh-CN'] || cmd.name['en'] || '').toLowerCase();
+          const code = (cmd.code || '').toLowerCase();
+          const desc = (cmd.desc || '').toLowerCase();
+          return name.includes(q) || code.includes(q) || desc.includes(q);
+        });
+        if (matchedCmds.length > 0) {
+          filtered.push({ category: cat.category, commands: matchedCmds });
+        }
+      });
+      renderConsoleCategories(filtered);
+    }
+
+    // Render Curated Mods List
+    function renderCuratedMods(mods) {
+      const modsList = document.getElementById('detail-mods-list');
+      modsList.innerHTML = '';
+      if (mods && mods.length > 0) {
+        mods.forEach(mod => {
+          const mdiv = document.createElement('div');
+          mdiv.className = 'bg-white dark:bg-[#141518] rounded-[24px] p-6 space-y-4 border border-zinc-200/80 dark:border-white/10 shadow-sm';
+          mdiv.innerHTML = `
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-zinc-100 dark:border-white/5">
+              <div>
+                <div class="flex items-center gap-2 flex-wrap">
+                  <h4 class="font-bold text-base text-zinc-900 dark:text-white">${mod.title}</h4>
+                  <span class="text-xs bg-purple-50 dark:bg-purple-500/10 text-purple-600 dark:text-purple-400 px-2.5 py-0.5 rounded-full font-semibold">${mod.version}</span>
+                  <span class="text-xs bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 px-2.5 py-0.5 rounded-full font-semibold">${mod.category}</span>
+                </div>
+                <div class="text-xs text-zinc-400 mt-1">Author: ${mod.author} • Size: ${mod.size}</div>
+              </div>
+              <div class="flex items-center gap-3 text-xs text-zinc-400">
+                <span class="flex items-center gap-1 text-blue-600 dark:text-blue-400 font-semibold">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                  <span>${mod.downloads}</span>
+                </span>
+                <span>•</span>
+                <span class="flex items-center gap-1 text-purple-600 dark:text-purple-400 font-semibold">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"></path></svg>
+                  <span>${mod.endorsements}</span>
+                </span>
+              </div>
+            </div>
+
+            <p class="text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed">${mod.desc}</p>
+
+            <div class="bg-zinc-50 dark:bg-black/30 p-4 rounded-2xl space-y-2 text-xs border border-zinc-200/60 dark:border-white/5">
+              <div class="font-bold text-zinc-800 dark:text-zinc-200 mb-1">${t('modInstallStepsGuide')}</div>
+              ${mod.installSteps.map(step => `<div class="text-zinc-500 dark:text-zinc-400 pl-2">${step}</div>`).join('')}
+            </div>
+
+            <div class="flex items-center justify-between pt-1 flex-wrap gap-2">
+              <div class="text-xs text-zinc-400">${t('modDependencyLabel')} <span class="text-zinc-700 dark:text-zinc-300 font-medium">${(mod.dependencies && mod.dependencies.length > 0) ? mod.dependencies.join(', ') : '无特殊前置 (解压即用)'}</span></div>
+              <div class="flex items-center gap-2">
+                ${mod.nexusUrl ? `
+                  <a href="${mod.nexusUrl}" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 rounded-full bg-zinc-100 hover:bg-zinc-200 dark:bg-white/10 dark:hover:bg-white/20 text-zinc-600 dark:text-zinc-300 text-xs font-semibold transition-colors border border-zinc-200/80 dark:border-white/10 flex items-center gap-1 cursor-pointer">
+                    <svg class="w-3.5 h-3.5 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                    <span>${t('modOriginPageBtn')}</span>
+                  </a>
+                ` : ''}
+                <button onclick="downloadMod('${mod.id}')" class="px-5 py-2 rounded-full ${mod.isDirect !== false ? 'bg-blue-600 hover:bg-blue-500 shadow-blue-500/20' : 'bg-purple-600 hover:bg-purple-500 shadow-purple-500/20'} text-white font-bold text-xs transition-colors shadow-sm flex items-center gap-1.5 cursor-pointer">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                  <span>${mod.isDirect !== false ? t('modDirectBtn') : t('modMirrorBtn')}</span>
+                </button>
+              </div>
+            </div>
+          `;
+          modsList.appendChild(mdiv);
+        });
+      } else {
+        modsList.innerHTML = `<div class="bg-white dark:bg-[#141518] rounded-[24px] p-8 text-center text-zinc-400 text-sm border border-zinc-200/80 dark:border-white/10">未搜索到相关 MOD。请尝试搜索其他关键字。</div>`;
+      }
+    }
+
+    // Filter Curated Mods
+    function filterCuratedMods(query) {
+      if (!activeGame || !activeGame.curatedMods) return;
+      const q = (query || '').trim().toLowerCase();
+      if (!q) {
+        renderCuratedMods(activeGame.curatedMods);
+        return;
+      }
+      const filtered = activeGame.curatedMods.filter(m => {
+        return (m.title || '').toLowerCase().includes(q) || (m.desc || '').toLowerCase().includes(q) || (m.category || '').toLowerCase().includes(q);
+      });
+      renderCuratedMods(filtered);
+    }
+
+    // Render Categorized FLiNG Trainer Hotkeys
+    function renderTrainerHotkeys(categories) {
+      const container = document.getElementById('detail-hotkeys-table');
+      container.innerHTML = '';
+      if (categories && categories.length > 0) {
+        categories.forEach(cat => {
+          if (!cat.items || cat.items.length === 0) return;
+          const block = document.createElement('div');
+          block.className = 'space-y-3';
+          
+          let rows = '';
+          cat.items.forEach(hk => {
+            rows += `
+              <div class="py-3 px-3 flex items-center justify-between text-xs sm:text-sm hover:bg-zinc-50 dark:hover:bg-white/[0.03] rounded-xl transition-colors">
+                <span class="font-mono font-bold text-blue-600 dark:text-blue-400 bg-zinc-100 dark:bg-white/10 px-3 py-1 rounded-full border border-zinc-200/60 dark:border-white/10 shadow-sm">${hk.key}</span>
+                <span class="text-zinc-800 dark:text-zinc-200 font-medium text-right">${hk.action}</span>
+              </div>
+            `;
+          });
+
+          block.innerHTML = `
+            <div class="text-xs font-bold text-zinc-500 uppercase tracking-wider px-1">${cat.category}</div>
+            <div class="bg-white dark:bg-[#141518] rounded-[24px] p-3 divide-y divide-zinc-100 dark:divide-white/5 border border-zinc-200/80 dark:border-white/10 shadow-sm">
+              ${rows}
+            </div>
+          `;
+          container.appendChild(block);
+        });
+      } else {
+        container.innerHTML = `<div class="bg-white dark:bg-[#141518] rounded-[24px] p-8 text-center text-zinc-400 text-sm border border-zinc-200/80 dark:border-white/10">未搜索到匹配的修改器热键功能。</div>`;
+      }
+    }
+
+    // Filter FLiNG Trainer Hotkeys
+    function filterTrainerHotkeys(query) {
+      if (!activeGame || !activeGame.trainerInfo || !activeGame.trainerInfo.hotkeysCategorized) return;
+      const q = (query || '').trim().toLowerCase();
+      if (!q) {
+        renderTrainerHotkeys(activeGame.trainerInfo.hotkeysCategorized);
+        return;
+      }
+      const filtered = [];
+      activeGame.trainerInfo.hotkeysCategorized.forEach(cat => {
+        const matchedItems = cat.items.filter(item => {
+          return (item.key || '').toLowerCase().includes(q) || (item.action || '').toLowerCase().includes(q);
+        });
+        if (matchedItems.length > 0) {
+          filtered.push({ category: cat.category, items: matchedItems });
+        }
+      });
+      renderTrainerHotkeys(filtered);
+    }
+
+    // ==========================================
+    // REAL DIRECT DOWNLOAD PIPELINE & MODALS
+    // ==========================================
+    let currentTrainerDownloadUrl = '';
+    let currentTrainerDownloadFilename = '';
+    let currentModDownloadUrl = '';
+    let currentModDownloadFilename = '';
+
+    function triggerFileDownload(url, filename) {
+      if (!url) return;
+      const a = document.createElement('a');
+      a.href = url;
+      if (filename) a.download = filename;
+      a.target = '_blank';
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(() => {
+        if (a.parentNode) a.parentNode.removeChild(a);
+      }, 300);
+    }
+
+    // FLiNG Clean Direct Download Action
+    function downloadCleanTrainer() {
+      if (!activeGame || !activeGame.trainerInfo) return;
+      const tInfo = activeGame.trainerInfo;
+      const locTitle = (activeGame.titles && activeGame.titles[currentLang]) ? activeGame.titles[currentLang] : activeGame.title;
+      
+      const mirrorUrl = tInfo.cleanMirrorUrl || tInfo.officialUrl;
+      const rawName = mirrorUrl.split('/').pop().split('?')[0];
+      const filename = (rawName && (rawName.endsWith('.zip') || rawName.endsWith('.7z') || rawName.endsWith('.rar'))) 
+        ? rawName 
+        : `${activeGame.id}_FLiNG_Trainer.zip`;
+      
+      currentTrainerDownloadUrl = mirrorUrl;
+      currentTrainerDownloadFilename = filename;
+
+      // 1. Pull direct download in browser
+      triggerFileDownload(mirrorUrl, filename);
+
+      // 2. Open high-texture popup with 10s Defender exclusion command & dual backup
+      openTrainerModal(locTitle, tInfo);
+    }
+
+    function openTrainerModal(locTitle, tInfo) {
+      const modal = document.getElementById('trainer-download-modal');
+      const card = document.getElementById('trainer-download-card');
+      const titleEl = document.getElementById('trainer-modal-title');
+      const cmdEl = document.getElementById('trainer-modal-cmd');
+      const backupLink = document.getElementById('trainer-modal-backup-link');
+
+      if (titleEl) titleEl.innerText = (t('trainerModalTitle') || '《{title}》修改器下载已在浏览器拉起').replace('{title}', locTitle);
+      const psCmd = tInfo?.safeVerification?.powershellExclusionCmd || `Add-MpPreference -ExclusionProcess '${activeGame.id}.exe'`;
+      if (cmdEl) cmdEl.innerText = psCmd;
+      if (backupLink) backupLink.href = tInfo?.officialUrl || '#';
+
+      if (modal) {
+        modal.classList.remove('hidden');
+        setTimeout(() => {
+          if (card) {
+            card.classList.remove('scale-95');
+            card.classList.add('scale-100');
+          }
+        }, 10);
+      }
+    }
+
+    function closeTrainerModal() {
+      const modal = document.getElementById('trainer-download-modal');
+      const card = document.getElementById('trainer-download-card');
+      if (!modal) return;
+      if (card) {
+        card.classList.remove('scale-100');
+        card.classList.add('scale-95');
+      }
+      setTimeout(() => {
+        modal.classList.add('hidden');
+      }, 150);
+    }
+
+    function retriggerTrainerDownload() {
+      if (!currentTrainerDownloadUrl && activeGame && activeGame.trainerInfo) {
+        currentTrainerDownloadUrl = activeGame.trainerInfo.cleanMirrorUrl || activeGame.trainerInfo.officialUrl;
+        currentTrainerDownloadFilename = `${activeGame.id}_FLiNG_Trainer.zip`;
+      }
+      if (currentTrainerDownloadUrl) {
+        triggerFileDownload(currentTrainerDownloadUrl, currentTrainerDownloadFilename);
+        showToast(t('trainerRetriggerToast'));
+      }
+    }
+
+    function copyTrainerCmd() {
+      const cmdEl = document.getElementById('trainer-modal-cmd');
+      const cmd = cmdEl ? cmdEl.innerText : (activeGame?.trainerInfo?.safeVerification?.powershellExclusionCmd || 'Add-MpPreference -ExclusionPath "D:\\Games\\Trainers"');
+      copyText(cmd, t('cmdCopiedToast'));
+    }
+
+    // Curated Mod Real Download Action
+    function downloadMod(modId) {
+      if (!activeGame || !activeGame.curatedMods) return;
+      const mod = activeGame.curatedMods.find(m => m.id === modId);
+      if (!mod) return;
+
+      const isDirect = mod.isDirect !== false && !!mod.downloadUrl;
+      const url = mod.downloadUrl || mod.nexusUrl || '#';
+      const filename = mod.downloadFilename || `${mod.id}.zip`;
+
+      currentModDownloadUrl = url;
+      currentModDownloadFilename = filename;
+
+      if (isDirect) {
+        triggerFileDownload(url, filename);
+      } else {
+        window.open(url, '_blank');
+      }
+
+      openModModal(mod, isDirect);
+    }
+
+    function openModModal(mod, isDirect) {
+      const modal = document.getElementById('mod-download-modal');
+      const card = document.getElementById('mod-download-card');
+      const titleEl = document.getElementById('mod-modal-title');
+      const badgeEl = document.getElementById('mod-modal-type-badge');
+      const subtitleEl = document.getElementById('mod-modal-subtitle');
+      const filenameEl = document.getElementById('mod-modal-filename');
+      const pathEl = document.getElementById('mod-modal-path');
+      const stepsEl = document.getElementById('mod-modal-steps');
+      const nexusLink = document.getElementById('mod-modal-nexus-link');
+
+      if (titleEl) titleEl.innerText = isDirect ? (t('modModalDirectTitle') || '《{title}》下载已在浏览器拉起').replace('{title}', mod.title) : (t('modModalOfficialTitle') || '《{title}》转存与官方页面已直达').replace('{title}', mod.title);
+      if (badgeEl) {
+        badgeEl.innerText = isDirect ? t('modModalDirectBadge') : t('modModalOfficialBadge');
+        badgeEl.className = isDirect
+          ? 'text-[10px] bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 px-2.5 py-0.5 rounded-full font-bold border border-blue-500/20'
+          : 'text-[10px] bg-purple-50 dark:bg-purple-500/10 text-purple-600 dark:text-purple-400 px-2.5 py-0.5 rounded-full font-bold border border-purple-500/20';
+      }
+      if (subtitleEl) {
+        subtitleEl.innerText = isDirect ? t('modModalDirectSubtitle') : t('modModalOfficialSubtitle');
+      }
+      if (filenameEl) filenameEl.innerText = mod.downloadFilename || `${mod.id}.zip`;
+      if (pathEl) pathEl.innerText = activeGame.modInstallPath || '游戏安装根目录';
+
+      if (stepsEl) {
+        const steps = mod.installSteps || ['解压至游戏根目录对应文件夹', '启动游戏验证是否生效'];
+        stepsEl.innerHTML = steps.map((s, idx) => `
+          <div class="flex items-start gap-2">
+            <span class="w-4 h-4 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 font-bold flex items-center justify-center text-[10px] shrink-0 mt-0.5">${idx + 1}</span>
+            <span>${s}</span>
+          </div>
+        `).join('');
+      }
+
+      if (nexusLink) {
+        nexusLink.href = mod.nexusUrl || '#';
+        nexusLink.style.display = mod.nexusUrl ? 'inline-flex' : 'none';
+      }
+
+      if (modal) {
+        modal.classList.remove('hidden');
+        setTimeout(() => {
+          if (card) {
+            card.classList.remove('scale-95');
+            card.classList.add('scale-100');
+          }
+        }, 10);
+      }
+    }
+
+    function closeModModal() {
+      const modal = document.getElementById('mod-download-modal');
+      const card = document.getElementById('mod-download-card');
+      if (!modal) return;
+      if (card) {
+        card.classList.remove('scale-100');
+        card.classList.add('scale-95');
+      }
+      setTimeout(() => {
+        modal.classList.add('hidden');
+      }, 150);
+    }
+
+    function retriggerModDownload() {
+      if (currentModDownloadUrl) {
+        triggerFileDownload(currentModDownloadUrl, currentModDownloadFilename);
+        showToast(t('modRetriggerToast'));
+      }
+    }
+
+    function copyModInstallPath() {
+      const p = activeGame?.modInstallPath || '游戏根目录';
+      copyText(p, t('pathCopiedToast'));
+    }
+
+    function setDetailTab(tab) {
+      document.querySelectorAll('.detail-tab-btn').forEach(btn => {
+        btn.className = 'detail-tab-btn px-5 py-2 rounded-full text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-all shrink-0';
+      });
+      const activeBtn = document.getElementById('detail-tab-btn-' + tab);
+      if (activeBtn) {
+        activeBtn.className = 'detail-tab-btn px-5 py-2 rounded-full text-xs sm:text-sm font-semibold bg-white dark:bg-blue-600 text-zinc-900 dark:text-white transition-all shrink-0 shadow-sm';
+      }
+
+      ['console', 'mods', 'trainers', 'reviews', 'social-cards'].forEach(t => {
+        const el = document.getElementById('detail-content-' + t);
+        if (el) el.classList.add('hidden');
+      });
+
+      const targetEl = document.getElementById('detail-content-' + tab);
+      if (targetEl) targetEl.classList.remove('hidden');
+    }
+
+    function askSmartAssistant() {
+      if (!activeGame) return;
+      const localizedTitle = activeGame.titles[currentLang] || activeGame.title;
+      showToast(`正在匹配关于《${localizedTitle}》的常见排错指引...`);
+    }
+
+    // ==========================================
+    // SCENARIO PACKAGES (小白 10 秒一键爽到)
+    // ==========================================
+    function renderScenarioBundles(game) {
+      const container = document.getElementById('detail-scenario-bundles-container');
+      if (!container) return;
+
+      if (!game.hasConsole) {
+        container.innerHTML = `
+          <div class="bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-emerald-500/10 rounded-[28px] p-6 border border-blue-500/20 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center space-x-3.5">
+              <div class="w-10 h-10 rounded-2xl bg-blue-600/20 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
+                <span class="text-xl">⚡</span>
+              </div>
+              <div>
+                <div class="font-extrabold text-sm sm:text-base text-zinc-900 dark:text-white">${t('noConsoleTitle')}</div>
+                <div class="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">${t('noConsoleDesc')}</div>
+              </div>
+            </div>
+            <button onclick="setDetailTab('trainers')" class="px-5 py-2.5 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition-all shadow-md shrink-0 flex items-center gap-1.5 cursor-pointer">
+              <span>${t('goToTrainers')}</span>
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      const bundles = (game.scenarioBundles && game.scenarioBundles.length > 0)
+        ? game.scenarioBundles
+        : generateDynamicBundles(game);
+
+      if (!bundles || bundles.length === 0) {
+        container.innerHTML = '';
+        return;
+      }
+
+      const shortcutKey = (game.consoleShortcut || '~').split(' ')[0] || '~';
+
+      let cardsHtml = '';
+      bundles.forEach((b, idx) => {
+        let gradientBorder = 'border-blue-500/30 hover:border-blue-500';
+        let gradientBg = 'from-blue-500/5 to-cyan-500/5';
+        let badgeColor = 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20';
+        let btnGradient = 'from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 shadow-blue-500/25';
+        let icon = '🚀';
+        let bName = b.name;
+        let bTag = b.tag || 'L-MOD';
+        let bDesc = b.desc;
+
+        if (b.type === 'starter' || idx === 0) {
+          bName = t('scenarioStarterPack');
+          bTag = t('scenarioStarterTag');
+          bDesc = t('scenarioStarterDesc');
+        } else if (b.type === 'salvation' || idx === 1) {
+          gradientBorder = 'border-purple-500/30 hover:border-purple-500';
+          gradientBg = 'from-purple-500/5 to-pink-500/5';
+          badgeColor = 'bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/20';
+          btnGradient = 'from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 shadow-purple-500/25';
+          icon = '💖';
+          bName = t('scenarioStoryRedeem');
+          bTag = t('scenarioStoryTag');
+          bDesc = t('scenarioStoryDesc');
+        } else if (b.type === 'arsenal' || idx === 2) {
+          gradientBorder = 'border-amber-500/30 hover:border-amber-500';
+          gradientBg = 'from-amber-500/5 to-orange-500/5';
+          badgeColor = 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20';
+          btnGradient = 'from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500 shadow-amber-500/25';
+          icon = '⚔️';
+          bName = t('scenarioEndgameArsenal');
+          bTag = t('scenarioEndgameTag');
+          bDesc = t('scenarioEndgameDesc');
+        }
+
+        const highlightsList = (b.highlights || []).map(hl => `
+          <div class="flex items-start gap-1.5 text-xs text-zinc-700 dark:text-zinc-300">
+            <svg class="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+            <span class="leading-snug">${hl}</span>
+          </div>
+        `).join('');
+
+        const previewLines = b.code ? b.code.split('\n').filter(l => l.trim() && !l.trim().startsWith('--') && !l.trim().startsWith('//') && !l.trim().startsWith('#')).slice(0, 3) : [];
+
+        cardsHtml += `
+          <div class="bg-gradient-to-b ${gradientBg} bg-white dark:bg-[#141518] rounded-[24px] p-5 sm:p-6 border ${gradientBorder} shadow-sm hover:shadow-md transition-all flex flex-col justify-between space-y-4 group">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between gap-2 flex-wrap">
+                <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full border ${badgeColor}">
+                  ${bTag}
+                </span>
+                <span class="text-[10px] text-zinc-400 font-mono">1-Click Bundle</span>
+              </div>
+              <div>
+                <h4 class="text-base sm:text-lg font-extrabold text-zinc-900 dark:text-white flex items-center gap-1.5">
+                  <span>${icon}</span>
+                  <span>${bName}</span>
+                </h4>
+                <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1 leading-relaxed min-h-[36px]">
+                  ${bDesc}
+                </p>
+              </div>
+              <div class="pt-2 border-t border-zinc-100 dark:border-white/5 space-y-2">
+                <div class="text-[11px] font-bold text-zinc-400 uppercase tracking-wider">${t('scenarioFeaturesLabel') || 'Features Included:'}</div>
+                <div class="space-y-1.5">
+                  ${highlightsList}
+                </div>
+              </div>
+              ${previewLines.length > 0 ? `
+                <div class="bg-zinc-100/80 dark:bg-black/40 rounded-xl p-2.5 font-mono text-[10px] text-zinc-600 dark:text-zinc-400 border border-zinc-200/60 dark:border-white/5 overflow-hidden">
+                  <div class="text-[9px] text-zinc-400 mb-1 font-sans">${t('codePreviewLabel') || 'Preview:'}</div>
+                  ${previewLines.map(pl => `<div class="truncate text-blue-600 dark:text-blue-400 font-semibold">${pl}</div>`).join('')}
+                  <div class="text-[9px] text-zinc-400 mt-1 italic font-sans">${t('codeFullBundlePack') || '+ Complete Bundle Script'}</div>
+                </div>
+              ` : ''}
+            </div>
+
+            <div class="pt-2">
+              <button 
+                onclick="copyScenarioBundle('${game.id}', '${b.id}')"
+                class="w-full py-3 px-4 rounded-xl font-bold text-xs text-white bg-gradient-to-r ${btnGradient} shadow-md flex items-center justify-center gap-2 transition-all transform group-hover:scale-[1.02] active:scale-95 cursor-pointer"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+                <span>${t('copyBundleBtn')}</span>
+              </button>
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = `
+        <div class="bg-white dark:bg-[#141518] rounded-[28px] p-6 border border-zinc-200/80 dark:border-white/10 shadow-sm space-y-5">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-zinc-100 dark:border-white/5">
+            <div>
+              <div class="flex items-center gap-2 flex-wrap mb-1">
+                <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+                <h3 class="text-base sm:text-lg font-extrabold text-zinc-900 dark:text-white">
+                  ${t('scenarioTitle') || '老L·极客推荐场景套餐 (小白 10 秒一键爽到)'}
+                </h3>
+                <span class="text-xs bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 px-2.5 py-0.5 rounded-full font-bold border border-emerald-500/20">
+                  ${t('scenarioPatchTag') || '100% 官方最新补丁实测'}
+                </span>
+              </div>
+              <p class="text-xs text-zinc-500 dark:text-zinc-400">
+                ${t('scenarioSubtitle') || '针对不同游玩场景整套打包，进游戏呼出控制台粘贴一次即可整套生效。'}
+              </p>
+            </div>
+            <div class="flex items-center gap-2 text-xs text-zinc-400 shrink-0">
+              <span>${t('consoleShortcutLabel') || '呼出键:'}</span>
+              <code class="px-2 py-1 rounded-md bg-zinc-100 dark:bg-white/10 text-blue-600 dark:text-blue-400 font-mono font-bold">${shortcutKey}</code>
+            </div>
+          </div>
+
+          <!-- 3-Column Responsive Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            ${cardsHtml}
+          </div>
+
+          <!-- Advanced usage tip -->
+          <div class="flex items-center gap-2 text-xs text-zinc-500 dark:text-zinc-400 bg-zinc-50 dark:bg-black/30 p-3 rounded-xl border border-zinc-200/60 dark:border-white/5">
+            <svg class="w-4 h-4 text-blue-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <span>${t('scenarioAdvancedTip') || '极客贴士：代码按官方控制台语法封装，点击按钮直接复制后，在游戏里呼出控制台按 <b>Ctrl+V</b>（或右键）回车执行即可！'}</span>
+          </div>
+        </div>
+      `;
+    }
+
+    function generateDynamicBundles(game) {
+      if (game.scenarioBundles && game.scenarioBundles.length > 0) {
+        return game.scenarioBundles;
+      }
+      
+      const allCmds = [];
+      if (game.consoleCategories) {
+        game.consoleCategories.forEach(cat => {
+          if (cat.commands) allCmds.push(...cat.commands);
+        });
+      } else if (game.popularCommands) {
+        allCmds.push(...game.popularCommands);
+      }
+
+      if (allCmds.length === 0) return [];
+
+      const starterCmds = allCmds.filter(c => {
+        const text = ((c.name && (c.name[currentLang] || c.name['zh-CN'] || c.name['en'] || c.name)) + ' ' + (c.desc || '') + ' ' + c.code).toLowerCase();
+        return text.includes('无敌') || text.includes('god') || text.includes('生命') || text.includes('health') || text.includes('金钱') || text.includes('金币') || text.includes('money') || text.includes('gold') || text.includes('经验') || text.includes('exp') || text.includes('负重') || text.includes('weight') || text.includes('stamina') || text.includes('耐力');
+      }).slice(0, 6);
+
+      const salvationCmds = allCmds.filter(c => {
+        const text = ((c.name && (c.name[currentLang] || c.name['zh-CN'] || c.name['en'] || c.name)) + ' ' + (c.desc || '') + ' ' + c.code).toLowerCase();
+        return text.includes('地图') || text.includes('map') || text.includes('传送') || text.includes('teleport') || text.includes('travel') || text.includes('解锁') || text.includes('unlock') || text.includes('通缉') || text.includes('wanted') || text.includes('结局') || text.includes('ending') || text.includes('quest') || text.includes('任务');
+      }).slice(0, 6);
+
+      const arsenalCmds = allCmds.filter(c => {
+        const text = ((c.name && (c.name[currentLang] || c.name['zh-CN'] || c.name['en'] || c.name)) + ' ' + (c.desc || '') + ' ' + c.code).toLowerCase();
+        return text.includes('武器') || text.includes('weapon') || text.includes('防具') || text.includes('armor') || text.includes('装备') || text.includes('equip') || text.includes('神装') || text.includes('道具') || text.includes('item') || text.includes('技能') || text.includes('perk') || text.includes('level');
+      }).slice(0, 8);
+
+      const fallbackStarter = starterCmds.length > 0 ? starterCmds : allCmds.slice(0, 4);
+      const fallbackSalvation = salvationCmds.length > 0 ? salvationCmds : allCmds.slice(2, 6);
+      const fallbackArsenal = arsenalCmds.length > 0 ? arsenalCmds : allCmds.slice(4, 10);
+
+      const formatCode = (cmds, title) => {
+        return `-- [老L·极客场景套餐] 《${game.title}》 ${title}\n` + cmds.map(c => c.code).join('\n');
+      };
+
+      const getHighlights = (cmds) => {
+        return cmds.map(c => {
+          return (c.name && (c.name[currentLang] || c.name['zh-CN'] || c.name['en'] || c.name)) || c.code;
+        }).slice(0, 5);
+      };
+
+      return [
+        {
+          id: `${game.id}_starter`,
+          type: 'starter',
+          name: '新手破荒起飞包',
+          tag: '👑 萌新首选 · 零门槛',
+          badge: '开荒推荐',
+          desc: '一键打包当前游戏核心生存、基础资源与高频破荒指令，小白进入游戏无需摸索直接起飞！',
+          highlights: getHighlights(fallbackStarter),
+          code: formatCode(fallbackStarter, '新手破荒起飞包')
+        },
+        {
+          id: `${game.id}_salvation`,
+          type: 'salvation',
+          name: '探索救赎包',
+          tag: '💖 意难平救赎 · 探索党狂喜',
+          badge: '完美探索',
+          desc: '一键打包地图全开、快速传送与探索辅助代码，告别繁琐跑图与漏掉支线的遗憾！',
+          highlights: getHighlights(fallbackSalvation),
+          code: formatCode(fallbackSalvation, '探索救赎包')
+        },
+        {
+          id: `${game.id}_arsenal`,
+          type: 'arsenal',
+          name: '二周目全神装满配包',
+          tag: '⚔️ 战力天花板 · 毕业满配',
+          badge: '满配毕业',
+          desc: '一键打包当前游戏强力武器装备、关键道具与高阶技能代码，体验满配战力碾压！',
+          highlights: getHighlights(fallbackArsenal),
+          code: formatCode(fallbackArsenal, '二周目全神装满配包')
+        }
+      ];
+    }
+
+    function copyScenarioBundle(gameId, bundleId) {
+      const game = allGames.find(g => g.id === gameId) || activeGame;
+      if (!game) return;
+
+      const bundles = (game.scenarioBundles && game.scenarioBundles.length > 0)
+        ? game.scenarioBundles
+        : generateDynamicBundles(game);
+
+      const bundle = bundles.find(b => b.id === bundleId || b.type === bundleId);
+      if (!bundle || !bundle.code) {
+        showToast('未能获取该套餐代码');
+        return;
+      }
+
+      const shortcutKey = (game.consoleShortcut || '~').split(' ')[0] || '~';
+      copyText(bundle.code, t('bundleCopiedToast'));
+    }
+
+    // ==========================================
+    // LAO L'S PITFALL BUREAU GUIDE
+    // ==========================================
+    function renderPitfallNotes(game) {
+      const container = document.getElementById('detail-pitfall-notes-container');
+      if (!container) return;
+
+      const note = game.pitfallNote || {
+        title: `老L实验室避坑笔记 (《${game.title}》最新版)`,
+        tips: [
+          "【存盘第一定律】：使用大体量刷物品、改钱或改剧情 Fact 标志位前，务必按 F5 快速存盘或备份存档文件夹，防患于未然！",
+          "【版本匹配铁律】：本站所有代码与套餐均为 Steam 官方最新补丁逐条人工真机实测，拒绝跨大版本硬套废弃语法。",
+          "【纯净无毒承诺】：坚持调用游戏官方底层机制与开源工具，绝不捆绑未知木马，纯净透明。"
+        ]
+      };
+
+      const tipsHtml = note.tips.map(tip => `
+        <div class="flex items-start gap-2">
+          <span class="text-blue-500 dark:text-blue-400 font-bold text-sm shrink-0 mt-0.5">•</span>
+          <div class="text-xs sm:text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed">${tip}</div>
+        </div>
+      `).join('');
+
+      container.innerHTML = `
+        <div class="bg-gradient-to-r from-blue-500/5 via-indigo-500/5 to-purple-500/5 dark:from-blue-500/10 dark:via-indigo-500/10 dark:to-purple-500/10 rounded-[24px] p-5 sm:p-6 border border-zinc-200/80 dark:border-white/10 shadow-sm space-y-4">
+          <div class="flex items-center justify-between gap-4 flex-wrap">
+            <div class="flex items-center space-x-3.5">
+              <div class="w-11 h-11 rounded-full overflow-hidden border-2 border-blue-500/40 shrink-0 shadow-sm">
+                <img src="avatar.jpg" alt="老L" class="w-full h-full object-cover">
+              </div>
+              <div>
+                <div class="flex items-center space-x-2 flex-wrap">
+                  <span class="font-extrabold text-sm sm:text-base text-zinc-900 dark:text-white">${note.title}</span>
+                  <span class="text-[10px] bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 px-2 py-0.5 rounded-full font-bold border border-emerald-500/20">
+                    🛡️ 老L人工验货
+                  </span>
+                </div>
+                <div class="text-[11px] text-zinc-500 dark:text-zinc-400 mt-0.5">
+                  主理人：老L (单机避坑局局长) · 拒绝流氓捆绑 · 官方底层机制
+                </div>
+              </div>
+            </div>
+            <div class="text-xs font-mono font-bold text-blue-600 dark:text-blue-400 bg-white dark:bg-white/10 px-3 py-1 rounded-full border border-zinc-200/60 dark:border-white/10 shadow-sm">
+              ${game.verifiedPatch || 'Steam 最新补丁已认证'}
+            </div>
+          </div>
+
+          <div class="bg-white/80 dark:bg-black/30 rounded-2xl p-4 border border-zinc-200/60 dark:border-white/5 space-y-2">
+            ${tipsHtml}
+          </div>
+        </div>
+      `;
+    }
+
+    // ==========================================
+    // STEAM RADAR & SECRET CODE CONVERSION CARD
+    // ==========================================
+    function renderRadarCard(game) {
+      const container = document.getElementById('detail-radar-container');
+      if (!container) return;
+
+      const secretCode = game.radarSecretCode || '老L单机888';
+
+      container.innerHTML = `
+        <div class="relative overflow-hidden bg-gradient-to-br from-zinc-900 via-zinc-900 to-zinc-950 text-white rounded-[28px] p-6 sm:p-7 border border-white/10 shadow-xl space-y-5">
+          <div class="absolute -right-8 -top-8 w-44 h-44 rounded-full bg-blue-500/10 blur-3xl pointer-events-none"></div>
+          <div class="absolute -left-8 -bottom-8 w-44 h-44 rounded-full bg-purple-500/10 blur-3xl pointer-events-none"></div>
+
+          <!-- Radar Status Header -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div class="flex items-center space-x-2.5">
+              <div class="relative flex items-center justify-center w-3 h-3">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+              </div>
+              <span class="font-extrabold text-sm sm:text-base tracking-tight text-white flex items-center gap-1.5">
+                <span>📡 Steam 补丁变动与 Mod 兼容性实时雷达</span>
+              </span>
+            </div>
+            <span class="text-xs bg-emerald-500/20 text-emerald-400 px-3 py-1 rounded-full font-mono font-medium border border-emerald-500/30 self-start sm:self-auto">
+              🟢 24h 智能巡检 · 最新推送已对齐
+            </span>
+          </div>
+
+          <!-- Warning & Community Secret Code Card -->
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-5 items-center bg-white/5 rounded-2xl p-4 sm:p-5 border border-white/5">
+            <div class="md:col-span-8 space-y-1.5">
+              <div class="flex items-center gap-1.5 text-amber-400 font-bold text-xs sm:text-sm">
+                <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                <span>若遇游戏半夜突发暗更导致指令失效 / 坏档？</span>
+              </div>
+              <p class="text-xs text-zinc-300 leading-relaxed">
+                Steam 单机大作频繁推送小补丁容易导致控制台钩子或 Mod 偏移。请保存官方避坑专属暗号，进入【老L·单机避坑雷达急救小分队】获取连夜同步的应急更新包与坏档急救脚本！
+              </p>
+            </div>
+
+            <div class="md:col-span-4 flex flex-col items-stretch sm:items-end gap-2.5">
+              <div class="flex items-center justify-between sm:justify-end gap-2 bg-black/40 px-3.5 py-2 rounded-xl border border-white/10 w-full sm:w-auto">
+                <span class="text-[11px] text-zinc-400">避坑急救暗号:</span>
+                <span class="font-mono font-extrabold text-amber-400 text-sm tracking-wider">【${secretCode}】</span>
+              </div>
+              <div class="flex flex-col sm:flex-row items-center gap-2 w-full sm:w-auto">
+                <a href="radar.html?game=${game.id}" class="w-full sm:w-auto px-4 py-2.5 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-xs transition-all shadow-lg shadow-blue-500/20 flex items-center justify-center gap-1.5 cursor-pointer">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                  <span>直达避坑雷达看板</span>
+                </a>
+                <button onclick="copyRadarSecretCode('${secretCode}')" class="w-full sm:w-auto px-4 py-2.5 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-zinc-950 font-bold text-xs transition-all shadow-lg shadow-amber-500/20 flex items-center justify-center gap-1.5 cursor-pointer">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+                  <span>一键复制急救暗号</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between text-[11px] text-zinc-400 pt-1 flex-wrap gap-2">
+            <span>💡 进群输入暗号秒领：最新失效补丁包 · 坏档救星 · 极客纯净源</span>
+            <span>100% 玩家共建公益社群 · 严禁任何广告</span>
+          </div>
+        </div>
+      `;
+    }
+
+    function copyRadarSecretCode(code) {
+      const secret = code || (activeGame ? activeGame.radarSecretCode : '老L单机888') || '老L单机888';
+      copyText(secret, t('toastSecretCopied'));
+    }
+
+    // ==========================================
+    // 5-CARD SOCIAL DISTRIBUTION MATRIX HANDLER
+    // ==========================================
+    const FLAGSHIP_FOLDERS = {
+      'cyberpunk-2077': '01_cyberpunk-2077',
+      'black-myth-wukong': '02_black-myth-wukong',
+      'witcher-3': '03_witcher-3',
+      'baldurs-gate-3': '04_baldurs-gate-3',
+      'elden-ring': '05_elden-ring',
+      'skyrim-se': '06_skyrim-se',
+      'fallout-4': '07_fallout-4'
+    };
+
+    const CARD_METAS = [
+      { num: 1, name: 'hook', title: 'Slide 1 · 痛点避坑卡', tag: '痛点暴击', desc: '痛点直击 + 杜绝流氓木马 + 官方原生离线认证' },
+      { num: 2, name: 'setup', title: 'Slide 2 · 极速开门卡', tag: '小白教程', desc: '3步极速开门 + 批处理脚本 + 键位防呆' },
+      { num: 3, name: 'commands', title: 'Slide 3 · 场景套餐卡', tag: '高频指令', desc: '新手破荒 / 意难平救赎 / 二周目神装满配' },
+      { num: 4, name: 'mods', title: 'Slide 4 · 护航模组卡', tag: '质变前置', desc: '三大官方痛点质变 Mod + 零冲突破坏' },
+      { num: 5, name: 'cta', title: 'Slide 5 · 避坑雷达自取卡', tag: '私域暗号', desc: 'Steam 大补丁连夜更新对齐 + 专属自取暗号' }
+    ];
+
+    function renderSocialCardsTab(game) {
+      const container = document.getElementById('detail-social-cards-container');
+      const teaser = document.getElementById('detail-cards-teaser');
+      if (!container) return;
+
+      const folder = FLAGSHIP_FOLDERS[game.id];
+      const localizedTitle = (game.titles && game.titles[currentLang]) ? game.titles[currentLang] : game.title;
+      const secretCode = game.radarSecretCode || '老L单机888';
+
+      if (!folder) {
+        if (teaser) teaser.classList.add('hidden');
+        container.innerHTML = `
+          <div class="bg-white dark:bg-[#141518] rounded-[28px] p-8 border border-zinc-200/80 dark:border-white/10 shadow-sm text-center space-y-4">
+            <div class="w-16 h-16 mx-auto rounded-2xl bg-zinc-100 dark:bg-white/5 flex items-center justify-center text-3xl">
+              ⏳
+            </div>
+            <h3 class="text-base font-bold text-zinc-900 dark:text-white">《${localizedTitle}》图文矩阵正在工期排期中</h3>
+            <p class="text-xs text-zinc-500 dark:text-zinc-400 max-w-md mx-auto">
+              目前已完成 Rank 1 ~ Rank 7 旗舰大作 1080×1440 高清卡片总装。本游戏已被列入流水线后续排期计划（按周迭代）。
+            </p>
+            <a href="radar.html?game=${game.id}" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold shadow-sm transition-all">
+              <span>查看 Steam 避坑兼容性诊断</span>
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            </a>
+          </div>
+        `;
+        return;
+      }
+
+      if (teaser) teaser.classList.remove('hidden');
+
+      container.innerHTML = `
+        <div class="space-y-6">
+          
+          <!-- Top Title & Badge Banner -->
+          <div class="bg-gradient-to-r from-purple-900/30 via-zinc-900 to-indigo-900/30 rounded-[28px] p-6 border border-purple-500/25 shadow-md flex flex-col md:flex-row md:items-center justify-between gap-4 text-white">
+            <div class="space-y-1.5">
+              <div class="flex items-center space-x-2">
+                <span class="bg-purple-500/20 text-purple-300 text-[10px] font-mono px-2.5 py-0.5 rounded-full border border-purple-500/30 font-bold uppercase">
+                  1080×1440 HD · 3:4 比例
+                </span>
+                <span class="bg-emerald-500/20 text-emerald-300 text-[10px] font-mono px-2.5 py-0.5 rounded-full border border-emerald-500/30 font-bold">
+                  Anti-Shadowban 绿标认证
+                </span>
+              </div>
+              <h3 class="text-lg sm:text-xl font-black tracking-tight text-white flex items-center gap-2">
+                <span>🎨 《${localizedTitle}》官方首发 5 联高清避坑图文卡片</span>
+              </h3>
+              <p class="text-xs text-zinc-300">
+                严格对齐小红书与 B 站官方分发标准。点击任意卡片即可放大全屏预览 1080×1440 像素原图或一键下载。
+              </p>
+            </div>
+
+            <!-- Secret code pill -->
+            <div class="shrink-0 flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+              <div class="bg-black/40 px-3.5 py-2 rounded-xl border border-white/10 text-xs flex items-center justify-between gap-2">
+                <span class="text-zinc-400">自取暗号:</span>
+                <span class="font-mono font-bold text-amber-400">【${secretCode}】</span>
+              </div>
+              <button onclick="copyRadarSecretCode('${secretCode}')" class="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-zinc-950 font-bold text-xs shadow-md transition-all cursor-pointer">
+                复制暗号
+              </button>
+            </div>
+          </div>
+
+          <!-- 5 Cards Horizontal Grid Carousel -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            ${CARD_METAS.map(m => {
+              const imgUrl = `social_distribution/${folder}/images/card_${m.num}_${m.name}.png`;
+              return `
+                <div class="bg-white dark:bg-[#141518] rounded-[22px] p-3 border border-zinc-200/80 dark:border-white/10 shadow-sm flex flex-col justify-between space-y-3 group hover:border-blue-500/40 transition-all">
+                  <div class="relative overflow-hidden rounded-xl bg-black cursor-pointer" onclick="openImageModal('${imgUrl}', '《${localizedTitle}》${m.title}')">
+                    <img 
+                      src="${imgUrl}" 
+                      alt="${m.title}" 
+                      class="w-full aspect-[3/4] object-cover group-hover:scale-105 transition-transform duration-300"
+                      loading="lazy"
+                    />
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                      <span class="px-3 py-1.5 rounded-full bg-white/90 text-zinc-950 font-bold text-xs shadow-lg flex items-center gap-1">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
+                        <span>放大原图</span>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="space-y-1 px-1">
+                    <div class="flex items-center justify-between">
+                      <span class="text-xs font-bold text-zinc-900 dark:text-white truncate">${m.title}</span>
+                      <span class="text-[10px] font-mono px-1.5 py-0.2 rounded bg-blue-500/10 text-blue-500 dark:text-blue-400 font-semibold">${m.tag}</span>
+                    </div>
+                    <p class="text-[11px] text-zinc-500 dark:text-zinc-400 line-clamp-2 leading-relaxed">${m.desc}</p>
+                  </div>
+
+                  <div class="pt-2 border-t border-zinc-100 dark:border-white/5 flex items-center justify-between text-xs px-1">
+                    <button onclick="openImageModal('${imgUrl}', '《${localizedTitle}》${m.title}')" class="text-blue-600 dark:text-blue-400 hover:underline font-medium cursor-pointer">预览</button>
+                    <a href="${imgUrl}" download="${game.id}_card_${m.num}_${m.name}.png" class="text-zinc-500 hover:text-zinc-900 dark:hover:text-white font-medium flex items-center gap-1">
+                      <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                      <span>保存</span>
+                    </a>
+                  </div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+
+          <!-- Social Copywriting Module -->
+          <div class="bg-white dark:bg-[#141518] rounded-[24px] p-6 border border-zinc-200/80 dark:border-white/10 shadow-sm space-y-4">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+              <div>
+                <h4 class="font-bold text-sm sm:text-base text-zinc-900 dark:text-white flex items-center gap-2">
+                  <span>📝 小红书 / B站 / 微信公众号发布文案套件</span>
+                  <span class="text-[10px] bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 px-2 py-0.5 rounded font-mono font-bold">已脱敏零违规</span>
+                </h4>
+                <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">直接一键拷贝文案并配合上方 5 联图，即可在各大社交平台发布引流并沉淀私域</p>
+              </div>
+
+              <div class="flex items-center space-x-2">
+                <button onclick="copySocialPost('${game.id}', 'xhs')" class="px-3.5 py-2 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-xs flex items-center gap-1.5 shadow-sm transition-all cursor-pointer">
+                  <span>📕 复制小红书文案</span>
+                </button>
+                <button onclick="copySocialPost('${game.id}', 'bili')" class="px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs flex items-center gap-1.5 shadow-sm transition-all cursor-pointer">
+                  <span>📺 复制B站动态文案</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Live Text Preview Box -->
+            <div class="bg-zinc-50 dark:bg-[#0c0d10] rounded-2xl p-4 border border-zinc-200/80 dark:border-white/10 text-xs text-zinc-700 dark:text-zinc-300 font-mono space-y-2 max-h-56 overflow-y-auto leading-relaxed">
+              <div class="text-zinc-400 font-bold border-b border-zinc-200 dark:border-white/5 pb-1">文案核心提炼 (预览)：</div>
+              <p>兄弟们，千万别再去盗版网站下载那些捆绑全家桶弹窗的第三方修改器了！玩【${localizedTitle}】其实游戏引擎底层就保留了官方调试机制与隐藏控制台，完全免费、不报毒、不闪退，100% 走单机原生离线逻辑，不影响成就更无封号风险！老L花了整整两个通宵完成实测，附带新手开荒起飞与意难平救赎套餐，在后台回复暗号【${secretCode}】自取完整懒人免配包与代码合集！</p>
+            </div>
+          </div>
+
+        </div>
+      `;
+    }
+
+    function copySocialPost(gameId, platform) {
+      const game = allGames.find(g => g.id === gameId);
+      const title = (game && game.titles && game.titles[currentLang]) ? game.titles[currentLang] : (game?.title || gameId);
+      const secret = (game && game.radarSecretCode) ? game.radarSecretCode : '老L单机888';
+
+      let text = '';
+      if (platform === 'xhs') {
+        text = `【${title}】别再去下带毒修改器了！其实自带官方控制台\n\n兄弟们，千万别再去下载捆绑流氓木马的修改器了！\n90%玩家不知道：《${title}》引擎底层保留了官方调试终端，不报毒、不闪退、零封号风险！\n\n老L整理了【高频逃课救赎套餐】：\n1. 新手破荒起飞包（手残救星）\n2. 意难平救赎包（逆转遗憾支线）\n3. 全神装满配自由代码合集\n\n在后台直接回复暗号：【${secret}】即可秒取完整离线批处理脚本与中文指令手册！\n\n#${title} #单机游戏 #Steam游戏 #单机游戏攻略 #游戏避坑指南`;
+        copyText(text, '📕 小红书 800 字脱敏爆款文案已复制！');
+      } else {
+        text = `各位游隼/猎魔人/天命人好，我是老L！\n\n《${title}》官方原生控制台实测开门指南正式发布！\n- 🛡️ 实测完全兼容 Steam 最新版本；\n- ⚡ 100% 官方离线底层逻辑，零木马、零报毒；\n- 🎮 附带新手开荒起飞与意难平救赎三大场景套餐；\n- 🛠️ 配备老L编写的双击批处理脚本，10 秒傻瓜自动开门！\n\n高清 5 联图教程见配图，后台私信回复暗号【${secret}】自取！`;
+        copyText(text, '📺 B站动态/专栏发布文案已复制！');
+      }
+    }
+
+    // ==========================================
+    // IMAGE MODAL PREVIEW HANDLER
+    // ==========================================
+    function openImageModal(src, title) {
+      const modal = document.getElementById('image-modal');
+      const img = document.getElementById('image-modal-img');
+      const titleEl = document.getElementById('image-modal-title');
+      const dl = document.getElementById('image-modal-download');
+      if (!modal || !img) return;
+
+      img.src = src;
+      if (titleEl) titleEl.innerText = title || '1080×1440 高清卡片原图';
+      if (dl) {
+        dl.href = src;
+        dl.setAttribute('download', src.split('/').pop());
+      }
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeImageModal() {
+      const modal = document.getElementById('image-modal');
+      if (!modal) return;
+      modal.classList.remove('flex');
+      modal.classList.add('hidden');
+    }
+
+    // ==========================================
+    // FILTER BY RADAR STATUS (IN-PAGE LIVE FILTER)
+    // ==========================================
+    function filterByRadarStatus(status) {
+      const RED_IDS = ['fallout-4'];
+      const YELLOW_IDS = ['skyrim-se', 'starfield', 'gta-v'];
+
+      let filtered = [];
+      if (status === 'red') {
+        filtered = allGames.filter(g => RED_IDS.includes(g.id) || (g.developer||'').includes('Bethesda'));
+        showToast(t('filterToastRed'));
+      } else if (status === 'yellow') {
+        filtered = allGames.filter(g => YELLOW_IDS.includes(g.id) || !(g.hasConsole));
+        showToast(t('filterToastYellow'));
+      } else if (status === 'green') {
+        filtered = allGames.filter(g => !RED_IDS.includes(g.id) && !YELLOW_IDS.includes(g.id));
+        showToast(t('filterToastGreen'));
+      }
+
+      const grid = document.getElementById('games-grid');
+      if (grid) {
+        grid.innerHTML = filtered.map(g => renderGameCard(g)).join('');
+      }
+      const countBadge = document.getElementById('catalog-count-badge');
+      if (countBadge) {
+        countBadge.innerText = `已筛选 ${filtered.length} 款`;
+      }
+      window.scrollTo({ top: 380, behavior: 'smooth' });
+    }
+
+    // ==========================================
+    // 10-SECOND LAZY DOOR OPENER MODAL HANDLERS
+    // ==========================================
+    function openLazyDoorModal() {
+      if (!activeGame) return;
+      const modal = document.getElementById('lazy-door-modal');
+      const card = document.getElementById('lazy-door-card');
+      const codePre = document.getElementById('lazy-modal-code');
+      const gameName = document.getElementById('lazy-modal-game-name');
+      const locTitle = (activeGame.titles && activeGame.titles[currentLang]) ? activeGame.titles[currentLang] : activeGame.title;
+
+      if (gameName) gameName.innerText = `《${locTitle}》`;
+      const batCode = activeGame.batScript || generateDynamicBatScript(activeGame);
+      if (codePre) codePre.innerText = batCode;
+
+      modal.classList.remove('hidden');
+      setTimeout(() => {
+        card.classList.remove('scale-95');
+        card.classList.add('scale-100');
+      }, 10);
+    }
+
+    function closeLazyDoorModal() {
+      const modal = document.getElementById('lazy-door-modal');
+      const card = document.getElementById('lazy-door-card');
+      if (!modal) return;
+      if (card) {
+        card.classList.remove('scale-100');
+        card.classList.add('scale-95');
+      }
+      setTimeout(() => {
+        modal.classList.add('hidden');
+      }, 150);
+    }
+
+    function downloadBatScript() {
+      if (!activeGame) return;
+      const batCode = activeGame.batScript || generateDynamicBatScript(activeGame);
+      const blob = new Blob([batCode], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${activeGame.id}_一键开启控制台.bat`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast(t('batDownloadedToast'));
+    }
+
+    function copyBatScript() {
+      if (!activeGame) return;
+      const batCode = activeGame.batScript || generateDynamicBatScript(activeGame);
+      copyText(batCode, t('batCopiedToast'));
+    }
+
+    function generateDynamicBatScript(game) {
+      if (game.batScript && currentLang.startsWith('zh')) return game.batScript;
+      const shortcut = game.consoleShortcut ? game.consoleShortcut.split(' ')[0] : '~';
+      const locTitle = (game.titles && game.titles[currentLang]) ? game.titles[currentLang] : game.title;
+      if (currentLang.startsWith('zh')) {
+        return `@echo off
+chcp 65001 >nul
+title 【老L·单机避坑局】${locTitle} 控制台排错与激活助手
+echo ========================================================
+echo   【老L·单机避坑局】《${locTitle}》控制台助手
+echo   官方底层机制 · 100%% 开源透明 · 零木马报毒
+echo ========================================================
+echo.
+echo [*] 正在检查当前游戏运行环境...
+echo [i] 请将本脚本放在游戏安装根目录运行。
+echo [i] 常用控制台呼出快捷键：${shortcut}
+echo.
+echo ========================================================
+echo  [√] 准备就绪！启动游戏后按下 ${shortcut}
+echo      直接粘贴老L推荐套餐指令即可畅享！
+echo ========================================================
+echo.
+pause`;
+      } else {
+        return `@echo off
+chcp 65001 >nul
+title [L-MOD Vault] ${locTitle} Console Setup Helper
+echo ========================================================
+echo   [L-MOD Vault] ${locTitle} Console Activator
+echo   Official Native Engine - 100%% Open Source - Zero Malware
+echo ========================================================
+echo.
+echo [*] Verifying game installation directory...
+echo [i] Please run this batch script inside the game root directory.
+echo [i] Console activation hotkey: ${shortcut}
+echo.
+echo ========================================================
+echo  [√] Environment Ready! Launch game, press ${shortcut}
+echo      and paste L-MOD bundle commands to enjoy!
+echo ========================================================
+echo.
+pause`;
+      }
+    }
+
+    // ESC key listener to close modals
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeLazyDoorModal();
+        closeTrainerModal();
+        closeModModal();
+        closeImageModal();
+      }
+    });
+
+    function copyText(text, customSuccessMsg) {
+      const successMsg = customSuccessMsg || translations[currentLang]?.copiedSuccess || "已复制到剪贴板！游戏中直接粘贴即可";
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+          showToast(successMsg);
+        }).catch(err => {
+          fallbackCopyText(text, successMsg);
+        });
+      } else {
+        fallbackCopyText(text, successMsg);
+      }
+    }
+
+    function fallbackCopyText(text, customSuccessMsg) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.top = '0';
+      ta.style.left = '0';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      if (ta.focus) ta.focus();
+      if (ta.select) ta.select();
+      try {
+        document.execCommand('copy');
+        showToast(customSuccessMsg || "已复制到剪贴板！");
+      } catch (err) {
+        showToast("复制失败，请手动选择复制！");
+      }
+      document.body.removeChild(ta);
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-text').innerText = msg;
+      toast.classList.remove('-translate-y-20', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('-translate-y-20', 'opacity-0');
+      }, 2500);
+    }
+
+    function initWeChatCheck() {
+      const ua = (navigator.userAgent || '').toLowerCase();
+      const isWeChat = ua.includes('micromessenger') || window.location.search.includes('wechat=1') || window.location.search.includes('wx=1');
+      const banner = document.getElementById('wechat-safe-banner');
+      if (!banner) return;
+      if (isWeChat) {
+        if (sessionStorage.getItem('lmod_wx_dismissed') === '1') return;
+        banner.classList.remove('hidden');
+        requestAnimationFrame(() => {
+          banner.classList.remove('-translate-y-full');
+          banner.classList.add('translate-y-0');
+        });
+      }
+    }
+
+    function dismissWeChatBanner() {
+      const banner = document.getElementById('wechat-safe-banner');
+      if (banner) {
+        banner.classList.remove('translate-y-0');
+        banner.classList.add('-translate-y-full');
+        setTimeout(() => {
+          banner.classList.add('hidden');
+        }, 450);
+        sessionStorage.setItem('lmod_wx_dismissed', '1');
+      }
+    }
+
+    window.addEventListener('hashchange', handleRouting);
+
+    function init() {
+      initTheme();
+      if (window.GAMES_DATA) allGames = window.GAMES_DATA;
+      else if (window.GAMES_DATABASE) allGames = window.GAMES_DATABASE;
+      if (window.TRANSLATIONS_DATA) translations = window.TRANSLATIONS_DATA;
+      initLanguage();
+      renderUI();
+      renderGames();
+      renderRecentSidebar();
+      handleRouting();
+      initWeChatCheck();
+    }
+
+    init();
+  </script>
+  <!-- High-Definition Image Preview Modal -->
+  <div id="image-modal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden items-center justify-center p-4 transition-all" onclick="closeImageModal()">
+    <div class="relative max-w-4xl max-h-[95vh] flex flex-col items-center" onclick="event.stopPropagation()">
+      <button onclick="closeImageModal()" class="absolute -top-10 right-0 text-white/70 hover:text-white p-2 cursor-pointer">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+      <img id="image-modal-img" src="" alt="Card Preview" class="max-h-[82vh] rounded-2xl shadow-2xl border border-white/20 object-contain">
+      <div class="mt-3 flex items-center space-x-3 text-xs">
+        <span id="image-modal-title" class="text-white font-bold"></span>
+        <a id="image-modal-download" href="#" download class="px-4 py-1.5 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-semibold transition-all"><span id="image-modal-dl-text">下载 1080×1440 原图</span></a>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

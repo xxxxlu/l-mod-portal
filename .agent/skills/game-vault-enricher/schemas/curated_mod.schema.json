@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CuratedMod",
+  "description": "Standard schema for community-verified Nexus and standalone mods in L-MOD Vault.",
+  "type": "object",
+  "required": [
+    "id",
+    "title",
+    "author",
+    "version",
+    "size",
+    "downloads",
+    "endorsements",
+    "category",
+    "desc",
+    "dependencies",
+    "installPath",
+    "installSteps"
+  ],
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9_-]+$" },
+    "title": { "type": "string", "minLength": 2 },
+    "author": { "type": "string", "minLength": 1 },
+    "version": { "type": "string" },
+    "size": { "type": "string" },
+    "downloads": { "type": "string" },
+    "endorsements": { "type": "string" },
+    "category": { "type": "string" },
+    "desc": { "type": "string", "minLength": 10 },
+    "dependencies": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "installPath": { "type": "string", "minLength": 2 },
+    "installSteps": {
+      "type": "array",
+      "minItems": 2,
+      "items": { "type": "string" }
+    }
+  }
+}
