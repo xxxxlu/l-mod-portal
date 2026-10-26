@@ -250,6 +250,8 @@ def sanitize_database():
         f.write("window.GAMES_DATABASE = window.GAMES_DATA;\n\n")
         f.write("window.TRANSLATIONS_DATA = " + json.dumps(translations_data, ensure_ascii=False, indent=2) + ";\n")
     print(f"💾 前端离线数据库双库同步完成: {DATA_JS_PATH}")
+    if os.path.exists(backup_path):
+        os.remove(backup_path)
 
     print("\n" + "=" * 70)
     print("🎉 清洗汇总统计:")
