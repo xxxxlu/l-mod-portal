@@ -1,0 +1,111 @@
+name: Steam Patch Sentinel Cron (避坑雷达自动化巡检流水线)
+
+on:
+  schedule:
+    # 每天 UTC 02:00 (北京时间上午 10:00) 自动触发全量对账
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+    inputs:
+      simulate_game:
+        description: '模拟测试游戏 ID (如 cyberpunk-2077, 为空则真实巡检)'
+        required: false
+        default: ''
+      simulate_version:
+        description: '模拟补丁版本号 (如 Update 2.5)'
+        required: false
+        default: 'Update 2.5 (Simulated)'
+      simulate_risk:
+        description: '模拟风险等级 (red / yellow)'
+        required: false
+        default: 'red'
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  inspect-steam-patches:
+    name: Run Steam Patch Sentinel & Radar Sync
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🐍 Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 🔍 Execute Steam Patch Sentinel Inspection
+        id: run_monitor
+        run: |
+          echo "🚀 启动 Steam 官方补丁动向自动化巡检..."
+          
+          CMD="python3 scripts/steam_patch_monitor.py --update-radar"
+          
+          if [ -n "${{ github.event.inputs.simulate_game }}" ]; then
+            echo "🧪 启用模拟演练模式: 游戏=${{ github.event.inputs.simulate_game }}, 版本=${{ github.event.inputs.simulate_version }}"
+            CMD="$CMD --simulate-patch ${{ github.event.inputs.simulate_game }} --simulate-version '${{ github.event.inputs.simulate_version }}' --simulate-risk ${{ github.event.inputs.simulate_risk }}"
+          fi
+          
+          eval $CMD
+
+      - name: 🛡️ Run Full E2E I18N & Dual-Page Gate Verification
+        run: |
+          echo "🧪 验证雷达看板与离线数据完整性..."
+          python3 scripts/verify_i18n_dual_pages.py
+
+      - name: 📝 Check Git Diff for Updates
+        id: git_status
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+            echo "⚡ 检测到 Steam 版本变动与数据更新！"
+          else
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+            echo "✅ 本次巡检各游戏版本平稳，无新补丁产生的数据差异。"
+          fi
+
+      - name: 🚨 Check for High-Risk Breaking Patches
+        id: check_risk
+        run: |
+          if grep -q "🔴【坏档高危·暂停更新】" docs/PATCH_MONITOR_LATEST.md || grep -q "🔴 坏档预警·暂缓更新" docs/PATCH_MONITOR_LATEST.md; then
+            echo "high_risk_detected=true" >> $GITHUB_OUTPUT
+            echo "🚨 发现坏档高危大作变动！"
+          elif grep -q "🟡【需更前置·排查测试】" docs/PATCH_MONITOR_LATEST.md || grep -q "🟡 官方刚推新补丁" docs/PATCH_MONITOR_LATEST.md; then
+            echo "warning_detected=true" >> $GITHUB_OUTPUT
+            echo "⚠️ 发现小补丁更新，前置待排查！"
+          else
+            echo "high_risk_detected=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: 🚀 Commit and Push Radar Sync Changes
+        if: steps.git_status.outputs.has_changes == 'true'
+        run: |
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/games_top100.json public/data.js docs/PATCH_MONITOR_LATEST.md
+          git commit -m "chore(radar): automated steam patch sentinel sync [skip ci]"
+          git push
+
+      - name: 📢 Open GitHub Issue on Breaking Patch Alert
+        if: steps.check_risk.outputs.high_risk_detected == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const reportPath = 'docs/PATCH_MONITOR_LATEST.md';
+            let content = '检测到官方突发坏档大更新！请立即启动适配排查。';
+            if (fs.existsSync(reportPath)) {
+              content = fs.readFileSync(reportPath, 'utf8');
+            }
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: '🚨【紧急避坑预警】Steam 官方推送突发补丁 · 避坑雷达已自动更新预警',
+              body: content,
+              labels: ['radar-alert', 'breaking-patch', 'mod-incompatible']
+            });

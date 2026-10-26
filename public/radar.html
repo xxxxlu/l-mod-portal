@@ -933,6 +933,110 @@ pause`
         batPreview: `@echo off
 echo [√] GTA V 单机离线隔离模式启动！
 pause`
+      },
+      "rdr2": {
+        status: "green",
+        statusText: "🟢 完美兼容实测通过",
+        verifiedPatch: "v1.0.1491 (完全对齐)",
+        engine: "RAGE 引擎",
+        toolchain: "ScriptHookRDR2 / LML (Lenny's Mod Loader)",
+        summary: "ScriptHookRDR2 最新对齐，故事模式全武器解锁与天气系统 100% 稳定运行。",
+        riskTitle: "⚠️ 线上模式封禁与版本对齐",
+        riskDesc: "打入 ScriptHook 离线补丁后切勿进入 RDO 荒野大镖客线上模式！启动前使用 L-MOD 安全离线批处理屏蔽连网校验。",
+        riskSeverity: "red",
+        rescueSteps: [
+          "1. 确认 ScriptHookRDR2.dll 与 dinput8.dll 放入游戏根目录。",
+          "2. 严禁进入线上模式，建议断网或离线启动。",
+          "3. 游戏内按 F5 呼出原生离线菜单。"
+        ],
+        batPreview: `@echo off
+chcp 65001 >nul
+title 【老L·单机避坑局】荒野大镖客2离线隔离启动
+if not exist "RDR2.exe" (
+    echo [!] 请置于 Red Dead Redemption 2 根目录下运行！
+    pause
+    exit /b
+)
+echo [√] RDR2 离线隔离模式环境就绪，按 F5 呼出修改器！
+pause`
+      },
+      "monster-hunter-world": {
+        status: "green",
+        statusText: "🟢 完美兼容实测通过",
+        verifiedPatch: "v15.11 (冰原最终版完全对齐)",
+        engine: "MT Framework",
+        toolchain: "Stracker's Loader / REFramework",
+        summary: "冰原最终大版本彻底固定，Stracker's Loader 核心前置 100% 稳定，显血插件与全素材代码零崩溃。",
+        riskTitle: "⚠️ 联机显血与 CRC 校验避坑",
+        riskDesc: "联机组队时部分前置会因 Steam 通信包 CRC 校验冲突导致偶发离线，建议使用本站提供的 CRC 旁路绕行配置。",
+        riskSeverity: "green",
+        rescueSteps: [
+          "1. 确认 dtdata.dll 与 hid.dll 放入 Monster Hunter World 根目录。",
+          "2. 冰原大版本已停止更新，无需担心 Steam 静默补丁背刺。",
+          "3. 游戏中按 Insert 键呼出 REFramework 覆盖菜单。"
+        ],
+        batPreview: `@echo off
+chcp 65001 >nul
+title 【老L·单机避坑局】怪猎冰原环境校验
+if not exist "MonsterHunterWorld.exe" (
+    echo [!] 请置于 Monster Hunter: World 根目录下运行！
+    pause
+    exit /b
+)
+echo [√] 冰原最终版环境检测通过，前置全部锁定就绪！
+pause`
+      },
+      "sekiro": {
+        status: "green",
+        statusText: "🟢 完美兼容实测通过",
+        verifiedPatch: "v1.06 (年度版完全对齐)",
+        engine: "FromSoft Proprietary",
+        toolchain: "Mod Engine / Dinput8 Hook",
+        summary: "v1.06 年度版已彻底封包停止更新，Mod Engine 钩子极度稳定，完美弹刀提示与模型替换稳定运行。",
+        riskTitle: "⚠️ dinput8.dll 路径覆盖",
+        riskDesc: "必须确保 dinput8.dll 放置在 sekiro.exe 同级目录，MOD 目录名需与 modengine.ini 中的 modOverrideDirectory 完全一致。",
+        riskSeverity: "green",
+        rescueSteps: [
+          "1. 确认 dinput8.dll 和 modengine.ini 位于 sekiro.exe 同级目录。",
+          "2. 模型与画质 Mod 放入 mods/ 文件夹，路径避免中文字符。",
+          "3. 官方年度版已终身锁定版本，零坏档风险。"
+        ],
+        batPreview: `@echo off
+chcp 65001 >nul
+title 【老L·单机避坑局】只狼环境就绪检测
+if not exist "sekiro.exe" (
+    echo [!] 请置于 Sekiro 根目录下运行！
+    pause
+    exit /b
+)
+echo [√] 只狼 v1.06 终装版 ModEngine 钩子环境正常！
+pause`
+      },
+      "re4-remake": {
+        status: "green",
+        statusText: "🟢 完美兼容实测通过",
+        verifiedPatch: "v1.0+ (逆命殊途DLC完全对齐)",
+        engine: "RE Engine",
+        toolchain: "REFramework / Fluffy Mod Manager",
+        summary: "REFramework 图形化 ImGui 控制台适配逆命殊途 DLC，第一人称与自由运镜零报错。",
+        riskTitle: "⚠️ 卡普空 Enigma 保护与着色器编译",
+        riskDesc: "更新后如遇黑色着色器加载失败，请删除 reshade-shaders 缓存并重启 REFramework 自动生成。",
+        riskSeverity: "amber",
+        rescueSteps: [
+          "1. 将 dinput8.dll 放入 re4.exe 根目录。",
+          "2. 启动游戏自动生成 reframework 文件夹，按 Insert 键呼出控制台。",
+          "3. 服装与武器 Mod 通过 Fluffy Mod Manager 一键管理。"
+        ],
+        batPreview: `@echo off
+chcp 65001 >nul
+title 【老L·单机避坑局】生化危机4重制版环境检测
+if not exist "re4.exe" (
+    echo [!] 请置于 Resident Evil 4 Remake 根目录下运行！
+    pause
+    exit /b
+)
+echo [√] REFramework 钩子就绪，进入游戏按 Insert 呼出！
+pause`
       }
     };
 
@@ -1123,7 +1227,29 @@ pause`
     function renderTicker() {
       const track = document.getElementById('ticker-track');
       if (!track) return;
-      const items = TICKER_DATA[currentLang] || TICKER_DATA['zh-CN'];
+      let items = [...(TICKER_DATA[currentLang] || TICKER_DATA['zh-CN'])];
+
+      // Dynamic alerts from games with compatibilityStatus == 'red' or 'yellow'
+      if (typeof allGames !== 'undefined' && Array.isArray(allGames)) {
+        const dynamicItems = [];
+        allGames.forEach(g => {
+          if (g.emergencyAlert && (g.compatibilityStatus === 'red' || g.compatibilityStatus === 'yellow')) {
+            const isRed = g.compatibilityStatus === 'red';
+            const localizedTitle = (g.titles && g.titles[currentLang]) ? g.titles[currentLang] : g.title;
+            const tag = isRed ? `🔴【${localizedTitle}】` : `🟡【${localizedTitle}】`;
+            const alertText = typeof g.emergencyAlert === 'object' ? (g.emergencyAlert[currentLang] || g.emergencyAlert['zh-CN']) : g.emergencyAlert;
+            dynamicItems.push({
+              id: g.id,
+              color: isRed ? 'text-red-400' : 'text-amber-400',
+              tag: tag,
+              text: alertText
+            });
+          }
+        });
+        if (dynamicItems.length > 0) {
+          items = [...dynamicItems, ...items];
+        }
+      }
       
       const makeItemHtml = (item) => `
         <span class="flex items-center space-x-1.5 cursor-pointer hover:text-white" onclick="event.stopPropagation(); openGameDrawerById('${item.id}')">
@@ -1344,10 +1470,26 @@ pause`
         };
       }
 
+      // Check if dynamic override from steam_patch_monitor exists
+      if (game.compatibilityStatus) {
+        meta = {
+          ...meta,
+          status: game.compatibilityStatus,
+          verifiedPatch: game.verifiedPatch || meta.verifiedPatch,
+          summary: game.radarSummary || meta.summary,
+          riskTitle: game.radarRiskTitle || meta.riskTitle,
+          riskDesc: game.radarRiskDesc || meta.riskDesc
+        };
+      }
+
       // Ensure statusText is dynamically localized according to active currentLang
-      const statusText = meta.status === 'green' ? t('statusCompatible', '🟢 完美兼容实测通过') :
+      let statusText = meta.status === 'green' ? t('statusCompatible', '🟢 完美兼容实测通过') :
                          meta.status === 'yellow' ? t('statusWarning', '🟡 需更新前置 / 需补丁适配') :
                          t('statusBroken', '🔴 恶性坏档 · 暂停更新');
+
+      if (game.radarStatusText && (currentLang === 'zh-CN' || currentLang === 'zh-TW')) {
+        statusText = game.radarStatusText;
+      }
 
       return {
         ...meta,

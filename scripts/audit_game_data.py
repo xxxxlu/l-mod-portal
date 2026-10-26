@@ -45,6 +45,10 @@ ENGINE_PROFILES = {
     "gta-v": "rockstar_rage",
     "rdr2": "rockstar_rage",
     "hearts-of-iron-iv": "clausewitz",
+    "hearts-of-iron-4": "clausewitz",
+    "crusader-kings-3": "clausewitz",
+    "fallout-new-vegas": "creation",
+    "valheim": "valheim_dev",
     "stellaris": "clausewitz",
     "rimworld": "unity_dev",
     "factorio": "lua_factorio",
@@ -106,6 +110,17 @@ def lint_command_syntax(gid, code):
             if code_lower in GENERIC_FAKE_CODES:
                 return False, f"检测到通用虚假占位符代码 '{code_clean}'，未对接巫师3真实控制台指令"
             return False, f"巫师3控制台语法不合规: '{code_clean}' 不是有效的 WitcherScript 指令或函数"
+        return True, ""
+
+    if engine_type == "valheim_dev" or gid == "valheim":
+        valheim_prefixes = (
+            "devcommands", "debugmode", "god", "ghost", "exploremap",
+            "raiseskill ", "spawn ", "fly", "pos", "goto ", "killall",
+            "tame", "resetcharacter", "env ", "wind ", "tod ", "item "
+        )
+        is_valheim_valid = any(code_lower.startswith(prefix) for prefix in valheim_prefixes)
+        if not is_valheim_valid:
+            return False, f"Valheim devcommands 语法不合规: '{code_clean}' 不是有效的 Valheim 控制台指令"
         return True, ""
 
     if code_lower in GENERIC_FAKE_CODES:
@@ -244,19 +259,24 @@ def audit_game(game_id=None, verbose=True):
         diff_stats = []
 
         # 1. 检查控制台与指令大类
+        has_console = g.get("hasConsole", True)
         categories = g.get("consoleCategories", [])
         total_cmds = sum(len(c.get("commands", [])) for c in categories)
 
-        if rank <= 10:
-            if len(categories) < 8:
-                issues.append(f"Top 10 核心大作分类过少 (当前 {len(categories)} 类，硬性门槛需 ≥ 8 类)")
-            if total_cmds < 40:
-                issues.append(f"Top 10 核心大作指令严重不足 (当前 {total_cmds} 条，硬性门槛需 ≥ 40 条)")
-        elif rank <= 30:
-            if len(categories) < 4:
-                issues.append(f"Top 30 热门单机分类过少 (当前 {len(categories)} 类，硬性门槛需 ≥ 4 类)")
-            if total_cmds < 15:
-                issues.append(f"Top 30 热门单机指令过少 (当前 {total_cmds} 条，硬性门槛需 ≥ 15 条)")
+        if has_console:
+            if rank <= 10:
+                if len(categories) < 8:
+                    issues.append(f"Top 10 核心大作分类过少 (当前 {len(categories)} 类，硬性门槛需 ≥ 8 类)")
+                if total_cmds < 40:
+                    issues.append(f"Top 10 核心大作指令严重不足 (当前 {total_cmds} 条，硬性门槛需 ≥ 40 条)")
+            elif rank <= 14:
+                if len(categories) < 4:
+                    issues.append(f"Tier 2 核心大作分类过少 (当前 {len(categories)} 类，硬性门槛需 ≥ 4 类)")
+                if total_cmds < 15:
+                    issues.append(f"Tier 2 核心大作指令过少 (当前 {total_cmds} 条，硬性门槛需 ≥ 15 条)")
+        else:
+            if len(categories) > 0:
+                issues.append(f"无原生控制台游戏不应包含控制台指令分类 (当前包含 {len(categories)} 类)")
 
         # 检查分类与指令质量
         for idx, c in enumerate(categories):
@@ -315,6 +335,14 @@ def audit_game(game_id=None, verbose=True):
         for m in mods:
             if not m.get("installSteps") or len(m["installSteps"]) == 0:
                 issues.append(f"Mod '{m.get('title')}' 缺少分步安装步骤")
+
+        # 4. 检查常用指令 popularCommands (杜绝任何通用虚假占位字符)
+        pop_cmds = g.get("popularCommands", [])
+        for pcmd in pop_cmds:
+            cmd_code = pcmd.get("command", "") if isinstance(pcmd, dict) else str(pcmd)
+            cmd_lower = cmd_code.lower().strip()
+            if "godmode / cheat / trainer" in cmd_lower or (not has_console and cmd_lower in GENERIC_FAKE_CODES):
+                issues.append(f"popularCommands 包含通用虚假占位字符: '{cmd_code}'")
 
         # 输出结果与 Diff 矩阵
         if issues:

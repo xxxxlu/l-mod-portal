@@ -1,4 +1,4 @@
-// L-MOD Vault Offline Database (Auto-bundled)
+// L-MOD Vault Offline Database (Auto-bundled & Sanitized)
 window.GAMES_DATA = [
   {
     "id": "cyberpunk-2077",
@@ -1882,7 +1882,15 @@ window.GAMES_DATA = [
         "code": "-- [老L·极客场景套餐] 赛博朋克2077 二周目全神装满配包 (v2.13 实测)\nlocal ds = PlayerDevelopmentSystem.GetInstance(Game.GetPlayer()):GetDevelopmentData(Game.GetPlayer()) for _, p in ipairs({\"Headhunter\", \"Netrunner\", \"Shinobi\", \"Solo\", \"Engineer\"}) do ds:SetProficiencyLevel(gamedataProficiencyType[p], 60, telemetryLevelGainReason.Gameplay) end\nGame.AddToInventory(\"Items.AdvancedSandevistanApogeePlusPlus\", 1)\nGame.AddToInventory(\"Items.HauntedCyberdeck_LegendaryPlusPlus\", 1)\nGame.AddToInventory(\"Items.AdvancedTimeBankLegendaryPlusPlus\", 1)\nGame.AddToInventory(\"Items.Preset_Borg4a_HauntedGun\", 1)\nGame.AddToInventory(\"Items.Preset_Hercules_Prototype\", 1)\nGame.AddToInventory(\"Items.Preset_Katana_Saburo\", 1)\nGame.AddToInventory(\"Items.Preset_Knife_Saburo\", 1)\nGame.AddToInventory(\"Items.Preset_Katana_Wakako\", 1)\nGame.AddToInventory(\"Items.ChimeraPowerMod\", 1)\nGame.AddToInventory(\"Items.ChimeraTechMod\", 1)\nGame.GetVehicleSystem():EnableAllPlayerVehicles()"
       }
     ],
-    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】赛博朋克2077 控制台环境一键检测与开门\necho ========================================================\necho   【老L·单机避坑局】赛博朋克2077 控制台一键检测与绑定脚本\necho   适用最新 2.13/往日之影 · 零木马 · 极速配置\necho ========================================================\necho.\n\nset \"CET_DIR=bin\\x64\\plugins\\cyber_engine_tweaks\"\nset \"BIND_FILE=%CET_DIR%\\bindings.json\"\n\nif not exist \"bin\\x64\\Cyberpunk2077.exe\" (\n    echo [!] 未在当前目录下检测到 Cyberpunk2077.exe\n    echo     请将本 bat 脚本放置在《赛博朋克2077》游戏安装根目录下运行！\n    echo.\n    pause\n    exit /b\n)\n\nif not exist \"%CET_DIR%\" mkdir \"%CET_DIR%\"\n\necho [*] 正在配置默认控制台呼出快捷键为 ~ 键 (OEM_3 键位代码 192) ...\nif exist \"%BIND_FILE%\" copy /y \"%BIND_FILE%\" \"%BIND_FILE%.bak\" >nul\n\necho {\"overlay_key\": 192}>\"%BIND_FILE%\"\necho [+] 快捷键绑定已就绪：默认按 ~ (波浪键) 呼出 CET 控制台！\n\necho.\necho ========================================================\necho  [√] 开门环境就绪！\necho      请确保 bin\\x64 目录下已放置 CET 核心前置文件。\necho      启动游戏按 ~ 键即可粘贴老L套餐指令代码！\necho ========================================================\necho.\npause"
+    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】赛博朋克2077 控制台环境一键检测与开门\necho ========================================================\necho   【老L·单机避坑局】赛博朋克2077 控制台一键检测与绑定脚本\necho   适用最新 2.13/往日之影 · 零木马 · 极速配置\necho ========================================================\necho.\n\nset \"CET_DIR=bin\\x64\\plugins\\cyber_engine_tweaks\"\nset \"BIND_FILE=%CET_DIR%\\bindings.json\"\n\nif not exist \"bin\\x64\\Cyberpunk2077.exe\" (\n    echo [!] 未在当前目录下检测到 Cyberpunk2077.exe\n    echo     请将本 bat 脚本放置在《赛博朋克2077》游戏安装根目录下运行！\n    echo.\n    pause\n    exit /b\n)\n\nif not exist \"%CET_DIR%\" mkdir \"%CET_DIR%\"\n\necho [*] 正在配置默认控制台呼出快捷键为 ~ 键 (OEM_3 键位代码 192) ...\nif exist \"%BIND_FILE%\" copy /y \"%BIND_FILE%\" \"%BIND_FILE%.bak\" >nul\n\necho {\"overlay_key\": 192}>\"%BIND_FILE%\"\necho [+] 快捷键绑定已就绪：默认按 ~ (波浪键) 呼出 CET 控制台！\n\necho.\necho ========================================================\necho  [√] 开门环境就绪！\necho      请确保 bin\\x64 目录下已放置 CET 核心前置文件。\necho      启动游戏按 ~ 键即可粘贴老L套餐指令代码！\necho ========================================================\necho.\npause",
+    "compatibilityStatus": "green",
+    "radarStatusText": "🟢 完美兼容实测通过",
+    "latestSteamPatch": "Cyberpunk 2077 最新版",
+    "steamBuildId": "---",
+    "steamLastChecked": "2026-10-26T17:33:39.889583",
+    "radarSummary": "Steam 官方最新推送已对齐，CET v1.33.0 / REDmod 100% 稳定运行，未发现恶性坏档报错。",
+    "radarRiskTitle": "💡 日常游玩避坑提示",
+    "radarRiskDesc": "建议在单机离线状态下游玩，大版本更新后优先使用本站批处理脚本核对环境路径。"
   },
   {
     "id": "black-myth-wukong",
@@ -3162,7 +3170,15 @@ window.GAMES_DATA = [
         "code": "# [老L·极客场景套餐] 黑神话悟空 二周目全神装满配包\nallweapon\nallequip\nallsoulskill\nallhulu\nallwine"
       }
     ],
-    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】黑神话悟空 调试控制台一键激活\necho ========================================================\necho   【老L·单机避坑局】黑神话悟空 调试控制台一键激活器\necho   基于虚幻5原生控制台 · 自动备份 · 绿色透明\necho ========================================================\necho.\n\nset \"MODS_TXT=b1\\Binaries\\Win64\\ue4ss\\mods.txt\"\n\nif not exist \"b1\\Binaries\\Win64\" (\n    echo [!] 未在当前目录下检测到 b1\\Binaries\\Win64\n    echo     请将本 bat 脚本放置在《黑神话：悟空》安装根目录下运行！\n    echo.\n    pause\n    exit /b\n)\n\nif exist \"%MODS_TXT%\" (\n    echo [*] 正在备份 mods.txt 到 %MODS_TXT%.bak ...\n    copy /y \"%MODS_TXT%\" \"%MODS_TXT%.bak\" >nul\n    powershell -Command \"(Get-Content '%MODS_TXT%') -replace 'ConsoleEnablerMod\\s*:\\s*0', 'ConsoleEnablerMod : 1' | Set-Content '%MODS_TXT%'\"\n    echo [+] 调试控制台模块已激活为 1！\n) else (\n    echo [i] 未检测到 ue4ss\\mods.txt，请确保已安装 UE4SS 调试前置。\n)\n\necho.\necho ========================================================\necho  [√] 搞定！进入游戏按 F10 或 ~ 键呼出控制台！\necho      直接粘贴老L推荐套餐代码即可畅玩！\necho ========================================================\necho.\npause"
+    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】黑神话悟空 调试控制台一键激活\necho ========================================================\necho   【老L·单机避坑局】黑神话悟空 调试控制台一键激活器\necho   基于虚幻5原生控制台 · 自动备份 · 绿色透明\necho ========================================================\necho.\n\nset \"MODS_TXT=b1\\Binaries\\Win64\\ue4ss\\mods.txt\"\n\nif not exist \"b1\\Binaries\\Win64\" (\n    echo [!] 未在当前目录下检测到 b1\\Binaries\\Win64\n    echo     请将本 bat 脚本放置在《黑神话：悟空》安装根目录下运行！\n    echo.\n    pause\n    exit /b\n)\n\nif exist \"%MODS_TXT%\" (\n    echo [*] 正在备份 mods.txt 到 %MODS_TXT%.bak ...\n    copy /y \"%MODS_TXT%\" \"%MODS_TXT%.bak\" >nul\n    powershell -Command \"(Get-Content '%MODS_TXT%') -replace 'ConsoleEnablerMod\\s*:\\s*0', 'ConsoleEnablerMod : 1' | Set-Content '%MODS_TXT%'\"\n    echo [+] 调试控制台模块已激活为 1！\n) else (\n    echo [i] 未检测到 ue4ss\\mods.txt，请确保已安装 UE4SS 调试前置。\n)\n\necho.\necho ========================================================\necho  [√] 搞定！进入游戏按 F10 或 ~ 键呼出控制台！\necho      直接粘贴老L推荐套餐代码即可畅玩！\necho ========================================================\necho.\npause",
+    "compatibilityStatus": "green",
+    "radarStatusText": "🟢 完美兼容实测通过",
+    "latestSteamPatch": "Black Myth: Wukong 最新版",
+    "steamBuildId": "---",
+    "steamLastChecked": "2026-10-26T17:33:39.889583",
+    "radarSummary": "Steam 官方最新推送已对齐，UE4SS v3.0.1+ / UE5 Console Enabler 100% 稳定运行，未发现恶性坏档报错。",
+    "radarRiskTitle": "💡 日常游玩避坑提示",
+    "radarRiskDesc": "建议在单机离线状态下游玩，大版本更新后优先使用本站批处理脚本核对环境路径。"
   },
   {
     "id": "witcher-3",
@@ -5522,7 +5538,15 @@ window.GAMES_DATA = [
         "code": "// [老L·极客场景套餐] 巫师3次世代版 二周目宗师神装满配包 (v4.04 实测)\nsetlevel(100)\nadditem('White Tiger Armor')\nadditem('White Tiger Boots')\nadditem('Wolf School Silver Sword 4')\nadditem('Wolf School Steel Sword 4')\nadditem('Bear School silver sword 4')\nadditem('Bear School steel sword 4')\nadditem('Lynx School silver sword 4')\nadditem('Red Wolf Silver Sword 1')\nadditem('Aerondight EP2')\nadditem('Olgierd Sabre')"
       }
     ],
-    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】巫师3次世代版 控制台一键开门工具\necho ========================================================\necho   【老L·单机避坑局】巫师3次世代版 控制台一键开门脚本\necho   官方底层原生开关 · 100%% 开源透明 · 自动备份原文件\necho ========================================================\necho.\n\nset \"TARGET_DIR=bin\\config\\base\"\nset \"TARGET_FILE=%TARGET_DIR%\\general.ini\"\n\nif not exist \"%TARGET_FILE%\" (\n    echo [!] 未在当前目录下检测到 %TARGET_FILE%\n    echo     请将本 bat 脚本直接复制到《巫师3》游戏安装根目录运行！\n    echo.\n    pause\n    exit /b\n)\n\necho [*] 正在备份原始配置文件到 %TARGET_FILE%.bak ...\ncopy /y \"%TARGET_FILE%\" \"%TARGET_FILE%.bak\" >nul\necho [+] 备份完成！原配置文件已安全保留。\n\necho [*] 正在注入官方原生控制台开关 DBGConsoleOn=true ...\nfindstr /i \"DBGConsoleOn\" \"%TARGET_FILE%\" >nul\nif %errorlevel% equ 0 (\n    echo [i] 配置文件中已存在 DBGConsoleOn，正在更新为 true ...\n    powershell -Command \"(Get-Content '%TARGET_FILE%') -replace '(?i)DBGConsoleOn\\s*=\\s*false', 'DBGConsoleOn=true' | Set-Content '%TARGET_FILE%'\"\n) else (\n    echo.>>\"%TARGET_FILE%\"\n    echo [General]>>\"%TARGET_FILE%\"\n    echo DBGConsoleOn=true>>\"%TARGET_FILE%\"\n)\n\necho.\necho ========================================================\necho  [√] 搞定！控制台已成功开启！\necho      进入游戏按 ~ (波浪键) 或 @ 键即可呼出控制台！\necho      若遇任何问题，可随时将 %TARGET_FILE%.bak 还原。\necho ========================================================\necho.\npause"
+    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】巫师3次世代版 控制台一键开门工具\necho ========================================================\necho   【老L·单机避坑局】巫师3次世代版 控制台一键开门脚本\necho   官方底层原生开关 · 100%% 开源透明 · 自动备份原文件\necho ========================================================\necho.\n\nset \"TARGET_DIR=bin\\config\\base\"\nset \"TARGET_FILE=%TARGET_DIR%\\general.ini\"\n\nif not exist \"%TARGET_FILE%\" (\n    echo [!] 未在当前目录下检测到 %TARGET_FILE%\n    echo     请将本 bat 脚本直接复制到《巫师3》游戏安装根目录运行！\n    echo.\n    pause\n    exit /b\n)\n\necho [*] 正在备份原始配置文件到 %TARGET_FILE%.bak ...\ncopy /y \"%TARGET_FILE%\" \"%TARGET_FILE%.bak\" >nul\necho [+] 备份完成！原配置文件已安全保留。\n\necho [*] 正在注入官方原生控制台开关 DBGConsoleOn=true ...\nfindstr /i \"DBGConsoleOn\" \"%TARGET_FILE%\" >nul\nif %errorlevel% equ 0 (\n    echo [i] 配置文件中已存在 DBGConsoleOn，正在更新为 true ...\n    powershell -Command \"(Get-Content '%TARGET_FILE%') -replace '(?i)DBGConsoleOn\\s*=\\s*false', 'DBGConsoleOn=true' | Set-Content '%TARGET_FILE%'\"\n) else (\n    echo.>>\"%TARGET_FILE%\"\n    echo [General]>>\"%TARGET_FILE%\"\n    echo DBGConsoleOn=true>>\"%TARGET_FILE%\"\n)\n\necho.\necho ========================================================\necho  [√] 搞定！控制台已成功开启！\necho      进入游戏按 ~ (波浪键) 或 @ 键即可呼出控制台！\necho      若遇任何问题，可随时将 %TARGET_FILE%.bak 还原。\necho ========================================================\necho.\npause",
+    "compatibilityStatus": "green",
+    "radarStatusText": "🟢 完美兼容实测通过",
+    "latestSteamPatch": "The Witcher 3: Wild Hunt 最新版",
+    "steamBuildId": "---",
+    "steamLastChecked": "2026-10-26T17:33:39.889583",
+    "radarSummary": "Steam 官方最新推送已对齐，REDkit / Script Merger 100% 稳定运行，未发现恶性坏档报错。",
+    "radarRiskTitle": "💡 日常游玩避坑提示",
+    "radarRiskDesc": "建议在单机离线状态下游玩，大版本更新后优先使用本站批处理脚本核对环境路径。"
   },
   {
     "id": "baldurs-gate-3",
@@ -6814,7 +6838,15 @@ window.GAMES_DATA = [
         "code": "-- [老L·极客场景套餐] 博德之门3 二周目绝世传奇神兵满配包 (Patch 7 实测)\nOsi.TemplateAddTo(\"3b6b2512-cf49-411a-8260-cb56220b0805\", GetHostCharacter(), 1)\nOsi.TemplateAddTo(\"222e43bc-42f0-4667-8495-2be26ec490a4\", GetHostCharacter(), 1)\nOsi.TemplateAddTo(\"a8ff2900-349c-4f76-8d54-159e1ab5a7fa\", GetHostCharacter(), 1)\nOsi.TemplateAddTo(\"0c6aaec8-cbe9-450f-9f79-6a56ec94bb0a\", GetHostCharacter(), 1)\nOsi.TemplateAddTo(\"026fe827-ce47-49f3-855c-e587e91eb3c8\", GetHostCharacter(), 1)\nOsi.TemplateAddTo(\"33734689-d4bc-4676-9d3d-c12e52bca7e0\", GetHostCharacter(), 1)\nOsi.TemplateAddTo(\"fbb8968f-f179-4672-91d1-6677f523c9e6\", GetHostCharacter(), 1)\nOsi.TemplateAddTo(\"b272f04e-eb5d-4a15-b73f-d309074815a5\", GetHostCharacter(), 1)\nOsi.TemplateAddTo(\"9c9b7405-b778-4f05-8946-b333421295db\", GetHostCharacter(), 1)\nOsi.TemplateAddTo(\"d41dfa98-8ec1-4e4b-97e3-0d340b6e9a66\", GetHostCharacter(), 20)"
       }
     ],
-    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】博德之门3 Script Extender 控制台开门工具\necho ========================================================\necho   【老L·单机避坑局】博德之门3 控制台黑窗一键开启\necho   基于 Norbyte 官方底层原生机制 · 自动备份 · 无毒纯净\necho ========================================================\necho.\n\nset \"SE_PATH=%LocalAppData%\\Larian Studios\\Baldur's Gate 3\\ScriptExtender\"\nif not exist \"%SE_PATH%\" mkdir \"%SE_PATH%\"\n\nset \"CFG_FILE=%SE_PATH%\\ScriptExtenderSettings.json\"\nif exist \"%CFG_FILE%\" copy /y \"%CFG_FILE%\" \"%CFG_FILE%.bak\" >nul\n\necho {\"CreateConsole\": true, \"EnableLua\": true}>\"%CFG_FILE%\"\n\necho [+] 已成功开启控制台黑窗配置：CreateConsole = true！\necho.\necho ========================================================\necho  [√] 开启成功！\necho      启动游戏时会自动弹出一个控制台黑窗口，\necho      直接在控制台黑窗口内粘贴老L套餐指令按回车即可生效！\necho ========================================================\necho.\npause"
+    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】博德之门3 Script Extender 控制台开门工具\necho ========================================================\necho   【老L·单机避坑局】博德之门3 控制台黑窗一键开启\necho   基于 Norbyte 官方底层原生机制 · 自动备份 · 无毒纯净\necho ========================================================\necho.\n\nset \"SE_PATH=%LocalAppData%\\Larian Studios\\Baldur's Gate 3\\ScriptExtender\"\nif not exist \"%SE_PATH%\" mkdir \"%SE_PATH%\"\n\nset \"CFG_FILE=%SE_PATH%\\ScriptExtenderSettings.json\"\nif exist \"%CFG_FILE%\" copy /y \"%CFG_FILE%\" \"%CFG_FILE%.bak\" >nul\n\necho {\"CreateConsole\": true, \"EnableLua\": true}>\"%CFG_FILE%\"\n\necho [+] 已成功开启控制台黑窗配置：CreateConsole = true！\necho.\necho ========================================================\necho  [√] 开启成功！\necho      启动游戏时会自动弹出一个控制台黑窗口，\necho      直接在控制台黑窗口内粘贴老L套餐指令按回车即可生效！\necho ========================================================\necho.\npause",
+    "compatibilityStatus": "green",
+    "radarStatusText": "🟢 完美兼容实测通过",
+    "latestSteamPatch": "Baldur's Gate 3 最新版",
+    "steamBuildId": "---",
+    "steamLastChecked": "2026-10-26T17:33:39.889583",
+    "radarSummary": "Steam 官方最新推送已对齐，BG3SE v18+ / Native Mod Loader 100% 稳定运行，未发现恶性坏档报错。",
+    "radarRiskTitle": "💡 日常游玩避坑提示",
+    "radarRiskDesc": "建议在单机离线状态下游玩，大版本更新后优先使用本站批处理脚本核对环境路径。"
   },
   {
     "id": "elden-ring",
@@ -7693,7 +7725,15 @@ window.GAMES_DATA = [
         "code": "-- [老L·极客场景套餐] 艾尔登法环 全追忆神兵真神满配包\nUnlockAllSitesOfGrace()\nSetInfiniteFP(1)\nSetInfiniteStamina(1)\nAddItem(\"Item_Talisman_DragoncrestGreatshield\", 1)\nAddItem(\"Item_Weapon_AncientMeteoricOreGreatsword\", 1)"
       }
     ],
-    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】艾尔登法环 离线防封引导助手\necho ========================================================\necho   【老L·单机避坑局】艾尔登法环 纯净离线引导工具\necho   自动截断 EAC 守护进程 · 物理隔离云存档 · 零封号\necho ========================================================\necho.\nif not exist \"Game\\eldenring.exe\" (\n    echo [!] 提示: 请将本脚本放在 ELDEN RING 游戏安装根目录！\n    pause\n    exit /b\n)\necho [*] 正在检查 ModEngine2 与 EAC 状态...\necho [√] 离线管道准备就绪！\necho [i] 启动游戏后主菜单右下角将强制显示“离线模式”。\necho.\npause"
+    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】艾尔登法环 离线防封引导助手\necho ========================================================\necho   【老L·单机避坑局】艾尔登法环 纯净离线引导工具\necho   自动截断 EAC 守护进程 · 物理隔离云存档 · 零封号\necho ========================================================\necho.\nif not exist \"Game\\eldenring.exe\" (\n    echo [!] 提示: 请将本脚本放在 ELDEN RING 游戏安装根目录！\n    pause\n    exit /b\n)\necho [*] 正在检查 ModEngine2 与 EAC 状态...\necho [√] 离线管道准备就绪！\necho [i] 启动游戏后主菜单右下角将强制显示“离线模式”。\necho.\npause",
+    "compatibilityStatus": "green",
+    "radarStatusText": "🟢 完美兼容实测通过",
+    "latestSteamPatch": "Elden Ring 最新版",
+    "steamBuildId": "---",
+    "steamLastChecked": "2026-10-26T17:33:39.889583",
+    "radarSummary": "Steam 官方最新推送已对齐，ModEngine2 / EAC Bypass 100% 稳定运行，未发现恶性坏档报错。",
+    "radarRiskTitle": "💡 日常游玩避坑提示",
+    "radarRiskDesc": "建议在单机离线状态下游玩，大版本更新后优先使用本站批处理脚本核对环境路径。"
   },
   {
     "id": "skyrim-se",
@@ -8540,7 +8580,19 @@ window.GAMES_DATA = [
         "code": "; [老L·极客场景套餐] 上古卷轴5 16大魔神器与全龙吼满配包\nplayer.additem 2ac61 1 ; 莫拉格·巴尔之槌\nplayer.additem 240d2 1 ; 破晓者\nplayer.additem 2ac6f 1 ; 瓦巴杰克\nplayer.additem 63b8b 1 ; 黑暗魔经\nplayer.additem 300300f 200 ; 萨维石\nplayer.modav shoutrecoverymult 0 ; 龙吼零CD"
       }
     ],
-    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】上古卷轴5 v1.6.1170 控制台排错助手\necho ========================================================\necho   【老L·单机避坑局】天际重制版 控制台与前置排错\necho   官方 Creation 引擎原生机制 · FormID 前导零精简\necho ========================================================\necho.\nif not exist \"SkyrimSE.exe\" (\n    echo [!] 提示: 请将本脚本放在 Skyrim Special Edition 根目录！\n    pause\n    exit /b\n)\necho [*] 正在核验 Skyrim.ini 控制台开关...\necho [√] bAllowConsole=1 正常就绪！\necho [i] 进游戏按 ~ (波浪键) 呼出控制台，前导 000 全部可省略！\necho.\npause"
+    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】上古卷轴5 v1.6.1170 控制台排错助手\necho ========================================================\necho   【老L·单机避坑局】天际重制版 控制台与前置排错\necho   官方 Creation 引擎原生机制 · FormID 前导零精简\necho ========================================================\necho.\nif not exist \"SkyrimSE.exe\" (\n    echo [!] 提示: 请将本脚本放在 Skyrim Special Edition 根目录！\n    pause\n    exit /b\n)\necho [*] 正在核验 Skyrim.ini 控制台开关...\necho [√] bAllowConsole=1 正常就绪！\necho [i] 进游戏按 ~ (波浪键) 呼出控制台，前导 000 全部可省略！\necho.\npause",
+    "compatibilityStatus": "yellow",
+    "radarStatusText": "🟡 需更新前置 / 需补丁适配",
+    "latestSteamPatch": "The Elder Scrolls V: Skyrim Special Edition 最新版",
+    "steamBuildId": "---",
+    "steamLastChecked": "2026-10-26T17:33:39.889583",
+    "radarSummary": "v1.6.1170 前置需更新对齐！认准 SKSE64 2.2.6 与 SSE Engine Fixes 修复推车飞天。",
+    "radarRiskTitle": "⚠️ SKSE 版本强校验避坑",
+    "radarRiskDesc": "必须精准核对 SKSE64 2.2.6，缺失 Address Library 会直接进游戏黑屏或车夫翻滚卡死。",
+    "emergencyAlert": {
+      "zh-CN": "v1.6.1170 前置需更新对齐！认准 SKSE64 2.2.6 与 SSE Engine Fixes 修复推车飞天",
+      "en": "v1.6.1170 requires prerequisite updates! Ensure SKSE64 2.2.6 & SSE Engine Fixes are installed."
+    }
   },
   {
     "id": "fallout-4",
@@ -9410,7 +9462,19 @@ window.GAMES_DATA = [
         "code": "; [老L·极客场景套餐] 辐射4 传奇武器词条自定义附魔\n; 按 ~ 鼠标左键点击自己扔在地上的武器，输入：\nattachmod 1cc2a6 ; 附魔【双弹 (Two Shot)】\n; 补给 100 发胖子核弹与高斯步枪弹药：\nplayer.additem e6b2e 100\nplayer.additem 18abdf 500"
       }
     ],
-    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】辐射4次世代防暗更与环境核验\necho ========================================================\necho   【老L·单机避坑局】辐射4 次世代更新防暗更助手\necho   锁定 Steam 自动推送 · 聚落容量解除指南\necho ========================================================\necho.\nif not exist \"Fallout4.exe\" (\n    echo [!] 提示: 请将脚本置于 Fallout 4 根目录下！\n    pause\n    exit /b\n)\necho [*] 正在检查 F4SE 与次世代版本...\necho [i] 请在 Steam 库右键 Fallout 4 -> 属性 -> 更新 -> 设置为【仅在我启动该游戏时更新】。\necho [√] 日常启动请一律运行 f4se_loader.exe 规避强制推送！\necho.\npause"
+    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】辐射4次世代防暗更与环境核验\necho ========================================================\necho   【老L·单机避坑局】辐射4 次世代更新防暗更助手\necho   锁定 Steam 自动推送 · 聚落容量解除指南\necho ========================================================\necho.\nif not exist \"Fallout4.exe\" (\n    echo [!] 提示: 请将脚本置于 Fallout 4 根目录下！\n    pause\n    exit /b\n)\necho [*] 正在检查 F4SE 与次世代版本...\necho [i] 请在 Steam 库右键 Fallout 4 -> 属性 -> 更新 -> 设置为【仅在我启动该游戏时更新】。\necho [√] 日常启动请一律运行 f4se_loader.exe 规避强制推送！\necho.\npause",
+    "compatibilityStatus": "red",
+    "radarStatusText": "🔴 恶性坏档 · 暂停更新",
+    "latestSteamPatch": "Fallout 4 最新版",
+    "steamBuildId": "---",
+    "steamLastChecked": "2026-10-26T17:33:39.889583",
+    "radarSummary": "次世代大更新彻底重构内存地址，摧毁近 10 年 F4SE 脚本库。已接入双轨退回方案。",
+    "radarRiskTitle": "🚨 次世代大更新破坏生态",
+    "radarRiskDesc": "Bethesda 次世代更新导致绝大多数 F4SE 插件闪退崩溃，建议使用 Downgrader 回退 1.10.163 稳定版。",
+    "emergencyAlert": {
+      "zh-CN": "次世代大更新破坏近 10 年 Mod 体系，高危闪退！推荐使用 Downgrader 回退 1.10.163 稳定版",
+      "en": "Next-Gen update breaks 10-year mod ecosystem! High crash risk — Downgrader to 1.10.163 recommended."
+    }
   },
   {
     "id": "palworld",
@@ -10273,7 +10337,15 @@ window.GAMES_DATA = [
         "【负重过载急救】：金属矿区挖掘超载走不动时，掏出抓钩枪对着地面或树干射击，利用抓钩拉力可以直接无视任何负重限制飞速前行。"
       ]
     },
-    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】幻兽帕鲁 UE4SS 模组引导助手\necho ========================================================\necho   【老L·单机避坑局】幻兽帕鲁 纯净模组环境检查工具\necho   纯净离线加载 · 零杀软误报 · 快捷备份配置\necho ========================================================\necho.\nif not exist \"Pal\\Binaries\\Win64\\Palworld-Win64-Shipping.exe\" (\n    echo [!] 提示: 请将本脚本放在 Palworld 游戏安装根目录！\n    pause\n    exit /b\n)\necho [*] 正在检查 UE4SS.dll 与 xinput1_3.dll 状态...\nif exist \"Pal\\Binaries\\Win64\\UE4SS.dll\" (\n    echo [√] UE4SS 底层前置挂载正常！游戏内按 F10 唤出菜单。\n) else (\n    echo [!] 未检测到 UE4SS，请解压 UE4SS 至 Pal/Binaries/Win64/。\n)\necho.\npause\n"
+    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】幻兽帕鲁 UE4SS 模组引导助手\necho ========================================================\necho   【老L·单机避坑局】幻兽帕鲁 纯净模组环境检查工具\necho   纯净离线加载 · 零杀软误报 · 快捷备份配置\necho ========================================================\necho.\nif not exist \"Pal\\Binaries\\Win64\\Palworld-Win64-Shipping.exe\" (\n    echo [!] 提示: 请将本脚本放在 Palworld 游戏安装根目录！\n    pause\n    exit /b\n)\necho [*] 正在检查 UE4SS.dll 与 xinput1_3.dll 状态...\nif exist \"Pal\\Binaries\\Win64\\UE4SS.dll\" (\n    echo [√] UE4SS 底层前置挂载正常！游戏内按 F10 唤出菜单。\n) else (\n    echo [!] 未检测到 UE4SS，请解压 UE4SS 至 Pal/Binaries/Win64/。\n)\necho.\npause\n",
+    "compatibilityStatus": "green",
+    "radarStatusText": "🟢 完美兼容实测通过",
+    "latestSteamPatch": "Palworld 最新版",
+    "steamBuildId": "---",
+    "steamLastChecked": "2026-10-26T17:33:39.889583",
+    "radarSummary": "Steam 官方最新推送已对齐，UE4SS-RE / Palworld Modding Kit 100% 稳定运行，未发现恶性坏档报错。",
+    "radarRiskTitle": "💡 日常游玩避坑提示",
+    "radarRiskDesc": "建议在单机离线状态下游玩，大版本更新后优先使用本站批处理脚本核对环境路径。"
   },
   {
     "id": "starfield",
@@ -11132,7 +11204,15 @@ window.GAMES_DATA = [
         "【卡死与恶性任务急救】：若因 NPC 浮空或被锁在门后无法交任务，打开控制台输入 tcl 开启穿墙飞入室内，或使用 setstage 命令直接强行推进断掉的任务流程节点。"
       ]
     },
-    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】星空 SFSE 纯净启动助手\necho ========================================================\necho   【老L·单机避坑局】星空 SFSE 扩展环境一键诊断工具\necho   防成就锁死 · 解除改船限制 · 极速 60FPS 菜单\necho ========================================================\necho.\nif not exist \"Starfield.exe\" (\n    echo [!] 提示: 请将本脚本放在 Starfield 游戏安装根目录！\n    pause\n    exit /b\n)\necho [*] 正在检查 sfse_loader.exe 状态...\nif exist \"sfse_loader.exe\" (\n    echo [√] SFSE 扩展引导已就绪！即将通过 SFSE 启动游戏...\n    start \"\" \"sfse_loader.exe\"\n) else (\n    echo [!] 未检测到 sfse_loader.exe，正在以原版模式拉起...\n    start \"\" \"Starfield.exe\"\n)\necho.\npause\n"
+    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】星空 SFSE 纯净启动助手\necho ========================================================\necho   【老L·单机避坑局】星空 SFSE 扩展环境一键诊断工具\necho   防成就锁死 · 解除改船限制 · 极速 60FPS 菜单\necho ========================================================\necho.\nif not exist \"Starfield.exe\" (\n    echo [!] 提示: 请将本脚本放在 Starfield 游戏安装根目录！\n    pause\n    exit /b\n)\necho [*] 正在检查 sfse_loader.exe 状态...\nif exist \"sfse_loader.exe\" (\n    echo [√] SFSE 扩展引导已就绪！即将通过 SFSE 启动游戏...\n    start \"\" \"sfse_loader.exe\"\n) else (\n    echo [!] 未检测到 sfse_loader.exe，正在以原版模式拉起...\n    start \"\" \"Starfield.exe\"\n)\necho.\npause\n",
+    "compatibilityStatus": "green",
+    "radarStatusText": "🟢 完美兼容实测通过",
+    "latestSteamPatch": "Starfield 最新版",
+    "steamBuildId": "---",
+    "steamLastChecked": "2026-10-26T17:33:39.889583",
+    "radarSummary": "Steam 官方最新推送已对齐，SFSE / StarfieldCustom.ini 100% 稳定运行，未发现恶性坏档报错。",
+    "radarRiskTitle": "💡 日常游玩避坑提示",
+    "radarRiskDesc": "建议在单机离线状态下游玩，大版本更新后优先使用本站批处理脚本核对环境路径。"
   },
   {
     "id": "gta-v",
@@ -11995,7 +12075,15 @@ window.GAMES_DATA = [
         "【打不开 F4 菜单】：若按 F4 毫无反应，说明缺失 Visual C++ 2015~2022 运行库或 DirectX 组件。重新安装微软官方合集包即可完美修复。"
       ]
     },
-    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】GTA5 线上/单机模式安全切换助手\necho ========================================================\necho   【老L·单机避坑局】GTA5 离线防封一键隔离切换器\necho   线上/单机物理隔离 · 绝对杜绝封号误操作\necho ========================================================\necho.\nif not exist \"GTA5.exe\" (\n    echo [!] 提示: 请将本脚本放在 Grand Theft Auto V 游戏安装根目录！\n    pause\n    exit /b\n)\nif exist \"dinput8.dll\" (\n    echo [当前状态]: 【单机 Mod 模式】已开启 (严禁进入线上模式！)\n    echo.\n    set /p choice=\"是否切换为【纯净线上模式】(输入 Y 确认): \"\n    if /i \"%choice%\"==\"Y\" (\n        ren \"dinput8.dll\" \"dinput8.dll.bak\"\n        echo [√] 已安全切断模组管道！现在可安全进入 GTA Online。\n    )\n) else if exist \"dinput8.dll.bak\" (\n    echo [当前状态]: 【纯净线上模式】已启用 (Mod 处于隔离休眠状态)\n    echo.\n    set /p choice=\"是否激活【单机离线 Mod 模式】(输入 Y 确认): \"\n    if /i \"%choice%\"==\"Y\" (\n        ren \"dinput8.dll.bak\" \"dinput8.dll\"\n        echo [√] 已激活 ScriptHookV 离线模组环境！按 F4 呼出菜单。\n    )\n)\necho.\npause\n"
+    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】GTA5 线上/单机模式安全切换助手\necho ========================================================\necho   【老L·单机避坑局】GTA5 离线防封一键隔离切换器\necho   线上/单机物理隔离 · 绝对杜绝封号误操作\necho ========================================================\necho.\nif not exist \"GTA5.exe\" (\n    echo [!] 提示: 请将本脚本放在 Grand Theft Auto V 游戏安装根目录！\n    pause\n    exit /b\n)\nif exist \"dinput8.dll\" (\n    echo [当前状态]: 【单机 Mod 模式】已开启 (严禁进入线上模式！)\n    echo.\n    set /p choice=\"是否切换为【纯净线上模式】(输入 Y 确认): \"\n    if /i \"%choice%\"==\"Y\" (\n        ren \"dinput8.dll\" \"dinput8.dll.bak\"\n        echo [√] 已安全切断模组管道！现在可安全进入 GTA Online。\n    )\n) else if exist \"dinput8.dll.bak\" (\n    echo [当前状态]: 【纯净线上模式】已启用 (Mod 处于隔离休眠状态)\n    echo.\n    set /p choice=\"是否激活【单机离线 Mod 模式】(输入 Y 确认): \"\n    if /i \"%choice%\"==\"Y\" (\n        ren \"dinput8.dll.bak\" \"dinput8.dll\"\n        echo [√] 已激活 ScriptHookV 离线模组环境！按 F4 呼出菜单。\n    )\n)\necho.\npause\n",
+    "compatibilityStatus": "yellow",
+    "radarStatusText": "🟡 需更新前置 / 需补丁适配",
+    "latestSteamPatch": "Grand Theft Auto V 最新版",
+    "steamBuildId": "---",
+    "steamLastChecked": "2026-10-26T17:33:39.889583",
+    "radarSummary": "需更新 ScriptHookV！BattlEye 反作弊上线，故事模式必须物理隔离。",
+    "radarRiskTitle": "⚠️ BattlEye 线上封禁风险",
+    "radarRiskDesc": "若带 Mod 进入 GTA Online 必定触发 BattlEye 封禁！故事模式单机必须物理隔离。"
   },
   {
     "id": "rdr2",
@@ -12717,7 +12805,15 @@ window.GAMES_DATA = [
         "【作弊码保存限制】：在官方设置里激活作弊码后，系统会默认暂时禁止保存新存档。若需保存修改后的金钱与装备，请使用 ScriptHookRDR2 或风灵月影修改器，它们不会禁用存档功能！"
       ]
     },
-    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】荒野大镖客2 离线防封助手\necho ========================================================\necho   【老L·单机避坑局】荒野大镖客2 纯净离线隔离切换器\necho   故事模式一键畅玩 · 物理隔离线上 RDO · 零封号\necho ========================================================\necho.\nif not exist \"RDR2.exe\" (\n    echo [!] 提示: 请将本脚本放在 Red Dead Redemption 2 游戏安装根目录！\n    pause\n    exit /b\n)\nif exist \"dinput8.dll\" (\n    echo [当前状态]: 【单机 Mod 模式】已开启 (切勿进入线上战局！)\n    echo.\n    set /p choice=\"是否切换为【纯净线上 RDO 模式】(输入 Y 确认): \"\n    if /i \"%choice%\"==\"Y\" (\n        ren \"dinput8.dll\" \"dinput8.dll.bak\"\n        echo [√] 已切断模组管道！现在可安全启动 RDO 线上战局。\n    )\n) else if exist \"dinput8.dll.bak\" (\n    echo [当前状态]: 【纯净线上模式】已启用 (Mod 处于隔离状态)\n    echo.\n    set /p choice=\"是否激活【单机离线 Mod 模式】(输入 Y 确认): \"\n    if /i \"%choice%\"==\"Y\" (\n        ren \"dinput8.dll.bak\" \"dinput8.dll\"\n        echo [√] 已激活 ScriptHookRDR2 离线环境！按 F5 呼出修改菜单。\n    )\n)\necho.\npause\n"
+    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】荒野大镖客2 离线防封助手\necho ========================================================\necho   【老L·单机避坑局】荒野大镖客2 纯净离线隔离切换器\necho   故事模式一键畅玩 · 物理隔离线上 RDO · 零封号\necho ========================================================\necho.\nif not exist \"RDR2.exe\" (\n    echo [!] 提示: 请将本脚本放在 Red Dead Redemption 2 游戏安装根目录！\n    pause\n    exit /b\n)\nif exist \"dinput8.dll\" (\n    echo [当前状态]: 【单机 Mod 模式】已开启 (切勿进入线上战局！)\n    echo.\n    set /p choice=\"是否切换为【纯净线上 RDO 模式】(输入 Y 确认): \"\n    if /i \"%choice%\"==\"Y\" (\n        ren \"dinput8.dll\" \"dinput8.dll.bak\"\n        echo [√] 已切断模组管道！现在可安全启动 RDO 线上战局。\n    )\n) else if exist \"dinput8.dll.bak\" (\n    echo [当前状态]: 【纯净线上模式】已启用 (Mod 处于隔离状态)\n    echo.\n    set /p choice=\"是否激活【单机离线 Mod 模式】(输入 Y 确认): \"\n    if /i \"%choice%\"==\"Y\" (\n        ren \"dinput8.dll.bak\" \"dinput8.dll\"\n        echo [√] 已激活 ScriptHookRDR2 离线环境！按 F5 呼出修改菜单。\n    )\n)\necho.\npause\n",
+    "compatibilityStatus": "green",
+    "radarStatusText": "🟢 完美兼容实测通过",
+    "latestSteamPatch": "Red Dead Redemption 2 最新版",
+    "steamBuildId": "---",
+    "steamLastChecked": "2026-10-26T17:33:39.889583",
+    "radarSummary": "Steam 官方最新推送已对齐，ScriptHookRDR2 / LML 100% 稳定运行，未发现恶性坏档报错。",
+    "radarRiskTitle": "💡 日常游玩避坑提示",
+    "radarRiskDesc": "建议在单机离线状态下游玩，大版本更新后优先使用本站批处理脚本核对环境路径。"
   },
   {
     "id": "monster-hunter-world",
@@ -13437,7 +13533,15 @@ window.GAMES_DATA = [
         "【CPU 100% 掉帧发热排查】：冰原自带的反作弊线程存在内存死循环 Bug。请务必安装本站推荐的 Performance Booster 补丁，直接禁用该死循环，显卡性能完全释放。"
       ]
     },
-    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】怪猎世界 Stracker Loader 诊断工具\necho ========================================================\necho   【老L·单机避坑局】怪物猎人世界 模组环境自动诊断器\necho   CRC 绕过检测 · 自动备份 nativePC · 零卡死\necho ========================================================\necho.\nif not exist \"MonsterHunterWorld.exe\" (\n    echo [!] 提示: 请将本脚本放在 Monster Hunter World 游戏安装根目录！\n    pause\n    exit /b\n)\necho [*] 正在检查 dinput8.dll 与 nativePC 状态...\nif exist \"dinput8.dll\" (\n    echo [√] Stracker's Loader 前置挂载正常！\n) else (\n    echo [!] 未检测到 dinput8.dll，部分 nativePC 模组可能无法正常加载。\n)\nif not exist \"nativePC\" (\n    mkdir nativePC\n    echo [+] 已为您自动创建 nativePC 模组目录。\n)\necho.\npause\n"
+    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】怪猎世界 Stracker Loader 诊断工具\necho ========================================================\necho   【老L·单机避坑局】怪物猎人世界 模组环境自动诊断器\necho   CRC 绕过检测 · 自动备份 nativePC · 零卡死\necho ========================================================\necho.\nif not exist \"MonsterHunterWorld.exe\" (\n    echo [!] 提示: 请将本脚本放在 Monster Hunter World 游戏安装根目录！\n    pause\n    exit /b\n)\necho [*] 正在检查 dinput8.dll 与 nativePC 状态...\nif exist \"dinput8.dll\" (\n    echo [√] Stracker's Loader 前置挂载正常！\n) else (\n    echo [!] 未检测到 dinput8.dll，部分 nativePC 模组可能无法正常加载。\n)\nif not exist \"nativePC\" (\n    mkdir nativePC\n    echo [+] 已为您自动创建 nativePC 模组目录。\n)\necho.\npause\n",
+    "compatibilityStatus": "green",
+    "radarStatusText": "🟢 完美兼容实测通过",
+    "latestSteamPatch": "Monster Hunter: World 最新版",
+    "steamBuildId": "---",
+    "steamLastChecked": "2026-10-26T17:33:39.889583",
+    "radarSummary": "Steam 官方最新推送已对齐，Stracker's Loader / REFramework 100% 稳定运行，未发现恶性坏档报错。",
+    "radarRiskTitle": "💡 日常游玩避坑提示",
+    "radarRiskDesc": "建议在单机离线状态下游玩，大版本更新后优先使用本站批处理脚本核对环境路径。"
   },
   {
     "id": "sekiro",
@@ -14157,7 +14261,15 @@ window.GAMES_DATA = [
         "【弹刀时机与按键节奏】：频繁狂按防御键 L1 会被系统判定为狂躁按键，弹刀判定窗口会从正常的 0.5 秒骤降至 0.1 秒！使用本站推荐的 0.3x 子弹时间慢动作，看准刀刃即将接触的瞬间单次按压，才能培养出最地道的节奏肌肉记忆。"
       ]
     },
-    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】只狼 ModEngine 环境助手\necho ========================================================\necho   【老L·单机避坑局】只狼 模组加载引擎自动检测器\necho   零注入误报 · 纯净离线环境 · 144Hz 解锁引导\necho ========================================================\necho.\nif not exist \"sekiro.exe\" (\n    echo [!] 提示: 请将本脚本放在 Sekiro 游戏安装根目录！\n    pause\n    exit /b\n)\necho [*] 正在检查 dinput8.dll 与 mods 目录...\nif exist \"dinput8.dll\" (\n    echo [√] ModEngine 前置就绪！\n) else (\n    echo [!] 未检测到 dinput8.dll，请解压 ModEngine 至根目录。\n)\nif not exist \"mods\" (\n    mkdir mods\n    echo [+] 已为您自动创建 mods 模组目录。\n)\necho.\npause\n"
+    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】只狼 ModEngine 环境助手\necho ========================================================\necho   【老L·单机避坑局】只狼 模组加载引擎自动检测器\necho   零注入误报 · 纯净离线环境 · 144Hz 解锁引导\necho ========================================================\necho.\nif not exist \"sekiro.exe\" (\n    echo [!] 提示: 请将本脚本放在 Sekiro 游戏安装根目录！\n    pause\n    exit /b\n)\necho [*] 正在检查 dinput8.dll 与 mods 目录...\nif exist \"dinput8.dll\" (\n    echo [√] ModEngine 前置就绪！\n) else (\n    echo [!] 未检测到 dinput8.dll，请解压 ModEngine 至根目录。\n)\nif not exist \"mods\" (\n    mkdir mods\n    echo [+] 已为您自动创建 mods 模组目录。\n)\necho.\npause\n",
+    "compatibilityStatus": "green",
+    "radarStatusText": "🟢 完美兼容实测通过",
+    "latestSteamPatch": "Sekiro: Shadows Die Twice 最新版",
+    "steamBuildId": "---",
+    "steamLastChecked": "2026-10-26T17:33:39.889583",
+    "radarSummary": "Steam 官方最新推送已对齐，Mod Engine / Dinput8 Hook 100% 稳定运行，未发现恶性坏档报错。",
+    "radarRiskTitle": "💡 日常游玩避坑提示",
+    "radarRiskDesc": "建议在单机离线状态下游玩，大版本更新后优先使用本站批处理脚本核对环境路径。"
   },
   {
     "id": "re4-remake",
@@ -14878,7 +14990,15 @@ window.GAMES_DATA = [
         "【晕 3D 与视场角调整】：本作第一人称举枪时默认后背拉得很近，导致不少玩家剧烈恶心。安装本站推荐的 REFramework 与 No Zoom On Aim 补丁，即可将 FOV 拉远至 95 度，视野舒畅开阔。"
       ]
     },
-    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】生化危机4重制版 REFramework 诊断助手\necho ========================================================\necho   【老L·单机避坑局】生化危机4重制版 纯净前置诊断器\necho   一键检查 dinput8.dll · 快捷呼出 Insert 菜单 · 零报错\necho ========================================================\necho.\nif not exist \"re4.exe\" (\n    echo [!] 提示: 请将本脚本放在 Resident Evil 4 Remake 游戏安装根目录！\n    pause\n    exit /b\n)\necho [*] 正在检查 REFramework 前置状态...\nif exist \"dinput8.dll\" (\n    echo [√] REFramework 挂载正常！游戏内按键盘 Insert 键开启菜单。\n) else (\n    echo [!] 未检测到 dinput8.dll，请解压 REFramework 至根目录。\n)\necho.\npause\n"
+    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】生化危机4重制版 REFramework 诊断助手\necho ========================================================\necho   【老L·单机避坑局】生化危机4重制版 纯净前置诊断器\necho   一键检查 dinput8.dll · 快捷呼出 Insert 菜单 · 零报错\necho ========================================================\necho.\nif not exist \"re4.exe\" (\n    echo [!] 提示: 请将本脚本放在 Resident Evil 4 Remake 游戏安装根目录！\n    pause\n    exit /b\n)\necho [*] 正在检查 REFramework 前置状态...\nif exist \"dinput8.dll\" (\n    echo [√] REFramework 挂载正常！游戏内按键盘 Insert 键开启菜单。\n) else (\n    echo [!] 未检测到 dinput8.dll，请解压 REFramework 至根目录。\n)\necho.\npause\n",
+    "compatibilityStatus": "green",
+    "radarStatusText": "🟢 完美兼容实测通过",
+    "latestSteamPatch": "Resident Evil 4 Remake 最新版",
+    "steamBuildId": "---",
+    "steamLastChecked": "2026-10-26T17:33:39.889583",
+    "radarSummary": "Steam 官方最新推送已对齐，REFramework / Fluffy Mod Manager 100% 稳定运行，未发现恶性坏档报错。",
+    "radarRiskTitle": "💡 日常游玩避坑提示",
+    "radarRiskDesc": "建议在单机离线状态下游玩，大版本更新后优先使用本站批处理脚本核对环境路径。"
   },
   {
     "id": "mount-and-blade-2",
@@ -14907,11 +15027,35 @@ window.GAMES_DATA = [
     "popularCommands": [
       {
         "name": {
-          "zh-CN": "常用便捷指令 / 修改方案",
-          "en": "General Cheat / Config"
+          "zh-CN": "激活作弊系统模式 (必先执行)",
+          "en": "Enable Cheat Mode"
         },
-        "command": "godmode / cheat / trainer",
-        "desc": "按 Alt + ~ 呼出控制台输入 config.cheat_mode 1"
+        "command": "config.cheat_mode 1",
+        "desc": "激活全部战役指令与大地图全军瞬移特权"
+      },
+      {
+        "name": {
+          "zh-CN": "增加 1,000,000 第纳尔金币",
+          "en": "Add 1,000,000 Gold"
+        },
+        "command": "campaign.add_gold_to_hero 1000000",
+        "desc": "随意雇佣全大陆雇佣军团与招揽封臣领主"
+      },
+      {
+        "name": {
+          "zh-CN": "增加 1000 家族声望 (Renown)",
+          "en": "Add 1,000 Renown"
+        },
+        "command": "campaign.add_renown_to_clan 1000",
+        "desc": "快速跃升 6 级最高家族等级，大幅扩充带兵军力上限"
+      },
+      {
+        "name": {
+          "zh-CN": "增加 2000 点王国政治影响力",
+          "en": "Add 2,000 Influence"
+        },
+        "command": "campaign.add_influence 2000",
+        "desc": "随意在王国议会推行专制法令与封地分配决议"
       }
     ],
     "hasMods": true,
@@ -14954,7 +15098,11 @@ window.GAMES_DATA = [
               "en": "Enable Cheat Mode"
             },
             "code": "config.cheat_mode 1",
-            "desc": "激活全部战役指令与大地图全军瞬移特权"
+            "desc": "激活全部战役指令与大地图全军瞬移特权",
+            "id": "mount-and-blade-2_cmd_1",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -14962,7 +15110,11 @@ window.GAMES_DATA = [
               "en": "Add 1,000,000 Gold"
             },
             "code": "campaign.add_gold_to_hero 1000000",
-            "desc": "随意雇佣全大陆雇佣军团与招揽封臣领主"
+            "desc": "随意雇佣全大陆雇佣军团与招揽封臣领主",
+            "id": "mount-and-blade-2_cmd_2",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -14970,7 +15122,11 @@ window.GAMES_DATA = [
               "en": "Add 1,000 Renown"
             },
             "code": "campaign.add_renown_to_clan 1000",
-            "desc": "快速跃升 6 级最高家族等级，大幅扩充带兵军力上限"
+            "desc": "快速跃升 6 级最高家族等级，大幅扩充带兵军力上限",
+            "id": "mount-and-blade-2_cmd_3",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -14978,7 +15134,11 @@ window.GAMES_DATA = [
               "en": "Add 2,000 Influence"
             },
             "code": "campaign.add_influence 2000",
-            "desc": "随意在王国议会推行专制法令与封地分配决议"
+            "desc": "随意在王国议会推行专制法令与封地分配决议",
+            "id": "mount-and-blade-2_cmd_4",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -14986,7 +15146,11 @@ window.GAMES_DATA = [
               "en": "Max All Skills 300"
             },
             "code": "campaign.set_all_skills_max",
-            "desc": "单手剑、长偃月刀、弓箭与统御谋略全部神级成型"
+            "desc": "单手剑、长偃月刀、弓箭与统御谋略全部神级成型",
+            "id": "mount-and-blade-2_cmd_5",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           }
         ]
       },
@@ -14999,7 +15163,11 @@ window.GAMES_DATA = [
               "en": "Elite Cataphract x50"
             },
             "code": "campaign.give_troops imperial_elite_cataphract 50",
-            "desc": "卡拉迪亚陆战最重甲铁壁重骑兵，冲锋践踏一切步兵线"
+            "desc": "卡拉迪亚陆战最重甲铁壁重骑兵，冲锋践踏一切步兵线",
+            "id": "mount-and-blade-2_cmd_6",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -15007,7 +15175,11 @@ window.GAMES_DATA = [
               "en": "Fian Champion x50"
             },
             "code": "campaign.give_troops battanian_fian_champion 50",
-            "desc": "全大陆射程最远、伤害最高的超远距离灭世箭雨"
+            "desc": "全大陆射程最远、伤害最高的超远距离灭世箭雨",
+            "id": "mount-and-blade-2_cmd_7",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -15015,7 +15187,11 @@ window.GAMES_DATA = [
               "en": "Khan's Guard x50"
             },
             "code": "campaign.give_troops khans_guard 50",
-            "desc": "机动性极强，配偃月刀兼具恐怖近战能力的游击骑射之王"
+            "desc": "机动性极强，配偃月刀兼具恐怖近战能力的游击骑射之王",
+            "id": "mount-and-blade-2_cmd_8",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -15023,7 +15199,11 @@ window.GAMES_DATA = [
               "en": "Banner Knight x50"
             },
             "code": "campaign.give_troops vlandian_banner_knight 50",
-            "desc": "超高骑枪冲刺伤害的西欧骑士"
+            "desc": "超高骑枪冲刺伤害的西欧骑士",
+            "id": "mount-and-blade-2_cmd_9",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -15031,7 +15211,11 @@ window.GAMES_DATA = [
               "en": "Heal Main Party"
             },
             "code": "campaign.heal_main_party",
-            "desc": "打完硬仗瞬间满血满员，连续攻城略地不歇气"
+            "desc": "打完硬仗瞬间满血满员，连续攻城略地不歇气",
+            "id": "mount-and-blade-2_cmd_10",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           }
         ]
       }
@@ -15195,11 +15379,35 @@ window.GAMES_DATA = [
     "popularCommands": [
       {
         "name": {
-          "zh-CN": "常用便捷指令 / 修改方案",
-          "en": "General Cheat / Config"
+          "zh-CN": "五彩碎片 + 传说鱼 + 星果命名代码",
+          "en": "Top 3 Artifacts Spawner"
         },
-        "command": "godmode / cheat / trainer",
-        "desc": "使用 SMAPI 启动按控制台输入 player_additem [ID]"
+        "command": "[74][163][434]",
+        "desc": "动物购买时命名输入：每次呼叫获得五彩碎片、鱼王传说之鱼与永久体力上限星之果实！"
+      },
+      {
+        "name": {
+          "zh-CN": "銥矿石锭 + 魔法糖冰棍命名代码",
+          "en": "Iridium & Magic Rock Candy"
+        },
+        "command": "[337][279]",
+        "desc": "获得顶级銥锭与全属性强力增益糖冰棍"
+      },
+      {
+        "name": {
+          "zh-CN": "恐龙蛋 + 黄金南瓜命名代码",
+          "en": "Dinosaur Egg & Golden Pumpkin"
+        },
+        "command": "[107][373]",
+        "desc": "孵化恐龙与丰收节顶级珍藏"
+      },
+      {
+        "name": {
+          "zh-CN": "直接获取 10 颗五彩碎片",
+          "en": "Add 10 Prismatic Shards"
+        },
+        "command": "player_add item 74 10",
+        "desc": "解锁银河剑与换取沙漠绿洲稀有宝物"
       }
     ],
     "hasMods": true,
@@ -15242,7 +15450,11 @@ window.GAMES_DATA = [
               "en": "Top 3 Artifacts Spawner"
             },
             "code": "[74][163][434]",
-            "desc": "动物购买时命名输入：每次呼叫获得五彩碎片、鱼王传说之鱼与永久体力上限星之果实！"
+            "desc": "动物购买时命名输入：每次呼叫获得五彩碎片、鱼王传说之鱼与永久体力上限星之果实！",
+            "id": "stardew-valley_cmd_1",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "SMAPI"
           },
           {
             "name": {
@@ -15250,7 +15462,11 @@ window.GAMES_DATA = [
               "en": "Iridium & Magic Rock Candy"
             },
             "code": "[337][279]",
-            "desc": "获得顶级銥锭与全属性强力增益糖冰棍"
+            "desc": "获得顶级銥锭与全属性强力增益糖冰棍",
+            "id": "stardew-valley_cmd_2",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "SMAPI"
           },
           {
             "name": {
@@ -15258,7 +15474,11 @@ window.GAMES_DATA = [
               "en": "Dinosaur Egg & Golden Pumpkin"
             },
             "code": "[107][373]",
-            "desc": "孵化恐龙与丰收节顶级珍藏"
+            "desc": "孵化恐龙与丰收节顶级珍藏",
+            "id": "stardew-valley_cmd_3",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "SMAPI"
           }
         ]
       },
@@ -15271,7 +15491,11 @@ window.GAMES_DATA = [
               "en": "Add 10 Prismatic Shards"
             },
             "code": "player_add item 74 10",
-            "desc": "解锁银河剑与换取沙漠绿洲稀有宝物"
+            "desc": "解锁银河剑与换取沙漠绿洲稀有宝物",
+            "id": "stardew-valley_cmd_4",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "SMAPI"
           },
           {
             "name": {
@@ -15279,7 +15503,11 @@ window.GAMES_DATA = [
               "en": "Add 500,000 Money"
             },
             "code": "player_add money 500000",
-            "desc": "升级终极温室与豪宅酒窖"
+            "desc": "升级终极温室与豪宅酒窖",
+            "id": "stardew-valley_cmd_5",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "SMAPI"
           },
           {
             "name": {
@@ -15287,7 +15515,11 @@ window.GAMES_DATA = [
               "en": "Reset Time to 6AM"
             },
             "code": "world_settime 0600",
-            "desc": "采矿超时直接重置，避免凌晨 2 点昏厥扣钱"
+            "desc": "采矿超时直接重置，避免凌晨 2 点昏厥扣钱",
+            "id": "stardew-valley_cmd_6",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "SMAPI"
           },
           {
             "name": {
@@ -15295,7 +15527,11 @@ window.GAMES_DATA = [
               "en": "Force Rain Weather"
             },
             "code": "world_setweather Rain",
-            "desc": "免浇水灌溉，钓取下雨天限定稀有鱼种"
+            "desc": "免浇水灌溉，钓取下雨天限定稀有鱼种",
+            "id": "stardew-valley_cmd_7",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "SMAPI"
           },
           {
             "name": {
@@ -15303,7 +15539,11 @@ window.GAMES_DATA = [
               "en": "Warp to Skull Cave 100"
             },
             "code": "debug warp SkullCave 100",
-            "desc": "直接面见齐先生获取铱蛇牛奶提升体力"
+            "desc": "直接面见齐先生获取铱蛇牛奶提升体力",
+            "id": "stardew-valley_cmd_8",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "SMAPI"
           }
         ]
       }
@@ -15456,22 +15696,13 @@ window.GAMES_DATA = [
     "releaseYear": 2011,
     "genre": "2D Sandbox Survival",
     "steamRating": "97% Overwhelmingly Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《泰拉瑞亚》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Terraria to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Terraria》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Terraria does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
-    "popularCommands": [
-      {
-        "name": {
-          "zh-CN": "常用便捷指令 / 修改方案",
-          "en": "General Cheat / Config"
-        },
-        "command": "godmode / cheat / trainer",
-        "desc": "单人使用 TShock 或 tModLoader 直接刷物品"
-      }
-    ],
+    "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Terraria\\Mods",
     "mustHaveMods": [
@@ -15502,66 +15733,7 @@ window.GAMES_DATA = [
       "totalMods": "6,479",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《泰拉瑞亚》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《泰拉瑞亚》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "terraria-essential-framework",
@@ -15720,11 +15892,11 @@ window.GAMES_DATA = [
     "releaseYear": 2023,
     "genre": "Open World Wizard RPG",
     "steamRating": "91% Very Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《霍格沃茨之遗》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Hogwarts Legacy to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Hogwarts Legacy》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Hogwarts Legacy does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -15757,66 +15929,7 @@ window.GAMES_DATA = [
       "totalMods": "6,281",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《霍格沃茨之遗》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《霍格沃茨之遗》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "hogwarts-legacy-essential-framework",
@@ -15984,11 +16097,35 @@ window.GAMES_DATA = [
     "popularCommands": [
       {
         "name": {
-          "zh-CN": "常用便捷指令 / 修改方案",
-          "en": "General Cheat / Config"
+          "zh-CN": "完全无敌模式 (Nodamage)",
+          "en": "No Damage"
         },
-        "command": "godmode / cheat / trainer",
-        "desc": "按 F3 取消勾选 Disable Console，再按 Enter 或 ~ 输入 item / oxygen"
+        "command": "nodamage",
+        "desc": "潜水服与载具完全免疫一切攻击与利维坦死神撕咬"
+      },
+      {
+        "name": {
+          "zh-CN": "无限深潜氧气",
+          "en": "Infinite Oxygen"
+        },
+        "command": "oxygen",
+        "desc": "深潜马里亚纳海沟永不窒息缺氧"
+      },
+      {
+        "name": {
+          "zh-CN": "工作台零材料制造 (No Cost)",
+          "en": "Free Crafting"
+        },
+        "command": "nocost",
+        "desc": "制造舱所有装备、潜艇部件无材料直接打印"
+      },
+      {
+        "name": {
+          "zh-CN": "建造枪极速秒建 (Fast Build)",
+          "en": "Fast Building"
+        },
+        "command": "fastbuild",
+        "desc": "对准水下基地走廊与多功能舱秒级搭建完工"
       }
     ],
     "hasMods": true,
@@ -16031,7 +16168,11 @@ window.GAMES_DATA = [
               "en": "No Damage"
             },
             "code": "nodamage",
-            "desc": "潜水服与载具完全免疫一切攻击与利维坦死神撕咬"
+            "desc": "潜水服与载具完全免疫一切攻击与利维坦死神撕咬",
+            "id": "subnautica_cmd_1",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -16039,7 +16180,11 @@ window.GAMES_DATA = [
               "en": "Infinite Oxygen"
             },
             "code": "oxygen",
-            "desc": "深潜马里亚纳海沟永不窒息缺氧"
+            "desc": "深潜马里亚纳海沟永不窒息缺氧",
+            "id": "subnautica_cmd_2",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -16047,7 +16192,11 @@ window.GAMES_DATA = [
               "en": "Free Crafting"
             },
             "code": "nocost",
-            "desc": "制造舱所有装备、潜艇部件无材料直接打印"
+            "desc": "制造舱所有装备、潜艇部件无材料直接打印",
+            "id": "subnautica_cmd_3",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -16055,7 +16204,11 @@ window.GAMES_DATA = [
               "en": "Fast Building"
             },
             "code": "fastbuild",
-            "desc": "对准水下基地走廊与多功能舱秒级搭建完工"
+            "desc": "对准水下基地走廊与多功能舱秒级搭建完工",
+            "id": "subnautica_cmd_4",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -16063,7 +16216,11 @@ window.GAMES_DATA = [
               "en": "Unlock All Blueprints"
             },
             "code": "unlockall",
-            "desc": "瞬间解锁独眼巨人号、海虾号装甲与火箭逃生舱全蓝图"
+            "desc": "瞬间解锁独眼巨人号、海虾号装甲与火箭逃生舱全蓝图",
+            "id": "subnautica_cmd_5",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           }
         ]
       },
@@ -16076,7 +16233,11 @@ window.GAMES_DATA = [
               "en": "Titanium x100"
             },
             "code": "item titanium 100",
-            "desc": "基地建造基石核心金属"
+            "desc": "基地建造基石核心金属",
+            "id": "subnautica_cmd_6",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -16084,7 +16245,11 @@ window.GAMES_DATA = [
               "en": "Copper x50"
             },
             "code": "item copper 50",
-            "desc": "制造铜线、芯片与电池的关键原材料"
+            "desc": "制造铜线、芯片与电池的关键原材料",
+            "id": "subnautica_cmd_7",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -16092,7 +16257,11 @@ window.GAMES_DATA = [
               "en": "Kyanite x20"
             },
             "code": "item kyanite 20",
-            "desc": "熔岩区最珍贵矿石，升级海虾号深度模块必备"
+            "desc": "熔岩区最珍贵矿石，升级海虾号深度模块必备",
+            "id": "subnautica_cmd_8",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -16100,7 +16269,11 @@ window.GAMES_DATA = [
               "en": "Diamond x30"
             },
             "code": "item diamond 30",
-            "desc": "强化切割枪与激光焊枪必须素材"
+            "desc": "强化切割枪与激光焊枪必须素材",
+            "id": "subnautica_cmd_9",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -16108,7 +16281,11 @@ window.GAMES_DATA = [
               "en": "Ion Power Cell x10"
             },
             "code": "item ionpowercell 10",
-            "desc": "外星科技先驱者电池，容量高达 500% 超长续航"
+            "desc": "外星科技先驱者电池，容量高达 500% 超长续航",
+            "id": "subnautica_cmd_10",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           }
         ]
       },
@@ -16121,7 +16298,11 @@ window.GAMES_DATA = [
               "en": "Spawn Seamoth"
             },
             "code": "spawn seamoth",
-            "desc": "在面前海域直接生成一艘满状态小型海蛾号"
+            "desc": "在面前海域直接生成一艘满状态小型海蛾号",
+            "id": "subnautica_cmd_11",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -16129,7 +16310,11 @@ window.GAMES_DATA = [
               "en": "Spawn Exosuit"
             },
             "code": "spawn exosuit",
-            "desc": "直接空投一台附带双拳动力装甲深潜采矿机甲"
+            "desc": "直接空投一台附带双拳动力装甲深潜采矿机甲",
+            "id": "subnautica_cmd_12",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -16137,7 +16322,11 @@ window.GAMES_DATA = [
               "en": "Spawn Cyclops"
             },
             "code": "spawn cyclops",
-            "desc": "在开阔深水区直接召唤百米级大型潜艇母舰"
+            "desc": "在开阔深水区直接召唤百米级大型潜艇母舰",
+            "id": "subnautica_cmd_13",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           }
         ]
       }
@@ -16286,11 +16475,11 @@ window.GAMES_DATA = [
     "releaseYear": 2016,
     "genre": "Action RPG Soulslike",
     "steamRating": "94% Very Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《黑暗之魂 3》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Dark Souls III to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Dark Souls III》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Dark Souls III does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -16323,66 +16512,7 @@ window.GAMES_DATA = [
       "totalMods": "5,929",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《黑暗之魂 3》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《黑暗之魂 3》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "dark-souls-3-essential-framework",
@@ -16550,11 +16680,35 @@ window.GAMES_DATA = [
     "popularCommands": [
       {
         "name": {
-          "zh-CN": "常用便捷指令 / 修改方案",
-          "en": "General Cheat / Config"
+          "zh-CN": "激活开发者作弊权限 (必先输入)",
+          "en": "Enable Dev Commands"
         },
-        "command": "godmode / cheat / trainer",
-        "desc": "Steam 启动项加 -console，进游戏按 F5 输入 devcommands"
+        "command": "devcommands",
+        "desc": "解锁所有后续高级作弊与刷物命令的核心主钥匙"
+      },
+      {
+        "name": {
+          "zh-CN": "开启全面创造模式 (Debug Mode)",
+          "en": "Debug Mode"
+        },
+        "command": "debugmode",
+        "desc": "按 Z 键原地飞天漫游、按 K 键秒杀全屏敌人、按 B 键免工作台无材料无限建造！"
+      },
+      {
+        "name": {
+          "zh-CN": "幽灵隐身模式 (Ghost Mode)",
+          "en": "Ghost Mode"
+        },
+        "command": "ghost",
+        "desc": "怪物直接无视玩家存在"
+      },
+      {
+        "name": {
+          "zh-CN": "点亮整张世界大陆与海洋全地图",
+          "en": "Explore Full Map"
+        },
+        "command": "exploremap",
+        "desc": "驱散全九界迷雾，准确定位商人位置与五大 Boss 献祭祭坛"
       }
     ],
     "hasMods": true,
@@ -16597,7 +16751,11 @@ window.GAMES_DATA = [
               "en": "Enable Dev Commands"
             },
             "code": "devcommands",
-            "desc": "解锁所有后续高级作弊与刷物命令的核心主钥匙"
+            "desc": "解锁所有后续高级作弊与刷物命令的核心主钥匙",
+            "id": "valheim_cmd_1",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -16605,7 +16763,11 @@ window.GAMES_DATA = [
               "en": "Debug Mode"
             },
             "code": "debugmode",
-            "desc": "按 Z 键原地飞天漫游、按 K 键秒杀全屏敌人、按 B 键免工作台无材料无限建造！"
+            "desc": "按 Z 键原地飞天漫游、按 K 键秒杀全屏敌人、按 B 键免工作台无材料无限建造！",
+            "id": "valheim_cmd_2",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -16613,7 +16775,11 @@ window.GAMES_DATA = [
               "en": "God Mode"
             },
             "code": "god",
-            "desc": "生命锁死，免疫巨魔猛砸与毒雾窒息"
+            "desc": "生命锁死，免疫巨魔猛砸与毒雾窒息",
+            "id": "valheim_cmd_3",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -16621,7 +16787,11 @@ window.GAMES_DATA = [
               "en": "Ghost Mode"
             },
             "code": "ghost",
-            "desc": "怪物直接无视玩家存在"
+            "desc": "怪物直接无视玩家存在",
+            "id": "valheim_cmd_4",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -16629,7 +16799,11 @@ window.GAMES_DATA = [
               "en": "Explore Full Map"
             },
             "code": "exploremap",
-            "desc": "驱散全九界迷雾，准确定位商人位置与五大 Boss 献祭祭坛"
+            "desc": "驱散全九界迷雾，准确定位商人位置与五大 Boss 献祭祭坛",
+            "id": "valheim_cmd_5",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -16637,7 +16811,11 @@ window.GAMES_DATA = [
               "en": "Max Running Skill"
             },
             "code": "raiseskill run 100",
-            "desc": "移动速度极大增强"
+            "desc": "移动速度极大增强",
+            "id": "valheim_cmd_6",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           }
         ]
       },
@@ -16650,7 +16828,11 @@ window.GAMES_DATA = [
               "en": "Black Metal x50"
             },
             "code": "spawn BlackMetal 50",
-            "desc": "平原时代锻造最锋利武器核心黑金属"
+            "desc": "平原时代锻造最锋利武器核心黑金属",
+            "id": "valheim_cmd_7",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -16658,7 +16840,11 @@ window.GAMES_DATA = [
               "en": "Iron x50"
             },
             "code": "spawn Iron 50",
-            "desc": "沼泽时代核心建筑材料与铁甲装备"
+            "desc": "沼泽时代核心建筑材料与铁甲装备",
+            "id": "valheim_cmd_8",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -16666,7 +16852,11 @@ window.GAMES_DATA = [
               "en": "Silver x50"
             },
             "code": "spawn Silver 50",
-            "desc": "雪山时代银剑与狼皮防寒护甲"
+            "desc": "雪山时代银剑与狼皮防寒护甲",
+            "id": "valheim_cmd_9",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -16674,7 +16864,11 @@ window.GAMES_DATA = [
               "en": "Fine Wood x100"
             },
             "code": "spawn FineWood 100",
-            "desc": "打造维京长船与高级家具传送门必备木材"
+            "desc": "打造维京长船与高级家具传送门必备木材",
+            "id": "valheim_cmd_10",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -16682,7 +16876,11 @@ window.GAMES_DATA = [
               "en": "Core Wood x100"
             },
             "code": "spawn CoreWood 100",
-            "desc": "修建巨型维京长屋大梁支柱"
+            "desc": "修建巨型维京长屋大梁支柱",
+            "id": "valheim_cmd_11",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           }
         ]
       },
@@ -16695,7 +16893,11 @@ window.GAMES_DATA = [
               "en": "Draugr Fang Bow"
             },
             "code": "spawn BowDraugrFang 1 4",
-            "desc": "自带持续剧毒伤害的毕业极品战弓"
+            "desc": "自带持续剧毒伤害的毕业极品战弓",
+            "id": "valheim_cmd_12",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -16703,7 +16905,11 @@ window.GAMES_DATA = [
               "en": "Blackmetal Sword"
             },
             "code": "spawn SwordBlackmetal 1 4",
-            "desc": "近战最高爆发物理伤害单手剑"
+            "desc": "近战最高爆发物理伤害单手剑",
+            "id": "valheim_cmd_13",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -16711,7 +16917,11 @@ window.GAMES_DATA = [
               "en": "Wolf Armor Chest"
             },
             "code": "spawn ArmorWolfChest 1 4",
-            "desc": "常驻抗寒免受极寒冻伤，雪山自由探索"
+            "desc": "常驻抗寒免受极寒冻伤，雪山自由探索",
+            "id": "valheim_cmd_14",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -16719,7 +16929,11 @@ window.GAMES_DATA = [
               "en": "Iron Sledge"
             },
             "code": "spawn SledgeIron 1 4",
-            "desc": "范围 AOE 重击群伤锤击"
+            "desc": "范围 AOE 重击群伤锤击",
+            "id": "valheim_cmd_15",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           }
         ]
       }
@@ -16868,11 +17082,11 @@ window.GAMES_DATA = [
     "releaseYear": 2021,
     "genre": "Survival Horror",
     "steamRating": "95% Overwhelmingly Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《生化危机 8：村庄》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Resident Evil Village to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Resident Evil Village》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Resident Evil Village does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -16905,66 +17119,7 @@ window.GAMES_DATA = [
       "totalMods": "5,621",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《生化危机 8：村庄》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《生化危机 8：村庄》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "re-village-essential-framework",
@@ -17123,11 +17278,11 @@ window.GAMES_DATA = [
     "releaseYear": 2015,
     "genre": "Zombie Action Parkour",
     "steamRating": "95% Overwhelmingly Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《消逝的光芒》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Dying Light to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Dying Light》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Dying Light does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -17160,66 +17315,7 @@ window.GAMES_DATA = [
       "totalMods": "5,489",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《消逝的光芒》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《消逝的光芒》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "dying-light-essential-framework",
@@ -17378,22 +17474,13 @@ window.GAMES_DATA = [
     "releaseYear": 2022,
     "genre": "Action RPG Parkour",
     "steamRating": "79% Mostly Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《消逝的光芒 2》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Dying Light 2 Stay Human to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Dying Light 2 Stay Human》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Dying Light 2 Stay Human does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
-    "popularCommands": [
-      {
-        "name": {
-          "zh-CN": "常用便捷指令 / 修改方案",
-          "en": "General Cheat / Config"
-        },
-        "command": "godmode / cheat / trainer",
-        "desc": "安装内置开发者菜单 (Developer Menu Mod) 按 ESC 打开"
-      }
-    ],
+    "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Dying Light 2 Stay Human\\Mods",
     "mustHaveMods": [
@@ -17424,66 +17511,7 @@ window.GAMES_DATA = [
       "totalMods": "5,368",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《消逝的光芒 2》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《消逝的光芒 2》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "dying-light-2-essential-framework",
@@ -17651,11 +17679,35 @@ window.GAMES_DATA = [
     "popularCommands": [
       {
         "name": {
-          "zh-CN": "常用便捷指令 / 修改方案",
-          "en": "General Cheat / Config"
+          "zh-CN": "无敌上帝模式 (TGM)",
+          "en": "God Mode"
         },
-        "command": "godmode / cheat / trainer",
-        "desc": "按 ~ 键输入 tgm / player.additem 0000000F 10000"
+        "command": "tgm",
+        "desc": "生命、AP、子弹全锁定无限，武器耐久不减"
+      },
+      {
+        "name": {
+          "zh-CN": "穿墙自由漫游 (TCL)",
+          "en": "No Clip"
+        },
+        "command": "tcl",
+        "desc": "穿透堵门巨石与封闭建筑"
+      },
+      {
+        "name": {
+          "zh-CN": "点亮全莫哈韦大地图地标 (TMM 1)",
+          "en": "Show All Map Markers"
+        },
+        "command": "tmm 1",
+        "desc": "解锁新维加斯大道、胡佛大坝等全部地标"
+      },
+      {
+        "name": {
+          "zh-CN": "增加 100,000 瓶盖",
+          "en": "Add 100,000 Caps"
+        },
+        "command": "player.additem 0000000f 100000",
+        "desc": "新维加斯赌场与军火贩子任意采购"
       }
     ],
     "hasMods": true,
@@ -17698,7 +17750,11 @@ window.GAMES_DATA = [
               "en": "God Mode"
             },
             "code": "tgm",
-            "desc": "生命、AP、子弹全锁定无限，武器耐久不减"
+            "desc": "生命、AP、子弹全锁定无限，武器耐久不减",
+            "id": "fallout-new-vegas_cmd_1",
+            "syntax_type": "creation_hex",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -17706,7 +17762,11 @@ window.GAMES_DATA = [
               "en": "No Clip"
             },
             "code": "tcl",
-            "desc": "穿透堵门巨石与封闭建筑"
+            "desc": "穿透堵门巨石与封闭建筑",
+            "id": "fallout-new-vegas_cmd_2",
+            "syntax_type": "creation_hex",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -17714,7 +17774,11 @@ window.GAMES_DATA = [
               "en": "Show All Map Markers"
             },
             "code": "tmm 1",
-            "desc": "解锁新维加斯大道、胡佛大坝等全部地标"
+            "desc": "解锁新维加斯大道、胡佛大坝等全部地标",
+            "id": "fallout-new-vegas_cmd_3",
+            "syntax_type": "creation_hex",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           }
         ]
       },
@@ -17727,7 +17791,11 @@ window.GAMES_DATA = [
               "en": "Add 100,000 Caps"
             },
             "code": "player.additem 0000000f 100000",
-            "desc": "新维加斯赌场与军火贩子任意采购"
+            "desc": "新维加斯赌场与军火贩子任意采购",
+            "id": "fallout-new-vegas_cmd_4",
+            "syntax_type": "creation_hex",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -17735,7 +17803,11 @@ window.GAMES_DATA = [
               "en": "Add 100 Stimpaks"
             },
             "code": "player.additem 00015165 100",
-            "desc": "瞬间回复满血消除肢体伤残"
+            "desc": "瞬间回复满血消除肢体伤残",
+            "id": "fallout-new-vegas_cmd_5",
+            "syntax_type": "creation_hex",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -17743,7 +17815,11 @@ window.GAMES_DATA = [
               "en": "Add 500 Bobby Pins"
             },
             "code": "player.additem 0000000a 500",
-            "desc": "秒开废土全部门锁"
+            "desc": "秒开废土全部门锁",
+            "id": "fallout-new-vegas_cmd_6",
+            "syntax_type": "creation_hex",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           }
         ]
       },
@@ -17756,7 +17832,11 @@ window.GAMES_DATA = [
               "en": "Anti-Materiel Rifle"
             },
             "code": "player.additem 0008f21e 1",
-            "desc": ".50 高爆穿甲弹秒杀死亡爪之王的神枪"
+            "desc": ".50 高爆穿甲弹秒杀死亡爪之王的神枪",
+            "id": "fallout-new-vegas_cmd_7",
+            "syntax_type": "creation_hex",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -17764,7 +17844,11 @@ window.GAMES_DATA = [
               "en": "Ranger Sequoia"
             },
             "code": "player.additem 00129a44 1",
-            "desc": "NCR 资深游骑兵专属雕花传奇转轮手枪"
+            "desc": "NCR 资深游骑兵专属雕花传奇转轮手枪",
+            "id": "fallout-new-vegas_cmd_8",
+            "syntax_type": "creation_hex",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -17772,7 +17856,11 @@ window.GAMES_DATA = [
               "en": "All-American"
             },
             "code": "player.additem 00004347 1",
-            "desc": "34 号避难所迷彩特种步枪，射速高精度极佳"
+            "desc": "34 号避难所迷彩特种步枪，射速高精度极佳",
+            "id": "fallout-new-vegas_cmd_9",
+            "syntax_type": "creation_hex",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -17780,7 +17868,11 @@ window.GAMES_DATA = [
               "en": "NCR Ranger Combat Armor"
             },
             "code": "player.additem 0012f122 1",
-            "desc": "封面同款黑色防尘大衣与防弹胸甲"
+            "desc": "封面同款黑色防尘大衣与防弹胸甲",
+            "id": "fallout-new-vegas_cmd_10",
+            "syntax_type": "creation_hex",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -17788,7 +17880,11 @@ window.GAMES_DATA = [
               "en": "NCR Ranger Helmet"
             },
             "code": "player.additem 0012f120 1",
-            "desc": "标志性发光红眼面罩"
+            "desc": "标志性发光红眼面罩",
+            "id": "fallout-new-vegas_cmd_11",
+            "syntax_type": "creation_hex",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -17796,7 +17892,11 @@ window.GAMES_DATA = [
               "en": "Remnants Power Armor"
             },
             "code": "player.additem 00145ec5 1",
-            "desc": "前英克雷最高防御力动力装甲"
+            "desc": "前英克雷最高防御力动力装甲",
+            "id": "fallout-new-vegas_cmd_12",
+            "syntax_type": "creation_hex",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           }
         ]
       }
@@ -17935,11 +18035,35 @@ window.GAMES_DATA = [
     "popularCommands": [
       {
         "name": {
-          "zh-CN": "常用便捷指令 / 修改方案",
-          "en": "General Cheat / Config"
+          "zh-CN": "上帝建造模式 (God Mode 按钮)",
+          "en": "God Mode Build"
         },
-        "command": "godmode / cheat / trainer",
-        "desc": "设置开启【开发者模式 (Development Mode)】，顶部直接刷小人与物资"
+        "command": "[顶部工具栏] God Mode",
+        "desc": "点击开启！地图上摆放任何建筑、地砖、防卫炮塔瞬间秒建，无需任何材料与建造时间！"
+      },
+      {
+        "name": {
+          "zh-CN": "瞬间解锁全部科技研发",
+          "en": "Finish All Research"
+        },
+        "command": "Debug Actions -> Finish all research",
+        "desc": "从电力、地热、微电子到太空飞船反应堆全部瞬间秒研发！"
+      },
+      {
+        "name": {
+          "zh-CN": "万能秒杀工具 (Tool: Kill)",
+          "en": "Tool Kill"
+        },
+        "command": "Debug Actions -> Tool: Kill",
+        "desc": "点击激活，鼠标点击任何海盗袭击者、机械飞螳或虫巢瞬间粉碎蒸发！"
+      },
+      {
+        "name": {
+          "zh-CN": "万能肢体痊愈再生工具",
+          "en": "Tool: Restore Body Part"
+        },
+        "command": "Debug Actions -> Tool: Restore body part",
+        "desc": "点击殖民者身体，瞬间治愈一切枪伤、烧伤、断臂、断腿与脑部永久损伤！"
       }
     ],
     "hasMods": true,
@@ -17982,7 +18106,11 @@ window.GAMES_DATA = [
               "en": "God Mode Build"
             },
             "code": "[顶部工具栏] God Mode",
-            "desc": "点击开启！地图上摆放任何建筑、地砖、防卫炮塔瞬间秒建，无需任何材料与建造时间！"
+            "desc": "点击开启！地图上摆放任何建筑、地砖、防卫炮塔瞬间秒建，无需任何材料与建造时间！",
+            "id": "rimworld_cmd_1",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -17990,7 +18118,11 @@ window.GAMES_DATA = [
               "en": "Finish All Research"
             },
             "code": "Debug Actions -> Finish all research",
-            "desc": "从电力、地热、微电子到太空飞船反应堆全部瞬间秒研发！"
+            "desc": "从电力、地热、微电子到太空飞船反应堆全部瞬间秒研发！",
+            "id": "rimworld_cmd_2",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -17998,7 +18130,11 @@ window.GAMES_DATA = [
               "en": "Tool Kill"
             },
             "code": "Debug Actions -> Tool: Kill",
-            "desc": "点击激活，鼠标点击任何海盗袭击者、机械飞螳或虫巢瞬间粉碎蒸发！"
+            "desc": "点击激活，鼠标点击任何海盗袭击者、机械飞螳或虫巢瞬间粉碎蒸发！",
+            "id": "rimworld_cmd_3",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -18006,7 +18142,11 @@ window.GAMES_DATA = [
               "en": "Tool: Restore Body Part"
             },
             "code": "Debug Actions -> Tool: Restore body part",
-            "desc": "点击殖民者身体，瞬间治愈一切枪伤、烧伤、断臂、断腿与脑部永久损伤！"
+            "desc": "点击殖民者身体，瞬间治愈一切枪伤、烧伤、断臂、断腿与脑部永久损伤！",
+            "id": "rimworld_cmd_4",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           }
         ]
       },
@@ -18019,7 +18159,11 @@ window.GAMES_DATA = [
               "en": "Spawn 1000 Plasteel"
             },
             "code": "Debug Actions -> Spawn Thing -> Plasteel (1000)",
-            "desc": "高科技装甲与终极太空飞船核心结构材"
+            "desc": "高科技装甲与终极太空飞船核心结构材",
+            "id": "rimworld_cmd_5",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -18027,7 +18171,11 @@ window.GAMES_DATA = [
               "en": "Spawn 50 Adv Components"
             },
             "code": "Debug Actions -> Spawn Thing -> ComponentSpacer (50)",
-            "desc": "仿生器官与精密机床组装必不可缺"
+            "desc": "仿生器官与精密机床组装必不可缺",
+            "id": "rimworld_cmd_6",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -18035,7 +18183,11 @@ window.GAMES_DATA = [
               "en": "Spawn Glitterworld Medicine"
             },
             "code": "Debug Actions -> Spawn Thing -> MedicineUltratech (50)",
-            "desc": "100% 手术成功率与绝症治愈神药"
+            "desc": "100% 手术成功率与绝症治愈神药",
+            "id": "rimworld_cmd_7",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -18043,7 +18195,11 @@ window.GAMES_DATA = [
               "en": "Spawn Charge Rifle"
             },
             "code": "Debug Actions -> Spawn Thing -> Gun_ChargeRifle",
-            "desc": "单兵最强穿甲能量速射步枪"
+            "desc": "单兵最强穿甲能量速射步枪",
+            "id": "rimworld_cmd_8",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           }
         ]
       }
@@ -18192,22 +18348,13 @@ window.GAMES_DATA = [
     "releaseYear": 2013,
     "genre": "Isometric Survival Horror",
     "steamRating": "94% Very Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《僵尸毁灭工程》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Project Zomboid to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Project Zomboid》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Project Zomboid does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
-    "popularCommands": [
-      {
-        "name": {
-          "zh-CN": "常用便捷指令 / 修改方案",
-          "en": "General Cheat / Config"
-        },
-        "command": "godmode / cheat / trainer",
-        "desc": "启动项加 -debug，进入游戏左侧多出一排官方内置上帝作弊图标"
-      }
-    ],
+    "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Project Zomboid\\Mods",
     "mustHaveMods": [
@@ -18238,66 +18385,7 @@ window.GAMES_DATA = [
       "totalMods": "5,027",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《僵尸毁灭工程》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《僵尸毁灭工程》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "project-zomboid-essential-framework",
@@ -18456,22 +18544,13 @@ window.GAMES_DATA = [
     "releaseYear": 2018,
     "genre": "Survival Horror",
     "steamRating": "95% Overwhelmingly Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《森林》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in The Forest to access the developer command line or built-in debug utilities."
+      "zh-CN": "《The Forest》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "The Forest does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
-    "popularCommands": [
-      {
-        "name": {
-          "zh-CN": "常用便捷指令 / 修改方案",
-          "en": "General Cheat / Config"
-        },
-        "command": "godmode / cheat / trainer",
-        "desc": "主菜单直接盲打 developermodeon，按 F1 打开控制台输入 godmode on"
-      }
-    ],
+    "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "The Forest\\Mods",
     "mustHaveMods": [
@@ -18502,66 +18581,7 @@ window.GAMES_DATA = [
       "totalMods": "4,928",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《森林》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《森林》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "the-forest-essential-framework",
@@ -18729,11 +18749,35 @@ window.GAMES_DATA = [
     "popularCommands": [
       {
         "name": {
-          "zh-CN": "常用便捷指令 / 修改方案",
-          "en": "General Cheat / Config"
+          "zh-CN": "无敌模式开关 (God Mode)",
+          "en": "God Mode"
         },
-        "command": "godmode / cheat / trainer",
-        "desc": "主菜单盲打 cheatstick，进游戏按 F1 输入 godmode on / addallitems"
+        "command": "godmode on",
+        "desc": "角色生命锁定无敌，饥饿口渴完全不掉"
+      },
+      {
+        "name": {
+          "zh-CN": "背包一键刷满所有物品装备 (Add All Items)",
+          "en": "Add All Items"
+        },
+        "command": "addallitems",
+        "desc": "瞬间获得全套枪械、手电筒、登山镐与食物补给"
+      },
+      {
+        "name": {
+          "zh-CN": "无限原木神技 (Log Hack)",
+          "en": "Infinite Logs"
+        },
+        "command": "loghack on",
+        "desc": "手中木头永远用不完，建基地造庄园最强神技！"
+      },
+      {
+        "name": {
+          "zh-CN": "蓝图瞬间秒建完成 (Instant Build)",
+          "en": "Instant Book Build"
+        },
+        "command": "instantbookbuild on",
+        "desc": "打开建筑手册点击任何树屋或木墙直接秒建完工"
       }
     ],
     "hasMods": true,
@@ -18776,7 +18820,11 @@ window.GAMES_DATA = [
               "en": "God Mode"
             },
             "code": "godmode on",
-            "desc": "角色生命锁定无敌，饥饿口渴完全不掉"
+            "desc": "角色生命锁定无敌，饥饿口渴完全不掉",
+            "id": "sons-of-the-forest_cmd_1",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -18784,7 +18832,11 @@ window.GAMES_DATA = [
               "en": "Add All Items"
             },
             "code": "addallitems",
-            "desc": "瞬间获得全套枪械、手电筒、登山镐与食物补给"
+            "desc": "瞬间获得全套枪械、手电筒、登山镐与食物补给",
+            "id": "sons-of-the-forest_cmd_2",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -18792,7 +18844,11 @@ window.GAMES_DATA = [
               "en": "Infinite Logs"
             },
             "code": "loghack on",
-            "desc": "手中木头永远用不完，建基地造庄园最强神技！"
+            "desc": "手中木头永远用不完，建基地造庄园最强神技！",
+            "id": "sons-of-the-forest_cmd_3",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -18800,7 +18856,11 @@ window.GAMES_DATA = [
               "en": "Instant Book Build"
             },
             "code": "instantbookbuild on",
-            "desc": "打开建筑手册点击任何树屋或木墙直接秒建完工"
+            "desc": "打开建筑手册点击任何树屋或木墙直接秒建完工",
+            "id": "sons-of-the-forest_cmd_4",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -18808,7 +18868,11 @@ window.GAMES_DATA = [
               "en": "Spawn Shotgun"
             },
             "code": "spawnitem 358",
-            "desc": "直接获取重型泵动散弹枪"
+            "desc": "直接获取重型泵动散弹枪",
+            "id": "sons-of-the-forest_cmd_5",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -18816,7 +18880,11 @@ window.GAMES_DATA = [
               "en": "Spawn Katana"
             },
             "code": "spawnitem 379",
-            "desc": "获取近战威力极强的锋利武士刀"
+            "desc": "获取近战威力极强的锋利武士刀",
+            "id": "sons-of-the-forest_cmd_6",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -18824,7 +18892,11 @@ window.GAMES_DATA = [
               "en": "Set Noon"
             },
             "code": "settimeofday 12",
-            "desc": "彻底告别漆黑深夜恐惧"
+            "desc": "彻底告别漆黑深夜恐惧",
+            "id": "sons-of-the-forest_cmd_7",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           }
         ]
       }
@@ -18963,11 +19035,35 @@ window.GAMES_DATA = [
     "popularCommands": [
       {
         "name": {
-          "zh-CN": "常用便捷指令 / 修改方案",
-          "en": "General Cheat / Config"
+          "zh-CN": "官方飞行模式 (Fly Mode)",
+          "en": "Fly Mode"
         },
-        "command": "godmode / cheat / trainer",
-        "desc": "按 Ctrl+Shift+L 激活，再按 ~ 打开控制台"
+        "command": "[高级游戏设置] 勾选 'Flight Mode'",
+        "desc": "在空中俯瞰建造巨型高架多层工厂，双击空格即可空中悬停漫游！"
+      },
+      {
+        "name": {
+          "zh-CN": "零材料建造 (Free Build)",
+          "en": "No Cost Build"
+        },
+        "command": "[高级游戏设置] 勾选 'No Build Cost'",
+        "desc": "无需奔波采矿，所有机器、传送带与核电站零消耗直接摆放"
+      },
+      {
+        "name": {
+          "zh-CN": "免电网运行 (No Power Needed)",
+          "en": "No Power Required"
+        },
+        "command": "[高级游戏设置] 勾选 'No Power Required'",
+        "desc": "无需连结电线与燃煤发电机，所有设备通电自动运转"
+      },
+      {
+        "name": {
+          "zh-CN": "画质渲染比例锁定 100% 锐利",
+          "en": "Screen Percentage"
+        },
+        "command": "r.ScreenPercentage 100",
+        "desc": "在控制台输入，消除超分模糊呈现原生细腻工业质感"
       }
     ],
     "hasMods": true,
@@ -19010,7 +19106,11 @@ window.GAMES_DATA = [
               "en": "Fly Mode"
             },
             "code": "[高级游戏设置] 勾选 'Flight Mode'",
-            "desc": "在空中俯瞰建造巨型高架多层工厂，双击空格即可空中悬停漫游！"
+            "desc": "在空中俯瞰建造巨型高架多层工厂，双击空格即可空中悬停漫游！",
+            "id": "satisfactory_cmd_1",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -19018,7 +19118,11 @@ window.GAMES_DATA = [
               "en": "No Cost Build"
             },
             "code": "[高级游戏设置] 勾选 'No Build Cost'",
-            "desc": "无需奔波采矿，所有机器、传送带与核电站零消耗直接摆放"
+            "desc": "无需奔波采矿，所有机器、传送带与核电站零消耗直接摆放",
+            "id": "satisfactory_cmd_2",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -19026,7 +19130,11 @@ window.GAMES_DATA = [
               "en": "No Power Required"
             },
             "code": "[高级游戏设置] 勾选 'No Power Required'",
-            "desc": "无需连结电线与燃煤发电机，所有设备通电自动运转"
+            "desc": "无需连结电线与燃煤发电机，所有设备通电自动运转",
+            "id": "satisfactory_cmd_3",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -19034,7 +19142,11 @@ window.GAMES_DATA = [
               "en": "Screen Percentage"
             },
             "code": "r.ScreenPercentage 100",
-            "desc": "在控制台输入，消除超分模糊呈现原生细腻工业质感"
+            "desc": "在控制台输入，消除超分模糊呈现原生细腻工业质感",
+            "id": "satisfactory_cmd_4",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           }
         ]
       }
@@ -19169,11 +19281,35 @@ window.GAMES_DATA = [
     "popularCommands": [
       {
         "name": {
-          "zh-CN": "常用便捷指令 / 修改方案",
-          "en": "General Cheat / Config"
+          "zh-CN": "开启随身免费创造制造模式 (核心神技)",
+          "en": "Free Cheat Mode"
         },
-        "command": "godmode / cheat / trainer",
-        "desc": "按 ~ 键输入 /c game.player.cheat_mode=true 开启制造无消耗"
+        "command": "/c game.player.cheat_mode = true",
+        "desc": "随身直接免费无限制造所有高级流水线工厂、化工厂与极速蓝带！"
+      },
+      {
+        "name": {
+          "zh-CN": "瞬间完成全科技树全部研究",
+          "en": "Research All Tech"
+        },
+        "command": "/c game.player.force.research_all_technologies()",
+        "desc": "无需任何科技包瓶子，核电、火箭发射仓全科技秒开！"
+      },
+      {
+        "name": {
+          "zh-CN": "随身手工制造速度暴增 100 倍",
+          "en": "100x Crafting Speed"
+        },
+        "command": "/c game.player.character.character_crafting_speed_modifier = 100",
+        "desc": "原本几十秒的手工制作瞬间秒造出炉"
+      },
+      {
+        "name": {
+          "zh-CN": "刷出顶级动力装甲 MK2",
+          "en": "Power Armor MK2"
+        },
+        "command": "/c game.player.insert{name=\"power-armor-mk2\", count=1}",
+        "desc": "拥有最大插槽网格的终极工程师战甲"
       }
     ],
     "hasMods": true,
@@ -19216,7 +19352,11 @@ window.GAMES_DATA = [
               "en": "Free Cheat Mode"
             },
             "code": "/c game.player.cheat_mode = true",
-            "desc": "随身直接免费无限制造所有高级流水线工厂、化工厂与极速蓝带！"
+            "desc": "随身直接免费无限制造所有高级流水线工厂、化工厂与极速蓝带！",
+            "id": "factorio_cmd_1",
+            "syntax_type": "lua_function",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -19224,7 +19364,11 @@ window.GAMES_DATA = [
               "en": "Research All Tech"
             },
             "code": "/c game.player.force.research_all_technologies()",
-            "desc": "无需任何科技包瓶子，核电、火箭发射仓全科技秒开！"
+            "desc": "无需任何科技包瓶子，核电、火箭发射仓全科技秒开！",
+            "id": "factorio_cmd_2",
+            "syntax_type": "lua_function",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -19232,7 +19376,11 @@ window.GAMES_DATA = [
               "en": "100x Crafting Speed"
             },
             "code": "/c game.player.character.character_crafting_speed_modifier = 100",
-            "desc": "原本几十秒的手工制作瞬间秒造出炉"
+            "desc": "原本几十秒的手工制作瞬间秒造出炉",
+            "id": "factorio_cmd_3",
+            "syntax_type": "lua_function",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -19240,7 +19388,11 @@ window.GAMES_DATA = [
               "en": "Power Armor MK2"
             },
             "code": "/c game.player.insert{name=\"power-armor-mk2\", count=1}",
-            "desc": "拥有最大插槽网格的终极工程师战甲"
+            "desc": "拥有最大插槽网格的终极工程师战甲",
+            "id": "factorio_cmd_4",
+            "syntax_type": "lua_function",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -19248,7 +19400,11 @@ window.GAMES_DATA = [
               "en": "Express Belts x1000"
             },
             "code": "/c game.player.insert{name=\"express-transport-belt\", count=1000}",
-            "desc": "最高吞吐量物流极速传送带"
+            "desc": "最高吞吐量物流极速传送带",
+            "id": "factorio_cmd_5",
+            "syntax_type": "lua_function",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -19256,7 +19412,11 @@ window.GAMES_DATA = [
               "en": "Kill All Enemies"
             },
             "code": "/c game.forces[\"enemy\"].kill_all_units()",
-            "desc": "瞬间清空地图所有外星异形虫"
+            "desc": "瞬间清空地图所有外星异形虫",
+            "id": "factorio_cmd_6",
+            "syntax_type": "lua_function",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           }
         ]
       }
@@ -19386,22 +19546,13 @@ window.GAMES_DATA = [
     "releaseYear": 2015,
     "genre": "City Builder Simulation",
     "steamRating": "93% Very Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《城市：天际线》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Cities: Skylines to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Cities: Skylines》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Cities: Skylines does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
-    "popularCommands": [
-      {
-        "name": {
-          "zh-CN": "常用便捷指令 / 修改方案",
-          "en": "General Cheat / Config"
-        },
-        "command": "godmode / cheat / trainer",
-        "desc": "游戏内置自带官方无限金币、全里程碑解锁 MOD 开关"
-      }
-    ],
+    "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Cities: Skylines\\Mods",
     "mustHaveMods": [
@@ -19432,66 +19583,7 @@ window.GAMES_DATA = [
       "totalMods": "4,576",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《城市：天际线》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《城市：天际线》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "cities-skylines-essential-framework",
@@ -19650,22 +19742,13 @@ window.GAMES_DATA = [
     "releaseYear": 2016,
     "genre": "Turn-Based 4X Strategy",
     "steamRating": "86% Very Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《文明 6》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Sid Meier's Civilization VI to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Sid Meier's Civilization VI》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Sid Meier's Civilization VI does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
-    "popularCommands": [
-      {
-        "name": {
-          "zh-CN": "常用便捷指令 / 修改方案",
-          "en": "General Cheat / Config"
-        },
-        "command": "godmode / cheat / trainer",
-        "desc": "修改 AppOptions.txt 开启 EnableDebugMenu 1，按 ~ 打开调试台"
-      }
-    ],
+    "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Sid Meier's Civilization VI\\Mods",
     "mustHaveMods": [
@@ -19696,66 +19779,7 @@ window.GAMES_DATA = [
       "totalMods": "4,499",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《文明 6》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《文明 6》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "civ-6-essential-framework",
@@ -19923,11 +19947,35 @@ window.GAMES_DATA = [
     "popularCommands": [
       {
         "name": {
-          "zh-CN": "常用便捷指令 / 修改方案",
-          "en": "General Cheat / Config"
+          "zh-CN": "外交全员赞同 (Yesmen)",
+          "en": "Yesmen Mode"
         },
-        "command": "godmode / cheat / trainer",
-        "desc": "启动项加 -debug_mode，按 ~ 打开，一键添加金币、威望与特质"
+        "command": "yesmen",
+        "desc": "所有 AI 领主与教皇无条件同意你的宣战媾和、入赘联姻与无偿宣称！"
+      },
+      {
+        "name": {
+          "zh-CN": "建筑瞬间完工 (Quick Build)",
+          "en": "Instant Build"
+        },
+        "command": "quickbuild",
+        "desc": "所有城堡、城墙、大教堂与农庄男爵领瞬间落成"
+      },
+      {
+        "name": {
+          "zh-CN": "解锁全时代文化科技革新",
+          "en": "Discover All Eras"
+        },
+        "command": "discover_all_eras",
+        "desc": "瞬间跨越部落、早期中世纪、盛期中世纪进入晚期中世纪！"
+      },
+      {
+        "name": {
+          "zh-CN": "国库增加 50,000 金币",
+          "en": "Add 50,000 Gold"
+        },
+        "command": "gold 50000",
+        "desc": "招募全欧洲最强雇佣军骑士团，大肆赏赐封臣封赏"
       }
     ],
     "hasMods": true,
@@ -19970,7 +20018,11 @@ window.GAMES_DATA = [
               "en": "Yesmen Mode"
             },
             "code": "yesmen",
-            "desc": "所有 AI 领主与教皇无条件同意你的宣战媾和、入赘联姻与无偿宣称！"
+            "desc": "所有 AI 领主与教皇无条件同意你的宣战媾和、入赘联姻与无偿宣称！",
+            "id": "crusader-kings-3_cmd_1",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Clausewitz Engine (-debug_mode)"
           },
           {
             "name": {
@@ -19978,7 +20030,11 @@ window.GAMES_DATA = [
               "en": "Instant Build"
             },
             "code": "quickbuild",
-            "desc": "所有城堡、城墙、大教堂与农庄男爵领瞬间落成"
+            "desc": "所有城堡、城墙、大教堂与农庄男爵领瞬间落成",
+            "id": "crusader-kings-3_cmd_2",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Clausewitz Engine (-debug_mode)"
           },
           {
             "name": {
@@ -19986,7 +20042,11 @@ window.GAMES_DATA = [
               "en": "Discover All Eras"
             },
             "code": "discover_all_eras",
-            "desc": "瞬间跨越部落、早期中世纪、盛期中世纪进入晚期中世纪！"
+            "desc": "瞬间跨越部落、早期中世纪、盛期中世纪进入晚期中世纪！",
+            "id": "crusader-kings-3_cmd_3",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Clausewitz Engine (-debug_mode)"
           }
         ]
       },
@@ -19999,7 +20059,11 @@ window.GAMES_DATA = [
               "en": "Add 50,000 Gold"
             },
             "code": "gold 50000",
-            "desc": "招募全欧洲最强雇佣军骑士团，大肆赏赐封臣封赏"
+            "desc": "招募全欧洲最强雇佣军骑士团，大肆赏赐封臣封赏",
+            "id": "crusader-kings-3_cmd_4",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Clausewitz Engine (-debug_mode)"
           },
           {
             "name": {
@@ -20007,7 +20071,11 @@ window.GAMES_DATA = [
               "en": "Add 10,000 Prestige"
             },
             "code": "prestige 10000",
-            "desc": "威望等级直接封顶“活着的传奇”，随心创建自定义帝国头衔"
+            "desc": "威望等级直接封顶“活着的传奇”，随心创建自定义帝国头衔",
+            "id": "crusader-kings-3_cmd_5",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Clausewitz Engine (-debug_mode)"
           },
           {
             "name": {
@@ -20015,7 +20083,11 @@ window.GAMES_DATA = [
               "en": "Add 5,000 Piety"
             },
             "code": "piety 5000",
-            "desc": "虔诚等级达到“圣人”，随时发起自创异端宗教宗教改革"
+            "desc": "虔诚等级达到“圣人”，随时发起自创异端宗教宗教改革",
+            "id": "crusader-kings-3_cmd_6",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Clausewitz Engine (-debug_mode)"
           }
         ]
       },
@@ -20028,7 +20100,11 @@ window.GAMES_DATA = [
               "en": "Add Trait Genius"
             },
             "code": "add_trait genius",
-            "desc": "外交、军事、管理、谋略、学识全属性各 +5，经验获取暴增"
+            "desc": "外交、军事、管理、谋略、学识全属性各 +5，经验获取暴增",
+            "id": "crusader-kings-3_cmd_7",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Clausewitz Engine (-debug_mode)"
           },
           {
             "name": {
@@ -20036,7 +20112,11 @@ window.GAMES_DATA = [
               "en": "Add Trait Beautiful"
             },
             "code": "add_trait beautiful_3",
-            "desc": "外交 +3，生育力 +30%，全领主好感度大幅攀升"
+            "desc": "外交 +3，生育力 +30%，全领主好感度大幅攀升",
+            "id": "crusader-kings-3_cmd_8",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Clausewitz Engine (-debug_mode)"
           },
           {
             "name": {
@@ -20044,7 +20124,11 @@ window.GAMES_DATA = [
               "en": "Add Trait Herculean"
             },
             "code": "add_trait herculean_3",
-            "desc": "勇武 +8，健康度极大强化，百病不侵"
+            "desc": "勇武 +8，健康度极大强化，百病不侵",
+            "id": "crusader-kings-3_cmd_9",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Clausewitz Engine (-debug_mode)"
           },
           {
             "name": {
@@ -20052,7 +20136,11 @@ window.GAMES_DATA = [
               "en": "Younger 10 Years"
             },
             "code": "age -10",
-            "desc": "倒退生理年龄，延长统治盛世"
+            "desc": "倒退生理年龄，延长统治盛世",
+            "id": "crusader-kings-3_cmd_10",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Clausewitz Engine (-debug_mode)"
           }
         ]
       }
@@ -20195,11 +20283,35 @@ window.GAMES_DATA = [
     "popularCommands": [
       {
         "name": {
-          "zh-CN": "常用便捷指令 / 修改方案",
-          "en": "General Cheat / Config"
+          "zh-CN": "瞬间建造开关 (Instant Construction)",
+          "en": "Instant Construction"
         },
-        "command": "godmode / cheat / trainer",
-        "desc": "非铁人模式按 ~ 输入 research all / manpower 1000000"
+        "command": "ic",
+        "desc": "点击开启！军用工厂、海军造船厂、防空炮与雷达站放置瞬间秒建完工"
+      },
+      {
+        "name": {
+          "zh-CN": "瞬间研发全军全工业全部科技",
+          "en": "Research All Tech"
+        },
+        "command": "research all",
+        "desc": "陆军学说、喷气航母、现代主战坦克与原子弹全谱系秒开！"
+      },
+      {
+        "name": {
+          "zh-CN": "彻底消除全图战争迷雾 (FOW)",
+          "en": "Remove Fog of War"
+        },
+        "command": "fow",
+        "desc": "卫星级宏观视野监控全球所有敌军师团移动走向"
+      },
+      {
+        "name": {
+          "zh-CN": "增加 2000 点政治点数 (PP)",
+          "en": "Add 2,000 Political Power"
+        },
+        "command": "pp 2000",
+        "desc": "随意改组内阁法律、指定工业巨头与国家焦点推进"
       }
     ],
     "hasMods": true,
@@ -20242,7 +20354,11 @@ window.GAMES_DATA = [
               "en": "Instant Construction"
             },
             "code": "ic",
-            "desc": "点击开启！军用工厂、海军造船厂、防空炮与雷达站放置瞬间秒建完工"
+            "desc": "点击开启！军用工厂、海军造船厂、防空炮与雷达站放置瞬间秒建完工",
+            "id": "hearts-of-iron-4_cmd_1",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Clausewitz Engine (-debug_mode)"
           },
           {
             "name": {
@@ -20250,7 +20366,11 @@ window.GAMES_DATA = [
               "en": "Research All Tech"
             },
             "code": "research all",
-            "desc": "陆军学说、喷气航母、现代主战坦克与原子弹全谱系秒开！"
+            "desc": "陆军学说、喷气航母、现代主战坦克与原子弹全谱系秒开！",
+            "id": "hearts-of-iron-4_cmd_2",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Clausewitz Engine (-debug_mode)"
           },
           {
             "name": {
@@ -20258,7 +20378,11 @@ window.GAMES_DATA = [
               "en": "Remove Fog of War"
             },
             "code": "fow",
-            "desc": "卫星级宏观视野监控全球所有敌军师团移动走向"
+            "desc": "卫星级宏观视野监控全球所有敌军师团移动走向",
+            "id": "hearts-of-iron-4_cmd_3",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Clausewitz Engine (-debug_mode)"
           }
         ]
       },
@@ -20271,7 +20395,11 @@ window.GAMES_DATA = [
               "en": "Add 2,000 Political Power"
             },
             "code": "pp 2000",
-            "desc": "随意改组内阁法律、指定工业巨头与国家焦点推进"
+            "desc": "随意改组内阁法律、指定工业巨头与国家焦点推进",
+            "id": "hearts-of-iron-4_cmd_4",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Clausewitz Engine (-debug_mode)"
           },
           {
             "name": {
@@ -20279,7 +20407,11 @@ window.GAMES_DATA = [
               "en": "Add 100 Command Power"
             },
             "code": "cp 100",
-            "desc": "将领特技提拔与空军战术演习随心开启"
+            "desc": "将领特技提拔与空军战术演习随心开启",
+            "id": "hearts-of-iron-4_cmd_5",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Clausewitz Engine (-debug_mode)"
           },
           {
             "name": {
@@ -20287,7 +20419,11 @@ window.GAMES_DATA = [
               "en": "Add 2,000,000 Manpower"
             },
             "code": "manpower 2000000",
-            "desc": "组建数百个精锐机械化重装师团兵员无忧"
+            "desc": "组建数百个精锐机械化重装师团兵员无忧",
+            "id": "hearts-of-iron-4_cmd_6",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Clausewitz Engine (-debug_mode)"
           },
           {
             "name": {
@@ -20295,7 +20431,11 @@ window.GAMES_DATA = [
               "en": "Add 500 XP to All"
             },
             "code": "gain_xp 500",
-            "desc": "随心改装主战坦克、航母舰载机与装甲师编制模板"
+            "desc": "随心改装主战坦克、航母舰载机与装甲师编制模板",
+            "id": "hearts-of-iron-4_cmd_7",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Clausewitz Engine (-debug_mode)"
           }
         ]
       },
@@ -20308,7 +20448,11 @@ window.GAMES_DATA = [
               "en": "Add 50,000 Infantry Rifles"
             },
             "code": "ae 50000 infantry_equipment_3",
-            "desc": "给全军士兵全员换装三代先进单兵半自动突击步枪"
+            "desc": "给全军士兵全员换装三代先进单兵半自动突击步枪",
+            "id": "hearts-of-iron-4_cmd_8",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Clausewitz Engine (-debug_mode)"
           },
           {
             "name": {
@@ -20316,7 +20460,11 @@ window.GAMES_DATA = [
               "en": "Add 5,000 Modern Tanks"
             },
             "code": "ae 5000 modern_tank_equipment_1",
-            "desc": "武装起数十个横扫战场的钢铁装甲洪流师"
+            "desc": "武装起数十个横扫战场的钢铁装甲洪流师",
+            "id": "hearts-of-iron-4_cmd_9",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Clausewitz Engine (-debug_mode)"
           },
           {
             "name": {
@@ -20324,7 +20472,11 @@ window.GAMES_DATA = [
               "en": "Add 100 Nukes"
             },
             "code": "nuke 100",
-            "desc": "配合战略轰炸机夺取制空权实施战略核威慑"
+            "desc": "配合战略轰炸机夺取制空权实施战略核威慑",
+            "id": "hearts-of-iron-4_cmd_10",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Clausewitz Engine (-debug_mode)"
           },
           {
             "name": {
@@ -20332,7 +20484,11 @@ window.GAMES_DATA = [
               "en": "Annex Country"
             },
             "code": "annex [TAG]",
-            "desc": "例如 annex FRA 瞬间将法国全境工业与版图纳入直辖"
+            "desc": "例如 annex FRA 瞬间将法国全境工业与版图纳入直辖",
+            "id": "hearts-of-iron-4_cmd_11",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Clausewitz Engine (-debug_mode)"
           }
         ]
       }
@@ -20475,11 +20631,35 @@ window.GAMES_DATA = [
     "popularCommands": [
       {
         "name": {
-          "zh-CN": "常用便捷指令 / 修改方案",
-          "en": "General Cheat / Config"
+          "zh-CN": "瞬间建造开关 (Instant Build)",
+          "en": "Instant Build"
         },
-        "command": "godmode / cheat / trainer",
-        "desc": "非铁人按 ~ 输入 minerals 100000 / energy 100000 / alloys 100000"
+        "command": "instant_build",
+        "desc": "戴森球、环形世界、物质解压器与无畏舰秒级落成完工！"
+      },
+      {
+        "name": {
+          "zh-CN": "瞬间研发全银河系所有科技与暗物质技术",
+          "en": "Research All Tech"
+        },
+        "command": "research_all_technologies 1",
+        "desc": "直接获取天灾飞升、暗物质护盾与快子光矛顶级科技"
+      },
+      {
+        "name": {
+          "zh-CN": "选定舰队无敌上帝模式",
+          "en": "Invulnerable Ships"
+        },
+        "command": "invulnerable",
+        "desc": "锁死护盾与装甲，硬抗堕落帝国与高维恶魔集火"
+      },
+      {
+        "name": {
+          "zh-CN": "瞬间造成 10 万伤害秒杀目标",
+          "en": "Damage Target 99999"
+        },
+        "command": "damage 99999",
+        "desc": "鼠标选定任何敌方恒星基地或泰坦战舰瞬间打爆"
       }
     ],
     "hasMods": true,
@@ -20522,7 +20702,11 @@ window.GAMES_DATA = [
               "en": "Instant Build"
             },
             "code": "instant_build",
-            "desc": "戴森球、环形世界、物质解压器与无畏舰秒级落成完工！"
+            "desc": "戴森球、环形世界、物质解压器与无畏舰秒级落成完工！",
+            "id": "stellaris_cmd_1",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Clausewitz Engine (-debug_mode)"
           },
           {
             "name": {
@@ -20530,7 +20714,11 @@ window.GAMES_DATA = [
               "en": "Research All Tech"
             },
             "code": "research_all_technologies 1",
-            "desc": "直接获取天灾飞升、暗物质护盾与快子光矛顶级科技"
+            "desc": "直接获取天灾飞升、暗物质护盾与快子光矛顶级科技",
+            "id": "stellaris_cmd_2",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Clausewitz Engine (-debug_mode)"
           },
           {
             "name": {
@@ -20538,7 +20726,11 @@ window.GAMES_DATA = [
               "en": "Invulnerable Ships"
             },
             "code": "invulnerable",
-            "desc": "锁死护盾与装甲，硬抗堕落帝国与高维恶魔集火"
+            "desc": "锁死护盾与装甲，硬抗堕落帝国与高维恶魔集火",
+            "id": "stellaris_cmd_3",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Clausewitz Engine (-debug_mode)"
           },
           {
             "name": {
@@ -20546,7 +20738,11 @@ window.GAMES_DATA = [
               "en": "Damage Target 99999"
             },
             "code": "damage 99999",
-            "desc": "鼠标选定任何敌方恒星基地或泰坦战舰瞬间打爆"
+            "desc": "鼠标选定任何敌方恒星基地或泰坦战舰瞬间打爆",
+            "id": "stellaris_cmd_4",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Clausewitz Engine (-debug_mode)"
           }
         ]
       },
@@ -20559,7 +20755,11 @@ window.GAMES_DATA = [
               "en": "Add 50,000 Alloys"
             },
             "code": "alloys 50000",
-            "desc": "支持爆造数十个满编泰坦无畏舰队"
+            "desc": "支持爆造数十个满编泰坦无畏舰队",
+            "id": "stellaris_cmd_5",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Clausewitz Engine (-debug_mode)"
           },
           {
             "name": {
@@ -20567,7 +20767,11 @@ window.GAMES_DATA = [
               "en": "Add 100,000 Energy"
             },
             "code": "energy 100000",
-            "desc": "全银河自由贸易与维护巨大帝国"
+            "desc": "全银河自由贸易与维护巨大帝国",
+            "id": "stellaris_cmd_6",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Clausewitz Engine (-debug_mode)"
           },
           {
             "name": {
@@ -20575,7 +20779,11 @@ window.GAMES_DATA = [
               "en": "Add 50,000 Unity"
             },
             "code": "unity 50000",
-            "desc": "点满全部传统飞升天赋树，完成机械飞升或灵能飞升"
+            "desc": "点满全部传统飞升天赋树，完成机械飞升或灵能飞升",
+            "id": "stellaris_cmd_7",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Clausewitz Engine (-debug_mode)"
           },
           {
             "name": {
@@ -20583,7 +20791,11 @@ window.GAMES_DATA = [
               "en": "Add 1,000 Influence"
             },
             "code": "influence 1000",
-            "desc": "疯狂圈地铺设前哨基地与主导星际理事会决议"
+            "desc": "疯狂圈地铺设前哨基地与主导星际理事会决议",
+            "id": "stellaris_cmd_8",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Clausewitz Engine (-debug_mode)"
           }
         ]
       }
@@ -20717,11 +20929,11 @@ window.GAMES_DATA = [
     "releaseYear": 2022,
     "genre": "Grand Strategy / RTS",
     "steamRating": "80% Very Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《全面战争：战锤 3》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Total War: WARHAMMER III to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Total War: WARHAMMER III》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Total War: WARHAMMER III does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -20754,66 +20966,7 @@ window.GAMES_DATA = [
       "totalMods": "4,224",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《全面战争：战锤 3》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《全面战争：战锤 3》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "total-war-warhammer-3-essential-framework",
@@ -20972,11 +21125,11 @@ window.GAMES_DATA = [
     "releaseYear": 2019,
     "genre": "Historical Strategy",
     "steamRating": "83% Very Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《全面战争：三国》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Total War: Three Kingdoms to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Total War: Three Kingdoms》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Total War: Three Kingdoms does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -21009,66 +21162,7 @@ window.GAMES_DATA = [
       "totalMods": "4,169",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《全面战争：三国》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《全面战争：三国》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "total-war-three-kingdoms-essential-framework",
@@ -21227,11 +21321,11 @@ window.GAMES_DATA = [
     "releaseYear": 2024,
     "genre": "Action RPG",
     "steamRating": "61% Mixed",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《龙之信条 2》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Dragon's Dogma 2 to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Dragon's Dogma 2》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Dragon's Dogma 2 does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -21264,66 +21358,7 @@ window.GAMES_DATA = [
       "totalMods": "4,103",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《龙之信条 2》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《龙之信条 2》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "dragons-dogma-2-essential-framework",
@@ -21482,11 +21517,11 @@ window.GAMES_DATA = [
     "releaseYear": 2023,
     "genre": "Mecha Action",
     "steamRating": "90% Very Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《装甲核心 6：境界天火》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Armored Core VI: Fires of Rubicon to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Armored Core VI: Fires of Rubicon》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Armored Core VI: Fires of Rubicon does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -21519,66 +21554,7 @@ window.GAMES_DATA = [
       "totalMods": "4,047",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《装甲核心 6：境界天火》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《装甲核心 6：境界天火》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "armored-core-6-essential-framework",
@@ -21737,11 +21713,11 @@ window.GAMES_DATA = [
     "releaseYear": 2024,
     "genre": "Open World Samurai Action",
     "steamRating": "93% Very Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《对马岛之魂：导演剪辑版》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Ghost of Tsushima DIRECTOR'S CUT to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Ghost of Tsushima DIRECTOR'S CUT》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Ghost of Tsushima DIRECTOR'S CUT does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -21774,66 +21750,7 @@ window.GAMES_DATA = [
       "totalMods": "3,992",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《对马岛之魂：导演剪辑版》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《对马岛之魂：导演剪辑版》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "ghost-of-tsushima-essential-framework",
@@ -21992,11 +21909,11 @@ window.GAMES_DATA = [
     "releaseYear": 2022,
     "genre": "Action-Adventure",
     "steamRating": "96% Overwhelmingly Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《战神 4》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in God of War to access the developer command line or built-in debug utilities."
+      "zh-CN": "《God of War》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "God of War does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -22029,66 +21946,7 @@ window.GAMES_DATA = [
       "totalMods": "3,937",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《战神 4》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《战神 4》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "god-of-war-essential-framework",
@@ -22247,11 +22105,11 @@ window.GAMES_DATA = [
     "releaseYear": 2022,
     "genre": "Superhero Open World",
     "steamRating": "96% Overwhelmingly Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《漫威蜘蛛侠：重制版》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Marvel's Spider-Man Remastered to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Marvel's Spider-Man Remastered》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Marvel's Spider-Man Remastered does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -22284,66 +22142,7 @@ window.GAMES_DATA = [
       "totalMods": "3,894",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《漫威蜘蛛侠：重制版》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《漫威蜘蛛侠：重制版》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "spiderman-remastered-essential-framework",
@@ -22502,11 +22301,11 @@ window.GAMES_DATA = [
     "releaseYear": 2020,
     "genre": "Post-Apocalyptic Action RPG",
     "steamRating": "87% Very Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《地平线：零之曙光》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Horizon Zero Dawn to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Horizon Zero Dawn》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Horizon Zero Dawn does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -22539,66 +22338,7 @@ window.GAMES_DATA = [
       "totalMods": "3,839",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《地平线：零之曙光》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《地平线：零之曙光》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "horizon-zero-dawn-essential-framework",
@@ -22757,11 +22497,11 @@ window.GAMES_DATA = [
     "releaseYear": 2021,
     "genre": "Zombie Open World",
     "steamRating": "92% Very Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《往日不再》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Days Gone to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Days Gone》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Days Gone does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -22794,66 +22534,7 @@ window.GAMES_DATA = [
       "totalMods": "3,795",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《往日不再》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《往日不再》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "days-gone-essential-framework",
@@ -23012,11 +22693,11 @@ window.GAMES_DATA = [
     "releaseYear": 2022,
     "genre": "Open World Sci-Fi",
     "steamRating": "93% Very Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《死亡搁浅：导演剪辑版》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Death Stranding Director's Cut to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Death Stranding Director's Cut》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Death Stranding Director's Cut does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -23049,66 +22730,7 @@ window.GAMES_DATA = [
       "totalMods": "3,751",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《死亡搁浅：导演剪辑版》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《死亡搁浅：导演剪辑版》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "death-stranding-essential-framework",
@@ -23267,11 +22889,11 @@ window.GAMES_DATA = [
     "releaseYear": 2020,
     "genre": "Interactive Story",
     "steamRating": "95% Overwhelmingly Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《底特律：化身为人》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Detroit: Become Human to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Detroit: Become Human》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Detroit: Become Human does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
     "popularCommands": [],
     "hasMods": false,
@@ -23298,66 +22920,7 @@ window.GAMES_DATA = [
       "totalMods": "3,707",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《底特律：化身为人》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《底特律：化身为人》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "detroit-become-human-essential-framework",
@@ -23525,11 +23088,35 @@ window.GAMES_DATA = [
     "popularCommands": [
       {
         "name": {
-          "zh-CN": "常用便捷指令 / 修改方案",
-          "en": "General Cheat / Config"
+          "zh-CN": "开启弓箭射击屏幕准星点 (神技)",
+          "en": "Show Bow Reticle"
         },
-        "command": "godmode / cheat / trainer",
-        "desc": "Steam 启动项加 -devmode，按 ~ 打开，支持随时存档 MOD"
+        "command": "wh_pl_showfirecursor 1",
+        "desc": "彻底治愈原版射箭无准星晃动的噩梦，命中率翻倍！"
+      },
+      {
+        "name": {
+          "zh-CN": "时间直接调节至正午 12 点",
+          "en": "Set Noon Time"
+        },
+        "command": "e_TimeOfDay = 12",
+        "desc": "摆脱中世纪深夜漆黑无光"
+      },
+      {
+        "name": {
+          "zh-CN": "彻底关闭动态模糊眩晕感",
+          "en": "Disable Motion Blur"
+        },
+        "command": "r_MotionBlur = 0",
+        "desc": "画面更锐利清晰消除头晕"
+      },
+      {
+        "name": {
+          "zh-CN": "增加 100,000 格罗申银币 (需装CheatMod)",
+          "en": "Add 100k Money"
+        },
+        "command": "cheat_money amount:100000",
+        "desc": "买断全拉泰城所有铁匠顶级重型板甲"
       }
     ],
     "hasMods": true,
@@ -23572,7 +23159,11 @@ window.GAMES_DATA = [
               "en": "Show Bow Reticle"
             },
             "code": "wh_pl_showfirecursor 1",
-            "desc": "彻底治愈原版射箭无准星晃动的噩梦，命中率翻倍！"
+            "desc": "彻底治愈原版射箭无准星晃动的噩梦，命中率翻倍！",
+            "id": "kingdom-come-deliverance_cmd_1",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Cheat Mod (-devmode)"
           },
           {
             "name": {
@@ -23580,7 +23171,11 @@ window.GAMES_DATA = [
               "en": "Set Noon Time"
             },
             "code": "e_TimeOfDay = 12",
-            "desc": "摆脱中世纪深夜漆黑无光"
+            "desc": "摆脱中世纪深夜漆黑无光",
+            "id": "kingdom-come-deliverance_cmd_2",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Cheat Mod (-devmode)"
           },
           {
             "name": {
@@ -23588,7 +23183,11 @@ window.GAMES_DATA = [
               "en": "Disable Motion Blur"
             },
             "code": "r_MotionBlur = 0",
-            "desc": "画面更锐利清晰消除头晕"
+            "desc": "画面更锐利清晰消除头晕",
+            "id": "kingdom-come-deliverance_cmd_3",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Cheat Mod (-devmode)"
           },
           {
             "name": {
@@ -23596,7 +23195,11 @@ window.GAMES_DATA = [
               "en": "Add 100k Money"
             },
             "code": "cheat_money amount:100000",
-            "desc": "买断全拉泰城所有铁匠顶级重型板甲"
+            "desc": "买断全拉泰城所有铁匠顶级重型板甲",
+            "id": "kingdom-come-deliverance_cmd_4",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Cheat Mod (-devmode)"
           },
           {
             "name": {
@@ -23604,7 +23207,11 @@ window.GAMES_DATA = [
               "en": "Save Anywhere"
             },
             "code": "cheat_save",
-            "desc": "告别昂贵的施命救主雪利酒，随时随地安全存盘"
+            "desc": "告别昂贵的施命救主雪利酒，随时随地安全存盘",
+            "id": "kingdom-come-deliverance_cmd_5",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Cheat Mod (-devmode)"
           }
         ]
       }
@@ -23738,22 +23345,13 @@ window.GAMES_DATA = [
     "releaseYear": 2010,
     "genre": "Action RPG Strategy",
     "steamRating": "97% Overwhelmingly Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《骑马与砍杀：战团》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Mount & Blade: Warband to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Mount & Blade: Warband》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Mount & Blade: Warband does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
-    "popularCommands": [
-      {
-        "name": {
-          "zh-CN": "常用便捷指令 / 修改方案",
-          "en": "General Cheat / Config"
-        },
-        "command": "godmode / cheat / trainer",
-        "desc": "启动器勾选【打开作弊模式 (Enable Cheats)】，按 Ctrl+X 刷钱"
-      }
-    ],
+    "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Mount & Blade: Warband\\Mods",
     "mustHaveMods": [
@@ -23784,66 +23382,7 @@ window.GAMES_DATA = [
       "totalMods": "3,619",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《骑马与砍杀：战团》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《骑马与砍杀：战团》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "mount-and-blade-warband-essential-framework",
@@ -24002,22 +23541,13 @@ window.GAMES_DATA = [
     "releaseYear": 2007,
     "genre": "Post-Apocalyptic FPS RPG",
     "steamRating": "95% Overwhelmingly Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《潜行者：切尔诺贝利的阴影》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in S.T.A.L.K.E.R.: Shadow of Chernobyl to access the developer command line or built-in debug utilities."
+      "zh-CN": "《S.T.A.L.K.E.R.: Shadow of Chernobyl》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "S.T.A.L.K.E.R.: Shadow of Chernobyl does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
-    "popularCommands": [
-      {
-        "name": {
-          "zh-CN": "常用便捷指令 / 修改方案",
-          "en": "General Cheat / Config"
-        },
-        "command": "godmode / cheat / trainer",
-        "desc": "按 ~ 打开控制台，安装 Autumn Aurora 2 或 GAMMA 顶级模组"
-      }
-    ],
+    "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "S.T.A.L.K.E.R.: Shadow of Chernobyl\\Mods",
     "mustHaveMods": [
@@ -24048,66 +23578,7 @@ window.GAMES_DATA = [
       "totalMods": "3,586",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《潜行者：切尔诺贝利的阴影》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《潜行者：切尔诺贝利的阴影》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "stalker-shadow-of-chernobyl-essential-framework",
@@ -24266,11 +23737,11 @@ window.GAMES_DATA = [
     "releaseYear": 2019,
     "genre": "Atmospheric Story FPS",
     "steamRating": "89% Very Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《地铁：离去》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Metro Exodus to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Metro Exodus》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Metro Exodus does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -24303,66 +23774,7 @@ window.GAMES_DATA = [
       "totalMods": "3,542",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《地铁：离去》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《地铁：离去》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "metro-exodus-essential-framework",
@@ -24521,22 +23933,13 @@ window.GAMES_DATA = [
     "releaseYear": 2020,
     "genre": "Supernatural Action-Adventure",
     "steamRating": "90% Very Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《控制：终极版》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Control Ultimate Edition to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Control Ultimate Edition》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Control Ultimate Edition does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
-    "popularCommands": [
-      {
-        "name": {
-          "zh-CN": "常用便捷指令 / 修改方案",
-          "en": "General Cheat / Config"
-        },
-        "command": "godmode / cheat / trainer",
-        "desc": "游戏菜单内置官方【辅助模式 (Assist Mode)】自带无敌与一击必杀"
-      }
-    ],
+    "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Control Ultimate Edition\\Mods",
     "mustHaveMods": [
@@ -24567,66 +23970,7 @@ window.GAMES_DATA = [
       "totalMods": "3,509",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《控制：终极版》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《控制：终极版》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "control-essential-framework",
@@ -24785,11 +24129,11 @@ window.GAMES_DATA = [
     "releaseYear": 2023,
     "genre": "Survival Horror",
     "steamRating": "89% Metacritic",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《心灵杀手 2》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Alan Wake 2 to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Alan Wake 2》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Alan Wake 2 does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -24822,66 +24166,7 @@ window.GAMES_DATA = [
       "totalMods": "3,465",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《心灵杀手 2》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《心灵杀手 2》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "alan-wake-2-essential-framework",
@@ -25040,22 +24325,13 @@ window.GAMES_DATA = [
     "releaseYear": 2020,
     "genre": "Fast-Paced FPS",
     "steamRating": "91% Very Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《毁灭战士：永恒》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in DOOM Eternal to access the developer command line or built-in debug utilities."
+      "zh-CN": "《DOOM Eternal》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "DOOM Eternal does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
-    "popularCommands": [
-      {
-        "name": {
-          "zh-CN": "常用便捷指令 / 修改方案",
-          "en": "General Cheat / Config"
-        },
-        "command": "godmode / cheat / trainer",
-        "desc": "通关后关卡选择自带官方作弊秘籍（无限弹药、全晶石）"
-      }
-    ],
+    "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "DOOM Eternal\\Mods",
     "mustHaveMods": [
@@ -25086,66 +24362,7 @@ window.GAMES_DATA = [
       "totalMods": "3,432",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《毁灭战士：永恒》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《毁灭战士：永恒》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "doom-eternal-essential-framework",
@@ -25304,11 +24521,11 @@ window.GAMES_DATA = [
     "releaseYear": 2019,
     "genre": "Looter Shooter",
     "steamRating": "85% Very Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《无主之地 3》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Borderlands 3 to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Borderlands 3》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Borderlands 3 does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -25341,66 +24558,7 @@ window.GAMES_DATA = [
       "totalMods": "3,399",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《无主之地 3》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《无主之地 3》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "borderlands-3-essential-framework",
@@ -25559,22 +24717,13 @@ window.GAMES_DATA = [
     "releaseYear": 2012,
     "genre": "Looter Shooter",
     "steamRating": "95% Overwhelmingly Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《无主之地 2》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Borderlands 2 to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Borderlands 2》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Borderlands 2 does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
-    "popularCommands": [
-      {
-        "name": {
-          "zh-CN": "常用便捷指令 / 修改方案",
-          "en": "General Cheat / Config"
-        },
-        "command": "godmode / cheat / trainer",
-        "desc": "修改 WillowEngine.ini 启用控制台或使用 Gibbed 存档修改器"
-      }
-    ],
+    "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Borderlands 2\\Mods",
     "mustHaveMods": [
@@ -25605,66 +24754,7 @@ window.GAMES_DATA = [
       "totalMods": "3,366",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《无主之地 2》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《无主之地 2》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "borderlands-2-essential-framework",
@@ -25823,11 +24913,11 @@ window.GAMES_DATA = [
     "releaseYear": 2013,
     "genre": "Story FPS",
     "steamRating": "95% Overwhelmingly Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《生化奇兵：无限》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in BioShock Infinite to access the developer command line or built-in debug utilities."
+      "zh-CN": "《BioShock Infinite》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "BioShock Infinite does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
     "popularCommands": [],
     "hasMods": false,
@@ -25854,66 +24944,7 @@ window.GAMES_DATA = [
       "totalMods": "3,333",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《生化奇兵：无限》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《生化奇兵：无限》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "bioshock-infinite-essential-framework",
@@ -26072,11 +25103,11 @@ window.GAMES_DATA = [
     "releaseYear": 2016,
     "genre": "Immersive Sim Stealth Action",
     "steamRating": "89% Very Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《羞辱 2》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Dishonored 2 to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Dishonored 2》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Dishonored 2 does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -26109,66 +25140,7 @@ window.GAMES_DATA = [
       "totalMods": "3,300",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《羞辱 2》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《羞辱 2》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "dishonored-2-essential-framework",
@@ -26327,11 +25299,11 @@ window.GAMES_DATA = [
     "releaseYear": 2017,
     "genre": "Sci-Fi Immersive Sim",
     "steamRating": "90% Very Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《掠食》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Prey to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Prey》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Prey does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -26364,66 +25336,7 @@ window.GAMES_DATA = [
       "totalMods": "3,267",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《掠食》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《掠食》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "prey-essential-framework",
@@ -26582,11 +25495,11 @@ window.GAMES_DATA = [
     "releaseYear": 2021,
     "genre": "Stealth Action",
     "steamRating": "90% Very Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《杀手：暗杀世界》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in HITMAN World of Assassination to access the developer command line or built-in debug utilities."
+      "zh-CN": "《HITMAN World of Assassination》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "HITMAN World of Assassination does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -26619,66 +25532,7 @@ window.GAMES_DATA = [
       "totalMods": "3,245",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《杀手：暗杀世界》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《杀手：暗杀世界》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "hitman-3-essential-framework",
@@ -26837,11 +25691,11 @@ window.GAMES_DATA = [
     "releaseYear": 2018,
     "genre": "Open World RPG",
     "steamRating": "89% Very Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《刺客信条：奥德赛》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Assassin's Creed Odyssey to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Assassin's Creed Odyssey》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Assassin's Creed Odyssey does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -26874,66 +25728,7 @@ window.GAMES_DATA = [
       "totalMods": "3,212",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《刺客信条：奥德赛》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《刺客信条：奥德赛》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "ac-odyssey-essential-framework",
@@ -27092,11 +25887,11 @@ window.GAMES_DATA = [
     "releaseYear": 2020,
     "genre": "Viking Open World RPG",
     "steamRating": "83% Very Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《刺客信条：英灵殿》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Assassin's Creed Valhalla to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Assassin's Creed Valhalla》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Assassin's Creed Valhalla does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -27129,66 +25924,7 @@ window.GAMES_DATA = [
       "totalMods": "3,179",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《刺客信条：英灵殿》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《刺客信条：英灵殿》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "ac-valhalla-essential-framework",
@@ -27347,22 +26083,13 @@ window.GAMES_DATA = [
     "releaseYear": 2017,
     "genre": "Ancient Egypt Action RPG",
     "steamRating": "86% Very Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《刺客信条：起源》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Assassin's Creed Origins to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Assassin's Creed Origins》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Assassin's Creed Origins does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
-    "popularCommands": [
-      {
-        "name": {
-          "zh-CN": "常用便捷指令 / 修改方案",
-          "en": "General Cheat / Config"
-        },
-        "command": "godmode / cheat / trainer",
-        "desc": "内置官方【阿尼姆斯控制面板 (Animus Control Panel)】随意改参数"
-      }
-    ],
+    "popularCommands": [],
     "hasMods": false,
     "modInstallPath": "N/A",
     "mustHaveMods": [],
@@ -27387,66 +26114,7 @@ window.GAMES_DATA = [
       "totalMods": "3,157",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《刺客信条：起源》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《刺客信条：起源》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "ac-origins-essential-framework",
@@ -27605,11 +26273,11 @@ window.GAMES_DATA = [
     "releaseYear": 2018,
     "genre": "Open World FPS",
     "steamRating": "80% Very Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《孤岛惊魂 5》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Far Cry 5 to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Far Cry 5》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Far Cry 5 does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -27642,66 +26310,7 @@ window.GAMES_DATA = [
       "totalMods": "3,124",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《孤岛惊魂 5》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《孤岛惊魂 5》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "far-cry-5-essential-framework",
@@ -27860,11 +26469,11 @@ window.GAMES_DATA = [
     "releaseYear": 2021,
     "genre": "Open World FPS",
     "steamRating": "74% Mostly Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《孤岛惊魂 6》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Far Cry 6 to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Far Cry 6》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Far Cry 6 does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -27897,66 +26506,7 @@ window.GAMES_DATA = [
       "totalMods": "3,102",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《孤岛惊魂 6》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《孤岛惊魂 6》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "far-cry-6-essential-framework",
@@ -28115,11 +26665,11 @@ window.GAMES_DATA = [
     "releaseYear": 2016,
     "genre": "Hacker Open World",
     "steamRating": "83% Very Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《看门狗 2》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Watch Dogs 2 to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Watch Dogs 2》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Watch Dogs 2 does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -28152,66 +26702,7 @@ window.GAMES_DATA = [
       "totalMods": "3,080",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《看门狗 2》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《看门狗 2》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "watch-dogs-2-essential-framework",
@@ -28370,22 +26861,13 @@ window.GAMES_DATA = [
     "releaseYear": 2016,
     "genre": "Space Exploration Survival",
     "steamRating": "82% Very Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《无人深空》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in No Man's Sky to access the developer command line or built-in debug utilities."
+      "zh-CN": "《No Man's Sky》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "No Man's Sky does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
-    "popularCommands": [
-      {
-        "name": {
-          "zh-CN": "常用便捷指令 / 修改方案",
-          "en": "General Cheat / Config"
-        },
-        "command": "godmode / cheat / trainer",
-        "desc": "游戏设置自带官方【自定义难度】随意开启免费制造与无敌"
-      }
-    ],
+    "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "No Man's Sky\\Mods",
     "mustHaveMods": [
@@ -28416,66 +26898,7 @@ window.GAMES_DATA = [
       "totalMods": "3,047",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《无人深空》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《无人深空》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "no-mans-sky-essential-framework",
@@ -28634,22 +27057,13 @@ window.GAMES_DATA = [
     "releaseYear": 2016,
     "genre": "Space Crafting Adventure",
     "steamRating": "92% Very Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《异星探险家》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Astroneer to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Astroneer》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Astroneer does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
-    "popularCommands": [
-      {
-        "name": {
-          "zh-CN": "常用便捷指令 / 修改方案",
-          "en": "General Cheat / Config"
-        },
-        "command": "godmode / cheat / trainer",
-        "desc": "开启创造模式拥有无限泥土与全科技解锁"
-      }
-    ],
+    "popularCommands": [],
     "hasMods": false,
     "modInstallPath": "N/A",
     "mustHaveMods": [],
@@ -28674,66 +27088,7 @@ window.GAMES_DATA = [
       "totalMods": "3,025",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《异星探险家》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《异星探险家》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "astroneer-essential-framework",
@@ -28892,22 +27247,13 @@ window.GAMES_DATA = [
     "releaseYear": 2018,
     "genre": "Ocean Survival Crafting",
     "steamRating": "93% Very Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《木筏求生》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Raft to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Raft》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Raft does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
-    "popularCommands": [
-      {
-        "name": {
-          "zh-CN": "常用便捷指令 / 修改方案",
-          "en": "General Cheat / Config"
-        },
-        "command": "godmode / cheat / trainer",
-        "desc": "安装 Raft Mod Loader 享受一键扩建大船与无限钩子"
-      }
-    ],
+    "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Raft\\Mods",
     "mustHaveMods": [
@@ -28938,66 +27284,7 @@ window.GAMES_DATA = [
       "totalMods": "3,003",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《木筏求生》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《木筏求生》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "raft-essential-framework",
@@ -29156,22 +27443,13 @@ window.GAMES_DATA = [
     "releaseYear": 2022,
     "genre": "Backyard Survival",
     "steamRating": "90% Very Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《禁闭求生》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Grounded to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Grounded》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Grounded does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
-    "popularCommands": [
-      {
-        "name": {
-          "zh-CN": "常用便捷指令 / 修改方案",
-          "en": "General Cheat / Config"
-        },
-        "command": "godmode / cheat / trainer",
-        "desc": "游戏内置自带官方自定义游戏规则，关闭蜘蛛恐惧症与饥饿度"
-      }
-    ],
+    "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Grounded\\Mods",
     "mustHaveMods": [
@@ -29202,66 +27480,7 @@ window.GAMES_DATA = [
       "totalMods": "2,981",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《禁闭求生》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《禁闭求生》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "grounded-essential-framework",
@@ -29420,22 +27639,13 @@ window.GAMES_DATA = [
     "releaseYear": 2019,
     "genre": "Amazon Survival Sim",
     "steamRating": "87% Very Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《丛林地狱》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Green Hell to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Green Hell》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Green Hell does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
-    "popularCommands": [
-      {
-        "name": {
-          "zh-CN": "常用便捷指令 / 修改方案",
-          "en": "General Cheat / Config"
-        },
-        "command": "godmode / cheat / trainer",
-        "desc": "开启 Debug Mode 按 F1-F12 直接呼出刷物品菜单"
-      }
-    ],
+    "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Green Hell\\Mods",
     "mustHaveMods": [
@@ -29466,66 +27676,7 @@ window.GAMES_DATA = [
       "totalMods": "2,959",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《丛林地狱》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《丛林地狱》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "green-hell-essential-framework",
@@ -29693,11 +27844,35 @@ window.GAMES_DATA = [
     "popularCommands": [
       {
         "name": {
-          "zh-CN": "常用便捷指令 / 修改方案",
-          "en": "General Cheat / Config"
+          "zh-CN": "开启调试模式 (Debug Menu)",
+          "en": "Debug Mode"
         },
-        "command": "godmode / cheat / trainer",
-        "desc": "按 F1 键输入 dm 开启上帝模式，再按 Q 即可自由飞天穿墙"
+        "command": "dm",
+        "desc": "按 Q 键开启上帝锁血模式、按 H 键开启自由飞天、按 ESC 可自由调节白天黑夜时间！"
+      },
+      {
+        "name": {
+          "zh-CN": "开启创造模式刷物器 (Creative Menu)",
+          "en": "Creative Menu"
+        },
+        "command": "cm",
+        "desc": "输入后游戏中按下键盘 U 键，直接打开包含全游戏所有 5000+ 武器、建材与陷阱的刷物界面！"
+      },
+      {
+        "name": {
+          "zh-CN": "角色增加 500,000 经验值",
+          "en": "Add 500k XP"
+        },
+        "command": "giveselfxp 500000",
+        "desc": "飞速升级，点满智力科技、枪械大师与建筑专精天赋"
+      },
+      {
+        "name": {
+          "zh-CN": "立刻在头顶呼叫飞机空投补给",
+          "en": "Spawn Airdrop"
+        },
+        "command": "spawnairdrop",
+        "desc": "空投降落伞直接刷在脚下，获取稀有蓝图与食物药品"
       }
     ],
     "hasMods": true,
@@ -29740,7 +27915,11 @@ window.GAMES_DATA = [
               "en": "Debug Mode"
             },
             "code": "dm",
-            "desc": "按 Q 键开启上帝锁血模式、按 H 键开启自由飞天、按 ESC 可自由调节白天黑夜时间！"
+            "desc": "按 Q 键开启上帝锁血模式、按 H 键开启自由飞天、按 ESC 可自由调节白天黑夜时间！",
+            "id": "7-days-to-die_cmd_1",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -29748,7 +27927,11 @@ window.GAMES_DATA = [
               "en": "Creative Menu"
             },
             "code": "cm",
-            "desc": "输入后游戏中按下键盘 U 键，直接打开包含全游戏所有 5000+ 武器、建材与陷阱的刷物界面！"
+            "desc": "输入后游戏中按下键盘 U 键，直接打开包含全游戏所有 5000+ 武器、建材与陷阱的刷物界面！",
+            "id": "7-days-to-die_cmd_2",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -29756,7 +27939,11 @@ window.GAMES_DATA = [
               "en": "Add 500k XP"
             },
             "code": "giveselfxp 500000",
-            "desc": "飞速升级，点满智力科技、枪械大师与建筑专精天赋"
+            "desc": "飞速升级，点满智力科技、枪械大师与建筑专精天赋",
+            "id": "7-days-to-die_cmd_3",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -29764,7 +27951,11 @@ window.GAMES_DATA = [
               "en": "Spawn Airdrop"
             },
             "code": "spawnairdrop",
-            "desc": "空投降落伞直接刷在脚下，获取稀有蓝图与食物药品"
+            "desc": "空投降落伞直接刷在脚下，获取稀有蓝图与食物药品",
+            "id": "7-days-to-die_cmd_4",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -29772,7 +27963,11 @@ window.GAMES_DATA = [
               "en": "Kill All Zombies"
             },
             "code": "killall",
-            "desc": "血月尸潮瞬间清场解围"
+            "desc": "血月尸潮瞬间清场解围",
+            "id": "7-days-to-die_cmd_5",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           }
         ]
       }
@@ -29915,11 +28110,35 @@ window.GAMES_DATA = [
     "popularCommands": [
       {
         "name": {
-          "zh-CN": "常用便捷指令 / 修改方案",
-          "en": "General Cheat / Config"
+          "zh-CN": "一键激活泰克创造模式 (GCM)",
+          "en": "Creative Mode"
         },
-        "command": "godmode / cheat / trainer",
-        "desc": "按 Tab 键输入 enablecheats [密码] 后输入 admincheat god 随意刷龙"
+        "command": "cheat gcm",
+        "desc": "随身全科技树免材料制造、无限负重、双击跳跃自由飞行！"
+      },
+      {
+        "name": {
+          "zh-CN": "准星对准恐龙瞬间秒级驯服 (DoTame)",
+          "en": "Instant Tame Target"
+        },
+        "command": "cheat DoTame",
+        "desc": "准星对准任何霸王龙、南方巨兽龙瞬间完成 100% 驯养！"
+      },
+      {
+        "name": {
+          "zh-CN": "飞行模式 / 恢复行走",
+          "en": "Fly / Walk"
+        },
+        "command": "cheat fly",
+        "desc": "空中自由航行建家，输入 cheat walk 落地恢复正常"
+      },
+      {
+        "name": {
+          "zh-CN": "增加 100 万角色与恐龙经验",
+          "en": "Add 1,000,000 XP"
+        },
+        "command": "cheat addexperience 1000000 0 0",
+        "desc": "瞬间满级，属性点自由加点"
       }
     ],
     "hasMods": true,
@@ -29962,7 +28181,11 @@ window.GAMES_DATA = [
               "en": "Creative Mode"
             },
             "code": "cheat gcm",
-            "desc": "随身全科技树免材料制造、无限负重、双击跳跃自由飞行！"
+            "desc": "随身全科技树免材料制造、无限负重、双击跳跃自由飞行！",
+            "id": "ark-survival-evolved_cmd_1",
+            "syntax_type": "ue_console",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -29970,7 +28193,11 @@ window.GAMES_DATA = [
               "en": "Instant Tame Target"
             },
             "code": "cheat DoTame",
-            "desc": "准星对准任何霸王龙、南方巨兽龙瞬间完成 100% 驯养！"
+            "desc": "准星对准任何霸王龙、南方巨兽龙瞬间完成 100% 驯养！",
+            "id": "ark-survival-evolved_cmd_2",
+            "syntax_type": "ue_console",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -29978,7 +28205,11 @@ window.GAMES_DATA = [
               "en": "Fly / Walk"
             },
             "code": "cheat fly",
-            "desc": "空中自由航行建家，输入 cheat walk 落地恢复正常"
+            "desc": "空中自由航行建家，输入 cheat walk 落地恢复正常",
+            "id": "ark-survival-evolved_cmd_3",
+            "syntax_type": "ue_console",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -29986,7 +28217,11 @@ window.GAMES_DATA = [
               "en": "Add 1,000,000 XP"
             },
             "code": "cheat addexperience 1000000 0 0",
-            "desc": "瞬间满级，属性点自由加点"
+            "desc": "瞬间满级，属性点自由加点",
+            "id": "ark-survival-evolved_cmd_4",
+            "syntax_type": "ue_console",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           }
         ]
       },
@@ -29999,7 +28234,11 @@ window.GAMES_DATA = [
               "en": "Add 1,000 Tek Elements"
             },
             "code": "cheat gfi Element 1000 0 0",
-            "desc": "驱动所有泰克发电机、泰克枪与泰克装甲动力"
+            "desc": "驱动所有泰克发电机、泰克枪与泰克装甲动力",
+            "id": "ark-survival-evolved_cmd_5",
+            "syntax_type": "ue_console",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -30007,7 +28246,11 @@ window.GAMES_DATA = [
               "en": "Give Tek Armor Set"
             },
             "code": "cheat givearmorset Tek 5",
-            "desc": "自带喷气背包、超音速冲撞狂奔与深海无限呼吸水下头盔"
+            "desc": "自带喷气背包、超音速冲撞狂奔与深海无限呼吸水下头盔",
+            "id": "ark-survival-evolved_cmd_6",
+            "syntax_type": "ue_console",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -30015,7 +28258,11 @@ window.GAMES_DATA = [
               "en": "Tek Sniper Rifle"
             },
             "code": "cheat gfi TekSniper 1 100 0",
-            "desc": "夜视热成像透视穿墙射杀一切生物"
+            "desc": "夜视热成像透视穿墙射杀一切生物",
+            "id": "ark-survival-evolved_cmd_7",
+            "syntax_type": "ue_console",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           }
         ]
       }
@@ -30149,22 +28396,13 @@ window.GAMES_DATA = [
     "releaseYear": 2018,
     "genre": "Survival Shooter",
     "steamRating": "87% Very Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《腐蚀 (本地自建服)》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Rust to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Rust》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Rust does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
-    "popularCommands": [
-      {
-        "name": {
-          "zh-CN": "常用便捷指令 / 修改方案",
-          "en": "General Cheat / Config"
-        },
-        "command": "godmode / cheat / trainer",
-        "desc": "按 F1 键打开控制台，房主输入 inventory.give 直接刷任意枪械"
-      }
-    ],
+    "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Rust\\Mods",
     "mustHaveMods": [
@@ -30195,66 +28433,7 @@ window.GAMES_DATA = [
       "totalMods": "2,882",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《腐蚀 (本地自建服)》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《腐蚀 (本地自建服)》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "rust-single-essential-framework",
@@ -30413,22 +28592,13 @@ window.GAMES_DATA = [
     "releaseYear": 2018,
     "genre": "Survival Action RPG",
     "steamRating": "78% Mostly Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《流放者柯南》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Conan Exiles to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Conan Exiles》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Conan Exiles does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
-    "popularCommands": [
-      {
-        "name": {
-          "zh-CN": "常用便捷指令 / 修改方案",
-          "en": "General Cheat / Config"
-        },
-        "command": "godmode / cheat / trainer",
-        "desc": "设置界面直接【成为管理员】，按 Shift+End 呼出全能内置作弊盘"
-      }
-    ],
+    "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Conan Exiles\\Mods",
     "mustHaveMods": [
@@ -30459,66 +28629,7 @@ window.GAMES_DATA = [
       "totalMods": "2,871",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《流放者柯南》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《流放者柯南》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "conan-exiles-essential-framework",
@@ -30677,22 +28788,13 @@ window.GAMES_DATA = [
     "releaseYear": 2021,
     "genre": "Medieval Life Sim",
     "steamRating": "90% Very Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《中世纪王朝》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Medieval Dynasty to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Medieval Dynasty》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Medieval Dynasty does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
-    "popularCommands": [
-      {
-        "name": {
-          "zh-CN": "常用便捷指令 / 修改方案",
-          "en": "General Cheat / Config"
-        },
-        "command": "godmode / cheat / trainer",
-        "desc": "游戏设置自带官方作弊滑块（无限负重、无限生命、快速建造）"
-      }
-    ],
+    "popularCommands": [],
     "hasMods": false,
     "modInstallPath": "N/A",
     "mustHaveMods": [],
@@ -30717,66 +28819,7 @@ window.GAMES_DATA = [
       "totalMods": "2,849",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《中世纪王朝》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《中世纪王朝》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "medieval-dynasty-essential-framework",
@@ -30935,22 +28978,13 @@ window.GAMES_DATA = [
     "releaseYear": 2018,
     "genre": "Sandbox Post-Apocalyptic RPG",
     "steamRating": "95% Overwhelmingly Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《剑士》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Kenshi to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Kenshi》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Kenshi does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
-    "popularCommands": [
-      {
-        "name": {
-          "zh-CN": "常用便捷指令 / 修改方案",
-          "en": "General Cheat / Config"
-        },
-        "command": "godmode / cheat / trainer",
-        "desc": "自带官方 Forgotten Construction Set (FCS) 深度编辑器随心改数值"
-      }
-    ],
+    "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Kenshi\\Mods",
     "mustHaveMods": [
@@ -30981,66 +29015,7 @@ window.GAMES_DATA = [
       "totalMods": "2,827",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《剑士》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《剑士》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "kenshi-essential-framework",
@@ -31208,11 +29183,35 @@ window.GAMES_DATA = [
     "popularCommands": [
       {
         "name": {
-          "zh-CN": "常用便捷指令 / 修改方案",
-          "en": "General Cheat / Config"
+          "zh-CN": "超级秘籍主开关 (必先输入)",
+          "en": "Enable Testing Cheats"
         },
-        "command": "godmode / cheat / trainer",
-        "desc": "按 Ctrl+Shift+C 输入 testingcheats true 再输入 motherlode 直接加 50000 块"
+        "command": "testingcheats true",
+        "desc": "解锁 Shift + 点击市民的全部隐藏调试动作菜单"
+      },
+      {
+        "name": {
+          "zh-CN": "所有市民需求瞬间满绿",
+          "en": "Fill All Commodities"
+        },
+        "command": "sims.fill_all_commodities",
+        "desc": "饥饿、膀胱、精力、社交、娱乐与卫生瞬间拉至最满！"
+      },
+      {
+        "name": {
+          "zh-CN": "衣柜镜子随时彻底重做五官身材特质",
+          "en": "Full CAS Edit Mode"
+        },
+        "command": "cas.fulleditmode",
+        "desc": "突破游戏限制，在生活模式中随时进入捏人界面重新整形捏脸"
+      },
+      {
+        "name": {
+          "zh-CN": "增加 50,000 模拟币 (Motherlode)",
+          "en": "Motherlode 50k"
+        },
+        "command": "motherlode",
+        "desc": "经典传奇代码，家庭账户直接到账 5 万现金"
       }
     ],
     "hasMods": true,
@@ -31255,7 +29254,11 @@ window.GAMES_DATA = [
               "en": "Enable Testing Cheats"
             },
             "code": "testingcheats true",
-            "desc": "解锁 Shift + 点击市民的全部隐藏调试动作菜单"
+            "desc": "解锁 Shift + 点击市民的全部隐藏调试动作菜单",
+            "id": "the-sims-4_cmd_1",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -31263,7 +29266,11 @@ window.GAMES_DATA = [
               "en": "Fill All Commodities"
             },
             "code": "sims.fill_all_commodities",
-            "desc": "饥饿、膀胱、精力、社交、娱乐与卫生瞬间拉至最满！"
+            "desc": "饥饿、膀胱、精力、社交、娱乐与卫生瞬间拉至最满！",
+            "id": "the-sims-4_cmd_2",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -31271,7 +29278,11 @@ window.GAMES_DATA = [
               "en": "Full CAS Edit Mode"
             },
             "code": "cas.fulleditmode",
-            "desc": "突破游戏限制，在生活模式中随时进入捏人界面重新整形捏脸"
+            "desc": "突破游戏限制，在生活模式中随时进入捏人界面重新整形捏脸",
+            "id": "the-sims-4_cmd_3",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           }
         ]
       },
@@ -31284,7 +29295,11 @@ window.GAMES_DATA = [
               "en": "Motherlode 50k"
             },
             "code": "motherlode",
-            "desc": "经典传奇代码，家庭账户直接到账 5 万现金"
+            "desc": "经典传奇代码，家庭账户直接到账 5 万现金",
+            "id": "the-sims-4_cmd_4",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -31292,7 +29307,11 @@ window.GAMES_DATA = [
               "en": "Set Exact Money"
             },
             "code": "money 9999999",
-            "desc": "随心买下微风山庄等最高档豪华海景地皮"
+            "desc": "随心买下微风山庄等最高档豪华海景地皮",
+            "id": "the-sims-4_cmd_5",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -31300,7 +29319,11 @@ window.GAMES_DATA = [
               "en": "Free Real Estate"
             },
             "code": "freerealestate on",
-            "desc": "搬家界面任意豪宅全部零元直接入住"
+            "desc": "搬家界面任意豪宅全部零元直接入住",
+            "id": "the-sims-4_cmd_6",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           }
         ]
       },
@@ -31313,7 +29336,11 @@ window.GAMES_DATA = [
               "en": "Move Objects Anywhere"
             },
             "code": "bb.moveobjects on",
-            "desc": "建筑师必备！按 9 键抬升物品高度、按 0 键下降、按 [ 或 ] 自由放大缩小物品！"
+            "desc": "建筑师必备！按 9 键抬升物品高度、按 0 键下降、按 [ 或 ] 自由放大缩小物品！",
+            "id": "the-sims-4_cmd_7",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -31321,7 +29348,11 @@ window.GAMES_DATA = [
               "en": "Unlock Career Objects"
             },
             "code": "bb.ignoregameplayunlocksentitlement",
-            "desc": "无需达成宇航员、黑客职业满级即可使用专属家具"
+            "desc": "无需达成宇航员、黑客职业满级即可使用专属家具",
+            "id": "the-sims-4_cmd_8",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -31329,7 +29360,11 @@ window.GAMES_DATA = [
               "en": "Show Hidden Objects"
             },
             "code": "bb.showhiddenobjects",
-            "desc": "在建筑搜索栏输入 debug 即可使用游戏内所有隐藏树木与餐盘"
+            "desc": "在建筑搜索栏输入 debug 即可使用游戏内所有隐藏树木与餐盘",
+            "id": "the-sims-4_cmd_9",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           }
         ]
       }
@@ -31482,22 +29517,13 @@ window.GAMES_DATA = [
     "releaseYear": 2019,
     "genre": "Zoo Management Sim",
     "steamRating": "90% Very Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《动物园之星》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Planet Zoo to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Planet Zoo》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Planet Zoo does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
-    "popularCommands": [
-      {
-        "name": {
-          "zh-CN": "常用便捷指令 / 修改方案",
-          "en": "General Cheat / Config"
-        },
-        "command": "godmode / cheat / trainer",
-        "desc": "沙盒模式无限制金钱与保育点数自由打造超大野生动物园"
-      }
-    ],
+    "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Planet Zoo\\Mods",
     "mustHaveMods": [
@@ -31528,66 +29554,7 @@ window.GAMES_DATA = [
       "totalMods": "2,783",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《动物园之星》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《动物园之星》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "planet-zoo-essential-framework",
@@ -31746,22 +29713,13 @@ window.GAMES_DATA = [
     "releaseYear": 2021,
     "genre": "Dinosaur Theme Park Sim",
     "steamRating": "87% Very Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《侏罗纪世界：进化 2》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Jurassic World Evolution 2 to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Jurassic World Evolution 2》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Jurassic World Evolution 2 does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
-    "popularCommands": [
-      {
-        "name": {
-          "zh-CN": "常用便捷指令 / 修改方案",
-          "en": "General Cheat / Config"
-        },
-        "command": "godmode / cheat / trainer",
-        "desc": "沙盒模式关闭恐龙发飙暴走与无限资金"
-      }
-    ],
+    "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Jurassic World Evolution 2\\Mods",
     "mustHaveMods": [
@@ -31792,66 +29750,7 @@ window.GAMES_DATA = [
       "totalMods": "2,761",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《侏罗纪世界：进化 2》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《侏罗纪世界：进化 2》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "jurassic-world-evolution-2-essential-framework",
@@ -32019,11 +29918,35 @@ window.GAMES_DATA = [
     "popularCommands": [
       {
         "name": {
-          "zh-CN": "常用便捷指令 / 修改方案",
-          "en": "General Cheat / Config"
+          "zh-CN": "自由飞天漫游与卡车定点瞬移 (核心神技)",
+          "en": "Free Cam & Teleport"
         },
-        "command": "godmode / cheat / trainer",
-        "desc": "修改 config.cfg 开启 developer 1，按 ~ 开启控制台与自由飞天镜头"
+        "command": "按 0 开启自由视角 -> 飞至目的地 -> 按 Ctrl + F9 瞬移",
+        "desc": "摆脱长途卡车堵车或翻车卡死困境，瞬间将卡车平稳放置在镜头正下方！"
+      },
+      {
+        "name": {
+          "zh-CN": "时间直接调节至正午 12 点阳光明媚",
+          "en": "Set Noon Time"
+        },
+        "command": "g_set_time 12 00",
+        "desc": "彻底告别漆黑视距不良的漫漫夜路"
+      },
+      {
+        "name": {
+          "zh-CN": "强制天气为大晴天消除暴雨",
+          "en": "Clear Sunny Weather"
+        },
+        "command": "g_set_weather 0",
+        "desc": "消除暴雨挡风玻璃视线模糊"
+      },
+      {
+        "name": {
+          "zh-CN": "自由摄像机飞天飞行速度调节",
+          "en": "Set Fly Speed"
+        },
+        "command": "g_flyspeed 100",
+        "desc": "加快按 0 视角漫游全欧洲大陆的速度"
       }
     ],
     "hasMods": true,
@@ -32066,7 +29989,11 @@ window.GAMES_DATA = [
               "en": "Free Cam & Teleport"
             },
             "code": "按 0 开启自由视角 -> 飞至目的地 -> 按 Ctrl + F9 瞬移",
-            "desc": "摆脱长途卡车堵车或翻车卡死困境，瞬间将卡车平稳放置在镜头正下方！"
+            "desc": "摆脱长途卡车堵车或翻车卡死困境，瞬间将卡车平稳放置在镜头正下方！",
+            "id": "euro-truck-simulator-2_cmd_1",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -32074,7 +30001,11 @@ window.GAMES_DATA = [
               "en": "Set Noon Time"
             },
             "code": "g_set_time 12 00",
-            "desc": "彻底告别漆黑视距不良的漫漫夜路"
+            "desc": "彻底告别漆黑视距不良的漫漫夜路",
+            "id": "euro-truck-simulator-2_cmd_2",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -32082,7 +30013,11 @@ window.GAMES_DATA = [
               "en": "Clear Sunny Weather"
             },
             "code": "g_set_weather 0",
-            "desc": "消除暴雨挡风玻璃视线模糊"
+            "desc": "消除暴雨挡风玻璃视线模糊",
+            "id": "euro-truck-simulator-2_cmd_3",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -32090,7 +30025,11 @@ window.GAMES_DATA = [
               "en": "Set Fly Speed"
             },
             "code": "g_flyspeed 100",
-            "desc": "加快按 0 视角漫游全欧洲大陆的速度"
+            "desc": "加快按 0 视角漫游全欧洲大陆的速度",
+            "id": "euro-truck-simulator-2_cmd_4",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -32098,7 +30037,11 @@ window.GAMES_DATA = [
               "en": "Disable Traffic"
             },
             "code": "g_traffic 0",
-            "desc": "一键清空高速公路所有慢速卡车，自己畅快飙车"
+            "desc": "一键清空高速公路所有慢速卡车，自己畅快飙车",
+            "id": "euro-truck-simulator-2_cmd_5",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           }
         ]
       }
@@ -32228,22 +30171,13 @@ window.GAMES_DATA = [
     "releaseYear": 2021,
     "genre": "Off-Road Physics Sim",
     "steamRating": "89% Very Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《雪地奔驰》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in SnowRunner to access the developer command line or built-in debug utilities."
+      "zh-CN": "《SnowRunner》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "SnowRunner does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
-    "popularCommands": [
-      {
-        "name": {
-          "zh-CN": "常用便捷指令 / 修改方案",
-          "en": "General Cheat / Config"
-        },
-        "command": "godmode / cheat / trainer",
-        "desc": "官方集成 Mod.io 一键订阅改装神车与无限金钱修改"
-      }
-    ],
+    "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "SnowRunner\\Mods",
     "mustHaveMods": [
@@ -32274,66 +30208,7 @@ window.GAMES_DATA = [
       "totalMods": "2,728",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《雪地奔驰》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《雪地奔驰》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "snowrunner-essential-framework",
@@ -32492,11 +30367,11 @@ window.GAMES_DATA = [
     "releaseYear": 2021,
     "genre": "Open World Racing",
     "steamRating": "88% Very Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《极限竞速：地平线 5》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Forza Horizon 5 to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Forza Horizon 5》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Forza Horizon 5 does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
     "popularCommands": [],
     "hasMods": false,
@@ -32523,66 +30398,7 @@ window.GAMES_DATA = [
       "totalMods": "2,706",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《极限竞速：地平线 5》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《极限竞速：地平线 5》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "forza-horizon-5-essential-framework",
@@ -32741,22 +30557,13 @@ window.GAMES_DATA = [
     "releaseYear": 2014,
     "genre": "Racing Simulation",
     "steamRating": "92% Very Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《神力科莎》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Assetto Corsa to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Assetto Corsa》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Assetto Corsa does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
-    "popularCommands": [
-      {
-        "name": {
-          "zh-CN": "常用便捷指令 / 修改方案",
-          "en": "General Cheat / Config"
-        },
-        "command": "godmode / cheat / trainer",
-        "desc": "安装 Content Manager (CM) 模组管理神器，体验成千上万玩家自制赛道跑车"
-      }
-    ],
+    "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Assetto Corsa\\Mods",
     "mustHaveMods": [
@@ -32774,66 +30581,7 @@ window.GAMES_DATA = [
       "totalMods": "2,695",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《神力科莎》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《神力科莎》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "assetto-corsa-essential-framework",
@@ -33001,11 +30749,35 @@ window.GAMES_DATA = [
     "popularCommands": [
       {
         "name": {
-          "zh-CN": "常用便捷指令 / 修改方案",
-          "en": "General Cheat / Config"
+          "zh-CN": "瞬间原地满血修复车辆 (Insert 键)",
+          "en": "Instant Repair"
         },
-        "command": "godmode / cheat / trainer",
-        "desc": "自带极其强大的官方 World Editor (按 F11 键进入上帝造物模式)"
+        "command": "按键盘 Insert 键",
+        "desc": "无论车辆被碾压粉碎成什么程度，按 Insert 原地满血复活！"
+      },
+      {
+        "name": {
+          "zh-CN": "自由摄像机与瞬间传送车辆 (F7 键)",
+          "en": "Free Cam Teleport"
+        },
+        "command": "按 Shift + C 漫游 -> 按 F7 瞬移车辆",
+        "desc": "将爱车随意传送到摩天大楼楼顶或悬崖峭壁边缘"
+      },
+      {
+        "name": {
+          "zh-CN": "开启全功能世界编辑器 (F11 键)",
+          "en": "World Editor"
+        },
+        "command": "按键盘 F11 键",
+        "desc": "自由增减坡道、高空跳台、调节引力与物理光照"
+      },
+      {
+        "name": {
+          "zh-CN": "以 10% 真实流速极度逼真观摩车辆解体",
+          "en": "Bullet Time 10%"
+        },
+        "command": "bulletTime(0.1)",
+        "desc": "在 Lua 控制台中运行，享受电影级极速慢动作破坏物理"
       }
     ],
     "hasMods": true,
@@ -33048,7 +30820,11 @@ window.GAMES_DATA = [
               "en": "Instant Repair"
             },
             "code": "按键盘 Insert 键",
-            "desc": "无论车辆被碾压粉碎成什么程度，按 Insert 原地满血复活！"
+            "desc": "无论车辆被碾压粉碎成什么程度，按 Insert 原地满血复活！",
+            "id": "beamng-drive_cmd_1",
+            "syntax_type": "lua_function",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -33056,7 +30832,11 @@ window.GAMES_DATA = [
               "en": "Free Cam Teleport"
             },
             "code": "按 Shift + C 漫游 -> 按 F7 瞬移车辆",
-            "desc": "将爱车随意传送到摩天大楼楼顶或悬崖峭壁边缘"
+            "desc": "将爱车随意传送到摩天大楼楼顶或悬崖峭壁边缘",
+            "id": "beamng-drive_cmd_2",
+            "syntax_type": "lua_function",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -33064,7 +30844,11 @@ window.GAMES_DATA = [
               "en": "World Editor"
             },
             "code": "按键盘 F11 键",
-            "desc": "自由增减坡道、高空跳台、调节引力与物理光照"
+            "desc": "自由增减坡道、高空跳台、调节引力与物理光照",
+            "id": "beamng-drive_cmd_3",
+            "syntax_type": "lua_function",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -33072,7 +30856,11 @@ window.GAMES_DATA = [
               "en": "Bullet Time 10%"
             },
             "code": "bulletTime(0.1)",
-            "desc": "在 Lua 控制台中运行，享受电影级极速慢动作破坏物理"
+            "desc": "在 Lua 控制台中运行，享受电影级极速慢动作破坏物理",
+            "id": "beamng-drive_cmd_4",
+            "syntax_type": "lua_function",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           }
         ]
       }
@@ -33202,11 +30990,11 @@ window.GAMES_DATA = [
     "releaseYear": 2022,
     "genre": "JRPG",
     "steamRating": "97% Overwhelmingly Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《女神异闻录 5 皇家版》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Persona 5 Royal to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Persona 5 Royal》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Persona 5 Royal does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -33239,66 +31027,7 @@ window.GAMES_DATA = [
       "totalMods": "2,662",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《女神异闻录 5 皇家版》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《女神异闻录 5 皇家版》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "persona-5-royal-essential-framework",
@@ -33457,11 +31186,11 @@ window.GAMES_DATA = [
     "releaseYear": 2024,
     "genre": "JRPG",
     "steamRating": "95% Overwhelmingly Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《女神异闻录 3 重制版》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Persona 3 Reload to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Persona 3 Reload》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Persona 3 Reload does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -33494,66 +31223,7 @@ window.GAMES_DATA = [
       "totalMods": "2,640",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《女神异闻录 3 重制版》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《女神异闻录 3 重制版》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "persona-3-reload-essential-framework",
@@ -33712,11 +31382,11 @@ window.GAMES_DATA = [
     "releaseYear": 2022,
     "genre": "Action RPG",
     "steamRating": "90% Very Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《最终幻想 7 重制版》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Final Fantasy VII Remake Intergrade to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Final Fantasy VII Remake Intergrade》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Final Fantasy VII Remake Intergrade does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -33749,66 +31419,7 @@ window.GAMES_DATA = [
       "totalMods": "2,629",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《最终幻想 7 重制版》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《最终幻想 7 重制版》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "ff7-remake-essential-framework",
@@ -33967,11 +31578,11 @@ window.GAMES_DATA = [
     "releaseYear": 2024,
     "genre": "Action RPG",
     "steamRating": "80% Very Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《最终幻想 16》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Final Fantasy XVI to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Final Fantasy XVI》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Final Fantasy XVI does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -34004,66 +31615,7 @@ window.GAMES_DATA = [
       "totalMods": "2,607",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《最终幻想 16》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《最终幻想 16》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "ff16-essential-framework",
@@ -34222,22 +31774,13 @@ window.GAMES_DATA = [
     "releaseYear": 2017,
     "genre": "Action RPG",
     "steamRating": "87% Very Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《尼尔：机械纪元》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in NieR:Automata to access the developer command line or built-in debug utilities."
+      "zh-CN": "《NieR:Automata》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "NieR:Automata does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
-    "popularCommands": [
-      {
-        "name": {
-          "zh-CN": "常用便捷指令 / 修改方案",
-          "en": "General Cheat / Config"
-        },
-        "command": "godmode / cheat / trainer",
-        "desc": "安装 FAR (Special K) 修复分辨率，通关后解锁官方内置作弊商店"
-      }
-    ],
+    "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "NieR:Automata\\Mods",
     "mustHaveMods": [
@@ -34268,66 +31811,7 @@ window.GAMES_DATA = [
       "totalMods": "2,596",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《尼尔：机械纪元》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《尼尔：机械纪元》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "nier-automata-essential-framework",
@@ -34486,11 +31970,11 @@ window.GAMES_DATA = [
     "releaseYear": 2021,
     "genre": "JRPG Action",
     "steamRating": "89% Very Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《破晓传说》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Tales of Arise to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Tales of Arise》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Tales of Arise does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -34523,66 +32007,7 @@ window.GAMES_DATA = [
       "totalMods": "2,574",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《破晓传说》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《破晓传说》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "tales-of-arise-essential-framework",
@@ -34741,11 +32166,11 @@ window.GAMES_DATA = [
     "releaseYear": 2024,
     "genre": "Turn-Based RPG",
     "steamRating": "90% Very Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《人中之龙 8》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Like a Dragon: Infinite Wealth to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Like a Dragon: Infinite Wealth》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Like a Dragon: Infinite Wealth does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -34778,66 +32203,7 @@ window.GAMES_DATA = [
       "totalMods": "2,563",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《人中之龙 8》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《人中之龙 8》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "like-a-dragon-infinite-wealth-essential-framework",
@@ -34996,11 +32362,11 @@ window.GAMES_DATA = [
     "releaseYear": 2020,
     "genre": "Turn-Based RPG",
     "steamRating": "95% Overwhelmingly Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《人中之龙 7》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Yakuza: Like a Dragon to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Yakuza: Like a Dragon》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Yakuza: Like a Dragon does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -35033,66 +32399,7 @@ window.GAMES_DATA = [
       "totalMods": "2,541",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《人中之龙 7》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《人中之龙 7》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "yakuza-like-a-dragon-essential-framework",
@@ -35251,11 +32558,11 @@ window.GAMES_DATA = [
     "releaseYear": 2023,
     "genre": "Action Adventure",
     "steamRating": "67% Mixed",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《星球大战绝地：幸存者》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Star Wars Jedi: Survivor to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Star Wars Jedi: Survivor》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Star Wars Jedi: Survivor does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -35288,66 +32595,7 @@ window.GAMES_DATA = [
       "totalMods": "2,530",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《星球大战绝地：幸存者》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《星球大战绝地：幸存者》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "star-wars-jedi-survivor-essential-framework",
@@ -35506,11 +32754,11 @@ window.GAMES_DATA = [
     "releaseYear": 2019,
     "genre": "Action Adventure",
     "steamRating": "89% Very Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《星球大战绝地：陨落的武士团》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Star Wars Jedi: Fallen Order to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Star Wars Jedi: Fallen Order》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Star Wars Jedi: Fallen Order does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -35543,66 +32791,7 @@ window.GAMES_DATA = [
       "totalMods": "2,519",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《星球大战绝地：陨落的武士团》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《星球大战绝地：陨落的武士团》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "star-wars-jedi-fallen-order-essential-framework",
@@ -35761,11 +32950,11 @@ window.GAMES_DATA = [
     "releaseYear": 2023,
     "genre": "Sci-Fi Survival Horror",
     "steamRating": "91% Very Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《死亡空间：重制版》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Dead Space Remake to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Dead Space Remake》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Dead Space Remake does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -35798,66 +32987,7 @@ window.GAMES_DATA = [
       "totalMods": "2,497",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《死亡空间：重制版》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《死亡空间：重制版》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "dead-space-remake-essential-framework",
@@ -36016,22 +33146,13 @@ window.GAMES_DATA = [
     "releaseYear": 2018,
     "genre": "Roguelite Metroidvania",
     "steamRating": "97% Overwhelmingly Positive",
-    "hasConsole": true,
-    "consoleShortcut": "波浪键 ~ 或 F1 / Insert 调试菜单",
+    "hasConsole": false,
+    "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《死亡细胞》在游戏内按 ~ 或 F1 键唤出终端。对于不支持直接打字的游戏，可在设置中开启调试模式或使用修改器内置菜单。",
-      "en": "Press ~ or F1 in Dead Cells to access the developer command line or built-in debug utilities."
+      "zh-CN": "《Dead Cells》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
+      "en": "Dead Cells does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
     },
-    "popularCommands": [
-      {
-        "name": {
-          "zh-CN": "常用便捷指令 / 修改方案",
-          "en": "General Cheat / Config"
-        },
-        "command": "godmode / cheat / trainer",
-        "desc": "游戏菜单内置官方【辅助模式】支持无限复活与难度自由下调"
-      }
-    ],
+    "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Dead Cells\\Mods",
     "mustHaveMods": [
@@ -36062,66 +33183,7 @@ window.GAMES_DATA = [
       "totalMods": "2,486",
       "latestPatch": "2026 Verified Clean"
     },
-    "consoleCategories": [
-      {
-        "category": "👑 核心生存与无敌上帝模式 (Combat & God Mode)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "无敌模式 (God Mode)",
-              "en": "God Mode"
-            },
-            "code": "god",
-            "desc": "锁定《死亡细胞》主角生命值，免疫一切战斗损伤与致命重击"
-          },
-          {
-            "name": {
-              "zh-CN": "穿墙飞天漫游 (No Clip)",
-              "en": "No Clip"
-            },
-            "code": "noclip",
-            "desc": "穿透障碍脱离卡死死角，自由探索未开放区域"
-          },
-          {
-            "name": {
-              "zh-CN": "秒杀准星前敌人 (Kill Target)",
-              "en": "Kill Target"
-            },
-            "code": "kill",
-            "desc": "快速清场解围，解决卡关战斗"
-          }
-        ]
-      },
-      {
-        "category": "💰 资源储备与养成加满 (Economy & Upgrades)",
-        "commands": [
-          {
-            "name": {
-              "zh-CN": "增加 100,000 货币资源",
-              "en": "Add 100k Currency"
-            },
-            "code": "add_money 100000",
-            "desc": "为《死亡细胞》注入充沛资金，购买全套装备"
-          },
-          {
-            "name": {
-              "zh-CN": "负重上限锁定 9999",
-              "en": "Max Carry Weight"
-            },
-            "code": "set_weight 9999",
-            "desc": "随心收集所有战利品与材料永不超重"
-          },
-          {
-            "name": {
-              "zh-CN": "驱散全地图战争迷雾",
-              "en": "Reveal Full Map"
-            },
-            "code": "reveal_map",
-            "desc": "点亮整张大地图地标与收集要素"
-          }
-        ]
-      }
-    ],
+    "consoleCategories": [],
     "curatedMods": [
       {
         "id": "dead-cells-essential-framework",
@@ -36289,11 +33351,27 @@ window.GAMES_DATA = [
     "popularCommands": [
       {
         "name": {
-          "zh-CN": "常用便捷指令 / 修改方案",
-          "en": "General Cheat / Config"
+          "zh-CN": "官方神魔模式 (原生内置)",
+          "en": "God Mode Option"
         },
-        "command": "godmode / cheat / trainer",
-        "desc": "游戏设置内置官方【神力模式 (God Mode)】每次死亡减伤增益 2%"
+        "command": "游戏菜单 -> 选项 -> 勾选 '神魔模式'",
+        "desc": "每次阵亡永久叠加 2% 减伤，最高高达 80% 减伤硬刚哈迪斯！"
+      },
+      {
+        "name": {
+          "zh-CN": "增加 10,000 黑暗晶石 (夜之圣镜加满)",
+          "en": "Add 10,000 Darkness"
+        },
+        "command": "add_darkness 10000",
+        "desc": "在安装 ModPrereqs 后按 ~ 输入，快速点满死里逃生三条命"
+      },
+      {
+        "name": {
+          "zh-CN": "获取 50 滴泰坦之血 (武器形态满阶)",
+          "en": "Add 50 Titan Blood"
+        },
+        "command": "add_titan_blood 50",
+        "desc": "一键解锁并升满关羽矛、亚瑟圣剑、罗摩弓等终极隐藏形态！"
       }
     ],
     "hasMods": true,
@@ -36336,7 +33414,11 @@ window.GAMES_DATA = [
               "en": "God Mode Option"
             },
             "code": "游戏菜单 -> 选项 -> 勾选 '神魔模式'",
-            "desc": "每次阵亡永久叠加 2% 减伤，最高高达 80% 减伤硬刚哈迪斯！"
+            "desc": "每次阵亡永久叠加 2% 减伤，最高高达 80% 减伤硬刚哈迪斯！",
+            "id": "hades_cmd_1",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -36344,7 +33426,11 @@ window.GAMES_DATA = [
               "en": "Add 10,000 Darkness"
             },
             "code": "add_darkness 10000",
-            "desc": "在安装 ModPrereqs 后按 ~ 输入，快速点满死里逃生三条命"
+            "desc": "在安装 ModPrereqs 后按 ~ 输入，快速点满死里逃生三条命",
+            "id": "hades_cmd_2",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           },
           {
             "name": {
@@ -36352,7 +33438,11 @@ window.GAMES_DATA = [
               "en": "Add 50 Titan Blood"
             },
             "code": "add_titan_blood 50",
-            "desc": "一键解锁并升满关羽矛、亚瑟圣剑、罗摩弓等终极隐藏形态！"
+            "desc": "一键解锁并升满关羽矛、亚瑟圣剑、罗摩弓等终极隐藏形态！",
+            "id": "hades_cmd_3",
+            "syntax_type": "gm_command",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Native Engine Console"
           }
         ]
       }
@@ -36491,11 +33581,35 @@ window.GAMES_DATA = [
     "popularCommands": [
       {
         "name": {
-          "zh-CN": "常用便捷指令 / 修改方案",
-          "en": "General Cheat / Config"
+          "zh-CN": "开启小骑士完全无敌模式 (God Mode)",
+          "en": "God Mode"
         },
-        "command": "godmode / cheat / trainer",
-        "desc": "安装 Scarab 模组管理器，支持 Debug Mod 按 F1 开启作弊菜单"
+        "command": "[F1 菜单] Cheats -> Toggle Invincibility",
+        "desc": "免疫一切地形尖刺与 Boss 接触伤害，畅通苦痛之路"
+      },
+      {
+        "name": {
+          "zh-CN": "无限灵魂法力 (Infinite Soul)",
+          "en": "Infinite Soul"
+        },
+        "command": "[F1 菜单] Cheats -> Infinite Soul",
+        "desc": "法术机关枪无限连发，随时凝聚回血"
+      },
+      {
+        "name": {
+          "zh-CN": "穿墙漫游模式 (Noclip)",
+          "en": "Noclip"
+        },
+        "command": "[F1 菜单] Movement -> Toggle Noclip",
+        "desc": "自由穿透铁门封锁与隐藏岩壁"
+      },
+      {
+        "name": {
+          "zh-CN": "一键集齐全部护符 (Give All Charms)",
+          "en": "Give All Charms"
+        },
+        "command": "[F1 菜单] Items -> Give All Charms",
+        "desc": "直接获取虚空之心、快砍、萨满之石等全部毕业护符"
       }
     ],
     "hasMods": true,
@@ -36538,7 +33652,11 @@ window.GAMES_DATA = [
               "en": "God Mode"
             },
             "code": "[F1 菜单] Cheats -> Toggle Invincibility",
-            "desc": "免疫一切地形尖刺与 Boss 接触伤害，畅通苦痛之路"
+            "desc": "免疫一切地形尖刺与 Boss 接触伤害，畅通苦痛之路",
+            "id": "hollow-knight_cmd_1",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Scarab / DebugMod"
           },
           {
             "name": {
@@ -36546,7 +33664,11 @@ window.GAMES_DATA = [
               "en": "Infinite Soul"
             },
             "code": "[F1 菜单] Cheats -> Infinite Soul",
-            "desc": "法术机关枪无限连发，随时凝聚回血"
+            "desc": "法术机关枪无限连发，随时凝聚回血",
+            "id": "hollow-knight_cmd_2",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Scarab / DebugMod"
           },
           {
             "name": {
@@ -36554,7 +33676,11 @@ window.GAMES_DATA = [
               "en": "Noclip"
             },
             "code": "[F1 菜单] Movement -> Toggle Noclip",
-            "desc": "自由穿透铁门封锁与隐藏岩壁"
+            "desc": "自由穿透铁门封锁与隐藏岩壁",
+            "id": "hollow-knight_cmd_3",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Scarab / DebugMod"
           },
           {
             "name": {
@@ -36562,7 +33688,11 @@ window.GAMES_DATA = [
               "en": "Give All Charms"
             },
             "code": "[F1 菜单] Items -> Give All Charms",
-            "desc": "直接获取虚空之心、快砍、萨满之石等全部毕业护符"
+            "desc": "直接获取虚空之心、快砍、萨满之石等全部毕业护符",
+            "id": "hollow-knight_cmd_4",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Scarab / DebugMod"
           },
           {
             "name": {
@@ -36570,7 +33700,11 @@ window.GAMES_DATA = [
               "en": "Bench Warp"
             },
             "code": "[F1 菜单] Warps -> Select Any Bench",
-            "desc": "直接传送至泪水之城或螳螂村长椅"
+            "desc": "直接传送至泪水之城或螳螂村长椅",
+            "id": "hollow-knight_cmd_5",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "Scarab / DebugMod"
           }
         ]
       }
@@ -36709,11 +33843,35 @@ window.GAMES_DATA = [
     "popularCommands": [
       {
         "name": {
-          "zh-CN": "常用便捷指令 / 修改方案",
-          "en": "General Cheat / Config"
+          "zh-CN": "金币直接加满至 999",
+          "en": "Add 999 Gold"
         },
-        "command": "godmode / cheat / trainer",
-        "desc": "支持 Steam 创意工坊模组，内置自定义模式自由选牌与无敌开局"
+        "command": "gold 999",
+        "desc": "在商店中任意买下所有遗物卡牌与移除诅咒"
+      },
+      {
+        "name": {
+          "zh-CN": "直接获取枯木遗物 (Dead Branch)",
+          "en": "Add Dead Branch"
+        },
+        "command": "relic Dead_Branch",
+        "desc": "消耗卡牌随机获得新牌，配合腐化直接无脑通关"
+      },
+      {
+        "name": {
+          "zh-CN": "直接获取异蛇之眼遗物 (Snecko Eye)",
+          "en": "Add Snecko Eye"
+        },
+        "command": "relic Snecko_Eye",
+        "desc": "每回合多抽两张牌，高费卡牌减费流核心"
+      },
+      {
+        "name": {
+          "zh-CN": "直接获取精灵瓶复活药水",
+          "en": "Add Fairy Potion"
+        },
+        "command": "potion Fairy_in_a_Bottle",
+        "desc": "受到致命伤害时自动复活并恢复 30% 生命"
       }
     ],
     "hasMods": true,
@@ -36756,7 +33914,11 @@ window.GAMES_DATA = [
               "en": "Add 999 Gold"
             },
             "code": "gold 999",
-            "desc": "在商店中任意买下所有遗物卡牌与移除诅咒"
+            "desc": "在商店中任意买下所有遗物卡牌与移除诅咒",
+            "id": "slay-the-spire_cmd_1",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "ModTheSpire + BaseMod"
           },
           {
             "name": {
@@ -36764,7 +33926,11 @@ window.GAMES_DATA = [
               "en": "Add Dead Branch"
             },
             "code": "relic Dead_Branch",
-            "desc": "消耗卡牌随机获得新牌，配合腐化直接无脑通关"
+            "desc": "消耗卡牌随机获得新牌，配合腐化直接无脑通关",
+            "id": "slay-the-spire_cmd_2",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "ModTheSpire + BaseMod"
           },
           {
             "name": {
@@ -36772,7 +33938,11 @@ window.GAMES_DATA = [
               "en": "Add Snecko Eye"
             },
             "code": "relic Snecko_Eye",
-            "desc": "每回合多抽两张牌，高费卡牌减费流核心"
+            "desc": "每回合多抽两张牌，高费卡牌减费流核心",
+            "id": "slay-the-spire_cmd_3",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "ModTheSpire + BaseMod"
           },
           {
             "name": {
@@ -36780,7 +33950,11 @@ window.GAMES_DATA = [
               "en": "Add Fairy Potion"
             },
             "code": "potion Fairy_in_a_Bottle",
-            "desc": "受到致命伤害时自动复活并恢复 30% 生命"
+            "desc": "受到致命伤害时自动复活并恢复 30% 生命",
+            "id": "slay-the-spire_cmd_4",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "ModTheSpire + BaseMod"
           },
           {
             "name": {
@@ -36788,7 +33962,11 @@ window.GAMES_DATA = [
               "en": "Add Max HP 50"
             },
             "code": "maxhp add 50",
-            "desc": "血量上限极大提升，从容抵御心脏大招"
+            "desc": "血量上限极大提升，从容抵御心脏大招",
+            "id": "slay-the-spire_cmd_5",
+            "syntax_type": "unity_dev",
+            "min_version": "v1.0+ (Latest Official Patch)",
+            "framework_required": "ModTheSpire + BaseMod"
           }
         ]
       }

@@ -57,7 +57,35 @@ l-mod-portal/
 │   ├── generate_social_matrix.py        # 社交素材合规脱敏与 HTML 卡片渲染引擎
 │   ├── render_cards_png.py              # 1080×1440 高清 PNG 工业级出图脚本
 │   └── enrich_rank5_7_flagships.py      # Rank 5~7 旗舰全息数据注入脚本
+├── scripts/
+│   ├── steam_patch_monitor.py # 24h Steam 补丁自动化巡检机器人与突发坏档实时预警哨兵
+│   ├── build_i18n_matrix.py   # 多语言矩阵与离线 data.js 自动化打包器
+│   └── verify_i18n_dual_pages.py # 双页面 8 语言完整性 E2E 质检门禁
+├── .github/
+│   └── workflows/
+│       └── patch_radar_cron.yml # GitHub Actions 每日 10:00 CST 定时巡检自动化流水线
+├── docs/
+│   ├── STEAM_PATCH_MONITOR_GUIDE.md # 补丁巡检机器人完整操作手册与演练指南
+│   ├── PATCH_MONITOR_LATEST.md    # 巡检机器人最新生成的官方版本对账简报与群公告
+│   └── DEPLOYMENT_GUIDE.md        # 独立站全球 CDN 极速部署指南
 └── README.md
+```
+
+---
+
+## 🤖 Steam 补丁变动自动化巡检机器人 (Milestone 3)
+
+通过 Steam 官方公共 API 自动化对账各单机大作的官方补丁动向与 Build ID，解决官方突发推送更新导致 Mod 失效和坏档问题：
+
+```bash
+# 1. 执行巡检并同步至避坑雷达看板
+python3 scripts/steam_patch_monitor.py --update-radar
+
+# 2. 模拟官方突发大更新（演练避坑预警与群公告生成）
+python3 scripts/steam_patch_monitor.py --simulate-patch cyberpunk-2077 --simulate-version "Update 2.5 (Edgerunners 2)" --simulate-risk red --update-radar
+
+# 3. 运行双页面与多语言全量门禁校验
+python3 scripts/verify_i18n_dual_pages.py
 ```
 
 ---

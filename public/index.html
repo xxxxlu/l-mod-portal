@@ -2015,7 +2015,11 @@
       if (hotkeysInput) hotkeysInput.value = '';
 
       // TAB 1: Console Setup
-      document.getElementById('detail-shortcut-key').innerText = game.consoleShortcut ? game.consoleShortcut.split(' ')[0] : '~';
+      const lazyBtn = document.getElementById('btn-open-lazy-door');
+      if (lazyBtn) lazyBtn.style.display = game.hasConsole ? 'flex' : 'none';
+      document.getElementById('detail-shortcut-key').innerText = game.hasConsole
+        ? (game.consoleShortcut ? game.consoleShortcut.split(' ')[0] : '~')
+        : t('consoleStatusNone');
       const guideText = (game.consoleEnableGuide && game.consoleEnableGuide[currentLang]) ? game.consoleEnableGuide[currentLang] : (game.consoleEnableGuide?.['zh-CN'] || '在游戏中按 ~ 键开启控制台。');
       document.getElementById('detail-enable-guide').innerText = guideText;
       
