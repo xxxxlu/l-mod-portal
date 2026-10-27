@@ -89,6 +89,7 @@ REDIRECTS_CONTENT = """# =======================================================
 # ==============================================================================
 
 # Friendly shortlinks & route rewrites
+/admin          /admin.html       200
 /radar          /radar.html       200
 /index          /index.html       200
 /home           /index.html       200

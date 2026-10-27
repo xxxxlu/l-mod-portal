@@ -33,6 +33,15 @@ export async function onRequestGet(context) {
        ORDER BY CASE compatibility_status WHEN 'red' THEN 1 WHEN 'yellow' THEN 2 ELSE 3 END, rank ASC`
     ).all();
 
+    // Check emergency broadcast from system_settings
+    let emergencyBroadcast = null;
+    try {
+      const bRow = await db.prepare('SELECT value FROM system_settings WHERE key = "emergency_broadcast"').first();
+      if (bRow?.value) {
+        emergencyBroadcast = JSON.parse(bRow.value);
+      }
+    } catch (e) {}
+
     return new Response(JSON.stringify({
       code: 0,
       message: 'success',
@@ -41,7 +50,8 @@ export async function onRequestGet(context) {
         metrics: counts,
         total_tracked: counts.green + counts.yellow + counts.red,
         active_alerts_count: alertGames.results ? alertGames.results.length : 0,
-        active_alerts: alertGames.results || []
+        active_alerts: alertGames.results || [],
+        emergency_broadcast: emergencyBroadcast
       }
     }), {
       headers: {

@@ -14,11 +14,6 @@
   X-Frame-Options: SAMEORIGIN
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
-/radar
-  Cache-Control: public, max-age=0, must-revalidate
-  X-Frame-Options: SAMEORIGIN
-  X-Content-Type-Options: nosniff
-  Referrer-Policy: strict-origin-when-cross-origin
 
 # 2. Immutable Static Assets (Images, Icons, Fonts)
 /*.jpg

@@ -5,6 +5,17 @@
   <!-- Anti-Flicker & Theme Synchronizer -->
   <script>
     (function () {
+      // Immediate clean routing redirect for /admin or /radar
+      const pathname = window.location.pathname.replace(/\/+$/, '');
+      if (pathname === '/admin' || window.location.hash === '#/admin') {
+        window.location.replace('/admin.html');
+        return;
+      }
+      if (pathname === '/radar' || window.location.hash === '#/radar') {
+        window.location.replace('/radar.html');
+        return;
+      }
+
       try {
         const saved = localStorage.getItem('lmod_theme');
         if (saved === 'light') {
@@ -1649,6 +1660,8 @@
   <script src="js/vault-client.js"></script>
   <!-- L-MOD AI Copilot -->
   <script src="ai_copilot.js"></script>
+  <!-- L-MOD Stealth Admin Gateway (Ctrl+Shift+L / 5-Clicks) -->
+  <script src="js/admin-stealth.js"></script>
 
   <!-- Application Logic -->
   <script>
