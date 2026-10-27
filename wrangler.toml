@@ -1,0 +1,13 @@
+name = "lmod-vault"
+pages_build_output_dir = "public"
+compatibility_date = "2024-09-23"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "lmod-vault-db"
+database_id = "598456e1-72e8-4582-a78f-67367d0a70bc"
+
+[[d1_databases]]
+binding = "lmod_vault_db"
+database_name = "lmod-vault-db"
+database_id = "598456e1-72e8-4582-a78f-67367d0a70bc"

@@ -17,6 +17,7 @@ venv/
 # Cloudflare & Node
 node_modules/
 .wrangler/
+database/chunks/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*

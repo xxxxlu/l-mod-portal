@@ -1628,6 +1628,8 @@
 
   <!-- Include Bundled Database -->
   <script src="data.js"></script>
+  <!-- L-MOD Vault Modern API & Telemetry Client -->
+  <script src="js/vault-client.js"></script>
   <!-- L-MOD AI Copilot -->
   <script src="ai_copilot.js"></script>
 
@@ -1967,6 +1969,37 @@
       document.getElementById('header-breadcrumb-title').innerText = locTitle;
       renderGameDetailView(game);
       window.scrollTo({ top: 0, behavior: 'instant' });
+
+      // Track game detail view
+      if (window.LModTracker) {
+        window.LModTracker.track('view_game', game.id, game.title);
+      }
+
+      // Asynchronous command hydration if missing in local bundle
+      if ((!game.consoleCategories || game.consoleCategories.length === 0) && window.LModAPI) {
+        window.LModAPI.fetchGameCommands(game.id).then(res => {
+          if (res && res.commands && res.commands.length > 0) {
+            // Group flat commands into categories
+            const catMap = new Map();
+            res.commands.forEach(cmd => {
+              const catTitle = cmd.category_name_zh || cmd.category_name_en || '通用核心';
+              if (!catMap.has(catTitle)) catMap.set(catTitle, []);
+              catMap.get(catTitle).push({
+                name: { 'zh-CN': cmd.name_zh, en: cmd.name_en },
+                code: cmd.code,
+                desc: cmd.description || ''
+              });
+            });
+            game.consoleCategories = Array.from(catMap.entries()).map(([cat, cmds]) => ({
+              category: cat,
+              commands: cmds
+            }));
+            if (activeGame && activeGame.id === game.id) {
+              renderConsoleCategories(game.consoleCategories);
+            }
+          }
+        }).catch(() => {});
+      }
     }
 
     function resetToHome() {
@@ -3802,6 +3835,9 @@
 
     function downloadBatScript() {
       if (!activeGame) return;
+      if (window.LModTracker) {
+        window.LModTracker.track('download_bat', activeGame.id, `${activeGame.id}_一键开启控制台.bat`);
+      }
       const batCode = activeGame.batScript || generateDynamicBatScript(activeGame);
       const blob = new Blob([batCode], { type: 'text/plain;charset=utf-8' });
       const url = URL.createObjectURL(blob);
@@ -3817,6 +3853,9 @@
 
     function copyBatScript() {
       if (!activeGame) return;
+      if (window.LModTracker) {
+        window.LModTracker.track('copy_code', activeGame.id, 'bat_script_full');
+      }
       const batCode = activeGame.batScript || generateDynamicBatScript(activeGame);
       copyText(batCode, t('batCopiedToast'));
     }
@@ -3878,6 +3917,9 @@ pause`;
 
     function copyText(text, customSuccessMsg) {
       const successMsg = customSuccessMsg || translations[currentLang]?.copiedSuccess || "已复制到剪贴板！游戏中直接粘贴即可";
+      if (window.LModTracker) {
+        window.LModTracker.track('copy_code', activeGame ? activeGame.id : null, text);
+      }
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(text).then(() => {
           showToast(successMsg);
@@ -3959,6 +4001,34 @@ pause`;
       renderRecentSidebar();
       handleRouting();
       initWeChatCheck();
+
+      // Modern Edge API Silent Sync (Non-blocking patch check & cloud hydration)
+      if (window.LModAPI && window.LModAPI.fetchGames) {
+        window.LModAPI.fetchGames({ page: 1, pageSize: 100 }).then(res => {
+          if (res && res.data && res.data.items && res.data.items.length > 0 && !res.fallback) {
+            const liveMap = new Map(res.data.items.map(g => [g.id, g]));
+            let hasChanges = false;
+            allGames.forEach(localG => {
+              const live = liveMap.get(localG.id);
+              if (live) {
+                if (localG.compatibility_status !== live.compatibility_status ||
+                    localG.verifiedPatch !== live.verified_patch) {
+                  localG.compatibility_status = live.compatibility_status;
+                  localG.verifiedPatch = live.verified_patch || localG.verifiedPatch;
+                  localG.latest_steam_patch = live.latest_steam_patch;
+                  localG.radarRiskTitle = live.radar_risk_title || localG.radarRiskTitle;
+                  hasChanges = true;
+                }
+              }
+            });
+            if (hasChanges && currentRoute === 'catalog') {
+              renderGames();
+            }
+          }
+        }).catch(err => {
+          console.debug('[L-MOD Sync] Edge sync skipped, running on offline bundle.');
+        });
+      }
     }
 
     init();

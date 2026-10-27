@@ -20,10 +20,11 @@ export async function onRequestGet(context) {
   };
 
   try {
-    // 1. If Cloudflare D1 Database binding 'DB' is available
-    if (env.DB) {
+    const db = env.DB || env.lmod_vault_db;
+    // 1. If Cloudflare D1 Database binding is available
+    if (db) {
       if (gameId) {
-        const { results } = await env.DB.prepare(
+        const { results } = await db.prepare(
           'SELECT * FROM games WHERE id = ?'
         ).bind(gameId).all();
 
@@ -53,7 +54,7 @@ export async function onRequestGet(context) {
       }
 
       sql += ' ORDER BY rank ASC';
-      const stmt = env.DB.prepare(sql);
+      const stmt = db.prepare(sql);
       const { results } = params.length > 0 ? await stmt.bind(...params).all() : await stmt.all();
 
       return new Response(JSON.stringify({

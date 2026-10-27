@@ -48,7 +48,6 @@ def generate_seed_sql(games):
         "-- ==============================================================================",
         "-- L-MOD Vault Seed Data (Auto-Generated)",
         "-- ==============================================================================",
-        "BEGIN TRANSACTION;",
         ""
     ]
 
@@ -171,7 +170,6 @@ def generate_seed_sql(games):
                 );""")
                 total_bundles += 1
 
-    lines.append("COMMIT;")
     lines.append("")
     return "\n".join(lines), total_commands, total_bundles
 
