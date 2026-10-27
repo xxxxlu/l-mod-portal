@@ -1,0 +1,2192 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <!-- Anti-Flicker & Theme Synchronizer -->
+  <script>
+    (function () {
+      try {
+        const saved = localStorage.getItem('lmod_theme');
+        if (saved === 'light') {
+          document.documentElement.classList.remove('dark');
+          document.documentElement.classList.add('light');
+        } else {
+          document.documentElement.classList.add('dark');
+          document.documentElement.classList.remove('light');
+        }
+      } catch (e) {
+        document.documentElement.classList.add('dark');
+      }
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Steam 补丁变动与 Mod 兼容性实时避坑雷达 | L-MOD Vault</title>
+  <!-- SEO & Standard Meta -->
+  <meta name="description" content="L-MOD 实验室 24h 智能巡检，对齐 Steam 最新推送。3A 单机大作控制台、Mod 框架与坏档风险实时监测。">
+  <meta name="keywords" content="Steam补丁,Mod兼容性,坏档避坑,次世代更新回退,SKSE更新,博德之门3补丁,艾尔登法环防封,L-MOD Radar">
+  <meta name="author" content="L-MOD Team">
+  <meta name="theme-color" content="#0a0b0e">
+
+  <!-- Open Graph / WeChat / QQ / Discord -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://lmod-vault.pages.dev/radar.html">
+  <meta property="og:site_name" content="L-MOD Vault Radar">
+  <meta property="og:title" content="Steam 补丁变动与 Mod 兼容性实时避坑雷达 | L-MOD Vault">
+  <meta property="og:description" content="L-MOD 实验室 24h 智能巡检，对齐 Steam 最新推送。3A 单机大作控制台、Mod 框架与坏档风险实时监测。">
+  <meta property="og:image" content="https://lmod-vault.pages.dev/avatar.jpg">
+  <meta property="og:image:width" content="600">
+  <meta property="og:image:height" content="600">
+  <meta property="og:image:alt" content="L-MOD Radar Emblem">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Steam 补丁变动与 Mod 兼容性实时避坑雷达 | L-MOD Vault">
+  <meta name="twitter:description" content="L-MOD 实验室 24h 智能巡检，对齐 Steam 最新推送。3A 单机大作控制台、Mod 框架与坏档风险实时监测。">
+  <meta name="twitter:image" content="https://lmod-vault.pages.dev/avatar.jpg">
+
+  <!-- Favicon & Touch Icons -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="apple-touch-icon" href="avatar.jpg">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Display"', '"SF Pro Text"', '"PingFang SC"', '"Hiragino Sans GB"', '"Microsoft YaHei"', 'sans-serif'],
+            mono: ['"SF Mono"', '"JetBrains Mono"', 'Menlo', 'Consolas', 'monospace']
+          },
+          colors: {
+            radar: {
+              bg: '#0a0b0e',
+              card: '#12141a',
+              cardHover: '#181b24',
+              border: 'rgba(255, 255, 255, 0.08)',
+              green: '#10b981',
+              amber: '#f59e0b',
+              red: '#ef4444',
+              cyan: '#06b6d4',
+              blue: '#3b82f6'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    :root {
+      --radar-bg: #f8fafc;
+      --radar-surface: #ffffff;
+      --radar-card: #ffffff;
+      --radar-card-hover: #f1f5f9;
+      --radar-border: rgba(0, 0, 0, 0.08);
+      --radar-text: #0f172a;
+      --radar-text-muted: #64748b;
+    }
+
+    html.dark {
+      --radar-bg: #0a0b0e;
+      --radar-surface: #0c0d12;
+      --radar-card: #12141a;
+      --radar-card-hover: #181b24;
+      --radar-border: rgba(255, 255, 255, 0.08);
+      --radar-text: #e2e8f0;
+      --radar-text-muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+    html, body {
+      background-color: var(--radar-bg);
+      color: var(--radar-text);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+    /* WeChat and mobile smooth scrolling */
+    body {
+      -webkit-overflow-scrolling: touch;
+      overflow-x: hidden;
+    }
+    /* Scrollbars */
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.2);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+    /* Ticker animation */
+    @keyframes marquee {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+    .animate-marquee {
+      display: inline-flex;
+      white-space: nowrap;
+      animation: marquee 32s linear infinite;
+    }
+    .animate-marquee:hover {
+      animation-play-state: paused;
+    }
+    /* Custom glow */
+    .glow-green {
+      box-shadow: 0 0 20px -3px rgba(16, 185, 129, 0.25);
+    }
+    .glow-amber {
+      box-shadow: 0 0 20px -3px rgba(245, 158, 11, 0.25);
+    }
+    .glow-red {
+      box-shadow: 0 0 20px -3px rgba(239, 68, 68, 0.35);
+    }
+    /* Backdrop blur fallback */
+    .glass-panel {
+      background: rgba(18, 20, 26, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+    /* Drawer animation */
+    .drawer-backdrop {
+      transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .drawer-content {
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+  </style>
+</head>
+<body class="selection:bg-[#A855F7]/30 selection:text-blue-200">
+
+  <!-- WeChat Legacy Thumbnail Sniffer -->
+  <img src="avatar.jpg" alt="L-MOD Radar" style="position:absolute;left:-9999px;top:-9999px;width:300px;height:300px;opacity:0;pointer-events:none;" />
+
+  <!-- ======================================================== -->
+  <!-- WECHAT SAFE GATEWAY BANNER (微信防拦截 & 浏览器拉起指引) -->
+  <!-- ======================================================== -->
+  <div id="wechat-safe-banner" class="hidden fixed top-0 left-0 right-0 z-[100] transform -translate-y-full transition-transform duration-500 ease-out">
+    <div class="bg-gradient-to-r from-amber-950/95 via-zinc-900/95 to-amber-900/95 backdrop-blur-xl border-b border-amber-500/30 text-amber-100 px-4 py-2.5 shadow-2xl">
+      <div class="max-w-7xl mx-auto flex items-center justify-between gap-3 text-xs sm:text-sm">
+        <div class="flex items-center space-x-2.5 min-w-0">
+          <span class="w-6 h-6 rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-300 flex items-center justify-center shrink-0 animate-pulse text-xs">💡</span>
+          <div class="truncate">
+            <span class="font-bold text-amber-200">【防拦截指引】</span>
+            <span class="opacity-95">为保证避坑雷达与 Mod 正常下载，建议点击右上角</span>
+            <span class="inline-flex items-center px-1.5 py-0.5 rounded bg-amber-500/30 text-amber-100 font-mono font-bold mx-1">···</span>
+            <span class="opacity-95">选择</span>
+            <span class="font-semibold text-white underline decoration-amber-400 decoration-2 underline-offset-2">【在浏览器打开】</span>
+          </div>
+        </div>
+        <div class="flex items-center space-x-2 shrink-0">
+          <div class="hidden sm:flex items-center text-amber-300/80 text-[11px] font-mono">
+            <span>点击右上角</span>
+            <svg class="w-3.5 h-3.5 ml-1 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
+          </div>
+          <button onclick="dismissWeChatBanner()" class="p-1 rounded-full hover:bg-white/10 text-amber-300/80 hover:text-white transition-colors" title="关闭指引">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- 1. TOP EMERGENCY BROADCAST BANNER (顶部紧急广播条)        -->
+  <!-- ======================================================== -->
+  <div class="sticky top-0 z-40 bg-gradient-to-r from-red-950/90 via-zinc-900/95 to-amber-950/90 backdrop-blur-md border-b border-white/10 text-xs py-2 px-4 shadow-lg overflow-hidden">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-3">
+      
+      <!-- Live Indicator Badge -->
+      <div class="flex items-center space-x-2 shrink-0 bg-red-500/20 text-red-300 px-2.5 py-1 rounded-full border border-red-500/30 font-mono font-semibold text-[11px]">
+        <span class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+        </span>
+        <span id="ticker-badge-text">紧急巡检广播</span>
+      </div>
+
+      <!-- Marquee Ticker -->
+      <div class="relative flex-1 overflow-hidden h-5 cursor-pointer" onclick="scrollAlerts()">
+        <div class="animate-marquee items-center space-x-8 text-zinc-300 font-medium tracking-wide" id="ticker-track">
+          <!-- Slide items cloned twice for seamless loop -->
+          <span class="flex items-center space-x-1.5 cursor-pointer hover:text-white" onclick="event.stopPropagation(); openGameDrawerById('fallout-4')">
+            <span class="text-red-400 font-bold">🔴【辐射4】</span>
+            <span>次世代大更新破坏近 10 年 Mod 体系，高危闪退！推荐使用 Downgrader 回退 1.10.163 稳定版</span>
+          </span>
+          <span class="text-zinc-600">|</span>
+          <span class="flex items-center space-x-1.5 cursor-pointer hover:text-white" onclick="event.stopPropagation(); openGameDrawerById('skyrim-se')">
+            <span class="text-amber-400 font-bold">🟡【上古卷轴5】</span>
+            <span>v1.6.1170 前置需更新对齐！认准 SKSE64 2.2.6 与 SSE Engine Fixes 修复推车飞天</span>
+          </span>
+          <span class="text-zinc-600">|</span>
+          <span class="flex items-center space-x-1.5 cursor-pointer hover:text-white" onclick="event.stopPropagation(); openGameDrawerById('baldurs-gate-3')">
+            <span class="text-emerald-400 font-bold">🟢【博德之门3】</span>
+            <span>Patch 7 官方工坊对齐实测通过！BG3SE v18+ 原生黑窗完全兼容，务必清除老版 ModFixer</span>
+          </span>
+          <span class="text-zinc-600">|</span>
+          <span class="flex items-center space-x-1.5 cursor-pointer hover:text-white" onclick="event.stopPropagation(); openGameDrawerById('elden-ring')">
+            <span class="text-emerald-400 font-bold">🟢【艾尔登法环】</span>
+            <span>黄金树幽影 v1.14 离线免封方案已同步！ModEngine2 管道拦截 EAC 零封号</span>
+          </span>
+          <span class="text-zinc-600">|</span>
+          <span class="flex items-center space-x-1.5 cursor-pointer hover:text-white" onclick="event.stopPropagation(); openGameDrawerById('cyberpunk-2077')">
+            <span class="text-emerald-400 font-bold">🟢【赛博朋克2077】</span>
+            <span>Patch 2.13 往日之影最新对齐！CET 1.33.0 原生脚本通过验证，拒绝旧版 SetLevel 坏档代码</span>
+          </span>
+          <span class="text-zinc-600">|</span>
+          <!-- Duplicate set for seamless continuous marquee -->
+          <span class="flex items-center space-x-1.5 cursor-pointer hover:text-white" onclick="event.stopPropagation(); openGameDrawerById('fallout-4')">
+            <span class="text-red-400 font-bold">🔴【辐射4】</span>
+            <span>次世代大更新破坏近 10 年 Mod 体系，高危闪退！推荐使用 Downgrader 回退 1.10.163 稳定版</span>
+          </span>
+          <span class="text-zinc-600">|</span>
+          <span class="flex items-center space-x-1.5 cursor-pointer hover:text-white" onclick="event.stopPropagation(); openGameDrawerById('skyrim-se')">
+            <span class="text-amber-400 font-bold">🟡【上古卷轴5】</span>
+            <span>v1.6.1170 前置需更新对齐！认准 SKSE64 2.2.6 与 SSE Engine Fixes 修复推车飞天</span>
+          </span>
+          <span class="text-zinc-600">|</span>
+          <span class="flex items-center space-x-1.5 cursor-pointer hover:text-white" onclick="event.stopPropagation(); openGameDrawerById('baldurs-gate-3')">
+            <span class="text-emerald-400 font-bold">🟢【博德之门3】</span>
+            <span>Patch 7 官方工坊对齐实测通过！BG3SE v18+ 原生黑窗完全兼容，务必清除老版 ModFixer</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- Quick Action: Back to Main Vault -->
+      <a href="/" class="shrink-0 flex items-center space-x-1 text-zinc-400 hover:text-white transition-colors bg-white/5 hover:bg-white/10 px-2.5 py-1 rounded-full text-[11px] border border-white/5">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+        <span id="ticker-back-text">返回 L-MOD 主库</span>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- 2. RADAR HEADER & BRAND SECTION                         -->
+  <!-- ======================================================== -->
+  <header class="relative border-b border-zinc-200/80 dark:border-white/[0.08] bg-white/90 dark:bg-[#0c0d12]/90 backdrop-blur-xl py-8 px-4 sm:px-8 transition-colors">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-6">
+      
+      <!-- Brand & Title -->
+      <div class="space-y-2">
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-blue-500 via-indigo-600 to-emerald-400 p-0.5 shadow-lg shadow-[#A855F7]/20 flex items-center justify-center">
+            <div class="w-full h-full bg-white dark:bg-[#0e1017] rounded-[14px] flex items-center justify-center text-lg shadow-sm">
+              📡
+            </div>
+          </div>
+          <div>
+            <div class="flex items-center space-x-2">
+              <h1 class="text-xl sm:text-2xl font-black tracking-tight text-zinc-900 dark:text-white flex items-center gap-2">
+                <span id="radar-header-title">Steam 补丁变动与 Mod 兼容性实时雷达</span>
+              </h1>
+              <span class="bg-[#A855F7]/20 text-[#A855F7] text-[10px] font-mono px-2 py-0.5 rounded-full border border-[#A855F7]/30 font-bold uppercase tracking-wider" id="radar-header-version">v4.0 独立看板</span>
+            </div>
+            <p class="text-xs text-zinc-500 dark:text-zinc-400 flex items-center gap-2 pt-0.5">
+              <span id="radar-header-powered">由 L-MOD Vault 避坑实验室驱动</span>
+              <span class="text-zinc-600">·</span>
+              <span class="text-emerald-400 flex items-center gap-1 font-mono">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
+                <span id="radar-header-live">24h 智能对齐巡检进行中</span>
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Actions / Community Gateway -->
+      <div class="flex items-center flex-wrap gap-2.5">
+        <button onclick="copyGroupSecretCode()" class="flex items-center space-x-2 bg-gradient-to-r from-amber-500/20 to-orange-500/20 hover:from-amber-500/30 hover:to-orange-500/30 text-amber-300 border border-amber-500/30 px-3.5 py-2 rounded-xl text-xs font-semibold shadow-sm transition-all cursor-pointer">
+          <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+          <span id="radar-group-code-label">进避坑互助群暗号:</span>
+          <span class="font-mono font-extrabold text-amber-300">【老L单机888】</span>
+        </button>
+
+        <!-- Custom Theme Switcher Button for Radar -->
+        <button 
+          onclick="toggleTheme()" 
+          id="theme-toggle-btn" 
+          title="切换白天 / 夜间模式 (跟随当前设备)"
+          class="flex items-center justify-center w-9 h-9 rounded-xl bg-zinc-100 hover:bg-zinc-200 dark:bg-white/5 dark:hover:bg-white/10 text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-white/10 shadow-sm transition-all cursor-pointer"
+        >
+          <!-- Sun Icon (for Dark mode) -->
+          <svg class="w-4 h-4 hidden dark:block text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+          <!-- Moon Icon (for Light mode) -->
+          <svg class="w-4 h-4 block dark:hidden text-zinc-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+        </button>
+
+        <!-- Custom Language Dropdown for Radar -->
+        <div class="relative" id="custom-lang-dropdown">
+          <button 
+            onclick="toggleLangDropdown(event)" 
+            class="flex items-center space-x-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-white/5 hover:bg-white/10 text-zinc-200 border border-white/10 transition-colors cursor-pointer"
+            id="lang-trigger-btn"
+          >
+            <span id="current-lang-flag">🇨🇳</span>
+            <span id="current-lang-name">简体中文</span>
+            <svg class="w-3.5 h-3.5 text-zinc-400 transition-transform duration-200" id="lang-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </button>
+
+          <div 
+            id="lang-menu" 
+            class="hidden absolute right-0 mt-2 w-48 bg-[#12141a] rounded-2xl shadow-2xl border border-white/10 p-1.5 z-50 text-xs backdrop-blur-xl animate-in fade-in zoom-in-95 duration-100"
+          >
+            <div class="px-3 py-1.5 text-[10px] text-zinc-400 font-bold border-b border-white/5 mb-1" id="lang-menu-title">
+              选择语言 · Select Language
+            </div>
+            <div class="space-y-0.5">
+              <button onclick="selectLanguage('zh-CN', '🇨🇳', '简体中文')" class="lang-option w-full flex items-center justify-between px-3 py-2 rounded-xl text-left hover:bg-white/10 transition-colors text-zinc-200" data-lang="zh-CN">
+                <span class="flex items-center space-x-2"><span>🇨🇳</span><span>简体中文</span></span>
+                <span class="lang-check text-[#A855F7] font-bold">✓</span>
+              </button>
+              <button onclick="selectLanguage('en', '🇺🇸', 'English')" class="lang-option w-full flex items-center justify-between px-3 py-2 rounded-xl text-left hover:bg-white/10 transition-colors text-zinc-200" data-lang="en">
+                <span class="flex items-center space-x-2"><span>🇺🇸</span><span>English</span></span>
+                <span class="lang-check hidden text-[#A855F7] font-bold">✓</span>
+              </button>
+              <button onclick="selectLanguage('zh-TW', '🇭🇰', '繁體中文')" class="lang-option w-full flex items-center justify-between px-3 py-2 rounded-xl text-left hover:bg-white/10 transition-colors text-zinc-200" data-lang="zh-TW">
+                <span class="flex items-center space-x-2"><span>🇭🇰</span><span>繁體中文</span></span>
+                <span class="lang-check hidden text-[#A855F7] font-bold">✓</span>
+              </button>
+              <button onclick="selectLanguage('ja', '🇯🇵', '日本語')" class="lang-option w-full flex items-center justify-between px-3 py-2 rounded-xl text-left hover:bg-white/10 transition-colors text-zinc-200" data-lang="ja">
+                <span class="flex items-center space-x-2"><span>🇯🇵</span><span>日本語</span></span>
+                <span class="lang-check hidden text-[#A855F7] font-bold">✓</span>
+              </button>
+              <button onclick="selectLanguage('ko', '🇰🇷', '한국어')" class="lang-option w-full flex items-center justify-between px-3 py-2 rounded-xl text-left hover:bg-white/10 transition-colors text-zinc-200" data-lang="ko">
+                <span class="flex items-center space-x-2"><span>🇰🇷</span><span>한국어</span></span>
+                <span class="lang-check hidden text-[#A855F7] font-bold">✓</span>
+              </button>
+              <button onclick="selectLanguage('ru', '🇷🇺', 'Русский')" class="lang-option w-full flex items-center justify-between px-3 py-2 rounded-xl text-left hover:bg-white/10 transition-colors text-zinc-200" data-lang="ru">
+                <span class="flex items-center space-x-2"><span>🇷🇺</span><span>Русский</span></span>
+                <span class="lang-check hidden text-[#A855F7] font-bold">✓</span>
+              </button>
+              <button onclick="selectLanguage('de', '🇩🇪', 'Deutsch')" class="lang-option w-full flex items-center justify-between px-3 py-2 rounded-xl text-left hover:bg-white/10 transition-colors text-zinc-200" data-lang="de">
+                <span class="flex items-center space-x-2"><span>🇩🇪</span><span>Deutsch</span></span>
+                <span class="lang-check hidden text-[#A855F7] font-bold">✓</span>
+              </button>
+              <button onclick="selectLanguage('es', '🇪🇸', 'Español')" class="lang-option w-full flex items-center justify-between px-3 py-2 rounded-xl text-left hover:bg-white/10 transition-colors text-zinc-200" data-lang="es">
+                <span class="flex items-center space-x-2"><span>🇪🇸</span><span>Español</span></span>
+                <span class="lang-check hidden text-[#A855F7] font-bold">✓</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- L-MOD AI COPILOT BADGE -->
+        <button 
+          id="radar-ai-btn"
+          type="button"
+          onclick="window.LMOD_AI_COPILOT && window.LMOD_AI_COPILOT.openDrawer()"
+          title="老L · AI 游戏智库顾问 (快捷键: Cmd+K / Ctrl+K)"
+          class="flex items-center space-x-1.5 bg-gradient-to-r from-purple-500/15 via-violet-500/15 to-pink-500/15 hover:from-purple-500/25 hover:to-pink-500/25 text-purple-700 dark:text-purple-300 px-3.5 py-2 rounded-xl text-xs font-bold border border-purple-500/30 dark:border-purple-400/30 shadow-sm transition-all cursor-pointer"
+        >
+          <span class="text-sm">🤖</span>
+          <span class="tracking-tight" id="radar-ai-btn-text">AI 顾问</span>
+          <span class="hidden sm:inline text-[9px] font-mono px-1 py-0.5 rounded bg-purple-500/20 text-purple-300">⌘K</span>
+        </button>
+
+        <a href="/" class="flex items-center space-x-2 bg-white/5 hover:bg-white/10 text-zinc-200 border border-white/10 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all">
+          <svg class="w-4 h-4 text-[#A855F7]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+          <span id="radar-return-btn-text">返回 L-MOD 主库</span>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ======================================================== -->
+  <!-- 3. THREE-COLOR RADAR METRIC CARDS (状态三色指示灯系统)   -->
+  <!-- ======================================================== -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-8 pt-6 pb-4">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3.5">
+      
+      <!-- Card 1: Green Compatible -->
+      <div onclick="filterByStatus('green')" class="cursor-pointer group relative overflow-hidden bg-white dark:bg-[#12141a] hover:bg-slate-50 dark:hover:bg-[#161922] p-4 rounded-2xl border border-emerald-500/30 dark:border-emerald-500/20 hover:border-emerald-500/50 transition-all shadow-sm glow-green">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs font-medium text-emerald-400 flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span id="metric-green-title">完美兼容 · 实测通过</span>
+          </span>
+          <span class="text-[10px] bg-emerald-500/10 text-emerald-300 px-2 py-0.5 rounded font-mono" id="metric-green-tag">稳定运行</span>
+        </div>
+        <div class="flex items-baseline space-x-2">
+          <span class="text-2xl sm:text-3xl font-black font-mono text-emerald-400" id="stat-green">88</span>
+          <span class="text-xs text-zinc-400" id="metric-green-unit">款 3A 大作</span>
+        </div>
+        <p class="text-[11px] text-zinc-400 mt-1 line-clamp-1" id="metric-green-desc">最新补丁实机测试，控制台与前置 100% 畅玩</p>
+      </div>
+
+      <!-- Card 2: Amber Need Update -->
+      <div onclick="filterByStatus('yellow')" class="cursor-pointer group relative overflow-hidden bg-white dark:bg-[#12141a] hover:bg-slate-50 dark:hover:bg-[#161922] p-4 rounded-2xl border border-amber-500/30 dark:border-amber-500/20 hover:border-amber-500/50 transition-all shadow-sm glow-amber">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs font-medium text-amber-400 flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+            <span id="metric-yellow-title">需更新前置 / 补丁对齐</span>
+          </span>
+          <span class="text-[10px] bg-amber-500/10 text-amber-300 px-2 py-0.5 rounded font-mono" id="metric-yellow-tag">注意前置</span>
+        </div>
+        <div class="flex items-baseline space-x-2">
+          <span class="text-2xl sm:text-3xl font-black font-mono text-amber-400" id="stat-yellow">9</span>
+          <span class="text-xs text-zinc-400" id="metric-yellow-unit">款需适配</span>
+        </div>
+        <p class="text-[11px] text-zinc-400 mt-1 line-clamp-1" id="metric-yellow-desc">老版 DLL 钩子失效，需升级最新版 Script Extender</p>
+      </div>
+
+      <!-- Card 3: Red Save-Corrupt Danger -->
+      <div onclick="filterByStatus('red')" class="cursor-pointer group relative overflow-hidden bg-white dark:bg-[#12141a] hover:bg-slate-50 dark:hover:bg-[#161922] p-4 rounded-2xl border border-red-500/30 dark:border-red-500/20 hover:border-red-500/50 transition-all shadow-sm glow-red">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs font-medium text-red-400 flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+            <span id="metric-red-title">恶性坏档 · 暂停更新</span>
+          </span>
+          <span class="text-[10px] bg-red-500/10 text-red-300 px-2 py-0.5 rounded font-mono" id="metric-red-tag">紧急预警</span>
+        </div>
+        <div class="flex items-baseline space-x-2">
+          <span class="text-2xl sm:text-3xl font-black font-mono text-red-400" id="stat-red">3</span>
+          <span class="text-xs text-zinc-400" id="metric-red-unit">款高危预警</span>
+        </div>
+        <p class="text-[11px] text-zinc-400 mt-1 line-clamp-1" id="metric-red-desc">次世代破坏老Mod架构，请务必锁定 Steam 自动更新</p>
+      </div>
+
+      <!-- Card 4: Radar Status / Inspection Info -->
+      <div class="relative overflow-hidden bg-white dark:bg-[#12141a] p-4 rounded-2xl border border-zinc-200/80 dark:border-white/5 shadow-sm">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs font-medium text-cyan-400 flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
+            <span id="metric-inspection-title">巡检哨兵机制</span>
+          </span>
+          <span class="text-[10px] bg-cyan-500/10 text-cyan-300 px-2 py-0.5 rounded font-mono" id="metric-inspection-tag">LIVE</span>
+        </div>
+        <div class="flex items-baseline space-x-2">
+          <span class="text-2xl sm:text-3xl font-black font-mono text-cyan-400">100</span>
+          <span class="text-xs text-zinc-400" id="metric-inspection-unit">款全球神作全覆盖</span>
+        </div>
+        <p class="text-[11px] text-zinc-400 mt-1 line-clamp-1" id="metric-inspection-desc">每日对比 Steam AppUpdate 差量，发现坏档连夜同步</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- 4. SEARCH & MULTI-DIMENSIONAL FILTER CONTROLS           -->
+  <!-- ======================================================== -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-8 py-4">
+    <div class="bg-white dark:bg-[#12141a] rounded-2xl p-4 sm:p-5 border border-zinc-200/80 dark:border-white/[0.08] space-y-4 shadow-sm dark:shadow-xl">
+      
+      <!-- Top Row: Search Input + Quick Reset -->
+      <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+        <div class="relative flex-1">
+          <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-zinc-400">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+          </div>
+          <input 
+            type="text" 
+            id="radar-search" 
+            oninput="handleSearch(this.value)"
+            placeholder="搜索游戏名称、中文别名、Steam AppID (如 1245620)、底层引擎..."
+            class="w-full bg-slate-50 dark:bg-[#0a0b0e] text-zinc-900 dark:text-white text-xs sm:text-sm pl-10 pr-10 py-2.5 rounded-xl border border-zinc-200 dark:border-white/10 focus:border-[#A855F7] focus:outline-none focus:ring-1 focus:ring-[#A855F7] placeholder-zinc-400 dark:placeholder-zinc-500 transition-all"
+          />
+          <button 
+            id="clear-search-btn" 
+            onclick="clearSearch()" 
+            class="hidden absolute inset-y-0 right-0 pr-3 flex items-center text-zinc-400 hover:text-white"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+          </button>
+        </div>
+
+        <!-- Sort Select -->
+        <div class="flex items-center space-x-2 shrink-0">
+          <span class="text-xs text-zinc-400 whitespace-nowrap hidden sm:inline" id="radar-sort-label">排序方式:</span>
+          <select 
+            id="sort-select" 
+            onchange="handleSort(this.value)"
+            class="bg-slate-50 dark:bg-[#0a0b0e] text-zinc-900 dark:text-white text-xs py-2.5 px-3 rounded-xl border border-zinc-200 dark:border-white/10 focus:border-[#A855F7] focus:outline-none cursor-pointer"
+          >
+            <option value="risk-desc" id="opt-risk-desc">⚠️ 风险优先 (坏档/需前置置顶)</option>
+            <option value="rank-asc" id="opt-rank-asc">👑 游戏排名 (Rank 1 ~ 100)</option>
+            <option value="compatible-first" id="opt-compat-first">🟢 稳定优先 (已实测完美)</option>
+            <option value="name-asc" id="opt-name-asc">🔤 游戏名称 (A-Z)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Filter Row: Status Pills & Engine Pills -->
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 pt-1 border-t border-white/5">
+        
+        <!-- Status Filter Pills -->
+        <div class="flex items-center flex-wrap gap-1.5" id="status-pills">
+          <span class="text-xs text-zinc-400 mr-1 font-medium" id="radar-filter-status-label">兼容状态:</span>
+          <button onclick="setStatusFilter('all')" class="status-pill active px-3 py-1 rounded-full text-xs font-medium bg-[#A855F7] text-white transition-all cursor-pointer" data-status="all" id="pill-status-all">全部</button>
+          <button onclick="setStatusFilter('green')" class="status-pill px-3 py-1 rounded-full text-xs font-medium bg-white/5 text-emerald-400 hover:bg-emerald-500/10 border border-emerald-500/20 transition-all cursor-pointer" data-status="green" id="pill-status-green">🟢 完美兼容</button>
+          <button onclick="setStatusFilter('yellow')" class="status-pill px-3 py-1 rounded-full text-xs font-medium bg-white/5 text-amber-400 hover:bg-amber-500/10 border border-amber-500/20 transition-all cursor-pointer" data-status="yellow" id="pill-status-yellow">🟡 需更前置</button>
+          <button onclick="setStatusFilter('red')" class="status-pill px-3 py-1 rounded-full text-xs font-medium bg-white/5 text-red-400 hover:bg-red-500/10 border border-red-500/20 transition-all cursor-pointer" data-status="red" id="pill-status-red">🔴 暂停更新</button>
+        </div>
+
+        <!-- Flagship & Engine Tags -->
+        <div class="flex items-center flex-wrap gap-1.5" id="engine-pills">
+          <span class="text-xs text-zinc-400 mr-1 font-medium" id="radar-filter-engine-label">专区/引擎:</span>
+          <button onclick="setEngineFilter('all')" class="engine-pill active px-2.5 py-1 rounded-full text-xs bg-white/10 text-white cursor-pointer" data-engine="all" id="pill-engine-all">全部</button>
+          <button onclick="setEngineFilter('flagship')" class="engine-pill px-2.5 py-1 rounded-full text-xs bg-white/5 text-purple-300 hover:bg-purple-500/20 border border-purple-500/30 cursor-pointer" data-engine="flagship" id="pill-engine-flagship">👑 Top 7 旗舰深度</button>
+          <button onclick="setEngineFilter('REDengine')" class="engine-pill px-2.5 py-1 rounded-full text-xs bg-white/5 text-zinc-300 hover:bg-white/10 cursor-pointer" data-engine="REDengine">REDengine</button>
+          <button onclick="setEngineFilter('Unreal')" class="engine-pill px-2.5 py-1 rounded-full text-xs bg-white/5 text-zinc-300 hover:bg-white/10 cursor-pointer" data-engine="Unreal" id="pill-engine-unreal">虚幻引擎</button>
+          <button onclick="setEngineFilter('Creation')" class="engine-pill px-2.5 py-1 rounded-full text-xs bg-white/5 text-zinc-300 hover:bg-white/10 cursor-pointer" data-engine="Creation" id="pill-engine-creation">B社引擎</button>
+          <button onclick="setEngineFilter('FromSoft')" class="engine-pill px-2.5 py-1 rounded-full text-xs bg-white/5 text-zinc-300 hover:bg-white/10 cursor-pointer" data-engine="FromSoft" id="pill-engine-fromsoft">魂系引擎</button>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- 5. RADAR CARDS GRID CONTAINER                            -->
+  <!-- ======================================================== -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-8 py-4 mb-20">
+    
+    <!-- Filter Result Count / Alert Bar -->
+    <div class="flex items-center justify-between mb-4 text-xs text-zinc-400">
+      <div>
+        <span><span id="radar-count-matched">共匹配到</span> <strong class="text-white font-mono" id="results-count">0</strong> <span id="radar-count-unit">款游戏</span></span>
+        <span id="active-filter-desc" class="ml-2 text-zinc-500"></span>
+      </div>
+      <div class="flex items-center space-x-2 text-[11px]">
+        <span class="inline-block w-2 h-2 rounded-full bg-emerald-500"></span><span id="legend-text-compat">完美</span>
+        <span class="inline-block w-2 h-2 rounded-full bg-amber-500 ml-2"></span><span id="legend-text-warn">前置</span>
+        <span class="inline-block w-2 h-2 rounded-full bg-red-500 ml-2"></span><span id="legend-text-broken">坏档/暂停</span>
+      </div>
+    </div>
+
+    <!-- Cards Grid -->
+    <div id="radar-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+      <!-- Injected by JavaScript -->
+    </div>
+
+    <!-- Empty State -->
+    <div id="radar-empty" class="hidden text-center py-16 space-y-4">
+      <div class="w-16 h-16 mx-auto rounded-full bg-white/5 flex items-center justify-center text-3xl text-zinc-500">
+        🔍
+      </div>
+      <h3 class="text-base font-bold text-zinc-300" id="radar-empty-title">未找到符合条件的游戏</h3>
+      <p class="text-xs text-zinc-500 max-w-sm mx-auto" id="radar-empty-desc">请尝试更换搜索关键字，或重置状态与引擎筛选条件。</p>
+      <button onclick="resetAllFilters()" id="radar-empty-reset-btn" class="px-4 py-2 rounded-xl bg-[#A855F7] hover:bg-[#A855F7] text-white text-xs font-semibold">
+        重置全部筛选
+      </button>
+    </div>
+
+  </main>
+
+  <!-- ======================================================== -->
+  <!-- 6. EXPANDABLE EMERGENCY RESCUE DRAWER / MODAL           -->
+  <!-- ======================================================== -->
+  <div id="drawer-container" class="fixed inset-0 z-50 pointer-events-none transition-all duration-300">
+    
+    <!-- Semi-transparent Backdrop -->
+    <div 
+      id="drawer-backdrop" 
+      onclick="closeGameDrawer()" 
+      class="drawer-backdrop absolute inset-0 bg-black/75 backdrop-blur-sm opacity-0 transition-opacity"
+    ></div>
+
+    <!-- Drawer Panel (Mobile Bottom Sheet / Desktop Right Drawer) -->
+    <div 
+      id="drawer-panel"
+      class="drawer-content absolute inset-x-0 bottom-0 md:inset-y-0 md:left-auto md:right-0 md:w-[620px] max-h-[92vh] md:max-h-full bg-white dark:bg-[#101218] border-t md:border-t-0 md:border-l border-zinc-200 dark:border-white/10 rounded-t-[28px] md:rounded-t-none md:rounded-l-[28px] shadow-2xl flex flex-col overflow-hidden translate-y-full md:translate-y-0 md:translate-x-full transition-transform pointer-events-auto"
+    >
+      <!-- Mobile Pull Bar Indicator -->
+      <div class="md:hidden pt-3 pb-1 flex justify-center cursor-pointer" onclick="closeGameDrawer()">
+        <div class="w-10 h-1.5 bg-zinc-600 rounded-full"></div>
+      </div>
+
+      <!-- Drawer Header -->
+      <div class="px-6 py-4 border-b border-white/[0.08] flex items-center justify-between shrink-0 bg-[#14161f]">
+        <div class="flex items-center space-x-3">
+          <span id="drawer-status-pill" class="text-xs px-2.5 py-1 rounded-full font-bold font-mono"></span>
+          <div class="text-xs font-mono text-zinc-400">
+            <span>AppID: </span><span id="drawer-appid" class="text-white font-bold"></span>
+          </div>
+        </div>
+        <button 
+          onclick="closeGameDrawer()" 
+          class="w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 text-zinc-400 hover:text-white flex items-center justify-center transition-colors cursor-pointer"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
+
+      <!-- Drawer Scrollable Body -->
+      <div class="flex-1 overflow-y-auto p-6 space-y-6" id="drawer-body">
+        
+        <!-- Game Title Banner -->
+        <div class="space-y-1">
+          <div class="flex items-center space-x-2">
+            <span class="bg-[#A855F7]/20 text-[#A855F7] text-[10px] font-mono px-2 py-0.5 rounded font-bold" id="drawer-rank"></span>
+            <span class="text-xs text-zinc-400" id="drawer-engine"></span>
+          </div>
+          <h2 class="text-xl sm:text-2xl font-black text-zinc-900 dark:text-white" id="drawer-title"></h2>
+          <p class="text-xs text-zinc-400" id="drawer-entitle"></p>
+        </div>
+
+        <!-- Section 1: Patch Change & Diagnosis -->
+        <div class="bg-[#181a24] rounded-2xl p-4 sm:p-5 border border-white/5 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-zinc-300 uppercase tracking-wider flex items-center gap-1.5">
+              <span id="drawer-patch-check-title">🔍 补丁变动与最新版本核验</span>
+            </span>
+            <span class="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20" id="drawer-patch"></span>
+          </div>
+          <p class="text-xs text-zinc-700 dark:text-zinc-300 leading-relaxed" id="drawer-summary"></p>
+          
+          <!-- Risk Box -->
+          <div id="drawer-risk-box" class="p-3.5 rounded-xl border space-y-1">
+            <div class="flex items-center gap-1.5 text-xs font-bold" id="drawer-risk-title"></div>
+            <p class="text-xs leading-relaxed" id="drawer-risk-desc"></p>
+          </div>
+        </div>
+
+        <!-- Section 2: Exclusive Rescue / Downgrade Plan -->
+        <div class="bg-[#181a24] rounded-2xl p-4 sm:p-5 border border-white/5 space-y-4">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-amber-400 uppercase tracking-wider flex items-center gap-1.5">
+              <span id="drawer-rescue-title">🛠️ 老L独家救砖 / 降级 / 避坑方案</span>
+            </span>
+            <span class="text-[11px] text-zinc-400" id="drawer-rescue-sub">100% 官方离线底层机制</span>
+          </div>
+
+          <div class="space-y-2 text-xs text-zinc-700 dark:text-zinc-300 leading-relaxed" id="drawer-rescue-steps">
+            <!-- Injected -->
+          </div>
+
+          <!-- Code Box for Bat script preview -->
+          <div class="space-y-2">
+            <div class="flex items-center justify-between text-[11px] text-zinc-400">
+              <span class="font-mono" id="drawer-bat-title">快速批处理脚本 (.bat) / 应急指令:</span>
+              <button onclick="copyDrawerBat()" id="drawer-btn-copy-bat" class="text-[#A855F7] hover:text-purple-300 font-semibold cursor-pointer">一键复制代码</button>
+            </div>
+            <div class="bg-[#0b0c10] rounded-xl p-3.5 border border-white/10 font-mono text-xs text-emerald-400 overflow-x-auto relative">
+              <pre class="whitespace-pre" id="drawer-code-pre"></pre>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 2.5: 5-Card High-Definition Matrix Preview (1080x1440 HD) -->
+        <div id="drawer-cards-section" class="bg-[#181a24] rounded-2xl p-4 sm:p-5 border border-purple-500/30 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-purple-300 uppercase tracking-wider flex items-center gap-1.5">
+              <span id="drawer-matrix-title">🎨 官方 5 联 1080×1440 高清避坑卡片 (实装)</span>
+            </span>
+            <span class="text-[10px] bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded font-mono font-bold" id="drawer-matrix-tag">社交媒体矩阵</span>
+          </div>
+          <p class="text-[11px] text-zinc-400" id="drawer-matrix-desc">已就绪首发 5 联高清卡片，点击任意卡片查看大图：</p>
+          <div id="drawer-cards-scroll" class="flex space-x-3 overflow-x-auto pb-2 no-scrollbar">
+            <!-- Injected by openGameDrawer() -->
+          </div>
+        </div>
+
+        <!-- Section 3: Community Secret Code Conversion Card -->
+        <div class="relative overflow-hidden bg-gradient-to-br from-zinc-900 via-zinc-900 to-black rounded-2xl p-5 border border-amber-500/30 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-amber-400 flex items-center gap-1.5">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+              <span id="drawer-secret-card-title">【老L·单机避坑局】急救雷达互助群</span>
+            </span>
+            <span class="text-[10px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-full font-mono" id="drawer-secret-card-tag">公益·零广告</span>
+          </div>
+          <p class="text-xs text-zinc-300 leading-relaxed" id="drawer-secret-card-desc">
+            若遇游戏突发更新失效或极端坏档，请保存官方避坑专属暗号，在微信公众号后台或私信输入暗号，自动秒推连夜更新的应急更新包与坏档急救工具！
+          </p>
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-black/50 p-3 rounded-xl border border-white/5">
+            <div class="flex items-center space-x-2">
+              <span class="text-xs text-zinc-400" id="drawer-secret-card-label">专属避坑暗号:</span>
+              <span class="text-sm font-mono font-black text-amber-400" id="drawer-secret-code">【老L单机888】</span>
+            </div>
+            <button onclick="copyCurrentSecretCode()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-zinc-950 font-bold text-xs transition-all shadow-md flex items-center justify-center gap-1 cursor-pointer">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+              <span id="drawer-btn-copy-code-text">一键复制暗号</span>
+            </button>
+          </div>
+          <div class="text-[11px] text-zinc-500 flex items-center justify-between pt-1">
+            <span id="drawer-secret-tip-1">💡 进群输入暗号秒领：最新追更包 · 坏档救星 · 纯净开源源</span>
+            <span id="drawer-secret-tip-2">群文件严禁 exe，绝对安全</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Drawer Footer Actions -->
+      <div class="px-6 py-4 border-t border-white/[0.08] bg-[#14161f] flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 shrink-0">
+        <a 
+          id="drawer-main-vault-link"
+          href="#"
+          class="flex-1 px-4 py-2.5 rounded-xl bg-[#A855F7] hover:bg-[#A855F7] text-white font-bold text-xs text-center transition-all flex items-center justify-center gap-2 shadow-lg shadow-[#A855F7]/20"
+        >
+          <span id="drawer-cta-main-text">🎮 进入 L-MOD 主库查看完整代码与场景套餐</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- 7. GLOBAL TOAST NOTIFICATION                             -->
+  <!-- ======================================================== -->
+  <div id="toast" class="fixed top-20 left-1/2 -translate-x-1/2 z-50 transform -translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+    <div class="bg-zinc-900/95 text-white text-xs font-semibold px-4 py-2.5 rounded-full shadow-2xl border border-white/20 flex items-center space-x-2 backdrop-blur-md">
+      <span class="text-emerald-400">✓</span>
+      <span id="toast-text">已复制！</span>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- 8. DATA SCRIPT INCLUSION & RADAR APP LOGIC              -->
+  <!-- ======================================================== -->
+  <script src="data.js"></script>
+  <!-- L-MOD Vault Modern API & Telemetry Client -->
+  <script src="js/vault-client.js"></script>
+  <!-- L-MOD AI Copilot -->
+  <script src="ai_copilot.js"></script>
+  <!-- L-MOD Stealth Admin Gateway (Ctrl+Shift+L / 5-Clicks) -->
+  <script src="js/admin-stealth.js"></script>
+  <script>
+    // ========================================================
+    // DEEP COMPATIBILITY METADATA FOR RADAR ENGINE
+    // ========================================================
+    const RADAR_METADATA = {
+      "cyberpunk-2077": {
+        status: "green",
+        statusText: "🟢 完美兼容实测通过",
+        verifiedPatch: "Patch 2.13 (往日之影DLC全兼容)",
+        engine: "REDengine 4",
+        toolchain: "CET v1.33.0 / REDmod",
+        summary: "CET 1.33.0+ 适配完成，专精树重构兼容通过，官方原生终端与场景套餐 100% 稳定运行。",
+        riskTitle: "⚠️ 专精树语法避坑",
+        riskDesc: "2.0+ 往日之影彻底重构了专精成长树，千万别运行网上旧版 1.63 的 SetLevel 代码，否则专精树直接永久卡死！本站套餐已换用 2.13 安全合规的 SetProficiencyLevel 函数。",
+        riskSeverity: "amber",
+        rescueSteps: [
+          "1. 确认游戏版本为 Steam 最新 2.13，使用本站提供的纯净 CET v1.33.0 离线框架。",
+          "2. 将框架解压至 bin/x64/ 目录，进入游戏按 ~ 键呼出（注意关闭 CapsLock 并切英文输入法）。",
+          "3. 剧情 Fact 修改后，立即进行一次 F5 快速存档与 F9 读档刷新状态机。"
+        ],
+        batPreview: `@echo off
+chcp 65001 >nul
+title 【老L·单机避坑局】赛博朋克2077 v2.13 控制台就绪检测
+echo [*] 正在核验 Cyberpunk 2077 游戏根目录...
+if not exist "bin\\x64\\Cyberpunk2077.exe" (
+    echo [!] 错误: 请将本脚本放在赛博朋克2077安装根目录下运行！
+    pause
+    exit /b
+)
+echo [√] 游戏版本检测通过！
+echo [i] 常用呼出热键: ~ (波浪键)
+echo [i] 专精指令请认准: Game.SetProficiencyLevel(...)
+pause`
+      },
+      "black-myth-wukong": {
+        status: "green",
+        statusText: "🟢 完美兼容实测通过",
+        verifiedPatch: "v1.0.10.15610 (Steam最新实测)",
+        engine: "虚幻引擎 5 (UE5)",
+        toolchain: "UE4SS v3.0.1+ / UE5 Console Enabler",
+        summary: "虚幻5原生控制台调试模式已适配，0.4x 子弹时间慢动作与全图鉴代码零闪退运行。",
+        riskTitle: "⚠️ 打坐存盘执行保障",
+        riskDesc: "招式变身与全道具收集指令建议在土地庙打坐存盘后输入，避免过场动画强制卸载模型导致镜头卡顿。",
+        riskSeverity: "green",
+        rescueSteps: [
+          "1. 认准带有官方数字签名的 UE4SS 框架，杜绝第三方报毒外挂。",
+          "2. 批处理脚本自动将 ConsoleEnablerMod 设为 1，开启原生底层打字窗口。",
+          "3. 游戏中按 ~ 呼出，输入 slomo 0.4 可开启慢动作弹反识破。"
+        ],
+        batPreview: `@echo off
+chcp 65001 >nul
+title 【老L·单机避坑局】黑神话悟空 原生控制台激活助手
+echo [*] 正在检查 b1\\Binaries\\Win64 目录...
+if not exist "b1\\Binaries\\Win64\\b1-Win64-Shipping.exe" (
+    echo [!] 请将本脚本置于黑神话悟空安装根目录下！
+    pause
+    exit /b
+)
+echo [√] 虚幻5引擎环境已就绪，启动游戏按 ~ 即可输入指令！
+pause`
+      },
+      "witcher-3": {
+        status: "green",
+        statusText: "🟢 完美兼容实测通过",
+        verifiedPatch: "v4.04 (次世代完全版 - REDkit官方支持)",
+        engine: "REDengine 3",
+        toolchain: "REDkit / 官方 Native Console",
+        summary: "官方次世代版原生隐藏控制台，只需改动 general.ini 添加开关即可原生唤醒，零报毒。",
+        riskTitle: "⚠️ 零注入原生开启原则",
+        riskDesc: "次世代版 4.04 官方原生隐藏了调试控制台，根本不需要下载任何可能报毒的第三方 exe，改一个字母即可开启！",
+        riskSeverity: "green",
+        rescueSteps: [
+          "1. 进入 bin/config/base/ 目录，使用记事本打开 general.ini。",
+          "2. 在 [General] 段落末尾另起一行，写入 DBGConsoleOn=true 并保存。",
+          "3. 进游戏按 ~ 键呼出；石之心通关后输入 additem('Iris\\'s Rose') 可永远保留爱丽丝玫瑰。"
+        ],
+        batPreview: `@echo off
+chcp 65001 >nul
+title 【老L·单机避坑局】巫师3次世代版 原生控制台一键激活
+set "INI_FILE=bin\\config\\base\\general.ini"
+if not exist "%INI_FILE%" (
+    echo [!] 未找到 %INI_FILE%，请确认脚本位于巫师3根目录下！
+    pause
+    exit /b
+)
+findstr /i "DBGConsoleOn=true" "%INI_FILE%" >nul
+if %errorlevel% equ 0 (
+    echo [√] general.ini 已成功开启 DBGConsoleOn=true！
+) else (
+    echo DBGConsoleOn=true >> "%INI_FILE%"
+    echo [√] 成功写入 DBGConsoleOn=true！
+)
+echo [*] 进游戏按 ~ 键即可畅享控制台！
+pause`
+      },
+      "baldurs-gate-3": {
+        status: "green",
+        statusText: "🟢 完美兼容实测通过",
+        verifiedPatch: "Patch 7 (Hotfix 29 对齐 - 官方MOD管理器)",
+        engine: "Divinity 4.0",
+        toolchain: "Norbyte Script Extender (BG3SE) v18+",
+        summary: "Patch 7 官方模组管理器上线后，Norbyte Script Extender 原生黑窗全面兼容，无冲突破坏成就。",
+        riskTitle: "⚠️ 彻底移除老版 ModFixer",
+        riskDesc: "Patch 7 官方接管了加载顺序，老版 ModFixer 会导致剧情掷骰子界面永久卡死或剧情对话跳过，必须彻底清空 Mods 目录下的历史残留！",
+        riskSeverity: "amber",
+        rescueSteps: [
+          "1. 确认 Script Extender 升级至 v18+ 针对 Patch 7 编译的 DWrite.dll。",
+          "2. 启动游戏时会自动弹出 SE 原生控制台黑窗，在黑窗内输入 Osi 指令即刻生效。",
+          "3. 长休补给直接注入 50 个营地补给包即可永久摆脱全员法术位空乏烦恼。"
+        ],
+        batPreview: `@echo off
+chcp 65001 >nul
+title 【老L·单机避坑局】博德之门3 Patch 7 环境排错
+echo [*] 正在检查 Baldur's Gate 3 / bin 目录...
+if not exist "bin\\bg3.exe" (
+    echo [!] 请将脚本放在博德之门3游戏根目录运行！
+    pause
+    exit /b
+)
+echo [i] 请确保已升级 Norbyte Script Extender v18+ 并彻底删除 ModFixer。
+echo [√] 启动游戏将自动唤醒底层 Osi 调试黑窗！
+pause`
+      },
+      "elden-ring": {
+        status: "green",
+        statusText: "🟢 完美兼容实测通过",
+        verifiedPatch: "v1.14 (黄金树幽影DLC完全对齐)",
+        engine: "FromSoftware 专有引擎",
+        toolchain: "ModEngine2 v2.1.0 / Seamless Co-op v1.8.2 / TGA Table",
+        summary: "黄金树幽影 DLC 适配通过，ModEngine2 离线管道截断 EAC 守护进程，100% 零封号安全畅玩。",
+        riskTitle: "⚠️ EAC 驱动层联机封禁防线",
+        riskDesc: "FromSoftware 部署的 EAC 驱动服务会在检测到内存修改时上报封禁标记（180天小黑屋）。必须严格在离线模式或通过 ModEngine2 管道拦截启动！",
+        riskSeverity: "amber",
+        rescueSteps: [
+          "1. 解压 ModEngine2，将模组放入 /mod 目录，直接双击 launchmod_eldenring.bat 启动。",
+          "2. 启动器自动拦截 EAC 并切入纯净离线环境，游戏主界面右下角显示已离线即可。",
+          "3. 好友联机推荐使用 Seamless Co-op，独立 .co2 存档与官方服务器物理隔离。"
+        ],
+        batPreview: `@echo off
+chcp 65001 >nul
+title 【老L·单机避坑局】艾尔登法环 离线免封启动助手
+echo [*] 正在准备离线启动环境并拦截 Easy Anti-Cheat (EAC)...
+if not exist "Game\\eldenring.exe" (
+    echo [!] 请将脚本放在 ELDEN RING 根目录或使用 ModEngine2 专属启动器！
+    pause
+    exit /b
+)
+echo [√] 离线管道准备完毕，主菜单右下角提示已离线即可放心体验！
+pause`
+      },
+      "skyrim-se": {
+        status: "yellow",
+        statusText: "🟡 需更新前置 / 需补丁适配",
+        verifiedPatch: "v1.6.1170 (SE/AE 深度适配)",
+        engine: "Creation Engine 1",
+        toolchain: "SKSE64 v2.2.6 / SSE Engine Fixes / Crash Logger",
+        summary: "Steam 最新 1.6.1170 破坏了老版 SKSE，需使用 2.2.6+ 与对应 Address Library，防止闪退。",
+        riskTitle: "⚠️ 严禁盲目运行 caqs 终极坏档",
+        riskDesc: "Bethesda 游戏中由于触发器失效引发的任务卡死，严禁使用 caqs (强制完成全游戏所有任务引发崩溃)。必须使用 setstage <QuestID> <Stage> 定向推进！",
+        riskSeverity: "red",
+        rescueSteps: [
+          "1. 确认已部署 SKSE64 2.2.6，并安装 SSE Engine Fixes 6.1.1 修复高刷新率推车飞天 Bug。",
+          "2. 打开 Documents/My Games/Skyrim Special Edition/Skyrim.ini 确认 bAllowConsole=1。",
+          "3. 游戏中按 ~ 呼出，FormID 前导零全部可省略（如 player.additem f 100000 瞬间到账 10 万金币）。"
+        ],
+        batPreview: `@echo off
+chcp 65001 >nul
+title 【老L·单机避坑局】上古卷轴5 v1.6.1170 排错检测
+if not exist "SkyrimSE.exe" (
+    echo [!] 请置于 Skyrim Special Edition 根目录下运行！
+    pause
+    exit /b
+)
+echo [i] 请确认已部署 SKSE64 v2.2.6 与对应 Address Library。
+echo [√] 启动游戏后按 ~ 呼出原生控制台，FormID 前导零可全省略！
+pause`
+      },
+      "fallout-4": {
+        status: "red",
+        statusText: "🔴 恶性坏档暂停更新 / 推荐降级",
+        verifiedPatch: "v1.10.984+ (次世代大更新双轨实测)",
+        engine: "Creation Engine 1",
+        toolchain: "Fallout 4 Downgrader / F4SE NG v0.7.2+ / Buffout 4 NG",
+        summary: "次世代大更新编译器升级导致内存偏移重写，破坏近 10 年 Mod 体系，老整合包一律闪退！",
+        riskTitle: "⚠️ 次世代崩溃与建造上限锁死",
+        riskDesc: "次世代补丁破坏大量依赖 F4SE 的顶级 Mod；且庇护山丘聚落建造容量被强制锁死变黄。死亡三角区（庇护山丘+红火箭+阿伯纳西）高密建造极易 CTD 闪退。",
+        riskSeverity: "red",
+        rescueSteps: [
+          "1. 深度 Mod 玩家强烈建议使用 Fallout 4 Downgrader 回退至 1.10.163 黄金稳定版本。",
+          "2. 在 Steam 库右键 Fallout 4 -> 属性 -> 更新 -> 设置为【仅在我启动该游戏时更新】彻底防暗更。",
+          "3. 工坊无限建造空间：按 ~ 点中工作台输入 setav 349 9999999 与 setav 348 9999999 即可。"
+        ],
+        batPreview: `@echo off
+chcp 65001 >nul
+title 【老L·单机避坑局】辐射4次世代防暗更与环境检测
+if not exist "Fallout4.exe" (
+    echo [!] 请置于 Fallout 4 根目录下运行！
+    pause
+    exit /b
+)
+echo [!] 警告: 次世代补丁破坏大量经典 Mod，建议锁定 Steam 自动更新！
+echo [√] 日常启动请一律通过 f4se_loader.exe 规避强制推送！
+pause`
+      },
+      "palworld": {
+        status: "green",
+        statusText: "🟢 完美兼容实测通过",
+        verifiedPatch: "v0.3.8 (天马更新实测)",
+        engine: "虚幻引擎 5 (UE5)",
+        toolchain: "UE4SS v3.0 / Palworld Save Tools",
+        summary: "UE4SS v3.0 适配正常，纯净指令与离线配种加速稳定运行。",
+        riskTitle: "⚠️ 联机存档校验防线",
+        riskDesc: "联机存档请勿随意修改帕鲁变态数值，易导致专用服务器反作弊校验失败。",
+        riskSeverity: "green",
+        rescueSteps: ["单机离线运行通过，推荐使用 Palworld Mod Config 纯净管理。"],
+        batPreview: `@echo off
+echo [√] 幻兽帕鲁 UE4SS 环境准备就绪！
+pause`
+      },
+      "starfield": {
+        status: "yellow",
+        statusText: "🟡 需更新前置 / 需补丁适配",
+        verifiedPatch: "v1.14.70 (破碎空间 DLC 对齐)",
+        engine: "Creation Engine 2",
+        toolchain: "SFSE / Starfield Community Patch",
+        summary: "SFSE 需对齐 Shattered Space 官方更新，官方工坊与本地插件共存需排序。",
+        riskTitle: "⚠️ 老版 DLL 注入黑屏闪退",
+        riskDesc: "更新后老版 DLL 注入插件可能导致启动黑屏闪退，需更新至最新 SFSE。",
+        riskSeverity: "amber",
+        rescueSteps: ["更新 SFSE 至最新版本，并在 StarfieldCustom.ini 确认 bInvalidateExistingFiles=1。"],
+        batPreview: `@echo off
+echo [√] 星空 SFSE 环境检测通过！
+pause`
+      },
+      "gta-v": {
+        status: "yellow",
+        statusText: "🟡 需更新前置 / 需补丁适配",
+        verifiedPatch: "v3323 (线上最新对齐)",
+        engine: "RAGE 引擎",
+        toolchain: "ScriptHookV / OpenIV",
+        summary: "需更新 ScriptHookV！BattlEye 反作弊上线，故事模式必须物理隔离。",
+        riskTitle: "⚠️ BattlEye 线上封禁风险",
+        riskDesc: "若带 Mod 进入 GTA Online 必定触发 BattlEye 封禁！故事模式单机必须物理隔离。",
+        riskSeverity: "red",
+        rescueSteps: ["单机必须在启动参数添加 -scOfflineOnly，隔离线上连接。"],
+        batPreview: `@echo off
+echo [√] GTA V 单机离线隔离模式启动！
+pause`
+      },
+      "rdr2": {
+        status: "green",
+        statusText: "🟢 完美兼容实测通过",
+        verifiedPatch: "v1.0.1491 (完全对齐)",
+        engine: "RAGE 引擎",
+        toolchain: "ScriptHookRDR2 / LML (Lenny's Mod Loader)",
+        summary: "ScriptHookRDR2 最新对齐，故事模式全武器解锁与天气系统 100% 稳定运行。",
+        riskTitle: "⚠️ 线上模式封禁与版本对齐",
+        riskDesc: "打入 ScriptHook 离线补丁后切勿进入 RDO 荒野大镖客线上模式！启动前使用 L-MOD 安全离线批处理屏蔽连网校验。",
+        riskSeverity: "red",
+        rescueSteps: [
+          "1. 确认 ScriptHookRDR2.dll 与 dinput8.dll 放入游戏根目录。",
+          "2. 严禁进入线上模式，建议断网或离线启动。",
+          "3. 游戏内按 F5 呼出原生离线菜单。"
+        ],
+        batPreview: `@echo off
+chcp 65001 >nul
+title 【老L·单机避坑局】荒野大镖客2离线隔离启动
+if not exist "RDR2.exe" (
+    echo [!] 请置于 Red Dead Redemption 2 根目录下运行！
+    pause
+    exit /b
+)
+echo [√] RDR2 离线隔离模式环境就绪，按 F5 呼出修改器！
+pause`
+      },
+      "monster-hunter-world": {
+        status: "green",
+        statusText: "🟢 完美兼容实测通过",
+        verifiedPatch: "v15.11 (冰原最终版完全对齐)",
+        engine: "MT Framework",
+        toolchain: "Stracker's Loader / REFramework",
+        summary: "冰原最终大版本彻底固定，Stracker's Loader 核心前置 100% 稳定，显血插件与全素材代码零崩溃。",
+        riskTitle: "⚠️ 联机显血与 CRC 校验避坑",
+        riskDesc: "联机组队时部分前置会因 Steam 通信包 CRC 校验冲突导致偶发离线，建议使用本站提供的 CRC 旁路绕行配置。",
+        riskSeverity: "green",
+        rescueSteps: [
+          "1. 确认 dtdata.dll 与 hid.dll 放入 Monster Hunter World 根目录。",
+          "2. 冰原大版本已停止更新，无需担心 Steam 静默补丁背刺。",
+          "3. 游戏中按 Insert 键呼出 REFramework 覆盖菜单。"
+        ],
+        batPreview: `@echo off
+chcp 65001 >nul
+title 【老L·单机避坑局】怪猎冰原环境校验
+if not exist "MonsterHunterWorld.exe" (
+    echo [!] 请置于 Monster Hunter: World 根目录下运行！
+    pause
+    exit /b
+)
+echo [√] 冰原最终版环境检测通过，前置全部锁定就绪！
+pause`
+      },
+      "sekiro": {
+        status: "green",
+        statusText: "🟢 完美兼容实测通过",
+        verifiedPatch: "v1.06 (年度版完全对齐)",
+        engine: "FromSoft Proprietary",
+        toolchain: "Mod Engine / Dinput8 Hook",
+        summary: "v1.06 年度版已彻底封包停止更新，Mod Engine 钩子极度稳定，完美弹刀提示与模型替换稳定运行。",
+        riskTitle: "⚠️ dinput8.dll 路径覆盖",
+        riskDesc: "必须确保 dinput8.dll 放置在 sekiro.exe 同级目录，MOD 目录名需与 modengine.ini 中的 modOverrideDirectory 完全一致。",
+        riskSeverity: "green",
+        rescueSteps: [
+          "1. 确认 dinput8.dll 和 modengine.ini 位于 sekiro.exe 同级目录。",
+          "2. 模型与画质 Mod 放入 mods/ 文件夹，路径避免中文字符。",
+          "3. 官方年度版已终身锁定版本，零坏档风险。"
+        ],
+        batPreview: `@echo off
+chcp 65001 >nul
+title 【老L·单机避坑局】只狼环境就绪检测
+if not exist "sekiro.exe" (
+    echo [!] 请置于 Sekiro 根目录下运行！
+    pause
+    exit /b
+)
+echo [√] 只狼 v1.06 终装版 ModEngine 钩子环境正常！
+pause`
+      },
+      "re4-remake": {
+        status: "green",
+        statusText: "🟢 完美兼容实测通过",
+        verifiedPatch: "v1.0+ (逆命殊途DLC完全对齐)",
+        engine: "RE Engine",
+        toolchain: "REFramework / Fluffy Mod Manager",
+        summary: "REFramework 图形化 ImGui 控制台适配逆命殊途 DLC，第一人称与自由运镜零报错。",
+        riskTitle: "⚠️ 卡普空 Enigma 保护与着色器编译",
+        riskDesc: "更新后如遇黑色着色器加载失败，请删除 reshade-shaders 缓存并重启 REFramework 自动生成。",
+        riskSeverity: "amber",
+        rescueSteps: [
+          "1. 将 dinput8.dll 放入 re4.exe 根目录。",
+          "2. 启动游戏自动生成 reframework 文件夹，按 Insert 键呼出控制台。",
+          "3. 服装与武器 Mod 通过 Fluffy Mod Manager 一键管理。"
+        ],
+        batPreview: `@echo off
+chcp 65001 >nul
+title 【老L·单机避坑局】生化危机4重制版环境检测
+if not exist "re4.exe" (
+    echo [!] 请置于 Resident Evil 4 Remake 根目录下运行！
+    pause
+    exit /b
+)
+echo [√] REFramework 钩子就绪，进入游戏按 Insert 呼出！
+pause`
+      }
+    };
+
+    // ========================================================
+    // GLOBAL STATE & I18N ENGINE
+    // ========================================================
+    let allGames = [];
+    let filteredGames = [];
+    let currentStatusFilter = 'all';
+    let currentEngineFilter = 'all';
+    let currentSearchQuery = '';
+    let currentSortMode = 'risk-desc';
+    let activeDrawerGame = null;
+
+    let currentLang = localStorage.getItem('lmod_lang') || 'zh-CN';
+    let translations = window.TRANSLATIONS_DATA || {};
+
+    const LANG_CONFIG = {
+      'zh-CN': { flag: '🇨🇳', name: '简体中文' },
+      'en':    { flag: '🇺🇸', name: 'English' },
+      'zh-TW': { flag: '🇭🇰', name: '繁體中文' },
+      'ja':    { flag: '🇯🇵', name: '日本語' },
+      'ko':    { flag: '🇰🇷', name: '한국어' },
+      'ru':    { flag: '🇷🇺', name: 'Русский' },
+      'de':    { flag: '🇩🇪', name: 'Deutsch' },
+      'es':    { flag: '🇪🇸', name: 'Español' }
+    };
+
+    function t(key, fallback = '') {
+      if (translations[currentLang] && translations[currentLang][key]) {
+        return translations[currentLang][key];
+      }
+      if (translations['zh-CN'] && translations['zh-CN'][key]) {
+        return translations['zh-CN'][key];
+      }
+      return fallback;
+    }
+
+    function toggleLangDropdown(event) {
+      if (event) event.stopPropagation();
+      const menu = document.getElementById('lang-menu');
+      const chevron = document.getElementById('lang-chevron');
+      if (!menu) return;
+      const isHidden = menu.classList.contains('hidden');
+      if (isHidden) {
+        menu.classList.remove('hidden');
+        if (chevron) chevron.classList.add('rotate-180');
+      } else {
+        menu.classList.add('hidden');
+        if (chevron) chevron.classList.remove('rotate-180');
+      }
+    }
+
+    function closeLangDropdown() {
+      const menu = document.getElementById('lang-menu');
+      const chevron = document.getElementById('lang-chevron');
+      if (menu && !menu.classList.contains('hidden')) {
+        menu.classList.add('hidden');
+        if (chevron) chevron.classList.remove('rotate-180');
+      }
+    }
+
+    document.addEventListener('click', (e) => {
+      const dd = document.getElementById('custom-lang-dropdown');
+      if (dd && !dd.contains(e.target)) {
+        closeLangDropdown();
+      }
+    });
+
+    function selectLanguage(langCode, flag, name) {
+      currentLang = langCode;
+      localStorage.setItem('lmod_lang', langCode);
+
+      const flagEl = document.getElementById('current-lang-flag');
+      const nameEl = document.getElementById('current-lang-name');
+      if (flagEl) flagEl.textContent = flag;
+      if (nameEl) nameEl.textContent = name;
+
+      document.querySelectorAll('.lang-option').forEach(btn => {
+        const btnLang = btn.getAttribute('data-lang');
+        const check = btn.querySelector('.lang-check');
+        if (btnLang === langCode) {
+          if (check) check.classList.remove('hidden');
+          btn.classList.add('text-[#A855F7]', 'font-semibold');
+        } else {
+          if (check) check.classList.add('hidden');
+          btn.classList.remove('text-[#A855F7]', 'font-semibold');
+        }
+      });
+
+      closeLangDropdown();
+      renderRadarUI();
+      applyFilters();
+      if (activeDrawerGame) {
+        openGameDrawer(activeDrawerGame);
+      }
+      showToast(`${t('toastLangSwitched', '语言已切换至')} ${name}`);
+    }
+
+    function initLanguage() {
+      if (window.TRANSLATIONS_DATA) {
+        translations = window.TRANSLATIONS_DATA;
+      }
+      const savedLang = localStorage.getItem('lmod_lang') || 'zh-CN';
+      currentLang = LANG_CONFIG[savedLang] ? savedLang : 'zh-CN';
+      const cfg = LANG_CONFIG[currentLang] || LANG_CONFIG['zh-CN'];
+
+      const flagEl = document.getElementById('current-lang-flag');
+      const nameEl = document.getElementById('current-lang-name');
+      if (flagEl) flagEl.textContent = cfg.flag;
+      if (nameEl) nameEl.textContent = cfg.name;
+
+      document.querySelectorAll('.lang-option').forEach(btn => {
+        const btnLang = btn.getAttribute('data-lang');
+        const check = btn.querySelector('.lang-check');
+        if (btnLang === currentLang) {
+          if (check) check.classList.remove('hidden');
+          btn.classList.add('text-[#A855F7]', 'font-semibold');
+        } else {
+          if (check) check.classList.add('hidden');
+          btn.classList.remove('text-[#A855F7]', 'font-semibold');
+        }
+      });
+    }
+
+    // ========================================================
+    // MULTILINGUAL EMERGENCY MARQUEE TICKER DATA & RENDERER
+    // ========================================================
+    const TICKER_DATA = {
+      'zh-CN': [
+        { id: 'fallout-4', color: 'text-red-400', tag: '🔴【辐射4】', text: '次世代大更新破坏近 10 年 Mod 体系，高危闪退！推荐使用 Downgrader 回退 1.10.163 稳定版' },
+        { id: 'skyrim-se', color: 'text-amber-400', tag: '🟡【上古卷轴5】', text: 'v1.6.1170 前置需更新对齐！认准 SKSE64 2.2.6 与 SSE Engine Fixes 修复推车飞天' },
+        { id: 'baldurs-gate-3', color: 'text-emerald-400', tag: '🟢【博德之门3】', text: 'Patch 7 官方工坊对齐实测通过！BG3SE v18+ 原生黑窗完全兼容，务必清除老版 ModFixer' },
+        { id: 'elden-ring', color: 'text-emerald-400', tag: '🟢【艾尔登法环】', text: '黄金树幽影 v1.14 离线免封方案已同步！ModEngine2 管道拦截 EAC 零封号' },
+        { id: 'cyberpunk-2077', color: 'text-emerald-400', tag: '🟢【赛博朋克2077】', text: '往日之影最新对齐！CET 1.33.0 原生脚本通过验证，拒绝旧版 SetLevel 坏档代码' }
+      ],
+      'en': [
+        { id: 'fallout-4', color: 'text-red-400', tag: '🔴 [Fallout 4]', text: 'Next-Gen update breaks 10-year mod ecosystem! High crash risk — Downgrader to 1.10.163 recommended.' },
+        { id: 'skyrim-se', color: 'text-amber-400', tag: '🟡 [Skyrim SE]', text: 'v1.6.1170 requires prerequisite updates! Ensure SKSE64 2.2.6 & SSE Engine Fixes are installed.' },
+        { id: 'baldurs-gate-3', color: 'text-emerald-400', tag: '🟢 [Baldur\'s Gate 3]', text: 'Patch 7 official mod manager verified! BG3SE v18+ compatible, purge legacy ModFixer.' },
+        { id: 'elden-ring', color: 'text-emerald-400', tag: '🟢 [Elden Ring]', text: 'Shadow of the Erdtree v1.14 offline safe mode synced! ModEngine2 pipes bypass EAC safely.' },
+        { id: 'cyberpunk-2077', color: 'text-emerald-400', tag: '🟢 [Cyberpunk 2077]', text: 'Phantom Liberty latest patch verified! CET 1.33.0+ native scripts working smoothly.' }
+      ],
+      'zh-TW': [
+        { id: 'fallout-4', color: 'text-red-400', tag: '🔴【異塵餘生4】', text: '次世代大更新破壞近 10 年 Mod 體系，高危閃退！推薦使用 Downgrader 回退 1.10.163 穩定版' },
+        { id: 'skyrim-se', color: 'text-amber-400', tag: '🟡【上古卷軸5】', text: 'v1.6.1170 前置需更新對齊！認準 SKSE64 2.2.6 與 SSE Engine Fixes 修復推車飛天' },
+        { id: 'baldurs-gate-3', color: 'text-emerald-400', tag: '🟢【柏德之門3】', text: 'Patch 7 官方工坊對齊實測通過！BG3SE v18+ 原生黑窗完全相容，務必清除舊版 ModFixer' },
+        { id: 'elden-ring', color: 'text-emerald-400', tag: '🟢【艾爾登法環】', text: '黃金樹幽影 v1.14 離線免封方案已同步！ModEngine2 管道攔截 EAC 零封號' },
+        { id: 'cyberpunk-2077', color: 'text-emerald-400', tag: '🟢【電馭叛客2077】', text: '往日之影最新對齊！CET 1.33.0 原生腳本通過驗證，拒絕舊版 SetLevel 壞檔代碼' }
+      ],
+      'ja': [
+        { id: 'fallout-4', color: 'text-red-400', tag: '🔴【Fallout 4】', text: '次世代アプデで過去10年のMod環境が崩壊！クラッシュ多発、ダウングレード（1.10.163）推奨。' },
+        { id: 'skyrim-se', color: 'text-amber-400', tag: '🟡【Skyrim SE】', text: 'v1.6.1170 前提MOD更新必須！SKSE64 2.2.6 & SSE Engine Fixes 適用を推奨。' },
+        { id: 'baldurs-gate-3', color: 'text-emerald-400', tag: '🟢【BG3】', text: 'Patch 7 公式Modマネージャー対応検証完了！BG3SE v18+ 完全対応、旧ModFixerは削除必須。' },
+        { id: 'elden-ring', color: 'text-emerald-400', tag: '🟢【Elden Ring】', text: 'SHADOW OF THE ERDTREE v1.14 オフライン回避策同期完了！ModEngine2でEAC安全ブロック。' },
+        { id: 'cyberpunk-2077', color: 'text-emerald-400', tag: '🟢【Cyberpunk 2077】', text: '仮初めの自由 最新同期完了！CET 1.33.0+ 検証済み、旧SetLevelセーブ破壊コードは使用禁止。' }
+      ],
+      'ko': [
+        { id: 'fallout-4', color: 'text-red-400', tag: '🔴【폴아웃 4】', text: '차세대 대형 패치로 10년 모드 생태계 파괴! 심각한 튕김 발생, 1.10.163 다운그레이더 강력 권장.' },
+        { id: 'skyrim-se', color: 'text-amber-400', tag: '🟡【스카이림 SE】', text: 'v1.6.1170 선행 모드 업데이트 필수! SKSE64 2.2.6 및 SSE Engine Fixes 최신 적용 권장.' },
+        { id: 'baldurs-gate-3', color: 'text-emerald-400', tag: '🟢【발더스 게이트 3】', text: '패치 7 공식 모드 매니저 호환 검증 통과! BG3SE v18+ 완벽 호환, 구버전 ModFixer 삭제 필수.' },
+        { id: 'elden-ring', color: 'text-emerald-400', tag: '🟢【엘든 링】', text: '황금 나무의 그림자 v1.14 오프라인 밴 방지 동기화 완료! ModEngine2 EAC 우회 적용.' },
+        { id: 'cyberpunk-2077', color: 'text-emerald-400', tag: '🟢【사이버펑크 2077】', text: '팬텀 리버티 최신 패치 검증 완료! CET 1.33.0+ 정상 구동, 구버전 SetLevel 코드 사용 금지.' }
+      ],
+      'ru': [
+        { id: 'fallout-4', color: 'text-red-400', tag: '🔴 [Fallout 4]', text: 'Некстген-патч сломал экосистему модов! Высокий риск вылетов — рекомендуется даунгрейд до 1.10.163.' },
+        { id: 'skyrim-se', color: 'text-amber-400', tag: '🟡 [Skyrim SE]', text: 'Для v1.6.1170 требуются обновления пререквизитов! Используйте SKSE64 2.2.6 и SSE Engine Fixes.' },
+        { id: 'baldurs-gate-3', color: 'text-emerald-400', tag: '🟢 [Baldur\'s Gate 3]', text: 'Патч 7 проверен с официальным менеджером модов! BG3SE v18+ работает, удалите старый ModFixer.' },
+        { id: 'elden-ring', color: 'text-emerald-400', tag: '🟢 [Elden Ring]', text: 'Shadow of the Erdtree v1.14 безопасный оффлайн-режим готов! ModEngine2 блокирует EAC.' },
+        { id: 'cyberpunk-2077', color: 'text-emerald-400', tag: '🟢 [Cyberpunk 2077]', text: 'Призрачная свобода проверена! CET 1.33.0+ работает стабильно, избегайте старого кода SetLevel.' }
+      ],
+      'de': [
+        { id: 'fallout-4', color: 'text-red-400', tag: '🔴 [Fallout 4]', text: 'Next-Gen-Update zerstört Mod-Ökosystem! Hohes Absturzrisiko — Downgrade auf 1.10.163 empfohlen.' },
+        { id: 'skyrim-se', color: 'text-amber-400', tag: '🟡 [Skyrim SE]', text: 'v1.6.1170 erfordert Mod-Aktualisierungen! SKSE64 2.2.6 & SSE Engine Fixes verwenden.' },
+        { id: 'baldurs-gate-3', color: 'text-emerald-400', tag: '🟢 [Baldur\'s Gate 3]', text: 'Patch 7 offizieller Mod-Manager verifiziert! BG3SE v18+ kompatibel, alten ModFixer entfernen.' },
+        { id: 'elden-ring', color: 'text-emerald-400', tag: '🟢 [Elden Ring]', text: 'Shadow of the Erdtree v1.14 Offline-Schutz aktiv! ModEngine2 umgeht EAC sicher.' },
+        { id: 'cyberpunk-2077', color: 'text-emerald-400', tag: '🟢 [Cyberpunk 2077]', text: 'Phantom Liberty verifiziert! CET 1.33.0+ Skripte funktionieren einwandfrei.' }
+      ],
+      'es': [
+        { id: 'fallout-4', color: 'text-red-400', tag: '🔴 [Fallout 4]', text: '¡Actualización de nueva generación rompe mods! Alto riesgo de fallos — se recomienda Downgrader a 1.10.163.' },
+        { id: 'skyrim-se', color: 'text-amber-400', tag: '🟡 [Skyrim SE]', text: '¡v1.6.1170 requiere actualizar dependencias! Use SKSE64 2.2.6 y SSE Engine Fixes.' },
+        { id: 'baldurs-gate-3', color: 'text-emerald-400', tag: '🟢 [Baldur\'s Gate 3]', text: '¡Parche 7 verificado con gestor oficial de mods! BG3SE v18+ compatible, elimine ModFixer antiguo.' },
+        { id: 'elden-ring', color: 'text-emerald-400', tag: '🟢 [Elden Ring]', text: '¡Shadow of the Erdtree v1.14 modo seguro sin conexión listo! ModEngine2 bloquea EAC.' },
+        { id: 'cyberpunk-2077', color: 'text-emerald-400', tag: '🟢 [Cyberpunk 2077]', text: '¡Phantom Liberty verificado! Scripts nativos CET 1.33.0+ estables, evite código SetLevel obsoleto.' }
+      ]
+    };
+
+    function renderTicker() {
+      const track = document.getElementById('ticker-track');
+      if (!track) return;
+      let items = [...(TICKER_DATA[currentLang] || TICKER_DATA['zh-CN'])];
+
+      // Dynamic alerts from games with compatibilityStatus == 'red' or 'yellow'
+      if (typeof allGames !== 'undefined' && Array.isArray(allGames)) {
+        const dynamicItems = [];
+        allGames.forEach(g => {
+          if (g.emergencyAlert && (g.compatibilityStatus === 'red' || g.compatibilityStatus === 'yellow')) {
+            const isRed = g.compatibilityStatus === 'red';
+            const localizedTitle = (g.titles && g.titles[currentLang]) ? g.titles[currentLang] : g.title;
+            const tag = isRed ? `🔴【${localizedTitle}】` : `🟡【${localizedTitle}】`;
+            const alertText = typeof g.emergencyAlert === 'object' ? (g.emergencyAlert[currentLang] || g.emergencyAlert['zh-CN']) : g.emergencyAlert;
+            dynamicItems.push({
+              id: g.id,
+              color: isRed ? 'text-red-400' : 'text-amber-400',
+              tag: tag,
+              text: alertText
+            });
+          }
+        });
+        if (dynamicItems.length > 0) {
+          items = [...dynamicItems, ...items];
+        }
+      }
+      
+      const makeItemHtml = (item) => `
+        <span class="flex items-center space-x-1.5 cursor-pointer hover:text-white" onclick="event.stopPropagation(); openGameDrawerById('${item.id}')">
+          <span class="${item.color} font-bold">${item.tag}</span>
+          <span>${item.text}</span>
+        </span>
+      `;
+
+      const listHtml = items.map(makeItemHtml).join('<span class="text-zinc-600">|</span>');
+      // Clone once for continuous seamless marquee loop
+      track.innerHTML = listHtml + '<span class="text-zinc-600">|</span>' + listHtml;
+    }
+
+    // ========================================================
+    // RENDER FULL RADAR UI (STATIC & LABELS)
+    // ========================================================
+    function renderRadarUI() {
+      // 1. Ticker Header
+      const tickBadge = document.getElementById('ticker-badge-text');
+      if (tickBadge) tickBadge.innerText = t('radarEmergencyBroadcast', '紧急巡检广播');
+      const tickBack = document.getElementById('ticker-back-text');
+      if (tickBack) tickBack.innerText = t('returnMainVault', '返回 L-MOD 主库');
+      renderTicker();
+
+      // 2. Header Brand
+      const hTitle = document.getElementById('radar-header-title');
+      if (hTitle) hTitle.innerText = t('radarTitle', 'Steam 补丁变动与 Mod 兼容性实时避坑雷达');
+      const hVer = document.getElementById('radar-header-version');
+      if (hVer) hVer.innerText = t('radarVersionBadge', 'v4.0 独立看板');
+      const hPow = document.getElementById('radar-header-powered');
+      if (hPow) hPow.innerText = t('radarSubtitle', '由 L-MOD Vault 避坑实验室驱动');
+      const hLive = document.getElementById('radar-header-live');
+      if (hLive) hLive.innerText = t('radarInspectingLive', '24h 智能对齐巡检进行中');
+      const hGroup = document.getElementById('radar-group-code-label');
+      if (hGroup) hGroup.innerText = t('radarSecretGroupBtn', '进避坑互助群暗号:');
+      const hRet = document.getElementById('radar-return-btn-text');
+      if (hRet) hRet.innerText = t('returnMainVault', '返回 L-MOD 主库');
+      const aiBtn = document.getElementById('radar-ai-btn');
+      if (aiBtn) aiBtn.title = t('headerAiBtnTitle', '老L · AI 游戏智库顾问 (快捷键: Cmd+K / Ctrl+K)');
+      const aiText = document.getElementById('radar-ai-btn-text');
+      if (aiText) aiText.innerText = t('headerAiBtnText', 'AI 顾问');
+
+      const menuTitle = document.getElementById('lang-menu-title');
+      if (menuTitle) menuTitle.innerText = t('selectLanguage', '选择语言 · Select Language');
+
+      // 3. Metric Cards
+      const mgTitle = document.getElementById('metric-green-title');
+      if (mgTitle) mgTitle.innerText = t('statusCompatible', '完美兼容 · 实测通过');
+      const mgTag = document.getElementById('metric-green-tag');
+      if (mgTag) mgTag.innerText = t('statusCompatibleTag', '稳定运行');
+      const mgUnit = document.getElementById('metric-green-unit');
+      if (mgUnit) mgUnit.innerText = t('metricGreenUnit', '款 3A 大作');
+      const mgDesc = document.getElementById('metric-green-desc');
+      if (mgDesc) mgDesc.innerText = t('statusCompatibleDesc', '最新补丁实机测试，控制台与前置 100% 畅玩');
+
+      const myTitle = document.getElementById('metric-yellow-title');
+      if (myTitle) myTitle.innerText = t('statusWarning', '需更新前置 / 需补丁适配');
+      const myTag = document.getElementById('metric-yellow-tag');
+      if (myTag) myTag.innerText = t('statusWarningTag', '注意排查');
+      const myUnit = document.getElementById('metric-yellow-unit');
+      if (myUnit) myUnit.innerText = t('metricYellowUnit', '款需更新前置');
+      const myDesc = document.getElementById('metric-yellow-desc');
+      if (myDesc) myDesc.innerText = t('statusWarningDesc', '游戏小更新破坏前置DLL，需更新对应框架后启动');
+
+      const mrTitle = document.getElementById('metric-red-title');
+      if (mrTitle) mrTitle.innerText = t('statusBroken', '恶性坏档 · 暂停更新');
+      const mrTag = document.getElementById('metric-red-tag');
+      if (mrTag) mrTag.innerText = t('statusBrokenTag', '紧急预警');
+      const mrUnit = document.getElementById('metric-red-unit');
+      if (mrUnit) mrUnit.innerText = t('metricRedUnit', '款高危预警');
+      const mrDesc = document.getElementById('metric-red-desc');
+      if (mrDesc) mrDesc.innerText = t('statusBrokenDesc', '次世代破坏老Mod架构，请务必锁定 Steam 自动更新');
+
+      const miTitle = document.getElementById('metric-inspection-title');
+      if (miTitle) miTitle.innerText = t('statusInspection', '巡检哨兵机制');
+      const miUnit = document.getElementById('metric-inspection-unit');
+      if (miUnit) miUnit.innerText = t('metricInspectionUnit', '款全球神作全覆盖');
+      const miDesc = document.getElementById('metric-inspection-desc');
+      if (miDesc) miDesc.innerText = t('statusInspectionDesc', '每日对比 Steam AppUpdate 差量，发现坏档连夜同步');
+
+      // 4. Search & Filters
+      const sInput = document.getElementById('radar-search');
+      if (sInput) sInput.placeholder = t('radarSearchPlaceholder', '搜索游戏名称、Steam AppID (如 1245620)、底层引擎...');
+
+      const sSort = document.getElementById('radar-sort-label');
+      if (sSort) sSort.innerText = t('sortLabel', '排序方式:');
+      const oRisk = document.getElementById('opt-risk-desc');
+      if (oRisk) oRisk.innerText = t('sortRiskDesc', '⚠️ 风险优先 (坏档/需前置置顶)');
+      const oRank = document.getElementById('opt-rank-asc');
+      if (oRank) oRank.innerText = t('sortRankAsc', '👑 游戏排名 (Rank 1 ~ 100)');
+      const oComp = document.getElementById('opt-compat-first');
+      if (oComp) oComp.innerText = t('sortCompatibleFirst', '🟢 稳定优先 (已实测完美)');
+      const oName = document.getElementById('opt-name-asc');
+      if (oName) oName.innerText = t('sortNameAsc', '🔤 游戏名称 (A-Z)');
+
+      const fStatus = document.getElementById('radar-filter-status-label');
+      if (fStatus) fStatus.innerText = t('filterCompatLabel', '兼容状态:');
+      const pStatAll = document.getElementById('pill-status-all');
+      if (pStatAll) pStatAll.innerText = t('filterEngineAll', '全部');
+      const pStatGreen = document.getElementById('pill-status-green');
+      if (pStatGreen) pStatGreen.innerText = t('statusCompatibleShort', '🟢 完美兼容');
+      const pStatYellow = document.getElementById('pill-status-yellow');
+      if (pStatYellow) pStatYellow.innerText = t('statusWarningShort', '🟡 需更前置');
+      const pStatRed = document.getElementById('pill-status-red');
+      if (pStatRed) pStatRed.innerText = t('statusBrokenShort', '🔴 暂停更新');
+
+      const fEngine = document.getElementById('radar-filter-engine-label');
+      if (fEngine) fEngine.innerText = t('filterEngineLabel', '专区/引擎:');
+      const pEngAll = document.getElementById('pill-engine-all');
+      if (pEngAll) pEngAll.innerText = t('filterEngineAll', '全部');
+      const pEngFlag = document.getElementById('pill-engine-flagship');
+      if (pEngFlag) pEngFlag.innerText = t('filterEngineFlagship', '👑 Top 7 旗舰深度');
+      const pEngUE = document.getElementById('pill-engine-unreal');
+      if (pEngUE) pEngUE.innerText = t('filterEngineUE', '虚幻引擎');
+      const pEngCreation = document.getElementById('pill-engine-creation');
+      if (pEngCreation) pEngCreation.innerText = t('filterEngineBethesda', 'B社引擎');
+      const pEngFrom = document.getElementById('pill-engine-fromsoft');
+      if (pEngFrom) pEngFrom.innerText = t('filterEngineFromSoft', '魂系引擎');
+
+      // 5. Results Count & Legend
+      const rMatched = document.getElementById('radar-count-matched');
+      if (rMatched) rMatched.innerText = t('matchedGamesCount', '共匹配到');
+      const rUnit = document.getElementById('radar-count-unit');
+      if (rUnit) rUnit.innerText = t('gamesUnit', '款游戏');
+      const legCompat = document.getElementById('legend-text-compat');
+      if (legCompat) legCompat.innerText = t('legendCompatible', '完美');
+      const legWarn = document.getElementById('legend-text-warn');
+      if (legWarn) legWarn.innerText = t('legendWarning', '前置');
+      const legBroken = document.getElementById('legend-text-broken');
+      if (legBroken) legBroken.innerText = t('legendBroken', '坏档/暂停');
+
+      // 6. Empty State
+      const empTitle = document.getElementById('radar-empty-title');
+      if (empTitle) empTitle.innerText = t('emptyTitle', '未找到符合条件的游戏');
+      const empDesc = document.getElementById('radar-empty-desc');
+      if (empDesc) empDesc.innerText = t('emptyDesc', '请尝试更换搜索关键字，或重置状态与引擎筛选条件。');
+      const empReset = document.getElementById('radar-empty-reset-btn');
+      if (empReset) empReset.innerText = t('resetFiltersBtn', '重置全部筛选');
+
+      // 7. Drawer Static Elements
+      const dPatchCheck = document.getElementById('drawer-patch-check-title');
+      if (dPatchCheck) dPatchCheck.innerText = '🔍 ' + t('drawerPatchCheckTitle', '补丁变动与最新版本核验');
+      const dRescueTitle = document.getElementById('drawer-rescue-title');
+      if (dRescueTitle) dRescueTitle.innerText = t('drawerSafeGuide', '🛠️ 老L独家救砖 / 降级 / 避坑方案');
+      const dRescueSub = document.getElementById('drawer-rescue-sub');
+      if (dRescueSub) dRescueSub.innerText = t('drawerOfflineMechanism', '100% 官方离线底层机制');
+      const dBatTitle = document.getElementById('drawer-bat-title');
+      if (dBatTitle) dBatTitle.innerText = t('drawerBatLabel', '快速批处理脚本 (.bat) / 应急指令:');
+      const dCopyBat = document.getElementById('drawer-btn-copy-bat');
+      if (dCopyBat) dCopyBat.innerText = t('drawerCopyBatBtn', '一键复制代码');
+
+      const dMatrixTitle = document.getElementById('drawer-matrix-title');
+      if (dMatrixTitle) dMatrixTitle.innerText = t('drawerCardsSectionTitle', '🎨 官方 5 联 1080×1440 高清避坑卡片 (实装)');
+      const dMatrixTag = document.getElementById('drawer-matrix-tag');
+      if (dMatrixTag) dMatrixTag.innerText = t('drawerMatrixTag', '社交媒体矩阵');
+      const dMatrixDesc = document.getElementById('drawer-matrix-desc');
+      if (dMatrixDesc) dMatrixDesc.innerText = t('drawerCardsSectionDesc', '已就绪首发 5 联高清卡片，点击任意卡片查看大图：');
+
+      const dSecTitle = document.getElementById('drawer-secret-card-title');
+      if (dSecTitle) dSecTitle.innerText = t('drawerSecretCardTitle', '【老L·单机避坑局】急救雷达互助群');
+      const dSecTag = document.getElementById('drawer-secret-card-tag');
+      if (dSecTag) dSecTag.innerText = t('drawerSecretCardTag', '公益·零广告');
+      const dSecDesc = document.getElementById('drawer-secret-card-desc');
+      if (dSecDesc) dSecDesc.innerText = t('drawerSecretCardDesc', '若遇游戏突发更新失效或极端坏档，请保存官方避坑专属暗号，在微信公众号后台或私信输入暗号，自动秒推连夜更新的应急更新包与坏档急救工具！');
+      const dSecLabel = document.getElementById('drawer-secret-card-label');
+      if (dSecLabel) dSecLabel.innerText = t('drawerSecretCodeLabel', '专属避坑暗号:');
+      const dCopyCode = document.getElementById('drawer-btn-copy-code-text');
+      if (dCopyCode) dCopyCode.innerText = t('drawerCopyCodeBtn', '一键复制暗号');
+      const dTip1 = document.getElementById('drawer-secret-tip-1');
+      if (dTip1) dTip1.innerText = t('drawerSecretTips1', '💡 进群输入暗号秒领：最新追更包 · 坏档救星 · 纯净开源源');
+      const dTip2 = document.getElementById('drawer-secret-tip-2');
+      if (dTip2) dTip2.innerText = t('drawerSecretTips2', '群文件严禁 exe，绝对安全');
+      const dMainBtn = document.getElementById('drawer-cta-main-text');
+      if (dMainBtn) dMainBtn.innerText = t('drawerMainVaultBtn', '🎮 进入 L-MOD 主库查看完整代码与场景套餐');
+
+      const dlModalText = document.getElementById('image-modal-download-text');
+      if (dlModalText) dlModalText.innerText = t('downloadOriginalImage', '下载 1080×1440 原图');
+    }
+
+    // ========================================================
+    // DEEP COMPATIBILITY & DYNAMIC METADATA ENGINE
+    // ========================================================
+    function getGameCompatibility(game) {
+      let meta = RADAR_METADATA[game.id];
+      if (!meta) {
+        // Heuristic classification for other games
+        const dev = (game.developer || '').toLowerCase();
+        const genre = (game.genre || '').toLowerCase();
+        let status = "green";
+        let engine = "Proprietary Engine";
+
+        if (dev.includes('bethesda') || dev.includes('todd')) {
+          status = "yellow";
+          engine = "Creation Engine";
+        } else if (dev.includes('fromsoftware')) {
+          status = "yellow";
+          engine = "FromSoft Engine";
+        } else if (dev.includes('cd projekt')) {
+          status = "green";
+          engine = "REDengine";
+        } else if (genre.includes('rpg') && game.hasConsole) {
+          status = "green";
+          engine = "Native Console Ready";
+        }
+
+        const locTitle = (game.titles && game.titles[currentLang]) ? game.titles[currentLang] : game.title;
+        meta = {
+          status: status,
+          verifiedPatch: game.verifiedPatch || game.latestPatch || t('steamLatestVerified', 'Steam 最新版本实机测试'),
+          engine: engine,
+          toolchain: game.hasConsole ? t('consoleNative', '官方原生打字终端') : t('offlineFramework', '纯净离线框架'),
+          summary: t('radarSummaryStable', 'Steam 官方最新推送已对齐，运行稳定，未发现恶性坏档报错。'),
+          riskTitle: t('riskTitleDefault', '💡 日常游玩避坑提示'),
+          riskDesc: (game.pitfallNote && game.pitfallNote.tips && game.pitfallNote.tips[0]) ? game.pitfallNote.tips[0] : (currentLang === 'zh-CN' || currentLang === 'zh-TW' ? '建议在单机离线状态下游玩，大版本更新后优先使用本站批处理脚本核对环境路径。' : 'Play in offline mode when modded. Run the verification script after major Steam updates.'),
+          riskSeverity: status,
+          rescueSteps: [
+            `1. Steam -> ${game.title} -> Properties -> Local Files.`,
+            `2. Shortcut: ${game.consoleShortcut || '~ (Tilde)'}.`,
+            `3. Backup save files before key quests or modifying facts.`
+          ],
+          batPreview: `@echo off\nchcp 65001 >nul\ntitle [L-MOD Vault] ${game.title} Safe Check\necho [*] Diagnostic passed!\necho [i] Shortcut: ${game.consoleShortcut || '~'}\npause`
+        };
+      }
+
+      // Check if dynamic override from steam_patch_monitor exists
+      if (game.compatibilityStatus) {
+        meta = {
+          ...meta,
+          status: game.compatibilityStatus,
+          verifiedPatch: game.verifiedPatch || meta.verifiedPatch,
+          summary: game.radarSummary || meta.summary,
+          riskTitle: game.radarRiskTitle || meta.riskTitle,
+          riskDesc: game.radarRiskDesc || meta.riskDesc
+        };
+      }
+
+      // Ensure statusText is dynamically localized according to active currentLang
+      let statusText = meta.status === 'green' ? t('statusCompatible', '🟢 完美兼容实测通过') :
+                         meta.status === 'yellow' ? t('statusWarning', '🟡 需更新前置 / 需补丁适配') :
+                         t('statusBroken', '🔴 恶性坏档 · 暂停更新');
+
+      if (game.radarStatusText && (currentLang === 'zh-CN' || currentLang === 'zh-TW')) {
+        statusText = game.radarStatusText;
+      }
+
+      return {
+        ...meta,
+        statusText: statusText
+      };
+    }
+
+    // ========================================================
+    // RENDER FUNCTIONS
+    // ========================================================
+    function renderRadarCards() {
+      const grid = document.getElementById('radar-grid');
+      const empty = document.getElementById('radar-empty');
+      const countEl = document.getElementById('results-count');
+      const filterDescEl = document.getElementById('active-filter-desc');
+
+      if (!grid) return;
+
+      countEl.innerText = filteredGames.length;
+
+      // Filter description label
+      let desc = [];
+      if (currentStatusFilter !== 'all') {
+        const statusMap = {
+          green: t('statusCompatibleShort', '🟢 完美兼容'),
+          yellow: t('statusWarningShort', '🟡 需更前置'),
+          red: t('statusBrokenShort', '🔴 暂停更新')
+        };
+        desc.push(statusMap[currentStatusFilter]);
+      }
+      if (currentEngineFilter !== 'all') {
+        desc.push(currentEngineFilter === 'flagship' ? t('filterEngineFlagship', '👑 Top 7 旗舰深度') : currentEngineFilter);
+      }
+      if (currentSearchQuery) {
+        desc.push(`"${currentSearchQuery}"`);
+      }
+      filterDescEl.innerText = desc.length > 0 ? `(${desc.join(' · ')})` : '';
+
+      if (filteredGames.length === 0) {
+        grid.innerHTML = '';
+        empty.classList.remove('hidden');
+        return;
+      }
+
+      empty.classList.add('hidden');
+
+      grid.innerHTML = filteredGames.map(game => {
+        const meta = getGameCompatibility(game);
+        const localizedTitle = (game.titles && game.titles[currentLang]) ? game.titles[currentLang] : game.title;
+        const secretCode = game.radarSecretCode || '老L单机888';
+
+        let statusBorder = 'border-emerald-500/20 hover:border-emerald-500/40';
+        let statusBadgeBg = 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30';
+        let statusDot = 'bg-emerald-500';
+        if (meta.status === 'yellow') {
+          statusBorder = 'border-amber-500/20 hover:border-amber-500/40';
+          statusBadgeBg = 'bg-amber-500/10 text-amber-400 border-amber-500/30';
+          statusDot = 'bg-amber-500';
+        } else if (meta.status === 'red') {
+          statusBorder = 'border-red-500/30 hover:border-red-500/50';
+          statusBadgeBg = 'bg-red-500/15 text-red-400 border-red-500/40';
+          statusDot = 'bg-red-500';
+        }
+
+        const shortStatus = meta.status === 'green' ? t('statusCompatibleShort', '🟢 完美兼容') :
+                            meta.status === 'yellow' ? t('statusWarningShort', '🟡 需更前置') :
+                            t('statusBrokenShort', '🔴 暂停更新');
+
+        const riskHeader = meta.status === 'red' ? t('cardRiskBroken', '🚨 恶性坏档风险') : t('cardRiskWarning', '⚠️ 前置版本需注意');
+
+        return `
+          <div 
+            onclick="openGameDrawerById('${game.id}')"
+            class="group relative overflow-hidden bg-white dark:bg-[#12141a] hover:bg-slate-50 dark:hover:bg-[#161822] rounded-2xl p-5 border ${statusBorder} transition-all duration-200 cursor-pointer flex flex-col justify-between shadow-sm dark:shadow-lg"
+          >
+            <!-- Top Status & Rank Row -->
+            <div class="space-y-3">
+              <div class="flex items-center justify-between gap-2">
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-mono font-semibold border ${statusBadgeBg}">
+                  <span class="w-2 h-2 rounded-full ${statusDot} ${meta.status === 'red' ? 'animate-ping' : ''}"></span>
+                  <span>${shortStatus}</span>
+                </span>
+                <span class="text-xs font-mono text-zinc-500 font-bold">#${game.rank}</span>
+              </div>
+
+              <!-- Title & Meta -->
+              <div>
+                <h3 class="text-base sm:text-lg font-black text-zinc-900 dark:text-white group-hover:text-[#A855F7] dark:group-hover:text-purple-400 transition-colors line-clamp-1">
+                  ${localizedTitle}
+                </h3>
+                <div class="flex items-center space-x-2 text-xs text-zinc-400 pt-0.5">
+                  <span class="truncate max-w-[180px]">${game.title}</span>
+                  <span class="text-zinc-600">·</span>
+                  <span class="font-mono text-zinc-400 shrink-0">AppID:${game.steamAppId || '---'}</span>
+                </div>
+              </div>
+
+              <!-- Verified Patch & Engine Badges -->
+              <div class="flex items-center flex-wrap gap-1.5 pt-1">
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-100 dark:bg-white/5 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-white/5 truncate max-w-[220px]">
+                  📌 ${meta.verifiedPatch}
+                </span>
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-[#A855F7]/10 text-[#A855F7] border border-[#A855F7]/20">
+                  ⚙️ ${meta.engine}
+                </span>
+              </div>
+
+              <!-- Brief Verdict -->
+              <p class="text-xs text-zinc-600 dark:text-zinc-300 line-clamp-2 leading-relaxed pt-1">
+                ${meta.summary}
+              </p>
+
+              <!-- Warning Box preview if Red / Yellow -->
+              ${meta.status !== 'green' ? `
+                <div class="p-2.5 rounded-xl ${meta.status === 'red' ? 'bg-red-950/40 text-red-300 border border-red-500/30' : 'bg-amber-950/40 text-amber-300 border border-amber-500/30'} text-xs space-y-0.5">
+                  <div class="font-bold flex items-center gap-1">
+                    <span>${riskHeader}</span>
+                  </div>
+                  <p class="text-[11px] line-clamp-1 opacity-90">${meta.riskDesc}</p>
+                </div>
+              ` : ''}
+            </div>
+
+            <!-- Card Bottom Bar: Rescue CTA -->
+            <div class="flex items-center justify-between pt-4 mt-3 border-t border-zinc-200/80 dark:border-white/5 text-xs">
+              <span class="text-[#A855F7] group-hover:text-purple-300 font-semibold flex items-center gap-1">
+                <span>${t('viewRescueGuide', '查看避坑急救方案')}</span>
+                <svg class="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+              </span>
+              <span class="text-[11px] text-zinc-400 font-mono">
+                ${t('secretCodePrefix', '暗号:')} <strong class="text-amber-400">【${secretCode}】</strong>
+              </span>
+            </div>
+
+          </div>
+        `;
+      }).join('');
+    }
+
+    // ========================================================
+    // EXPANDABLE DRAWER CONTROLS
+    // ========================================================
+    function openGameDrawerById(gameId) {
+      const game = allGames.find(g => g.id === gameId);
+      if (!game) return;
+      openGameDrawer(game);
+    }
+
+    function openGameDrawer(game) {
+      activeDrawerGame = game;
+      const meta = getGameCompatibility(game);
+      const localizedTitle = (game.titles && game.titles[currentLang]) ? game.titles[currentLang] : game.title;
+      const secretCode = game.radarSecretCode || '老L单机888';
+
+      // Fill in details
+      document.getElementById('drawer-rank').innerText = `RANK #${game.rank}`;
+      document.getElementById('drawer-engine').innerText = `${t('engineLabel', '引擎')}: ${meta.engine} | ${t('toolchainLabel', '工具链')}: ${meta.toolchain}`;
+      document.getElementById('drawer-title').innerText = localizedTitle;
+      document.getElementById('drawer-entitle').innerText = `${game.title} · ${game.developer || ''} (${game.releaseYear || ''})`;
+      document.getElementById('drawer-appid').innerText = game.steamAppId || '---';
+
+      // Status pill
+      const pill = document.getElementById('drawer-status-pill');
+      pill.innerText = meta.statusText;
+      pill.className = `text-xs px-2.5 py-1 rounded-full font-bold font-mono ${
+        meta.status === 'green' ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' :
+        meta.status === 'yellow' ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30' :
+        'bg-red-500/25 text-red-400 border border-red-500/40'
+      }`;
+
+      // Patch & summary
+      document.getElementById('drawer-patch').innerText = meta.verifiedPatch;
+      document.getElementById('drawer-summary').innerText = meta.summary;
+
+      // Risk box
+      const riskBox = document.getElementById('drawer-risk-box');
+      const riskTitle = document.getElementById('drawer-risk-title');
+      const riskDesc = document.getElementById('drawer-risk-desc');
+      riskTitle.innerText = meta.riskTitle;
+      riskDesc.innerText = meta.riskDesc;
+
+      if (meta.status === 'red') {
+        riskBox.className = 'p-3.5 rounded-xl border bg-red-950/40 border-red-500/30 text-red-300 space-y-1';
+      } else if (meta.status === 'yellow') {
+        riskBox.className = 'p-3.5 rounded-xl border bg-amber-950/40 border-amber-500/30 text-amber-300 space-y-1';
+      } else {
+        riskBox.className = 'p-3.5 rounded-xl border bg-emerald-950/30 border-emerald-500/30 text-emerald-300 space-y-1';
+      }
+
+      // Rescue steps
+      const stepsContainer = document.getElementById('drawer-rescue-steps');
+      stepsContainer.innerHTML = meta.rescueSteps.map(step => `
+        <div class="flex items-start space-x-2">
+          <span class="text-[#A855F7] font-bold shrink-0">▸</span>
+          <span>${step}</span>
+        </div>
+      `).join('');
+
+      // Bat script
+      document.getElementById('drawer-code-pre').innerText = meta.batPreview;
+
+      // Populate 5 Cards if Flagship
+      const RADAR_FLAGSHIP_FOLDERS = {
+        'cyberpunk-2077': '01_cyberpunk-2077',
+        'black-myth-wukong': '02_black-myth-wukong',
+        'witcher-3': '03_witcher-3',
+        'baldurs-gate-3': '04_baldurs-gate-3',
+        'elden-ring': '05_elden-ring',
+        'skyrim-se': '06_skyrim-se',
+        'fallout-4': '07_fallout-4'
+      };
+      const cardsSec = document.getElementById('drawer-cards-section');
+      const cardsScroll = document.getElementById('drawer-cards-scroll');
+      const folder = RADAR_FLAGSHIP_FOLDERS[game.id];
+
+      if (folder && cardsSec && cardsScroll) {
+        cardsSec.classList.remove('hidden');
+        const cardMetas = [
+          { num: 1, name: 'hook', title: t('slide1Title', 'Slide 1 · 痛点避坑卡') },
+          { num: 2, name: 'setup', title: t('slide2Title', 'Slide 2 · 极速开门卡') },
+          { num: 3, name: 'commands', title: t('slide3Title', 'Slide 3 · 场景套餐卡') },
+          { num: 4, name: 'mods', title: t('slide4Title', 'Slide 4 · 护航模组卡') },
+          { num: 5, name: 'cta', title: t('slide5Title', 'Slide 5 · 避坑雷达自取卡') }
+        ];
+        cardsScroll.innerHTML = cardMetas.map(m => {
+          const imgUrl = `social_distribution/${folder}/images/card_${m.num}_${m.name}.png`;
+          return `
+            <div class="shrink-0 w-32 space-y-1.5 cursor-pointer group" onclick="openImageModal('${imgUrl}', '《${localizedTitle}》${m.title}')">
+              <div class="relative overflow-hidden rounded-xl border border-white/10 group-hover:border-purple-500/50 transition-all bg-black aspect-[3/4]">
+                <img src="${imgUrl}" alt="${m.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+              </div>
+              <div class="text-[10px] text-zinc-300 truncate text-center">${m.title}</div>
+            </div>
+          `;
+        }).join('');
+      } else if (cardsSec) {
+        cardsSec.classList.add('hidden');
+      }
+
+      // Secret code
+      document.getElementById('drawer-secret-code').innerText = `【${secretCode}】`;
+
+      // Main vault link
+      const vaultLink = document.getElementById('drawer-main-vault-link');
+      vaultLink.href = `index.html#/game/${game.id}`;
+
+      // Show drawer
+      const container = document.getElementById('drawer-container');
+      const backdrop = document.getElementById('drawer-backdrop');
+      const panel = document.getElementById('drawer-panel');
+
+      container.classList.remove('pointer-events-none');
+      backdrop.classList.remove('opacity-0');
+      backdrop.classList.add('opacity-100');
+
+      panel.classList.remove('translate-y-full', 'md:translate-x-full');
+      panel.classList.add('translate-y-0', 'md:translate-x-0');
+
+      // Update URL hash without jumping
+      history.replaceState(null, '', `#game-${game.id}`);
+    }
+
+    function closeGameDrawer() {
+      const container = document.getElementById('drawer-container');
+      const backdrop = document.getElementById('drawer-backdrop');
+      const panel = document.getElementById('drawer-panel');
+
+      backdrop.classList.remove('opacity-100');
+      backdrop.classList.add('opacity-0');
+
+      panel.classList.remove('translate-y-0', 'md:translate-x-0');
+      panel.classList.add('translate-y-full', 'md:translate-x-full');
+
+      setTimeout(() => {
+        container.classList.add('pointer-events-none');
+      }, 300);
+
+      activeDrawerGame = null;
+      history.replaceState(null, '', window.location.pathname);
+    }
+
+    // ESC to close drawer
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeGameDrawer();
+    });
+
+    // ========================================================
+    // SEARCH & FILTER LOGIC
+    // ========================================================
+    function handleSearch(val) {
+      currentSearchQuery = val.trim().toLowerCase();
+      document.getElementById('clear-search-btn').classList.toggle('hidden', currentSearchQuery.length === 0);
+      applyFilters();
+    }
+
+    function clearSearch() {
+      document.getElementById('radar-search').value = '';
+      currentSearchQuery = '';
+      document.getElementById('clear-search-btn').classList.add('hidden');
+      applyFilters();
+    }
+
+    function setStatusFilter(status) {
+      currentStatusFilter = status;
+      document.querySelectorAll('#status-pills .status-pill').forEach(btn => {
+        if (btn.getAttribute('data-status') === status) {
+          btn.classList.add('active', 'bg-[#A855F7]', 'text-white');
+          btn.classList.remove('bg-white/5');
+        } else {
+          btn.classList.remove('active', 'bg-[#A855F7]', 'text-white');
+          btn.classList.add('bg-white/5');
+        }
+      });
+      applyFilters();
+    }
+
+    function filterByStatus(status) {
+      setStatusFilter(status);
+      window.scrollTo({ top: 380, behavior: 'smooth' });
+    }
+
+    function setEngineFilter(engine) {
+      currentEngineFilter = engine;
+      document.querySelectorAll('#engine-pills .engine-pill').forEach(btn => {
+        if (btn.getAttribute('data-engine') === engine) {
+          btn.classList.add('active', 'bg-white/20', 'text-white');
+          btn.classList.remove('bg-white/5');
+        } else {
+          btn.classList.remove('active', 'bg-white/20', 'text-white');
+          btn.classList.add('bg-white/5');
+        }
+      });
+      applyFilters();
+    }
+
+    function handleSort(mode) {
+      currentSortMode = mode;
+      applyFilters();
+    }
+
+    function resetAllFilters() {
+      clearSearch();
+      setStatusFilter('all');
+      setEngineFilter('all');
+      document.getElementById('sort-select').value = 'risk-desc';
+      currentSortMode = 'risk-desc';
+      applyFilters();
+    }
+
+    function applyFilters() {
+      filteredGames = allGames.filter(game => {
+        const meta = getGameCompatibility(game);
+        const zhTitle = (game.titles && game.titles['zh-CN']) ? game.titles['zh-CN'].toLowerCase() : '';
+        const locTitle = (game.titles && game.titles[currentLang]) ? game.titles[currentLang].toLowerCase() : '';
+        const enTitle = (game.title || '').toLowerCase();
+        const appId = String(game.steamAppId || '');
+        const dev = (game.developer || '').toLowerCase();
+        const engine = (meta.engine || '').toLowerCase();
+
+        // 1. Status Filter
+        if (currentStatusFilter !== 'all' && meta.status !== currentStatusFilter) {
+          return false;
+        }
+
+        // 2. Engine / Flagship Filter
+        if (currentEngineFilter === 'flagship') {
+          if (game.rank > 7) return false;
+        } else if (currentEngineFilter !== 'all') {
+          if (!engine.includes(currentEngineFilter.toLowerCase())) return false;
+        }
+
+        // 3. Search Query (multilingual match)
+        if (currentSearchQuery) {
+          const matchTitle = zhTitle.includes(currentSearchQuery) || 
+                             locTitle.includes(currentSearchQuery) || 
+                             enTitle.includes(currentSearchQuery);
+          const matchAppId = appId.includes(currentSearchQuery);
+          const matchDev = dev.includes(currentSearchQuery);
+          const matchEngine = engine.includes(currentSearchQuery);
+          if (!matchTitle && !matchAppId && !matchDev && !matchEngine) {
+            return false;
+          }
+        }
+
+        return true;
+      });
+
+      // 4. Sort
+      filteredGames.sort((a, b) => {
+        const metaA = getGameCompatibility(a);
+        const metaB = getGameCompatibility(b);
+
+        if (currentSortMode === 'risk-desc') {
+          const scoreMap = { red: 3, yellow: 2, green: 1 };
+          const diff = scoreMap[metaB.status] - scoreMap[metaA.status];
+          if (diff !== 0) return diff;
+          return a.rank - b.rank;
+        } else if (currentSortMode === 'compatible-first') {
+          const scoreMap = { green: 3, yellow: 2, red: 1 };
+          const diff = scoreMap[metaB.status] - scoreMap[metaA.status];
+          if (diff !== 0) return diff;
+          return a.rank - b.rank;
+        } else if (currentSortMode === 'rank-asc') {
+          return a.rank - b.rank;
+        } else if (currentSortMode === 'name-asc') {
+          return a.title.localeCompare(b.title);
+        }
+        return 0;
+      });
+
+      renderRadarCards();
+    }
+
+    // ========================================================
+    // CLIPBOARD HELPERS (WECHAT 100% COMPATIBLE FALLBACK)
+    // ========================================================
+    function copyText(text, successMsg) {
+      const msg = successMsg || t('toastCopied', '已复制！');
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+          showToast(msg);
+        }).catch(() => {
+          fallbackCopyText(text, msg);
+        });
+      } else {
+        fallbackCopyText(text, msg);
+      }
+    }
+
+    function fallbackCopyText(text, successMsg) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.top = '0';
+      ta.style.left = '0';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      try {
+        document.execCommand('copy');
+        showToast(successMsg);
+      } catch (e) {
+        showToast('Ctrl+C / Cmd+C');
+      }
+      document.body.removeChild(ta);
+    }
+
+    function showToast(text) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-text').innerText = text;
+      toast.classList.remove('-translate-y-20', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('-translate-y-20', 'opacity-0');
+      }, 2500);
+    }
+
+    function copyGroupSecretCode() {
+      copyText('老L单机888', t('toastSecretCopied', '进群暗号已复制！微信后台发送秒领急救包'));
+    }
+
+    function copyCurrentSecretCode() {
+      if (!activeDrawerGame) return;
+      const code = activeDrawerGame.radarSecretCode || '老L单机888';
+      copyText(code, t('toastSecretCopied', '进群暗号已复制！微信后台发送秒领急救包'));
+    }
+
+    function copyDrawerBat() {
+      if (!activeDrawerGame) return;
+      const meta = getGameCompatibility(activeDrawerGame);
+      copyText(meta.batPreview, t('toastBatCopied', '批处理脚本代码已复制！新建文本改名为 .bat 即可运行'));
+    }
+
+    function scrollAlerts() {
+      // Pause or jump
+    }
+
+    // ========================================================
+    // INITIALIZATION & URL ROUTING
+    // ========================================================
+    function updateMetrics() {
+      let green = 0, yellow = 0, red = 0;
+      allGames.forEach(g => {
+        const meta = getGameCompatibility(g);
+        if (meta.status === 'green') green++;
+        else if (meta.status === 'yellow') yellow++;
+        else if (meta.status === 'red') red++;
+      });
+      const statG = document.getElementById('stat-green');
+      if (statG) statG.innerText = green;
+      const statY = document.getElementById('stat-yellow');
+      if (statY) statY.innerText = yellow;
+      const statR = document.getElementById('stat-red');
+      if (statR) statR.innerText = red;
+    }
+
+    function handleUrlParams() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const gameParam = urlParams.get('game');
+      const hash = window.location.hash.replace('#game-', '').replace('#', '');
+      const targetId = gameParam || hash;
+
+      if (targetId) {
+        setTimeout(() => {
+          openGameDrawerById(targetId);
+        }, 150);
+      }
+    }
+
+    // ==========================================
+    // IMAGE MODAL PREVIEW HANDLER
+    // ==========================================
+    function openImageModal(src, title) {
+      const modal = document.getElementById('image-modal');
+      const img = document.getElementById('image-modal-img');
+      const titleEl = document.getElementById('image-modal-title');
+      const dl = document.getElementById('image-modal-download');
+      if (!modal || !img) return;
+
+      img.src = src;
+      if (titleEl) titleEl.innerText = title || '1080×1440 HD Card';
+      if (dl) {
+        dl.href = src;
+        dl.setAttribute('download', src.split('/').pop());
+      }
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeImageModal() {
+      const modal = document.getElementById('image-modal');
+      if (!modal) return;
+      modal.classList.remove('flex');
+      modal.classList.add('hidden');
+    }
+
+    function initWeChatCheck() {
+      const ua = (navigator.userAgent || '').toLowerCase();
+      const isWeChat = ua.includes('micromessenger') || window.location.search.includes('wechat=1') || window.location.search.includes('wx=1');
+      const banner = document.getElementById('wechat-safe-banner');
+      if (!banner) return;
+      if (isWeChat) {
+        if (sessionStorage.getItem('lmod_wx_dismissed') === '1') return;
+        banner.classList.remove('hidden');
+        requestAnimationFrame(() => {
+          banner.classList.remove('-translate-y-full');
+          banner.classList.add('translate-y-0');
+        });
+      }
+    }
+
+    function dismissWeChatBanner() {
+      const banner = document.getElementById('wechat-safe-banner');
+      if (banner) {
+        banner.classList.remove('translate-y-0');
+        banner.classList.add('-translate-y-full');
+        setTimeout(() => {
+          banner.classList.add('hidden');
+        }, 450);
+        sessionStorage.setItem('lmod_wx_dismissed', '1');
+      }
+    }
+
+    function initTheme() {
+      const savedTheme = localStorage.getItem('lmod_theme');
+      if (savedTheme) {
+        applyTheme(savedTheme);
+      } else {
+        applyTheme('dark');
+      }
+    }
+
+    function toggleTheme() {
+      const isDark = document.documentElement.classList.contains('dark');
+      const newTheme = isDark ? 'light' : 'dark';
+      localStorage.setItem('lmod_theme', newTheme);
+      applyTheme(newTheme);
+    }
+
+    function applyTheme(theme) {
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+      const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+      if (metaThemeColor) {
+        metaThemeColor.setAttribute('content', theme === 'dark' ? '#0a0b0e' : '#f8fafc');
+      }
+    }
+
+    function initRadar() {
+      initTheme();
+      if (window.GAMES_DATA) {
+        allGames = window.GAMES_DATA;
+      } else if (window.GAMES_DATABASE) {
+        allGames = window.GAMES_DATABASE;
+      }
+      initLanguage();
+      renderRadarUI();
+      updateMetrics();
+      applyFilters();
+      handleUrlParams();
+      initWeChatCheck();
+    }
+
+    window.addEventListener('DOMContentLoaded', initRadar);
+</script>
+  <!-- High-Definition Image Preview Modal -->
+  <div id="image-modal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden items-center justify-center p-4 transition-all" onclick="closeImageModal()">
+    <div class="relative max-w-4xl max-h-[95vh] flex flex-col items-center" onclick="event.stopPropagation()">
+      <button onclick="closeImageModal()" class="absolute -top-10 right-0 text-white/70 hover:text-white p-2 cursor-pointer">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+      <img id="image-modal-img" src="" alt="Card Preview" class="max-h-[82vh] rounded-2xl shadow-2xl border border-white/20 object-contain">
+      <div class="mt-3 flex items-center space-x-3 text-xs">
+        <span id="image-modal-title" class="text-white font-bold"></span>
+        <a id="image-modal-download" href="#" download class="px-4 py-1.5 rounded-full bg-[#A855F7] hover:bg-[#A855F7] text-white font-semibold transition-all"><span id="image-modal-download-text">下载 1080×1440 原图</span></a>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

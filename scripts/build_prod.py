@@ -85,16 +85,15 @@ HEADERS_CONTENT = """# =========================================================
 """
 
 REDIRECTS_CONTENT = """# ==============================================================================
-# Cloudflare Pages Redirects & Rewrites for L-MOD Vault
+# Cloudflare Pages Clean Redirects & Rewrites for L-MOD Vault
+# Production Safe: No circular 308 rewrites with Clean URLs
 # ==============================================================================
 
-# Friendly shortlinks & route rewrites
-/admin          /admin.html       200
-/radar          /radar.html       200
-/index          /index.html       200
-/home           /index.html       200
+# 1. Clean root & aliases
+/home           /                 301
+/index          /                 301
 
-# SPA Hash & Dynamic Deep-link Fallback
+# 2. SPA Dynamic Fallback for deep links
 /*              /index.html       200
 """
 
@@ -186,6 +185,19 @@ def verify_or_generate_cf_configs():
         log_pass("已生成高质感矢量品牌 Favicon: public/favicon.svg")
     else:
         log_pass("验证通过: public/favicon.svg 存在")
+
+    # 5. Clean URLs Directory Indexes (admin & radar)
+    admin_dir = PUBLIC_DIR / "admin"
+    admin_dir.mkdir(exist_ok=True)
+    if (PUBLIC_DIR / "admin.html").exists():
+        (admin_dir / "index.html").write_text((PUBLIC_DIR / "admin.html").read_text(encoding="utf-8"), encoding="utf-8")
+        log_pass("已同步生成 clean URL 目录入口: public/admin/index.html")
+
+    radar_dir = PUBLIC_DIR / "radar"
+    radar_dir.mkdir(exist_ok=True)
+    if (PUBLIC_DIR / "radar.html").exists():
+        (radar_dir / "index.html").write_text((PUBLIC_DIR / "radar.html").read_text(encoding="utf-8"), encoding="utf-8")
+        log_pass("已同步生成 clean URL 目录入口: public/radar/index.html")
 
 
 def scan_asset_integrity():

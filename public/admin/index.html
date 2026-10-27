@@ -1,0 +1,2034 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>L-MOD Vault | 站长专属管理中台 (Admin Console & AI Control Plane)</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            vault: {
+              black: '#08090c',
+              dark: '#0d0f15',
+              card: '#12151e',
+              border: '#1e2433',
+              accent: '#8b5cf6',
+              emerald: '#10b981',
+              amber: '#f59e0b',
+              rose: '#f43f5e'
+            }
+          },
+          fontFamily: {
+            mono: ['JetBrains Mono', 'SF Mono', 'Menlo', 'Consolas', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #08090c; }
+    ::-webkit-scrollbar-thumb { background: #262f40; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #3b465c; }
+    .glass-card {
+      background: rgba(18, 21, 30, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+    }
+    .glass-card-hover:hover {
+      border-color: rgba(139, 92, 246, 0.4);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+    }
+    .cyber-grid {
+      background-size: 40px 40px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    }
+    .neon-glow {
+      box-shadow: 0 0 25px -5px rgba(139, 92, 246, 0.35);
+    }
+    .neon-emerald {
+      box-shadow: 0 0 25px -5px rgba(16, 185, 129, 0.35);
+    }
+  </style>
+</head>
+<body class="bg-vault-black text-slate-200 min-h-screen font-sans antialiased cyber-grid selection:bg-purple-600 selection:text-white">
+
+  <!-- ========================================================================= -->
+  <!-- 1. ZERO TRUST SHIELD AUTH SCREEN (Shown when unauthenticated) -->
+  <!-- ========================================================================= -->
+  <div id="auth-screen" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-vault-black/95 backdrop-blur-2xl">
+    <div class="w-full max-w-md glass-card rounded-2xl p-8 border border-slate-800 shadow-2xl relative overflow-hidden">
+      <!-- Glow ambient background -->
+      <div class="absolute -top-24 -left-24 w-48 h-48 bg-purple-600/20 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-24 -right-24 w-48 h-48 bg-emerald-600/20 rounded-full blur-3xl pointer-events-none"></div>
+
+      <!-- Shield Header -->
+      <div class="text-center mb-8 relative">
+        <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-600 to-indigo-800 text-white mb-4 shadow-xl border border-purple-400/30">
+          <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+          </svg>
+        </div>
+        <h1 class="text-2xl font-bold tracking-tight text-white flex items-center justify-center gap-2">
+          <span>L-MOD</span>
+          <span class="text-xs px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30 uppercase tracking-widest font-mono">Zero Trust</span>
+        </h1>
+        <p class="text-xs text-slate-400 mt-1">站长专属特权通道 · 全栈管理与 AI 控制平面</p>
+      </div>
+
+      <!-- Login Form -->
+      <form id="login-form" class="space-y-4 relative">
+        <!-- Username Field -->
+        <div>
+          <label class="block text-xs font-medium text-slate-300 mb-1.5 font-mono flex items-center justify-between">
+            <span>站长管理账号 (ADMIN USERNAME)</span>
+            <span class="text-[10px] text-purple-400">默认: admin</span>
+          </label>
+          <input 
+            id="admin-username" 
+            type="text" 
+            value="admin"
+            placeholder="输入站长账号 (如 admin / laol)" 
+            class="w-full bg-slate-950/80 border border-slate-700/80 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 font-mono transition-all"
+            autocomplete="username"
+            required
+          >
+        </div>
+
+        <!-- Password Field -->
+        <div>
+          <label class="block text-xs font-medium text-slate-300 mb-1.5 font-mono flex items-center justify-between">
+            <span>站长专属密码 (PASSWORD)</span>
+            <span class="text-[10px] text-purple-400">HMAC-SHA256 签发</span>
+          </label>
+          <div class="relative">
+            <input 
+              id="admin-passkey" 
+              type="password" 
+              placeholder="输入站长密码 (初始默认: lmod2026!)" 
+              class="w-full bg-slate-950/80 border border-slate-700/80 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 font-mono transition-all pr-10"
+              autocomplete="current-password"
+              required
+            >
+            <button type="button" id="toggle-pwd-btn" class="absolute right-3 top-2.5 text-slate-400 hover:text-white transition">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Preset Fill Helper -->
+        <div class="flex items-center justify-between text-[11px] font-mono px-1">
+          <span class="text-slate-400">默认初始凭据:</span>
+          <button type="button" id="quick-fill-btn" class="text-purple-400 hover:text-purple-300 transition underline underline-offset-2">
+            点击自动填入 (admin / lmod2026!)
+          </button>
+        </div>
+
+        <div id="login-error" class="hidden p-3 rounded-lg bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs flex items-center gap-2">
+          <svg class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <span id="login-error-msg">账号或密码错误，特权通道拒绝访问</span>
+        </div>
+
+        <button 
+          type="submit" 
+          id="login-submit-btn" 
+          class="w-full py-3 px-4 rounded-xl font-medium text-sm text-white bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 transition-all shadow-lg shadow-purple-600/30 flex items-center justify-center gap-2"
+        >
+          <span>进入中台控制平面</span>
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </button>
+
+        <div class="pt-2 text-center">
+          <a href="/" class="text-xs text-slate-500 hover:text-slate-300 transition">← 返回 L-MOD Vault 玩家前端</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- 2. ADMIN PORTAL MAIN CONSOLE -->
+  <!-- ========================================================================= -->
+  <div id="admin-app" class="hidden min-h-screen flex flex-col">
+
+    <!-- Top Navigation Header -->
+    <header class="sticky top-0 z-40 bg-vault-dark/80 backdrop-blur-md border-b border-slate-800/80 px-4 lg:px-8 py-3.5 transition-all">
+      <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+        
+        <!-- Brand & Node Status -->
+        <div class="flex items-center gap-3 w-full md:w-auto justify-between md:justify-start">
+          <div class="flex items-center gap-3">
+            <a href="/" class="flex items-center gap-2 group">
+              <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center font-bold text-white text-sm shadow-md">
+                L
+              </div>
+              <div>
+                <span class="font-bold tracking-tight text-white group-hover:text-purple-300 transition text-sm">L-MOD Vault</span>
+                <span class="text-[10px] text-purple-400 block font-mono -mt-1">ADMIN CONTROL PLANE</span>
+              </div>
+            </a>
+            <span class="hidden sm:inline-block text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-mono flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span id="header-edge-node">Cloudflare Edge · D1</span>
+            </span>
+          </div>
+
+          <!-- Mobile Logout Button -->
+          <button id="mobile-logout-btn" class="md:hidden text-xs text-slate-400 hover:text-rose-400 p-2">
+            退出
+          </button>
+        </div>
+
+        <!-- Global Emergency Alert Banner indicator (if active) -->
+        <div id="header-emergency-pill" class="hidden items-center gap-2 px-3 py-1 rounded-full bg-rose-500/15 border border-rose-500/30 text-rose-300 text-xs">
+          <span class="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
+          <span class="font-semibold">全站紧急熔断广播运行中</span>
+        </div>
+
+        <!-- Right Quick Actions -->
+        <div class="hidden md:flex items-center gap-3">
+          <button id="refresh-data-btn" class="text-xs px-3 py-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-300 border border-slate-700/60 transition flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+            <span>刷新数据</span>
+          </button>
+          <div class="h-4 w-[1px] bg-slate-800"></div>
+          <div class="flex items-center gap-2 text-xs text-slate-400 font-mono">
+            <span class="w-2 h-2 rounded-full bg-purple-400"></span>
+            <span id="admin-user-tag">老L·站长 (Super Admin)</span>
+          </div>
+          <button id="open-pwd-modal-btn" class="text-xs px-2.5 py-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-purple-300 border border-purple-500/30 transition flex items-center gap-1 font-mono">
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/></svg>
+            <span>修改密码</span>
+          </button>
+          <button id="logout-btn" class="text-xs px-3 py-1.5 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 text-rose-300 border border-rose-500/30 transition">
+            退出登录
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Navigation Tabs -->
+      <div class="max-w-7xl mx-auto mt-3 flex items-center gap-1 overflow-x-auto pb-1 text-sm border-t border-slate-800/60 pt-2 font-medium">
+        <button data-tab="analytics" class="nav-tab px-4 py-2 rounded-lg text-purple-400 bg-purple-500/10 border border-purple-500/20 flex items-center gap-2 whitespace-nowrap transition">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+          <span>玩家数据大盘 (Telemetry)</span>
+        </button>
+
+        <button data-tab="cms" class="nav-tab px-4 py-2 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 flex items-center gap-2 whitespace-nowrap transition">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+          <span>游戏与指令运维 (Game CMS)</span>
+        </button>
+
+        <button data-tab="ai" class="nav-tab px-4 py-2 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 flex items-center gap-2 whitespace-nowrap transition">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          <span>老L·AI 编排台 (Copilot Studio)</span>
+        </button>
+
+        <button data-tab="radar" class="nav-tab px-4 py-2 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 flex items-center gap-2 whitespace-nowrap transition">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0"/></svg>
+          <span>补丁雷达巡检 (Sentinel Control)</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 lg:p-8 space-y-8">
+
+      <!-- ===================================================================== -->
+      <!-- TAB 1: TELEMETRY & ANALYTICS DASHBOARD -->
+      <!-- ===================================================================== -->
+      <section id="panel-analytics" class="tab-panel space-y-8">
+        
+        <!-- 4 Metric Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="glass-card rounded-2xl p-5 border border-slate-800">
+            <div class="flex items-center justify-between text-slate-400 text-xs font-mono">
+              <span>总访问量 / UV</span>
+              <span class="p-1.5 rounded-lg bg-purple-500/10 text-purple-400">PV/UV</span>
+            </div>
+            <div class="mt-3 flex items-baseline gap-2">
+              <span id="metric-total-pv" class="text-3xl font-extrabold text-white">--</span>
+              <span class="text-xs text-slate-400 font-mono">PV</span>
+              <span class="text-slate-600 font-mono">/</span>
+              <span id="metric-total-uv" class="text-xl font-bold text-purple-400">--</span>
+              <span class="text-xs text-slate-400 font-mono">UV</span>
+            </div>
+            <div class="mt-2 text-[11px] text-slate-400 font-mono">
+              今日: <span id="metric-today-pv" class="text-white font-semibold">--</span> PV · 
+              <span id="metric-today-uv" class="text-purple-400 font-semibold">--</span> UV
+            </div>
+          </div>
+
+          <div class="glass-card rounded-2xl p-5 border border-slate-800">
+            <div class="flex items-center justify-between text-slate-400 text-xs font-mono">
+              <span>搜索热度 (Search)</span>
+              <span class="p-1.5 rounded-lg bg-blue-500/10 text-blue-400">QUERY</span>
+            </div>
+            <div class="mt-3 flex items-baseline gap-2">
+              <span id="metric-search-count" class="text-3xl font-extrabold text-blue-400">--</span>
+              <span class="text-xs text-slate-400 font-mono">次检索</span>
+            </div>
+            <div class="mt-2 text-[11px] text-slate-400 font-mono">Top 1 词: <span id="metric-top-keyword" class="text-white">--</span></div>
+          </div>
+
+          <div class="glass-card rounded-2xl p-5 border border-slate-800">
+            <div class="flex items-center justify-between text-slate-400 text-xs font-mono">
+              <span>指令复制代码流</span>
+              <span class="p-1.5 rounded-lg bg-emerald-500/10 text-emerald-400">COPY</span>
+            </div>
+            <div class="mt-3 flex items-baseline gap-2">
+              <span id="metric-copy-count" class="text-3xl font-extrabold text-emerald-400">--</span>
+              <span class="text-xs text-slate-400 font-mono">次复制</span>
+            </div>
+            <div class="mt-2 text-[11px] text-slate-400 font-mono">高频指令: <span class="text-emerald-300">CET Lua / Hex</span></div>
+          </div>
+
+          <div class="glass-card rounded-2xl p-5 border border-slate-800">
+            <div class="flex items-center justify-between text-slate-400 text-xs font-mono">
+              <span>批处理包下载 (.bat)</span>
+              <span class="p-1.5 rounded-lg bg-amber-500/10 text-amber-400">DOWNLOAD</span>
+            </div>
+            <div class="mt-3 flex items-baseline gap-2">
+              <span id="metric-download-count" class="text-3xl font-extrabold text-amber-400">--</span>
+              <span class="text-xs text-slate-400 font-mono">次生成</span>
+            </div>
+            <div class="mt-2 text-[11px] text-slate-400 font-mono">一键破荒包分发量</div>
+          </div>
+        </div>
+
+        <!-- Hot Searches & Popular Commands Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          
+          <!-- Top 10 Search Queries -->
+          <div class="glass-card rounded-2xl p-6 border border-slate-800">
+            <div class="flex items-center justify-between mb-4">
+              <h2 class="text-base font-bold text-white flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-blue-400"></span>
+                <span>今日高频搜索热词 Top 10</span>
+              </h2>
+              <span class="text-xs text-slate-500 font-mono">实时埋点聚合</span>
+            </div>
+            <div id="top-searches-list" class="space-y-2.5">
+              <div class="text-xs text-slate-500 py-4 text-center">正在读取检索数据...</div>
+            </div>
+          </div>
+
+          <!-- Top 10 Copied Commands -->
+          <div class="glass-card rounded-2xl p-6 border border-slate-800">
+            <div class="flex items-center justify-between mb-4">
+              <h2 class="text-base font-bold text-white flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                <span>最受欢迎指令排行 Top 10</span>
+              </h2>
+              <span class="text-xs text-slate-500 font-mono">copy_code 频次</span>
+            </div>
+            <div id="top-commands-list" class="space-y-2.5 max-h-96 overflow-y-auto pr-1">
+              <div class="text-xs text-slate-500 py-4 text-center">正在读取指令排行...</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Player Feedback Moderation Stream -->
+        <div class="glass-card rounded-2xl p-6 border border-slate-800">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-5">
+            <div>
+              <h2 class="text-base font-bold text-white flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+                <span>玩家报错与反馈审核流 (Community Feedback)</span>
+              </h2>
+              <p class="text-xs text-slate-400 mt-0.5">审核排查前台玩家上报的失效代码、模组请求与避坑反馈</p>
+            </div>
+            <div class="flex items-center gap-2 text-xs">
+              <button data-feedback-filter="all" class="feedback-filter-btn px-3 py-1.5 rounded-lg bg-slate-800 text-purple-300 border border-slate-700">全部</button>
+              <button data-feedback-filter="pending" class="feedback-filter-btn px-3 py-1.5 rounded-lg text-slate-400 hover:bg-slate-800">待排查</button>
+              <button data-feedback-filter="verified" class="feedback-filter-btn px-3 py-1.5 rounded-lg text-slate-400 hover:bg-slate-800">已采纳</button>
+              <button data-feedback-filter="resolved" class="feedback-filter-btn px-3 py-1.5 rounded-lg text-slate-400 hover:bg-slate-800">已解决</button>
+            </div>
+          </div>
+
+          <div id="feedback-list-container" class="space-y-3">
+            <div class="text-xs text-slate-500 py-6 text-center font-mono">加载反馈列表中...</div>
+          </div>
+        </div>
+
+        <!-- Holographic Telemetry Events Stream -->
+        <div class="glass-card rounded-2xl p-6 border border-slate-800">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-4">
+            <div>
+              <h2 class="text-base font-bold text-white flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-purple-400"></span>
+                <span>全息日志流水 (Telemetry Events)</span>
+              </h2>
+              <p class="text-xs text-slate-400 mt-0.5">D1 生产环境轻量埋点上报流实时穿透</p>
+            </div>
+            <div class="flex items-center gap-3">
+              <select id="telemetry-filter-type" class="bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs text-slate-300 font-mono">
+                <option value="all">所有事件类型</option>
+                <option value="copy_code">copy_code (复制指令)</option>
+                <option value="download_bat">download_bat (脚本生成)</option>
+                <option value="search_query">search_query (搜索行为)</option>
+                <option value="ai_ask">ai_ask (AI 交互)</option>
+                <option value="view_game">view_game (游戏曝光)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs font-mono">
+              <thead class="text-slate-400 border-b border-slate-800 uppercase text-[10px]">
+                <tr>
+                  <th class="py-2.5 px-3">ID</th>
+                  <th class="py-2.5 px-3">事件</th>
+                  <th class="py-2.5 px-3">关联游戏</th>
+                  <th class="py-2.5 px-3">载荷详情 (Target Payload)</th>
+                  <th class="py-2.5 px-3">国家</th>
+                  <th class="py-2.5 px-3">上报时间</th>
+                </tr>
+              </thead>
+              <tbody id="telemetry-table-body" class="divide-y divide-slate-800/60 text-slate-300">
+                <tr><td colspan="6" class="text-center py-6 text-slate-500">正在调取全息日志...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- TAB 2: GAME & VAULT CMS -->
+      <!-- ===================================================================== -->
+      <section id="panel-cms" class="tab-panel hidden space-y-6">
+        
+        <!-- CMS Header & Controls -->
+        <div class="glass-card rounded-2xl p-6 border border-slate-800 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div>
+            <h2 class="text-lg font-bold text-white flex items-center gap-2">
+              <span>游戏与指令知识库动态运维</span>
+              <span class="text-xs px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 font-mono">100 款 3A 旗舰</span>
+            </h2>
+            <p class="text-xs text-slate-400 mt-1">补丁版本热更新、三色避坑指示灯与控制台代码即时同步 D1 数据库</p>
+          </div>
+
+          <div class="flex items-center gap-3 w-full md:w-auto">
+            <div class="relative flex-1 md:w-64">
+              <input 
+                id="cms-search-input" 
+                type="text" 
+                placeholder="搜索游戏 (如 2077, 黑神话, 巫师)..." 
+                class="w-full bg-slate-950/80 border border-slate-700/80 rounded-xl px-3.5 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-purple-500 font-mono"
+              >
+            </div>
+            <select id="cms-status-filter" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-300 font-mono">
+              <option value="all">全量兼容状态</option>
+              <option value="green">🟢 完美适配</option>
+              <option value="yellow">🟡 部分失效/需注意</option>
+              <option value="red">🔴 高危熔断</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Games Table -->
+        <div class="glass-card rounded-2xl border border-slate-800 overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-slate-950/80 text-slate-400 uppercase font-mono text-[11px] border-b border-slate-800">
+                <tr>
+                  <th class="py-3 px-4">Rank</th>
+                  <th class="py-3 px-4">游戏标题</th>
+                  <th class="py-3 px-4">兼容状态</th>
+                  <th class="py-3 px-4">L-MOD 验证基准补丁</th>
+                  <th class="py-3 px-4">Steam 最新补丁</th>
+                  <th class="py-3 px-4 text-center">指令条数</th>
+                  <th class="py-3 px-4 text-right">操作</th>
+                </tr>
+              </thead>
+              <tbody id="cms-games-tbody" class="divide-y divide-slate-800/60 font-sans">
+                <tr><td colspan="7" class="py-8 text-center text-slate-500 font-mono">加载 100 款游戏知识库...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- TAB 3: AI COPILOT & SKILLS STUDIO -->
+      <!-- ===================================================================== -->
+      <section id="panel-ai" class="tab-panel hidden space-y-6">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+          <!-- Left Column: AI Persona & Prompt Tune (2 Cols) -->
+          <div class="lg:col-span-2 space-y-6">
+            
+            <div class="glass-card rounded-2xl p-6 border border-slate-800 space-y-5">
+              <div class="flex items-center justify-between border-b border-slate-800/80 pb-4">
+                <div>
+                  <h2 class="text-base font-bold text-white flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-purple-500"></span>
+                    <span>老L·AI 系统提示词与人设调优 (System Prompt)</span>
+                  </h2>
+                  <p class="text-xs text-slate-400 mt-0.5">控制老L·AI 顾问的语气口吻、知识边界与高危坏档拦截逻辑</p>
+                </div>
+                <div class="flex items-center gap-2">
+                  <button id="ai-preset-veteran" class="text-xs px-2.5 py-1 rounded-md bg-purple-500/20 text-purple-300 border border-purple-500/30">资深老炮</button>
+                  <button id="ai-preset-strict" class="text-xs px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 hover:bg-slate-700">极客严谨</button>
+                  <button id="ai-preset-friendly" class="text-xs px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 hover:bg-slate-700">新手向导</button>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-mono text-slate-400 mb-2">系统级 System Prompt (热更新生效)</label>
+                <textarea 
+                  id="ai-system-prompt" 
+                  rows="6" 
+                  class="w-full bg-slate-950/90 border border-slate-700/80 rounded-xl p-4 text-xs text-slate-200 leading-relaxed font-mono focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 resize-none"
+                ></textarea>
+                <div class="flex items-center justify-between mt-2 text-[11px] text-slate-500 font-mono">
+                  <span>支持变量动态插值与安全上下文包裹</span>
+                  <span id="ai-prompt-length">0 字</span>
+                </div>
+              </div>
+
+              <!-- Hyperparameters -->
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+                <div>
+                  <label class="block text-xs font-mono text-slate-400 mb-1.5">语气风格 (Tone)</label>
+                  <select id="ai-tone-select" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-xs text-slate-200 font-mono">
+                    <option value="hardcore_veteran">资深单机老炮 / 严谨避坑顾问</option>
+                    <option value="geek_strict">硬核极客 / 语法零容错</option>
+                    <option value="beginner_guide">新手导师 / 通俗易懂</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-mono text-slate-400 mb-1.5">知识召回阈值 (<span id="ai-recall-val">0.65</span>)</label>
+                  <input type="range" id="ai-recall-slider" min="0.3" max="0.95" step="0.05" value="0.65" class="w-full accent-purple-500">
+                </div>
+
+                <div>
+                  <label class="block text-xs font-mono text-slate-400 mb-1.5">单次最大指令注入数 (<span id="ai-max-cmds-val">6</span> 条)</label>
+                  <input type="range" id="ai-max-cmds-slider" min="2" max="15" step="1" value="6" class="w-full accent-purple-500">
+                </div>
+              </div>
+
+              <div class="pt-4 border-t border-slate-800 flex justify-end">
+                <button id="ai-save-config-btn" class="px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold shadow-lg shadow-purple-600/30 transition flex items-center gap-2">
+                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                  <span>保存 AI 编排配置并全网热更新</span>
+                </button>
+              </div>
+
+            </div>
+
+            <!-- Skills Expansion Capabilities Matrix -->
+            <div class="glass-card rounded-2xl p-6 border border-slate-800 space-y-4">
+              <div class="border-b border-slate-800/80 pb-3">
+                <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                  <span>AI Skills 扩展能力矩阵 (Agentic Capabilities)</span>
+                </h3>
+                <p class="text-xs text-slate-400 mt-0.5">勾选启用老L·AI 在推理链路中激活的专属工具与安全守卫</p>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                <label class="flex items-start gap-3 p-3 rounded-xl bg-slate-950/60 border border-slate-800 cursor-pointer hover:border-purple-500/40 transition">
+                  <input type="checkbox" id="skill-code-dedup" checked class="mt-0.5 accent-purple-500 rounded">
+                  <div>
+                    <span class="font-bold text-white block">智能代码查重 (Code De-dup)</span>
+                    <span class="text-[11px] text-slate-400">比对 D1 数据库去除相似功能重复指令，保持回答紧凑。</span>
+                  </div>
+                </label>
+
+                <label class="flex items-start gap-3 p-3 rounded-xl bg-slate-950/60 border border-slate-800 cursor-pointer hover:border-purple-500/40 transition">
+                  <input type="checkbox" id="skill-syntax-val" checked class="mt-0.5 accent-purple-500 rounded">
+                  <div>
+                    <span class="font-bold text-white block">语法自检修复 (Syntax Auto-Fix)</span>
+                    <span class="text-[11px] text-slate-400">自动修正 CET Lua / Creation Engine 引号及参数缺失。</span>
+                  </div>
+                </label>
+
+                <label class="flex items-start gap-3 p-3 rounded-xl bg-slate-950/60 border border-slate-800 cursor-pointer hover:border-purple-500/40 transition">
+                  <input type="checkbox" id="skill-steam-diff" checked class="mt-0.5 accent-purple-500 rounded">
+                  <div>
+                    <span class="font-bold text-white block">Steam 补丁语义对比 (Patch Diff)</span>
+                    <span class="text-[11px] text-slate-400">在回答中自动标明指令适用的基准补丁与最新补丁偏差。</span>
+                  </div>
+                </label>
+
+                <label class="flex items-start gap-3 p-3 rounded-xl bg-slate-950/60 border border-slate-800 cursor-pointer hover:border-purple-500/40 transition">
+                  <input type="checkbox" id="skill-save-guard" checked class="mt-0.5 accent-purple-500 rounded">
+                  <div>
+                    <span class="font-bold text-white block">坏档预防拦截 (Save Corruption Guard)</span>
+                    <span class="text-[11px] text-slate-400">遇到涉及巨额金币、全跳关的高危指令强制前置红色警示。</span>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Right Column: Model Routing & Interactive Playground (1 Col) -->
+          <div class="space-y-6">
+
+            <!-- Model Routing Card -->
+            <div class="glass-card rounded-2xl p-6 border border-slate-800 space-y-4">
+              <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-blue-400"></span>
+                <span>大模型路由与环境状态</span>
+              </h3>
+
+              <div class="space-y-3 text-xs font-mono">
+                <div>
+                  <label class="block text-slate-400 mb-1">主选大模型 (Primary Route)</label>
+                  <select id="ai-primary-model" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-white">
+                    <option value="gemini-2.5-flash">Google Gemini 2.5 Flash (极速智能推理 · 官方推荐)</option>
+                    <option value="deepseek-chat">DeepSeek-V3 / DeepSeek-Chat (深度思考单机专家)</option>
+                    <option value="gemini-1.5-pro">Google Gemini 1.5 Pro (超长上下文)</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-slate-400 mb-1">备用降级路由 (Fallback)</label>
+                  <select id="ai-fallback-model" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-white">
+                    <option value="deepseek-chat">DeepSeek-Chat</option>
+                    <option value="gemini-2.5-flash">Google Gemini 2.5 Flash</option>
+                  </select>
+                </div>
+
+                <div class="p-3 rounded-xl bg-slate-950 border border-slate-800/80 space-y-2">
+                  <div class="flex items-center justify-between text-[11px]">
+                    <span class="text-slate-400">Gemini API Key:</span>
+                    <span class="text-emerald-400 font-semibold flex items-center gap-1">
+                      <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                      <span>已挂载 (Cloudflare Secret)</span>
+                    </span>
+                  </div>
+                  <div class="flex items-center justify-between text-[11px]">
+                    <span class="text-slate-400">DeepSeek Key:</span>
+                    <span class="text-emerald-400 font-semibold flex items-center gap-1">
+                      <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                      <span>已挂载 (Cloudflare Secret)</span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Interactive AI Sandbox & Diagnostic Simulator -->
+            <div class="glass-card rounded-2xl p-6 border border-slate-800 space-y-4">
+              <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-indigo-400"></span>
+                <span>AI 提示词与技能沙盒测试</span>
+              </h3>
+
+              <div class="space-y-3">
+                <input 
+                  id="ai-test-query" 
+                  type="text" 
+                  value="2077 怎么刷钱和强尼银手手枪？" 
+                  placeholder="输入测试问题..." 
+                  class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-xs text-white placeholder-slate-500 font-mono"
+                >
+                <select id="ai-test-game" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-xs text-white font-mono">
+                  <option value="cyberpunk-2077">Cyberpunk 2077 (赛博朋克 2077)</option>
+                  <option value="black-myth-wukong">Black Myth: Wukong (黑神话: 悟空)</option>
+                  <option value="witcher-3">The Witcher 3: Wild Hunt (巫师 3)</option>
+                  <option value="elden-ring">ELDEN RING (艾尔登法环)</option>
+                  <option value="baldurs-gate-3">Baldurs Gate 3 (博德之门 3)</option>
+                </select>
+
+                <button id="ai-run-test-btn" class="w-full py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold transition flex items-center justify-center gap-1.5 shadow-md shadow-indigo-600/30">
+                  <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/></svg>
+                  <span>运行技能沙盒测试</span>
+                </button>
+              </div>
+
+              <!-- Output Diagnostic Area -->
+              <div id="ai-test-output" class="hidden p-3 rounded-xl bg-slate-950 border border-slate-800 text-[11px] font-mono space-y-2 max-h-60 overflow-y-auto">
+                <div class="text-purple-400 font-semibold">【沙盒执行报告】</div>
+                <div id="ai-test-diagnostics" class="text-slate-300 whitespace-pre-wrap leading-relaxed"></div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- TAB 4: STEAM PATCH RADAR SENTINEL CONTROL -->
+      <!-- ===================================================================== -->
+      <section id="panel-radar" class="tab-panel hidden space-y-6">
+
+        <!-- Sentinel Top Gauges -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div class="glass-card rounded-2xl p-5 border border-slate-800">
+            <div class="flex items-center justify-between text-xs text-slate-400 font-mono">
+              <span>完美兼容基准</span>
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 neon-emerald"></span>
+            </div>
+            <div class="mt-3 flex items-baseline gap-2">
+              <span id="radar-green-count" class="text-3xl font-extrabold text-emerald-400">--</span>
+              <span class="text-xs text-slate-500 font-mono">/ 100 款游戏</span>
+            </div>
+            <p class="text-[11px] text-slate-400 mt-1 font-mono">主流指令与前置框架 100% 验证</p>
+          </div>
+
+          <div class="glass-card rounded-2xl p-5 border border-slate-800">
+            <div class="flex items-center justify-between text-xs text-slate-400 font-mono">
+              <span>部分失效 / 需注意</span>
+              <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+            </div>
+            <div class="mt-3 flex items-baseline gap-2">
+              <span id="radar-yellow-count" class="text-3xl font-extrabold text-amber-400">--</span>
+              <span class="text-xs text-slate-500 font-mono">/ 100 款游戏</span>
+            </div>
+            <p class="text-[11px] text-slate-400 mt-1 font-mono">前置扩展（CET/UE4SS）待更新</p>
+          </div>
+
+          <div class="glass-card rounded-2xl p-5 border border-slate-800">
+            <div class="flex items-center justify-between text-xs text-slate-400 font-mono">
+              <span>高危熔断预警</span>
+              <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span>
+            </div>
+            <div class="mt-3 flex items-baseline gap-2">
+              <span id="radar-red-count" class="text-3xl font-extrabold text-rose-400">--</span>
+              <span class="text-xs text-slate-500 font-mono">/ 100 款游戏</span>
+            </div>
+            <p class="text-[11px] text-slate-400 mt-1 font-mono">底层引擎大更新，坏档拦截</p>
+          </div>
+        </div>
+
+        <!-- Emergency Circuit-Breaker Broadcast Control -->
+        <div class="glass-card rounded-2xl p-6 border border-slate-800 space-y-4">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-slate-800/80 pb-4">
+            <div>
+              <h2 class="text-base font-bold text-white flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span>
+                <span>全网紧急熔断跑马灯广播 (Emergency Circuit-Breaker Broadcast)</span>
+              </h2>
+              <p class="text-xs text-slate-400 mt-0.5">当某款大作突发破坏性版本更新时，可后台一键发布全站醒目警示</p>
+            </div>
+            
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input type="checkbox" id="broadcast-enable-toggle" class="sr-only peer">
+              <div class="w-11 h-6 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-rose-600"></div>
+              <span class="ml-3 text-xs font-mono text-slate-300 font-medium" id="broadcast-status-label">未激活</span>
+            </label>
+          </div>
+
+          <!-- Broadcast Form -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs font-mono">
+            <div>
+              <label class="block text-slate-400 mb-1">预警严重等级</label>
+              <select id="broadcast-level-select" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white">
+                <option value="red">🔴 红色高危熔断 (破坏性更新 · 暂停使用修改器)</option>
+                <option value="yellow">🟡 黄色更新注意 (前置框架等待适配 · 建议备份)</option>
+                <option value="info">ℹ️ 蓝色常规公告 (巡检提示 · 官方补丁预告)</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-slate-400 mb-1">关联特定游戏 (可选)</label>
+              <select id="broadcast-game-select" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white">
+                <option value="all">全站全局广播 (全网生效)</option>
+                <option value="cyberpunk-2077">Cyberpunk 2077</option>
+                <option value="black-myth-wukong">Black Myth: Wukong</option>
+                <option value="witcher-3">The Witcher 3: Wild Hunt</option>
+                <option value="baldurs-gate-3">Baldurs Gate 3</option>
+                <option value="elden-ring">ELDEN RING</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-slate-400 mb-1">广播标题</label>
+              <input id="broadcast-title-input" type="text" value="Steam 补丁兼容性高危熔断预警" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-mono text-slate-400 mb-1">广播提示内容 (展示在玩家页面顶部跑马灯)</label>
+            <input id="broadcast-msg-input" type="text" value="检测到最新热更新导致底层钩子失效，请玩家暂缓使用旧版控制台与修改器，务必先行备份存档！" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-xs text-white font-mono">
+          </div>
+
+          <div class="flex justify-end pt-2">
+            <button id="save-broadcast-btn" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-rose-600 to-red-600 hover:from-rose-500 hover:to-red-500 text-white text-xs font-bold shadow-lg shadow-rose-600/30 transition flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/></svg>
+              <span>立即同步/下发熔断广播</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Manual Sentinel Trigger & Live Terminal -->
+        <div class="glass-card rounded-2xl p-6 border border-slate-800 space-y-4">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div>
+              <h2 class="text-base font-bold text-white flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-blue-400"></span>
+                <span>手动触发 Steam 补丁巡检 (Sentinel Dispatcher)</span>
+              </h2>
+              <p class="text-xs text-slate-400 mt-0.5">即时调用 Steam Patch API 与 L-MOD 验证基准进行差分比对</p>
+            </div>
+
+            <div class="flex items-center gap-3">
+              <select id="inspect-target-select" class="bg-slate-950 border border-slate-700 rounded-lg p-2 text-xs text-white font-mono">
+                <option value="all">全量旗舰单机大作 (Top 10 Flagship)</option>
+                <option value="cyberpunk-2077">Cyberpunk 2077 (赛博朋克 2077)</option>
+                <option value="black-myth-wukong">Black Myth: Wukong (黑神话: 悟空)</option>
+                <option value="witcher-3">The Witcher 3: Wild Hunt (巫师 3)</option>
+                <option value="baldurs-gate-3">Baldurs Gate 3 (博德之门 3)</option>
+                <option value="elden-ring">ELDEN RING (艾尔登法环)</option>
+              </select>
+
+              <button id="trigger-inspect-btn" class="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold shadow-md shadow-blue-600/30 transition flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                <span>立即巡检</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Inspection Output Terminal -->
+          <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 font-mono text-xs text-slate-300 space-y-2 max-h-48 overflow-y-auto">
+            <div class="flex items-center justify-between text-slate-500 text-[10px] border-b border-slate-800/80 pb-1.5">
+              <span>SENTINEL AUDIT CONSOLE</span>
+              <span id="inspect-terminal-status">IDLE READY</span>
+            </div>
+            <div id="inspect-terminal-content" class="text-slate-400 leading-relaxed text-[11px]">
+              等待站长发起巡检任务... 哨兵机器人已就绪。
+            </div>
+          </div>
+        </div>
+
+        <!-- 24h Audit Trail Table (patch_radar_logs) -->
+        <div class="glass-card rounded-2xl border border-slate-800 overflow-hidden">
+          <div class="p-4 border-b border-slate-800 flex items-center justify-between">
+            <h3 class="text-sm font-bold text-white flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-purple-400"></span>
+              <span>24 小时巡检审计流水 (patch_radar_logs)</span>
+            </h3>
+            <span class="text-xs text-slate-500 font-mono">D1 持久化审计存证</span>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs font-mono">
+              <thead class="bg-slate-950/80 text-slate-400 text-[11px] uppercase border-b border-slate-800">
+                <tr>
+                  <th class="py-2.5 px-4">游戏</th>
+                  <th class="py-2.5 px-4">巡检标题 / 补丁</th>
+                  <th class="py-2.5 px-4">Build ID</th>
+                  <th class="py-2.5 px-4">状态</th>
+                  <th class="py-2.5 px-4">风险评估与裁定</th>
+                  <th class="py-2.5 px-4">巡检时间</th>
+                </tr>
+              </thead>
+              <tbody id="radar-logs-tbody" class="divide-y divide-slate-800/60 text-slate-300">
+                <tr><td colspan="6" class="text-center py-6 text-slate-500">正在调取巡检日志...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- 3. MODAL: EDIT GAME & COMMANDS (CMS EDIT DRAWER) -->
+  <!-- ========================================================================= -->
+  <div id="game-edit-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-vault-black/80 backdrop-blur-xl">
+    <div class="w-full max-w-2xl glass-card rounded-2xl p-6 border border-slate-800 shadow-2xl space-y-5 max-h-[90vh] overflow-y-auto">
+      
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div>
+          <h3 id="modal-game-title" class="text-base font-bold text-white">编辑游戏配置</h3>
+          <p id="modal-game-id" class="text-xs text-purple-400 font-mono">ID: cyberpunk-2077</p>
+        </div>
+        <button id="modal-close-btn" class="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <form id="game-edit-form" class="space-y-4 text-xs font-mono">
+        <input type="hidden" id="edit-game-id">
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-slate-400 mb-1">L-MOD 验证基准补丁</label>
+            <input id="edit-verified-patch" type="text" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white" required>
+          </div>
+          <div>
+            <label class="block text-slate-400 mb-1">Steam 客户端最新补丁</label>
+            <input id="edit-latest-patch" type="text" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-slate-400 mb-1">兼容性三色状态</label>
+            <select id="edit-compat-status" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white">
+              <option value="green">🟢 完美适配 (Green)</option>
+              <option value="yellow">🟡 部分失效/需注意 (Yellow)</option>
+              <option value="red">🔴 高危熔断 (Red)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-slate-400 mb-1">控制台呼出快捷键</label>
+            <input id="edit-console-shortcut" type="text" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white" placeholder="如 ~ 或 CET 悬浮窗">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-slate-400 mb-1">避坑雷达短标题 (Radar Risk Title)</label>
+          <input id="edit-radar-title" type="text" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white">
+        </div>
+
+        <div>
+          <label class="block text-slate-400 mb-1">详细避坑与存档备份提示 (Pitfall Note)</label>
+          <textarea id="edit-pitfall-note" rows="3" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white resize-none"></textarea>
+        </div>
+
+        <div class="flex justify-between items-center pt-3 border-t border-slate-800">
+          <button type="button" id="modal-manage-commands-btn" class="px-3.5 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-purple-300 font-semibold transition">
+            管理该游戏指令集 (<span id="modal-commands-count">0</span>)
+          </button>
+          <button type="submit" class="px-5 py-2 rounded-lg bg-purple-600 hover:bg-purple-500 text-white font-semibold shadow-md shadow-purple-600/30 transition">
+            保存更改同步 D1
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- 4. MODAL: COMMAND MANAGEMENT (ADD/EDIT/DELETE COMMANDS) -->
+  <!-- ========================================================================= -->
+  <div id="command-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-vault-black/85 backdrop-blur-xl">
+    <div class="w-full max-w-3xl glass-card rounded-2xl p-6 border border-slate-800 shadow-2xl space-y-5 max-h-[90vh] overflow-y-auto">
+      
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div>
+          <h3 id="cmd-modal-game-title" class="text-base font-bold text-white">指令库管理</h3>
+          <p id="cmd-modal-game-id" class="text-xs text-purple-400 font-mono"></p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button id="cmd-add-new-btn" class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold flex items-center gap-1 transition">
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+            <span>新增指令</span>
+          </button>
+          <button id="cmd-modal-close-btn" class="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Command Edit Sub-form (Hidden by default, shown when adding/editing) -->
+      <div id="command-editor-box" class="hidden p-4 rounded-xl bg-slate-950 border border-purple-500/30 space-y-3 text-xs font-mono">
+        <h4 id="cmd-editor-title" class="text-sm font-bold text-purple-300">新增控制台指令</h4>
+        <input type="hidden" id="cmd-input-id">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-slate-400 mb-1">指令中文名称 *</label>
+            <input id="cmd-input-name-zh" type="text" placeholder="如: 获得100万金币" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-white" required>
+          </div>
+          <div>
+            <label class="block text-slate-400 mb-1">英文名称 (可选)</label>
+            <input id="cmd-input-name-en" type="text" placeholder="如: Add 1M Money" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-white">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-slate-400 mb-1">可执行代码语法 (Code) *</label>
+          <textarea id="cmd-input-code" rows="2" placeholder="输入精准执行代码..." class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-emerald-400 font-mono resize-none" required></textarea>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div>
+            <label class="block text-slate-400 mb-1">分类名 (中文)</label>
+            <input id="cmd-input-cat-zh" type="text" placeholder="如: 常用代码 / 武器装备" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-white">
+          </div>
+          <div>
+            <label class="block text-slate-400 mb-1">语法类型</label>
+            <select id="cmd-input-syntax" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-white">
+              <option value="cet_lua">CET Lua (赛博朋克等)</option>
+              <option value="engine_console">Engine Console (原生控制台)</option>
+              <option value="ue_console">UE4SS (虚幻引擎)</option>
+              <option value="creation_hex">Creation Engine (B社Hex)</option>
+            </select>
+          </div>
+          <div class="flex items-center gap-2 pt-5">
+            <input type="checkbox" id="cmd-input-popular" class="accent-purple-500 rounded">
+            <label for="cmd-input-popular" class="text-slate-300">置顶热门快捷指令</label>
+          </div>
+        </div>
+
+        <div class="flex justify-end gap-2 pt-2">
+          <button type="button" id="cmd-cancel-btn" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300">取消</button>
+          <button type="button" id="cmd-save-btn" class="px-4 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-500 text-white font-semibold">保存指令到 D1</button>
+        </div>
+      </div>
+
+      <!-- Commands List Table -->
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs font-mono">
+          <thead class="bg-slate-950/80 text-slate-400 uppercase text-[10px] border-b border-slate-800">
+            <tr>
+              <th class="py-2.5 px-3">指令名</th>
+              <th class="py-2.5 px-3">执行代码</th>
+              <th class="py-2.5 px-3">语法类型</th>
+              <th class="py-2.5 px-3 text-right">操作</th>
+            </tr>
+          </thead>
+          <tbody id="game-commands-tbody" class="divide-y divide-slate-800/60 text-slate-300">
+            <tr><td colspan="4" class="text-center py-6 text-slate-500">加载指令中...</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL: CHANGE ADMIN PASSWORD -->
+  <!-- ========================================================================= -->
+  <div id="password-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-vault-black/85 backdrop-blur-xl font-sans">
+    <div class="w-full max-w-md glass-card rounded-2xl p-6 border border-slate-800 shadow-2xl space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/></svg>
+          </div>
+          <div>
+            <h3 class="text-sm font-bold text-white">修改站长登录密码</h3>
+            <p class="text-[10px] text-slate-400 font-mono">D1 分布式数据库即时同步生效</p>
+          </div>
+        </div>
+        <button id="pwd-modal-close-btn" class="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <form id="change-pwd-form" class="space-y-3.5 text-xs font-mono">
+        <div>
+          <label class="block text-slate-400 mb-1">当前原密码 *</label>
+          <input id="pwd-old-input" type="password" placeholder="输入当前使用的密码" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white" required>
+        </div>
+
+        <div>
+          <label class="block text-slate-400 mb-1">新密码 * (至少 6 位)</label>
+          <input id="pwd-new-input" type="password" placeholder="设置新密码" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white" required minlength="6">
+        </div>
+
+        <div>
+          <label class="block text-slate-400 mb-1">确认新密码 *</label>
+          <input id="pwd-confirm-input" type="password" placeholder="再次输入新密码" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white" required minlength="6">
+        </div>
+
+        <div id="pwd-modal-msg" class="hidden p-2.5 rounded-lg text-xs font-mono"></div>
+
+        <div class="flex justify-end gap-2 pt-2 border-t border-slate-800">
+          <button type="button" id="pwd-cancel-btn" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300">取消</button>
+          <button type="submit" id="pwd-submit-btn" class="px-4 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-500 text-white font-semibold transition">确认修改</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="fixed bottom-6 right-6 z-50 space-y-2 pointer-events-none"></div>
+
+  <!-- ========================================================================= -->
+  <!-- 5. JAVASCRIPT APP LOGIC -->
+  <!-- ========================================================================= -->
+  <script>
+    (function () {
+      'use strict';
+
+      const TOKEN_KEY = 'lmod_admin_token';
+      const API_BASE = '/api/v1/admin';
+
+      // State
+      let authToken = localStorage.getItem(TOKEN_KEY) || '';
+      let adminProfile = null;
+      let cachedGames = [];
+      let currentGameDetail = null;
+
+      // DOM Elements
+      const authScreen = document.getElementById('auth-screen');
+      const adminApp = document.getElementById('admin-app');
+      const loginForm = document.getElementById('login-form');
+      const adminPasskeyInput = document.getElementById('admin-passkey');
+      const loginErrorBox = document.getElementById('login-error');
+      const loginErrorMsg = document.getElementById('login-error-msg');
+      const togglePwdBtn = document.getElementById('toggle-pwd-btn');
+      const logoutBtn = document.getElementById('logout-btn');
+      const mobileLogoutBtn = document.getElementById('mobile-logout-btn');
+      const refreshDataBtn = document.getElementById('refresh-data-btn');
+
+      // Toast notification utility
+      function showToast(message, type = 'success') {
+        const container = document.getElementById('toast-container');
+        const toast = document.createElement('div');
+        const colors = {
+          success: 'bg-emerald-950/90 border-emerald-500/40 text-emerald-300',
+          error: 'bg-rose-950/90 border-rose-500/40 text-rose-300',
+          info: 'bg-purple-950/90 border-purple-500/40 text-purple-300'
+        };
+
+        toast.className = `p-3 rounded-xl border text-xs font-mono shadow-2xl backdrop-blur-md transition-all duration-300 transform translate-y-4 opacity-0 pointer-events-auto ${colors[type] || colors.info}`;
+        toast.textContent = message;
+        container.appendChild(toast);
+
+        requestAnimationFrame(() => {
+          toast.classList.remove('translate-y-4', 'opacity-0');
+        });
+
+        setTimeout(() => {
+          toast.classList.add('opacity-0', 'translate-y-2');
+          setTimeout(() => toast.remove(), 300);
+        }, 3500);
+      }
+
+      // Authenticated API Fetch Helper
+      async function apiFetch(endpoint, options = {}) {
+        const headers = {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${authToken}`,
+          ...(options.headers || {})
+        };
+
+        const res = await fetch(`${API_BASE}${endpoint}`, {
+          ...options,
+          headers
+        });
+
+        if (res.status === 401 || res.status === 403) {
+          // Token invalid or expired
+          localStorage.removeItem(TOKEN_KEY);
+          authToken = '';
+          showAuthScreen();
+          throw new Error('站长会话已过期，请重新登录认证');
+        }
+
+        return await res.json();
+      }
+
+      // Password visibility toggle
+      togglePwdBtn.addEventListener('click', () => {
+        adminPasskeyInput.type = adminPasskeyInput.type === 'password' ? 'text' : 'password';
+      });
+
+      // Quick Fill Default Credentials
+      const quickFillBtn = document.getElementById('quick-fill-btn');
+      if (quickFillBtn) {
+        quickFillBtn.addEventListener('click', () => {
+          document.getElementById('admin-username').value = 'admin';
+          document.getElementById('admin-passkey').value = 'lmod2026!';
+          showToast('已自动填入初始站长凭据 (admin / lmod2026!)', 'info');
+        });
+      }
+
+      // Show/Hide Screens
+      function showAuthScreen() {
+        authScreen.classList.remove('hidden');
+        adminApp.classList.add('hidden');
+      }
+
+      function showAdminConsole() {
+        authScreen.classList.add('hidden');
+        adminApp.classList.remove('hidden');
+        loadAllData();
+      }
+
+      // Login submission
+      loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        loginErrorBox.classList.add('hidden');
+        const username = (document.getElementById('admin-username')?.value || 'admin').trim();
+        const passkey = adminPasskeyInput.value.trim();
+        if (!passkey) return;
+
+        try {
+          const res = await fetch(`${API_BASE}/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password: passkey })
+          });
+          const json = await res.json();
+
+          if (res.ok && json.code === 0 && json.data.token) {
+            authToken = json.data.token;
+            localStorage.setItem(TOKEN_KEY, authToken);
+            adminProfile = json.data.admin_profile;
+            showToast('站长特权认证通过，欢迎回到控制中台！', 'success');
+            showAdminConsole();
+          } else {
+            loginErrorBox.classList.remove('hidden');
+            loginErrorMsg.textContent = json.message || '通行口令错误';
+          }
+        } catch (err) {
+          loginErrorBox.classList.remove('hidden');
+          loginErrorMsg.textContent = '登录接口请求失败: ' + err.message;
+        }
+      });
+
+      // Change Password Dialog & Submission
+      const openPwdBtn = document.getElementById('open-pwd-modal-btn');
+      const pwdModal = document.getElementById('password-modal');
+      const closePwdBtn = document.getElementById('pwd-modal-close-btn');
+      const cancelPwdBtn = document.getElementById('pwd-cancel-btn');
+      const changePwdForm = document.getElementById('change-pwd-form');
+      const pwdMsgBox = document.getElementById('pwd-modal-msg');
+
+      if (openPwdBtn && pwdModal) {
+        openPwdBtn.addEventListener('click', () => {
+          pwdModal.classList.remove('hidden');
+          pwdMsgBox.classList.add('hidden');
+          changePwdForm.reset();
+        });
+        closePwdBtn.addEventListener('click', () => pwdModal.classList.add('hidden'));
+        cancelPwdBtn.addEventListener('click', () => pwdModal.classList.add('hidden'));
+
+        changePwdForm.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const old_password = document.getElementById('pwd-old-input').value;
+          const new_password = document.getElementById('pwd-new-input').value;
+          const confirm_password = document.getElementById('pwd-confirm-input').value;
+
+          pwdMsgBox.classList.add('hidden');
+
+          if (new_password !== confirm_password) {
+            pwdMsgBox.className = 'p-2.5 rounded-lg text-xs font-mono bg-rose-500/15 border border-rose-500/30 text-rose-300';
+            pwdMsgBox.textContent = '两次输入的新密码不一致，请核对';
+            pwdMsgBox.classList.remove('hidden');
+            return;
+          }
+
+          try {
+            const res = await apiFetch('/password', {
+              method: 'POST',
+              body: JSON.stringify({ old_password, new_password })
+            });
+
+            if (res.code === 0) {
+              showToast(res.message, 'success');
+              pwdModal.classList.add('hidden');
+            } else {
+              pwdMsgBox.className = 'p-2.5 rounded-lg text-xs font-mono bg-rose-500/15 border border-rose-500/30 text-rose-300';
+              pwdMsgBox.textContent = res.message || '密码修改失败';
+              pwdMsgBox.classList.remove('hidden');
+            }
+          } catch (err) {
+            pwdMsgBox.className = 'p-2.5 rounded-lg text-xs font-mono bg-rose-500/15 border border-rose-500/30 text-rose-300';
+            pwdMsgBox.textContent = err.message;
+            pwdMsgBox.classList.remove('hidden');
+          }
+        });
+      }
+
+      // Logout handler
+      function handleLogout() {
+        localStorage.removeItem(TOKEN_KEY);
+        authToken = '';
+        adminProfile = null;
+        showToast('已退出站长管理中台', 'info');
+        showAuthScreen();
+      }
+      logoutBtn.addEventListener('click', handleLogout);
+      mobileLogoutBtn.addEventListener('click', handleLogout);
+      refreshDataBtn.addEventListener('click', () => {
+        loadAllData();
+        showToast('中台全量数据已刷新', 'info');
+      });
+
+      // Tab Switching
+      const tabs = document.querySelectorAll('.nav-tab');
+      const panels = document.querySelectorAll('.tab-panel');
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          const target = tab.dataset.tab;
+          tabs.forEach(t => {
+            t.classList.remove('text-purple-400', 'bg-purple-500/10', 'border-purple-500/20');
+            t.classList.add('text-slate-400');
+          });
+          tab.classList.add('text-purple-400', 'bg-purple-500/10', 'border-purple-500/20');
+          tab.classList.remove('text-slate-400');
+
+          panels.forEach(p => p.classList.add('hidden'));
+          const targetPanel = document.getElementById(`panel-${target}`);
+          if (targetPanel) targetPanel.classList.remove('hidden');
+        });
+      });
+
+      // =======================================================================
+      // DATA LOADER
+      // =======================================================================
+      async function loadAllData() {
+        try {
+          await Promise.all([
+            loadSessionAndStats(),
+            loadAnalyticsOverview(),
+            loadTelemetryEvents(),
+            loadCommunityFeedback('all'),
+            loadGamesCMS(),
+            loadAiConfig(),
+            loadRadarStatus()
+          ]);
+        } catch (err) {
+          console.error('Failed to load admin data:', err);
+        }
+      }
+
+      // Check Session
+      async function loadSessionAndStats() {
+        try {
+          const res = await apiFetch('/me');
+          if (res.code === 0 && res.data) {
+            document.getElementById('admin-user-tag').textContent = `${res.data.admin.username || '老L·站长'} (Super Admin)`;
+            const b = res.data.system_stats?.emergency_broadcast;
+            const pill = document.getElementById('header-emergency-pill');
+            if (b && b.enabled) {
+              pill.classList.remove('hidden');
+              pill.classList.add('flex');
+            } else {
+              pill.classList.add('hidden');
+              pill.classList.remove('flex');
+            }
+          }
+        } catch (e) {}
+      }
+
+      // =======================================================================
+      // MODULE 1: TELEMETRY & ANALYTICS
+      // =======================================================================
+      async function loadAnalyticsOverview() {
+        const res = await apiFetch('/analytics/overview');
+        if (res.code !== 0 || !res.data) return;
+
+        const { summary, top_searches, top_commands, top_downloads } = res.data;
+
+        // Metrics
+        document.getElementById('metric-total-pv').textContent = summary.total_pv || 0;
+        document.getElementById('metric-total-uv').textContent = summary.total_uv || 0;
+        document.getElementById('metric-today-pv').textContent = summary.today_pv || 0;
+        document.getElementById('metric-today-uv').textContent = summary.today_uv || 0;
+        document.getElementById('metric-search-count').textContent = summary.search_query_count || 0;
+        document.getElementById('metric-copy-count').textContent = summary.copy_code_count || 0;
+        document.getElementById('metric-download-count').textContent = summary.download_bat_count || 0;
+
+        if (top_searches.length > 0) {
+          document.getElementById('metric-top-keyword').textContent = top_searches[0].query;
+        }
+
+        // Top Searches List
+        const searchContainer = document.getElementById('top-searches-list');
+        if (top_searches.length === 0) {
+          searchContainer.innerHTML = '<div class="text-xs text-slate-500 py-4 text-center">暂无搜索记录</div>';
+        } else {
+          const maxCount = top_searches[0].count || 1;
+          searchContainer.innerHTML = top_searches.map((s, idx) => {
+            const pct = Math.min(100, Math.round((s.count / maxCount) * 100));
+            return `
+              <div class="flex items-center justify-between text-xs font-mono p-2 rounded-lg bg-slate-950/60 border border-slate-800/80">
+                <div class="flex items-center gap-2.5 truncate max-w-[70%]">
+                  <span class="w-5 text-center font-bold ${idx < 3 ? 'text-blue-400' : 'text-slate-500'}">#${idx + 1}</span>
+                  <span class="text-slate-200 truncate">${escapeHtml(s.query)}</span>
+                </div>
+                <div class="flex items-center gap-2 shrink-0">
+                  <div class="w-16 h-1.5 rounded-full bg-slate-800 overflow-hidden hidden sm:block">
+                    <div class="h-full bg-blue-500 rounded-full" style="width: ${pct}%"></div>
+                  </div>
+                  <span class="text-blue-400 font-semibold">${s.count} 次</span>
+                </div>
+              </div>
+            `;
+          }).join('');
+        }
+
+        // Top Commands List
+        const cmdContainer = document.getElementById('top-commands-list');
+        if (top_commands.length === 0) {
+          cmdContainer.innerHTML = '<div class="text-xs text-slate-500 py-4 text-center">暂无指令复制记录</div>';
+        } else {
+          cmdContainer.innerHTML = top_commands.map((c, idx) => {
+            return `
+              <div class="p-2.5 rounded-lg bg-slate-950/60 border border-slate-800 text-xs font-mono space-y-1">
+                <div class="flex items-center justify-between text-[11px]">
+                  <span class="text-purple-400 font-semibold">${escapeHtml(c.game_id || 'global')}</span>
+                  <span class="text-emerald-400 font-bold">${c.count} 次复制</span>
+                </div>
+                <div class="text-slate-300 truncate bg-slate-900/90 px-2 py-1 rounded text-[11px] border border-slate-800">
+                  ${escapeHtml(c.code)}
+                </div>
+              </div>
+            `;
+          }).join('');
+        }
+      }
+
+      // Load Events Stream
+      async function loadTelemetryEvents() {
+        const type = document.getElementById('telemetry-filter-type').value;
+        const res = await apiFetch(`/analytics/events?page=1&page_size=15&event_type=${type}`);
+        const tbody = document.getElementById('telemetry-table-body');
+
+        if (res.code !== 0 || !res.data || res.data.events.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="6" class="text-center py-6 text-slate-500">暂无埋点流水</td></tr>';
+          return;
+        }
+
+        tbody.innerHTML = res.data.events.map(e => {
+          const typeBadges = {
+            copy_code: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20',
+            download_bat: 'bg-amber-500/10 text-amber-400 border-amber-500/20',
+            search_query: 'bg-blue-500/10 text-blue-400 border-blue-500/20',
+            ai_ask: 'bg-purple-500/10 text-purple-400 border-purple-500/20',
+            view_game: 'bg-slate-800 text-slate-400 border-slate-700'
+          };
+          const badgeClass = typeBadges[e.event_type] || 'bg-slate-800 text-slate-400';
+
+          return `
+            <tr class="hover:bg-slate-800/30 transition">
+              <td class="py-2 px-3 text-slate-500">#${e.id}</td>
+              <td class="py-2 px-3"><span class="px-2 py-0.5 rounded text-[10px] border ${badgeClass}">${e.event_type}</span></td>
+              <td class="py-2 px-3 text-slate-300 font-semibold">${e.game_id || '-'}</td>
+              <td class="py-2 px-3 text-slate-200 truncate max-w-xs" title="${escapeHtml(e.target_payload || '')}">${escapeHtml(e.target_payload || '-')}</td>
+              <td class="py-2 px-3 text-slate-400">${e.client_country || 'Global'}</td>
+              <td class="py-2 px-3 text-slate-500">${(e.created_at || '').slice(11, 19)}</td>
+            </tr>
+          `;
+        }).join('');
+      }
+
+      document.getElementById('telemetry-filter-type').addEventListener('change', loadTelemetryEvents);
+
+      // Community Feedback Flow
+      async function loadCommunityFeedback(status = 'all') {
+        const res = await apiFetch(`/feedback?status=${status}&page=1&page_size=20`);
+        const container = document.getElementById('feedback-list-container');
+
+        if (res.code !== 0 || !res.data || res.data.items.length === 0) {
+          container.innerHTML = '<div class="text-xs text-slate-500 py-6 text-center font-mono">当前分类暂无玩家反馈</div>';
+          return;
+        }
+
+        container.innerHTML = res.data.items.map(fb => {
+          const statusTags = {
+            pending: '<span class="text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">待排查</span>',
+            verified: '<span class="text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded border border-blue-500/20">已采纳</span>',
+            resolved: '<span class="text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">已解决</span>'
+          };
+
+          return `
+            <div class="p-4 rounded-xl bg-slate-950/70 border border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div class="space-y-1.5 flex-1">
+                <div class="flex items-center gap-2 text-xs font-mono">
+                  ${statusTags[fb.status] || fb.status}
+                  <span class="text-purple-300 font-bold">${escapeHtml(fb.game_title_zh || fb.game_id || '通用反馈')}</span>
+                  <span class="text-slate-500">· 玩家: ${escapeHtml(fb.player_nickname || '匿名')} (${fb.player_ip_country || 'APAC'})</span>
+                  <span class="text-slate-500 text-[10px]">${(fb.created_at || '').slice(0, 16)}</span>
+                </div>
+                <div class="text-xs text-slate-200 leading-relaxed">${escapeHtml(fb.content)}</div>
+              </div>
+
+              <div class="flex items-center gap-2 shrink-0">
+                ${fb.status !== 'resolved' ? `
+                  <button onclick="window.updateFeedbackStatus(${fb.id}, 'resolved')" class="px-2.5 py-1 rounded-lg bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/30 text-xs font-mono transition">
+                    已修复
+                  </button>
+                ` : ''}
+                ${fb.status !== 'verified' ? `
+                  <button onclick="window.updateFeedbackStatus(${fb.id}, 'verified')" class="px-2.5 py-1 rounded-lg bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 border border-blue-500/30 text-xs font-mono transition">
+                    采纳
+                  </button>
+                ` : ''}
+                ${fb.status !== 'pending' ? `
+                  <button onclick="window.updateFeedbackStatus(${fb.id}, 'pending')" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-mono transition">
+                    待查
+                  </button>
+                ` : ''}
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      // Feedback filter buttons
+      document.querySelectorAll('.feedback-filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.feedback-filter-btn').forEach(b => {
+            b.classList.remove('bg-slate-800', 'text-purple-300', 'border', 'border-slate-700');
+            b.classList.add('text-slate-400');
+          });
+          btn.classList.add('bg-slate-800', 'text-purple-300', 'border', 'border-slate-700');
+          btn.classList.remove('text-slate-400');
+          loadCommunityFeedback(btn.dataset.feedbackFilter);
+        });
+      });
+
+      window.updateFeedbackStatus = async function (id, newStatus) {
+        try {
+          const res = await apiFetch('/feedback/status', {
+            method: 'POST',
+            body: JSON.stringify({ id, status: newStatus })
+          });
+          if (res.code === 0) {
+            showToast(`反馈 #${id} 状态已更新为: ${newStatus}`, 'success');
+            loadCommunityFeedback('all');
+          } else {
+            showToast(res.message || '更新失败', 'error');
+          }
+        } catch (e) {
+          showToast(e.message, 'error');
+        }
+      };
+
+      // =======================================================================
+      // MODULE 2: GAME & VAULT CMS
+      // =======================================================================
+      async function loadGamesCMS() {
+        const q = document.getElementById('cms-search-input').value.trim();
+        const status = document.getElementById('cms-status-filter').value;
+        const res = await apiFetch(`/games?q=${encodeURIComponent(q)}&status=${status}`);
+
+        const tbody = document.getElementById('cms-games-tbody');
+        if (res.code !== 0 || !res.data || res.data.games.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="7" class="py-8 text-center text-slate-500 font-mono">未找到匹配的游戏</td></tr>';
+          return;
+        }
+
+        cachedGames = res.data.games;
+
+        tbody.innerHTML = res.data.games.map(g => {
+          const compatPills = {
+            green: '<span class="px-2 py-0.5 rounded-full text-[11px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-mono">🟢 完美适配</span>',
+            yellow: '<span class="px-2 py-0.5 rounded-full text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/20 font-mono">🟡 部分失效</span>',
+            red: '<span class="px-2 py-0.5 rounded-full text-[11px] bg-rose-500/10 text-rose-400 border border-rose-500/20 font-mono">🔴 高危熔断</span>'
+          };
+
+          return `
+            <tr class="hover:bg-slate-800/40 transition">
+              <td class="py-3 px-4 font-mono text-purple-400 font-bold">#${g.rank}</td>
+              <td class="py-3 px-4">
+                <div class="font-bold text-white text-xs">${escapeHtml(g.title_zh || g.title)}</div>
+                <div class="text-[10px] text-slate-500 font-mono">${escapeHtml(g.title)} (${g.id})</div>
+              </td>
+              <td class="py-3 px-4">${compatPills[g.compatibility_status] || g.compatibility_status}</td>
+              <td class="py-3 px-4 font-mono text-xs text-slate-200">${escapeHtml(g.verified_patch || '-')}</td>
+              <td class="py-3 px-4 font-mono text-xs text-slate-400">${escapeHtml(g.latest_steam_patch || '-')}</td>
+              <td class="py-3 px-4 text-center font-mono font-bold text-slate-300">${g.command_count} 条</td>
+              <td class="py-3 px-4 text-right">
+                <button onclick="window.openGameEditor('${g.id}')" class="px-3 py-1 rounded-lg bg-purple-600/20 hover:bg-purple-600/30 text-purple-300 border border-purple-500/30 text-xs font-mono transition">
+                  编辑运维
+                </button>
+              </td>
+            </tr>
+          `;
+        }).join('');
+      }
+
+      document.getElementById('cms-search-input').addEventListener('input', debounce(loadGamesCMS, 300));
+      document.getElementById('cms-status-filter').addEventListener('change', loadGamesCMS);
+
+      // Open Game Editor Modal
+      window.openGameEditor = async function (gameId) {
+        try {
+          const res = await apiFetch(`/games/${gameId}`);
+          if (res.code !== 0 || !res.data) return;
+
+          currentGameDetail = res.data;
+          const g = res.data.game;
+
+          document.getElementById('modal-game-title').textContent = `编辑游戏: ${g.title_zh || g.title}`;
+          document.getElementById('modal-game-id').textContent = `ID: ${g.id} · Steam AppID: ${g.steam_app_id || 'N/A'}`;
+          document.getElementById('edit-game-id').value = g.id;
+          document.getElementById('edit-verified-patch').value = g.verified_patch || '';
+          document.getElementById('edit-latest-patch').value = g.latest_steam_patch || '';
+          document.getElementById('edit-compat-status').value = g.compatibility_status || 'green';
+          document.getElementById('edit-console-shortcut').value = g.console_shortcut || '';
+          document.getElementById('edit-radar-title').value = g.radar_risk_title || '';
+          document.getElementById('edit-pitfall-note').value = g.pitfall_note || '';
+          document.getElementById('modal-commands-count').textContent = res.data.commands.length;
+
+          document.getElementById('game-edit-modal').classList.remove('hidden');
+        } catch (e) {
+          showToast('无法读取游戏详情: ' + e.message, 'error');
+        }
+      };
+
+      document.getElementById('modal-close-btn').addEventListener('click', () => {
+        document.getElementById('game-edit-modal').classList.add('hidden');
+      });
+
+      // Save Game Changes
+      document.getElementById('game-edit-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const id = document.getElementById('edit-game-id').value;
+        const verified_patch = document.getElementById('edit-verified-patch').value;
+        const latest_steam_patch = document.getElementById('edit-latest-patch').value;
+        const compatibility_status = document.getElementById('edit-compat-status').value;
+        const console_shortcut = document.getElementById('edit-console-shortcut').value;
+        const radar_risk_title = document.getElementById('edit-radar-title').value;
+        const pitfall_note = document.getElementById('edit-pitfall-note').value;
+
+        try {
+          const res = await apiFetch('/games/update', {
+            method: 'POST',
+            body: JSON.stringify({
+              id,
+              verified_patch,
+              latest_steam_patch,
+              compatibility_status,
+              console_shortcut,
+              radar_risk_title,
+              pitfall_note
+            })
+          });
+
+          if (res.code === 0) {
+            showToast('游戏配置更新成功！已即时同步 D1 数据库', 'success');
+            document.getElementById('game-edit-modal').classList.add('hidden');
+            loadGamesCMS();
+            loadRadarStatus();
+          } else {
+            showToast(res.message || '保存失败', 'error');
+          }
+        } catch (err) {
+          showToast(err.message, 'error');
+        }
+      });
+
+      // Manage Commands Modal
+      document.getElementById('modal-manage-commands-btn').addEventListener('click', () => {
+        if (!currentGameDetail) return;
+        document.getElementById('game-edit-modal').classList.add('hidden');
+        openCommandsModal(currentGameDetail.game.id, currentGameDetail.game.title_zh || currentGameDetail.game.title);
+      });
+
+      async function openCommandsModal(gameId, gameTitle) {
+        document.getElementById('cmd-modal-game-title').textContent = `指令库运维: ${gameTitle}`;
+        document.getElementById('cmd-modal-game-id').textContent = `Game ID: ${gameId}`;
+        document.getElementById('command-modal').classList.remove('hidden');
+        document.getElementById('command-editor-box').classList.add('hidden');
+        await loadGameCommands(gameId);
+      }
+
+      async function loadGameCommands(gameId) {
+        const res = await apiFetch(`/commands?game_id=${gameId}&page_size=100`);
+        const tbody = document.getElementById('game-commands-tbody');
+
+        if (res.code !== 0 || !res.data || res.data.commands.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="4" class="text-center py-6 text-slate-500">该游戏暂无控制台指令</td></tr>';
+          return;
+        }
+
+        tbody.innerHTML = res.data.commands.map(cmd => {
+          return `
+            <tr class="hover:bg-slate-800/40">
+              <td class="py-2.5 px-3">
+                <div class="font-bold text-white">${escapeHtml(cmd.name_zh)}</div>
+                <div class="text-[10px] text-slate-500">${escapeHtml(cmd.category_name_zh || '常用')}</div>
+              </td>
+              <td class="py-2.5 px-3">
+                <code class="text-emerald-400 bg-slate-950 px-2 py-1 rounded block max-w-sm truncate border border-slate-800 text-[11px]">${escapeHtml(cmd.code)}</code>
+              </td>
+              <td class="py-2.5 px-3 text-slate-400 font-mono text-[11px]">${cmd.syntax_type}</td>
+              <td class="py-2.5 px-3 text-right space-x-1">
+                <button onclick="window.editCommand('${cmd.id}')" class="px-2 py-1 rounded bg-purple-600/20 text-purple-300 hover:bg-purple-600/30 text-xs">编辑</button>
+                <button onclick="window.deleteCommand('${cmd.id}')" class="px-2 py-1 rounded bg-rose-600/20 text-rose-300 hover:bg-rose-600/30 text-xs">删除</button>
+              </td>
+            </tr>
+          `;
+        }).join('');
+      }
+
+      document.getElementById('cmd-modal-close-btn').addEventListener('click', () => {
+        document.getElementById('command-modal').classList.add('hidden');
+      });
+
+      // Add New Command UI
+      document.getElementById('cmd-add-new-btn').addEventListener('click', () => {
+        document.getElementById('cmd-editor-title').textContent = '新增控制台指令';
+        document.getElementById('cmd-input-id').value = '';
+        document.getElementById('cmd-input-name-zh').value = '';
+        document.getElementById('cmd-input-name-en').value = '';
+        document.getElementById('cmd-input-code').value = '';
+        document.getElementById('cmd-input-cat-zh').value = '常用代码';
+        document.getElementById('cmd-input-syntax').value = 'engine_console';
+        document.getElementById('cmd-input-popular').checked = false;
+        document.getElementById('command-editor-box').classList.remove('hidden');
+      });
+
+      document.getElementById('cmd-cancel-btn').addEventListener('click', () => {
+        document.getElementById('command-editor-box').classList.add('hidden');
+      });
+
+      // Save Command
+      document.getElementById('cmd-save-btn').addEventListener('click', async () => {
+        if (!currentGameDetail) return;
+        const id = document.getElementById('cmd-input-id').value.trim();
+        const game_id = currentGameDetail.game.id;
+        const name_zh = document.getElementById('cmd-input-name-zh').value.trim();
+        const name_en = document.getElementById('cmd-input-name-en').value.trim();
+        const code = document.getElementById('cmd-input-code').value.trim();
+        const category_name_zh = document.getElementById('cmd-input-cat-zh').value.trim();
+        const syntax_type = document.getElementById('cmd-input-syntax').value;
+        const is_popular = document.getElementById('cmd-input-popular').checked ? 1 : 0;
+
+        if (!name_zh || !code) {
+          showToast('请填写指令名称和可执行代码', 'error');
+          return;
+        }
+
+        try {
+          const res = await apiFetch('/commands/save', {
+            method: 'POST',
+            body: JSON.stringify({
+              id: id || undefined,
+              game_id,
+              name_zh,
+              name_en,
+              code,
+              category_name_zh,
+              syntax_type,
+              is_popular
+            })
+          });
+
+          if (res.code === 0) {
+            showToast(res.message, 'success');
+            document.getElementById('command-editor-box').classList.add('hidden');
+            await loadGameCommands(game_id);
+            loadGamesCMS();
+          } else {
+            showToast(res.message || '保存指令失败', 'error');
+          }
+        } catch (e) {
+          showToast(e.message, 'error');
+        }
+      });
+
+      window.deleteCommand = async function (id) {
+        if (!confirm('确定彻底从 D1 数据库删除该控制台指令吗？此操作不可逆！')) return;
+        try {
+          const res = await apiFetch('/commands/delete', {
+            method: 'POST',
+            body: JSON.stringify({ id })
+          });
+          if (res.code === 0) {
+            showToast(res.message, 'success');
+            if (currentGameDetail) {
+              await loadGameCommands(currentGameDetail.game.id);
+              loadGamesCMS();
+            }
+          } else {
+            showToast(res.message, 'error');
+          }
+        } catch (e) {
+          showToast(e.message, 'error');
+        }
+      };
+
+      // =======================================================================
+      // MODULE 3: AI COPILOT & SKILLS STUDIO
+      // =======================================================================
+      async function loadAiConfig() {
+        const res = await apiFetch('/ai/config');
+        if (res.code !== 0 || !res.data) return;
+
+        const cfg = res.data;
+        const promptEl = document.getElementById('ai-system-prompt');
+        promptEl.value = cfg.system_prompt || '';
+        document.getElementById('ai-prompt-length').textContent = `${promptEl.value.length} 字`;
+        document.getElementById('ai-tone-select').value = cfg.tone || 'hardcore_veteran';
+        document.getElementById('ai-recall-slider').value = cfg.recall_threshold || 0.65;
+        document.getElementById('ai-recall-val').textContent = cfg.recall_threshold || 0.65;
+        document.getElementById('ai-max-cmds-slider').value = cfg.max_context_commands || 6;
+        document.getElementById('ai-max-cmds-val').textContent = cfg.max_context_commands || 6;
+        document.getElementById('ai-primary-model').value = cfg.primary_model || 'gemini-2.5-flash';
+        document.getElementById('ai-fallback-model').value = cfg.fallback_model || 'deepseek-chat';
+
+        if (cfg.skills) {
+          document.getElementById('skill-code-dedup').checked = Boolean(cfg.skills.code_dedup);
+          document.getElementById('skill-syntax-val').checked = Boolean(cfg.skills.syntax_validator);
+          document.getElementById('skill-steam-diff').checked = Boolean(cfg.skills.steam_diff);
+          document.getElementById('skill-save-guard').checked = Boolean(cfg.skills.save_backup_guard);
+        }
+      }
+
+      document.getElementById('ai-system-prompt').addEventListener('input', (e) => {
+        document.getElementById('ai-prompt-length').textContent = `${e.target.value.length} 字`;
+      });
+      document.getElementById('ai-recall-slider').addEventListener('input', (e) => {
+        document.getElementById('ai-recall-val').textContent = e.target.value;
+      });
+      document.getElementById('ai-max-cmds-slider').addEventListener('input', (e) => {
+        document.getElementById('ai-max-cmds-val').textContent = e.target.value;
+      });
+
+      // Prompt presets
+      document.getElementById('ai-preset-veteran').addEventListener('click', () => {
+        document.getElementById('ai-system-prompt').value = '你是由 L-MOD Vault 官方研发的‘老L’——全球单机游戏底层指令与避坑智库首席顾问。你精通 CET Lua、UE4SS、Creation Engine 控制台语法与反作弊机制。你的回答风格：言简意赅、老练严谨、绝不废话、直击痛点。遇到破坏存档或与补丁冲突的高危指令，必须第一时间发出红色预警并给出备份方案。';
+        document.getElementById('ai-tone-select').value = 'hardcore_veteran';
+      });
+      document.getElementById('ai-preset-strict').addEventListener('click', () => {
+        document.getElementById('ai-system-prompt').value = '你是由 L-MOD Vault 打造的极客代码自检引擎。回答专注于纯净可执行代码、语法参数类型、引擎版本依赖分析，绝无多余口语化寒暄，零幻觉代码。';
+        document.getElementById('ai-tone-select').value = 'geek_strict';
+      });
+      document.getElementById('ai-preset-friendly').addEventListener('click', () => {
+        document.getElementById('ai-system-prompt').value = '我是老L，你的单机游戏避坑小助手。我会一步步教你如何呼出控制台、输入代码、并提醒你注意存档安全，小白也能轻松通关！';
+        document.getElementById('ai-tone-select').value = 'beginner_guide';
+      });
+
+      // Save AI Config
+      document.getElementById('ai-save-config-btn').addEventListener('click', async () => {
+        const system_prompt = document.getElementById('ai-system-prompt').value.trim();
+        const tone = document.getElementById('ai-tone-select').value;
+        const recall_threshold = parseFloat(document.getElementById('ai-recall-slider').value);
+        const max_context_commands = parseInt(document.getElementById('ai-max-cmds-slider').value, 10);
+        const primary_model = document.getElementById('ai-primary-model').value;
+        const fallback_model = document.getElementById('ai-fallback-model').value;
+
+        const skills = {
+          code_dedup: document.getElementById('skill-code-dedup').checked,
+          syntax_validator: document.getElementById('skill-syntax-val').checked,
+          steam_diff: document.getElementById('skill-steam-diff').checked,
+          save_backup_guard: document.getElementById('skill-save-guard').checked,
+          downgrade_wizard: true
+        };
+
+        try {
+          const res = await apiFetch('/ai/config', {
+            method: 'POST',
+            body: JSON.stringify({
+              system_prompt,
+              tone,
+              recall_threshold,
+              max_context_commands,
+              primary_model,
+              fallback_model,
+              skills
+            })
+          });
+
+          if (res.code === 0) {
+            showToast('老L·AI 顾问人设与技能编排已热更新全网生效！', 'success');
+          } else {
+            showToast(res.message || '更新失败', 'error');
+          }
+        } catch (e) {
+          showToast(e.message, 'error');
+        }
+      });
+
+      // AI Sandbox Test
+      document.getElementById('ai-run-test-btn').addEventListener('click', async () => {
+        const query = document.getElementById('ai-test-query').value.trim();
+        const game_id = document.getElementById('ai-test-game').value;
+        const outputBox = document.getElementById('ai-test-output');
+        const diagBox = document.getElementById('ai-test-diagnostics');
+
+        outputBox.classList.remove('hidden');
+        diagBox.textContent = '老L·AI 沙盒正在加载 D1 智库上下文并执行技能拦截链...';
+
+        try {
+          const res = await apiFetch('/ai/test', {
+            method: 'POST',
+            body: JSON.stringify({ query, game_id })
+          });
+
+          if (res.code === 0 && res.data) {
+            const d = res.data;
+            diagBox.textContent = 
+`🎯 检索命中了 ${d.synthesized_prompt.retrieved_commands_count} 条控制台代码
+🛡️ 坏档防御拦截: ${d.skills_audit.save_backup_guard.status} (${d.skills_audit.save_backup_guard.verdict})
+⚡ 语法自检状态: ${d.skills_audit.syntax_validator.status}
+🧭 Steam补丁对比: ${d.skills_audit.steam_diff.status}
+🤖 模型路由: ${d.active_model_route}
+
+💬 模拟回复:
+${d.simulated_response}`;
+          } else {
+            diagBox.textContent = '测试失败: ' + (res.message || '未知错误');
+          }
+        } catch (e) {
+          diagBox.textContent = '请求异常: ' + e.message;
+        }
+      });
+
+      // =======================================================================
+      // MODULE 4: PATCH RADAR SENTINEL CONTROL
+      // =======================================================================
+      async function loadRadarStatus() {
+        const res = await apiFetch('/radar/status');
+        if (res.code !== 0 || !res.data) return;
+
+        const { radar_metrics, emergency_broadcast, recent_logs } = res.data;
+
+        document.getElementById('radar-green-count').textContent = radar_metrics.green || 0;
+        document.getElementById('radar-yellow-count').textContent = radar_metrics.yellow || 0;
+        document.getElementById('radar-red-count').textContent = radar_metrics.red || 0;
+
+        // Emergency Broadcast controls
+        if (emergency_broadcast) {
+          document.getElementById('broadcast-enable-toggle').checked = Boolean(emergency_broadcast.enabled);
+          document.getElementById('broadcast-status-label').textContent = emergency_broadcast.enabled ? '🚨 广播运行中' : '未激活';
+          document.getElementById('broadcast-level-select').value = emergency_broadcast.level || 'yellow';
+          document.getElementById('broadcast-title-input').value = emergency_broadcast.title || '';
+          document.getElementById('broadcast-msg-input').value = emergency_broadcast.message || '';
+          if (emergency_broadcast.target_game_id) {
+            document.getElementById('broadcast-game-select').value = emergency_broadcast.target_game_id;
+          }
+        }
+
+        // Recent Logs Table
+        const tbody = document.getElementById('radar-logs-tbody');
+        if (recent_logs.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="6" class="text-center py-6 text-slate-500">暂无巡检记录</td></tr>';
+          return;
+        }
+
+        tbody.innerHTML = recent_logs.map(log => {
+          const statusTags = {
+            green: '<span class="text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">🟢 完美兼容</span>',
+            yellow: '<span class="text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">🟡 需注意</span>',
+            red: '<span class="text-rose-400 bg-rose-500/10 px-2 py-0.5 rounded border border-rose-500/20">🔴 熔断警报</span>'
+          };
+
+          return `
+            <tr class="hover:bg-slate-800/30">
+              <td class="py-2.5 px-4 font-bold text-white">${escapeHtml(log.game_title_zh || log.game_id)}</td>
+              <td class="py-2.5 px-4 text-slate-300">${escapeHtml(log.patch_title)}</td>
+              <td class="py-2.5 px-4 text-slate-400 font-mono">${log.build_id || '-'}</td>
+              <td class="py-2.5 px-4">${statusTags[log.status] || log.status}</td>
+              <td class="py-2.5 px-4 text-slate-300 max-w-xs truncate" title="${escapeHtml(log.risk_desc || '')}">${escapeHtml(log.risk_title || '')}</td>
+              <td class="py-2.5 px-4 text-slate-500 font-mono">${(log.checked_at || '').slice(0, 16)}</td>
+            </tr>
+          `;
+        }).join('');
+      }
+
+      // Save Emergency Broadcast
+      document.getElementById('save-broadcast-btn').addEventListener('click', async () => {
+        const enabled = document.getElementById('broadcast-enable-toggle').checked;
+        const level = document.getElementById('broadcast-level-select').value;
+        const target_game_id = document.getElementById('broadcast-game-select').value;
+        const title = document.getElementById('broadcast-title-input').value.trim();
+        const message = document.getElementById('broadcast-msg-input').value.trim();
+
+        try {
+          const res = await apiFetch('/radar/broadcast', {
+            method: 'POST',
+            body: JSON.stringify({
+              enabled,
+              level,
+              target_game_id,
+              title,
+              message
+            })
+          });
+
+          if (res.code === 0) {
+            showToast(res.message, enabled ? 'error' : 'success');
+            loadSessionAndStats();
+            loadRadarStatus();
+          } else {
+            showToast(res.message || '广播更新失败', 'error');
+          }
+        } catch (e) {
+          showToast(e.message, 'error');
+        }
+      });
+
+      // Manual Sentinel Trigger
+      document.getElementById('trigger-inspect-btn').addEventListener('click', async () => {
+        const game_id = document.getElementById('inspect-target-select').value;
+        const termContent = document.getElementById('inspect-terminal-content');
+        const termStatus = document.getElementById('inspect-terminal-status');
+
+        termStatus.textContent = 'SCANNING STEAM API...';
+        termStatus.className = 'text-blue-400 animate-pulse';
+        termContent.textContent = `[${new Date().toLocaleTimeString()}] 哨兵巡检启动... 目标: ${game_id}\n正在穿透 Steam CDN 抓取最新官方更新日志与 Build ID...`;
+
+        try {
+          const res = await apiFetch('/radar/inspect', {
+            method: 'POST',
+            body: JSON.stringify({ game_id })
+          });
+
+          if (res.code === 0 && res.data) {
+            termStatus.textContent = 'AUDIT COMPLETED';
+            termStatus.className = 'text-emerald-400 font-bold';
+            
+            const lines = res.data.results.map(r => 
+              `✓ [${r.title_zh}] Steam AppID:${r.steam_app_id} | 基准:${r.verified_patch} | 最新:${r.latest_steam_patch} | 状态:[${r.status.toUpperCase()}] -> ${r.verdict}`
+            ).join('\n');
+
+            termContent.textContent = 
+`[${new Date().toLocaleTimeString()}] 巡检完成！共核验 ${res.data.inspected_count} 款游戏：\n${lines}\n审计日志已持久化归档至 D1 patch_radar_logs。`;
+            showToast(res.message, 'success');
+            loadRadarStatus();
+          } else {
+            termStatus.textContent = 'FAILED';
+            termStatus.className = 'text-rose-400 font-bold';
+            termContent.textContent = '巡检执行失败: ' + (res.message || '未知错误');
+          }
+        } catch (e) {
+          termStatus.textContent = 'ERROR';
+          termStatus.className = 'text-rose-400';
+          termContent.textContent = '巡检网络异常: ' + e.message;
+        }
+      });
+
+      // Utility Helpers
+      function escapeHtml(str) {
+        if (!str) return '';
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      }
+
+      function debounce(fn, wait) {
+        let t;
+        return function (...args) {
+          clearTimeout(t);
+          t = setTimeout(() => fn.apply(this, args), wait);
+        };
+      }
+
+      // Initialize App on DOM Ready
+      if (authToken) {
+        // Attempt fast verify
+        apiFetch('/me')
+          .then(res => {
+            if (res.code === 0) {
+              showAdminConsole();
+            } else {
+              showAuthScreen();
+            }
+          })
+          .catch(() => showAuthScreen());
+      } else {
+        showAuthScreen();
+      }
+
+    })();
+  </script>
+</body>
+</html>
