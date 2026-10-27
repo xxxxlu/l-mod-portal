@@ -2,6 +2,23 @@
 <html lang="zh-CN" class="dark">
 <head>
   <meta charset="UTF-8">
+  <!-- Anti-Flicker & Theme Synchronizer -->
+  <script>
+    (function () {
+      try {
+        const saved = localStorage.getItem('lmod_theme');
+        if (saved === 'light') {
+          document.documentElement.classList.remove('dark');
+          document.documentElement.classList.add('light');
+        } else {
+          document.documentElement.classList.add('dark');
+          document.documentElement.classList.remove('light');
+        }
+      } catch (e) {
+        document.documentElement.classList.add('dark');
+      }
+    })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>Steam 补丁变动与 Mod 兼容性实时避坑雷达 | L-MOD Vault</title>
   <!-- SEO & Standard Meta -->
@@ -244,7 +261,7 @@
       </div>
 
       <!-- Quick Action: Back to Main Vault -->
-      <a href="index.html" class="shrink-0 flex items-center space-x-1 text-zinc-400 hover:text-white transition-colors bg-white/5 hover:bg-white/10 px-2.5 py-1 rounded-full text-[11px] border border-white/5">
+      <a href="/" class="shrink-0 flex items-center space-x-1 text-zinc-400 hover:text-white transition-colors bg-white/5 hover:bg-white/10 px-2.5 py-1 rounded-full text-[11px] border border-white/5">
         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
         <span id="ticker-back-text">返回 L-MOD 主库</span>
       </a>
@@ -375,7 +392,7 @@
           <span class="hidden sm:inline text-[9px] font-mono px-1 py-0.5 rounded bg-purple-500/20 text-purple-300">⌘K</span>
         </button>
 
-        <a href="index.html" class="flex items-center space-x-2 bg-white/5 hover:bg-white/10 text-zinc-200 border border-white/10 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all">
+        <a href="/" class="flex items-center space-x-2 bg-white/5 hover:bg-white/10 text-zinc-200 border border-white/10 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all">
           <svg class="w-4 h-4 text-[#A855F7]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
           <span id="radar-return-btn-text">返回 L-MOD 主库</span>
         </a>
@@ -2108,7 +2125,36 @@ pause`
       }
     }
 
+    function initTheme() {
+      const savedTheme = localStorage.getItem('lmod_theme');
+      if (savedTheme) {
+        applyTheme(savedTheme);
+      } else {
+        applyTheme('dark');
+      }
+    }
+
+    function toggleTheme() {
+      const isDark = document.documentElement.classList.contains('dark');
+      const newTheme = isDark ? 'light' : 'dark';
+      localStorage.setItem('lmod_theme', newTheme);
+      applyTheme(newTheme);
+    }
+
+    function applyTheme(theme) {
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+      const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+      if (metaThemeColor) {
+        metaThemeColor.setAttribute('content', theme === 'dark' ? '#0a0b0e' : '#f8fafc');
+      }
+    }
+
     function initRadar() {
+      initTheme();
       if (window.GAMES_DATA) {
         allGames = window.GAMES_DATA;
       } else if (window.GAMES_DATABASE) {
