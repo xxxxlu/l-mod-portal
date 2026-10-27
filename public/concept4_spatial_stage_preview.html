@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>L-MOD Vault | 3D 空间全息游戏舱 (Spatial Liquid Stage)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap');
+
+    :root {
+      --bg: #050608;
+      --emerald-glow: #10b981;
+      --glass-base: rgba(14, 20, 27, 0.72);
+      --glass-border: rgba(255, 255, 255, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      user-select: none;
+    }
+
+    body {
+      background-color: var(--bg);
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      color: #f1f5f9;
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+    }
+
+    .font-mono-tech {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* === 零重力水银浮球 (液态流体) === */
+    .mercury-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      opacity: 0.55;
+      mix-blend-mode: screen;
+      will-change: transform;
+      animation: mercuryDrift 20s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+    }
+    .blob-1 {
+      width: 580px;
+      height: 580px;
+      background: radial-gradient(circle, #059669 0%, #10b981 40%, #064e3b 75%, transparent 85%);
+      top: -150px;
+      left: 20%;
+      animation-duration: 22s;
+    }
+    .blob-2 {
+      width: 480px;
+      height: 480px;
+      background: radial-gradient(circle, #10b981 0%, #047857 50%, transparent 80%);
+      bottom: -120px;
+      right: 15%;
+      animation-duration: 25s;
+    }
+    .blob-3 {
+      width: 320px;
+      height: 320px;
+      background: radial-gradient(circle, #34d399 0%, transparent 70%);
+      top: 40%;
+      left: -80px;
+      animation-duration: 18s;
+      opacity: 0.35;
+    }
+
+    @keyframes mercuryDrift {
+      0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+      50% { transform: translate(50px, -40px) scale(1.1) rotate(25deg); }
+      100% { transform: translate(-30px, 45px) scale(0.92) rotate(-15deg); }
+    }
+
+    /* === 3D 空间弧形轮盘视差舞台 === */
+    .stage-viewport {
+      perspective: 1400px;
+      perspective-origin: 50% 50%;
+      transform-style: preserve-3d;
+    }
+
+    .carousel-track {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      height: 520px;
+      transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* 单个空间全息卡片 */
+    .spatial-card {
+      position: absolute;
+      width: 360px;
+      height: 490px;
+      border-radius: 28px;
+      background: var(--glass-base);
+      backdrop-filter: blur(32px) saturate(180%);
+      -webkit-backdrop-filter: blur(32px) saturate(180%);
+      border: 1px solid var(--glass-border);
+      transition: all 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+      overflow: hidden;
+      box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.95);
+      will-change: transform, opacity;
+    }
+
+    /* 激活卡片焦点 (Center Active) */
+    .spatial-card.active {
+      transform: translate3d(0, 0, 80px) rotateY(0deg) scale(1.08);
+      border-color: rgba(16, 185, 129, 0.6);
+      box-shadow: 0 35px 80px -15px rgba(0, 0, 0, 0.95), 0 0 50px -5px rgba(16, 185, 129, 0.35);
+      z-index: 30;
+      opacity: 1;
+    }
+
+    /* 左侧卡片 (Layer 1) */
+    .spatial-card.left-1 {
+      transform: translate3d(-340px, 0, -60px) rotateY(22deg) scale(0.9);
+      opacity: 0.75;
+      z-index: 20;
+    }
+    .spatial-card.left-1:hover {
+      opacity: 0.95;
+      transform: translate3d(-330px, 0, -40px) rotateY(16deg) scale(0.93);
+    }
+
+    /* 左侧远端卡片 (Layer 2) */
+    .spatial-card.left-2 {
+      transform: translate3d(-620px, 0, -220px) rotateY(38deg) scale(0.75);
+      opacity: 0.4;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    /* 右侧卡片 (Layer 1) */
+    .spatial-card.right-1 {
+      transform: translate3d(340px, 0, -60px) rotateY(-22deg) scale(0.9);
+      opacity: 0.75;
+      z-index: 20;
+    }
+    .spatial-card.right-1:hover {
+      opacity: 0.95;
+      transform: translate3d(330px, 0, -40px) rotateY(-16deg) scale(0.93);
+    }
+
+    /* 右侧远端卡片 (Layer 2) */
+    .spatial-card.right-2 {
+      transform: translate3d(620px, 0, -220px) rotateY(-38deg) scale(0.75);
+      opacity: 0.4;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    /* 动态声波频谱 (Patch Telemetry Waveform) */
+    .wave-bar {
+      width: 3.5px;
+      border-radius: 999px;
+      background: #10b981;
+      transform-origin: center;
+      animation: wavePulse 1.2s ease-in-out infinite alternate;
+    }
+    @keyframes wavePulse {
+      0% { height: 6px; opacity: 0.3; }
+      50% { height: 32px; opacity: 1; }
+      100% { height: 14px; opacity: 0.6; }
+    }
+
+    /* 底部悬浮全息 Island 胶囊 Dock */
+    .floating-dock {
+      background: rgba(13, 17, 24, 0.75);
+      backdrop-filter: blur(28px) saturate(180%);
+      -webkit-backdrop-filter: blur(28px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.9), 0 0 30px rgba(16, 185, 129, 0.15);
+    }
+
+    /* 顶部流体 Dynamic Island */
+    .top-island {
+      background: rgba(13, 17, 24, 0.65);
+      backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    }
+  </style>
+</head>
+<body class="flex flex-col justify-between p-6 relative">
+
+  <!-- 零重力水银浮球 (液态流体) 背景 -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+    <div class="mercury-blob blob-1"></div>
+    <div class="mercury-blob blob-2"></div>
+    <div class="mercury-blob blob-3"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(#ffffff0a_1px,transparent_1px)] [background-size:32px_32px] opacity-40"></div>
+  </div>
+
+  <!-- 顶部：全息悬浮 Dynamic Island (放弃传统左侧栏) -->
+  <header class="relative z-20 flex items-center justify-between w-full max-w-7xl mx-auto pt-2">
+    <!-- 左侧菜单触发器 -->
+    <div class="top-island px-4 py-2.5 rounded-full flex items-center gap-3">
+      <div class="w-6 h-6 rounded-full bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-emerald-400 text-xs font-mono-tech font-bold">
+        LV
+      </div>
+      <span class="text-xs font-mono-tech font-bold tracking-wider text-slate-300">L-MOD VAULT</span>
+    </div>
+
+    <!-- 居中高光标题 -->
+    <div class="top-island px-6 py-2 rounded-full hidden sm:flex items-center gap-3">
+      <span class="text-xs text-slate-400 font-mono-tech uppercase tracking-widest">SPATIAL GAME STAGE</span>
+      <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+    </div>
+
+    <!-- 右侧：Steam 避坑雷达实时遥测胶囊 -->
+    <div class="top-island px-4 py-2 rounded-full flex items-center gap-3 text-xs font-mono-tech">
+      <div class="w-5 h-5 rounded-full bg-slate-800 flex items-center justify-center text-slate-300">
+        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95C18.05 21.45 22 17.19 22 12c0-5.52-4.48-10-10-10z"/></svg>
+      </div>
+      <div>
+        <div class="text-[11px] font-bold text-emerald-400 flex items-center gap-1.5">
+          <span>STEAM RADAR</span>
+          <span class="px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-300 text-[9px]">ONLINE</span>
+        </div>
+        <div class="text-[9px] text-slate-400">3 款补丁更新 · 100% 避坑准入</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 核心 3D 空间轮盘舞台 (Center Stage) -->
+  <main class="relative z-10 w-full flex-1 flex flex-col items-center justify-center stage-viewport">
+    
+    <div class="carousel-track" id="carouselTrack">
+      
+      <!-- 卡片 1: 赛博朋克 2077 -->
+      <div class="spatial-card" id="card-0" onclick="focusCard(0)">
+        <div class="relative h-56 w-full overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0e141b] via-[#0e141b]/40 to-transparent"></div>
+          <span class="absolute top-4 left-4 px-2.5 py-1 rounded-xl text-[10px] font-mono-tech font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-400/30">
+            v2.13 COMPATIBLE
+          </span>
+        </div>
+        <div class="p-6 flex flex-col justify-between h-[266px]">
+          <div>
+            <div class="text-[11px] font-mono-tech text-cyan-400 uppercase tracking-widest">CD PROJEKT RED</div>
+            <h2 class="text-xl font-extrabold text-white mt-1">赛博朋克 2077: 往日之影</h2>
+            <p class="text-xs text-slate-400 mt-1 line-clamp-2">CET 核心框架、无假代码控制台脚本与 Fling 纯净免翻修改器。</p>
+          </div>
+          <div class="pt-4 border-t border-white/10 flex items-center justify-between text-xs font-mono-tech">
+            <span class="text-slate-400">142 组前置框架</span>
+            <span class="text-cyan-400 font-bold bg-cyan-500/10 px-2.5 py-1 rounded-lg">即刻开门 ➔</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 卡片 2: 艾尔登法环 -->
+      <div class="spatial-card" id="card-1" onclick="focusCard(1)">
+        <div class="relative h-56 w-full overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0e141b] via-[#0e141b]/40 to-transparent"></div>
+          <span class="absolute top-4 left-4 px-2.5 py-1 rounded-xl text-[10px] font-mono-tech font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">
+            v1.14 SHADOW READY
+          </span>
+        </div>
+        <div class="p-6 flex flex-col justify-between h-[266px]">
+          <div>
+            <div class="text-[11px] font-mono-tech text-emerald-400 uppercase tracking-widest">FROMSOFTWARE</div>
+            <h2 class="text-xl font-extrabold text-white mt-1">艾尔登法环: 黄金树幽影</h2>
+            <p class="text-xs text-slate-400 mt-1 line-clamp-2">无缝联机 Mod、二周目神装存档与自动防坏档快照。</p>
+          </div>
+          <div class="pt-4 border-t border-white/10 flex items-center justify-between text-xs font-mono-tech">
+            <span class="text-slate-400">210 组资源</span>
+            <span class="text-emerald-400 font-bold bg-emerald-500/10 px-2.5 py-1 rounded-lg">查看详情 ➔</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 卡片 3: 黑神话：悟空 (默认聚焦 Center Stage) -->
+      <div class="spatial-card active" id="card-2" onclick="focusCard(2)">
+        <div class="relative h-56 w-full overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0e141b] via-[#0e141b]/40 to-transparent"></div>
+          <span class="absolute top-4 left-4 px-2.5 py-1 rounded-xl text-[10px] font-mono-tech font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">
+            v1.0.9 READY
+          </span>
+          <span class="absolute top-4 right-4 px-2 py-0.5 rounded-full text-[10px] font-mono-tech bg-black/60 backdrop-blur-md text-emerald-400 border border-emerald-500/30">
+            98% STABLE
+          </span>
+        </div>
+        
+        <div class="p-6 flex flex-col justify-between h-[266px]">
+          <div>
+            <div class="text-[11px] font-mono-tech text-emerald-400 uppercase tracking-widest">GAME SCIENCE</div>
+            <h2 class="text-2xl font-extrabold text-white mt-0.5">黑神话：悟空</h2>
+            
+            <!-- 方案二特色：实时动态音频频谱条 -->
+            <div class="my-3 py-2 px-3 rounded-xl bg-black/40 border border-emerald-500/20 flex items-center justify-between gap-1 overflow-hidden">
+              <div class="text-[10px] font-mono-tech text-slate-400 mr-2 shrink-0">补丁脉冲</div>
+              <div class="flex items-center gap-1 flex-1 justify-center h-7">
+                <div class="wave-bar" style="animation-delay: 0.1s;"></div>
+                <div class="wave-bar" style="animation-delay: 0.3s;"></div>
+                <div class="wave-bar" style="animation-delay: 0.6s;"></div>
+                <div class="wave-bar" style="animation-delay: 0.2s;"></div>
+                <div class="wave-bar" style="animation-delay: 0.8s;"></div>
+                <div class="wave-bar" style="animation-delay: 0.4s;"></div>
+                <div class="wave-bar" style="animation-delay: 0.7s;"></div>
+                <div class="wave-bar" style="animation-delay: 0.5s;"></div>
+                <div class="wave-bar" style="animation-delay: 0.9s;"></div>
+                <div class="wave-bar" style="animation-delay: 0.3s;"></div>
+              </div>
+              <span class="text-[10px] font-mono-tech text-emerald-400 font-bold ml-2 shrink-0">86 MODS</span>
+            </div>
+          </div>
+
+          <div class="pt-2 border-t border-white/10 flex items-center justify-between text-xs font-mono-tech">
+            <span class="text-slate-400">一键开门脚本</span>
+            <span class="text-emerald-300 font-bold bg-emerald-500/20 border border-emerald-500/40 px-3 py-1 rounded-xl shadow-[0_0_15px_rgba(16,185,129,0.3)]">
+              双击注入 ⚡
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 卡片 4: 巫师 3 -->
+      <div class="spatial-card" id="card-3" onclick="focusCard(3)">
+        <div class="relative h-56 w-full overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0e141b] via-[#0e141b]/40 to-transparent"></div>
+          <span class="absolute top-4 left-4 px-2.5 py-1 rounded-xl text-[10px] font-mono-tech font-bold bg-purple-500/20 text-purple-300 border border-purple-400/30">
+            v4.04 NEXT-GEN
+          </span>
+        </div>
+        <div class="p-6 flex flex-col justify-between h-[266px]">
+          <div>
+            <div class="text-[11px] font-mono-tech text-purple-400 uppercase tracking-widest">CD PROJEKT RED</div>
+            <h2 class="text-xl font-extrabold text-white mt-1">巫师 3: 狂猎 次世代</h2>
+            <p class="text-xs text-slate-400 mt-1 line-clamp-2">REDmod 官方套件、高清重制贴图包与控制台全物品代码。</p>
+          </div>
+          <div class="pt-4 border-t border-white/10 flex items-center justify-between text-xs font-mono-tech">
+            <span class="text-slate-400">178 组前置</span>
+            <span class="text-purple-400 font-bold bg-purple-500/10 px-2.5 py-1 rounded-lg">查看详情 ➔</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 卡片 5: 博德之门 3 -->
+      <div class="spatial-card" id="card-4" onclick="focusCard(4)">
+        <div class="relative h-56 w-full overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0e141b] via-[#0e141b]/40 to-transparent"></div>
+          <span class="absolute top-4 left-4 px-2.5 py-1 rounded-xl text-[10px] font-mono-tech font-bold bg-amber-500/20 text-amber-300 border border-amber-400/30">
+            PATCH 7 OFFICIAL
+          </span>
+        </div>
+        <div class="p-6 flex flex-col justify-between h-[266px]">
+          <div>
+            <div class="text-[11px] font-mono-tech text-amber-400 uppercase tracking-widest">LARIAN STUDIOS</div>
+            <h2 class="text-xl font-extrabold text-white mt-1">博德之门 3</h2>
+            <p class="text-xs text-slate-400 mt-1 line-clamp-2">Patch 7 官方内置模组管理器适配与纯净洗点代码。</p>
+          </div>
+          <div class="pt-4 border-t border-white/10 flex items-center justify-between text-xs font-mono-tech">
+            <span class="text-slate-400">95 组模组</span>
+            <span class="text-amber-400 font-bold bg-amber-500/10 px-2.5 py-1 rounded-lg">查看详情 ➔</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 轮盘左右按键与提示 -->
+    <div class="flex items-center gap-6 mt-4">
+      <button onclick="prevCard()" class="p-3 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white transition">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+      </button>
+      <span class="text-xs font-mono-tech text-slate-400">支持键盘 [← / →] 或鼠标滚轮切换</span>
+      <button onclick="nextCard()" class="p-3 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white transition">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+      </button>
+    </div>
+
+  </main>
+
+  <!-- 底部：悬浮全息 Dynamic Island 导航 Dock (彻底颠覆传统网站布局) -->
+  <footer class="relative z-20 w-full max-w-3xl mx-auto pb-4">
+    <div class="floating-dock rounded-full px-6 py-3 flex items-center justify-between gap-4">
+      
+      <!-- 快速启动 -->
+      <button class="w-9 h-9 rounded-full bg-emerald-500 text-black flex items-center justify-center font-bold shadow-[0_0_15px_#10b981] hover:scale-105 transition">
+        ▶
+      </button>
+
+      <!-- 核心分类胶囊切换 -->
+      <div class="flex items-center gap-1 text-xs font-mono-tech">
+        <button class="px-4 py-2 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold transition">
+          GAMES (100)
+        </button>
+        <button class="px-4 py-2 rounded-full text-slate-400 hover:text-white transition">
+          MODS
+        </button>
+        <button class="px-4 py-2 rounded-full text-slate-400 hover:text-white transition">
+          TRAINERS
+        </button>
+        <button class="px-4 py-2 rounded-full text-slate-400 hover:text-white transition">
+          RADAR
+        </button>
+      </div>
+
+      <!-- 全局搜索触发 -->
+      <div class="flex items-center gap-3">
+        <button class="w-9 h-9 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center text-slate-300 transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 3D 轮盘弧形变换控制脚本 -->
+  <script>
+    let currentIndex = 2; // Default focus: Black Myth Wukong
+    const totalCards = 5;
+
+    function updateCarousel() {
+      for (let i = 0; i < totalCards; i++) {
+        const card = document.getElementById(`card-${i}`);
+        card.className = 'spatial-card';
+
+        const diff = i - currentIndex;
+
+        if (diff === 0) {
+          card.classList.add('active');
+        } else if (diff === -1) {
+          card.classList.add('left-1');
+        } else if (diff === -2 || diff < -2) {
+          card.classList.add('left-2');
+        } else if (diff === 1) {
+          card.classList.add('right-1');
+        } else if (diff === 2 || diff > 2) {
+          card.classList.add('right-2');
+        }
+      }
+    }
+
+    function focusCard(index) {
+      currentIndex = index;
+      updateCarousel();
+    }
+
+    function prevCard() {
+      if (currentIndex > 0) {
+        currentIndex--;
+        updateCarousel();
+      }
+    }
+
+    function nextCard() {
+      if (currentIndex < totalCards - 1) {
+        currentIndex++;
+        updateCarousel();
+      }
+    }
+
+    // 键盘左右箭头支持
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') prevCard();
+      if (e.key === 'ArrowRight') nextCard();
+    });
+
+    // 鼠标滚轮切换
+    let wheelCooldown = false;
+    window.addEventListener('wheel', (e) => {
+      if (wheelCooldown) return;
+      if (e.deltaY > 30) {
+        nextCard();
+        wheelCooldown = true;
+        setTimeout(() => wheelCooldown = false, 350);
+      } else if (e.deltaY < -30) {
+        prevCard();
+        wheelCooldown = true;
+        setTimeout(() => wheelCooldown = false, 350);
+      }
+    });
+
+    // 初始化
+    updateCarousel();
+  </script>
+</body>
+</html>

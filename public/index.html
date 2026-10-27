@@ -42,7 +42,7 @@
           },
           colors: {
             brand: {
-              blue: '#0071e3',
+              blue: '#A855F7',
               purple: '#8b5cf6',
               pink: '#ec4899',
               green: '#10b981',
@@ -55,7 +55,16 @@
     }
   </script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap');
+
+    :root {
+      --bg-base: #07080a;
+      --card-cardstock: #111319;
+      --card-border: rgba(255, 255, 255, 0.12);
+      --accent: #A855F7; /* Neon Violet Accent */
+      --accent-dim: rgba(168, 85, 247, 0.14);
+      --text-muted: #8b8f9e;
+    }
 
     * {
       box-sizing: border-box;
@@ -63,18 +72,171 @@
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Google Sans", "Inter", sans-serif;
+      background-color: var(--bg-base);
+      color: #f1f5f9;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+      background-image: radial-gradient(circle at 50% 15%, rgba(168, 85, 247, 0.08) 0%, transparent 60%);
     }
 
-    /* Apple-style Smooth Shimmer Brand Gradient */
-    .brand-gradient-text {
-      background: linear-gradient(135deg, #0071e3 0%, #8b5cf6 45%, #ec4899 85%, #f59e0b 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+    .font-display {
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 0.04em;
     }
 
-    .brand-gradient-bg {
-      background: linear-gradient(135deg, #0071e3 0%, #8b5cf6 45%, #ec4899 85%, #f59e0b 100%);
+    .font-mono-tech {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* ======================================================== */
+    /* 宝可梦全息闪卡 (POKÉMON HOLO FOIL) 核心物理与光学着色引擎 */
+    /* ======================================================== */
+
+    .pokemon-card-container {
+      perspective: 900px;
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+
+    .pokemon-card {
+      position: relative;
+      background: var(--card-cardstock);
+      border-radius: 20px;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      transform-origin: 50% 50%; /* 核心：严格以中心为重心旋转，绝无突兀位移 */
+      
+      /* 物理实体卡边缘：金属反光边框 + 扎实的真实接触阴影 */
+      border: 1.5px solid rgba(255, 255, 255, 0.14);
+      box-shadow: 
+        0 15px 35px -5px rgba(0, 0, 0, 0.8),
+        0 0 0 1px rgba(0, 0, 0, 0.6);
+      
+      transition: transform 0.1s ease-out, box-shadow 0.25s ease;
+      will-change: transform, box-shadow;
+    }
+
+    /* === 宝可梦闪卡灵魂 1：彩虹全息镭射滤镜层 (Rainbow Holo Foil) === */
+    .holo-foil-layer {
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      z-index: 20;
+      opacity: 0;
+      mix-blend-mode: color-dodge; /* 产生闪卡独特的彩虹反光 */
+      
+      background-image: 
+        linear-gradient(
+          115deg,
+          transparent 0%,
+          rgba(255, 110, 199, 0.35) 15%,
+          rgba(168, 85, 247, 0.45) 30%,
+          rgba(0, 240, 255, 0.45) 50%,
+          rgba(255, 225, 75, 0.45) 70%,
+          rgba(255, 110, 199, 0.35) 85%,
+          transparent 100%
+        ),
+        repeating-linear-gradient(
+          0deg,
+          rgba(255, 255, 255, 0.08) 0px,
+          rgba(255, 255, 255, 0.08) 2px,
+          transparent 2px,
+          transparent 4px
+        );
+      
+      background-size: 200% 200%, 100% 100%;
+      background-position: var(--foil-pos-x, 50%) var(--foil-pos-y, 50%);
+      transition: opacity 0.35s ease;
+    }
+
+    /* === 宝可梦闪卡灵魂 2：卡套高光漫射层 (Specular Glare) === */
+    .holo-glare-layer {
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      z-index: 25;
+      opacity: 0;
+      mix-blend-mode: overlay;
+      
+      background: radial-gradient(
+        400px circle at var(--pointer-x, 50%) var(--pointer-y, 50%),
+        rgba(255, 255, 255, 0.55) 0%,
+        rgba(255, 255, 255, 0.15) 30%,
+        transparent 65%
+      );
+      transition: opacity 0.25s ease;
+    }
+
+    /* 悬停时激活闪卡彩虹光泽 */
+    .pokemon-card:hover .holo-foil-layer,
+    .pokemon-card:hover .holo-glare-layer {
+      opacity: 0.85;
+    }
+
+    /* 金属箔框 */
+    .card-foil-border {
+      position: relative;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(168, 85, 247, 0.25) 50%, rgba(255, 255, 255, 0.08) 100%);
+      padding: 1.5px;
+    }
+
+    /* 闪卡技能槽/属性框 (PTCG Abilities Box) */
+    .ability-tray {
+      background: rgba(10, 11, 15, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+    }
+
+    /* 工业十字标记 */
+    .cross-marker {
+      position: relative;
+    }
+    .cross-marker::before, .cross-marker::after {
+      content: '+';
+      position: absolute;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: #3b3f4d;
+      pointer-events: none;
+    }
+    .cross-marker::before { top: -8px; left: -8px; }
+    .cross-marker::after { bottom: -8px; right: -8px; }
+
+    /* 跑马灯 */
+    .ticker-wrap {
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      background: #111317;
+      border-top: 1px solid var(--card-border);
+      border-bottom: 1px solid var(--card-border);
+      padding: 7px 0;
+    }
+    .ticker-move {
+      display: inline-block;
+      animation: ticker 28s linear infinite;
+    }
+    @keyframes ticker {
+      0% { transform: translate3d(0, 0, 0); }
+      100% { transform: translate3d(-50%, 0, 0); }
+    }
+
+    /* 动作按钮 */
+    .btn-action {
+      background: transparent;
+      color: #f3f4f6;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .pokemon-card:hover .btn-action, .btn-action:hover {
+      background: var(--accent);
+      color: #000000;
+      border-color: var(--accent);
+      box-shadow: 0 0 16px var(--accent);
     }
 
     /* Custom Apple & Google hybrid scrollbars */
@@ -116,7 +278,11 @@
     }
   </style>
 </head>
-<body class="bg-[#f5f6f8] dark:bg-[#0c0d0f] text-zinc-900 dark:text-zinc-100 min-h-screen flex flex-col md:flex-row transition-colors duration-300 selection:bg-blue-500 selection:text-white">
+<!-- Custom Fluid Cursor -->
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"><span id="cursor-label">3D // 01</span></div>
+
+  <body class="bg-[#0b0c0f] text-slate-100 min-h-screen flex flex-col md:flex-row transition-colors duration-300 selection:bg-[#A855F7] selection:text-black">
 
   <!-- WeChat Legacy Thumbnail Sniffer -->
   <img src="avatar.jpg" alt="L-MOD Vault" style="position:absolute;left:-9999px;top:-9999px;width:300px;height:300px;opacity:0;pointer-events:none;" />
@@ -174,9 +340,9 @@
       <div class="flex items-center justify-between px-2 py-1">
         <a href="#/" class="flex items-center space-x-3 group">
           <!-- Custom L Crystal Monogram Emblem (Not a Gemini clone) -->
-          <div class="w-9 h-9 rounded-2xl brand-gradient-bg p-[1.5px] shadow-sm animate-crystal flex items-center justify-center">
+          <div class="w-9 h-9 rounded-2xl bg-[#A855F7] p-[1.5px] shadow-sm animate-crystal flex items-center justify-center">
             <div class="w-full h-full bg-white dark:bg-[#121316] rounded-[14px] flex items-center justify-center">
-              <svg class="w-5 h-5 text-blue-600 dark:text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+              <svg class="w-5 h-5 text-[#A855F7] dark:text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M7 4v13a3 3 0 0 0 3 3h7" />
               </svg>
             </div>
@@ -196,7 +362,7 @@
 
       <!-- Action: Explore All / Reset Button -->
       <button onclick="resetToHome()" class="w-full flex items-center space-x-3 px-4 py-2.5 bg-zinc-100 hover:bg-zinc-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-zinc-800 dark:text-zinc-200 rounded-full text-sm font-medium transition-all group border border-zinc-200/50 dark:border-white/5">
-        <svg class="w-4 h-4 text-blue-600 dark:text-blue-400 group-hover:rotate-90 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"></path></svg>
+        <svg class="w-4 h-4 text-[#A855F7] dark:text-purple-400 group-hover:rotate-90 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"></path></svg>
         <span id="sidebar-explore-label">探索全部 100 款游戏</span>
       </button>
 
@@ -204,7 +370,7 @@
       <div class="pt-2 space-y-1 text-xs">
         <div class="px-3 text-zinc-400 dark:text-zinc-500 font-semibold tracking-wider uppercase text-[10px] mb-1.5">精选专题</div>
         
-        <button onclick="setFilterAndNavigate('all')" class="sidebar-nav-btn w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-white/5 transition-all text-left font-medium active bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400" data-nav="all">
+        <button onclick="setFilterAndNavigate('all')" class="sidebar-nav-btn w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-white/5 transition-all text-left font-medium active bg-purple-500/10 dark:bg-[#A855F7]/10 text-[#A855F7] dark:text-purple-400" data-nav="all">
           <span class="text-sm">🌟</span>
           <span id="sidebar-nav-all">全部 100 款神作排行</span>
         </button>
@@ -271,7 +437,7 @@
             <div class="text-[11px] text-zinc-500 dark:text-zinc-400 truncate">Hybrid Engine 2.5</div>
           </div>
         </div>
-        <div class="text-zinc-400 group-hover:text-blue-500 transition-colors pr-1 shrink-0">
+        <div class="text-zinc-400 group-hover:text-[#A855F7] transition-colors pr-1 shrink-0">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
         </div>
       </div>
@@ -308,7 +474,7 @@
             <span class="text-emerald-400 font-bold">🟢【艾尔登法环】</span><a href="radar.html?game=elden-ring" class="hover:underline">黄金树幽影 v1.14 离线免封方案已同步！ModEngine2 零封号</a>
           </div>
         </div>
-        <a href="radar.html" class="shrink-0 text-blue-400 hover:text-blue-300 font-bold flex items-center gap-1">
+        <a href="radar.html" class="shrink-0 text-purple-400 hover:text-blue-300 font-bold flex items-center gap-1">
           <span id="broadcast-bar-btn">进入避坑雷达看板</span>
           <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
         </a>
@@ -326,7 +492,7 @@
 
         <!-- Brand Capsule Indicator -->
         <div class="hidden sm:flex items-center space-x-2 bg-white/90 dark:bg-white/5 border border-zinc-200/80 dark:border-white/10 px-3.5 py-1.5 rounded-full shadow-sm text-xs">
-          <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
+          <span class="w-2 h-2 rounded-full bg-[#A855F7] animate-pulse"></span>
           <span class="font-medium text-zinc-700 dark:text-zinc-300">L-MOD Vault</span>
           <span class="text-zinc-400">/</span>
           <span class="text-zinc-500 dark:text-zinc-400" id="header-breadcrumb-title">全球 100 款单机神作</span>
@@ -374,37 +540,37 @@
               选择语言 · Select Language
             </div>
             <div class="space-y-0.5">
-              <button onclick="selectLanguage('zh-CN', '🇨🇳', '简体中文')" class="lang-option w-full flex items-center justify-between px-3 py-2 rounded-xl text-left hover:bg-blue-50 dark:hover:bg-white/10 transition-colors text-zinc-800 dark:text-zinc-200" data-lang="zh-CN">
+              <button onclick="selectLanguage('zh-CN', '🇨🇳', '简体中文')" class="lang-option w-full flex items-center justify-between px-3 py-2 rounded-xl text-left hover:bg-purple-500/10 dark:hover:bg-white/10 transition-colors text-zinc-800 dark:text-zinc-200" data-lang="zh-CN">
                 <span class="flex items-center space-x-2"><span>🇨🇳</span><span>简体中文</span></span>
-                <span class="lang-check text-blue-600 dark:text-blue-400 font-bold">✓</span>
+                <span class="lang-check text-[#A855F7] dark:text-purple-400 font-bold">✓</span>
               </button>
-              <button onclick="selectLanguage('en', '🇺🇸', 'English')" class="lang-option w-full flex items-center justify-between px-3 py-2 rounded-xl text-left hover:bg-blue-50 dark:hover:bg-white/10 transition-colors text-zinc-800 dark:text-zinc-200" data-lang="en">
+              <button onclick="selectLanguage('en', '🇺🇸', 'English')" class="lang-option w-full flex items-center justify-between px-3 py-2 rounded-xl text-left hover:bg-purple-500/10 dark:hover:bg-white/10 transition-colors text-zinc-800 dark:text-zinc-200" data-lang="en">
                 <span class="flex items-center space-x-2"><span>🇺🇸</span><span>English</span></span>
-                <span class="lang-check hidden text-blue-600 dark:text-blue-400 font-bold">✓</span>
+                <span class="lang-check hidden text-[#A855F7] dark:text-purple-400 font-bold">✓</span>
               </button>
-              <button onclick="selectLanguage('zh-TW', '🇭🇰', '繁體中文')" class="lang-option w-full flex items-center justify-between px-3 py-2 rounded-xl text-left hover:bg-blue-50 dark:hover:bg-white/10 transition-colors text-zinc-800 dark:text-zinc-200" data-lang="zh-TW">
+              <button onclick="selectLanguage('zh-TW', '🇭🇰', '繁體中文')" class="lang-option w-full flex items-center justify-between px-3 py-2 rounded-xl text-left hover:bg-purple-500/10 dark:hover:bg-white/10 transition-colors text-zinc-800 dark:text-zinc-200" data-lang="zh-TW">
                 <span class="flex items-center space-x-2"><span>🇭🇰</span><span>繁體中文</span></span>
-                <span class="lang-check hidden text-blue-600 dark:text-blue-400 font-bold">✓</span>
+                <span class="lang-check hidden text-[#A855F7] dark:text-purple-400 font-bold">✓</span>
               </button>
-              <button onclick="selectLanguage('ja', '🇯🇵', '日本語')" class="lang-option w-full flex items-center justify-between px-3 py-2 rounded-xl text-left hover:bg-blue-50 dark:hover:bg-white/10 transition-colors text-zinc-800 dark:text-zinc-200" data-lang="ja">
+              <button onclick="selectLanguage('ja', '🇯🇵', '日本語')" class="lang-option w-full flex items-center justify-between px-3 py-2 rounded-xl text-left hover:bg-purple-500/10 dark:hover:bg-white/10 transition-colors text-zinc-800 dark:text-zinc-200" data-lang="ja">
                 <span class="flex items-center space-x-2"><span>🇯🇵</span><span>日本語</span></span>
-                <span class="lang-check hidden text-blue-600 dark:text-blue-400 font-bold">✓</span>
+                <span class="lang-check hidden text-[#A855F7] dark:text-purple-400 font-bold">✓</span>
               </button>
-              <button onclick="selectLanguage('ko', '🇰🇷', '한국어')" class="lang-option w-full flex items-center justify-between px-3 py-2 rounded-xl text-left hover:bg-blue-50 dark:hover:bg-white/10 transition-colors text-zinc-800 dark:text-zinc-200" data-lang="ko">
+              <button onclick="selectLanguage('ko', '🇰🇷', '한국어')" class="lang-option w-full flex items-center justify-between px-3 py-2 rounded-xl text-left hover:bg-purple-500/10 dark:hover:bg-white/10 transition-colors text-zinc-800 dark:text-zinc-200" data-lang="ko">
                 <span class="flex items-center space-x-2"><span>🇰🇷</span><span>한국어</span></span>
-                <span class="lang-check hidden text-blue-600 dark:text-blue-400 font-bold">✓</span>
+                <span class="lang-check hidden text-[#A855F7] dark:text-purple-400 font-bold">✓</span>
               </button>
-              <button onclick="selectLanguage('ru', '🇷🇺', 'Русский')" class="lang-option w-full flex items-center justify-between px-3 py-2 rounded-xl text-left hover:bg-blue-50 dark:hover:bg-white/10 transition-colors text-zinc-800 dark:text-zinc-200" data-lang="ru">
+              <button onclick="selectLanguage('ru', '🇷🇺', 'Русский')" class="lang-option w-full flex items-center justify-between px-3 py-2 rounded-xl text-left hover:bg-purple-500/10 dark:hover:bg-white/10 transition-colors text-zinc-800 dark:text-zinc-200" data-lang="ru">
                 <span class="flex items-center space-x-2"><span>🇷🇺</span><span>Русский</span></span>
-                <span class="lang-check hidden text-blue-600 dark:text-blue-400 font-bold">✓</span>
+                <span class="lang-check hidden text-[#A855F7] dark:text-purple-400 font-bold">✓</span>
               </button>
-              <button onclick="selectLanguage('de', '🇩🇪', 'Deutsch')" class="lang-option w-full flex items-center justify-between px-3 py-2 rounded-xl text-left hover:bg-blue-50 dark:hover:bg-white/10 transition-colors text-zinc-800 dark:text-zinc-200" data-lang="de">
+              <button onclick="selectLanguage('de', '🇩🇪', 'Deutsch')" class="lang-option w-full flex items-center justify-between px-3 py-2 rounded-xl text-left hover:bg-purple-500/10 dark:hover:bg-white/10 transition-colors text-zinc-800 dark:text-zinc-200" data-lang="de">
                 <span class="flex items-center space-x-2"><span>🇩🇪</span><span>Deutsch</span></span>
-                <span class="lang-check hidden text-blue-600 dark:text-blue-400 font-bold">✓</span>
+                <span class="lang-check hidden text-[#A855F7] dark:text-purple-400 font-bold">✓</span>
               </button>
-              <button onclick="selectLanguage('es', '🇪🇸', 'Español')" class="lang-option w-full flex items-center justify-between px-3 py-2 rounded-xl text-left hover:bg-blue-50 dark:hover:bg-white/10 transition-colors text-zinc-800 dark:text-zinc-200" data-lang="es">
+              <button onclick="selectLanguage('es', '🇪🇸', 'Español')" class="lang-option w-full flex items-center justify-between px-3 py-2 rounded-xl text-left hover:bg-purple-500/10 dark:hover:bg-white/10 transition-colors text-zinc-800 dark:text-zinc-200" data-lang="es">
                 <span class="flex items-center space-x-2"><span>🇪🇸</span><span>Español</span></span>
-                <span class="lang-check hidden text-blue-600 dark:text-blue-400 font-bold">✓</span>
+                <span class="lang-check hidden text-[#A855F7] dark:text-purple-400 font-bold">✓</span>
               </button>
             </div>
           </div>
@@ -427,7 +593,7 @@
 
         <!-- View Mode Switcher (Gallery vs Clean Search List) -->
         <div class="bg-zinc-200/60 dark:bg-white/5 p-1 rounded-full flex items-center space-x-1 border border-zinc-200/50 dark:border-white/5">
-          <button id="view-mode-gallery-btn" onclick="setViewMode('gallery')" title="画廊画卷视图" class="p-1 px-2.5 rounded-full text-xs font-medium bg-white dark:bg-blue-600 text-zinc-900 dark:text-white shadow-sm transition-all flex items-center space-x-1">
+          <button id="view-mode-gallery-btn" onclick="setViewMode('gallery')" title="画廊画卷视图" class="p-1 px-2.5 rounded-full text-xs font-medium bg-white dark:bg-[#A855F7] text-zinc-900 dark:text-white shadow-sm transition-all flex items-center space-x-1">
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
             <span class="hidden sm:inline" id="view-mode-gallery-text">画廊</span>
           </button>
@@ -451,13 +617,13 @@
 
         <!-- Modern Hero Section (Apple typography + subtle brand gradient) -->
         <div class="pt-6 pb-8 text-center sm:text-left">
-          <div class="inline-flex items-center space-x-2 mb-3 px-3 py-1 rounded-full bg-white/90 dark:bg-white/5 text-xs text-blue-600 dark:text-blue-400 border border-zinc-200/80 dark:border-white/10 shadow-sm">
-            <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+          <div class="inline-flex items-center space-x-2 mb-3 px-3 py-1 rounded-full bg-white/90 dark:bg-white/5 text-xs text-[#A855F7] dark:text-purple-400 border border-zinc-200/80 dark:border-white/10 shadow-sm">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#A855F7]"></span>
             <span>L-MOD Vault • 单机全功能作弊与MOD集约平台</span>
           </div>
           <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight mb-3 text-zinc-900 dark:text-white">
             <span>探索单机代码 ·</span>
-            <span class="brand-gradient-text">重塑游戏体验</span>
+            <span class="text-[#A855F7]">重塑游戏体验</span>
           </h1>
           <p class="text-zinc-600 dark:text-zinc-400 text-sm sm:text-base max-w-2xl leading-relaxed" id="hero-subtitle">
             收录全球前 100 款热门单机。官方控制台代码、N网精选高分 MOD 与纯净修改器一键直达，告别垃圾广告与捆绑软件。
@@ -477,7 +643,7 @@
               <span class="font-extrabold text-sm sm:text-base tracking-tight text-white flex items-center gap-1.5">
                 <span>📡 Steam 补丁变动与 Mod 兼容性实时避坑雷达</span>
               </span>
-              <span class="bg-blue-500/20 text-blue-400 text-[10px] font-mono px-2 py-0.5 rounded-full border border-blue-500/30 font-bold">24h 智能巡检</span>
+              <span class="bg-[#A855F7]/20 text-purple-400 text-[10px] font-mono px-2 py-0.5 rounded-full border border-[#A855F7]/30 font-bold">24h 智能巡检</span>
             </div>
 
             <!-- Link to Standalone Radar -->
@@ -520,8 +686,8 @@
 
         <!-- Smart Omnibox Search Bar (Spotlight + Prompt hybrid) -->
         <div class="mb-6">
-          <div class="bg-white/95 dark:bg-[#151619] hover:border-zinc-300 dark:hover:border-white/20 focus-within:border-blue-500 dark:focus-within:border-blue-400 focus-within:ring-4 focus-within:ring-blue-500/10 rounded-[28px] p-2.5 px-5 flex items-center transition-all shadow-sm border border-zinc-200/80 dark:border-white/[0.08]">
-            <div class="mr-3 text-blue-600 dark:text-blue-400 shrink-0">
+          <div class="bg-white/95 dark:bg-[#151619] hover:border-zinc-300 dark:hover:border-white/20 focus-within:border-[#A855F7] dark:focus-within:border-purple-400 focus-within:ring-4 focus-within:ring-[#A855F7]/10 rounded-[28px] p-2.5 px-5 flex items-center transition-all shadow-sm border border-zinc-200/80 dark:border-white/[0.08]">
+            <div class="mr-3 text-[#A855F7] dark:text-purple-400 shrink-0">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
             </div>
             <input 
@@ -536,7 +702,7 @@
               <button onclick="clearSearch()" id="clear-search-btn" class="hidden w-8 h-8 rounded-full hover:bg-zinc-100 dark:hover:bg-white/10 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 items-center justify-center transition-colors">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
               </button>
-              <button onclick="executeSmartSearch(document.getElementById('search-input').value)" class="w-8 h-8 rounded-full bg-blue-600 hover:bg-blue-500 text-white flex items-center justify-center transition-all shadow-sm" title="智能检索">
+              <button onclick="executeSmartSearch(document.getElementById('search-input').value)" class="w-8 h-8 rounded-full bg-[#A855F7] hover:bg-[#A855F7] text-white flex items-center justify-center transition-all shadow-sm" title="智能检索">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
               </button>
             </div>
@@ -582,10 +748,10 @@
         <!-- SMART SEARCH INSTANT ANSWER CARD                         -->
         <!-- ======================================================== -->
         <div id="smart-ai-response-box" class="hidden mb-8 transition-all duration-300">
-          <div class="bg-white/95 dark:bg-[#151619] rounded-[28px] p-6 border border-blue-500/20 shadow-xl space-y-4">
+          <div class="bg-white/95 dark:bg-[#151619] rounded-[28px] p-6 border border-[#A855F7]/20 shadow-xl space-y-4">
             <div class="flex items-center justify-between">
               <div class="flex items-center space-x-2.5">
-                <div class="w-6 h-6 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold text-xs">
+                <div class="w-6 h-6 rounded-full bg-[#A855F7] text-white flex items-center justify-center font-bold text-xs">
                   L
                 </div>
                 <span class="text-sm font-semibold text-zinc-900 dark:text-zinc-100">L-MOD 智能匹配解答</span>
@@ -660,7 +826,7 @@
             <span>•</span>
             <span id="detail-breadcrumb-genre">Action RPG</span>
             <span>•</span>
-            <span id="detail-breadcrumb-id" class="font-mono text-blue-600 dark:text-blue-400">cyberpunk-2077</span>
+            <span id="detail-breadcrumb-id" class="font-mono text-[#A855F7] dark:text-purple-400">cyberpunk-2077</span>
           </div>
         </div>
 
@@ -685,7 +851,7 @@
                     <svg class="w-3.5 h-3.5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
                     <span id="detail-patch-text">🛡️ 官方最新补丁实测认证</span>
                   </span>
-                  <span id="detail-pure-badge" class="px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 inline-flex items-center gap-1 shadow-sm">
+                  <span id="detail-pure-badge" class="px-3 py-1 rounded-full text-xs font-semibold bg-purple-500/10 dark:bg-[#A855F7]/10 text-[#A855F7] dark:text-purple-400 border border-[#A855F7]/20 inline-flex items-center gap-1 shadow-sm">
                     <span id="detail-clean-guarantee">🚫 拒绝流氓木马 · 官方底层机制</span>
                   </span>
                 </div>
@@ -697,7 +863,7 @@
               <div class="flex items-center gap-2 bg-zinc-100/80 dark:bg-black/40 backdrop-blur-md p-2.5 rounded-2xl shrink-0 border border-zinc-200/80 dark:border-white/10">
                 <div class="px-3 text-center">
                   <div class="text-[10px] text-zinc-400 font-medium" id="stat-label-downloads">N网总下载</div>
-                  <div id="detail-stat-downloads" class="text-sm sm:text-base font-bold text-blue-600 dark:text-blue-400">342.8M</div>
+                  <div id="detail-stat-downloads" class="text-sm sm:text-base font-bold text-[#A855F7] dark:text-purple-400">342.8M</div>
                 </div>
                 <div class="w-px h-7 bg-zinc-200 dark:bg-white/10"></div>
                 <div class="px-3 text-center">
@@ -716,7 +882,7 @@
 
         <!-- Apple-style Segmented Control (Pill Tabs) -->
         <div class="bg-zinc-200/60 dark:bg-white/5 p-1.5 rounded-full inline-flex gap-1 mb-8 overflow-x-auto no-scrollbar max-w-full border border-zinc-200/50 dark:border-white/5">
-          <button onclick="setDetailTab('console')" id="detail-tab-btn-console" class="detail-tab-btn px-5 py-2 rounded-full text-xs sm:text-sm font-semibold bg-white dark:bg-blue-600 text-zinc-900 dark:text-white transition-all shrink-0 shadow-sm">
+          <button onclick="setDetailTab('console')" id="detail-tab-btn-console" class="detail-tab-btn px-5 py-2 rounded-full text-xs sm:text-sm font-semibold bg-white dark:bg-[#A855F7] text-zinc-900 dark:text-white transition-all shrink-0 shadow-sm">
             <span id="tab-text-console">🎮 官方控制台与代码</span>
           </button>
           <button onclick="setDetailTab('mods')" id="detail-tab-btn-mods" class="detail-tab-btn px-5 py-2 rounded-full text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-all shrink-0">
@@ -749,14 +915,14 @@
                 <button 
                   onclick="openLazyDoorModal()" 
                   id="btn-open-lazy-door"
-                  class="px-4 py-2 rounded-full text-xs font-bold text-white bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 shadow-md shadow-blue-500/25 flex items-center gap-1.5 transition-all transform hover:scale-105 active:scale-95 cursor-pointer ring-2 ring-blue-500/20"
+                  class="px-4 py-2 rounded-full text-xs font-bold text-white bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 shadow-md shadow-blue-500/25 flex items-center gap-1.5 transition-all transform hover:scale-105 active:scale-95 cursor-pointer ring-2 ring-[#A855F7]/20"
                 >
                   <svg class="w-3.5 h-3.5 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                   <span id="detail-btn-lazy-door">🚀 懒人双击一键开门 (生成 .bat)</span>
                 </button>
                 <div class="flex items-center space-x-1.5 bg-zinc-100 dark:bg-white/10 px-3 py-1.5 rounded-full border border-zinc-200/60 dark:border-white/10">
                   <span class="text-[11px] text-zinc-400" id="detail-shortcut-label">呼出键:</span>
-                  <span id="detail-shortcut-key" class="text-xs text-blue-600 dark:text-blue-400 font-mono font-bold">~ (Tilde)</span>
+                  <span id="detail-shortcut-key" class="text-xs text-[#A855F7] dark:text-purple-400 font-mono font-bold">~ (Tilde)</span>
                 </div>
               </div>
             </div>
@@ -866,7 +1032,7 @@
             <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-zinc-100 dark:border-white/5">
               <div>
                 <div class="flex items-center gap-2 mb-2 flex-wrap">
-                  <span class="px-3 py-1 rounded-full text-xs font-bold bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20">
+                  <span class="px-3 py-1 rounded-full text-xs font-bold bg-purple-500/10 dark:bg-[#A855F7]/10 text-[#A855F7] dark:text-purple-400 border border-[#A855F7]/20">
                     风灵月影 (FLiNG) 官方直连
                   </span>
                   <span id="trainer-patch-badge" class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
@@ -900,7 +1066,7 @@
                   rel="noopener noreferrer"
                   class="inline-flex items-center justify-center space-x-2 px-5 py-3 rounded-full bg-zinc-100 hover:bg-zinc-200/80 dark:bg-white/10 dark:hover:bg-white/20 text-zinc-700 dark:text-zinc-300 text-xs sm:text-sm font-semibold transition-all border border-zinc-200/80 dark:border-white/10 group cursor-pointer"
                 >
-                  <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                  <svg class="w-4 h-4 text-[#A855F7]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
                   <span id="trainer-btn-official-page">风灵月影官方页面 (备用通道)</span>
                 </a>
               </div>
@@ -962,7 +1128,7 @@
               <h3 class="text-base font-bold text-zinc-900 dark:text-white">玩家实测反馈与版本避坑问答</h3>
               <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">针对当前补丁版本的安装经验、排错互助</p>
             </div>
-            <button onclick="askSmartAssistant()" class="px-4 py-2 rounded-full bg-white dark:bg-white/10 hover:bg-zinc-50 dark:hover:bg-white/20 text-blue-600 dark:text-blue-400 text-xs font-semibold transition-colors flex items-center gap-1.5 border border-zinc-200/80 dark:border-white/10 shadow-sm">
+            <button onclick="askSmartAssistant()" class="px-4 py-2 rounded-full bg-white dark:bg-white/10 hover:bg-zinc-50 dark:hover:bg-white/20 text-[#A855F7] dark:text-purple-400 text-xs font-semibold transition-colors flex items-center gap-1.5 border border-zinc-200/80 dark:border-white/10 shadow-sm">
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
               <span>在线排错建议</span>
             </button>
@@ -1026,8 +1192,8 @@
       </div>
 
       <!-- Security & Reassurance Banner -->
-      <div class="bg-blue-50/80 dark:bg-blue-500/10 rounded-2xl p-4 border border-blue-500/20 text-xs text-zinc-700 dark:text-zinc-300 space-y-2">
-        <div class="font-bold text-blue-700 dark:text-blue-400 flex items-center gap-1.5 text-xs sm:text-sm">
+      <div class="bg-purple-500/10/80 dark:bg-[#A855F7]/10 rounded-2xl p-4 border border-[#A855F7]/20 text-xs text-zinc-700 dark:text-zinc-300 space-y-2">
+        <div class="font-bold text-blue-700 dark:text-purple-400 flex items-center gap-1.5 text-xs sm:text-sm">
           <svg class="w-4 h-4 shrink-0 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
           <span id="lazy-safe-title">老L承诺：100% 原生纯净 · 自动备份原文件 (.bak) · 绝无木马捆绑</span>
         </div>
@@ -1039,9 +1205,9 @@
       <!-- 3-Step Simple Guide -->
       <div class="space-y-1.5 text-xs text-zinc-600 dark:text-zinc-400">
         <div class="font-bold text-zinc-800 dark:text-zinc-200" id="lazy-steps-title">极简 3 步使用指引：</div>
-        <div class="flex items-center gap-2"><span class="w-4 h-4 rounded-full bg-blue-500/20 text-blue-600 dark:text-blue-400 text-[10px] font-bold flex items-center justify-center shrink-0">1</span><span id="lazy-step-1">点击下方【下载 .bat 脚本】将文件保存（或复制代码存为 <code>一键开门.bat</code>）；</span></div>
-        <div class="flex items-center gap-2"><span class="w-4 h-4 rounded-full bg-blue-500/20 text-blue-600 dark:text-blue-400 text-[10px] font-bold flex items-center justify-center shrink-0">2</span><span id="lazy-step-2">将 <code>.bat</code> 放置在该游戏安装根目录，双击运行（脚本自动备份并注入配置）；</span></div>
-        <div class="flex items-center gap-2"><span class="w-4 h-4 rounded-full bg-blue-500/20 text-blue-600 dark:text-blue-400 text-[10px] font-bold flex items-center justify-center shrink-0">3</span><span id="lazy-step-3">启动游戏，按快捷键呼出控制台，直接粘贴老L推荐套餐即可爽玩！</span></div>
+        <div class="flex items-center gap-2"><span class="w-4 h-4 rounded-full bg-[#A855F7]/20 text-[#A855F7] dark:text-purple-400 text-[10px] font-bold flex items-center justify-center shrink-0">1</span><span id="lazy-step-1">点击下方【下载 .bat 脚本】将文件保存（或复制代码存为 <code>一键开门.bat</code>）；</span></div>
+        <div class="flex items-center gap-2"><span class="w-4 h-4 rounded-full bg-[#A855F7]/20 text-[#A855F7] dark:text-purple-400 text-[10px] font-bold flex items-center justify-center shrink-0">2</span><span id="lazy-step-2">将 <code>.bat</code> 放置在该游戏安装根目录，双击运行（脚本自动备份并注入配置）；</span></div>
+        <div class="flex items-center gap-2"><span class="w-4 h-4 rounded-full bg-[#A855F7]/20 text-[#A855F7] dark:text-purple-400 text-[10px] font-bold flex items-center justify-center shrink-0">3</span><span id="lazy-step-3">启动游戏，按快捷键呼出控制台，直接粘贴老L推荐套餐即可爽玩！</span></div>
       </div>
 
       <!-- Code Block Preview -->
@@ -1060,7 +1226,7 @@
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
             <span>复制代码</span>
           </button>
-          <button onclick="downloadBatScript()" class="flex-1 sm:flex-none px-5 py-2.5 rounded-full bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition-all shadow-md shadow-blue-500/20 flex items-center justify-center gap-1.5 cursor-pointer">
+          <button onclick="downloadBatScript()" class="flex-1 sm:flex-none px-5 py-2.5 rounded-full bg-[#A855F7] hover:bg-[#A855F7] text-white text-xs font-bold transition-all shadow-md shadow-blue-500/20 flex items-center justify-center gap-1.5 cursor-pointer">
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
             <span>下载 .bat 脚本</span>
           </button>
@@ -1124,7 +1290,7 @@
             <span id="trainer-btn-retrigger">重新拉起直接下载 (ZIP)</span>
           </button>
           <a id="trainer-modal-backup-link" href="#" target="_blank" rel="noopener noreferrer" class="flex-1 px-4 py-2.5 rounded-full bg-zinc-100 hover:bg-zinc-200 dark:bg-white/10 dark:hover:bg-white/20 text-zinc-700 dark:text-zinc-300 text-xs font-semibold transition-all flex items-center justify-center gap-1.5 border border-zinc-200/80 dark:border-white/10 cursor-pointer">
-            <svg class="w-3.5 h-3.5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+            <svg class="w-3.5 h-3.5 text-[#A855F7]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
             <span id="trainer-btn-backup">直达风灵月影官方页面 (备用)</span>
           </a>
         </div>
@@ -1156,7 +1322,7 @@
           <div>
             <div class="flex items-center gap-2 flex-wrap">
               <h3 class="text-lg sm:text-xl font-extrabold text-zinc-900 dark:text-white" id="mod-modal-title">MOD 下载已在浏览器拉起</h3>
-              <span class="text-[10px] bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 px-2.5 py-0.5 rounded-full font-bold border border-blue-500/20" id="mod-modal-type-badge">极速真直连</span>
+              <span class="text-[10px] bg-purple-500/10 dark:bg-[#A855F7]/10 text-[#A855F7] dark:text-purple-400 px-2.5 py-0.5 rounded-full font-bold border border-[#A855F7]/20" id="mod-modal-type-badge">极速真直连</span>
             </div>
             <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1" id="mod-modal-subtitle">文件正在保存中 · 附全中文安装路径与部署指引</p>
           </div>
@@ -1167,16 +1333,16 @@
       </div>
 
       <!-- File & Path Info Box -->
-      <div class="bg-blue-50/60 dark:bg-blue-500/10 rounded-2xl p-4 border border-blue-500/20 space-y-2 text-xs">
+      <div class="bg-purple-500/10/60 dark:bg-[#A855F7]/10 rounded-2xl p-4 border border-[#A855F7]/20 space-y-2 text-xs">
         <div class="flex items-center justify-between">
           <span class="text-zinc-500 dark:text-zinc-400" id="mod-modal-label-file">下载目标文件:</span>
-          <span class="font-mono font-bold text-blue-600 dark:text-blue-400" id="mod-modal-filename">CET_v1.34.0.zip</span>
+          <span class="font-mono font-bold text-[#A855F7] dark:text-purple-400" id="mod-modal-filename">CET_v1.34.0.zip</span>
         </div>
         <div class="flex items-center justify-between">
           <span class="text-zinc-500 dark:text-zinc-400" id="mod-modal-label-path">建议安装路径:</span>
           <div class="flex items-center gap-1.5 font-mono text-zinc-800 dark:text-zinc-200">
             <span id="mod-modal-path" class="max-w-[220px] sm:max-w-xs truncate">bin/x64/plugins/</span>
-            <button onclick="copyModInstallPath()" id="mod-modal-btn-copy-path" class="text-blue-600 hover:underline text-[11px] shrink-0 font-sans">复制路径</button>
+            <button onclick="copyModInstallPath()" id="mod-modal-btn-copy-path" class="text-[#A855F7] hover:underline text-[11px] shrink-0 font-sans">复制路径</button>
           </div>
         </div>
       </div>
@@ -1193,7 +1359,7 @@
 
       <!-- Modal Action Buttons -->
       <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2">
-        <button onclick="retriggerModDownload()" class="w-full sm:w-auto px-5 py-2.5 rounded-full bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition-all shadow-md shadow-blue-500/20 flex items-center justify-center gap-1.5 cursor-pointer">
+        <button onclick="retriggerModDownload()" class="w-full sm:w-auto px-5 py-2.5 rounded-full bg-[#A855F7] hover:bg-[#A855F7] text-white text-xs font-bold transition-all shadow-md shadow-blue-500/20 flex items-center justify-center gap-1.5 cursor-pointer">
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
           <span id="mod-modal-btn-retrigger">重新拉起下载</span>
         </button>
@@ -1411,7 +1577,7 @@
           btn.href = `#/game/${game.id}`;
           btn.className = 'w-full flex items-center space-x-2 px-3 py-1.5 rounded-xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-white/5 transition-colors text-xs truncate';
           btn.innerHTML = `
-            <span class="text-blue-600 dark:text-blue-400 font-mono text-[10px]">#${game.rank}</span>
+            <span class="text-[#A855F7] dark:text-purple-400 font-mono text-[10px]">#${game.rank}</span>
             <span class="truncate">${locTitle}</span>
           `;
           container.appendChild(btn);
@@ -1442,12 +1608,12 @@
       const listCon = document.getElementById('games-list-container');
 
       if (mode === 'gallery') {
-        galleryBtn.className = 'p-1 px-2.5 rounded-full text-xs font-medium bg-white dark:bg-blue-600 text-zinc-900 dark:text-white shadow-sm transition-all flex items-center space-x-1';
+        galleryBtn.className = 'p-1 px-2.5 rounded-full text-xs font-medium bg-white dark:bg-[#A855F7] text-zinc-900 dark:text-white shadow-sm transition-all flex items-center space-x-1';
         listBtn.className = 'p-1 px-2.5 rounded-full text-xs font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-all flex items-center space-x-1';
         galleryCon.classList.remove('hidden');
         listCon.classList.add('hidden');
       } else {
-        listBtn.className = 'p-1 px-2.5 rounded-full text-xs font-medium bg-white dark:bg-blue-600 text-zinc-900 dark:text-white shadow-sm transition-all flex items-center space-x-1';
+        listBtn.className = 'p-1 px-2.5 rounded-full text-xs font-medium bg-white dark:bg-[#A855F7] text-zinc-900 dark:text-white shadow-sm transition-all flex items-center space-x-1';
         galleryBtn.className = 'p-1 px-2.5 rounded-full text-xs font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-all flex items-center space-x-1';
         listCon.classList.remove('hidden');
         galleryCon.classList.add('hidden');
@@ -1511,9 +1677,9 @@
               const targetCard = document.getElementById(`game-card-${lastClickedGameId}`) ||
                                  document.getElementById(`game-list-row-${lastClickedGameId}`);
               if (targetCard) {
-                targetCard.classList.add('ring-2', 'ring-blue-500', 'ring-offset-2', 'dark:ring-offset-[#0c0d0f]', 'transition-all', 'duration-300');
+                targetCard.classList.add('ring-2', 'ring-[#A855F7]', 'ring-offset-2', 'dark:ring-offset-[#0c0d0f]', 'transition-all', 'duration-300');
                 setTimeout(() => {
-                  targetCard.classList.remove('ring-2', 'ring-blue-500', 'ring-offset-2', 'dark:ring-offset-[#0c0d0f]');
+                  targetCard.classList.remove('ring-2', 'ring-[#A855F7]', 'ring-offset-2', 'dark:ring-offset-[#0c0d0f]');
                 }, 1500);
               }
             }
@@ -1705,7 +1871,7 @@
       });
       document.querySelectorAll('.sidebar-nav-btn').forEach(btn => {
         if (btn.dataset.nav === filter) {
-          btn.className = 'sidebar-nav-btn w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl transition-all text-left font-medium active bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400';
+          btn.className = 'sidebar-nav-btn w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl transition-all text-left font-medium active bg-purple-500/10 dark:bg-[#A855F7]/10 text-[#A855F7] dark:text-purple-400';
         } else {
           btn.className = 'sidebar-nav-btn w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-white/5 transition-all text-left font-medium';
         }
@@ -1780,7 +1946,7 @@
         <div class="bg-zinc-50 dark:bg-black/40 p-4 rounded-2xl border border-zinc-200/60 dark:border-white/5 my-2">
           <div class="flex items-center justify-between text-xs text-zinc-400 mb-1.5 font-mono">
             <span>控制台快捷键 (${matchedGame.consoleShortcut || '~'})</span>
-            <button onclick="copyText('${primaryCode.replace(/'/g, "\\'")}')" class="text-blue-600 dark:text-blue-400 hover:underline flex items-center space-x-1 font-semibold">
+            <button onclick="copyText('${primaryCode.replace(/'/g, "\\'")}')" class="text-[#A855F7] dark:text-purple-400 hover:underline flex items-center space-x-1 font-semibold">
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
               <span id="trainer-btn-copy-cmd">一键复制指令</span>
             </button>
@@ -1792,7 +1958,7 @@
 
       resAction.innerHTML = `
         <div class="text-xs text-zinc-400">已匹配最佳结果</div>
-        <a href="#/game/${matchedGame.id}" class="inline-flex items-center space-x-1.5 px-4 py-2 rounded-full bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold transition-all shadow-sm">
+        <a href="#/game/${matchedGame.id}" class="inline-flex items-center space-x-1.5 px-4 py-2 rounded-full bg-[#A855F7] hover:bg-[#A855F7] text-white text-xs font-semibold transition-all shadow-sm">
           <span>进入《${locTitle}》专属二级页面</span>
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
         </a>
@@ -1855,77 +2021,100 @@
         const rating = (game.steamRating || '90%').split(' ')[0];
         const isCertified = game.rank <= 14;
 
-        // 1. GALLERY CARD (Apple clean card with subtle shadow & hover lift)
+        // 1. POKÉMON HOLOGRAPHIC FOIL TRADING CARD (PTCG Secret Rare Spec)
+        const isUltraRare = game.rank <= 14;
+        const cardWrap = document.createElement('div');
+        cardWrap.className = 'pokemon-card-container';
+        cardWrap.setAttribute('data-holo-card', '');
+
         const card = document.createElement('a');
         card.id = `game-card-${game.id}`;
         card.href = `#/game/${game.id}`;
         card.onclick = () => saveCatalogScroll(game.id);
-        card.className = 'group relative bg-white dark:bg-[#141518] rounded-[24px] overflow-hidden transition-all duration-300 flex flex-col justify-between shadow-[0_2px_10px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_28px_rgba(0,0,0,0.08)] border border-zinc-200/80 dark:border-white/10 hover:border-blue-500/40 hover:-translate-y-1';
+        card.className = 'pokemon-card group relative p-4 flex flex-col justify-between h-[510px] cursor-pointer';
 
         card.innerHTML = `
-          <div>
-            <!-- Game Media Header -->
-            <div class="relative w-full h-36 bg-zinc-100 dark:bg-black/40 overflow-hidden">
-              ${game.headerImage ? `
-                <img src="${game.headerImage}" alt="${game.title}" loading="lazy" class="w-full h-full object-cover filter brightness-95 dark:brightness-85 group-hover:scale-105 transition-transform duration-500" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-              ` : ''}
-              <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-zinc-200 to-zinc-100 dark:from-zinc-800 dark:to-zinc-900 text-3xl font-extrabold text-zinc-400 dark:text-zinc-600" style="${game.headerImage ? 'display:none' : 'display:flex'}">
-                ${game.title.charAt(0)}
-              </div>
-              <div class="absolute inset-0 bg-gradient-to-t from-white/90 dark:from-[#141518] via-transparent to-black/20"></div>
-              
-              <!-- Floating Rank & Status Badges -->
-              <div class="absolute top-3 left-3 flex items-center space-x-1.5">
-                <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 shadow-sm">#${game.rank}</span>
-                ${isCertified 
-                  ? `<span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-500 text-zinc-950 shadow-md flex items-center gap-1"><span>👑</span><span>精测认证</span></span>` 
-                  : `<span class="px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-zinc-900/80 text-zinc-300 backdrop-blur-md border border-white/10 flex items-center gap-1"><span>🛠️</span><span>排雷中</span></span>`}
-              </div>
+          <!-- 全息彩虹镭射层 (Rainbow Holo Foil) -->
+          <div class="holo-foil-layer"></div>
+          <!-- 卡套高光漫射层 (Specular Glare) -->
+          <div class="holo-glare-layer"></div>
 
-              <!-- Floating Rating -->
-              <div class="absolute top-3 right-3">
-                <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-white/90 dark:bg-black/70 text-emerald-600 dark:text-emerald-400 backdrop-blur-md shadow-sm border border-black/5 dark:border-white/10">${rating} 好评</span>
+          <div>
+            <!-- 卡牌头部：序号、稀有度与生命值/避坑状态 -->
+            <div class="flex items-center justify-between pb-2.5 border-b border-white/10 text-xs font-mono-tech">
+              <div class="flex items-center gap-2">
+                <span class="font-bold text-white tracking-wider">#${game.rank} // 100</span>
+                <span class="text-[10px] ${isUltraRare ? 'text-amber-300 font-bold' : 'text-purple-300'}">
+                  ${isUltraRare ? '★★★ ULTRA RARE' : '★★ RARE'}
+                </span>
+              </div>
+              <div class="flex items-center gap-1.5 text-[10px] text-emerald-400 font-bold">
+                <span>HP 100</span>
+                <span class="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#10b981]"></span>
               </div>
             </div>
 
-            <!-- Card Body -->
-            <div class="p-5 pt-3">
-              <h3 class="font-bold text-base text-zinc-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-1 mb-1">${localizedTitle}</h3>
-              <p class="text-xs text-zinc-500 dark:text-zinc-400 line-clamp-1 mb-2.5">${game.title} • ${game.releaseYear}</p>
-              
-              ${isCertified ? `
-                <div class="text-[11px] text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-xl border border-emerald-500/15 mb-2.5 flex items-center gap-1.5 font-medium">
-                  <span>🛡️</span>
-                  <span class="truncate">${game.verifiedPatch || t('detailTestedPatch')} · ${t('cardTestedBadge')}</span>
+            <!-- 卡牌核心：金属箔框海报窗 (Artwork Window) -->
+            <div class="card-foil-border my-3 overflow-hidden shadow-md">
+              <div class="relative h-44 w-full overflow-hidden bg-black rounded-[14px]">
+                ${game.headerImage ? `
+                  <img src="${game.headerImage}" alt="${game.title}" loading="lazy" class="w-full h-full object-cover filter brightness-100 group-hover:scale-105 transition-transform duration-500" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                ` : ''}
+                <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-zinc-800 to-zinc-900 text-3xl font-extrabold text-zinc-500" style="${game.headerImage ? 'display:none' : 'display:flex'}">
+                  ${game.title.charAt(0)}
                 </div>
-              ` : `
-                <div class="text-[11px] text-amber-600/90 dark:text-amber-400/90 bg-amber-500/10 px-2.5 py-1 rounded-xl border border-amber-500/15 mb-2.5 flex items-center gap-1.5 font-medium">
-                  <span>🛠️</span>
-                  <span class="truncate">${t('cardTestingBadge')}</span>
+                <div class="absolute bottom-2 left-2 px-2 py-0.5 bg-black/80 text-purple-300 font-mono-tech text-[10px] border border-purple-500/40 rounded">
+                  ${game.developer || 'VERIFIED'}
                 </div>
-              `}
+                <div class="absolute top-2 right-2 px-2 py-0.5 bg-black/80 text-emerald-400 font-mono-tech text-[10px] border border-emerald-500/40 rounded font-bold">
+                  ${game.verifiedPatch || 'v2.13 COMPATIBLE'}
+                </div>
+              </div>
+            </div>
 
-              <!-- Badges -->
-              <div class="flex items-center gap-1.5 flex-wrap">
-                ${game.hasConsole ? `<span class="text-[10px] bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 px-2 py-0.5 rounded-full font-semibold">⚡ ${t('tabConsole')}</span>` : ''}
-                ${game.hasMods ? `<span class="text-[10px] bg-purple-50 dark:bg-purple-500/10 text-purple-600 dark:text-purple-400 px-2 py-0.5 rounded-full font-semibold">📦 ${t('tabMods')}</span>` : ''}
-                ${game.hasTrainer ? `<span class="text-[10px] bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 px-2 py-0.5 rounded-full font-semibold">🛡️ ${t('filterTrainers')}</span>` : ''}
+            <!-- 卡牌标题与副标 -->
+            <h2 class="font-display text-2xl text-white tracking-wide group-hover:text-[#A855F7] transition-colors line-clamp-1">${localizedTitle}</h2>
+            <p class="text-[11px] text-slate-400 font-mono-tech line-clamp-1 mt-0.5">${game.title} • ${game.releaseYear}</p>
+
+            <!-- 宝可梦式技能战力槽 (Abilities / Moves Tray) -->
+            <div class="ability-tray p-3 mt-3 space-y-2 text-xs font-mono-tech">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-1.5 text-slate-300 font-semibold">
+                  <span class="text-purple-400">⚔</span>
+                  <span>CORE EXTENDER</span>
+                </div>
+                <span class="text-white font-bold">${game.hasMods ? '已对账框架' : '收录中'}</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-1.5 text-slate-300 font-semibold">
+                  <span class="text-emerald-400">🛡</span>
+                  <span>CLEAN TRAINER</span>
+                </div>
+                <span class="text-purple-300 font-bold">${game.hasTrainer ? '免翻直链已就绪' : '官方代码'}</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-1.5 text-slate-300 font-semibold">
+                  <span class="text-amber-400">⚡</span>
+                  <span>ONE-CLICK .BAT</span>
+                </div>
+                <span class="text-emerald-400 font-bold">${isCertified ? 'AUTO INJECT' : '对账中'}</span>
               </div>
             </div>
           </div>
 
-          <!-- Card Bottom Info -->
-          <div class="px-5 pb-4 flex items-center justify-between text-xs text-zinc-400">
-            <div class="flex items-center space-x-1 text-zinc-600 dark:text-zinc-400 font-medium">
-              <svg class="w-3.5 h-3.5 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-              <span>${downloads} 下载</span>
-            </div>
-            <div class="w-7 h-7 rounded-full bg-zinc-100 dark:bg-white/10 group-hover:bg-blue-600 group-hover:text-white text-zinc-600 dark:text-zinc-300 flex items-center justify-center transition-all">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+          <!-- 卡牌底部铭牌与稀有度防伪戳 -->
+          <div class="pt-3 border-t border-white/10 flex items-center justify-between text-[11px] font-mono-tech text-slate-400">
+            <span>ILLUS. L-MOD VAULT</span>
+            <div class="flex items-center gap-2">
+              <span class="text-white font-bold">${downloads} 次拉取</span>
+              <span class="w-4 h-4 rounded-full bg-gradient-to-tr from-purple-500 to-cyan-400 flex items-center justify-center text-[9px] text-black font-extrabold shadow-sm">
+                ★
+              </span>
             </div>
           </div>
         `;
-        galleryCon.appendChild(card);
+        cardWrap.appendChild(card);
+        galleryCon.appendChild(cardWrap);
 
         // 2. MINIMALIST LIST ROW
         const listRow = document.createElement('a');
@@ -1936,10 +2125,10 @@
 
         listRow.innerHTML = `
           <div class="flex items-center space-x-4 min-w-0">
-            <span class="w-8 text-center text-xs font-mono font-bold text-blue-600 dark:text-blue-400 shrink-0">#${game.rank}</span>
+            <span class="w-8 text-center text-xs font-mono font-bold text-[#A855F7] dark:text-purple-400 shrink-0">#${game.rank}</span>
             <div class="min-w-0">
               <div class="flex items-center space-x-2">
-                <span class="font-bold text-sm text-zinc-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 truncate">${localizedTitle}</span>
+                <span class="font-bold text-sm text-zinc-900 dark:text-white group-hover:text-[#A855F7] dark:group-hover:text-purple-400 truncate">${localizedTitle}</span>
                 <span class="text-xs text-zinc-400 hidden sm:inline truncate">(${game.title})</span>
                 ${isCertified 
                   ? `<span class="text-[10px] bg-amber-500/15 text-amber-600 dark:text-amber-400 px-2.5 py-0.5 rounded-full font-bold border border-amber-500/30 shrink-0">👑 精测认证</span>`
@@ -1951,20 +2140,116 @@
 
           <div class="flex items-center space-x-3 shrink-0 ml-4">
             <div class="hidden md:flex items-center space-x-1.5">
-              ${game.hasConsole ? `<span class="text-[10px] bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 px-2 py-0.5 rounded-full font-semibold">控制台</span>` : ''}
+              ${game.hasConsole ? `<span class="text-[10px] bg-purple-500/10 dark:bg-[#A855F7]/10 text-[#A855F7] dark:text-purple-400 px-2 py-0.5 rounded-full font-semibold">控制台</span>` : ''}
               ${game.hasMods ? `<span class="text-[10px] bg-purple-50 dark:bg-purple-500/10 text-purple-600 dark:text-purple-400 px-2 py-0.5 rounded-full font-semibold">MOD</span>` : ''}
             </div>
             <span class="text-xs text-emerald-600 dark:text-emerald-400 font-semibold hidden sm:inline">${rating}</span>
-            <div class="w-7 h-7 rounded-full flex items-center justify-center text-zinc-400 group-hover:text-blue-600 dark:group-hover:text-blue-400">
+            <div class="w-7 h-7 rounded-full flex items-center justify-center text-zinc-400 group-hover:text-[#A855F7] dark:group-hover:text-purple-400">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
             </div>
           </div>
         `;
         listCon.appendChild(listRow);
       });
+      init3DCardPhysics();
+      initCustomCursor();
     }
 
     // Render Secondary Game Detail View
+    
+    // === 宝可梦全息闪卡 (PTCG Holo Foil) 物理与着色引擎 ===
+    function init3DCardPhysics() {
+      const cards = document.querySelectorAll('[data-holo-card]');
+      cards.forEach(cardContainer => {
+        const card = cardContainer.querySelector('.pokemon-card');
+        if (!card || card.__hasHoloListener) return;
+        card.__hasHoloListener = true;
+
+        cardContainer.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+
+          // 真实重心旋转角度 (rotateX, rotateY)，绝不带 translateY 或 translateZ 突兀位移！
+          const rotateX = ((y - centerY) / centerY) * -13;
+          const rotateY = ((x - centerX) / centerX) * 13;
+
+          // 核心：严格围绕中心 50% 50% 旋转，不产生位移！
+          card.style.transform = `rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg)`;
+
+          // 彩虹镭射反光位置计算 (随着角度偏转，彩虹光斑滑过卡牌)
+          const foilPosX = 50 + ((x - centerX) / centerX) * 50;
+          const foilPosY = 50 + ((y - centerY) / centerY) * 50;
+          card.style.setProperty('--foil-pos-x', `${foilPosX.toFixed(1)}%`);
+          card.style.setProperty('--foil-pos-y', `${foilPosY.toFixed(1)}%`);
+
+          // 高光反射点
+          card.style.setProperty('--pointer-x', `${x.toFixed(1)}px`);
+          card.style.setProperty('--pointer-y', `${y.toFixed(1)}px`);
+
+          // 动态接触阴影 (随着手倾斜，背光阴影自然扩散)
+          const shadowX = ((x - centerX) / centerX) * -12;
+          const shadowY = ((y - centerY) / centerY) * -12 + 18;
+          card.style.boxShadow = `${shadowX.toFixed(1)}px ${shadowY.toFixed(1)}px 35px rgba(0, 0, 0, 0.85), 0 0 15px rgba(168, 85, 247, 0.25)`;
+        });
+
+        cardContainer.addEventListener('mouseleave', () => {
+          card.style.transform = 'rotateX(0deg) rotateY(0deg)';
+          card.style.boxShadow = '0 15px 35px -5px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(0, 0, 0, 0.6)';
+          card.style.transition = 'transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s ease';
+        });
+
+        cardContainer.addEventListener('mouseenter', () => {
+          card.style.transition = 'none';
+        });
+      });
+    }
+
+    function initCustomCursor() {
+      if (cursorInitialized) return;
+      cursorInitialized = true;
+
+      const dot = document.getElementById('cursor-dot');
+      const ring = document.getElementById('cursor-ring');
+      const label = document.getElementById('cursor-label');
+      if (!dot || !ring) return;
+
+      let mouseX = window.innerWidth / 2;
+      let mouseY = window.innerHeight / 2;
+      let ringX = mouseX;
+      let ringY = mouseY;
+
+      window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        dot.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
+      });
+
+      function animateCursor() {
+        ringX += (mouseX - ringX) * 0.22;
+        ringY += (mouseY - ringY) * 0.22;
+        ring.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
+        requestAnimationFrame(animateCursor);
+      }
+      animateCursor();
+
+      document.body.addEventListener('mouseover', (e) => {
+        const targetCard = e.target.closest('[data-cursor]');
+        if (targetCard) {
+          document.body.classList.add('cursor-hover');
+          if (label) label.innerText = targetCard.getAttribute('data-cursor') || '3D';
+        } else if (e.target.closest('button, a')) {
+          ring.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%) scale(1.35)`;
+        } else {
+          document.body.classList.remove('cursor-hover');
+          ring.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%) scale(1)`;
+        }
+      });
+    }
+
     function renderGameDetailView(game) {
       const localizedTitle = game.titles && game.titles[currentLang] ? game.titles[currentLang] : game.title;
 
@@ -2083,15 +2368,15 @@
             const cmdName = cmd.name[currentLang] || cmd.name['zh-CN'] || cmd.name['en'] || cmd.name;
             const escapedCode = cmd.code.replace(/'/g, "\\'");
             cmdCards += `
-              <div class="bg-white dark:bg-[#141518] rounded-[20px] p-4 sm:p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all border border-zinc-200/80 dark:border-white/10 shadow-sm hover:border-blue-500/40">
+              <div class="bg-white dark:bg-[#141518] rounded-[20px] p-4 sm:p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all border border-zinc-200/80 dark:border-white/10 shadow-sm hover:border-[#A855F7]/40">
                 <div class="flex-1">
                   <div class="font-bold text-sm sm:text-base text-zinc-900 dark:text-white">${cmdName}</div>
                   <div class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">${cmd.desc}</div>
                   <div class="mt-2.5 inline-block bg-zinc-50 dark:bg-black/30 rounded-xl px-3.5 py-1.5 border border-zinc-200/60 dark:border-white/5">
-                    <code class="text-xs text-blue-600 dark:text-blue-400 font-mono font-bold select-all">${cmd.code}</code>
+                    <code class="text-xs text-[#A855F7] dark:text-purple-400 font-mono font-bold select-all">${cmd.code}</code>
                   </div>
                 </div>
-                <button onclick="copyText('${escapedCode}')" class="self-start md:self-center px-4 py-2 rounded-full bg-zinc-100 hover:bg-blue-600 dark:bg-white/10 dark:hover:bg-blue-600 text-zinc-800 dark:text-zinc-200 hover:text-white dark:hover:text-white font-semibold text-xs transition-colors shrink-0 flex items-center gap-1.5 shadow-sm">
+                <button onclick="copyText('${escapedCode}')" class="self-start md:self-center px-4 py-2 rounded-full bg-zinc-100 hover:bg-[#A855F7] dark:bg-white/10 dark:hover:bg-[#A855F7] text-zinc-800 dark:text-zinc-200 hover:text-white dark:hover:text-white font-semibold text-xs transition-colors shrink-0 flex items-center gap-1.5 shadow-sm">
                   <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
                   <span>${t('btnCopyCode')}</span>
                 </button>
@@ -2152,7 +2437,7 @@
                 <div class="text-xs text-zinc-400 mt-1">Author: ${mod.author} • Size: ${mod.size}</div>
               </div>
               <div class="flex items-center gap-3 text-xs text-zinc-400">
-                <span class="flex items-center gap-1 text-blue-600 dark:text-blue-400 font-semibold">
+                <span class="flex items-center gap-1 text-[#A855F7] dark:text-purple-400 font-semibold">
                   <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                   <span>${mod.downloads}</span>
                 </span>
@@ -2180,7 +2465,7 @@
                     <span>${t('modOriginPageBtn')}</span>
                   </a>
                 ` : ''}
-                <button onclick="downloadMod('${mod.id}')" class="px-5 py-2 rounded-full ${mod.isDirect !== false ? 'bg-blue-600 hover:bg-blue-500 shadow-blue-500/20' : 'bg-purple-600 hover:bg-purple-500 shadow-purple-500/20'} text-white font-bold text-xs transition-colors shadow-sm flex items-center gap-1.5 cursor-pointer">
+                <button onclick="downloadMod('${mod.id}')" class="px-5 py-2 rounded-full ${mod.isDirect !== false ? 'bg-[#A855F7] hover:bg-[#A855F7] shadow-blue-500/20' : 'bg-purple-600 hover:bg-purple-500 shadow-purple-500/20'} text-white font-bold text-xs transition-colors shadow-sm flex items-center gap-1.5 cursor-pointer">
                   <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                   <span>${mod.isDirect !== false ? t('modDirectBtn') : t('modMirrorBtn')}</span>
                 </button>
@@ -2222,7 +2507,7 @@
           cat.items.forEach(hk => {
             rows += `
               <div class="py-3 px-3 flex items-center justify-between text-xs sm:text-sm hover:bg-zinc-50 dark:hover:bg-white/[0.03] rounded-xl transition-colors">
-                <span class="font-mono font-bold text-blue-600 dark:text-blue-400 bg-zinc-100 dark:bg-white/10 px-3 py-1 rounded-full border border-zinc-200/60 dark:border-white/10 shadow-sm">${hk.key}</span>
+                <span class="font-mono font-bold text-[#A855F7] dark:text-purple-400 bg-zinc-100 dark:bg-white/10 px-3 py-1 rounded-full border border-zinc-200/60 dark:border-white/10 shadow-sm">${hk.key}</span>
                 <span class="text-zinc-800 dark:text-zinc-200 font-medium text-right">${hk.action}</span>
               </div>
             `;
@@ -2394,7 +2679,7 @@
       if (badgeEl) {
         badgeEl.innerText = isDirect ? t('modModalDirectBadge') : t('modModalOfficialBadge');
         badgeEl.className = isDirect
-          ? 'text-[10px] bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 px-2.5 py-0.5 rounded-full font-bold border border-blue-500/20'
+          ? 'text-[10px] bg-purple-500/10 dark:bg-[#A855F7]/10 text-[#A855F7] dark:text-purple-400 px-2.5 py-0.5 rounded-full font-bold border border-[#A855F7]/20'
           : 'text-[10px] bg-purple-50 dark:bg-purple-500/10 text-purple-600 dark:text-purple-400 px-2.5 py-0.5 rounded-full font-bold border border-purple-500/20';
       }
       if (subtitleEl) {
@@ -2407,7 +2692,7 @@
         const steps = mod.installSteps || ['解压至游戏根目录对应文件夹', '启动游戏验证是否生效'];
         stepsEl.innerHTML = steps.map((s, idx) => `
           <div class="flex items-start gap-2">
-            <span class="w-4 h-4 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 font-bold flex items-center justify-center text-[10px] shrink-0 mt-0.5">${idx + 1}</span>
+            <span class="w-4 h-4 rounded-full bg-[#A855F7]/10 text-[#A855F7] dark:text-purple-400 font-bold flex items-center justify-center text-[10px] shrink-0 mt-0.5">${idx + 1}</span>
             <span>${s}</span>
           </div>
         `).join('');
@@ -2460,7 +2745,7 @@
       });
       const activeBtn = document.getElementById('detail-tab-btn-' + tab);
       if (activeBtn) {
-        activeBtn.className = 'detail-tab-btn px-5 py-2 rounded-full text-xs sm:text-sm font-semibold bg-white dark:bg-blue-600 text-zinc-900 dark:text-white transition-all shrink-0 shadow-sm';
+        activeBtn.className = 'detail-tab-btn px-5 py-2 rounded-full text-xs sm:text-sm font-semibold bg-white dark:bg-[#A855F7] text-zinc-900 dark:text-white transition-all shrink-0 shadow-sm';
       }
 
       ['console', 'mods', 'trainers', 'reviews', 'social-cards'].forEach(t => {
@@ -2487,9 +2772,9 @@
 
       if (!game.hasConsole) {
         container.innerHTML = `
-          <div class="bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-emerald-500/10 rounded-[28px] p-6 border border-blue-500/20 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div class="bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-emerald-500/10 rounded-[28px] p-6 border border-[#A855F7]/20 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
             <div class="flex items-center space-x-3.5">
-              <div class="w-10 h-10 rounded-2xl bg-blue-600/20 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
+              <div class="w-10 h-10 rounded-2xl bg-[#A855F7]/20 text-[#A855F7] dark:text-purple-400 flex items-center justify-center shrink-0">
                 <span class="text-xl">⚡</span>
               </div>
               <div>
@@ -2497,7 +2782,7 @@
                 <div class="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">${t('noConsoleDesc')}</div>
               </div>
             </div>
-            <button onclick="setDetailTab('trainers')" class="px-5 py-2.5 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition-all shadow-md shrink-0 flex items-center gap-1.5 cursor-pointer">
+            <button onclick="setDetailTab('trainers')" class="px-5 py-2.5 rounded-full bg-[#A855F7] hover:bg-[#A855F7] text-white font-bold text-xs transition-all shadow-md shrink-0 flex items-center gap-1.5 cursor-pointer">
               <span>${t('goToTrainers')}</span>
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
             </button>
@@ -2519,9 +2804,9 @@
 
       let cardsHtml = '';
       bundles.forEach((b, idx) => {
-        let gradientBorder = 'border-blue-500/30 hover:border-blue-500';
+        let gradientBorder = 'border-[#A855F7]/30 hover:border-[#A855F7]';
         let gradientBg = 'from-blue-500/5 to-cyan-500/5';
-        let badgeColor = 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20';
+        let badgeColor = 'bg-[#A855F7]/10 text-[#A855F7] dark:text-purple-400 border-[#A855F7]/20';
         let btnGradient = 'from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 shadow-blue-500/25';
         let icon = '🚀';
         let bName = b.name;
@@ -2588,7 +2873,7 @@
               ${previewLines.length > 0 ? `
                 <div class="bg-zinc-100/80 dark:bg-black/40 rounded-xl p-2.5 font-mono text-[10px] text-zinc-600 dark:text-zinc-400 border border-zinc-200/60 dark:border-white/5 overflow-hidden">
                   <div class="text-[9px] text-zinc-400 mb-1 font-sans">${t('codePreviewLabel') || 'Preview:'}</div>
-                  ${previewLines.map(pl => `<div class="truncate text-blue-600 dark:text-blue-400 font-semibold">${pl}</div>`).join('')}
+                  ${previewLines.map(pl => `<div class="truncate text-[#A855F7] dark:text-purple-400 font-semibold">${pl}</div>`).join('')}
                   <div class="text-[9px] text-zinc-400 mt-1 italic font-sans">${t('codeFullBundlePack') || '+ Complete Bundle Script'}</div>
                 </div>
               ` : ''}
@@ -2612,7 +2897,7 @@
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-zinc-100 dark:border-white/5">
             <div>
               <div class="flex items-center gap-2 flex-wrap mb-1">
-                <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-[#A855F7]"></span>
                 <h3 class="text-base sm:text-lg font-extrabold text-zinc-900 dark:text-white">
                   ${t('scenarioTitle') || '老L·极客推荐场景套餐 (小白 10 秒一键爽到)'}
                 </h3>
@@ -2626,7 +2911,7 @@
             </div>
             <div class="flex items-center gap-2 text-xs text-zinc-400 shrink-0">
               <span>${t('consoleShortcutLabel') || '呼出键:'}</span>
-              <code class="px-2 py-1 rounded-md bg-zinc-100 dark:bg-white/10 text-blue-600 dark:text-blue-400 font-mono font-bold">${shortcutKey}</code>
+              <code class="px-2 py-1 rounded-md bg-zinc-100 dark:bg-white/10 text-[#A855F7] dark:text-purple-400 font-mono font-bold">${shortcutKey}</code>
             </div>
           </div>
 
@@ -2637,7 +2922,7 @@
 
           <!-- Advanced usage tip -->
           <div class="flex items-center gap-2 text-xs text-zinc-500 dark:text-zinc-400 bg-zinc-50 dark:bg-black/30 p-3 rounded-xl border border-zinc-200/60 dark:border-white/5">
-            <svg class="w-4 h-4 text-blue-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <svg class="w-4 h-4 text-[#A855F7] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
             <span>${t('scenarioAdvancedTip') || '极客贴士：代码按官方控制台语法封装，点击按钮直接复制后，在游戏里呼出控制台按 <b>Ctrl+V</b>（或右键）回车执行即可！'}</span>
           </div>
         </div>
@@ -2759,7 +3044,7 @@
 
       const tipsHtml = note.tips.map(tip => `
         <div class="flex items-start gap-2">
-          <span class="text-blue-500 dark:text-blue-400 font-bold text-sm shrink-0 mt-0.5">•</span>
+          <span class="text-[#A855F7] dark:text-purple-400 font-bold text-sm shrink-0 mt-0.5">•</span>
           <div class="text-xs sm:text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed">${tip}</div>
         </div>
       `).join('');
@@ -2768,7 +3053,7 @@
         <div class="bg-gradient-to-r from-blue-500/5 via-indigo-500/5 to-purple-500/5 dark:from-blue-500/10 dark:via-indigo-500/10 dark:to-purple-500/10 rounded-[24px] p-5 sm:p-6 border border-zinc-200/80 dark:border-white/10 shadow-sm space-y-4">
           <div class="flex items-center justify-between gap-4 flex-wrap">
             <div class="flex items-center space-x-3.5">
-              <div class="w-11 h-11 rounded-full overflow-hidden border-2 border-blue-500/40 shrink-0 shadow-sm">
+              <div class="w-11 h-11 rounded-full overflow-hidden border-2 border-[#A855F7]/40 shrink-0 shadow-sm">
                 <img src="avatar.jpg" alt="老L" class="w-full h-full object-cover">
               </div>
               <div>
@@ -2783,7 +3068,7 @@
                 </div>
               </div>
             </div>
-            <div class="text-xs font-mono font-bold text-blue-600 dark:text-blue-400 bg-white dark:bg-white/10 px-3 py-1 rounded-full border border-zinc-200/60 dark:border-white/10 shadow-sm">
+            <div class="text-xs font-mono font-bold text-[#A855F7] dark:text-purple-400 bg-white dark:bg-white/10 px-3 py-1 rounded-full border border-zinc-200/60 dark:border-white/10 shadow-sm">
               ${game.verifiedPatch || 'Steam 最新补丁已认证'}
             </div>
           </div>
@@ -2806,7 +3091,7 @@
 
       container.innerHTML = `
         <div class="relative overflow-hidden bg-gradient-to-br from-zinc-900 via-zinc-900 to-zinc-950 text-white rounded-[28px] p-6 sm:p-7 border border-white/10 shadow-xl space-y-5">
-          <div class="absolute -right-8 -top-8 w-44 h-44 rounded-full bg-blue-500/10 blur-3xl pointer-events-none"></div>
+          <div class="absolute -right-8 -top-8 w-44 h-44 rounded-full bg-[#A855F7]/10 blur-3xl pointer-events-none"></div>
           <div class="absolute -left-8 -bottom-8 w-44 h-44 rounded-full bg-purple-500/10 blur-3xl pointer-events-none"></div>
 
           <!-- Radar Status Header -->
@@ -2909,7 +3194,7 @@
             <p class="text-xs text-zinc-500 dark:text-zinc-400 max-w-md mx-auto">
               目前已完成 Rank 1 ~ Rank 7 旗舰大作 1080×1440 高清卡片总装。本游戏已被列入流水线后续排期计划（按周迭代）。
             </p>
-            <a href="radar.html?game=${game.id}" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold shadow-sm transition-all">
+            <a href="radar.html?game=${game.id}" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#A855F7] hover:bg-[#A855F7] text-white text-xs font-semibold shadow-sm transition-all">
               <span>查看 Steam 避坑兼容性诊断</span>
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
             </a>
@@ -2959,7 +3244,7 @@
             ${CARD_METAS.map(m => {
               const imgUrl = `social_distribution/${folder}/images/card_${m.num}_${m.name}.png`;
               return `
-                <div class="bg-white dark:bg-[#141518] rounded-[22px] p-3 border border-zinc-200/80 dark:border-white/10 shadow-sm flex flex-col justify-between space-y-3 group hover:border-blue-500/40 transition-all">
+                <div class="bg-white dark:bg-[#141518] rounded-[22px] p-3 border border-zinc-200/80 dark:border-white/10 shadow-sm flex flex-col justify-between space-y-3 group hover:border-[#A855F7]/40 transition-all">
                   <div class="relative overflow-hidden rounded-xl bg-black cursor-pointer" onclick="openImageModal('${imgUrl}', '《${localizedTitle}》${m.title}')">
                     <img 
                       src="${imgUrl}" 
@@ -2978,13 +3263,13 @@
                   <div class="space-y-1 px-1">
                     <div class="flex items-center justify-between">
                       <span class="text-xs font-bold text-zinc-900 dark:text-white truncate">${m.title}</span>
-                      <span class="text-[10px] font-mono px-1.5 py-0.2 rounded bg-blue-500/10 text-blue-500 dark:text-blue-400 font-semibold">${m.tag}</span>
+                      <span class="text-[10px] font-mono px-1.5 py-0.2 rounded bg-[#A855F7]/10 text-[#A855F7] dark:text-purple-400 font-semibold">${m.tag}</span>
                     </div>
                     <p class="text-[11px] text-zinc-500 dark:text-zinc-400 line-clamp-2 leading-relaxed">${m.desc}</p>
                   </div>
 
                   <div class="pt-2 border-t border-zinc-100 dark:border-white/5 flex items-center justify-between text-xs px-1">
-                    <button onclick="openImageModal('${imgUrl}', '《${localizedTitle}》${m.title}')" class="text-blue-600 dark:text-blue-400 hover:underline font-medium cursor-pointer">预览</button>
+                    <button onclick="openImageModal('${imgUrl}', '《${localizedTitle}》${m.title}')" class="text-[#A855F7] dark:text-purple-400 hover:underline font-medium cursor-pointer">预览</button>
                     <a href="${imgUrl}" download="${game.id}_card_${m.num}_${m.name}.png" class="text-zinc-500 hover:text-zinc-900 dark:hover:text-white font-medium flex items-center gap-1">
                       <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                       <span>保存</span>
@@ -3010,7 +3295,7 @@
                 <button onclick="copySocialPost('${game.id}', 'xhs')" class="px-3.5 py-2 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-xs flex items-center gap-1.5 shadow-sm transition-all cursor-pointer">
                   <span>📕 复制小红书文案</span>
                 </button>
-                <button onclick="copySocialPost('${game.id}', 'bili')" class="px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs flex items-center gap-1.5 shadow-sm transition-all cursor-pointer">
+                <button onclick="copySocialPost('${game.id}', 'bili')" class="px-3.5 py-2 rounded-xl bg-[#A855F7] hover:bg-[#A855F7] text-white font-bold text-xs flex items-center gap-1.5 shadow-sm transition-all cursor-pointer">
                   <span>📺 复制B站动态文案</span>
                 </button>
               </div>
@@ -3306,7 +3591,7 @@ pause`;
       <img id="image-modal-img" src="" alt="Card Preview" class="max-h-[82vh] rounded-2xl shadow-2xl border border-white/20 object-contain">
       <div class="mt-3 flex items-center space-x-3 text-xs">
         <span id="image-modal-title" class="text-white font-bold"></span>
-        <a id="image-modal-download" href="#" download class="px-4 py-1.5 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-semibold transition-all"><span id="image-modal-dl-text">下载 1080×1440 原图</span></a>
+        <a id="image-modal-download" href="#" download class="px-4 py-1.5 rounded-full bg-[#A855F7] hover:bg-[#A855F7] text-white font-semibold transition-all"><span id="image-modal-dl-text">下载 1080×1440 原图</span></a>
       </div>
     </div>
   </div>

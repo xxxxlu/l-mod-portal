@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>L-MOD Vault | 高密度四方卡片矩阵 · 光标跟随流体质感原型</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+    :root {
+      --bg: #090a0f;
+      --card-bg: rgba(15, 18, 26, 0.75);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --spotlight-color: rgba(52, 211, 153, 0.15);
+      --border-spotlight: rgba(52, 211, 153, 0.45);
+    }
+
+    body {
+      background-color: var(--bg);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #e2e8f0;
+      min-height: 100vh;
+    }
+
+    .font-mono-tech {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* === 背景：克制淡雅的深色液态流动暗光 (不突兀、不假大空) === */
+    .ambient-glow {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .glow-orb-1 {
+      position: absolute;
+      width: 700px;
+      height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.12) 0%, rgba(5, 150, 105, 0.04) 50%, transparent 70%);
+      top: -200px;
+      left: 10%;
+      filter: blur(120px);
+      animation: ambientFloat 25s ease-in-out infinite alternate;
+    }
+    .glow-orb-2 {
+      position: absolute;
+      width: 650px;
+      height: 650px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(245, 158, 11, 0.08) 0%, rgba(217, 119, 6, 0.03) 50%, transparent 70%);
+      bottom: -150px;
+      right: 5%;
+      filter: blur(140px);
+      animation: ambientFloat 30s ease-in-out infinite alternate-reverse;
+    }
+
+    @keyframes ambientFloat {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(40px, 30px) scale(1.06); }
+    }
+
+    /* === 核心交互：四方卡片光标追踪聚光灯 (Mouse-Follow Spotlight) === */
+    .spotlight-card {
+      position: relative;
+      background: var(--card-bg);
+      backdrop-filter: blur(20px) saturate(160%);
+      -webkit-backdrop-filter: blur(20px) saturate(160%);
+      border-radius: 20px;
+      border: 1px solid var(--card-border);
+      overflow: hidden;
+      transition: border-color 0.3s ease, transform 0.25s cubic-bezier(0.2, 0, 0.2, 1), box-shadow 0.3s ease;
+    }
+
+    .spotlight-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.8), 0 0 25px -5px rgba(16, 185, 129, 0.1);
+    }
+
+    /* 鼠标跟随内部径向光斑 */
+    .spotlight-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(
+        500px circle at var(--mouse-x, -500px) var(--mouse-y, -500px),
+        var(--spotlight-color),
+        transparent 70%
+      );
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* 鼠标跟随外边框发光 */
+    .spotlight-card::after {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      background: radial-gradient(
+        350px circle at var(--mouse-x, -500px) var(--mouse-y, -500px),
+        var(--border-spotlight),
+        transparent 60%
+      );
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+      z-index: 2;
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      padding: 1px;
+    }
+
+    .spotlight-card:hover::before,
+    .spotlight-card:hover::after {
+      opacity: 1;
+    }
+
+    /* 游戏封面微缩图悬浮放大 */
+    .game-thumb {
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .spotlight-card:hover .game-thumb {
+      transform: scale(1.04);
+    }
+
+    /* 状态圆点呼吸 */
+    .pulse-dot {
+      animation: pulseGlow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.9); }
+    }
+  </style>
+</head>
+<body class="selection:bg-emerald-500 selection:text-black">
+
+  <!-- 柔和液态流动背景 (AI感淡化，保持专业深邃) -->
+  <div class="ambient-glow">
+    <div class="glow-orb-1"></div>
+    <div class="glow-orb-2"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(#ffffff06_1px,transparent_1px)] [background-size:28px_28px] opacity-50"></div>
+  </div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-6 py-8">
+    
+    <!-- 顶部状态栏：信息一览无余 -->
+    <header class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pb-6 border-b border-white/10">
+      <div>
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center font-bold text-emerald-400 font-mono-tech text-sm">
+            LV
+          </div>
+          <h1 class="text-xl font-bold tracking-tight text-white flex items-center gap-2">
+            L-MOD VAULT
+            <span class="text-xs px-2 py-0.5 rounded-full font-mono-tech bg-white/5 text-slate-400 border border-white/10 font-normal">智库索引</span>
+          </h1>
+        </div>
+        <p class="text-xs text-slate-400 mt-1">单机游戏纯净修改器 · 官方控制台代码库 · Steam 补丁实时避坑雷达</p>
+      </div>
+
+      <!-- 右侧：全局搜索与避坑雷达状态 -->
+      <div class="flex items-center gap-4 w-full md:w-auto">
+        <div class="relative flex-1 md:w-72">
+          <input type="text" placeholder="快速筛选游戏、版本、MOD..." class="w-full bg-slate-900/60 border border-white/10 focus:border-emerald-500/50 rounded-xl px-3.5 py-1.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none transition">
+          <span class="absolute right-3 top-2 text-[10px] font-mono-tech text-slate-500">⌘K</span>
+        </div>
+
+        <div class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-xs font-mono-tech text-emerald-400 shrink-0">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 pulse-dot"></span>
+          <span>雷达全绿 · 零坏档预警</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- 分类过滤药丸：一眼定位 -->
+    <div class="flex items-center justify-between gap-4 my-6">
+      <div class="flex items-center gap-2 overflow-x-auto text-xs font-mono-tech no-scrollbar">
+        <button class="px-3 py-1.5 rounded-xl bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold shrink-0">
+          全部旗舰 (Top 100)
+        </button>
+        <button class="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white border border-white/5 shrink-0 transition">
+          老L全息精测认证 (前7款)
+        </button>
+        <button class="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white border border-white/5 shrink-0 transition">
+          免翻修改器 (Clean Trainers)
+        </button>
+        <button class="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white border border-white/5 shrink-0 transition">
+          一键开门 BAT 脚本
+        </button>
+      </div>
+
+      <div class="text-xs text-slate-500 font-mono-tech hidden sm:block">
+        已加载 6 款首发旗舰大作
+      </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- 核心区域：高密度四方卡片矩阵 (Dense Multi-Card Grid)    -->
+    <!-- 移入精准跟随鼠标，信息量一览无余，无需频繁翻页轮播          -->
+    <!-- ======================================================== -->
+    <main class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- 卡片 1: 赛博朋克 2077 -->
+      <article class="spotlight-card group p-5 flex flex-col justify-between" data-spotlight>
+        <div class="relative z-10">
+          <!-- 封面图与右上角版本兼容标签 -->
+          <div class="relative h-44 rounded-xl overflow-hidden bg-slate-800 border border-white/5 mb-4">
+            <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=600&q=80" alt="Cyberpunk" class="w-full h-full object-cover game-thumb">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0f121a] via-transparent to-black/30"></div>
+            
+            <div class="absolute top-2.5 left-2.5 flex items-center gap-1.5">
+              <span class="px-2 py-0.5 rounded-md text-[10px] font-mono-tech font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-400/40 backdrop-blur-md">
+                v2.13 官方对账
+              </span>
+            </div>
+
+            <div class="absolute top-2.5 right-2.5">
+              <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-mono-tech bg-black/60 text-emerald-400 border border-emerald-500/30 backdrop-blur-md">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 pulse-dot"></span>
+                完美兼容
+              </span>
+            </div>
+
+            <div class="absolute bottom-2.5 left-3">
+              <span class="text-[10px] font-mono-tech text-cyan-300 uppercase tracking-wider">CD PROJEKT RED</span>
+              <h2 class="text-base font-bold text-white tracking-tight">赛博朋克 2077: 往日之影</h2>
+            </div>
+          </div>
+
+          <!-- 核心信息指标一览 (用户一眼获取所需) -->
+          <div class="space-y-2.5 text-xs">
+            <div class="flex items-center justify-between text-slate-400">
+              <span>前置 MOD 框架:</span>
+              <span class="font-mono-tech text-white font-semibold">CET + Redscript + ArchiveXL</span>
+            </div>
+            <div class="flex items-center justify-between text-slate-400">
+              <span>修改器收录:</span>
+              <span class="font-mono-tech text-emerald-400 font-semibold">Fling 纯净免翻直链 (已验证)</span>
+            </div>
+            <div class="flex items-center justify-between text-slate-400">
+              <span>场景化套餐:</span>
+              <span class="font-mono-tech text-cyan-300">【二周目神装】/【隐藏结局包】</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 底部快捷动作条 -->
+        <div class="relative z-10 pt-4 mt-4 border-t border-white/5 flex items-center justify-between">
+          <div class="flex items-center gap-1.5">
+            <span class="px-2 py-0.5 rounded text-[10px] font-mono-tech bg-white/5 text-slate-400">142 项资源</span>
+            <span class="px-2 py-0.5 rounded text-[10px] font-mono-tech bg-emerald-500/10 text-emerald-400">一键开门 BAT</span>
+          </div>
+          <button class="px-3 py-1 rounded-lg text-xs font-mono-tech font-bold bg-white/5 hover:bg-emerald-500/20 text-slate-300 hover:text-emerald-300 border border-white/10 hover:border-emerald-500/30 transition">
+            展开详情 ➔
+          </button>
+        </div>
+      </article>
+
+      <!-- 卡片 2: 黑神话：悟空 -->
+      <article class="spotlight-card group p-5 flex flex-col justify-between" data-spotlight>
+        <div class="relative z-10">
+          <div class="relative h-44 rounded-xl overflow-hidden bg-slate-800 border border-white/5 mb-4">
+            <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80" alt="Wukong" class="w-full h-full object-cover game-thumb">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0f121a] via-transparent to-black/30"></div>
+            
+            <div class="absolute top-2.5 left-2.5 flex items-center gap-1.5">
+              <span class="px-2 py-0.5 rounded-md text-[10px] font-mono-tech font-bold bg-amber-500/20 text-amber-300 border border-amber-400/40 backdrop-blur-md">
+                v1.0.9 最新官方
+              </span>
+            </div>
+
+            <div class="absolute top-2.5 right-2.5">
+              <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-mono-tech bg-black/60 text-emerald-400 border border-emerald-500/30 backdrop-blur-md">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 pulse-dot"></span>
+                避坑就绪
+              </span>
+            </div>
+
+            <div class="absolute bottom-2.5 left-3">
+              <span class="text-[10px] font-mono-tech text-amber-300 uppercase tracking-wider">GAME SCIENCE</span>
+              <h2 class="text-base font-bold text-white tracking-tight">黑神话：悟空</h2>
+            </div>
+          </div>
+
+          <div class="space-y-2.5 text-xs">
+            <div class="flex items-center justify-between text-slate-400">
+              <span>控制台代码:</span>
+              <span class="font-mono-tech text-white font-semibold">86 组真实无报错指令</span>
+            </div>
+            <div class="flex items-center justify-between text-slate-400">
+              <span>修改器直链:</span>
+              <span class="font-mono-tech text-emerald-400 font-semibold">风灵月影 v1.0.9 纯净打包</span>
+            </div>
+            <div class="flex items-center justify-between text-slate-400">
+              <span>极客场景包:</span>
+              <span class="font-mono-tech text-amber-300">【全珍玩全丹药】/【定身不破】</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative z-10 pt-4 mt-4 border-t border-white/5 flex items-center justify-between">
+          <div class="flex items-center gap-1.5">
+            <span class="px-2 py-0.5 rounded text-[10px] font-mono-tech bg-white/5 text-slate-400">86 项资源</span>
+            <span class="px-2 py-0.5 rounded text-[10px] font-mono-tech bg-amber-500/10 text-amber-400">零命令行注入</span>
+          </div>
+          <button class="px-3 py-1 rounded-lg text-xs font-mono-tech font-bold bg-white/5 hover:bg-emerald-500/20 text-slate-300 hover:text-emerald-300 border border-white/10 hover:border-emerald-500/30 transition">
+            展开详情 ➔
+          </button>
+        </div>
+      </article>
+
+      <!-- 卡片 3: 艾尔登法环 -->
+      <article class="spotlight-card group p-5 flex flex-col justify-between" data-spotlight>
+        <div class="relative z-10">
+          <div class="relative h-44 rounded-xl overflow-hidden bg-slate-800 border border-white/5 mb-4">
+            <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=600&q=80" alt="Elden Ring" class="w-full h-full object-cover game-thumb">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0f121a] via-transparent to-black/30"></div>
+            
+            <div class="absolute top-2.5 left-2.5 flex items-center gap-1.5">
+              <span class="px-2 py-0.5 rounded-md text-[10px] font-mono-tech font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 backdrop-blur-md">
+                v1.14 黄金树幽影
+              </span>
+            </div>
+
+            <div class="absolute top-2.5 right-2.5">
+              <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-mono-tech bg-black/60 text-emerald-400 border border-emerald-500/30 backdrop-blur-md">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 pulse-dot"></span>
+                无损备份
+              </span>
+            </div>
+
+            <div class="absolute bottom-2.5 left-3">
+              <span class="text-[10px] font-mono-tech text-emerald-300 uppercase tracking-wider">FROMSOFTWARE</span>
+              <h2 class="text-base font-bold text-white tracking-tight">艾尔登法环: 黄金树幽影</h2>
+            </div>
+          </div>
+
+          <div class="space-y-2.5 text-xs">
+            <div class="flex items-center justify-between text-slate-400">
+              <span>无缝联机 Mod:</span>
+              <span class="font-mono-tech text-white font-semibold">Seamless Co-op v1.8.2 汉化</span>
+            </div>
+            <div class="flex items-center justify-between text-slate-400">
+              <span>坏档防护:</span>
+              <span class="font-mono-tech text-emerald-400 font-semibold">自动快照备份与一键还原工具</span>
+            </div>
+            <div class="flex items-center justify-between text-slate-400">
+              <span>场景化套餐:</span>
+              <span class="font-mono-tech text-emerald-300">【全幽影树碎片】/【二周目开局】</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative z-10 pt-4 mt-4 border-t border-white/5 flex items-center justify-between">
+          <div class="flex items-center gap-1.5">
+            <span class="px-2 py-0.5 rounded text-[10px] font-mono-tech bg-white/5 text-slate-400">210 项资源</span>
+            <span class="px-2 py-0.5 rounded text-[10px] font-mono-tech bg-emerald-500/10 text-emerald-400">联机防封补丁</span>
+          </div>
+          <button class="px-3 py-1 rounded-lg text-xs font-mono-tech font-bold bg-white/5 hover:bg-emerald-500/20 text-slate-300 hover:text-emerald-300 border border-white/10 hover:border-emerald-500/30 transition">
+            展开详情 ➔
+          </button>
+        </div>
+      </article>
+
+      <!-- 卡片 4: 博德之门 3 -->
+      <article class="spotlight-card group p-5 flex flex-col justify-between" data-spotlight>
+        <div class="relative z-10">
+          <div class="relative h-44 rounded-xl overflow-hidden bg-slate-800 border border-white/5 mb-4">
+            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80" alt="Baldur's Gate 3" class="w-full h-full object-cover game-thumb">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0f121a] via-transparent to-black/30"></div>
+            
+            <div class="absolute top-2.5 left-2.5 flex items-center gap-1.5">
+              <span class="px-2 py-0.5 rounded-md text-[10px] font-mono-tech font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-400/40 backdrop-blur-md">
+                Patch 7 官方支持
+              </span>
+            </div>
+
+            <div class="absolute top-2.5 right-2.5">
+              <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-mono-tech bg-black/60 text-emerald-400 border border-emerald-500/30 backdrop-blur-md">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 pulse-dot"></span>
+                内置管理器
+              </span>
+            </div>
+
+            <div class="absolute bottom-2.5 left-3">
+              <span class="text-[10px] font-mono-tech text-indigo-300 uppercase tracking-wider">LARIAN STUDIOS</span>
+              <h2 class="text-base font-bold text-white tracking-tight">博德之门 3</h2>
+            </div>
+          </div>
+
+          <div class="space-y-2.5 text-xs">
+            <div class="flex items-center justify-between text-slate-400">
+              <span>前置框架:</span>
+              <span class="font-mono-tech text-white font-semibold">Script Extender (Patch 7 对齐)</span>
+            </div>
+            <div class="flex items-center justify-between text-slate-400">
+              <span>官方模组:</span>
+              <span class="font-mono-tech text-emerald-400 font-semibold">内置 Mod Manager 自动对账</span>
+            </div>
+            <div class="flex items-center justify-between text-slate-400">
+              <span>热门代码:</span>
+              <span class="font-mono-tech text-indigo-300">【无限负重】/【洗点不耗金币】</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative z-10 pt-4 mt-4 border-t border-white/5 flex items-center justify-between">
+          <div class="flex items-center gap-1.5">
+            <span class="px-2 py-0.5 rounded text-[10px] font-mono-tech bg-white/5 text-slate-400">95 项资源</span>
+            <span class="px-2 py-0.5 rounded text-[10px] font-mono-tech bg-indigo-500/10 text-indigo-400">救砖备份</span>
+          </div>
+          <button class="px-3 py-1 rounded-lg text-xs font-mono-tech font-bold bg-white/5 hover:bg-emerald-500/20 text-slate-300 hover:text-emerald-300 border border-white/10 hover:border-emerald-500/30 transition">
+            展开详情 ➔
+          </button>
+        </div>
+      </article>
+
+      <!-- 卡片 5: 巫师 3: 狂猎 -->
+      <article class="spotlight-card group p-5 flex flex-col justify-between" data-spotlight>
+        <div class="relative z-10">
+          <div class="relative h-44 rounded-xl overflow-hidden bg-slate-800 border border-white/5 mb-4">
+            <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=600&q=80" alt="Witcher 3" class="w-full h-full object-cover game-thumb">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0f121a] via-transparent to-black/30"></div>
+            
+            <div class="absolute top-2.5 left-2.5 flex items-center gap-1.5">
+              <span class="px-2 py-0.5 rounded-md text-[10px] font-mono-tech font-bold bg-purple-500/20 text-purple-300 border border-purple-400/40 backdrop-blur-md">
+                v4.04 次世代完全版
+              </span>
+            </div>
+
+            <div class="absolute top-2.5 right-2.5">
+              <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-mono-tech bg-black/60 text-emerald-400 border border-emerald-500/30 backdrop-blur-md">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 pulse-dot"></span>
+                脚本免冲突
+              </span>
+            </div>
+
+            <div class="absolute bottom-2.5 left-3">
+              <span class="text-[10px] font-mono-tech text-purple-300 uppercase tracking-wider">CD PROJEKT RED</span>
+              <h2 class="text-base font-bold text-white tracking-tight">巫师 3: 狂猎 次世代</h2>
+            </div>
+          </div>
+
+          <div class="space-y-2.5 text-xs">
+            <div class="flex items-center justify-between text-slate-400">
+              <span>Mod 合并工具:</span>
+              <span class="font-mono-tech text-white font-semibold">Script Merger 纯净解冲突</span>
+            </div>
+            <div class="flex items-center justify-between text-slate-400">
+              <span>控制台开启:</span>
+              <span class="font-mono-tech text-emerald-400 font-semibold">双击 BAT 自动修改 ini 配置文件</span>
+            </div>
+            <div class="flex items-center justify-between text-slate-400">
+              <span>全物品代码:</span>
+              <span class="font-mono-tech text-purple-300">【宗师级猎魔人套装】全系直出</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative z-10 pt-4 mt-4 border-t border-white/5 flex items-center justify-between">
+          <div class="flex items-center gap-1.5">
+            <span class="px-2 py-0.5 rounded text-[10px] font-mono-tech bg-white/5 text-slate-400">178 项资源</span>
+            <span class="px-2 py-0.5 rounded text-[10px] font-mono-tech bg-purple-500/10 text-purple-400">REDmod 适配</span>
+          </div>
+          <button class="px-3 py-1 rounded-lg text-xs font-mono-tech font-bold bg-white/5 hover:bg-emerald-500/20 text-slate-300 hover:text-emerald-300 border border-white/10 hover:border-emerald-500/30 transition">
+            展开详情 ➔
+          </button>
+        </div>
+      </article>
+
+      <!-- 卡片 6: 辐射 4: 次世代版 -->
+      <article class="spotlight-card group p-5 flex flex-col justify-between" data-spotlight>
+        <div class="relative z-10">
+          <div class="relative h-44 rounded-xl overflow-hidden bg-slate-800 border border-white/5 mb-4">
+            <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80" alt="Fallout 4" class="w-full h-full object-cover game-thumb">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0f121a] via-transparent to-black/30"></div>
+            
+            <div class="absolute top-2.5 left-2.5 flex items-center gap-1.5">
+              <span class="px-2 py-0.5 rounded-md text-[10px] font-mono-tech font-bold bg-amber-500/20 text-amber-300 border border-amber-400/40 backdrop-blur-md">
+                v1.10.984 Next-Gen
+              </span>
+            </div>
+
+            <div class="absolute top-2.5 right-2.5">
+              <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-mono-tech bg-black/60 text-amber-400 border border-amber-500/30 backdrop-blur-md">
+                <span class="w-1.5 h-1.5 rounded-full bg-amber-400 pulse-dot"></span>
+                需降级指引
+              </span>
+            </div>
+
+            <div class="absolute bottom-2.5 left-3">
+              <span class="text-[10px] font-mono-tech text-amber-300 uppercase tracking-wider">BETHESDA</span>
+              <h2 class="text-base font-bold text-white tracking-tight">辐射 4: 次世代版</h2>
+            </div>
+          </div>
+
+          <div class="space-y-2.5 text-xs">
+            <div class="flex items-center justify-between text-slate-400">
+              <span>避坑指南:</span>
+              <span class="font-mono-tech text-white font-semibold">Steam 一键回滚脚本 (避开坏档)</span>
+            </div>
+            <div class="flex items-center justify-between text-slate-400">
+              <span>前置扩展:</span>
+              <span class="font-mono-tech text-amber-400 font-semibold">F4SE 新旧版双轨下载</span>
+            </div>
+            <div class="flex items-center justify-between text-slate-400">
+              <span>场景化套餐:</span>
+              <span class="font-mono-tech text-amber-300">【避难所无限建材】/【动力装甲包】</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative z-10 pt-4 mt-4 border-t border-white/5 flex items-center justify-between">
+          <div class="flex items-center gap-1.5">
+            <span class="px-2 py-0.5 rounded text-[10px] font-mono-tech bg-white/5 text-slate-400">114 项资源</span>
+            <span class="px-2 py-0.5 rounded text-[10px] font-mono-tech bg-amber-500/10 text-amber-400">回滚救砖</span>
+          </div>
+          <button class="px-3 py-1 rounded-lg text-xs font-mono-tech font-bold bg-white/5 hover:bg-emerald-500/20 text-slate-300 hover:text-emerald-300 border border-white/10 hover:border-emerald-500/30 transition">
+            展开详情 ➔
+          </button>
+        </div>
+      </article>
+
+    </main>
+
+    <!-- 底部状态条 -->
+    <footer class="mt-10 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs font-mono-tech text-slate-500 gap-4">
+      <div>L-MOD VAULT · HIGH INFORMATION DENSITY GRID · CLEAN ZERO-AD DISTRIBUTION</div>
+      <div class="flex items-center gap-4 text-slate-400">
+        <span>已收录 100 款 3A 大作</span>
+        <span>·</span>
+        <span>Steam 补丁 24H 实时监控</span>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- 精准光标跟随聚光灯算法 (Linear / Raycast 级交互细节) -->
+  <script>
+    const cards = document.querySelectorAll('[data-spotlight]');
+
+    cards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.setProperty('--mouse-x', `-500px`);
+        card.style.setProperty('--mouse-y', `-500px`);
+      });
+    });
+  </script>
+</body>
+</html>

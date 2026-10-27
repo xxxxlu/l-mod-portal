@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>L-MOD VAULT // KINETIC MOTORSPORT EDITION (Inspired by Lando Norris)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@400;600;700;800&family=Syne:wght@700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+    :root {
+      --bg-color: #0e0f12;
+      --card-bg: #14161b;
+      --border-color: #23262f;
+      --accent-lime: #D2FF00; /* Lando Norris Signature Electric Lime */
+      --accent-lime-dim: rgba(210, 255, 0, 0.12);
+      --text-muted: #8b8f9a;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      cursor: none; /* 使用定制物理流体光标 */
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: #f3f4f6;
+      font-family: 'Inter', -apple-system, sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    .font-display {
+      font-family: 'Bebas Neue', 'Syne', sans-serif;
+      letter-spacing: 0.04em;
+    }
+
+    .font-mono-tech {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* === 诺里斯官网灵魂：弹性液态物理光标 (Custom Fluid Cursor) === */
+    #custom-cursor-dot {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 8px;
+      height: 8px;
+      background-color: var(--accent-lime);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.2s ease;
+      box-shadow: 0 0 10px var(--accent-lime);
+    }
+
+    #custom-cursor-ring {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 44px;
+      height: 44px;
+      border: 1.5px solid var(--accent-lime);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+                  height 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+                  border-radius 0.3s ease,
+                  background-color 0.25s ease,
+                  border-color 0.25s ease;
+      will-change: transform;
+      mix-blend-mode: difference;
+    }
+
+    /* 光标悬停交互变体 */
+    body.cursor-hover #custom-cursor-ring {
+      width: 100px;
+      height: 38px;
+      border-radius: 999px;
+      background-color: var(--accent-lime);
+      border-color: transparent;
+      mix-blend-mode: normal;
+    }
+    body.cursor-hover #custom-cursor-dot {
+      opacity: 0;
+    }
+
+    #cursor-label {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 800;
+      color: #000000;
+      letter-spacing: 0.08em;
+      opacity: 0;
+      white-space: nowrap;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+    body.cursor-hover #cursor-label {
+      opacity: 1;
+    }
+
+    /* === 工业十字标记与刻度 === */
+    .cross-marker {
+      position: relative;
+    }
+    .cross-marker::before, .cross-marker::after {
+      content: '+';
+      position: absolute;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: #4b5160;
+      pointer-events: none;
+    }
+    .cross-marker::before { top: -8px; left: -8px; }
+    .cross-marker::after { bottom: -8px; right: -8px; }
+
+    /* === 跑马灯 Ticker Strip === */
+    .ticker-wrap {
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      background: #111317;
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+      padding: 8px 0;
+    }
+    .ticker-move {
+      display: inline-block;
+      animation: ticker 25s linear infinite;
+    }
+    @keyframes ticker {
+      0% { transform: translate3d(0, 0, 0); }
+      100% { transform: translate3d(-50%, 0, 0); }
+    }
+
+    /* === 锐利模块化卡片 === */
+    .norris-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+    .norris-card:hover {
+      border-color: var(--accent-lime);
+      box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.8), 0 0 20px -2px rgba(210, 255, 0, 0.15);
+      transform: translateY(-2px);
+    }
+    .norris-card:hover .index-num {
+      color: var(--accent-lime);
+    }
+
+    /* 悬停按钮反转高对比 */
+    .btn-norris {
+      background: transparent;
+      color: #f3f4f6;
+      border: 1px solid var(--border-color);
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn-norris:hover, .norris-card:hover .btn-norris {
+      background: var(--accent-lime);
+      color: #000000;
+      border-color: var(--accent-lime);
+      box-shadow: 0 0 15px rgba(210, 255, 0, 0.35);
+    }
+
+    /* 封面高对比黑白到彩色渐变与裁切 */
+    .game-hero-media {
+      filter: grayscale(20%) contrast(110%);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .norris-card:hover .game-hero-media {
+      filter: grayscale(0%) contrast(100%);
+      transform: scale(1.03);
+    }
+  </style>
+</head>
+<body class="flex flex-col justify-between">
+
+  <!-- 定制物理流动光标 DOM -->
+  <div id="custom-cursor-dot"></div>
+  <div id="custom-cursor-ring">
+    <span id="cursor-label">VIEW // 01</span>
+  </div>
+
+  <!-- 顶部竞技与遥测导航栏 -->
+  <header class="border-b border-[#23262f] bg-[#0e0f12]/90 backdrop-blur-md sticky top-0 z-40 px-6 py-4">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      
+      <!-- 品牌标识：锐利力量感 -->
+      <div class="flex items-center gap-4">
+        <a href="#" class="flex items-center gap-2 group">
+          <div class="w-7 h-7 bg-[#D2FF00] text-black font-display text-xl font-bold flex items-center justify-center tracking-tight">
+            LN
+          </div>
+          <span class="font-display text-2xl tracking-wider text-white group-hover:text-[#D2FF00] transition-colors">
+            L-MOD // VAULT
+          </span>
+        </a>
+        <span class="hidden md:inline-block px-2 py-0.5 bg-[#1a1c22] border border-[#2d313b] text-[#8b8f9a] text-[10px] font-mono-tech uppercase">
+          SINGLE-PLAYER REPO · EST 2026
+        </span>
+      </div>
+
+      <!-- 中部搜索框：极简高对比 -->
+      <div class="hidden lg:flex items-center bg-[#14161b] border border-[#23262f] rounded-none px-3 py-1.5 w-96 focus-within:border-[#D2FF00] transition">
+        <span class="text-[#8b8f9a] font-mono-tech text-xs mr-2">SEARCH //</span>
+        <input type="text" placeholder="FILTER 100 AAA TITLES OR SCRIPTS..." class="bg-transparent border-none text-xs text-white placeholder-[#525763] font-mono-tech focus:outline-none w-full">
+        <span class="text-[10px] font-mono-tech bg-[#23262f] text-[#8b8f9a] px-1.5 py-0.5">⌘K</span>
+      </div>
+
+      <!-- 右侧：Steam 补丁避坑遥测数据 -->
+      <div class="flex items-center gap-4">
+        <div class="flex items-center gap-2 text-right">
+          <span class="w-2 h-2 rounded-full bg-[#D2FF00] animate-ping"></span>
+          <div class="text-[11px] font-mono-tech">
+            <div class="text-[#D2FF00] font-bold">RADAR TELEMETRY: 100% PASS</div>
+            <div class="text-[#8b8f9a] text-[9px]">ZERO CRASH DETECTED TODAY</div>
+          </div>
+        </div>
+
+        <button class="btn-norris px-3 py-1.5 text-xs text-black bg-[#D2FF00] border-none font-mono-tech font-bold hover:shadow-[0_0_15px_#D2FF00]">
+          避坑看板 ➔
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- 诺里斯风格：高频动态 Marquee 跑马灯条 -->
+  <div class="ticker-wrap font-mono-tech text-xs">
+    <div class="ticker-move text-[#8b8f9a]">
+      <span class="text-[#D2FF00] font-bold">⚡ STEAM PATCH RADAR ONLINE</span> // 100 AAA SINGLE-PLAYER TITLES // PURE TRAINERS NO REDIRECT ADS // CYBERPUNK 2077 v2.13 COMPATIBLE // BLACK MYTH WUKONG v1.0.9 READY // ELDEN RING SHADOW OF THE ERDTREE // 1-CLICK BAT INJECTION // ZERO BAN RISK // FAST DISPATCH // 
+      <span class="text-[#D2FF00] font-bold">⚡ STEAM PATCH RADAR ONLINE</span> // 100 AAA SINGLE-PLAYER TITLES // PURE TRAINERS NO REDIRECT ADS // CYBERPUNK 2077 v2.13 COMPATIBLE // BLACK MYTH WUKONG v1.0.9 READY // ELDEN RING SHADOW OF THE ERDTREE // 1-CLICK BAT INJECTION // ZERO BAN RISK // FAST DISPATCH //
+    </div>
+  </div>
+
+  <!-- 主体工作区：高密度四方模块矩阵 (严谨、硬核、高信息量、无AI塑料感) -->
+  <main class="max-w-7xl mx-auto px-6 py-10 w-full flex-1">
+    
+    <!-- 状态导语 -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 mb-8 border-b border-[#23262f]">
+      <div>
+        <div class="text-[11px] font-mono-tech text-[#D2FF00] uppercase tracking-widest">[ SELECTION / TOP 100 REPO ]</div>
+        <h1 class="font-display text-4xl md:text-5xl text-white tracking-wide mt-1">
+          FLAGSHIP ARCHIVE <span class="text-[#8b8f9a]">/ 01—06</span>
+        </h1>
+      </div>
+      
+      <!-- 快速标签筛选 -->
+      <div class="flex items-center gap-2 font-mono-tech text-xs">
+        <span class="text-[#8b8f9a] mr-2">FILTER //</span>
+        <button class="px-3 py-1 bg-[#D2FF00] text-black font-bold">ALL 100</button>
+        <button class="px-3 py-1 bg-[#14161b] text-[#8b8f9a] hover:text-white border border-[#23262f] hover:border-[#D2FF00] transition">TRAINERS</button>
+        <button class="px-3 py-1 bg-[#14161b] text-[#8b8f9a] hover:text-white border border-[#23262f] hover:border-[#D2FF00] transition">BAT SCRIPTS</button>
+        <button class="px-3 py-1 bg-[#14161b] text-[#8b8f9a] hover:text-white border border-[#23262f] hover:border-[#D2FF00] transition">CONSOLE</button>
+      </div>
+    </div>
+
+    <!-- 核心网格：高对比度、工业标记、信息直接呈现 -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- 卡片 01: 赛博朋克 2077 -->
+      <article class="norris-card cross-marker p-5 flex flex-col justify-between" data-cursor="EXPLORE // 01">
+        <div>
+          <!-- 顶部元信息条 -->
+          <div class="flex items-center justify-between pb-3 border-b border-[#23262f] text-xs font-mono-tech">
+            <span class="index-num font-bold text-white transition-colors">01 // REPO</span>
+            <span class="px-1.5 py-0.5 bg-[#D2FF00]/10 text-[#D2FF00] border border-[#D2FF00]/30 font-bold text-[10px]">
+              [ v2.13 COMPATIBLE ]
+            </span>
+          </div>
+
+          <!-- 游戏封面图 -->
+          <div class="relative h-44 overflow-hidden my-4 bg-black border border-[#23262f]">
+            <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=600&q=80" alt="Cyberpunk" class="w-full h-full object-cover game-hero-media">
+            <div class="absolute bottom-2 left-2 px-2 py-0.5 bg-black/80 font-mono-tech text-[10px] text-[#D2FF00] border border-[#D2FF00]/40">
+              CD PROJEKT RED
+            </div>
+          </div>
+
+          <!-- 标题与核心信息 -->
+          <h2 class="font-display text-2xl text-white tracking-wide">CYBERPUNK 2077: PHANTOM LIBERTY</h2>
+          
+          <div class="mt-3 space-y-1.5 text-xs font-mono-tech">
+            <div class="flex items-center justify-between text-[#8b8f9a]">
+              <span>CORE EXTENDER:</span>
+              <span class="text-white font-semibold">CET + REDSCRIPT</span>
+            </div>
+            <div class="flex items-center justify-between text-[#8b8f9a]">
+              <span>CLEAN TRAINER:</span>
+              <span class="text-[#D2FF00] font-semibold">FLING VERIFIED (v2.13)</span>
+            </div>
+            <div class="flex items-center justify-between text-[#8b8f9a]">
+              <span>AUTO BAT INJECT:</span>
+              <span class="text-white">ENABLED · 1-CLICK</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 底部高对比度按钮 -->
+        <div class="pt-4 mt-4 border-t border-[#23262f] flex items-center justify-between">
+          <span class="text-[11px] font-mono-tech text-[#8b8f9a]">142 MODS READY</span>
+          <button class="btn-norris px-3 py-1.5 text-xs">
+            OPEN ARCHIVE ➔
+          </button>
+        </div>
+      </article>
+
+      <!-- 卡片 02: 黑神话：悟空 -->
+      <article class="norris-card cross-marker p-5 flex flex-col justify-between" data-cursor="EXPLORE // 02">
+        <div>
+          <div class="flex items-center justify-between pb-3 border-b border-[#23262f] text-xs font-mono-tech">
+            <span class="index-num font-bold text-white transition-colors">02 // REPO</span>
+            <span class="px-1.5 py-0.5 bg-[#D2FF00]/10 text-[#D2FF00] border border-[#D2FF00]/30 font-bold text-[10px]">
+              [ v1.0.9 READY ]
+            </span>
+          </div>
+
+          <div class="relative h-44 overflow-hidden my-4 bg-black border border-[#23262f]">
+            <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80" alt="Wukong" class="w-full h-full object-cover game-hero-media">
+            <div class="absolute bottom-2 left-2 px-2 py-0.5 bg-black/80 font-mono-tech text-[10px] text-[#D2FF00] border border-[#D2FF00]/40">
+              GAME SCIENCE
+            </div>
+          </div>
+
+          <h2 class="font-display text-2xl text-white tracking-wide">BLACK MYTH: WUKONG</h2>
+          
+          <div class="mt-3 space-y-1.5 text-xs font-mono-tech">
+            <div class="flex items-center justify-between text-[#8b8f9a]">
+              <span>CONSOLE CHEATS:</span>
+              <span class="text-white font-semibold">86 VERIFIED NO-ERROR</span>
+            </div>
+            <div class="flex items-center justify-between text-[#8b8f9a]">
+              <span>CLEAN TRAINER:</span>
+              <span class="text-[#D2FF00] font-semibold">STANDALONE CLEAN v1.0.9</span>
+            </div>
+            <div class="flex items-center justify-between text-[#8b8f9a]">
+              <span>RADAR STATUS:</span>
+              <span class="text-[#D2FF00]">STABLE · ZERO CRASH</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-4 mt-4 border-t border-[#23262f] flex items-center justify-between">
+          <span class="text-[11px] font-mono-tech text-[#8b8f9a]">86 ASSETS LOADED</span>
+          <button class="btn-norris px-3 py-1.5 text-xs">
+            OPEN ARCHIVE ➔
+          </button>
+        </div>
+      </article>
+
+      <!-- 卡片 03: 艾尔登法环 -->
+      <article class="norris-card cross-marker p-5 flex flex-col justify-between" data-cursor="EXPLORE // 03">
+        <div>
+          <div class="flex items-center justify-between pb-3 border-b border-[#23262f] text-xs font-mono-tech">
+            <span class="index-num font-bold text-white transition-colors">03 // REPO</span>
+            <span class="px-1.5 py-0.5 bg-[#D2FF00]/10 text-[#D2FF00] border border-[#D2FF00]/30 font-bold text-[10px]">
+              [ v1.14 SHADOW READY ]
+            </span>
+          </div>
+
+          <div class="relative h-44 overflow-hidden my-4 bg-black border border-[#23262f]">
+            <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=600&q=80" alt="Elden Ring" class="w-full h-full object-cover game-hero-media">
+            <div class="absolute bottom-2 left-2 px-2 py-0.5 bg-black/80 font-mono-tech text-[10px] text-[#D2FF00] border border-[#D2FF00]/40">
+              FROMSOFTWARE
+            </div>
+          </div>
+
+          <h2 class="font-display text-2xl text-white tracking-wide">ELDEN RING: SHADOW OF ERDTREE</h2>
+          
+          <div class="mt-3 space-y-1.5 text-xs font-mono-tech">
+            <div class="flex items-center justify-between text-[#8b8f9a]">
+              <span>CO-OP FRAMEWORK:</span>
+              <span class="text-white font-semibold">SEAMLESS CO-OP v1.8.2</span>
+            </div>
+            <div class="flex items-center justify-between text-[#8b8f9a]">
+              <span>SAVEGAME SAFEGUARD:</span>
+              <span class="text-[#D2FF00] font-semibold">AUTO SNAPSHOT ENABLED</span>
+            </div>
+            <div class="flex items-center justify-between text-[#8b8f9a]">
+              <span>HOT PRESET:</span>
+              <span class="text-white">NG+ COMPLETE ARSENAL</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-4 mt-4 border-t border-[#23262f] flex items-center justify-between">
+          <span class="text-[11px] font-mono-tech text-[#8b8f9a]">210 ASSETS LOADED</span>
+          <button class="btn-norris px-3 py-1.5 text-xs">
+            OPEN ARCHIVE ➔
+          </button>
+        </div>
+      </article>
+
+      <!-- 卡片 04: 博德之门 3 -->
+      <article class="norris-card cross-marker p-5 flex flex-col justify-between" data-cursor="EXPLORE // 04">
+        <div>
+          <div class="flex items-center justify-between pb-3 border-b border-[#23262f] text-xs font-mono-tech">
+            <span class="index-num font-bold text-white transition-colors">04 // REPO</span>
+            <span class="px-1.5 py-0.5 bg-[#D2FF00]/10 text-[#D2FF00] border border-[#D2FF00]/30 font-bold text-[10px]">
+              [ PATCH 7 OFFICIAL ]
+            </span>
+          </div>
+
+          <div class="relative h-44 overflow-hidden my-4 bg-black border border-[#23262f]">
+            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80" alt="Baldurs Gate 3" class="w-full h-full object-cover game-hero-media">
+            <div class="absolute bottom-2 left-2 px-2 py-0.5 bg-black/80 font-mono-tech text-[10px] text-[#D2FF00] border border-[#D2FF00]/40">
+              LARIAN STUDIOS
+            </div>
+          </div>
+
+          <h2 class="font-display text-2xl text-white tracking-wide">BALDUR'S GATE 3</h2>
+          
+          <div class="mt-3 space-y-1.5 text-xs font-mono-tech">
+            <div class="flex items-center justify-between text-[#8b8f9a]">
+              <span>SCRIPT EXTENDER:</span>
+              <span class="text-white font-semibold">PATCH 7 ALIGNED</span>
+            </div>
+            <div class="flex items-center justify-between text-[#8b8f9a]">
+              <span>MOD MANAGER:</span>
+              <span class="text-[#D2FF00] font-semibold">NATIVE ENGINE INTEGRATED</span>
+            </div>
+            <div class="flex items-center justify-between text-[#8b8f9a]">
+              <span>CHEATS:</span>
+              <span class="text-white">RESPEC · UNLIMITED WEIGHT</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-4 mt-4 border-t border-[#23262f] flex items-center justify-between">
+          <span class="text-[11px] font-mono-tech text-[#8b8f9a]">95 ASSETS LOADED</span>
+          <button class="btn-norris px-3 py-1.5 text-xs">
+            OPEN ARCHIVE ➔
+          </button>
+        </div>
+      </article>
+
+      <!-- 卡片 05: 巫师 3 -->
+      <article class="norris-card cross-marker p-5 flex flex-col justify-between" data-cursor="EXPLORE // 05">
+        <div>
+          <div class="flex items-center justify-between pb-3 border-b border-[#23262f] text-xs font-mono-tech">
+            <span class="index-num font-bold text-white transition-colors">05 // REPO</span>
+            <span class="px-1.5 py-0.5 bg-[#D2FF00]/10 text-[#D2FF00] border border-[#D2FF00]/30 font-bold text-[10px]">
+              [ v4.04 NEXT-GEN ]
+            </span>
+          </div>
+
+          <div class="relative h-44 overflow-hidden my-4 bg-black border border-[#23262f]">
+            <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=600&q=80" alt="Witcher 3" class="w-full h-full object-cover game-hero-media">
+            <div class="absolute bottom-2 left-2 px-2 py-0.5 bg-black/80 font-mono-tech text-[10px] text-[#D2FF00] border border-[#D2FF00]/40">
+              CD PROJEKT RED
+            </div>
+          </div>
+
+          <h2 class="font-display text-2xl text-white tracking-wide">THE WITCHER 3: WILD HUNT</h2>
+          
+          <div class="mt-3 space-y-1.5 text-xs font-mono-tech">
+            <div class="flex items-center justify-between text-[#8b8f9a]">
+              <span>SCRIPT MERGER:</span>
+              <span class="text-white font-semibold">AUTO CONFLICT RESOLUTION</span>
+            </div>
+            <div class="flex items-center justify-between text-[#8b8f9a]">
+              <span>CONSOLE COMMANDS:</span>
+              <span class="text-[#D2FF00] font-semibold">1-CLICK INI UNLOCK</span>
+            </div>
+            <div class="flex items-center justify-between text-[#8b8f9a]">
+              <span>TEXTURE PACK:</span>
+              <span class="text-white">HD Reworked Next-Gen</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-4 mt-4 border-t border-[#23262f] flex items-center justify-between">
+          <span class="text-[11px] font-mono-tech text-[#8b8f9a]">178 ASSETS LOADED</span>
+          <button class="btn-norris px-3 py-1.5 text-xs">
+            OPEN ARCHIVE ➔
+          </button>
+        </div>
+      </article>
+
+      <!-- 卡片 06: 荒野大镖客 2 -->
+      <article class="norris-card cross-marker p-5 flex flex-col justify-between" data-cursor="EXPLORE // 06">
+        <div>
+          <div class="flex items-center justify-between pb-3 border-b border-[#23262f] text-xs font-mono-tech">
+            <span class="index-num font-bold text-white transition-colors">06 // REPO</span>
+            <span class="px-1.5 py-0.5 bg-[#D2FF00]/10 text-[#D2FF00] border border-[#D2FF00]/30 font-bold text-[10px]">
+              [ SCRIPTHOOK V2 ]
+            </span>
+          </div>
+
+          <div class="relative h-44 overflow-hidden my-4 bg-black border border-[#23262f]">
+            <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80" alt="RDR2" class="w-full h-full object-cover game-hero-media">
+            <div class="absolute bottom-2 left-2 px-2 py-0.5 bg-black/80 font-mono-tech text-[10px] text-[#D2FF00] border border-[#D2FF00]/40">
+              ROCKSTAR GAMES
+            </div>
+          </div>
+
+          <h2 class="font-display text-2xl text-white tracking-wide">RED DEAD REDEMPTION 2</h2>
+          
+          <div class="mt-3 space-y-1.5 text-xs font-mono-tech">
+            <div class="flex items-center justify-between text-[#8b8f9a]">
+              <span>INJECTION CORE:</span>
+              <span class="text-white font-semibold">Alexander Blade Hook</span>
+            </div>
+            <div class="flex items-center justify-between text-[#8b8f9a]">
+              <span>CLEAN TRAINER:</span>
+              <span class="text-[#D2FF00] font-semibold">RAMPAGE NATIVE v1.8</span>
+            </div>
+            <div class="flex items-center justify-between text-[#8b8f9a]">
+              <span>RADAR STATUS:</span>
+              <span class="text-[#D2FF00]">BYPASS INTEGRITY OK</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-4 mt-4 border-t border-[#23262f] flex items-center justify-between">
+          <span class="text-[11px] font-mono-tech text-[#8b8f9a]">116 ASSETS LOADED</span>
+          <button class="btn-norris px-3 py-1.5 text-xs">
+            OPEN ARCHIVE ➔
+          </button>
+        </div>
+      </article>
+
+    </div>
+
+  </main>
+
+  <!-- 底部纯粹技术页脚 -->
+  <footer class="border-t border-[#23262f] bg-[#0c0d10] px-6 py-6 font-mono-tech text-xs text-[#8b8f9a]">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-[#D2FF00]"></span>
+        <span class="text-white font-bold">L-MOD VAULT</span>
+        <span>// ZERO AD · FAST CDN · 24H STEAM RADAR SENTINEL</span>
+      </div>
+      <div>
+        <span>INSPIRED BY LANDO NORRIS (LN4) KINETIC TELEMETRY UI</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 弹性物理流体光标算法 (Lerp Spring Physics) -->
+  <script>
+    const dot = document.getElementById('custom-cursor-dot');
+    const ring = document.getElementById('custom-cursor-ring');
+    const label = document.getElementById('cursor-label');
+
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let ringX = mouseX;
+    let ringY = mouseY;
+
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+
+      dot.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
+    });
+
+    // 弹性平滑滞后追踪 (Lerp)
+    function animateCursor() {
+      ringX += (mouseX - ringX) * 0.18;
+      ringY += (mouseY - ringY) * 0.18;
+
+      ring.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    // 交互元素感应：光标变形与文字胶囊
+    const interactiveCards = document.querySelectorAll('[data-cursor]');
+
+    interactiveCards.forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        document.body.classList.add('cursor-hover');
+        label.innerText = card.getAttribute('data-cursor') || 'VIEW';
+      });
+
+      card.addEventListener('mouseleave', () => {
+        document.body.classList.remove('cursor-hover');
+      });
+    });
+
+    // 按钮单独增强
+    document.querySelectorAll('button, a').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        ring.style.borderColor = '#D2FF00';
+        ring.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%) scale(1.4)`;
+      });
+      el.addEventListener('mouseleave', () => {
+        ring.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%) scale(1)`;
+      });
+    });
+  </script>
+</body>
+</html>

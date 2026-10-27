@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>L-MOD VAULT // 宝可梦全息闪卡 (Pokémon Holo Foil) 质感原型</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@400;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap');
+
+    :root {
+      --bg-base: #07080a;
+      --card-cardstock: #111319;
+      --accent-violet: #A855F7;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-base);
+      color: #f1f5f9;
+      font-family: 'Inter', -apple-system, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background-image: radial-gradient(circle at 50% 20%, rgba(168, 85, 247, 0.08) 0%, transparent 60%);
+    }
+
+    .font-display {
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 0.04em;
+    }
+
+    .font-mono-tech {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* ======================================================== */
+    /* 宝可梦全息闪卡 (POKÉMON HOLO FOIL) 核心物理与光学着色引擎 */
+    /* ======================================================== */
+
+    .pokemon-card-container {
+      perspective: 900px;
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+
+    .pokemon-card {
+      position: relative;
+      background: var(--card-cardstock);
+      border-radius: 20px;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      transform-origin: 50% 50%; /* 核心：严格以中心为重心旋转，绝无突兀位移 */
+      
+      /* 物理实体卡边缘：金属反光边框 + 扎实的真实接触阴影 */
+      border: 1.5px solid rgba(255, 255, 255, 0.14);
+      box-shadow: 
+        0 15px 35px -5px rgba(0, 0, 0, 0.8),
+        0 0 0 1px rgba(0, 0, 0, 0.6);
+      
+      transition: transform 0.1s ease-out, box-shadow 0.25s ease;
+      will-change: transform, box-shadow;
+    }
+
+    /* === 宝可梦闪卡灵魂 1：彩虹全息镭射滤镜层 (Rainbow Holo Foil) === */
+    .holo-foil-layer {
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      z-index: 20;
+      opacity: 0;
+      mix-blend-mode: color-dodge; /* 核心混合模式：产生闪卡独特的彩虹反光 */
+      
+      background-image: 
+        /* 对角线彩虹色谱 */
+        linear-gradient(
+          115deg,
+          transparent 0%,
+          rgba(255, 110, 199, 0.35) 15%,
+          rgba(168, 85, 247, 0.45) 30%,
+          rgba(0, 240, 255, 0.45) 50%,
+          rgba(255, 225, 75, 0.45) 70%,
+          rgba(255, 110, 199, 0.35) 85%,
+          transparent 100%
+        ),
+        /* 微细全息反光光栅 */
+        repeating-linear-gradient(
+          0deg,
+          rgba(255, 255, 255, 0.08) 0px,
+          rgba(255, 255, 255, 0.08) 2px,
+          transparent 2px,
+          transparent 4px
+        );
+      
+      background-size: 200% 200%, 100% 100%;
+      background-position: var(--foil-pos-x, 50%) var(--foil-pos-y, 50%);
+      transition: opacity 0.35s ease;
+    }
+
+    /* === 宝可梦闪卡灵魂 2：卡套高光漫射层 (Specular Glare) === */
+    .holo-glare-layer {
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      z-index: 25;
+      opacity: 0;
+      mix-blend-mode: overlay;
+      
+      background: radial-gradient(
+        400px circle at var(--pointer-x, 50%) var(--pointer-y, 50%),
+        rgba(255, 255, 255, 0.55) 0%,
+        rgba(255, 255, 255, 0.15) 30%,
+        transparent 65%
+      );
+      transition: opacity 0.25s ease;
+    }
+
+    /* 悬停时激活闪卡彩虹光泽 */
+    .pokemon-card:hover .holo-foil-layer,
+    .pokemon-card:hover .holo-glare-layer {
+      opacity: 0.85;
+    }
+
+    /* === 宝可梦实体卡牌解构布局 === */
+    .card-foil-border {
+      position: relative;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(168, 85, 247, 0.25) 50%, rgba(255, 255, 255, 0.08) 100%);
+      padding: 1.5px;
+    }
+
+    /* 闪卡技能槽/属性框 (PTCG Abilities Box) */
+    .ability-tray {
+      background: rgba(10, 11, 15, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+    }
+  </style>
+</head>
+<body class="flex flex-col justify-between selection:bg-[#A855F7] selection:text-white">
+
+  <!-- 顶部标题栏 -->
+  <header class="border-b border-white/10 bg-[#07080a]/90 backdrop-blur-md sticky top-0 z-40 px-6 py-4">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 via-fuchsia-500 to-cyan-400 p-[1.5px] shadow-[0_0_15px_rgba(168,85,247,0.4)]">
+          <div class="w-full h-full bg-[#0a0b0e] rounded-[7px] flex items-center justify-center font-display text-lg text-white font-bold">
+            LV
+          </div>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-display text-2xl tracking-wider text-white">L-MOD // VAULT</span>
+            <span class="px-2 py-0.5 rounded text-[10px] font-mono-tech bg-purple-500/20 text-purple-300 border border-purple-500/30 font-bold">
+              PTCG HOLO EDITION
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 右侧雷达 -->
+      <div class="flex items-center gap-3 text-xs font-mono-tech">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+        <span class="text-slate-300">STEAM RADAR: 100% PASS</span>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- 主体卡牌展台 -->
+  <main class="max-w-7xl mx-auto px-6 py-10 w-full flex-1">
+    
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 mb-8 border-b border-white/10">
+      <div>
+        <div class="text-[11px] font-mono-tech text-purple-400 uppercase tracking-widest">[ POKÉMON HOLOGRAPHIC FOIL SPEC ]</div>
+        <h1 class="font-display text-4xl md:text-5xl text-white tracking-wide mt-1">
+          COLLECTIBLE 3A ARCHIVE <span class="text-slate-500">/ 01—06</span>
+        </h1>
+      </div>
+      <div class="text-xs font-mono-tech text-slate-400">
+        ✦ 鼠标滑入卡片感受真正的彩虹全息镭射膜反光（Color-Dodge）与中心轴实体翻转
+      </div>
+    </div>
+
+    <!-- 宝可梦全息卡牌网格 (3x2) -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+      <!-- 闪卡 01: 赛博朋克 2077 (Secret Rare) -->
+      <div class="pokemon-card-container" data-holo-card>
+        <div class="pokemon-card p-4 flex flex-col justify-between h-[510px]">
+          
+          <!-- 全息彩虹滤镜与高光 -->
+          <div class="holo-foil-layer"></div>
+          <div class="holo-glare-layer"></div>
+
+          <!-- 卡牌头部：HP与稀有度 -->
+          <div>
+            <div class="flex items-center justify-between pb-2.5 border-b border-white/10 text-xs font-mono-tech">
+              <div class="flex items-center gap-2">
+                <span class="font-bold text-white tracking-wider">#01 // 100</span>
+                <span class="text-[10px] text-amber-300 font-bold">★★★ ULTRA RARE</span>
+              </div>
+              <div class="flex items-center gap-1.5 text-[10px] text-emerald-400 font-bold">
+                <span>HP 100</span>
+                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+              </div>
+            </div>
+
+            <!-- 卡牌核心：金属箔框海报窗 (Artwork Window) -->
+            <div class="card-foil-border my-3 overflow-hidden shadow-md">
+              <div class="relative h-44 w-full overflow-hidden bg-black rounded-[14px]">
+                <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=600&q=80" alt="Cyberpunk" class="w-full h-full object-cover">
+                <div class="absolute bottom-2 left-2 px-2 py-0.5 bg-black/80 text-purple-300 font-mono-tech text-[10px] border border-purple-500/40 rounded">
+                  CD PROJEKT RED
+                </div>
+                <div class="absolute top-2 right-2 px-2 py-0.5 bg-black/80 text-emerald-400 font-mono-tech text-[10px] border border-emerald-500/40 rounded font-bold">
+                  v2.13 COMPATIBLE
+                </div>
+              </div>
+            </div>
+
+            <!-- 卡牌标题 -->
+            <div class="flex items-center justify-between mt-1">
+              <h2 class="font-display text-2xl text-white tracking-wide">CYBERPUNK 2077: PHANTOM LIBERTY</h2>
+            </div>
+            <p class="text-[11px] text-slate-400 font-mono-tech">ACTION RPG · REDengine 4 · 2020/2023</p>
+
+            <!-- 宝可梦式技能战力槽 (Abilities / Moves Tray) -->
+            <div class="ability-tray p-3 mt-3 space-y-2 text-xs font-mono-tech">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-1.5 text-slate-300 font-semibold">
+                  <span class="text-purple-400">⚔</span>
+                  <span>CORE EXTENDER</span>
+                </div>
+                <span class="text-white font-bold">CET + Redscript</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-1.5 text-slate-300 font-semibold">
+                  <span class="text-emerald-400">🛡</span>
+                  <span>CLEAN TRAINER</span>
+                </div>
+                <span class="text-purple-300 font-bold">FLING v2.13 OK</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-1.5 text-slate-300 font-semibold">
+                  <span class="text-amber-400">⚡</span>
+                  <span>ONE-CLICK .BAT</span>
+                </div>
+                <span class="text-emerald-400 font-bold">AUTO INJECT</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 卡牌底部铭牌与稀有度防伪戳 -->
+          <div class="pt-3 border-t border-white/10 flex items-center justify-between text-[11px] font-mono-tech text-slate-400">
+            <span>ILLUS. L-MOD VAULT</span>
+            <div class="flex items-center gap-2">
+              <span class="text-white font-bold">142 MODS</span>
+              <span class="w-4 h-4 rounded-full bg-gradient-to-tr from-purple-500 to-cyan-400 flex items-center justify-center text-[9px] text-black font-extrabold shadow-sm">
+                ★
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 闪卡 02: 黑神话：悟空 -->
+      <div class="pokemon-card-container" data-holo-card>
+        <div class="pokemon-card p-4 flex flex-col justify-between h-[510px]">
+          
+          <div class="holo-foil-layer"></div>
+          <div class="holo-glare-layer"></div>
+
+          <div>
+            <div class="flex items-center justify-between pb-2.5 border-b border-white/10 text-xs font-mono-tech">
+              <div class="flex items-center gap-2">
+                <span class="font-bold text-white tracking-wider">#02 // 100</span>
+                <span class="text-[10px] text-amber-300 font-bold">★★★ ULTRA RARE</span>
+              </div>
+              <div class="flex items-center gap-1.5 text-[10px] text-emerald-400 font-bold">
+                <span>HP 100</span>
+                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+              </div>
+            </div>
+
+            <div class="card-foil-border my-3 overflow-hidden shadow-md">
+              <div class="relative h-44 w-full overflow-hidden bg-black rounded-[14px]">
+                <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80" alt="Wukong" class="w-full h-full object-cover">
+                <div class="absolute bottom-2 left-2 px-2 py-0.5 bg-black/80 text-purple-300 font-mono-tech text-[10px] border border-purple-500/40 rounded">
+                  GAME SCIENCE
+                </div>
+                <div class="absolute top-2 right-2 px-2 py-0.5 bg-black/80 text-emerald-400 font-mono-tech text-[10px] border border-emerald-500/40 rounded font-bold">
+                  v1.0.9 READY
+                </div>
+              </div>
+            </div>
+
+            <h2 class="font-display text-2xl text-white tracking-wide">BLACK MYTH: WUKONG</h2>
+            <p class="text-[11px] text-slate-400 font-mono-tech">ACTION RPG · UNREAL ENGINE 5 · 2024</p>
+
+            <div class="ability-tray p-3 mt-3 space-y-2 text-xs font-mono-tech">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-1.5 text-slate-300 font-semibold">
+                  <span class="text-purple-400">⚔</span>
+                  <span>CONSOLE CHEATS</span>
+                </div>
+                <span class="text-white font-bold">86 NO-ERROR</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-1.5 text-slate-300 font-semibold">
+                  <span class="text-emerald-400">🛡</span>
+                  <span>CLEAN TRAINER</span>
+                </div>
+                <span class="text-purple-300 font-bold">FLING v1.0.9</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-1.5 text-slate-300 font-semibold">
+                  <span class="text-amber-400">⚡</span>
+                  <span>PATCH RADAR</span>
+                </div>
+                <span class="text-emerald-400 font-bold">ZERO CRASH</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-3 border-t border-white/10 flex items-center justify-between text-[11px] font-mono-tech text-slate-400">
+            <span>ILLUS. L-MOD VAULT</span>
+            <div class="flex items-center gap-2">
+              <span class="text-white font-bold">86 ASSETS</span>
+              <span class="w-4 h-4 rounded-full bg-gradient-to-tr from-purple-500 to-cyan-400 flex items-center justify-center text-[9px] text-black font-extrabold shadow-sm">
+                ★
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 闪卡 03: 艾尔登法环 -->
+      <div class="pokemon-card-container" data-holo-card>
+        <div class="pokemon-card p-4 flex flex-col justify-between h-[510px]">
+          
+          <div class="holo-foil-layer"></div>
+          <div class="holo-glare-layer"></div>
+
+          <div>
+            <div class="flex items-center justify-between pb-2.5 border-b border-white/10 text-xs font-mono-tech">
+              <div class="flex items-center gap-2">
+                <span class="font-bold text-white tracking-wider">#03 // 100</span>
+                <span class="text-[10px] text-amber-300 font-bold">★★★ ULTRA RARE</span>
+              </div>
+              <div class="flex items-center gap-1.5 text-[10px] text-emerald-400 font-bold">
+                <span>HP 100</span>
+                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+              </div>
+            </div>
+
+            <div class="card-foil-border my-3 overflow-hidden shadow-md">
+              <div class="relative h-44 w-full overflow-hidden bg-black rounded-[14px]">
+                <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=600&q=80" alt="Elden Ring" class="w-full h-full object-cover">
+                <div class="absolute bottom-2 left-2 px-2 py-0.5 bg-black/80 text-purple-300 font-mono-tech text-[10px] border border-purple-500/40 rounded">
+                  FROMSOFTWARE
+                </div>
+                <div class="absolute top-2 right-2 px-2 py-0.5 bg-black/80 text-emerald-400 font-mono-tech text-[10px] border border-emerald-500/40 rounded font-bold">
+                  v1.14 SHADOW READY
+                </div>
+              </div>
+            </div>
+
+            <h2 class="font-display text-2xl text-white tracking-wide">ELDEN RING: SHADOW OF ERDTREE</h2>
+            <p class="text-[11px] text-slate-400 font-mono-tech">SOULSLIKE · DANTELION ENGINE · 2022/2024</p>
+
+            <div class="ability-tray p-3 mt-3 space-y-2 text-xs font-mono-tech">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-1.5 text-slate-300 font-semibold">
+                  <span class="text-purple-400">⚔</span>
+                  <span>CO-OP FRAMEWORK</span>
+                </div>
+                <span class="text-white font-bold">SEAMLESS v1.8.2</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-1.5 text-slate-300 font-semibold">
+                  <span class="text-emerald-400">🛡</span>
+                  <span>SAVEGAME SNAPSHOT</span>
+                </div>
+                <span class="text-purple-300 font-bold">AUTO BACKUP</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-1.5 text-slate-300 font-semibold">
+                  <span class="text-amber-400">⚡</span>
+                  <span>NG+ PRESET</span>
+                </div>
+                <span class="text-emerald-400 font-bold">COMPLETE ARSENAL</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-3 border-t border-white/10 flex items-center justify-between text-[11px] font-mono-tech text-slate-400">
+            <span>ILLUS. L-MOD VAULT</span>
+            <div class="flex items-center gap-2">
+              <span class="text-white font-bold">210 ASSETS</span>
+              <span class="w-4 h-4 rounded-full bg-gradient-to-tr from-purple-500 to-cyan-400 flex items-center justify-center text-[9px] text-black font-extrabold shadow-sm">
+                ★
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 闪卡 04: 博德之门 3 -->
+      <div class="pokemon-card-container" data-holo-card>
+        <div class="pokemon-card p-4 flex flex-col justify-between h-[510px]">
+          
+          <div class="holo-foil-layer"></div>
+          <div class="holo-glare-layer"></div>
+
+          <div>
+            <div class="flex items-center justify-between pb-2.5 border-b border-white/10 text-xs font-mono-tech">
+              <div class="flex items-center gap-2">
+                <span class="font-bold text-white tracking-wider">#04 // 100</span>
+                <span class="text-[10px] text-amber-300 font-bold">★★★ ULTRA RARE</span>
+              </div>
+              <div class="flex items-center gap-1.5 text-[10px] text-emerald-400 font-bold">
+                <span>HP 100</span>
+                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+              </div>
+            </div>
+
+            <div class="card-foil-border my-3 overflow-hidden shadow-md">
+              <div class="relative h-44 w-full overflow-hidden bg-black rounded-[14px]">
+                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80" alt="Baldurs Gate 3" class="w-full h-full object-cover">
+                <div class="absolute bottom-2 left-2 px-2 py-0.5 bg-black/80 text-purple-300 font-mono-tech text-[10px] border border-purple-500/40 rounded">
+                  LARIAN STUDIOS
+                </div>
+                <div class="absolute top-2 right-2 px-2 py-0.5 bg-black/80 text-emerald-400 font-mono-tech text-[10px] border border-emerald-500/40 rounded font-bold">
+                  PATCH 7 OFFICIAL
+                </div>
+              </div>
+            </div>
+
+            <h2 class="font-display text-2xl text-white tracking-wide">BALDUR'S GATE 3</h2>
+            <p class="text-[11px] text-slate-400 font-mono-tech">CRPG · DIVINITY 4.0 ENGINE · 2023</p>
+
+            <div class="ability-tray p-3 mt-3 space-y-2 text-xs font-mono-tech">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-1.5 text-slate-300 font-semibold">
+                  <span class="text-purple-400">⚔</span>
+                  <span>SCRIPT EXTENDER</span>
+                </div>
+                <span class="text-white font-bold">PATCH 7 ALIGNED</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-1.5 text-slate-300 font-semibold">
+                  <span class="text-emerald-400">🛡</span>
+                  <span>MOD MANAGER</span>
+                </div>
+                <span class="text-purple-300 font-bold">NATIVE INTEGRATED</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-1.5 text-slate-300 font-semibold">
+                  <span class="text-amber-400">⚡</span>
+                  <span>HOT CHEATS</span>
+                </div>
+                <span class="text-emerald-400 font-bold">RESPEC · UNLIMITED</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-3 border-t border-white/10 flex items-center justify-between text-[11px] font-mono-tech text-slate-400">
+            <span>ILLUS. L-MOD VAULT</span>
+            <div class="flex items-center gap-2">
+              <span class="text-white font-bold">95 ASSETS</span>
+              <span class="w-4 h-4 rounded-full bg-gradient-to-tr from-purple-500 to-cyan-400 flex items-center justify-center text-[9px] text-black font-extrabold shadow-sm">
+                ★
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 闪卡 05: 巫师 3: 狂猎 -->
+      <div class="pokemon-card-container" data-holo-card>
+        <div class="pokemon-card p-4 flex flex-col justify-between h-[510px]">
+          
+          <div class="holo-foil-layer"></div>
+          <div class="holo-glare-layer"></div>
+
+          <div>
+            <div class="flex items-center justify-between pb-2.5 border-b border-white/10 text-xs font-mono-tech">
+              <div class="flex items-center gap-2">
+                <span class="font-bold text-white tracking-wider">#05 // 100</span>
+                <span class="text-[10px] text-amber-300 font-bold">★★★ ULTRA RARE</span>
+              </div>
+              <div class="flex items-center gap-1.5 text-[10px] text-emerald-400 font-bold">
+                <span>HP 100</span>
+                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+              </div>
+            </div>
+
+            <div class="card-foil-border my-3 overflow-hidden shadow-md">
+              <div class="relative h-44 w-full overflow-hidden bg-black rounded-[14px]">
+                <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=600&q=80" alt="Witcher" class="w-full h-full object-cover">
+                <div class="absolute bottom-2 left-2 px-2 py-0.5 bg-black/80 text-purple-300 font-mono-tech text-[10px] border border-purple-500/40 rounded">
+                  CD PROJEKT RED
+                </div>
+                <div class="absolute top-2 right-2 px-2 py-0.5 bg-black/80 text-emerald-400 font-mono-tech text-[10px] border border-emerald-500/40 rounded font-bold">
+                  v4.04 NEXT-GEN
+                </div>
+              </div>
+            </div>
+
+            <h2 class="font-display text-2xl text-white tracking-wide">THE WITCHER 3: WILD HUNT</h2>
+            <p class="text-[11px] text-slate-400 font-mono-tech">OPEN WORLD RPG · REDengine 3 · 2015/2022</p>
+
+            <div class="ability-tray p-3 mt-3 space-y-2 text-xs font-mono-tech">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-1.5 text-slate-300 font-semibold">
+                  <span class="text-purple-400">⚔</span>
+                  <span>SCRIPT MERGER</span>
+                </div>
+                <span class="text-white font-bold">CONFLICT RESOLVER</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-1.5 text-slate-300 font-semibold">
+                  <span class="text-emerald-400">🛡</span>
+                  <span>CONSOLE UNLOCK</span>
+                </div>
+                <span class="text-purple-300 font-bold">1-CLICK INI BAT</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-1.5 text-slate-300 font-semibold">
+                  <span class="text-amber-400">⚡</span>
+                  <span>TEXTURE OVERHAUL</span>
+                </div>
+                <span class="text-emerald-400 font-bold">HD REWORKED</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-3 border-t border-white/10 flex items-center justify-between text-[11px] font-mono-tech text-slate-400">
+            <span>ILLUS. L-MOD VAULT</span>
+            <div class="flex items-center gap-2">
+              <span class="text-white font-bold">178 ASSETS</span>
+              <span class="w-4 h-4 rounded-full bg-gradient-to-tr from-purple-500 to-cyan-400 flex items-center justify-center text-[9px] text-black font-extrabold shadow-sm">
+                ★
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 闪卡 06: 荒野大镖客 2 -->
+      <div class="pokemon-card-container" data-holo-card>
+        <div class="pokemon-card p-4 flex flex-col justify-between h-[510px]">
+          
+          <div class="holo-foil-layer"></div>
+          <div class="holo-glare-layer"></div>
+
+          <div>
+            <div class="flex items-center justify-between pb-2.5 border-b border-white/10 text-xs font-mono-tech">
+              <div class="flex items-center gap-2">
+                <span class="font-bold text-white tracking-wider">#06 // 100</span>
+                <span class="text-[10px] text-amber-300 font-bold">★★★ ULTRA RARE</span>
+              </div>
+              <div class="flex items-center gap-1.5 text-[10px] text-emerald-400 font-bold">
+                <span>HP 100</span>
+                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+              </div>
+            </div>
+
+            <div class="card-foil-border my-3 overflow-hidden shadow-md">
+              <div class="relative h-44 w-full overflow-hidden bg-black rounded-[14px]">
+                <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80" alt="RDR2" class="w-full h-full object-cover">
+                <div class="absolute bottom-2 left-2 px-2 py-0.5 bg-black/80 text-purple-300 font-mono-tech text-[10px] border border-purple-500/40 rounded">
+                  ROCKSTAR GAMES
+                </div>
+                <div class="absolute top-2 right-2 px-2 py-0.5 bg-black/80 text-emerald-400 font-mono-tech text-[10px] border border-emerald-500/40 rounded font-bold">
+                  SCRIPTHOOK V2
+                </div>
+              </div>
+            </div>
+
+            <h2 class="font-display text-2xl text-white tracking-wide">RED DEAD REDEMPTION 2</h2>
+            <p class="text-[11px] text-slate-400 font-mono-tech">OPEN WORLD WESTERN · RAGE ENGINE · 2018/2019</p>
+
+            <div class="ability-tray p-3 mt-3 space-y-2 text-xs font-mono-tech">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-1.5 text-slate-300 font-semibold">
+                  <span class="text-purple-400">⚔</span>
+                  <span>HOOK FRAMEWORK</span>
+                </div>
+                <span class="text-white font-bold">BLADE HOOK v2</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-1.5 text-slate-300 font-semibold">
+                  <span class="text-emerald-400">🛡</span>
+                  <span>CLEAN TRAINER</span>
+                </div>
+                <span class="text-purple-300 font-bold">RAMPAGE NATIVE</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-1.5 text-slate-300 font-semibold">
+                  <span class="text-amber-400">⚡</span>
+                  <span>RADAR BYPASS</span>
+                </div>
+                <span class="text-emerald-400 font-bold">INTEGRITY PASS</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-3 border-t border-white/10 flex items-center justify-between text-[11px] font-mono-tech text-slate-400">
+            <span>ILLUS. L-MOD VAULT</span>
+            <div class="flex items-center gap-2">
+              <span class="text-white font-bold">116 ASSETS</span>
+              <span class="w-4 h-4 rounded-full bg-gradient-to-tr from-purple-500 to-cyan-400 flex items-center justify-center text-[9px] text-black font-extrabold shadow-sm">
+                ★
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="border-t border-white/10 bg-[#07080a] px-6 py-6 font-mono-tech text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>L-MOD VAULT // POKÉMON HOLOGRAPHIC FOIL SHADER</div>
+      <div>PURE PTCG PHYSICS · ZERO AWKWARD FLOATING</div>
+    </div>
+  </footer>
+
+  <!-- 宝可梦全息闪卡物理与着色算法脚本 -->
+  <script>
+    const cards = document.querySelectorAll('[data-holo-card]');
+
+    cards.forEach(cardContainer => {
+      const card = cardContainer.querySelector('.pokemon-card');
+
+      cardContainer.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left; // x position within element
+        const y = e.clientY - rect.top;  // y position within element
+
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        // 真实重心旋转角度 (rotateX, rotateY)，绝不带 translateY 或 translateZ 跳起！
+        const rotateX = ((y - centerY) / centerY) * -13; // 倾角
+        const rotateY = ((x - centerX) / centerX) * 13;
+
+        // 核心：严格围绕中心 50% 50% 旋转，不产生位移！
+        card.style.transform = `rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg)`;
+
+        // 彩虹镭射反光位置计算 (随着角度偏转，彩虹光斑滑过卡牌)
+        const foilPosX = 50 + ((x - centerX) / centerX) * 50;
+        const foilPosY = 50 + ((y - centerY) / centerY) * 50;
+        card.style.setProperty('--foil-pos-x', `${foilPosX.toFixed(1)}%`);
+        card.style.setProperty('--foil-pos-y', `${foilPosY.toFixed(1)}%`);
+
+        // 高光反射点
+        card.style.setProperty('--pointer-x', `${x.toFixed(1)}px`);
+        card.style.setProperty('--pointer-y', `${y.toFixed(1)}px`);
+
+        // 动态接触阴影 (随着手倾斜，背光阴影自然扩散)
+        const shadowX = ((x - centerX) / centerX) * -12;
+        const shadowY = ((y - centerY) / centerY) * -12 + 18;
+        card.style.boxShadow = `${shadowX.toFixed(1)}px ${shadowY.toFixed(1)}px 35px rgba(0, 0, 0, 0.85), 0 0 15px rgba(168, 85, 247, 0.25)`;
+      });
+
+      cardContainer.addEventListener('mouseleave', () => {
+        card.style.transform = 'rotateX(0deg) rotateY(0deg)';
+        card.style.boxShadow = '0 15px 35px -5px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(0, 0, 0, 0.6)';
+        card.style.transition = 'transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s ease';
+      });
+
+      cardContainer.addEventListener('mouseenter', () => {
+        card.style.transition = 'none';
+      });
+    });
+  </script>
+</body>
+</html>

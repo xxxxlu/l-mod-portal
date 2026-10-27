@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>L-MOD VAULT // 黑白双色 · 3D跟随鼠标抬起交互原型</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+    :root {
+      /* 纯黑暗黑主题 (Dark Mode) */
+      --bg: #090a0d;
+      --card-bg: #12141a;
+      --card-border: #22252e;
+      --card-border-hover: #ffffff;
+      --text-main: #f3f4f6;
+      --text-muted: #838896;
+      --badge-bg: #1a1d26;
+      --badge-border: #2e3342;
+      --btn-invert-bg: #ffffff;
+      --btn-invert-text: #000000;
+      --shadow-color: rgba(0, 0, 0, 0.85);
+      --glare-color: rgba(255, 255, 255, 0.14);
+    }
+
+    html.light {
+      /* 纯白极简主题 (Light Mode - 瑞士平面风格) */
+      --bg: #f5f6f8;
+      --card-bg: #ffffff;
+      --card-border: #e2e4ea;
+      --card-border-hover: #000000;
+      --text-main: #0c0d10;
+      --text-muted: #6b7280;
+      --badge-bg: #f0f2f5;
+      --badge-border: #d8dbe2;
+      --btn-invert-bg: #000000;
+      --btn-invert-text: #ffffff;
+      --shadow-color: rgba(0, 0, 0, 0.14);
+      --glare-color: rgba(0, 0, 0, 0.05);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      cursor: none; /* 启用物理光标 */
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: 'Inter', -apple-system, sans-serif;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .font-display {
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 0.04em;
+    }
+
+    .font-mono-tech {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* === 物理液态反色光标 === */
+    #cursor-dot {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 6px;
+      height: 6px;
+      background-color: var(--text-main);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.2s ease;
+    }
+
+    #cursor-ring {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 40px;
+      height: 40px;
+      border: 1.5px solid var(--text-main);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: width 0.28s cubic-bezier(0.16, 1, 0.3, 1), 
+                  height 0.28s cubic-bezier(0.16, 1, 0.3, 1), 
+                  border-radius 0.28s ease,
+                  background-color 0.25s ease;
+      mix-blend-mode: difference;
+    }
+
+    body.cursor-hover #cursor-ring {
+      width: 100px;
+      height: 36px;
+      border-radius: 999px;
+      background-color: #ffffff;
+      border-color: transparent;
+      mix-blend-mode: difference;
+    }
+    body.cursor-hover #cursor-dot {
+      opacity: 0;
+    }
+
+    #cursor-label {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 800;
+      color: #000000;
+      letter-spacing: 0.08em;
+      opacity: 0;
+      white-space: nowrap;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+    body.cursor-hover #cursor-label {
+      opacity: 1;
+    }
+
+    /* === 核心：3D 跟随鼠标抬起 (3D Follow Lift Card) === */
+    .card-3d-stage {
+      perspective: 1200px;
+      transform-style: preserve-3d;
+    }
+
+    .card-3d-box {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      position: relative;
+      transform-style: preserve-3d;
+      transform: translateZ(0);
+      transition: transform 0.15s cubic-bezier(0.2, 0, 0.2, 1), 
+                  border-color 0.25s ease, 
+                  box-shadow 0.25s ease;
+      will-change: transform, box-shadow;
+    }
+
+    /* 光标光斑反光层 */
+    .glare-film {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      background: radial-gradient(
+        500px circle at var(--glare-x, 50%) var(--glare-y, 50%),
+        var(--glare-color) 0%,
+        transparent 65%
+      );
+      z-index: 5;
+    }
+
+    .card-3d-box:hover .glare-film {
+      opacity: 1;
+    }
+
+    /* 内部悬浮元素做 Z 轴立体推进 */
+    .layer-z-deep {
+      transform: translateZ(24px);
+      transform-style: preserve-3d;
+    }
+
+    /* 黑色/白色反转按钮 */
+    .btn-invert {
+      background: transparent;
+      color: var(--text-main);
+      border: 1px solid var(--card-border);
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn-invert:hover {
+      background: var(--btn-invert-bg);
+      color: var(--btn-invert-text);
+      border-color: var(--btn-invert-bg);
+    }
+  </style>
+</head>
+<body class="flex flex-col justify-between selection:bg-white selection:text-black">
+
+  <!-- 定制物理流动光标 -->
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring">
+    <span id="cursor-label">VIEW // 01</span>
+  </div>
+
+  <!-- 顶部导航：黑白双色主题切换与遥测 -->
+  <header class="border-b border-[var(--card-border)] bg-[var(--bg)]/90 backdrop-blur-md sticky top-0 z-40 px-6 py-4 transition-colors">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      
+      <!-- 品牌标识 -->
+      <div class="flex items-center gap-4">
+        <a href="#" class="flex items-center gap-2.5">
+          <div class="w-7 h-7 bg-[var(--text-main)] text-[var(--bg)] font-display text-xl font-bold flex items-center justify-center tracking-tight transition-colors">
+            LV
+          </div>
+          <span class="font-display text-2xl tracking-wider text-[var(--text-main)]">
+            L-MOD // VAULT
+          </span>
+        </a>
+        <span class="hidden md:inline-block px-2 py-0.5 bg-[var(--badge-bg)] border border-[var(--badge-border)] text-[var(--text-muted)] text-[10px] font-mono-tech uppercase">
+          MONOCHROME ARCHIVE · 100 AAA
+        </span>
+      </div>
+
+      <!-- 搜索栏 -->
+      <div class="hidden lg:flex items-center bg-[var(--card-bg)] border border-[var(--card-border)] px-3 py-1.5 w-80 focus-within:border-[var(--text-main)] transition">
+        <span class="text-[var(--text-muted)] font-mono-tech text-xs mr-2">FIND //</span>
+        <input type="text" placeholder="FILTER GAME OR CODE..." class="bg-transparent border-none text-xs text-[var(--text-main)] placeholder-[var(--text-muted)] font-mono-tech focus:outline-none w-full">
+        <span class="text-[10px] font-mono-tech bg-[var(--badge-bg)] text-[var(--text-muted)] px-1.5 py-0.5">⌘K</span>
+      </div>
+
+      <!-- 右侧：黑白双模式切换按钮 (点击即刻体验深黑/纯白两种感觉) -->
+      <div class="flex items-center gap-3">
+        <button onclick="toggleTheme()" class="px-3.5 py-1.5 rounded-none border border-[var(--card-border)] hover:border-[var(--text-main)] bg-[var(--card-bg)] text-xs font-mono-tech font-bold text-[var(--text-main)] flex items-center gap-2 transition" id="theme-btn">
+          <span id="theme-icon">☀</span>
+          <span id="theme-text">切换为纯白极简</span>
+        </button>
+
+        <div class="hidden sm:flex items-center gap-2 pl-2 border-l border-[var(--card-border)] text-xs font-mono-tech text-[var(--text-muted)]">
+          <span class="w-1.5 h-1.5 rounded-full bg-[var(--text-main)] animate-ping"></span>
+          <span>RADAR: PASS</span>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- 主体工作区：3D 跟随鼠标抬起 四方卡片矩阵 -->
+  <main class="max-w-7xl mx-auto px-6 py-10 w-full flex-1">
+    
+    <!-- 标题与说明 -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 mb-8 border-b border-[var(--card-border)]">
+      <div>
+        <div class="text-[11px] font-mono-tech text-[var(--text-muted)] uppercase tracking-widest">[ 3D LIFT PHYSICS ACTIVE ]</div>
+        <h1 class="font-display text-4xl md:text-5xl text-[var(--text-main)] tracking-wide mt-1">
+          FLAGSHIP REPO <span class="text-[var(--text-muted)]">/ 01—06</span>
+        </h1>
+      </div>
+      <div class="text-xs font-mono-tech text-[var(--text-muted)]">
+        ✦ 鼠标滑入卡片感受 3D 陀螺仪视差与物理高度抬升
+      </div>
+    </div>
+
+    <!-- 3D 物理卡片网格 (3x2) -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+      <!-- 卡片 01: 赛博朋克 2077 -->
+      <div class="card-3d-stage" data-3d-card data-cursor="LIFT // 01">
+        <article class="card-3d-box p-6 flex flex-col justify-between h-[490px]">
+          <div class="glare-film"></div>
+
+          <div class="layer-z-deep">
+            <!-- 顶部索引与版本 -->
+            <div class="flex items-center justify-between pb-3 border-b border-[var(--card-border)] text-xs font-mono-tech">
+              <span class="font-bold text-[var(--text-main)]">01 // REPO</span>
+              <span class="px-2 py-0.5 bg-[var(--badge-bg)] text-[var(--text-main)] border border-[var(--badge-border)] font-bold text-[10px]">
+                [ v2.13 COMPATIBLE ]
+              </span>
+            </div>
+
+            <!-- 封面图 -->
+            <div class="relative h-44 overflow-hidden my-4 bg-black border border-[var(--card-border)]">
+              <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=600&q=80" alt="Cyberpunk" class="w-full h-full object-cover grayscale contrast-125 hover:grayscale-0 transition-all duration-500">
+              <div class="absolute bottom-2 left-2 px-2 py-0.5 bg-black text-white font-mono-tech text-[10px] border border-white/20">
+                CD PROJEKT RED
+              </div>
+            </div>
+
+            <!-- 标题 -->
+            <h2 class="font-display text-2xl text-[var(--text-main)] tracking-wide">CYBERPUNK 2077: PHANTOM LIBERTY</h2>
+            
+            <!-- 技术指标一览 -->
+            <div class="mt-3 space-y-1.5 text-xs font-mono-tech">
+              <div class="flex items-center justify-between text-[var(--text-muted)]">
+                <span>EXTENDER CORE:</span>
+                <span class="text-[var(--text-main)] font-semibold">CET + REDSCRIPT</span>
+              </div>
+              <div class="flex items-center justify-between text-[var(--text-muted)]">
+                <span>CLEAN TRAINER:</span>
+                <span class="text-[var(--text-main)] font-semibold">FLING VERIFIED (v2.13)</span>
+              </div>
+              <div class="flex items-center justify-between text-[var(--text-muted)]">
+                <span>1-CLICK BAT:</span>
+                <span class="text-[var(--text-main)]">INJECTION READY</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 底部按钮 -->
+          <div class="layer-z-deep pt-4 border-t border-[var(--card-border)] flex items-center justify-between">
+            <span class="text-[11px] font-mono-tech text-[var(--text-muted)]">142 MODS</span>
+            <button class="btn-invert px-3.5 py-1.5 text-xs">
+              EXPAND ARCHIVE ➔
+            </button>
+          </div>
+        </article>
+      </div>
+
+      <!-- 卡片 02: 黑神话：悟空 -->
+      <div class="card-3d-stage" data-3d-card data-cursor="LIFT // 02">
+        <article class="card-3d-box p-6 flex flex-col justify-between h-[490px]">
+          <div class="glare-film"></div>
+
+          <div class="layer-z-deep">
+            <div class="flex items-center justify-between pb-3 border-b border-[var(--card-border)] text-xs font-mono-tech">
+              <span class="font-bold text-[var(--text-main)]">02 // REPO</span>
+              <span class="px-2 py-0.5 bg-[var(--badge-bg)] text-[var(--text-main)] border border-[var(--badge-border)] font-bold text-[10px]">
+                [ v1.0.9 READY ]
+              </span>
+            </div>
+
+            <div class="relative h-44 overflow-hidden my-4 bg-black border border-[var(--card-border)]">
+              <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80" alt="Wukong" class="w-full h-full object-cover grayscale contrast-125 hover:grayscale-0 transition-all duration-500">
+              <div class="absolute bottom-2 left-2 px-2 py-0.5 bg-black text-white font-mono-tech text-[10px] border border-white/20">
+                GAME SCIENCE
+              </div>
+            </div>
+
+            <h2 class="font-display text-2xl text-[var(--text-main)] tracking-wide">BLACK MYTH: WUKONG</h2>
+            
+            <div class="mt-3 space-y-1.5 text-xs font-mono-tech">
+              <div class="flex items-center justify-between text-[var(--text-muted)]">
+                <span>CONSOLE COMMANDS:</span>
+                <span class="text-[var(--text-main)] font-semibold">86 VERIFIED NO-ERROR</span>
+              </div>
+              <div class="flex items-center justify-between text-[var(--text-muted)]">
+                <span>CLEAN TRAINER:</span>
+                <span class="text-[var(--text-main)] font-semibold">STANDALONE CLEAN v1.0.9</span>
+              </div>
+              <div class="flex items-center justify-between text-[var(--text-muted)]">
+                <span>RADAR STATUS:</span>
+                <span class="text-[var(--text-main)]">STABLE · ZERO CRASH</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="layer-z-deep pt-4 border-t border-[var(--card-border)] flex items-center justify-between">
+            <span class="text-[11px] font-mono-tech text-[var(--text-muted)]">86 ASSETS</span>
+            <button class="btn-invert px-3.5 py-1.5 text-xs">
+              EXPAND ARCHIVE ➔
+            </button>
+          </div>
+        </article>
+      </div>
+
+      <!-- 卡片 03: 艾尔登法环 -->
+      <div class="card-3d-stage" data-3d-card data-cursor="LIFT // 03">
+        <article class="card-3d-box p-6 flex flex-col justify-between h-[490px]">
+          <div class="glare-film"></div>
+
+          <div class="layer-z-deep">
+            <div class="flex items-center justify-between pb-3 border-b border-[var(--card-border)] text-xs font-mono-tech">
+              <span class="font-bold text-[var(--text-main)]">03 // REPO</span>
+              <span class="px-2 py-0.5 bg-[var(--badge-bg)] text-[var(--text-main)] border border-[var(--badge-border)] font-bold text-[10px]">
+                [ v1.14 SHADOW READY ]
+              </span>
+            </div>
+
+            <div class="relative h-44 overflow-hidden my-4 bg-black border border-[var(--card-border)]">
+              <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=600&q=80" alt="Elden Ring" class="w-full h-full object-cover grayscale contrast-125 hover:grayscale-0 transition-all duration-500">
+              <div class="absolute bottom-2 left-2 px-2 py-0.5 bg-black text-white font-mono-tech text-[10px] border border-white/20">
+                FROMSOFTWARE
+              </div>
+            </div>
+
+            <h2 class="font-display text-2xl text-[var(--text-main)] tracking-wide">ELDEN RING: SHADOW OF ERDTREE</h2>
+            
+            <div class="mt-3 space-y-1.5 text-xs font-mono-tech">
+              <div class="flex items-center justify-between text-[var(--text-muted)]">
+                <span>CO-OP FRAMEWORK:</span>
+                <span class="text-[var(--text-main)] font-semibold">SEAMLESS CO-OP v1.8.2</span>
+              </div>
+              <div class="flex items-center justify-between text-[var(--text-muted)]">
+                <span>SAVEGAME SAFEGUARD:</span>
+                <span class="text-[var(--text-main)] font-semibold">AUTO SNAPSHOT ENABLED</span>
+              </div>
+              <div class="flex items-center justify-between text-[var(--text-muted)]">
+                <span>HOT PRESET:</span>
+                <span class="text-[var(--text-main)]">NG+ COMPLETE ARSENAL</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="layer-z-deep pt-4 border-t border-[var(--card-border)] flex items-center justify-between">
+            <span class="text-[11px] font-mono-tech text-[var(--text-muted)]">210 ASSETS</span>
+            <button class="btn-invert px-3.5 py-1.5 text-xs">
+              EXPAND ARCHIVE ➔
+            </button>
+          </div>
+        </article>
+      </div>
+
+      <!-- 卡片 04: 博德之门 3 -->
+      <div class="card-3d-stage" data-3d-card data-cursor="LIFT // 04">
+        <article class="card-3d-box p-6 flex flex-col justify-between h-[490px]">
+          <div class="glare-film"></div>
+
+          <div class="layer-z-deep">
+            <div class="flex items-center justify-between pb-3 border-b border-[var(--card-border)] text-xs font-mono-tech">
+              <span class="font-bold text-[var(--text-main)]">04 // REPO</span>
+              <span class="px-2 py-0.5 bg-[var(--badge-bg)] text-[var(--text-main)] border border-[var(--badge-border)] font-bold text-[10px]">
+                [ PATCH 7 OFFICIAL ]
+              </span>
+            </div>
+
+            <div class="relative h-44 overflow-hidden my-4 bg-black border border-[var(--card-border)]">
+              <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80" alt="Baldur" class="w-full h-full object-cover grayscale contrast-125 hover:grayscale-0 transition-all duration-500">
+              <div class="absolute bottom-2 left-2 px-2 py-0.5 bg-black text-white font-mono-tech text-[10px] border border-white/20">
+                LARIAN STUDIOS
+              </div>
+            </div>
+
+            <h2 class="font-display text-2xl text-[var(--text-main)] tracking-wide">BALDUR'S GATE 3</h2>
+            
+            <div class="mt-3 space-y-1.5 text-xs font-mono-tech">
+              <div class="flex items-center justify-between text-[var(--text-muted)]">
+                <span>SCRIPT EXTENDER:</span>
+                <span class="text-[var(--text-main)] font-semibold">PATCH 7 ALIGNED</span>
+              </div>
+              <div class="flex items-center justify-between text-[var(--text-muted)]">
+                <span>MOD MANAGER:</span>
+                <span class="text-[var(--text-main)] font-semibold">NATIVE ENGINE INTEGRATED</span>
+              </div>
+              <div class="flex items-center justify-between text-[var(--text-muted)]">
+                <span>CHEATS:</span>
+                <span class="text-[var(--text-main)]">RESPEC · UNLIMITED WEIGHT</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="layer-z-deep pt-4 border-t border-[var(--card-border)] flex items-center justify-between">
+            <span class="text-[11px] font-mono-tech text-[var(--text-muted)]">95 ASSETS</span>
+            <button class="btn-invert px-3.5 py-1.5 text-xs">
+              EXPAND ARCHIVE ➔
+            </button>
+          </div>
+        </article>
+      </div>
+
+      <!-- 卡片 05: 巫师 3 -->
+      <div class="card-3d-stage" data-3d-card data-cursor="LIFT // 05">
+        <article class="card-3d-box p-6 flex flex-col justify-between h-[490px]">
+          <div class="glare-film"></div>
+
+          <div class="layer-z-deep">
+            <div class="flex items-center justify-between pb-3 border-b border-[var(--card-border)] text-xs font-mono-tech">
+              <span class="font-bold text-[var(--text-main)]">05 // REPO</span>
+              <span class="px-2 py-0.5 bg-[var(--badge-bg)] text-[var(--text-main)] border border-[var(--badge-border)] font-bold text-[10px]">
+                [ v4.04 NEXT-GEN ]
+              </span>
+            </div>
+
+            <div class="relative h-44 overflow-hidden my-4 bg-black border border-[var(--card-border)]">
+              <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=600&q=80" alt="Witcher" class="w-full h-full object-cover grayscale contrast-125 hover:grayscale-0 transition-all duration-500">
+              <div class="absolute bottom-2 left-2 px-2 py-0.5 bg-black text-white font-mono-tech text-[10px] border border-white/20">
+                CD PROJEKT RED
+              </div>
+            </div>
+
+            <h2 class="font-display text-2xl text-[var(--text-main)] tracking-wide">THE WITCHER 3: WILD HUNT</h2>
+            
+            <div class="mt-3 space-y-1.5 text-xs font-mono-tech">
+              <div class="flex items-center justify-between text-[var(--text-muted)]">
+                <span>SCRIPT MERGER:</span>
+                <span class="text-[var(--text-main)] font-semibold">AUTO CONFLICT RESOLUTION</span>
+              </div>
+              <div class="flex items-center justify-between text-[var(--text-muted)]">
+                <span>CONSOLE COMMANDS:</span>
+                <span class="text-[var(--text-main)] font-semibold">1-CLICK INI UNLOCK</span>
+              </div>
+              <div class="flex items-center justify-between text-[var(--text-muted)]">
+                <span>TEXTURE PACK:</span>
+                <span class="text-[var(--text-main)]">HD REWORKED NEXT-GEN</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="layer-z-deep pt-4 border-t border-[var(--card-border)] flex items-center justify-between">
+            <span class="text-[11px] font-mono-tech text-[var(--text-muted)]">178 ASSETS</span>
+            <button class="btn-invert px-3.5 py-1.5 text-xs">
+              EXPAND ARCHIVE ➔
+            </button>
+          </div>
+        </article>
+      </div>
+
+      <!-- 卡片 06: 荒野大镖客 2 -->
+      <div class="card-3d-stage" data-3d-card data-cursor="LIFT // 06">
+        <article class="card-3d-box p-6 flex flex-col justify-between h-[490px]">
+          <div class="glare-film"></div>
+
+          <div class="layer-z-deep">
+            <div class="flex items-center justify-between pb-3 border-b border-[var(--card-border)] text-xs font-mono-tech">
+              <span class="font-bold text-[var(--text-main)]">06 // REPO</span>
+              <span class="px-2 py-0.5 bg-[var(--badge-bg)] text-[var(--text-main)] border border-[var(--badge-border)] font-bold text-[10px]">
+                [ SCRIPTHOOK V2 ]
+              </span>
+            </div>
+
+            <div class="relative h-44 overflow-hidden my-4 bg-black border border-[var(--card-border)]">
+              <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80" alt="RDR2" class="w-full h-full object-cover grayscale contrast-125 hover:grayscale-0 transition-all duration-500">
+              <div class="absolute bottom-2 left-2 px-2 py-0.5 bg-black text-white font-mono-tech text-[10px] border border-white/20">
+                ROCKSTAR GAMES
+              </div>
+            </div>
+
+            <h2 class="font-display text-2xl text-[var(--text-main)] tracking-wide">RED DEAD REDEMPTION 2</h2>
+            
+            <div class="mt-3 space-y-1.5 text-xs font-mono-tech">
+              <div class="flex items-center justify-between text-[var(--text-muted)]">
+                <span>INJECTION CORE:</span>
+                <span class="text-[var(--text-main)] font-semibold">ALEXANDER BLADE HOOK</span>
+              </div>
+              <div class="flex items-center justify-between text-[var(--text-muted)]">
+                <span>CLEAN TRAINER:</span>
+                <span class="text-[var(--text-main)] font-semibold">RAMPAGE NATIVE v1.8</span>
+              </div>
+              <div class="flex items-center justify-between text-[var(--text-muted)]">
+                <span>RADAR STATUS:</span>
+                <span class="text-[var(--text-main)]">BYPASS INTEGRITY OK</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="layer-z-deep pt-4 border-t border-[var(--card-border)] flex items-center justify-between">
+            <span class="text-[11px] font-mono-tech text-[var(--text-muted)]">116 ASSETS</span>
+            <button class="btn-invert px-3.5 py-1.5 text-xs">
+              EXPAND ARCHIVE ➔
+            </button>
+          </div>
+        </article>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="border-t border-[var(--card-border)] bg-[var(--bg)] px-6 py-6 font-mono-tech text-xs text-[var(--text-muted)] transition-colors">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>L-MOD VAULT // PURE MONOCHROME 3D LIFT ENGINE</div>
+      <div>ZERO AD · STEAM RADAR 24H LIVE MONITOR</div>
+    </div>
+  </footer>
+
+  <!-- 3D 抬起算法 + 光标追踪脚本 -->
+  <script>
+    // 1. 3D 跟随鼠标抬起 (Real-time 3D Mouse-Follow Lift)
+    const cards = document.querySelectorAll('[data-3d-card]');
+
+    cards.forEach(card => {
+      const box = card.querySelector('.card-3d-box');
+
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        const rotateX = ((y - centerY) / centerY) * -12; // 最大倾斜 12度
+        const rotateY = ((x - centerX) / centerX) * 12;
+
+        // 核心：Z 轴推进抬高 (translateZ 26px) + 倾斜 + 物理阴影扩散偏移
+        const shadowOffsetX = ((x - centerX) / centerX) * -16;
+        const shadowOffsetY = ((y - centerY) / centerY) * -16 + 28;
+
+        box.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateZ(28px) translateY(-8px) scale3d(1.02, 1.02, 1.02)`;
+        box.style.borderColor = 'var(--card-border-hover)';
+        box.style.boxShadow = `${shadowOffsetX.toFixed(1)}px ${shadowOffsetY.toFixed(1)}px 50px var(--shadow-color)`;
+
+        // 反光光斑坐标
+        const glareX = (x / rect.width) * 100;
+        const glareY = (y / rect.height) * 100;
+        box.style.setProperty('--glare-x', `${glareX.toFixed(1)}%`);
+        box.style.setProperty('--glare-y', `${glareY.toFixed(1)}%`);
+      });
+
+      card.addEventListener('mouseleave', () => {
+        box.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0) translateY(0) scale3d(1, 1, 1)';
+        box.style.borderColor = 'var(--card-border)';
+        box.style.boxShadow = 'none';
+        box.style.transition = 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.3s ease';
+      });
+
+      card.addEventListener('mouseenter', () => {
+        box.style.transition = 'none';
+      });
+    });
+
+    // 2. 定制光标平滑滞后追踪
+    const dot = document.getElementById('cursor-dot');
+    const ring = document.getElementById('cursor-ring');
+    const label = document.getElementById('cursor-label');
+
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let ringX = mouseX;
+    let ringY = mouseY;
+
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      dot.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
+    });
+
+    function animateCursor() {
+      ringX += (mouseX - ringX) * 0.2;
+      ringY += (mouseY - ringY) * 0.2;
+      ring.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    // 3. 悬停变胶囊
+    cards.forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        document.body.classList.add('cursor-hover');
+        label.innerText = card.getAttribute('data-cursor') || 'VIEW';
+      });
+      card.addEventListener('mouseleave', () => {
+        document.body.classList.remove('cursor-hover');
+      });
+    });
+
+    // 4. 黑白双模式切换逻辑 (Dark / Light)
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.classList.contains('dark');
+      const themeBtn = document.getElementById('theme-btn');
+      const themeIcon = document.getElementById('theme-icon');
+      const themeText = document.getElementById('theme-text');
+
+      if (isDark) {
+        html.classList.remove('dark');
+        html.classList.add('light');
+        themeIcon.innerText = '☾';
+        themeText.innerText = '切换为纯黑极夜';
+      } else {
+        html.classList.remove('light');
+        html.classList.add('dark');
+        themeIcon.innerText = '☀';
+        themeText.innerText = '切换为纯白极简';
+      }
+    }
+  </script>
+</body>
+</html>

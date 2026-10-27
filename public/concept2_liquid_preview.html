@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>L-MOD Vault | 方案二：流体液态玻璃 (Liquid Glassmorphism) 交互原型</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+    :root {
+      --bg-base: #060709;
+      --glass-bg: rgba(13, 16, 23, 0.65);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --glass-border-hover: rgba(52, 211, 153, 0.35);
+    }
+
+    body {
+      background-color: var(--bg-base);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #e2e8f0;
+      overflow-x: hidden;
+    }
+
+    .font-mono-tech {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* === 方案二核心：克制而高级的液态流体背景光球 === */
+    .liquid-sphere {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      pointer-events: none;
+      opacity: 0.45;
+      will-change: transform;
+      animation: gentleDrift 20s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+    }
+    .sphere-emerald {
+      width: 550px;
+      height: 550px;
+      background: radial-gradient(circle, #10b981 0%, #059669 40%, transparent 75%);
+      top: -120px;
+      left: 10%;
+      animation-duration: 22s;
+    }
+    .sphere-amber {
+      width: 480px;
+      height: 480px;
+      background: radial-gradient(circle, #f59e0b 0%, #d97706 45%, transparent 75%);
+      bottom: -100px;
+      right: 18%;
+      animation-duration: 26s;
+    }
+    .sphere-cyan {
+      width: 420px;
+      height: 420px;
+      background: radial-gradient(circle, #06b6d4 0%, #0284c7 40%, transparent 75%);
+      top: 35%;
+      left: 45%;
+      animation-duration: 28s;
+      opacity: 0.25;
+    }
+
+    @keyframes gentleDrift {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(40px, -30px) scale(1.08); }
+      100% { transform: translate(-30px, 35px) scale(0.95); }
+    }
+
+    /* === 极简高通透毛玻璃卡片 === */
+    .liquid-glass-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(24px) saturate(160%);
+      -webkit-backdrop-filter: blur(24px) saturate(160%);
+      border: 1px solid var(--glass-border);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .liquid-glass-card:hover {
+      border-color: var(--glass-border-hover);
+      box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.8), 0 0 30px -5px rgba(16, 185, 129, 0.15);
+      transform: translateY(-4px);
+    }
+
+    /* === 彩虹光泽细微边框 Command Bar === */
+    .rainbow-border {
+      position: relative;
+      border-radius: 9999px;
+      background: linear-gradient(90deg, rgba(16, 185, 129, 0.4), rgba(6, 182, 212, 0.4), rgba(245, 158, 11, 0.4), rgba(16, 185, 129, 0.4));
+      background-size: 300% 100%;
+      padding: 1px;
+      animation: rainbowShift 8s linear infinite;
+    }
+    @keyframes rainbowShift {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 300% 50%; }
+    }
+
+    /* === 动态声波频谱柱形图 === */
+    .wave-bar {
+      width: 3px;
+      border-radius: 9999px;
+      background: #10b981;
+      transform-origin: bottom;
+      animation: waveBeat 1.4s ease-in-out infinite alternate;
+    }
+    @keyframes waveBeat {
+      0% { height: 6px; opacity: 0.3; }
+      50% { height: 28px; opacity: 1; }
+      100% { height: 12px; opacity: 0.6; }
+    }
+
+    /* 抽屉平滑滑入 */
+    .drawer-panel {
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+    }
+  </style>
+</head>
+<body class="min-h-screen relative flex flex-col justify-between selection:bg-emerald-500 selection:text-black">
+
+  <!-- 柔和流体光球背景 (克制、不刺眼、高级) -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+    <div class="liquid-sphere sphere-emerald"></div>
+    <div class="liquid-sphere sphere-amber"></div>
+    <div class="liquid-sphere sphere-cyan"></div>
+  </div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-6 py-6 w-full flex-1 flex flex-col">
+    
+    <!-- 顶部极简导航与搜索 -->
+    <header class="flex flex-col md:flex-row items-center justify-between gap-6 pb-6">
+      <!-- 品牌标识 -->
+      <div class="flex items-center gap-3 self-start md:self-auto">
+        <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-emerald-400 via-teal-500 to-amber-400 p-[1.5px] shadow-[0_0_16px_rgba(16,185,129,0.3)]">
+          <div class="w-full h-full bg-[#08090c] rounded-full flex items-center justify-center font-bold text-emerald-400 font-mono-tech text-sm">
+            L
+          </div>
+        </div>
+        <span class="text-lg font-bold tracking-tight text-white font-mono-tech">
+          L-MOD VAULT
+        </span>
+      </div>
+
+      <!-- 方案二特色：极光纤细 Command Bar 搜索框 -->
+      <div class="w-full md:max-w-xl">
+        <div class="rainbow-border">
+          <div class="bg-[#0b0e14]/90 backdrop-blur-2xl rounded-full px-4 py-2 flex items-center gap-3">
+            <svg class="w-4 h-4 text-emerald-400/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+            <input type="text" placeholder="Command Bar (按 / 快速检索游戏、代码、补丁)..." class="w-full bg-transparent border-none text-xs text-slate-200 placeholder-slate-400 focus:outline-none">
+            <kbd class="hidden sm:inline-block px-1.5 py-0.5 text-[10px] font-mono-tech text-slate-400 bg-white/5 rounded border border-white/10">⌘K</kbd>
+          </div>
+        </div>
+
+        <!-- 扁平轻量分类胶囊 -->
+        <div class="flex items-center gap-2 mt-3 overflow-x-auto no-scrollbar text-xs">
+          <button class="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-medium whitespace-nowrap transition">
+            全部 100 款 3A
+          </button>
+          <button class="px-3 py-1 rounded-full bg-white/5 hover:bg-white/10 text-slate-300 border border-white/5 whitespace-nowrap transition">
+            Steam 避坑雷达
+          </button>
+          <button class="px-3 py-1 rounded-full bg-white/5 hover:bg-white/10 text-slate-300 border border-white/5 whitespace-nowrap transition">
+            纯净免翻修改器
+          </button>
+          <button class="px-3 py-1 rounded-full bg-white/5 hover:bg-white/10 text-slate-300 border border-white/5 whitespace-nowrap transition">
+            一键开门脚本
+          </button>
+        </div>
+      </div>
+
+      <!-- 右侧雷达简报徽章 -->
+      <div class="hidden lg:flex items-center gap-3 px-3.5 py-1.5 rounded-full bg-slate-900/40 border border-white/10 text-xs font-mono-tech">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span class="text-slate-300">RADAR ACTIVE</span>
+        <span class="text-slate-400">· 24H 巡检</span>
+      </div>
+    </header>
+
+    <!-- 主展示区：左侧游戏卡片流 + 右侧常驻/抽屉详情舱 (方案二核心构图) -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 my-6 flex-1 items-start">
+      
+      <!-- 左侧：清爽高质感的 3A 旗舰卡片列表 (占 7 列) -->
+      <section class="lg:col-span-7 space-y-4">
+        <div class="flex items-center justify-between pb-2 text-xs font-mono-tech text-slate-400 border-b border-white/5">
+          <span>TOP 旗舰推荐 · 点击卡片展开右侧全息控制舱</span>
+          <span>按热度降序</span>
+        </div>
+
+        <!-- 卡片 1: 艾尔登法环 (默认高亮选中) -->
+        <div onclick="selectGame('elden')" id="card-elden" class="liquid-glass-card rounded-2xl p-5 cursor-pointer relative overflow-hidden group border-emerald-500/40 shadow-[0_0_25px_rgba(16,185,129,0.12)]">
+          <div class="flex items-center justify-between gap-4">
+            <div class="flex items-center gap-4">
+              <div class="w-14 h-14 rounded-xl overflow-hidden bg-slate-800 border border-white/10 flex-shrink-0">
+                <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=150&q=80" alt="Elden Ring" class="w-full h-full object-cover group-hover:scale-105 transition-transform">
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h3 class="text-base font-bold text-white group-hover:text-emerald-400 transition-colors">艾尔登法环: 黄金树幽影</h3>
+                  <span class="px-2 py-0.5 rounded text-[10px] font-mono-tech bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">v1.14 完美适配</span>
+                </div>
+                <p class="text-xs text-slate-400 mt-1">FromSoftware · 无缝联机Mod / 官方控制台代码 / 坏档备份</p>
+              </div>
+            </div>
+            
+            <div class="text-right flex-shrink-0">
+              <span class="inline-block text-xs font-mono-tech font-bold text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-lg border border-emerald-500/20">
+                210 项资源 ➔
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 卡片 2: 赛博朋克 2077 -->
+        <div onclick="selectGame('cyberpunk')" id="card-cyberpunk" class="liquid-glass-card rounded-2xl p-5 cursor-pointer relative overflow-hidden group">
+          <div class="flex items-center justify-between gap-4">
+            <div class="flex items-center gap-4">
+              <div class="w-14 h-14 rounded-xl overflow-hidden bg-slate-800 border border-white/10 flex-shrink-0">
+                <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=150&q=80" alt="Cyberpunk" class="w-full h-full object-cover group-hover:scale-105 transition-transform">
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h3 class="text-base font-bold text-white group-hover:text-emerald-400 transition-colors">赛博朋克 2077: 往日之影</h3>
+                  <span class="px-2 py-0.5 rounded text-[10px] font-mono-tech bg-cyan-500/15 text-cyan-400 border border-cyan-500/30">v2.13 避坑就绪</span>
+                </div>
+                <p class="text-xs text-slate-400 mt-1">CD PROJEKT RED · CET/Redscript核心前置 · 纯净修改器</p>
+              </div>
+            </div>
+            
+            <div class="text-right flex-shrink-0">
+              <span class="inline-block text-xs font-mono-tech text-slate-400 group-hover:text-white transition">
+                142 项资源 ➔
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 卡片 3: 黑神话：悟空 -->
+        <div onclick="selectGame('wukong')" id="card-wukong" class="liquid-glass-card rounded-2xl p-5 cursor-pointer relative overflow-hidden group">
+          <div class="flex items-center justify-between gap-4">
+            <div class="flex items-center gap-4">
+              <div class="w-14 h-14 rounded-xl overflow-hidden bg-slate-800 border border-white/10 flex-shrink-0">
+                <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=150&q=80" alt="Wukong" class="w-full h-full object-cover group-hover:scale-105 transition-transform">
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h3 class="text-base font-bold text-white group-hover:text-emerald-400 transition-colors">黑神话：悟空</h3>
+                  <span class="px-2 py-0.5 rounded text-[10px] font-mono-tech bg-amber-500/15 text-amber-400 border border-amber-500/30">v1.0.9 绿灯通行</span>
+                </div>
+                <p class="text-xs text-slate-400 mt-1">游戏科学 · 场景化神装指令集 · 零门槛一键注入 BAT</p>
+              </div>
+            </div>
+            
+            <div class="text-right flex-shrink-0">
+              <span class="inline-block text-xs font-mono-tech text-slate-400 group-hover:text-white transition">
+                86 项资源 ➔
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 卡片 4: 巫师3 / 辐射4 / 博德之门3 极简速览 -->
+        <div class="grid grid-cols-2 gap-3 pt-2">
+          <div class="liquid-glass-card rounded-xl p-3.5 flex items-center justify-between cursor-pointer">
+            <span class="text-xs font-bold text-slate-200">博德之门 3 (Patch 7)</span>
+            <span class="text-[10px] font-mono-tech text-emerald-400">官方Mod管理器</span>
+          </div>
+          <div class="liquid-glass-card rounded-xl p-3.5 flex items-center justify-between cursor-pointer">
+            <span class="text-xs font-bold text-slate-200">辐射 4 (Next-Gen)</span>
+            <span class="text-[10px] font-mono-tech text-amber-400">避开突发次世代</span>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- 右侧：方案二灵魂 —— 游戏全息交互控制舱 (占 5 列) -->
+      <aside class="lg:col-span-5 sticky top-6">
+        <div class="liquid-glass-card rounded-3xl p-6 relative overflow-hidden border-emerald-500/20 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.9)]">
+          
+          <!-- 顶部状态栏 -->
+          <div class="flex items-center justify-between pb-4 border-b border-white/10">
+            <div class="flex items-center gap-2 text-xs font-mono-tech text-slate-400">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+              <span id="drawer-title-sub">GAME DETAIL DRAWER</span>
+            </div>
+            <span class="text-[10px] font-mono-tech px-2 py-0.5 rounded bg-white/5 text-slate-400 border border-white/10">
+              INTERACTIVE DECK
+            </span>
+          </div>
+
+          <!-- 游戏聚焦大标与视觉徽记 -->
+          <div class="py-5">
+            <div class="flex items-center justify-between">
+              <div>
+                <span class="text-xs font-mono-tech text-emerald-400 uppercase tracking-widest" id="drawer-studio">FROMSOFTWARE</span>
+                <h2 class="text-2xl font-extrabold text-white tracking-tight mt-0.5" id="drawer-game-title">ELDEN RING</h2>
+                <p class="text-xs text-slate-400 mt-1" id="drawer-game-desc">黄金树幽影 v1.14 官方补丁完全对账</p>
+              </div>
+              <!-- 金色神圣律法光晕徽标 (方案二特色) -->
+              <div class="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-300 shadow-[0_0_20px_rgba(245,158,11,0.25)]">
+                <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <circle cx="12" cy="12" r="9"></circle>
+                  <circle cx="12" cy="12" r="4"></circle>
+                  <path d="M12 3v18M3 12h18"></path>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- 核心功能区：极客预设场景套餐 -->
+          <div class="space-y-2.5">
+            <div class="text-[11px] font-mono-tech uppercase tracking-wider text-slate-400">
+              HIGH-TECH MOD PRESETS (场景化套餐)
+            </div>
+
+            <!-- 套餐 1 -->
+            <div class="liquid-glass-card rounded-xl p-3 flex items-center justify-between cursor-pointer hover:border-emerald-400/50 transition group">
+              <div class="flex items-center gap-3">
+                <span class="text-emerald-400 text-sm">✦</span>
+                <div>
+                  <div class="text-xs font-bold text-slate-200 group-hover:text-emerald-300 transition">Ultra Graphics ENB 真实光影包</div>
+                  <div class="text-[10px] text-slate-400">零掉帧超采样 + 纯净抗锯齿</div>
+                </div>
+              </div>
+              <span class="text-xs text-slate-400 group-hover:text-emerald-400 transition">➔</span>
+            </div>
+
+            <!-- 套餐 2 -->
+            <div class="liquid-glass-card rounded-xl p-3 flex items-center justify-between cursor-pointer hover:border-emerald-400/50 transition group">
+              <div class="flex items-center gap-3">
+                <span class="text-amber-400 text-sm">⚡</span>
+                <div>
+                  <div class="text-xs font-bold text-slate-200 group-hover:text-amber-300 transition">新手破荒 · 随身篝火与救砖备份</div>
+                  <div class="text-[10px] text-slate-400">自动防坏档快照 · 10秒还原</div>
+                </div>
+              </div>
+              <span class="text-xs text-slate-400 group-hover:text-amber-400 transition">➔</span>
+            </div>
+          </div>
+
+          <!-- 方案二特色：实时动态声波/补丁脉冲频谱柱 (纯 CSS/JS 动画) -->
+          <div class="mt-6 pt-5 border-t border-white/10">
+            <div class="flex items-center justify-between text-[11px] font-mono-tech text-slate-400 mb-2">
+              <span>PATCH TELEMETRY (实时补丁信号)</span>
+              <span class="text-emerald-400">SIGNAL STABLE · 99.8%</span>
+            </div>
+            <div class="h-10 bg-black/40 rounded-xl px-4 flex items-center justify-between gap-1 overflow-hidden border border-white/5">
+              <div class="wave-bar" style="animation-delay: 0.1s;"></div>
+              <div class="wave-bar" style="animation-delay: 0.3s;"></div>
+              <div class="wave-bar" style="animation-delay: 0.6s;"></div>
+              <div class="wave-bar" style="animation-delay: 0.2s;"></div>
+              <div class="wave-bar" style="animation-delay: 0.8s;"></div>
+              <div class="wave-bar" style="animation-delay: 0.4s;"></div>
+              <div class="wave-bar" style="animation-delay: 0.7s;"></div>
+              <div class="wave-bar" style="animation-delay: 0.5s;"></div>
+              <div class="wave-bar" style="animation-delay: 0.9s;"></div>
+              <div class="wave-bar" style="animation-delay: 0.2s;"></div>
+              <div class="wave-bar" style="animation-delay: 0.6s;"></div>
+              <div class="wave-bar" style="animation-delay: 0.4s;"></div>
+              <div class="wave-bar" style="animation-delay: 0.8s;"></div>
+              <div class="wave-bar" style="animation-delay: 0.1s;"></div>
+            </div>
+          </div>
+
+          <!-- 方案二特色：一键 .BAT 脚本注入发光开关 -->
+          <div class="mt-4 p-3.5 rounded-2xl bg-black/40 border border-emerald-500/20 flex items-center justify-between">
+            <div>
+              <div class="text-xs font-bold text-white font-mono-tech">ONE-CLICK .BAT SCRIPT GENERATOR</div>
+              <div class="text-[10px] text-slate-400">自动打包下载，双击免命令行注入</div>
+            </div>
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input type="checkbox" checked class="sr-only peer">
+              <div class="w-11 h-6 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-500 peer-checked:shadow-[0_0_15px_#10b981]"></div>
+            </label>
+          </div>
+
+        </div>
+      </aside>
+
+    </div>
+
+    <!-- 极简页脚 -->
+    <footer class="pt-6 border-t border-white/5 flex items-center justify-between text-xs font-mono-tech text-slate-400">
+      <div>L-MOD VAULT · LIQUID GLASSMORPHISM ENGINE</div>
+      <div>PURE MODS · ZERO REDIRECT ADS</div>
+    </footer>
+  </div>
+
+  <!-- 简单切换交互 -->
+  <script>
+    const gameData = {
+      elden: {
+        studio: 'FROMSOFTWARE',
+        title: 'ELDEN RING',
+        desc: '黄金树幽影 v1.14 官方补丁完全对账',
+        cardId: 'card-elden'
+      },
+      cyberpunk: {
+        studio: 'CD PROJEKT RED',
+        title: 'CYBERPUNK 2077',
+        desc: '往日之影 v2.13 CET 前置与免翻修改器',
+        cardId: 'card-cyberpunk'
+      },
+      wukong: {
+        studio: 'GAME SCIENCE',
+        title: 'BLACK MYTH: WUKONG',
+        desc: 'v1.0.9 零报错场景化神装代码与一键开门',
+        cardId: 'card-wukong'
+      }
+    };
+
+    function selectGame(key) {
+      const data = gameData[key];
+      if (!data) return;
+
+      document.getElementById('drawer-studio').innerText = data.studio;
+      document.getElementById('drawer-game-title').innerText = data.title;
+      document.getElementById('drawer-game-desc').innerText = data.desc;
+
+      // 移除其他高亮
+      ['card-elden', 'card-cyberpunk', 'card-wukong'].forEach(id => {
+        const el = document.getElementById(id);
+        el.classList.remove('border-emerald-500/40', 'shadow-[0_0_25px_rgba(16,185,129,0.12)]');
+      });
+
+      // 添加当前高亮
+      const activeCard = document.getElementById(data.cardId);
+      activeCard.classList.add('border-emerald-500/40', 'shadow-[0_0_25px_rgba(16,185,129,0.12)]');
+    }
+  </script>
+</body>
+</html>
