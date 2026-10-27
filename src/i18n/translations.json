@@ -269,7 +269,17 @@
     "headerAiBtnText": "AI 顾问",
     "headerAiBtnTitle": "老L · AI 游戏智库顾问 (快捷键: Cmd+K / Ctrl+K)",
     "cardIllustrator": "画师: L-MOD VAULT",
-    "viewDetailCardBtn": "进入全功能二级页面"
+    "viewDetailCardBtn": "进入全功能二级页面",
+    "sortRecent": "🕒 最近更新",
+    "sortHeat": "🔥 人气热度",
+    "sortRank": "🏆 官方排位",
+    "sortRating": "★ Steam 好评",
+    "sortRandom": "🎲 随机漫游",
+    "cardHeatSolar": "🔥 炽热神作",
+    "cardHeatViolet": "⚡ 顶级热门",
+    "cardHeatCyan": "💎 人气鼎沸",
+    "cardHeatEmerald": "🌿 典藏口碑",
+    "cardUpdatedLabel": "更新"
   },
   "en": {
     "siteName": "L-MOD Vault",
@@ -442,7 +452,7 @@
     "statusInspectionTag": "LIVE",
     "statusInspectionDesc": "Daily Steam AppUpdate diff checking, zero-day rollback guides",
     "radarSearchPlaceholder": "Search game title, Steam AppID (e.g. 1245620), engine...",
-    "sortLabel": "Sort by:",
+    "sortLabel": "Sort By:",
     "sortRiskDesc": "⚠️ Risk First (Broken/Update needed)",
     "sortRankAsc": "👑 Game Rank (1 ~ 100)",
     "sortCompatibleFirst": "🟢 Stable First (Compatible)",
@@ -541,7 +551,17 @@
     "headerAiBtnText": "AI Copilot",
     "headerAiBtnTitle": "L • AI Vault Copilot (Shortcut: Cmd+K / Ctrl+K)",
     "cardIllustrator": "ILLUS. L-MOD VAULT",
-    "viewDetailCardBtn": "Enter Full Deep-Dive Detail"
+    "viewDetailCardBtn": "Enter Full Deep-Dive Detail",
+    "sortRecent": "🕒 Recently Updated",
+    "sortHeat": "🔥 Most Popular",
+    "sortRank": "🏆 Official Rank",
+    "sortRating": "★ Steam Rating",
+    "sortRandom": "🎲 Shuffle / Discover",
+    "cardHeatSolar": "🔥 MYTHIC HEAT",
+    "cardHeatViolet": "⚡ LEGENDARY",
+    "cardHeatCyan": "💎 EPIC HEAT",
+    "cardHeatEmerald": "🌿 RARE CLASSIC",
+    "cardUpdatedLabel": "Updated"
   },
   "zh-TW": {
     "siteName": "L-MOD Vault",
@@ -813,7 +833,17 @@
     "headerAiBtnText": "AI 顧問",
     "headerAiBtnTitle": "老L · AI 遊戲智庫顧問 (快捷鍵: Cmd+K / Ctrl+K)",
     "cardIllustrator": "繪師: L-MOD VAULT",
-    "viewDetailCardBtn": "進入全功能二級頁面"
+    "viewDetailCardBtn": "進入全功能二級頁面",
+    "sortRecent": "🕒 最近更新",
+    "sortHeat": "🔥 人氣熱度",
+    "sortRank": "🏆 官方排位",
+    "sortRating": "★ Steam 好評",
+    "sortRandom": "🎲 隨機漫遊",
+    "cardHeatSolar": "🔥 熾熱神作",
+    "cardHeatViolet": "⚡ 頂級熱門",
+    "cardHeatCyan": "💎 人氣鼎沸",
+    "cardHeatEmerald": "🌿 典藏口碑",
+    "cardUpdatedLabel": "更新"
   },
   "ja": {
     "siteName": "L-MOD Vault",
@@ -1085,7 +1115,17 @@
     "headerAiBtnText": "AI 顧問",
     "headerAiBtnTitle": "L • AI ゲーム顧問 (ショートカット: Cmd+K / Ctrl+K)",
     "cardIllustrator": "イラスト: L-MOD VAULT",
-    "viewDetailCardBtn": "詳細ページを開く"
+    "viewDetailCardBtn": "詳細ページを開く",
+    "sortRecent": "🕒 最近の更新",
+    "sortHeat": "🔥 人気順",
+    "sortRank": "🏆 公式ランク",
+    "sortRating": "★ Steam 高評価",
+    "sortRandom": "🎲 シャッフル",
+    "cardHeatSolar": "🔥 神作級人気",
+    "cardHeatViolet": "⚡ 殿堂入り人気",
+    "cardHeatCyan": "💎 圧倒的人気",
+    "cardHeatEmerald": "🌿 名作クラシック",
+    "cardUpdatedLabel": "更新"
   },
   "ko": {
     "siteName": "L-MOD Vault",
@@ -1357,7 +1397,17 @@
     "headerAiBtnText": "AI 고문",
     "headerAiBtnTitle": "L • AI 게임 고문 (단축키: Cmd+K / Ctrl+K)",
     "cardIllustrator": "일러스트: L-MOD VAULT",
-    "viewDetailCardBtn": "상세 분석 페이지로 이동"
+    "viewDetailCardBtn": "상세 분석 페이지로 이동",
+    "sortRecent": "🕒 최근 업데이트",
+    "sortHeat": "🔥 인기순",
+    "sortRank": "🏆 공식 랭킹",
+    "sortRating": "★ 스팀 평가순",
+    "sortRandom": "🎲 무작위 탐색",
+    "cardHeatSolar": "🔥 신화급 인기",
+    "cardHeatViolet": "⚡ 전설급 인기",
+    "cardHeatCyan": "💎 에픽 인기",
+    "cardHeatEmerald": "🌿 클래식 명작",
+    "cardUpdatedLabel": "업데이트"
   },
   "ru": {
     "siteName": "L-MOD Vault",
@@ -1629,7 +1679,17 @@
     "headerAiBtnText": "ИИ-советник",
     "headerAiBtnTitle": "L • ИИ-консультант по играм (Cmd+K / Ctrl+K)",
     "cardIllustrator": "ИЛЛЮСТР. L-MOD VAULT",
-    "viewDetailCardBtn": "Открыть полный обзор"
+    "viewDetailCardBtn": "Открыть полный обзор",
+    "sortRecent": "🕒 Недавние обновления",
+    "sortHeat": "🔥 По популярности",
+    "sortRank": "🏆 Официальный ранг",
+    "sortRating": "★ Рейтинг Steam",
+    "sortRandom": "🎲 Случайный выбор",
+    "cardHeatSolar": "🔥 МИФИЧЕСКИЙ ТОП",
+    "cardHeatViolet": "⚡ ЛЕГЕНДАРНЫЙ",
+    "cardHeatCyan": "💎 ЭПИЧЕСКИЙ ТОП",
+    "cardHeatEmerald": "🌿 КЛАССИКА",
+    "cardUpdatedLabel": "Обновлено"
   },
   "de": {
     "siteName": "L-MOD Vault",
@@ -1802,7 +1862,7 @@
     "statusInspectionTag": "LIVE",
     "statusInspectionDesc": "Täglicher Steam-Diff-Check, sofortige Synchronisation bei Spielstand-Problemen",
     "radarSearchPlaceholder": "Spielname, Steam AppID (z.B. 1245620), Engine suchen...",
-    "sortLabel": "Sortieren nach:",
+    "sortLabel": "Sortieren:",
     "sortRiskDesc": "⚠️ Risiko zuerst (Beschädigt/Update nötig)",
     "sortRankAsc": "👑 Rangfolge (Rang 1 ~ 100)",
     "sortCompatibleFirst": "🟢 Stabil zuerst (Voll kompatibel)",
@@ -1901,7 +1961,17 @@
     "headerAiBtnText": "KI-Berater",
     "headerAiBtnTitle": "L • KI-Spieleberater (Tastenkürzel: Cmd+K / Ctrl+K)",
     "cardIllustrator": "ILLUS. L-MOD VAULT",
-    "viewDetailCardBtn": "Detailseite öffnen"
+    "viewDetailCardBtn": "Detailseite öffnen",
+    "sortRecent": "🕒 Zuletzt aktualisiert",
+    "sortHeat": "🔥 Beliebteste",
+    "sortRank": "🏆 Offizieller Rang",
+    "sortRating": "★ Steam-Bewertung",
+    "sortRandom": "🎲 Zufällig",
+    "cardHeatSolar": "🔥 MYTHISCHER HIT",
+    "cardHeatViolet": "⚡ LEGENDÄR",
+    "cardHeatCyan": "💎 EPISCHER HIT",
+    "cardHeatEmerald": "🌿 KLASSIKER",
+    "cardUpdatedLabel": "Aktualisiert"
   },
   "es": {
     "siteName": "L-MOD Vault",
@@ -2074,7 +2144,7 @@
     "statusInspectionTag": "LIVE",
     "statusInspectionDesc": "Comprobación diaria de Steam, sincronización inmediata ante partidas corruptas",
     "radarSearchPlaceholder": "Buscar por nombre de juego, Steam AppID (ej. 1245620), motor...",
-    "sortLabel": "Ordenar por:",
+    "sortLabel": "Ordenar:",
     "sortRiskDesc": "⚠️ Riesgo primero (Dañados/Update necesario arriba)",
     "sortRankAsc": "👑 Clasificación de juego (Rank 1 ~ 100)",
     "sortCompatibleFirst": "🟢 Estable primero (Compatibles comprobados)",
@@ -2173,6 +2243,16 @@
     "headerAiBtnText": "Asesor IA",
     "headerAiBtnTitle": "L • Asesor IA de juegos (Atajo: Cmd+K / Ctrl+K)",
     "cardIllustrator": "ILUS. L-MOD VAULT",
-    "viewDetailCardBtn": "Ver detalles completos"
+    "viewDetailCardBtn": "Ver detalles completos",
+    "sortRecent": "🕒 Recién actualizados",
+    "sortHeat": "🔥 Más populares",
+    "sortRank": "🏆 Rango oficial",
+    "sortRating": "★ Reseñas Steam",
+    "sortRandom": "🎲 Aleatorio",
+    "cardHeatSolar": "🔥 ÉXITO MÍTICO",
+    "cardHeatViolet": "⚡ LEGENDARIO",
+    "cardHeatCyan": "💎 ÉPICO",
+    "cardHeatEmerald": "🌿 CLÁSICO",
+    "cardUpdatedLabel": "Actualizado"
   }
 }

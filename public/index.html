@@ -240,6 +240,89 @@
     .pokemon-card:hover .holo-glare-layer {
       opacity: 0.75;
     }
+    /* ======================================================== */
+    /* POKÉMON HOLO FOIL · 4-TIER HEAT SHADER PALETTES          */
+    /* ======================================================== */
+    
+    /* 1. 炽热赤金 (Solar Amber / Mythic Heat: Downloads >= 75M or Rank <= 10) */
+    .pokemon-card.tier-solar {
+      border-color: rgba(245, 158, 11, 0.45);
+      box-shadow: 0 10px 25px -5px rgba(245, 158, 11, 0.12), 0 0 0 1px rgba(245, 158, 11, 0.15);
+    }
+    html.dark .pokemon-card.tier-solar {
+      border-color: rgba(245, 158, 11, 0.4);
+      box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.8), 0 0 24px -4px rgba(245, 158, 11, 0.22);
+    }
+    .pokemon-card.tier-solar .card-foil-border {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.65) 0%, rgba(251, 191, 36, 0.4) 50%, rgba(239, 68, 68, 0.35) 100%);
+    }
+    .pokemon-card.tier-solar .ability-tray {
+      border-color: rgba(245, 158, 11, 0.2);
+    }
+    .pokemon-card.tier-solar:hover {
+      border-color: rgba(245, 158, 11, 0.85);
+      box-shadow: 0 20px 40px -8px rgba(245, 158, 11, 0.38);
+    }
+
+    /* 2. 霓虹紫晶 (Cosmic Violet / Legendary Heat: Downloads 45M-75M or Rank <= 25) */
+    .pokemon-card.tier-violet {
+      border-color: rgba(168, 85, 247, 0.45);
+      box-shadow: 0 10px 25px -5px rgba(168, 85, 247, 0.12), 0 0 0 1px rgba(168, 85, 247, 0.15);
+    }
+    html.dark .pokemon-card.tier-violet {
+      border-color: rgba(168, 85, 247, 0.4);
+      box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.8), 0 0 24px -4px rgba(168, 85, 247, 0.22);
+    }
+    .pokemon-card.tier-violet .card-foil-border {
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.65) 0%, rgba(236, 72, 153, 0.4) 50%, rgba(59, 130, 246, 0.35) 100%);
+    }
+    .pokemon-card.tier-violet .ability-tray {
+      border-color: rgba(168, 85, 247, 0.2);
+    }
+    .pokemon-card.tier-violet:hover {
+      border-color: rgba(168, 85, 247, 0.85);
+      box-shadow: 0 20px 40px -8px rgba(168, 85, 247, 0.38);
+    }
+
+    /* 3. 极光钻蓝 (Aurora Cyan / Epic Heat: Downloads 30M-45M or Rank <= 60) */
+    .pokemon-card.tier-cyan {
+      border-color: rgba(6, 182, 212, 0.45);
+      box-shadow: 0 10px 25px -5px rgba(6, 182, 212, 0.12), 0 0 0 1px rgba(6, 182, 212, 0.15);
+    }
+    html.dark .pokemon-card.tier-cyan {
+      border-color: rgba(6, 182, 212, 0.4);
+      box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.8), 0 0 24px -4px rgba(6, 182, 212, 0.22);
+    }
+    .pokemon-card.tier-cyan .card-foil-border {
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.65) 0%, rgba(59, 130, 246, 0.4) 50%, rgba(16, 185, 129, 0.35) 100%);
+    }
+    .pokemon-card.tier-cyan .ability-tray {
+      border-color: rgba(6, 182, 212, 0.2);
+    }
+    .pokemon-card.tier-cyan:hover {
+      border-color: rgba(6, 182, 212, 0.85);
+      box-shadow: 0 20px 40px -8px rgba(6, 182, 212, 0.38);
+    }
+
+    /* 4. 翡翠青晶 (Emerald Jade / Classic Heat: Standard/Respected) */
+    .pokemon-card.tier-emerald {
+      border-color: rgba(16, 185, 129, 0.45);
+      box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.12), 0 0 0 1px rgba(16, 185, 129, 0.15);
+    }
+    html.dark .pokemon-card.tier-emerald {
+      border-color: rgba(16, 185, 129, 0.4);
+      box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.8), 0 0 24px -4px rgba(16, 185, 129, 0.22);
+    }
+    .pokemon-card.tier-emerald .card-foil-border {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.65) 0%, rgba(20, 184, 166, 0.4) 50%, rgba(234, 179, 8, 0.3) 100%);
+    }
+    .pokemon-card.tier-emerald .ability-tray {
+      border-color: rgba(16, 185, 129, 0.2);
+    }
+    .pokemon-card.tier-emerald:hover {
+      border-color: rgba(16, 185, 129, 0.85);
+      box-shadow: 0 20px 40px -8px rgba(16, 185, 129, 0.38);
+    }
 
     /* 金属箔框 */
     .card-foil-border {
@@ -913,8 +996,8 @@
           </div>
         </div>
 
-        <!-- Filter Pills & Counts -->
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+        <!-- Filter Pills -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-3">
           <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1" id="filter-container">
             <button onclick="setFilter('all')" class="filter-btn active px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 shadow-sm transition-all shrink-0" data-filter="all" id="btn-filter-all">全部 100 款</button>
             <button onclick="setFilter('certified')" class="filter-btn px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium bg-white/90 dark:bg-white/5 hover:bg-white dark:hover:bg-white/10 text-amber-600 dark:text-amber-400 border border-amber-500/30 transition-all shrink-0" data-filter="certified" id="btn-filter-certified">👑 老L全息精测认证 (前 14 款)</button>
@@ -923,9 +1006,35 @@
             <button onclick="setFilter('mods')" class="filter-btn px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium bg-white/90 dark:bg-white/5 hover:bg-white dark:hover:bg-white/10 text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-white/10 transition-all shrink-0" data-filter="mods" id="btn-filter-mods">精选 MOD 库</button>
             <button onclick="setFilter('trainers')" class="filter-btn px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium bg-white/90 dark:bg-white/5 hover:bg-white dark:hover:bg-white/10 text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-white/10 transition-all shrink-0" data-filter="trainers" id="btn-filter-trainers">纯净修改器</button>
           </div>
+        </div>
 
-          <div class="text-xs text-zinc-400 dark:text-zinc-500 shrink-0" id="games-count-display">
-            共收录 100 款单机神作
+        <!-- Sort Control Bar (玩家可自主切换排序规则 · 默认最近更新) -->
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-6 p-2.5 sm:px-4 bg-white/70 dark:bg-white/[0.03] backdrop-blur-md rounded-2xl border border-zinc-200/80 dark:border-white/10 shadow-sm">
+          <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5" id="sort-container">
+            <span class="text-xs font-mono-tech text-zinc-500 dark:text-zinc-400 mr-1 flex items-center gap-1.5 font-semibold shrink-0">
+              <svg class="w-3.5 h-3.5 text-[#A855F7]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12"></path></svg>
+              <span id="sort-bar-label">排序方式:</span>
+            </span>
+            <button onclick="setSort('recent')" id="btn-sort-recent" class="sort-btn active px-3 py-1.5 rounded-xl text-xs font-bold bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 shadow-sm transition-all shrink-0">
+              🕒 最近更新
+            </button>
+            <button onclick="setSort('heat')" id="btn-sort-heat" class="sort-btn px-3 py-1.5 rounded-xl text-xs font-medium bg-transparent hover:bg-zinc-100 dark:hover:bg-white/10 text-zinc-600 dark:text-zinc-400 transition-all shrink-0">
+              🔥 人气热度
+            </button>
+            <button onclick="setSort('rank')" id="btn-sort-rank" class="sort-btn px-3 py-1.5 rounded-xl text-xs font-medium bg-transparent hover:bg-zinc-100 dark:hover:bg-white/10 text-zinc-600 dark:text-zinc-400 transition-all shrink-0">
+              🏆 官方排位
+            </button>
+            <button onclick="setSort('rating')" id="btn-sort-rating" class="sort-btn px-3 py-1.5 rounded-xl text-xs font-medium bg-transparent hover:bg-zinc-100 dark:hover:bg-white/10 text-zinc-600 dark:text-zinc-400 transition-all shrink-0">
+              ★ Steam 好评
+            </button>
+            <button onclick="setSort('random')" id="btn-sort-random" class="sort-btn px-3 py-1.5 rounded-xl text-xs font-medium bg-transparent hover:bg-zinc-100 dark:hover:bg-white/10 text-zinc-600 dark:text-zinc-400 transition-all shrink-0">
+              🎲 随机漫游
+            </button>
+          </div>
+
+          <div class="text-xs text-zinc-400 dark:text-zinc-500 shrink-0 font-mono-tech flex items-center gap-2">
+            <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span id="games-count-display">共收录 100 款单机神作</span>
           </div>
         </div>
 
@@ -1528,6 +1637,7 @@
     let currentFilter = 'all';
     let currentSearch = '';
     let currentViewMode = 'gallery';
+    let currentSort = 'recent'; // 默认按照最近更新排行
     let cursorInitialized = false;
     let allGames = window.GAMES_DATA || window.GAMES_DATABASE || [];
     let translations = window.TRANSLATIONS_DATA || {};
@@ -2010,6 +2120,27 @@
       setElText('header-ai-btn-text', t('headerAiBtnText'));
       const themeBtn = document.getElementById('theme-toggle-btn');
       if (themeBtn) themeBtn.title = t('btnThemeToggle');
+
+      // Sort Bar i18n
+      setElText('sort-bar-label', t('sortLabel'));
+      setElText('btn-sort-recent', t('sortRecent'));
+      setElText('btn-sort-heat', t('sortHeat'));
+      setElText('btn-sort-rank', t('sortRank'));
+      setElText('btn-sort-rating', t('sortRating'));
+      setElText('btn-sort-random', t('sortRandom'));
+    }
+
+    function setSort(sortType) {
+      currentSort = sortType;
+      document.querySelectorAll('.sort-btn').forEach(btn => {
+        const isThis = btn.id === `btn-sort-${sortType}`;
+        if (isThis) {
+          btn.className = 'sort-btn active px-3 py-1.5 rounded-xl text-xs font-bold bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 shadow-sm transition-all shrink-0';
+        } else {
+          btn.className = 'sort-btn px-3 py-1.5 rounded-xl text-xs font-medium bg-transparent hover:bg-zinc-100 dark:hover:bg-white/10 text-zinc-600 dark:text-zinc-400 transition-all shrink-0';
+        }
+      });
+      renderGames();
     }
 
     function setFilter(filter) {
@@ -2167,6 +2298,58 @@
         return true;
       });
 
+      // Helper function to parse download count (e.g. '1.25B', '342.8M', '89.2M')
+      function parseDownloads(s) {
+        if (!s) return 30.0;
+        const str = String(s).trim();
+        if (str.endsWith('B')) return parseFloat(str.slice(0, -1)) * 1000;
+        if (str.endsWith('M')) return parseFloat(str.slice(0, -1));
+        if (str.endsWith('K')) return parseFloat(str.slice(0, -1)) / 1000;
+        try {
+          return parseFloat(str.replace(/,/g, '')) || 30.0;
+        } catch(e) {
+          return 30.0;
+        }
+      }
+
+      function parseRating(s) {
+        if (!s) return 85;
+        const m = String(s).match(/(\d+)%/);
+        return m ? parseInt(m[1], 10) : 85;
+      }
+
+      // Sort filtered games based on currentSort (default: 'recent')
+      if (currentSort === 'recent') {
+        filtered.sort((a, b) => {
+          const dateA = a.lastUpdated || '2026-08-01';
+          const dateB = b.lastUpdated || '2026-08-01';
+          if (dateB !== dateA) return dateB.localeCompare(dateA);
+          return (a.rank || 999) - (b.rank || 999);
+        });
+      } else if (currentSort === 'heat') {
+        filtered.sort((a, b) => {
+          const dlA = parseDownloads(a.nexusStats ? a.nexusStats.totalDownloads : null);
+          const dlB = parseDownloads(b.nexusStats ? b.nexusStats.totalDownloads : null);
+          if (dlB !== dlA) return dlB - dlA;
+          return (a.rank || 999) - (b.rank || 999);
+        });
+      } else if (currentSort === 'rank') {
+        filtered.sort((a, b) => (a.rank || 999) - (b.rank || 999));
+      } else if (currentSort === 'rating') {
+        filtered.sort((a, b) => {
+          const rA = parseRating(a.steamRating);
+          const rB = parseRating(b.steamRating);
+          if (rB !== rA) return rB - rA;
+          return (a.rank || 999) - (b.rank || 999);
+        });
+      } else if (currentSort === 'random') {
+        filtered.sort((a, b) => {
+          const hA = ((a.rank * 137) % 100);
+          const hB = ((b.rank * 137) % 100);
+          return hA - hB;
+        });
+      }
+
       let filterTag = '';
       if (currentFilter === 'certified') filterTag = ` (${t('filterCertified')})`;
       else if (currentFilter === 'mining') filterTag = ` (${t('filterMining')})`;
@@ -2180,14 +2363,46 @@
         .replace('{count}', filtered.length)
         .replace('{filter}', filterTag);
 
+      function computeHeatTier(game) {
+        if (game.heatTier) return game.heatTier;
+        const d = parseDownloads(game.nexusStats ? game.nexusStats.totalDownloads : null);
+        const rank = game.rank || 99;
+        if (d >= 75 || rank <= 10) return 'solar';
+        if (d >= 45 || rank <= 25) return 'violet';
+        if (d >= 30 || rank <= 60) return 'cyan';
+        return 'emerald';
+      }
+
       filtered.forEach(game => {
         const localizedTitle = game.titles && game.titles[currentLang] ? game.titles[currentLang] : game.title;
         const downloads = game.nexusStats ? game.nexusStats.totalDownloads : '10.5M';
         const rating = (game.steamRating || '90%').split(' ')[0];
         const isCertified = game.rank <= 14;
 
-        // 1. POKÉMON HOLOGRAPHIC FOIL TRADING CARD (PTCG Secret Rare Spec)
-        const isUltraRare = game.rank <= 14;
+        // 1. POKÉMON HOLOGRAPHIC FOIL TRADING CARD (4-Tier Heat Engine)
+        const tier = computeHeatTier(game);
+        let heatBadgeText = t('cardHeatEmerald');
+        let heatBadgeClass = 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border-emerald-500/30';
+        let starBadgeClass = 'from-emerald-500 to-teal-300 text-emerald-950';
+        let titleHoverClass = 'group-hover:text-emerald-600 dark:group-hover:text-emerald-400';
+
+        if (tier === 'solar') {
+          heatBadgeText = t('cardHeatSolar');
+          heatBadgeClass = 'bg-amber-500/15 text-amber-600 dark:text-amber-300 border-amber-500/30';
+          starBadgeClass = 'from-amber-500 to-yellow-300 text-amber-950';
+          titleHoverClass = 'group-hover:text-amber-500 dark:group-hover:text-amber-400';
+        } else if (tier === 'violet') {
+          heatBadgeText = t('cardHeatViolet');
+          heatBadgeClass = 'bg-purple-500/15 text-purple-600 dark:text-purple-300 border-purple-500/30';
+          starBadgeClass = 'from-purple-600 to-pink-400 text-purple-950';
+          titleHoverClass = 'group-hover:text-purple-600 dark:group-hover:text-purple-400';
+        } else if (tier === 'cyan') {
+          heatBadgeText = t('cardHeatCyan');
+          heatBadgeClass = 'bg-cyan-500/15 text-cyan-600 dark:text-cyan-300 border-cyan-500/30';
+          starBadgeClass = 'from-cyan-500 to-sky-300 text-cyan-950';
+          titleHoverClass = 'group-hover:text-cyan-600 dark:group-hover:text-cyan-400';
+        }
+
         const cardWrap = document.createElement('div');
         cardWrap.className = 'pokemon-card-container';
         cardWrap.setAttribute('data-holo-card', '');
@@ -2197,10 +2412,8 @@
         card.id = `game-card-${game.id}`;
         card.href = `#/game/${game.id}`;
         card.onclick = (e) => navigateToGame(game.id, e);
-        card.className = 'pokemon-card group relative p-4 flex flex-col justify-between h-[510px] cursor-pointer';
+        card.className = `pokemon-card tier-${tier} group relative p-4 flex flex-col justify-between h-[510px] cursor-pointer`;
 
-        const ultraRareText = t('cardUltraRare');
-        const rareText = t('cardRare');
         const coreExtenderLabel = t('cardAbilityCore');
         const cleanTrainerLabel = t('cardAbilityTrainer');
         const batScriptLabel = t('cardAbilityBat');
@@ -2209,6 +2422,7 @@
         const batStatus = isCertified ? t('statusAutoInject') : t('statusVerifying');
         const pullsSuffix = t('downloadsPullSuffix');
         const illusCredit = t('cardIllustrator');
+        const updatedLabel = t('cardUpdatedLabel');
 
         card.innerHTML = `
           <!-- 全息彩虹镭射层 (Rainbow Holo Foil) -->
@@ -2217,17 +2431,17 @@
           <div class="holo-glare-layer"></div>
 
           <div>
-            <!-- 卡牌头部：序号、稀有度与生命值/避坑状态 -->
+            <!-- 卡牌头部：序号、热度徽章与最近更新对齐 -->
             <div class="flex items-center justify-between pb-2.5 border-b border-black/5 dark:border-white/10 text-xs font-mono-tech">
               <div class="flex items-center gap-2">
                 <span class="font-bold text-zinc-900 dark:text-white tracking-wider">#${game.rank} // 100</span>
-                <span class="text-[10px] ${isUltraRare ? 'text-amber-600 dark:text-amber-300 font-bold' : 'text-purple-600 dark:text-purple-300 font-medium'}">
-                  ${isUltraRare ? ultraRareText : rareText}
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full border ${heatBadgeClass}">
+                  ${heatBadgeText}
                 </span>
               </div>
-              <div class="flex items-center gap-1.5 text-[10px] text-emerald-600 dark:text-emerald-400 font-bold">
-                <span>HP 100</span>
-                <span class="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_#10b981]"></span>
+              <div class="flex items-center gap-1.5 text-[10px] text-zinc-600 dark:text-slate-300 font-bold">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_6px_#10b981]"></span>
+                <span>${updatedLabel}: ${game.lastUpdated || '2026-10-26'}</span>
               </div>
             </div>
 
@@ -2250,7 +2464,7 @@
             </div>
 
             <!-- 卡牌标题与副标 -->
-            <h2 class="font-display text-2xl text-zinc-900 dark:text-white tracking-wide group-hover:text-[#A855F7] dark:group-hover:text-purple-400 transition-colors line-clamp-1">${localizedTitle}</h2>
+            <h2 class="font-display text-2xl text-zinc-900 dark:text-white tracking-wide ${titleHoverClass} transition-colors line-clamp-1">${localizedTitle}</h2>
             <p class="text-[11px] text-zinc-500 dark:text-slate-400 font-mono-tech line-clamp-1 mt-0.5">${game.title} • ${game.releaseYear}</p>
 
             <!-- 宝可梦式技能战力槽 (Abilities / Moves Tray) -->
@@ -2284,7 +2498,7 @@
             <span>${illusCredit}</span>
             <div class="flex items-center gap-2">
               <span class="text-zinc-900 dark:text-white font-bold">${downloads} ${pullsSuffix}</span>
-              <span class="w-4 h-4 rounded-full bg-gradient-to-tr from-purple-500 to-cyan-400 flex items-center justify-center text-[9px] text-black font-extrabold shadow-sm">
+              <span class="w-4 h-4 rounded-full bg-gradient-to-tr ${starBadgeClass} flex items-center justify-center text-[9px] font-extrabold shadow-sm">
                 ★
               </span>
             </div>
@@ -2301,40 +2515,25 @@
         listRow.className = 'group flex items-center justify-between p-3.5 px-4 rounded-2xl bg-white/70 dark:bg-transparent hover:bg-white dark:hover:bg-white/5 transition-all border border-zinc-200/60 dark:border-transparent hover:border-zinc-300 dark:hover:border-white/10 shadow-none hover:shadow-sm';
 
         listRow.innerHTML = `
-          <div class="flex items-center space-x-4 min-w-0">
-            <span class="w-8 text-center text-xs font-mono font-bold text-[#A855F7] dark:text-purple-400 shrink-0">#${game.rank}</span>
-            <div class="min-w-0">
-              <div class="flex items-center space-x-2">
-                <span class="font-bold text-sm text-zinc-900 dark:text-white group-hover:text-[#A855F7] dark:group-hover:text-purple-400 truncate">${localizedTitle}</span>
-                <span class="text-xs text-zinc-400 hidden sm:inline truncate">(${game.title})</span>
-                ${isCertified 
-                  ? `<span class="text-[10px] bg-amber-500/15 text-amber-600 dark:text-amber-400 px-2.5 py-0.5 rounded-full font-bold border border-amber-500/30 shrink-0">👑 精测认证</span>`
-                  : `<span class="text-[10px] bg-zinc-100 dark:bg-white/10 text-zinc-500 dark:text-zinc-400 px-2.5 py-0.5 rounded-full font-medium shrink-0">🛠️ 实测排雷中</span>`}
-              </div>
-              <div class="text-[11px] text-zinc-500 dark:text-zinc-400 truncate">${game.developer} • ${game.genre} ${!isCertified ? '• <span class=\"text-amber-500\">实测排雷中</span>' : ''}</div>
+          <div class="flex items-center space-x-3.5">
+            <span class="font-mono-tech text-xs font-bold px-2 py-0.5 rounded-full border ${heatBadgeClass}">#${game.rank}</span>
+            <div>
+              <div class="font-bold text-sm text-zinc-900 dark:text-white group-hover:text-purple-500 transition-colors">${localizedTitle}</div>
+              <div class="text-[11px] text-zinc-400 font-mono-tech">${game.title} • ${updatedLabel}: ${game.lastUpdated || '2026-10-26'}</div>
             </div>
           </div>
-
-          <div class="flex items-center space-x-3 shrink-0 ml-4">
-            <div class="hidden md:flex items-center space-x-1.5">
-              ${game.hasConsole ? `<span class="text-[10px] bg-purple-500/10 dark:bg-[#A855F7]/10 text-[#A855F7] dark:text-purple-400 px-2 py-0.5 rounded-full font-semibold">控制台</span>` : ''}
-              ${game.hasMods ? `<span class="text-[10px] bg-purple-50 dark:bg-purple-500/10 text-purple-600 dark:text-purple-400 px-2 py-0.5 rounded-full font-semibold">MOD</span>` : ''}
-            </div>
-            <span class="text-xs text-emerald-600 dark:text-emerald-400 font-semibold hidden sm:inline">${rating}</span>
-            <div class="w-7 h-7 rounded-full flex items-center justify-center text-zinc-400 group-hover:text-[#A855F7] dark:group-hover:text-purple-400">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-            </div>
+          <div class="flex items-center space-x-4">
+            <span class="text-xs font-mono-tech text-zinc-500 hidden sm:inline">${downloads} ${pullsSuffix}</span>
+            <span class="text-xs text-purple-600 dark:text-purple-400 font-mono-tech">${t('viewDetailCardBtn')} →</span>
           </div>
         `;
         listCon.appendChild(listRow);
       });
+
       init3DCardPhysics();
       initCustomCursor();
     }
 
-    // Render Secondary Game Detail View
-    
-    // === 宝可梦全息闪卡 (PTCG Holo Foil) 物理与着色引擎 ===
     function init3DCardPhysics() {
       const cards = document.querySelectorAll('[data-holo-card]');
       cards.forEach(cardContainer => {

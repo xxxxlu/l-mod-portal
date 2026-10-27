@@ -1889,7 +1889,9 @@
     "steamLastChecked": "2026-10-26T17:33:39.889583",
     "radarSummary": "Steam 官方最新推送已对齐，CET v1.33.0 / REDmod 100% 稳定运行，未发现恶性坏档报错。",
     "radarRiskTitle": "💡 日常游玩避坑提示",
-    "radarRiskDesc": "建议在单机离线状态下游玩，大版本更新后优先使用本站批处理脚本核对环境路径。"
+    "radarRiskDesc": "建议在单机离线状态下游玩，大版本更新后优先使用本站批处理脚本核对环境路径。",
+    "lastUpdated": "2026-10-25",
+    "heatTier": "solar"
   },
   {
     "id": "black-myth-wukong",
@@ -3177,7 +3179,9 @@
     "steamLastChecked": "2026-10-26T17:33:39.889583",
     "radarSummary": "Steam 官方最新推送已对齐，UE4SS v3.0.1+ / UE5 Console Enabler 100% 稳定运行，未发现恶性坏档报错。",
     "radarRiskTitle": "💡 日常游玩避坑提示",
-    "radarRiskDesc": "建议在单机离线状态下游玩，大版本更新后优先使用本站批处理脚本核对环境路径。"
+    "radarRiskDesc": "建议在单机离线状态下游玩，大版本更新后优先使用本站批处理脚本核对环境路径。",
+    "lastUpdated": "2026-10-26",
+    "heatTier": "solar"
   },
   {
     "id": "witcher-3",
@@ -5545,7 +5549,9 @@
     "steamLastChecked": "2026-10-26T17:33:39.889583",
     "radarSummary": "Steam 官方最新推送已对齐，REDkit / Script Merger 100% 稳定运行，未发现恶性坏档报错。",
     "radarRiskTitle": "💡 日常游玩避坑提示",
-    "radarRiskDesc": "建议在单机离线状态下游玩，大版本更新后优先使用本站批处理脚本核对环境路径。"
+    "radarRiskDesc": "建议在单机离线状态下游玩，大版本更新后优先使用本站批处理脚本核对环境路径。",
+    "lastUpdated": "2026-10-14",
+    "heatTier": "solar"
   },
   {
     "id": "baldurs-gate-3",
@@ -6845,7 +6851,9 @@
     "steamLastChecked": "2026-10-26T17:33:39.889583",
     "radarSummary": "Steam 官方最新推送已对齐，BG3SE v18+ / Native Mod Loader 100% 稳定运行，未发现恶性坏档报错。",
     "radarRiskTitle": "💡 日常游玩避坑提示",
-    "radarRiskDesc": "建议在单机离线状态下游玩，大版本更新后优先使用本站批处理脚本核对环境路径。"
+    "radarRiskDesc": "建议在单机离线状态下游玩，大版本更新后优先使用本站批处理脚本核对环境路径。",
+    "lastUpdated": "2026-10-24",
+    "heatTier": "solar"
   },
   {
     "id": "elden-ring",
@@ -7732,7 +7740,9 @@
     "steamLastChecked": "2026-10-26T17:33:39.889583",
     "radarSummary": "Steam 官方最新推送已对齐，ModEngine2 / EAC Bypass 100% 稳定运行，未发现恶性坏档报错。",
     "radarRiskTitle": "💡 日常游玩避坑提示",
-    "radarRiskDesc": "建议在单机离线状态下游玩，大版本更新后优先使用本站批处理脚本核对环境路径。"
+    "radarRiskDesc": "建议在单机离线状态下游玩，大版本更新后优先使用本站批处理脚本核对环境路径。",
+    "lastUpdated": "2026-10-22",
+    "heatTier": "solar"
   },
   {
     "id": "skyrim-se",
@@ -8591,7 +8601,9 @@
     "emergencyAlert": {
       "zh-CN": "v1.6.1170 前置需更新对齐！认准 SKSE64 2.2.6 与 SSE Engine Fixes 修复推车飞天",
       "en": "v1.6.1170 requires prerequisite updates! Ensure SKSE64 2.2.6 & SSE Engine Fixes are installed."
-    }
+    },
+    "lastUpdated": "2026-10-18",
+    "heatTier": "solar"
   },
   {
     "id": "fallout-4",
@@ -9473,7 +9485,9 @@
     "emergencyAlert": {
       "zh-CN": "次世代大更新破坏近 10 年 Mod 体系，高危闪退！推荐使用 Downgrader 回退 1.10.163 稳定版",
       "en": "Next-Gen update breaks 10-year mod ecosystem! High crash risk — Downgrader to 1.10.163 recommended."
-    }
+    },
+    "lastUpdated": "2026-10-20",
+    "heatTier": "solar"
   },
   {
     "id": "palworld",
@@ -10344,7 +10358,9 @@
     "steamLastChecked": "2026-10-26T17:33:39.889583",
     "radarSummary": "Steam 官方最新推送已对齐，UE4SS-RE / Palworld Modding Kit 100% 稳定运行，未发现恶性坏档报错。",
     "radarRiskTitle": "💡 日常游玩避坑提示",
-    "radarRiskDesc": "建议在单机离线状态下游玩，大版本更新后优先使用本站批处理脚本核对环境路径。"
+    "radarRiskDesc": "建议在单机离线状态下游玩，大版本更新后优先使用本站批处理脚本核对环境路径。",
+    "lastUpdated": "2026-10-16",
+    "heatTier": "solar"
   },
   {
     "id": "starfield",
@@ -11211,7 +11227,9 @@
     "steamLastChecked": "2026-10-26T17:33:39.889583",
     "radarSummary": "Steam 官方最新推送已对齐，SFSE / StarfieldCustom.ini 100% 稳定运行，未发现恶性坏档报错。",
     "radarRiskTitle": "💡 日常游玩避坑提示",
-    "radarRiskDesc": "建议在单机离线状态下游玩，大版本更新后优先使用本站批处理脚本核对环境路径。"
+    "radarRiskDesc": "建议在单机离线状态下游玩，大版本更新后优先使用本站批处理脚本核对环境路径。",
+    "lastUpdated": "2026-10-15",
+    "heatTier": "solar"
   },
   {
     "id": "gta-v",
@@ -12082,7 +12100,9 @@
     "steamLastChecked": "2026-10-26T17:33:39.889583",
     "radarSummary": "需更新 ScriptHookV！BattlEye 反作弊上线，故事模式必须物理隔离。",
     "radarRiskTitle": "⚠️ BattlEye 线上封禁风险",
-    "radarRiskDesc": "若带 Mod 进入 GTA Online 必定触发 BattlEye 封禁！故事模式单机必须物理隔离。"
+    "radarRiskDesc": "若带 Mod 进入 GTA Online 必定触发 BattlEye 封禁！故事模式单机必须物理隔离。",
+    "lastUpdated": "2026-10-11",
+    "heatTier": "solar"
   },
   {
     "id": "rdr2",
@@ -12812,7 +12832,9 @@
     "steamLastChecked": "2026-10-26T17:33:39.889583",
     "radarSummary": "Steam 官方最新推送已对齐，ScriptHookRDR2 / LML 100% 稳定运行，未发现恶性坏档报错。",
     "radarRiskTitle": "💡 日常游玩避坑提示",
-    "radarRiskDesc": "建议在单机离线状态下游玩，大版本更新后优先使用本站批处理脚本核对环境路径。"
+    "radarRiskDesc": "建议在单机离线状态下游玩，大版本更新后优先使用本站批处理脚本核对环境路径。",
+    "lastUpdated": "2026-10-08",
+    "heatTier": "violet"
   },
   {
     "id": "monster-hunter-world",
@@ -13540,7 +13562,9 @@
     "steamLastChecked": "2026-10-26T17:33:39.889583",
     "radarSummary": "Steam 官方最新推送已对齐，Stracker's Loader / REFramework 100% 稳定运行，未发现恶性坏档报错。",
     "radarRiskTitle": "💡 日常游玩避坑提示",
-    "radarRiskDesc": "建议在单机离线状态下游玩，大版本更新后优先使用本站批处理脚本核对环境路径。"
+    "radarRiskDesc": "建议在单机离线状态下游玩，大版本更新后优先使用本站批处理脚本核对环境路径。",
+    "lastUpdated": "2026-10-12",
+    "heatTier": "violet"
   },
   {
     "id": "sekiro",
@@ -14268,7 +14292,9 @@
     "steamLastChecked": "2026-10-26T17:33:39.889583",
     "radarSummary": "Steam 官方最新推送已对齐，Mod Engine / Dinput8 Hook 100% 稳定运行，未发现恶性坏档报错。",
     "radarRiskTitle": "💡 日常游玩避坑提示",
-    "radarRiskDesc": "建议在单机离线状态下游玩，大版本更新后优先使用本站批处理脚本核对环境路径。"
+    "radarRiskDesc": "建议在单机离线状态下游玩，大版本更新后优先使用本站批处理脚本核对环境路径。",
+    "lastUpdated": "2026-10-09",
+    "heatTier": "violet"
   },
   {
     "id": "re4-remake",
@@ -14997,7 +15023,9 @@
     "steamLastChecked": "2026-10-26T17:33:39.889583",
     "radarSummary": "Steam 官方最新推送已对齐，REFramework / Fluffy Mod Manager 100% 稳定运行，未发现恶性坏档报错。",
     "radarRiskTitle": "💡 日常游玩避坑提示",
-    "radarRiskDesc": "建议在单机离线状态下游玩，大版本更新后优先使用本站批处理脚本核对环境路径。"
+    "radarRiskDesc": "建议在单机离线状态下游玩，大版本更新后优先使用本站批处理脚本核对环境路径。",
+    "lastUpdated": "2026-10-10",
+    "heatTier": "violet"
   },
   {
     "id": "mount-and-blade-2",
@@ -15349,7 +15377,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-10-07",
+    "heatTier": "violet"
   },
   {
     "id": "stardew-valley",
@@ -15675,7 +15705,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-10-01",
+    "heatTier": "violet"
   },
   {
     "id": "terraria",
@@ -15871,7 +15903,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-09-29",
+    "heatTier": "violet"
   },
   {
     "id": "hogwarts-legacy",
@@ -16067,7 +16101,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-10-06",
+    "heatTier": "violet"
   },
   {
     "id": "subnautica",
@@ -16454,7 +16490,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-08-19",
+    "heatTier": "violet"
   },
   {
     "id": "dark-souls-3",
@@ -16650,7 +16688,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-10-05",
+    "heatTier": "violet"
   },
   {
     "id": "valheim",
@@ -17061,7 +17101,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-10-04",
+    "heatTier": "violet"
   },
   {
     "id": "re-village",
@@ -17257,7 +17299,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-09-28",
+    "heatTier": "violet"
   },
   {
     "id": "dying-light",
@@ -17453,7 +17497,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-09-03",
+    "heatTier": "violet"
   },
   {
     "id": "dying-light-2",
@@ -17649,7 +17695,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-09-27",
+    "heatTier": "violet"
   },
   {
     "id": "fallout-new-vegas",
@@ -18005,7 +18053,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-09-05",
+    "heatTier": "violet"
   },
   {
     "id": "rimworld",
@@ -18327,7 +18377,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-09-26",
+    "heatTier": "violet"
   },
   {
     "id": "project-zomboid",
@@ -18523,7 +18575,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-09-25",
+    "heatTier": "violet"
   },
   {
     "id": "the-forest",
@@ -18719,7 +18773,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-08-13",
+    "heatTier": "cyan"
   },
   {
     "id": "sons-of-the-forest",
@@ -19005,7 +19061,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-10-03",
+    "heatTier": "cyan"
   },
   {
     "id": "satisfactory",
@@ -19251,7 +19309,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-10-21",
+    "heatTier": "cyan"
   },
   {
     "id": "factorio",
@@ -19525,7 +19585,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-10-02",
+    "heatTier": "cyan"
   },
   {
     "id": "cities-skylines",
@@ -19721,7 +19783,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-09-24",
+    "heatTier": "cyan"
   },
   {
     "id": "civ-6",
@@ -19917,7 +19981,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-08-08",
+    "heatTier": "cyan"
   },
   {
     "id": "crusader-kings-3",
@@ -20253,7 +20319,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-08-13",
+    "heatTier": "cyan"
   },
   {
     "id": "hearts-of-iron-4",
@@ -20601,7 +20669,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-08-24",
+    "heatTier": "cyan"
   },
   {
     "id": "stellaris",
@@ -20908,7 +20978,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-08-25",
+    "heatTier": "cyan"
   },
   {
     "id": "total-war-warhammer-3",
@@ -21104,7 +21176,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-09-23",
+    "heatTier": "cyan"
   },
   {
     "id": "total-war-three-kingdoms",
@@ -21300,7 +21374,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-08-31",
+    "heatTier": "cyan"
   },
   {
     "id": "dragons-dogma-2",
@@ -21496,7 +21572,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-10-17",
+    "heatTier": "cyan"
   },
   {
     "id": "armored-core-6",
@@ -21692,7 +21770,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-09-22",
+    "heatTier": "cyan"
   },
   {
     "id": "ghost-of-tsushima",
@@ -21888,7 +21968,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-09-21",
+    "heatTier": "cyan"
   },
   {
     "id": "god-of-war",
@@ -22084,7 +22166,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-09-20",
+    "heatTier": "cyan"
   },
   {
     "id": "spiderman-remastered",
@@ -22280,7 +22364,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-09-19",
+    "heatTier": "cyan"
   },
   {
     "id": "horizon-zero-dawn",
@@ -22476,7 +22562,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-09-03",
+    "heatTier": "cyan"
   },
   {
     "id": "days-gone",
@@ -22672,7 +22760,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-08-20",
+    "heatTier": "cyan"
   },
   {
     "id": "death-stranding",
@@ -22868,7 +22958,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-09-18",
+    "heatTier": "cyan"
   },
   {
     "id": "detroit-become-human",
@@ -23058,7 +23150,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-09-04",
+    "heatTier": "cyan"
   },
   {
     "id": "kingdom-come-deliverance",
@@ -23324,7 +23418,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-09-22",
+    "heatTier": "cyan"
   },
   {
     "id": "mount-and-blade-warband",
@@ -23520,7 +23616,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-09-06",
+    "heatTier": "cyan"
   },
   {
     "id": "stalker-shadow-of-chernobyl",
@@ -23716,7 +23814,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-08-25",
+    "heatTier": "cyan"
   },
   {
     "id": "metro-exodus",
@@ -23912,7 +24012,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-08-26",
+    "heatTier": "cyan"
   },
   {
     "id": "control",
@@ -24108,7 +24210,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-08-21",
+    "heatTier": "cyan"
   },
   {
     "id": "alan-wake-2",
@@ -24304,7 +24408,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-09-17",
+    "heatTier": "cyan"
   },
   {
     "id": "doom-eternal",
@@ -24500,7 +24606,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-09-14",
+    "heatTier": "cyan"
   },
   {
     "id": "borderlands-3",
@@ -24696,7 +24804,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-08-06",
+    "heatTier": "cyan"
   },
   {
     "id": "borderlands-2",
@@ -24892,7 +25002,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-08-24",
+    "heatTier": "cyan"
   },
   {
     "id": "bioshock-infinite",
@@ -25082,7 +25194,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-09-08",
+    "heatTier": "cyan"
   },
   {
     "id": "dishonored-2",
@@ -25278,7 +25392,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-08-16",
+    "heatTier": "cyan"
   },
   {
     "id": "prey",
@@ -25474,7 +25590,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-09-20",
+    "heatTier": "cyan"
   },
   {
     "id": "hitman-3",
@@ -25670,7 +25788,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-09-16",
+    "heatTier": "cyan"
   },
   {
     "id": "ac-odyssey",
@@ -25866,7 +25986,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-08-04",
+    "heatTier": "emerald"
   },
   {
     "id": "ac-valhalla",
@@ -26062,7 +26184,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-09-08",
+    "heatTier": "emerald"
   },
   {
     "id": "ac-origins",
@@ -26252,7 +26376,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-09-20",
+    "heatTier": "emerald"
   },
   {
     "id": "far-cry-5",
@@ -26448,7 +26574,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-08-21",
+    "heatTier": "emerald"
   },
   {
     "id": "far-cry-6",
@@ -26644,7 +26772,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-08-09",
+    "heatTier": "emerald"
   },
   {
     "id": "watch-dogs-2",
@@ -26840,7 +26970,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-08-09",
+    "heatTier": "emerald"
   },
   {
     "id": "no-mans-sky",
@@ -27036,7 +27168,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-09-15",
+    "heatTier": "emerald"
   },
   {
     "id": "astroneer",
@@ -27226,7 +27360,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-09-04",
+    "heatTier": "emerald"
   },
   {
     "id": "raft",
@@ -27422,7 +27558,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-08-14",
+    "heatTier": "emerald"
   },
   {
     "id": "grounded",
@@ -27618,7 +27756,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-08-02",
+    "heatTier": "emerald"
   },
   {
     "id": "green-hell",
@@ -27814,7 +27954,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-09-02",
+    "heatTier": "emerald"
   },
   {
     "id": "7-days-to-die",
@@ -28080,7 +28222,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-09-14",
+    "heatTier": "emerald"
   },
   {
     "id": "ark-survival-evolved",
@@ -28375,7 +28519,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-09-13",
+    "heatTier": "emerald"
   },
   {
     "id": "rust-single",
@@ -28571,7 +28717,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-08-29",
+    "heatTier": "emerald"
   },
   {
     "id": "conan-exiles",
@@ -28767,7 +28915,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-08-07",
+    "heatTier": "emerald"
   },
   {
     "id": "medieval-dynasty",
@@ -28957,7 +29107,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-09-11",
+    "heatTier": "emerald"
   },
   {
     "id": "kenshi",
@@ -29153,7 +29305,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-08-06",
+    "heatTier": "emerald"
   },
   {
     "id": "the-sims-4",
@@ -29496,7 +29650,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-09-11",
+    "heatTier": "emerald"
   },
   {
     "id": "planet-zoo",
@@ -29692,7 +29848,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-08-28",
+    "heatTier": "emerald"
   },
   {
     "id": "jurassic-world-evolution-2",
@@ -29888,7 +30046,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-08-28",
+    "heatTier": "emerald"
   },
   {
     "id": "euro-truck-simulator-2",
@@ -30150,7 +30310,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-08-18",
+    "heatTier": "emerald"
   },
   {
     "id": "snowrunner",
@@ -30346,7 +30508,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-08-29",
+    "heatTier": "emerald"
   },
   {
     "id": "forza-horizon-5",
@@ -30536,7 +30700,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-09-12",
+    "heatTier": "emerald"
   },
   {
     "id": "assetto-corsa",
@@ -30719,7 +30885,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-09-18",
+    "heatTier": "emerald"
   },
   {
     "id": "beamng-drive",
@@ -30969,7 +31137,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-09-11",
+    "heatTier": "emerald"
   },
   {
     "id": "persona-5-royal",
@@ -31165,7 +31335,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-09-10",
+    "heatTier": "emerald"
   },
   {
     "id": "persona-3-reload",
@@ -31361,7 +31533,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-10-13",
+    "heatTier": "emerald"
   },
   {
     "id": "ff7-remake",
@@ -31557,7 +31731,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-09-09",
+    "heatTier": "emerald"
   },
   {
     "id": "ff16",
@@ -31753,7 +31929,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-08-21",
+    "heatTier": "emerald"
   },
   {
     "id": "nier-automata",
@@ -31949,7 +32127,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-09-08",
+    "heatTier": "emerald"
   },
   {
     "id": "tales-of-arise",
@@ -32145,7 +32325,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-08-14",
+    "heatTier": "emerald"
   },
   {
     "id": "like-a-dragon-infinite-wealth",
@@ -32341,7 +32523,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-08-28",
+    "heatTier": "emerald"
   },
   {
     "id": "yakuza-like-a-dragon",
@@ -32537,7 +32721,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-08-09",
+    "heatTier": "emerald"
   },
   {
     "id": "star-wars-jedi-survivor",
@@ -32733,7 +32919,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-09-07",
+    "heatTier": "emerald"
   },
   {
     "id": "star-wars-jedi-fallen-order",
@@ -32929,7 +33117,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-09-24",
+    "heatTier": "emerald"
   },
   {
     "id": "dead-space-remake",
@@ -33125,7 +33315,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-09-06",
+    "heatTier": "emerald"
   },
   {
     "id": "dead-cells",
@@ -33321,7 +33513,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-09-05",
+    "heatTier": "emerald"
   },
   {
     "id": "hades",
@@ -33551,7 +33745,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-09-04",
+    "heatTier": "emerald"
   },
   {
     "id": "hollow-knight",
@@ -33813,7 +34009,9 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-09-03",
+    "heatTier": "emerald"
   },
   {
     "id": "slay-the-spire",
@@ -34095,6 +34293,8 @@
       ]
     },
     "verifiedPatch": "Steam 最新版本实测",
-    "radarSecretCode": "老L单机888"
+    "radarSecretCode": "老L单机888",
+    "lastUpdated": "2026-09-02",
+    "heatTier": "emerald"
   }
 ]
