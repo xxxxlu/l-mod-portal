@@ -362,6 +362,19 @@
           </div>
         </div>
 
+        <!-- L-MOD AI COPILOT BADGE -->
+        <button 
+          id="radar-ai-btn"
+          type="button"
+          onclick="window.LMOD_AI_COPILOT && window.LMOD_AI_COPILOT.openDrawer()"
+          title="老L · AI 游戏智库顾问 (快捷键: Cmd+K / Ctrl+K)"
+          class="flex items-center space-x-1.5 bg-gradient-to-r from-purple-500/15 via-violet-500/15 to-pink-500/15 hover:from-purple-500/25 hover:to-pink-500/25 text-purple-700 dark:text-purple-300 px-3.5 py-2 rounded-xl text-xs font-bold border border-purple-500/30 dark:border-purple-400/30 shadow-sm transition-all cursor-pointer"
+        >
+          <span class="text-sm">🤖</span>
+          <span class="tracking-tight" id="radar-ai-btn-text">AI 顾问</span>
+          <span class="hidden sm:inline text-[9px] font-mono px-1 py-0.5 rounded bg-purple-500/20 text-purple-300">⌘K</span>
+        </button>
+
         <a href="index.html" class="flex items-center space-x-2 bg-white/5 hover:bg-white/10 text-zinc-200 border border-white/10 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all">
           <svg class="w-4 h-4 text-[#A855F7]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
           <span id="radar-return-btn-text">返回 L-MOD 主库</span>
@@ -719,6 +732,8 @@
   <!-- 8. DATA SCRIPT INCLUSION & RADAR APP LOGIC              -->
   <!-- ======================================================== -->
   <script src="data.js"></script>
+  <!-- L-MOD AI Copilot -->
+  <script src="ai_copilot.js"></script>
   <script>
     // ========================================================
     // DEEP COMPATIBILITY METADATA FOR RADAR ENGINE
@@ -1321,6 +1336,10 @@ pause`
       if (hGroup) hGroup.innerText = t('radarSecretGroupBtn', '进避坑互助群暗号:');
       const hRet = document.getElementById('radar-return-btn-text');
       if (hRet) hRet.innerText = t('returnMainVault', '返回 L-MOD 主库');
+      const aiBtn = document.getElementById('radar-ai-btn');
+      if (aiBtn) aiBtn.title = t('headerAiBtnTitle', '老L · AI 游戏智库顾问 (快捷键: Cmd+K / Ctrl+K)');
+      const aiText = document.getElementById('radar-ai-btn-text');
+      if (aiText) aiText.innerText = t('headerAiBtnText', 'AI 顾问');
 
       const menuTitle = document.getElementById('lang-menu-title');
       if (menuTitle) menuTitle.innerText = t('selectLanguage', '选择语言 · Select Language');

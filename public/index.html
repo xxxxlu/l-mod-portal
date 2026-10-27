@@ -531,6 +531,15 @@
             <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-bold">LIVE</span>
           </span>
         </a>
+
+        <!-- L-MOD AI Copilot Sidebar Entry -->
+        <button onclick="window.LMOD_AI_COPILOT && window.LMOD_AI_COPILOT.openDrawer()" class="sidebar-nav-btn w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-white/5 transition-all text-left font-medium group cursor-pointer">
+          <div class="flex items-center space-x-3">
+            <span class="text-sm">🤖</span>
+            <span id="sidebar-nav-ai" class="font-bold text-purple-600 dark:text-purple-400">老L · AI 智库顾问</span>
+          </div>
+          <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-400 font-bold">COPILOT</span>
+        </button>
       </div>
 
       <!-- Recents Section -->
@@ -634,6 +643,18 @@
           </span>
           <span class="tracking-tight" id="header-radar-btn-text">📡 避坑雷达</span>
         </a>
+
+        <!-- L-MOD AI COPILOT ACCESS BADGE -->
+        <button 
+          type="button"
+          onclick="window.LMOD_AI_COPILOT && window.LMOD_AI_COPILOT.openDrawer()"
+          title="老L · AI 游戏智库顾问 (快捷键: Cmd+K / Ctrl+K)"
+          class="flex items-center space-x-1.5 bg-gradient-to-r from-purple-500/15 via-violet-500/15 to-pink-500/15 hover:from-purple-500/25 hover:to-pink-500/25 text-purple-700 dark:text-purple-300 px-3 py-1.5 rounded-full text-xs font-bold border border-purple-500/30 dark:border-purple-400/30 shadow-sm transition-all cursor-pointer"
+        >
+          <span class="text-sm">🤖</span>
+          <span class="tracking-tight" id="header-ai-btn-text">AI 顾问</span>
+          <span class="hidden lg:inline text-[9px] font-mono px-1 py-0.5 rounded bg-purple-500/20 text-purple-300">⌘K</span>
+        </button>
         
         <!-- ======================================================== -->
         <!-- CUSTOM COMPONENT 1: APPLE-STYLE CUSTOM LANGUAGE DROPDOWN -->
@@ -1498,6 +1519,8 @@
 
   <!-- Include Bundled Database -->
   <script src="data.js"></script>
+  <!-- L-MOD AI Copilot -->
+  <script src="ai_copilot.js"></script>
 
   <!-- Application Logic -->
   <script>
@@ -1505,6 +1528,7 @@
     let currentFilter = 'all';
     let currentSearch = '';
     let currentViewMode = 'gallery';
+    let cursorInitialized = false;
     let allGames = window.GAMES_DATA || window.GAMES_DATABASE || [];
     let translations = window.TRANSLATIONS_DATA || {};
     let activeGame = null;
@@ -1538,7 +1562,7 @@
       const newTheme = isDark ? 'light' : 'dark';
       localStorage.setItem('lmod_theme', newTheme);
       applyTheme(newTheme);
-      showToast(newTheme === 'dark' ? '已切换至深色模式 🌙' : '已切换至浅色模式 ☀️');
+      showToast(newTheme === 'dark' ? t('toastThemeDark') : t('toastThemeLight'));
     }
 
     function applyTheme(theme) {
@@ -1746,6 +1770,17 @@
     }
 
     // Save catalog scroll position and target game id
+        // Navigate to secondary deep-dive game view
+    function navigateToGame(gameId, event) {
+      if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      saveCatalogScroll(gameId);
+      window.location.hash = `#/game/${gameId}`;
+      handleRouting();
+    }
+
     function saveCatalogScroll(gameId) {
       savedCatalogScrollTop = window.scrollY || document.documentElement.scrollTop || 0;
       if (gameId) lastClickedGameId = gameId;
@@ -1969,6 +2004,12 @@
 
       // Footer
       setElText('footer-note', t('footerNote'));
+
+      // Newly added AI & Theme components i18n
+      setElText('sidebar-nav-ai', t('sidebarNavAi'));
+      setElText('header-ai-btn-text', t('headerAiBtnText'));
+      const themeBtn = document.getElementById('theme-toggle-btn');
+      if (themeBtn) themeBtn.title = t('btnThemeToggle');
     }
 
     function setFilter(filter) {
@@ -2150,12 +2191,24 @@
         const cardWrap = document.createElement('div');
         cardWrap.className = 'pokemon-card-container';
         cardWrap.setAttribute('data-holo-card', '');
+        cardWrap.onclick = (e) => navigateToGame(game.id, e);
 
         const card = document.createElement('a');
         card.id = `game-card-${game.id}`;
         card.href = `#/game/${game.id}`;
-        card.onclick = () => saveCatalogScroll(game.id);
+        card.onclick = (e) => navigateToGame(game.id, e);
         card.className = 'pokemon-card group relative p-4 flex flex-col justify-between h-[510px] cursor-pointer';
+
+        const ultraRareText = t('cardUltraRare');
+        const rareText = t('cardRare');
+        const coreExtenderLabel = t('cardAbilityCore');
+        const cleanTrainerLabel = t('cardAbilityTrainer');
+        const batScriptLabel = t('cardAbilityBat');
+        const coreStatus = game.hasMods ? t('statusExtenderReady') : t('statusExtenderPending');
+        const trainerStatus = game.hasTrainer ? t('statusTrainerReady') : t('statusTrainerOfficial');
+        const batStatus = isCertified ? t('statusAutoInject') : t('statusVerifying');
+        const pullsSuffix = t('downloadsPullSuffix');
+        const illusCredit = t('cardIllustrator');
 
         card.innerHTML = `
           <!-- 全息彩虹镭射层 (Rainbow Holo Foil) -->
@@ -2169,7 +2222,7 @@
               <div class="flex items-center gap-2">
                 <span class="font-bold text-zinc-900 dark:text-white tracking-wider">#${game.rank} // 100</span>
                 <span class="text-[10px] ${isUltraRare ? 'text-amber-600 dark:text-amber-300 font-bold' : 'text-purple-600 dark:text-purple-300 font-medium'}">
-                  ${isUltraRare ? '★★★ ULTRA RARE' : '★★ RARE'}
+                  ${isUltraRare ? ultraRareText : rareText}
                 </span>
               </div>
               <div class="flex items-center gap-1.5 text-[10px] text-emerald-600 dark:text-emerald-400 font-bold">
@@ -2205,32 +2258,32 @@
               <div class="flex items-center justify-between">
                 <div class="flex items-center gap-1.5 text-zinc-600 dark:text-slate-300 font-semibold">
                   <span class="text-purple-600 dark:text-purple-400">⚔</span>
-                  <span>CORE EXTENDER</span>
+                  <span>${coreExtenderLabel}</span>
                 </div>
-                <span class="text-zinc-900 dark:text-white font-bold">${game.hasMods ? '已对账框架' : '收录中'}</span>
+                <span class="text-zinc-900 dark:text-white font-bold">${coreStatus}</span>
               </div>
               <div class="flex items-center justify-between">
                 <div class="flex items-center gap-1.5 text-zinc-600 dark:text-slate-300 font-semibold">
                   <span class="text-emerald-600 dark:text-emerald-400">🛡</span>
-                  <span>CLEAN TRAINER</span>
+                  <span>${cleanTrainerLabel}</span>
                 </div>
-                <span class="text-purple-600 dark:text-purple-300 font-bold">${game.hasTrainer ? '免翻直链已就绪' : '官方代码'}</span>
+                <span class="text-purple-600 dark:text-purple-300 font-bold">${trainerStatus}</span>
               </div>
               <div class="flex items-center justify-between">
                 <div class="flex items-center gap-1.5 text-zinc-600 dark:text-slate-300 font-semibold">
                   <span class="text-amber-600 dark:text-amber-400">⚡</span>
-                  <span>ONE-CLICK .BAT</span>
+                  <span>${batScriptLabel}</span>
                 </div>
-                <span class="text-emerald-600 dark:text-emerald-400 font-bold">${isCertified ? 'AUTO INJECT' : '对账中'}</span>
+                <span class="text-emerald-600 dark:text-emerald-400 font-bold">${batStatus}</span>
               </div>
             </div>
           </div>
 
           <!-- 卡牌底部铭牌与稀有度防伪戳 -->
           <div class="pt-3 border-t border-black/5 dark:border-white/10 flex items-center justify-between text-[11px] font-mono-tech text-zinc-500 dark:text-slate-400">
-            <span>ILLUS. L-MOD VAULT</span>
+            <span>${illusCredit}</span>
             <div class="flex items-center gap-2">
-              <span class="text-zinc-900 dark:text-white font-bold">${downloads} 次拉取</span>
+              <span class="text-zinc-900 dark:text-white font-bold">${downloads} ${pullsSuffix}</span>
               <span class="w-4 h-4 rounded-full bg-gradient-to-tr from-purple-500 to-cyan-400 flex items-center justify-center text-[9px] text-black font-extrabold shadow-sm">
                 ★
               </span>
@@ -2244,7 +2297,7 @@
         const listRow = document.createElement('a');
         listRow.id = `game-list-row-${game.id}`;
         listRow.href = `#/game/${game.id}`;
-        listRow.onclick = () => saveCatalogScroll(game.id);
+        listRow.onclick = (e) => navigateToGame(game.id, e);
         listRow.className = 'group flex items-center justify-between p-3.5 px-4 rounded-2xl bg-white/70 dark:bg-transparent hover:bg-white dark:hover:bg-white/5 transition-all border border-zinc-200/60 dark:border-transparent hover:border-zinc-300 dark:hover:border-white/10 shadow-none hover:shadow-sm';
 
         listRow.innerHTML = `
