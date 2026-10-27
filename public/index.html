@@ -58,12 +58,37 @@
     @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap');
 
     :root {
-      --bg-base: #07080a;
-      --card-cardstock: #111319;
+      --bg-base: #f8fafc;
+      --bg-surface: #ffffff;
+      --card-cardstock: #ffffff;
+      --card-border: rgba(0, 0, 0, 0.08);
+      --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.06), 0 0 0 1px rgba(0, 0, 0, 0.04);
+      --accent: #9333ea;
+      --accent-dim: rgba(147, 51, 234, 0.08);
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --card-foil-border: linear-gradient(135deg, rgba(168, 85, 247, 0.28) 0%, rgba(59, 130, 246, 0.2) 50%, rgba(236, 72, 153, 0.2) 100%);
+      --ability-bg: #f8fafc;
+      --ability-border: rgba(0, 0, 0, 0.06);
+      --ticker-bg: #f1f5f9;
+      --ticker-border: rgba(0, 0, 0, 0.06);
+    }
+
+    html.dark {
+      --bg-base: #090a0f;
+      --bg-surface: #12141a;
+      --card-cardstock: #12141a;
       --card-border: rgba(255, 255, 255, 0.12);
-      --accent: #A855F7; /* Neon Violet Accent */
+      --card-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(0, 0, 0, 0.6);
+      --accent: #A855F7;
       --accent-dim: rgba(168, 85, 247, 0.14);
+      --text-main: #f1f5f9;
       --text-muted: #8b8f9e;
+      --card-foil-border: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(168, 85, 247, 0.25) 50%, rgba(255, 255, 255, 0.08) 100%);
+      --ability-bg: rgba(10, 11, 16, 0.85);
+      --ability-border: rgba(255, 255, 255, 0.08);
+      --ticker-bg: #111317;
+      --ticker-border: rgba(255, 255, 255, 0.1);
     }
 
     * {
@@ -73,9 +98,17 @@
 
     body {
       background-color: var(--bg-base);
-      color: #f1f5f9;
+      color: var(--text-main);
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
-      background-image: radial-gradient(circle at 50% 15%, rgba(168, 85, 247, 0.08) 0%, transparent 60%);
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+
+    html.dark body {
+      background-image: radial-gradient(circle at 50% 12%, rgba(168, 85, 247, 0.08) 0%, transparent 60%);
+    }
+
+    html:not(.dark) body {
+      background-image: radial-gradient(circle at 50% 12%, rgba(168, 85, 247, 0.04) 0%, transparent 60%);
     }
 
     .font-display {
@@ -104,14 +137,9 @@
       overflow: hidden;
       transform-style: preserve-3d;
       transform-origin: 50% 50%; /* 核心：严格以中心为重心旋转，绝无突兀位移 */
-      
-      /* 物理实体卡边缘：金属反光边框 + 扎实的真实接触阴影 */
-      border: 1.5px solid rgba(255, 255, 255, 0.14);
-      box-shadow: 
-        0 15px 35px -5px rgba(0, 0, 0, 0.8),
-        0 0 0 1px rgba(0, 0, 0, 0.6);
-      
-      transition: transform 0.1s ease-out, box-shadow 0.25s ease;
+      border: 1.5px solid var(--card-border);
+      box-shadow: var(--card-shadow);
+      transition: transform 0.1s ease-out, box-shadow 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
       will-change: transform, box-shadow;
     }
 
@@ -123,8 +151,14 @@
       pointer-events: none;
       z-index: 20;
       opacity: 0;
-      mix-blend-mode: color-dodge; /* 产生闪卡独特的彩虹反光 */
-      
+      transition: opacity 0.35s ease;
+      background-size: 200% 200%, 100% 100%;
+      background-position: var(--foil-pos-x, 50%) var(--foil-pos-y, 50%);
+    }
+
+    /* 暗色模式：采用 Color-Dodge 激发绚烂霓虹全息反光 */
+    html.dark .holo-foil-layer {
+      mix-blend-mode: color-dodge;
       background-image: 
         linear-gradient(
           115deg,
@@ -143,10 +177,29 @@
           transparent 2px,
           transparent 4px
         );
-      
-      background-size: 200% 200%, 100% 100%;
-      background-position: var(--foil-pos-x, 50%) var(--foil-pos-y, 50%);
-      transition: opacity 0.35s ease;
+    }
+
+    /* 亮色模式：采用 Color-Burn / Soft Iridescent 产生珠光纸面彩虹漫射 */
+    html:not(.dark) .holo-foil-layer {
+      mix-blend-mode: color-burn;
+      background-image: 
+        linear-gradient(
+          115deg,
+          transparent 0%,
+          rgba(236, 72, 153, 0.4) 15%,
+          rgba(147, 51, 234, 0.45) 30%,
+          rgba(6, 182, 212, 0.45) 50%,
+          rgba(234, 179, 8, 0.45) 70%,
+          rgba(236, 72, 153, 0.4) 85%,
+          transparent 100%
+        ),
+        repeating-linear-gradient(
+          0deg,
+          rgba(0, 0, 0, 0.03) 0px,
+          rgba(0, 0, 0, 0.03) 2px,
+          transparent 2px,
+          transparent 4px
+        );
     }
 
     /* === 宝可梦闪卡灵魂 2：卡套高光漫射层 (Specular Glare) === */
@@ -157,35 +210,49 @@
       pointer-events: none;
       z-index: 25;
       opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+
+    html.dark .holo-glare-layer {
       mix-blend-mode: overlay;
-      
       background: radial-gradient(
         400px circle at var(--pointer-x, 50%) var(--pointer-y, 50%),
         rgba(255, 255, 255, 0.55) 0%,
         rgba(255, 255, 255, 0.15) 30%,
         transparent 65%
       );
-      transition: opacity 0.25s ease;
+    }
+
+    html:not(.dark) .holo-glare-layer {
+      mix-blend-mode: soft-light;
+      background: radial-gradient(
+        400px circle at var(--pointer-x, 50%) var(--pointer-y, 50%),
+        rgba(255, 255, 255, 0.95) 0%,
+        rgba(255, 255, 255, 0.35) 35%,
+        transparent 70%
+      );
     }
 
     /* 悬停时激活闪卡彩虹光泽 */
-    .pokemon-card:hover .holo-foil-layer,
-    .pokemon-card:hover .holo-glare-layer {
+    .pokemon-card:hover .holo-foil-layer {
       opacity: 0.85;
+    }
+    .pokemon-card:hover .holo-glare-layer {
+      opacity: 0.75;
     }
 
     /* 金属箔框 */
     .card-foil-border {
       position: relative;
       border-radius: 16px;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(168, 85, 247, 0.25) 50%, rgba(255, 255, 255, 0.08) 100%);
+      background: var(--card-foil-border);
       padding: 1.5px;
     }
 
     /* 闪卡技能槽/属性框 (PTCG Abilities Box) */
     .ability-tray {
-      background: rgba(10, 11, 15, 0.85);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: var(--ability-bg);
+      border: 1px solid var(--ability-border);
       border-radius: 12px;
     }
 
@@ -198,8 +265,9 @@
       position: absolute;
       font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
-      color: #3b3f4d;
+      color: var(--text-muted);
       pointer-events: none;
+      opacity: 0.4;
     }
     .cross-marker::before { top: -8px; left: -8px; }
     .cross-marker::after { bottom: -8px; right: -8px; }
@@ -209,9 +277,9 @@
       width: 100%;
       overflow: hidden;
       white-space: nowrap;
-      background: #111317;
-      border-top: 1px solid var(--card-border);
-      border-bottom: 1px solid var(--card-border);
+      background: var(--ticker-bg);
+      border-top: 1px solid var(--ticker-border);
+      border-bottom: 1px solid var(--ticker-border);
       padding: 7px 0;
     }
     .ticker-move {
@@ -226,17 +294,69 @@
     /* 动作按钮 */
     .btn-action {
       background: transparent;
-      color: #f3f4f6;
-      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: var(--text-main);
+      border: 1px solid var(--card-border);
       font-family: 'JetBrains Mono', monospace;
       font-weight: 700;
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .pokemon-card:hover .btn-action, .btn-action:hover {
       background: var(--accent);
-      color: #000000;
+      color: #ffffff;
       border-color: var(--accent);
       box-shadow: 0 0 16px var(--accent);
+    }
+
+    /* Custom Cursor */
+    @media (pointer: fine) {
+      #cursor-dot {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 6px;
+        height: 6px;
+        background: var(--accent);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        transition: transform 0.04s ease-out;
+      }
+      #cursor-ring {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 36px;
+        height: 36px;
+        border: 1.5px solid var(--accent);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9998;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: width 0.2s ease, height 0.2s ease, border-color 0.2s ease;
+      }
+      #cursor-label {
+        font-size: 8px;
+        font-family: 'JetBrains Mono', monospace;
+        font-weight: 700;
+        color: var(--accent);
+        opacity: 0;
+        transition: opacity 0.2s ease;
+      }
+      body.cursor-hover #cursor-ring {
+        width: 48px;
+        height: 48px;
+        border-color: #ec4899;
+      }
+      body.cursor-hover #cursor-label {
+        opacity: 1;
+      }
+    }
+    @media (pointer: coarse) {
+      #cursor-dot, #cursor-ring {
+        display: none !important;
+      }
     }
 
     /* Custom Apple & Google hybrid scrollbars */
@@ -282,7 +402,7 @@
   <div id="cursor-dot"></div>
   <div id="cursor-ring"><span id="cursor-label">3D // 01</span></div>
 
-  <body class="bg-[#0b0c0f] text-slate-100 min-h-screen flex flex-col md:flex-row transition-colors duration-300 selection:bg-[#A855F7] selection:text-black">
+  <body class="bg-[#f8fafc] dark:bg-[#090a0f] text-zinc-900 dark:text-zinc-100 min-h-screen flex flex-col md:flex-row transition-colors duration-300 selection:bg-[#A855F7]/30 selection:text-purple-900 dark:selection:text-purple-200">
 
   <!-- WeChat Legacy Thumbnail Sniffer -->
   <img src="avatar.jpg" alt="L-MOD Vault" style="position:absolute;left:-9999px;top:-9999px;width:300px;height:300px;opacity:0;pointer-events:none;" />
@@ -482,7 +602,7 @@
     </div>
 
     <!-- Top Floating App Bar (Apple Frosted Glass) -->
-    <header class="sticky top-0 z-30 bg-[#f5f6f8]/80 dark:bg-[#0c0d0f]/80 backdrop-blur-2xl px-4 sm:px-8 h-16 flex items-center justify-between border-b border-zinc-200/60 dark:border-white/[0.06] transition-colors">
+    <header class="sticky top-0 z-30 bg-white/80 dark:bg-[#0c0d0f]/80 backdrop-blur-2xl px-4 sm:px-8 h-16 flex items-center justify-between border-b border-zinc-200/60 dark:border-white/[0.06] transition-colors">
       
       <!-- Left: Mobile Menu & Breadcrumbs -->
       <div class="flex items-center space-x-3">
@@ -633,23 +753,23 @@
         <!-- ======================================================== -->
         <!-- STEAM RADAR LIVE STATUS BAR & COMPATIBILITY CAPSULE      -->
         <!-- ======================================================== -->
-        <div class="mb-6 bg-gradient-to-r from-zinc-900 via-[#12141c] to-zinc-900 rounded-[24px] p-4 sm:p-5 border border-white/10 shadow-lg text-white space-y-3">
+        <div class="mb-6 bg-white dark:bg-gradient-to-r dark:from-zinc-900 dark:via-[#12141c] dark:to-zinc-900 rounded-[24px] p-4 sm:p-5 border border-zinc-200/80 dark:border-white/10 shadow-sm text-zinc-900 dark:text-white space-y-3">
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div class="flex items-center space-x-2.5">
               <span class="relative flex h-2.5 w-2.5">
                 <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
               </span>
-              <span class="font-extrabold text-sm sm:text-base tracking-tight text-white flex items-center gap-1.5">
+              <span class="font-extrabold text-sm sm:text-base tracking-tight text-zinc-900 dark:text-white flex items-center gap-1.5">
                 <span>📡 Steam 补丁变动与 Mod 兼容性实时避坑雷达</span>
               </span>
-              <span class="bg-[#A855F7]/20 text-purple-400 text-[10px] font-mono px-2 py-0.5 rounded-full border border-[#A855F7]/30 font-bold">24h 智能巡检</span>
+              <span class="bg-[#A855F7]/10 dark:bg-[#A855F7]/20 text-[#A855F7] dark:text-purple-400 text-[10px] font-mono px-2 py-0.5 rounded-full border border-[#A855F7]/20 dark:border-[#A855F7]/30 font-bold">24h 智能巡检</span>
             </div>
 
             <!-- Link to Standalone Radar -->
             <a 
               href="radar.html"
-              class="self-start sm:self-auto px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white/10 hover:bg-white/20 text-zinc-200 border border-white/10 transition-all flex items-center gap-1.5 group cursor-pointer"
+              class="self-start sm:self-auto px-3.5 py-1.5 rounded-full text-xs font-semibold bg-zinc-100 hover:bg-zinc-200 dark:bg-white/10 dark:hover:bg-white/20 text-zinc-700 dark:text-zinc-200 border border-zinc-200 dark:border-white/10 transition-all flex items-center gap-1.5 group cursor-pointer"
             >
               <span>进入全屏雷达看板</span>
               <svg class="w-3.5 h-3.5 text-zinc-400 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
@@ -658,28 +778,28 @@
 
           <!-- Status Indicators Row -->
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-1">
-            <div onclick="filterByRadarStatus('green')" class="bg-white/5 hover:bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-2.5 transition-all cursor-pointer">
+            <div onclick="filterByRadarStatus('green')" class="bg-emerald-50/60 dark:bg-white/5 hover:bg-emerald-100/60 dark:hover:bg-emerald-500/10 border border-emerald-500/25 dark:border-emerald-500/20 rounded-xl p-2.5 transition-all cursor-pointer">
               <div class="flex items-center justify-between">
-                <span class="text-[11px] text-emerald-400 font-medium">🟢 完美兼容实测</span>
-                <span class="text-xs font-mono font-bold text-emerald-400">88 款</span>
+                <span class="text-[11px] text-emerald-700 dark:text-emerald-400 font-bold">🟢 完美兼容实测</span>
+                <span class="text-xs font-mono font-bold text-emerald-700 dark:text-emerald-400">88 款</span>
               </div>
-              <p class="text-[10px] text-zinc-400 mt-0.5 truncate">最新推送实测稳定运行，点击筛选</p>
+              <p class="text-[10px] text-zinc-600 dark:text-zinc-400 mt-0.5 truncate">最新推送实测稳定运行，点击筛选</p>
             </div>
 
-            <div onclick="filterByRadarStatus('yellow')" class="bg-white/5 hover:bg-amber-500/10 border border-amber-500/20 rounded-xl p-2.5 transition-all cursor-pointer">
+            <div onclick="filterByRadarStatus('yellow')" class="bg-amber-50/60 dark:bg-white/5 hover:bg-amber-100/60 dark:hover:bg-amber-500/10 border border-amber-500/25 dark:border-amber-500/20 rounded-xl p-2.5 transition-all cursor-pointer">
               <div class="flex items-center justify-between">
-                <span class="text-[11px] text-amber-400 font-medium">🟡 需更前置/降级</span>
-                <span class="text-xs font-mono font-bold text-amber-400">9 款</span>
+                <span class="text-[11px] text-amber-700 dark:text-amber-400 font-bold">🟡 需更前置/降级</span>
+                <span class="text-xs font-mono font-bold text-amber-700 dark:text-amber-400">9 款</span>
               </div>
-              <p class="text-[10px] text-zinc-400 mt-0.5 truncate">需升级 Script Extender 前置</p>
+              <p class="text-[10px] text-zinc-600 dark:text-zinc-400 mt-0.5 truncate">需升级 Script Extender 前置</p>
             </div>
 
-            <div onclick="filterByRadarStatus('red')" class="bg-white/5 hover:bg-red-500/10 border border-red-500/30 rounded-xl p-2.5 transition-all cursor-pointer">
+            <div onclick="filterByRadarStatus('red')" class="bg-red-50/60 dark:bg-white/5 hover:bg-red-100/60 dark:hover:bg-red-500/10 border border-red-500/25 dark:border-red-500/30 rounded-xl p-2.5 transition-all cursor-pointer">
               <div class="flex items-center justify-between">
-                <span class="text-[11px] text-red-400 font-medium">🔴 坏档暂停更新</span>
-                <span class="text-xs font-mono font-bold text-red-400">3 款</span>
+                <span class="text-[11px] text-red-700 dark:text-red-400 font-bold">🔴 坏档暂停更新</span>
+                <span class="text-xs font-mono font-bold text-red-700 dark:text-red-400">3 款</span>
               </div>
-              <p class="text-[10px] text-zinc-400 mt-0.5 truncate">次世代破坏老Mod，需锁定更新</p>
+              <p class="text-[10px] text-zinc-600 dark:text-zinc-400 mt-0.5 truncate">次世代破坏老Mod，需锁定更新</p>
             </div>
           </div>
         </div>
@@ -1192,7 +1312,7 @@
       </div>
 
       <!-- Security & Reassurance Banner -->
-      <div class="bg-purple-500/10/80 dark:bg-[#A855F7]/10 rounded-2xl p-4 border border-[#A855F7]/20 text-xs text-zinc-700 dark:text-zinc-300 space-y-2">
+      <div class="bg-purple-50 dark:bg-[#A855F7]/10 dark:bg-[#A855F7]/10 rounded-2xl p-4 border border-[#A855F7]/20 text-xs text-zinc-700 dark:text-zinc-300 space-y-2">
         <div class="font-bold text-blue-700 dark:text-purple-400 flex items-center gap-1.5 text-xs sm:text-sm">
           <svg class="w-4 h-4 shrink-0 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
           <span id="lazy-safe-title">老L承诺：100% 原生纯净 · 自动备份原文件 (.bak) · 绝无木马捆绑</span>
@@ -1426,6 +1546,10 @@
         document.documentElement.classList.add('dark');
       } else {
         document.documentElement.classList.remove('dark');
+      }
+      const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+      if (metaThemeColor) {
+        metaThemeColor.setAttribute('content', theme === 'dark' ? '#090a0f' : '#f8fafc');
       }
     }
 
@@ -2041,16 +2165,16 @@
 
           <div>
             <!-- 卡牌头部：序号、稀有度与生命值/避坑状态 -->
-            <div class="flex items-center justify-between pb-2.5 border-b border-white/10 text-xs font-mono-tech">
+            <div class="flex items-center justify-between pb-2.5 border-b border-black/5 dark:border-white/10 text-xs font-mono-tech">
               <div class="flex items-center gap-2">
-                <span class="font-bold text-white tracking-wider">#${game.rank} // 100</span>
-                <span class="text-[10px] ${isUltraRare ? 'text-amber-300 font-bold' : 'text-purple-300'}">
+                <span class="font-bold text-zinc-900 dark:text-white tracking-wider">#${game.rank} // 100</span>
+                <span class="text-[10px] ${isUltraRare ? 'text-amber-600 dark:text-amber-300 font-bold' : 'text-purple-600 dark:text-purple-300 font-medium'}">
                   ${isUltraRare ? '★★★ ULTRA RARE' : '★★ RARE'}
                 </span>
               </div>
-              <div class="flex items-center gap-1.5 text-[10px] text-emerald-400 font-bold">
+              <div class="flex items-center gap-1.5 text-[10px] text-emerald-600 dark:text-emerald-400 font-bold">
                 <span>HP 100</span>
-                <span class="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#10b981]"></span>
+                <span class="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_#10b981]"></span>
               </div>
             </div>
 
@@ -2073,40 +2197,40 @@
             </div>
 
             <!-- 卡牌标题与副标 -->
-            <h2 class="font-display text-2xl text-white tracking-wide group-hover:text-[#A855F7] transition-colors line-clamp-1">${localizedTitle}</h2>
-            <p class="text-[11px] text-slate-400 font-mono-tech line-clamp-1 mt-0.5">${game.title} • ${game.releaseYear}</p>
+            <h2 class="font-display text-2xl text-zinc-900 dark:text-white tracking-wide group-hover:text-[#A855F7] dark:group-hover:text-purple-400 transition-colors line-clamp-1">${localizedTitle}</h2>
+            <p class="text-[11px] text-zinc-500 dark:text-slate-400 font-mono-tech line-clamp-1 mt-0.5">${game.title} • ${game.releaseYear}</p>
 
             <!-- 宝可梦式技能战力槽 (Abilities / Moves Tray) -->
             <div class="ability-tray p-3 mt-3 space-y-2 text-xs font-mono-tech">
               <div class="flex items-center justify-between">
-                <div class="flex items-center gap-1.5 text-slate-300 font-semibold">
-                  <span class="text-purple-400">⚔</span>
+                <div class="flex items-center gap-1.5 text-zinc-600 dark:text-slate-300 font-semibold">
+                  <span class="text-purple-600 dark:text-purple-400">⚔</span>
                   <span>CORE EXTENDER</span>
                 </div>
-                <span class="text-white font-bold">${game.hasMods ? '已对账框架' : '收录中'}</span>
+                <span class="text-zinc-900 dark:text-white font-bold">${game.hasMods ? '已对账框架' : '收录中'}</span>
               </div>
               <div class="flex items-center justify-between">
-                <div class="flex items-center gap-1.5 text-slate-300 font-semibold">
-                  <span class="text-emerald-400">🛡</span>
+                <div class="flex items-center gap-1.5 text-zinc-600 dark:text-slate-300 font-semibold">
+                  <span class="text-emerald-600 dark:text-emerald-400">🛡</span>
                   <span>CLEAN TRAINER</span>
                 </div>
-                <span class="text-purple-300 font-bold">${game.hasTrainer ? '免翻直链已就绪' : '官方代码'}</span>
+                <span class="text-purple-600 dark:text-purple-300 font-bold">${game.hasTrainer ? '免翻直链已就绪' : '官方代码'}</span>
               </div>
               <div class="flex items-center justify-between">
-                <div class="flex items-center gap-1.5 text-slate-300 font-semibold">
-                  <span class="text-amber-400">⚡</span>
+                <div class="flex items-center gap-1.5 text-zinc-600 dark:text-slate-300 font-semibold">
+                  <span class="text-amber-600 dark:text-amber-400">⚡</span>
                   <span>ONE-CLICK .BAT</span>
                 </div>
-                <span class="text-emerald-400 font-bold">${isCertified ? 'AUTO INJECT' : '对账中'}</span>
+                <span class="text-emerald-600 dark:text-emerald-400 font-bold">${isCertified ? 'AUTO INJECT' : '对账中'}</span>
               </div>
             </div>
           </div>
 
           <!-- 卡牌底部铭牌与稀有度防伪戳 -->
-          <div class="pt-3 border-t border-white/10 flex items-center justify-between text-[11px] font-mono-tech text-slate-400">
+          <div class="pt-3 border-t border-black/5 dark:border-white/10 flex items-center justify-between text-[11px] font-mono-tech text-zinc-500 dark:text-slate-400">
             <span>ILLUS. L-MOD VAULT</span>
             <div class="flex items-center gap-2">
-              <span class="text-white font-bold">${downloads} 次拉取</span>
+              <span class="text-zinc-900 dark:text-white font-bold">${downloads} 次拉取</span>
               <span class="w-4 h-4 rounded-full bg-gradient-to-tr from-purple-500 to-cyan-400 flex items-center justify-center text-[9px] text-black font-extrabold shadow-sm">
                 ★
               </span>
@@ -2121,7 +2245,7 @@
         listRow.id = `game-list-row-${game.id}`;
         listRow.href = `#/game/${game.id}`;
         listRow.onclick = () => saveCatalogScroll(game.id);
-        listRow.className = 'group flex items-center justify-between p-3.5 px-4 rounded-2xl hover:bg-white dark:hover:bg-white/5 transition-all border border-transparent hover:border-zinc-200/80 dark:hover:border-white/10 shadow-none hover:shadow-sm';
+        listRow.className = 'group flex items-center justify-between p-3.5 px-4 rounded-2xl bg-white/70 dark:bg-transparent hover:bg-white dark:hover:bg-white/5 transition-all border border-zinc-200/60 dark:border-transparent hover:border-zinc-300 dark:hover:border-white/10 shadow-none hover:shadow-sm';
 
         listRow.innerHTML = `
           <div class="flex items-center space-x-4 min-w-0">
@@ -2191,14 +2315,19 @@
           card.style.setProperty('--pointer-y', `${y.toFixed(1)}px`);
 
           // 动态接触阴影 (随着手倾斜，背光阴影自然扩散)
+          const isDark = document.documentElement.classList.contains('dark');
           const shadowX = ((x - centerX) / centerX) * -12;
           const shadowY = ((y - centerY) / centerY) * -12 + 18;
-          card.style.boxShadow = `${shadowX.toFixed(1)}px ${shadowY.toFixed(1)}px 35px rgba(0, 0, 0, 0.85), 0 0 15px rgba(168, 85, 247, 0.25)`;
+          if (isDark) {
+            card.style.boxShadow = `${shadowX.toFixed(1)}px ${shadowY.toFixed(1)}px 35px rgba(0, 0, 0, 0.85), 0 0 15px rgba(168, 85, 247, 0.25)`;
+          } else {
+            card.style.boxShadow = `${shadowX.toFixed(1)}px ${shadowY.toFixed(1)}px 25px rgba(0, 0, 0, 0.08), 0 0 15px rgba(168, 85, 247, 0.12)`;
+          }
         });
 
         cardContainer.addEventListener('mouseleave', () => {
           card.style.transform = 'rotateX(0deg) rotateY(0deg)';
-          card.style.boxShadow = '0 15px 35px -5px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(0, 0, 0, 0.6)';
+          card.style.boxShadow = ''; // 清除内联阴影，优雅回落至 CSS var(--card-shadow)
           card.style.transition = 'transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s ease';
         });
 

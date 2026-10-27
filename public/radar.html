@@ -58,15 +58,36 @@
     }
   </script>
   <style>
+    :root {
+      --radar-bg: #f8fafc;
+      --radar-surface: #ffffff;
+      --radar-card: #ffffff;
+      --radar-card-hover: #f1f5f9;
+      --radar-border: rgba(0, 0, 0, 0.08);
+      --radar-text: #0f172a;
+      --radar-text-muted: #64748b;
+    }
+
+    html.dark {
+      --radar-bg: #0a0b0e;
+      --radar-surface: #0c0d12;
+      --radar-card: #12141a;
+      --radar-card-hover: #181b24;
+      --radar-border: rgba(255, 255, 255, 0.08);
+      --radar-text: #e2e8f0;
+      --radar-text-muted: #94a3b8;
+    }
+
     * {
       box-sizing: border-box;
       -webkit-tap-highlight-color: transparent;
     }
     html, body {
-      background-color: #0a0b0e;
-      color: #e2e8f0;
+      background-color: var(--radar-bg);
+      color: var(--radar-text);
       min-height: 100vh;
       -webkit-font-smoothing: antialiased;
+      transition: background-color 0.25s ease, color 0.25s ease;
     }
     /* WeChat and mobile smooth scrolling */
     body {
@@ -234,25 +255,25 @@
   <!-- ======================================================== -->
   <!-- 2. RADAR HEADER & BRAND SECTION                         -->
   <!-- ======================================================== -->
-  <header class="relative border-b border-white/[0.08] bg-[#0c0d12]/90 py-8 px-4 sm:px-8">
+  <header class="relative border-b border-zinc-200/80 dark:border-white/[0.08] bg-white/90 dark:bg-[#0c0d12]/90 backdrop-blur-xl py-8 px-4 sm:px-8 transition-colors">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-6">
       
       <!-- Brand & Title -->
       <div class="space-y-2">
         <div class="flex items-center space-x-3">
           <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-blue-500 via-indigo-600 to-emerald-400 p-0.5 shadow-lg shadow-[#A855F7]/20 flex items-center justify-center">
-            <div class="w-full h-full bg-[#0e1017] rounded-[14px] flex items-center justify-center text-lg">
+            <div class="w-full h-full bg-white dark:bg-[#0e1017] rounded-[14px] flex items-center justify-center text-lg shadow-sm">
               📡
             </div>
           </div>
           <div>
             <div class="flex items-center space-x-2">
-              <h1 class="text-xl sm:text-2xl font-black tracking-tight text-white flex items-center gap-2">
+              <h1 class="text-xl sm:text-2xl font-black tracking-tight text-zinc-900 dark:text-white flex items-center gap-2">
                 <span id="radar-header-title">Steam 补丁变动与 Mod 兼容性实时雷达</span>
               </h1>
               <span class="bg-[#A855F7]/20 text-[#A855F7] text-[10px] font-mono px-2 py-0.5 rounded-full border border-[#A855F7]/30 font-bold uppercase tracking-wider" id="radar-header-version">v4.0 独立看板</span>
             </div>
-            <p class="text-xs text-zinc-400 flex items-center gap-2 pt-0.5">
+            <p class="text-xs text-zinc-500 dark:text-zinc-400 flex items-center gap-2 pt-0.5">
               <span id="radar-header-powered">由 L-MOD Vault 避坑实验室驱动</span>
               <span class="text-zinc-600">·</span>
               <span class="text-emerald-400 flex items-center gap-1 font-mono">
@@ -270,6 +291,19 @@
           <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
           <span id="radar-group-code-label">进避坑互助群暗号:</span>
           <span class="font-mono font-extrabold text-amber-300">【老L单机888】</span>
+        </button>
+
+        <!-- Custom Theme Switcher Button for Radar -->
+        <button 
+          onclick="toggleTheme()" 
+          id="theme-toggle-btn" 
+          title="切换白天 / 夜间模式 (跟随当前设备)"
+          class="flex items-center justify-center w-9 h-9 rounded-xl bg-zinc-100 hover:bg-zinc-200 dark:bg-white/5 dark:hover:bg-white/10 text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-white/10 shadow-sm transition-all cursor-pointer"
+        >
+          <!-- Sun Icon (for Dark mode) -->
+          <svg class="w-4 h-4 hidden dark:block text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+          <!-- Moon Icon (for Light mode) -->
+          <svg class="w-4 h-4 block dark:hidden text-zinc-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
         </button>
 
         <!-- Custom Language Dropdown for Radar -->
@@ -344,7 +378,7 @@
     <div class="grid grid-cols-2 md:grid-cols-4 gap-3.5">
       
       <!-- Card 1: Green Compatible -->
-      <div onclick="filterByStatus('green')" class="cursor-pointer group relative overflow-hidden bg-[#12141a] hover:bg-[#161922] p-4 rounded-2xl border border-emerald-500/20 hover:border-emerald-500/40 transition-all glow-green">
+      <div onclick="filterByStatus('green')" class="cursor-pointer group relative overflow-hidden bg-white dark:bg-[#12141a] hover:bg-slate-50 dark:hover:bg-[#161922] p-4 rounded-2xl border border-emerald-500/30 dark:border-emerald-500/20 hover:border-emerald-500/50 transition-all shadow-sm glow-green">
         <div class="flex items-center justify-between mb-2">
           <span class="text-xs font-medium text-emerald-400 flex items-center gap-1.5">
             <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
@@ -360,7 +394,7 @@
       </div>
 
       <!-- Card 2: Amber Need Update -->
-      <div onclick="filterByStatus('yellow')" class="cursor-pointer group relative overflow-hidden bg-[#12141a] hover:bg-[#161922] p-4 rounded-2xl border border-amber-500/20 hover:border-amber-500/40 transition-all glow-amber">
+      <div onclick="filterByStatus('yellow')" class="cursor-pointer group relative overflow-hidden bg-white dark:bg-[#12141a] hover:bg-slate-50 dark:hover:bg-[#161922] p-4 rounded-2xl border border-amber-500/30 dark:border-amber-500/20 hover:border-amber-500/50 transition-all shadow-sm glow-amber">
         <div class="flex items-center justify-between mb-2">
           <span class="text-xs font-medium text-amber-400 flex items-center gap-1.5">
             <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
@@ -376,7 +410,7 @@
       </div>
 
       <!-- Card 3: Red Save-Corrupt Danger -->
-      <div onclick="filterByStatus('red')" class="cursor-pointer group relative overflow-hidden bg-[#12141a] hover:bg-[#161922] p-4 rounded-2xl border border-red-500/20 hover:border-red-500/40 transition-all glow-red">
+      <div onclick="filterByStatus('red')" class="cursor-pointer group relative overflow-hidden bg-white dark:bg-[#12141a] hover:bg-slate-50 dark:hover:bg-[#161922] p-4 rounded-2xl border border-red-500/30 dark:border-red-500/20 hover:border-red-500/50 transition-all shadow-sm glow-red">
         <div class="flex items-center justify-between mb-2">
           <span class="text-xs font-medium text-red-400 flex items-center gap-1.5">
             <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
@@ -392,7 +426,7 @@
       </div>
 
       <!-- Card 4: Radar Status / Inspection Info -->
-      <div class="relative overflow-hidden bg-[#12141a] p-4 rounded-2xl border border-white/5">
+      <div class="relative overflow-hidden bg-white dark:bg-[#12141a] p-4 rounded-2xl border border-zinc-200/80 dark:border-white/5 shadow-sm">
         <div class="flex items-center justify-between mb-2">
           <span class="text-xs font-medium text-cyan-400 flex items-center gap-1.5">
             <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
@@ -414,7 +448,7 @@
   <!-- 4. SEARCH & MULTI-DIMENSIONAL FILTER CONTROLS           -->
   <!-- ======================================================== -->
   <section class="max-w-7xl mx-auto px-4 sm:px-8 py-4">
-    <div class="bg-[#12141a] rounded-2xl p-4 sm:p-5 border border-white/[0.08] space-y-4 shadow-xl">
+    <div class="bg-white dark:bg-[#12141a] rounded-2xl p-4 sm:p-5 border border-zinc-200/80 dark:border-white/[0.08] space-y-4 shadow-sm dark:shadow-xl">
       
       <!-- Top Row: Search Input + Quick Reset -->
       <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
@@ -427,7 +461,7 @@
             id="radar-search" 
             oninput="handleSearch(this.value)"
             placeholder="搜索游戏名称、中文别名、Steam AppID (如 1245620)、底层引擎..."
-            class="w-full bg-[#0a0b0e] text-white text-xs sm:text-sm pl-10 pr-10 py-2.5 rounded-xl border border-white/10 focus:border-[#A855F7] focus:outline-none focus:ring-1 focus:ring-[#A855F7] placeholder-zinc-500 transition-all"
+            class="w-full bg-slate-50 dark:bg-[#0a0b0e] text-zinc-900 dark:text-white text-xs sm:text-sm pl-10 pr-10 py-2.5 rounded-xl border border-zinc-200 dark:border-white/10 focus:border-[#A855F7] focus:outline-none focus:ring-1 focus:ring-[#A855F7] placeholder-zinc-400 dark:placeholder-zinc-500 transition-all"
           />
           <button 
             id="clear-search-btn" 
@@ -444,7 +478,7 @@
           <select 
             id="sort-select" 
             onchange="handleSort(this.value)"
-            class="bg-[#0a0b0e] text-white text-xs py-2.5 px-3 rounded-xl border border-white/10 focus:border-[#A855F7] focus:outline-none cursor-pointer"
+            class="bg-slate-50 dark:bg-[#0a0b0e] text-zinc-900 dark:text-white text-xs py-2.5 px-3 rounded-xl border border-zinc-200 dark:border-white/10 focus:border-[#A855F7] focus:outline-none cursor-pointer"
           >
             <option value="risk-desc" id="opt-risk-desc">⚠️ 风险优先 (坏档/需前置置顶)</option>
             <option value="rank-asc" id="opt-rank-asc">👑 游戏排名 (Rank 1 ~ 100)</option>
@@ -534,7 +568,7 @@
     <!-- Drawer Panel (Mobile Bottom Sheet / Desktop Right Drawer) -->
     <div 
       id="drawer-panel"
-      class="drawer-content absolute inset-x-0 bottom-0 md:inset-y-0 md:left-auto md:right-0 md:w-[620px] max-h-[92vh] md:max-h-full bg-[#101218] border-t md:border-t-0 md:border-l border-white/10 rounded-t-[28px] md:rounded-t-none md:rounded-l-[28px] shadow-2xl flex flex-col overflow-hidden translate-y-full md:translate-y-0 md:translate-x-full transition-transform pointer-events-auto"
+      class="drawer-content absolute inset-x-0 bottom-0 md:inset-y-0 md:left-auto md:right-0 md:w-[620px] max-h-[92vh] md:max-h-full bg-white dark:bg-[#101218] border-t md:border-t-0 md:border-l border-zinc-200 dark:border-white/10 rounded-t-[28px] md:rounded-t-none md:rounded-l-[28px] shadow-2xl flex flex-col overflow-hidden translate-y-full md:translate-y-0 md:translate-x-full transition-transform pointer-events-auto"
     >
       <!-- Mobile Pull Bar Indicator -->
       <div class="md:hidden pt-3 pb-1 flex justify-center cursor-pointer" onclick="closeGameDrawer()">
@@ -566,7 +600,7 @@
             <span class="bg-[#A855F7]/20 text-[#A855F7] text-[10px] font-mono px-2 py-0.5 rounded font-bold" id="drawer-rank"></span>
             <span class="text-xs text-zinc-400" id="drawer-engine"></span>
           </div>
-          <h2 class="text-xl sm:text-2xl font-black text-white" id="drawer-title"></h2>
+          <h2 class="text-xl sm:text-2xl font-black text-zinc-900 dark:text-white" id="drawer-title"></h2>
           <p class="text-xs text-zinc-400" id="drawer-entitle"></p>
         </div>
 
@@ -578,7 +612,7 @@
             </span>
             <span class="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20" id="drawer-patch"></span>
           </div>
-          <p class="text-xs text-zinc-300 leading-relaxed" id="drawer-summary"></p>
+          <p class="text-xs text-zinc-700 dark:text-zinc-300 leading-relaxed" id="drawer-summary"></p>
           
           <!-- Risk Box -->
           <div id="drawer-risk-box" class="p-3.5 rounded-xl border space-y-1">
@@ -596,7 +630,7 @@
             <span class="text-[11px] text-zinc-400" id="drawer-rescue-sub">100% 官方离线底层机制</span>
           </div>
 
-          <div class="space-y-2 text-xs text-zinc-300 leading-relaxed" id="drawer-rescue-steps">
+          <div class="space-y-2 text-xs text-zinc-700 dark:text-zinc-300 leading-relaxed" id="drawer-rescue-steps">
             <!-- Injected -->
           </div>
 
@@ -1563,7 +1597,7 @@ pause`
         return `
           <div 
             onclick="openGameDrawerById('${game.id}')"
-            class="group relative overflow-hidden bg-[#12141a] hover:bg-[#161822] rounded-2xl p-5 border ${statusBorder} transition-all duration-200 cursor-pointer flex flex-col justify-between shadow-lg"
+            class="group relative overflow-hidden bg-white dark:bg-[#12141a] hover:bg-slate-50 dark:hover:bg-[#161822] rounded-2xl p-5 border ${statusBorder} transition-all duration-200 cursor-pointer flex flex-col justify-between shadow-sm dark:shadow-lg"
           >
             <!-- Top Status & Rank Row -->
             <div class="space-y-3">
@@ -1577,7 +1611,7 @@ pause`
 
               <!-- Title & Meta -->
               <div>
-                <h3 class="text-base sm:text-lg font-black text-white group-hover:text-[#A855F7] transition-colors line-clamp-1">
+                <h3 class="text-base sm:text-lg font-black text-zinc-900 dark:text-white group-hover:text-[#A855F7] dark:group-hover:text-purple-400 transition-colors line-clamp-1">
                   ${localizedTitle}
                 </h3>
                 <div class="flex items-center space-x-2 text-xs text-zinc-400 pt-0.5">
@@ -1589,7 +1623,7 @@ pause`
 
               <!-- Verified Patch & Engine Badges -->
               <div class="flex items-center flex-wrap gap-1.5 pt-1">
-                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-white/5 text-zinc-300 border border-white/5 truncate max-w-[220px]">
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-100 dark:bg-white/5 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-white/5 truncate max-w-[220px]">
                   📌 ${meta.verifiedPatch}
                 </span>
                 <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-[#A855F7]/10 text-[#A855F7] border border-[#A855F7]/20">
@@ -1598,7 +1632,7 @@ pause`
               </div>
 
               <!-- Brief Verdict -->
-              <p class="text-xs text-zinc-300 line-clamp-2 leading-relaxed pt-1">
+              <p class="text-xs text-zinc-600 dark:text-zinc-300 line-clamp-2 leading-relaxed pt-1">
                 ${meta.summary}
               </p>
 
@@ -1614,7 +1648,7 @@ pause`
             </div>
 
             <!-- Card Bottom Bar: Rescue CTA -->
-            <div class="flex items-center justify-between pt-4 mt-3 border-t border-white/5 text-xs">
+            <div class="flex items-center justify-between pt-4 mt-3 border-t border-zinc-200/80 dark:border-white/5 text-xs">
               <span class="text-[#A855F7] group-hover:text-purple-300 font-semibold flex items-center gap-1">
                 <span>${t('viewRescueGuide', '查看避坑急救方案')}</span>
                 <svg class="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
