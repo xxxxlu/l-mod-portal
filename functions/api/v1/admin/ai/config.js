@@ -51,7 +51,7 @@ export async function onRequestGet(context) {
         temperature: 0.3,
         recall_threshold: 0.65,
         max_context_commands: 6,
-        primary_model: 'gemini-2.5-flash',
+        primary_model: 'gemini-1.5-flash',
         fallback_model: 'deepseek-chat',
         skills: {
           game_vault_rag: true,

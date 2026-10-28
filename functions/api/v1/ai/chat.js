@@ -491,8 +491,13 @@ export async function onRequestPost(context) {
       { role: 'user', content: rawQuery }
     ];
 
-    // 6. 确定可用大模型路由优先级
-    const availableRoute = resolveAvailableModelRoute(config);
+    // 6. 确定可用大模型路由与轮换池优先级 (支持 Gemini + OpenRouter + DeepSeek 智能热备轮换)
+    const availableRoutes = resolveAvailableModelRoutes(config);
+    const primaryRoute = availableRoutes[0] || {
+      type: 'local_d1_engine',
+      modelName: 'LMOD-Edge-RAG-v4.0',
+      reason: '当前未配置外部大模型 API Key，已切换为 D1 智库底层原生规则引擎输出'
+    };
 
     // 7. 执行大模型流式调用或智能兜底
     if (isStream) {
@@ -512,38 +517,49 @@ export async function onRequestPost(context) {
             } : null,
             skills_triggered: skillsTriggered,
             commands_count: retrievedCommands.length,
-            model_route: availableRoute.modelName,
+            model_route: primaryRoute.modelName,
             status: 'streaming'
           })}\n\n`;
           await writer.write(encoder.encode(metaEvent));
 
           let streamSuccess = false;
+          let activeRoute = null;
 
-          // 优先尝试官方大模型流式输出
-          if (availableRoute.type === 'gemini') {
-            streamSuccess = await streamGemini(
-              availableRoute.key,
-              availableRoute.modelName,
-              synthesizedPrompt,
-              conversationMessages,
-              config.temperature,
-              writer,
-              encoder
-            );
-          } else if (availableRoute.type === 'openai_compatible') {
-            streamSuccess = await streamOpenAiCompatible(
-              availableRoute.endpoint,
-              availableRoute.key,
-              availableRoute.modelName,
-              synthesizedPrompt,
-              conversationMessages,
-              config.temperature,
-              writer,
-              encoder
-            );
+          // 循环尝试可用路由池 (若主力遇到 429 或故障则秒级故障转移至备选)
+          for (const route of availableRoutes) {
+            try {
+              if (route.type === 'gemini') {
+                streamSuccess = await streamGemini(
+                  route.key,
+                  route.modelName,
+                  synthesizedPrompt,
+                  conversationMessages,
+                  config.temperature,
+                  writer,
+                  encoder
+                );
+              } else if (route.type === 'openai_compatible') {
+                streamSuccess = await streamOpenAiCompatible(
+                  route.endpoint,
+                  route.key,
+                  route.modelName,
+                  synthesizedPrompt,
+                  conversationMessages,
+                  config.temperature,
+                  writer,
+                  encoder
+                );
+              }
+              if (streamSuccess) {
+                activeRoute = route;
+                break;
+              }
+            } catch (errRoute) {
+              console.warn(`Model route ${route.reason} attempt failed:`, errRoute);
+            }
           }
 
-          // 若大模型未配置或在线流式调用失败，使用边缘本地规则引擎合成高质感回答兜底
+          // 若大模型未配置或在线流式调用全部失败，使用边缘本地规则引擎合成高质感回答兜底
           if (!streamSuccess) {
             const fallbackText = generateEdgeEngineFallbackAnswer({
               query: rawQuery,
@@ -553,7 +569,7 @@ export async function onRequestPost(context) {
               crashGuideInfo,
               isHighRiskQuery,
               skillsTriggered,
-              routeMsg: availableRoute.reason
+              routeMsg: availableRoutes.length > 0 ? '外部大模型调用超时或受限，已切换为 D1 智库底层原生规则引擎输出' : '当前未配置外部大模型 API Key，已切换为 D1 智库底层原生规则引擎输出'
             });
 
             // 模拟极客打字机效果切块推送
@@ -566,7 +582,11 @@ export async function onRequestPost(context) {
           }
 
           // 推送完成事件
-          const doneEvent = `event: done\ndata: ${JSON.stringify({ status: 'completed' })}\n\n`;
+          const doneEvent = `event: done\ndata: ${JSON.stringify({
+            status: 'completed',
+            tokens_generated: streamSuccess ? 'llm_stream' : 'edge_engine',
+            active_model: activeRoute ? activeRoute.modelName : primaryRoute.modelName
+          })}\n\n`;
           await writer.write(encoder.encode(doneEvent));
           await writer.write(encoder.encode('data: [DONE]\n\n'));
 
@@ -592,10 +612,22 @@ export async function onRequestPost(context) {
     } else {
       // 非流式普通 JSON 响应
       let fullText = '';
-      if (availableRoute.type === 'gemini') {
-        fullText = await fetchGeminiSync(availableRoute.key, availableRoute.modelName, synthesizedPrompt, conversationMessages, config.temperature);
-      } else if (availableRoute.type === 'openai_compatible') {
-        fullText = await fetchOpenAiSync(availableRoute.endpoint, availableRoute.key, availableRoute.modelName, synthesizedPrompt, conversationMessages, config.temperature);
+      let activeRoute = null;
+
+      for (const route of availableRoutes) {
+        try {
+          if (route.type === 'gemini') {
+            fullText = await fetchGeminiSync(route.key, route.modelName, synthesizedPrompt, conversationMessages, config.temperature);
+          } else if (route.type === 'openai_compatible') {
+            fullText = await fetchOpenAiSync(route.endpoint, route.key, route.modelName, synthesizedPrompt, conversationMessages, config.temperature);
+          }
+          if (fullText) {
+            activeRoute = route;
+            break;
+          }
+        } catch (errRoute) {
+          console.warn(`Sync model route ${route.reason} attempt failed:`, errRoute);
+        }
       }
 
       if (!fullText) {
@@ -607,7 +639,7 @@ export async function onRequestPost(context) {
           crashGuideInfo,
           isHighRiskQuery,
           skillsTriggered,
-          routeMsg: availableRoute.reason
+          routeMsg: availableRoutes.length > 0 ? '外部大模型调用超时或受限，已切换为 D1 智库底层原生规则引擎输出' : '当前未配置外部大模型 API Key，已切换为 D1 智库底层原生规则引擎输出'
         });
       }
 
@@ -619,7 +651,7 @@ export async function onRequestPost(context) {
           game: matchedGame,
           skills_triggered: skillsTriggered,
           retrieved_commands: retrievedCommands,
-          model_route: availableRoute.modelName
+          model_route: activeRoute ? activeRoute.modelName : primaryRoute.modelName
         }
       }), {
         headers: { 'Content-Type': 'application/json; charset=utf-8' }
@@ -640,57 +672,59 @@ export async function onRequestPost(context) {
 }
 
 // =============================================================================
-// 模型路由判定解析器
+// 模型路由判定与轮换池解析器 (Multi-Provider Priority Resolver)
 // =============================================================================
-function resolveAvailableModelRoute(config) {
-  // 1. 优先 Google Gemini
-  if (config.primary_model.startsWith('gemini') && config.gemini_api_key) {
-    return {
-      type: 'gemini',
-      key: config.gemini_api_key,
-      modelName: config.primary_model,
-      reason: '官方配置 Google Gemini 旗舰模型'
-    };
-  }
+function resolveAvailableModelRoutes(config) {
+  const routes = [];
 
-  // 2. DeepSeek
-  if ((config.primary_model.includes('deepseek') || config.fallback_model.includes('deepseek')) && config.deepseek_api_key) {
-    return {
-      type: 'openai_compatible',
-      endpoint: 'https://api.deepseek.com/chat/completions',
-      key: config.deepseek_api_key,
-      modelName: config.primary_model.includes('deepseek') ? config.primary_model : 'deepseek-chat',
-      reason: '官方配置 DeepSeek 大模型'
-    };
-  }
-
-  // 3. 自定义 OpenAI 规范端点
-  if (config.custom_endpoint && config.custom_api_key) {
-    return {
-      type: 'openai_compatible',
-      endpoint: config.custom_endpoint,
-      key: config.custom_api_key,
-      modelName: config.custom_model || 'custom-model',
-      reason: '官方自定义兼容端点'
-    };
-  }
-
-  // 4. 若 primary 未能命中但备用 Gemini 可用
-  if (config.gemini_api_key) {
-    return {
-      type: 'gemini',
-      key: config.gemini_api_key,
-      modelName: 'gemini-2.5-flash',
-      reason: '降级路由 Google Gemini 极速版'
-    };
-  }
-
-  // 5. 纯本地 D1 智能引擎
-  return {
-    type: 'local_d1_engine',
-    modelName: 'LMOD-Edge-RAG-v4.0',
-    reason: '当前未配置外部大模型 API Key，已切换为 D1 智库底层原生规则引擎输出'
+  const addRoute = (type, key, model, endpoint, reason) => {
+    if (!key) return;
+    routes.push({
+      type,
+      key,
+      modelName: model,
+      endpoint,
+      reason
+    });
   };
+
+  // 1. Google Gemini (官方免费 1.5 Flash / 1.5 Pro)
+  if (config.gemini_api_key) {
+    let gModel = config.primary_model?.startsWith('gemini') ? config.primary_model : 'gemini-1.5-flash';
+    if (gModel === 'gemini-2.5-flash') gModel = 'gemini-1.5-flash';
+    addRoute('gemini', config.gemini_api_key, gModel, null, `Google Gemini 官方免费大模型 (${gModel})`);
+  }
+
+  // 2. OpenRouter / 自定义 OpenAI 兼容端点 (支持免费模型池轮换)
+  if (config.custom_api_key) {
+    const isOrKey = config.custom_api_key.startsWith('sk-or-');
+    let endpoint = (config.custom_endpoint || '').trim();
+    if (!endpoint && isOrKey) {
+      endpoint = 'https://openrouter.ai/api/v1/chat/completions';
+    }
+    let cModel = config.custom_model || (config.primary_model?.includes('/') ? config.primary_model : 'google/gemini-2.0-flash-exp:free');
+    if (cModel === 'openrouter/free') cModel = 'google/gemini-2.0-flash-exp:free';
+    if (endpoint) {
+      addRoute('openai_compatible', config.custom_api_key, cModel, endpoint, isOrKey ? `OpenRouter 免费轮换模型 (${cModel})` : `自定义端点 (${cModel})`);
+    }
+  }
+
+  // 3. DeepSeek 官方
+  if (config.deepseek_api_key) {
+    addRoute('openai_compatible', config.deepseek_api_key, 'deepseek-chat', 'https://api.deepseek.com/chat/completions', 'DeepSeek-V3 官方大模型');
+  }
+
+  // 依据站长配置的主选偏好排序路由池
+  if (config.primary_model && (config.primary_model.includes('openrouter') || config.primary_model.includes('/') || config.primary_model === 'custom')) {
+    routes.sort((a, b) => (a.reason.includes('OpenRouter') || a.reason.includes('自定义') ? -1 : 1));
+  } else if (config.primary_model?.includes('deepseek')) {
+    routes.sort((a, b) => (a.reason.includes('DeepSeek') ? -1 : 1));
+  } else {
+    // 默认 Gemini 优先
+    routes.sort((a, b) => (a.type === 'gemini' ? -1 : 1));
+  }
+
+  return routes;
 }
 
 // =============================================================================
@@ -806,7 +840,12 @@ function buildEngineCrashKnowledge(gameId, query) {
 // =============================================================================
 async function streamGemini(apiKey, modelName, systemPrompt, messages, temperature, writer, encoder) {
   try {
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:streamGenerateContent?alt=sse&key=${apiKey}`;
+    // 兼容映射：防止历史配置或误填导致 404
+    let targetModel = modelName;
+    if (!targetModel || targetModel === 'gemini-2.5-flash') {
+      targetModel = 'gemini-1.5-flash';
+    }
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/${targetModel}:streamGenerateContent?alt=sse&key=${apiKey}`;
 
     // 格式化 Gemini 历史与当前提问
     const geminiContents = messages.map(m => ({
@@ -872,18 +911,30 @@ async function streamGemini(apiKey, modelName, systemPrompt, messages, temperatu
 }
 
 // =============================================================================
-// OpenAI / DeepSeek 兼容端点流式调用实现
+// OpenAI / OpenRouter / DeepSeek 兼容端点流式调用实现
 // =============================================================================
 async function streamOpenAiCompatible(endpoint, apiKey, modelName, systemPrompt, messages, temperature, writer, encoder) {
   try {
-    const response = await fetch(endpoint, {
+    let targetUrl = (endpoint || 'https://openrouter.ai/api/v1/chat/completions').trim();
+    if (!targetUrl.endsWith('/chat/completions')) {
+      targetUrl = targetUrl.replace(/\/+$/, '') + '/chat/completions';
+    }
+
+    let targetModel = modelName && modelName !== 'custom' ? modelName : 'google/gemini-2.0-flash-exp:free';
+    if (targetModel === 'openrouter/free') {
+      targetModel = 'google/gemini-2.0-flash-exp:free';
+    }
+
+    const response = await fetch(targetUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${apiKey}`
+        'Authorization': `Bearer ${apiKey}`,
+        'HTTP-Referer': 'https://lmod-vault.pages.dev',
+        'X-Title': 'L-MOD Vault'
       },
       body: JSON.stringify({
-        model: modelName,
+        model: targetModel,
         messages: [
           { role: 'system', content: systemPrompt },
           ...messages
@@ -940,7 +991,11 @@ async function streamOpenAiCompatible(endpoint, apiKey, modelName, systemPrompt,
 // =============================================================================
 async function fetchGeminiSync(apiKey, modelName, systemPrompt, messages, temperature) {
   try {
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`;
+    let targetModel = modelName;
+    if (!targetModel || targetModel === 'gemini-2.5-flash') {
+      targetModel = 'gemini-1.5-flash';
+    }
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/${targetModel}:generateContent?key=${apiKey}`;
     const geminiContents = messages.map(m => ({
       role: m.role === 'assistant' ? 'model' : 'user',
       parts: [{ text: m.content }]
@@ -965,14 +1020,26 @@ async function fetchGeminiSync(apiKey, modelName, systemPrompt, messages, temper
 
 async function fetchOpenAiSync(endpoint, apiKey, modelName, systemPrompt, messages, temperature) {
   try {
-    const response = await fetch(endpoint, {
+    let targetUrl = (endpoint || 'https://openrouter.ai/api/v1/chat/completions').trim();
+    if (!targetUrl.endsWith('/chat/completions')) {
+      targetUrl = targetUrl.replace(/\/+$/, '') + '/chat/completions';
+    }
+
+    let targetModel = modelName && modelName !== 'custom' ? modelName : 'google/gemini-2.0-flash-exp:free';
+    if (targetModel === 'openrouter/free') {
+      targetModel = 'google/gemini-2.0-flash-exp:free';
+    }
+
+    const response = await fetch(targetUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${apiKey}`
+        'Authorization': `Bearer ${apiKey}`,
+        'HTTP-Referer': 'https://lmod-vault.pages.dev',
+        'X-Title': 'L-MOD Vault'
       },
       body: JSON.stringify({
-        model: modelName,
+        model: targetModel,
         messages: [{ role: 'system', content: systemPrompt }, ...messages],
         temperature: temperature || 0.3
       })

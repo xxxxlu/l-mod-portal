@@ -725,10 +725,13 @@
                 <div>
                   <label class="block text-slate-400 mb-1">主选大模型 (Primary Route)</label>
                   <select id="ai-primary-model" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-white">
-                    <option value="gemini-2.5-flash">Google Gemini 2.5 Flash (极速智能推理 · 官方推荐)</option>
-                    <option value="gemini-2.0-flash">Google Gemini 2.0 Flash (最新高并发)</option>
-                    <option value="deepseek-chat">DeepSeek-V3 / DeepSeek-Chat (深度思考单机专家)</option>
-                    <option value="gemini-1.5-pro">Google Gemini 1.5 Pro (超长上下文)</option>
+                    <option value="gemini-1.5-flash">Google Gemini 1.5 Flash (官方免费高配额 · 1500次/天 · 首选推荐)</option>
+                    <option value="gemini-1.5-pro">Google Gemini 1.5 Pro (官方免费 · 超长上下文)</option>
+                    <option value="gemini-2.0-flash-exp">Google Gemini 2.0 Flash Exp (最新体验版)</option>
+                    <option value="openrouter/free">OpenRouter 免费模型轮换池 (:free 系列)</option>
+                    <option value="deepseek/deepseek-r1:free">OpenRouter: DeepSeek R1 (免费深度思考推理)</option>
+                    <option value="meta-llama/llama-3.3-70b-instruct:free">OpenRouter: Llama 3.3 70B (免费开源神兽)</option>
+                    <option value="deepseek-chat">DeepSeek 官方 API (DeepSeek-V3 深度思考单机专家)</option>
                     <option value="custom">自定义兼容端点模型 (Custom Route)</option>
                   </select>
                 </div>
@@ -736,8 +739,9 @@
                 <div>
                   <label class="block text-slate-400 mb-1">备用降级路由 (Fallback)</label>
                   <select id="ai-fallback-model" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-white">
+                    <option value="openrouter/free">OpenRouter 免费轮换模型 (:free)</option>
+                    <option value="gemini-1.5-flash">Google Gemini 1.5 Flash</option>
                     <option value="deepseek-chat">DeepSeek-Chat</option>
-                    <option value="gemini-2.5-flash">Google Gemini 2.5 Flash</option>
                     <option value="local">D1 本地规则引擎 (零延迟兜底)</option>
                   </select>
                 </div>
@@ -776,30 +780,40 @@
                   >
                 </div>
 
-                <!-- Custom OpenAI Compatible Endpoint -->
+                <!-- Custom / OpenRouter OpenAI Compatible Endpoint -->
                 <div id="ai-custom-box" class="pt-2 border-t border-slate-800/80 space-y-2">
+                  <div class="flex items-center justify-between">
+                    <label class="block text-slate-400 text-xs">OpenRouter / 自定义兼容端点</label>
+                    <button 
+                      type="button" 
+                      onclick="window.quickFillOpenRouter()" 
+                      class="text-[10px] text-purple-400 hover:text-purple-300 underline font-sans cursor-pointer"
+                    >
+                      ⚡ 一键填入 OpenRouter 预设
+                    </button>
+                  </div>
                   <div>
-                    <label class="block text-slate-400 mb-1">自定义端点 URL (OpenAI 规范)</label>
                     <input 
                       id="ai-custom-endpoint" 
                       type="text" 
-                      placeholder="https://api.example.com/v1/chat/completions" 
+                      placeholder="https://openrouter.ai/api/v1/chat/completions" 
                       class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-xs text-white placeholder-slate-600 font-mono"
                     >
                   </div>
                   <div>
-                    <label class="block text-slate-400 mb-1">自定义 API Key</label>
+                    <label class="block text-slate-400 mb-1">OpenRouter / 自定义 API Key</label>
                     <input 
                       id="ai-custom-key" 
                       type="password" 
-                      placeholder="自定义端点 Key" 
+                      placeholder="sk-or-v1-... (若保留原密钥留空或保持掩码)" 
                       class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-xs text-white placeholder-slate-600 font-mono"
                     >
                   </div>
                 </div>
 
-                <div class="p-2.5 rounded-lg bg-purple-950/20 border border-purple-500/20 text-[11px] text-purple-300 leading-relaxed font-sans">
-                  🔒 密钥保存在 D1 加密系统表或 Pages 环境变量中，前台玩家发起提问走官方流式代理中继，绝不暴露真实 Key。
+                <div class="p-2.5 rounded-lg bg-purple-950/20 border border-purple-500/20 text-[11px] text-purple-300 leading-relaxed font-sans space-y-1">
+                  <div>💡 <b>双擎轮换策略</b>：支持同时填入 Google Gemini 与 OpenRouter 免费 Key。系统会自动优先调用主选模型，遇 429 配额限制自动秒级切换至备选模型，最后由 D1 智库兜底！</div>
+                  <div>🔒 <b>安全保障</b>：密钥全量脱敏存储于 Cloudflare D1 加密系统表，玩家前台只走官方中继代理。</div>
                 </div>
               </div>
             </div>
@@ -2019,8 +2033,10 @@
         document.getElementById('ai-recall-val').textContent = cfg.recall_threshold || 0.65;
         document.getElementById('ai-max-cmds-slider').value = cfg.max_context_commands || 6;
         document.getElementById('ai-max-cmds-val').textContent = cfg.max_context_commands || 6;
-        document.getElementById('ai-primary-model').value = cfg.primary_model || 'gemini-2.5-flash';
-        document.getElementById('ai-fallback-model').value = cfg.fallback_model || 'deepseek-chat';
+        let pModel = cfg.primary_model || 'gemini-1.5-flash';
+        if (pModel === 'gemini-2.5-flash') pModel = 'gemini-1.5-flash';
+        document.getElementById('ai-primary-model').value = pModel;
+        document.getElementById('ai-fallback-model').value = cfg.fallback_model || 'openrouter/free';
 
         // 4 大专属 Skills 矩阵回填
         const skills = cfg.skills || {};
@@ -2058,6 +2074,13 @@
         document.getElementById('ai-custom-endpoint').value = cfg.custom_endpoint || '';
         document.getElementById('ai-custom-key').value = cfg.custom_api_key || '';
       }
+
+      window.quickFillOpenRouter = function () {
+        document.getElementById('ai-custom-endpoint').value = 'https://openrouter.ai/api/v1/chat/completions';
+        document.getElementById('ai-primary-model').value = 'openrouter/free';
+        document.getElementById('ai-custom-key').focus();
+        showToast('已填入 OpenRouter 官方规范端点，请在下方填入 sk-or-v1-... 密钥并保存', 'info');
+      };
 
       document.getElementById('ai-system-prompt').addEventListener('input', (e) => {
         document.getElementById('ai-prompt-length').textContent = `${e.target.value.length} 字`;
