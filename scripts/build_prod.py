@@ -69,9 +69,13 @@ HEADERS_CONTENT = """# =========================================================
   Cache-Control: public, max-age=31536000, immutable
   Access-Control-Allow-Origin: *
 
-# 3. Core Database Bundle - Long browser cache with CORS & nosniff
+# 3. Core Database Bundle & AI Copilot Script
 /data.js
   Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
+  X-Content-Type-Options: nosniff
+/ai_copilot.js
+  Cache-Control: public, max-age=0, must-revalidate
   Access-Control-Allow-Origin: *
   X-Content-Type-Options: nosniff
 
