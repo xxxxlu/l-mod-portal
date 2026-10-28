@@ -14,64 +14,172 @@
  * 4. 多路由智能容灾降级：Gemini 2.5 Flash -> DeepSeek-Chat -> D1 本地知识库智能兜底
  */
 
-// 常用单机游戏别名与主游戏 ID 映射表
+// 常用单机游戏别名与主游戏 ID 映射表 (覆盖百大单机神作及玩家高频黑话)
 const GAME_ALIASES = {
+  // 赛博朋克 2077
   '2077': 'cyberpunk-2077',
   '赛博朋克': 'cyberpunk-2077',
   '赛博朋克2077': 'cyberpunk-2077',
   '电驭叛客': 'cyberpunk-2077',
   'cyberpunk': 'cyberpunk-2077',
+  '夜之城': 'cyberpunk-2077',
+
+  // 黑神话：悟空
   '黑猴': 'black-myth-wukong',
   '黑神话': 'black-myth-wukong',
+  '黑神话悟空': 'black-myth-wukong',
   '悟空': 'black-myth-wukong',
   'wukong': 'black-myth-wukong',
+
+  // 艾尔登法环
   '老头环': 'elden-ring',
   '法环': 'elden-ring',
   '艾尔登': 'elden-ring',
   '艾尔登法环': 'elden-ring',
   '黄金树': 'elden-ring',
+  '黄金树幽影': 'elden-ring',
   'elden': 'elden-ring',
+  'eldenring': 'elden-ring',
+
+  // 巫师 3
   '巫师3': 'witcher-3',
+  '巫师': 'witcher-3',
   '白狼': 'witcher-3',
   'witcher': 'witcher-3',
+  'witcher3': 'witcher-3',
+
+  // 博德之门 3
   '博德之门3': 'baldurs-gate-3',
+  '博德之门': 'baldurs-gate-3',
   '博德3': 'baldurs-gate-3',
   'bg3': 'baldurs-gate-3',
-  '老滚5': 'the-elder-scrolls-v-skyrim-special-edition',
-  '天际': 'the-elder-scrolls-v-skyrim-special-edition',
-  '上古卷轴': 'the-elder-scrolls-v-skyrim-special-edition',
-  'skyrim': 'the-elder-scrolls-v-skyrim-special-edition',
+
+  // 上古卷轴 5：天际
+  '老滚5': 'skyrim-se',
+  '老滚': 'skyrim-se',
+  '天际': 'skyrim-se',
+  '天际重制版': 'skyrim-se',
+  '上古卷轴': 'skyrim-se',
+  '上古卷轴5': 'skyrim-se',
+  'skyrim': 'skyrim-se',
+
+  // 辐射 4 / 新维加斯
   '辐射4': 'fallout-4',
+  '辐射': 'fallout-4',
   'fallout4': 'fallout-4',
-  '大表哥2': 'red-dead-redemption-2',
-  '荒野大镖客': 'red-dead-redemption-2',
-  'rdr2': 'red-dead-redemption-2',
+  'fallout': 'fallout-4',
+  '新维加斯': 'fallout-new-vegas',
+  '辐射新维加斯': 'fallout-new-vegas',
+
+  // 荒野大镖客 2
+  '大表哥2': 'rdr2',
+  '大表哥': 'rdr2',
+  '大镖客2': 'rdr2',
+  '大镖客': 'rdr2',
+  '荒野大镖客': 'rdr2',
+  '荒野大镖客2': 'rdr2',
+  'rdr2': 'rdr2',
+
+  // 幻兽帕鲁
   '帕鲁': 'palworld',
   '幻兽帕鲁': 'palworld',
+  'palworld': 'palworld',
+
+  // 星空
   '星空': 'starfield',
-  '生化危机4': 'resident-evil-4',
+  'starfield': 'starfield',
+
+  // GTA5
+  'gta5': 'gta-v',
+  'gta': 'gta-v',
+  '侠盗猎车手': 'gta-v',
+  '侠盗猎车手5': 'gta-v',
+  '洛圣都': 'gta-v',
+
+  // 生化危机系列
+  '生化危机4': 're4-remake',
+  '生化4': 're4-remake',
+  're4': 're4-remake',
+  '生化危机8': 're-village',
+  '生化8': 're-village',
+  '村庄': 're-village',
+
+  // 只狼 / 怪猎
   '只狼': 'sekiro',
+  'sekiro': 'sekiro',
   '怪物猎人': 'monster-hunter-world',
+  '怪猎世界': 'monster-hunter-world',
   '怪猎': 'monster-hunter-world',
-  '骑砍2': 'mount-blade-ii-bannerlord',
-  '星露谷': 'stardew-valley',
-  '深海迷航': 'subnautica',
-  '英灵神殿': 'valheim',
-  '环世界': 'rimworld',
-  '边缘世界': 'rimworld',
-  '森林之子': 'sons-of-the-forest',
+  'mhw': 'monster-hunter-world',
+
+  // 骑马与砍杀系列
+  '骑马与砍杀': 'mount-and-blade-2',
+  '骑马与砍杀2': 'mount-and-blade-2',
+  '骑砍': 'mount-and-blade-2',
+  '骑砍2': 'mount-and-blade-2',
+  '霸主': 'mount-and-blade-2',
+  'bannerlord': 'mount-and-blade-2',
+  '战团': 'mount-and-blade-warband',
+  '骑砍战团': 'mount-and-blade-warband',
+  '骑马与砍杀战团': 'mount-and-blade-warband',
+
+  // 策略与建造经营
+  '十字军之王3': 'crusader-kings-3',
+  '十字军之王': 'crusader-kings-3',
+  'ck3': 'crusader-kings-3',
+  '钢铁雄心4': 'hearts-of-iron-4',
+  '钢铁雄心': 'hearts-of-iron-4',
+  '钢4': 'hearts-of-iron-4',
+  'hoi4': 'hearts-of-iron-4',
+  '群星': 'stellaris',
+  '文明6': 'civ-6',
+  '文明': 'civ-6',
+  '城市天际线': 'cities-skylines',
   '幸福工厂': 'satisfactory',
   '异星工厂': 'factorio',
-  '十字军之王': 'crusader-kings-iii',
-  '钢铁雄心': 'hearts-of-iron-iv',
-  '群星': 'stellaris',
-  '天国拯救': 'kingdom-come-deliverance',
+  '环世界': 'rimworld',
+  '边缘世界': 'rimworld',
+
+  // 战锤与三国
+  '战锤3': 'total-war-warhammer-3',
+  '全战战锤': 'total-war-warhammer-3',
+  '全战三国': 'total-war-three-kingdoms',
+  '三国全战': 'total-war-three-kingdoms',
+
+  // 生存冒险
+  '英灵神殿': 'valheim',
+  '森林之子': 'sons-of-the-forest',
   '七日杀': '7-days-to-die',
   '方舟': 'ark-survival-evolved',
+  '消逝的光芒': 'dying-light',
+  '消逝的光芒2': 'dying-light-2',
+  '消光2': 'dying-light-2',
+  '天国拯救': 'kingdom-come-deliverance',
+  '星露谷': 'stardew-valley',
+  '星露谷物语': 'stardew-valley',
+  '深海迷航': 'subnautica',
+  '泰拉瑞亚': 'terraria',
+  '霍格沃茨': 'hogwarts-legacy',
+  '霍格沃茨之遗': 'hogwarts-legacy',
+  '黑魂3': 'dark-souls-3',
+  '黑暗之魂3': 'dark-souls-3',
+  '龙之信条2': 'dragons-dogma-2',
+  '装甲核心6': 'armored-core-6',
+  '对马岛': 'ghost-of-tsushima',
+  '对马岛之魂': 'ghost-of-tsushima',
+  '战神4': 'god-of-war',
+  '战神': 'god-of-war',
+  '漫威蜘蛛侠': 'spiderman-remastered',
+  '蜘蛛侠': 'spiderman-remastered',
+  '地平线零之曙光': 'horizon-zero-dawn',
+  '死亡搁浅': 'death-stranding',
+  '底特律变人': 'detroit-become-human',
   '模拟人生4': 'the-sims-4',
   '欧卡2': 'euro-truck-simulator-2',
+  '欧洲卡车模拟': 'euro-truck-simulator-2',
   '杀戮尖塔': 'slay-the-spire',
   '哈迪斯': 'hades',
+  '黑帝斯': 'hades',
   '空洞骑士': 'hollow-knight'
 };
 
@@ -159,21 +267,27 @@ export async function onRequestPost(context) {
       }
     }
 
-    // 若按 ID 未查到但有 db，尝试通过游戏标题模糊匹配
+    // 若按别名未查到但有 db，尝试通过游戏标题前缀或全称模糊匹配
     if (db && !matchedGame && rawQuery.length >= 2) {
       try {
-        const potential = await db.prepare(
-          `SELECT id, rank, title, title_zh, developer, release_year,
-                  has_console, console_shortcut, console_guide_zh,
-                  verified_patch, latest_steam_patch, compatibility_status,
-                  radar_risk_title, radar_risk_desc, pitfall_note
-           FROM games
-           WHERE ? LIKE '%' || title || '%' OR ? LIKE '%' || title_zh || '%'
-           ORDER BY rank ASC LIMIT 1`
-        ).bind(rawQuery, rawQuery).first();
-        if (potential) {
-          matchedGame = potential;
-          targetGameId = potential.id;
+        const gamesList = await db.prepare("SELECT id, rank, title, title_zh FROM games ORDER BY rank ASC").all();
+        if (gamesList?.results) {
+          const qNorm = rawQuery.toLowerCase().replace(/[\s:：·\-]/g, '');
+          for (const g of gamesList.results) {
+            const mainZh = (g.title_zh || '').split(/[:：\(\)（）\s]/)[0].toLowerCase().replace(/[\s:：·\-]/g, '');
+            const mainEn = (g.title || '').split(/[:：\(\)（）\s\-]/)[0].toLowerCase().replace(/[\s:：·\-]/g, '');
+            if ((mainZh.length >= 2 && qNorm.includes(mainZh)) || (mainEn.length >= 4 && qNorm.includes(mainEn))) {
+              targetGameId = g.id;
+              matchedGame = await db.prepare(
+                `SELECT id, rank, title, title_zh, developer, release_year,
+                        has_console, console_shortcut, console_guide_zh,
+                        verified_patch, latest_steam_patch, compatibility_status,
+                        radar_risk_title, radar_risk_desc, pitfall_note
+                 FROM games WHERE id = ?`
+              ).bind(g.id).first();
+              break;
+            }
+          }
         }
       } catch (e) {}
     }
@@ -191,12 +305,39 @@ export async function onRequestPost(context) {
     const hasCommandIntent = /代码|指令|控制台|作弊|秘籍|cheat|command|console|lua|bat/i.test(rawQuery);
 
     if (config.skills.game_vault_rag && db && (targetGameId || hasCommandIntent)) {
-      // 提取核心查询关键词
-      const stopWords = new Set(['请问', '怎么', '如何', '我要', '一下', '这个', '那个', '有没有', '谁有', '哪里', '是啥', '什么']);
-      const rawTokens = rawQuery.replace(/[，。？！、\?,\!]/g, ' ')
+      // 提取核心查询关键词（支持中文自然句式智能分词与特征挖掘）
+      let cleanQuery = rawQuery;
+      if (matchedGame) {
+        // 剔除已识别的游戏名词，避免污染具体指令关键词
+        const namesToStrip = [
+          matchedGame.title_zh,
+          matchedGame.title,
+          (matchedGame.title_zh || '').split(/[:：\(\)（）\s]/)[0],
+          (matchedGame.title || '').split(/[:：\(\)（）\s\-]/)[0]
+        ].filter(Boolean);
+        for (const n of namesToStrip) {
+          if (n.length >= 2) {
+            cleanQuery = cleanQuery.replace(new RegExp(n.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi'), ' ');
+          }
+        }
+      }
+
+      // 去除常见停用词与虚词
+      const stopPattern = /请问|怎么|如何|想要|要|给|加|增加|获取|获得|刷|搞|弄|把|的|了|啊|吗|呢|一下|一个|这个|那个|有没有|谁有|是啥|什么|修改|怎么弄|教程|方法/gi;
+      const filteredText = cleanQuery.replace(stopPattern, ' ').replace(/[，。？！、\?,\!]/g, ' ');
+
+      // 提取独立语义单元
+      let searchTerms = filteredText
         .split(/\s+/)
         .map(t => t.trim())
-        .filter(t => t.length >= 1 && !stopWords.has(t));
+        .filter(t => t.length >= 1);
+
+      // 高频特征词挖掘（声望、家族、影响力、金币、属性点、武器等）
+      const FEATURE_REGEX = /声望|家族|影响力|第纳尔|兵种|具装|可汗|骑兵|步兵|射手|钱|金币|金钱|刷钱|属性|属性点|专精|技能点|特警|四季宝|保时捷|觉|不朽|武器|枪|刀|剑|护甲|防具|衣服|装扮|道具|物品|无敌|不死|锁血|秒杀|一击必杀|霸体|无限|等级|经验|升级|满级|升满|重置|洗点|传送|坐标|瞬移|飞天|穿墙|血量|生命|生命值|体力|法力|蓝量|耐力|全收集|解锁|跳过|通关|好感|羁绊|控制台|代码|指令|作弊|秘籍/g;
+      const matchedFeatures = rawQuery.match(FEATURE_REGEX);
+      if (matchedFeatures && matchedFeatures.length > 0) {
+        searchTerms = Array.from(new Set([...matchedFeatures, ...searchTerms]));
+      }
 
       let conditions = [];
       let params = [];
@@ -205,13 +346,6 @@ export async function onRequestPost(context) {
         conditions.push('game_id = ?');
         params.push(targetGameId);
       }
-
-      // 功能词匹配（金币/武器/无敌/等级/技能/跳过/保时捷/传送等）
-      const featureWords = rawTokens.filter(t => 
-        /钱|金币|金钱|武器|枪|手枪|衣服|装扮|技能|等级|属性|无敌|秒杀|传送|物品|重置|四季宝|保时捷|代码|控制台|作弊/i.test(t)
-      );
-
-      const searchTerms = featureWords.length > 0 ? featureWords : rawTokens.slice(0, 3);
 
       if (searchTerms.length > 0) {
         const orClauses = searchTerms.map(() => '(name_zh LIKE ? OR name_en LIKE ? OR description LIKE ? OR code LIKE ?)');
