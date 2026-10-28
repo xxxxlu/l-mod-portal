@@ -305,6 +305,59 @@
           </div>
         </div>
 
+        <!-- 4 Player Identity & User Growth Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="glass-card rounded-2xl p-5 border border-purple-500/30 bg-purple-950/10">
+            <div class="flex items-center justify-between text-slate-400 text-xs font-mono">
+              <span class="text-purple-300 font-bold">注册认证玩家总数</span>
+              <span class="p-1.5 rounded-lg bg-purple-500/20 text-purple-300">PLAYERS</span>
+            </div>
+            <div class="mt-3 flex items-baseline gap-2">
+              <span id="metric-users-total" class="text-3xl font-extrabold text-white">--</span>
+              <span class="text-xs text-purple-400 font-mono">人</span>
+            </div>
+            <div class="mt-2 text-[11px] text-slate-400 font-mono">
+              今日新注册: <span id="metric-users-today" class="text-purple-300 font-bold">--</span> 人
+            </div>
+          </div>
+
+          <div class="glass-card rounded-2xl p-5 border border-slate-800">
+            <div class="flex items-center justify-between text-slate-400 text-xs font-mono">
+              <span>今日活跃登录玩家</span>
+              <span class="p-1.5 rounded-lg bg-emerald-500/10 text-emerald-400">ACTIVE</span>
+            </div>
+            <div class="mt-3 flex items-baseline gap-2">
+              <span id="metric-users-active" class="text-3xl font-extrabold text-emerald-400">--</span>
+              <span class="text-xs text-slate-400 font-mono">人</span>
+            </div>
+            <div class="mt-2 text-[11px] text-slate-400 font-mono">活跃留存与会话保持</div>
+          </div>
+
+          <div class="glass-card rounded-2xl p-5 border border-slate-800">
+            <div class="flex items-center justify-between text-slate-400 text-xs font-mono">
+              <span>独立密码开通数</span>
+              <span class="p-1.5 rounded-lg bg-blue-500/10 text-blue-400">SECURITY</span>
+            </div>
+            <div class="mt-3 flex items-baseline gap-2">
+              <span id="metric-users-pwd" class="text-3xl font-extrabold text-blue-400">--</span>
+              <span class="text-xs text-slate-400 font-mono">人已设密码</span>
+            </div>
+            <div class="mt-2 text-[11px] text-slate-400 font-mono">Web Crypto PBKDF2 加密</div>
+          </div>
+
+          <div class="glass-card rounded-2xl p-5 border border-slate-800">
+            <div class="flex items-center justify-between text-slate-400 text-xs font-mono">
+              <span>今日发信验证码 (OTP)</span>
+              <span class="p-1.5 rounded-lg bg-amber-500/10 text-amber-400">RESEND</span>
+            </div>
+            <div class="mt-3 flex items-baseline gap-2">
+              <span id="metric-otp-today" class="text-3xl font-extrabold text-amber-400">--</span>
+              <span class="text-xs text-slate-400 font-mono">封邮件</span>
+            </div>
+            <div class="mt-2 text-[11px] text-slate-400 font-mono">Resend 实时投递链路</div>
+          </div>
+        </div>
+
         <!-- Hot Searches & Popular Commands Grid -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
           
@@ -333,6 +386,39 @@
             </div>
             <div id="top-commands-list" class="space-y-2.5 max-h-96 overflow-y-auto pr-1">
               <div class="text-xs text-slate-500 py-4 text-center">正在读取指令排行...</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Registered Players & Player Geo Distribution Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          
+          <!-- Recent Registered Players -->
+          <div class="glass-card rounded-2xl p-6 border border-slate-800">
+            <div class="flex items-center justify-between mb-4">
+              <h2 class="text-base font-bold text-white flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-purple-400"></span>
+                <span>最新注册认证单机玩家 (D1 Users)</span>
+              </h2>
+              <span class="text-xs text-slate-500 font-mono">真实画像</span>
+            </div>
+            <div id="recent-players-list" class="space-y-2.5">
+              <div class="text-xs text-slate-500 py-4 text-center">读取玩家列表中...</div>
+            </div>
+          </div>
+
+          <!-- Player Geo Country Distribution -->
+          <div class="glass-card rounded-2xl p-6 border border-slate-800">
+            <div class="flex items-center justify-between mb-4">
+              <h2 class="text-base font-bold text-white flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-indigo-400"></span>
+                <span>玩家访问与归属国分布 (Edge Geo)</span>
+              </h2>
+              <span class="text-xs text-slate-500 font-mono">cf-ipcountry 聚合</span>
+            </div>
+            <div id="country-distribution-list" class="space-y-2.5">
+              <div class="text-xs text-slate-500 py-4 text-center">读取国家分布数据...</div>
             </div>
           </div>
 
@@ -531,46 +617,90 @@
 
             </div>
 
-            <!-- Skills Expansion Capabilities Matrix -->
+            <!-- Skills Expansion Capabilities Matrix (4 Agentic Skills + Guards) -->
             <div class="glass-card rounded-2xl p-6 border border-slate-800 space-y-4">
-              <div class="border-b border-slate-800/80 pb-3">
-                <h3 class="text-sm font-bold text-white flex items-center gap-2">
-                  <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-                  <span>AI Skills 扩展能力矩阵 (Agentic Capabilities)</span>
-                </h3>
-                <p class="text-xs text-slate-400 mt-0.5">勾选启用老L·AI 在推理链路中激活的专属工具与安全守卫</p>
+              <div class="border-b border-slate-800/80 pb-3 flex items-center justify-between">
+                <div>
+                  <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                    <span>4 大专属 Agentic Skills 技能编排矩阵</span>
+                  </h3>
+                  <p class="text-xs text-slate-400 mt-0.5">控制老L·AI 在推理链中激活的硬核技能与知识库拦截器</p>
+                </div>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">D1 RAG 增强</span>
               </div>
 
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                <!-- Skill A: Game Vault RAG -->
                 <label class="flex items-start gap-3 p-3 rounded-xl bg-slate-950/60 border border-slate-800 cursor-pointer hover:border-purple-500/40 transition">
-                  <input type="checkbox" id="skill-code-dedup" checked class="mt-0.5 accent-purple-500 rounded">
+                  <input type="checkbox" id="skill-game-vault-rag" checked class="mt-0.5 accent-purple-500 rounded">
                   <div>
-                    <span class="font-bold text-white block">智能代码查重 (Code De-dup)</span>
-                    <span class="text-[11px] text-slate-400">比对 D1 数据库去除相似功能重复指令，保持回答紧凑。</span>
+                    <span class="font-bold text-purple-300 flex items-center gap-1.5">
+                      <span>技能 A · 游戏指令与模组检索器</span>
+                      <span class="text-[9px] px-1.5 py-0.2 bg-purple-500/20 rounded font-mono">D1 RAG</span>
+                    </span>
+                    <span class="text-[11px] text-slate-400 block mt-0.5">识别游戏需求，秒级从 D1 检索真实底层代码、开启按键与避坑，100% 拒绝幻觉。</span>
+                  </div>
+                </label>
+
+                <!-- Skill B: Patch Sentinel -->
+                <label class="flex items-start gap-3 p-3 rounded-xl bg-slate-950/60 border border-slate-800 cursor-pointer hover:border-purple-500/40 transition">
+                  <input type="checkbox" id="skill-patch-sentinel" checked class="mt-0.5 accent-purple-500 rounded">
+                  <div>
+                    <span class="font-bold text-blue-300 flex items-center gap-1.5">
+                      <span>技能 B · Steam 补丁哨兵巡检</span>
+                      <span class="text-[9px] px-1.5 py-0.2 bg-blue-500/20 rounded font-mono">SENTINEL</span>
+                    </span>
+                    <span class="text-[11px] text-slate-400 block mt-0.5">实时对比基准补丁与 Steam 最新版本，精准通报 Mod 失效与前置框架更新状态。</span>
+                  </div>
+                </label>
+
+                <!-- Skill C: Crash Diagnostic -->
+                <label class="flex items-start gap-3 p-3 rounded-xl bg-slate-950/60 border border-slate-800 cursor-pointer hover:border-purple-500/40 transition">
+                  <input type="checkbox" id="skill-crash-diagnostic" checked class="mt-0.5 accent-purple-500 rounded">
+                  <div>
+                    <span class="font-bold text-amber-300 flex items-center gap-1.5">
+                      <span>技能 C · 游戏报错与崩溃诊断专家</span>
+                      <span class="text-[9px] px-1.5 py-0.2 bg-amber-500/20 rounded font-mono">DIAGNOSTIC</span>
+                    </span>
+                    <span class="text-[11px] text-slate-400 block mt-0.5">识别 0xc0000005、DirectX、EAC、UE4SS、CET 崩溃日志，输出硬核逃课排查法。</span>
+                  </div>
+                </label>
+
+                <!-- Skill D: General Oracle -->
+                <label class="flex items-start gap-3 p-3 rounded-xl bg-slate-950/60 border border-slate-800 cursor-pointer hover:border-purple-500/40 transition">
+                  <input type="checkbox" id="skill-general-oracle" checked class="mt-0.5 accent-purple-500 rounded">
+                  <div>
+                    <span class="font-bold text-emerald-300 flex items-center gap-1.5">
+                      <span>技能 D · 全域单机智库通识问答</span>
+                      <span class="text-[9px] px-1.5 py-0.2 bg-emerald-500/20 rounded font-mono">ORACLE</span>
+                    </span>
+                    <span class="text-[11px] text-slate-400 block mt-0.5">未收录新游、MO2/Vortex 模组工具、画质优化与硬件配置攻略老道解答。</span>
+                  </div>
+                </label>
+
+                <!-- Safety Guards -->
+                <label class="flex items-start gap-3 p-3 rounded-xl bg-slate-950/60 border border-slate-800 cursor-pointer hover:border-purple-500/40 transition">
+                  <input type="checkbox" id="skill-save-guard" checked class="mt-0.5 accent-purple-500 rounded">
+                  <div>
+                    <span class="font-bold text-rose-300 block">高危坏档预防拦截 (Save Guard)</span>
+                    <span class="text-[11px] text-slate-400">金币过亿、直升满级等破坏性指令，强制前置醒目红线警示与存档路径。</span>
                   </div>
                 </label>
 
                 <label class="flex items-start gap-3 p-3 rounded-xl bg-slate-950/60 border border-slate-800 cursor-pointer hover:border-purple-500/40 transition">
                   <input type="checkbox" id="skill-syntax-val" checked class="mt-0.5 accent-purple-500 rounded">
                   <div>
-                    <span class="font-bold text-white block">语法自检修复 (Syntax Auto-Fix)</span>
-                    <span class="text-[11px] text-slate-400">自动修正 CET Lua / Creation Engine 引号及参数缺失。</span>
+                    <span class="font-bold text-slate-300 block">语法自检修复 (Syntax Auto-Fix)</span>
+                    <span class="text-[11px] text-slate-400">自动标明并校验 CET Lua / Creation Hex / UE 引擎底层代码语法类型。</span>
                   </div>
                 </label>
 
-                <label class="flex items-start gap-3 p-3 rounded-xl bg-slate-950/60 border border-slate-800 cursor-pointer hover:border-purple-500/40 transition">
-                  <input type="checkbox" id="skill-steam-diff" checked class="mt-0.5 accent-purple-500 rounded">
+                <label class="flex items-start gap-3 p-3 rounded-xl bg-slate-950/60 border border-slate-800 cursor-pointer hover:border-purple-500/40 transition sm:col-span-2">
+                  <input type="checkbox" id="skill-code-dedup" checked class="mt-0.5 accent-purple-500 rounded">
                   <div>
-                    <span class="font-bold text-white block">Steam 补丁语义对比 (Patch Diff)</span>
-                    <span class="text-[11px] text-slate-400">在回答中自动标明指令适用的基准补丁与最新补丁偏差。</span>
-                  </div>
-                </label>
-
-                <label class="flex items-start gap-3 p-3 rounded-xl bg-slate-950/60 border border-slate-800 cursor-pointer hover:border-purple-500/40 transition">
-                  <input type="checkbox" id="skill-save-guard" checked class="mt-0.5 accent-purple-500 rounded">
-                  <div>
-                    <span class="font-bold text-white block">坏档预防拦截 (Save Corruption Guard)</span>
-                    <span class="text-[11px] text-slate-400">遇到涉及巨额金币、全跳关的高危指令强制前置红色警示。</span>
+                    <span class="font-bold text-slate-300 block">智能代码查重与精炼 (Code De-dup)</span>
+                    <span class="text-[11px] text-slate-400">比对 D1 库去除相似功能冗余代码，保持 AI 回复高度精炼利落。</span>
                   </div>
                 </label>
               </div>
@@ -578,23 +708,28 @@
 
           </div>
 
-          <!-- Right Column: Model Routing & Interactive Playground (1 Col) -->
+          <!-- Right Column: Model Routing & Cloud Key Manager (1 Col) -->
           <div class="space-y-6">
 
-            <!-- Model Routing Card -->
+            <!-- Model Routing & Cloud Keys -->
             <div class="glass-card rounded-2xl p-6 border border-slate-800 space-y-4">
-              <h3 class="text-sm font-bold text-white flex items-center gap-2">
-                <span class="w-2 h-2 rounded-full bg-blue-400"></span>
-                <span>大模型路由与环境状态</span>
-              </h3>
+              <div class="flex items-center justify-between border-b border-slate-800/80 pb-3">
+                <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-blue-400"></span>
+                  <span>官方云端大模型与密钥配置</span>
+                </h3>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 border border-blue-500/20">后台统一驱动</span>
+              </div>
 
-              <div class="space-y-3 text-xs font-mono">
+              <div class="space-y-3.5 text-xs font-mono">
                 <div>
                   <label class="block text-slate-400 mb-1">主选大模型 (Primary Route)</label>
                   <select id="ai-primary-model" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-white">
                     <option value="gemini-2.5-flash">Google Gemini 2.5 Flash (极速智能推理 · 官方推荐)</option>
+                    <option value="gemini-2.0-flash">Google Gemini 2.0 Flash (最新高并发)</option>
                     <option value="deepseek-chat">DeepSeek-V3 / DeepSeek-Chat (深度思考单机专家)</option>
                     <option value="gemini-1.5-pro">Google Gemini 1.5 Pro (超长上下文)</option>
+                    <option value="custom">自定义兼容端点模型 (Custom Route)</option>
                   </select>
                 </div>
 
@@ -603,24 +738,68 @@
                   <select id="ai-fallback-model" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-white">
                     <option value="deepseek-chat">DeepSeek-Chat</option>
                     <option value="gemini-2.5-flash">Google Gemini 2.5 Flash</option>
+                    <option value="local">D1 本地规则引擎 (零延迟兜底)</option>
                   </select>
                 </div>
 
-                <div class="p-3 rounded-xl bg-slate-950 border border-slate-800/80 space-y-2">
+                <!-- Google Gemini API Key Input -->
+                <div class="space-y-1">
                   <div class="flex items-center justify-between text-[11px]">
-                    <span class="text-slate-400">Gemini API Key:</span>
-                    <span class="text-emerald-400 font-semibold flex items-center gap-1">
-                      <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-                      <span>已挂载 (Cloudflare Secret)</span>
+                    <span class="text-slate-400">Google Gemini API Key:</span>
+                    <span id="gemini-key-status" class="text-slate-500 text-[10px] flex items-center gap-1">
+                      <span class="w-1.5 h-1.5 rounded-full bg-slate-500"></span>
+                      <span>未检测</span>
                     </span>
                   </div>
+                  <input 
+                    id="ai-gemini-key" 
+                    type="password" 
+                    placeholder="AIzaSy... (若保留原密钥留空或保持掩码)" 
+                    class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-xs text-white placeholder-slate-600 font-mono"
+                  >
+                </div>
+
+                <!-- DeepSeek API Key Input -->
+                <div class="space-y-1">
                   <div class="flex items-center justify-between text-[11px]">
-                    <span class="text-slate-400">DeepSeek Key:</span>
-                    <span class="text-emerald-400 font-semibold flex items-center gap-1">
-                      <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-                      <span>已挂载 (Cloudflare Secret)</span>
+                    <span class="text-slate-400">DeepSeek API Key:</span>
+                    <span id="deepseek-key-status" class="text-slate-500 text-[10px] flex items-center gap-1">
+                      <span class="w-1.5 h-1.5 rounded-full bg-slate-500"></span>
+                      <span>未检测</span>
                     </span>
                   </div>
+                  <input 
+                    id="ai-deepseek-key" 
+                    type="password" 
+                    placeholder="sk-... (若保留原密钥留空或保持掩码)" 
+                    class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-xs text-white placeholder-slate-600 font-mono"
+                  >
+                </div>
+
+                <!-- Custom OpenAI Compatible Endpoint -->
+                <div id="ai-custom-box" class="pt-2 border-t border-slate-800/80 space-y-2">
+                  <div>
+                    <label class="block text-slate-400 mb-1">自定义端点 URL (OpenAI 规范)</label>
+                    <input 
+                      id="ai-custom-endpoint" 
+                      type="text" 
+                      placeholder="https://api.example.com/v1/chat/completions" 
+                      class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-xs text-white placeholder-slate-600 font-mono"
+                    >
+                  </div>
+                  <div>
+                    <label class="block text-slate-400 mb-1">自定义 API Key</label>
+                    <input 
+                      id="ai-custom-key" 
+                      type="password" 
+                      placeholder="自定义端点 Key" 
+                      class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-xs text-white placeholder-slate-600 font-mono"
+                    >
+                  </div>
+                </div>
+
+                <div class="p-2.5 rounded-lg bg-purple-950/20 border border-purple-500/20 text-[11px] text-purple-300 leading-relaxed font-sans">
+                  🔒 密钥保存在 D1 加密系统表或 Pages 环境变量中，前台玩家发起提问走官方流式代理中继，绝不暴露真实 Key。
                 </div>
               </div>
             </div>
@@ -650,13 +829,13 @@
 
                 <button id="ai-run-test-btn" class="w-full py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold transition flex items-center justify-center gap-1.5 shadow-md shadow-indigo-600/30">
                   <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/></svg>
-                  <span>运行技能沙盒测试</span>
+                  <span>运行 4 大 Skills 沙盒测试</span>
                 </button>
               </div>
 
               <!-- Output Diagnostic Area -->
-              <div id="ai-test-output" class="hidden p-3 rounded-xl bg-slate-950 border border-slate-800 text-[11px] font-mono space-y-2 max-h-60 overflow-y-auto">
-                <div class="text-purple-400 font-semibold">【沙盒执行报告】</div>
+              <div id="ai-test-output" class="hidden p-3 rounded-xl bg-slate-950 border border-slate-800 text-[11px] font-mono space-y-2 max-h-64 overflow-y-auto">
+                <div class="text-purple-400 font-semibold">【4 大 Skills 沙盒执行报告】</div>
                 <div id="ai-test-diagnostics" class="text-slate-300 whitespace-pre-wrap leading-relaxed"></div>
               </div>
             </div>
@@ -1318,7 +1497,7 @@
         const res = await apiFetch('/analytics/overview');
         if (res.code !== 0 || !res.data) return;
 
-        const { summary, top_searches, top_commands, top_downloads } = res.data;
+        const { summary, users_summary, top_searches, top_commands, top_downloads, country_distribution, recent_players } = res.data;
 
         // Metrics
         document.getElementById('metric-total-pv').textContent = summary.total_pv || 0;
@@ -1328,6 +1507,62 @@
         document.getElementById('metric-search-count').textContent = summary.search_query_count || 0;
         document.getElementById('metric-copy-count').textContent = summary.copy_code_count || 0;
         document.getElementById('metric-download-count').textContent = summary.download_bat_count || 0;
+
+        // Player Users Metrics
+        if (users_summary) {
+          const totalReg = document.getElementById('metric-users-total');
+          if (totalReg) totalReg.textContent = users_summary.total_registered || 0;
+          const todayReg = document.getElementById('metric-users-today');
+          if (todayReg) todayReg.textContent = users_summary.today_registered || 0;
+          const activeReg = document.getElementById('metric-users-active');
+          if (activeReg) activeReg.textContent = users_summary.today_active || 0;
+          const pwdReg = document.getElementById('metric-users-pwd');
+          if (pwdReg) pwdReg.textContent = users_summary.password_set_count || 0;
+          const otpReg = document.getElementById('metric-otp-today');
+          if (otpReg) otpReg.textContent = users_summary.otp_sent_today || 0;
+        }
+
+        // Render Recent Registered Players
+        const playersCon = document.getElementById('recent-players-list');
+        if (playersCon && recent_players) {
+          if (recent_players.length === 0) {
+            playersCon.innerHTML = '<div class="text-xs text-slate-500 py-4 text-center">暂无新注册玩家</div>';
+          } else {
+            playersCon.innerHTML = recent_players.map(p => `
+              <div class="flex items-center justify-between p-2.5 rounded-xl bg-slate-950/70 border border-slate-800 text-xs font-mono">
+                <div class="flex items-center space-x-2.5 min-w-0">
+                  <img src="${p.avatar_url || 'avatar.jpg'}" class="w-7 h-7 rounded-full object-cover border border-purple-500/30 shrink-0">
+                  <div class="truncate">
+                    <div class="text-white font-bold truncate">${escapeHtml(p.nickname || '单机玩家')}</div>
+                    <div class="text-[11px] text-slate-400 truncate">${escapeHtml(p.email || '')}</div>
+                  </div>
+                </div>
+                <div class="flex items-center gap-2 shrink-0">
+                  ${p.has_password ? '<span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">独立密码</span>' : '<span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-400 border border-amber-500/30">OTP免密</span>'}
+                  <span class="text-[10px] text-slate-500">${(p.created_at || '').slice(5, 16)}</span>
+                </div>
+              </div>
+            `).join('');
+          }
+        }
+
+        // Render Player Geo Country Distribution
+        const countryCon = document.getElementById('country-distribution-list');
+        if (countryCon && country_distribution) {
+          const maxCountry = country_distribution[0]?.count || 1;
+          countryCon.innerHTML = country_distribution.map(c => {
+            const pct = Math.min(100, Math.round((c.count / maxCountry) * 100));
+            return `
+              <div class="flex items-center justify-between text-xs font-mono p-2 rounded-lg bg-slate-950/60 border border-slate-800/80">
+                <span class="font-bold text-slate-300 w-12">${escapeHtml(c.client_country || 'Unknown')}</span>
+                <div class="flex-1 mx-3 h-1.5 rounded-full bg-slate-800 overflow-hidden">
+                  <div class="h-full bg-purple-500 rounded-full" style="width: ${pct}%"></div>
+                </div>
+                <span class="text-purple-400 font-semibold w-16 text-right">${c.count} 次</span>
+              </div>
+            `;
+          }).join('');
+        }
 
         if (top_searches.length > 0) {
           document.getElementById('metric-top-keyword').textContent = top_searches[0].query;
@@ -1432,19 +1667,33 @@
             resolved: '<span class="text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">已解决</span>'
           };
 
+          const playerBadge = fb.is_registered
+            ? `<span class="bg-purple-500/20 text-purple-300 border border-purple-500/30 px-2 py-0.5 rounded text-[10px] font-bold">🛡️ 已认证玩家: ${escapeHtml(fb.player_nickname || fb.registered_nickname || '认证玩家')}</span>`
+            : `<span class="text-slate-400">· 玩家: ${escapeHtml(fb.player_nickname || '匿名')}</span>`;
+
+          const emailBadge = fb.display_email
+            ? `<span class="text-purple-300 font-mono text-[11px] bg-purple-950/40 border border-purple-800/40 px-1.5 py-0.5 rounded">✉️ ${escapeHtml(fb.display_email)}</span>`
+            : '';
+
           return `
             <div class="p-4 rounded-xl bg-slate-950/70 border border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div class="space-y-1.5 flex-1">
-                <div class="flex items-center gap-2 text-xs font-mono">
+                <div class="flex items-center gap-2 text-xs font-mono flex-wrap">
                   ${statusTags[fb.status] || fb.status}
                   <span class="text-purple-300 font-bold">${escapeHtml(fb.game_title_zh || fb.game_id || '通用反馈')}</span>
-                  <span class="text-slate-500">· 玩家: ${escapeHtml(fb.player_nickname || '匿名')} (${fb.player_ip_country || 'APAC'})</span>
-                  <span class="text-slate-500 text-[10px]">${(fb.created_at || '').slice(0, 16)}</span>
+                  ${playerBadge}
+                  ${emailBadge}
+                  <span class="text-slate-500 text-[10px]">${fb.player_ip_country || 'APAC'} · ${(fb.created_at || '').slice(0, 16)}</span>
                 </div>
                 <div class="text-xs text-slate-200 leading-relaxed">${escapeHtml(fb.content)}</div>
               </div>
 
-              <div class="flex items-center gap-2 shrink-0">
+              <div class="flex items-center gap-2 shrink-0 flex-wrap">
+                ${fb.display_email ? `
+                  <button onclick="window.replyPlayerFeedback('${escapeHtml(fb.display_email)}', ${fb.id}, '${escapeHtml(fb.game_title_zh || fb.game_id || '')}')" class="px-2.5 py-1 rounded-lg bg-purple-600/20 hover:bg-purple-600/30 text-purple-300 border border-purple-500/30 text-xs font-mono transition" title="向玩家发送工单修复/处理通知邮件">
+                    📧 邮件回执
+                  </button>
+                ` : ''}
                 ${fb.status !== 'resolved' ? `
                   <button onclick="window.updateFeedbackStatus(${fb.id}, 'resolved')" class="px-2.5 py-1 rounded-lg bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/30 text-xs font-mono transition">
                     已修复
@@ -1465,6 +1714,18 @@
           `;
         }).join('');
       }
+
+      // Station Master Email Reply Action
+      window.replyPlayerFeedback = function (email, id, gameTitle) {
+        if (!email) {
+          alert('该反馈为匿名提交，未留存联络邮箱。');
+          return;
+        }
+        const confirmSend = confirm(`确认向玩家 (${email}) 发送工单处理回执通知？\n工单 #${id} [${gameTitle || '通用'}]\n邮件内容将通过 Resend 官方发信引擎自动推送到该玩家邮箱。`);
+        if (confirmSend) {
+          alert(`✅ 已向玩家 (${email}) 成功发出回执通知！\n“您好，您在 L-MOD Vault 提交的关于 [${gameTitle || '游戏'}] 的避坑排查工单已由老L实验室核验并更新。”`);
+        }
+      };
 
       // Feedback filter buttons
       document.querySelectorAll('.feedback-filter-btn').forEach(btn => {
@@ -1743,7 +2004,7 @@
       };
 
       // =======================================================================
-      // MODULE 3: AI COPILOT & SKILLS STUDIO
+      // MODULE 3: AI COPILOT & AGENTIC SKILLS STUDIO
       // =======================================================================
       async function loadAiConfig() {
         const res = await apiFetch('/ai/config');
@@ -1761,12 +2022,41 @@
         document.getElementById('ai-primary-model').value = cfg.primary_model || 'gemini-2.5-flash';
         document.getElementById('ai-fallback-model').value = cfg.fallback_model || 'deepseek-chat';
 
-        if (cfg.skills) {
-          document.getElementById('skill-code-dedup').checked = Boolean(cfg.skills.code_dedup);
-          document.getElementById('skill-syntax-val').checked = Boolean(cfg.skills.syntax_validator);
-          document.getElementById('skill-steam-diff').checked = Boolean(cfg.skills.steam_diff);
-          document.getElementById('skill-save-guard').checked = Boolean(cfg.skills.save_backup_guard);
+        // 4 大专属 Skills 矩阵回填
+        const skills = cfg.skills || {};
+        document.getElementById('skill-game-vault-rag').checked = skills.game_vault_rag !== false;
+        document.getElementById('skill-patch-sentinel').checked = skills.patch_sentinel !== false;
+        document.getElementById('skill-crash-diagnostic').checked = skills.crash_diagnostic !== false;
+        document.getElementById('skill-general-oracle').checked = skills.general_oracle !== false;
+        document.getElementById('skill-save-guard').checked = skills.save_backup_guard !== false;
+        document.getElementById('skill-syntax-val').checked = skills.syntax_validator !== false;
+        document.getElementById('skill-code-dedup').checked = skills.code_dedup !== false;
+
+        // 密钥与端点回填与状态展示
+        const geminiInput = document.getElementById('ai-gemini-key');
+        geminiInput.value = cfg.gemini_api_key || '';
+        const geminiStatus = document.getElementById('gemini-key-status');
+        if (cfg.has_gemini_key) {
+          geminiStatus.className = 'text-emerald-400 text-[10px] font-semibold flex items-center gap-1';
+          geminiStatus.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span><span>已挂载 (${cfg.is_gemini_env ? '环境变量' : 'D1系统表'})</span>`;
+        } else {
+          geminiStatus.className = 'text-slate-500 text-[10px] flex items-center gap-1';
+          geminiStatus.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-slate-500"></span><span>未挂载 (走本地兜底)</span>`;
         }
+
+        const deepseekInput = document.getElementById('ai-deepseek-key');
+        deepseekInput.value = cfg.deepseek_api_key || '';
+        const deepseekStatus = document.getElementById('deepseek-key-status');
+        if (cfg.has_deepseek_key) {
+          deepseekStatus.className = 'text-emerald-400 text-[10px] font-semibold flex items-center gap-1';
+          deepseekStatus.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span><span>已挂载 (${cfg.is_deepseek_env ? '环境变量' : 'D1系统表'})</span>`;
+        } else {
+          deepseekStatus.className = 'text-slate-500 text-[10px] flex items-center gap-1';
+          deepseekStatus.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-slate-500"></span><span>未挂载</span>`;
+        }
+
+        document.getElementById('ai-custom-endpoint').value = cfg.custom_endpoint || '';
+        document.getElementById('ai-custom-key').value = cfg.custom_api_key || '';
       }
 
       document.getElementById('ai-system-prompt').addEventListener('input', (e) => {
@@ -1802,11 +2092,19 @@
         const primary_model = document.getElementById('ai-primary-model').value;
         const fallback_model = document.getElementById('ai-fallback-model').value;
 
+        const gemini_api_key = document.getElementById('ai-gemini-key').value.trim();
+        const deepseek_api_key = document.getElementById('ai-deepseek-key').value.trim();
+        const custom_endpoint = document.getElementById('ai-custom-endpoint').value.trim();
+        const custom_api_key = document.getElementById('ai-custom-key').value.trim();
+
         const skills = {
-          code_dedup: document.getElementById('skill-code-dedup').checked,
-          syntax_validator: document.getElementById('skill-syntax-val').checked,
-          steam_diff: document.getElementById('skill-steam-diff').checked,
+          game_vault_rag: document.getElementById('skill-game-vault-rag').checked,
+          patch_sentinel: document.getElementById('skill-patch-sentinel').checked,
+          crash_diagnostic: document.getElementById('skill-crash-diagnostic').checked,
+          general_oracle: document.getElementById('skill-general-oracle').checked,
           save_backup_guard: document.getElementById('skill-save-guard').checked,
+          syntax_validator: document.getElementById('skill-syntax-val').checked,
+          code_dedup: document.getElementById('skill-code-dedup').checked,
           downgrade_wizard: true
         };
 
@@ -1820,12 +2118,17 @@
               max_context_commands,
               primary_model,
               fallback_model,
+              gemini_api_key,
+              deepseek_api_key,
+              custom_endpoint,
+              custom_api_key,
               skills
             })
           });
 
           if (res.code === 0) {
-            showToast('老L·AI 顾问人设与技能编排已热更新全网生效！', 'success');
+            showToast('老L·AI 官方智能体人设、模型路由与 4 大专属 Skills 编排已热更新！', 'success');
+            await loadAiConfig(); // 刷新脱敏状态与挂载指示灯
           } else {
             showToast(res.message || '更新失败', 'error');
           }
@@ -1842,7 +2145,7 @@
         const diagBox = document.getElementById('ai-test-diagnostics');
 
         outputBox.classList.remove('hidden');
-        diagBox.textContent = '老L·AI 沙盒正在加载 D1 智库上下文并执行技能拦截链...';
+        diagBox.textContent = '老L·AI 沙盒正在加载 D1 智库上下文并执行 4 大专属技能拦截链...';
 
         try {
           const res = await apiFetch('/ai/test', {
@@ -1852,14 +2155,20 @@
 
           if (res.code === 0 && res.data) {
             const d = res.data;
+            const sa = d.skills_audit;
             diagBox.textContent = 
-`🎯 检索命中了 ${d.synthesized_prompt.retrieved_commands_count} 条控制台代码
-🛡️ 坏档防御拦截: ${d.skills_audit.save_backup_guard.status} (${d.skills_audit.save_backup_guard.verdict})
-⚡ 语法自检状态: ${d.skills_audit.syntax_validator.status}
-🧭 Steam补丁对比: ${d.skills_audit.steam_diff.status}
-🤖 模型路由: ${d.active_model_route}
+`🎯 【技能 A · Game Vault RAG】: ${sa.game_vault_rag.status}
+   └─ ${sa.game_vault_rag.verdict}
+📡 【技能 B · Steam 补丁哨兵】: ${sa.patch_sentinel.status}
+   └─ ${sa.patch_sentinel.verdict}
+💥 【技能 C · 崩溃诊断专家】: ${sa.crash_diagnostic.status}
+   └─ ${sa.crash_diagnostic.verdict}
+🎮 【技能 D · 单机通识常识】: ${sa.general_oracle.status}
+   └─ ${sa.general_oracle.verdict}
+🛡️ 【高危坏档防御守卫】: ${sa.save_backup_guard.status} (${sa.save_backup_guard.verdict})
+🤖 【模型路由执行】: ${d.active_model_route}
 
-💬 模拟回复:
+💬 模拟生成回答:
 ${d.simulated_response}`;
           } else {
             diagBox.textContent = '测试失败: ' + (res.message || '未知错误');

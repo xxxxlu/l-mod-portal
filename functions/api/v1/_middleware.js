@@ -40,7 +40,7 @@ export async function onRequest(context) {
   const baseHeaders = {
     'Access-Control-Allow-Origin': corsOrigin,
     'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Session-Id',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Session-Id, X-Player-Token, x-player-token',
     'Access-Control-Max-Age': '86400',
     'X-Content-Type-Options': 'nosniff',
     'X-Frame-Options': 'SAMEORIGIN',

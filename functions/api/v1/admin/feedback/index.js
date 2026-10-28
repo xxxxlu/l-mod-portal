@@ -1,6 +1,6 @@
 /**
  * Cloudflare Pages Function: GET /api/v1/admin/feedback
- * Player Bug Reports & Feedback Audit Stream
+ * Player Bug Reports & Feedback Audit Stream with Registered User Insights
  */
 
 export async function onRequestGet(context) {
@@ -42,10 +42,12 @@ export async function onRequestGet(context) {
 
     const sql = `
       SELECT cf.id, cf.game_id, cf.category, cf.content, cf.player_nickname,
-             cf.player_ip_country, cf.status, cf.created_at,
-             g.title as game_title, g.title_zh as game_title_zh
+             cf.player_ip_country, cf.status, cf.created_at, cf.user_id, cf.player_email,
+             g.title as game_title, g.title_zh as game_title_zh,
+             u.email as verified_email, u.nickname as registered_nickname, u.avatar_url as registered_avatar
       FROM community_feedback cf
       LEFT JOIN games g ON cf.game_id = g.id
+      LEFT JOIN users u ON cf.user_id = u.id
       ${whereClause}
       ORDER BY cf.id DESC
       LIMIT ? OFFSET ?
@@ -69,7 +71,11 @@ export async function onRequestGet(context) {
         total,
         total_pages: Math.ceil(total / pageSize),
         status_counts: counts,
-        items: results || []
+        items: (results || []).map(r => ({
+          ...r,
+          is_registered: Boolean(r.user_id || r.verified_email),
+          display_email: r.verified_email || r.player_email || null
+        }))
       }
     }), {
       headers: {

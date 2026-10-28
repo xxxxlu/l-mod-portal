@@ -651,6 +651,15 @@
           </div>
           <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-400 font-bold">COPILOT</span>
         </button>
+
+        <!-- Player Favorites Sidebar Entry -->
+        <button onclick="window.LModAuth ? window.LModAuth.filterMyFavorites() : alert('请先登录')" class="sidebar-nav-btn w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-white/5 transition-all text-left font-medium group cursor-pointer">
+          <div class="flex items-center space-x-3">
+            <span class="text-sm">⭐</span>
+            <span class="font-bold text-purple-600 dark:text-purple-400">我的单机收藏</span>
+          </div>
+          <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-400 font-bold" id="sidebar-fav-badge">CLOUD</span>
+        </button>
       </div>
 
       <!-- Recents Section -->
@@ -666,6 +675,9 @@
     <!-- Bottom Controls & User Info -->
     <div class="pt-4 border-t border-zinc-200/80 dark:border-white/[0.08] space-y-3">
       
+      <!-- Player Auth Slot for Mobile / Sidebar -->
+      <div id="sidebar-auth-container"></div>
+
       <!-- Creator L Profile Chip -->
       <div class="flex items-center justify-between p-2 rounded-2xl hover:bg-zinc-100 dark:hover:bg-white/5 transition-colors cursor-pointer group" onclick="showToast('主理人 L • 专属单机游戏模组空间')">
         <div class="flex items-center space-x-3 min-w-0">
@@ -741,6 +753,19 @@
 
       <!-- Right: Custom Dropdowns & Theme Toggles -->
       <div class="flex items-center space-x-2.5">
+
+        <!-- PLAYER AUTH & IDENTITY CONTAINER -->
+        <div id="navbar-auth-container" class="flex items-center">
+          <button 
+            type="button" 
+            onclick="window.LModAuth && window.LModAuth.openAuthModal()"
+            class="flex items-center space-x-1.5 bg-gradient-to-r from-purple-600/90 to-indigo-600/90 hover:from-purple-600 hover:to-indigo-600 text-white px-3.5 py-1.5 rounded-full text-xs font-semibold shadow-md shadow-purple-500/20 transition-all cursor-pointer"
+            id="nav-login-btn"
+          >
+            <span>🔑</span>
+            <span>登录 / 注册</span>
+          </button>
+        </div>
 
         <!-- STEAM RADAR ACCESS BADGE -->
         <a 
@@ -1132,6 +1157,26 @@
                   <span id="detail-pure-badge" class="px-3 py-1 rounded-full text-xs font-semibold bg-purple-500/10 dark:bg-[#A855F7]/10 text-[#A855F7] dark:text-purple-400 border border-[#A855F7]/20 inline-flex items-center gap-1 shadow-sm">
                     <span id="detail-clean-guarantee">🚫 拒绝流氓木马 · 官方底层机制</span>
                   </span>
+
+                  <!-- Detail View Cloud Favorite Button -->
+                  <button 
+                    id="detail-fav-btn" 
+                    type="button" 
+                    onclick="window.LModAuth && window.LModAuth.toggleFavorite(window.currentGame ? window.currentGame.id : '', event)" 
+                    class="px-3.5 py-1 rounded-full text-xs font-bold bg-purple-500/15 hover:bg-purple-500/25 text-purple-600 dark:text-purple-300 border border-purple-500/30 inline-flex items-center gap-1.5 shadow-sm transition cursor-pointer"
+                  >
+                    <svg class="fav-heart-icon w-3.5 h-3.5 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                    <span id="detail-fav-text">收藏单机</span>
+                  </button>
+
+                  <!-- Detail View Feedback / Bug Report Trigger Button -->
+                  <button 
+                    type="button" 
+                    onclick="window.LModAuth && window.LModAuth.openFeedbackModal(window.currentGame ? window.currentGame.id : '')" 
+                    class="px-3 py-1 rounded-full text-xs font-semibold bg-zinc-200/70 hover:bg-zinc-200 dark:bg-white/10 dark:hover:bg-white/15 text-zinc-700 dark:text-zinc-300 border border-zinc-300 dark:border-white/10 inline-flex items-center gap-1.5 shadow-sm transition cursor-pointer"
+                  >
+                    <span>🐞 避坑报错</span>
+                  </button>
                 </div>
                 <h1 id="detail-title" class="text-3xl sm:text-4xl font-extrabold text-zinc-900 dark:text-white tracking-tight mb-2">Cyberpunk 2077</h1>
                 <p id="detail-subtitle" class="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400">CD PROJEKT RED (2020) • Open World Action RPG</p>
@@ -1658,6 +1703,8 @@
   <script src="data.js"></script>
   <!-- L-MOD Vault Modern API & Telemetry Client -->
   <script src="js/vault-client.js"></script>
+  <!-- L-MOD Player Authentication & Identity Engine -->
+  <script src="js/vault-auth.js"></script>
   <!-- L-MOD AI Copilot -->
   <script src="ai_copilot.js"></script>
   <!-- L-MOD Stealth Admin Gateway (Ctrl+Shift+L / 5-Clicks) -->
@@ -2495,9 +2542,23 @@
                   ${heatBadgeText}
                 </span>
               </div>
-              <div class="flex items-center gap-1.5 text-[10px] text-zinc-600 dark:text-slate-300 font-bold">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_6px_#10b981]"></span>
-                <span>${updatedLabel}: ${game.lastUpdated || '2026-10-26'}</span>
+              <div class="flex items-center gap-1.5">
+                <div class="flex items-center gap-1.5 text-[10px] text-zinc-600 dark:text-slate-300 font-bold">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_6px_#10b981]"></span>
+                  <span>${updatedLabel}: ${game.lastUpdated || '2026-10-26'}</span>
+                </div>
+                <!-- Heart Favorite Button -->
+                <button 
+                  type="button" 
+                  data-fav-btn="${game.id}" 
+                  onclick="window.LModAuth && window.LModAuth.toggleFavorite('${game.id}', event)" 
+                  title="收藏此单机神作"
+                  class="fav-toggle-btn p-1 rounded-full hover:bg-purple-500/20 text-zinc-400 dark:text-zinc-500 hover:text-purple-500 dark:hover:text-purple-400 transition-all cursor-pointer relative z-20"
+                >
+                  <svg class="fav-heart-icon w-3.5 h-3.5 transition-transform hover:scale-125" fill="${window.LModAuth && window.LModAuth.isFavorited(game.id) ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                  </svg>
+                </button>
               </div>
             </div>
 
@@ -2578,7 +2639,18 @@
               <div class="text-[11px] text-zinc-400 font-mono-tech">${game.title} • ${updatedLabel}: ${game.lastUpdated || '2026-10-26'}</div>
             </div>
           </div>
-          <div class="flex items-center space-x-4">
+          <div class="flex items-center space-x-3">
+            <button 
+              type="button" 
+              data-fav-btn="${game.id}" 
+              onclick="window.LModAuth && window.LModAuth.toggleFavorite('${game.id}', event)" 
+              title="收藏此单机神作"
+              class="fav-toggle-btn p-1.5 rounded-full hover:bg-purple-500/20 text-zinc-400 dark:text-zinc-500 hover:text-purple-500 dark:hover:text-purple-400 transition-all cursor-pointer"
+            >
+              <svg class="fav-heart-icon w-4 h-4" fill="${window.LModAuth && window.LModAuth.isFavorited(game.id) ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+              </svg>
+            </button>
             <span class="text-xs font-mono-tech text-zinc-500 hidden sm:inline">${downloads} ${pullsSuffix}</span>
             <span class="text-xs text-purple-600 dark:text-purple-400 font-mono-tech">${t('viewDetailCardBtn')} →</span>
           </div>
@@ -2586,6 +2658,7 @@
         listCon.appendChild(listRow);
       });
 
+      if (window.LModAuth) window.LModAuth.updateHeartVisuals();
       init3DCardPhysics();
       initCustomCursor();
     }
@@ -2751,6 +2824,24 @@
       renderRadarCard(game);
       renderSocialCardsTab(game);
       renderConsoleCategories(game.consoleCategories || []);
+
+      // Sync Detail Favorite Heart Button State
+      const detailFavBtn = document.getElementById('detail-fav-btn');
+      const detailFavText = document.getElementById('detail-fav-text');
+      if (detailFavBtn && window.LModAuth) {
+        detailFavBtn.setAttribute('data-fav-btn', game.id);
+        const isFav = window.LModAuth.isFavorited(game.id);
+        const icon = detailFavBtn.querySelector('.fav-heart-icon');
+        if (isFav) {
+          detailFavBtn.classList.add('text-purple-400');
+          if (icon) icon.setAttribute('fill', 'currentColor');
+          if (detailFavText) detailFavText.innerText = '已收藏';
+        } else {
+          detailFavBtn.classList.remove('text-purple-400');
+          if (icon) icon.setAttribute('fill', 'none');
+          if (detailFavText) detailFavText.innerText = '收藏单机';
+        }
+      }
 
       // TAB 2: Mods Setup
       document.getElementById('detail-mod-path').innerText = game.modInstallPath || 'GameDirectory\\Mods';

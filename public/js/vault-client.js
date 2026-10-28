@@ -6,7 +6,7 @@
 (function (window) {
   'use strict';
 
-  // 1. Unified Telemetry Engine
+  // 1. Unified Telemetry Engine with Authenticated Player Tracing
   const LModTracker = {
     sessionId: (function () {
       let sid = localStorage.getItem('lmod_sid');
@@ -17,13 +17,42 @@
       return sid;
     })(),
 
+    userId: (function () {
+      try {
+        const u = localStorage.getItem('lmod_player_user');
+        if (u) {
+          const parsed = JSON.parse(u);
+          return parsed.id || null;
+        }
+      } catch (e) {}
+      return null;
+    })(),
+
+    setUserId: function (uid) {
+      this.userId = uid || null;
+    },
+
+    getUserId: function () {
+      if (this.userId) return this.userId;
+      if (window.LModAuth && typeof window.LModAuth.getUserId === 'function') {
+        const id = window.LModAuth.getUserId();
+        if (id) {
+          this.userId = id;
+          return id;
+        }
+      }
+      return null;
+    },
+
     track: function (eventType, gameId, targetPayload) {
       try {
+        const currentUserId = this.getUserId();
         const payload = JSON.stringify({
           event_type: eventType,
           game_id: gameId || null,
           target_payload: targetPayload ? String(targetPayload).slice(0, 255) : null,
           session_id: this.sessionId,
+          user_id: currentUserId,
           timestamp: Date.now()
         });
 

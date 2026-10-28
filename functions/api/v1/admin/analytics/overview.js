@@ -1,6 +1,6 @@
 /**
  * Cloudflare Pages Function: GET /api/v1/admin/analytics/overview
- * Real-time Telemetry & Analytics Overview Dashboard
+ * Real-time Telemetry, Player Analytics & Identity Overview Dashboard
  */
 
 export async function onRequestGet(context) {
@@ -12,12 +12,27 @@ export async function onRequestGet(context) {
   }
 
   try {
-    // 1. Core KPIs
-    const [pvTotalRes, uvTotalRes, pvTodayRes, uvTodayRes] = await Promise.all([
+    // 1. Core KPIs & User Metrics
+    const [
+      pvTotalRes,
+      uvTotalRes,
+      pvTodayRes,
+      uvTodayRes,
+      usersTotalRes,
+      usersTodayRes,
+      usersActiveTodayRes,
+      usersWithPwdRes,
+      otpTodayRes
+    ] = await Promise.all([
       db.prepare('SELECT count(*) as count FROM telemetry_events').first(),
       db.prepare('SELECT count(DISTINCT session_id) as count FROM telemetry_events').first(),
       db.prepare("SELECT count(*) as count FROM telemetry_events WHERE DATE(created_at) = DATE('now')").first(),
-      db.prepare("SELECT count(DISTINCT session_id) as count FROM telemetry_events WHERE DATE(created_at) = DATE('now')").first()
+      db.prepare("SELECT count(DISTINCT session_id) as count FROM telemetry_events WHERE DATE(created_at) = DATE('now')").first(),
+      db.prepare("SELECT count(*) as count FROM users WHERE email IS NOT NULL").first().catch(() => ({ count: 0 })),
+      db.prepare("SELECT count(*) as count FROM users WHERE email IS NOT NULL AND DATE(created_at) = DATE('now')").first().catch(() => ({ count: 0 })),
+      db.prepare("SELECT count(*) as count FROM users WHERE email IS NOT NULL AND DATE(last_login_at) = DATE('now')").first().catch(() => ({ count: 0 })),
+      db.prepare("SELECT count(*) as count FROM users WHERE password_hash IS NOT NULL AND password_hash != ''").first().catch(() => ({ count: 0 })),
+      db.prepare("SELECT count(*) as count FROM email_verification_codes WHERE DATE(created_at) = DATE('now')").first().catch(() => ({ count: 0 }))
     ]);
 
     // 2. Events breakdown by type
@@ -77,6 +92,17 @@ export async function onRequestGet(context) {
        LIMIT 7`
     ).all();
 
+    // 8. Recent Registered Players
+    const recentUsersRes = await db.prepare(
+      `SELECT id, email, nickname, avatar_url,
+              (password_hash IS NOT NULL AND password_hash != '') as has_password,
+              created_at, last_login_at
+       FROM users
+       WHERE email IS NOT NULL
+       ORDER BY created_at DESC
+       LIMIT 6`
+    ).all().catch(() => ({ results: [] }));
+
     const eventBreakdown = {};
     (eventTypesRes.results || []).forEach(r => {
       eventBreakdown[r.event_type] = r.count;
@@ -97,12 +123,20 @@ export async function onRequestGet(context) {
           ai_ask_count: eventBreakdown['ai_ask'] || 0,
           view_game_count: eventBreakdown['view_game'] || 0
         },
+        users_summary: {
+          total_registered: usersTotalRes?.count || 0,
+          today_registered: usersTodayRes?.count || 0,
+          today_active: usersActiveTodayRes?.count || 0,
+          password_set_count: usersWithPwdRes?.count || 0,
+          otp_sent_today: otpTodayRes?.count || 0
+        },
         event_breakdown: eventBreakdown,
         top_searches: topSearchesRes.results || [],
         top_commands: topCommandsRes.results || [],
         top_downloads: topDownloadsRes.results || [],
         country_distribution: countryRes.results || [],
         activity_trend: trendRes.results || [],
+        recent_players: recentUsersRes.results || [],
         generated_at: new Date().toISOString()
       }
     }), {

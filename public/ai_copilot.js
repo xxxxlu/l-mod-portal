@@ -1,114 +1,112 @@
 /**
- * L-MOD Vault - Player-Facing AI Copilot (老L · AI 游戏智库顾问)
- * Standalone, zero-dependency, context-aware Copilot for index.html & radar.html.
- * Supports:
- * 1. Offline Local RAG (100% free, instant response from window.GAMES_DATA)
- * 2. Bring Your Own Key (BYOK) for Google Gemini API & DeepSeek API
- * 3. Natural Language Command Search & One-Click Copy / .bat generation
- * 4. Crash & Mod Conflict Diagnostics (EAC, UE4SS, CET, ScriptExtender)
- * 5. Real-time Steam Patch Radar status integration
- * 6. Multi-language support (8 languages)
+ * L-MOD Vault - Player-Facing AI Copilot (老L · 官方 AI 游戏智库顾问)
+ * ==============================================================================
+ * 首席架构师重构版：
+ * 1. 【彻底修复回车双发 Bug】：
+ *    - 严格监听中文拼音输入法组合状态 (compositionstart / compositionend / isComposing / keyCode === 229)
+ *    - 状态机互斥锁 (state.isSending & state.isLoading) 彻底杜绝并发二次投递
+ *    - Shift+Enter 正常换行，Enter 触发送，Textarea 弹性高度输入与发送后自适应回缩
+ * 2. 【官方云端智能体 + 免 Key 体验】：
+ *    - 默认直连官方中继 (/api/v1/ai/chat)，由站长后台统一配置 API Key，玩家免输密钥
+ *    - Server-Sent Events (SSE) 极客级流式打字机逐字输出
+ * 3. 【4 大专属 Agentic Skills 实时联动】：
+ *    - 技能 A: 游戏指令与模组检索 (Game Vault RAG)
+ *    - 技能 B: Steam 补丁哨兵巡检 (Patch Sentinel)
+ *    - 技能 C: 报错闪退崩溃专家诊断 (Crash Diagnostic)
+ *    - 技能 D: 全域单机智库通用问答 (General Gaming Oracle)
+ * 4. 【多级容灾与离线保障】：
+ *    - 云端网络异常或离线时，100% 优雅回退到本地极速 RAG 智库
+ *    - 支持一键复制真实指令、一键生成 Windows .bat 批处理脚本
  */
 
 (function () {
   'use strict';
 
-  // Prevent multiple initializations
+  // 防止重复初始化
   if (window.LMOD_AI_COPILOT) return;
 
   const STORAGE_KEY_KEY = 'lmod_ai_config';
   const STORAGE_HISTORY_KEY = 'lmod_ai_history';
 
-  // Copilot State
+  // 状态机核心定义
   const state = {
     isOpen: false,
     isSettingsOpen: false,
-    activeGame: null, // { id, title, ... }
-    mode: 'local', // 'local' | 'gemini' | 'deepseek' | 'custom'
-    apiKey: '',
+    activeGame: null, // 当前锚定游戏 { id, title, rank, ... }
+    mode: 'cloud', // 'cloud' (官方云端免Key推荐) | 'local' (离线智库) | 'byok' (自带Key调试)
+    isSending: false, // 发送互斥锁 (防抖/防并发)
+    isLoading: false, // 网络加载/流式中继锁
+    byokProvider: 'gemini', // 'gemini' | 'deepseek' | 'custom'
+    byokKey: '',
     customEndpoint: '',
     customModel: '',
-    geminiModel: 'gemini-2.5-flash',
-    deepseekModel: 'deepseek-chat',
-    isLoading: false,
     messages: []
   };
 
-  // UI Multi-Language Dictionary
+  // 多语言文案字典
   const i18n = {
     'zh-CN': {
-      title: '老L · AI 游戏智库顾问',
-      tagline: '控制台代码 / 闪退排查 / 避坑雷达 / 一键脚本',
-      globalContext: '全网 100 款单机智库',
+      title: '老L · AI 官方智库顾问',
+      tagline: '控制台代码 · 闪退排查 · 补丁雷达 · 一键脚本',
+      globalContext: '全网 100 款单机大作智库',
       activeContextPrefix: '当前游戏: ',
       switchGame: '切换游戏',
       clearContext: '切回全局',
-      inputPlaceholder: '输入你的问题，如：“2077怎么刷四季宝”、“法环闪退排查”...',
+      inputPlaceholder: '输入你的问题，如：“2077怎么刷四季宝”、“法环闪退排查”、“黑神话广智怎么打”...',
       sendBtn: '发送',
-      thinking: '老L 正在调取游戏底层指令与避坑数据库...',
+      thinking: '老L 正在调取 D1 智库底层指令与 4 大专属 Skills...',
       copyCode: '复制指令',
       copied: '已复制到剪贴板！',
       downloadBat: '生成 .bat 脚本',
-      settingsTitle: 'AI 引擎与模型设置',
-      modeLocal: '本地极速智库 (免 Key 推荐 · 毫秒级响应)',
-      modeGemini: 'Google Gemini 2.5 (在线大模型 · 智能推理)',
-      modeDeepSeek: 'DeepSeek API (深度思考 · 中文单机专家)',
-      modeCustom: '自定义 OpenAI 兼容接口',
-      apiKeyLabel: 'API Key 密钥 (仅保存在本地浏览器，安全隐私)',
+      settingsTitle: 'AI 引擎与官方智能体配置',
+      modeCloud: '⚡ 官方统一云端智能体 (免 Key 推荐 · 4大Skills编排)',
+      modeLocal: '📦 本地极速智库 (离线模式 · 零延迟)',
+      modeByok: '🛠️ 自定义/开发者自带密钥 (BYOK)',
+      byokKeyLabel: '私有 API Key (若填写将覆盖官方配置，仅存本地)',
       saveSettings: '保存配置',
       close: '关闭',
       clearHistory: '清空会话',
-      welcomeMessage: '我是**老L**，你的单机游戏避坑与控制台代码顾问！\n\n你可以随时向我提问：\n- 🔍 **找控制台代码**：“给我赛博朋克2077强尼的保时捷代码”\n- 💥 **闪退坏档排查**：“博德之门3打Mod闪退怎么解决”\n- 📡 **避坑雷达咨询**：“艾尔登法环当前版本能打无敌Mod吗”\n- ⚡ **修改器与热键**：“黑神话悟空风灵月影修改器快捷键”',
+      welcomeMessage: '我是**老L**，L-MOD Vault 官方单机游戏智库首席顾问！\n\n已为你接入**官方云端智能体**与 **4 大专属 Skills 技能链**：\n- 🔍 **查核心控制台代码**：“给我赛博朋克2077强尼的保时捷代码”\n- 💥 **闪退坏档逃课排查**：“博德之门3打Mod闪退怎么解决”\n- 📡 **Steam 补丁避坑雷达**：“艾尔登法环当前版本能打Mod吗”\n- 🎮 **单机攻略与配置通识**：“黑神话悟空推荐画质设置”',
       pillCommands: '🔍 查核心作弊代码',
       pillCrash: '💥 闪退与冲突排查',
       pillPatch: '📡 最新补丁避坑状态',
       pillTrainer: '⚡ 修改器热键与防误报',
-      emptyNoMatch: '在本地知识库中未找到完全匹配的词条。',
-      emptySuggestOnline: '建议点击右上角 ⚙️ 接入 Gemini 或 DeepSeek API Key 进行全网大模型推理！',
-      noGameFound: '未找到指定游戏，已为您在全站 100 款游戏中检索相似内容。',
+      cloudBadge: '官方云端智能体',
       offlineBadge: '本地智库 (离线)',
-      geminiBadge: 'Gemini 在线',
-      deepseekBadge: 'DeepSeek 在线',
-      customBadge: '自定义 API'
+      byokBadge: '自带 Key (私有)'
     },
     'en': {
-      title: 'L-MOD · AI Game Vault Advisor',
-      tagline: 'Console Cheats / Crash Doctor / Patch Radar / Script Generator',
+      title: 'Old L · Official AI Vault Advisor',
+      tagline: 'Console Codes / Crash Doctor / Patch Radar / Script Gen',
       globalContext: 'Global 100 Games Vault',
       activeContextPrefix: 'Active Game: ',
       switchGame: 'Switch Game',
       clearContext: 'Reset to Global',
       inputPlaceholder: 'Ask a question, e.g. "Cyberpunk Johnny Porsche code", "Elden Ring crash fix"...',
       sendBtn: 'Send',
-      thinking: 'Old L is retrieving low-level game commands and radar data...',
-      copyCode: 'Copy Command',
+      thinking: 'Old L is orchestrating D1 commands & 4 agentic skills...',
+      copyCode: 'Copy Code',
       copied: 'Copied to clipboard!',
       downloadBat: 'Download .bat',
-      settingsTitle: 'AI Engine & Model Settings',
-      modeLocal: 'Local Fast Vault (No Key Needed · Instant)',
-      modeGemini: 'Google Gemini 2.5 (Online AI · Deep Reasoning)',
-      modeDeepSeek: 'DeepSeek API (Deep Reasoning)',
-      modeCustom: 'Custom OpenAI-Compatible API',
-      apiKeyLabel: 'API Key (Stored locally in your browser only)',
+      settingsTitle: 'AI Engine & Agent Configuration',
+      modeCloud: '⚡ Official Cloud Agent (Recommended · No Key Needed)',
+      modeLocal: '📦 Offline Local Vault (Zero Latency)',
+      modeByok: '🛠️ Developer / Bring Your Own Key (BYOK)',
+      byokKeyLabel: 'Private API Key (Stored in browser only)',
       saveSettings: 'Save Settings',
       close: 'Close',
       clearHistory: 'Clear Chat',
-      welcomeMessage: "I'm **Old L**, your single-player game modding and console command advisor!\n\nFeel free to ask:\n- 🔍 **Find Commands**: 'Give me the Johnny Silverhand Porsche code for Cyberpunk 2077'\n- 💥 **Crash & Fixes**: 'Baldur\\'s Gate 3 crashes with mods, how to fix?'\n- 📡 **Patch Radar**: 'Can I safely use mods on the latest Elden Ring patch?'\n- ⚡ **Trainers**: 'FLiNG trainer hotkeys for Black Myth Wukong'",
+      welcomeMessage: "I'm **Old L**, your official single-player game modding and console command advisor!\n\nArmed with **Cloud Agent + 4 Exclusive Skills**:\n- 🔍 **Find Real Commands**: 'Johnny Silverhand Porsche code for Cyberpunk 2077'\n- 💥 **Crash & Mod Fixes**: 'Baldur\\'s Gate 3 crashes with mods, how to fix?'\n- 📡 **Patch Radar**: 'Can I safely mod on the latest Elden Ring patch?'\n- 🎮 **General Guide**: 'Best graphics settings for Black Myth: Wukong'",
       pillCommands: '🔍 Key Console Codes',
       pillCrash: '💥 Crash & Mod Doctor',
       pillPatch: '📡 Patch Radar Status',
       pillTrainer: '⚡ Trainer Hotkeys',
-      emptyNoMatch: 'No exact match found in local database.',
-      emptySuggestOnline: 'Tip: Click ⚙️ to configure Gemini or DeepSeek API for online AI reasoning!',
-      noGameFound: 'Game not specified. Searched across all 100 games.',
+      cloudBadge: 'Official Cloud Agent',
       offlineBadge: 'Local Vault (Offline)',
-      geminiBadge: 'Gemini Online',
-      deepseekBadge: 'DeepSeek Online',
-      customBadge: 'Custom API'
+      byokBadge: 'Private Key (BYOK)'
     }
   };
 
-  // Helper: Get Current Language
   function getLang() {
     const code = localStorage.getItem('lmod_lang') || 'zh-CN';
     return i18n[code] ? code : 'zh-CN';
@@ -119,18 +117,17 @@
     return (i18n[lang] && i18n[lang][key]) || i18n['zh-CN'][key] || key;
   }
 
-  // Load Saved Configuration
+  // 加载与保存配置
   function loadConfig() {
     try {
       const raw = localStorage.getItem(STORAGE_KEY_KEY);
       if (raw) {
         const parsed = JSON.parse(raw);
-        state.mode = parsed.mode || 'local';
-        state.apiKey = parsed.apiKey || '';
+        state.mode = parsed.mode || 'cloud';
+        state.byokProvider = parsed.byokProvider || 'gemini';
+        state.byokKey = parsed.byokKey || '';
         state.customEndpoint = parsed.customEndpoint || '';
         state.customModel = parsed.customModel || '';
-        state.geminiModel = parsed.geminiModel || 'gemini-2.5-flash';
-        state.deepseekModel = parsed.deepseekModel || 'deepseek-chat';
       }
     } catch (e) {
       console.warn('Failed to load L-MOD AI config:', e);
@@ -141,11 +138,10 @@
     try {
       const config = {
         mode: state.mode,
-        apiKey: state.apiKey,
+        byokProvider: state.byokProvider,
+        byokKey: state.byokKey,
         customEndpoint: state.customEndpoint,
-        customModel: state.customModel,
-        geminiModel: state.geminiModel,
-        deepseekModel: state.deepseekModel
+        customModel: state.customModel
       };
       localStorage.setItem(STORAGE_KEY_KEY, JSON.stringify(config));
     } catch (e) {
@@ -153,17 +149,11 @@
     }
   }
 
-  // Detect Active Game from Environment
+  // 智能环境探测：获取当前网页锚定的游戏
   function detectActiveGame() {
-    // 1. Check window.activeGame from index.html
-    if (window.activeGame && window.activeGame.id) {
-      return window.activeGame;
-    }
-    // 2. Check window.currentDrawerGame from radar.html
-    if (window.currentDrawerGame && window.currentDrawerGame.id) {
-      return window.currentDrawerGame;
-    }
-    // 3. Check URL hash (e.g. #/game/cyberpunk-2077 or ?game=cyberpunk-2077)
+    if (window.activeGame && window.activeGame.id) return window.activeGame;
+    if (window.currentDrawerGame && window.currentDrawerGame.id) return window.currentDrawerGame;
+
     const hash = window.location.hash || '';
     const search = window.location.search || '';
     const match = hash.match(/game[=/]([a-zA-Z0-9_-]+)/) || search.match(/game=([a-zA-Z0-9_-]+)/);
@@ -176,13 +166,12 @@
     return state.activeGame || null;
   }
 
-  // Find Game by Query
+  // 根据 Query 推导目标游戏
   function findGameByQuery(query) {
     const games = window.GAMES_DATA || window.GAMES_DATABASE || [];
     if (!games.length) return null;
     const q = query.toLowerCase().replace(/\s+/g, '');
 
-    // Direct game name match
     for (const g of games) {
       const title = (g.title || '').toLowerCase().replace(/\s+/g, '');
       if (title && q.includes(title)) return g;
@@ -194,7 +183,6 @@
       }
     }
 
-    // Common aliases mapping
     const aliases = {
       '2077': 'cyberpunk-2077',
       '赛博朋克': 'cyberpunk-2077',
@@ -265,53 +253,712 @@
   }
 
   // =========================================================================
-  // LOCAL RAG ENGINE: Ultra-Fast, Context-Aware, 100% Free & Hallucination-Free
+  // 核心样式注入
+  // =========================================================================
+  function injectStyles() {
+    if (document.getElementById('lmod-ai-styles')) return;
+    const style = document.createElement('style');
+    style.id = 'lmod-ai-styles';
+    style.textContent = `
+      #lmod-ai-fab {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 16px;
+        border-radius: 9999px;
+        background: linear-gradient(135deg, #8b5cf6 0%, #A855F7 50%, #ec4899 100%);
+        color: #ffffff;
+        box-shadow: 0 10px 25px -5px rgba(168, 85, 247, 0.5), 0 8px 10px -6px rgba(168, 85, 247, 0.3);
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(10px);
+        user-select: none;
+      }
+      #lmod-ai-fab:hover {
+        transform: translateY(-2px) scale(1.03);
+        box-shadow: 0 14px 30px -4px rgba(168, 85, 247, 0.65);
+      }
+      #lmod-ai-fab .fab-ping {
+        position: absolute;
+        top: -2px;
+        right: -2px;
+        width: 10px;
+        height: 10px;
+        border-radius: 9999px;
+        background: #10b981;
+      }
+      #lmod-ai-drawer {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        max-width: 500px;
+        background: rgba(14, 16, 22, 0.98);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        border-left: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: -15px 0 50px rgba(0, 0, 0, 0.7);
+        z-index: 10000;
+        display: flex;
+        flex-direction: column;
+        transform: translateX(100%);
+        transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        color: #f3f4f6;
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+      }
+      #lmod-ai-drawer.open {
+        transform: translateX(0);
+      }
+      #lmod-ai-backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(4px);
+        z-index: 9998;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+      }
+      #lmod-ai-backdrop.open {
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .lmod-msg {
+        animation: lmodFadeIn 0.25s ease-out;
+      }
+      @keyframes lmodFadeIn {
+        from { opacity: 0; transform: translateY(6px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .lmod-code-box {
+        background: #090a0f;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 10px;
+        padding: 12px;
+        margin: 8px 0;
+        font-family: "SF Mono", Menlo, Consolas, Monaco, monospace;
+        font-size: 12px;
+        position: relative;
+        overflow-x: auto;
+      }
+      .lmod-btn-action {
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        color: #e5e7eb;
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 11px;
+        cursor: pointer;
+        transition: all 0.2s;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+      }
+      .lmod-btn-action:hover {
+        background: rgba(168, 85, 247, 0.25);
+        border-color: rgba(168, 85, 247, 0.5);
+        color: #ffffff;
+      }
+      .lmod-pill {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 9999px;
+        padding: 4px 10px;
+        font-size: 11px;
+        color: #d1d5db;
+        cursor: pointer;
+        transition: all 0.2s;
+        white-space: nowrap;
+      }
+      .lmod-pill:hover {
+        background: rgba(168, 85, 247, 0.2);
+        border-color: rgba(168, 85, 247, 0.4);
+        color: #ffffff;
+      }
+      .lmod-skill-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 10px;
+        padding: 2px 7px;
+        border-radius: 6px;
+        background: rgba(168, 85, 247, 0.15);
+        color: #d8b4fe;
+        border: 1px solid rgba(168, 85, 247, 0.3);
+        margin-right: 4px;
+        margin-bottom: 4px;
+      }
+      .lmod-typing-cursor::after {
+        content: '▋';
+        display: inline-block;
+        color: #A855F7;
+        animation: lmodBlink 1s infinite;
+        margin-left: 2px;
+      }
+      @keyframes lmodBlink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  // =========================================================================
+  // DOM 抽屉渲染与事件绑定 (包含中文拼音防抖与回车双发彻底修复)
+  // =========================================================================
+  function injectDrawerHtml() {
+    if (document.getElementById('lmod-ai-drawer')) return;
+
+    // 1. Backdrop
+    const backdrop = document.createElement('div');
+    backdrop.id = 'lmod-ai-backdrop';
+    backdrop.onclick = closeDrawer;
+    document.body.appendChild(backdrop);
+
+    // 2. FAB Button
+    const fab = document.createElement('div');
+    fab.id = 'lmod-ai-fab';
+    fab.title = '老L · AI 官方智库顾问 (Cmd+K / Ctrl+K)';
+    fab.innerHTML = `
+      <span class="fab-ping"></span>
+      <span style="font-size: 16px;">🤖</span>
+      <span style="font-weight: 700; font-size: 13px; letter-spacing: 0.2px;">AI 顾问</span>
+      <span style="font-size: 10px; opacity: 0.7; font-family: monospace; background: rgba(0,0,0,0.2); padding: 1px 5px; border-radius: 4px;">⌘K</span>
+    `;
+    fab.onclick = toggleDrawer;
+    document.body.appendChild(fab);
+
+    // 3. Drawer Container
+    const drawer = document.createElement('div');
+    drawer.id = 'lmod-ai-drawer';
+    drawer.innerHTML = `
+      <!-- HEADER -->
+      <div style="padding: 16px 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); display: flex; align-items: center; justify-content: space-between; background: rgba(255, 255, 255, 0.02);">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <div style="width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, #8b5cf6, #ec4899); display: flex; align-items: center; justify-content: center; font-size: 18px; box-shadow: 0 4px 12px rgba(168, 85, 247, 0.4);">
+            🤖
+          </div>
+          <div>
+            <div style="font-weight: 700; font-size: 14px; display: flex; align-items: center; gap: 6px;">
+              <span>${t('title')}</span>
+              <span id="lmod-mode-badge" style="font-size: 9px; padding: 2px 6px; border-radius: 4px; background: rgba(168, 85, 247, 0.2); color: #c084fc; font-weight: 600;">${t('cloudBadge')}</span>
+            </div>
+            <div style="font-size: 11px; color: #9ca3af; margin-top: 1px;" id="lmod-tagline">${t('tagline')}</div>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 6px;">
+          <button id="lmod-btn-settings" title="查看智能体引擎设置" style="background: none; border: none; color: #9ca3af; cursor: pointer; padding: 6px; border-radius: 8px; transition: color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#9ca3af'">
+            ⚙️
+          </button>
+          <button id="lmod-btn-clear" title="清空对话" style="background: none; border: none; color: #9ca3af; cursor: pointer; padding: 6px; border-radius: 8px; transition: color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#9ca3af'">
+            🗑️
+          </button>
+          <button id="lmod-btn-close" title="关闭 (Esc)" style="background: none; border: none; color: #9ca3af; cursor: pointer; padding: 6px; border-radius: 8px; transition: color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#9ca3af'">
+            ✕
+          </button>
+        </div>
+      </div>
+
+      <!-- ACTIVE CONTEXT BAR -->
+      <div id="lmod-context-bar" style="padding: 8px 16px; background: rgba(168, 85, 247, 0.08); border-bottom: 1px solid rgba(168, 85, 247, 0.15); font-size: 11px; display: flex; align-items: center; justify-content: space-between;">
+        <div style="display: flex; align-items: center; gap: 6px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+          <span style="color: #A855F7;">🎮</span>
+          <span id="lmod-context-text" style="color: #d8b4fe; font-weight: 600;">${t('globalContext')}</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 6px;">
+          <button id="lmod-context-clear" style="display: none; background: rgba(255,255,255,0.06); border: none; color: #cbd5e1; font-size: 10px; padding: 2px 6px; border-radius: 4px; cursor: pointer;">${t('clearContext')}</button>
+        </div>
+      </div>
+
+      <!-- QUICK PILLS -->
+      <div id="lmod-quick-pills" style="padding: 10px 16px; display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; border-bottom: 1px solid rgba(255, 255, 255, 0.05); background: rgba(0,0,0,0.15);">
+        <button class="lmod-pill" data-prompt="${t('pillCommands')}">${t('pillCommands')}</button>
+        <button class="lmod-pill" data-prompt="${t('pillCrash')}">${t('pillCrash')}</button>
+        <button class="lmod-pill" data-prompt="${t('pillPatch')}">${t('pillPatch')}</button>
+        <button class="lmod-pill" data-prompt="${t('pillTrainer')}">${t('pillTrainer')}</button>
+      </div>
+
+      <!-- CHAT MESSAGE LIST -->
+      <div id="lmod-chat-body" style="flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 14px; scroll-behavior: smooth;">
+        <!-- Messages injected here -->
+      </div>
+
+      <!-- INPUT BAR -->
+      <div style="padding: 14px 16px; border-top: 1px solid rgba(255, 255, 255, 0.08); background: rgba(14, 16, 22, 0.98); display: flex; flex-direction: column; gap: 8px;">
+        <div style="display: flex; gap: 8px; align-items: flex-end;">
+          <textarea id="lmod-chat-input" rows="1" placeholder="${t('inputPlaceholder')}" style="flex: 1; resize: none; max-height: 120px; min-height: 40px; background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 12px; padding: 10px 14px; color: #ffffff; font-size: 13px; outline: none; font-family: inherit; line-height: 1.4; transition: border-color 0.2s; box-sizing: border-box;"></textarea>
+          <button id="lmod-btn-send" style="background: linear-gradient(135deg, #8b5cf6, #A855F7); border: none; border-radius: 12px; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; color: #fff; cursor: pointer; flex-shrink: 0; box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3); transition: transform 0.2s;">
+            <svg style="width: 18px; height: 18px; fill: currentColor;" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+          </button>
+        </div>
+        <div style="font-size: 10px; color: #6b7280; text-align: center; display: flex; justify-content: space-between; align-items: center;">
+          <span>Enter 发送 / Shift+Enter 换行 (已做拼音防抖保护)</span>
+          <span style="color: #8b5cf6; cursor: pointer;" onclick="window.LMOD_AI_COPILOT.openSettings()">⚡ 官方智库中继 · 已就绪</span>
+        </div>
+      </div>
+
+      <!-- SETTINGS MODAL -->
+      <div id="lmod-settings-modal" style="display: none; position: absolute; inset: 0; background: rgba(10, 12, 16, 0.98); z-index: 10001; padding: 24px; flex-direction: column; gap: 16px; overflow-y: auto;">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 12px;">
+          <h3 style="margin: 0; font-size: 15px; font-weight: 700; color: #fff;">${t('settingsTitle')}</h3>
+          <button id="lmod-settings-close" style="background: none; border: none; color: #9ca3af; font-size: 16px; cursor: pointer;">✕</button>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 14px; font-size: 12px;">
+          <div style="padding: 12px; border-radius: 10px; background: rgba(168, 85, 247, 0.1); border: 1px solid rgba(168, 85, 247, 0.2); line-height: 1.5; color: #d8b4fe;">
+            <strong style="color: #fff;">💡 官方统一云端智能体已上线：</strong><br>
+            前台玩家无需配置任何 API Key，由站长后台统一调配 Google Gemini 2.5 旗舰推理与 D1 智库 4 大专属 Skills 技能链。
+          </div>
+
+          <div>
+            <label style="display: block; font-weight: 600; color: #e5e7eb; margin-bottom: 6px;">选择运行模式</label>
+            <select id="lmod-cfg-mode" style="width: 100%; background: #1c1f26; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 8px; padding: 8px; color: #fff; font-size: 12px;">
+              <option value="cloud">${t('modeCloud')}</option>
+              <option value="local">${t('modeLocal')}</option>
+              <option value="byok">${t('modeByok')}</option>
+            </select>
+          </div>
+
+          <!-- BYOK Developer Fields -->
+          <div id="lmod-cfg-byok-box" style="display: none; flex-direction: column; gap: 10px;">
+            <div>
+              <label style="display: block; font-weight: 600; color: #e5e7eb; margin-bottom: 6px;">私有模型供应商</label>
+              <select id="lmod-cfg-byok-provider" style="width: 100%; background: #1c1f26; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 8px; padding: 8px; color: #fff; font-size: 12px;">
+                <option value="gemini">Google Gemini (Gemini 2.5 Flash)</option>
+                <option value="deepseek">DeepSeek API (DeepSeek-Chat)</option>
+                <option value="custom">自定义 OpenAI 规范端点</option>
+              </select>
+            </div>
+
+            <div>
+              <label style="display: block; font-weight: 600; color: #e5e7eb; margin-bottom: 6px;">${t('byokKeyLabel')}</label>
+              <input type="password" id="lmod-cfg-byok-key" placeholder="AIzaSy... 或 sk-..." style="width: 100%; box-sizing: border-box; background: #1c1f26; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 8px; padding: 8px 12px; color: #fff; font-size: 12px; font-family: monospace;">
+            </div>
+
+            <div id="lmod-cfg-custom-endpoint-box" style="display: none;">
+              <label style="display: block; font-weight: 600; color: #e5e7eb; margin-bottom: 6px;">自定义端点 URL</label>
+              <input type="text" id="lmod-cfg-endpoint" placeholder="https://api.example.com/v1/chat/completions" style="width: 100%; box-sizing: border-box; background: #1c1f26; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 8px; padding: 8px 12px; color: #fff; font-size: 12px;">
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: auto; padding-top: 16px; border-top: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: flex-end; gap: 8px;">
+          <button id="lmod-btn-save-cfg" style="background: #A855F7; color: #fff; border: none; border-radius: 8px; padding: 8px 16px; font-weight: 600; cursor: pointer; font-size: 12px;">${t('saveSettings')}</button>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(drawer);
+
+    // 绑定基础关闭与清空事件
+    document.getElementById('lmod-btn-close').onclick = closeDrawer;
+    document.getElementById('lmod-btn-clear').onclick = clearChatHistory;
+    document.getElementById('lmod-btn-settings').onclick = openSettings;
+    document.getElementById('lmod-settings-close').onclick = closeSettings;
+    document.getElementById('lmod-btn-save-cfg').onclick = handleSaveSettings;
+    document.getElementById('lmod-btn-send').onclick = handleSendUserMessage;
+
+    // 快捷胶囊点击事件
+    document.querySelectorAll('#lmod-quick-pills .lmod-pill').forEach(btn => {
+      btn.onclick = function () {
+        const prompt = this.getAttribute('data-prompt');
+        sendUserMessage(prompt);
+      };
+    });
+
+    // 模式切换监听
+    document.getElementById('lmod-cfg-mode').onchange = function (e) {
+      updateSettingsFormVisibility(e.target.value);
+    };
+
+    document.getElementById('lmod-cfg-byok-provider').onchange = function (e) {
+      const endpointBox = document.getElementById('lmod-cfg-custom-endpoint-box');
+      endpointBox.style.display = e.target.value === 'custom' ? 'block' : 'none';
+    };
+
+    // -----------------------------------------------------------------------
+    // 关键核心：中文拼音输入法状态机 + 彻底根治回车双发 Bug
+    // -----------------------------------------------------------------------
+    const input = document.getElementById('lmod-chat-input');
+    let isComposing = false; // 中文拼音组合上屏状态机
+
+    input.addEventListener('compositionstart', function () {
+      isComposing = true;
+    });
+
+    input.addEventListener('compositionend', function () {
+      // 部分浏览器在 compositionend 后立即触发一次 keydown，延迟 50ms 释放状态
+      setTimeout(() => {
+        isComposing = false;
+      }, 50);
+    });
+
+    // Textarea 自适应弹性高度扩展
+    input.addEventListener('input', function () {
+      this.style.height = 'auto';
+      this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+    });
+
+    // 严格键盘拦截：杜绝回车二次触发
+    input.addEventListener('keydown', function (e) {
+      // 1. 若处于中文输入法选词组合状态，或按键码为 229，坚决拦截
+      if (e.isComposing || isComposing || e.keyCode === 229) {
+        return;
+      }
+
+      // 2. Shift + Enter 正常多行换行，单按 Enter 且非组合键触发发送
+      if (e.key === 'Enter' && !e.shiftKey && !e.ctrlKey && !e.metaKey && !e.altKey) {
+        e.preventDefault();
+        e.stopPropagation();
+        handleSendUserMessage();
+      }
+    });
+
+    // 清除游戏锚定上下文
+    document.getElementById('lmod-context-clear').onclick = function () {
+      state.activeGame = null;
+      updateContextBar();
+    };
+
+    updateContextBar();
+    updateModeBadge();
+  }
+
+  function updateSettingsFormVisibility(mode) {
+    const byokBox = document.getElementById('lmod-cfg-byok-box');
+    const endpointBox = document.getElementById('lmod-cfg-custom-endpoint-box');
+    const provider = document.getElementById('lmod-cfg-byok-provider').value;
+
+    if (mode === 'byok') {
+      byokBox.style.display = 'flex';
+      endpointBox.style.display = provider === 'custom' ? 'block' : 'none';
+    } else {
+      byokBox.style.display = 'none';
+    }
+  }
+
+  function updateModeBadge() {
+    const badge = document.getElementById('lmod-mode-badge');
+    if (!badge) return;
+
+    if (state.mode === 'cloud') {
+      badge.textContent = t('cloudBadge');
+      badge.style.background = 'rgba(168, 85, 247, 0.2)';
+      badge.style.color = '#c084fc';
+    } else if (state.mode === 'byok') {
+      badge.textContent = t('byokBadge');
+      badge.style.background = 'rgba(59, 130, 246, 0.2)';
+      badge.style.color = '#60a5fa';
+    } else {
+      badge.textContent = t('offlineBadge');
+      badge.style.background = 'rgba(16, 185, 129, 0.15)';
+      badge.style.color = '#34d399';
+    }
+  }
+
+  function updateContextBar() {
+    const barText = document.getElementById('lmod-context-text');
+    const clearBtn = document.getElementById('lmod-context-clear');
+    if (!barText) return;
+
+    const game = detectActiveGame();
+    if (game) {
+      state.activeGame = game;
+      const title = (game.titles && game.titles['zh-CN']) || game.title;
+      barText.textContent = `${t('activeContextPrefix')}${title} (Rank #${game.rank})`;
+      clearBtn.style.display = 'inline-block';
+    } else {
+      barText.textContent = t('globalContext');
+      clearBtn.style.display = 'none';
+    }
+  }
+
+  // =========================================================================
+  // 发送消息处理引擎 (防抖互斥锁 + SSE 流式解析 + 本地优雅容灾)
+  // =========================================================================
+  async function handleSendUserMessage() {
+    // 状态机互斥锁校验：若正在发送或正在加载，坚决拒绝任何并发执行
+    if (state.isSending || state.isLoading) return;
+
+    const input = document.getElementById('lmod-chat-input');
+    const query = input.value.trim();
+    if (!query) return;
+
+    // 立即加锁并清空输入框，自适应高度回缩至单行
+    state.isSending = true;
+    input.value = '';
+    input.style.height = 'auto';
+
+    try {
+      await sendUserMessage(query);
+    } finally {
+      // 无论成功还是失败，最终释放发送互斥锁
+      state.isSending = false;
+    }
+  }
+
+  async function sendUserMessage(query) {
+    if (state.isLoading) return;
+
+    // 记录用户消息并渲染到列表
+    state.messages.push({ role: 'user', text: query });
+    appendUserMessageDom(query);
+
+    const container = document.getElementById('lmod-chat-body');
+    container.scrollTop = container.scrollHeight;
+
+    // 开启加载指示器
+    state.isLoading = true;
+    const loadingDiv = document.createElement('div');
+    loadingDiv.id = 'lmod-loading-indicator';
+    loadingDiv.className = 'lmod-msg';
+    loadingDiv.style.alignSelf = 'flex-start';
+    loadingDiv.style.fontSize = '12px';
+    loadingDiv.style.color = '#c084fc';
+    loadingDiv.style.padding = '8px 12px';
+    loadingDiv.style.background = 'rgba(168, 85, 247, 0.1)';
+    loadingDiv.style.borderRadius = '10px';
+    loadingDiv.innerHTML = `<span style="display: inline-block; animation: spin 1s linear infinite;">⚡</span> ${t('thinking')}`;
+    container.appendChild(loadingDiv);
+    container.scrollTop = container.scrollHeight;
+
+    const activeGame = detectActiveGame();
+
+    try {
+      // 1. 若选用了本地离线模式，直接本地 RAG 计算
+      if (state.mode === 'local') {
+        await new Promise(r => setTimeout(r, 150));
+        const result = localRagQuery(query, activeGame);
+        removeLoadingIndicator();
+        pushAndRenderAssistantMessage(result.text, result.commands, result.batContent);
+        return;
+      }
+
+      // 2. 若选用开发者自带 Key (BYOK) 模式，直接调用第三方
+      if (state.mode === 'byok' && state.byokKey) {
+        let result = null;
+        if (state.byokProvider === 'gemini') {
+          result = await callGeminiApiByok(query, activeGame);
+        } else {
+          result = await callDeepSeekApiByok(query, activeGame);
+        }
+        removeLoadingIndicator();
+        pushAndRenderAssistantMessage(result.text, result.commands, result.batContent);
+        return;
+      }
+
+      // 3. 官方云端智能体核心链路：调用 /api/v1/ai/chat (支持 SSE 流式打字机)
+      await streamCloudAiChat(query, activeGame);
+
+    } catch (err) {
+      console.warn('Official cloud AI error, falling back to local vault:', err);
+      removeLoadingIndicator();
+
+      // 零失败容灾机制：自动无缝回退至本地 100 款大作离线知识库
+      const fallback = localRagQuery(query, activeGame);
+      const fallbackNotice = `> 💡 **老L 提示**：官方云端中继发生轻微网络波动，已无缝切换为**本地高保真离线智库**为您解答：\n\n`;
+
+      pushAndRenderAssistantMessage(fallbackNotice + fallback.text, fallback.commands, fallback.batContent);
+
+    } finally {
+      removeLoadingIndicator();
+      state.isLoading = false;
+      const finalInput = document.getElementById('lmod-chat-input');
+      if (finalInput) finalInput.focus();
+    }
+  }
+
+  function removeLoadingIndicator() {
+    const loading = document.getElementById('lmod-loading-indicator');
+    if (loading) loading.remove();
+  }
+
+  // =========================================================================
+  // 官方中继 SSE 流式打字机处理器
+  // =========================================================================
+  async function streamCloudAiChat(query, activeGame) {
+    const container = document.getElementById('lmod-chat-body');
+
+    // 构造请求上下文
+    const historyPayload = state.messages.slice(-5).map(m => ({
+      role: m.role,
+      content: m.text
+    }));
+
+    const resp = await fetch('/api/v1/ai/chat', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'text/event-stream'
+      },
+      body: JSON.stringify({
+        query: query,
+        game_id: activeGame ? activeGame.id : null,
+        history: historyPayload,
+        stream: true
+      })
+    });
+
+    if (!resp.ok) {
+      throw new Error(`HTTP ${resp.status} ${resp.statusText}`);
+    }
+
+    removeLoadingIndicator();
+
+    // 创建当前流式消息节点
+    const msgDiv = document.createElement('div');
+    msgDiv.className = 'lmod-msg';
+    msgDiv.style.alignSelf = 'flex-start';
+    msgDiv.style.maxWidth = '92%';
+    msgDiv.style.background = 'rgba(255, 255, 255, 0.05)';
+    msgDiv.style.border = '1px solid rgba(255, 255, 255, 0.08)';
+    msgDiv.style.color = '#e2e8f0';
+    msgDiv.style.padding = '14px';
+    msgDiv.style.borderRadius = '14px 14px 14px 2px';
+    msgDiv.style.fontSize = '12.5px';
+    msgDiv.style.lineHeight = '1.6';
+    msgDiv.style.wordBreak = 'break-word';
+
+    // 技能徽章槽位
+    const skillsBar = document.createElement('div');
+    skillsBar.style.marginBottom = '8px';
+    skillsBar.style.display = 'none';
+    msgDiv.appendChild(skillsBar);
+
+    // 正文内容槽位 (带打字机光标)
+    const contentSpan = document.createElement('div');
+    contentSpan.className = 'lmod-typing-cursor';
+    msgDiv.appendChild(contentSpan);
+
+    container.appendChild(msgDiv);
+    container.scrollTop = container.scrollHeight;
+
+    let accumulatedText = '';
+    const reader = resp.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = '';
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      buffer += decoder.decode(value, { stream: true });
+      const events = buffer.split('\n\n');
+      buffer = events.pop() || '';
+
+      for (const ev of events) {
+        if (!ev.trim()) continue;
+        const lines = ev.split('\n');
+        let eventType = 'message';
+        let dataStr = '';
+
+        for (const line of lines) {
+          if (line.startsWith('event: ')) {
+            eventType = line.slice(7).trim();
+          } else if (line.startsWith('data: ')) {
+            dataStr = line.slice(6).trim();
+          }
+        }
+
+        if (dataStr === '[DONE]') break;
+
+        try {
+          const parsed = JSON.parse(dataStr);
+
+          // 1. 元数据包：渲染已激活动态技能徽章
+          if (eventType === 'meta' || parsed.type === 'meta') {
+            const skills = parsed.skills_triggered || [];
+            if (skills.length > 0) {
+              skillsBar.innerHTML = skills.map(s => 
+                `<span class="lmod-skill-badge" title="${s.detail || ''}">⚡ ${s.name}</span>`
+              ).join('');
+              skillsBar.style.display = 'block';
+            }
+          }
+
+          // 2. 增量字符包：累加并实时格式化 Markdown
+          if (eventType === 'delta' || parsed.type === 'delta' || parsed.text) {
+            const chunk = parsed.text || '';
+            accumulatedText += chunk;
+            contentSpan.innerHTML = formatMarkdown(accumulatedText);
+            container.scrollTop = container.scrollHeight;
+          }
+        } catch (e) {
+          // 非 JSON delta 文本兜底
+          if (dataStr) {
+            accumulatedText += dataStr;
+            contentSpan.innerHTML = formatMarkdown(accumulatedText);
+            container.scrollTop = container.scrollHeight;
+          }
+        }
+      }
+    }
+
+    // 流式打字完成，移除打字机光标
+    contentSpan.classList.remove('lmod-typing-cursor');
+
+    // 挂载代码复制和 .bat 生成动作按钮
+    attachCodeActionButtons(msgDiv, null);
+
+    state.messages.push({
+      role: 'assistant',
+      text: accumulatedText
+    });
+  }
+
+  function pushAndRenderAssistantMessage(text, commands, batContent) {
+    state.messages.push({
+      role: 'assistant',
+      text: text,
+      commands: commands,
+      batContent: batContent
+    });
+    appendAssistantMessageDom(text, commands, batContent);
+    const container = document.getElementById('lmod-chat-body');
+    if (container) container.scrollTop = container.scrollHeight;
+  }
+
+  // =========================================================================
+  // 离线 Local RAG 规则引擎 (零延迟 · 100% 免费离线兜底)
   // =========================================================================
   function localRagQuery(rawQuery, contextGame) {
     const query = rawQuery.trim();
     const qLower = query.toLowerCase();
     const games = window.GAMES_DATA || window.GAMES_DATABASE || [];
 
-    // Target game detection
     const targetGame = findGameByQuery(query) || contextGame || detectActiveGame();
 
-    // Specific intent classifiers
     const isCrashQuery = /闪退|崩溃|打不开|进不去|跳出|报错|crash|black\s*screen|error|eac|ue4ss|cet/i.test(query);
     const isPatchQuery = /补丁|雷达|更新|失效|版本|坏档|patch|update|radar|save/i.test(query);
     const isTrainerQuery = /修改器|风灵月影|热键|白名单|杀毒|fling|trainer|hotkey/i.test(query);
     const isHowToEnable = /怎么开|快捷键|呼出|按键|按什么|如何开启|console\s*shortcut|how\s*to/i.test(query);
 
-    // If target game found, perform deep analysis on that game
     if (targetGame) {
       const locTitle = (targetGame.titles && targetGame.titles['zh-CN']) || targetGame.title;
 
-      // 1. Crash & Mod Conflict Diagnosis
       if (isCrashQuery) {
         return buildCrashDiagnosisResponse(targetGame, locTitle, query);
       }
-
-      // 2. Steam Patch & Radar Status Query
       if (isPatchQuery) {
         return buildPatchRadarResponse(targetGame, locTitle);
       }
-
-      // 3. Trainer & Hotkey Query
       if (isTrainerQuery) {
         return buildTrainerResponse(targetGame, locTitle);
       }
-
-      // 4. How to Enable Console Guide
       if (isHowToEnable) {
         return buildConsoleGuideResponse(targetGame, locTitle);
       }
 
-      // 5. Search for Commands inside Game
       const matchedCommands = searchCommandsInGame(targetGame, query);
       if (matchedCommands.length > 0) {
         return buildCommandsResponse(targetGame, locTitle, matchedCommands, query);
       }
 
-      // 6. Search Scenario Bundles
       if (targetGame.scenarioBundles && targetGame.scenarioBundles.length > 0) {
         const bundle = targetGame.scenarioBundles.find(b => 
           qLower.includes(b.name.toLowerCase()) || 
@@ -321,32 +968,26 @@
         return buildScenarioBundleResponse(targetGame, locTitle, bundle);
       }
 
-      // 7. Fallback to Popular Commands if general search
       if (targetGame.popularCommands && targetGame.popularCommands.length > 0) {
         return buildPopularCommandsFallback(targetGame, locTitle, query);
       }
     }
 
-    // Global Search across All 100 Games
     const globalMatches = searchAcrossAllGames(query, games);
     if (globalMatches.length > 0) {
       return buildGlobalSearchResults(globalMatches, query);
     }
 
-    // Default Fallback
     return {
       text: `### 🎮 未在知识库中找到针对 "${query}" 的完全匹配\n\n` +
             `- **建议操作**：请检查游戏名称或关键词（如输入：“2077无限钱”、“黑神话控制台快捷键”、“老头环闪退排查”）。\n` +
-            `- **大模型深度推理**：若想询问更复杂的 Mod 安装、配装思路或冷门游戏，点击右上角 **⚙️ 切换为 Gemini 或 DeepSeek**，即可启动在线 AI 智能解答！`
+            `- **智能推理**：你也可以直接提问任何游戏攻略或报错现象，老L 将依托全网单机通识库为你实时推导解答！`
     };
   }
 
-  // Sub-generator: Crash Diagnosis
   function buildCrashDiagnosisResponse(game, title, query) {
-    const engine = game.developer ? `开发商/引擎特征: ${game.developer}` : '';
     let diagnosis = `### 💥 《${title}》闪退与 Mod 冲突在线排查指南\n\n`;
 
-    // Engine-specific diagnostics
     if (game.id === 'cyberpunk-2077') {
       diagnosis += `**CDPR REDengine 4 专属诊断要点**：\n` +
         `1. **CET (Cyber Engine Tweaks) 版本不匹配**：若游戏刚更新了补丁，CET 的 \`bin/x64/plugins/cyber_engine_tweaks.asi\` 必须对应最新版本，否则启动必闪退。\n` +
@@ -354,13 +995,13 @@
         `3. **旧版 ArchiveXL / TweakXL 冲突**：确保前置核心库均升级至匹配当前补丁的版本。\n`;
     } else if (game.id === 'elden-ring' || game.id === 'sekiro') {
       diagnosis += `**FromSoftware 引擎专属诊断要点**：\n` +
-        `1. **EAC 反作弊未关闭拦截**：必须将 \`start_protected_game.exe\` 替换或使用 \`launchmod_eldenring.bat\` 离线引导，否则带 Mod 启动必被 EAC 拦截闪退。\n` +
+        `1. **EAC 反作弊未关闭拦截**：必须将 \`start_protected_game.exe\` 替换或使用离线引导，否则带 Mod 启动必被 EAC 拦截闪退。\n` +
         `2. **ModEngine2 引导路径错误**：检查 \`config_eldenring.toml\` 中 mod 路径是否正确指向 mod 文件夹。\n` +
         `3. **版本更新坏档**：黄金树幽影 v1.14+ 补丁重构了部分 Regulation.bin 参数，旧版参数文件会导致主菜单加载闪退。\n`;
     } else if (game.id === 'black-myth-wukong' || game.id === 'palworld') {
       diagnosis += `**虚幻引擎 (UE5) 专属诊断要点**：\n` +
         `1. **DX12 着色器编译崩溃**：在 Steam 启动项中添加 \`-dx11\` 强制使用 DirectX 11 启动测试。\n` +
-        `2. **UE4SS 注入器冲突**：检查 \`b1/Binaries/Win64/ue4ss.dll\`，尝试将 \`UE4SS-settings.ini\` 中的 \`GuiConsoleEnabled = 0\` 关闭以排查图形钩子崩溃。\n` +
+        `2. **UE4SS 注入器冲突**：检查 \`ue4ss.ini\`，尝试将 \`GuiConsoleEnabled = 0\` 关闭以排查图形钩子崩溃。\n` +
         `3. **Pak Mod 冲突**：将 \`~mods\` 文件夹重命名为 \`~mods_backup\`，逐个排查损坏的 Mod。\n`;
     } else if (game.id.includes('skyrim') || game.id.includes('fallout-4') || game.id === 'starfield') {
       diagnosis += `**Bethesda Creation 引擎专属诊断要点**：\n` +
@@ -370,7 +1011,7 @@
     } else {
       diagnosis += `**通用单机 Mod 闪退排查四部曲**：\n` +
         `1. **重命名 Mod 文件夹进行二分法排查**：临时禁用 Mod 目录，确认是否为纯净原版能正常启动；\n` +
-        `2. **检查防作弊与注入 DLL**：检查是否有 \`dinput8.dll\`, \`dxgi.dll\`, \`version.dll\` 等钩子文件与显卡驱动 overlay (如微星小飞机/GeForce Experience) 冲突；\n` +
+        `2. **检查防作弊与注入 DLL**：检查是否有 \`dinput8.dll\`, \`dxgi.dll\`, \`version.dll\` 等钩子文件与显卡驱动 overlay 冲突；\n` +
         `3. **管理员权限与杀毒白名单**：Windows Defender 常误杀注入型 DLL，请将游戏根目录加入排除项；\n` +
         `4. **验证 Steam 游戏文件完整性**：右键游戏属性 -> 已安装文件 -> 验证游戏文件的完整性。\n`;
     }
@@ -382,7 +1023,6 @@
     return { text: diagnosis };
   }
 
-  // Sub-generator: Patch & Radar Status
   function buildPatchRadarResponse(game, title) {
     const statusMap = {
       'green': '🟢 完美兼容 (可放心安装/无需降级)',
@@ -410,7 +1050,6 @@
     return { text: res };
   }
 
-  // Sub-generator: Trainer Response
   function buildTrainerResponse(game, title) {
     let res = `### ⚡ 《${title}》纯净修改器与快捷键一览\n\n`;
 
@@ -428,7 +1067,7 @@
         res += `- \`${hk.key}\`：${hk.action}\n`;
       }
     } else {
-      res += `本游戏更推荐使用游戏官方内置控制台或注入式控制台，更加稳定且杜绝报毒！\n`;
+      res += `本游戏更推荐使用官方内置或注入式控制台，更加稳定且杜绝报毒！\n`;
     }
 
     if (game.trainerInfo && game.trainerInfo.powershellExclusionCmd) {
@@ -439,7 +1078,6 @@
     return { text: res };
   }
 
-  // Sub-generator: Console Guide Response
   function buildConsoleGuideResponse(game, title) {
     let res = `### 🛠️ 《${title}》控制台唤出与开启方法\n\n`;
     res += `- **控制台支持情况**：${game.hasConsole ? '✅ 支持控制台' : '⚠️ 需第三方前置注入'}\n`;
@@ -452,12 +1090,10 @@
     return { text: res };
   }
 
-  // Sub-generator: Commands Search
   function searchCommandsInGame(game, query) {
     const q = query.toLowerCase();
     const results = [];
 
-    // Search popular commands
     if (game.popularCommands) {
       for (const cmd of game.popularCommands) {
         const name = (cmd.name || '').toLowerCase();
@@ -469,7 +1105,6 @@
       }
     }
 
-    // Search console categories
     if (game.consoleCategories) {
       for (const cat of game.consoleCategories) {
         if (cat.commands) {
@@ -485,7 +1120,6 @@
       }
     }
 
-    // Deduplicate by code
     const unique = [];
     const seen = new Set();
     for (const c of results) {
@@ -495,7 +1129,7 @@
       }
     }
 
-    return unique.slice(0, 8); // Top 8 matches
+    return unique.slice(0, 8);
   }
 
   function buildCommandsResponse(game, title, commands, query) {
@@ -587,502 +1221,57 @@
   }
 
   // =========================================================================
-  // ONLINE AI CALLS: Google Gemini & DeepSeek API Integration
+  // BYOK 私有 API 调用支持 (开发者调试)
   // =========================================================================
-  async function callGeminiApi(prompt, contextGame) {
-    if (!state.apiKey) {
-      throw new Error('请先在设置 (⚙️) 中填入您的 Google Gemini API Key！');
-    }
-
-    const model = state.geminiModel || 'gemini-2.5-flash';
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(state.apiKey)}`;
-
-    let systemContext = `You are '老L' (Old L), a legendary single-player PC game modding, console command, and anti-pitfall master of L-MOD Vault.
-Your mission is to provide 100% accurate, safe, zero-placeholder, verified game cheats, console commands, trainer guidance, and mod crash diagnosis.
-Rules:
-1. Always specify exact engine key (e.g. ~, F1, F10, Insert) and syntax (Lua for CET, Hex for Creation Engine, Osi for BG3).
-2. NEVER output generic fake commands like 'god', 'addmoney', 'give all' unless the game natively supports them.
-3. If giving code, wrap it cleanly in markdown code blocks with clear step-by-step instructions.
-4. Language: Match the user's language (prefer Chinese Simplified if query is in Chinese).`;
-
-    if (contextGame) {
-      systemContext += `\n\nActive Game Context:
-- Name: ${contextGame.title} (ID: ${contextGame.id})
-- Developer: ${contextGame.developer || 'N/A'}
-- Has Console: ${contextGame.hasConsole}
-- Console Shortcut: ${contextGame.consoleShortcut || 'N/A'}
-- Verified Patch: ${contextGame.verifiedPatch || 'Latest'}
-- Compatibility Status: ${contextGame.compatibilityStatus || 'green'}
-- Pitfall Note: ${contextGame.pitfallNote || 'None'}`;
-    }
-
-    const payload = {
-      contents: [
-        {
-          role: 'user',
-          parts: [{ text: `${systemContext}\n\nUser Question:\n${prompt}` }]
-        }
-      ],
-      generationConfig: {
-        temperature: 0.3,
-        maxOutputTokens: 2048
-      }
-    };
+  async function callGeminiApiByok(prompt, contextGame) {
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${encodeURIComponent(state.byokKey)}`;
+    let sysContext = `你是老L，L-MOD Vault 官方单机游戏智库顾问。请严格给出真实底层指令，代码用 Markdown 代码块包裹。`;
+    if (contextGame) sysContext += `当前游戏: ${contextGame.title}`;
 
     const resp = await fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
+      body: JSON.stringify({
+        contents: [{ role: 'user', parts: [{ text: `${sysContext}\n\n用户问题: ${prompt}` }] }],
+        generationConfig: { temperature: 0.3 }
+      })
     });
-
-    if (!resp.ok) {
-      const errData = await resp.json().catch(() => ({}));
-      const msg = (errData.error && errData.error.message) || `HTTP ${resp.status} ${resp.statusText}`;
-      throw new Error(`Gemini API 报错: ${msg}`);
-    }
-
+    if (!resp.ok) throw new Error(`Gemini BYOK 响应异常: ${resp.status}`);
     const data = await resp.json();
-    const candidate = data.candidates && data.candidates[0];
-    const text = candidate && candidate.content && candidate.content.parts && candidate.content.parts[0] && candidate.content.parts[0].text;
-    if (!text) throw new Error('Gemini 返回内容为空');
-
-    return { text: text };
+    const text = data.candidates?.[0]?.content?.parts?.[0]?.text || '无返回';
+    return { text };
   }
 
-  async function callDeepSeekApi(prompt, contextGame) {
-    if (!state.apiKey) {
-      throw new Error('请先在设置 (⚙️) 中填入您的 DeepSeek API Key！');
-    }
-
+  async function callDeepSeekApiByok(prompt, contextGame) {
     const endpoint = state.customEndpoint || 'https://api.deepseek.com/chat/completions';
-    const model = state.deepseekModel || 'deepseek-chat';
-
-    let systemContent = `你是老L（L-MOD Vault 官方单机游戏智库顾问与逆向工程老兵）。
-专门解答单机游戏作弊控制台、MOD冲突、闪退崩溃诊断和避坑指南。
-绝对杜绝无用假指令，代码严格遵循各游戏引擎真实语法（CET Lua, Creation Hex, UE4SS, BG3 Osiris等）。`;
-
-    if (contextGame) {
-      systemContent += `\n当前用户正在查看游戏：《${contextGame.title}》，已认证补丁版本：${contextGame.verifiedPatch || '最新'}，控制台按键：${contextGame.consoleShortcut || '无'}`;
-    }
-
-    const payload = {
-      model: model,
-      messages: [
-        { role: 'system', content: systemContent },
-        { role: 'user', content: prompt }
-      ],
-      temperature: 0.3
-    };
-
     const resp = await fetch(endpoint, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${state.apiKey}`
+        'Authorization': `Bearer ${state.byokKey}`
       },
-      body: JSON.stringify(payload)
+      body: JSON.stringify({
+        model: state.customModel || 'deepseek-chat',
+        messages: [{ role: 'user', content: prompt }],
+        temperature: 0.3
+      })
     });
-
-    if (!resp.ok) {
-      const errData = await resp.json().catch(() => ({}));
-      const msg = (errData.error && errData.error.message) || `HTTP ${resp.status} ${resp.statusText}`;
-      throw new Error(`DeepSeek API 报错: ${msg}`);
-    }
-
+    if (!resp.ok) throw new Error(`DeepSeek BYOK 响应异常: ${resp.status}`);
     const data = await resp.json();
-    const text = data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content;
-    if (!text) throw new Error('DeepSeek 返回内容为空');
-
-    return { text: text };
+    const text = data.choices?.[0]?.message?.content || '无返回';
+    return { text };
   }
 
   // =========================================================================
-  // UI RENDERER & DOM INJECTION
-  // =========================================================================
-  function injectStyles() {
-    if (document.getElementById('lmod-ai-styles')) return;
-    const style = document.createElement('style');
-    style.id = 'lmod-ai-styles';
-    style.textContent = `
-      #lmod-ai-fab {
-        position: fixed;
-        bottom: 24px;
-        right: 24px;
-        z-index: 9999;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        padding: 10px 16px;
-        border-radius: 9999px;
-        background: linear-gradient(135deg, #8b5cf6 0%, #A855F7 50%, #ec4899 100%);
-        color: #ffffff;
-        box-shadow: 0 10px 25px -5px rgba(168, 85, 247, 0.5), 0 8px 10px -6px rgba(168, 85, 247, 0.3);
-        cursor: pointer;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        border: 1px solid rgba(255, 255, 255, 0.25);
-        backdrop-filter: blur(10px);
-        user-select: none;
-      }
-      #lmod-ai-fab:hover {
-        transform: translateY(-2px) scale(1.03);
-        box-shadow: 0 14px 30px -4px rgba(168, 85, 247, 0.65);
-      }
-      #lmod-ai-fab .fab-ping {
-        position: absolute;
-        top: -2px;
-        right: -2px;
-        width: 10px;
-        height: 10px;
-        border-radius: 9999px;
-        background: #10b981;
-      }
-      #lmod-ai-drawer {
-        position: fixed;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        width: 100%;
-        max-width: 480px;
-        background: rgba(14, 16, 22, 0.96);
-        backdrop-filter: blur(24px);
-        -webkit-backdrop-filter: blur(24px);
-        border-left: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: -15px 0 50px rgba(0, 0, 0, 0.7);
-        z-index: 10000;
-        display: flex;
-        flex-direction: column;
-        transform: translateX(100%);
-        transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-        color: #f3f4f6;
-        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
-      }
-      #lmod-ai-drawer.open {
-        transform: translateX(0);
-      }
-      #lmod-ai-backdrop {
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.5);
-        backdrop-filter: blur(4px);
-        z-index: 9998;
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.3s ease;
-      }
-      #lmod-ai-backdrop.open {
-        opacity: 1;
-        pointer-events: auto;
-      }
-      .lmod-msg {
-        animation: lmodFadeIn 0.25s ease-out;
-      }
-      @keyframes lmodFadeIn {
-        from { opacity: 0; transform: translateY(6px); }
-        to { opacity: 1; transform: translateY(0); }
-      }
-      .lmod-code-box {
-        background: #090a0f;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 10px;
-        padding: 12px;
-        margin: 8px 0;
-        font-family: "SF Mono", Menlo, Consolas, Monaco, monospace;
-        font-size: 12px;
-        position: relative;
-        overflow-x: auto;
-      }
-      .lmod-btn-action {
-        background: rgba(255, 255, 255, 0.08);
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        color: #e5e7eb;
-        padding: 4px 10px;
-        border-radius: 6px;
-        font-size: 11px;
-        cursor: pointer;
-        transition: all 0.2s;
-        display: inline-flex;
-        align-items: center;
-        gap: 4px;
-      }
-      .lmod-btn-action:hover {
-        background: rgba(168, 85, 247, 0.25);
-        border-color: rgba(168, 85, 247, 0.5);
-        color: #ffffff;
-      }
-      .lmod-pill {
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 9999px;
-        padding: 4px 10px;
-        font-size: 11px;
-        color: #d1d5db;
-        cursor: pointer;
-        transition: all 0.2s;
-        white-space: nowrap;
-      }
-      .lmod-pill:hover {
-        background: rgba(168, 85, 247, 0.2);
-        border-color: rgba(168, 85, 247, 0.4);
-        color: #ffffff;
-      }
-    `;
-    document.head.appendChild(style);
-  }
-
-  function injectDrawerHtml() {
-    if (document.getElementById('lmod-ai-drawer')) return;
-
-    // 1. Backdrop
-    const backdrop = document.createElement('div');
-    backdrop.id = 'lmod-ai-backdrop';
-    backdrop.onclick = closeDrawer;
-    document.body.appendChild(backdrop);
-
-    // 2. FAB Button
-    const fab = document.createElement('div');
-    fab.id = 'lmod-ai-fab';
-    fab.title = '老L · AI 游戏智库顾问 (Cmd+K / Ctrl+K)';
-    fab.innerHTML = `
-      <span class="fab-ping"></span>
-      <span style="font-size: 16px;">🤖</span>
-      <span style="font-weight: 700; font-size: 13px; letter-spacing: 0.2px;">AI 顾问</span>
-      <span style="font-size: 10px; opacity: 0.7; font-family: monospace; background: rgba(0,0,0,0.2); padding: 1px 5px; border-radius: 4px;">⌘K</span>
-    `;
-    fab.onclick = toggleDrawer;
-    document.body.appendChild(fab);
-
-    // 3. Drawer Container
-    const drawer = document.createElement('div');
-    drawer.id = 'lmod-ai-drawer';
-    drawer.innerHTML = `
-      <!-- HEADER -->
-      <div style="padding: 16px 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); display: flex; align-items: center; justify-content: space-between; background: rgba(255, 255, 255, 0.02);">
-        <div style="display: flex; align-items: center; gap: 10px;">
-          <div style="width: 34px; height: 34px; border-radius: 10px; background: linear-gradient(135deg, #8b5cf6, #ec4899); display: flex; align-items: center; justify-content: center; font-size: 18px; box-shadow: 0 4px 12px rgba(168, 85, 247, 0.4);">
-            🤖
-          </div>
-          <div>
-            <div style="font-weight: 700; font-size: 14px; display: flex; align-items: center; gap: 6px;">
-              <span>${t('title')}</span>
-              <span id="lmod-mode-badge" style="font-size: 9px; padding: 2px 6px; border-radius: 4px; background: rgba(16, 185, 129, 0.15); color: #34d399; font-weight: 600;">${t('offlineBadge')}</span>
-            </div>
-            <div style="font-size: 11px; color: #9ca3af; margin-top: 1px;" id="lmod-tagline">${t('tagline')}</div>
-          </div>
-        </div>
-        <div style="display: flex; align-items: center; gap: 6px;">
-          <button id="lmod-btn-settings" title="设置 API Key 与模型" style="background: none; border: none; color: #9ca3af; cursor: pointer; padding: 6px; border-radius: 8px; transition: color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#9ca3af'">
-            ⚙️
-          </button>
-          <button id="lmod-btn-clear" title="清空对话" style="background: none; border: none; color: #9ca3af; cursor: pointer; padding: 6px; border-radius: 8px; transition: color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#9ca3af'">
-            🗑️
-          </button>
-          <button id="lmod-btn-close" title="关闭 (Esc)" style="background: none; border: none; color: #9ca3af; cursor: pointer; padding: 6px; border-radius: 8px; transition: color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#9ca3af'">
-            ✕
-          </button>
-        </div>
-      </div>
-
-      <!-- ACTIVE CONTEXT BAR -->
-      <div id="lmod-context-bar" style="padding: 8px 16px; background: rgba(168, 85, 247, 0.08); border-bottom: 1px solid rgba(168, 85, 247, 0.15); font-size: 11px; display: flex; align-items: center; justify-content: space-between;">
-        <div style="display: flex; align-items: center; gap: 6px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-          <span style="color: #A855F7;">🎮</span>
-          <span id="lmod-context-text" style="color: #d8b4fe; font-weight: 600;">${t('globalContext')}</span>
-        </div>
-        <div style="display: flex; align-items: center; gap: 6px;">
-          <button id="lmod-context-clear" style="display: none; background: rgba(255,255,255,0.06); border: none; color: #cbd5e1; font-size: 10px; padding: 2px 6px; border-radius: 4px; cursor: pointer;">${t('clearContext')}</button>
-        </div>
-      </div>
-
-      <!-- QUICK PILLS -->
-      <div id="lmod-quick-pills" style="padding: 10px 16px; display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; border-bottom: 1px solid rgba(255, 255, 255, 0.05); background: rgba(0,0,0,0.15);">
-        <button class="lmod-pill" data-prompt="${t('pillCommands')}">${t('pillCommands')}</button>
-        <button class="lmod-pill" data-prompt="${t('pillCrash')}">${t('pillCrash')}</button>
-        <button class="lmod-pill" data-prompt="${t('pillPatch')}">${t('pillPatch')}</button>
-        <button class="lmod-pill" data-prompt="${t('pillTrainer')}">${t('pillTrainer')}</button>
-      </div>
-
-      <!-- CHAT MESSAGE LIST -->
-      <div id="lmod-chat-body" style="flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 14px; scroll-behavior: smooth;">
-        <!-- Messages injected here -->
-      </div>
-
-      <!-- INPUT BAR -->
-      <div style="padding: 14px 16px; border-top: 1px solid rgba(255, 255, 255, 0.08); background: rgba(14, 16, 22, 0.98); display: flex; flex-direction: column; gap: 8px;">
-        <div style="display: flex; gap: 8px; align-items: flex-end;">
-          <textarea id="lmod-chat-input" rows="1" placeholder="${t('inputPlaceholder')}" style="flex: 1; resize: none; max-height: 120px; background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 12px; padding: 10px 14px; color: #ffffff; font-size: 13px; outline: none; font-family: inherit; line-height: 1.4; transition: border-color 0.2s;"></textarea>
-          <button id="lmod-btn-send" style="background: linear-gradient(135deg, #8b5cf6, #A855F7); border: none; border-radius: 12px; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; color: #fff; cursor: pointer; flex-shrink: 0; box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3); transition: transform 0.2s;">
-            <svg style="width: 18px; height: 18px; fill: currentColor;" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
-          </button>
-        </div>
-        <div style="font-size: 10px; color: #6b7280; text-align: center; display: flex; justify-content: space-between; align-items: center;">
-          <span>按 Enter 发送 / Shift+Enter 换行</span>
-          <span style="color: #8b5cf6; cursor: pointer;" onclick="window.LMOD_AI_COPILOT.openSettings()">⚙️ 引擎配置</span>
-        </div>
-      </div>
-
-      <!-- SETTINGS MODAL (OVERLAY INSIDE DRAWER) -->
-      <div id="lmod-settings-modal" style="display: none; position: absolute; inset: 0; background: rgba(10, 12, 16, 0.98); z-index: 10001; padding: 24px; flex-direction: column; gap: 16px; overflow-y: auto;">
-        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 12px;">
-          <h3 style="margin: 0; font-size: 15px; font-weight: 700; color: #fff;">${t('settingsTitle')}</h3>
-          <button id="lmod-settings-close" style="background: none; border: none; color: #9ca3af; font-size: 16px; cursor: pointer;">✕</button>
-        </div>
-
-        <div style="display: flex; flex-direction: column; gap: 12px; font-size: 12px;">
-          <div>
-            <label style="display: block; font-weight: 600; color: #e5e7eb; margin-bottom: 6px;">选择推理模式</label>
-            <select id="lmod-cfg-mode" style="width: 100%; background: #1c1f26; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 8px; padding: 8px; color: #fff; font-size: 12px;">
-              <option value="local">${t('modeLocal')}</option>
-              <option value="gemini">${t('modeGemini')}</option>
-              <option value="deepseek">${t('modeDeepSeek')}</option>
-              <option value="custom">${t('modeCustom')}</option>
-            </select>
-          </div>
-
-          <div id="lmod-cfg-apikey-box" style="display: none;">
-            <label style="display: block; font-weight: 600; color: #e5e7eb; margin-bottom: 6px;">${t('apiKeyLabel')}</label>
-            <input type="password" id="lmod-cfg-apikey" placeholder="AIzaSy... 或 sk-..." style="width: 100%; box-sizing: border-box; background: #1c1f26; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 8px; padding: 8px 12px; color: #fff; font-size: 12px; font-family: monospace;">
-            <span style="font-size: 10px; color: #9ca3af; margin-top: 4px; display: block;">密钥直接在您本机浏览器与官方端点通信，绝不上报或中转。</span>
-          </div>
-
-          <div id="lmod-cfg-gemini-box" style="display: none;">
-            <label style="display: block; font-weight: 600; color: #e5e7eb; margin-bottom: 6px;">Gemini 模型选择</label>
-            <select id="lmod-cfg-gemini-model" style="width: 100%; background: #1c1f26; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 8px; padding: 8px; color: #fff; font-size: 12px;">
-              <option value="gemini-2.5-flash">gemini-2.5-flash (推荐 · 极速高精)</option>
-              <option value="gemini-2.5-pro">gemini-2.5-pro (深度推理)</option>
-              <option value="gemini-1.5-flash">gemini-1.5-flash (轻量稳定)</option>
-            </select>
-          </div>
-
-          <div id="lmod-cfg-custom-box" style="display: none;">
-            <label style="display: block; font-weight: 600; color: #e5e7eb; margin-bottom: 6px;">自定义端点 URL (OpenAI 规范)</label>
-            <input type="text" id="lmod-cfg-endpoint" placeholder="https://api.yourdomain.com/v1/chat/completions" style="width: 100%; box-sizing: border-box; background: #1c1f26; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 8px; padding: 8px 12px; color: #fff; font-size: 12px;">
-          </div>
-        </div>
-
-        <div style="margin-top: auto; padding-top: 16px; border-top: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: flex-end; gap: 8px;">
-          <button id="lmod-btn-save-cfg" style="background: #A855F7; color: #fff; border: none; border-radius: 8px; padding: 8px 16px; font-weight: 600; cursor: pointer; font-size: 12px;">${t('saveSettings')}</button>
-        </div>
-      </div>
-    `;
-    document.body.appendChild(drawer);
-
-    // Event Listeners
-    document.getElementById('lmod-btn-close').onclick = closeDrawer;
-    document.getElementById('lmod-btn-clear').onclick = clearChatHistory;
-    document.getElementById('lmod-btn-settings').onclick = openSettings;
-    document.getElementById('lmod-settings-close').onclick = closeSettings;
-    document.getElementById('lmod-btn-save-cfg').onclick = handleSaveSettings;
-    document.getElementById('lmod-btn-send').onclick = handleSendUserMessage;
-
-    // Mode Selector Switch
-    document.getElementById('lmod-cfg-mode').onchange = function (e) {
-      updateSettingsFormVisibility(e.target.value);
-    };
-
-    // Quick Pills
-    document.querySelectorAll('#lmod-quick-pills .lmod-pill').forEach(btn => {
-      btn.onclick = function () {
-        const prompt = this.getAttribute('data-prompt');
-        sendUserMessage(prompt);
-      };
-    });
-
-    // Input Enter Key
-    const input = document.getElementById('lmod-chat-input');
-    input.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        handleSendUserMessage();
-      }
-    });
-
-    // Context Clear
-    document.getElementById('lmod-context-clear').onclick = function () {
-      state.activeGame = null;
-      updateContextBar();
-    };
-
-    // Auto update context bar on open
-    updateContextBar();
-    updateModeBadge();
-  }
-
-  function updateSettingsFormVisibility(mode) {
-    const keyBox = document.getElementById('lmod-cfg-apikey-box');
-    const geminiBox = document.getElementById('lmod-cfg-gemini-box');
-    const customBox = document.getElementById('lmod-cfg-custom-box');
-
-    if (mode === 'local') {
-      keyBox.style.display = 'none';
-      geminiBox.style.display = 'none';
-      customBox.style.display = 'none';
-    } else if (mode === 'gemini') {
-      keyBox.style.display = 'block';
-      geminiBox.style.display = 'block';
-      customBox.style.display = 'none';
-    } else if (mode === 'deepseek') {
-      keyBox.style.display = 'block';
-      geminiBox.style.display = 'none';
-      customBox.style.display = 'none';
-    } else if (mode === 'custom') {
-      keyBox.style.display = 'block';
-      geminiBox.style.display = 'none';
-      customBox.style.display = 'block';
-    }
-  }
-
-  function updateModeBadge() {
-    const badge = document.getElementById('lmod-mode-badge');
-    if (!badge) return;
-
-    if (state.mode === 'gemini') {
-      badge.textContent = t('geminiBadge');
-      badge.style.background = 'rgba(168, 85, 247, 0.2)';
-      badge.style.color = '#c084fc';
-    } else if (state.mode === 'deepseek') {
-      badge.textContent = t('deepseekBadge');
-      badge.style.background = 'rgba(59, 130, 246, 0.2)';
-      badge.style.color = '#60a5fa';
-    } else if (state.mode === 'custom') {
-      badge.textContent = t('customBadge');
-      badge.style.background = 'rgba(234, 179, 8, 0.2)';
-      badge.style.color = '#facc15';
-    } else {
-      badge.textContent = t('offlineBadge');
-      badge.style.background = 'rgba(16, 185, 129, 0.15)';
-      badge.style.color = '#34d399';
-    }
-  }
-
-  function updateContextBar() {
-    const barText = document.getElementById('lmod-context-text');
-    const clearBtn = document.getElementById('lmod-context-clear');
-    if (!barText) return;
-
-    const game = detectActiveGame();
-    if (game) {
-      state.activeGame = game;
-      const title = (game.titles && game.titles['zh-CN']) || game.title;
-      barText.textContent = `${t('activeContextPrefix')}${title} (Rank #${game.rank})`;
-      clearBtn.style.display = 'inline-block';
-    } else {
-      barText.textContent = t('globalContext');
-      clearBtn.style.display = 'none';
-    }
-  }
-
-  // =========================================================================
-  // MESSAGE RENDERING (Markdown + Code Boxes + Actions)
+  // DOM 节点追加与 Markdown 渲染
   // =========================================================================
   function renderMessages() {
     const container = document.getElementById('lmod-chat-body');
     if (!container) return;
 
     container.innerHTML = '';
-
-    // If no messages, render welcome
     if (state.messages.length === 0) {
-      appendAssistantMessage(t('welcomeMessage'), false);
+      appendAssistantMessageDom(t('welcomeMessage'));
       return;
     }
 
@@ -1129,10 +1318,7 @@ Rules:
     div.style.lineHeight = '1.6';
     div.style.wordBreak = 'break-word';
 
-    // Format Markdown to HTML
     div.innerHTML = formatMarkdown(text);
-
-    // Attach Copy and Download Bat action buttons
     attachCodeActionButtons(div, batContent);
 
     container.appendChild(div);
@@ -1142,14 +1328,11 @@ Rules:
     if (!md) return '';
 
     let html = md
-      // Escape HTML tags to prevent XSS
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;')
-      // Headers
       .replace(/^### (.*$)/gim, '<div style="font-weight: 700; font-size: 14px; color: #a78bfa; margin: 8px 0 4px 0;">$1</div>')
       .replace(/^#### (.*$)/gim, '<div style="font-weight: 600; font-size: 13px; color: #f3f4f6; margin: 6px 0 2px 0;">$1</div>')
-      // Code blocks ```lang\ncode\n```
       .replace(/```([a-zA-Z0-9_-]*)\n([\s\S]*?)```/g, function (match, lang, code) {
         return `<div class="lmod-code-box" data-code="${encodeURIComponent(code)}">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; font-size: 10px; color: #9ca3af; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 4px;">
@@ -1159,23 +1342,28 @@ Rules:
           <pre style="margin: 0; white-space: pre-wrap; word-break: break-all; color: #a5f3fc;">${code}</pre>
         </div>`;
       })
-      // Inline code
       .replace(/`([^`]+)`/g, '<code style="background: rgba(168,85,247,0.15); color: #d8b4fe; padding: 2px 5px; border-radius: 4px; font-family: monospace; font-size: 11.5px;">$1</code>')
-      // Bold
       .replace(/\*\*([^*]+)\*\*/g, '<strong style="color: #ffffff; font-weight: 600;">$1</strong>')
-      // Blockquotes
       .replace(/^> (.*$)/gim, '<div style="border-left: 3px solid #A855F7; padding-left: 8px; margin: 6px 0; color: #cbd5e1; font-style: italic; background: rgba(168,85,247,0.05); padding: 6px 10px; border-radius: 0 6px 6px 0;">$1</div>')
-      // Unordered lists
       .replace(/^\s*-\s+(.*$)/gim, '<div style="display: flex; gap: 6px; margin: 2px 0;"><span style="color: #A855F7;">•</span><span>$1</span></div>')
-      // Links [title](url)
       .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" style="color: #c084fc; text-decoration: underline;">$1</a>')
-      // Line breaks
       .replace(/\n\n/g, '<div style="height: 8px;"></div>');
 
     return html;
   }
 
   function attachCodeActionButtons(div, batContent) {
+    // 自动为所有代码块挂载点击复制支持
+    div.querySelectorAll('.lmod-code-box').forEach(box => {
+      const copyBtn = box.querySelector('.lmod-btn-copy');
+      if (copyBtn) {
+        copyBtn.onclick = function (e) {
+          e.stopPropagation();
+          copyCode(this);
+        };
+      }
+    });
+
     if (!batContent) return;
 
     const actionContainer = document.createElement('div');
@@ -1209,12 +1397,42 @@ Rules:
     URL.revokeObjectURL(url);
 
     if (window.showToast) {
-      window.showToast('已生成并下载 .bat 批处理文件！');
+      window.showToast('已生成并下载 .bat 批处理脚本！');
     }
   }
 
+  function copyCode(btn) {
+    const box = btn.closest('.lmod-code-box');
+    if (!box) return;
+
+    const raw = box.getAttribute('data-code');
+    const code = raw ? decodeURIComponent(raw) : box.querySelector('pre').innerText;
+
+    navigator.clipboard.writeText(code).then(() => {
+      const originalText = btn.innerHTML;
+      btn.innerHTML = '✅ 已复制';
+      btn.style.color = '#34d399';
+      setTimeout(() => {
+        btn.innerHTML = originalText;
+        btn.style.color = '';
+      }, 1800);
+
+      if (window.showToast) {
+        window.showToast(t('copied'));
+      }
+    }).catch(() => {
+      const ta = document.createElement('textarea');
+      ta.value = code;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      if (window.showToast) window.showToast(t('copied'));
+    });
+  }
+
   // =========================================================================
-  // ACTIONS & HANDLERS
+  // 抽屉与界面控制
   // =========================================================================
   function toggleDrawer() {
     if (state.isOpen) closeDrawer();
@@ -1258,9 +1476,9 @@ Rules:
     if (!modal) return;
 
     document.getElementById('lmod-cfg-mode').value = state.mode;
-    document.getElementById('lmod-cfg-apikey').value = state.apiKey;
+    document.getElementById('lmod-cfg-byok-provider').value = state.byokProvider;
+    document.getElementById('lmod-cfg-byok-key').value = state.byokKey;
     document.getElementById('lmod-cfg-endpoint').value = state.customEndpoint;
-    document.getElementById('lmod-cfg-gemini-model').value = state.geminiModel;
 
     updateSettingsFormVisibility(state.mode);
     modal.style.display = 'flex';
@@ -1273,16 +1491,16 @@ Rules:
 
   function handleSaveSettings() {
     state.mode = document.getElementById('lmod-cfg-mode').value;
-    state.apiKey = document.getElementById('lmod-cfg-apikey').value.trim();
+    state.byokProvider = document.getElementById('lmod-cfg-byok-provider').value;
+    state.byokKey = document.getElementById('lmod-cfg-byok-key').value.trim();
     state.customEndpoint = document.getElementById('lmod-cfg-endpoint').value.trim();
-    state.geminiModel = document.getElementById('lmod-cfg-gemini-model').value;
 
     saveConfig();
     updateModeBadge();
     closeSettings();
 
     if (window.showToast) {
-      window.showToast('AI 智库引擎配置已保存！');
+      window.showToast('AI 引擎配置已更新！');
     }
   }
 
@@ -1291,133 +1509,7 @@ Rules:
     renderMessages();
   }
 
-  async function handleSendUserMessage() {
-    const input = document.getElementById('lmod-chat-input');
-    const query = input.value.trim();
-    if (!query || state.isLoading) return;
-
-    input.value = '';
-    await sendUserMessage(query);
-  }
-
-  async function sendUserMessage(query) {
-    if (state.isLoading) return;
-
-    state.messages.push({ role: 'user', text: query });
-    appendUserMessageDom(query);
-
-    // Scroll to bottom
-    const container = document.getElementById('lmod-chat-body');
-    container.scrollTop = container.scrollHeight;
-
-    // Show loading
-    state.isLoading = true;
-    const loadingDiv = document.createElement('div');
-    loadingDiv.id = 'lmod-loading-indicator';
-    loadingDiv.className = 'lmod-msg';
-    loadingDiv.style.alignSelf = 'flex-start';
-    loadingDiv.style.fontSize = '12px';
-    loadingDiv.style.color = '#c084fc';
-    loadingDiv.style.padding = '8px 12px';
-    loadingDiv.style.background = 'rgba(168, 85, 247, 0.1)';
-    loadingDiv.style.borderRadius = '10px';
-    loadingDiv.innerHTML = `<span style="display: inline-block; animation: spin 1s linear infinite;">⚡</span> ${t('thinking')}`;
-    container.appendChild(loadingDiv);
-    container.scrollTop = container.scrollHeight;
-
-    const activeGame = detectActiveGame();
-
-    try {
-      let result = null;
-
-      if (state.mode === 'gemini') {
-        result = await callGeminiApi(query, activeGame);
-      } else if (state.mode === 'deepseek') {
-        result = await callDeepSeekApi(query, activeGame);
-      } else if (state.mode === 'custom') {
-        result = await callDeepSeekApi(query, activeGame); // OpenAI standard format
-      } else {
-        // Default Local RAG Engine
-        // Give a tiny simulated delay for smooth feel
-        await new Promise(r => setTimeout(r, 200));
-        result = localRagQuery(query, activeGame);
-      }
-
-      // Remove loading
-      const loading = document.getElementById('lmod-loading-indicator');
-      if (loading) loading.remove();
-
-      state.messages.push({
-        role: 'assistant',
-        text: result.text,
-        commands: result.commands,
-        batContent: result.batContent
-      });
-
-      appendAssistantMessageDom(result.text, result.commands, result.batContent);
-      container.scrollTop = container.scrollHeight;
-
-    } catch (err) {
-      const loading = document.getElementById('lmod-loading-indicator');
-      if (loading) loading.remove();
-
-      const errMsg = `⚠️ **请求失败**：${err.message || err}\n\n已自动切换为**本地离线智库**为您解答：\n\n`;
-      const fallback = localRagQuery(query, activeGame);
-
-      state.messages.push({
-        role: 'assistant',
-        text: errMsg + fallback.text,
-        commands: fallback.commands,
-        batContent: fallback.batContent
-      });
-
-      appendAssistantMessageDom(errMsg + fallback.text, fallback.commands, fallback.batContent);
-      container.scrollTop = container.scrollHeight;
-    } finally {
-      state.isLoading = false;
-    }
-  }
-
-  function appendAssistantMessage(text, isUser = false) {
-    if (isUser) {
-      appendUserMessageDom(text);
-    } else {
-      appendAssistantMessageDom(text);
-    }
-  }
-
-  function copyCode(btn) {
-    const box = btn.closest('.lmod-code-box');
-    if (!box) return;
-
-    const raw = box.getAttribute('data-code');
-    const code = raw ? decodeURIComponent(raw) : box.querySelector('pre').innerText;
-
-    navigator.clipboard.writeText(code).then(() => {
-      const originalText = btn.innerHTML;
-      btn.innerHTML = '✅ 已复制';
-      btn.style.color = '#34d399';
-      setTimeout(() => {
-        btn.innerHTML = originalText;
-        btn.style.color = '';
-      }, 1800);
-
-      if (window.showToast) {
-        window.showToast(t('copied'));
-      }
-    }).catch(() => {
-      // Fallback execCommand
-      const ta = document.createElement('textarea');
-      ta.value = code;
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand('copy');
-      document.body.removeChild(ta);
-      if (window.showToast) window.showToast(t('copied'));
-    });
-  }
-
-  // Keyboard Shortcuts (Cmd+K / Ctrl+K, Esc)
+  // 全局快捷键 Cmd+K / Ctrl+K 呼出，Esc 关闭
   window.addEventListener('keydown', function (e) {
     if ((e.metaKey || e.ctrlKey) && (e.key === 'k' || e.key === 'K')) {
       e.preventDefault();
@@ -1427,7 +1519,7 @@ Rules:
     }
   });
 
-  // Export Global API
+  // 全局暴露 API
   window.LMOD_AI_COPILOT = {
     openDrawer: openDrawer,
     closeDrawer: closeDrawer,
@@ -1442,7 +1534,7 @@ Rules:
     }
   };
 
-  // Auto initialize on DOM ready
+  // 页面就绪自动初始化
   loadConfig();
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
