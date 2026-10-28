@@ -87,7 +87,7 @@ jobs:
         run: |
           git config --local user.name "github-actions[bot]"
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src/data/games_top100.json public/data.js docs/PATCH_MONITOR_LATEST.md
+          git add public/data.js docs/PATCH_MONITOR_LATEST.md
           git commit -m "chore(radar): automated steam patch sentinel sync [skip ci]"
           git push
 
