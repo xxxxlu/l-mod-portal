@@ -170,12 +170,22 @@ class DeploymentVerifier:
     def verify_top14_flagship_games(self):
         self.log_title("2. Top 14 旗舰单机大作全息数据资产、深链接与下载直链核验")
 
-        if not GAMES_JSON_PATH.exists():
-            print(f"  {RED}✖ 找不到数据源文件: {GAMES_JSON_PATH}{RESET}")
-            return
+        all_games = None
+        if GAMES_JSON_PATH.exists():
+            with open(GAMES_JSON_PATH, "r", encoding="utf-8") as f:
+                all_games = json.load(f)
+        else:
+            data_js_path = PUBLIC_DIR / "data.js"
+            if data_js_path.exists():
+                with open(data_js_path, "r", encoding="utf-8") as f:
+                    c = f.read()
+                m = re.search(r'window\.GAMES_DATA\s*=\s*(\[[\s\S]*?\]);', c)
+                if m:
+                    all_games = json.loads(m.group(1))
 
-        with open(GAMES_JSON_PATH, "r", encoding="utf-8") as f:
-            all_games = json.load(f)
+        if not all_games:
+            print(f"  {RED}✖ 找不到数据源文件: {GAMES_JSON_PATH} 或 public/data.js{RESET}")
+            return
 
         top14 = sorted(all_games, key=lambda x: x.get("rank", 999))[:14]
         flagship_pass = 0

@@ -44,7 +44,11 @@ def run_tests():
         assert len(games_data) == 100, f"Expected 100 games, got {len(games_data)}"
         print(f"✅ Verified {len(games_data)} games in games_top100.json.")
     else:
-        print("ℹ️ Local master games_top100.json omitted in this environment. Database parity handled via D1.")
+        with open(DATA_JS, 'r', encoding='utf-8') as f:
+            content = f.read()
+        match = re.search(r'window\.GAMES_DATA\s*=\s*(\[[\s\S]*?\]);', content)
+        games_data = json.loads(match.group(1)) if match else []
+        print(f"ℹ️ Local master games_top100.json omitted in this environment. Loaded {len(games_data)} games from public/data.js.")
 
     # Check 8-language symmetry
     keys_zh = set(trans_data['zh-CN'].keys())
