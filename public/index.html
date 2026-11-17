@@ -33,7 +33,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>L-MOD Vault | 全球单机游戏 MOD · 纯净修改器 · 官方控制台代码库</title>
   <!-- SEO & Standard Meta -->
-  <meta name="description" content="L-MOD Vault 全球单机游戏纯净智库：收录 100 款 3A 旗舰单机大作，提供场景化一键指令集、纯净免翻修改器直链、前置 Mod 生态框架与实时避坑雷达。零假代码，零外链广告，免后端极速分发。">
+  <meta name="description" content="L-MOD Vault 全球单机游戏纯净智库：收录 100 款 3A 旗舰单机大作，提供场景化一键指令集、风灵月影修改器官方直达、前置 Mod 生态框架与实时避坑雷达。零假代码，零外链广告，免后端极速分发。">
   <meta name="keywords" content="单机游戏MOD,控制台代码,修改器下载,赛博朋克2077,黑神话悟空,巫师3,博德之门3,艾尔登法环,Steam补丁避坑,L-MOD Vault">
   <meta name="author" content="L-MOD Team">
   <meta name="theme-color" content="#0c0d0f">
@@ -43,7 +43,7 @@
   <meta property="og:url" content="https://lmod-vault.pages.dev/">
   <meta property="og:site_name" content="L-MOD Vault">
   <meta property="og:title" content="L-MOD Vault | 全球单机游戏 MOD · 纯净修改器 · 官方控制台代码库">
-  <meta property="og:description" content="收录全球 Top 100 单机大作，全息采掘无假代码指令集，集成 Fling/Nexus 纯净免翻直链与 Steam 实时补丁雷达。">
+  <meta property="og:description" content="收录全球 Top 100 单机大作，全息采掘无假代码指令集，集成 风灵月影 / N 网官方直达与 Steam 实时补丁雷达。">
   <meta property="og:image" content="https://lmod-vault.pages.dev/avatar.jpg">
   <meta property="og:image:width" content="600">
   <meta property="og:image:height" content="600">
@@ -52,7 +52,7 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="L-MOD Vault | 全球单机游戏 MOD · 纯净修改器 · 官方控制台代码库">
-  <meta name="twitter:description" content="收录全球 Top 100 单机大作，全息采掘无假代码指令集，集成 Fling/Nexus 纯净免翻直链与 Steam 实时补丁雷达。">
+  <meta name="twitter:description" content="收录全球 Top 100 单机大作，全息采掘无假代码指令集，集成 风灵月影 / N 网官方直达与 Steam 实时补丁雷达。">
   <meta name="twitter:image" content="https://lmod-vault.pages.dev/avatar.jpg">
 
   <!-- Favicon & Touch Icons -->
@@ -628,7 +628,7 @@
 
         <button onclick="setFilterAndNavigate('trainers')" class="sidebar-nav-btn w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-white/5 transition-all text-left font-medium" data-nav="trainers">
           <span class="text-sm">🛡️</span>
-          <span id="sidebar-nav-trainers">纯净修改器 (Verified Clean)</span>
+          <span id="sidebar-nav-trainers">纯净修改器 (FLiNG 官方)</span>
         </button>
 
         <!-- Steam Avoidance Radar Sidebar Entry -->
@@ -1350,47 +1350,45 @@
         <!-- TAB 3: TRAINERS (风灵月影 FLiNG 官方纯净专区) -->
         <div id="detail-content-trainers" class="hidden space-y-6">
           
+          <!-- No trainer for this game -->
+          <div id="trainer-empty" class="hidden bg-white dark:bg-[#141518] rounded-[28px] p-8 text-center text-sm text-zinc-500 dark:text-zinc-400 border border-zinc-200/80 dark:border-white/10 shadow-sm">
+            暂无收录纯净修改器，请优先使用官方内置控制台代码。
+          </div>
+
           <!-- FLiNG Official Hub Header Card -->
-          <div class="bg-white dark:bg-[#141518] rounded-[28px] p-6 sm:p-8 border border-zinc-200/80 dark:border-white/10 shadow-sm space-y-6">
+          <div id="trainer-hub-card" class="bg-white dark:bg-[#141518] rounded-[28px] p-6 sm:p-8 border border-zinc-200/80 dark:border-white/10 shadow-sm space-y-6">
             <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-zinc-100 dark:border-white/5">
               <div>
                 <div class="flex items-center gap-2 mb-2 flex-wrap">
-                  <span class="px-3 py-1 rounded-full text-xs font-bold bg-purple-500/10 dark:bg-[#A855F7]/10 text-[#A855F7] dark:text-purple-400 border border-[#A855F7]/20">
+                  <span id="trainer-sec-title" class="px-3 py-1 rounded-full text-xs font-bold bg-purple-500/10 dark:bg-[#A855F7]/10 text-[#A855F7] dark:text-purple-400 border border-[#A855F7]/20">
                     风灵月影 (FLiNG) 官方直连
                   </span>
                   <span id="trainer-patch-badge" class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
-                    最新版本适配
                   </span>
-                  <span class="px-3 py-1 rounded-full text-xs font-medium bg-zinc-100 dark:bg-white/10 text-zinc-600 dark:text-zinc-400">
-                    VirusTotal 0/72 Clean
+                  <span id="trainer-meta-badge" class="px-3 py-1 rounded-full text-xs font-medium bg-zinc-100 dark:bg-white/10 text-zinc-600 dark:text-zinc-400">
                   </span>
                 </div>
-                <h3 class="text-xl sm:text-2xl font-extrabold text-zinc-900 dark:text-white tracking-tight">
+                <h3 id="trainer-sec-sub" class="text-xl sm:text-2xl font-extrabold text-zinc-900 dark:text-white tracking-tight">
                   纯净单文件修改器 · 告别流氓捆绑
                 </h3>
-                <p class="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 mt-1.5 leading-relaxed">
-                  本站坚决抵制任何第三方恶意全家桶下载器与弹窗推广！提供原作者官方直源与经过 MD5 校验的纯净单文件。
+                <p id="trainer-sec-desc" class="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 mt-1.5 leading-relaxed">
+                  只链接风灵月影官网原版，本站不转存、不改包。功能数、热键和适配版本定期从官网同步。
+                </p>
+                <p id="trainer-anticheat-warn" class="hidden text-xs sm:text-sm font-semibold text-red-700 dark:text-red-300 bg-red-500/10 border border-red-500/20 rounded-2xl px-4 py-3 mt-3 leading-relaxed">
                 </p>
               </div>
 
-              <!-- Dual Safe Download Buttons -->
+              <!-- Official Download (link only, no re-hosting) -->
               <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0">
-                <button 
-                  onclick="downloadCleanTrainer()" 
+                <a
+                  id="trainer-official-link"
+                  href="#"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   class="inline-flex items-center justify-center space-x-2 px-6 py-3 rounded-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs sm:text-sm font-bold transition-all shadow-lg shadow-emerald-500/25 group cursor-pointer"
                 >
-                  <svg class="w-4 h-4 text-white group-hover:translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                  <span id="trainer-btn-direct-dl">⚡ 极速纯净一键直接下载 (ZIP)</span>
-                </button>
-                <a 
-                  id="trainer-official-link" 
-                  href="#" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  class="inline-flex items-center justify-center space-x-2 px-5 py-3 rounded-full bg-zinc-100 hover:bg-zinc-200/80 dark:bg-white/10 dark:hover:bg-white/20 text-zinc-700 dark:text-zinc-300 text-xs sm:text-sm font-semibold transition-all border border-zinc-200/80 dark:border-white/10 group cursor-pointer"
-                >
-                  <svg class="w-4 h-4 text-[#A855F7]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-                  <span id="trainer-btn-official-page">风灵月影官方页面 (备用通道)</span>
+                  <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                  <span id="trainer-btn-direct-dl">⚡ 去风灵月影官网下载</span>
                 </a>
               </div>
             </div>
@@ -1402,22 +1400,16 @@
                   !
                 </div>
                 <div class="flex-1 text-xs">
-                  <div class="font-bold text-amber-800 dark:text-amber-300 text-sm mb-1">
-                    防杀毒软件误报拦截 · 10 秒放行指南 (Windows Defender)
+                  <div id="trainer-def-title" class="font-bold text-amber-800 dark:text-amber-300 text-sm mb-1">
+                    被杀毒软件拦截怎么办 (Windows Defender)
                   </div>
-                  <p class="text-amber-900/80 dark:text-amber-200/80 leading-relaxed mb-3">
-                    修改器通过系统内存注入数值，所有主流杀毒软件均会触发特征误报（显示为 HackTool:Win32/GameHack），这属于游戏内存修改的通用机制，绝非病毒。
+                  <p id="trainer-def-desc" class="text-amber-900/80 dark:text-amber-200/80 leading-relaxed mb-3">
+                    修改器要改游戏内存，杀毒软件常会报 HackTool:Win32/GameHack。从风灵月影官网下的原版多半是误报；来路不明的文件一律别放行。
                   </p>
                   <div class="space-y-1.5 text-zinc-700 dark:text-zinc-300 font-medium">
-                    <div id="trainer-def-step1">1. 打开【Windows 安全中心】 -> 点击【病毒和威胁防护】 -> 【管理设置】</div>
-                    <div id="trainer-def-step2">2. 向下滑动找到【排除项】 -> 点击【添加或删除排除项】</div>
-                    <div id="trainer-def-step3">3. 添加文件夹 -> 选择你存放修改器的目录，即可一劳永逸正常运行不被误杀！</div>
-                  </div>
-                  <div class="mt-3 pt-3 border-t border-amber-500/20 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                    <span class="font-mono text-[11px] text-zinc-500 dark:text-zinc-400" id="trainer-def-cmd-label">PowerShell 一键放行指令:</span>
-                    <button onclick="copyTrainerCmd()" class="self-start text-[11px] bg-white dark:bg-black/40 hover:bg-amber-100 dark:hover:bg-amber-500/20 text-amber-800 dark:text-amber-300 px-3 py-1 rounded-full font-mono transition-colors border border-amber-500/30 cursor-pointer shadow-sm">
-                      复制一键放行命令
-                    </button>
+                    <div id="trainer-def-step1">1. 打开【Windows 安全中心】→【病毒和威胁防护】→【保护历史记录】</div>
+                    <div id="trainer-def-step2">2. 找到刚被拦下的修改器那一条 →【操作】→【允许在设备上】</div>
+                    <div id="trainer-def-step3">3. 只放行这一个文件就够了，别把整个文件夹加进排除项。</div>
                   </div>
                 </div>
               </div>
@@ -1426,7 +1418,7 @@
           </div>
 
           <!-- Hotkeys Search Bar -->
-          <div class="flex items-center bg-white dark:bg-[#141518] rounded-2xl px-4 py-2.5 border border-zinc-200/80 dark:border-white/10 shadow-sm">
+          <div id="trainer-hotkeys-search" class="flex items-center bg-white dark:bg-[#141518] rounded-2xl px-4 py-2.5 border border-zinc-200/80 dark:border-white/10 shadow-sm">
             <svg class="w-4 h-4 text-zinc-400 mr-2.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
             <input 
               type="text" 
@@ -1560,77 +1552,6 @@
   </div>
 
   <!-- ======================================================== -->
-  <!-- MODAL: TRAINER DIRECT DOWNLOAD & DEFENDER EXCLUSION      -->
-  <!-- ======================================================== -->
-  <div id="trainer-download-modal" onclick="if(event.target===this) closeTrainerModal()" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-md hidden flex items-center justify-center p-4 overflow-y-auto">
-    <div class="bg-white dark:bg-[#141518] rounded-[28px] max-w-xl w-full border border-zinc-200/80 dark:border-white/10 shadow-2xl p-6 sm:p-8 space-y-5 my-8 transform transition-all duration-300 scale-95" id="trainer-download-card">
-      
-      <!-- Modal Header -->
-      <div class="flex items-start justify-between gap-4 pb-4 border-b border-zinc-100 dark:border-white/5">
-        <div class="flex items-center space-x-3.5">
-          <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-emerald-500 via-teal-600 to-blue-600 flex items-center justify-center text-white shadow-lg shadow-emerald-500/25 shrink-0">
-            <svg class="w-6 h-6 text-white animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-          </div>
-          <div>
-            <div class="flex items-center gap-2 flex-wrap">
-              <h3 class="text-lg sm:text-xl font-extrabold text-zinc-900 dark:text-white" id="trainer-modal-title">下载已在浏览器拉起</h3>
-              <span class="text-[10px] bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 px-2.5 py-0.5 rounded-full font-bold border border-emerald-500/20">纯净 ZIP 直连</span>
-            </div>
-            <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1" id="trainer-modal-subtitle">若浏览器弹出下载确认，请点击【保留 / 允许下载】· 零捆绑 · 零广告</p>
-          </div>
-        </div>
-        <button onclick="closeTrainerModal()" class="w-8 h-8 rounded-full bg-zinc-100 dark:bg-white/10 hover:bg-zinc-200 dark:hover:bg-white/20 text-zinc-500 hover:text-zinc-900 dark:hover:text-white flex items-center justify-center transition-colors shrink-0 cursor-pointer">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-        </button>
-      </div>
-
-      <!-- Defender 10-Second Pass Box -->
-      <div class="bg-amber-500/10 dark:bg-amber-500/10 rounded-2xl p-4.5 border border-amber-500/20 space-y-3">
-        <div class="flex items-center justify-between">
-          <div class="flex items-center space-x-2">
-            <div class="w-5 h-5 rounded-full bg-amber-500 text-white flex items-center justify-center font-bold text-xs shrink-0">!</div>
-            <span class="font-bold text-amber-800 dark:text-amber-300 text-xs sm:text-sm">附赠：Windows Defender 10秒防误杀放行指令</span>
-          </div>
-          <span class="text-[10px] text-amber-600 dark:text-amber-400 font-mono">PowerShell</span>
-        </div>
-        <p class="text-xs text-amber-900/80 dark:text-amber-200/80 leading-relaxed">
-          修改器修改游戏内存会触发杀软特征误报 (HackTool:Win32)。以管理员权限运行 PowerShell 贴入下方指令，即可 10 秒彻底放行：
-        </p>
-        <div class="relative bg-zinc-950 text-amber-300 rounded-xl p-3 font-mono text-xs overflow-x-auto border border-zinc-800 flex items-center justify-between gap-3">
-          <code id="trainer-modal-cmd" class="whitespace-nowrap overflow-x-auto no-scrollbar">Add-MpPreference -ExclusionProcess 'Trainer.exe'</code>
-          <button onclick="copyTrainerCmd()" id="btn-copy-trainer-cmd" class="px-3 py-1 rounded-lg bg-amber-500 hover:bg-amber-400 text-zinc-950 text-xs font-bold transition-all shrink-0 cursor-pointer shadow-sm">
-            一键复制指令
-          </button>
-        </div>
-      </div>
-
-      <!-- Dual Channel Actions -->
-      <div class="bg-zinc-50 dark:bg-black/30 rounded-2xl p-4 border border-zinc-200/80 dark:border-white/5 space-y-2.5">
-        <div class="text-xs font-bold text-zinc-800 dark:text-zinc-200" id="trainer-dual-label">双通道下载保障：</div>
-        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5">
-          <button onclick="retriggerTrainerDownload()" class="flex-1 px-4 py-2.5 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-sm shadow-emerald-600/20 cursor-pointer">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-            <span id="trainer-btn-retrigger">重新拉起直接下载 (ZIP)</span>
-          </button>
-          <a id="trainer-modal-backup-link" href="#" target="_blank" rel="noopener noreferrer" class="flex-1 px-4 py-2.5 rounded-full bg-zinc-100 hover:bg-zinc-200 dark:bg-white/10 dark:hover:bg-white/20 text-zinc-700 dark:text-zinc-300 text-xs font-semibold transition-all flex items-center justify-center gap-1.5 border border-zinc-200/80 dark:border-white/10 cursor-pointer">
-            <svg class="w-3.5 h-3.5 text-[#A855F7]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-            <span id="trainer-btn-backup">直达风灵月影官方页面 (备用)</span>
-          </a>
-        </div>
-      </div>
-
-      <!-- Quick 3 Steps -->
-      <div class="flex items-center justify-between pt-1 text-xs text-zinc-500 dark:text-zinc-400">
-        <span id="trainer-3step-hint">极简 3 步：保持单机离线 -> 运行放行指令 -> 解压启动即享</span>
-        <button onclick="closeTrainerModal()" class="px-5 py-2 rounded-full bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-bold text-xs transition-all shadow-sm cursor-pointer">
-          我知道了
-        </button>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ======================================================== -->
   <!-- MODAL: MOD REAL DIRECT DOWNLOAD & INSTALL GUIDANCE       -->
   <!-- ======================================================== -->
   <div id="mod-download-modal" onclick="if(event.target===this) closeModModal()" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-md hidden flex items-center justify-center p-4 overflow-y-auto">
@@ -1700,7 +1621,7 @@
   </div>
 
   <!-- Include Bundled Database -->
-  <script src="data.js"></script>
+  <script src="data.js?v=20261117"></script>
   <!-- L-MOD Vault Modern API & Telemetry Client -->
   <script src="js/vault-client.js"></script>
   <!-- L-MOD Player Authentication & Identity Engine -->
@@ -2169,8 +2090,7 @@
       setElText('trainer-def-step1', t('trainerDefenderStep1'));
       setElText('trainer-def-step2', t('trainerDefenderStep2'));
       setElText('trainer-def-step3', t('trainerDefenderStep3'));
-      setElText('trainer-def-cmd-label', t('trainerDefenderCmdLabel'));
-      setElText('trainer-btn-copy-def', t('trainerDefenderCopyCmdBtn'));
+      setElText('trainer-empty', t('noTrainersDetail'));
 
       const hotkeysInput = document.getElementById('hotkeys-search-input');
       if (hotkeysInput) hotkeysInput.placeholder = t('trainerSearchPlaceholder');
@@ -2190,18 +2110,8 @@
       setElText('lazy-btn-download', t('activatorDownloadBat'));
       setElText('lazy-btn-close', t('activatorClose'));
 
-      // Modals: Trainer Download
-      setElText('trainer-modal-clean-tag', t('trainerModalCleanTag'));
-      setElText('trainer-modal-subtitle', t('trainerModalStarted'));
-      setElText('trainer-ex-title', t('trainerExclusionTitle'));
-      setElText('trainer-ex-desc', t('trainerExclusionDesc'));
-      setElText('trainer-ex-cmd-label', t('trainerExclusionCmdLabel'));
       setElText('trainer-btn-copy-cmd', t('copyCmdBtn'));
-      setElText('trainer-dual-label', t('trainerDualChannels'));
-      setElText('trainer-btn-retrigger', t('trainerRetriggerBtn'));
-      setElText('trainer-btn-backup', t('trainerBackupMirror'));
-      setElText('trainer-3step-hint', t('trainer3StepHint'));
-      setElText('trainer-btn-close', t('trainerClose'));
+      if (activeGame) renderTrainerTab(activeGame);
 
       // Modals: Mod Download
       setElText('mod-modal-label-file', t('modModalTargetFile'));
@@ -2396,7 +2306,15 @@
           if (game.popularCommands) {
             matchCmd = game.popularCommands.some(c => (c.command || '').toLowerCase().includes(currentSearch) || (c.desc || '').toLowerCase().includes(currentSearch));
           }
-          return matchTitleEn || matchTitleLoc || matchGenre || matchDev || matchCmd;
+          // 任意语言标题 + 别名（老头环 / 大表哥2 / bg3 …），别名来自游戏数据的 aliases 字段
+          const squash = s => String(s || '').toLowerCase().replace(/\s+/g, '');
+          const qSquash = squash(currentSearch);
+          const matchAnyTitle = Object.values(game.titles || {}).some(v => squash(v).includes(qSquash));
+          const matchAlias = (game.aliases || []).some(a => {
+            const al = squash(a);
+            return al && (al.includes(qSquash) || (al.length >= 2 && qSquash.includes(al)));
+          });
+          return matchTitleEn || matchTitleLoc || matchAnyTitle || matchAlias || matchGenre || matchDev || matchCmd;
         }
         return true;
       });
@@ -2848,15 +2766,7 @@
       renderCuratedMods(game.curatedMods || []);
 
       // TAB 3: FLiNG Trainer Setup
-      if (game.trainerInfo) {
-        const offLink = document.getElementById('trainer-official-link');
-        if (offLink) offLink.href = game.trainerInfo.officialUrl;
-        const patchBadge = document.getElementById('trainer-patch-badge');
-        if (patchBadge) patchBadge.innerText = game.trainerInfo.version;
-        renderTrainerHotkeys(game.trainerInfo.hotkeysCategorized || []);
-      } else {
-        renderTrainerHotkeys([]);
-      }
+      renderTrainerTab(game);
 
       // TAB 4: Reviews
       const reviewsList = document.getElementById('detail-reviews-list');
@@ -3021,8 +2931,35 @@
       renderCuratedMods(filtered);
     }
 
+    function escHtml(v) {
+      return String(v == null ? '' : v).replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
+    }
+
+    // FLiNG trainer tab: data comes from public/trainers.json via scripts/fling_trainer_sync.py (official page link only, no re-hosting)
+    function renderTrainerTab(game) {
+      const tInfo = game && game.hasTrainer ? game.trainerInfo : null;
+      const show = (id, on) => { const el = document.getElementById(id); if (el) el.classList.toggle('hidden', !on); };
+      const setElText = (id, text) => { const el = document.getElementById(id); if (el && text !== undefined) el.innerText = text; };
+      show('trainer-empty', !tInfo);
+      show('trainer-hub-card', !!tInfo);
+      show('trainer-hotkeys-search', !!tInfo);
+      show('trainer-anticheat-warn', !!(tInfo && tInfo.antiCheat));
+      const searchInput = document.getElementById('hotkeys-search-input');
+      if (searchInput) searchInput.value = '';
+      if (!tInfo) {
+        renderTrainerHotkeys([], true);
+        return;
+      }
+      const offLink = document.getElementById('trainer-official-link');
+      if (offLink) offLink.href = tInfo.officialUrl;
+      setElText('trainer-patch-badge', `${t('trainerVersionLabel')} ${tInfo.version || ''}`.trim());
+      setElText('trainer-meta-badge', t('trainerMetaBadge').replace('{n}', tInfo.optionsCount || '?').replace('{date}', tInfo.lastUpdated || '?'));
+      setElText('trainer-anticheat-warn', t('trainerAntiCheatWarn'));
+      renderTrainerHotkeys(tInfo.hotkeysCategorized || []);
+    }
+
     // Render Categorized FLiNG Trainer Hotkeys
-    function renderTrainerHotkeys(categories) {
+    function renderTrainerHotkeys(categories, noTrainer) {
       const container = document.getElementById('detail-hotkeys-table');
       container.innerHTML = '';
       if (categories && categories.length > 0) {
@@ -3034,22 +2971,22 @@
           let rows = '';
           cat.items.forEach(hk => {
             rows += `
-              <div class="py-3 px-3 flex items-center justify-between text-xs sm:text-sm hover:bg-zinc-50 dark:hover:bg-white/[0.03] rounded-xl transition-colors">
-                <span class="font-mono font-bold text-[#A855F7] dark:text-purple-400 bg-zinc-100 dark:bg-white/10 px-3 py-1 rounded-full border border-zinc-200/60 dark:border-white/10 shadow-sm">${hk.key}</span>
-                <span class="text-zinc-800 dark:text-zinc-200 font-medium text-right">${hk.action}</span>
+              <div class="py-3 px-3 flex items-center justify-between gap-3 text-xs sm:text-sm hover:bg-zinc-50 dark:hover:bg-white/[0.03] rounded-xl transition-colors"${hk.tip ? ` title="${escHtml(hk.tip)}"` : ''}>
+                <span class="shrink-0 font-mono font-bold text-[#A855F7] dark:text-purple-400 bg-zinc-100 dark:bg-white/10 px-3 py-1 rounded-full border border-zinc-200/60 dark:border-white/10 shadow-sm">${escHtml(hk.key)}</span>
+                <span class="text-zinc-800 dark:text-zinc-200 font-medium text-right">${escHtml(hk.action)}${hk.tip ? ' <span class="text-zinc-400">ⓘ</span>' : ''}</span>
               </div>
             `;
           });
 
           block.innerHTML = `
-            <div class="text-xs font-bold text-zinc-500 uppercase tracking-wider px-1">${cat.category}</div>
+            <div class="text-xs font-bold text-zinc-500 uppercase tracking-wider px-1">${escHtml(cat.category)}</div>
             <div class="bg-white dark:bg-[#141518] rounded-[24px] p-3 divide-y divide-zinc-100 dark:divide-white/5 border border-zinc-200/80 dark:border-white/10 shadow-sm">
               ${rows}
             </div>
           `;
           container.appendChild(block);
         });
-      } else {
+      } else if (!noTrainer) {
         container.innerHTML = `<div class="bg-white dark:bg-[#141518] rounded-[24px] p-8 text-center text-zinc-400 text-sm border border-zinc-200/80 dark:border-white/10">未搜索到匹配的修改器热键功能。</div>`;
       }
     }
@@ -3077,8 +3014,6 @@
     // ==========================================
     // REAL DIRECT DOWNLOAD PIPELINE & MODALS
     // ==========================================
-    let currentTrainerDownloadUrl = '';
-    let currentTrainerDownloadFilename = '';
     let currentModDownloadUrl = '';
     let currentModDownloadFilename = '';
 
@@ -3093,81 +3028,6 @@
       setTimeout(() => {
         if (a.parentNode) a.parentNode.removeChild(a);
       }, 300);
-    }
-
-    // FLiNG Clean Direct Download Action
-    function downloadCleanTrainer() {
-      if (!activeGame || !activeGame.trainerInfo) return;
-      const tInfo = activeGame.trainerInfo;
-      const locTitle = (activeGame.titles && activeGame.titles[currentLang]) ? activeGame.titles[currentLang] : activeGame.title;
-      
-      const mirrorUrl = tInfo.cleanMirrorUrl || tInfo.officialUrl;
-      const rawName = mirrorUrl.split('/').pop().split('?')[0];
-      const filename = (rawName && (rawName.endsWith('.zip') || rawName.endsWith('.7z') || rawName.endsWith('.rar'))) 
-        ? rawName 
-        : `${activeGame.id}_FLiNG_Trainer.zip`;
-      
-      currentTrainerDownloadUrl = mirrorUrl;
-      currentTrainerDownloadFilename = filename;
-
-      // 1. Pull direct download in browser
-      triggerFileDownload(mirrorUrl, filename);
-
-      // 2. Open high-texture popup with 10s Defender exclusion command & dual backup
-      openTrainerModal(locTitle, tInfo);
-    }
-
-    function openTrainerModal(locTitle, tInfo) {
-      const modal = document.getElementById('trainer-download-modal');
-      const card = document.getElementById('trainer-download-card');
-      const titleEl = document.getElementById('trainer-modal-title');
-      const cmdEl = document.getElementById('trainer-modal-cmd');
-      const backupLink = document.getElementById('trainer-modal-backup-link');
-
-      if (titleEl) titleEl.innerText = (t('trainerModalTitle') || '《{title}》修改器下载已在浏览器拉起').replace('{title}', locTitle);
-      const psCmd = tInfo?.safeVerification?.powershellExclusionCmd || `Add-MpPreference -ExclusionProcess '${activeGame.id}.exe'`;
-      if (cmdEl) cmdEl.innerText = psCmd;
-      if (backupLink) backupLink.href = tInfo?.officialUrl || '#';
-
-      if (modal) {
-        modal.classList.remove('hidden');
-        setTimeout(() => {
-          if (card) {
-            card.classList.remove('scale-95');
-            card.classList.add('scale-100');
-          }
-        }, 10);
-      }
-    }
-
-    function closeTrainerModal() {
-      const modal = document.getElementById('trainer-download-modal');
-      const card = document.getElementById('trainer-download-card');
-      if (!modal) return;
-      if (card) {
-        card.classList.remove('scale-100');
-        card.classList.add('scale-95');
-      }
-      setTimeout(() => {
-        modal.classList.add('hidden');
-      }, 150);
-    }
-
-    function retriggerTrainerDownload() {
-      if (!currentTrainerDownloadUrl && activeGame && activeGame.trainerInfo) {
-        currentTrainerDownloadUrl = activeGame.trainerInfo.cleanMirrorUrl || activeGame.trainerInfo.officialUrl;
-        currentTrainerDownloadFilename = `${activeGame.id}_FLiNG_Trainer.zip`;
-      }
-      if (currentTrainerDownloadUrl) {
-        triggerFileDownload(currentTrainerDownloadUrl, currentTrainerDownloadFilename);
-        showToast(t('trainerRetriggerToast'));
-      }
-    }
-
-    function copyTrainerCmd() {
-      const cmdEl = document.getElementById('trainer-modal-cmd');
-      const cmd = cmdEl ? cmdEl.innerText : (activeGame?.trainerInfo?.safeVerification?.powershellExclusionCmd || 'Add-MpPreference -ExclusionPath "D:\\Games\\Trainers"');
-      copyText(cmd, t('cmdCopiedToast'));
     }
 
     // Curated Mod Real Download Action
@@ -4023,7 +3883,6 @@ pause`;
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') {
         closeLazyDoorModal();
-        closeTrainerModal();
         closeModModal();
         closeImageModal();
       }

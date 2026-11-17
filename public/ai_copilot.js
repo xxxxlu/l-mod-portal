@@ -121,70 +121,17 @@
       }
     }
 
-    const aliases = {
-      '2077': 'cyberpunk-2077',
-      '赛博朋克': 'cyberpunk-2077',
-      '电驭叛客': 'cyberpunk-2077',
-      '黑猴': 'black-myth-wukong',
-      '黑神话': 'black-myth-wukong',
-      '悟空': 'black-myth-wukong',
-      'wukong': 'black-myth-wukong',
-      '老头环': 'elden-ring',
-      '法环': 'elden-ring',
-      '艾尔登': 'elden-ring',
-      '艾尔登法环': 'elden-ring',
-      '黄金树': 'elden-ring',
-      'elden': 'elden-ring',
-      '巫师3': 'witcher-3',
-      '白狼': 'witcher-3',
-      'witcher': 'witcher-3',
-      '博德之门3': 'baldurs-gate-3',
-      '博德3': 'baldurs-gate-3',
-      'bg3': 'baldurs-gate-3',
-      '老滚5': 'the-elder-scrolls-v-skyrim-special-edition',
-      '天际': 'the-elder-scrolls-v-skyrim-special-edition',
-      '上古卷轴': 'the-elder-scrolls-v-skyrim-special-edition',
-      'skyrim': 'the-elder-scrolls-v-skyrim-special-edition',
-      '辐射4': 'fallout-4',
-      'fallout4': 'fallout-4',
-      '大表哥2': 'red-dead-redemption-2',
-      '荒野大镖客': 'red-dead-redemption-2',
-      'rdr2': 'red-dead-redemption-2',
-      '帕鲁': 'palworld',
-      '幻兽帕鲁': 'palworld',
-      '星空': 'starfield',
-      '生化危机4': 'resident-evil-4',
-      're4': 'resident-evil-4',
-      '只狼': 'sekiro',
-      '怪物猎人': 'monster-hunter-world',
-      'mhw': 'monster-hunter-world',
-      '骑砍2': 'mount-blade-ii-bannerlord',
-      '星露谷': 'stardew-valley',
-      '深海迷航': 'subnautica',
-      '英灵神殿': 'valheim',
-      '环世界': 'rimworld',
-      '边缘世界': 'rimworld',
-      '森林之子': 'sons-of-the-forest',
-      '幸福工厂': 'satisfactory',
-      '异星工厂': 'factorio',
-      '十字军之王': 'crusader-kings-iii',
-      '钢铁雄心': 'hearts-of-iron-iv',
-      'hoi4': 'hearts-of-iron-iv',
-      '群星': 'stellaris',
-      '天国拯救': 'kingdom-come-deliverance',
-      '七日杀': '7-days-to-die',
-      '方舟': 'ark-survival-evolved',
-      '模拟人生4': 'the-sims-4',
-      '欧卡2': 'euro-truck-simulator-2',
-      '杀戮尖塔': 'slay-the-spire',
-      '哈迪斯': 'hades',
-      '空洞骑士': 'hollow-knight'
-    };
-
-    for (const [alias, id] of Object.entries(aliases)) {
-      if (q.includes(alias)) {
-        return games.find(g => g.id === id) || null;
+    // 别名来自游戏数据的 aliases 字段（与服务端 _game_aliases.js 同源），长的先匹配
+    const aliasPairs = [];
+    for (const g of games) {
+      for (const a of (g.aliases || [])) {
+        const key = String(a).toLowerCase().replace(/\s+/g, '');
+        if (key) aliasPairs.push([key, g]);
       }
+    }
+    aliasPairs.sort((x, y) => y[0].length - x[0].length);
+    for (const [alias, g] of aliasPairs) {
+      if (q.includes(alias)) return g;
     }
 
     return null;

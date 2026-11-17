@@ -14,6 +14,14 @@ window.GAMES_DATA = [
       "de": "Cyberpunk 2077",
       "es": "Cyberpunk 2077"
     },
+    "aliases": [
+      "2077",
+      "赛博朋克",
+      "赛博朋克2077",
+      "电驭叛客",
+      "cyberpunk",
+      "夜之城"
+    ],
     "developer": "CD PROJEKT RED",
     "releaseYear": 2020,
     "genre": "Open World Action RPG",
@@ -110,11 +118,27 @@ window.GAMES_DATA = [
       },
       {
         "key": "Num 3",
-        "action": "Infinite Ammo (无限子弹)"
+        "action": "Infinite Items/Ammo (无限物品/弹药)"
       },
       {
-        "key": "Num 0",
-        "action": "One Hit Kill (一击必杀)"
+        "key": "Num 4",
+        "action": "Items Won’t Decrease (物品不减少)"
+      },
+      {
+        "key": "Num 5",
+        "action": "Healing Items No Cooldown (治疗物品无冷却)"
+      },
+      {
+        "key": "Num 6",
+        "action": "Grenades No Cooldown (手雷无冷却)"
+      },
+      {
+        "key": "Num *",
+        "action": "Projectile Launch System No Cooldown (投射物发射系统无冷却)"
+      },
+      {
+        "key": "Num 7",
+        "action": "No Reload (无需换弹)"
       }
     ],
     "nexusStats": {
@@ -1731,22 +1755,18 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1091500/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "v2.13 (Steam/Epic/GOG 全版本兼容)",
-      "officialUrl": "https://flingtrainer.com/trainer/cyberpunk-2077-trainer/",
-      "cleanMirrorUrl": "https://github.com/l-mod-vault/mirrors/releases/download/cyberpunk2077/Cyberpunk_2077_v2.13_Plus_36_Trainer.zip",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "officialUrl": "https://flingtrainer.com/trainer/cyberpunk-2077-trainer-16095388215/",
+      "version": "v1.03-v2.5+",
+      "optionsCount": 46,
+      "lastUpdated": "2026-10-28",
+      "platforms": [
+        "Steam",
+        "Epic Games Store",
+        "GOG",
+        "Xbox/Game Pass"
+      ],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
           "category": "⚔️ 战斗与生存 (Combat & Survival)",
@@ -1761,65 +1781,204 @@ window.GAMES_DATA = [
             },
             {
               "key": "Num 3",
-              "action": "无限子弹/无需换弹 (Infinite Ammo)"
-            },
-            {
-              "key": "Num 4",
-              "action": "武器无后坐力与最大精准 (No Recoil & Max Precision)"
+              "action": "无限物品/弹药 (Infinite Items/Ammo)"
             },
             {
               "key": "Num 5",
-              "action": "快速扫描与RAM无限 (Infinite RAM)"
+              "action": "治疗物品无冷却 (Healing Items No Cooldown)"
+            },
+            {
+              "key": "Num 6",
+              "action": "手雷无冷却 (Grenades No Cooldown)"
+            },
+            {
+              "key": "Num *",
+              "action": "投射物发射系统无冷却 (Projectile Launch System No Cooldown)"
+            },
+            {
+              "key": "Num 7",
+              "action": "无需换弹 (No Reload)"
+            },
+            {
+              "key": "Num 8",
+              "action": "超级精准 (Super Accuracy)"
+            },
+            {
+              "key": "Num 9",
+              "action": "无后坐力 (No Recoil)"
             },
             {
               "key": "Num 0",
               "action": "一击必杀 (One Hit Kill)"
+            },
+            {
+              "key": "Num .",
+              "action": "伤害倍率 (Damage Multiplier)"
+            },
+            {
+              "key": "Num +",
+              "action": "防御倍率 (Defense Multiplier)"
+            },
+            {
+              "key": "Num –",
+              "action": "隐身模式 (Stealth Mode)"
+            },
+            {
+              "key": "Ctrl+Num 6",
+              "action": "技能经验/进度满值 (Max Skill XP/Progression)"
+            },
+            {
+              "key": "Ctrl+Num 7",
+              "action": "技能经验倍率 (Skill XP Multiplier)"
+            },
+            {
+              "key": "Shift+F1",
+              "action": "Edit Headhunter Skill Level"
+            },
+            {
+              "key": "Shift+F2",
+              "action": "Edit Netrunner Skill Level"
+            },
+            {
+              "key": "Shift+F3",
+              "action": "Edit Shinobi Skill Level"
+            },
+            {
+              "key": "Shift+F4",
+              "action": "Edit Solo Skill Level"
+            },
+            {
+              "key": "Shift+F5",
+              "action": "Edit Engineer Skill Level"
             }
           ]
         },
         {
-          "category": "💰 资金与满级属性 (Economy & Stats)",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
+            {
+              "key": "Num 4",
+              "action": "物品不减少 (Items Won’t Decrease)"
+            },
             {
               "key": "Ctrl+Num 1",
-              "action": "增加 100 万欧元现金 (Add 1,000,000 Eddies)"
+              "action": "修改金钱 (Edit Money)"
             },
-            {
-              "key": "Ctrl+Num 2",
-              "action": "无限经验值与街头声望 (Infinite EXP & Street Cred)"
-            },
-            {
-              "key": "Ctrl+Num 3",
-              "action": "无限核心属性点与特权专精点 (Infinite Attribute & Perk Points)"
-            },
-            {
-              "key": "Ctrl+Num 4",
-              "action": "最大负重上限锁定 9999 (Max Carry Weight)"
-            },
-            {
-              "key": "Ctrl+Num 5",
-              "action": "无限制造升级素材与义体组件 (Infinite Crafting Components)"
-            }
-          ]
-        },
-        {
-          "category": "🚀 移动与游戏速度 (Movement & Speed)",
-          "items": [
             {
               "key": "Alt+Num 1",
-              "action": "超级移动速度与滑铲加速 (Super Speed)"
-            },
-            {
-              "key": "Alt+Num 2",
-              "action": "无限二段跳与滞空跳跃 (Infinite Jump)"
+              "action": "无限 RAM (Infinite RAM)"
             },
             {
               "key": "Alt+Num 3",
-              "action": "锁定时间流速/慢动作子弹时间 (Slow Motion)"
+              "action": "无限零件 (Infinite Components)"
+            },
+            {
+              "key": "Alt+Num 4",
+              "action": "无限快速破解零件 (Infinite Quickhack Components)"
+            },
+            {
+              "key": "Alt+Num 5",
+              "action": "修改最大负重 (Edit Max Carrying Weight)"
+            }
+          ]
+        },
+        {
+          "category": "📈 等级与属性 (Level & Stats)",
+          "items": [
+            {
+              "key": "Ctrl+Num 2",
+              "action": "无限经验 (Infinite XP)"
+            },
+            {
+              "key": "Ctrl+Num 3",
+              "action": "经验倍率 (XP Multiplier)"
+            },
+            {
+              "key": "Ctrl+Num 4",
+              "action": "无限街头声望 (Infinite Street Cred)"
+            },
+            {
+              "key": "Ctrl+Num 5",
+              "action": "街头声望倍率 (Street Cred Multiplier)"
+            },
+            {
+              "key": "Ctrl+Num 8",
+              "action": "修改属性点 (Edit Attribute Points)"
+            },
+            {
+              "key": "Ctrl+Num 9",
+              "action": "修改天赋点 (Edit Perk Points)"
+            },
+            {
+              "key": "Ctrl+Num 0",
+              "action": "修改遗物点 (Edit Relic Points)"
+            },
+            {
+              "key": "Alt+Num 9",
+              "action": "修改玩家等级 (Edit Player Level)"
+            },
+            {
+              "key": "Alt+Num 0",
+              "action": "修改街头声望等级 (Edit Street Cred Level)"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "Ctrl+Num +",
+              "action": "设置游戏速度 (Set Game Speed)"
+            },
+            {
+              "key": "Alt+Num 2",
+              "action": "冻结破解协议计时器 (Freeze Breach Protocol Timer)"
+            },
+            {
+              "key": "Alt+Num 6",
+              "action": "设置移动速度 (Set Movement Speed)"
+            },
+            {
+              "key": "Alt+Num 7",
+              "action": "超级跳跃 (Super Jump)"
+            },
+            {
+              "key": "Alt+Num 8",
+              "action": "无限二段跳 (Infinite Double Jumps (Reinforced Tendons))"
+            },
+            {
+              "key": "Alt+Num .",
+              "action": "冻结时间 (Freeze Daytime)"
+            },
+            {
+              "key": "Alt+Num +",
+              "action": "时间 +1 小时 (Daytime +1 Hour)"
+            },
+            {
+              "key": "Shift+PageUp",
+              "action": "开启飞行模式 (Enable Fly Mode)"
+            },
+            {
+              "key": "Shift+Num +",
+              "action": "设置飞行高度 (Set Fly Height)"
+            },
+            {
+              "key": "Shift+Num –",
+              "action": "设置飞行速度 (Set Fly Speed)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Ctrl+Num .",
+              "action": "无视义体容量 (Ignore Cyberware Capacity)"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "latestPatch": "Patch 2.13 & 往日之影 (Steam/Epic/GOG 全版本兼容)",
     "verifiedPatch": "2.13 (往日之影DLC全兼容)",
@@ -1908,6 +2067,13 @@ window.GAMES_DATA = [
       "de": "Black Myth: Wukong",
       "es": "Black Myth: Wukong"
     },
+    "aliases": [
+      "黑猴",
+      "黑神话",
+      "黑神话悟空",
+      "悟空",
+      "wukong"
+    ],
     "developer": "Game Science (游戏科学)",
     "releaseYear": 2024,
     "genre": "Action RPG / Soulslike",
@@ -1975,23 +2141,35 @@ window.GAMES_DATA = [
     "trainerHotkeys": [
       {
         "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
+        "action": "God Mode/Ignore Hits (无敌模式/无视攻击)"
       },
       {
         "key": "Num 2",
-        "action": "Infinite Mana (无限法力/法宝)"
+        "action": "Infinite Health (无限生命)"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Stamina (无限气力)"
+        "action": "Infinite Mana (无限法力)"
       },
       {
         "key": "Num 4",
-        "action": "Max Stick Gauge (无限棍势满豆)"
+        "action": "Infinite Stamina (无限耐力)"
+      },
+      {
+        "key": "Num 5",
+        "action": "Infinite Focus (无限专注)"
+      },
+      {
+        "key": "Num 6",
+        "action": "Infinite Gourd Usage (葫芦无限使用)"
       },
       {
         "key": "Num 7",
-        "action": "Infinite Will / Spark (无限灵蕴/灵光点)"
+        "action": "Instant Spell Cooldown (法术瞬间冷却)"
+      },
+      {
+        "key": "Num 8",
+        "action": "Instant Transform Cooldown (变身瞬间冷却)"
       }
     ],
     "nexusStats": {
@@ -3040,78 +3218,217 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/2358720/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "v1.0.9.15179 (Steam 官方最新首发更新)",
       "officialUrl": "https://flingtrainer.com/trainer/black-myth-wukong-trainer/",
-      "cleanMirrorUrl": "https://github.com/l-mod-vault/mirrors/releases/download/bmw/Black_Myth_Wukong_v1.0.8_Plus_26_Trainer.zip",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "version": "v1.0-v1.0.20+",
+      "optionsCount": 44,
+      "lastUpdated": "2025-10-17",
+      "platforms": [],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 战斗与法术 (Combat & Spells)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "天命人无限生命 (Infinite Health)"
+              "action": "无敌模式/无视攻击 (God Mode/Ignore Hits)"
             },
             {
               "key": "Num 2",
-              "action": "无限气力奔跑翻滚 (Infinite Stamina)"
+              "action": "无限生命 (Infinite Health)"
             },
             {
               "key": "Num 3",
-              "action": "法力值无限使用 (Infinite Mana)"
+              "action": "无限法力 (Infinite Mana)"
             },
             {
               "key": "Num 4",
-              "action": "棍势瞬间四段满蓄力 (Instant 4 Focus Points)"
+              "action": "无限耐力 (Infinite Stamina)"
             },
             {
               "key": "Num 5",
-              "action": "定身法定身时间延长锁定 (Infinite Immobilize Duration)"
+              "action": "无限专注 (Infinite Focus)"
             },
             {
-              "key": "Num 6",
-              "action": "聚形散气/铜头铁臂法术零冷却 (Instant Cooldown)"
+              "key": "Num 7",
+              "action": "法术瞬间冷却 (Instant Spell Cooldown)"
+            },
+            {
+              "key": "Num 8",
+              "action": "变身瞬间冷却 (Instant Transform Cooldown)"
             },
             {
               "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
+              "action": "无限精魄能量 (Infinite Spirit Energy)"
+            },
+            {
+              "key": "Num .",
+              "action": "无限法宝能量 (Infinite Vessel Energy)"
+            },
+            {
+              "key": "Ctrl+Num 1",
+              "action": "超级伤害/一击必杀 (Super Damage/One Hit Kills)"
+            },
+            {
+              "key": "Ctrl+Num 2",
+              "action": "伤害倍率 (Damage Multiplier)"
+            },
+            {
+              "key": "Ctrl+Num 3",
+              "action": "防御倍率 (Defense Multiplier)"
+            },
+            {
+              "key": "Ctrl+Num 4",
+              "action": "耐力消耗率 (Stamina Consumption Rate)"
+            },
+            {
+              "key": "Shift+F1",
+              "action": "修改最大生命 (Edit Max Health)"
+            },
+            {
+              "key": "Shift+F2",
+              "action": "修改最大法力 (Edit Max Mana)"
+            },
+            {
+              "key": "Shift+F3",
+              "action": "修改最大耐力 (Edit Max Stamina)"
+            },
+            {
+              "key": "Shift+F5",
+              "action": "修改防御 (Edit Defense)"
+            },
+            {
+              "key": "Shift+F6",
+              "action": "修改耐力恢复速率 (Edit Stamina Recovery Rate)"
+            },
+            {
+              "key": "Shift+F8",
+              "action": "提高暴击伤害 (Increase Critical Hit Damage)"
+            },
+            {
+              "key": "Shift+F9",
+              "action": "修改伤害加成 (Edit Damage Bonus)"
+            },
+            {
+              "key": "Shift+F10",
+              "action": "修改伤害减免 (Edit Damage Reduction)"
+            },
+            {
+              "key": "Ctrl+F3",
+              "action": "Edit Poison Resistance"
             }
           ]
         },
         {
-          "category": "💰 灵蕴与养成 (Economy & Upgrades)",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
-              "key": "Ctrl+Num 1",
-              "action": "增加 100,000 灵蕴货币 (Add 100,000 Will)"
+              "key": "Alt+Num 2",
+              "action": "修改点选物品数量 (Edit Clicked Item Amount)"
+            }
+          ]
+        },
+        {
+          "category": "📈 等级与属性 (Level & Stats)",
+          "items": [
+            {
+              "key": "Num /",
+              "action": "免疫负面状态 (Prevent Negative Status)"
             },
             {
-              "key": "Ctrl+Num 2",
-              "action": "增加 50 点灵光技能点 (Add 50 Spark Points)"
+              "key": "Ctrl+Num *",
+              "action": "经验倍率 (Exp Multiplier)"
             },
             {
-              "key": "Ctrl+Num 3",
-              "action": "珍玩与材料掉落率 100% (100% Drop Rate)"
+              "key": "Ctrl+Num +",
+              "action": "修改遗物点 (Edit Relic Points)"
             },
             {
-              "key": "Ctrl+Num 4",
-              "action": "葫芦无限回血饮酒次数 (Infinite Gourd Drinks)"
+              "key": "Alt+Num 3",
+              "action": "提高经验 (Increase Exp)"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "Ctrl+Num 5",
+              "action": "设置游戏速度 (Set Game Speed)"
+            },
+            {
+              "key": "Alt+Num 5",
+              "action": "设置玩家速度 (Set Player Speed)"
+            },
+            {
+              "key": "Alt+Num 6",
+              "action": "设置移动速度 (Set Movement Speed)"
+            },
+            {
+              "key": "Alt+Num 7",
+              "action": "设置跳跃高度 (Set Jump Height)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 6",
+              "action": "葫芦无限使用 (Infinite Gourd Usage)"
+            },
+            {
+              "key": "Num 9",
+              "action": "变身无限持续 (Infinite Transform Duration)"
+            },
+            {
+              "key": "Num +",
+              "action": "暴击率满值 (Max Critical Hit Chance)"
+            },
+            {
+              "key": "Num –",
+              "action": "韧性满值 (Max Poise)"
+            },
+            {
+              "key": "Ctrl+Num /",
+              "action": "Will Multiplier"
+            },
+            {
+              "key": "Ctrl+Num –",
+              "action": "100% 掉落率 (100% Drop Rate)"
+            },
+            {
+              "key": "Alt+Num 1",
+              "action": "Edit Will"
+            },
+            {
+              "key": "Alt+Num 4",
+              "action": "Edit Sparks"
+            },
+            {
+              "key": "Shift+F4",
+              "action": "修改攻击力 (Edit Attack)"
+            },
+            {
+              "key": "Shift+F7",
+              "action": "修改暴击率 (Edit Critical Hit Chance)"
+            },
+            {
+              "key": "Ctrl+F1",
+              "action": "Edit Chill Resistance"
+            },
+            {
+              "key": "Ctrl+F2",
+              "action": "Edit Burn Resistance"
+            },
+            {
+              "key": "Ctrl+F4",
+              "action": "Edit Shock Resistance"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "v1.0.10.15610 (Steam最新补丁实测)",
     "radarSecretCode": "老L单机888",
@@ -3198,6 +3515,13 @@ window.GAMES_DATA = [
       "de": "The Witcher 3: Wild Hunt - Complete Edition (Next-Gen)",
       "es": "The Witcher 3: Wild Hunt - Edición Completa (Next-Gen)"
     },
+    "aliases": [
+      "巫师3",
+      "巫师",
+      "白狼",
+      "witcher",
+      "witcher3"
+    ],
     "developer": "CD PROJEKT RED",
     "releaseYear": 2015,
     "genre": "Open World RPG",
@@ -3286,19 +3610,35 @@ window.GAMES_DATA = [
     "trainerHotkeys": [
       {
         "key": "Num 1",
-        "action": "Infinite Health"
+        "action": "Infinite Health (无限生命)"
       },
       {
         "key": "Num 2",
-        "action": "Infinite Stamina"
+        "action": "Infinite Stamina (无限耐力)"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Adrenaline"
+        "action": "Infinite Adrenaline (无限肾上腺素)"
+      },
+      {
+        "key": "Num 4",
+        "action": "Zero Toxicity (零毒性)"
       },
       {
         "key": "Num 5",
-        "action": "Zero Toxicity (无毒性)"
+        "action": "Infinite Oxygen (无限氧气)"
+      },
+      {
+        "key": "Num 6",
+        "action": "Infinite Horse Stamina (无限马匹耐力)"
+      },
+      {
+        "key": "Num 7",
+        "action": "Minimize Horse Fear Level"
+      },
+      {
+        "key": "Num 8",
+        "action": "Drain Enemies Stamina (清空敌人耐力)"
       }
     ],
     "nexusStats": {
@@ -5402,82 +5742,141 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/292030/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "Next-Gen v4.04 (次世代官方最新版本全功能修改器)",
       "officialUrl": "https://flingtrainer.com/trainer/the-witcher-3-wild-hunt-trainer/",
-      "cleanMirrorUrl": "https://github.com/l-mod-vault/mirrors/releases/download/witcher3/The_Witcher_3_v4.04_Plus_19_Trainer.zip",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "D41D8CD98F00B204E9800998ECF8427E (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / GOG 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "version": "v1.0-v4.04+",
+      "optionsCount": 22,
+      "lastUpdated": "2024-05-22",
+      "platforms": [],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 战斗与生命 (Combat & Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "杰洛特无限生命 (Infinite Health)"
+              "action": "无限生命 (Infinite Health)"
             },
             {
               "key": "Num 2",
-              "action": "无限活力/耐力 (Infinite Stamina)"
+              "action": "无限耐力 (Infinite Stamina)"
             },
             {
               "key": "Num 3",
-              "action": "肾上腺素瞬间全满 (Max Adrenaline)"
-            },
-            {
-              "key": "Num 4",
-              "action": "毒素毒性槽清零 (Zero Toxicity)"
+              "action": "无限肾上腺素 (Infinite Adrenaline)"
             },
             {
               "key": "Num 5",
-              "action": "无限氧气水下潜水 (Infinite Oxygen)"
+              "action": "无限氧气 (Infinite Oxygen)"
             },
             {
               "key": "Num 6",
-              "action": "武器与装备永不磨损 (Indestructible Equipment)"
+              "action": "无限马匹耐力 (Infinite Horse Stamina)"
+            },
+            {
+              "key": "Num 8",
+              "action": "清空敌人耐力 (Drain Enemies Stamina)"
+            },
+            {
+              "key": "Num 9",
+              "action": "敌人无法攻击 (Enemies Can’t Attack)"
             },
             {
               "key": "Num 0",
               "action": "一击必杀 (One Hit Kill)"
+            },
+            {
+              "key": "Ctrl+Num 4",
+              "action": "无限技能点 (Infinite Skill Points)"
+            },
+            {
+              "key": "Ctrl+Num 5",
+              "action": "无限装备耐久 (Infinite Equipment Durability)"
             }
           ]
         },
         {
-          "category": "💰 财富、技能与负重 (Economy, Skills & Inventory)",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
               "key": "Ctrl+Num 1",
-              "action": "增加 100,000 克朗金币 (Add 100,000 Money)"
+              "action": "无限金币 (Infinite Gold)"
             },
             {
               "key": "Ctrl+Num 2",
-              "action": "物品材料与炸弹不减 (Infinite Items & Bombs)"
+              "action": "物品不减少 (Items Won’t Decrease)"
+            },
+            {
+              "key": "Ctrl+Num 6",
+              "action": "零重量 (Zero Weight)"
+            }
+          ]
+        },
+        {
+          "category": "📈 等级与属性 (Level & Stats)",
+          "items": [
+            {
+              "key": "Num 7",
+              "action": "Minimize Horse Fear Level"
             },
             {
               "key": "Ctrl+Num 3",
-              "action": "增加 10 点能力点 (Add 10 Ability Points)"
+              "action": "增加 1000 经验 (Add 1000 Exp)"
             },
             {
-              "key": "Ctrl+Num 4",
-              "action": "负重上限永久锁定 9999 (Infinite Weight Limit)"
+              "key": "PageUp",
+              "action": "传送到标记点 (Teleport To Waypoint Location)"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "Ctrl+Num 8",
+              "action": "超级速度 (Super Speed)"
             },
             {
-              "key": "Ctrl+Num 5",
-              "action": "昆特牌对决必定获胜 (Always Win Gwent)"
+              "key": "Num .",
+              "action": "保存坐标 (Save Location)"
+            },
+            {
+              "key": "Num +",
+              "action": "传送到保存坐标 (Teleport To Saved Location)"
+            },
+            {
+              "key": "Num –",
+              "action": "撤销传送 (Undo Teleportation)"
+            },
+            {
+              "key": "Ctrl+Num +",
+              "action": "时间 +1 小时 (Daytime +1 Hour)"
+            },
+            {
+              "key": "Ctrl+Num –",
+              "action": "时间 -1 小时 (Daytime -1 Hour)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 4",
+              "action": "零毒性 (Zero Toxicity)"
+            },
+            {
+              "key": "Ctrl+Num 7",
+              "action": "无限药水和炸弹 (Infinite Potions & Bombs)"
+            },
+            {
+              "key": "Ctrl+Num 9",
+              "action": "慢动作 (Slow Motion)"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "latestPatch": "v4.04 (次世代版 / 完全版 - 官方 REDkit & 工坊支持)",
     "verifiedPatch": "v4.04 (次世代版 / 完全版 - REDkit官方支持)",
@@ -5578,6 +5977,12 @@ window.GAMES_DATA = [
       "de": "Baldur's Gate 3",
       "es": "Baldur's Gate 3"
     },
+    "aliases": [
+      "博德之门3",
+      "博德之门",
+      "博德3",
+      "bg3"
+    ],
     "developer": "Larian Studios",
     "releaseYear": 2023,
     "genre": "CRPG / Turn-Based Tactics",
@@ -5665,16 +6070,36 @@ window.GAMES_DATA = [
     "hasTrainer": true,
     "trainerHotkeys": [
       {
-        "key": "Num 1",
-        "action": "Infinite Health"
+        "key": "Ctrl+Num 1",
+        "action": "God Mode (无敌模式)"
       },
       {
-        "key": "Num 2",
-        "action": "Infinite Spell Slots"
+        "key": "Ctrl+Num 2",
+        "action": "Infinite Movement/Actions/Spell Slots/…"
       },
       {
-        "key": "Num 3",
-        "action": "Infinite Action Points"
+        "key": "Ctrl+Num 3",
+        "action": "Items/Gold Won’t Decrease (物品/金币不减少)"
+      },
+      {
+        "key": "Ctrl+Num 4",
+        "action": "Ignore Weight/No Overburden (无视负重/不会超重)"
+      },
+      {
+        "key": "Ctrl+Num 5",
+        "action": "Infinite Exp (无限经验)"
+      },
+      {
+        "key": "Ctrl+Num 6",
+        "action": "Exp Multiplier (经验倍率)"
+      },
+      {
+        "key": "Ctrl+Num 7",
+        "action": "Set Game Speed (设置游戏速度)"
+      },
+      {
+        "key": "Ctrl+Num 9",
+        "action": "Minimum Roll Dice Target/Always Succeed"
       }
     ],
     "nexusStats": {
@@ -6727,70 +7152,125 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1086940/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "Patch 7 (官方内置模组管理器更新专版)",
       "officialUrl": "https://flingtrainer.com/trainer/baldurs-gate-3-trainer/",
-      "cleanMirrorUrl": "https://github.com/l-mod-vault/mirrors/releases/download/bg3/Baldurs_Gate_3_v4.1.1_Plus_32_Trainer.zip",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / GOG 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "version": "v4.1.1",
+      "optionsCount": 21,
+      "lastUpdated": "2025-04-16",
+      "platforms": [],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 战斗与法术位 (Combat & Spells)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
-              "key": "Num 1",
-              "action": "无限生命 (Infinite Health)"
-            },
-            {
-              "key": "Num 2",
-              "action": "无限行动点/动作/附赠动作 (Infinite Actions)"
-            },
-            {
-              "key": "Num 3",
-              "action": "无限法术位与法力环位 (Infinite Spell Slots)"
-            },
-            {
-              "key": "Num 4",
-              "action": "极速施法无需长休 (Instant Cast & Rest)"
-            },
-            {
-              "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
+              "key": "Ctrl+Num 1",
+              "action": "无敌模式 (God Mode)"
             }
           ]
         },
         {
-          "category": "🎲 骰子与养成 (Dice & Progression)",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
-              "key": "Ctrl+Num 1",
-              "action": "投骰子必出 20 大成功 (D20 Always Natural 20)"
-            },
-            {
-              "key": "Ctrl+Num 2",
-              "action": "增加 100,000 金币 (Add 100,000 Gold)"
-            },
-            {
               "key": "Ctrl+Num 3",
-              "action": "无限夺心魔幼虫标本 (Infinite Illithid Parasites)"
+              "action": "物品/金币不减少 (Items/Gold Won’t Decrease)"
             },
             {
               "key": "Ctrl+Num 4",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
+              "action": "无视负重/不会超重 (Ignore Weight/No Overburden)"
+            }
+          ]
+        },
+        {
+          "category": "📈 等级与属性 (Level & Stats)",
+          "items": [
+            {
+              "key": "Ctrl+Num 5",
+              "action": "无限经验 (Infinite Exp)"
+            },
+            {
+              "key": "Ctrl+Num 6",
+              "action": "经验倍率 (Exp Multiplier)"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "Ctrl+Num 7",
+              "action": "设置游戏速度 (Set Game Speed)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Ctrl+Num 2",
+              "action": "Infinite Movement/Actions/Spell Slots/…"
+            },
+            {
+              "key": "Ctrl+Num 9",
+              "action": "Minimum Roll Dice Target/Always Succeed"
+            },
+            {
+              "key": "Ctrl+Num 0",
+              "action": "同伴好感满值 (Max Companions Approval)"
+            },
+            {
+              "key": "Alt+Num 1",
+              "action": "力量 (Strength)"
+            },
+            {
+              "key": "Alt+Num 2",
+              "action": "敏捷 (Dexterity)"
+            },
+            {
+              "key": "Alt+Num 3",
+              "action": "体质 (Constitution)"
+            },
+            {
+              "key": "Alt+Num 4",
+              "action": "智力 (Intelligence)"
+            },
+            {
+              "key": "Alt+Num 5",
+              "action": "感知 (Wisdom)"
+            },
+            {
+              "key": "Alt+Num 6",
+              "action": "魅力 (Charisma)"
+            },
+            {
+              "key": "Alt+Num 7",
+              "action": "力量 (Strength)"
+            },
+            {
+              "key": "Alt+Num 8",
+              "action": "敏捷 (Dexterity)"
+            },
+            {
+              "key": "Alt+Num 9",
+              "action": "体质 (Constitution)"
+            },
+            {
+              "key": "Alt+Num 0",
+              "action": "智力 (Intelligence)"
+            },
+            {
+              "key": "Alt+Num .",
+              "action": "感知 (Wisdom)"
+            },
+            {
+              "key": "Alt+Num +",
+              "action": "魅力 (Charisma)"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "latestPatch": "Patch 7 (官方内置模组管理器与全新邪恶结局更新)",
     "verifiedPatch": "Patch 7 (官方MOD管理器全面兼容)",
@@ -6890,6 +7370,16 @@ window.GAMES_DATA = [
       "de": "Elden Ring",
       "es": "Elden Ring"
     },
+    "aliases": [
+      "老头环",
+      "法环",
+      "艾尔登",
+      "艾尔登法环",
+      "黄金树",
+      "黄金树幽影",
+      "elden",
+      "eldenring"
+    ],
     "developer": "FromSoftware",
     "releaseYear": 2022,
     "genre": "Action RPG / Open World Soulslike",
@@ -6931,23 +7421,35 @@ window.GAMES_DATA = [
     "trainerHotkeys": [
       {
         "key": "Num 1",
-        "action": "Infinite Health"
+        "action": "God Mode/Ignore Hits (无敌模式/无视攻击)"
       },
       {
         "key": "Num 2",
-        "action": "Infinite FP"
+        "action": "Infinite HP (无限生命)"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Stamina"
+        "action": "Infinite FP (无限专注值 (FP))"
       },
       {
         "key": "Num 4",
-        "action": "100% Drop Rate (百分百掉宝)"
+        "action": "Infinite Stamina (无限耐力)"
       },
       {
-        "key": "Num 0",
-        "action": "Infinite Runes (无限卢恩)"
+        "key": "Num 5",
+        "action": "Zero Weight (零重量)"
+      },
+      {
+        "key": "Num 6",
+        "action": "Infinite Item Usage (物品无限使用)"
+      },
+      {
+        "key": "Num 7",
+        "action": "100% Drop Rate (100% 掉落率)"
+      },
+      {
+        "key": "Num 8",
+        "action": "Stealth Mode (隐身模式)"
       }
     ],
     "nexusStats": {
@@ -7608,28 +8110,20 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1245620/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "v1.14+ (Shadow of the Erdtree DLC 对齐)",
-      "officialUrl": "https://flingtrainer.com/trainer/elden-ring-trainer/",
-      "cleanMirrorUrl": "https://github.com/l-mod-vault/mirrors/releases/download/v1.14/Elden_Ring_v1.14_Plus_34_Trainer.zip",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (零误报极客纯净版)",
-        "md5CheckSum": "8f4a1c7e9b0d2e3f5a6b7c8d9e0f1a2b",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionProcess 'Elden Ring Trainer.exe'",
-        "troubleshootSteps": [
-          "必须先通过 launchmod_eldenring.bat 或 EAC 离线替换引导启动游戏，进入主菜单后再运行修改器",
-          "若 Windows Defender 拦截报毒，请以管理员身份运行上方 PowerShell 白名单命令",
-          "关闭游戏后若需重返线上联机，务必删除作弊非法生成的越级强化道具与测试装备"
-        ]
-      },
+      "officialUrl": "https://flingtrainer.com/trainer/elden-ring-shadow-of-the-erdtree-trainer-1768067282/",
+      "version": "v1.02-v1.16.*+",
+      "optionsCount": 35,
+      "lastUpdated": "2026-01-02",
+      "platforms": [],
+      "antiCheat": true,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "🛡️ 核心生存与战斗无敌",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "无敌模式 (God Mode / 免受一切伤害与异常状态)"
+              "action": "无敌模式/无视攻击 (God Mode/Ignore Hits)"
             },
             {
               "key": "Num 2",
@@ -7637,64 +8131,160 @@ window.GAMES_DATA = [
             },
             {
               "key": "Num 3",
-              "action": "无限专注值/法力 (Infinite FP - 战技与魔法无限释放)"
+              "action": "无限专注值 (FP) (Infinite FP)"
             },
             {
               "key": "Num 4",
-              "action": "无限精力/耐力 (Infinite Stamina - 翻滚冲刺不减)"
-            },
-            {
-              "key": "Num 5",
-              "action": "零重量 (Zero Weight - 随时处于轻盈翻滚状态)"
-            },
-            {
-              "key": "Num 6",
-              "action": "装备耐久度不减 (Weapon Durability)"
-            },
-            {
-              "key": "Num 7",
-              "action": "100% 掉落率 (100% Item Drop Rate)"
+              "action": "无限耐力 (Infinite Stamina)"
             },
             {
               "key": "Num 8",
-              "action": "幽影树庇护点数不减 (Shadow Realm Blessing Edit)"
+              "action": "隐身模式 (Stealth Mode)"
+            },
+            {
+              "key": "Num 0",
+              "action": "超级伤害/一击必杀 (Super Damage/One Hit Kill)"
+            },
+            {
+              "key": "Num .",
+              "action": "伤害倍率 (Damage Multiplier)"
+            },
+            {
+              "key": "Num +",
+              "action": "防御倍率 (Defense Multiplier)"
+            },
+            {
+              "key": "Num /",
+              "action": "无限马匹生命 (Infinite Horse HP)"
+            },
+            {
+              "key": "Ctrl+Num 0",
+              "action": "冻结敌人位置 (Freeze Enemies Position)"
+            },
+            {
+              "key": "Alt+Num 0",
+              "action": "修改最大生命 (Edit Max HP)"
+            },
+            {
+              "key": "Alt+Num .",
+              "action": "修改最大专注值 (FP) (Edit Max FP)"
+            },
+            {
+              "key": "Alt+Num +",
+              "action": "修改最大耐力 (Edit Max Stamina)"
             }
           ]
         },
         {
-          "category": "⚡ 战斗伤害与攻防调校",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
-              "key": "Num 9",
-              "action": "一击削韧倒地 (Super Stance Damage / 处决破韧)"
+              "key": "Num 5",
+              "action": "零重量 (Zero Weight)"
             },
             {
-              "key": "Num 0",
-              "action": "超级伤害/一击必杀 (One Hit Kill)"
-            },
-            {
-              "key": "Num .",
-              "action": "绝对防御免伤 (Defense Multiplier)"
+              "key": "Num 6",
+              "action": "物品无限使用 (Infinite Item Usage)"
             },
             {
               "key": "Ctrl+Num 1",
-              "action": "编辑持有的卢恩货币 (Edit Runes Amount)"
+              "action": "修改卢恩 (Edit Runes)"
             },
             {
               "key": "Ctrl+Num 2",
-              "action": "死亡不掉落卢恩 (Runes Won't Drop on Death)"
+              "action": "卢恩倍率 (Runes Multiplier)"
             },
             {
               "key": "Ctrl+Num 3",
-              "action": "游戏全局慢动作 0.3x 识破 (Slomo 0.3x Reflex)"
+              "action": "死亡不掉卢恩 (Won’t Lose Runes When Player Dies)"
+            }
+          ]
+        },
+        {
+          "category": "📈 等级与属性 (Level & Stats)",
+          "items": [
+            {
+              "key": "Num 9",
+              "action": "免疫所有负面状态 (Immune To All Negative Status)"
             },
             {
+              "key": "Alt+Num 1",
+              "action": "修改等级 (Edit Level)"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
               "key": "Ctrl+Num 4",
-              "action": "游戏全局超速奔跑 1.5x (Super Speed Exploration)"
+              "action": "冻结时间 (Freeze Daytime)"
+            },
+            {
+              "key": "Ctrl+Num 5",
+              "action": "时间 +1 小时 (Daytime +1 Hour)"
+            },
+            {
+              "key": "Ctrl+Num 6",
+              "action": "设置游戏速度 (Set Game Speed)"
+            },
+            {
+              "key": "Ctrl+Num 7",
+              "action": "开启飞行模式 (Enable Fly Mode)"
+            },
+            {
+              "key": "Ctrl+Num 8",
+              "action": "向上飞 (Fly Up)"
+            },
+            {
+              "key": "Ctrl+Num 9",
+              "action": "向下飞 (Fly Down)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 7",
+              "action": "100% 掉落率 (100% Drop Rate)"
+            },
+            {
+              "key": "Alt+Num 2",
+              "action": "修改生命力 (Edit Vigor)"
+            },
+            {
+              "key": "Alt+Num 3",
+              "action": "修改集中力 (Edit Mind)"
+            },
+            {
+              "key": "Alt+Num 4",
+              "action": "修改耐力 (Edit Endurance)"
+            },
+            {
+              "key": "Alt+Num 5",
+              "action": "修改力量 (Edit Strength)"
+            },
+            {
+              "key": "Alt+Num 6",
+              "action": "修改敏捷 (Edit Dexterity)"
+            },
+            {
+              "key": "Alt+Num 7",
+              "action": "修改智力 (Edit Intelligence)"
+            },
+            {
+              "key": "Alt+Num 8",
+              "action": "修改信仰 (Edit Faith)"
+            },
+            {
+              "key": "Alt+Num 9",
+              "action": "修改感应 (Edit Arcane)"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "v1.14 (黄金树幽影DLC完全对齐)",
     "radarSecretCode": "法环",
@@ -7779,6 +8369,15 @@ window.GAMES_DATA = [
       "de": "The Elder Scrolls V: Skyrim SE",
       "es": "The Elder Scrolls V: Skyrim SE"
     },
+    "aliases": [
+      "老滚5",
+      "老滚",
+      "天际",
+      "天际重制版",
+      "上古卷轴",
+      "上古卷轴5",
+      "skyrim"
+    ],
     "developer": "Bethesda Game Studios",
     "releaseYear": 2016,
     "genre": "Open World RPG",
@@ -7821,15 +8420,35 @@ window.GAMES_DATA = [
     "trainerHotkeys": [
       {
         "key": "Num 1",
-        "action": "Infinite Health"
+        "action": "Infinite HP (无限生命)"
       },
       {
         "key": "Num 2",
-        "action": "Infinite Magicka"
+        "action": "Infinite MP (无限魔法值 (MP))"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Carry Weight"
+        "action": "Infinite Stamina (无限耐力)"
+      },
+      {
+        "key": "Num 4",
+        "action": "Edit Gold (修改金币)"
+      },
+      {
+        "key": "Num 5",
+        "action": "Edit Perk Points (修改天赋点)"
+      },
+      {
+        "key": "Num 6",
+        "action": "Zero Weight (零重量)"
+      },
+      {
+        "key": "Num 7",
+        "action": "Set Game Speed (设置游戏速度)"
+      },
+      {
+        "key": "Num 8",
+        "action": "Set Jump Height (设置跳跃高度)"
       }
     ],
     "nexusStats": {
@@ -8481,77 +9100,76 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/489830/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "v1.6.1170+ / AE & SE 完全兼容",
       "officialUrl": "https://flingtrainer.com/trainer/the-elder-scrolls-v-skyrim-special-edition-trainer/",
-      "cleanMirrorUrl": "https://github.com/l-mod-vault/mirrors/releases/download/v1.6.1170/The_Elder_Scrolls_V_Skyrim_SE_Trainer.zip",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (零误报纯净离线版)",
-        "md5CheckSum": "4b7c2a1d9e8f0a3b5c6d7e8f9a0b1c2d",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionProcess 'Skyrim Special Edition Trainer.exe'",
-        "troubleshootSteps": [
-          "单机运行无需离线绕过，若安装了 SSE Engine Fixes，在运行修改器前直接启动 skse64_loader.exe 即可正常享受热键注入",
-          "若 Windows Defender 拦截，以管理员运行上方 PowerShell 白名单命令",
-          "使用控制台配合修改器时建议先按 ~ 暂停游戏再激活对应热键"
-        ]
-      },
+      "version": "v1.0-v20231205+",
+      "optionsCount": 10,
+      "lastUpdated": "2023-12-05",
+      "platforms": [],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "👑 核心上帝模式与生存",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "无敌模式 (God Mode)"
+              "action": "无限生命 (Infinite HP)"
             },
             {
               "key": "Num 2",
-              "action": "无限生命 (Infinite Health)"
+              "action": "无限魔法值 (MP) (Infinite MP)"
             },
             {
               "key": "Num 3",
-              "action": "无限魔法 (Infinite Magicka)"
-            },
-            {
-              "key": "Num 4",
               "action": "无限耐力 (Infinite Stamina)"
             },
             {
-              "key": "Num 5",
-              "action": "龙吼零冷却 (Zero Shout Cooldown)"
+              "key": "Num 9",
+              "action": "无坠落伤害 (No Fall Damage)"
             },
             {
-              "key": "Num 6",
-              "action": "无限龙魂点数 (Infinite Dragon Souls)"
+              "key": "Num 0",
+              "action": "龙吼无冷却 (Dragon Shouts No Cooldown)"
             }
           ]
         },
         {
-          "category": "🛠️ 物品资源与游戏调节",
+          "category": "💰 资源与物品 (Resources & Items)",
+          "items": [
+            {
+              "key": "Num 4",
+              "action": "修改金币 (Edit Gold)"
+            },
+            {
+              "key": "Num 6",
+              "action": "零重量 (Zero Weight)"
+            }
+          ]
+        },
+        {
+          "category": "📈 等级与属性 (Level & Stats)",
+          "items": [
+            {
+              "key": "Num 5",
+              "action": "修改天赋点 (Edit Perk Points)"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
           "items": [
             {
               "key": "Num 7",
-              "action": "无限金币/背包负重清空 (Infinite Gold / Weight)"
+              "action": "设置游戏速度 (Set Game Speed)"
             },
             {
               "key": "Num 8",
-              "action": "一击必杀 (One Hit Kill)"
-            },
-            {
-              "key": "Num 9",
-              "action": "开锁器永不损坏 (Unbreakable Lockpicks)"
-            },
-            {
-              "key": "Ctrl+Num 1",
-              "action": "潜行绝对隐形 (Super Stealth)"
-            },
-            {
-              "key": "Ctrl+Num 2",
-              "action": "无限附魔充能 (Infinite Enchantment Charge)"
+              "action": "设置跳跃高度 (Set Jump Height)"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "v1.6.1170 (与 1.6.1130 AE 深度适配)",
     "radarSecretCode": "老滚5",
@@ -8646,6 +9264,12 @@ window.GAMES_DATA = [
       "de": "Fallout 4",
       "es": "Fallout 4"
     },
+    "aliases": [
+      "辐射4",
+      "辐射",
+      "fallout4",
+      "fallout"
+    ],
     "developer": "Bethesda Game Studios",
     "releaseYear": 2015,
     "genre": "Post-Apocalyptic Open World RPG",
@@ -8689,15 +9313,35 @@ window.GAMES_DATA = [
     "trainerHotkeys": [
       {
         "key": "Num 1",
-        "action": "Infinite Health"
+        "action": "God Mode (无敌模式)"
       },
       {
         "key": "Num 2",
-        "action": "Infinite Action Points (AP)"
+        "action": "Infinite HP (无限生命)"
       },
       {
         "key": "Num 3",
-        "action": "No Reload (免换弹)"
+        "action": "Infinite AP (无限行动点 (AP))"
+      },
+      {
+        "key": "Num 4",
+        "action": "Zero Radiation (零辐射)"
+      },
+      {
+        "key": "Num 5",
+        "action": "Infinite Ammo (无限弹药)"
+      },
+      {
+        "key": "Num 6",
+        "action": "No Reload (无需换弹)"
+      },
+      {
+        "key": "Num 7",
+        "action": "Super Accuracy (超级精准)"
+      },
+      {
+        "key": "Num 8",
+        "action": "No Recoil (无后坐力)"
       }
     ],
     "nexusStats": {
@@ -9371,24 +10015,16 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/377160/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "v1.10.984+ (次世代大更新完全兼容)",
-      "officialUrl": "https://flingtrainer.com/trainer/fallout-4-trainer/",
-      "cleanMirrorUrl": "https://github.com/l-mod-vault/mirrors/releases/download/v1.10.984/Fallout_4_v1.10.984_Plus_25_Trainer.zip",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (零误报纯净离线版)",
-        "md5CheckSum": "3a8c1f0d2e4b5c6a7b8c9d0e1f2a3b4c",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionProcess 'Fallout 4 Trainer.exe'",
-        "troubleshootSteps": [
-          "单机运行无任何反作弊封号风险，直接解压启动修改器与游戏即可畅快游玩",
-          "若 Windows Defender 拦截，请以管理员身份运行上方 PowerShell 白名单命令",
-          "使用控制台与修改器时建议先按 ~ 暂停游戏再激活对应热键"
-        ]
-      },
+      "officialUrl": "https://flingtrainer.com/trainer/fallout-4-trainer-1768067282/",
+      "version": "v1.0-v1.10.980+",
+      "optionsCount": 22,
+      "lastUpdated": "2024-04-29",
+      "platforms": [],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "👑 核心上帝模式与废土生存",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
@@ -9396,52 +10032,112 @@ window.GAMES_DATA = [
             },
             {
               "key": "Num 2",
-              "action": "无限生命 (Infinite Health)"
-            },
-            {
-              "key": "Num 3",
-              "action": "无限行动点数 AP (Infinite Action Points)"
-            },
-            {
-              "key": "Num 4",
-              "action": "辐射度归零 (Zero Radiation)"
+              "action": "无限生命 (Infinite HP)"
             },
             {
               "key": "Num 5",
-              "action": "无限弹药无需换弹 (Infinite Ammo & No Reload)"
+              "action": "无限弹药 (Infinite Ammo)"
             },
             {
               "key": "Num 6",
-              "action": "动力装甲核心能量无限 (Infinite Fusion Core Energy)"
+              "action": "无需换弹 (No Reload)"
+            },
+            {
+              "key": "Num 7",
+              "action": "超级精准 (Super Accuracy)"
+            },
+            {
+              "key": "Num 8",
+              "action": "无后坐力 (No Recoil)"
+            },
+            {
+              "key": "Num 9",
+              "action": "无限动力装甲核心能量 (Infinite Power Armor Core Power)"
+            },
+            {
+              "key": "Num +",
+              "action": "隐身模式 (Stealth Mode)"
             }
           ]
         },
         {
-          "category": "🏭 聚落建设与无限资源",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
-              "key": "Num 7",
-              "action": "无限瓶盖货币 (Infinite Caps)"
-            },
-            {
-              "key": "Num 8",
-              "action": "建造材料不减 (Infinite Settlement Crafting Materials)"
-            },
-            {
-              "key": "Num 9",
-              "action": "一击必杀 (One Hit Kill)"
-            },
-            {
               "key": "Ctrl+Num 1",
-              "action": "开锁绝对成功 (Instant Lockpick)"
+              "action": "物品不减少 (Items Won’t Decrease)"
             },
             {
               "key": "Ctrl+Num 2",
-              "action": "终端机黑客破解秒过 (Instant Terminal Hack)"
+              "action": "零重量 (Zero Weight)"
+            },
+            {
+              "key": "Ctrl+Num 4",
+              "action": "Minimum Building Requirement"
+            },
+            {
+              "key": "Ctrl+Num 5",
+              "action": "Infinite Building Size"
+            }
+          ]
+        },
+        {
+          "category": "📈 等级与属性 (Level & Stats)",
+          "items": [
+            {
+              "key": "Ctrl+Num 3",
+              "action": "天赋点不减少 (Perk Points Won’t Decrease)"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "Ctrl+Num 6",
+              "action": "设置游戏速度 (Set Game Speed)"
+            },
+            {
+              "key": "Ctrl+Num 7",
+              "action": "设置跳跃高度 (Set Jump Height)"
+            },
+            {
+              "key": "Ctrl+Num 0",
+              "action": "冻结时间 (Freeze Daytime)"
+            },
+            {
+              "key": "Ctrl+Num +",
+              "action": "时间 +1 小时 (Daytime +1 Hour)"
+            },
+            {
+              "key": "Ctrl+Num –",
+              "action": "时间 -1 小时 (Daytime -1 Hour)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 3",
+              "action": "无限行动点 (AP) (Infinite AP)"
+            },
+            {
+              "key": "Num 4",
+              "action": "零辐射 (Zero Radiation)"
+            },
+            {
+              "key": "Num 0",
+              "action": "无限骇入次数 (Infinite Hacking Attempts)"
+            },
+            {
+              "key": "Num .",
+              "action": "简易开锁 (Easy Lock Picking)"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "v1.10.984+ (次世代大更新双轨实测)",
     "radarSecretCode": "辐射4",
@@ -9530,6 +10226,11 @@ window.GAMES_DATA = [
       "de": "Palworld",
       "es": "Palworld"
     },
+    "aliases": [
+      "帕鲁",
+      "幻兽帕鲁",
+      "palworld"
+    ],
     "developer": "Pocketpair",
     "releaseYear": 2024,
     "genre": "Open World Survival Crafting",
@@ -9571,19 +10272,35 @@ window.GAMES_DATA = [
     "trainerHotkeys": [
       {
         "key": "Num 1",
-        "action": "Infinite Health"
+        "action": "God Mode/Ignore Hits (无敌模式/无视攻击)"
       },
       {
         "key": "Num 2",
-        "action": "Infinite Stamina"
+        "action": "Lock Health (锁定生命)"
       },
       {
         "key": "Num 3",
-        "action": "100% Catch Rate (百分百捕捉率)"
+        "action": "Infinite Shield (无限护盾)"
       },
       {
         "key": "Num 4",
-        "action": "Fast Egg Hatching (光速孵蛋)"
+        "action": "Max Food (食物满值)"
+      },
+      {
+        "key": "Num 5",
+        "action": "Infinite Stamina (无限耐力)"
+      },
+      {
+        "key": "Num 6",
+        "action": "Stealth Mode (隐身模式)"
+      },
+      {
+        "key": "Num 7",
+        "action": "Perfect Body Temperature (体温完美)"
+      },
+      {
+        "key": "Num 8",
+        "action": "100% Pal Capture Rate (100% 帕鲁捕获率)"
       }
     ],
     "nexusStats": {
@@ -10231,94 +10948,236 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1623730/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "v0.3.x+ (Sakurajima 樱岛版本完全对齐)",
       "officialUrl": "https://flingtrainer.com/trainer/palworld-trainer/",
-      "cleanMirrorUrl": "https://github.com/l-mod-vault/mirrors/releases/download/palworld/Palworld_v0.3_Plus_33_Trainer.zip",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (零误报极客纯净版)",
-        "md5CheckSum": "7c8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionProcess 'Palworld Trainer.exe'",
-        "troubleshootSteps": [
-          "必须在单人世界或自建离线房间中运行修改器，请勿在官方 VAC/反作弊服务器使用",
-          "若 Windows Defender 拦截，以管理员身份运行上方 PowerShell 白名单放行指令",
-          "建议先进入游戏加载完人物后，再按对应小键盘快捷键激活修改项目"
-        ]
-      },
+      "version": "v1.0+",
+      "optionsCount": 48,
+      "lastUpdated": "2026-07-10",
+      "platforms": [
+        "Steam",
+        "Xbox/Game Pass"
+      ],
+      "antiCheat": false,
+      "offlineOnly": true,
       "hotkeysCategorized": [
         {
-          "category": "🛡️ 核心生存与无敌状态",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "无敌模式 (God Mode / 锁血锁盾)"
+              "action": "无敌模式/无视攻击 (God Mode/Ignore Hits)"
             },
             {
               "key": "Num 2",
-              "action": "无限体力 (奔跑/攀爬/滑翔零耐力消耗)"
+              "action": "锁定生命 (Lock Health)"
             },
             {
               "key": "Num 3",
-              "action": "饱食度全满 (不再产生饥饿感)"
-            },
-            {
-              "key": "Num 4",
-              "action": "无限帕鲁体力与饱食度"
+              "action": "无限护盾 (Infinite Shield)"
             },
             {
               "key": "Num 5",
-              "action": "温度恒定舒适 (免疫炎热与严寒)"
-            }
-          ]
-        },
-        {
-          "category": "🎒 装备耐久与随身负重",
-          "items": [
+              "action": "无限耐力 (Infinite Stamina)"
+            },
             {
               "key": "Num 6",
-              "action": "无限武器装备耐久度 (永不损坏)"
+              "action": "隐身模式 (Stealth Mode)"
             },
             {
-              "key": "Num 7",
-              "action": "随身负重清零 (无限捡取矿石与建材)"
+              "key": "Num *",
+              "action": "超级伤害/一击必杀 (Super Damage/One Hit Kills)"
             },
             {
-              "key": "Num 8",
-              "action": "100% 帕鲁捕捉成功率 (哪怕普通球抓神兽)"
+              "key": "Num +",
+              "action": "伤害倍率 (Damage Multiplier)"
             },
             {
-              "key": "Num 9",
-              "action": "帕鲁球数量不减 (投掷不消耗)"
-            }
-          ]
-        },
-        {
-          "category": "⚡ 经验财富与时间流速",
-          "items": [
-            {
-              "key": "Ctrl+Num 1",
-              "action": "编辑玩家金钱金币 (999,999)"
-            },
-            {
-              "key": "Ctrl+Num 2",
-              "action": "无限古代科技点数与普通科技点"
-            },
-            {
-              "key": "Ctrl+Num 3",
-              "action": "瞬间孵蛋 (孵化器无需漫长等待)"
+              "key": "Num –",
+              "action": "防御倍率 (Defense Multiplier)"
             },
             {
               "key": "Ctrl+Num 4",
-              "action": "据点帕鲁 SAN 值全满锁定 (永不抑郁生病)"
+              "action": "无限装备耐久 (Infinite Equipment Durability)"
+            },
+            {
+              "key": "Alt+Num 1",
+              "action": "锁定生命 (Pal: Lock Health)"
+            },
+            {
+              "key": "Alt+Num 4",
+              "action": "无限耐力 (Pal: Infinite Stamina)"
+            },
+            {
+              "key": "Alt+Num 5",
+              "action": "技能瞬间冷却 (Pal: Instant Skill Cooldown)"
+            },
+            {
+              "key": "Alt+Num 6",
+              "action": "无限弹药/无需换弹 (Infinite Ammo/No Reload)"
+            },
+            {
+              "key": "Alt+Num 7",
+              "action": "武器瞬间冷却 (Instant Weapon Cooldown)"
+            },
+            {
+              "key": "Shift+F1",
+              "action": "修改最大生命 (Edit Max Health)"
+            },
+            {
+              "key": "Shift+F2",
+              "action": "Edit Max Shield"
+            },
+            {
+              "key": "Shift+F4",
+              "action": "修改最大耐力 (Edit Max Stamina)"
+            }
+          ]
+        },
+        {
+          "category": "💰 资源与物品 (Resources & Items)",
+          "items": [
+            {
+              "key": "Num 4",
+              "action": "食物满值 (Max Food)"
+            },
+            {
+              "key": "Num .",
+              "action": "掉落物品倍率 (Drop Item Multiplier)"
+            },
+            {
+              "key": "Ctrl+Num 1",
+              "action": "修改金钱 (Edit Money)"
+            },
+            {
+              "key": "Ctrl+Num 2",
+              "action": "修改物品数量 (Edit Items Amount)"
+            },
+            {
+              "key": "Ctrl+Num 3",
+              "action": "零重量 (Zero Weight)"
             },
             {
               "key": "Ctrl+Num 5",
-              "action": "自定移动速度与全局时间倍率 (0.5x~5.0x)"
+              "action": "食物不腐坏 (Food Won’t Spoil)"
+            },
+            {
+              "key": "Ctrl+Num 6",
+              "action": "无需制作材料 (No Crafting Material Requirements)"
+            },
+            {
+              "key": "Ctrl+Num 7",
+              "action": "无需建造材料 (No Building Material Requirements)"
+            },
+            {
+              "key": "Ctrl+Num 8",
+              "action": "快速制作与建造 (Fast Crafting & Building)"
+            },
+            {
+              "key": "Alt+Num 2",
+              "action": "食物满值 (Pal: Max Food)"
+            },
+            {
+              "key": "Shift+F3",
+              "action": "Edit Max Food"
+            },
+            {
+              "key": "Shift+F6",
+              "action": "Edit Max Weight"
+            }
+          ]
+        },
+        {
+          "category": "📈 等级与属性 (Level & Stats)",
+          "items": [
+            {
+              "key": "Alt+Num 8",
+              "action": "无限经验 (Infinite Exp)"
+            },
+            {
+              "key": "Alt+Num 9",
+              "action": "经验倍率 (Exp Multiplier)"
+            },
+            {
+              "key": "Alt+Num 0",
+              "action": "Edit Stat Points"
+            },
+            {
+              "key": "Alt+Num .",
+              "action": "Edit Technology Points"
+            },
+            {
+              "key": "Alt+Num +",
+              "action": "Edit Ancient Technology Points"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "Ctrl+Num 9",
+              "action": "冻结时间 (Freeze Daytime)"
+            },
+            {
+              "key": "Ctrl+Num 0",
+              "action": "时间流逝速度 (Time Pass Speed)"
+            },
+            {
+              "key": "Ctrl+Num.",
+              "action": "设置游戏速度 (Set Game Speed)"
+            },
+            {
+              "key": "Alt+Num –",
+              "action": "设置玩家速度 (Set Player Speed)"
+            },
+            {
+              "key": "Alt+Num /",
+              "action": "Set AI Speed"
+            },
+            {
+              "key": "Alt+Num *",
+              "action": "设置移动速度 (Set Movement Speed)"
+            },
+            {
+              "key": "Alt+Insert",
+              "action": "设置跳跃高度 (Set Jump Height)"
+            },
+            {
+              "key": "Alt+Delete",
+              "action": "无限跳跃 (Infinite Jumps)"
+            },
+            {
+              "key": "Shift+F5",
+              "action": "Edit Work Speed"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 7",
+              "action": "体温完美 (Perfect Body Temperature)"
+            },
+            {
+              "key": "Num 8",
+              "action": "100% 帕鲁捕获率 (100% Pal Capture Rate)"
+            },
+            {
+              "key": "Num 9",
+              "action": "100% 稀有帕鲁刷新率 (100% Rare Pal Spawn Rate)"
+            },
+            {
+              "key": "Num 0",
+              "action": "100% 掉落率 (100% Drop Rate)"
+            },
+            {
+              "key": "Alt+Num 3",
+              "action": "Pal: Max San"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "v0.3.x (樱岛版本完全对齐)",
     "radarSecretCode": "帕鲁",
@@ -10403,6 +11262,10 @@ window.GAMES_DATA = [
       "de": "Starfield",
       "es": "Starfield"
     },
+    "aliases": [
+      "星空",
+      "starfield"
+    ],
     "developer": "Bethesda Game Studios",
     "releaseYear": 2023,
     "genre": "Space Action RPG",
@@ -10444,15 +11307,35 @@ window.GAMES_DATA = [
     "trainerHotkeys": [
       {
         "key": "Num 1",
-        "action": "Infinite Health"
+        "action": "God Mode/Ignore Hits (无敌模式/无视攻击)"
       },
       {
         "key": "Num 2",
-        "action": "Infinite Oxygen"
+        "action": "Infinite Health (无限生命)"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Spaceship Hull/Shield"
+        "action": "Infinite Power (无限电力)"
+      },
+      {
+        "key": "Num 4",
+        "action": "Infinite Jetpack Boost"
+      },
+      {
+        "key": "Num 5",
+        "action": "Infinite Oxygen (无限氧气)"
+      },
+      {
+        "key": "Num 6",
+        "action": "Infinite Ammo (无限弹药)"
+      },
+      {
+        "key": "Num 7",
+        "action": "No Reload (无需换弹)"
+      },
+      {
+        "key": "Num 8",
+        "action": "Infinite Weapon Energy"
       }
     ],
     "nexusStats": {
@@ -11100,94 +11983,208 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1716740/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "v1.14+ (Shattered Space 破碎空间 DLC 完全对齐)",
       "officialUrl": "https://flingtrainer.com/trainer/starfield-trainer/",
-      "cleanMirrorUrl": "https://github.com/l-mod-vault/mirrors/releases/download/starfield/Starfield_v1.14_Plus_35_Trainer.zip",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (零误报极客纯净版)",
-        "md5CheckSum": "6a5b4c3d2e1f0a9b8c7d6e5f4a3b2c1d",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionProcess 'Starfield Trainer.exe'",
-        "troubleshootSteps": [
-          "B社单机无联机服务器，修改器 100% 安全离线使用",
-          "若 Windows Defender 拦截，以管理员身份运行上方 PowerShell 白名单放行指令",
-          "进入游戏主菜单或飞船驾驶舱后再激活修改器热键"
-        ]
-      },
+      "version": "v1.0-v1.16+",
+      "optionsCount": 41,
+      "lastUpdated": "2026-04-28",
+      "platforms": [
+        "Steam",
+        "Xbox/Game Pass"
+      ],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "🛡️ 角色生存与飞船绝对无敌",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "无敌模式 (God Mode / 锁血锁氧气)"
+              "action": "无敌模式/无视攻击 (God Mode/Ignore Hits)"
             },
             {
               "key": "Num 2",
-              "action": "无限喷气背包推力 (随心翱翔空中)"
-            },
-            {
-              "key": "Num 3",
-              "action": "无限武器弹药与零重新装填"
-            },
-            {
-              "key": "Num 4",
-              "action": "飞船护盾无限锁定 (抗击舰队围攻)"
+              "action": "无限生命 (Infinite Health)"
             },
             {
               "key": "Num 5",
-              "action": "飞船舰载武器无限能源与零过热"
-            }
-          ]
-        },
-        {
-          "category": "🎒 财富开锁与随身负重",
-          "items": [
+              "action": "无限氧气 (Infinite Oxygen)"
+            },
             {
               "key": "Num 6",
-              "action": "无限信用币金钱 (999,999,999)"
+              "action": "无限弹药 (Infinite Ammo)"
             },
             {
               "key": "Num 7",
-              "action": "无限数码撬棒 (Digipicks 开锁不减)"
+              "action": "无需换弹 (No Reload)"
             },
             {
               "key": "Num 8",
-              "action": "随身负重无限突破 (99,999 负重上限)"
+              "action": "Infinite Weapon Energy"
             },
             {
               "key": "Num 9",
-              "action": "100% 潜行隐蔽成功率 (不被卫兵发现)"
+              "action": "超级精准 (Super Accuracy)"
+            },
+            {
+              "key": "Num 0",
+              "action": "无后坐力 (No Recoil)"
+            },
+            {
+              "key": "Ctrl+Num 1",
+              "action": "一击必杀 (One Hit Kills)"
+            },
+            {
+              "key": "Ctrl+Num 2",
+              "action": "伤害倍率 (Damage Multiplier)"
+            },
+            {
+              "key": "Ctrl+Num 3",
+              "action": "防御倍率 (Defense Multiplier)"
+            },
+            {
+              "key": "Ctrl+Num 7",
+              "action": "无坠落伤害 (No Fall Damage)"
+            },
+            {
+              "key": "Ctrl+Num 8",
+              "action": "无限生命 (Spaceship: Infinite Health)"
+            },
+            {
+              "key": "Ctrl+Num 9",
+              "action": "无限护盾 (Spaceship: Infinite Shield)"
+            },
+            {
+              "key": "Ctrl+Num .",
+              "action": "Spaceship: Infinite Weapon Energy"
+            },
+            {
+              "key": "Ctrl+Num +",
+              "action": "Spaceship: One Hit Destroy Shield"
+            },
+            {
+              "key": "Alt+Num 6",
+              "action": "修改技能点 (Edit Skill Points)"
+            },
+            {
+              "key": "Alt+Num 7",
+              "action": "解锁全部技能 (Unlock All Skills)"
             }
           ]
         },
         {
-          "category": "🚀 飞船建造与研究制造",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
-              "key": "Ctrl+Num 1",
-              "action": "飞船建造部件免费 (无需花费信用币)"
+              "key": "Alt+Num 1",
+              "action": "修改信用点 (Edit Credits)"
             },
             {
-              "key": "Ctrl+Num 2",
-              "action": "哨站建造全材料免费"
+              "key": "Alt+Num 2",
+              "action": "物品不减少 (Items Don’t Decrease)"
             },
             {
-              "key": "Ctrl+Num 3",
-              "action": "全部实验室科研项目瞬间完成"
+              "key": "Alt+Num 3",
+              "action": "零重量 (Zero Weight)"
             },
+            {
+              "key": "Alt+Num .",
+              "action": "无需制作材料 (No Crafting Material Requirements)"
+            },
+            {
+              "key": "Alt+Num +",
+              "action": "Minimum Building Material Requirements"
+            }
+          ]
+        },
+        {
+          "category": "📈 等级与属性 (Level & Stats)",
+          "items": [
+            {
+              "key": "Alt+Num 4",
+              "action": "无限经验 (Infinite Exp)"
+            },
+            {
+              "key": "Alt+Num 5",
+              "action": "经验倍率 (Exp Multiplier)"
+            },
+            {
+              "key": "Alt+Num –",
+              "action": "Companion Affinity Always Go Up"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
             {
               "key": "Ctrl+Num 4",
-              "action": "最高星系快速跃迁距离 (无视重力引擎限制)"
+              "action": "设置游戏速度 (Set Game Speed)"
             },
             {
               "key": "Ctrl+Num 5",
-              "action": "超级移动速度与时间流速调节 (0.5x~5.0x)"
+              "action": "设置移动速度 (Set Movement Speed)"
+            },
+            {
+              "key": "Ctrl+Num 6",
+              "action": "设置跳跃高度 (Set Jump Height)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 3",
+              "action": "无限电力 (Infinite Power)"
+            },
+            {
+              "key": "Num 4",
+              "action": "Infinite Jetpack Boost"
+            },
+            {
+              "key": "Num .",
+              "action": "快速射击 (Rapid Fire)"
+            },
+            {
+              "key": "Num +",
+              "action": "All Guns Become Fully Automatic"
+            },
+            {
+              "key": "Num –",
+              "action": "100% 暴击率 (100% Critical Chance)"
+            },
+            {
+              "key": "PageUp",
+              "action": "Max Equipment Drop Rate"
+            },
+            {
+              "key": "PageDown",
+              "action": "Max Legendary Drop Rate"
+            },
+            {
+              "key": "Ctrl+Num 0",
+              "action": "无限加速 (Spaceship: Infinite Boost)"
+            },
+            {
+              "key": "Ctrl+Num –",
+              "action": "Spaceship: One Hit Destroy Hull"
+            },
+            {
+              "key": "Alt+Num 8",
+              "action": "100% Steal Chance"
+            },
+            {
+              "key": "Alt+Num 9",
+              "action": "Persuasion Always Succeed"
+            },
+            {
+              "key": "Alt+Num 0",
+              "action": "Easy Research"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "v1.14 (破碎空间DLC完全对齐)",
     "radarSecretCode": "星空",
@@ -11272,6 +12269,13 @@ window.GAMES_DATA = [
       "de": "Grand Theft Auto V",
       "es": "Grand Theft Auto V"
     },
+    "aliases": [
+      "gta5",
+      "gta",
+      "侠盗猎车手",
+      "侠盗猎车手5",
+      "洛圣都"
+    ],
     "developer": "Rockstar Games",
     "releaseYear": 2013,
     "genre": "Open World Action-Adventure",
@@ -11312,16 +12316,36 @@ window.GAMES_DATA = [
     "hasTrainer": true,
     "trainerHotkeys": [
       {
-        "key": "F4",
-        "action": "Open Native Trainer in-game"
+        "key": "Alt+Num 1",
+        "action": "Infinite Health (无限生命)"
       },
       {
-        "key": "Num 1",
-        "action": "Infinite Health"
+        "key": "Alt+Num 2",
+        "action": "Infinite Vehicle Health (无限载具生命)"
       },
       {
-        "key": "Num 2",
-        "action": "Infinite Ammo"
+        "key": "Alt+Num 3",
+        "action": "Stun Gun Instant Recharge"
+      },
+      {
+        "key": "Alt+Num 4",
+        "action": "Infinite Ammo/Grenades (无限弹药/手雷)"
+      },
+      {
+        "key": "Alt+Num 5",
+        "action": "No Reload (无需换弹)"
+      },
+      {
+        "key": "Alt+Num 6",
+        "action": "Infinite Stamina (无限耐力)"
+      },
+      {
+        "key": "Alt+Num 7",
+        "action": "Infinite Armor (无限护甲)"
+      },
+      {
+        "key": "Alt+Num 8",
+        "action": "Infinite Special Ability"
       }
     ],
     "nexusStats": {
@@ -11973,94 +12997,127 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/271590/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "v1.0.3179.0+ (最新故事模式完全对齐)",
-      "officialUrl": "https://flingtrainer.com/trainer/grand-theft-auto-v-trainer/",
-      "cleanMirrorUrl": "https://github.com/l-mod-vault/mirrors/releases/download/gta-v/Grand_Theft_Auto_V_v1.0.3179_Trainer.zip",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (零误报极客纯净版)",
-        "md5CheckSum": "5b4a3c2d1e0f9a8b7c6d5e4f3a2b1c0d",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionProcess 'Grand Theft Auto V Trainer.exe'",
-        "troubleshootSteps": [
-          "绝对仅限单人线下故事模式使用，切勿在官方线上战局中开启运行",
-          "若 Windows Defender 拦截，以管理员身份运行上方 PowerShell 白名单放行指令",
-          "进入游戏加载出麦克/富兰克林/崔佛人物后再切换出桌面启动修改器"
-        ]
-      },
+      "officialUrl": "https://flingtrainer.com/trainer/grand-theft-auto-v-trainer-1766066855/",
+      "version": "v1.0-v1.69+",
+      "optionsCount": 19,
+      "lastUpdated": "2024-09-19",
+      "platforms": [
+        "Steam"
+      ],
+      "antiCheat": true,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "🛡️ 角色生存与通缉度调控",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
-              "key": "Num 1",
-              "action": "无敌模式 (God Mode / 锁血锁护甲)"
+              "key": "Alt+Num 1",
+              "action": "无限生命 (Infinite Health)"
             },
             {
-              "key": "Num 2",
-              "action": "无限体力 (奔跑/游泳/潜水零衰减)"
+              "key": "Alt+Num 2",
+              "action": "无限载具生命 (Infinite Vehicle Health)"
             },
             {
-              "key": "Num 3",
-              "action": "无限特殊能力槽 (麦克子弹时间/小富驾驶/崔佛狂暴)"
+              "key": "Alt+Num 4",
+              "action": "无限弹药/手雷 (Infinite Ammo/Grenades)"
             },
             {
-              "key": "Num 4",
-              "action": "通缉星级清零 (警察立刻放弃追捕)"
+              "key": "Alt+Num 5",
+              "action": "无需换弹 (No Reload)"
             },
             {
-              "key": "Num 5",
-              "action": "锁定六星顶级通缉 (极限警察围剿大逃杀)"
+              "key": "Alt+Num 6",
+              "action": "无限耐力 (Infinite Stamina)"
+            },
+            {
+              "key": "Alt+Num 7",
+              "action": "无限护甲 (Infinite Armor)"
+            },
+            {
+              "key": "Alt+Num 9",
+              "action": "无限氧气 (Infinite Oxygen)"
             }
           ]
         },
         {
-          "category": "🔫 军火弹药与特种爆炸能力",
-          "items": [
-            {
-              "key": "Num 6",
-              "action": "无限弹药与免装弹 (打靶连射无需换弹匣)"
-            },
-            {
-              "key": "Num 7",
-              "action": "超级近战肉搏拳头 (一拳击飞路人与汽车)"
-            },
-            {
-              "key": "Num 8",
-              "action": "爆炸近战与燃烧子弹 (弹无虚发火海轰炸)"
-            },
-            {
-              "key": "Num 9",
-              "action": "超级跳跃与从天而降 (从万米高空滑翔俯冲)"
-            }
-          ]
-        },
-        {
-          "category": "🚗 载具极速改装与洛圣都天气",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
               "key": "Ctrl+Num 1",
-              "action": "载具无敌状态 (撞击永不损坏变型)"
+              "action": "修改金钱 (Edit Money)"
+            }
+          ]
+        },
+        {
+          "category": "📈 等级与属性 (Level & Stats)",
+          "items": [
+            {
+              "key": "Alt+Num 8",
+              "action": "Infinite Special Ability"
             },
             {
-              "key": "Ctrl+Num 2",
-              "action": "载具无限氮气加速 (随时瞬间飙车冲刺)"
-            },
-            {
-              "key": "Ctrl+Num 3",
-              "action": "编辑故事模式当前角色现金 (十亿美金)"
-            },
-            {
-              "key": "Ctrl+Num 4",
-              "action": "昼夜时间自由倒流与快进调节"
+              "key": "Alt+Num 0",
+              "action": "无通缉等级 (No Wanted Level)"
             },
             {
               "key": "Ctrl+Num 5",
-              "action": "随意切换洛圣都天气 (晴朗/雷暴/暴风雪)"
+              "action": "传送到标记点 (Teleport To Waypoint Location)"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "Alt+Num .",
+              "action": "冻结时间 (Freeze Daytime)"
+            },
+            {
+              "key": "Alt+Num +",
+              "action": "Set Daytime"
+            },
+            {
+              "key": "Alt+Num –",
+              "action": "Timer -10 (Countdown Timer +10) Seconds"
+            },
+            {
+              "key": "Ctrl+Num 2",
+              "action": "Change Weather"
+            },
+            {
+              "key": "Ctrl+Num 3",
+              "action": "超级速度 (Super Speed)"
+            },
+            {
+              "key": "Ctrl+Num .",
+              "action": "保存坐标 (Save Location)"
+            },
+            {
+              "key": "Ctrl+Num +",
+              "action": "传送 (Teleport)"
+            },
+            {
+              "key": "Ctrl+Num –",
+              "action": "Undo Teleport"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Alt+Num 3",
+              "action": "Stun Gun Instant Recharge"
+            },
+            {
+              "key": "Ctrl+Num 4",
+              "action": "慢动作 (Slow Motion)"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "v1.0.3179 (线上DLC完全对齐)",
     "radarSecretCode": "洛圣都",
@@ -12145,6 +13202,15 @@ window.GAMES_DATA = [
       "de": "Red Dead Redemption 2",
       "es": "Red Dead Redemption 2"
     },
+    "aliases": [
+      "大表哥2",
+      "大表哥",
+      "大镖客2",
+      "大镖客",
+      "荒野大镖客",
+      "荒野大镖客2",
+      "rdr2"
+    ],
     "developer": "Rockstar Games",
     "releaseYear": 2018,
     "genre": "Open World Western RPG",
@@ -12180,11 +13246,31 @@ window.GAMES_DATA = [
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Infinite Stamina (无限耐力)"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Infinite Dead Eye"
+      },
+      {
+        "key": "Num 4",
+        "action": "Infinite Horse Health (无限马匹生命)"
+      },
+      {
+        "key": "Num 5",
+        "action": "Infinite Horse Stamina (无限马匹耐力)"
+      },
+      {
+        "key": "Num 6",
+        "action": "Infinite Ammo (无限弹药)"
+      },
+      {
+        "key": "Num 7",
+        "action": "No Reload (无需换弹)"
+      },
+      {
+        "key": "Num 8",
+        "action": "Infinite Items (无限物品)"
       }
     ],
     "nexusStats": {
@@ -12705,94 +13791,84 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1174180/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "v1.0.1491.17+ (全离线故事模式对齐)",
       "officialUrl": "https://flingtrainer.com/trainer/red-dead-redemption-2-trainer/",
-      "cleanMirrorUrl": "https://github.com/l-mod-vault/mirrors/releases/download/rdr2/Red_Dead_Redemption_2_v1491_Plus_31_Trainer.zip",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (零误报极客纯净版)",
-        "md5CheckSum": "4a3b2c1d0e9f8a7b6c5d4e3f2a1b0c9d",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionProcess 'Red Dead Redemption 2 Trainer.exe'",
-        "troubleshootSteps": [
-          "绝对仅限线下单机故事模式使用，切勿在 RDO 线上战局使用",
-          "若 Windows Defender 拦截，以管理员身份运行上方 PowerShell 白名单放行指令",
-          "进入游戏主界面操作亚瑟骑马行动后，再按小键盘热键激活"
-        ]
-      },
+      "version": "v1.0-v1491.50+",
+      "optionsCount": 12,
+      "lastUpdated": "2024-03-20",
+      "platforms": [],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "🛡️ 亚瑟生存与死神之眼",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "亚瑟无敌模式 (God Mode / 锁血锁核心)"
+              "action": "无限生命 (Infinite Health)"
             },
             {
               "key": "Num 2",
-              "action": "无限体力 (疾跑/潜水/拉弓零疲劳)"
-            },
-            {
-              "key": "Num 3",
-              "action": "无限死神之眼 (Dead Eye 随时定格标点)"
+              "action": "无限耐力 (Infinite Stamina)"
             },
             {
               "key": "Num 4",
-              "action": "核心状态锁定全满 (生命/体力/死眼三核心不衰减)"
+              "action": "无限马匹生命 (Infinite Horse Health)"
             },
             {
               "key": "Num 5",
-              "action": "亚瑟温度适宜 (严寒雪山单衣不掉血)"
-            }
-          ]
-        },
-        {
-          "category": "🐎 爱马机能与随身背包",
-          "items": [
+              "action": "无限马匹耐力 (Infinite Horse Stamina)"
+            },
             {
               "key": "Num 6",
-              "action": "马匹无敌模式 (撞树/坠崖/遭野兽围攻不倒)"
+              "action": "无限弹药 (Infinite Ammo)"
             },
             {
               "key": "Num 7",
-              "action": "马匹无限体力与胆量 (面对灰熊巨鳄永不受惊甩下)"
+              "action": "无需换弹 (No Reload)"
             },
             {
-              "key": "Num 8",
-              "action": "无限枪械弹药与无需换弹匣"
-            },
-            {
-              "key": "Num 9",
-              "action": "枪械武器永不生锈磨损 (状态完美如新)"
+              "key": "Num 0",
+              "action": "隐身模式 (Stealth Mode)"
             }
           ]
         },
         {
-          "category": "💰 财富金条与西部时间",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
+              "key": "Num 8",
+              "action": "无限物品 (Infinite Items)"
+            },
+            {
               "key": "Ctrl+Num 1",
-              "action": "编辑亚瑟钱包现金 (直接增加 $10,000)"
+              "action": "设置金钱 (Set Money)"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "Num 9",
+              "action": "设置游戏速度 (Set Game Speed)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 3",
+              "action": "Infinite Dead Eye"
             },
             {
               "key": "Ctrl+Num 2",
-              "action": "通缉悬赏金清零 (警长立刻放弃追缉)"
-            },
-            {
-              "key": "Ctrl+Num 3",
-              "action": "锁定最高荣誉值 (圣人亚瑟救赎之道)"
-            },
-            {
-              "key": "Ctrl+Num 4",
-              "action": "100% 捕猎完美三星毛皮 (任何枪支射杀均保完美)"
-            },
-            {
-              "key": "Ctrl+Num 5",
-              "action": "时间昼夜流速调节与自由传送"
+              "action": "No Bounty"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "v1.0.1491 (完全对齐)",
     "radarSecretCode": "大表哥",
@@ -12877,6 +13953,12 @@ window.GAMES_DATA = [
       "de": "Monster Hunter: World",
       "es": "Monster Hunter: World"
     },
+    "aliases": [
+      "怪物猎人",
+      "怪猎世界",
+      "怪猎",
+      "mhw"
+    ],
     "developer": "Capcom",
     "releaseYear": 2018,
     "genre": "Action RPG",
@@ -12911,12 +13993,32 @@ window.GAMES_DATA = [
         "action": "Infinite Health (无限生命)"
       },
       {
+        "key": "Num –",
+        "action": "God Mode/Ignore Hits (无敌模式/无视攻击)"
+      },
+      {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Infinite Stamina (无限耐力)"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Max Sharpness"
+      },
+      {
+        "key": "Num 4",
+        "action": "Infinite Item Pouch Items"
+      },
+      {
+        "key": "Num 5",
+        "action": "Infinite Slinger Ammo"
+      },
+      {
+        "key": "Num 6",
+        "action": "Mantles No Cooldown"
+      },
+      {
+        "key": "Num 7",
+        "action": "Set Game Speed (设置游戏速度)"
       }
     ],
     "nexusStats": {
@@ -13435,94 +14537,309 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/582010/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "v15.11+ (Iceborne 冰原终极版本完全对齐)",
-      "officialUrl": "https://flingtrainer.com/trainer/monster-hunter-world-trainer/",
-      "cleanMirrorUrl": "https://github.com/l-mod-vault/mirrors/releases/download/mhw/Monster_Hunter_World_Iceborne_Plus_47_Trainer.zip",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (零误报极客纯净版)",
-        "md5CheckSum": "3b2a1c0d9e8f7a6b5c4d3e2f1a0b9c8d",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionProcess 'Monster Hunter World Trainer.exe'",
-        "troubleshootSteps": [
-          "冰原单人离线与好友私人房间均可正常使用，请勿在公开救援任务滥用一击必杀",
-          "若 Windows Defender 拦截，以管理员身份运行上方 PowerShell 白名单放行指令",
-          "进入月辰据点或接取任务营地后再开启修改功能"
-        ]
-      },
+      "officialUrl": "https://flingtrainer.com/trainer/monster-hunter-world-iceborne-trainer-1709484154/",
+      "version": "v20200109-v20231017+ Iceborne DLC",
+      "optionsCount": 67,
+      "lastUpdated": "2023-10-19",
+      "platforms": [],
+      "antiCheat": false,
+      "offlineOnly": true,
       "hotkeysCategorized": [
         {
-          "category": "🛡️ 猎人生存与武器斩味",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "猎人无敌锁血 (God Mode / 免受伤害)"
+              "action": "无限生命 (Infinite Health)"
+            },
+            {
+              "key": "Num –",
+              "action": "无敌模式/无视攻击 (God Mode/Ignore Hits)"
             },
             {
               "key": "Num 2",
-              "action": "无限耐力 (奔跑/蓄力/滑步零消耗)"
-            },
-            {
-              "key": "Num 3",
-              "action": "武器无限斩味 (紫斩白斩永不磨损掉斩)"
-            },
-            {
-              "key": "Num 4",
-              "action": "太刀红刃练气全满锁定 (随时释放登龙气刃斩)"
+              "action": "无限耐力 (Infinite Stamina)"
             },
             {
               "key": "Num 5",
-              "action": "盾斧红盾红剑超解瓶子无限锁定"
-            }
-          ]
-        },
-        {
-          "category": "🎒 装备珠子与客制素材",
-          "items": [
+              "action": "Infinite Slinger Ammo"
+            },
             {
               "key": "Num 6",
-              "action": "无限随身道具与弹药 (秘药/闪光弹无限用)"
+              "action": "Mantles No Cooldown"
             },
             {
-              "key": "Num 7",
-              "action": "100% 极品 4 级珠子掉落概率 (攻击珠II/达人珠II)"
+              "key": "Num 0",
+              "action": "一击必杀 (One Hit Kill)"
             },
             {
-              "key": "Num 8",
-              "action": "装备锻造与客制强化无需任何素材"
+              "key": "Ctrl+Num .",
+              "action": "Palico Gadgets No Cooldown"
             },
             {
-              "key": "Num 9",
-              "action": "武器防具强化等级直接拉至上限"
+              "key": "Ctrl+Num –",
+              "action": "隐身模式 (Stealth Mode)"
+            },
+            {
+              "key": "Ctrl+PageUp",
+              "action": "Show Monster Health (Lock On)"
+            },
+            {
+              "key": "Ctrl+F3",
+              "action": "伤害倍率 (Damage Multiplier)"
+            },
+            {
+              "key": "Ctrl+F11",
+              "action": "防御倍率 (Defense Multiplier)"
+            },
+            {
+              "key": "Alt+F11",
+              "action": "Max Decoration Skill Level"
+            },
+            {
+              "key": "Alt+F12",
+              "action": "Easy Unlock Armor Set Skill"
+            },
+            {
+              "key": "Alt+Num 6",
+              "action": "无需换弹 (Gunlance: No Reload)"
+            },
+            {
+              "key": "Alt+Num .",
+              "action": "无需换弹 (All Bowguns: No Reload)"
+            },
+            {
+              "key": "Alt+PageUp",
+              "action": "All Bowguns: Ignore Range (Best Damage)"
             }
           ]
         },
         {
-          "category": "🐉 聚魔之地与狩猎生态",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
-              "key": "Ctrl+Num 1",
-              "action": "聚魔之地全区域等级直接锁定 Lv7"
-            },
-            {
-              "key": "Ctrl+Num 2",
-              "action": "编辑调查点数与金钱金币 (99,999,999)"
-            },
-            {
-              "key": "Ctrl+Num 3",
-              "action": "怪物一击倒地断尾破坏 (部位破坏狂)"
+              "key": "Num 4",
+              "action": "Infinite Item Pouch Items"
             },
             {
               "key": "Ctrl+Num 4",
-              "action": "超高剥取次数 (单只古龙剥取 20 次)"
+              "action": "Edit Item Quantity (Item Box)"
             },
             {
               "key": "Ctrl+Num 5",
-              "action": "随从猫六大特殊装备全满级"
+              "action": "无需装备升级材料 (No Equipment Upgrade Requirement)"
+            },
+            {
+              "key": "Ctrl+F8",
+              "action": "Infinite Resource Gathering"
+            },
+            {
+              "key": "Alt+End",
+              "action": "All Weapons: Max Frostcraft"
+            }
+          ]
+        },
+        {
+          "category": "📈 等级与属性 (Level & Stats)",
+          "items": [
+            {
+              "key": "Ctrl+Num 2",
+              "action": "修改研究点 (Edit Research Points)"
+            },
+            {
+              "key": "Ctrl+Num 8",
+              "action": "Max Palico Level"
+            },
+            {
+              "key": "Ctrl+Num 0",
+              "action": "Max Tailraiders Level"
+            },
+            {
+              "key": "Ctrl+F1",
+              "action": "Research Point Multiplier"
+            },
+            {
+              "key": "Ctrl+F2",
+              "action": "Hunter Exp Multiplier"
+            },
+            {
+              "key": "Ctrl+F6",
+              "action": "Max Monster Research Level"
+            },
+            {
+              "key": "Ctrl+F10",
+              "action": "Master Exp Multiplier"
+            },
+            {
+              "key": "Alt+F5",
+              "action": "Max Guiding Lands Region Level"
+            },
+            {
+              "key": "Alt+F6",
+              "action": "Max Decoration Slots And Level"
+            },
+            {
+              "key": "Alt+Num 5",
+              "action": "Switch Axe: Amped State"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "Num 7",
+              "action": "设置游戏速度 (Set Game Speed)"
+            },
+            {
+              "key": "Ctrl+Num +",
+              "action": "Discover All Monsters On Map"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 3",
+              "action": "Max Sharpness"
+            },
+            {
+              "key": "Num 8",
+              "action": "One Hit Destroy Body Parts"
+            },
+            {
+              "key": "Num 9",
+              "action": "One Hit Wound (Easy Capture)"
+            },
+            {
+              "key": "Num .",
+              "action": "100% Critical Hit"
+            },
+            {
+              "key": "Num +",
+              "action": "Super Weapon Elemental Effects"
+            },
+            {
+              "key": "Ctrl+Num 1",
+              "action": "Edit Zenny"
+            },
+            {
+              "key": "Ctrl+Num 3",
+              "action": "Infinite Lucky Vouchers"
+            },
+            {
+              "key": "Ctrl+Num 6",
+              "action": "No Equipment Forge Requirement"
+            },
+            {
+              "key": "Ctrl+Num 7",
+              "action": "No Equipment Augmentation Requirement"
+            },
+            {
+              "key": "Ctrl+Num 9",
+              "action": "Max Palico Gadget Proficiency"
+            },
+            {
+              "key": "Ctrl+Home",
+              "action": "增益无限持续 (Infinite Buff Duration)"
+            },
+            {
+              "key": "Ctrl+Insert",
+              "action": "Edit Player’s Name"
+            },
+            {
+              "key": "Ctrl+Delete",
+              "action": "Edit Palico’s Name"
+            },
+            {
+              "key": "Alt+Insert",
+              "action": "Infinite Character Edit Vouchers"
+            },
+            {
+              "key": "Alt+Delete",
+              "action": "Infinite Palico Edit Vouchers"
+            },
+            {
+              "key": "Ctrl+F4",
+              "action": "Get All Rewards (Normal+Rare)"
+            },
+            {
+              "key": "Ctrl+F5",
+              "action": "10x Bonus/Expedition Rewards"
+            },
+            {
+              "key": "Ctrl+F7",
+              "action": "Infinite Mantles Duration"
+            },
+            {
+              "key": "Ctrl+F9",
+              "action": "Ignore Augmentation Slot (Master Rank)"
+            },
+            {
+              "key": "Alt+F7",
+              "action": "Change Hunter Rank"
+            },
+            {
+              "key": "Alt+F8",
+              "action": "Change Master Rank"
+            },
+            {
+              "key": "Alt+F9",
+              "action": "Infinite Investigations"
+            },
+            {
+              "key": "Alt+F10",
+              "action": "Edit Guiding Lands Lures"
+            },
+            {
+              "key": "Alt+Num 1",
+              "action": "Long Sword: Max Spirit Gauge"
+            },
+            {
+              "key": "Alt+Num 2",
+              "action": "Great Sword: Instant Charge"
+            },
+            {
+              "key": "Alt+Num 3",
+              "action": "Hammer: Quick Charge"
+            },
+            {
+              "key": "Alt+Num 4",
+              "action": "Charge Blade: Max Charge"
+            },
+            {
+              "key": "Alt+Home",
+              "action": "Switch Axe: Max Charge"
+            },
+            {
+              "key": "Alt+Num 7",
+              "action": "Gunlance: No Overheat"
+            },
+            {
+              "key": "Alt+Num 8",
+              "action": "Bow: Instant Charge"
+            },
+            {
+              "key": "Alt+Num 9",
+              "action": "Dual Blades: Max Demon Gauge"
+            },
+            {
+              "key": "Alt+Num 0",
+              "action": "Insect Glaive: Infinite Extract Duration"
+            },
+            {
+              "key": "Alt+Num +",
+              "action": "All Bowguns: No Deviation"
+            },
+            {
+              "key": "Alt+Num –",
+              "action": "快速射击 (Heavy Bowgun: Rapid Fire)"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "v15.11 (冰原最终版完全对齐)",
     "radarSecretCode": "苍蓝星",
@@ -13607,6 +14924,10 @@ window.GAMES_DATA = [
       "de": "Sekiro: Shadows Die Twice",
       "es": "Sekiro: Shadows Die Twice"
     },
+    "aliases": [
+      "只狼",
+      "sekiro"
+    ],
     "developer": "FromSoftware",
     "releaseYear": 2019,
     "genre": "Soulslike Action",
@@ -13642,11 +14963,31 @@ window.GAMES_DATA = [
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Invulnerable/Ignore Attacks"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Max Guard"
+      },
+      {
+        "key": "Num 4",
+        "action": "Immune All Negative Effects"
+      },
+      {
+        "key": "Num 5",
+        "action": "Infinite Buff Duration (增益无限持续)"
+      },
+      {
+        "key": "Num 6",
+        "action": "Infinite Items (无限物品)"
+      },
+      {
+        "key": "Num 7",
+        "action": "Super Speed (超级速度)"
+      },
+      {
+        "key": "Num 8",
+        "action": "Super Jump (超级跳跃)"
       }
     ],
     "nexusStats": {
@@ -14165,94 +15506,137 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/814380/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "v1.06 (年度版与全Boss连战完全对齐)",
       "officialUrl": "https://flingtrainer.com/trainer/sekiro-shadows-die-twice-trainer/",
-      "cleanMirrorUrl": "https://github.com/l-mod-vault/mirrors/releases/download/sekiro/Sekiro_Shadows_Die_Twice_v1.06_Plus_24_Trainer.zip",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (零误报极客纯净版)",
-        "md5CheckSum": "2a1b0c9d8e7f6a5b4c3d2e1f0a9b8c7d",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionProcess 'Sekiro Shadows Die Twice Trainer.exe'",
-        "troubleshootSteps": [
-          "只狼纯单机离线运行，无任何网络联机或 EAC 封号风险，100% 安全",
-          "若 Windows Defender 拦截，以管理员身份运行上方 PowerShell 白名单放行指令",
-          "进入游戏操控狼行动后再按对应快捷键激活功能"
-        ]
-      },
+      "version": "v1.02-v1.05+",
+      "optionsCount": 24,
+      "lastUpdated": "2020-10-29",
+      "platforms": [],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "🛡️ 狼机体生存与躯干防御",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "无敌模式 (God Mode / 绝对格挡免伤)"
+              "action": "无限生命 (Infinite Health)"
             },
             {
-              "key": "Num 2",
-              "action": "躯干架势槽锁定不崩 (Posture Lock)"
+              "key": "Num 0",
+              "action": "One Hit Break/Easy Kill"
             },
             {
-              "key": "Num 3",
-              "action": "无限回生次数 (倒下后随时原地满血再起)"
-            },
-            {
-              "key": "Num 4",
-              "action": "免疫全异常状态 (防恐怖/防中毒/防火焚)"
-            },
-            {
-              "key": "Num 5",
-              "action": "完全光学潜行隐身 (敌人视若无睹)"
-            }
-          ]
-        },
-        {
-          "category": "🥋 躯干秒崩与忍具纸人",
-          "items": [
-            {
-              "key": "Num 6",
-              "action": "一击崩解敌方躯干架势 (瞬间触发红点忍杀)"
-            },
-            {
-              "key": "Num 7",
-              "action": "超级伤害/一击必杀 (One Hit Kill)"
-            },
-            {
-              "key": "Num 8",
-              "action": "无限白金纸人 (999 纸人无限释放义手神技)"
-            },
-            {
-              "key": "Num 9",
-              "action": "伤药葫芦与药丸使用不减"
-            }
-          ]
-        },
-        {
-          "category": "⚡ 金钱经验与慢动作练习",
-          "items": [
-            {
-              "key": "Ctrl+Num 1",
-              "action": "编辑金钱金币 (999,999 随心购买仙峰寺飞镖)"
-            },
-            {
-              "key": "Ctrl+Num 2",
-              "action": "无限技能技能点 (随时点满全流派秘籍)"
+              "key": "Num .",
+              "action": "隐身模式 (Stealth Mode)"
             },
             {
               "key": "Ctrl+Num 3",
-              "action": "死亡不掉落金钱与经验 (龙咳概率清零)"
+              "action": "无限技能点 (Infinite Skill Points)"
+            },
+            {
+              "key": "Ctrl+Num 7",
+              "action": "Resurrection No Cooldown"
+            },
+            {
+              "key": "F3",
+              "action": "最大生命倍率 (Max HP Multiplier)"
+            }
+          ]
+        },
+        {
+          "category": "💰 资源与物品 (Resources & Items)",
+          "items": [
+            {
+              "key": "Num 6",
+              "action": "无限物品 (Infinite Items)"
+            },
+            {
+              "key": "Ctrl+Num 1",
+              "action": "无限金钱 (Infinite Money)"
             },
             {
               "key": "Ctrl+Num 4",
-              "action": "0.3x 子弹时间慢动作 (观察剑圣抬手前摇)"
+              "action": "No Money/Exp Loss Upon Death"
+            },
+            {
+              "key": "F1",
+              "action": "金钱倍率 (Money Multiplier)"
+            }
+          ]
+        },
+        {
+          "category": "📈 等级与属性 (Level & Stats)",
+          "items": [
+            {
+              "key": "Ctrl+Num 2",
+              "action": "无限经验 (Infinite Exp)"
+            },
+            {
+              "key": "F2",
+              "action": "经验倍率 (Exp Multiplier)"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "Num 7",
+              "action": "超级速度 (Super Speed)"
+            },
+            {
+              "key": "Num 8",
+              "action": "超级跳跃 (Super Jump)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 2",
+              "action": "Invulnerable/Ignore Attacks"
+            },
+            {
+              "key": "Num 3",
+              "action": "Max Guard"
+            },
+            {
+              "key": "Num 4",
+              "action": "Immune All Negative Effects"
+            },
+            {
+              "key": "Num 5",
+              "action": "增益无限持续 (Infinite Buff Duration)"
+            },
+            {
+              "key": "Num 9",
+              "action": "慢动作 (Slow Motion)"
             },
             {
               "key": "Ctrl+Num 5",
-              "action": "随心设定全局游戏时间流速 (0.2x~3.0x)"
+              "action": "Add 1 Attack Power"
+            },
+            {
+              "key": "Ctrl+Num 6",
+              "action": "Infinite Resurrections"
+            },
+            {
+              "key": "Ctrl+Num 8",
+              "action": "Auto Pickup Loots"
+            },
+            {
+              "key": "Ctrl+Num 9",
+              "action": "100% 掉落率 (100% Drop Rate)"
+            },
+            {
+              "key": "F4",
+              "action": "Guard Multiplier"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "v1.06 (年度版完全对齐)",
     "radarSecretCode": "只狼",
@@ -14337,6 +15721,11 @@ window.GAMES_DATA = [
       "de": "Resident Evil 4 Remake",
       "es": "Resident Evil 4 Remake"
     },
+    "aliases": [
+      "生化危机4",
+      "生化4",
+      "re4"
+    ],
     "developer": "Capcom",
     "releaseYear": 2023,
     "genre": "Survival Horror",
@@ -14368,15 +15757,35 @@ window.GAMES_DATA = [
     "trainerHotkeys": [
       {
         "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
+        "action": "God Mode/Ignore Hits (无敌模式/无视攻击)"
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Infinite Health (无限生命)"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Edit Max Health (修改最大生命)"
+      },
+      {
+        "key": "Num 4",
+        "action": "Infinite Armor (无限护甲)"
+      },
+      {
+        "key": "Num 5",
+        "action": "Infinite Items (无限物品)"
+      },
+      {
+        "key": "Num 6",
+        "action": "Infinite Ammo (无限弹药)"
+      },
+      {
+        "key": "Num 7",
+        "action": "No Reload (无需换弹)"
+      },
+      {
+        "key": "Num 8",
+        "action": "Infinite Knife Durability"
       }
     ],
     "nexusStats": {
@@ -14896,94 +16305,185 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/2050650/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "v1.0+ (逆命殊途 Separate Ways DLC 完全对齐)",
-      "officialUrl": "https://flingtrainer.com/trainer/resident-evil-4-remake-trainer/",
-      "cleanMirrorUrl": "https://github.com/l-mod-vault/mirrors/releases/download/re4/Resident_Evil_4_Remake_v1.0_Plus_33_Trainer.zip",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (零误报极客纯净版)",
-        "md5CheckSum": "1a0b9c8d7e6f5a4b3c2d1e0f9a8b7c6d",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionProcess 'Resident Evil 4 Remake Trainer.exe'",
-        "troubleshootSteps": [
-          "卡普空纯单机离线游戏，无任何 VAC 封禁风险，100% 安全放心使用",
-          "若 Windows Defender 拦截，以管理员身份运行上方 PowerShell 白名单放行指令",
-          "进入游戏操控里昂拔枪行动后再按小键盘热键激活功能"
-        ]
-      },
+      "officialUrl": "https://flingtrainer.com/trainer/resident-evil-4-trainer/",
+      "version": "v1.0-v20260203+",
+      "optionsCount": 36,
+      "lastUpdated": "2026-02-04",
+      "platforms": [],
+      "antiCheat": true,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "🛡️ 里昂与阿什莉生存守护",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "里昂无敌模式 (God Mode / 锁血锁伤)"
+              "action": "无敌模式/无视攻击 (God Mode/Ignore Hits)"
             },
             {
               "key": "Num 2",
-              "action": "阿什莉无敌模式 (永不受伤、绝不被邪教徒抗走)"
+              "action": "无限生命 (Infinite Health)"
             },
             {
               "key": "Num 3",
-              "action": "无限奔跑体力 (里昂疾跑永不疲劳)"
+              "action": "修改最大生命 (Edit Max Health)"
             },
             {
               "key": "Num 4",
-              "action": "战术防爆防弹衣耐久度无限锁定"
+              "action": "无限护甲 (Infinite Armor)"
             },
             {
-              "key": "Num 5",
-              "action": "战斗小刀耐久度无限 (随便格挡电锯不磨损)"
-            }
-          ]
-        },
-        {
-          "category": "🔫 军备弹药与射击精修",
-          "items": [
-            {
               "key": "Num 6",
-              "action": "全部枪械无限弹药 (无需繁琐换弹匣)"
+              "action": "无限弹药 (Infinite Ammo)"
             },
             {
               "key": "Num 7",
-              "action": "枪械射击零后坐力与准星零扩散 (百步穿杨)"
+              "action": "无需换弹 (No Reload)"
             },
             {
               "key": "Num 8",
-              "action": "近战体术一击必杀与爆头必触发碎颅"
+              "action": "Infinite Knife Durability"
             },
             {
-              "key": "Num 9",
-              "action": "小刀格挡判定时间扩大 100% (轻松招架飞斧电锯)"
+              "key": "Num +",
+              "action": "Easy Kills"
+            },
+            {
+              "key": "PageUp",
+              "action": "伤害倍率 (Damage Multiplier)"
+            },
+            {
+              "key": "PageDown",
+              "action": "防御倍率 (Defense Multiplier)"
+            },
+            {
+              "key": "Alt+Num 1",
+              "action": "无后坐力 (No Recoil)"
+            },
+            {
+              "key": "Alt+Num 2",
+              "action": "超级精准 (Super Accuracy)"
             }
           ]
         },
         {
-          "category": "💰 财富比塞塔与佣兵模式",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
-              "key": "Ctrl+Num 1",
-              "action": "编辑比塞塔现金 (直接入账 10,000,000)"
-            },
-            {
-              "key": "Ctrl+Num 2",
-              "action": "编辑尖晶石数量 (999 尖晶石无限兑换藏宝图)"
-            },
-            {
-              "key": "Ctrl+Num 3",
-              "action": "武器商人改装改造免费 (无需消耗任何金币)"
+              "key": "Num 5",
+              "action": "无限物品 (Infinite Items)"
             },
             {
               "key": "Ctrl+Num 4",
-              "action": "佣兵模式锁定剩余时间与保持 150 极限连击"
+              "action": "Edit Exclusive Upgrade Tickets"
+            },
+            {
+              "key": "Ctrl+Num 6",
+              "action": "Unlock All Extra Content Shop Items"
+            },
+            {
+              "key": "Ctrl+Num 7",
+              "action": "简易制作 (Easy Crafting)"
+            },
+            {
+              "key": "Alt+Num 5",
+              "action": "Edit Gold Tokens"
+            }
+          ]
+        },
+        {
+          "category": "📈 等级与属性 (Level & Stats)",
+          "items": [
+            {
+              "key": "Alt+Num 4",
+              "action": "Max Shooting Range Score"
+            },
+            {
+              "key": "F5",
+              "action": "最高分 (Mercenary Mode: Max Score)"
+            },
+            {
+              "key": "F6",
+              "action": "分数倍率 (Mercenary Mode: Score Multiplier)"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "Num 9",
+              "action": "设置游戏速度 (Set Game Speed)"
+            },
+            {
+              "key": "Num 0",
+              "action": "Set Player Movement Speed"
+            },
+            {
+              "key": "Num .",
+              "action": "Set AI Movement Speed"
+            },
+            {
+              "key": "Alt+Num 8",
+              "action": "Freeze Play Time"
+            },
+            {
+              "key": "Alt+Num 9",
+              "action": "Adjust Play Time (+/- Minutes)"
+            },
+            {
+              "key": "F1",
+              "action": "冻结计时器 (Mercenary Mode: Freeze Timer)"
+            },
+            {
+              "key": "F2",
+              "action": "Mercenary Mode: Freeze Combo Timer"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Ctrl+Num 1",
+              "action": "Edit Pesetas"
+            },
+            {
+              "key": "Ctrl+Num 2",
+              "action": "Pesetas Multiplier"
+            },
+            {
+              "key": "Ctrl+Num 3",
+              "action": "Edit Spinels"
             },
             {
               "key": "Ctrl+Num 5",
-              "action": "佣兵模式瞬间拉满二百万高分秒拿 S++ 评分"
+              "action": "修改CP (Edit CP)"
+            },
+            {
+              "key": "Alt+Num 3",
+              "action": "Change FOV"
+            },
+            {
+              "key": "Alt+Num 6",
+              "action": "Edit Silver Tokens"
+            },
+            {
+              "key": "Alt+Num 7",
+              "action": "Reset Save Count"
+            },
+            {
+              "key": "F3",
+              "action": "Mercenary Mode: Max Mayhem Gauge"
+            },
+            {
+              "key": "F4",
+              "action": "Mercenary Mode: Infinite Mayhem Duration"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "v1.0+ (逆命殊途DLC完全对齐)",
     "radarSecretCode": "生化4",
@@ -15068,6 +16568,14 @@ window.GAMES_DATA = [
       "de": "Mount & Blade II: Bannerlord",
       "es": "Mount & Blade II: Bannerlord"
     },
+    "aliases": [
+      "骑马与砍杀",
+      "骑马与砍杀2",
+      "骑砍",
+      "骑砍2",
+      "霸主",
+      "bannerlord"
+    ],
     "developer": "TaleWorlds",
     "releaseYear": 2020,
     "genre": "Medieval Strategy Action RPG",
@@ -15124,16 +16632,36 @@ window.GAMES_DATA = [
     "hasTrainer": true,
     "trainerHotkeys": [
       {
-        "key": "Num 1",
+        "key": "Alt+Num 1",
         "action": "Infinite Health (无限生命)"
       },
       {
-        "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "key": "Alt+Num 2",
+        "action": "Infinite Horse Health (无限马匹生命)"
       },
       {
-        "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "key": "Alt+Num 3",
+        "action": "Infinite Shield Durability"
+      },
+      {
+        "key": "Alt+Num 4",
+        "action": "Infinite Party Health"
+      },
+      {
+        "key": "Alt+Num 5",
+        "action": "One Hit Kill (一击必杀)"
+      },
+      {
+        "key": "Alt+Num 6",
+        "action": "Ignore Melee Damage"
+      },
+      {
+        "key": "Ctrl+Num 1",
+        "action": "Edit Gold (修改金币)"
+      },
+      {
+        "key": "Ctrl+Num 2",
+        "action": "Edit Influence (修改影响力)"
       }
     ],
     "nexusStats": {
@@ -15338,70 +16866,173 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/261550/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "v1.2.9 (Steam 最新官方正式版)",
-      "officialUrl": "https://flingtrainer.com/trainer/mount-and-blade-2-bannerlord-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/mount-and-blade-2-bannerlord-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "officialUrl": "https://flingtrainer.com/trainer/mount-blade-ii-bannerlord-trainer/",
+      "version": "v1.0-v1.4.x+",
+      "optionsCount": 33,
+      "lastUpdated": "2026-08-10",
+      "platforms": [],
+      "antiCheat": false,
+      "offlineOnly": true,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 战场与军团战斗 (Battle & Troops)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
-              "key": "Num 1",
-              "action": "主角无限生命 (Infinite Player Health)"
+              "key": "Alt+Num 1",
+              "action": "无限生命 (Infinite Health)"
             },
             {
-              "key": "Num 2",
-              "action": "战马无限生命 (Infinite Mount Health)"
+              "key": "Alt+Num 2",
+              "action": "无限马匹生命 (Infinite Horse Health)"
             },
             {
-              "key": "Num 3",
-              "action": "全军士兵无限生命 (Infinite Troops Health)"
+              "key": "Alt+Num 3",
+              "action": "Infinite Shield Durability"
             },
             {
-              "key": "Num 4",
-              "action": "盾牌无限耐久度 (Infinite Shield)"
+              "key": "Alt+Num 4",
+              "action": "Infinite Party Health"
             },
             {
-              "key": "Num 0",
+              "key": "Alt+Num 5",
               "action": "一击必杀 (One Hit Kill)"
+            },
+            {
+              "key": "Alt+Num 6",
+              "action": "Ignore Melee Damage"
+            },
+            {
+              "key": "Ctrl+F1",
+              "action": "无限技能经验 (Infinite Skill XP)"
+            },
+            {
+              "key": "Ctrl+F2",
+              "action": "技能经验倍率 (Skill XP Multiplier)"
+            },
+            {
+              "key": "Alt+F2",
+              "action": "Edit Focus Points"
+            },
+            {
+              "key": "Ctrl+F7",
+              "action": "Infinite Smithy Stamina"
             }
           ]
         },
         {
-          "category": "💰 军费与家族统治 (Economy & Clan)",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
               "key": "Ctrl+Num 1",
-              "action": "增加 100 万第纳尔军费 (Add 1,000,000 Gold)"
-            },
-            {
-              "key": "Ctrl+Num 2",
-              "action": "增加 1000 家族声望 (Add 1,000 Renown)"
+              "action": "修改金币 (Edit Gold)"
             },
             {
               "key": "Ctrl+Num 3",
-              "action": "增加 2000 王国影响力 (Add 2,000 Influence)"
+              "action": "无限食物 (Infinite Food)"
             },
             {
+              "key": "Ctrl+Num 5",
+              "action": "Trade/Exchange Items Don’t Decrease"
+            },
+            {
+              "key": "Ctrl+Num 6",
+              "action": "Max Carrying Capacity"
+            },
+            {
+              "key": "Ctrl+F8",
+              "action": "Infinite Smithy Materials"
+            }
+          ]
+        },
+        {
+          "category": "📈 等级与属性 (Level & Stats)",
+          "items": [
+            {
+              "key": "Ctrl+Num 2",
+              "action": "修改影响力 (Edit Influence)"
+            },
+            {
+              "key": "Alt+F1",
+              "action": "修改属性点 (Edit Attribute Points)"
+            },
+            {
+              "key": "Ctrl+F10",
+              "action": "Infinite Troops XP"
+            },
+            {
+              "key": "Ctrl+F11",
+              "action": "Troops XP Multiplier"
+            },
+            {
+              "key": "Alt+F5",
+              "action": "Max Character Relationship"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "Ctrl+Num 7",
+              "action": "设置游戏速度 (Set Game Speed)"
+            },
+            {
+              "key": "Ctrl+Num 8",
+              "action": "移动速度 (Movement Speed)"
+            },
+            {
+              "key": "Ctrl+Num 9",
+              "action": "Slow AI Movement Speed"
+            },
+            {
+              "key": "Ctrl+Num .",
+              "action": "冻结时间 (Freeze Daytime)"
+            },
+            {
+              "key": "Alt+F8",
+              "action": "One Day Settlements Construction"
+            },
+            {
+              "key": "Alt+F9",
+              "action": "Can Recruit Prisoners At Anytime"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
               "key": "Ctrl+Num 4",
-              "action": "所有部队士兵瞬间满级进阶 (Instant Troop Upgrade)"
+              "action": "士气满值 (Max Morale)"
+            },
+            {
+              "key": "Ctrl+Num 0",
+              "action": "Barter Offer Always Accepted"
+            },
+            {
+              "key": "Ctrl+F5",
+              "action": "Infinite Renown"
+            },
+            {
+              "key": "Ctrl+F6",
+              "action": "Renown Multiplier"
+            },
+            {
+              "key": "Ctrl+F9",
+              "action": "Unlock All Smithy Parts"
+            },
+            {
+              "key": "Alt+F6",
+              "action": "Persuasion/Conversation Always Succeed"
+            },
+            {
+              "key": "Alt+F7",
+              "action": "Instant Siege Construction"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -15422,6 +17053,10 @@ window.GAMES_DATA = [
       "de": "Stardew Valley",
       "es": "Stardew Valley"
     },
+    "aliases": [
+      "星露谷",
+      "星露谷物语"
+    ],
     "developer": "ConcernedApe",
     "releaseYear": 2016,
     "genre": "Farming Sim RPG",
@@ -15479,15 +17114,35 @@ window.GAMES_DATA = [
     "trainerHotkeys": [
       {
         "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
+        "action": "God Mode/Ignore Hits (无敌模式/无视攻击)"
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Infinite Health (无限生命)"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Infinite Stamina (无限耐力)"
+      },
+      {
+        "key": "Num 4",
+        "action": "Infinite Watering Can Usage"
+      },
+      {
+        "key": "Num 5",
+        "action": "100% Drop Rate (100% 掉落率)"
+      },
+      {
+        "key": "Num 6",
+        "action": "100% Critical Chance (100% 暴击率)"
+      },
+      {
+        "key": "Num 7",
+        "action": "Set Movement Speed (设置移动速度)"
+      },
+      {
+        "key": "Num 8",
+        "action": "Set Game Speed (设置游戏速度)"
       }
     ],
     "nexusStats": {
@@ -15666,29 +17321,20 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/413150/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "v1.6.9 (1.6 大版本全内容更新兼容)",
       "officialUrl": "https://flingtrainer.com/trainer/stardew-valley-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/stardew-valley-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "version": "v1.6.3+",
+      "optionsCount": 33,
+      "lastUpdated": "2024-04-07",
+      "platforms": [],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 农场生存与时间 (Farm Life & Time)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "无限体力/耐力 (Infinite Stamina)"
+              "action": "无敌模式/无视攻击 (God Mode/Ignore Hits)"
             },
             {
               "key": "Num 2",
@@ -15696,40 +17342,152 @@ window.GAMES_DATA = [
             },
             {
               "key": "Num 3",
-              "action": "水壶水分永不减少 (Infinite Water Can)"
+              "action": "无限耐力 (Infinite Stamina)"
             },
             {
-              "key": "Num 4",
-              "action": "作物瞬间成熟/免等待 (Instant Crop Growth)"
+              "key": "Num 0",
+              "action": "超级伤害/一击必杀 (Super Damage/One Hit Kills)"
             },
             {
-              "key": "Num 5",
-              "action": "锁定时间流速/自由暂停 (Freeze Time)"
+              "key": "Num .",
+              "action": "伤害倍率 (Damage Multiplier)"
+            },
+            {
+              "key": "Num +",
+              "action": "防御倍率 (Defense Multiplier)"
+            },
+            {
+              "key": "Alt+Num 4",
+              "action": "Infinite Skill Exp"
+            },
+            {
+              "key": "Alt+Num 5",
+              "action": "Skill Exp Multiplier"
             }
           ]
         },
         {
-          "category": "💰 财富与社交好感 (Economy & Friendship)",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
+              "key": "Num 4",
+              "action": "Infinite Watering Can Usage"
+            },
+            {
               "key": "Ctrl+Num 1",
-              "action": "增加 100,000 农场金币 (Add 100,000 Money)"
+              "action": "修改金钱 (Edit Money)"
             },
             {
               "key": "Ctrl+Num 2",
-              "action": "所有村民好感度直接拉满十心 (Max Friendship Hearts)"
+              "action": "Edit Qi Coins"
             },
             {
               "key": "Ctrl+Num 3",
-              "action": "钓鱼必中且瞬间收杆 (Instant Catch Fish)"
+              "action": "Edit Qi Gems"
             },
             {
               "key": "Ctrl+Num 4",
-              "action": "超级移动奔跑速度 2x/3x (Super Move Speed)"
+              "action": "Edit Mouse Hover Item Amount"
+            },
+            {
+              "key": "Ctrl+Num 5",
+              "action": "Edit Mouse Hover Item Quality"
+            },
+            {
+              "key": "Alt+Num 2",
+              "action": "Auto Water Crops"
+            }
+          ]
+        },
+        {
+          "category": "📈 等级与属性 (Level & Stats)",
+          "items": [
+            {
+              "key": "Alt+Num 6",
+              "action": "Max NPC Friendship"
+            },
+            {
+              "key": "Alt+Num 7",
+              "action": "NPC Friendship Multiplier"
+            },
+            {
+              "key": "Shift+F1",
+              "action": "友好度满值 (Pet: Max Friendship)"
+            },
+            {
+              "key": "Shift+F2",
+              "action": "友好度满值 (Farm Animals: Max Friendship)"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "Num 7",
+              "action": "设置移动速度 (Set Movement Speed)"
+            },
+            {
+              "key": "Num 8",
+              "action": "设置游戏速度 (Set Game Speed)"
+            },
+            {
+              "key": "Ctrl+Num 6",
+              "action": "冻结时间 (Freeze Daytime)"
+            },
+            {
+              "key": "Ctrl+Num 7",
+              "action": "时间流逝速度 (Time Pass Speed)"
+            },
+            {
+              "key": "Alt+Num 1",
+              "action": "No Clip Mode"
+            },
+            {
+              "key": "Alt+Num 3",
+              "action": "One Day Grow Crops"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 5",
+              "action": "100% 掉落率 (100% Drop Rate)"
+            },
+            {
+              "key": "Num 6",
+              "action": "100% 暴击率 (100% Critical Chance)"
+            },
+            {
+              "key": "Num 9",
+              "action": "One Hit Cut Trees"
+            },
+            {
+              "key": "Num –",
+              "action": "Knockback Multiplier"
+            },
+            {
+              "key": "Shift+F3",
+              "action": "Farm Animals: Max Fullness"
+            },
+            {
+              "key": "Shift+F4",
+              "action": "幸福度满值 (Farm Animals: Max Happiness)"
+            },
+            {
+              "key": "Shift+F5",
+              "action": "Fishing: Instant Bite"
+            },
+            {
+              "key": "Shift+F6",
+              "action": "瞬间上钩 (Fishing: Instant Catch)"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -15750,6 +17508,9 @@ window.GAMES_DATA = [
       "de": "Terraria",
       "es": "Terraria"
     },
+    "aliases": [
+      "泰拉瑞亚"
+    ],
     "developer": "Re-Logic",
     "releaseYear": 2011,
     "genre": "2D Sandbox Survival",
@@ -15774,15 +17535,35 @@ window.GAMES_DATA = [
     "trainerHotkeys": [
       {
         "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
+        "action": "God Mode (无敌模式)"
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Infinite Health (无限生命)"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Infinite Mana (无限法力)"
+      },
+      {
+        "key": "Num 4",
+        "action": "Infinite Breath (无限呼吸)"
+      },
+      {
+        "key": "Num 5",
+        "action": "Infinite Fly Duration"
+      },
+      {
+        "key": "Num 6",
+        "action": "Ghost Mode"
+      },
+      {
+        "key": "Num 7",
+        "action": "Infinite Items (无限物品)"
+      },
+      {
+        "key": "Num 8",
+        "action": "Max Light/Brightness"
       }
     ],
     "nexusStats": {
@@ -15855,79 +17636,84 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/105600/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
       "officialUrl": "https://flingtrainer.com/trainer/terraria-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/terraria-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "version": "v1.4-v1.4.5.x+",
+      "optionsCount": 12,
+      "lastUpdated": "2026-09-16",
+      "platforms": [],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "泰拉瑞亚 主角锁血无敌 (Infinite Health)"
+              "action": "无敌模式 (God Mode)"
             },
             {
               "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
+              "action": "无限生命 (Infinite Health)"
             },
             {
               "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
+              "action": "无限法力 (Infinite Mana)"
+            },
+            {
+              "key": "Num 4",
+              "action": "无限呼吸 (Infinite Breath)"
             },
             {
               "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
+              "action": "超级伤害/一击必杀 (Super Damage/One Hit Kill)"
             }
           ]
         },
         {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
-              "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
+              "key": "Num 7",
+              "action": "无限物品 (Infinite Items)"
             },
             {
-              "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
-            },
-            {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
+              "key": "Num 9",
+              "action": "解锁全部制作配方 (Unlock All Crafting Recipes)"
             }
           ]
         },
         {
-          "category": "🚀 探索与移动速度 (Movement & World)",
+          "category": "🌍 移动与世界 (Movement & World)",
           "items": [
             {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
+              "key": "Num 5",
+              "action": "Infinite Fly Duration"
             },
             {
-              "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
+              "key": "Num .",
+              "action": "冻结时间 (Freeze Daytime)"
             },
             {
-              "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
+              "key": "Num +",
+              "action": "设置游戏速度 (Set Game Speed)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 6",
+              "action": "Ghost Mode"
+            },
+            {
+              "key": "Num 8",
+              "action": "Max Light/Brightness"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -15948,6 +17734,10 @@ window.GAMES_DATA = [
       "de": "Hogwarts Legacy",
       "es": "Hogwarts Legacy"
     },
+    "aliases": [
+      "霍格沃茨",
+      "霍格沃茨之遗"
+    ],
     "developer": "Avalanche Software",
     "releaseYear": 2023,
     "genre": "Open World Wizard RPG",
@@ -15976,11 +17766,31 @@ window.GAMES_DATA = [
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Edit Max Health (修改最大生命)"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Infinite Ancient Magic Energy"
+      },
+      {
+        "key": "Num 4",
+        "action": "Max Combo (最大连击)"
+      },
+      {
+        "key": "Num 5",
+        "action": "Infinite Item Usage (物品无限使用)"
+      },
+      {
+        "key": "Num 6",
+        "action": "Spells Instant Cooldown (法术瞬间冷却)"
+      },
+      {
+        "key": "Num 7",
+        "action": "Set Player Speed (设置玩家速度)"
+      },
+      {
+        "key": "Num 8",
+        "action": "Set Movement Speed (设置移动速度)"
       }
     ],
     "nexusStats": {
@@ -16053,79 +17863,177 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/990080/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
-      "officialUrl": "https://flingtrainer.com/trainer/hogwarts-legacy-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/hogwarts-legacy-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "officialUrl": "https://flingtrainer.com/trainer/hogwarts-legacy-trainers/",
+      "version": "v1.0-v1614419+",
+      "optionsCount": 33,
+      "lastUpdated": "2025-12-16",
+      "platforms": [
+        "Steam",
+        "Epic Games Store",
+        "Xbox/Game Pass"
+      ],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "霍格沃茨之遗 主角锁血无敌 (Infinite Health)"
+              "action": "无限生命 (Infinite Health)"
             },
             {
               "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
+              "action": "修改最大生命 (Edit Max Health)"
             },
             {
               "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
+              "action": "Infinite Ancient Magic Energy"
+            },
+            {
+              "key": "Num 6",
+              "action": "法术瞬间冷却 (Spells Instant Cooldown)"
             },
             {
               "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
-            }
-          ]
-        },
-        {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
-          "items": [
+              "action": "一击必杀 (One Hit Kills)"
+            },
+            {
+              "key": "Num .",
+              "action": "伤害倍率 (Damage Multiplier)"
+            },
+            {
+              "key": "Num +",
+              "action": "防御倍率 (Defense Multiplier)"
+            },
             {
               "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
-            },
-            {
-              "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
-            },
-            {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
+              "action": "隐身模式 (Stealth Mode)"
             }
           ]
         },
         {
-          "category": "🚀 探索与移动速度 (Movement & World)",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
+              "key": "Num 5",
+              "action": "物品无限使用 (Infinite Item Usage)"
             },
             {
-              "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
+              "key": "Ctrl+Num 4",
+              "action": "Shop Items Cost 0 Money"
+            },
+            {
+              "key": "Ctrl+Num 5",
+              "action": "Gain Money When Buying Items"
+            },
+            {
+              "key": "Ctrl+Num 6",
+              "action": "金钱倍率 (Money Multiplier)"
             },
             {
               "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
+              "action": "物品不减少 (Items Won’t Decrease)"
+            }
+          ]
+        },
+        {
+          "category": "📈 等级与属性 (Level & Stats)",
+          "items": [
+            {
+              "key": "Ctrl+Num 2",
+              "action": "无限经验 (Infinite Exp)"
+            },
+            {
+              "key": "Ctrl+Num 3",
+              "action": "经验倍率 (Exp Multiplier)"
+            },
+            {
+              "key": "Alt+Num 0",
+              "action": "修改天赋点 (Edit Talent Points)"
+            },
+            {
+              "key": "Alt+Num +",
+              "action": "传送到标记点 (Teleport To Waypoint)"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "Num 7",
+              "action": "设置玩家速度 (Set Player Speed)"
+            },
+            {
+              "key": "Num 8",
+              "action": "设置移动速度 (Set Movement Speed)"
+            },
+            {
+              "key": "Num 9",
+              "action": "设置游戏速度 (Set Game Speed)"
+            },
+            {
+              "key": "Alt+Num 8",
+              "action": "Unlock All Fast Travel Locations"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 4",
+              "action": "最大连击 (Max Combo)"
+            },
+            {
+              "key": "Num –",
+              "action": "Life Leech (%)"
+            },
+            {
+              "key": "Ctrl+Num 7",
+              "action": "Loots Multiplier"
+            },
+            {
+              "key": "Ctrl+Num 8",
+              "action": "Max Extraordinary Gear Drop Rate"
+            },
+            {
+              "key": "Ctrl+Num 9",
+              "action": "Max Legendary Gear Drop Rate"
+            },
+            {
+              "key": "Alt+Num 1",
+              "action": "Infinite Broom Boost"
+            },
+            {
+              "key": "Alt+Num 2",
+              "action": "Infinite Potion Effect Duration"
+            },
+            {
+              "key": "Alt+Num 4",
+              "action": "Instant Grow Plants"
+            },
+            {
+              "key": "Alt+Num 5",
+              "action": "Instant Brew Potions"
+            },
+            {
+              "key": "Alt+Num 6",
+              "action": "No Brew Potion Requirements"
+            },
+            {
+              "key": "Alt+Num 7",
+              "action": "Ignore Conjuration Requirements"
+            },
+            {
+              "key": "Alt+Num 9",
+              "action": "Edit Max Gear Slot Count"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -16146,6 +18054,9 @@ window.GAMES_DATA = [
       "de": "Subnautica",
       "es": "Subnautica"
     },
+    "aliases": [
+      "深海迷航"
+    ],
     "developer": "Unknown Worlds",
     "releaseYear": 2018,
     "genre": "Underwater Survival",
@@ -16203,15 +18114,35 @@ window.GAMES_DATA = [
     "trainerHotkeys": [
       {
         "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
+        "action": "Invincible (无敌)"
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Infinite HP (无限生命)"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Infinite Oxygen (无限氧气)"
+      },
+      {
+        "key": "Num 4",
+        "action": "Infinite Food (无限食物)"
+      },
+      {
+        "key": "Num 5",
+        "action": "Infinite Water (无限水)"
+      },
+      {
+        "key": "Num 6",
+        "action": "Zero Radiation (零辐射)"
+      },
+      {
+        "key": "Num 7",
+        "action": "Infinite Power (无限电力)"
+      },
+      {
+        "key": "Num 8",
+        "action": "Infinite Battery Power"
       }
     ],
     "nexusStats": {
@@ -16455,66 +18386,96 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/264710/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "Living Large v2.0 (全语言整合)",
       "officialUrl": "https://flingtrainer.com/trainer/subnautica-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/subnautica-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "version": "v1.0-v20210512+",
+      "optionsCount": 15,
+      "lastUpdated": "2021-05-12",
+      "platforms": [],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 潜水员生存 (Diver Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
-              "key": "Num 1",
-              "action": "无限生命 (Infinite Health)"
-            },
-            {
               "key": "Num 2",
-              "action": "无限氧气/永不缺氧 (Infinite Oxygen)"
+              "action": "无限生命 (Infinite HP)"
             },
             {
               "key": "Num 3",
-              "action": "饥饿水分不减 (No Hunger & Thirst)"
-            },
-            {
-              "key": "Num 4",
-              "action": "辐射完全免疫 (Zero Radiation)"
-            },
-            {
-              "key": "Num 0",
-              "action": "潜水艇无敌碰撞 (Submarine Invincible)"
+              "action": "无限氧气 (Infinite Oxygen)"
             }
           ]
         },
         {
-          "category": "💰 资源建造 (Crafting & Base)",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
-              "key": "Ctrl+Num 1",
-              "action": "建造枪零材料秒建 (Instant & Free Building)"
+              "key": "Num 4",
+              "action": "无限食物 (Infinite Food)"
+            },
+            {
+              "key": "Num 5",
+              "action": "无限水 (Infinite Water)"
             },
             {
               "key": "Ctrl+Num 2",
-              "action": "无限蓄电池能源 (Infinite Battery Power)"
+              "action": "无视制作需求 (Ignore Crafting Requirements)"
             },
             {
               "key": "Ctrl+Num 3",
-              "action": "超级游泳与推进速度 (Super Swim Speed)"
+              "action": "瞬间制作 (Instant Crafting)"
+            },
+            {
+              "key": "Ctrl+Num 4",
+              "action": "无视建造需求 (Ignore Building Requirements)"
+            },
+            {
+              "key": "Ctrl+Num 5",
+              "action": "瞬间建造 (Instant Building)"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "Num 9",
+              "action": "设置游泳速度 (Set Swim Speed)"
+            },
+            {
+              "key": "Num 0",
+              "action": "设置游戏速度 (Set Game Speed)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 1",
+              "action": "无敌 (Invincible)"
+            },
+            {
+              "key": "Num 6",
+              "action": "零辐射 (Zero Radiation)"
+            },
+            {
+              "key": "Num 7",
+              "action": "无限电力 (Infinite Power)"
+            },
+            {
+              "key": "Num 8",
+              "action": "Infinite Battery Power"
+            },
+            {
+              "key": "Ctrl+Num 1",
+              "action": "解锁全部蓝图 (Unlock All Blueprints)"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -16535,6 +18496,10 @@ window.GAMES_DATA = [
       "de": "Dark Souls III",
       "es": "Dark Souls III"
     },
+    "aliases": [
+      "黑魂3",
+      "黑暗之魂3"
+    ],
     "developer": "FromSoftware",
     "releaseYear": 2016,
     "genre": "Action RPG Soulslike",
@@ -16559,15 +18524,35 @@ window.GAMES_DATA = [
     "trainerHotkeys": [
       {
         "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
+        "action": "Infinite HP (无限生命)"
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Infinite FP (无限专注值 (FP))"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Infinite Stamina (无限耐力)"
+      },
+      {
+        "key": "Num 4",
+        "action": "Items Won’t Decrease (物品不减少)"
+      },
+      {
+        "key": "Num 5",
+        "action": "Zero Weight (零重量)"
+      },
+      {
+        "key": "Num 6",
+        "action": "Infinite Equipment Durability (无限装备耐久)"
+      },
+      {
+        "key": "Num 7",
+        "action": "100% Drop Rate (100% 掉落率)"
+      },
+      {
+        "key": "Num 8",
+        "action": "Infinite Souls (无限魂)"
       }
     ],
     "nexusStats": {
@@ -16640,79 +18625,161 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/374320/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
-      "officialUrl": "https://flingtrainer.com/trainer/dark-souls-3-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/dark-souls-3-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "officialUrl": "https://flingtrainer.com/trainer/dark-souls-iii-trainers/",
+      "version": "v1.03-v1.15.2+",
+      "optionsCount": 28,
+      "lastUpdated": "2023-01-15",
+      "platforms": [],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "黑暗之魂 3 主角锁血无敌 (Infinite Health)"
+              "action": "无限生命 (Infinite HP)"
             },
             {
               "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
+              "action": "无限专注值 (FP) (Infinite FP)"
             },
             {
               "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
+              "action": "无限耐力 (Infinite Stamina)"
+            },
+            {
+              "key": "Num 6",
+              "action": "无限装备耐久 (Infinite Equipment Durability)"
             },
             {
               "key": "Num 0",
               "action": "一击必杀 (One Hit Kill)"
-            }
-          ]
-        },
-        {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
-          "items": [
-            {
-              "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
             },
-            {
-              "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
-            },
-            {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
-            }
-          ]
-        },
-        {
-          "category": "🚀 探索与移动速度 (Movement & World)",
-          "items": [
             {
               "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
+              "action": "No Poisoning"
             },
             {
               "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
+              "action": "No Bleeding"
+            },
+            {
+              "key": "Alt+Num 5",
+              "action": "敌人无法移动 (Enemies Cannot Move)"
+            }
+          ]
+        },
+        {
+          "category": "💰 资源与物品 (Resources & Items)",
+          "items": [
+            {
+              "key": "Num 4",
+              "action": "物品不减少 (Items Won’t Decrease)"
+            },
+            {
+              "key": "Num 5",
+              "action": "零重量 (Zero Weight)"
+            },
+            {
+              "key": "Num 8",
+              "action": "无限魂 (Infinite Souls)"
+            },
+            {
+              "key": "Num 9",
+              "action": "增加魂 (Add Souls)"
+            },
+            {
+              "key": "PageDown",
+              "action": "Souls Won’t Drop Upon Death"
+            }
+          ]
+        },
+        {
+          "category": "📈 等级与属性 (Level & Stats)",
+          "items": [
+            {
+              "key": "Ctrl+Num 0",
+              "action": "Reset Level"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "Num .",
+              "action": "保存坐标 (Save Location)"
+            },
+            {
+              "key": "Num +",
+              "action": "传送 (Teleport)"
+            },
+            {
+              "key": "Num –",
+              "action": "撤销传送 (Undo Teleportation)"
+            },
+            {
+              "key": "PageUp",
+              "action": "设置游戏速度 (Set Game Speed)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 7",
+              "action": "100% 掉落率 (100% Drop Rate)"
             },
             {
               "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
+              "action": "Never Frosted"
+            },
+            {
+              "key": "Alt+Num 4",
+              "action": "Never Cursed"
+            },
+            {
+              "key": "Ctrl+Num 1",
+              "action": "增加 5 生命力 (Add 5 Vigor)"
+            },
+            {
+              "key": "Ctrl+Num 2",
+              "action": "Add 5 Attunement"
+            },
+            {
+              "key": "Ctrl+Num 3",
+              "action": "增加 5 耐力 (Add 5 Endurance)"
+            },
+            {
+              "key": "Ctrl+Num 4",
+              "action": "增加 5 活力 (Add 5 Vitality)"
+            },
+            {
+              "key": "Ctrl+Num 5",
+              "action": "增加 5 力量 (Add 5 Strength)"
+            },
+            {
+              "key": "Ctrl+Num 6",
+              "action": "增加 5 敏捷 (Add 5 Dexterity)"
+            },
+            {
+              "key": "Ctrl+Num 7",
+              "action": "增加 5 智力 (Add 5 Intelligence)"
+            },
+            {
+              "key": "Ctrl+Num 8",
+              "action": "增加 5 信仰 (Add 5 Faith)"
+            },
+            {
+              "key": "Ctrl+Num 9",
+              "action": "增加 5 幸运 (Add 5 Luck)"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -16733,6 +18800,9 @@ window.GAMES_DATA = [
       "de": "Valheim",
       "es": "Valheim"
     },
+    "aliases": [
+      "英灵神殿"
+    ],
     "developer": "Iron Gate",
     "releaseYear": 2021,
     "genre": "Nordic Survival Crafting",
@@ -16790,15 +18860,35 @@ window.GAMES_DATA = [
     "trainerHotkeys": [
       {
         "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
+        "action": "God Mode (无敌模式)"
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Infinite Health (无限生命)"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Infinite Stamina (无限耐力)"
+      },
+      {
+        "key": "Num 4",
+        "action": "Infinite Eitr"
+      },
+      {
+        "key": "Num 5",
+        "action": "Stealth Mode (隐身模式)"
+      },
+      {
+        "key": "Num 6",
+        "action": "Edit Max Carrying Weight (修改最大负重)"
+      },
+      {
+        "key": "Num 7",
+        "action": "Set Player Speed (设置玩家速度)"
+      },
+      {
+        "key": "Num 8",
+        "action": "Set Jump Height (设置跳跃高度)"
       }
     ],
     "nexusStats": {
@@ -17066,66 +19156,125 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/892970/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "Ashlands 灰烬之境 v0.218.15",
       "officialUrl": "https://flingtrainer.com/trainer/valheim-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/valheim-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "version": "v1.0.x+",
+      "optionsCount": 21,
+      "lastUpdated": "2026-09-23",
+      "platforms": [],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 维京战斗与生存 (Viking Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "无限生命 (Infinite Health)"
+              "action": "无敌模式 (God Mode)"
             },
             {
               "key": "Num 2",
-              "action": "无限耐力 (Infinite Stamina)"
+              "action": "无限生命 (Infinite Health)"
             },
             {
               "key": "Num 3",
-              "action": "食物饱食度时间锁定 (Infinite Food Duration)"
+              "action": "无限耐力 (Infinite Stamina)"
             },
             {
-              "key": "Num 4",
-              "action": "武器工具无限耐久 (Infinite Durability)"
+              "key": "Num 5",
+              "action": "隐身模式 (Stealth Mode)"
             },
             {
-              "key": "Num 0",
+              "key": "Num .",
               "action": "一击必杀 (One Hit Kill)"
+            },
+            {
+              "key": "Ctrl+Num 2",
+              "action": "Infinite Tools & Equipments Durability"
+            },
+            {
+              "key": "Ctrl+Num 3",
+              "action": "Fast Skill Level Up"
             }
           ]
         },
         {
-          "category": "💰 资源建造 (Crafting & Build)",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
+              "key": "Num 6",
+              "action": "修改最大负重 (Edit Max Carrying Weight)"
+            },
+            {
+              "key": "Num 9",
+              "action": "No Crafting Req. & Unlock All Blueprints"
+            },
+            {
               "key": "Ctrl+Num 1",
-              "action": "自由建造无需工作台与材料 (Free Building)"
+              "action": "无限物品 (Infinite Items)"
             },
             {
-              "key": "Ctrl+Num 2",
-              "action": "瞬间秒砍树木与矿石 (Instant Tree Chop & Mining)"
+              "key": "Ctrl+Num 5",
+              "action": "Infinite Food Effect Duration"
+            }
+          ]
+        },
+        {
+          "category": "📈 等级与属性 (Level & Stats)",
+          "items": [
+            {
+              "key": "Ctrl+Num 7",
+              "action": "Edit Comfort Level"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "Num 7",
+              "action": "设置玩家速度 (Set Player Speed)"
             },
             {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
+              "key": "Num 8",
+              "action": "设置跳跃高度 (Set Jump Height)"
+            },
+            {
+              "key": "Ctrl+Num 4",
+              "action": "设置游戏速度 (Set Game Speed)"
+            },
+            {
+              "key": "Ctrl+Num 9",
+              "action": "冻结时间 (Freeze Daytime)"
+            },
+            {
+              "key": "Ctrl+Num 0",
+              "action": "时间流逝速度 (Time Pass Speed)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 4",
+              "action": "Infinite Eitr"
+            },
+            {
+              "key": "Num 0",
+              "action": "One Hit Destroy Objects"
+            },
+            {
+              "key": "Ctrl+Num 6",
+              "action": "Infinite Rested Effect Duration"
+            },
+            {
+              "key": "Ctrl+Num 8",
+              "action": "No Death Penalty"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -17146,6 +19295,11 @@ window.GAMES_DATA = [
       "de": "Resident Evil Village",
       "es": "Resident Evil Village"
     },
+    "aliases": [
+      "生化危机8",
+      "生化8",
+      "村庄"
+    ],
     "developer": "Capcom",
     "releaseYear": 2021,
     "genre": "Survival Horror",
@@ -17170,15 +19324,35 @@ window.GAMES_DATA = [
     "trainerHotkeys": [
       {
         "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
+        "action": "God Mode/Ignore Hit (无敌模式/无视攻击)"
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Infinite Health (无限生命)"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Infinite Ammo (无限弹药)"
+      },
+      {
+        "key": "Num 4",
+        "action": "No Reload (无需换弹)"
+      },
+      {
+        "key": "Num 5",
+        "action": "Rapid Fire (快速射击)"
+      },
+      {
+        "key": "Num 6",
+        "action": "No Recoil (无后坐力)"
+      },
+      {
+        "key": "Num 7",
+        "action": "Infinite Items & Resources"
+      },
+      {
+        "key": "Num 8",
+        "action": "Ignore Crafting Requirements (无视制作需求)"
       }
     ],
     "nexusStats": {
@@ -17251,79 +19425,133 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1196590/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
       "officialUrl": "https://flingtrainer.com/trainer/resident-evil-village-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/resident-evil-village-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "version": "v1.0-v20260203+",
+      "optionsCount": 23,
+      "lastUpdated": "2026-02-04",
+      "platforms": [],
+      "antiCheat": true,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "生化危机 8：村庄 主角锁血无敌 (Infinite Health)"
+              "action": "无敌模式/无视攻击 (God Mode/Ignore Hit)"
             },
             {
               "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
+              "action": "无限生命 (Infinite Health)"
             },
             {
               "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
+              "action": "无限弹药 (Infinite Ammo)"
+            },
+            {
+              "key": "Num 4",
+              "action": "无需换弹 (No Reload)"
+            },
+            {
+              "key": "Num 6",
+              "action": "无后坐力 (No Recoil)"
             },
             {
               "key": "Num 0",
               "action": "一击必杀 (One Hit Kill)"
+            },
+            {
+              "key": "Num .",
+              "action": "伤害倍率 (Damage Multiplier)"
             }
           ]
         },
         {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
+              "key": "Num 7",
+              "action": "Infinite Items & Resources"
+            },
+            {
+              "key": "Num 8",
+              "action": "无视制作需求 (Ignore Crafting Requirements)"
+            },
+            {
+              "key": "Num +",
+              "action": "Highlight Items & Interactables"
+            },
+            {
               "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
+              "action": "修改金钱 (Edit Money)"
             },
             {
               "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
+              "action": "金钱倍率 (Money Multiplier)"
             },
             {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
+              "key": "Ctrl+Num 4",
+              "action": "Unlock All Extra Content Shop Items"
             }
           ]
         },
         {
-          "category": "🚀 探索与移动速度 (Movement & World)",
+          "category": "📈 等级与属性 (Level & Stats)",
           "items": [
             {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
+              "key": "Ctrl+Num 6",
+              "action": "最高分 (The Mercenaries: Max Score)"
             },
             {
-              "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
+              "key": "Ctrl+Num 7",
+              "action": "分数倍率 (Score Multiplier)"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "Num 9",
+              "action": "设置游戏速度 (Set Game Speed)"
+            },
+            {
+              "key": "Alt+Num 1",
+              "action": "Total Play Time -1 Hour"
             },
             {
               "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
+              "action": "设置玩家速度 (Set Player Speed)"
+            },
+            {
+              "key": "Ctrl+Num 5",
+              "action": "无限时间 (The Mercenaries: Infinite Time)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 5",
+              "action": "快速射击 (Rapid Fire)"
+            },
+            {
+              "key": "Alt+Num 2",
+              "action": "Fill Cooking Recipe Without Ingredients"
+            },
+            {
+              "key": "Ctrl+Num 3",
+              "action": "修改CP (Edit CP)"
+            },
+            {
+              "key": "Ctrl+Num 8",
+              "action": "The Mercenaries: Spawn Goal Instantly"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -17344,6 +19572,9 @@ window.GAMES_DATA = [
       "de": "Dying Light",
       "es": "Dying Light"
     },
+    "aliases": [
+      "消逝的光芒"
+    ],
     "developer": "Techland",
     "releaseYear": 2015,
     "genre": "Zombie Action Parkour",
@@ -17372,11 +19603,31 @@ window.GAMES_DATA = [
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Infinite Stamina (无限耐力)"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Infinite Weapon Durability (无限武器耐久)"
+      },
+      {
+        "key": "Num 4",
+        "action": "Infinite Medkit"
+      },
+      {
+        "key": "Num 5",
+        "action": "Infinite Cash (无限现金)"
+      },
+      {
+        "key": "Num 6",
+        "action": "Infinite Item (无限物品)"
+      },
+      {
+        "key": "Num 7",
+        "action": "Infinite Survivor XP"
+      },
+      {
+        "key": "Num 8",
+        "action": "Infinite Agility XP"
       }
     ],
     "nexusStats": {
@@ -17449,79 +19700,169 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/239140/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
-      "officialUrl": "https://flingtrainer.com/trainer/dying-light-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/dying-light-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "officialUrl": "https://flingtrainer.com/trainer/dying-light-enhanced-edition-trainer/",
+      "version": "v1.10-v1.49+",
+      "optionsCount": 29,
+      "lastUpdated": "2022-09-02",
+      "platforms": [],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "消逝的光芒 主角锁血无敌 (Infinite Health)"
+              "action": "无限生命 (Infinite Health)"
             },
             {
               "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
+              "action": "无限耐力 (Infinite Stamina)"
             },
             {
               "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
+              "action": "无限武器耐久 (Infinite Weapon Durability)"
             },
             {
               "key": "Num 0",
               "action": "一击必杀 (One Hit Kill)"
-            }
-          ]
-        },
-        {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
-          "items": [
-            {
-              "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
             },
             {
-              "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
+              "key": "Alt+Num 1",
+              "action": "超级精准 (Super Accuracy)"
             },
             {
               "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
+              "action": "Infinite Lockpick Durability"
+            },
+            {
+              "key": "Ctrl+Num 4",
+              "action": "Slowdown Enemies"
+            },
+            {
+              "key": "Ctrl+Num 5",
+              "action": "敌人无法移动 (Enemies Cannot Move)"
+            },
+            {
+              "key": "Ctrl+Num 7",
+              "action": "Grappling Hook No Cooldown"
+            },
+            {
+              "key": "Ctrl+Num 9",
+              "action": "无限弹药 (Infinite Ammo)"
+            },
+            {
+              "key": "Ctrl+Num 0",
+              "action": "无需换弹 (No Reload)"
             }
           ]
         },
         {
-          "category": "🚀 探索与移动速度 (Movement & World)",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
+              "key": "Num 5",
+              "action": "无限现金 (Infinite Cash)"
             },
             {
-              "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
+              "key": "Num 6",
+              "action": "无限物品 (Infinite Item)"
+            },
+            {
+              "key": "Ctrl+Num 2",
+              "action": "Infinite Lockpick"
+            }
+          ]
+        },
+        {
+          "category": "📈 等级与属性 (Level & Stats)",
+          "items": [
+            {
+              "key": "Num 7",
+              "action": "Infinite Survivor XP"
+            },
+            {
+              "key": "Num 8",
+              "action": "Infinite Agility XP"
+            },
+            {
+              "key": "Num 9",
+              "action": "Infinite Power XP"
+            },
+            {
+              "key": "Insert",
+              "action": "传送到标记点 (Teleport To Waypoint)"
             },
             {
               "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
+              "action": "Infinite Legend XP"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "PageUp",
+              "action": "超级速度 (Super Speed)"
+            },
+            {
+              "key": "PageDown",
+              "action": "超级跳跃 (Super Jump)"
+            },
+            {
+              "key": "Num .",
+              "action": "保存坐标 (Save Location)"
+            },
+            {
+              "key": "Num +",
+              "action": "传送 (Teleport)"
+            },
+            {
+              "key": "Num –",
+              "action": "撤销传送 (Undo Teleportation)"
+            },
+            {
+              "key": "Alt+Num 2",
+              "action": "冻结挑战计时器 (Freeze Challenge Timer)"
+            },
+            {
+              "key": "Alt+Num 4",
+              "action": "设置游戏速度 (Set Game Speed)"
+            },
+            {
+              "key": "Ctrl+Num +",
+              "action": "时间 +1 小时 (Daytime +1 Hour)"
+            },
+            {
+              "key": "Ctrl+Num –",
+              "action": "时间 -1 小时 (Daytime -1 Hour)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 4",
+              "action": "Infinite Medkit"
+            },
+            {
+              "key": "Ctrl+Num 1",
+              "action": "Infinite Throwable"
+            },
+            {
+              "key": "Ctrl+Num 6",
+              "action": "Undetectable by Special Zombies"
+            },
+            {
+              "key": "Ctrl+Num 8",
+              "action": "无限电量 (Infinite Battery)"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -17542,6 +19883,10 @@ window.GAMES_DATA = [
       "de": "Dying Light 2 Stay Human",
       "es": "Dying Light 2 Stay Human"
     },
+    "aliases": [
+      "消逝的光芒2",
+      "消光2"
+    ],
     "developer": "Techland",
     "releaseYear": 2022,
     "genre": "Action RPG Parkour",
@@ -17570,11 +19915,31 @@ window.GAMES_DATA = [
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Infinite Stamina (无限耐力)"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Infinite Immunity"
+      },
+      {
+        "key": "Num 4",
+        "action": "Infinite Weapon Durability (无限武器耐久)"
+      },
+      {
+        "key": "Num 5",
+        "action": "Infinite Crafting Materials (无限制作材料)"
+      },
+      {
+        "key": "Num 6",
+        "action": "Ignore Crafting Requirements (无视制作需求)"
+      },
+      {
+        "key": "Num 7",
+        "action": "Ignore Blueprint Upgrade Requirements"
+      },
+      {
+        "key": "Num 8",
+        "action": "Set Game Speed (设置游戏速度)"
       }
     ],
     "nexusStats": {
@@ -17647,79 +20012,173 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/534380/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
-      "officialUrl": "https://flingtrainer.com/trainer/dying-light-2-stay-human-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/dying-light-2-stay-human-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "officialUrl": "https://flingtrainer.com/trainer/dying-light-2-stay-human-trainer-1675224644/",
+      "version": "v1.0-v1.3x+",
+      "optionsCount": 33,
+      "lastUpdated": "2026-10-22",
+      "platforms": [],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "消逝的光芒 2 主角锁血无敌 (Infinite Health)"
+              "action": "无限生命 (Infinite Health)"
             },
             {
               "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
+              "action": "无限耐力 (Infinite Stamina)"
             },
             {
-              "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
+              "key": "Num 4",
+              "action": "无限武器耐久 (Infinite Weapon Durability)"
+            },
+            {
+              "key": "Num 9",
+              "action": "Super Stamina Damage"
             },
             {
               "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
-            }
-          ]
-        },
-        {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
-          "items": [
-            {
-              "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
+              "action": "超级伤害/一击必杀 (Super Damage/One Hit Kill)"
             },
             {
-              "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
+              "key": "Num .",
+              "action": "伤害倍率 (Damage Multiplier)"
             },
             {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
-            }
-          ]
-        },
-        {
-          "category": "🚀 探索与移动速度 (Movement & World)",
-          "items": [
+              "key": "Num +",
+              "action": "防御倍率 (Defense Multiplier)"
+            },
             {
               "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
+              "action": "无限弹药 (Infinite Ammo)"
             },
             {
               "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
+              "action": "无需换弹 (No Reload)"
             },
             {
               "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
+              "action": "超级精准 (Super Accuracy)"
+            },
+            {
+              "key": "Alt+Num 4",
+              "action": "无后坐力 (No Recoil)"
+            },
+            {
+              "key": "Alt+Num 8",
+              "action": "隐身模式 (Stealth Mode)"
+            }
+          ]
+        },
+        {
+          "category": "💰 资源与物品 (Resources & Items)",
+          "items": [
+            {
+              "key": "Num 5",
+              "action": "无限制作材料 (Infinite Crafting Materials)"
+            },
+            {
+              "key": "Num 6",
+              "action": "无视制作需求 (Ignore Crafting Requirements)"
+            },
+            {
+              "key": "Num 7",
+              "action": "Ignore Blueprint Upgrade Requirements"
+            },
+            {
+              "key": "Ctrl+Num 1",
+              "action": "修改金钱 (Edit Money)"
+            }
+          ]
+        },
+        {
+          "category": "📈 等级与属性 (Level & Stats)",
+          "items": [
+            {
+              "key": "Ctrl+Num 6",
+              "action": "无限经验 (Infinite XP)"
+            },
+            {
+              "key": "Ctrl+Num 7",
+              "action": "经验倍率 (XP Multiplier)"
+            },
+            {
+              "key": "Ctrl+Num 8",
+              "action": "Edit Bounty Agent’s XP"
+            },
+            {
+              "key": "Ctrl+Num –",
+              "action": "传送到标记点 (Teleport to Waypoint)"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "Num 8",
+              "action": "设置游戏速度 (Set Game Speed)"
+            },
+            {
+              "key": "Alt+Num 5",
+              "action": "冻结挑战计时器 (Freeze Challenge Timer)"
+            },
+            {
+              "key": "Alt+Num 6",
+              "action": "Set Sprint Speed"
+            },
+            {
+              "key": "Alt+Num 7",
+              "action": "设置跳跃高度 (Set Jump Height)"
+            },
+            {
+              "key": "Ctrl+Num 9",
+              "action": "冻结时间 (Freeze Daytime)"
+            },
+            {
+              "key": "Ctrl+Num 0",
+              "action": "时间 +1 小时 (Daytime +1 Hour)"
+            },
+            {
+              "key": "Ctrl+Num .",
+              "action": "保存坐标 (Save Location)"
+            },
+            {
+              "key": "Ctrl+Num +",
+              "action": "传送 (Teleport)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 3",
+              "action": "Infinite Immunity"
+            },
+            {
+              "key": "Ctrl+Num 2",
+              "action": "Edit Watcher Tokens"
+            },
+            {
+              "key": "Ctrl+Num 3",
+              "action": "Edit Harper’s Tokens"
+            },
+            {
+              "key": "Ctrl+Num 4",
+              "action": "Edit Hunter’s Tokens"
+            },
+            {
+              "key": "Ctrl+Num 5",
+              "action": "Edit Mutation Samples"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -17740,6 +20199,10 @@ window.GAMES_DATA = [
       "de": "Fallout: New Vegas",
       "es": "Fallout: New Vegas"
     },
+    "aliases": [
+      "新维加斯",
+      "辐射新维加斯"
+    ],
     "developer": "Obsidian Entertainment",
     "releaseYear": 2010,
     "genre": "Post-Apocalyptic RPG",
@@ -17793,21 +20256,8 @@ window.GAMES_DATA = [
         "desc": "针对 辐射：新维加斯 的社区必备体验与性能优化补丁包"
       }
     ],
-    "hasTrainer": true,
-    "trainerHotkeys": [
-      {
-        "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
-      },
-      {
-        "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
-      },
-      {
-        "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
-      }
-    ],
+    "hasTrainer": false,
+    "trainerHotkeys": [],
     "nexusStats": {
       "totalDownloads": "47.7M",
       "totalEndorsements": "691K",
@@ -18016,69 +20466,7 @@ window.GAMES_DATA = [
     ],
     "steamAppId": 22380,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/22380/header.jpg",
-    "trainerInfo": {
-      "author": "风灵月影 (FLiNG)",
-      "version": "Ultimate Edition v1.4.0.525 (全DLC整合)",
-      "officialUrl": "https://flingtrainer.com/trainer/fallout-new-vegas-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/fallout-new-vegas-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
-      "hotkeysCategorized": [
-        {
-          "category": "⚔️ 莫哈韦生存战斗 (Combat & Survival)",
-          "items": [
-            {
-              "key": "Num 1",
-              "action": "无限生命 (Infinite Health)"
-            },
-            {
-              "key": "Num 2",
-              "action": "无限AP行动力 (Infinite AP)"
-            },
-            {
-              "key": "Num 3",
-              "action": "弹药无限与无需装填 (Infinite Ammo)"
-            },
-            {
-              "key": "Num 4",
-              "action": "武器防具耐久度锁定 (Infinite Durability)"
-            },
-            {
-              "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
-            }
-          ]
-        },
-        {
-          "category": "💰 瓶盖与负重 (Economy & Stats)",
-          "items": [
-            {
-              "key": "Ctrl+Num 1",
-              "action": "增加 100,000 瓶盖 (Add 100,000 Caps)"
-            },
-            {
-              "key": "Ctrl+Num 2",
-              "action": "增加 100 赌场筹码 (Add Casino Chips)"
-            },
-            {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
-            }
-          ]
-        }
-      ]
-    },
+    "trainerInfo": {},
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-05",
@@ -18098,6 +20486,10 @@ window.GAMES_DATA = [
       "de": "RimWorld",
       "es": "RimWorld"
     },
+    "aliases": [
+      "环世界",
+      "边缘世界"
+    ],
     "developer": "Ludeon Studios",
     "releaseYear": 2018,
     "genre": "Colony Sim Strategy",
@@ -18151,21 +20543,8 @@ window.GAMES_DATA = [
         "desc": "针对 边缘世界 的社区必备体验与性能优化补丁包"
       }
     ],
-    "hasTrainer": true,
-    "trainerHotkeys": [
-      {
-        "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
-      },
-      {
-        "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
-      },
-      {
-        "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
-      }
-    ],
+    "hasTrainer": false,
+    "trainerHotkeys": [],
     "nexusStats": {
       "totalDownloads": "46.7M",
       "totalEndorsements": "677K",
@@ -18340,69 +20719,7 @@ window.GAMES_DATA = [
     ],
     "steamAppId": 294100,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/294100/header.jpg",
-    "trainerInfo": {
-      "author": "风灵月影 (FLiNG)",
-      "version": "Anomaly 异象 DLC v1.5 全兼容",
-      "officialUrl": "https://flingtrainer.com/trainer/rimworld-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/rimworld-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
-      "hotkeysCategorized": [
-        {
-          "category": "⚔️ 殖民者生存健康 (Colonist Health)",
-          "items": [
-            {
-              "key": "Num 1",
-              "action": "殖民者锁血无敌 (Infinite Health)"
-            },
-            {
-              "key": "Num 2",
-              "action": "情绪心情永久 100% 亢奋 (Max Mood & No Breakdown)"
-            },
-            {
-              "key": "Num 3",
-              "action": "休息饥饿饱食度全满 (No Rest & Hunger)"
-            },
-            {
-              "key": "Num 4",
-              "action": "疾病与病毒瞬间免疫治愈 (Instant Cure All Diseases)"
-            },
-            {
-              "key": "Num 0",
-              "action": "袭击敌军一键击溃 (Kill All Raiders)"
-            }
-          ]
-        },
-        {
-          "category": "💰 基地建筑与科技 (Base Building & Research)",
-          "items": [
-            {
-              "key": "Ctrl+Num 1",
-              "action": "建造上帝模式：零材料秒建 (Instant Free Build)"
-            },
-            {
-              "key": "Ctrl+Num 2",
-              "action": "瞬间完成当前科技树研发 (Instant Research)"
-            },
-            {
-              "key": "Ctrl+Num 3",
-              "action": "作物与动物极速生长成熟 (Instant Plant & Animal Growth)"
-            }
-          ]
-        }
-      ]
-    },
+    "trainerInfo": {},
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-26",
@@ -18422,6 +20739,7 @@ window.GAMES_DATA = [
       "de": "Project Zomboid",
       "es": "Project Zomboid"
     },
+    "aliases": [],
     "developer": "The Indie Stone",
     "releaseYear": 2013,
     "genre": "Isometric Survival Horror",
@@ -18442,21 +20760,8 @@ window.GAMES_DATA = [
         "desc": "针对 僵尸毁灭工程 的社区必备体验与性能优化补丁包"
       }
     ],
-    "hasTrainer": true,
-    "trainerHotkeys": [
-      {
-        "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
-      },
-      {
-        "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
-      },
-      {
-        "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
-      }
-    ],
+    "hasTrainer": false,
+    "trainerHotkeys": [],
     "nexusStats": {
       "totalDownloads": "45.7M",
       "totalEndorsements": "662K",
@@ -18525,82 +20830,7 @@ window.GAMES_DATA = [
     ],
     "steamAppId": 108600,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/108600/header.jpg",
-    "trainerInfo": {
-      "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
-      "officialUrl": "https://flingtrainer.com/trainer/project-zomboid-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/project-zomboid-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
-      "hotkeysCategorized": [
-        {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
-          "items": [
-            {
-              "key": "Num 1",
-              "action": "僵尸毁灭工程 主角锁血无敌 (Infinite Health)"
-            },
-            {
-              "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
-            },
-            {
-              "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
-            },
-            {
-              "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
-            }
-          ]
-        },
-        {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
-          "items": [
-            {
-              "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
-            },
-            {
-              "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
-            },
-            {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
-            }
-          ]
-        },
-        {
-          "category": "🚀 探索与移动速度 (Movement & World)",
-          "items": [
-            {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
-            },
-            {
-              "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
-            },
-            {
-              "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
-            }
-          ]
-        }
-      ]
-    },
+    "trainerInfo": {},
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-25",
@@ -18620,6 +20850,7 @@ window.GAMES_DATA = [
       "de": "The Forest",
       "es": "The Forest"
     },
+    "aliases": [],
     "developer": "Endnight Games",
     "releaseYear": 2018,
     "genre": "Survival Horror",
@@ -18640,21 +20871,8 @@ window.GAMES_DATA = [
         "desc": "针对 森林 的社区必备体验与性能优化补丁包"
       }
     ],
-    "hasTrainer": true,
-    "trainerHotkeys": [
-      {
-        "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
-      },
-      {
-        "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
-      },
-      {
-        "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
-      }
-    ],
+    "hasTrainer": false,
+    "trainerHotkeys": [],
     "nexusStats": {
       "totalDownloads": "44.8M",
       "totalEndorsements": "649K",
@@ -18723,82 +20941,7 @@ window.GAMES_DATA = [
     ],
     "steamAppId": 242760,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/242760/header.jpg",
-    "trainerInfo": {
-      "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
-      "officialUrl": "https://flingtrainer.com/trainer/the-forest-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/the-forest-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
-      "hotkeysCategorized": [
-        {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
-          "items": [
-            {
-              "key": "Num 1",
-              "action": "森林 主角锁血无敌 (Infinite Health)"
-            },
-            {
-              "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
-            },
-            {
-              "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
-            },
-            {
-              "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
-            }
-          ]
-        },
-        {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
-          "items": [
-            {
-              "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
-            },
-            {
-              "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
-            },
-            {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
-            }
-          ]
-        },
-        {
-          "category": "🚀 探索与移动速度 (Movement & World)",
-          "items": [
-            {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
-            },
-            {
-              "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
-            },
-            {
-              "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
-            }
-          ]
-        }
-      ]
-    },
+    "trainerInfo": {},
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-13",
@@ -18818,6 +20961,9 @@ window.GAMES_DATA = [
       "de": "Sons of the Forest",
       "es": "Sons of the Forest"
     },
+    "aliases": [
+      "森林之子"
+    ],
     "developer": "Endnight Games",
     "releaseYear": 2024,
     "genre": "Survival Horror",
@@ -18875,15 +21021,35 @@ window.GAMES_DATA = [
     "trainerHotkeys": [
       {
         "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
+        "action": "God Mode (无敌模式)"
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Infinite Health (无限生命)"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Infinite Stamina (无限耐力)"
+      },
+      {
+        "key": "Num 4",
+        "action": "Max Strength (力量满值)"
+      },
+      {
+        "key": "Num 5",
+        "action": "Max Hydration"
+      },
+      {
+        "key": "Num 6",
+        "action": "Max Fullness"
+      },
+      {
+        "key": "Num 7",
+        "action": "Max Rest"
+      },
+      {
+        "key": "Num 8",
+        "action": "Infinite Ammo/No Reload (无限弹药/无需换弹)"
       }
     ],
     "nexusStats": {
@@ -19026,66 +21192,120 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1326470/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "v1.0 正式发售完整版",
       "officialUrl": "https://flingtrainer.com/trainer/sons-of-the-forest-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/sons-of-the-forest-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "version": "v1.0+",
+      "optionsCount": 21,
+      "lastUpdated": "2024-05-15",
+      "platforms": [],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 荒岛生存与野人战斗 (Survival & Combat)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "无限生命 (Infinite Health)"
+              "action": "无敌模式 (God Mode)"
             },
             {
               "key": "Num 2",
-              "action": "无限耐力 (Infinite Stamina)"
+              "action": "无限生命 (Infinite Health)"
             },
             {
               "key": "Num 3",
-              "action": "饥饿口渴锁定不减 (No Hunger & Thirst)"
+              "action": "无限耐力 (Infinite Stamina)"
             },
             {
-              "key": "Num 4",
-              "action": "手中原木无限复制 (Infinite Wood Logs - loghack)"
+              "key": "Num 8",
+              "action": "无限弹药/无需换弹 (Infinite Ammo/No Reload)"
             },
             {
               "key": "Num 0",
-              "action": "一击必杀野人与变异怪 (One Hit Kill)"
+              "action": "超级伤害/一击必杀 (Super Damage/One Hit Kills)"
+            },
+            {
+              "key": "Num .",
+              "action": "伤害倍率 (Damage Multiplier)"
+            },
+            {
+              "key": "Ctrl+Num 1",
+              "action": "隐身模式 (Stealth Mode)"
             }
           ]
         },
         {
-          "category": "💰 基地秒建与科技 (Building & Items)",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
-              "key": "Ctrl+Num 1",
-              "action": "生存指南蓝图秒建完工 (Instant Blueprint Build)"
-            },
-            {
               "key": "Ctrl+Num 2",
-              "action": "获取全套枪械武器与弹药 (Add All Weapons)"
+              "action": "物品不减少 (Items Won’t Decrease)"
             },
             {
               "key": "Ctrl+Num 3",
-              "action": "极速狂奔移动超级速度 (Super Speed)"
+              "action": "获得全部物品 (Obtain All Items)"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "Num 9",
+              "action": "设置游戏速度 (Set Game Speed)"
+            },
+            {
+              "key": "Ctrl+Num 5",
+              "action": "冻结时间 (Freeze Daytime)"
+            },
+            {
+              "key": "Ctrl+Num 6",
+              "action": "时间流逝速度 (Time Pass Speed)"
+            },
+            {
+              "key": "Ctrl+Num 7",
+              "action": "设置移动速度 (Set Movement Speed)"
+            },
+            {
+              "key": "Ctrl+Num 8",
+              "action": "设置游泳速度 (Set Swim Speed)"
+            },
+            {
+              "key": "Ctrl+Num 9",
+              "action": "设置跳跃高度 (Set Jump Height)"
+            },
+            {
+              "key": "Ctrl+Num 0",
+              "action": "无限跳跃 (Infinite Jumps)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 4",
+              "action": "力量满值 (Max Strength)"
+            },
+            {
+              "key": "Num 5",
+              "action": "Max Hydration"
+            },
+            {
+              "key": "Num 6",
+              "action": "Max Fullness"
+            },
+            {
+              "key": "Num 7",
+              "action": "Max Rest"
+            },
+            {
+              "key": "Ctrl+Num 4",
+              "action": "Open Debug Console"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -19106,6 +21326,9 @@ window.GAMES_DATA = [
       "de": "Satisfactory",
       "es": "Satisfactory"
     },
+    "aliases": [
+      "幸福工厂"
+    ],
     "developer": "Coffee Stain Studios",
     "releaseYear": 2024,
     "genre": "Automation Factory Building",
@@ -19167,11 +21390,31 @@ window.GAMES_DATA = [
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Edit Items Quantity"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Max Inventory Size"
+      },
+      {
+        "key": "Num 4",
+        "action": "Ignore Crafting Requirements (无视制作需求)"
+      },
+      {
+        "key": "Num 5",
+        "action": "Infinite Power (无限电力)"
+      },
+      {
+        "key": "Num 6",
+        "action": "Super Speed (Move Speed) (超级速度)"
+      },
+      {
+        "key": "Num 7",
+        "action": "Set Game Speed (设置游戏速度)"
+      },
+      {
+        "key": "Num 8",
+        "action": "Super Jump (超级跳跃)"
       }
     ],
     "nexusStats": {
@@ -19278,62 +21521,79 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/526870/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "v1.0 正式版全平台发布 (Steam/Epic)",
       "officialUrl": "https://flingtrainer.com/trainer/satisfactory-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/satisfactory-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "version": "v1.0-v1.2+",
+      "optionsCount": 10,
+      "lastUpdated": "2026-06-07",
+      "platforms": [
+        "Steam",
+        "Epic Games Store"
+      ],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 先驱者生存与探索 (Pioneer Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "先驱者无限生命 (Infinite Health)"
+              "action": "无限生命 (Infinite Health)"
             },
             {
-              "key": "Num 2",
-              "action": "喷气背包无限飞行滞空 (Infinite Jetpack Fuel)"
-            },
-            {
-              "key": "Num 3",
-              "action": "辐射完全免疫 (Zero Radiation)"
+              "key": "Num 9",
+              "action": "无坠落伤害 (No Fall Damage)"
             },
             {
               "key": "Num 0",
-              "action": "一击必杀野生外星生物 (One Hit Kill)"
+              "action": "一击必杀 (One Hit Kill)"
             }
           ]
         },
         {
-          "category": "💰 工厂建造与电力 (Factory & Power)",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
-              "key": "Ctrl+Num 1",
-              "action": "全工厂免电力运转 (No Power Required)"
+              "key": "Num 2",
+              "action": "Edit Items Quantity"
             },
             {
-              "key": "Ctrl+Num 2",
-              "action": "建造枪零材料秒建所有机器 (Free Building)"
+              "key": "Num 3",
+              "action": "Max Inventory Size"
             },
             {
-              "key": "Ctrl+Num 3",
-              "action": "瞬间解锁太空电梯全部科技阶段 (Unlock All Tiers)"
+              "key": "Num 4",
+              "action": "无视制作需求 (Ignore Crafting Requirements)"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "Num 6",
+              "action": "超级速度 (Super Speed (Move Speed))"
+            },
+            {
+              "key": "Num 7",
+              "action": "设置游戏速度 (Set Game Speed)"
+            },
+            {
+              "key": "Num 8",
+              "action": "超级跳跃 (Super Jump)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 5",
+              "action": "无限电力 (Infinite Power)"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -19354,6 +21614,9 @@ window.GAMES_DATA = [
       "de": "Factorio",
       "es": "Factorio"
     },
+    "aliases": [
+      "异星工厂"
+    ],
     "developer": "Wube Software",
     "releaseYear": 2020,
     "genre": "Factory Simulation Strategy",
@@ -19407,21 +21670,8 @@ window.GAMES_DATA = [
         "desc": "针对 异星工厂 的社区必备体验与性能优化补丁包"
       }
     ],
-    "hasTrainer": true,
-    "trainerHotkeys": [
-      {
-        "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
-      },
-      {
-        "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
-      },
-      {
-        "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
-      }
-    ],
+    "hasTrainer": false,
+    "trainerHotkeys": [],
     "nexusStats": {
       "totalDownloads": "42.4M",
       "totalEndorsements": "614K",
@@ -19548,69 +21798,7 @@ window.GAMES_DATA = [
     ],
     "steamAppId": 427520,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/427520/header.jpg",
-    "trainerInfo": {
-      "author": "风灵月影 (FLiNG)",
-      "version": "Space Age 太空时代 v2.0 官方版",
-      "officialUrl": "https://flingtrainer.com/trainer/factorio-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/factorio-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
-      "hotkeysCategorized": [
-        {
-          "category": "⚔️ 工程师生存与虫群 (Engineer & Enemies)",
-          "items": [
-            {
-              "key": "Num 1",
-              "action": "工程师无敌不掉血 (Infinite Health)"
-            },
-            {
-              "key": "Num 2",
-              "action": "秒杀全地图所有虫群虫巢 (Kill All Bitter Units)"
-            },
-            {
-              "key": "Num 3",
-              "action": "世界永久大白天无黑夜 (Always Day Time)"
-            },
-            {
-              "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
-            }
-          ]
-        },
-        {
-          "category": "💰 工厂蓝图与科技 (Factory & Research)",
-          "items": [
-            {
-              "key": "Ctrl+Num 1",
-              "action": "开启随身创造免费制造所有机器 (Free Crafting Mode)"
-            },
-            {
-              "key": "Ctrl+Num 2",
-              "action": "瞬间完成全科技树全部研究 (Research All Tech)"
-            },
-            {
-              "key": "Ctrl+Num 3",
-              "action": "随身手工制造速度暴增 100 倍 (100x Crafting Speed)"
-            },
-            {
-              "key": "Ctrl+Num 4",
-              "action": "奔跑移动速度翻倍加倍 (2x Running Speed)"
-            }
-          ]
-        }
-      ]
-    },
+    "trainerInfo": {},
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-10-02",
@@ -19630,6 +21818,9 @@ window.GAMES_DATA = [
       "de": "Cities: Skylines",
       "es": "Cities: Skylines"
     },
+    "aliases": [
+      "城市天际线"
+    ],
     "developer": "Colossal Order",
     "releaseYear": 2015,
     "genre": "City Builder Simulation",
@@ -19650,21 +21841,8 @@ window.GAMES_DATA = [
         "desc": "针对 城市：天际线 的社区必备体验与性能优化补丁包"
       }
     ],
-    "hasTrainer": true,
-    "trainerHotkeys": [
-      {
-        "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
-      },
-      {
-        "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
-      },
-      {
-        "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
-      }
-    ],
+    "hasTrainer": false,
+    "trainerHotkeys": [],
     "nexusStats": {
       "totalDownloads": "41.6M",
       "totalEndorsements": "603K",
@@ -19733,82 +21911,7 @@ window.GAMES_DATA = [
     ],
     "steamAppId": 255710,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/255710/header.jpg",
-    "trainerInfo": {
-      "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
-      "officialUrl": "https://flingtrainer.com/trainer/cities-skylines-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/cities-skylines-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
-      "hotkeysCategorized": [
-        {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
-          "items": [
-            {
-              "key": "Num 1",
-              "action": "城市：天际线 主角锁血无敌 (Infinite Health)"
-            },
-            {
-              "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
-            },
-            {
-              "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
-            },
-            {
-              "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
-            }
-          ]
-        },
-        {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
-          "items": [
-            {
-              "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
-            },
-            {
-              "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
-            },
-            {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
-            }
-          ]
-        },
-        {
-          "category": "🚀 探索与移动速度 (Movement & World)",
-          "items": [
-            {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
-            },
-            {
-              "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
-            },
-            {
-              "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
-            }
-          ]
-        }
-      ]
-    },
+    "trainerInfo": {},
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-24",
@@ -19828,6 +21931,10 @@ window.GAMES_DATA = [
       "de": "Sid Meier's Civilization VI",
       "es": "Sid Meier's Civilization VI"
     },
+    "aliases": [
+      "文明6",
+      "文明"
+    ],
     "developer": "Firaxis Games",
     "releaseYear": 2016,
     "genre": "Turn-Based 4X Strategy",
@@ -19852,15 +21959,35 @@ window.GAMES_DATA = [
     "trainerHotkeys": [
       {
         "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
+        "action": "Infinite Gold (无限金币)"
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Infinite Faith (无限信仰)"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "One Turn Research"
+      },
+      {
+        "key": "Num 4",
+        "action": "One Turn Civics"
+      },
+      {
+        "key": "Num 5",
+        "action": "Add Influence (增加影响力)"
+      },
+      {
+        "key": "Num 6",
+        "action": "Units Infinite Moves"
+      },
+      {
+        "key": "Num 7",
+        "action": "Units Infinite Health"
+      },
+      {
+        "key": "Num 8",
+        "action": "One Turn Building/Recruit"
       }
     ],
     "nexusStats": {
@@ -19933,79 +22060,124 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/289070/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
       "officialUrl": "https://flingtrainer.com/trainer/sid-meiers-civilization-vi-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/sid-meiers-civilization-vi-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "version": "v1.0-v20221215+",
+      "optionsCount": 22,
+      "lastUpdated": "2022-12-22",
+      "platforms": [],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
-              "key": "Num 1",
-              "action": "文明 6 主角锁血无敌 (Infinite Health)"
+              "key": "Num 7",
+              "action": "Units Infinite Health"
             },
             {
-              "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
-            },
-            {
-              "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
-            },
-            {
-              "key": "Num 0",
+              "key": "Alt+Num 7",
               "action": "一击必杀 (One Hit Kill)"
             }
           ]
         },
         {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
-              "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
+              "key": "Num 1",
+              "action": "无限金币 (Infinite Gold)"
             },
             {
-              "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
+              "key": "Num 8",
+              "action": "One Turn Building/Recruit"
             },
             {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
+              "key": "Num 9",
+              "action": "Get All Resources"
+            },
+            {
+              "key": "PageUp",
+              "action": "增加金币 (Add Gold)"
+            },
+            {
+              "key": "PageDown",
+              "action": "Infinite Builder Usage"
+            },
+            {
+              "key": "Alt+Num 1",
+              "action": "Set AI Gold To 0"
+            },
+            {
+              "key": "Alt+Num 8",
+              "action": "AI Can’t Build/Recruit"
+            },
+            {
+              "key": "Alt+Num 9",
+              "action": "Set AI Resources To 0"
             }
           ]
         },
         {
-          "category": "🚀 探索与移动速度 (Movement & World)",
+          "category": "📈 等级与属性 (Level & Stats)",
           "items": [
             {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
+              "key": "Num 5",
+              "action": "增加影响力 (Add Influence)"
+            },
+            {
+              "key": "Num 0",
+              "action": "Units Can Level Up"
+            },
+            {
+              "key": "Alt+Num 5",
+              "action": "Set AI Influence To 0"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 2",
+              "action": "无限信仰 (Infinite Faith)"
+            },
+            {
+              "key": "Num 3",
+              "action": "One Turn Research"
+            },
+            {
+              "key": "Num 4",
+              "action": "One Turn Civics"
+            },
+            {
+              "key": "Num 6",
+              "action": "Units Infinite Moves"
+            },
+            {
+              "key": "Num .",
+              "action": "Player Cities Max Population"
             },
             {
               "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
+              "action": "Set AI Faith To 0"
             },
             {
               "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
+              "action": "AI Can’t Complete Research"
+            },
+            {
+              "key": "Alt+Num 4",
+              "action": "AI Can’t Complete Civics"
+            },
+            {
+              "key": "Alt+Num 6",
+              "action": "AI Units Can’t Move"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -20026,6 +22198,11 @@ window.GAMES_DATA = [
       "de": "Crusader Kings III",
       "es": "Crusader Kings III"
     },
+    "aliases": [
+      "十字军之王3",
+      "十字军之王",
+      "ck3"
+    ],
     "developer": "Paradox Development Studio",
     "releaseYear": 2020,
     "genre": "Historical Grand Strategy",
@@ -20083,15 +22260,35 @@ window.GAMES_DATA = [
     "trainerHotkeys": [
       {
         "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
+        "action": "Edit Health (修改生命)"
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Edit Gold (修改金币)"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Edit Prestige (修改威望)"
+      },
+      {
+        "key": "Num 4",
+        "action": "Max Level of Fame"
+      },
+      {
+        "key": "Num 5",
+        "action": "Edit Piety"
+      },
+      {
+        "key": "Num 6",
+        "action": "Max Level of Devotion"
+      },
+      {
+        "key": "Num 7",
+        "action": "Edit Influence (修改影响力)"
+      },
+      {
+        "key": "Num 8",
+        "action": "Max Level of Influence"
       }
     ],
     "nexusStats": {
@@ -20280,70 +22477,128 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1158310/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "Roads to Power 拜占庭行政制 v1.13",
-      "officialUrl": "https://flingtrainer.com/trainer/crusader-kings-3-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/crusader-kings-3-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "officialUrl": "https://flingtrainer.com/trainer/crusader-kings-iii-trainer/",
+      "version": "v1.0-v1.20+",
+      "optionsCount": 23,
+      "lastUpdated": "2026-10-10",
+      "platforms": [],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 统治者特质与政略 (Ruler & Politics)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "统治者永不衰老生病 (Immortal & No Disease)"
-            },
-            {
-              "key": "Num 2",
-              "action": "压力值瞬间归零锁定 (Zero Stress)"
-            },
-            {
-              "key": "Num 3",
-              "action": "所有外交提议 100% 接受 (Yesmen Always Accept)"
-            },
-            {
-              "key": "Num 4",
-              "action": "瞬间秒建所有男爵领城堡建筑 (Instant Build Holdings)"
-            },
-            {
-              "key": "Num 0",
-              "action": "战争得分瞬间锁定 100% (Instant 100% War Score)"
+              "action": "修改生命 (Edit Health)"
             }
           ]
         },
         {
-          "category": "💰 国库与威望信仰 (Treasury & Prestige)",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
+              "key": "Num 2",
+              "action": "修改金币 (Edit Gold)"
+            }
+          ]
+        },
+        {
+          "category": "📈 等级与属性 (Level & Stats)",
+          "items": [
+            {
+              "key": "Num 3",
+              "action": "修改威望 (Edit Prestige)"
+            },
+            {
+              "key": "Num 4",
+              "action": "Max Level of Fame"
+            },
+            {
+              "key": "Num 6",
+              "action": "Max Level of Devotion"
+            },
+            {
+              "key": "Num 7",
+              "action": "修改影响力 (Edit Influence)"
+            },
+            {
+              "key": "Num 8",
+              "action": "Max Level of Influence"
+            },
+            {
+              "key": "Num 0",
+              "action": "Max Level of Splendor"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 5",
+              "action": "Edit Piety"
+            },
+            {
+              "key": "Num 9",
+              "action": "Edit Renown"
+            },
+            {
+              "key": "Alt+Num 1",
+              "action": "Edit Provisions"
+            },
+            {
+              "key": "Alt+Num 2",
+              "action": "Edit Herds"
+            },
+            {
+              "key": "Alt+Num 3",
+              "action": "Edit Treasury"
+            },
+            {
+              "key": "Alt+Num 4",
+              "action": "Edit Dread"
+            },
+            {
+              "key": "Alt+Num 5",
+              "action": "Edit Stress"
+            },
+            {
+              "key": "Alt+Num 6",
+              "action": "Edit Merit"
+            },
+            {
+              "key": "Alt+Num 7",
+              "action": "Edit Legitimacy"
+            },
+            {
               "key": "Ctrl+Num 1",
-              "action": "增加 50,000 国库金币 (Add 50,000 Gold)"
+              "action": "Diplomacy"
             },
             {
               "key": "Ctrl+Num 2",
-              "action": "增加 10,000 宗族威望 (Add 10,000 Prestige)"
+              "action": "Martial"
             },
             {
               "key": "Ctrl+Num 3",
-              "action": "增加 5,000 宗教虔诚值 (Add 5,000 Piety)"
+              "action": "Stewardship"
             },
             {
               "key": "Ctrl+Num 4",
-              "action": "全时代文化科技革新全开 (Discover All Innovations)"
+              "action": "Intrigue"
+            },
+            {
+              "key": "Ctrl+Num 5",
+              "action": "Learning"
+            },
+            {
+              "key": "Ctrl+Num 6",
+              "action": "Prowess"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -20364,6 +22619,12 @@ window.GAMES_DATA = [
       "de": "Hearts of Iron IV",
       "es": "Hearts of Iron IV"
     },
+    "aliases": [
+      "钢铁雄心4",
+      "钢铁雄心",
+      "钢4",
+      "hoi4"
+    ],
     "developer": "Paradox Development Studio",
     "releaseYear": 2016,
     "genre": "Grand Strategy Wargame",
@@ -20421,15 +22682,35 @@ window.GAMES_DATA = [
     "trainerHotkeys": [
       {
         "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
+        "action": "Infinite Political Power"
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Max Stability"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Max War Support"
+      },
+      {
+        "key": "Num 4",
+        "action": "Infinite Manpower"
+      },
+      {
+        "key": "Num 5",
+        "action": "Infinite Command Power"
+      },
+      {
+        "key": "Num 6",
+        "action": "Infinite Army Experience"
+      },
+      {
+        "key": "Num 7",
+        "action": "Infinite Navy Experience"
+      },
+      {
+        "key": "Num 8",
+        "action": "Infinite Air Experience"
       }
     ],
     "nexusStats": {
@@ -20630,70 +22911,79 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/394360/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "Gotterdammerung 诸神黄昏 v1.14 全DLC",
-      "officialUrl": "https://flingtrainer.com/trainer/hearts-of-iron-4-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/hearts-of-iron-4-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "officialUrl": "https://flingtrainer.com/trainer/hearts-of-iron-iv-trainer/",
+      "version": "v1.10.3-v1.19+",
+      "optionsCount": 12,
+      "lastUpdated": "2026-06-14",
+      "platforms": [],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 陆海空全军作战 (Military Power)",
+          "category": "📈 等级与属性 (Level & Stats)",
           "items": [
             {
-              "key": "Num 1",
-              "action": "无敌作战：部队永不溃退 (Troops Never Retreat)"
-            },
-            {
               "key": "Num 2",
-              "action": "瞬间移动与极速占领 (Instant Movement)"
+              "action": "Max Stability"
             },
             {
-              "key": "Num 3",
-              "action": "陆海空军三军经验锁定 500 满额 (Max Army/Navy/Air XP)"
+              "key": "Num 6",
+              "action": "Infinite Army Experience"
             },
             {
-              "key": "Num 4",
-              "action": "核武器储备无限秒投 (Infinite Nukes)"
+              "key": "Num 7",
+              "action": "Infinite Navy Experience"
             },
             {
-              "key": "Num 0",
-              "action": "瞬间迫降敌国/无条件投降 (Instant Surrender)"
+              "key": "Num 8",
+              "action": "Infinite Air Experience"
             }
           ]
         },
         {
-          "category": "💰 军工建造与政治 (Industry & Politics)",
+          "category": "🌍 移动与世界 (Movement & World)",
           "items": [
             {
+              "key": "Num 0",
+              "action": "One Day Research"
+            },
+            {
+              "key": "Num .",
+              "action": "One Day Construction"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 1",
+              "action": "Infinite Political Power"
+            },
+            {
+              "key": "Num 3",
+              "action": "Max War Support"
+            },
+            {
+              "key": "Num 4",
+              "action": "Infinite Manpower"
+            },
+            {
+              "key": "Num 5",
+              "action": "Infinite Command Power"
+            },
+            {
+              "key": "Num 9",
+              "action": "Infinite Factories"
+            },
+            {
               "key": "Ctrl+Num 1",
-              "action": "瞬间建造：民用军工船坞秒完工 (Instant Construction)"
-            },
-            {
-              "key": "Ctrl+Num 2",
-              "action": "政治点数与指挥点数锁满 (Max Political & Command Power)"
-            },
-            {
-              "key": "Ctrl+Num 3",
-              "action": "后备人力池锁定 1000 万 (Infinite Manpower)"
-            },
-            {
-              "key": "Ctrl+Num 4",
-              "action": "全军工装备物资无限补给 (Infinite Equipment)"
+              "action": "Change World Tension"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -20714,6 +23004,9 @@ window.GAMES_DATA = [
       "de": "Stellaris",
       "es": "Stellaris"
     },
+    "aliases": [
+      "群星"
+    ],
     "developer": "Paradox Development Studio",
     "releaseYear": 2016,
     "genre": "Sci-Fi 4X Strategy",
@@ -20771,15 +23064,35 @@ window.GAMES_DATA = [
     "trainerHotkeys": [
       {
         "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
+        "action": "Instant Research (瞬间研究)"
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Instant Construction/Recruit"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Construction Ship Instant Construction"
+      },
+      {
+        "key": "Num 4",
+        "action": "Instant Survey"
+      },
+      {
+        "key": "Num 5",
+        "action": "Instant Build Megastructures"
+      },
+      {
+        "key": "Num 6",
+        "action": "Selected Unit: Infinite Health (无限生命)"
+      },
+      {
+        "key": "Num 7",
+        "action": "Selected Unit: Infinite Armor (无限护甲)"
+      },
+      {
+        "key": "Num 8",
+        "action": "Selected Unit: Infinite Shield (无限护盾)"
       }
     ],
     "nexusStats": {
@@ -20939,70 +23252,136 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/281990/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "The Machine Age 机械时代 v3.12",
       "officialUrl": "https://flingtrainer.com/trainer/stellaris-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/stellaris-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "version": "2.3.0-v4.4.4+",
+      "optionsCount": 25,
+      "lastUpdated": "2026-06-26",
+      "platforms": [],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 星际舰队战 (Space Fleet Combat)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
-              "key": "Num 1",
-              "action": "舰队上帝模式无敌锁血 (Invulnerable Fleets)"
+              "key": "Num 6",
+              "action": "无限生命 (Selected Unit: Infinite Health)"
             },
             {
-              "key": "Num 2",
-              "action": "瞬间秒杀选定敌方舰队 (Instant Kill Selected Fleet)"
+              "key": "Num 7",
+              "action": "无限护甲 (Selected Unit: Infinite Armor)"
             },
             {
-              "key": "Num 3",
-              "action": "巨构建筑与泰坦战舰瞬间秒造 (Instant Mega-Structures)"
+              "key": "Num 8",
+              "action": "无限护盾 (Selected Unit: Infinite Shield)"
             },
             {
-              "key": "Num 4",
-              "action": "瞬间完成全星系科考调查 (Instant Survey All Systems)"
-            },
-            {
-              "key": "Num 0",
-              "action": "瞬间完成全宇宙全科技研发 (Research All Technologies)"
+              "key": "Ctrl+Num 1",
+              "action": "修改能量 (Edit Energy)"
             }
           ]
         },
         {
-          "category": "💰 战略资源与合金 (Strategic Resources)",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
-              "key": "Ctrl+Num 1",
-              "action": "增加 100,000 能量币与矿石 (Add 100k Energy & Minerals)"
-            },
-            {
-              "key": "Ctrl+Num 2",
-              "action": "增加 50,000 战略合金 (Add 50,000 Alloys)"
+              "key": "Num 5",
+              "action": "Instant Build Megastructures"
             },
             {
               "key": "Ctrl+Num 3",
-              "action": "增加 50,000 帝国凝聚力 (Add 50,000 Unity)"
+              "action": "修改食物 (Edit Food)"
+            },
+            {
+              "key": "Alt+Num 3",
+              "action": "Edit Rare Crystals"
+            }
+          ]
+        },
+        {
+          "category": "📈 等级与属性 (Level & Stats)",
+          "items": [
+            {
+              "key": "Ctrl+Num 7",
+              "action": "修改影响力 (Edit Influence)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 1",
+              "action": "瞬间研究 (Instant Research)"
+            },
+            {
+              "key": "Num 2",
+              "action": "Instant Construction/Recruit"
+            },
+            {
+              "key": "Num 3",
+              "action": "Construction Ship Instant Construction"
+            },
+            {
+              "key": "Num 4",
+              "action": "Instant Survey"
+            },
+            {
+              "key": "Ctrl+Num 2",
+              "action": "Edit Minerals"
             },
             {
               "key": "Ctrl+Num 4",
-              "action": "帝国影响力锁定 1000 满额 (Max Influence)"
+              "action": "Edit Goods"
+            },
+            {
+              "key": "Ctrl+Num 5",
+              "action": "Edit Alloys"
+            },
+            {
+              "key": "Ctrl+Num 6",
+              "action": "Edit Trade"
+            },
+            {
+              "key": "Ctrl+Num 8",
+              "action": "Edit Unity"
+            },
+            {
+              "key": "Alt+Num 1",
+              "action": "Edit Volatile Motes"
+            },
+            {
+              "key": "Alt+Num 2",
+              "action": "Edit Exotic Gases"
+            },
+            {
+              "key": "Alt+Num 4",
+              "action": "Edit Living Metal"
+            },
+            {
+              "key": "Alt+Num 5",
+              "action": "Edit Zro"
+            },
+            {
+              "key": "Alt+Num 6",
+              "action": "Edit Dark Matter"
+            },
+            {
+              "key": "Alt+Num 7",
+              "action": "Edit Nanites"
+            },
+            {
+              "key": "Alt+Num 8",
+              "action": "Edit Minor Artifacts"
+            },
+            {
+              "key": "Alt+Num 9",
+              "action": "Edit Astral Threads"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -21023,6 +23402,10 @@ window.GAMES_DATA = [
       "de": "Total War: WARHAMMER III",
       "es": "Total War: WARHAMMER III"
     },
+    "aliases": [
+      "战锤3",
+      "全战战锤"
+    ],
     "developer": "Creative Assembly",
     "releaseYear": 2022,
     "genre": "Grand Strategy / RTS",
@@ -21047,15 +23430,35 @@ window.GAMES_DATA = [
     "trainerHotkeys": [
       {
         "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
+        "action": "Edit Money (修改金钱)"
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Infinite Movement"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Restore Army Size"
+      },
+      {
+        "key": "Num 4",
+        "action": "Max City Population Surplus"
+      },
+      {
+        "key": "Num .",
+        "action": "Max Hordes Population Surplus"
+      },
+      {
+        "key": "Num 5",
+        "action": "Max City Control"
+      },
+      {
+        "key": "Num 6",
+        "action": "Unlock All Technologies"
+      },
+      {
+        "key": "Num 7",
+        "action": "One Turn Technology"
       }
     ],
     "nexusStats": {
@@ -21128,79 +23531,209 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1142710/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
       "officialUrl": "https://flingtrainer.com/trainer/total-war-warhammer-iii-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/total-war-warhammer-iii-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "version": "v1.0-v9.0.x+",
+      "optionsCount": 41,
+      "lastUpdated": "2026-09-29",
+      "platforms": [
+        "Steam",
+        "Epic Games Store",
+        "Xbox/Game Pass"
+      ],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
-          "items": [
-            {
-              "key": "Num 1",
-              "action": "全面战争：战锤 3 主角锁血无敌 (Infinite Health)"
-            },
-            {
-              "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
-            },
-            {
-              "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
-            },
-            {
-              "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
-            }
-          ]
-        },
-        {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
-          "items": [
-            {
-              "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
-            },
-            {
-              "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
-            },
-            {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
-            }
-          ]
-        },
-        {
-          "category": "🚀 探索与移动速度 (Movement & World)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
-            },
-            {
-              "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
+              "action": "无限生命 (Infinite Health (In Battle))"
             },
             {
               "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
+              "action": "无限弹药 (Infinite Ammo)"
+            },
+            {
+              "key": "Alt+Num 5",
+              "action": "法术瞬间冷却 (Spells Instant Cooldown)"
+            },
+            {
+              "key": "Alt+Num 6",
+              "action": "Empty Enemies Ammo"
+            },
+            {
+              "key": "Alt+Num 7",
+              "action": "敌人士气清空 (Empty Enemies Morale)"
+            },
+            {
+              "key": "Alt+Num 8",
+              "action": "Easy Kill"
+            },
+            {
+              "key": "Alt+Num 9",
+              "action": "伤害倍率 (Damage Multiplier)"
+            },
+            {
+              "key": "Alt+Num 0",
+              "action": "防御倍率 (Defense Multiplier)"
+            },
+            {
+              "key": "Ctrl+Num 2",
+              "action": "Lords & Heroes: Edit Skill Points"
+            },
+            {
+              "key": "Ctrl+F10",
+              "action": "Edit Necromantic Energy"
+            }
+          ]
+        },
+        {
+          "category": "💰 资源与物品 (Resources & Items)",
+          "items": [
+            {
+              "key": "Num 1",
+              "action": "修改金钱 (Edit Money)"
+            },
+            {
+              "key": "Ctrl+F1",
+              "action": "修改魂 (Edit Souls)"
+            },
+            {
+              "key": "Ctrl+F3",
+              "action": "Edit Raw Materials"
+            }
+          ]
+        },
+        {
+          "category": "📈 等级与属性 (Level & Stats)",
+          "items": [
+            {
+              "key": "Ctrl+Num 1",
+              "action": "Lords & Heroes: Infinite Exp"
+            },
+            {
+              "key": "Ctrl+F5",
+              "action": "Edit Conclave Influence"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "Ctrl+Num 4",
+              "action": "设置游戏速度 (Set Game Speed)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 2",
+              "action": "Infinite Movement"
+            },
+            {
+              "key": "Num 3",
+              "action": "Restore Army Size"
+            },
+            {
+              "key": "Num 4",
+              "action": "Max City Population Surplus"
+            },
+            {
+              "key": "Num .",
+              "action": "Max Hordes Population Surplus"
+            },
+            {
+              "key": "Num 5",
+              "action": "Max City Control"
+            },
+            {
+              "key": "Num 6",
+              "action": "Unlock All Technologies"
+            },
+            {
+              "key": "Num 7",
+              "action": "One Turn Technology"
+            },
+            {
+              "key": "Num 8",
+              "action": "一回合建造 (One Turn Construction)"
+            },
+            {
+              "key": "Num 9",
+              "action": "One Turn Recruit"
+            },
+            {
+              "key": "Num 0",
+              "action": "Drain AI Army Size"
+            },
+            {
+              "key": "Alt+Num 2",
+              "action": "Max Morale/Leadership"
+            },
+            {
+              "key": "Alt+Num 4",
+              "action": "Infinite Wind Of Magic"
+            },
+            {
+              "key": "Ctrl+Num 3",
+              "action": "Diplomacy Always Succeed"
+            },
+            {
+              "key": "F2",
+              "action": "Edit Glory"
+            },
+            {
+              "key": "F3",
+              "action": "Edit Skulls"
+            },
+            {
+              "key": "F4",
+              "action": "Edit Infections"
+            },
+            {
+              "key": "F5",
+              "action": "Edit Devotees"
+            },
+            {
+              "key": "F6",
+              "action": "Edit Grimoires"
+            },
+            {
+              "key": "Ctrl+F2",
+              "action": "Edit Meat"
+            },
+            {
+              "key": "Ctrl+F4",
+              "action": "Edit Armaments"
+            },
+            {
+              "key": "Ctrl+F6",
+              "action": "Edit Labours"
+            },
+            {
+              "key": "Ctrl+F7",
+              "action": "Edit Blood"
+            },
+            {
+              "key": "Ctrl+F8",
+              "action": "Edit Corpse"
+            },
+            {
+              "key": "Ctrl+F9",
+              "action": "Edit Manipulation"
+            },
+            {
+              "key": "Ctrl+F11",
+              "action": "Edit Extra Sigils"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -21221,6 +23754,10 @@ window.GAMES_DATA = [
       "de": "Total War: Three Kingdoms",
       "es": "Total War: Three Kingdoms"
     },
+    "aliases": [
+      "全战三国",
+      "三国全战"
+    ],
     "developer": "Creative Assembly",
     "releaseYear": 2019,
     "genre": "Historical Strategy",
@@ -21245,15 +23782,35 @@ window.GAMES_DATA = [
     "trainerHotkeys": [
       {
         "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
+        "action": "Infinite Gold (无限金币)"
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Max Public Order"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "One Turn Reform"
+      },
+      {
+        "key": "Num 4",
+        "action": "Infinite Army Movement"
+      },
+      {
+        "key": "Num 5",
+        "action": "Restore Army Size To Max"
+      },
+      {
+        "key": "Num 6",
+        "action": "Infinite Character Exp"
+      },
+      {
+        "key": "Num 7",
+        "action": "Infinite Character Skill Points"
+      },
+      {
+        "key": "PageDown",
+        "action": "Reset Skill Points"
       }
     ],
     "nexusStats": {
@@ -21326,79 +23883,145 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/779340/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
       "officialUrl": "https://flingtrainer.com/trainer/total-war-three-kingdoms-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/total-war-three-kingdoms-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "version": "v1.0-v20251030+",
+      "optionsCount": 25,
+      "lastUpdated": "2025-12-06",
+      "platforms": [],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
+          "items": [
+            {
+              "key": "Num 7",
+              "action": "Infinite Character Skill Points"
+            },
+            {
+              "key": "PageDown",
+              "action": "Reset Skill Points"
+            },
+            {
+              "key": "Num 8",
+              "action": "技能无冷却 (Skills No Cooldown)"
+            },
+            {
+              "key": "Ctrl+Num 8",
+              "action": "无敌模式 (God Mode (In Battle))"
+            },
+            {
+              "key": "Ctrl+Num –",
+              "action": "敌人士气清空 (Empty Enemies Morale)"
+            }
+          ]
+        },
+        {
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
               "key": "Num 1",
-              "action": "全面战争：三国 主角锁血无敌 (Infinite Health)"
+              "action": "无限金币 (Infinite Gold)"
             },
             {
+              "key": "Num .",
+              "action": "Drain AI Factions Gold"
+            },
+            {
+              "key": "Alt+Num 1",
+              "action": "金币倍率 (Gold Multiplier)"
+            }
+          ]
+        },
+        {
+          "category": "📈 等级与属性 (Level & Stats)",
+          "items": [
+            {
+              "key": "Num 6",
+              "action": "Infinite Character Exp"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "Ctrl+Num 7",
+              "action": "设置游戏速度 (Set Game Speed)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
               "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
+              "action": "Max Public Order"
             },
             {
               "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
+              "action": "One Turn Reform"
+            },
+            {
+              "key": "Num 4",
+              "action": "Infinite Army Movement"
+            },
+            {
+              "key": "Num 5",
+              "action": "Restore Army Size To Max"
+            },
+            {
+              "key": "Num 9",
+              "action": "AI Factions Can’t Move"
             },
             {
               "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
-            }
-          ]
-        },
-        {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
-          "items": [
+              "action": "Drain AI Factions Army Size"
+            },
             {
               "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
+              "action": "Max Military Supplies"
             },
             {
               "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
+              "action": "Max Town Population"
             },
             {
               "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
-            }
-          ]
-        },
-        {
-          "category": "🚀 探索与移动速度 (Movement & World)",
-          "items": [
-            {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
+              "action": "Max Town Reserves"
             },
             {
-              "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
+              "key": "Ctrl+Num 4",
+              "action": "Max Faction Specialisation"
             },
             {
-              "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
+              "key": "Ctrl+Num 5",
+              "action": "Negotiation Always Succeed"
+            },
+            {
+              "key": "Ctrl+Num 6",
+              "action": "一回合建造 (One Turn Construction)"
+            },
+            {
+              "key": "Ctrl+Num 9",
+              "action": "无限箭矢 (Infinite Arrows)"
+            },
+            {
+              "key": "Ctrl+Num 0",
+              "action": "Freeze Year/Character Age"
+            },
+            {
+              "key": "Ctrl+Num .",
+              "action": "Max Character Satisfaction"
+            },
+            {
+              "key": "Ctrl+Num +",
+              "action": "Max Army Morale"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -21419,6 +24042,9 @@ window.GAMES_DATA = [
       "de": "Dragon's Dogma 2",
       "es": "Dragon's Dogma 2"
     },
+    "aliases": [
+      "龙之信条2"
+    ],
     "developer": "Capcom",
     "releaseYear": 2024,
     "genre": "Action RPG",
@@ -21447,11 +24073,31 @@ window.GAMES_DATA = [
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Clear Loss Gauge"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Infinite Stamina (无限耐力)"
+      },
+      {
+        "key": "Num 4",
+        "action": "Edit Max Encumbrance (修改最大负重)"
+      },
+      {
+        "key": "Num 5",
+        "action": "Edit Gold (修改金币)"
+      },
+      {
+        "key": "Num 6",
+        "action": "Edit Rift Crystals"
+      },
+      {
+        "key": "Num 7",
+        "action": "Freeze Daytime (冻结时间)"
+      },
+      {
+        "key": "Num 8",
+        "action": "Daytime +1 Hour (时间 +1 小时)"
       }
     ],
     "nexusStats": {
@@ -21524,79 +24170,185 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/2054970/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
       "officialUrl": "https://flingtrainer.com/trainer/dragons-dogma-2-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/dragons-dogma-2-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "version": "v1.0-v20261103+",
+      "optionsCount": 36,
+      "lastUpdated": "2026-11-10",
+      "platforms": [],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "龙之信条 2 主角锁血无敌 (Infinite Health)"
-            },
-            {
-              "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
+              "action": "无限生命 (Infinite Health)"
             },
             {
               "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
+              "action": "无限耐力 (Infinite Stamina)"
             },
             {
-              "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
+              "key": "Ctrl+Num 6",
+              "action": "修改基础最大生命 (Edit Base Max Health)"
+            },
+            {
+              "key": "Ctrl+Num 7",
+              "action": "修改基础最大耐力 (Edit Base Max Stamina)"
+            },
+            {
+              "key": "Ctrl+Num 9",
+              "action": "修改基础防御 (Edit Base Defense)"
+            },
+            {
+              "key": "Ctrl+Num .",
+              "action": "修改基础魔法防御 (Edit Base Magick Defense)"
+            },
+            {
+              "key": "Alt+Num 6",
+              "action": "修改基础最大生命 (Edit Base Max Health)"
+            },
+            {
+              "key": "Alt+Num 7",
+              "action": "修改基础最大耐力 (Edit Base Max Stamina)"
+            },
+            {
+              "key": "Alt+Num 9",
+              "action": "修改基础防御 (Edit Base Defense)"
+            },
+            {
+              "key": "Alt+Num .",
+              "action": "修改基础魔法防御 (Edit Base Magick Defense)"
             }
           ]
         },
         {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
+          "category": "💰 资源与物品 (Resources & Items)",
+          "items": [
+            {
+              "key": "Num 5",
+              "action": "修改金币 (Edit Gold)"
+            },
+            {
+              "key": "Num 6",
+              "action": "Edit Rift Crystals"
+            },
+            {
+              "key": "Ctrl+Num *",
+              "action": "修改点选物品数量 (Edit Clicked Item Amount)"
+            }
+          ]
+        },
+        {
+          "category": "📈 等级与属性 (Level & Stats)",
           "items": [
             {
               "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
+              "action": "修改等级 (Edit Level)"
             },
             {
               "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
+              "action": "修改经验 (Edit Experience)"
             },
             {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
+              "key": "Alt+Num 1",
+              "action": "修改等级 (Edit Level)"
+            },
+            {
+              "key": "Alt+Num 2",
+              "action": "修改经验 (Edit Experience)"
             }
           ]
         },
         {
-          "category": "🚀 探索与移动速度 (Movement & World)",
+          "category": "🌍 移动与世界 (Movement & World)",
           "items": [
             {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
+              "key": "Num 7",
+              "action": "冻结时间 (Freeze Daytime)"
             },
             {
-              "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
+              "key": "Num 8",
+              "action": "时间 +1 小时 (Daytime +1 Hour)"
+            },
+            {
+              "key": "Num 9",
+              "action": "时间 -1 小时 (Daytime -1 Hour)"
+            },
+            {
+              "key": "Num 0",
+              "action": "设置游戏速度 (Set Game Speed)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 2",
+              "action": "Clear Loss Gauge"
+            },
+            {
+              "key": "Num 4",
+              "action": "修改最大负重 (Edit Max Encumbrance)"
+            },
+            {
+              "key": "Ctrl+Num 3",
+              "action": "Edit Total DCP"
+            },
+            {
+              "key": "Ctrl+Num 4",
+              "action": "Edit Current Vocation DCP"
+            },
+            {
+              "key": "Ctrl+Num 5",
+              "action": "Edit All Vocation DCP"
+            },
+            {
+              "key": "Ctrl+Num 8",
+              "action": "修改基础力量 (Edit Base Strength)"
+            },
+            {
+              "key": "Ctrl+Num 0",
+              "action": "修改基础魔力 (Edit Base Magick)"
+            },
+            {
+              "key": "Ctrl+Num +",
+              "action": "修改基础击倒力 (Edit Base Knockdown Power)"
             },
             {
               "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
+              "action": "Edit Total DCP"
+            },
+            {
+              "key": "Alt+Num 4",
+              "action": "Edit Current Vocation DCP"
+            },
+            {
+              "key": "Alt+Num 5",
+              "action": "Edit All Vocation DCP"
+            },
+            {
+              "key": "Alt+Num 8",
+              "action": "修改基础力量 (Edit Base Strength)"
+            },
+            {
+              "key": "Alt+Num 0",
+              "action": "修改基础魔力 (Edit Base Magick)"
+            },
+            {
+              "key": "Alt+Num +",
+              "action": "修改基础击倒力 (Edit Base Knockdown Power)"
+            },
+            {
+              "key": "Alt+Num –",
+              "action": "修改最大负重 (Edit Max Encumbrance)"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -21617,6 +24369,9 @@ window.GAMES_DATA = [
       "de": "Armored Core VI: Fires of Rubicon",
       "es": "Armored Core VI: Fires of Rubicon"
     },
+    "aliases": [
+      "装甲核心6"
+    ],
     "developer": "FromSoftware",
     "releaseYear": 2023,
     "genre": "Mecha Action",
@@ -21641,15 +24396,35 @@ window.GAMES_DATA = [
     "trainerHotkeys": [
       {
         "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
+        "action": "Infinite AP (无限行动点 (AP))"
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Infinite Energy (无限能量)"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "No ACS Overload"
+      },
+      {
+        "key": "Num 4",
+        "action": "Infinite Ammo (无限弹药)"
+      },
+      {
+        "key": "Num 5",
+        "action": "No Reload (无需换弹)"
+      },
+      {
+        "key": "Num 6",
+        "action": "Instant Weapon Cooldown (武器瞬间冷却)"
+      },
+      {
+        "key": "Num 7",
+        "action": "Instant Scan Cooldown/Instant Reload"
+      },
+      {
+        "key": "Num 8",
+        "action": "Infinite Repair Kits"
       }
     ],
     "nexusStats": {
@@ -21722,79 +24497,99 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1888120/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
       "officialUrl": "https://flingtrainer.com/trainer/armored-core-vi-fires-of-rubicon-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/armored-core-vi-fires-of-rubicon-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "version": "v1.0-v1.05+",
+      "optionsCount": 17,
+      "lastUpdated": "2023-12-24",
+      "platforms": [],
+      "antiCheat": true,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
-              "key": "Num 1",
-              "action": "装甲核心 6：境界天火 主角锁血无敌 (Infinite Health)"
-            },
-            {
               "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
+              "action": "无限能量 (Infinite Energy)"
             },
             {
-              "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
+              "key": "Num 4",
+              "action": "无限弹药 (Infinite Ammo)"
+            },
+            {
+              "key": "Num 5",
+              "action": "无需换弹 (No Reload)"
+            },
+            {
+              "key": "Num 6",
+              "action": "武器瞬间冷却 (Instant Weapon Cooldown)"
+            },
+            {
+              "key": "Num 7",
+              "action": "Instant Scan Cooldown/Instant Reload"
+            },
+            {
+              "key": "Num 9",
+              "action": "Make Enemies ACS Overload"
             },
             {
               "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
+              "action": "一击必杀 (One Hit Kills)"
+            },
+            {
+              "key": "Num .",
+              "action": "伤害倍率 (Damage Multiplier)"
+            },
+            {
+              "key": "Num +",
+              "action": "防御倍率 (Defense Multiplier)"
             }
           ]
         },
         {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
+          "category": "🌍 移动与世界 (Movement & World)",
           "items": [
             {
-              "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
-            },
-            {
-              "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
+              "key": "Alt+Num 2",
+              "action": "Freeze Mission Timer"
             },
             {
               "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
+              "action": "设置游戏速度 (Set Game Speed)"
             }
           ]
         },
         {
-          "category": "🚀 探索与移动速度 (Movement & World)",
+          "category": "🧩 其他功能 (Other)",
           "items": [
             {
+              "key": "Num 1",
+              "action": "无限行动点 (AP) (Infinite AP)"
+            },
+            {
+              "key": "Num 3",
+              "action": "No ACS Overload"
+            },
+            {
+              "key": "Num 8",
+              "action": "Infinite Repair Kits"
+            },
+            {
               "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
+              "action": "Instant Weapon Charge"
             },
             {
-              "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
+              "key": "Ctrl+Num 1",
+              "action": "Edit COAM"
             },
             {
-              "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
+              "key": "Ctrl+Num 2",
+              "action": "Infinite OST CHIPS"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -21815,6 +24610,10 @@ window.GAMES_DATA = [
       "de": "Ghost of Tsushima DIRECTOR'S CUT",
       "es": "Ghost of Tsushima DIRECTOR'S CUT"
     },
+    "aliases": [
+      "对马岛",
+      "对马岛之魂"
+    ],
     "developer": "Sucker Punch / Nixxes",
     "releaseYear": 2024,
     "genre": "Open World Samurai Action",
@@ -21843,11 +24642,31 @@ window.GAMES_DATA = [
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Infinite Resolve"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Max Ghost Stance Gauge"
+      },
+      {
+        "key": "Num 4",
+        "action": "Stealth Mode (隐身模式)"
+      },
+      {
+        "key": "Num 5",
+        "action": "Infinite Arrows (Half Bow/Longbow) (无限箭矢)"
+      },
+      {
+        "key": "Num 6",
+        "action": "Infinite Darts (Blowgun)"
+      },
+      {
+        "key": "Num 7",
+        "action": "Infinite Throwables (无限投掷物)"
+      },
+      {
+        "key": "Num 8",
+        "action": "Infinite Incendiary Oil (Way Of The Flame)"
       }
     ],
     "nexusStats": {
@@ -21920,79 +24739,173 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/2215430/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
-      "officialUrl": "https://flingtrainer.com/trainer/ghost-of-tsushima-directors-cut-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/ghost-of-tsushima-directors-cut-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "officialUrl": "https://flingtrainer.com/trainer/ghost-of-tsushima-trainer/",
+      "version": "v1.0+",
+      "optionsCount": 33,
+      "lastUpdated": "2024-05-19",
+      "platforms": [],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "对马岛之魂：导演剪辑版 主角锁血无敌 (Infinite Health)"
+              "action": "无限生命 (Infinite Health)"
             },
             {
-              "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
-            },
-            {
-              "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
+              "key": "Num 4",
+              "action": "隐身模式 (Stealth Mode)"
             },
             {
               "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
-            }
-          ]
-        },
-        {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
-          "items": [
+              "action": "超级伤害/一击必杀 (Super Damage/One Hit Kills)"
+            },
             {
-              "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
+              "key": "Num .",
+              "action": "伤害倍率 (Damage Multiplier)"
+            },
+            {
+              "key": "Num +",
+              "action": "防御倍率 (Defense Multiplier)"
             },
             {
               "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
+              "action": "无限技能点 (Infinite Skill Points (Technique Points))"
             },
             {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
+              "key": "Ctrl+Num 4",
+              "action": "修改最大生命 (Edit Max Health)"
             }
           ]
         },
         {
-          "category": "🚀 探索与移动速度 (Movement & World)",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
+              "key": "Alt+Num 9",
+              "action": "修改金币 (Edit Gold)"
+            }
+          ]
+        },
+        {
+          "category": "📈 等级与属性 (Level & Stats)",
+          "items": [
+            {
+              "key": "Ctrl+Num 1",
+              "action": "无限经验 (Infinite Exp (Legend))"
+            },
+            {
+              "key": "Ctrl+Num 8",
+              "action": "传送到标记点 (Teleport To Waypoint Location)"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "Ctrl+Num 5",
+              "action": "设置游戏速度 (Set Game Speed)"
+            },
+            {
+              "key": "Ctrl+Num 6",
+              "action": "保存坐标 (Save Location)"
+            },
+            {
+              "key": "Ctrl+Num 7",
+              "action": "传送到保存坐标 (Teleport To Saved Location)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 2",
+              "action": "Infinite Resolve"
+            },
+            {
+              "key": "Num 3",
+              "action": "Max Ghost Stance Gauge"
+            },
+            {
+              "key": "Num 5",
+              "action": "无限箭矢 (Infinite Arrows (Half Bow/Longbow))"
+            },
+            {
+              "key": "Num 6",
+              "action": "Infinite Darts (Blowgun)"
+            },
+            {
+              "key": "Num 7",
+              "action": "无限投掷物 (Infinite Throwables)"
+            },
+            {
+              "key": "Num 8",
+              "action": "Infinite Incendiary Oil (Way Of The Flame)"
+            },
+            {
+              "key": "Num 9",
+              "action": "Easy Break Guard"
+            },
+            {
+              "key": "Ctrl+Num 3",
+              "action": "Fast Unlock Stances"
+            },
+            {
               "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
+              "action": "Edit Supplies"
             },
             {
               "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
+              "action": "Edit Flowers"
             },
             {
               "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
+              "action": "Edit Predator Hides"
+            },
+            {
+              "key": "Alt+Num 4",
+              "action": "Edit Bamboo"
+            },
+            {
+              "key": "Alt+Num 5",
+              "action": "Edit Yew Wood"
+            },
+            {
+              "key": "Alt+Num 6",
+              "action": "Edit Wax Wood"
+            },
+            {
+              "key": "Alt+Num 7",
+              "action": "Edit Iron"
+            },
+            {
+              "key": "Alt+Num 8",
+              "action": "Edit Steel"
+            },
+            {
+              "key": "Alt+Num 0",
+              "action": "Edit Linen"
+            },
+            {
+              "key": "Alt+Num .",
+              "action": "Edit Leather"
+            },
+            {
+              "key": "Alt+Num +",
+              "action": "Edit Silk"
+            },
+            {
+              "key": "Alt+Num –",
+              "action": "Edit Ghost Flowers"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -22013,6 +24926,10 @@ window.GAMES_DATA = [
       "de": "God of War",
       "es": "God of War"
     },
+    "aliases": [
+      "战神4",
+      "战神"
+    ],
     "developer": "Santa Monica Studio",
     "releaseYear": 2022,
     "genre": "Action-Adventure",
@@ -22037,15 +24954,35 @@ window.GAMES_DATA = [
     "trainerHotkeys": [
       {
         "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
+        "action": "God Mode/Ignore Hits (无敌模式/无视攻击)"
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Infinite Health (无限生命)"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Infinite Rage (无限怒气)"
+      },
+      {
+        "key": "Num 4",
+        "action": "Infinite Arrow (无限箭矢)"
+      },
+      {
+        "key": "Num 5",
+        "action": "Skills Instant Cooldown (技能瞬间冷却)"
+      },
+      {
+        "key": "Num 6",
+        "action": "Ignore Crafting/Upgrade Requirements"
+      },
+      {
+        "key": "Num 7",
+        "action": "Set Game Speed (设置游戏速度)"
+      },
+      {
+        "key": "Num 8",
+        "action": "One Hit Stun (一击眩晕)"
       }
     ],
     "nexusStats": {
@@ -22118,79 +25055,101 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1593500/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
-      "officialUrl": "https://flingtrainer.com/trainer/god-of-war-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/god-of-war-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "officialUrl": "https://flingtrainer.com/trainer/god-of-war-trainer-2022/",
+      "version": "v1.0-v1.0.2+",
+      "optionsCount": 15,
+      "lastUpdated": "2022-01-22",
+      "platforms": [],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "战神 4 主角锁血无敌 (Infinite Health)"
+              "action": "无敌模式/无视攻击 (God Mode/Ignore Hits)"
             },
             {
               "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
+              "action": "无限生命 (Infinite Health)"
             },
             {
               "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
+              "action": "无限怒气 (Infinite Rage)"
+            },
+            {
+              "key": "Num 5",
+              "action": "技能瞬间冷却 (Skills Instant Cooldown)"
+            },
+            {
+              "key": "Num 9",
+              "action": "一击必杀 (One Hit Kill)"
             },
             {
               "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
+              "action": "伤害倍率 (Damage Multiplier)"
+            },
+            {
+              "key": "Num .",
+              "action": "防御倍率 (Defense Multiplier)"
             }
           ]
         },
         {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
+              "key": "Num 6",
+              "action": "Ignore Crafting/Upgrade Requirements"
+            }
+          ]
+        },
+        {
+          "category": "📈 等级与属性 (Level & Stats)",
+          "items": [
+            {
+              "key": "Ctrl+Num 3",
+              "action": "修改经验 (Edit XP)"
+            },
+            {
+              "key": "Ctrl+Num 4",
+              "action": "经验倍率 (XP Multiplier)"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "Num 7",
+              "action": "设置游戏速度 (Set Game Speed)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 4",
+              "action": "无限箭矢 (Infinite Arrow)"
+            },
+            {
+              "key": "Num 8",
+              "action": "一击眩晕 (One Hit Stun)"
+            },
+            {
               "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
+              "action": "Edit Hacksilver"
             },
             {
               "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
-            },
-            {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
-            }
-          ]
-        },
-        {
-          "category": "🚀 探索与移动速度 (Movement & World)",
-          "items": [
-            {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
-            },
-            {
-              "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
-            },
-            {
-              "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
+              "action": "Hacksilver Multiplier"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -22211,6 +25170,10 @@ window.GAMES_DATA = [
       "de": "Marvel's Spider-Man Remastered",
       "es": "Marvel's Spider-Man Remastered"
     },
+    "aliases": [
+      "漫威蜘蛛侠",
+      "蜘蛛侠"
+    ],
     "developer": "Insomniac Games",
     "releaseYear": 2022,
     "genre": "Superhero Open World",
@@ -22235,15 +25198,35 @@ window.GAMES_DATA = [
     "trainerHotkeys": [
       {
         "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
+        "action": "God Mode/Ignore Hits (无敌模式/无视攻击)"
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Infinite Health (无限生命)"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Edit Max Health (修改最大生命)"
+      },
+      {
+        "key": "Num 4",
+        "action": "Infinite Focus (无限专注)"
+      },
+      {
+        "key": "Num 5",
+        "action": "Infinite Gadgets Ammo"
+      },
+      {
+        "key": "Num 6",
+        "action": "Suit Power Instant Cooldown"
+      },
+      {
+        "key": "Num 7",
+        "action": "Infinite Suit Power Duration"
+      },
+      {
+        "key": "Num 8",
+        "action": "Infinite Scan Duration"
       }
     ],
     "nexusStats": {
@@ -22316,79 +25299,161 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1817070/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
-      "officialUrl": "https://flingtrainer.com/trainer/marvels-spider-man-remastered-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/marvels-spider-man-remastered-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "officialUrl": "https://flingtrainer.com/trainer/marvels-spider-man-remastered-trainers/",
+      "version": "v1.812-v2.616+",
+      "optionsCount": 30,
+      "lastUpdated": "2023-06-22",
+      "platforms": [],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "漫威蜘蛛侠：重制版 主角锁血无敌 (Infinite Health)"
+              "action": "无敌模式/无视攻击 (God Mode/Ignore Hits)"
             },
             {
               "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
+              "action": "无限生命 (Infinite Health)"
             },
             {
               "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
+              "action": "修改最大生命 (Edit Max Health)"
+            },
+            {
+              "key": "Num 4",
+              "action": "无限专注 (Infinite Focus)"
+            },
+            {
+              "key": "Num 5",
+              "action": "Infinite Gadgets Ammo"
+            },
+            {
+              "key": "Num 6",
+              "action": "Suit Power Instant Cooldown"
             },
             {
               "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
+              "action": "超级伤害/一击必杀 (Super Damage/One Hit Kills)"
+            },
+            {
+              "key": "Num .",
+              "action": "伤害倍率 (Damage Multiplier)"
+            },
+            {
+              "key": "Num +",
+              "action": "防御倍率 (Defense Multiplier)"
+            },
+            {
+              "key": "Ctrl+Num 1",
+              "action": "隐身模式 (Stealth Mode)"
+            },
+            {
+              "key": "Ctrl+Num 4",
+              "action": "无限技能点 (Infinite Skill Points)"
             }
           ]
         },
         {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
-              "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
-            },
+              "key": "Ctrl+Num 8",
+              "action": "无视制作需求 (Ignore Crafting Requirements)"
+            }
+          ]
+        },
+        {
+          "category": "📈 等级与属性 (Level & Stats)",
+          "items": [
             {
               "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
+              "action": "无限经验 (Infinite XP)"
             },
             {
               "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
+              "action": "经验倍率 (XP Multiplier)"
+            },
+            {
+              "key": "Ctrl+Num 7",
+              "action": "Max Challenge Score"
+            },
+            {
+              "key": "Alt+Num 9",
+              "action": "传送到标记点 (Teleport To Waypoint)"
             }
           ]
         },
         {
-          "category": "🚀 探索与移动速度 (Movement & World)",
+          "category": "🌍 移动与世界 (Movement & World)",
           "items": [
             {
+              "key": "Ctrl+Num 6",
+              "action": "冻结挑战计时器 (Freeze Challenge Timer)"
+            },
+            {
+              "key": "Ctrl+Num 9",
+              "action": "设置游戏速度 (Set Game Speed)"
+            },
+            {
+              "key": "Alt+Num 7",
+              "action": "保存坐标 (Save Location)"
+            },
+            {
+              "key": "Alt+Num 8",
+              "action": "传送 (Teleport)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 7",
+              "action": "Infinite Suit Power Duration"
+            },
+            {
+              "key": "Num 8",
+              "action": "Infinite Scan Duration"
+            },
+            {
+              "key": "Num 9",
+              "action": "最大连击 (Max Combo)"
+            },
+            {
+              "key": "Ctrl+Num 5",
+              "action": "Easy Complete Benchmark Challenges"
+            },
+            {
               "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
+              "action": "Edit Research Tokens"
             },
             {
               "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
+              "action": "Edit Landmark Tokens"
             },
             {
               "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
+              "action": "Edit Base Tokens"
+            },
+            {
+              "key": "Alt+Num 4",
+              "action": "Edit Crime Tokens"
+            },
+            {
+              "key": "Alt+Num 5",
+              "action": "Edit Challenge Tokens"
+            },
+            {
+              "key": "Alt+Num 6",
+              "action": "Edit Backpack Tokens"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -22409,6 +25474,9 @@ window.GAMES_DATA = [
       "de": "Horizon Zero Dawn",
       "es": "Horizon Zero Dawn"
     },
+    "aliases": [
+      "地平线零之曙光"
+    ],
     "developer": "Guerrilla Games",
     "releaseYear": 2020,
     "genre": "Post-Apocalyptic Action RPG",
@@ -22436,12 +25504,32 @@ window.GAMES_DATA = [
         "action": "Infinite Health (无限生命)"
       },
       {
+        "key": "Num +",
+        "action": "Infinite Concentration"
+      },
+      {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Full Medicine Pouch"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Infinite Oxygen (无限氧气)"
+      },
+      {
+        "key": "Num 4",
+        "action": "Instant Charge Weapon"
+      },
+      {
+        "key": "Num 5",
+        "action": "Infinite Ammo/Arrow (无限弹药/箭矢)"
+      },
+      {
+        "key": "Num 6",
+        "action": "Infinite Shards"
+      },
+      {
+        "key": "Num 7",
+        "action": "Infinite Resources (无限资源)"
       }
     ],
     "nexusStats": {
@@ -22514,79 +25602,157 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1151640/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
-      "officialUrl": "https://flingtrainer.com/trainer/horizon-zero-dawn-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/horizon-zero-dawn-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "officialUrl": "https://flingtrainer.com/trainer/horizon-zero-dawn-complete-edition-trainer/",
+      "version": "v1.0-v1.08+",
+      "optionsCount": 28,
+      "lastUpdated": "2020-11-25",
+      "platforms": [],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "地平线：零之曙光 主角锁血无敌 (Infinite Health)"
-            },
-            {
-              "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
+              "action": "无限生命 (Infinite Health)"
             },
             {
               "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
+              "action": "无限氧气 (Infinite Oxygen)"
+            },
+            {
+              "key": "Num 5",
+              "action": "无限弹药/箭矢 (Infinite Ammo/Arrow)"
             },
             {
               "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
-            }
-          ]
-        },
-        {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
-          "items": [
+              "action": "超级伤害/一击必杀 (Super Damage/One Hit Kill)"
+            },
             {
-              "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
+              "key": "Num .",
+              "action": "伤害倍率 (Damage Multiplier)"
             },
             {
               "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
+              "action": "隐身模式 (Stealth Mode)"
             },
             {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
+              "key": "Ctrl+Num 6",
+              "action": "修改技能点 (Edit Skill Points)"
             }
           ]
         },
         {
-          "category": "🚀 探索与移动速度 (Movement & World)",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
+              "key": "Num 7",
+              "action": "无限资源 (Infinite Resources)"
+            },
+            {
+              "key": "Num 8",
+              "action": "Infinite Potion/Consumables"
+            },
+            {
+              "key": "Ctrl+Num 1",
+              "action": "无视制作需求 (Ignore Crafting Requirements)"
+            },
+            {
+              "key": "Ctrl+Num 8",
+              "action": "Ignore Purchase Requirements"
+            },
+            {
+              "key": "Alt+Num 4",
+              "action": "Edit Resource Capacity"
+            }
+          ]
+        },
+        {
+          "category": "📈 等级与属性 (Level & Stats)",
+          "items": [
+            {
+              "key": "Ctrl+Num 4",
+              "action": "无限经验 (Infinite Exp)"
+            },
+            {
+              "key": "Ctrl+Num 5",
+              "action": "经验倍率 (Exp Multiplier)"
+            },
+            {
+              "key": "Ctrl+Num 9",
+              "action": "传送到标记点 (Teleport To Waypoint Location)"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "Ctrl+Num 7",
+              "action": "设置游戏速度 (Set Game Speed)"
+            },
+            {
+              "key": "Ctrl+Num 0",
+              "action": "Freeze Trial Mission Timer"
+            },
+            {
+              "key": "Ctrl+Num .",
+              "action": "冻结时间 (Freeze Daytime)"
+            },
+            {
+              "key": "Ctrl+Num +",
+              "action": "时间 +1 小时 (Daytime +1 Hour)"
+            },
+            {
+              "key": "Ctrl+Num –",
+              "action": "时间 -1 小时 (Daytime -1 Hour)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num +",
+              "action": "Infinite Concentration"
+            },
+            {
+              "key": "Num 2",
+              "action": "Full Medicine Pouch"
+            },
+            {
+              "key": "Num 4",
+              "action": "Instant Charge Weapon"
+            },
+            {
+              "key": "Num 6",
+              "action": "Infinite Shards"
+            },
+            {
+              "key": "Num 9",
+              "action": "Infinite Traps"
+            },
+            {
+              "key": "Ctrl+Num 3",
+              "action": "增益无限持续 (Infinite BUFF Duration)"
+            },
+            {
               "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
+              "action": "Edit Weapon Capacity"
             },
             {
               "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
+              "action": "Edit Outfit Capacity"
             },
             {
               "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
+              "action": "Edit Modification Capacity"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -22607,6 +25773,7 @@ window.GAMES_DATA = [
       "de": "Days Gone",
       "es": "Days Gone"
     },
+    "aliases": [],
     "developer": "Bend Studio",
     "releaseYear": 2021,
     "genre": "Zombie Open World",
@@ -22631,15 +25798,35 @@ window.GAMES_DATA = [
     "trainerHotkeys": [
       {
         "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
+        "action": "God Mode/Ignore Hits (无敌模式/无视攻击)"
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Infinite Health (无限生命)"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Infinite Stamina (无限耐力)"
+      },
+      {
+        "key": "Num 4",
+        "action": "Infinite Focus (无限专注)"
+      },
+      {
+        "key": "Num 5",
+        "action": "Infinite Ammo (无限弹药)"
+      },
+      {
+        "key": "Num 6",
+        "action": "No Reload (无需换弹)"
+      },
+      {
+        "key": "Num 7",
+        "action": "Super Accuracy (超级精准)"
+      },
+      {
+        "key": "Num 8",
+        "action": "No Recoil (无后坐力)"
       }
     ],
     "nexusStats": {
@@ -22712,79 +25899,177 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1259420/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
-      "officialUrl": "https://flingtrainer.com/trainer/days-gone-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/days-gone-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "officialUrl": "https://flingtrainer.com/trainer/days-gone-trainer-20210518/",
+      "version": "v1.0-v20250425+",
+      "optionsCount": 34,
+      "lastUpdated": "2025-04-26",
+      "platforms": [],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "往日不再 主角锁血无敌 (Infinite Health)"
+              "action": "无敌模式/无视攻击 (God Mode/Ignore Hits)"
             },
             {
               "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
+              "action": "无限生命 (Infinite Health)"
             },
             {
               "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
+              "action": "无限耐力 (Infinite Stamina)"
+            },
+            {
+              "key": "Num 4",
+              "action": "无限专注 (Infinite Focus)"
+            },
+            {
+              "key": "Num 5",
+              "action": "无限弹药 (Infinite Ammo)"
+            },
+            {
+              "key": "Num 6",
+              "action": "无需换弹 (No Reload)"
+            },
+            {
+              "key": "Num 7",
+              "action": "超级精准 (Super Accuracy)"
+            },
+            {
+              "key": "Num 8",
+              "action": "无后坐力 (No Recoil)"
             },
             {
               "key": "Num 0",
               "action": "一击必杀 (One Hit Kill)"
+            },
+            {
+              "key": "Num .",
+              "action": "伤害倍率 (Damage Multiplier)"
+            },
+            {
+              "key": "Num +",
+              "action": "隐身模式 (Stealth Mode)"
+            },
+            {
+              "key": "Alt+Num 1",
+              "action": "无限生命 (Bike: Infinite Health)"
+            },
+            {
+              "key": "Alt+Num 4",
+              "action": "无限武器耐久 (Infinite Weapon Durability)"
+            },
+            {
+              "key": "Alt+Num 5",
+              "action": "Infinite Weapon Mods Durability"
+            },
+            {
+              "key": "Ctrl+Num 7",
+              "action": "无限技能点 (Infinite Skill Points)"
             }
           ]
         },
         {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
+              "key": "Alt+Num 2",
+              "action": "无限燃料 (Bike: Infinite Fuel)"
+            },
+            {
+              "key": "Alt+Num 7",
+              "action": "解锁全部制作配方 (Unlock All Crafting Recipes)"
+            },
+            {
+              "key": "Alt+Num 8",
+              "action": "无视制作需求 (Ignore Crafting Requirements)"
+            },
+            {
               "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
+              "action": "无限信用点 (Infinite Credits)"
             },
             {
               "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
+              "action": "信用点倍率 (Credits Multiplier)"
             },
             {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
+              "key": "Ctrl+Num .",
+              "action": "无限信用点 (Challenge Mode: Infinite Credits)"
             }
           ]
         },
         {
-          "category": "🚀 探索与移动速度 (Movement & World)",
+          "category": "📈 等级与属性 (Level & Stats)",
           "items": [
             {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
+              "key": "Ctrl+Num 5",
+              "action": "无限经验 (Infinite Exp)"
             },
             {
-              "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
+              "key": "Ctrl+Num 6",
+              "action": "经验倍率 (Exp Multiplier)"
+            },
+            {
+              "key": "Ctrl+Num 0",
+              "action": "最高分 (Challenge Mode: Max Score)"
+            },
+            {
+              "key": "Ctrl+Num +",
+              "action": "Challenge Mode: Max Rep Level"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "Alt+Num .",
+              "action": "冻结时间 (Freeze Daytime)"
+            },
+            {
+              "key": "Alt+Num +",
+              "action": "时间 +1 小时 (Daytime +1 Hour)"
+            },
+            {
+              "key": "Ctrl+Num 8",
+              "action": "设置游戏速度 (Set Game Speed)"
+            },
+            {
+              "key": "Ctrl+Num 9",
+              "action": "冻结计时器 (Challenge Mode: Freeze Timer)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 9",
+              "action": "快速射击 (Rapid Fire)"
             },
             {
               "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
+              "action": "Bike: Infinite Nitrous"
+            },
+            {
+              "key": "Alt+Num 6",
+              "action": "Infinite Scraps"
+            },
+            {
+              "key": "Ctrl+Num 3",
+              "action": "Max Trust"
+            },
+            {
+              "key": "Ctrl+Num 4",
+              "action": "Trust Multiplier"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -22805,6 +26090,9 @@ window.GAMES_DATA = [
       "de": "Death Stranding Director's Cut",
       "es": "Death Stranding Director's Cut"
     },
+    "aliases": [
+      "死亡搁浅"
+    ],
     "developer": "Kojima Productions",
     "releaseYear": 2022,
     "genre": "Open World Sci-Fi",
@@ -22833,11 +26121,31 @@ window.GAMES_DATA = [
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Max Consciousness"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Infinite Stamina (无限耐力)"
+      },
+      {
+        "key": "Num 4",
+        "action": "No Fatigue (No Max Stamina Drop)"
+      },
+      {
+        "key": "Num 5",
+        "action": "Zero BB Stress"
+      },
+      {
+        "key": "Num 6",
+        "action": "Edit Carrying Weight Capacity"
+      },
+      {
+        "key": "Num 7",
+        "action": "Infinite Ammo/Infinite Item Usage (无限弹药/物品无限使用)"
+      },
+      {
+        "key": "Num 8",
+        "action": "Max Equipment Durability (装备耐久满值)"
       }
     ],
     "nexusStats": {
@@ -22910,79 +26218,143 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1850570/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
-      "officialUrl": "https://flingtrainer.com/trainer/death-stranding-directors-cut-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/death-stranding-directors-cut-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "officialUrl": "https://flingtrainer.com/trainer/death-stranding-trainer/",
+      "version": "Store v1.0+",
+      "optionsCount": 26,
+      "lastUpdated": "2022-05-11",
+      "platforms": [
+        "Steam",
+        "Epic Games Store"
+      ],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "死亡搁浅：导演剪辑版 主角锁血无敌 (Infinite Health)"
-            },
-            {
-              "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
+              "action": "无限生命 (Infinite Health)"
             },
             {
               "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
+              "action": "无限耐力 (Infinite Stamina)"
+            },
+            {
+              "key": "Num 4",
+              "action": "No Fatigue (No Max Stamina Drop)"
+            },
+            {
+              "key": "Num 7",
+              "action": "无限弹药/物品无限使用 (Infinite Ammo/Infinite Item Usage)"
+            },
+            {
+              "key": "Num 8",
+              "action": "装备耐久满值 (Max Equipment Durability)"
+            },
+            {
+              "key": "Num 9",
+              "action": "Max Carrying Item Durability"
             },
             {
               "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
-            }
-          ]
-        },
-        {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
-          "items": [
+              "action": "Max Container Durability"
+            },
             {
-              "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
+              "key": "Alt+Num 6",
+              "action": "Stealth Mode/Enemy Won’t Attack"
+            },
+            {
+              "key": "Alt+Num 7",
+              "action": "无需换弹 (No Reload)"
+            },
+            {
+              "key": "Alt+Num 8",
+              "action": "Max Vehicle Durability"
             },
             {
               "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
+              "action": "Max Material Storage Capacity"
             },
             {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
+              "key": "Ctrl+Num 5",
+              "action": "Max Building Durability"
             }
           ]
         },
         {
-          "category": "🚀 探索与移动速度 (Movement & World)",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
+              "key": "Num 6",
+              "action": "Edit Carrying Weight Capacity"
+            },
+            {
+              "key": "Alt+Num 4",
+              "action": "Ignore Weight/No Shifting Weight"
+            },
+            {
+              "key": "Alt+Num 9",
+              "action": "Easy Building & Upgrade"
+            },
+            {
+              "key": "Ctrl+Num 1",
+              "action": "无限材料 (Infinite Materials)"
+            },
+            {
+              "key": "Ctrl+Num 3",
+              "action": "Edit Chiral Crystals"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "Ctrl+Num 4",
+              "action": "设置游戏速度 (Set Game Speed)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 2",
+              "action": "Max Consciousness"
+            },
+            {
+              "key": "Num 5",
+              "action": "Zero BB Stress"
+            },
+            {
+              "key": "Num .",
+              "action": "Retain Balance/Won’t Fall"
+            },
+            {
               "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
+              "action": "Invulnerable/Ignore Hits"
             },
             {
               "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
+              "action": "Infinite Equipment Battery"
             },
             {
               "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
+              "action": "Infinite Vehicle Battery"
+            },
+            {
+              "key": "Alt+Num 5",
+              "action": "Infinite Urine"
+            },
+            {
+              "key": "Ctrl+Num 6",
+              "action": "Infinite Chiral Bandwidth"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -23003,6 +26375,9 @@ window.GAMES_DATA = [
       "de": "Detroit: Become Human",
       "es": "Detroit: Become Human"
     },
+    "aliases": [
+      "底特律变人"
+    ],
     "developer": "Quantic Dream",
     "releaseYear": 2020,
     "genre": "Interactive Story",
@@ -23017,21 +26392,8 @@ window.GAMES_DATA = [
     "hasMods": false,
     "modInstallPath": "N/A",
     "mustHaveMods": [],
-    "hasTrainer": true,
-    "trainerHotkeys": [
-      {
-        "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
-      },
-      {
-        "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
-      },
-      {
-        "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
-      }
-    ],
+    "hasTrainer": false,
+    "trainerHotkeys": [],
     "nexusStats": {
       "totalDownloads": "33.7M",
       "totalEndorsements": "488K",
@@ -23100,82 +26462,7 @@ window.GAMES_DATA = [
     ],
     "steamAppId": 1222140,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1222140/header.jpg",
-    "trainerInfo": {
-      "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
-      "officialUrl": "https://flingtrainer.com/trainer/detroit-become-human-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/detroit-become-human-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
-      "hotkeysCategorized": [
-        {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
-          "items": [
-            {
-              "key": "Num 1",
-              "action": "底特律：化身为人 主角锁血无敌 (Infinite Health)"
-            },
-            {
-              "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
-            },
-            {
-              "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
-            },
-            {
-              "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
-            }
-          ]
-        },
-        {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
-          "items": [
-            {
-              "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
-            },
-            {
-              "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
-            },
-            {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
-            }
-          ]
-        },
-        {
-          "category": "🚀 探索与移动速度 (Movement & World)",
-          "items": [
-            {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
-            },
-            {
-              "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
-            },
-            {
-              "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
-            }
-          ]
-        }
-      ]
-    },
+    "trainerInfo": {},
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-04",
@@ -23195,6 +26482,9 @@ window.GAMES_DATA = [
       "de": "Kingdom Come: Deliverance",
       "es": "Kingdom Come: Deliverance"
     },
+    "aliases": [
+      "天国拯救"
+    ],
     "developer": "Warhorse Studios",
     "releaseYear": 2018,
     "genre": "Realistic Medieval RPG",
@@ -23256,11 +26546,31 @@ window.GAMES_DATA = [
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Infinite Stamina (无限耐力)"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Infinite Energy (无限能量)"
+      },
+      {
+        "key": "Num 4",
+        "action": "Infinite Nourishment"
+      },
+      {
+        "key": "Num 5",
+        "action": "Items Don’t Decrease (物品不减少)"
+      },
+      {
+        "key": "Num 6",
+        "action": "Zero Weight (零重量)"
+      },
+      {
+        "key": "Num 7",
+        "action": "Max Item Condition/Freshness"
+      },
+      {
+        "key": "Num 8",
+        "action": "Super Speed (超级速度)"
       }
     ],
     "nexusStats": {
@@ -23379,70 +26689,109 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/379430/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "Royal Edition 皇家典藏版 v1.9.6",
       "officialUrl": "https://flingtrainer.com/trainer/kingdom-come-deliverance-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/kingdom-come-deliverance-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "version": "v1.2-v1.9.2+",
+      "optionsCount": 16,
+      "lastUpdated": "2019-07-18",
+      "platforms": [],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 亨利生存与剑斗 (Henry's Combat)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "亨利无限生命 (Infinite Health)"
+              "action": "无限生命 (Infinite Health)"
             },
             {
               "key": "Num 2",
-              "action": "无限体力与耐力 (Infinite Stamina)"
+              "action": "无限耐力 (Infinite Stamina)"
             },
             {
               "key": "Num 3",
-              "action": "饥饿疲劳永不降低 (No Hunger & Fatigue)"
-            },
-            {
-              "key": "Num 4",
-              "action": "武器防具耐久不磨损 (Infinite Durability)"
+              "action": "无限能量 (Infinite Energy)"
             },
             {
               "key": "Num 0",
+              "action": "Drain Enemies’ Stamina"
+            },
+            {
+              "key": "Num .",
               "action": "一击必杀 (One Hit Kill)"
             }
           ]
         },
         {
-          "category": "💰 格罗申银币与便民 (Economy & QoL)",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
-              "key": "Ctrl+Num 1",
-              "action": "增加 100,000 格罗申银币 (Add 100,000 Groschen)"
+              "key": "Num 5",
+              "action": "物品不减少 (Items Don’t Decrease)"
             },
             {
+              "key": "Num 6",
+              "action": "零重量 (Zero Weight)"
+            },
+            {
+              "key": "Num 7",
+              "action": "Max Item Condition/Freshness"
+            },
+            {
+              "key": "Ctrl+Num 1",
+              "action": "无限金钱 (Infinite Money)"
+            }
+          ]
+        },
+        {
+          "category": "📈 等级与属性 (Level & Stats)",
+          "items": [
+            {
               "key": "Ctrl+Num 2",
-              "action": "无需保存药剂自由随时存档 (Save Anywhere)"
+              "action": "无限经验 (Infinite XP)"
             },
             {
               "key": "Ctrl+Num 3",
-              "action": "开锁器永不断裂且一键秒开 (Easy Lockpick)"
+              "action": "无限天赋点 (Infinite Perk Points)"
             },
             {
               "key": "Ctrl+Num 4",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
+              "action": "声望满值 (Max Reputation)"
+            },
+            {
+              "key": "F1/F2/F3/F4",
+              "action": "2/4/8/16x XP"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "Num 8",
+              "action": "超级速度 (Super Speed)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 4",
+              "action": "Infinite Nourishment"
+            },
+            {
+              "key": "Num 9",
+              "action": "No Injuries"
+            },
+            {
+              "key": "Home",
+              "action": "Disable All"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -23463,6 +26812,11 @@ window.GAMES_DATA = [
       "de": "Mount & Blade: Warband",
       "es": "Mount & Blade: Warband"
     },
+    "aliases": [
+      "战团",
+      "骑砍战团",
+      "骑马与砍杀战团"
+    ],
     "developer": "TaleWorlds",
     "releaseYear": 2010,
     "genre": "Action RPG Strategy",
@@ -23483,21 +26837,8 @@ window.GAMES_DATA = [
         "desc": "针对 骑马与砍杀：战团 的社区必备体验与性能优化补丁包"
       }
     ],
-    "hasTrainer": true,
-    "trainerHotkeys": [
-      {
-        "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
-      },
-      {
-        "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
-      },
-      {
-        "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
-      }
-    ],
+    "hasTrainer": false,
+    "trainerHotkeys": [],
     "nexusStats": {
       "totalDownloads": "32.9M",
       "totalEndorsements": "477K",
@@ -23566,82 +26907,7 @@ window.GAMES_DATA = [
     ],
     "steamAppId": 48700,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/48700/header.jpg",
-    "trainerInfo": {
-      "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
-      "officialUrl": "https://flingtrainer.com/trainer/mount-and-blade-warband-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/mount-and-blade-warband-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
-      "hotkeysCategorized": [
-        {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
-          "items": [
-            {
-              "key": "Num 1",
-              "action": "骑马与砍杀：战团 主角锁血无敌 (Infinite Health)"
-            },
-            {
-              "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
-            },
-            {
-              "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
-            },
-            {
-              "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
-            }
-          ]
-        },
-        {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
-          "items": [
-            {
-              "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
-            },
-            {
-              "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
-            },
-            {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
-            }
-          ]
-        },
-        {
-          "category": "🚀 探索与移动速度 (Movement & World)",
-          "items": [
-            {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
-            },
-            {
-              "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
-            },
-            {
-              "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
-            }
-          ]
-        }
-      ]
-    },
+    "trainerInfo": {},
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-06",
@@ -23661,6 +26927,7 @@ window.GAMES_DATA = [
       "de": "S.T.A.L.K.E.R.: Shadow of Chernobyl",
       "es": "S.T.A.L.K.E.R.: Shadow of Chernobyl"
     },
+    "aliases": [],
     "developer": "GSC Game World",
     "releaseYear": 2007,
     "genre": "Post-Apocalyptic FPS RPG",
@@ -23681,21 +26948,8 @@ window.GAMES_DATA = [
         "desc": "针对 潜行者：切尔诺贝利的阴影 的社区必备体验与性能优化补丁包"
       }
     ],
-    "hasTrainer": true,
-    "trainerHotkeys": [
-      {
-        "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
-      },
-      {
-        "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
-      },
-      {
-        "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
-      }
-    ],
+    "hasTrainer": false,
+    "trainerHotkeys": [],
     "nexusStats": {
       "totalDownloads": "32.6M",
       "totalEndorsements": "472K",
@@ -23764,82 +27018,7 @@ window.GAMES_DATA = [
     ],
     "steamAppId": 4500,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/4500/header.jpg",
-    "trainerInfo": {
-      "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
-      "officialUrl": "https://flingtrainer.com/trainer/stalker-shadow-of-chernobyl-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/stalker-shadow-of-chernobyl-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
-      "hotkeysCategorized": [
-        {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
-          "items": [
-            {
-              "key": "Num 1",
-              "action": "潜行者：切尔诺贝利的阴影 主角锁血无敌 (Infinite Health)"
-            },
-            {
-              "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
-            },
-            {
-              "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
-            },
-            {
-              "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
-            }
-          ]
-        },
-        {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
-          "items": [
-            {
-              "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
-            },
-            {
-              "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
-            },
-            {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
-            }
-          ]
-        },
-        {
-          "category": "🚀 探索与移动速度 (Movement & World)",
-          "items": [
-            {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
-            },
-            {
-              "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
-            },
-            {
-              "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
-            }
-          ]
-        }
-      ]
-    },
+    "trainerInfo": {},
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-25",
@@ -23859,6 +27038,7 @@ window.GAMES_DATA = [
       "de": "Metro Exodus",
       "es": "Metro Exodus"
     },
+    "aliases": [],
     "developer": "4A Games",
     "releaseYear": 2019,
     "genre": "Atmospheric Story FPS",
@@ -23887,11 +27067,31 @@ window.GAMES_DATA = [
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Infinite Ammo (无限弹药)"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "No Reload (无需换弹)"
+      },
+      {
+        "key": "Num 4",
+        "action": "Weapons No Overheat (武器不过热)"
+      },
+      {
+        "key": "Num 5",
+        "action": "Max Gas Mask Timer"
+      },
+      {
+        "key": "Num 6",
+        "action": "Max Filter Timer"
+      },
+      {
+        "key": "Num 7",
+        "action": "Infinite Medkits"
+      },
+      {
+        "key": "Num 8",
+        "action": "Infinite Throwables (无限投掷物)"
       }
     ],
     "nexusStats": {
@@ -23964,37 +27164,28 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/412020/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
       "officialUrl": "https://flingtrainer.com/trainer/metro-exodus-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/metro-exodus-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "version": "Original/Enhanced Edition v1.0-v2.0+",
+      "optionsCount": 10,
+      "lastUpdated": "2021-05-09",
+      "platforms": [],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "地铁：离去 主角锁血无敌 (Infinite Health)"
+              "action": "无限生命 (Infinite Health)"
             },
             {
               "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
+              "action": "无限弹药 (Infinite Ammo)"
             },
             {
               "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
+              "action": "无需换弹 (No Reload)"
             },
             {
               "key": "Num 0",
@@ -24003,40 +27194,41 @@ window.GAMES_DATA = [
           ]
         },
         {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
+          "category": "🌍 移动与世界 (Movement & World)",
           "items": [
             {
-              "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
+              "key": "Num 5",
+              "action": "Max Gas Mask Timer"
             },
             {
-              "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
+              "key": "Num 6",
+              "action": "Max Filter Timer"
             },
             {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
+              "key": "Num 9",
+              "action": "设置游戏速度 (Set Game Speed)"
             }
           ]
         },
         {
-          "category": "🚀 探索与移动速度 (Movement & World)",
+          "category": "🧩 其他功能 (Other)",
           "items": [
             {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
+              "key": "Num 4",
+              "action": "武器不过热 (Weapons No Overheat)"
             },
             {
-              "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
+              "key": "Num 7",
+              "action": "Infinite Medkits"
             },
             {
-              "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
+              "key": "Num 8",
+              "action": "无限投掷物 (Infinite Throwables)"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -24057,6 +27249,7 @@ window.GAMES_DATA = [
       "de": "Control Ultimate Edition",
       "es": "Control Ultimate Edition"
     },
+    "aliases": [],
     "developer": "Remedy Entertainment",
     "releaseYear": 2020,
     "genre": "Supernatural Action-Adventure",
@@ -24085,11 +27278,31 @@ window.GAMES_DATA = [
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Infinite Energy (无限能量)"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Infinite Ammo/No Reload (无限弹药/无需换弹)"
+      },
+      {
+        "key": "Num 4",
+        "action": "Edit Money (修改金钱)"
+      },
+      {
+        "key": "Num 5",
+        "action": "Edit Skill Points (修改技能点)"
+      },
+      {
+        "key": "Num 6",
+        "action": "Infinite Materials (无限材料)"
+      },
+      {
+        "key": "Num 7",
+        "action": "Super Speed (超级速度)"
+      },
+      {
+        "key": "Num 8",
+        "action": "Slow Motion (慢动作)"
       }
     ],
     "nexusStats": {
@@ -24162,37 +27375,39 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/870780/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
-      "officialUrl": "https://flingtrainer.com/trainer/control-ultimate-edition-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/control-ultimate-edition-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "officialUrl": "https://flingtrainer.com/trainer/control-trainer/",
+      "version": "Store v1.0-v1.12+",
+      "optionsCount": 12,
+      "lastUpdated": "2020-08-28",
+      "platforms": [
+        "Steam",
+        "Epic Games Store"
+      ],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "控制：终极版 主角锁血无敌 (Infinite Health)"
+              "action": "无限生命 (Infinite Health)"
             },
             {
               "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
+              "action": "无限能量 (Infinite Energy)"
             },
             {
               "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
+              "action": "无限弹药/无需换弹 (Infinite Ammo/No Reload)"
+            },
+            {
+              "key": "Num 5",
+              "action": "修改技能点 (Edit Skill Points)"
+            },
+            {
+              "key": "Num 9",
+              "action": "One Hit Destroy Shield"
             },
             {
               "key": "Num 0",
@@ -24201,40 +27416,46 @@ window.GAMES_DATA = [
           ]
         },
         {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
-              "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
+              "key": "Num 4",
+              "action": "修改金钱 (Edit Money)"
             },
             {
-              "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
+              "key": "Num 6",
+              "action": "无限材料 (Infinite Materials)"
             },
             {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
+              "key": "Num .",
+              "action": "No Crafting/Upgrading Requirements"
+            },
+            {
+              "key": "Num +",
+              "action": "金钱倍率 (Money Multiplier)"
             }
           ]
         },
         {
-          "category": "🚀 探索与移动速度 (Movement & World)",
+          "category": "🌍 移动与世界 (Movement & World)",
           "items": [
             {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
-            },
+              "key": "Num 7",
+              "action": "超级速度 (Super Speed)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
             {
-              "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
-            },
-            {
-              "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
+              "key": "Num 8",
+              "action": "慢动作 (Slow Motion)"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -24255,6 +27476,7 @@ window.GAMES_DATA = [
       "de": "Alan Wake 2",
       "es": "Alan Wake 2"
     },
+    "aliases": [],
     "developer": "Remedy Entertainment",
     "releaseYear": 2023,
     "genre": "Survival Horror",
@@ -24283,11 +27505,31 @@ window.GAMES_DATA = [
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Infinite Ammo (无限弹药)"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "No Reload (无需换弹)"
+      },
+      {
+        "key": "Num 4",
+        "action": "Infinite Flashlight Energy"
+      },
+      {
+        "key": "Num 5",
+        "action": "Super Accuracy (超级精准)"
+      },
+      {
+        "key": "Num 6",
+        "action": "Rapid Fire (快速射击)"
+      },
+      {
+        "key": "Num 7",
+        "action": "Instant Reload"
+      },
+      {
+        "key": "Num 8",
+        "action": "No Recoil (无后坐力)"
       }
     ],
     "nexusStats": {
@@ -24360,79 +27602,192 @@ window.GAMES_DATA = [
     "headerImage": "",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
       "officialUrl": "https://flingtrainer.com/trainer/alan-wake-2-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/alan-wake-2-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "version": "v1.0.12-v1.1.1+",
+      "optionsCount": 39,
+      "lastUpdated": "2024-08-11",
+      "platforms": [],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "心灵杀手 2 主角锁血无敌 (Infinite Health)"
+              "action": "无限生命 (Infinite Health)"
             },
             {
               "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
+              "action": "无限弹药 (Infinite Ammo)"
             },
             {
               "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
+              "action": "无需换弹 (No Reload)"
+            },
+            {
+              "key": "Num 4",
+              "action": "Infinite Flashlight Energy"
+            },
+            {
+              "key": "Num 5",
+              "action": "超级精准 (Super Accuracy)"
+            },
+            {
+              "key": "Num 7",
+              "action": "Instant Reload"
+            },
+            {
+              "key": "Num 8",
+              "action": "无后坐力 (No Recoil)"
             },
             {
               "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
-            }
-          ]
-        },
-        {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
-          "items": [
-            {
-              "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
+              "action": "超级伤害/一击必杀 (Super Damage/One Hit Kills)"
             },
             {
-              "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
+              "key": "Num .",
+              "action": "伤害倍率 (Damage Multiplier)"
             },
             {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
-            }
-          ]
-        },
-        {
-          "category": "🚀 探索与移动速度 (Movement & World)",
-          "items": [
-            {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
+              "key": "Num +",
+              "action": "防御倍率 (Defense Multiplier)"
             },
             {
               "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
+              "action": "无限治疗物品 (Infinite Healing Items)"
+            }
+          ]
+        },
+        {
+          "category": "💰 资源与物品 (Resources & Items)",
+          "items": [
+            {
+              "key": "Alt+Num 4",
+              "action": "修改选中物品数量 (Edit Selected Item Amount)"
+            },
+            {
+              "key": "Alt+Num 5",
+              "action": "物品不减少 (Items Won’t Decrease)"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "Num 9",
+              "action": "设置玩家速度 (Set Player Speed)"
+            },
+            {
+              "key": "Alt+Num 6",
+              "action": "设置游戏速度 (Set Game Speed)"
+            },
+            {
+              "key": "F10",
+              "action": "Tourist Map"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 6",
+              "action": "快速射击 (Rapid Fire)"
+            },
+            {
+              "key": "Alt+Num 1",
+              "action": "Edit Manuscript Fragments"
             },
             {
               "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
+              "action": "Infinite Battery Packs"
+            },
+            {
+              "key": "F1",
+              "action": "Wellness Retreat"
+            },
+            {
+              "key": "F2",
+              "action": "God Rays"
+            },
+            {
+              "key": "F3",
+              "action": "Wheels Within Wheels"
+            },
+            {
+              "key": "F4",
+              "action": "Roulette"
+            },
+            {
+              "key": "F5",
+              "action": "Personal Space"
+            },
+            {
+              "key": "F6",
+              "action": "Sunny Skies"
+            },
+            {
+              "key": "F7",
+              "action": "Full Stop"
+            },
+            {
+              "key": "F8",
+              "action": "Paint The Town"
+            },
+            {
+              "key": "F9",
+              "action": "Goes Around"
+            },
+            {
+              "key": "F11",
+              "action": "Magic Pocket"
+            },
+            {
+              "key": "F12",
+              "action": "电量 (Battery)"
+            },
+            {
+              "key": "Shift+F1",
+              "action": "Torchbearer"
+            },
+            {
+              "key": "Shift+F2",
+              "action": "ER"
+            },
+            {
+              "key": "Shift+F3",
+              "action": "Prescription"
+            },
+            {
+              "key": "Shift+F4",
+              "action": "It’s Personal"
+            },
+            {
+              "key": "Shift+F5",
+              "action": "Never There"
+            },
+            {
+              "key": "Shift+F6",
+              "action": "Turning Tables"
+            },
+            {
+              "key": "Shift+F7",
+              "action": "Main Attraction"
+            },
+            {
+              "key": "Shift+F8",
+              "action": "In The Headlights"
+            },
+            {
+              "key": "Shift+F9",
+              "action": "Lucky Strike"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -24453,6 +27808,7 @@ window.GAMES_DATA = [
       "de": "DOOM Eternal",
       "es": "DOOM Eternal"
     },
+    "aliases": [],
     "developer": "id Software",
     "releaseYear": 2020,
     "genre": "Fast-Paced FPS",
@@ -24481,11 +27837,31 @@ window.GAMES_DATA = [
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Infinite Shield (无限护盾)"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Infinite Rune Energy"
+      },
+      {
+        "key": "Num 4",
+        "action": "Infinite Ammo (无限弹药)"
+      },
+      {
+        "key": "Num 5",
+        "action": "Grenades No Cooldown (手雷无冷却)"
+      },
+      {
+        "key": "Num 6",
+        "action": "Rapid Fire (快速射击)"
+      },
+      {
+        "key": "Num 7",
+        "action": "Super Speed (超级速度)"
+      },
+      {
+        "key": "Num 8",
+        "action": "Slow Motion (慢动作)"
       }
     ],
     "nexusStats": {
@@ -24558,79 +27934,119 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/782330/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
       "officialUrl": "https://flingtrainer.com/trainer/doom-eternal-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/doom-eternal-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "version": "v1.0-v6.66+",
+      "optionsCount": 20,
+      "lastUpdated": "2021-10-29",
+      "platforms": [
+        "Steam",
+        "Xbox/Game Pass"
+      ],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "毁灭战士：永恒 主角锁血无敌 (Infinite Health)"
+              "action": "无限生命 (Infinite Health)"
             },
             {
               "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
+              "action": "无限护盾 (Infinite Shield)"
             },
             {
               "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
+              "action": "Infinite Rune Energy"
+            },
+            {
+              "key": "Num 4",
+              "action": "无限弹药 (Infinite Ammo)"
+            },
+            {
+              "key": "Num 5",
+              "action": "手雷无冷却 (Grenades No Cooldown)"
             },
             {
               "key": "Num 0",
               "action": "一击必杀 (One Hit Kill)"
-            }
-          ]
-        },
-        {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
-          "items": [
-            {
-              "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
-            },
-            {
-              "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
-            },
-            {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
-            }
-          ]
-        },
-        {
-          "category": "🚀 探索与移动速度 (Movement & World)",
-          "items": [
-            {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
             },
             {
               "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
+              "action": "Infinite Crucible Energy"
             },
             {
               "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
+              "action": "Infinite Sentinel Hammer Energy"
+            }
+          ]
+        },
+        {
+          "category": "📈 等级与属性 (Level & Stats)",
+          "items": [
+            {
+              "key": "Ctrl+Num 2",
+              "action": "Edit Weapon Points"
+            },
+            {
+              "key": "Ctrl+Num 4",
+              "action": "Edit Praetor Suit Points"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "Num 7",
+              "action": "超级速度 (Super Speed)"
+            },
+            {
+              "key": "Num 9",
+              "action": "无限跳跃 (Infinite Jumps)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 6",
+              "action": "快速射击 (Rapid Fire)"
+            },
+            {
+              "key": "Num 8",
+              "action": "慢动作 (Slow Motion)"
+            },
+            {
+              "key": "Num +",
+              "action": "Infinite Dash"
+            },
+            {
+              "key": "Num –",
+              "action": "Infinite Blood Punch"
+            },
+            {
+              "key": "Alt+Num 1",
+              "action": "Infinite Radiation Protection"
+            },
+            {
+              "key": "Ctrl+Num 1",
+              "action": "Infinite Extra Lives"
+            },
+            {
+              "key": "Ctrl+Num 3",
+              "action": "Edit Mastery Tokens"
+            },
+            {
+              "key": "Ctrl+Num 5",
+              "action": "Edit Sentinel Batteries"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -24651,6 +28067,7 @@ window.GAMES_DATA = [
       "de": "Borderlands 3",
       "es": "Borderlands 3"
     },
+    "aliases": [],
     "developer": "Gearbox Software",
     "releaseYear": 2019,
     "genre": "Looter Shooter",
@@ -24679,11 +28096,31 @@ window.GAMES_DATA = [
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Infinite Shield (无限护盾)"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Infinite Ammo (无限弹药)"
+      },
+      {
+        "key": "Num 4",
+        "action": "No Reload (无需换弹)"
+      },
+      {
+        "key": "Num 5",
+        "action": "Infinite Grenades (无限手雷)"
+      },
+      {
+        "key": "Num 6",
+        "action": "Action Skills No Cooldown"
+      },
+      {
+        "key": "Num 7",
+        "action": "Super Accuracy (超级精准)"
+      },
+      {
+        "key": "Num 8",
+        "action": "No Recoil (无后坐力)"
       }
     ],
     "nexusStats": {
@@ -24756,79 +28193,176 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/397540/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
-      "officialUrl": "https://flingtrainer.com/trainer/borderlands-3-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/borderlands-3-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "officialUrl": "https://flingtrainer.com/trainer/borderlands-3-trainer-1768400688/",
+      "version": "v1.0-v1.0.16+",
+      "optionsCount": 33,
+      "lastUpdated": "2021-04-10",
+      "platforms": [
+        "Epic Games Store",
+        "Steam"
+      ],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "无主之地 3 主角锁血无敌 (Infinite Health)"
+              "action": "无限生命 (Infinite Health)"
             },
             {
               "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
+              "action": "无限护盾 (Infinite Shield)"
             },
             {
               "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
+              "action": "无限弹药 (Infinite Ammo)"
+            },
+            {
+              "key": "Num 4",
+              "action": "无需换弹 (No Reload)"
+            },
+            {
+              "key": "Num 5",
+              "action": "无限手雷 (Infinite Grenades)"
+            },
+            {
+              "key": "Num 6",
+              "action": "Action Skills No Cooldown"
+            },
+            {
+              "key": "Num 7",
+              "action": "超级精准 (Super Accuracy)"
+            },
+            {
+              "key": "Num 8",
+              "action": "无后坐力 (No Recoil)"
             },
             {
               "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
+              "action": "超级伤害/一击必杀 (Super Damage/One Hit Kill)"
+            },
+            {
+              "key": "Ctrl+Num 5",
+              "action": "Learn Skills Without Skill Points"
+            },
+            {
+              "key": "Alt+Num 8",
+              "action": "隐身模式 (Stealth Mode)"
+            },
+            {
+              "key": "Alt+Num 0",
+              "action": "Enemy Drop Item Level Set To Player Level"
+            },
+            {
+              "key": "F8",
+              "action": "伤害倍率 (Damage Multiplier (Player To Enemies))"
+            },
+            {
+              "key": "F9",
+              "action": "伤害倍率 (Damage Multiplier (Enemies To Player))"
             }
           ]
         },
         {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
-            {
-              "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
-            },
-            {
-              "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
-            },
             {
               "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
-            }
-          ]
-        },
-        {
-          "category": "🚀 探索与移动速度 (Movement & World)",
-          "items": [
-            {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
+              "action": "Battle Suit Infinite Fuel"
             },
             {
-              "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
+              "key": "Alt+Num 1",
+              "action": "修改金钱 (Edit Money)"
             },
             {
               "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
+              "action": "Edit Golden Key"
+            },
+            {
+              "key": "Alt+Num 5",
+              "action": "Edit Inventory Size"
+            },
+            {
+              "key": "Alt+Num 9",
+              "action": "Open Golden Chest Without Golden Keys"
+            },
+            {
+              "key": "F6",
+              "action": "金钱倍率 (Money Multiplier)"
+            }
+          ]
+        },
+        {
+          "category": "📈 等级与属性 (Level & Stats)",
+          "items": [
+            {
+              "key": "Ctrl+Num 4",
+              "action": "无限经验 (Infinite Exp)"
+            },
+            {
+              "key": "Ctrl+Num 9",
+              "action": "传送到标记点 (Teleport To Waypoint Location)"
+            },
+            {
+              "key": "F7",
+              "action": "经验倍率 (Exp Multiplier)"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "Ctrl+Num 6",
+              "action": "超级速度 (Super Speed)"
+            },
+            {
+              "key": "Ctrl+Num 8",
+              "action": "超级跳跃 (Super Jump)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 9",
+              "action": "快速射击 (Rapid Fire)"
+            },
+            {
+              "key": "Ctrl+Num 1",
+              "action": "武器不过热 (Weapons No Overheat)"
+            },
+            {
+              "key": "Ctrl+Num 2",
+              "action": "Vehicles Infinite Boost"
+            },
+            {
+              "key": "Ctrl+Num 7",
+              "action": "慢动作 (Slow Motion)"
+            },
+            {
+              "key": "Alt+Num 2",
+              "action": "Edit Eridium"
+            },
+            {
+              "key": "Alt+Num 4",
+              "action": "Edit Guardian Tokens"
+            },
+            {
+              "key": "Alt+Num 6",
+              "action": "Max Drop Rate"
+            },
+            {
+              "key": "Alt+Num 7",
+              "action": "High Legendary Drop Rate"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -24849,6 +28383,7 @@ window.GAMES_DATA = [
       "de": "Borderlands 2",
       "es": "Borderlands 2"
     },
+    "aliases": [],
     "developer": "Gearbox Software",
     "releaseYear": 2012,
     "genre": "Looter Shooter",
@@ -24869,21 +28404,8 @@ window.GAMES_DATA = [
         "desc": "针对 无主之地 2 的社区必备体验与性能优化补丁包"
       }
     ],
-    "hasTrainer": true,
-    "trainerHotkeys": [
-      {
-        "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
-      },
-      {
-        "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
-      },
-      {
-        "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
-      }
-    ],
+    "hasTrainer": false,
+    "trainerHotkeys": [],
     "nexusStats": {
       "totalDownloads": "30.6M",
       "totalEndorsements": "443K",
@@ -24952,82 +28474,7 @@ window.GAMES_DATA = [
     ],
     "steamAppId": 49520,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/49520/header.jpg",
-    "trainerInfo": {
-      "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
-      "officialUrl": "https://flingtrainer.com/trainer/borderlands-2-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/borderlands-2-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
-      "hotkeysCategorized": [
-        {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
-          "items": [
-            {
-              "key": "Num 1",
-              "action": "无主之地 2 主角锁血无敌 (Infinite Health)"
-            },
-            {
-              "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
-            },
-            {
-              "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
-            },
-            {
-              "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
-            }
-          ]
-        },
-        {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
-          "items": [
-            {
-              "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
-            },
-            {
-              "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
-            },
-            {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
-            }
-          ]
-        },
-        {
-          "category": "🚀 探索与移动速度 (Movement & World)",
-          "items": [
-            {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
-            },
-            {
-              "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
-            },
-            {
-              "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
-            }
-          ]
-        }
-      ]
-    },
+    "trainerInfo": {},
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-24",
@@ -25047,6 +28494,7 @@ window.GAMES_DATA = [
       "de": "BioShock Infinite",
       "es": "BioShock Infinite"
     },
+    "aliases": [],
     "developer": "Irrational Games",
     "releaseYear": 2013,
     "genre": "Story FPS",
@@ -25061,21 +28509,8 @@ window.GAMES_DATA = [
     "hasMods": false,
     "modInstallPath": "N/A",
     "mustHaveMods": [],
-    "hasTrainer": true,
-    "trainerHotkeys": [
-      {
-        "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
-      },
-      {
-        "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
-      },
-      {
-        "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
-      }
-    ],
+    "hasTrainer": false,
+    "trainerHotkeys": [],
     "nexusStats": {
       "totalDownloads": "30.3M",
       "totalEndorsements": "439K",
@@ -25144,82 +28579,7 @@ window.GAMES_DATA = [
     ],
     "steamAppId": 8870,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/8870/header.jpg",
-    "trainerInfo": {
-      "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
-      "officialUrl": "https://flingtrainer.com/trainer/bioshock-infinite-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/bioshock-infinite-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
-      "hotkeysCategorized": [
-        {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
-          "items": [
-            {
-              "key": "Num 1",
-              "action": "生化奇兵：无限 主角锁血无敌 (Infinite Health)"
-            },
-            {
-              "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
-            },
-            {
-              "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
-            },
-            {
-              "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
-            }
-          ]
-        },
-        {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
-          "items": [
-            {
-              "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
-            },
-            {
-              "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
-            },
-            {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
-            }
-          ]
-        },
-        {
-          "category": "🚀 探索与移动速度 (Movement & World)",
-          "items": [
-            {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
-            },
-            {
-              "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
-            },
-            {
-              "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
-            }
-          ]
-        }
-      ]
-    },
+    "trainerInfo": {},
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-08",
@@ -25239,6 +28599,7 @@ window.GAMES_DATA = [
       "de": "Dishonored 2",
       "es": "Dishonored 2"
     },
+    "aliases": [],
     "developer": "Arkane Studios",
     "releaseYear": 2016,
     "genre": "Immersive Sim Stealth Action",
@@ -25267,11 +28628,31 @@ window.GAMES_DATA = [
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Infinite MP (无限魔法值 (MP))"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Infinite Ammo (无限弹药)"
+      },
+      {
+        "key": "Num 4",
+        "action": "Infinite Consumables (无限消耗品)"
+      },
+      {
+        "key": "Num 5",
+        "action": "Infinite Oxygen (无限氧气)"
+      },
+      {
+        "key": "Num 6",
+        "action": "Stealth Mode (隐身模式)"
+      },
+      {
+        "key": "Num 7",
+        "action": "Super Speed (超级速度)"
+      },
+      {
+        "key": "Num 8",
+        "action": "Super Jump (超级跳跃)"
       }
     ],
     "nexusStats": {
@@ -25344,37 +28725,40 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/403640/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
       "officialUrl": "https://flingtrainer.com/trainer/dishonored-2-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/dishonored-2-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "version": "v1.74-v1.77.9",
+      "optionsCount": 15,
+      "lastUpdated": "2020-05-13",
+      "platforms": [],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "羞辱 2 主角锁血无敌 (Infinite Health)"
+              "action": "无限生命 (Infinite Health)"
             },
             {
               "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
+              "action": "无限魔法值 (MP) (Infinite MP)"
             },
             {
               "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
+              "action": "无限弹药 (Infinite Ammo)"
+            },
+            {
+              "key": "Num 5",
+              "action": "无限氧气 (Infinite Oxygen)"
+            },
+            {
+              "key": "Num 6",
+              "action": "隐身模式 (Stealth Mode)"
+            },
+            {
+              "key": "Num 9",
+              "action": "无坠落伤害 (No Fall Damage)"
             },
             {
               "key": "Num 0",
@@ -25383,40 +28767,54 @@ window.GAMES_DATA = [
           ]
         },
         {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
+              "key": "Num 4",
+              "action": "无限消耗品 (Infinite Consumables)"
+            },
+            {
               "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
+              "action": "无限金币 (Infinite Gold)"
             },
             {
               "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
+              "action": "无限卢恩 (Infinite Runes)"
             },
             {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
+              "key": "Ctrl+Num 5",
+              "action": "金币倍率 (Gold Multiplier)"
             }
           ]
         },
         {
-          "category": "🚀 探索与移动速度 (Movement & World)",
+          "category": "🌍 移动与世界 (Movement & World)",
           "items": [
             {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
+              "key": "Num 7",
+              "action": "超级速度 (Super Speed)"
             },
             {
-              "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
+              "key": "Num 8",
+              "action": "超级跳跃 (Super Jump)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Ctrl+Num 3",
+              "action": "Infinite Traits"
             },
             {
-              "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
+              "key": "Ctrl+Num 4",
+              "action": "Infinite Whale Bones"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -25437,6 +28835,7 @@ window.GAMES_DATA = [
       "de": "Prey",
       "es": "Prey"
     },
+    "aliases": [],
     "developer": "Arkane Studios",
     "releaseYear": 2017,
     "genre": "Sci-Fi Immersive Sim",
@@ -25465,11 +28864,31 @@ window.GAMES_DATA = [
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Infinite Suit Integrity"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Infinite PSI"
+      },
+      {
+        "key": "Num 4",
+        "action": "Infinite Stamina (无限耐力)"
+      },
+      {
+        "key": "Num 5",
+        "action": "Infinite Item/Ammo/Etc."
+      },
+      {
+        "key": "Num 6",
+        "action": "No Reload (无需换弹)"
+      },
+      {
+        "key": "Num 7",
+        "action": "Freeze Hacking Timer"
+      },
+      {
+        "key": "Num 8",
+        "action": "Super Speed (超级速度)"
       }
     ],
     "nexusStats": {
@@ -25542,37 +28961,32 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/480490/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
       "officialUrl": "https://flingtrainer.com/trainer/prey-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/prey-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "version": "v1.0-v20200723+",
+      "optionsCount": 10,
+      "lastUpdated": "2021-01-10",
+      "platforms": [],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "掠食 主角锁血无敌 (Infinite Health)"
+              "action": "无限生命 (Infinite Health)"
             },
             {
-              "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
+              "key": "Num 4",
+              "action": "无限耐力 (Infinite Stamina)"
             },
             {
-              "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
+              "key": "Num 5",
+              "action": "Infinite Item/Ammo/Etc."
+            },
+            {
+              "key": "Num 6",
+              "action": "无需换弹 (No Reload)"
             },
             {
               "key": "Num 0",
@@ -25581,40 +28995,37 @@ window.GAMES_DATA = [
           ]
         },
         {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
+          "category": "🌍 移动与世界 (Movement & World)",
           "items": [
             {
-              "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
+              "key": "Num 7",
+              "action": "Freeze Hacking Timer"
             },
             {
-              "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
-            },
-            {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
+              "key": "Num 8",
+              "action": "超级速度 (Super Speed)"
             }
           ]
         },
         {
-          "category": "🚀 探索与移动速度 (Movement & World)",
+          "category": "🧩 其他功能 (Other)",
           "items": [
             {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
+              "key": "Num 2",
+              "action": "Infinite Suit Integrity"
             },
             {
-              "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
+              "key": "Num 3",
+              "action": "Infinite PSI"
             },
             {
-              "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
+              "key": "Num 9",
+              "action": "慢动作 (Slow Motion)"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -25635,6 +29046,7 @@ window.GAMES_DATA = [
       "de": "HITMAN World of Assassination",
       "es": "HITMAN World of Assassination"
     },
+    "aliases": [],
     "developer": "IO Interactive",
     "releaseYear": 2021,
     "genre": "Stealth Action",
@@ -25663,11 +29075,31 @@ window.GAMES_DATA = [
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Infinite Ammo (无限弹药)"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "No Reload (无需换弹)"
+      },
+      {
+        "key": "Num 4",
+        "action": "Super Accuracy (超级精准)"
+      },
+      {
+        "key": "Num 5",
+        "action": "No Recoil (无后坐力)"
+      },
+      {
+        "key": "Num 6",
+        "action": "Rapid Fire (快速射击)"
+      },
+      {
+        "key": "Num 7",
+        "action": "Jam Enemies Weapon"
+      },
+      {
+        "key": "Num 8",
+        "action": "Super Speed (超级速度)"
       }
     ],
     "nexusStats": {
@@ -25740,79 +29172,83 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1659040/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
-      "officialUrl": "https://flingtrainer.com/trainer/hitman-world-of-assassination-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/hitman-world-of-assassination-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "officialUrl": "https://flingtrainer.com/trainer/hitman-3-trainer/",
+      "version": "v3.x+",
+      "optionsCount": 13,
+      "lastUpdated": "2026-11-07",
+      "platforms": [],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "杀手：暗杀世界 主角锁血无敌 (Infinite Health)"
+              "action": "无限生命 (Infinite Health)"
             },
             {
               "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
+              "action": "无限弹药 (Infinite Ammo)"
             },
             {
               "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
+              "action": "无需换弹 (No Reload)"
+            },
+            {
+              "key": "Num 4",
+              "action": "超级精准 (Super Accuracy)"
+            },
+            {
+              "key": "Num 5",
+              "action": "无后坐力 (No Recoil)"
+            },
+            {
+              "key": "Num 7",
+              "action": "Jam Enemies Weapon"
             },
             {
               "key": "Num 0",
               "action": "一击必杀 (One Hit Kill)"
+            },
+            {
+              "key": "Num .",
+              "action": "隐身模式 (Stealth Mode (Invisible To Enemies))"
+            },
+            {
+              "key": "Num +",
+              "action": "隐身模式 (Stealth Mode (Invisible To Cameras))"
             }
           ]
         },
         {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
+          "category": "🌍 移动与世界 (Movement & World)",
           "items": [
             {
-              "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
-            },
-            {
-              "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
-            },
-            {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
+              "key": "Num 8",
+              "action": "超级速度 (Super Speed)"
             }
           ]
         },
         {
-          "category": "🚀 探索与移动速度 (Movement & World)",
+          "category": "🧩 其他功能 (Other)",
           "items": [
             {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
+              "key": "Num 6",
+              "action": "快速射击 (Rapid Fire)"
             },
             {
-              "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
+              "key": "Num 9",
+              "action": "慢动作 (Slow Motion)"
             },
             {
-              "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
+              "key": "Num –",
+              "action": "Freelancer Mode: Edit Merces"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -25833,6 +29269,7 @@ window.GAMES_DATA = [
       "de": "Assassin's Creed Odyssey",
       "es": "Assassin's Creed Odyssey"
     },
+    "aliases": [],
     "developer": "Ubisoft",
     "releaseYear": 2018,
     "genre": "Open World RPG",
@@ -25856,16 +29293,36 @@ window.GAMES_DATA = [
     "hasTrainer": true,
     "trainerHotkeys": [
       {
+        "key": "PageUp",
+        "action": "God Mode/Ignore Hit (无敌模式/无视攻击)"
+      },
+      {
         "key": "Num 1",
         "action": "Infinite Health (无限生命)"
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Infinite Adrenaline Bars"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Infinite Oxygen (无限氧气)"
+      },
+      {
+        "key": "Num 4",
+        "action": "Skills No Cooldown (技能无冷却)"
+      },
+      {
+        "key": "Num 5",
+        "action": "Infinite Skill Duration (技能无限持续)"
+      },
+      {
+        "key": "Num 6",
+        "action": "Infinite Arrows (无限箭矢)"
+      },
+      {
+        "key": "Num 7",
+        "action": "Infinite Ship Power & Acceleration"
       }
     ],
     "nexusStats": {
@@ -25938,79 +29395,149 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/812140/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
-      "officialUrl": "https://flingtrainer.com/trainer/assassins-creed-odyssey-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/assassins-creed-odyssey-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "officialUrl": "https://flingtrainer.com/trainer/assassins-creed-odyssey-trainer-2/",
+      "version": "v1.0.2-v1.5.4+",
+      "optionsCount": 28,
+      "lastUpdated": "2020-11-28",
+      "platforms": [],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
+              "key": "PageUp",
+              "action": "无敌模式/无视攻击 (God Mode/Ignore Hit)"
+            },
+            {
               "key": "Num 1",
-              "action": "刺客信条：奥德赛 主角锁血无敌 (Infinite Health)"
+              "action": "无限生命 (Infinite Health)"
             },
             {
               "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
+              "action": "Infinite Adrenaline Bars"
             },
             {
               "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
+              "action": "无限氧气 (Infinite Oxygen)"
+            },
+            {
+              "key": "Num 4",
+              "action": "技能无冷却 (Skills No Cooldown)"
+            },
+            {
+              "key": "Num 5",
+              "action": "技能无限持续 (Infinite Skill Duration)"
+            },
+            {
+              "key": "Num 9",
+              "action": "隐身模式 (Stealth Mode)"
             },
             {
               "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
+              "action": "超级伤害/一击必杀 (Super Damage/One Hit Kill)"
+            },
+            {
+              "key": "Alt+Num 0",
+              "action": "伤害倍率 (Damage Multiplier)"
+            },
+            {
+              "key": "Num .",
+              "action": "无限生命 (Ship: Infinite Health)"
+            },
+            {
+              "key": "Num +",
+              "action": "Ship: Attacks No Cooldown"
+            },
+            {
+              "key": "Num –",
+              "action": "一击必杀 (Ship: One Hit Kill)"
+            },
+            {
+              "key": "Ctrl+Num 4",
+              "action": "无限技能点 (Infinite Skill Points)"
+            },
+            {
+              "key": "Ctrl+PageUp",
+              "action": "Conquest Battle: Drop 50% Athenian HP"
+            },
+            {
+              "key": "Ctrl+PageDown",
+              "action": "Conquest Battle: Drop 50% Spartan HP"
             }
           ]
         },
         {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
               "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
+              "action": "无限金钱 (Infinite Money)"
             },
             {
               "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
-            },
-            {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
+              "action": "无限资源 (Infinite Resources)"
             }
           ]
         },
         {
-          "category": "🚀 探索与移动速度 (Movement & World)",
+          "category": "📈 等级与属性 (Level & Stats)",
           "items": [
             {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
-            },
-            {
-              "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
+              "key": "Ctrl+Num 3",
+              "action": "无限经验 (Infinite XP)"
             },
             {
               "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
+              "action": "经验倍率 (Exp Multiplier)"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "Num 8",
+              "action": "设置游戏速度 (Set Game Speed)"
+            },
+            {
+              "key": "Ctrl+Num 8",
+              "action": "冻结时间 (Freeze Daytime)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 6",
+              "action": "无限箭矢 (Infinite Arrows)"
+            },
+            {
+              "key": "Num 7",
+              "action": "Infinite Ship Power & Acceleration"
+            },
+            {
+              "key": "Ctrl+Num 5",
+              "action": "Clear Bounties"
+            },
+            {
+              "key": "Ctrl+Num 6",
+              "action": "Super Revelation Range"
+            },
+            {
+              "key": "Ctrl+Num 7",
+              "action": "Unlock All Engravings"
+            },
+            {
+              "key": "Ctrl+Num 9",
+              "action": "Zero Nation Power"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -26031,6 +29558,7 @@ window.GAMES_DATA = [
       "de": "Assassin's Creed Valhalla",
       "es": "Assassin's Creed Valhalla"
     },
+    "aliases": [],
     "developer": "Ubisoft",
     "releaseYear": 2020,
     "genre": "Viking Open World RPG",
@@ -26055,15 +29583,35 @@ window.GAMES_DATA = [
     "trainerHotkeys": [
       {
         "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
+        "action": "God Mode/Ignore Hit (无敌模式/无视攻击)"
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Infinite Health (无限生命)"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Infinite Stamina (无限耐力)"
+      },
+      {
+        "key": "Num .",
+        "action": "Infinite Adrenaline (无限肾上腺素)"
+      },
+      {
+        "key": "Num 4",
+        "action": "Infinite Oxygen (无限氧气)"
+      },
+      {
+        "key": "Num 5",
+        "action": "Stealth Mode (隐身模式)"
+      },
+      {
+        "key": "Num 6",
+        "action": "Infinite Arrow (无限箭矢)"
+      },
+      {
+        "key": "Num 7",
+        "action": "Set Game Speed (设置游戏速度)"
       }
     ],
     "nexusStats": {
@@ -26136,79 +29684,125 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/2208920/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
-      "officialUrl": "https://flingtrainer.com/trainer/assassins-creed-valhalla-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/assassins-creed-valhalla-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "officialUrl": "https://flingtrainer.com/trainer/assassins-creed-valhalla-trainer-1670681753/",
+      "version": "v1.0.2-v1.7.x+",
+      "optionsCount": 20,
+      "lastUpdated": "2022-12-10",
+      "platforms": [
+        "Steam",
+        "Ubisoft",
+        "Epic Games Store"
+      ],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "刺客信条：英灵殿 主角锁血无敌 (Infinite Health)"
+              "action": "无敌模式/无视攻击 (God Mode/Ignore Hit)"
             },
             {
               "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
+              "action": "无限生命 (Infinite Health)"
             },
             {
               "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
+              "action": "无限耐力 (Infinite Stamina)"
+            },
+            {
+              "key": "Num .",
+              "action": "无限肾上腺素 (Infinite Adrenaline)"
+            },
+            {
+              "key": "Num 4",
+              "action": "无限氧气 (Infinite Oxygen)"
+            },
+            {
+              "key": "Num 5",
+              "action": "隐身模式 (Stealth Mode)"
+            },
+            {
+              "key": "Num 9",
+              "action": "超级伤害/一击必杀 (Super Damage/One Hit Kill)"
             },
             {
               "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
+              "action": "伤害倍率 (Damage Multiplier)"
+            },
+            {
+              "key": "Num +",
+              "action": "防御倍率 (Defense Multiplier)"
+            },
+            {
+              "key": "Ctrl+Num 6",
+              "action": "无限技能点 (Infinite Skill Points)"
             }
           ]
         },
         {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
               "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
+              "action": "Infinite Silver & Resources"
             },
             {
               "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
+              "action": "无限制作材料 (Infinite Crafting Materials)"
             },
             {
               "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
+              "action": "无需装备升级材料 (No Equipment Upgrade Requirement)"
             }
           ]
         },
         {
-          "category": "🚀 探索与移动速度 (Movement & World)",
+          "category": "📈 等级与属性 (Level & Stats)",
           "items": [
             {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
+              "key": "Ctrl+Num 4",
+              "action": "无限经验 (Infinite Exp)"
             },
             {
-              "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
+              "key": "Ctrl+Num 5",
+              "action": "经验倍率 (Exp Multiplier)"
             },
             {
-              "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
+              "key": "Ctrl+Num 7",
+              "action": "Infinite Mastery Points"
+            },
+            {
+              "key": "Ctrl+Num 8",
+              "action": "传送到标记点 (Teleport To Waypoint)"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "Num 7",
+              "action": "设置游戏速度 (Set Game Speed)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 6",
+              "action": "无限箭矢 (Infinite Arrow)"
+            },
+            {
+              "key": "Num 8",
+              "action": "一击眩晕 (One Hit Stun)"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -26229,6 +29823,7 @@ window.GAMES_DATA = [
       "de": "Assassin's Creed Origins",
       "es": "Assassin's Creed Origins"
     },
+    "aliases": [],
     "developer": "Ubisoft",
     "releaseYear": 2017,
     "genre": "Ancient Egypt Action RPG",
@@ -26251,11 +29846,31 @@ window.GAMES_DATA = [
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Infinite Adrenaline (无限肾上腺素)"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Infinite Adrenaline Effect Duration"
+      },
+      {
+        "key": "Num 4",
+        "action": "Infinite Oxygen (无限氧气)"
+      },
+      {
+        "key": "Num 5",
+        "action": "Infinite Exp (无限经验)"
+      },
+      {
+        "key": "Num 6",
+        "action": "Exp Multiplier (经验倍率)"
+      },
+      {
+        "key": "Num 7",
+        "action": "Infinite Skill Points (无限技能点)"
+      },
+      {
+        "key": "Num 8",
+        "action": "Set Game Speed (设置游戏速度)"
       }
     ],
     "nexusStats": {
@@ -26328,79 +29943,113 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/582160/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
       "officialUrl": "https://flingtrainer.com/trainer/assassins-creed-origins-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/assassins-creed-origins-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "version": "v1.02-v1.60+",
+      "optionsCount": 18,
+      "lastUpdated": "2024-01-29",
+      "platforms": [],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "刺客信条：起源 主角锁血无敌 (Infinite Health)"
+              "action": "无限生命 (Infinite Health)"
             },
             {
               "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
+              "action": "无限肾上腺素 (Infinite Adrenaline)"
             },
             {
               "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
+              "action": "Infinite Adrenaline Effect Duration"
+            },
+            {
+              "key": "Num 4",
+              "action": "无限氧气 (Infinite Oxygen)"
+            },
+            {
+              "key": "Num 7",
+              "action": "无限技能点 (Infinite Skill Points)"
+            },
+            {
+              "key": "Num 9",
+              "action": "隐身模式 (Stealth Mode)"
             },
             {
               "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
+              "action": "超级伤害/一击必杀 (Super Damage/One Hit Kills)"
+            },
+            {
+              "key": "Num .",
+              "action": "伤害倍率 (Damage Multiplier)"
             }
           ]
         },
         {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
               "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
+              "action": "修改金钱 (Edit Money)"
             },
             {
               "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
-            },
-            {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
+              "action": "修改资源 (Edit Resources)"
             }
           ]
         },
         {
-          "category": "🚀 探索与移动速度 (Movement & World)",
+          "category": "📈 等级与属性 (Level & Stats)",
           "items": [
             {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
+              "key": "Num 5",
+              "action": "无限经验 (Infinite Exp)"
             },
             {
-              "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
+              "key": "Num 6",
+              "action": "经验倍率 (Exp Multiplier)"
             },
             {
-              "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
+              "key": "Ctrl+Num 7",
+              "action": "传送到标记点 (Teleport To Waypoint Location)"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "Num 8",
+              "action": "设置游戏速度 (Set Game Speed)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Ctrl+Num 3",
+              "action": "无限箭矢 (Infinite Arrow)"
+            },
+            {
+              "key": "Ctrl+Num 4",
+              "action": "Infinite Tools & Weapons"
+            },
+            {
+              "key": "Ctrl+Num 5",
+              "action": "无限加速 (Racing: Infinite Boost)"
+            },
+            {
+              "key": "Ctrl+Num 6",
+              "action": "Racing: Opponents Can’t Boost"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -26421,6 +30070,7 @@ window.GAMES_DATA = [
       "de": "Far Cry 5",
       "es": "Far Cry 5"
     },
+    "aliases": [],
     "developer": "Ubisoft",
     "releaseYear": 2018,
     "genre": "Open World FPS",
@@ -26441,21 +30091,8 @@ window.GAMES_DATA = [
         "desc": "针对 孤岛惊魂 5 的社区必备体验与性能优化补丁包"
       }
     ],
-    "hasTrainer": true,
-    "trainerHotkeys": [
-      {
-        "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
-      },
-      {
-        "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
-      },
-      {
-        "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
-      }
-    ],
+    "hasTrainer": false,
+    "trainerHotkeys": [],
     "nexusStats": {
       "totalDownloads": "28.4M",
       "totalEndorsements": "411K",
@@ -26524,82 +30161,7 @@ window.GAMES_DATA = [
     ],
     "steamAppId": 552520,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/552520/header.jpg",
-    "trainerInfo": {
-      "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
-      "officialUrl": "https://flingtrainer.com/trainer/far-cry-5-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/far-cry-5-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
-      "hotkeysCategorized": [
-        {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
-          "items": [
-            {
-              "key": "Num 1",
-              "action": "孤岛惊魂 5 主角锁血无敌 (Infinite Health)"
-            },
-            {
-              "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
-            },
-            {
-              "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
-            },
-            {
-              "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
-            }
-          ]
-        },
-        {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
-          "items": [
-            {
-              "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
-            },
-            {
-              "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
-            },
-            {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
-            }
-          ]
-        },
-        {
-          "category": "🚀 探索与移动速度 (Movement & World)",
-          "items": [
-            {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
-            },
-            {
-              "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
-            },
-            {
-              "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
-            }
-          ]
-        }
-      ]
-    },
+    "trainerInfo": {},
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-21",
@@ -26619,6 +30181,7 @@ window.GAMES_DATA = [
       "de": "Far Cry 6",
       "es": "Far Cry 6"
     },
+    "aliases": [],
     "developer": "Ubisoft",
     "releaseYear": 2021,
     "genre": "Open World FPS",
@@ -26647,11 +30210,31 @@ window.GAMES_DATA = [
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Infinite Stamina (无限耐力)"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Infinite Ammo (无限弹药)"
+      },
+      {
+        "key": "Num 4",
+        "action": "Infinite Grenades/Throwables"
+      },
+      {
+        "key": "Num 5",
+        "action": "No Reload (无需换弹)"
+      },
+      {
+        "key": "Num 6",
+        "action": "Super Accuracy (超级精准)"
+      },
+      {
+        "key": "Num 7",
+        "action": "No Recoil (无后坐力)"
+      },
+      {
+        "key": "Num 8",
+        "action": "Suppressor No Overheat"
       }
     ],
     "nexusStats": {
@@ -26724,79 +30307,193 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/2369390/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
       "officialUrl": "https://flingtrainer.com/trainer/far-cry-6-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/far-cry-6-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "version": "v1.1.0-v1.7.0+",
+      "optionsCount": 38,
+      "lastUpdated": "2023-02-18",
+      "platforms": [],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "孤岛惊魂 6 主角锁血无敌 (Infinite Health)"
+              "action": "无限生命 (Infinite Health)"
             },
             {
               "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
+              "action": "无限耐力 (Infinite Stamina)"
             },
             {
               "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
+              "action": "无限弹药 (Infinite Ammo)"
+            },
+            {
+              "key": "Num 4",
+              "action": "Infinite Grenades/Throwables"
+            },
+            {
+              "key": "Num 5",
+              "action": "无需换弹 (No Reload)"
+            },
+            {
+              "key": "Num 6",
+              "action": "超级精准 (Super Accuracy)"
+            },
+            {
+              "key": "Num 7",
+              "action": "无后坐力 (No Recoil)"
+            },
+            {
+              "key": "Num 9",
+              "action": "Supremo No Cooldown"
             },
             {
               "key": "Num 0",
               "action": "一击必杀 (One Hit Kill)"
-            }
-          ]
-        },
-        {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
-          "items": [
+            },
+            {
+              "key": "Num .",
+              "action": "伤害倍率 (Damage Multiplier)"
+            },
+            {
+              "key": "Num +",
+              "action": "隐身模式 (Stealth Mode)"
+            },
             {
               "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
+              "action": "无限氧气 (Infinite Oxygen)"
             },
             {
               "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
+              "action": "无限呼吸 (Infinite Breath (Sniping))"
             },
             {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
+              "key": "Ctrl+Num 4",
+              "action": "Infinite Healing Syringes"
+            },
+            {
+              "key": "Alt+Num 1",
+              "action": "无限载具生命 (Infinite Vehicle Health)"
             }
           ]
         },
         {
-          "category": "🚀 探索与移动速度 (Movement & World)",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
+              "key": "Alt+Num 3",
+              "action": "无视制作需求 (Ignore Crafting Requirements)"
+            },
+            {
+              "key": "Alt+Num 4",
+              "action": "无视建造需求 (Ignore Building Requirements)"
+            },
+            {
+              "key": "Alt+Num 7",
+              "action": "无限金钱 (Infinite Money (Yaran Pesos))"
+            },
+            {
+              "key": "Alt+Num 8",
+              "action": "金钱倍率 (Money Multiplier)"
+            },
+            {
+              "key": "Alt+Num .",
+              "action": "无限材料 (Infinite Materials)"
+            },
+            {
+              "key": "Alt+Num +",
+              "action": "Infinite Camp Resources"
+            },
+            {
+              "key": "Alt+Num –",
+              "action": "Pick Up Items Multiplier"
+            },
+            {
+              "key": "Ctrl+F1",
+              "action": "无限现金 (Infinite Cash (DLC 1))"
+            }
+          ]
+        },
+        {
+          "category": "📈 等级与属性 (Level & Stats)",
+          "items": [
+            {
+              "key": "Ctrl+Num 0",
+              "action": "传送到标记点 (Teleport To Waypoint)"
+            },
+            {
+              "key": "Alt+Num 5",
+              "action": "无限经验 (Infinite Exp)"
+            },
+            {
+              "key": "Alt+Num 6",
+              "action": "经验倍率 (Exp Multiplier)"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "Ctrl+Num 7",
+              "action": "设置游戏速度 (Set Game Speed)"
+            },
+            {
+              "key": "Ctrl+Num 8",
+              "action": "设置玩家速度 (Set Player Speed)"
+            },
+            {
+              "key": "Ctrl+Num 9",
+              "action": "设置跳跃高度 (Set Jump Height)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 8",
+              "action": "Suppressor No Overheat"
+            },
+            {
+              "key": "Ctrl+Num 3",
+              "action": "Machine Gun No Overheat"
+            },
+            {
+              "key": "Ctrl+Num 5",
+              "action": "Infinite Auto Turrets"
+            },
+            {
+              "key": "Ctrl+Num 6",
+              "action": "Fishing Line Won’t Break"
             },
             {
               "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
+              "action": "One Hit Destroy Vehicles"
             },
             {
-              "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
+              "key": "Alt+Num 9",
+              "action": "Infinite Depleted Uranium"
+            },
+            {
+              "key": "Alt+Num 0",
+              "action": "Depleted Uranium Multiplier"
+            },
+            {
+              "key": "Ctrl+F2",
+              "action": "Infinite Respect (DLC 2)"
+            },
+            {
+              "key": "Ctrl+F3",
+              "action": "Infinite Penance (DLC 3)"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -26817,6 +30514,7 @@ window.GAMES_DATA = [
       "de": "Watch Dogs 2",
       "es": "Watch Dogs 2"
     },
+    "aliases": [],
     "developer": "Ubisoft",
     "releaseYear": 2016,
     "genre": "Hacker Open World",
@@ -26845,11 +30543,31 @@ window.GAMES_DATA = [
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Infinite Ammo (无限弹药)"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "No Reload (无需换弹)"
+      },
+      {
+        "key": "Num 4",
+        "action": "Infinite Battery (无限电量)"
+      },
+      {
+        "key": "Num 5",
+        "action": "Stealth Mode (隐身模式)"
+      },
+      {
+        "key": "Num 6",
+        "action": "Infinite Money (无限金钱)"
+      },
+      {
+        "key": "Num 7",
+        "action": "Super Speed (超级速度)"
+      },
+      {
+        "key": "Num 8",
+        "action": "Slow Motion (慢动作)"
       }
     ],
     "nexusStats": {
@@ -26922,79 +30640,72 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/447040/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
       "officialUrl": "https://flingtrainer.com/trainer/watch-dogs-2-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/watch-dogs-2-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "version": "v1.07-v1.17+",
+      "optionsCount": 9,
+      "lastUpdated": "2020-07-17",
+      "platforms": [],
+      "antiCheat": true,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "看门狗 2 主角锁血无敌 (Infinite Health)"
+              "action": "无限生命 (Infinite Health)"
             },
             {
               "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
+              "action": "无限弹药 (Infinite Ammo)"
             },
             {
               "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
+              "action": "无需换弹 (No Reload)"
             },
             {
-              "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
+              "key": "Num 5",
+              "action": "隐身模式 (Stealth Mode)"
             }
           ]
         },
         {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
-              "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
+              "key": "Num 6",
+              "action": "无限金钱 (Infinite Money)"
             },
             {
-              "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
-            },
-            {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
+              "key": "Num 9",
+              "action": "Money/Follower Multiplier"
             }
           ]
         },
         {
-          "category": "🚀 探索与移动速度 (Movement & World)",
+          "category": "🌍 移动与世界 (Movement & World)",
           "items": [
             {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
+              "key": "Num 7",
+              "action": "超级速度 (Super Speed)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 4",
+              "action": "无限电量 (Infinite Battery)"
             },
             {
-              "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
-            },
-            {
-              "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
+              "key": "Num 8",
+              "action": "慢动作 (Slow Motion)"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -27015,6 +30726,7 @@ window.GAMES_DATA = [
       "de": "No Man's Sky",
       "es": "No Man's Sky"
     },
+    "aliases": [],
     "developer": "Hello Games",
     "releaseYear": 2016,
     "genre": "Space Exploration Survival",
@@ -27043,11 +30755,31 @@ window.GAMES_DATA = [
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Infinite Shield (无限护盾)"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Infinite Stamina (无限耐力)"
+      },
+      {
+        "key": "Num 4",
+        "action": "Jetpack Infinite Energy"
+      },
+      {
+        "key": "Num 5",
+        "action": "Multi-Tool No Overheat"
+      },
+      {
+        "key": "Num 6",
+        "action": "No Reload (无需换弹)"
+      },
+      {
+        "key": "Num 7",
+        "action": "Infinite Grenades (无限手雷)"
+      },
+      {
+        "key": "Num 8",
+        "action": "Infinite Items (无限物品)"
       }
     ],
     "nexusStats": {
@@ -27120,79 +30852,144 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/275850/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
       "officialUrl": "https://flingtrainer.com/trainer/no-mans-sky-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/no-mans-sky-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "version": "v1.5-v7.x+",
+      "optionsCount": 27,
+      "lastUpdated": "2026-09-13",
+      "platforms": [],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "无人深空 主角锁血无敌 (Infinite Health)"
+              "action": "无限生命 (Infinite Health)"
             },
             {
               "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
+              "action": "无限护盾 (Infinite Shield)"
             },
             {
               "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
+              "action": "无限耐力 (Infinite Stamina)"
+            },
+            {
+              "key": "Num 4",
+              "action": "Jetpack Infinite Energy"
+            },
+            {
+              "key": "Num 6",
+              "action": "无需换弹 (No Reload)"
+            },
+            {
+              "key": "Num 7",
+              "action": "无限手雷 (Infinite Grenades)"
             },
             {
               "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
-            }
-          ]
-        },
-        {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
-          "items": [
+              "action": "超级伤害/一击摧毁 (Super Damage/One Hit Destroy)"
+            },
             {
               "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
+              "action": "Starship Infinite Health"
             },
             {
               "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
+              "action": "Starship Infinite Shield"
             },
             {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
+              "key": "Alt+Num 1",
+              "action": "Launch Thruster Infinite Energy"
+            },
+            {
+              "key": "Alt+Num 2",
+              "action": "Pulse Engine Infinite Energy"
+            },
+            {
+              "key": "Alt+Num 3",
+              "action": "Hyperdrive Infinite Energy"
+            },
+            {
+              "key": "Alt+Num 5",
+              "action": "Life Support Infinite Energy"
+            },
+            {
+              "key": "Alt+Num 6",
+              "action": "Hazard Protection Infinite Energy"
+            },
+            {
+              "key": "Alt+Num 7",
+              "action": "Multi-Tool Infinite Energy"
             }
           ]
         },
         {
-          "category": "🚀 探索与移动速度 (Movement & World)",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
+              "key": "Num 8",
+              "action": "无限物品 (Infinite Items)"
             },
             {
-              "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
+              "key": "Num 9",
+              "action": "No/Minimum Crafting Requirements"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "Ctrl+Num 6",
+              "action": "设置游戏速度 (Set Game Speed)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 5",
+              "action": "Multi-Tool No Overheat"
             },
             {
-              "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
+              "key": "Ctrl+Num 3",
+              "action": "Starship Weapons No Overheat"
+            },
+            {
+              "key": "Ctrl+Num 4",
+              "action": "Infinite Units"
+            },
+            {
+              "key": "Ctrl+Num 5",
+              "action": "Add Units"
+            },
+            {
+              "key": "Ctrl+Num 7",
+              "action": "Open Locks Without Atlas Pass"
+            },
+            {
+              "key": "Ctrl+Num 8",
+              "action": "Translate All Alien Languages"
+            },
+            {
+              "key": "Ctrl+Num 9",
+              "action": "Infinite Nanites"
+            },
+            {
+              "key": "Ctrl+Num 0",
+              "action": "Infinite Quicksilver"
+            },
+            {
+              "key": "Alt+Num 4",
+              "action": "Scanner Instant Charge"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -27213,6 +31010,7 @@ window.GAMES_DATA = [
       "de": "Astroneer",
       "es": "Astroneer"
     },
+    "aliases": [],
     "developer": "System Era Softworks",
     "releaseYear": 2016,
     "genre": "Space Crafting Adventure",
@@ -27235,11 +31033,31 @@ window.GAMES_DATA = [
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Infinite Oxygen (无限氧气)"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Infinite Backpack Energy"
+      },
+      {
+        "key": "Num 4",
+        "action": "Infinite Jet Pack Duration"
+      },
+      {
+        "key": "Num 5",
+        "action": "No Crafting Requirement"
+      },
+      {
+        "key": "Num 6",
+        "action": "Infinite Bytes"
+      },
+      {
+        "key": "Num 7",
+        "action": "Bytes Multiplier"
+      },
+      {
+        "key": "Num 8",
+        "action": "Set Game Speed (设置游戏速度)"
       }
     ],
     "nexusStats": {
@@ -27312,79 +31130,71 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/361420/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
       "officialUrl": "https://flingtrainer.com/trainer/astroneer-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/astroneer-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "version": "v1.11-v1.19+",
+      "optionsCount": 8,
+      "lastUpdated": "2021-04-07",
+      "platforms": [
+        "Steam",
+        "Xbox/Game Pass"
+      ],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "异星探险家 主角锁血无敌 (Infinite Health)"
+              "action": "无限生命 (Infinite Health)"
             },
             {
               "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
+              "action": "无限氧气 (Infinite Oxygen)"
             },
             {
               "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
-            },
-            {
-              "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
+              "action": "Infinite Backpack Energy"
             }
           ]
         },
         {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
-              "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
-            },
-            {
-              "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
-            },
-            {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
+              "key": "Num 5",
+              "action": "No Crafting Requirement"
             }
           ]
         },
         {
-          "category": "🚀 探索与移动速度 (Movement & World)",
+          "category": "🌍 移动与世界 (Movement & World)",
           "items": [
             {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
+              "key": "Num 8",
+              "action": "设置游戏速度 (Set Game Speed)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 4",
+              "action": "Infinite Jet Pack Duration"
             },
             {
-              "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
+              "key": "Num 6",
+              "action": "Infinite Bytes"
             },
             {
-              "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
+              "key": "Num 7",
+              "action": "Bytes Multiplier"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -27405,6 +31215,7 @@ window.GAMES_DATA = [
       "de": "Raft",
       "es": "Raft"
     },
+    "aliases": [],
     "developer": "Redbeet Interactive",
     "releaseYear": 2018,
     "genre": "Ocean Survival Crafting",
@@ -27425,21 +31236,8 @@ window.GAMES_DATA = [
         "desc": "针对 木筏求生 的社区必备体验与性能优化补丁包"
       }
     ],
-    "hasTrainer": true,
-    "trainerHotkeys": [
-      {
-        "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
-      },
-      {
-        "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
-      },
-      {
-        "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
-      }
-    ],
+    "hasTrainer": false,
+    "trainerHotkeys": [],
     "nexusStats": {
       "totalDownloads": "27.3M",
       "totalEndorsements": "395K",
@@ -27508,82 +31306,7 @@ window.GAMES_DATA = [
     ],
     "steamAppId": 648800,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/648800/header.jpg",
-    "trainerInfo": {
-      "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
-      "officialUrl": "https://flingtrainer.com/trainer/raft-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/raft-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
-      "hotkeysCategorized": [
-        {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
-          "items": [
-            {
-              "key": "Num 1",
-              "action": "木筏求生 主角锁血无敌 (Infinite Health)"
-            },
-            {
-              "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
-            },
-            {
-              "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
-            },
-            {
-              "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
-            }
-          ]
-        },
-        {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
-          "items": [
-            {
-              "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
-            },
-            {
-              "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
-            },
-            {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
-            }
-          ]
-        },
-        {
-          "category": "🚀 探索与移动速度 (Movement & World)",
-          "items": [
-            {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
-            },
-            {
-              "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
-            },
-            {
-              "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
-            }
-          ]
-        }
-      ]
-    },
+    "trainerInfo": {},
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-14",
@@ -27603,6 +31326,7 @@ window.GAMES_DATA = [
       "de": "Grounded",
       "es": "Grounded"
     },
+    "aliases": [],
     "developer": "Obsidian Entertainment",
     "releaseYear": 2022,
     "genre": "Backyard Survival",
@@ -27631,11 +31355,31 @@ window.GAMES_DATA = [
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Max Shield/Block"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Infinite Stamina (无限耐力)"
+      },
+      {
+        "key": "Num 4",
+        "action": "No Hunger (不会饥饿)"
+      },
+      {
+        "key": "Num 5",
+        "action": "No Thirst (不会口渴)"
+      },
+      {
+        "key": "Num 6",
+        "action": "Infinite Oxygen (无限氧气)"
+      },
+      {
+        "key": "Num 7",
+        "action": "Infinite Analyzer Charges"
+      },
+      {
+        "key": "Num 8",
+        "action": "Infinite Items (无限物品)"
       }
     ],
     "nexusStats": {
@@ -27708,37 +31452,47 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/962130/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
       "officialUrl": "https://flingtrainer.com/trainer/grounded-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/grounded-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "version": "v1.0.5-v1.4.2+",
+      "optionsCount": 18,
+      "lastUpdated": "2024-05-15",
+      "platforms": [
+        "Steam",
+        "Xbox/Game Pass"
+      ],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "禁闭求生 主角锁血无敌 (Infinite Health)"
+              "action": "无限生命 (Infinite Health)"
             },
             {
               "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
+              "action": "Max Shield/Block"
             },
             {
               "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
+              "action": "无限耐力 (Infinite Stamina)"
+            },
+            {
+              "key": "Num 4",
+              "action": "不会饥饿 (No Hunger)"
+            },
+            {
+              "key": "Num 5",
+              "action": "不会口渴 (No Thirst)"
+            },
+            {
+              "key": "Num 6",
+              "action": "无限氧气 (Infinite Oxygen)"
+            },
+            {
+              "key": "Num 9",
+              "action": "Infinite Tools Durability"
             },
             {
               "key": "Num 0",
@@ -27747,40 +31501,66 @@ window.GAMES_DATA = [
           ]
         },
         {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
-              "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
+              "key": "Num 8",
+              "action": "无限物品 (Infinite Items)"
             },
             {
-              "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
+              "key": "Ctrl+Num 5",
+              "action": "无视制作需求 (Ignore Crafting Requirement)"
             },
             {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
+              "key": "Ctrl+Num 6",
+              "action": "Easy Building/Min. Building Requirement"
             }
           ]
         },
         {
-          "category": "🚀 探索与移动速度 (Movement & World)",
+          "category": "🌍 移动与世界 (Movement & World)",
           "items": [
             {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
+              "key": "Num .",
+              "action": "冻结时间 (Freeze Daytime)"
             },
             {
-              "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
+              "key": "Num +",
+              "action": "时间 +1 小时 (Daytime +1 Hour)"
             },
             {
-              "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
+              "key": "Num –",
+              "action": "时间 -1 小时 (Daytime -1 Hour)"
+            },
+            {
+              "key": "Ctrl+Num 2",
+              "action": "设置游戏速度 (Set Game Speed)"
+            },
+            {
+              "key": "Ctrl+Num 3",
+              "action": "设置移动速度 (Set Move Speed)"
+            },
+            {
+              "key": "Ctrl+Num 4",
+              "action": "无限跳跃 (Infinite Jumps)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 7",
+              "action": "Infinite Analyzer Charges"
+            },
+            {
+              "key": "Ctrl+Num 1",
+              "action": "Edit Raw Science"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -27801,6 +31581,7 @@ window.GAMES_DATA = [
       "de": "Green Hell",
       "es": "Green Hell"
     },
+    "aliases": [],
     "developer": "Creepy Jar",
     "releaseYear": 2019,
     "genre": "Amazon Survival Sim",
@@ -27829,11 +31610,31 @@ window.GAMES_DATA = [
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Infinite Stamina (无限耐力)"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Infinite Energy (无限能量)"
+      },
+      {
+        "key": "Num 4",
+        "action": "Infinite Sanity (无限理智)"
+      },
+      {
+        "key": "Num 5",
+        "action": "No Thirst (不会口渴)"
+      },
+      {
+        "key": "Num 6",
+        "action": "No Dirtiness"
+      },
+      {
+        "key": "Num 7",
+        "action": "Infinite Oxygen (无限氧气)"
+      },
+      {
+        "key": "Num 8",
+        "action": "Infinite Nutrition Fat"
       }
     ],
     "nexusStats": {
@@ -27906,79 +31707,96 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/815370/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
       "officialUrl": "https://flingtrainer.com/trainer/green-hell-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/green-hell-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "version": "v1.0-v2.0.2+",
+      "optionsCount": 15,
+      "lastUpdated": "2021-02-05",
+      "platforms": [],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "丛林地狱 主角锁血无敌 (Infinite Health)"
+              "action": "无限生命 (Infinite Health)"
             },
             {
               "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
+              "action": "无限耐力 (Infinite Stamina)"
             },
             {
               "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
+              "action": "无限能量 (Infinite Energy)"
             },
             {
-              "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
+              "key": "Num 4",
+              "action": "无限理智 (Infinite Sanity)"
+            },
+            {
+              "key": "Num 5",
+              "action": "不会口渴 (No Thirst)"
+            },
+            {
+              "key": "Num 7",
+              "action": "无限氧气 (Infinite Oxygen)"
+            },
+            {
+              "key": "Num .",
+              "action": "无限物品耐久 (Infinite Item Durability)"
             }
           ]
         },
         {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
+          "category": "💰 资源与物品 (Resources & Items)",
+          "items": [
+            {
+              "key": "Ctrl+Num 4",
+              "action": "No Building Requirements/Instant Building"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
           "items": [
             {
               "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
+              "action": "设置游戏速度 (Set Game Speed)"
             },
             {
               "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
+              "action": "超级移动速度 (Super Movement Speed)"
             },
             {
               "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
+              "action": "超级跳跃 (Super Jump)"
             }
           ]
         },
         {
-          "category": "🚀 探索与移动速度 (Movement & World)",
+          "category": "🧩 其他功能 (Other)",
           "items": [
             {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
+              "key": "Num 6",
+              "action": "No Dirtiness"
             },
             {
-              "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
+              "key": "Num 8",
+              "action": "Infinite Nutrition Fat"
             },
             {
-              "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
+              "key": "Num 9",
+              "action": "Infinite Nutrition Carbo"
+            },
+            {
+              "key": "Num 0",
+              "action": "Infinite Nutrition Protein"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -27999,6 +31817,9 @@ window.GAMES_DATA = [
       "de": "7 Days to Die",
       "es": "7 Days to Die"
     },
+    "aliases": [
+      "七日杀"
+    ],
     "developer": "The Fun Pimps",
     "releaseYear": 2024,
     "genre": "Voxel Zombie Survival",
@@ -28056,15 +31877,35 @@ window.GAMES_DATA = [
     "trainerHotkeys": [
       {
         "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
+        "action": "God Mode (无敌模式)"
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Infinite Health (无限生命)"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Infinite Stamina (无限耐力)"
+      },
+      {
+        "key": "Num 4",
+        "action": "Infinite Food (无限食物)"
+      },
+      {
+        "key": "Num 5",
+        "action": "Infinite Water (无限水)"
+      },
+      {
+        "key": "Num 6",
+        "action": "Infinite Ammo/Arrow (无限弹药/箭矢)"
+      },
+      {
+        "key": "Num 7",
+        "action": "No Reload (无需换弹)"
+      },
+      {
+        "key": "Num 8",
+        "action": "Stable Body Temperature (体温稳定)"
       }
     ],
     "nexusStats": {
@@ -28183,70 +32024,161 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/251570/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "v1.0 正式版全平台发布 (Steam)",
       "officialUrl": "https://flingtrainer.com/trainer/7-days-to-die-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/7-days-to-die-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "version": "v1.0-v3.x+",
+      "optionsCount": 30,
+      "lastUpdated": "2026-10-06",
+      "platforms": [],
+      "antiCheat": true,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 末日生存与战斗 (Survival & Combat)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "无限生命 (Infinite Health)"
+              "action": "无敌模式 (God Mode)"
             },
             {
               "key": "Num 2",
-              "action": "无限耐力 (Infinite Stamina)"
+              "action": "无限生命 (Infinite Health)"
             },
             {
               "key": "Num 3",
-              "action": "不饥饿不口渴 (No Hunger & Thirst)"
+              "action": "无限耐力 (Infinite Stamina)"
             },
             {
-              "key": "Num 4",
-              "action": "骨折感染完全免疫 (Immune to Bleed & Infection)"
+              "key": "Num 6",
+              "action": "无限弹药/箭矢 (Infinite Ammo/Arrow)"
+            },
+            {
+              "key": "Num 7",
+              "action": "无需换弹 (No Reload)"
             },
             {
               "key": "Num 0",
-              "action": "一击必杀僵尸群 (One Hit Kill)"
+              "action": "超级伤害/一击必杀 (Super Damage/One Hit Kills)"
+            },
+            {
+              "key": "Num .",
+              "action": "伤害倍率 (Damage Multiplier)"
+            },
+            {
+              "key": "Alt+Num 3",
+              "action": "修改技能点 (Edit Skill Points)"
+            },
+            {
+              "key": "Alt+Num 5",
+              "action": "超级精准 (Super Accuracy)"
+            },
+            {
+              "key": "Alt+Num 6",
+              "action": "无后坐力 (No Recoil)"
+            },
+            {
+              "key": "Ctrl+Num 1",
+              "action": "隐身模式 (Stealth Mode)"
+            },
+            {
+              "key": "Ctrl+Num 0",
+              "action": "无限物品耐久 (Infinite Item Durability)"
             }
           ]
         },
         {
-          "category": "💰 资源搜刮建造 (Crafting & Build)",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
-              "key": "Ctrl+Num 1",
-              "action": "制造零材料零耗时 (Instant & Free Crafting)"
+              "key": "Num 4",
+              "action": "无限食物 (Infinite Food)"
             },
             {
+              "key": "Num 5",
+              "action": "无限水 (Infinite Water)"
+            },
+            {
+              "key": "Ctrl+Num 5",
+              "action": "Edit Holding Item Amount"
+            },
+            {
+              "key": "Ctrl+Num 6",
+              "action": "零重量 (Zero Weight)"
+            },
+            {
+              "key": "Ctrl+Num 7",
+              "action": "No Crafting Requirements"
+            },
+            {
+              "key": "Ctrl+Num 8",
+              "action": "瞬间制作 (Instant Craft)"
+            }
+          ]
+        },
+        {
+          "category": "📈 等级与属性 (Level & Stats)",
+          "items": [
+            {
+              "key": "Alt+Num 1",
+              "action": "无限经验 (Infinite Exp)"
+            },
+            {
+              "key": "Alt+Num 2",
+              "action": "经验倍率 (Exp Multiplier)"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
               "key": "Ctrl+Num 2",
-              "action": "瞬间秒挖岩石与拆解方块 (Instant Mining)"
+              "action": "飞行模式 (Fly Mode)"
             },
             {
               "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
+              "action": "设置移动速度 (Set Movement Speed)"
             },
             {
               "key": "Ctrl+Num 4",
-              "action": "载具无限燃料汽油 (Infinite Vehicle Fuel)"
+              "action": "设置游戏速度 (Set Game Speed)"
+            },
+            {
+              "key": "Ctrl+Num .",
+              "action": "冻结时间 (Freeze Daytime)"
+            },
+            {
+              "key": "Ctrl+Num +",
+              "action": "时间流逝速度 (Time Pass Speed)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 8",
+              "action": "体温稳定 (Stable Body Temperature)"
+            },
+            {
+              "key": "Num 9",
+              "action": "100% 掉落率 (100% Drop Rate)"
+            },
+            {
+              "key": "Alt+Num 4",
+              "action": "Enable Creative Menu"
+            },
+            {
+              "key": "Alt+Num 7",
+              "action": "快速射击 (Rapid Fire)"
+            },
+            {
+              "key": "Ctrl+Num 9",
+              "action": "Instant Search"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -28267,6 +32199,9 @@ window.GAMES_DATA = [
       "de": "ARK: Survival Evolved",
       "es": "ARK: Survival Evolved"
     },
+    "aliases": [
+      "方舟"
+    ],
     "developer": "Studio Wildcard",
     "releaseYear": 2015,
     "genre": "Dinosaur Survival MMO/Single",
@@ -28328,11 +32263,31 @@ window.GAMES_DATA = [
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Infinite Stamina (无限耐力)"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Max Food (食物满值)"
+      },
+      {
+        "key": "Num 4",
+        "action": "Max Water (水满值)"
+      },
+      {
+        "key": "Num 5",
+        "action": "Zero Weight (零重量)"
+      },
+      {
+        "key": "Num 6",
+        "action": "Infinite Oxygen (无限氧气)"
+      },
+      {
+        "key": "Num 7",
+        "action": "No Torpidity"
+      },
+      {
+        "key": "Num 8",
+        "action": "Add Experience (增加经验)"
       }
     ],
     "nexusStats": {
@@ -28480,70 +32435,133 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/346110/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "v358.25 (全DLC整合兼容版)",
       "officialUrl": "https://flingtrainer.com/trainer/ark-survival-evolved-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/ark-survival-evolved-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "version": "v1.0-v318.*",
+      "optionsCount": 23,
+      "lastUpdated": "2020-11-26",
+      "platforms": [],
+      "antiCheat": true,
+      "offlineOnly": true,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 驯兽战斗与生存 (Combat & Dinos)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "主角与坐骑恐龙无限生命 (Infinite Health)"
+              "action": "无限生命 (Infinite Health)"
             },
             {
               "key": "Num 2",
-              "action": "无限耐力与氧气 (Infinite Stamina & Oxygen)"
+              "action": "无限耐力 (Infinite Stamina)"
             },
             {
-              "key": "Num 3",
-              "action": "饥饿水分锁定不掉 (No Hunger & Thirst)"
-            },
-            {
-              "key": "Num 4",
-              "action": "恐龙瞬间 100% 驯服 (Instant Tame Dino)"
+              "key": "Num 6",
+              "action": "无限氧气 (Infinite Oxygen)"
             },
             {
               "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
+              "action": "超级伤害/一击摧毁 (Super Damage/One Hit Destroy)"
+            },
+            {
+              "key": "Ctrl+Num 2",
+              "action": "Infinite Equipments Durability"
+            },
+            {
+              "key": "Ctrl+Num 3",
+              "action": "无坠落伤害 (No Fall Damage)"
+            },
+            {
+              "key": "Ctrl+Num 8",
+              "action": "Guns No Reload"
             }
           ]
         },
         {
-          "category": "💰 科技点数与泰克 (Engrams & Tek)",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
+              "key": "Num 3",
+              "action": "食物满值 (Max Food)"
+            },
+            {
+              "key": "Num 4",
+              "action": "水满值 (Max Water)"
+            },
+            {
+              "key": "Num 5",
+              "action": "零重量 (Zero Weight)"
+            },
+            {
+              "key": "Num 9",
+              "action": "Add 100 Engram Points"
+            },
+            {
               "key": "Ctrl+Num 1",
-              "action": "解锁全印痕科技与泰克图鉴 (Unlock All Engrams)"
-            },
-            {
-              "key": "Ctrl+Num 2",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
-            },
-            {
-              "key": "Ctrl+Num 3",
-              "action": "无限泰克能量元素板 (Infinite Tek Element)"
+              "action": "瞬间制作 (Instant Craft)"
             },
             {
               "key": "Ctrl+Num 4",
-              "action": "超级自由飞行穿墙 (Fly & Ghost Mode)"
+              "action": "无限物品 (Infinite Items)"
+            },
+            {
+              "key": "Ctrl+Num 6",
+              "action": "无视制作需求 (Ignore Crafting Requirements)"
+            },
+            {
+              "key": "Ctrl+Num 7",
+              "action": "Items Don’t Spoil"
+            }
+          ]
+        },
+        {
+          "category": "📈 等级与属性 (Level & Stats)",
+          "items": [
+            {
+              "key": "Num 8",
+              "action": "增加经验 (Add Experience)"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "PageUp",
+              "action": "设置玩家速度 (Set Player Speed)"
+            },
+            {
+              "key": "PageDown",
+              "action": "超级跳跃 (Super Jump)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 7",
+              "action": "No Torpidity"
+            },
+            {
+              "key": "Ctrl+Num 5",
+              "action": "体温稳定 (Stable Body Temperature)"
+            },
+            {
+              "key": "Ctrl+Num 9",
+              "action": "Instant Tame"
+            },
+            {
+              "key": "Ctrl+Num 0",
+              "action": "One Hit Faint"
+            },
+            {
+              "key": "Ctrl+Num .",
+              "action": "Dinos Always Hungry"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -28564,6 +32582,7 @@ window.GAMES_DATA = [
       "de": "Rust",
       "es": "Rust"
     },
+    "aliases": [],
     "developer": "Facepunch Studios",
     "releaseYear": 2018,
     "genre": "Survival Shooter",
@@ -28584,21 +32603,8 @@ window.GAMES_DATA = [
         "desc": "针对 腐蚀 (本地自建服) 的社区必备体验与性能优化补丁包"
       }
     ],
-    "hasTrainer": true,
-    "trainerHotkeys": [
-      {
-        "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
-      },
-      {
-        "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
-      },
-      {
-        "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
-      }
-    ],
+    "hasTrainer": false,
+    "trainerHotkeys": [],
     "nexusStats": {
       "totalDownloads": "26.2M",
       "totalEndorsements": "379K",
@@ -28667,82 +32673,7 @@ window.GAMES_DATA = [
     ],
     "steamAppId": 252490,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/252490/header.jpg",
-    "trainerInfo": {
-      "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
-      "officialUrl": "https://flingtrainer.com/trainer/rust-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/rust-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
-      "hotkeysCategorized": [
-        {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
-          "items": [
-            {
-              "key": "Num 1",
-              "action": "腐蚀 (本地自建服) 主角锁血无敌 (Infinite Health)"
-            },
-            {
-              "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
-            },
-            {
-              "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
-            },
-            {
-              "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
-            }
-          ]
-        },
-        {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
-          "items": [
-            {
-              "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
-            },
-            {
-              "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
-            },
-            {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
-            }
-          ]
-        },
-        {
-          "category": "🚀 探索与移动速度 (Movement & World)",
-          "items": [
-            {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
-            },
-            {
-              "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
-            },
-            {
-              "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
-            }
-          ]
-        }
-      ]
-    },
+    "trainerInfo": {},
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-29",
@@ -28762,6 +32693,7 @@ window.GAMES_DATA = [
       "de": "Conan Exiles",
       "es": "Conan Exiles"
     },
+    "aliases": [],
     "developer": "Funcom",
     "releaseYear": 2018,
     "genre": "Survival Action RPG",
@@ -28782,21 +32714,8 @@ window.GAMES_DATA = [
         "desc": "针对 流放者柯南 的社区必备体验与性能优化补丁包"
       }
     ],
-    "hasTrainer": true,
-    "trainerHotkeys": [
-      {
-        "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
-      },
-      {
-        "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
-      },
-      {
-        "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
-      }
-    ],
+    "hasTrainer": false,
+    "trainerHotkeys": [],
     "nexusStats": {
       "totalDownloads": "26.1M",
       "totalEndorsements": "378K",
@@ -28865,82 +32784,7 @@ window.GAMES_DATA = [
     ],
     "steamAppId": 440900,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/440900/header.jpg",
-    "trainerInfo": {
-      "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
-      "officialUrl": "https://flingtrainer.com/trainer/conan-exiles-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/conan-exiles-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
-      "hotkeysCategorized": [
-        {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
-          "items": [
-            {
-              "key": "Num 1",
-              "action": "流放者柯南 主角锁血无敌 (Infinite Health)"
-            },
-            {
-              "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
-            },
-            {
-              "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
-            },
-            {
-              "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
-            }
-          ]
-        },
-        {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
-          "items": [
-            {
-              "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
-            },
-            {
-              "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
-            },
-            {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
-            }
-          ]
-        },
-        {
-          "category": "🚀 探索与移动速度 (Movement & World)",
-          "items": [
-            {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
-            },
-            {
-              "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
-            },
-            {
-              "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
-            }
-          ]
-        }
-      ]
-    },
+    "trainerInfo": {},
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-07",
@@ -28960,6 +32804,7 @@ window.GAMES_DATA = [
       "de": "Medieval Dynasty",
       "es": "Medieval Dynasty"
     },
+    "aliases": [],
     "developer": "Render Cube",
     "releaseYear": 2021,
     "genre": "Medieval Life Sim",
@@ -28982,11 +32827,31 @@ window.GAMES_DATA = [
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Infinite Stamina (无限耐力)"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Infinite Food (无限食物)"
+      },
+      {
+        "key": "Num 4",
+        "action": "Infinite Water (无限水)"
+      },
+      {
+        "key": "Num 5",
+        "action": "Zero Dirtiness"
+      },
+      {
+        "key": "Num 6",
+        "action": "Set Game Speed (设置游戏速度)"
+      },
+      {
+        "key": "Num 7",
+        "action": "Set Item Quantity/Money"
+      },
+      {
+        "key": "Num 8",
+        "action": "Zero Weight/Max Weight Limit"
       }
     ],
     "nexusStats": {
@@ -29059,79 +32924,83 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1129580/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
       "officialUrl": "https://flingtrainer.com/trainer/medieval-dynasty-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/medieval-dynasty-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "version": "v1.0-v2.6+",
+      "optionsCount": 11,
+      "lastUpdated": "2026-06-25",
+      "platforms": [
+        "Steam",
+        "Xbox/Game Pass"
+      ],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "中世纪王朝 主角锁血无敌 (Infinite Health)"
+              "action": "无限生命 (Infinite Health)"
             },
             {
               "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
-            },
+              "action": "无限耐力 (Infinite Stamina)"
+            }
+          ]
+        },
+        {
+          "category": "💰 资源与物品 (Resources & Items)",
+          "items": [
             {
               "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
+              "action": "无限食物 (Infinite Food)"
+            },
+            {
+              "key": "Num 4",
+              "action": "无限水 (Infinite Water)"
+            },
+            {
+              "key": "Num 7",
+              "action": "Set Item Quantity/Money"
+            },
+            {
+              "key": "Num 8",
+              "action": "Zero Weight/Max Weight Limit"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "Num 6",
+              "action": "设置游戏速度 (Set Game Speed)"
+            },
+            {
+              "key": "Num 9",
+              "action": "设置玩家速度 (Set Player Speed)"
             },
             {
               "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
+              "action": "设置移动速度 (Set Movement Speed)"
+            },
+            {
+              "key": "Num .",
+              "action": "设置跳跃高度 (Set Jump Height)"
             }
           ]
         },
         {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
+          "category": "🧩 其他功能 (Other)",
           "items": [
             {
-              "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
-            },
-            {
-              "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
-            },
-            {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
-            }
-          ]
-        },
-        {
-          "category": "🚀 探索与移动速度 (Movement & World)",
-          "items": [
-            {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
-            },
-            {
-              "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
-            },
-            {
-              "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
+              "key": "Num 5",
+              "action": "Zero Dirtiness"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -29152,6 +33021,7 @@ window.GAMES_DATA = [
       "de": "Kenshi",
       "es": "Kenshi"
     },
+    "aliases": [],
     "developer": "Lo-Fi Games",
     "releaseYear": 2018,
     "genre": "Sandbox Post-Apocalyptic RPG",
@@ -29172,21 +33042,8 @@ window.GAMES_DATA = [
         "desc": "针对 剑士 的社区必备体验与性能优化补丁包"
       }
     ],
-    "hasTrainer": true,
-    "trainerHotkeys": [
-      {
-        "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
-      },
-      {
-        "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
-      },
-      {
-        "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
-      }
-    ],
+    "hasTrainer": false,
+    "trainerHotkeys": [],
     "nexusStats": {
       "totalDownloads": "25.7M",
       "totalEndorsements": "372K",
@@ -29255,82 +33112,7 @@ window.GAMES_DATA = [
     ],
     "steamAppId": 233860,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/233860/header.jpg",
-    "trainerInfo": {
-      "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
-      "officialUrl": "https://flingtrainer.com/trainer/kenshi-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/kenshi-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
-      "hotkeysCategorized": [
-        {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
-          "items": [
-            {
-              "key": "Num 1",
-              "action": "剑士 主角锁血无敌 (Infinite Health)"
-            },
-            {
-              "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
-            },
-            {
-              "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
-            },
-            {
-              "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
-            }
-          ]
-        },
-        {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
-          "items": [
-            {
-              "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
-            },
-            {
-              "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
-            },
-            {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
-            }
-          ]
-        },
-        {
-          "category": "🚀 探索与移动速度 (Movement & World)",
-          "items": [
-            {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
-            },
-            {
-              "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
-            },
-            {
-              "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
-            }
-          ]
-        }
-      ]
-    },
+    "trainerInfo": {},
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-06",
@@ -29350,6 +33132,9 @@ window.GAMES_DATA = [
       "de": "The Sims 4",
       "es": "The Sims 4"
     },
+    "aliases": [
+      "模拟人生4"
+    ],
     "developer": "Maxis / EA",
     "releaseYear": 2014,
     "genre": "Life Simulation",
@@ -29403,21 +33188,8 @@ window.GAMES_DATA = [
         "desc": "针对 模拟人生 4 的社区必备体验与性能优化补丁包"
       }
     ],
-    "hasTrainer": true,
-    "trainerHotkeys": [
-      {
-        "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
-      },
-      {
-        "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
-      },
-      {
-        "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
-      }
-    ],
+    "hasTrainer": false,
+    "trainerHotkeys": [],
     "nexusStats": {
       "totalDownloads": "25.5M",
       "totalEndorsements": "369K",
@@ -29609,73 +33381,7 @@ window.GAMES_DATA = [
     ],
     "steamAppId": 1222670,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1222670/header.jpg",
-    "trainerInfo": {
-      "author": "风灵月影 (FLiNG)",
-      "version": "Life & Death 生与死 DLC 兼容最新版",
-      "officialUrl": "https://flingtrainer.com/trainer/the-sims-4-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/the-sims-4-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
-      "hotkeysCategorized": [
-        {
-          "category": "⚔️ 市民需求与生命 (Sim Needs & Life)",
-          "items": [
-            {
-              "key": "Num 1",
-              "action": "市民全需求永久满绿不掉 (Fill All Needs)"
-            },
-            {
-              "key": "Num 2",
-              "action": "永不疲倦/精力无限 (Never Tired)"
-            },
-            {
-              "key": "Num 3",
-              "action": "市民永不衰老死亡 (Stop Aging)"
-            },
-            {
-              "key": "Num 4",
-              "action": "全职业晋升到最高 10 级总裁 (Max All Careers)"
-            },
-            {
-              "key": "Num 0",
-              "action": "瞬间结交成为挚友/浪漫伴侣 (Instant Best Friends & Romance)"
-            }
-          ]
-        },
-        {
-          "category": "💰 财富资金与建筑建造 (Funds & Building)",
-          "items": [
-            {
-              "key": "Ctrl+Num 1",
-              "action": "家庭资金瞬间设为 9,999,999 模拟币 (Max Family Funds)"
-            },
-            {
-              "key": "Ctrl+Num 2",
-              "action": "自由摆放穿模叠加物品 (bb.moveobjects on)"
-            },
-            {
-              "key": "Ctrl+Num 3",
-              "action": "解锁全职业全部隐藏限定家具 (Unlock All Career Objects)"
-            },
-            {
-              "key": "Ctrl+Num 4",
-              "action": "所有房产豪宅免费入住购买 (Free Real Estate On)"
-            }
-          ]
-        }
-      ]
-    },
+    "trainerInfo": {},
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-11",
@@ -29695,6 +33401,7 @@ window.GAMES_DATA = [
       "de": "Planet Zoo",
       "es": "Planet Zoo"
     },
+    "aliases": [],
     "developer": "Frontier Developments",
     "releaseYear": 2019,
     "genre": "Zoo Management Sim",
@@ -29719,15 +33426,31 @@ window.GAMES_DATA = [
     "trainerHotkeys": [
       {
         "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
+        "action": "Set Money (设置金钱)"
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Add Conservation Credits"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Max Staff Happiness"
+      },
+      {
+        "key": "Num 4",
+        "action": "Max Staff Energy"
+      },
+      {
+        "key": "Num 5",
+        "action": "Instant Research (瞬间研究)"
+      },
+      {
+        "key": "Num 6",
+        "action": "Money Multiplier (金钱倍率)"
+      },
+      {
+        "key": "Num 7",
+        "action": "Set Game Speed (设置游戏速度)"
       }
     ],
     "nexusStats": {
@@ -29800,79 +33523,64 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/703080/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
       "officialUrl": "https://flingtrainer.com/trainer/planet-zoo-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/planet-zoo-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "version": "v1.0.1-v1.4.2+",
+      "optionsCount": 7,
+      "lastUpdated": "2020-12-16",
+      "platforms": [],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
+          "items": [
+            {
+              "key": "Num 4",
+              "action": "Max Staff Energy"
+            }
+          ]
+        },
+        {
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
               "key": "Num 1",
-              "action": "动物园之星 主角锁血无敌 (Infinite Health)"
+              "action": "设置金钱 (Set Money)"
             },
             {
               "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
+              "action": "Add Conservation Credits"
             },
+            {
+              "key": "Num 6",
+              "action": "金钱倍率 (Money Multiplier)"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "Num 7",
+              "action": "设置游戏速度 (Set Game Speed)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
             {
               "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
+              "action": "Max Staff Happiness"
             },
             {
-              "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
-            }
-          ]
-        },
-        {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
-          "items": [
-            {
-              "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
-            },
-            {
-              "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
-            },
-            {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
-            }
-          ]
-        },
-        {
-          "category": "🚀 探索与移动速度 (Movement & World)",
-          "items": [
-            {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
-            },
-            {
-              "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
-            },
-            {
-              "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
+              "key": "Num 5",
+              "action": "瞬间研究 (Instant Research)"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -29893,6 +33601,7 @@ window.GAMES_DATA = [
       "de": "Jurassic World Evolution 2",
       "es": "Jurassic World Evolution 2"
     },
+    "aliases": [],
     "developer": "Frontier Developments",
     "releaseYear": 2021,
     "genre": "Dinosaur Theme Park Sim",
@@ -29917,15 +33626,35 @@ window.GAMES_DATA = [
     "trainerHotkeys": [
       {
         "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
+        "action": "Edit Money (修改金钱)"
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Money Multiplier (金钱倍率)"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Infinite Facility Resources"
+      },
+      {
+        "key": "Num 4",
+        "action": "Instant Complete Tasks"
+      },
+      {
+        "key": "Num 5",
+        "action": "Zero Scientist Stress"
+      },
+      {
+        "key": "Num 6",
+        "action": "Max Scientist Stats"
+      },
+      {
+        "key": "Num 7",
+        "action": "Max Park Rating"
+      },
+      {
+        "key": "Num 8",
+        "action": "Dinosaurs: Max Health (最大生命)"
       }
     ],
     "nexusStats": {
@@ -29998,79 +33727,89 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1244460/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
       "officialUrl": "https://flingtrainer.com/trainer/jurassic-world-evolution-2-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/jurassic-world-evolution-2-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "version": "v1.0-v1.7.2+",
+      "optionsCount": 12,
+      "lastUpdated": "2023-05-11",
+      "platforms": [],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
+          "items": [
+            {
+              "key": "Num 8",
+              "action": "最大生命 (Dinosaurs: Max Health)"
+            }
+          ]
+        },
+        {
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
               "key": "Num 1",
-              "action": "侏罗纪世界：进化 2 主角锁血无敌 (Infinite Health)"
+              "action": "修改金钱 (Edit Money)"
             },
             {
               "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
+              "action": "金钱倍率 (Money Multiplier)"
             },
             {
               "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
+              "action": "Infinite Facility Resources"
+            },
+            {
+              "key": "Num 9",
+              "action": "食物满值 (Dinosaurs: Max Food)"
             },
             {
               "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
+              "action": "水满值 (Dinosaurs: Max Water)"
             }
           ]
         },
         {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
+          "category": "📈 等级与属性 (Level & Stats)",
           "items": [
             {
-              "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
-            },
-            {
-              "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
-            },
-            {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
+              "key": "Num 6",
+              "action": "Max Scientist Stats"
             }
           ]
         },
         {
-          "category": "🚀 探索与移动速度 (Movement & World)",
+          "category": "🌍 移动与世界 (Movement & World)",
           "items": [
             {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
+              "key": "Num +",
+              "action": "设置游戏速度 (Set Game Speed)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 4",
+              "action": "Instant Complete Tasks"
             },
             {
-              "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
+              "key": "Num 5",
+              "action": "Zero Scientist Stress"
             },
             {
-              "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
+              "key": "Num 7",
+              "action": "Max Park Rating"
+            },
+            {
+              "key": "Num .",
+              "action": "Dinosaurs: Max Comfort"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -30091,6 +33830,10 @@ window.GAMES_DATA = [
       "de": "Euro Truck Simulator 2",
       "es": "Euro Truck Simulator 2"
     },
+    "aliases": [
+      "欧卡2",
+      "欧洲卡车模拟"
+    ],
     "developer": "SCS Software",
     "releaseYear": 2012,
     "genre": "Truck Driving Sim",
@@ -30144,21 +33887,8 @@ window.GAMES_DATA = [
         "desc": "针对 欧洲卡车模拟 2 的社区必备体验与性能优化补丁包"
       }
     ],
-    "hasTrainer": true,
-    "trainerHotkeys": [
-      {
-        "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
-      },
-      {
-        "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
-      },
-      {
-        "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
-      }
-    ],
+    "hasTrainer": false,
+    "trainerHotkeys": [],
     "nexusStats": {
       "totalDownloads": "25.0M",
       "totalEndorsements": "362K",
@@ -30273,69 +34003,7 @@ window.GAMES_DATA = [
     ],
     "steamAppId": 227300,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/227300/header.jpg",
-    "trainerInfo": {
-      "author": "风灵月影 (FLiNG)",
-      "version": "v1.51 (全欧洲与巴尔干半岛兼容版)",
-      "officialUrl": "https://flingtrainer.com/trainer/euro-truck-simulator-2-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/euro-truck-simulator-2-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
-      "hotkeysCategorized": [
-        {
-          "category": "⚔️ 驾驶生存与卡车状态 (Truck & Driver)",
-          "items": [
-            {
-              "key": "Num 1",
-              "action": "卡车零损伤永不损坏 (No Truck Damage)"
-            },
-            {
-              "key": "Num 2",
-              "action": "无限燃油柴油不耗油 (Infinite Fuel)"
-            },
-            {
-              "key": "Num 3",
-              "action": "司机永不疲劳困倦 (No Fatigue)"
-            },
-            {
-              "key": "Num 4",
-              "action": "彻底关闭超速闯红灯违章罚款 (No Traffic Offenses)"
-            },
-            {
-              "key": "Num 0",
-              "action": "超级极速推进马力 (Super Speed Boost)"
-            }
-          ]
-        },
-        {
-          "category": "💰 货运物流与资金 (Logistics & Money)",
-          "items": [
-            {
-              "key": "Ctrl+Num 1",
-              "action": "增加 5,000,000 欧元运输资金 (Add 5M Euros)"
-            },
-            {
-              "key": "Ctrl+Num 2",
-              "action": "角色驾驶等级直升 100 级 (Set Max Level 100)"
-            },
-            {
-              "key": "Ctrl+Num 3",
-              "action": "所有城市车库直接买断解锁 (Unlock All Garages)"
-            }
-          ]
-        }
-      ]
-    },
+    "trainerInfo": {},
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-18",
@@ -30355,6 +34023,7 @@ window.GAMES_DATA = [
       "de": "SnowRunner",
       "es": "SnowRunner"
     },
+    "aliases": [],
     "developer": "Saber Interactive",
     "releaseYear": 2021,
     "genre": "Off-Road Physics Sim",
@@ -30379,15 +34048,35 @@ window.GAMES_DATA = [
     "trainerHotkeys": [
       {
         "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
+        "action": "Infinite Vehicle Health (无限载具生命)"
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Infinite Fuel (无限燃料)"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Infinite Repair Points"
+      },
+      {
+        "key": "Num 4",
+        "action": "Infinite Spare Tires"
+      },
+      {
+        "key": "Num 5",
+        "action": "Freeze Daytime (冻结时间)"
+      },
+      {
+        "key": "Num 6",
+        "action": "Daytime +1 Hour (时间 +1 小时)"
+      },
+      {
+        "key": "Num 7",
+        "action": "Daytime -1 Hour (时间 -1 小时)"
+      },
+      {
+        "key": "Num 8",
+        "action": "Set Game Speed (设置游戏速度)"
       }
     ],
     "nexusStats": {
@@ -30460,79 +34149,73 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1465360/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
       "officialUrl": "https://flingtrainer.com/trainer/snowrunner-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/snowrunner-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "version": "v1.0-v20+",
+      "optionsCount": 7,
+      "lastUpdated": "2022-12-28",
+      "platforms": [],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "雪地奔驰 主角锁血无敌 (Infinite Health)"
-            },
+              "action": "无限载具生命 (Infinite Vehicle Health)"
+            }
+          ]
+        },
+        {
+          "category": "💰 资源与物品 (Resources & Items)",
+          "items": [
             {
               "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
-            },
+              "action": "无限燃料 (Infinite Fuel)"
+            }
+          ]
+        },
+        {
+          "category": "📈 等级与属性 (Level & Stats)",
+          "items": [
             {
               "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
-            },
-            {
-              "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
+              "action": "Infinite Repair Points"
             }
           ]
         },
         {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
+          "category": "🌍 移动与世界 (Movement & World)",
           "items": [
             {
-              "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
+              "key": "Num 5",
+              "action": "冻结时间 (Freeze Daytime)"
             },
             {
-              "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
+              "key": "Num 6",
+              "action": "时间 +1 小时 (Daytime +1 Hour)"
             },
             {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
+              "key": "Num 7",
+              "action": "时间 -1 小时 (Daytime -1 Hour)"
+            },
+            {
+              "key": "Num 8",
+              "action": "设置游戏速度 (Set Game Speed)"
             }
           ]
         },
         {
-          "category": "🚀 探索与移动速度 (Movement & World)",
+          "category": "🧩 其他功能 (Other)",
           "items": [
             {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
-            },
-            {
-              "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
-            },
-            {
-              "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
+              "key": "Num 4",
+              "action": "Infinite Spare Tires"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -30553,6 +34236,7 @@ window.GAMES_DATA = [
       "de": "Forza Horizon 5",
       "es": "Forza Horizon 5"
     },
+    "aliases": [],
     "developer": "Playground Games",
     "releaseYear": 2021,
     "genre": "Open World Racing",
@@ -30567,21 +34251,8 @@ window.GAMES_DATA = [
     "hasMods": false,
     "modInstallPath": "N/A",
     "mustHaveMods": [],
-    "hasTrainer": true,
-    "trainerHotkeys": [
-      {
-        "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
-      },
-      {
-        "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
-      },
-      {
-        "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
-      }
-    ],
+    "hasTrainer": false,
+    "trainerHotkeys": [],
     "nexusStats": {
       "totalDownloads": "24.6M",
       "totalEndorsements": "356K",
@@ -30650,82 +34321,7 @@ window.GAMES_DATA = [
     ],
     "steamAppId": 1551360,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1551360/header.jpg",
-    "trainerInfo": {
-      "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
-      "officialUrl": "https://flingtrainer.com/trainer/forza-horizon-5-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/forza-horizon-5-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
-      "hotkeysCategorized": [
-        {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
-          "items": [
-            {
-              "key": "Num 1",
-              "action": "极限竞速：地平线 5 主角锁血无敌 (Infinite Health)"
-            },
-            {
-              "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
-            },
-            {
-              "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
-            },
-            {
-              "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
-            }
-          ]
-        },
-        {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
-          "items": [
-            {
-              "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
-            },
-            {
-              "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
-            },
-            {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
-            }
-          ]
-        },
-        {
-          "category": "🚀 探索与移动速度 (Movement & World)",
-          "items": [
-            {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
-            },
-            {
-              "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
-            },
-            {
-              "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
-            }
-          ]
-        }
-      ]
-    },
+    "trainerInfo": {},
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-12",
@@ -30745,6 +34341,7 @@ window.GAMES_DATA = [
       "de": "Assetto Corsa",
       "es": "Assetto Corsa"
     },
+    "aliases": [],
     "developer": "Kunos Simulazioni",
     "releaseYear": 2014,
     "genre": "Racing Simulation",
@@ -30835,82 +34432,7 @@ window.GAMES_DATA = [
     ],
     "steamAppId": 244210,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/244210/header.jpg",
-    "trainerInfo": {
-      "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
-      "officialUrl": "https://flingtrainer.com/trainer/assetto-corsa-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/assetto-corsa-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
-      "hotkeysCategorized": [
-        {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
-          "items": [
-            {
-              "key": "Num 1",
-              "action": "神力科莎 主角锁血无敌 (Infinite Health)"
-            },
-            {
-              "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
-            },
-            {
-              "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
-            },
-            {
-              "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
-            }
-          ]
-        },
-        {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
-          "items": [
-            {
-              "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
-            },
-            {
-              "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
-            },
-            {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
-            }
-          ]
-        },
-        {
-          "category": "🚀 探索与移动速度 (Movement & World)",
-          "items": [
-            {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
-            },
-            {
-              "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
-            },
-            {
-              "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
-            }
-          ]
-        }
-      ]
-    },
+    "trainerInfo": {},
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-18",
@@ -30930,6 +34452,7 @@ window.GAMES_DATA = [
       "de": "BeamNG.drive",
       "es": "BeamNG.drive"
     },
+    "aliases": [],
     "developer": "BeamNG",
     "releaseYear": 2015,
     "genre": "Soft-body Physics Vehicle Sim",
@@ -30983,21 +34506,8 @@ window.GAMES_DATA = [
         "desc": "针对 BeamNG.drive 的社区必备体验与性能优化补丁包"
       }
     ],
-    "hasTrainer": true,
-    "trainerHotkeys": [
-      {
-        "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
-      },
-      {
-        "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
-      },
-      {
-        "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
-      }
-    ],
+    "hasTrainer": false,
+    "trainerHotkeys": [],
     "nexusStats": {
       "totalDownloads": "24.3M",
       "totalEndorsements": "352K",
@@ -31100,69 +34610,7 @@ window.GAMES_DATA = [
     ],
     "steamAppId": 284160,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/284160/header.jpg",
-    "trainerInfo": {
-      "author": "风灵月影 (FLiNG)",
-      "version": "v0.33 (软体物理引擎重制版)",
-      "officialUrl": "https://flingtrainer.com/trainer/beamng-drive-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/beamng-drive-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
-      "hotkeysCategorized": [
-        {
-          "category": "⚔️ 车辆物理与损伤 (Physics & Damage)",
-          "items": [
-            {
-              "key": "Num 1",
-              "action": "车辆瞬间原地完全修复重置 (Instant Repair Car - Insert)"
-            },
-            {
-              "key": "Num 2",
-              "action": "车辆无敌防撞不变形 (Invincible Car Mesh)"
-            },
-            {
-              "key": "Num 3",
-              "action": "无限引擎动力与超级抓地力 (Super Engine Power)"
-            },
-            {
-              "key": "Num 4",
-              "action": "瞬间将车辆瞬移至镜头前 (Teleport to Cam - F7)"
-            },
-            {
-              "key": "Num 0",
-              "action": "引爆车辆所有零件与爆胎 (Explode All Parts)"
-            }
-          ]
-        },
-        {
-          "category": "🚀 物理流速与重力 (Time & Gravity)",
-          "items": [
-            {
-              "key": "Alt+Num 1",
-              "action": "慢动作物理流速 100x 慢放 (Slow Motion)"
-            },
-            {
-              "key": "Alt+Num 2",
-              "action": "改变世界重力为月球/零重力 (Moon / Zero Gravity)"
-            },
-            {
-              "key": "Alt+Num 3",
-              "action": "风力扰动与飓风模拟 (Wind & Storm Simulation)"
-            }
-          ]
-        }
-      ]
-    },
+    "trainerInfo": {},
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-11",
@@ -31182,6 +34630,7 @@ window.GAMES_DATA = [
       "de": "Persona 5 Royal",
       "es": "Persona 5 Royal"
     },
+    "aliases": [],
     "developer": "ATLUS",
     "releaseYear": 2022,
     "genre": "JRPG",
@@ -31206,15 +34655,35 @@ window.GAMES_DATA = [
     "trainerHotkeys": [
       {
         "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
+        "action": "Infinite HP (无限生命)"
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Infinite SP (无限技能值 (SP))"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Infinite Bullets"
+      },
+      {
+        "key": "Num 4",
+        "action": "Melee Skills Don’t Cost HP"
+      },
+      {
+        "key": "Num 5",
+        "action": "Items Won’t Decrease (物品不减少)"
+      },
+      {
+        "key": "Num 6",
+        "action": "Edit Security Level"
+      },
+      {
+        "key": "Num 7",
+        "action": "Infinite Exp (无限经验)"
+      },
+      {
+        "key": "Num 8",
+        "action": "Exp Multiplier (经验倍率)"
       }
     ],
     "nexusStats": {
@@ -31287,79 +34756,179 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1687950/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
       "officialUrl": "https://flingtrainer.com/trainer/persona-5-royal-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/persona-5-royal-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "version": "v1.0-v1.04+",
+      "optionsCount": 34,
+      "lastUpdated": "2024-09-13",
+      "platforms": [
+        "Steam"
+      ],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "女神异闻录 5 皇家版 主角锁血无敌 (Infinite Health)"
+              "action": "无限生命 (Infinite HP)"
             },
             {
               "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
+              "action": "无限技能值 (SP) (Infinite SP)"
             },
             {
-              "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
+              "key": "Num 4",
+              "action": "Melee Skills Don’t Cost HP"
             },
             {
               "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
+              "action": "超级伤害/一击必杀 (Super Damage/One Hit Kills)"
+            },
+            {
+              "key": "Num .",
+              "action": "伤害倍率 (Damage Multiplier)"
+            },
+            {
+              "key": "Num +",
+              "action": "防御倍率 (Defense Multiplier)"
+            },
+            {
+              "key": "Ctrl+F4",
+              "action": "获得全部技能卡 (Obtain All Skill Cards)"
             }
           ]
         },
         {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
+              "key": "Num 5",
+              "action": "物品不减少 (Items Won’t Decrease)"
+            },
+            {
               "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
+              "action": "修改金钱 (Edit Money)"
             },
             {
               "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
+              "action": "金钱倍率 (Money Multiplier)"
             },
             {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
+              "key": "Ctrl+F1",
+              "action": "获得全部消耗品 (Obtain All Consumables)"
+            },
+            {
+              "key": "Ctrl+F3",
+              "action": "获得全部材料 (Obtain All Materials)"
             }
           ]
         },
         {
-          "category": "🚀 探索与移动速度 (Movement & World)",
+          "category": "📈 等级与属性 (Level & Stats)",
           "items": [
             {
+              "key": "Num 6",
+              "action": "Edit Security Level"
+            },
+            {
+              "key": "Num 7",
+              "action": "无限经验 (Infinite Exp)"
+            },
+            {
+              "key": "Num 8",
+              "action": "经验倍率 (Exp Multiplier)"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "Num 9",
+              "action": "设置游戏速度 (Set Game Speed)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 3",
+              "action": "Infinite Bullets"
+            },
+            {
+              "key": "Ctrl+Num 3",
+              "action": "Edit P Medals"
+            },
+            {
+              "key": "Ctrl+F2",
+              "action": "Obtain All Tools"
+            },
+            {
+              "key": "Ctrl+F5",
+              "action": "Obtain All Melee Weapons"
+            },
+            {
+              "key": "Ctrl+F6",
+              "action": "Obtain All Ranged Weapons"
+            },
+            {
+              "key": "Ctrl+F7",
+              "action": "Obtain All Protectors"
+            },
+            {
+              "key": "Ctrl+F8",
+              "action": "获得全部饰品 (Obtain All Accessories)"
+            },
+            {
+              "key": "Ctrl+F9",
+              "action": "获得全部服装 (Obtain All Outfits)"
+            },
+            {
               "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
+              "action": "Knowledge"
             },
             {
               "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
+              "action": "Guts"
             },
             {
               "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
+              "action": "Proficiency"
+            },
+            {
+              "key": "Alt+Num 4",
+              "action": "Kindness"
+            },
+            {
+              "key": "Alt+Num 5",
+              "action": "Charm"
+            },
+            {
+              "key": "Alt+Num 6",
+              "action": "St"
+            },
+            {
+              "key": "Alt+Num 7",
+              "action": "Ma"
+            },
+            {
+              "key": "Alt+Num 8",
+              "action": "En"
+            },
+            {
+              "key": "Alt+Num 9",
+              "action": "Ag"
+            },
+            {
+              "key": "Alt+Num 0",
+              "action": "Lu"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -31380,6 +34949,7 @@ window.GAMES_DATA = [
       "de": "Persona 3 Reload",
       "es": "Persona 3 Reload"
     },
+    "aliases": [],
     "developer": "ATLUS",
     "releaseYear": 2024,
     "genre": "JRPG",
@@ -31404,15 +34974,35 @@ window.GAMES_DATA = [
     "trainerHotkeys": [
       {
         "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
+        "action": "Infinite HP (无限生命)"
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Infinite SP (无限技能值 (SP))"
+      },
+      {
+        "key": "Num –",
+        "action": "Max Theurgy Gauge"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Skills Don’t Cost HP"
+      },
+      {
+        "key": "Num 4",
+        "action": "100% Weakness Attack"
+      },
+      {
+        "key": "Num 5",
+        "action": "100% Critical Chance (100% 暴击率)"
+      },
+      {
+        "key": "Num 6",
+        "action": "100% Shuffle Chance"
+      },
+      {
+        "key": "Num 7",
+        "action": "100% Drop Rate (100% 掉落率)"
       }
     ],
     "nexusStats": {
@@ -31485,79 +35075,184 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/2161700/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
       "officialUrl": "https://flingtrainer.com/trainer/persona-3-reload-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/persona-3-reload-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "version": "v1.0-v20260407+",
+      "optionsCount": 35,
+      "lastUpdated": "2026-06-07",
+      "platforms": [
+        "Steam",
+        "Xbox/Game Pass"
+      ],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "女神异闻录 3 重制版 主角锁血无敌 (Infinite Health)"
+              "action": "无限生命 (Infinite HP)"
             },
             {
               "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
+              "action": "无限技能值 (SP) (Infinite SP)"
             },
             {
               "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
+              "action": "Skills Don’t Cost HP"
+            },
+            {
+              "key": "Num 8",
+              "action": "隐身模式 (Stealth Mode)"
             },
             {
               "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
+              "action": "超级伤害/一击必杀 (Super Damage/One Hit Kills)"
+            },
+            {
+              "key": "Num .",
+              "action": "伤害倍率 (Damage Multiplier)"
+            },
+            {
+              "key": "Num +",
+              "action": "防御倍率 (Defense Multiplier)"
+            },
+            {
+              "key": "Ctrl+Num 4",
+              "action": "获得全部技能卡 (Obtain All Skill Cards)"
+            },
+            {
+              "key": "Ctrl+Num 7",
+              "action": "Obtain All Body Armors"
+            },
+            {
+              "key": "Alt+Num 7",
+              "action": "Edit Courage"
             }
           ]
         },
         {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
               "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
+              "action": "修改金钱 (Edit Money)"
             },
             {
               "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
+              "action": "消耗品不减少 (Consumables Won’t Decrease)"
             },
             {
               "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
+              "action": "获得全部消耗品 (Obtain All Consumables)"
+            },
+            {
+              "key": "Ctrl+Num 5",
+              "action": "Obtain All Materials & Valuables"
             }
           ]
         },
         {
-          "category": "🚀 探索与移动速度 (Movement & World)",
+          "category": "📈 等级与属性 (Level & Stats)",
           "items": [
             {
               "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
+              "action": "无限经验 (Infinite Exp)"
             },
             {
               "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
+              "action": "经验倍率 (Exp Multiplier)"
             },
             {
               "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
+              "action": "Easy Level Up Social Link"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "Num 9",
+              "action": "设置游戏速度 (Set Game Speed)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num –",
+              "action": "Max Theurgy Gauge"
+            },
+            {
+              "key": "Num 4",
+              "action": "100% Weakness Attack"
+            },
+            {
+              "key": "Num 5",
+              "action": "100% 暴击率 (100% Critical Chance)"
+            },
+            {
+              "key": "Num 6",
+              "action": "100% Shuffle Chance"
+            },
+            {
+              "key": "Num 7",
+              "action": "100% 掉落率 (100% Drop Rate)"
+            },
+            {
+              "key": "Ctrl+Num 6",
+              "action": "获得全部武器 (Obtain All Weapons)"
+            },
+            {
+              "key": "Ctrl+Num 8",
+              "action": "Obtain All Footwears"
+            },
+            {
+              "key": "Ctrl+Num 9",
+              "action": "获得全部饰品 (Obtain All Accessories)"
+            },
+            {
+              "key": "Ctrl+Num 0",
+              "action": "获得全部服装 (Obtain All Outfits)"
+            },
+            {
+              "key": "Alt+Num 4",
+              "action": "Obtain All Personas (100% Compendium)"
+            },
+            {
+              "key": "Alt+Num 5",
+              "action": "Edit Charm"
+            },
+            {
+              "key": "Alt+Num 6",
+              "action": "Edit Academics"
+            },
+            {
+              "key": "Alt+Num 8",
+              "action": "Edit ST"
+            },
+            {
+              "key": "Alt+Num 9",
+              "action": "Edit MA"
+            },
+            {
+              "key": "Alt+Num 0",
+              "action": "Edit EN"
+            },
+            {
+              "key": "Alt+Num .",
+              "action": "Edit AG"
+            },
+            {
+              "key": "Alt+Num +",
+              "action": "Edit LU"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -31578,6 +35273,7 @@ window.GAMES_DATA = [
       "de": "Final Fantasy VII Remake Intergrade",
       "es": "Final Fantasy VII Remake Intergrade"
     },
+    "aliases": [],
     "developer": "Square Enix",
     "releaseYear": 2022,
     "genre": "Action RPG",
@@ -31602,15 +35298,35 @@ window.GAMES_DATA = [
     "trainerHotkeys": [
       {
         "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
+        "action": "God Mode/Block All Damages"
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Infinite HP (无限生命)"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Infinite MP (无限魔法值 (MP))"
+      },
+      {
+        "key": "Num 4",
+        "action": "Max ATB Gauge"
+      },
+      {
+        "key": "Num 5",
+        "action": "Max Limit Gauge"
+      },
+      {
+        "key": "Num 6",
+        "action": "100% Critical Chance (100% 暴击率)"
+      },
+      {
+        "key": "Num 7",
+        "action": "One Hit Stagger"
+      },
+      {
+        "key": "Num 8",
+        "action": "Infinite Stagger Duration"
       }
     ],
     "nexusStats": {
@@ -31683,79 +35399,141 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1462040/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
       "officialUrl": "https://flingtrainer.com/trainer/final-fantasy-vii-remake-intergrade-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/final-fantasy-vii-remake-intergrade-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "version": "v1.0-v20260218+",
+      "optionsCount": 25,
+      "lastUpdated": "2026-06-29",
+      "platforms": [],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "最终幻想 7 重制版 主角锁血无敌 (Infinite Health)"
+              "action": "God Mode/Block All Damages"
             },
             {
               "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
+              "action": "无限生命 (Infinite HP)"
             },
             {
               "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
+              "action": "无限魔法值 (MP) (Infinite MP)"
+            },
+            {
+              "key": "Num 9",
+              "action": "敌人无法攻击 (Enemies Can’t Attack)"
             },
             {
               "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
+              "action": "超级伤害/一击必杀 (Super Damage/One Hit Kills)"
+            },
+            {
+              "key": "Num .",
+              "action": "伤害倍率 (Damage Multiplier)"
+            },
+            {
+              "key": "Num /",
+              "action": "无限生命 (Motorcycle Battle: Infinite HP)"
+            },
+            {
+              "key": "Alt+Num 1",
+              "action": "无限技能值 (SP) (Infinite SP)"
             }
           ]
         },
         {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
-              "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
+              "key": "Ctrl+Num 2",
+              "action": "无限物品 (Infinite Items)"
+            }
+          ]
+        },
+        {
+          "category": "📈 等级与属性 (Level & Stats)",
+          "items": [
+            {
+              "key": "Ctrl+Num 5",
+              "action": "无限经验 (Infinite Exp)"
             },
             {
-              "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
+              "key": "Ctrl+Num 6",
+              "action": "经验倍率 (Exp Multiplier)"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "Ctrl+Num 9",
+              "action": "设置游戏速度 (Set Game Speed)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 4",
+              "action": "Max ATB Gauge"
+            },
+            {
+              "key": "Num 5",
+              "action": "Max Limit Gauge"
+            },
+            {
+              "key": "Num 6",
+              "action": "100% 暴击率 (100% Critical Chance)"
+            },
+            {
+              "key": "Num 7",
+              "action": "One Hit Stagger"
+            },
+            {
+              "key": "Num 8",
+              "action": "Infinite Stagger Duration"
+            },
+            {
+              "key": "Num +",
+              "action": "100% Summon Chance"
+            },
+            {
+              "key": "Num –",
+              "action": "Infinite Summon Duration"
+            },
+            {
+              "key": "Ctrl+Num 1",
+              "action": "100% 掉落率 (100% Drop Rate)"
             },
             {
               "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
-            }
-          ]
-        },
-        {
-          "category": "🚀 探索与移动速度 (Movement & World)",
-          "items": [
+              "action": "修改金币 (Gil) (Edit Gil)"
+            },
             {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
+              "key": "Ctrl+Num 4",
+              "action": "金币 (Gil)倍率 (Gil Multiplier)"
+            },
+            {
+              "key": "Ctrl+Num 7",
+              "action": "无限行动点 (AP) (Infinite AP)"
+            },
+            {
+              "key": "Ctrl+Num 8",
+              "action": "AP Multiplier"
             },
             {
               "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
-            },
-            {
-              "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
+              "action": "Edit Moogle Medal"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -31776,6 +35554,7 @@ window.GAMES_DATA = [
       "de": "Final Fantasy XVI",
       "es": "Final Fantasy XVI"
     },
+    "aliases": [],
     "developer": "Square Enix",
     "releaseYear": 2024,
     "genre": "Action RPG",
@@ -31800,15 +35579,35 @@ window.GAMES_DATA = [
     "trainerHotkeys": [
       {
         "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
+        "action": "God Mode/Ignore Hits (无敌模式/无视攻击)"
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Infinite HP (无限生命)"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Max Limit Break Gauge"
+      },
+      {
+        "key": "Num 4",
+        "action": "Infinite Limit Break Duration"
+      },
+      {
+        "key": "Num 5",
+        "action": "Instant Skill Cooldown (技能瞬间冷却)"
+      },
+      {
+        "key": "Num 6",
+        "action": "Infinite Shortcut Items"
+      },
+      {
+        "key": "Num 7",
+        "action": "Super Stagger Damage/Fast Takedown"
+      },
+      {
+        "key": "Num 8",
+        "action": "Stagger Damage Multiplier"
       }
     ],
     "nexusStats": {
@@ -31881,79 +35680,145 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/2515020/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
       "officialUrl": "https://flingtrainer.com/trainer/final-fantasy-xvi-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/final-fantasy-xvi-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "version": "v1.0+",
+      "optionsCount": 26,
+      "lastUpdated": "2024-09-17",
+      "platforms": [],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "最终幻想 16 主角锁血无敌 (Infinite Health)"
+              "action": "无敌模式/无视攻击 (God Mode/Ignore Hits)"
             },
             {
               "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
+              "action": "无限生命 (Infinite HP)"
             },
             {
-              "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
+              "key": "Num 5",
+              "action": "技能瞬间冷却 (Instant Skill Cooldown)"
+            },
+            {
+              "key": "Num 7",
+              "action": "Super Stagger Damage/Fast Takedown"
+            },
+            {
+              "key": "Num 8",
+              "action": "Stagger Damage Multiplier"
             },
             {
               "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
+              "action": "超级伤害/一击必杀 (Super Damage/One Hit Kills)"
+            },
+            {
+              "key": "Num .",
+              "action": "伤害倍率 (Damage Multiplier)"
+            },
+            {
+              "key": "Num +",
+              "action": "防御倍率 (Defense Multiplier)"
+            },
+            {
+              "key": "Alt+Num 5",
+              "action": "修改最大生命 (Edit Max HP)"
             }
           ]
         },
         {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
-              "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
+              "key": "Num 6",
+              "action": "Infinite Shortcut Items"
             },
             {
               "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
+              "action": "Edit Consumables Amount"
             },
             {
               "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
+              "action": "修改材料数量 (Edit Materials Amount)"
             }
           ]
         },
         {
-          "category": "🚀 探索与移动速度 (Movement & World)",
+          "category": "📈 等级与属性 (Level & Stats)",
           "items": [
             {
               "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
+              "action": "无限经验 (Infinite Exp)"
             },
             {
               "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
+              "action": "经验倍率 (Exp Multiplier)"
             },
             {
               "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
+              "action": "修改能力点 (Edit Ability Points)"
+            },
+            {
+              "key": "Alt+Num 4",
+              "action": "能力点倍率 (Ability Points Multiplier)"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "Ctrl+Num 4",
+              "action": "设置游戏速度 (Set Game Speed)"
+            },
+            {
+              "key": "Ctrl+Num 5",
+              "action": "设置移动速度 (Set Movement Speed)"
+            },
+            {
+              "key": "Ctrl+Num 6",
+              "action": "设置跳跃高度 (Set Jump Height)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 3",
+              "action": "Max Limit Break Gauge"
+            },
+            {
+              "key": "Num 4",
+              "action": "Infinite Limit Break Duration"
+            },
+            {
+              "key": "Num 9",
+              "action": "Infinite Takedown Duration"
+            },
+            {
+              "key": "Ctrl+Num 1",
+              "action": "修改金币 (Gil) (Edit Gil)"
+            },
+            {
+              "key": "Alt+Num 6",
+              "action": "Edit STR"
+            },
+            {
+              "key": "Alt+Num 7",
+              "action": "Edit VIT"
+            },
+            {
+              "key": "Alt+Num 8",
+              "action": "Edit WIL"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -31974,6 +35839,7 @@ window.GAMES_DATA = [
       "de": "NieR:Automata",
       "es": "NieR:Automata"
     },
+    "aliases": [],
     "developer": "Square Enix / PlatinumGames",
     "releaseYear": 2017,
     "genre": "Action RPG",
@@ -32001,12 +35867,32 @@ window.GAMES_DATA = [
         "action": "Infinite Health (无限生命)"
       },
       {
+        "key": "Num +",
+        "action": "God Mode/Ignore Hit (无敌模式/无视攻击)"
+      },
+      {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Infinite Hacking Health"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Infinite Hacking Time"
+      },
+      {
+        "key": "Num 4",
+        "action": "Pod Programs No Cooldown"
+      },
+      {
+        "key": "Num 5",
+        "action": "Items Won’t Decrease (物品不减少)"
+      },
+      {
+        "key": "Num 6",
+        "action": "Infinite Double Jumps (无限二段跳)"
+      },
+      {
+        "key": "Num 7",
+        "action": "Minimum Plug-in Chip Size"
       }
     ],
     "nexusStats": {
@@ -32079,79 +35965,120 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/524220/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
-      "officialUrl": "https://flingtrainer.com/trainer/nierautomata-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/nierautomata-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "officialUrl": "https://flingtrainer.com/trainer/nier-automata-trainer/",
+      "version": "v1.0-v20210318+",
+      "optionsCount": 19,
+      "lastUpdated": "2021-03-24",
+      "platforms": [
+        "Steam",
+        "Xbox/Game Pass"
+      ],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "尼尔：机械纪元 主角锁血无敌 (Infinite Health)"
+              "action": "无限生命 (Infinite Health)"
+            },
+            {
+              "key": "Num +",
+              "action": "无敌模式/无视攻击 (God Mode/Ignore Hit)"
             },
             {
               "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
+              "action": "Infinite Hacking Health"
             },
             {
-              "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
+              "key": "Num 4",
+              "action": "Pod Programs No Cooldown"
             },
             {
               "key": "Num 0",
               "action": "一击必杀 (One Hit Kill)"
+            },
+            {
+              "key": "Ctrl+Num 6",
+              "action": "无限生命 (Ending E Minigame: Infinite Health)"
             }
           ]
         },
         {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
-              "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
+              "key": "Num 5",
+              "action": "物品不减少 (Items Won’t Decrease)"
             },
             {
-              "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
+              "key": "Ctrl+Num 1",
+              "action": "无限金钱 (Infinite Money)"
             },
             {
               "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
+              "action": "无限物品 (Infinite Items)"
+            },
+            {
+              "key": "Ctrl+Num 4",
+              "action": "No Weapon Upgrade Requirements"
+            },
+            {
+              "key": "Ctrl+Num 5",
+              "action": "No Pod Upgrade Requirements"
             }
           ]
         },
         {
-          "category": "🚀 探索与移动速度 (Movement & World)",
+          "category": "📈 等级与属性 (Level & Stats)",
           "items": [
             {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
+              "key": "Ctrl+Num 2",
+              "action": "无限经验 (Infinite Exp)"
             },
             {
-              "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
+              "key": "F1",
+              "action": "经验倍率 (Exp Multiplier)"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "Num 3",
+              "action": "Infinite Hacking Time"
             },
             {
-              "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
+              "key": "Num 6",
+              "action": "无限二段跳 (Infinite Double Jumps)"
+            },
+            {
+              "key": "Num 8",
+              "action": "超级速度 (Super Speed)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 7",
+              "action": "Minimum Plug-in Chip Size"
+            },
+            {
+              "key": "Num 9",
+              "action": "慢动作 (Slow Motion)"
+            },
+            {
+              "key": "Num .",
+              "action": "One Hit Fill Hacking Gauge"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -32172,6 +36099,7 @@ window.GAMES_DATA = [
       "de": "Tales of Arise",
       "es": "Tales of Arise"
     },
+    "aliases": [],
     "developer": "Bandai Namco",
     "releaseYear": 2021,
     "genre": "JRPG Action",
@@ -32196,15 +36124,35 @@ window.GAMES_DATA = [
     "trainerHotkeys": [
       {
         "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
+        "action": "God Mode/Ignore Hits (无敌模式/无视攻击)"
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Infinite HP (无限生命)"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Infinite AG"
+      },
+      {
+        "key": "Num 4",
+        "action": "Infinite Boost Attacks"
+      },
+      {
+        "key": "Num 5",
+        "action": "Infinite CP (无限CP)"
+      },
+      {
+        "key": "Num 6",
+        "action": "Max Combo (最大连击)"
+      },
+      {
+        "key": "Num 7",
+        "action": "100% Critical Rate (100% 暴击率)"
+      },
+      {
+        "key": "Num 8",
+        "action": "100% Drop Rate (100% 掉落率)"
       }
     ],
     "nexusStats": {
@@ -32277,79 +36225,160 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/740130/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
       "officialUrl": "https://flingtrainer.com/trainer/tales-of-arise-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/tales-of-arise-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "version": "v1.0-v1.07+",
+      "optionsCount": 29,
+      "lastUpdated": "2024-02-22",
+      "platforms": [
+        "Steam",
+        "Xbox/Game Pass"
+      ],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "破晓传说 主角锁血无敌 (Infinite Health)"
+              "action": "无敌模式/无视攻击 (God Mode/Ignore Hits)"
             },
             {
               "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
+              "action": "无限生命 (Infinite HP)"
             },
             {
-              "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
+              "key": "Num .",
+              "action": "超级伤害/一击必杀 (Super Damage/One Hit Kill)"
             },
             {
-              "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
+              "key": "Num +",
+              "action": "伤害倍率 (Damage Multiplier)"
+            },
+            {
+              "key": "Alt+Num 1",
+              "action": "隐身模式 (Stealth Mode)"
+            },
+            {
+              "key": "Ctrl+Num 6",
+              "action": "无限技能值 (SP) (Infinite SP)"
+            },
+            {
+              "key": "Ctrl+Num 7",
+              "action": "SP Multiplier"
             }
           ]
         },
         {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
-              "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
+              "key": "Alt+Num 2",
+              "action": "食物无限持续 (Infinite Food Duration)"
             },
             {
               "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
+              "action": "修改消耗品 (Edit Consumables)"
             },
             {
               "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
+              "action": "修改材料 (Edit Materials)"
+            },
+            {
+              "key": "Ctrl+Num 9",
+              "action": "Ignore Craft Weapon Requirements"
             }
           ]
         },
         {
-          "category": "🚀 探索与移动速度 (Movement & World)",
+          "category": "📈 等级与属性 (Level & Stats)",
           "items": [
             {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
+              "key": "Ctrl+Num 4",
+              "action": "无限经验 (Infinite Exp)"
             },
             {
-              "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
+              "key": "Ctrl+Num 5",
+              "action": "经验倍率 (Exp Multiplier)"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "Num 9",
+              "action": "Infinite Air Jumps"
             },
             {
               "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
+              "action": "设置游戏速度 (Set Game Speed)"
+            },
+            {
+              "key": "Alt+Num 4",
+              "action": "设置玩家速度 (Set Player Speed)"
+            },
+            {
+              "key": "Alt+Num 5",
+              "action": "设置跳跃高度 (Set Jump Height)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 3",
+              "action": "Infinite AG"
+            },
+            {
+              "key": "Num 4",
+              "action": "Infinite Boost Attacks"
+            },
+            {
+              "key": "Num 5",
+              "action": "无限CP (Infinite CP)"
+            },
+            {
+              "key": "Num 6",
+              "action": "最大连击 (Max Combo)"
+            },
+            {
+              "key": "Num 7",
+              "action": "100% 暴击率 (100% Critical Rate)"
+            },
+            {
+              "key": "Num 8",
+              "action": "100% 掉落率 (100% Drop Rate)"
+            },
+            {
+              "key": "Num 0",
+              "action": "Infinite Mid-Air Evasions"
+            },
+            {
+              "key": "Alt+Num 6",
+              "action": "Fishing: Fast Lure"
+            },
+            {
+              "key": "Alt+Num 7",
+              "action": "瞬间上钩 (Fishing: Instant Catch)"
+            },
+            {
+              "key": "Ctrl+Num 1",
+              "action": "Edit GALD"
+            },
+            {
+              "key": "Ctrl+Num 8",
+              "action": "Max Arte Proficiency"
+            },
+            {
+              "key": "Ctrl+Num 0",
+              "action": "Minimum Enhance Accessory Requirements"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -32370,6 +36399,7 @@ window.GAMES_DATA = [
       "de": "Like a Dragon: Infinite Wealth",
       "es": "Like a Dragon: Infinite Wealth"
     },
+    "aliases": [],
     "developer": "Ryu Ga Gotoku Studio",
     "releaseYear": 2024,
     "genre": "Turn-Based RPG",
@@ -32394,15 +36424,35 @@ window.GAMES_DATA = [
     "trainerHotkeys": [
       {
         "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
+        "action": "Infinite HP (无限生命)"
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Infinite MP (无限魔法值 (MP))"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Max Hype Gauge"
+      },
+      {
+        "key": "Num 4",
+        "action": "Infinite Dragon’s Resurgence Duration"
+      },
+      {
+        "key": "Num 5",
+        "action": "Stealth Mode (隐身模式)"
+      },
+      {
+        "key": "Num 6",
+        "action": "Infinite Street Surfer Battery"
+      },
+      {
+        "key": "Num 7",
+        "action": "Max Poundmates Level"
+      },
+      {
+        "key": "Num 8",
+        "action": "Infinite Exp (无限经验)"
       }
     ],
     "nexusStats": {
@@ -32475,79 +36525,300 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/2072450/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
       "officialUrl": "https://flingtrainer.com/trainer/like-a-dragon-infinite-wealth-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/like-a-dragon-infinite-wealth-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "version": "v1.13-v1.17+",
+      "optionsCount": 64,
+      "lastUpdated": "2024-02-27",
+      "platforms": [
+        "Steam",
+        "Xbox/Game Pass"
+      ],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "人中之龙 8 主角锁血无敌 (Infinite Health)"
+              "action": "无限生命 (Infinite HP)"
             },
             {
               "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
+              "action": "无限魔法值 (MP) (Infinite MP)"
             },
             {
-              "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
+              "key": "Num 5",
+              "action": "隐身模式 (Stealth Mode)"
             },
             {
-              "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
+              "key": "PageUp",
+              "action": "Super Damage/Easy Kills"
+            },
+            {
+              "key": "PageDown",
+              "action": "伤害倍率 (Damage Multiplier)"
+            },
+            {
+              "key": "Insert",
+              "action": "防御倍率 (Defense Multiplier)"
+            },
+            {
+              "key": "Shift+F4",
+              "action": "无限技能值 (SP) (Sujimon: Infinite SP)"
+            },
+            {
+              "key": "Shift+F5",
+              "action": "无限魔法值 (MP) (Sujimon: Infinite MP)"
+            },
+            {
+              "key": "Shift+F6",
+              "action": "一击必杀 (Sujimon: One Hit Kills)"
+            },
+            {
+              "key": "Ctrl+F1",
+              "action": "无限生命 (Dondoko Island: Infinite Health)"
             }
           ]
         },
         {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
               "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
+              "action": "修改金钱 (Edit Money)"
             },
             {
               "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
+              "action": "金钱倍率 (Money Multiplier)"
             },
             {
               "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
+              "action": "Edit Recovery Items Amount"
+            },
+            {
+              "key": "Ctrl+Num 4",
+              "action": "Edit Status Items Amount"
+            },
+            {
+              "key": "Ctrl+Num 5",
+              "action": "Edit Battle Items Amount"
+            },
+            {
+              "key": "Ctrl+Num 6",
+              "action": "Edit Growth Items Amount"
+            },
+            {
+              "key": "Ctrl+Num 7",
+              "action": "修改材料数量 (Edit Materials Amount)"
+            },
+            {
+              "key": "Ctrl+Num 8",
+              "action": "Edit Sujimon Items Amount"
+            },
+            {
+              "key": "Ctrl+Num 9",
+              "action": "Edit Etc. Items Amount"
+            },
+            {
+              "key": "Ctrl+Num 0",
+              "action": "No Crafting Material Cost"
+            },
+            {
+              "key": "Ctrl+Num .",
+              "action": "No Cooking Material Cost"
+            },
+            {
+              "key": "Shift+F2",
+              "action": "无限食物 (Crazy Delivery: Infinite Food)"
+            },
+            {
+              "key": "Ctrl+F3",
+              "action": "Dondoko Island: Infinite Basic Resources"
             }
           ]
         },
         {
-          "category": "🚀 探索与移动速度 (Movement & World)",
+          "category": "📈 等级与属性 (Level & Stats)",
           "items": [
             {
+              "key": "Num 7",
+              "action": "Max Poundmates Level"
+            },
+            {
+              "key": "Num 8",
+              "action": "无限经验 (Infinite Exp)"
+            },
+            {
+              "key": "Num 9",
+              "action": "经验倍率 (Exp Multiplier)"
+            },
+            {
+              "key": "Num 0",
+              "action": "无限职业经验 (Infinite Job Exp)"
+            },
+            {
+              "key": "Num .",
+              "action": "职业经验倍率 (Job Exp Multiplier)"
+            },
+            {
+              "key": "Ctrl+Num +",
+              "action": "Infinite Personality Exp"
+            },
+            {
+              "key": "Ctrl+Num –",
+              "action": "Personality Exp Multiplier"
+            },
+            {
+              "key": "Ctrl+Num /",
+              "action": "Infinite Awakening Exp"
+            },
+            {
+              "key": "Ctrl+Num *",
+              "action": "Awakening Exp Multiplier"
+            },
+            {
               "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
+              "action": "Edit Shogi Points"
             },
             {
               "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
+              "action": "Edit Fortune Points"
             },
             {
               "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
+              "action": "Edit Miss Match Points"
+            },
+            {
+              "key": "Alt+Num 4",
+              "action": "Edit Delivery Points"
+            },
+            {
+              "key": "Alt+Num 5",
+              "action": "Edit Sujimon League Points"
+            },
+            {
+              "key": "Alt+Num 6",
+              "action": "Edit Can Quest Points"
+            },
+            {
+              "key": "Alt+Num 7",
+              "action": "Edit Golf Points"
+            },
+            {
+              "key": "Alt+Num 8",
+              "action": "Edit Batting Center Points"
+            },
+            {
+              "key": "Alt+Num +",
+              "action": "Edit Recycling Center Points"
+            },
+            {
+              "key": "Alt+Num –",
+              "action": "Edit Snap Points"
+            },
+            {
+              "key": "Shift+F1",
+              "action": "最高分 (Crazy Delivery: Max Score)"
+            },
+            {
+              "key": "Shift+F7",
+              "action": "经验满值 (Sujimon: Max Exp)"
+            },
+            {
+              "key": "Shift+F8",
+              "action": "友好度满值 (Sujimon: Max Friendship)"
+            },
+            {
+              "key": "Ctrl+F4",
+              "action": "Karaoke: Perfect Score"
+            },
+            {
+              "key": "Ctrl+F7",
+              "action": "最高分 (Can Quest: Max Score)"
+            },
+            {
+              "key": "Ctrl+F8",
+              "action": "最高分 (Golf: Max Score (Closest to the Pin))"
+            },
+            {
+              "key": "Shift+F9",
+              "action": "最高分 (Sicko Snap: Max Score)"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "Shift+Num *",
+              "action": "设置游戏速度 (Set Game Speed)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 3",
+              "action": "Max Hype Gauge"
+            },
+            {
+              "key": "Num 4",
+              "action": "Infinite Dragon’s Resurgence Duration"
+            },
+            {
+              "key": "Num 6",
+              "action": "Infinite Street Surfer Battery"
+            },
+            {
+              "key": "Num +",
+              "action": "无限羁绊 (Infinite Bond)"
+            },
+            {
+              "key": "Num –",
+              "action": "羁绊倍率 (Bond Multiplier)"
+            },
+            {
+              "key": "Shift+Num /",
+              "action": "Easy Complete Challenges"
+            },
+            {
+              "key": "Alt+Num 9",
+              "action": "Edit m HOLD’EM Chips"
+            },
+            {
+              "key": "Alt+Num 0",
+              "action": "Edit Casino Chips"
+            },
+            {
+              "key": "Alt+Num .",
+              "action": "Edit Wooden Tags"
+            },
+            {
+              "key": "Shift+F3",
+              "action": "无限加速 (Crazy Delivery: Infinite Boost)"
+            },
+            {
+              "key": "Ctrl+F2",
+              "action": "Dondoko Island: Edit Dokobucks"
+            },
+            {
+              "key": "Ctrl+F5",
+              "action": "Darts: Always Win"
+            },
+            {
+              "key": "Ctrl+F6",
+              "action": "Miss Match: Max Love"
+            },
+            {
+              "key": "Ctrl+F9",
+              "action": "Golf: Infinite Shots (Bingo Challenge)"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -32568,6 +36839,7 @@ window.GAMES_DATA = [
       "de": "Yakuza: Like a Dragon",
       "es": "Yakuza: Like a Dragon"
     },
+    "aliases": [],
     "developer": "Ryu Ga Gotoku Studio",
     "releaseYear": 2020,
     "genre": "Turn-Based RPG",
@@ -32592,15 +36864,35 @@ window.GAMES_DATA = [
     "trainerHotkeys": [
       {
         "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
+        "action": "Infinite HP (无限生命)"
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Infinite MP (无限魔法值 (MP))"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Infinite Recovery Items"
+      },
+      {
+        "key": "Num 4",
+        "action": "Infinite Status Items"
+      },
+      {
+        "key": "Num 5",
+        "action": "Infinite Battle Items"
+      },
+      {
+        "key": "Num 6",
+        "action": "Infinite Growth Items"
+      },
+      {
+        "key": "Num 7",
+        "action": "Infinite Materials (无限材料)"
+      },
+      {
+        "key": "Num 8",
+        "action": "Infinite Other Items"
       }
     ],
     "nexusStats": {
@@ -32673,79 +36965,163 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1235140/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
       "officialUrl": "https://flingtrainer.com/trainer/yakuza-like-a-dragon-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/yakuza-like-a-dragon-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "version": "v1.0+",
+      "optionsCount": 30,
+      "lastUpdated": "2020-11-13",
+      "platforms": [
+        "Steam"
+      ],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "人中之龙 7 主角锁血无敌 (Infinite Health)"
+              "action": "无限生命 (Infinite HP)"
             },
             {
               "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
-            },
-            {
-              "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
+              "action": "无限魔法值 (MP) (Infinite MP)"
             },
             {
               "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
+              "action": "超级伤害/一击必杀 (Super Damage/One Hit Kill)"
+            },
+            {
+              "key": "Num .",
+              "action": "伤害倍率 (Damage Multiplier)"
+            },
+            {
+              "key": "Alt+Num 4",
+              "action": "无限生命 (Dragon Kart: Infinite HP)"
+            },
+            {
+              "key": "Alt+Num 9",
+              "action": "Management: Edit Funds"
+            },
+            {
+              "key": "Alt+Num 0",
+              "action": "Management: Max Employee Happiness"
+            },
+            {
+              "key": "Alt+Num .",
+              "action": "Management: Max Shareholder Meeting Command Points"
             }
           ]
         },
         {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
+              "key": "Num 3",
+              "action": "Infinite Recovery Items"
+            },
+            {
+              "key": "Num 4",
+              "action": "Infinite Status Items"
+            },
+            {
+              "key": "Num 5",
+              "action": "Infinite Battle Items"
+            },
+            {
+              "key": "Num 6",
+              "action": "Infinite Growth Items"
+            },
+            {
+              "key": "Num 7",
+              "action": "无限材料 (Infinite Materials)"
+            },
+            {
+              "key": "Num 8",
+              "action": "Infinite Other Items"
+            },
+            {
               "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
+              "action": "修改金钱 (Edit Money)"
             },
             {
               "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
-            },
-            {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
+              "action": "金钱倍率 (Money Multiplier)"
             }
           ]
         },
         {
-          "category": "🚀 探索与移动速度 (Movement & World)",
+          "category": "📈 等级与属性 (Level & Stats)",
           "items": [
             {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
+              "key": "Ctrl+Num 3",
+              "action": "无限经验 (Infinite Exp)"
+            },
+            {
+              "key": "Ctrl+Num 4",
+              "action": "经验倍率 (Exp Multiplier)"
+            },
+            {
+              "key": "Ctrl+Num 5",
+              "action": "无限职业经验 (Infinite Job Exp)"
+            },
+            {
+              "key": "Ctrl+Num 6",
+              "action": "职业经验倍率 (Job Exp Multiplier)"
             },
             {
               "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
+              "action": "最高分 (Can Quest: Max Score)"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "Num 9",
+              "action": "设置游戏速度 (Set Game Speed)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Ctrl+Num 7",
+              "action": "无限羁绊 (Infinite Bond)"
+            },
+            {
+              "key": "Ctrl+Num 8",
+              "action": "羁绊倍率 (Bond Multiplier)"
+            },
+            {
+              "key": "Alt+Num 1",
+              "action": "Can Quest: Edit Tokens"
             },
             {
               "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
+              "action": "Dragon Kart: Edit Tokens"
+            },
+            {
+              "key": "Alt+Num 5",
+              "action": "Dragon Kart: Freeze AI Karts"
+            },
+            {
+              "key": "Alt+Num 6",
+              "action": "Batting Center: Edit Tokens"
+            },
+            {
+              "key": "Alt+Num 7",
+              "action": "Slot Machine: Edit Tokens"
+            },
+            {
+              "key": "Alt+Num 8",
+              "action": "Shogi: Edit Tokens"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -32766,6 +37142,7 @@ window.GAMES_DATA = [
       "de": "Star Wars Jedi: Survivor",
       "es": "Star Wars Jedi: Survivor"
     },
+    "aliases": [],
     "developer": "Respawn Entertainment",
     "releaseYear": 2023,
     "genre": "Action Adventure",
@@ -32790,15 +37167,35 @@ window.GAMES_DATA = [
     "trainerHotkeys": [
       {
         "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
+        "action": "God Mode/Ignore Hits (无敌模式/无视攻击)"
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Infinite Health (无限生命)"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Infinite Stamina (无限耐力)"
+      },
+      {
+        "key": "Num 4",
+        "action": "Infinite Force (无限原力)"
+      },
+      {
+        "key": "Num 5",
+        "action": "Infinite Ammo (无限弹药)"
+      },
+      {
+        "key": "Num 6",
+        "action": "Infinite Slow Charge"
+      },
+      {
+        "key": "Num 7",
+        "action": "Infinite Health Pots"
+      },
+      {
+        "key": "Num 8",
+        "action": "Super Stamina Damage/One Hit Stagger"
       }
     ],
     "nexusStats": {
@@ -32871,79 +37268,124 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1774580/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
       "officialUrl": "https://flingtrainer.com/trainer/star-wars-jedi-survivor-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/star-wars-jedi-survivor-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "version": "v20241212+",
+      "optionsCount": 14,
+      "lastUpdated": "2025-06-09",
+      "platforms": [],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "星球大战绝地：幸存者 主角锁血无敌 (Infinite Health)"
+              "action": "无敌模式/无视攻击 (God Mode/Ignore Hits)"
             },
             {
               "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
+              "action": "无限生命 (Infinite Health)"
             },
             {
               "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
+              "action": "无限耐力 (Infinite Stamina)"
+            },
+            {
+              "key": "Num 5",
+              "action": "无限弹药 (Infinite Ammo)"
+            },
+            {
+              "key": "Num 7",
+              "action": "Infinite Health Pots"
+            },
+            {
+              "key": "Num 8",
+              "action": "Super Stamina Damage/One Hit Stagger"
+            },
+            {
+              "key": "Num 9",
+              "action": "Stamina Damage Multiplier"
             },
             {
               "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
-            }
-          ]
-        },
-        {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
-          "items": [
+              "action": "超级伤害/一击必杀 (Super Damage/One Hit Kills)"
+            },
+            {
+              "key": "Num .",
+              "action": "伤害倍率 (Damage Multiplier)"
+            },
+            {
+              "key": "Num +",
+              "action": "防御倍率 (Defense Multiplier)"
+            },
             {
               "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
+              "action": "修改最大生命 (Edit Max Health)"
             },
             {
               "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
+              "action": "修改最大耐力 (Edit Max Stamina)"
             },
             {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
+              "key": "Ctrl+Num 6",
+              "action": "修改技能点 (Edit Skill Points)"
             }
           ]
         },
         {
-          "category": "🚀 探索与移动速度 (Movement & World)",
+          "category": "📈 等级与属性 (Level & Stats)",
           "items": [
             {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
+              "key": "Ctrl+Num 4",
+              "action": "Fast Level Up"
             },
             {
-              "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
+              "key": "Ctrl+Num 5",
+              "action": "经验倍率 (Exp Multiplier)"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "Ctrl+Num 7",
+              "action": "设置游戏速度 (Set Game Speed)"
             },
             {
-              "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
+              "key": "Ctrl+Num 8",
+              "action": "设置玩家速度 (Set Player Speed)"
+            },
+            {
+              "key": "Ctrl+Num 9",
+              "action": "设置移动速度 (Set Movement Speed)"
+            },
+            {
+              "key": "Ctrl+Num 0",
+              "action": "设置跳跃高度 (Set Jump Height)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 4",
+              "action": "无限原力 (Infinite Force)"
+            },
+            {
+              "key": "Num 6",
+              "action": "Infinite Slow Charge"
+            },
+            {
+              "key": "Ctrl+Num 3",
+              "action": "Edit Max Force"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -32964,6 +37406,7 @@ window.GAMES_DATA = [
       "de": "Star Wars Jedi: Fallen Order",
       "es": "Star Wars Jedi: Fallen Order"
     },
+    "aliases": [],
     "developer": "Respawn Entertainment",
     "releaseYear": 2019,
     "genre": "Action Adventure",
@@ -32992,11 +37435,27 @@ window.GAMES_DATA = [
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Max Block Stamina"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Infinite Force (无限原力)"
+      },
+      {
+        "key": "Num 4",
+        "action": "Set Game Speed (设置游戏速度)"
+      },
+      {
+        "key": "Num 5",
+        "action": "Super Jump (超级跳跃)"
+      },
+      {
+        "key": "Num 6",
+        "action": "Infinite Skill Points (无限技能点)"
+      },
+      {
+        "key": "Num 0",
+        "action": "One Hit Kill (一击必杀)"
       }
     ],
     "nexusStats": {
@@ -33069,37 +37528,28 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1172380/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
       "officialUrl": "https://flingtrainer.com/trainer/star-wars-jedi-fallen-order-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/star-wars-jedi-fallen-order-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "version": "v1.0-v20191118+",
+      "optionsCount": 7,
+      "lastUpdated": "2019-11-18",
+      "platforms": [],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "星球大战绝地：陨落的武士团 主角锁血无敌 (Infinite Health)"
+              "action": "无限生命 (Infinite Health)"
             },
             {
               "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
+              "action": "Max Block Stamina"
             },
             {
-              "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
+              "key": "Num 6",
+              "action": "无限技能点 (Infinite Skill Points)"
             },
             {
               "key": "Num 0",
@@ -33108,40 +37558,29 @@ window.GAMES_DATA = [
           ]
         },
         {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
+          "category": "🌍 移动与世界 (Movement & World)",
           "items": [
             {
-              "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
+              "key": "Num 4",
+              "action": "设置游戏速度 (Set Game Speed)"
             },
             {
-              "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
-            },
-            {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
+              "key": "Num 5",
+              "action": "超级跳跃 (Super Jump)"
             }
           ]
         },
         {
-          "category": "🚀 探索与移动速度 (Movement & World)",
+          "category": "🧩 其他功能 (Other)",
           "items": [
             {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
-            },
-            {
-              "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
-            },
-            {
-              "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
+              "key": "Num 3",
+              "action": "无限原力 (Infinite Force)"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -33162,6 +37601,7 @@ window.GAMES_DATA = [
       "de": "Dead Space Remake",
       "es": "Dead Space Remake"
     },
+    "aliases": [],
     "developer": "Motive / EA",
     "releaseYear": 2023,
     "genre": "Sci-Fi Survival Horror",
@@ -33190,11 +37630,31 @@ window.GAMES_DATA = [
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Infinite Stasis Energy"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Infinite Ammo/No Reload (无限弹药/无需换弹)"
+      },
+      {
+        "key": "Num 4",
+        "action": "Items Won’t Decrease (物品不减少)"
+      },
+      {
+        "key": "Num 5",
+        "action": "Edit Credits (修改信用点)"
+      },
+      {
+        "key": "Num 6",
+        "action": "Credit Multiplier"
+      },
+      {
+        "key": "Num 7",
+        "action": "Edit Nodes"
+      },
+      {
+        "key": "Num 8",
+        "action": "Node Multiplier"
       }
     ],
     "nexusStats": {
@@ -33267,79 +37727,88 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1693980/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
       "officialUrl": "https://flingtrainer.com/trainer/dead-space-remake-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/dead-space-remake-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "version": "v1.0+",
+      "optionsCount": 13,
+      "lastUpdated": "2023-01-30",
+      "platforms": [],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "死亡空间：重制版 主角锁血无敌 (Infinite Health)"
+              "action": "无限生命 (Infinite Health)"
             },
             {
               "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
+              "action": "Infinite Stasis Energy"
             },
             {
               "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
+              "action": "无限弹药/无需换弹 (Infinite Ammo/No Reload)"
             },
             {
               "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
-            }
-          ]
-        },
-        {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
-          "items": [
+              "action": "一击必杀 (One Hit Kills)"
+            },
+            {
+              "key": "Num .",
+              "action": "伤害倍率 (Damage Multiplier)"
+            },
+            {
+              "key": "Num +",
+              "action": "防御倍率 (Defense Multiplier)"
+            },
             {
               "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
-            },
-            {
-              "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
-            },
-            {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
+              "action": "无限氧气 (Infinite Oxygen)"
             }
           ]
         },
         {
-          "category": "🚀 探索与移动速度 (Movement & World)",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
+              "key": "Num 4",
+              "action": "物品不减少 (Items Won’t Decrease)"
             },
             {
-              "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
+              "key": "Num 5",
+              "action": "修改信用点 (Edit Credits)"
             },
             {
-              "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
+              "key": "Num 6",
+              "action": "Credit Multiplier"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "Num 9",
+              "action": "设置游戏速度 (Set Game Speed)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 7",
+              "action": "Edit Nodes"
+            },
+            {
+              "key": "Num 8",
+              "action": "Node Multiplier"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -33360,6 +37829,7 @@ window.GAMES_DATA = [
       "de": "Dead Cells",
       "es": "Dead Cells"
     },
+    "aliases": [],
     "developer": "Motion Twin",
     "releaseYear": 2018,
     "genre": "Roguelite Metroidvania",
@@ -33388,11 +37858,31 @@ window.GAMES_DATA = [
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Invulnerable/Ignore Damage"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Edit Max Health (修改最大生命)"
+      },
+      {
+        "key": "Num 4",
+        "action": "Infinite Arrow/Ammo (无限箭矢/弹药)"
+      },
+      {
+        "key": "Num 5",
+        "action": "Skills No Cooldown (技能无冷却)"
+      },
+      {
+        "key": "Num 6",
+        "action": "Infinite Jumps (无限跳跃)"
+      },
+      {
+        "key": "Num 7",
+        "action": "Freeze Timer (冻结计时器)"
+      },
+      {
+        "key": "Num 8",
+        "action": "Infinite Money (无限金钱)"
       }
     ],
     "nexusStats": {
@@ -33465,79 +37955,93 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/588650/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "2026 最新官方补丁适配 (Steam/Epic/GOG)",
       "officialUrl": "https://flingtrainer.com/trainer/dead-cells-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/dead-cells-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "version": "v1.9-v35+",
+      "optionsCount": 13,
+      "lastUpdated": "2024-10-10",
+      "platforms": [
+        "Steam",
+        "Epic Games Store",
+        "GOG",
+        "Xbox/Game Pass"
+      ],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 核心战斗与无敌 (Combat & Survival)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "死亡细胞 主角锁血无敌 (Infinite Health)"
+              "action": "无限生命 (Infinite Health)"
             },
             {
               "key": "Num 2",
-              "action": "无限体力与耐力奔跑 (Infinite Stamina)"
+              "action": "Invulnerable/Ignore Damage"
             },
             {
               "key": "Num 3",
-              "action": "无限弹药/装备零磨损 (Infinite Ammo/Durability)"
+              "action": "修改最大生命 (Edit Max Health)"
+            },
+            {
+              "key": "Num 4",
+              "action": "无限箭矢/弹药 (Infinite Arrow/Ammo)"
+            },
+            {
+              "key": "Num 5",
+              "action": "技能无冷却 (Skills No Cooldown)"
             },
             {
               "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
-            }
-          ]
-        },
-        {
-          "category": "💰 资源与数值养成 (Economy & Stats)",
-          "items": [
-            {
-              "key": "Ctrl+Num 1",
-              "action": "增加 100,000 游戏金币 (Add Currency)"
+              "action": "超级伤害/一击必杀 (Super Damage/One Hit Kill)"
             },
             {
               "key": "Ctrl+Num 2",
-              "action": "经验值经验倍率加倍 (EXP Multiplier)"
-            },
-            {
-              "key": "Ctrl+Num 3",
-              "action": "负重上限锁定 9999 (Max Carry Weight)"
+              "action": "伤害倍率 (Damage Multiplier)"
             }
           ]
         },
         {
-          "category": "🚀 探索与移动速度 (Movement & World)",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
-              "key": "Alt+Num 1",
-              "action": "超级移动奔跑速度 2x/3x (Super Speed)"
+              "key": "Num 8",
+              "action": "无限金钱 (Infinite Money)"
             },
             {
-              "key": "Alt+Num 2",
-              "action": "隐身模式/怪物视若无睹 (Invisibility)"
+              "key": "Ctrl+Num 1",
+              "action": "金钱倍率 (Money Multiplier)"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "Num 6",
+              "action": "无限跳跃 (Infinite Jumps)"
             },
             {
-              "key": "Alt+Num 3",
-              "action": "慢动作子弹时间调节 (Slow Motion)"
+              "key": "Num 7",
+              "action": "冻结计时器 (Freeze Timer)"
+            },
+            {
+              "key": "Ctrl+Num 3",
+              "action": "设置游戏速度 (Set Game Speed)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 9",
+              "action": "Edit Cells"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -33558,6 +38062,10 @@ window.GAMES_DATA = [
       "de": "Hades",
       "es": "Hades"
     },
+    "aliases": [
+      "哈迪斯",
+      "黑帝斯"
+    ],
     "developer": "Supergiant Games",
     "releaseYear": 2020,
     "genre": "Roguelike Action",
@@ -33607,15 +38115,35 @@ window.GAMES_DATA = [
     "trainerHotkeys": [
       {
         "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
+        "action": "God Mode (无敌模式)"
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "100% Critical Rate (100% 暴击率)"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Super Damage/One Hit Kill (超级伤害/一击必杀)"
+      },
+      {
+        "key": "Num 4",
+        "action": "Damage Multiplier (伤害倍率)"
+      },
+      {
+        "key": "Num 5",
+        "action": "Set Player Speed (设置玩家速度)"
+      },
+      {
+        "key": "Num 6",
+        "action": "Set Game Speed (设置游戏速度)"
+      },
+      {
+        "key": "Ctrl+Num 1",
+        "action": "Gold (金币)"
+      },
+      {
+        "key": "Ctrl+Num 2",
+        "action": "Keys (钥匙)"
       }
     ],
     "nexusStats": {
@@ -33710,66 +38238,99 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1145360/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "v1.38246 (官方完整版)",
       "officialUrl": "https://flingtrainer.com/trainer/hades-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/hades-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "version": "v1.0-v1.38+ /DirectX/Vulkan",
+      "optionsCount": 15,
+      "lastUpdated": "2021-09-02",
+      "platforms": [
+        "Steam",
+        "Xbox/Game Pass"
+      ],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 冥界战斗与生存 (Underworld Combat)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
             {
               "key": "Num 1",
-              "action": "扎格柔斯无限生命 (Infinite Health)"
-            },
-            {
-              "key": "Num 2",
-              "action": "无限投弹次数与法术 (Infinite Blood Crystals)"
+              "action": "无敌模式 (God Mode)"
             },
             {
               "key": "Num 3",
-              "action": "冥王神力援护瞬间满充能 (Instant God Call Gauge)"
+              "action": "超级伤害/一击必杀 (Super Damage/One Hit Kill)"
             },
             {
-              "key": "Num 0",
-              "action": "一击必杀 (One Hit Kill)"
+              "key": "Num 4",
+              "action": "伤害倍率 (Damage Multiplier)"
             }
           ]
         },
         {
-          "category": "💰 黑暗晶石与泰坦之血 (Economy & Darkness)",
+          "category": "💰 资源与物品 (Resources & Items)",
           "items": [
             {
               "key": "Ctrl+Num 1",
-              "action": "增加 10,000 黑暗晶石 (Add 10,000 Darkness)"
+              "action": "金币 (Gold)"
             },
             {
               "key": "Ctrl+Num 2",
-              "action": "增加 5,000 装修宝石 (Add 5,000 Gemstones)"
+              "action": "钥匙 (Keys)"
+            },
+            {
+              "key": "Ctrl+Num 5",
+              "action": "Gemstones"
+            }
+          ]
+        },
+        {
+          "category": "🌍 移动与世界 (Movement & World)",
+          "items": [
+            {
+              "key": "Num 5",
+              "action": "设置玩家速度 (Set Player Speed)"
+            },
+            {
+              "key": "Num 6",
+              "action": "设置游戏速度 (Set Game Speed)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 2",
+              "action": "100% 暴击率 (100% Critical Rate)"
             },
             {
               "key": "Ctrl+Num 3",
-              "action": "增加 50 滴泰坦之血 (Add 50 Titan Blood)"
+              "action": "Darkness"
             },
             {
               "key": "Ctrl+Num 4",
-              "action": "增加 50 瓶仙酒好感 (Add 50 Ambrosia)"
+              "action": "Reroll Stones"
+            },
+            {
+              "key": "Ctrl+Num 6",
+              "action": "Diamond"
+            },
+            {
+              "key": "Ctrl+Num 7",
+              "action": "Titan Blood"
+            },
+            {
+              "key": "Ctrl+Num 8",
+              "action": "Nectar"
+            },
+            {
+              "key": "Ctrl+Num 9",
+              "action": "Ambrosia"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -33790,6 +38351,9 @@ window.GAMES_DATA = [
       "de": "Hollow Knight",
       "es": "Hollow Knight"
     },
+    "aliases": [
+      "空洞骑士"
+    ],
     "developer": "Team Cherry",
     "releaseYear": 2017,
     "genre": "Metroidvania Action",
@@ -33847,15 +38411,35 @@ window.GAMES_DATA = [
     "trainerHotkeys": [
       {
         "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
+        "action": "Invincible (无敌)"
       },
       {
         "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
+        "action": "Infinite Soul"
       },
       {
         "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
+        "action": "Fast Attack Speed"
+      },
+      {
+        "key": "Num 4",
+        "action": "Infinite Double Jumps (无限二段跳)"
+      },
+      {
+        "key": "Num 5",
+        "action": "Infinite Dashes"
+      },
+      {
+        "key": "Num 6",
+        "action": "Infinite Geo"
+      },
+      {
+        "key": "Num 7",
+        "action": "Geo Multiplier"
+      },
+      {
+        "key": "Num 8",
+        "action": "Set Player Speed (设置玩家速度)"
       }
     ],
     "nexusStats": {
@@ -33974,42 +38558,20 @@ window.GAMES_DATA = [
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/367520/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
-      "version": "v1.5.78 (寻神者全DLC官方版)",
       "officialUrl": "https://flingtrainer.com/trainer/hollow-knight-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/hollow-knight-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
+      "version": "v1.4.3.2-v1.5.80+",
+      "optionsCount": 11,
+      "lastUpdated": "2023-07-13",
+      "platforms": [
+        "Steam",
+        "Xbox/Game Pass"
+      ],
+      "antiCheat": false,
+      "offlineOnly": false,
       "hotkeysCategorized": [
         {
-          "category": "⚔️ 小骑士战斗与灵魂 (Combat & Soul)",
+          "category": "⚔️ 战斗与生存 (Combat & Survival)",
           "items": [
-            {
-              "key": "Num 1",
-              "action": "无限生命血量 (Infinite Health Masks)"
-            },
-            {
-              "key": "Num 2",
-              "action": "无限灵魂容器法力 (Infinite Soul)"
-            },
-            {
-              "key": "Num 3",
-              "action": "骨钉伤害 10x 强化 (Super Nail Damage)"
-            },
-            {
-              "key": "Num 4",
-              "action": "穿墙飞天自由穿越地形 (Noclip)"
-            },
             {
               "key": "Num 0",
               "action": "一击必杀 (One Hit Kill)"
@@ -34017,23 +38579,57 @@ window.GAMES_DATA = [
           ]
         },
         {
-          "category": "💰 吉欧与护符槽 (Geo & Charms)",
+          "category": "🌍 移动与世界 (Movement & World)",
           "items": [
             {
+              "key": "Num 3",
+              "action": "Fast Attack Speed"
+            },
+            {
+              "key": "Num 4",
+              "action": "无限二段跳 (Infinite Double Jumps)"
+            },
+            {
+              "key": "Num 8",
+              "action": "设置玩家速度 (Set Player Speed)"
+            },
+            {
+              "key": "Num 9",
+              "action": "设置游戏速度 (Set Game Speed)"
+            }
+          ]
+        },
+        {
+          "category": "🧩 其他功能 (Other)",
+          "items": [
+            {
+              "key": "Num 1",
+              "action": "无敌 (Invincible)"
+            },
+            {
+              "key": "Num 2",
+              "action": "Infinite Soul"
+            },
+            {
+              "key": "Num 5",
+              "action": "Infinite Dashes"
+            },
+            {
+              "key": "Num 6",
+              "action": "Infinite Geo"
+            },
+            {
+              "key": "Num 7",
+              "action": "Geo Multiplier"
+            },
+            {
               "key": "Ctrl+Num 1",
-              "action": "增加 50,000 吉欧货币 (Add 50,000 Geo)"
-            },
-            {
-              "key": "Ctrl+Num 2",
-              "action": "一键集齐全部 40 款全护符 (Give All Charms)"
-            },
-            {
-              "key": "Ctrl+Num 3",
-              "action": "护符凹槽数量扩充至 11 格 (Max Charm Notches)"
+              "action": "Edit Charm Slots"
             }
           ]
         }
-      ]
+      ],
+      "source": "trainers.json"
     },
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
@@ -34054,6 +38650,9 @@ window.GAMES_DATA = [
       "de": "Slay the Spire",
       "es": "Slay the Spire"
     },
+    "aliases": [
+      "杀戮尖塔"
+    ],
     "developer": "MegaCrit",
     "releaseYear": 2019,
     "genre": "Roguelike Deckbuilder",
@@ -34107,21 +38706,8 @@ window.GAMES_DATA = [
         "desc": "针对 杀戮尖塔 的社区必备体验与性能优化补丁包"
       }
     ],
-    "hasTrainer": true,
-    "trainerHotkeys": [
-      {
-        "key": "Num 1",
-        "action": "Infinite Health (无限生命)"
-      },
-      {
-        "key": "Num 2",
-        "action": "Infinite Ammo / Stamina (无限子弹/耐力)"
-      },
-      {
-        "key": "Num 3",
-        "action": "Infinite Money / Resources (无限金钱/资源)"
-      }
-    ],
+    "hasTrainer": false,
+    "trainerHotkeys": [],
     "nexusStats": {
       "totalDownloads": "22.2M",
       "totalEndorsements": "321K",
@@ -34256,69 +38842,7 @@ window.GAMES_DATA = [
     ],
     "steamAppId": 646570,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/646570/header.jpg",
-    "trainerInfo": {
-      "author": "风灵月影 (FLiNG)",
-      "version": "v2.3.4 (官方终章整合)",
-      "officialUrl": "https://flingtrainer.com/trainer/slay-the-spire-trainer/",
-      "cleanMirrorUrl": "https://flingtrainer.com/trainer/slay-the-spire-trainer/",
-      "safeVerification": {
-        "isCleanVerified": true,
-        "hasBundledAds": false,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-          "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-          "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-          "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-          "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-      },
-      "hotkeysCategorized": [
-        {
-          "category": "⚔️ 爬塔战斗与卡牌 (Card Combat)",
-          "items": [
-            {
-              "key": "Num 1",
-              "action": "角色锁血无敌 (Infinite HP)"
-            },
-            {
-              "key": "Num 2",
-              "action": "能量费用点数锁定 99 点 (Infinite Energy)"
-            },
-            {
-              "key": "Num 3",
-              "action": "无限抽牌出牌 (Infinite Card Draw)"
-            },
-            {
-              "key": "Num 4",
-              "action": "每回合护甲格挡拉满 999 (Max Block 999)"
-            },
-            {
-              "key": "Num 0",
-              "action": "一击秒杀所有敌人精英 (One Hit Kill)"
-            }
-          ]
-        },
-        {
-          "category": "💰 金币与遗物 (Gold & Relics)",
-          "items": [
-            {
-              "key": "Ctrl+Num 1",
-              "action": "当前爬塔金币锁定 999 (Add 999 Gold)"
-            },
-            {
-              "key": "Ctrl+Num 2",
-              "action": "自由向牌组添加任意升级金卡 (Add Any Upgraded Card)"
-            },
-            {
-              "key": "Ctrl+Num 3",
-              "action": "一键获取枯木/异蛇之眼神级遗物 (Give Top Relics)"
-            }
-          ]
-        }
-      ]
-    },
+    "trainerInfo": {},
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-02",
@@ -34372,7 +38896,7 @@ window.TRANSLATIONS_DATA = {
     "navMining": "持续排雷采掘中 (后续单机)",
     "navConsole": "官方控制台作弊代码",
     "navMods": "N网爆款 MOD 与补丁",
-    "navTrainers": "纯净修改器 (Verified Clean)",
+    "navTrainers": "纯净修改器 (FLiNG 官方)",
     "navRadar": "Steam 避坑实时雷达",
     "navRecents": "最近浏览历史",
     "recentsEmpty": "暂无历史记录",
@@ -34430,14 +38954,14 @@ window.TRANSLATIONS_DATA = {
     "batCopiedToast": "批处理代码已复制！新建文本文件粘贴并改名为 .bat 即可使用",
     "trainerHeaderTitle": "风灵月影 (FLiNG) 官方直连",
     "trainerHeaderSubtitle": "纯净单文件修改器 · 告别流氓捆绑",
-    "trainerHeaderDesc": "本站坚决抵制任何第三方恶意全家桶下载器与弹窗推广！提供原作者官方直源与经过 MD5 校验的纯净单文件。",
-    "trainerDirectDownloadBtn": "⚡ 极速纯净一键直接下载 (ZIP)",
+    "trainerHeaderDesc": "只链接风灵月影官网原版，本站不转存、不改包。功能数、热键和适配版本定期从官网同步。",
+    "trainerDirectDownloadBtn": "⚡ 去风灵月影官网下载",
     "trainerOfficialPageBtn": "风灵月影官方页面 (备用通道)",
-    "trainerDefenderTitle": "防杀毒软件误报拦截 · 10 秒放行指南 (Windows Defender)",
-    "trainerDefenderDesc": "修改器通过系统内存注入数值，所有主流杀毒软件均会触发特征误报（显示为 HackTool:Win32/GameHack），这属于游戏内存修改的通用机制，绝非病毒。",
-    "trainerDefenderStep1": "1. 打开【Windows 安全中心】 -> 点击【病毒和威胁防护】 -> 【管理设置】",
-    "trainerDefenderStep2": "2. 向下滑动找到【排除项】 -> 点击【添加或删除排除项】",
-    "trainerDefenderStep3": "3. 添加文件夹 -> 选择你存放修改器的目录，即可一劳永逸正常运行不被误杀！",
+    "trainerDefenderTitle": "被杀毒软件拦截怎么办 (Windows Defender)",
+    "trainerDefenderDesc": "修改器要改游戏内存，杀毒软件常会报 HackTool:Win32/GameHack。从风灵月影官网下的原版多半是误报；来路不明的文件一律别放行。",
+    "trainerDefenderStep1": "1. 打开【Windows 安全中心】→【病毒和威胁防护】→【保护历史记录】",
+    "trainerDefenderStep2": "2. 找到刚被拦下的修改器那一条 →【操作】→【允许在设备上】",
+    "trainerDefenderStep3": "3. 只放行这一个文件就够了，别把整个文件夹加进排除项。",
     "trainerDefenderCmdLabel": "PowerShell 一键放行指令:",
     "trainerDefenderCopyCmdBtn": "复制一键放行命令",
     "trainerSearchPlaceholder": "搜索修改器热键功能（如：生命、金钱、速度、耐力、一击必杀）...",
@@ -34586,7 +39110,7 @@ window.TRANSLATIONS_DATA = {
     "statusExtenderReady": "已对账框架",
     "statusExtenderPending": "官方原生",
     "cardAbilityTrainer": "🛡 纯净修改器 (CLEAN TRAINER)",
-    "statusTrainerReady": "免翻直链已就绪",
+    "statusTrainerReady": "风灵月影已收录",
     "statusTrainerOfficial": "官方代码",
     "cardAbilityBat": "⚡ 一键批处理 (.BAT)",
     "statusAutoInject": "自动配置 (AUTO INJECT)",
@@ -34609,7 +39133,10 @@ window.TRANSLATIONS_DATA = {
     "cardHeatViolet": "⚡ 顶级热门",
     "cardHeatCyan": "💎 人气鼎沸",
     "cardHeatEmerald": "🌿 典藏口碑",
-    "cardUpdatedLabel": "更新"
+    "cardUpdatedLabel": "更新",
+    "trainerVersionLabel": "适配版本",
+    "trainerMetaBadge": "{n} 项功能 · 官网更新于 {date}",
+    "trainerAntiCheatWarn": "⚠️ 这款游戏带反作弊：修改器只能在单机离线下用，联机使用可能被封号。本站不提供任何绕过反作弊的方法。"
   },
   "en": {
     "siteName": "L-MOD Vault",
@@ -34654,7 +39181,7 @@ window.TRANSLATIONS_DATA = {
     "navMining": "Continuous Mining & Testing",
     "navConsole": "Official Console Cheats",
     "navMods": "Curated Nexus Mods & Fixes",
-    "navTrainers": "Pure Clean Trainers (Verified Clean)",
+    "navTrainers": "Pure Clean Trainers (FLiNG Official)",
     "navRadar": "Steam Pitfall Live Radar",
     "navRecents": "Recently Viewed",
     "recentsEmpty": "No recent history",
@@ -34712,14 +39239,14 @@ window.TRANSLATIONS_DATA = {
     "batCopiedToast": "Script code copied! Paste into a text file and rename to .bat to use.",
     "trainerHeaderTitle": "FLiNG Trainer Official Direct",
     "trainerHeaderSubtitle": "Pure Standalone Trainer · Zero Bundled Adware",
-    "trainerHeaderDesc": "Zero third-party adware installers! We provide original official files with verified MD5 checksums.",
-    "trainerDirectDownloadBtn": "⚡ High-Speed Direct Download (ZIP)",
+    "trainerHeaderDesc": "We only link to FLiNG's official page — no re-uploads, no repacks. Options, hotkeys and supported versions are synced from the official site regularly.",
+    "trainerDirectDownloadBtn": "⚡ Download on FLiNG's official site",
     "trainerOfficialPageBtn": "FLiNG Official Page (Backup)",
-    "trainerDefenderTitle": "Antivirus False Positive Fix · 10s Windows Defender Exclusion",
-    "trainerDefenderDesc": "Trainers inject values into game memory, triggering common antivirus alerts (e.g. HackTool:Win32/GameHack). This is standard for memory modification, not malware.",
-    "trainerDefenderStep1": "1. Open Windows Security -> Click 'Virus & threat protection' -> 'Manage settings'",
-    "trainerDefenderStep2": "2. Scroll down to 'Exclusions' -> Click 'Add or remove exclusions'",
-    "trainerDefenderStep3": "3. Click Add -> Folder -> Select your trainers directory to permanently avoid false positives!",
+    "trainerDefenderTitle": "Blocked by antivirus? (Windows Defender)",
+    "trainerDefenderDesc": "Trainers modify game memory, so antivirus often flags them as HackTool:Win32/GameHack. For the original file from FLiNG's official site this is usually a false positive — never allow files from unknown sources.",
+    "trainerDefenderStep1": "1. Open Windows Security → Virus & threat protection → Protection history",
+    "trainerDefenderStep2": "2. Find the entry for the trainer you just downloaded → Actions → Allow on device",
+    "trainerDefenderStep3": "3. Allowing this one file is enough — don't add whole folders to exclusions.",
     "trainerDefenderCmdLabel": "PowerShell 1-Click Exclusion Command:",
     "trainerDefenderCopyCmdBtn": "Copy Exclusion Command",
     "trainerSearchPlaceholder": "Search hotkey features (e.g. Health, Money, Speed, Stamina, One-Hit Kill)...",
@@ -34868,7 +39395,7 @@ window.TRANSLATIONS_DATA = {
     "statusExtenderReady": "Framework Ready",
     "statusExtenderPending": "Native Engine",
     "cardAbilityTrainer": "🛡 CLEAN TRAINER",
-    "statusTrainerReady": "Direct CDN Ready",
+    "statusTrainerReady": "FLiNG trainer available",
     "statusTrainerOfficial": "Official Codes",
     "cardAbilityBat": "⚡ ONE-CLICK .BAT",
     "statusAutoInject": "AUTO INJECT READY",
@@ -34891,7 +39418,10 @@ window.TRANSLATIONS_DATA = {
     "cardHeatViolet": "⚡ LEGENDARY",
     "cardHeatCyan": "💎 EPIC HEAT",
     "cardHeatEmerald": "🌿 RARE CLASSIC",
-    "cardUpdatedLabel": "Updated"
+    "cardUpdatedLabel": "Updated",
+    "trainerVersionLabel": "Supports",
+    "trainerMetaBadge": "{n} options · updated {date}",
+    "trainerAntiCheatWarn": "⚠️ This game has anti-cheat: use the trainer offline in single-player only — using it online may get you banned. We do not provide any way to bypass anti-cheat."
   },
   "zh-TW": {
     "siteName": "L-MOD Vault",
@@ -34936,7 +39466,7 @@ window.TRANSLATIONS_DATA = {
     "navMining": "持續排雷採掘中 (後續單機)",
     "navConsole": "官方控制台作弊代碼",
     "navMods": "N網爆款 MOD 與補丁",
-    "navTrainers": "純淨修改器 (Verified Clean)",
+    "navTrainers": "純淨修改器 (FLiNG 官方)",
     "navRadar": "Steam 避坑實時雷達",
     "navRecents": "最近瀏覽歷史",
     "recentsEmpty": "暫無歷史記錄",
@@ -34994,14 +39524,14 @@ window.TRANSLATIONS_DATA = {
     "batCopiedToast": "批處理代碼已複製！新建文本文件貼上並改名為 .bat 即可使用",
     "trainerHeaderTitle": "風靈月影 (FLiNG) 官方直連",
     "trainerHeaderSubtitle": "純淨單文件修改器 · 告別流氓捆綁",
-    "trainerHeaderDesc": "本站堅決抵制任何第三方惡意全家桶下載器與彈窗推廣！提供原作者官方直源與經過 MD5 校驗的純淨單文件。",
-    "trainerDirectDownloadBtn": "⚡ 極速純淨一鍵直接下載 (ZIP)",
+    "trainerHeaderDesc": "只連結風靈月影官網原版，本站不轉存、不改包。功能數、熱鍵與適配版本定期從官網同步。",
+    "trainerDirectDownloadBtn": "⚡ 前往風靈月影官網下載",
     "trainerOfficialPageBtn": "風靈月影官方頁面 (備用通道)",
-    "trainerDefenderTitle": "防防毒軟體誤報攔截 · 10 秒放行指南 (Windows Defender)",
-    "trainerDefenderDesc": "修改器通過系統記憶體注入數值，所有主流防毒軟體均會觸發特徵誤報（顯示為 HackTool:Win32/GameHack），這屬於遊戲記憶體修改的通用機制，絕非病毒。",
-    "trainerDefenderStep1": "1. 打開【Windows 安全中心】 -> 點擊【病毒和威脅防護】 -> 【管理設置】",
-    "trainerDefenderStep2": "2. 向下滑動找到【排除項】 -> 點擊【添加或刪除排除項】",
-    "trainerDefenderStep3": "3. 添加資料夾 -> 選擇你存放修改器的目錄，即可一勞永逸正常運行不被誤殺！",
+    "trainerDefenderTitle": "被防毒軟體攔截怎麼辦 (Windows Defender)",
+    "trainerDefenderDesc": "修改器要改遊戲記憶體，防毒軟體常會報 HackTool:Win32/GameHack。從風靈月影官網下載的原版多半是誤報；來路不明的檔案一律別放行。",
+    "trainerDefenderStep1": "1. 開啟【Windows 安全性】→【病毒與威脅防護】→【保護歷程記錄】",
+    "trainerDefenderStep2": "2. 找到剛被攔下的修改器那一筆 →【動作】→【允許在裝置上】",
+    "trainerDefenderStep3": "3. 只放行這一個檔案就夠了，別把整個資料夾加進排除項目。",
     "trainerDefenderCmdLabel": "PowerShell 一鍵放行指令:",
     "trainerDefenderCopyCmdBtn": "複製一鍵放行命令",
     "trainerSearchPlaceholder": "搜尋修改器熱鍵功能（如：生命、金錢、速度、耐力、一擊必殺）...",
@@ -35150,7 +39680,7 @@ window.TRANSLATIONS_DATA = {
     "statusExtenderReady": "已對帳框架",
     "statusExtenderPending": "官方原生",
     "cardAbilityTrainer": "🛡 純淨修改器 (CLEAN TRAINER)",
-    "statusTrainerReady": "免翻直鏈已就緒",
+    "statusTrainerReady": "風靈月影已收錄",
     "statusTrainerOfficial": "官方代碼",
     "cardAbilityBat": "⚡ 一鍵批處理 (.BAT)",
     "statusAutoInject": "自動配置 (AUTO INJECT)",
@@ -35173,7 +39703,10 @@ window.TRANSLATIONS_DATA = {
     "cardHeatViolet": "⚡ 頂級熱門",
     "cardHeatCyan": "💎 人氣鼎沸",
     "cardHeatEmerald": "🌿 典藏口碑",
-    "cardUpdatedLabel": "更新"
+    "cardUpdatedLabel": "更新",
+    "trainerVersionLabel": "適配版本",
+    "trainerMetaBadge": "{n} 項功能 · 官網更新於 {date}",
+    "trainerAntiCheatWarn": "⚠️ 這款遊戲有反作弊：修改器只能在單機離線下使用，連線使用可能被封號。本站不提供任何繞過反作弊的方法。"
   },
   "ja": {
     "siteName": "L-MOD Vault",
@@ -35218,7 +39751,7 @@ window.TRANSLATIONS_DATA = {
     "navMining": "継続検証中 (その他)",
     "navConsole": "公式コンソールチートコード",
     "navMods": "Nexus厳選MOD＆パッチ",
-    "navTrainers": "クリーンチート (安全性検証済)",
+    "navTrainers": "クリーンチート (FLiNG 公式)",
     "navRadar": "Steam不具合回避リアルタイムレーダー",
     "navRecents": "最近閲覧したゲーム",
     "recentsEmpty": "履歴はありません",
@@ -35276,14 +39809,14 @@ window.TRANSLATIONS_DATA = {
     "batCopiedToast": "コードをコピーしました！新規テキストに貼り付けて .bat に変更して使用してください",
     "trainerHeaderTitle": "FLiNG 公式ダイレクト",
     "trainerHeaderSubtitle": "クリーンな単一ファイル · バンドル広告一切なし",
-    "trainerHeaderDesc": "悪質なインストーラーや広告バンドルを排除。MD5チェックサム検証済みの公式オリジナルファイルを提供します。",
-    "trainerDirectDownloadBtn": "⚡ 高速クリーン直接ダウンロード (ZIP)",
+    "trainerHeaderDesc": "FLiNG 公式ページへのリンクのみで、再配布や改変は一切しません。機能数・ホットキー・対応バージョンは公式サイトから定期的に同期しています。",
+    "trainerDirectDownloadBtn": "⚡ FLiNG 公式サイトでダウンロード",
     "trainerOfficialPageBtn": "FLiNG 公式ページ (予備)",
-    "trainerDefenderTitle": "誤検知ブロック対策 · 10秒除外設定ガイド (Windows Defender)",
-    "trainerDefenderDesc": "チートツールはメモリに数値を注入するため、主要なセキュリティソフトで誤検知（HackTool:Win32等）が発生します。これはゲーム変更の一般的な挙動であり、ウイルスではありません。",
-    "trainerDefenderStep1": "1. 【Windows セキュリティ】を開く -> 【ウイルスと脅威の防止】 -> 【設定の管理】",
-    "trainerDefenderStep2": "2. 下にスクロールして【除外】 -> 【除外の追加または削除】をクリック",
-    "trainerDefenderStep3": "3. 【フォルダー】を追加 -> チートツールの保存先を選択すれば、誤検知を防げます！",
+    "trainerDefenderTitle": "ウイルス対策ソフトにブロックされたら (Windows Defender)",
+    "trainerDefenderDesc": "トレーナーはゲームのメモリを書き換えるため、HackTool:Win32/GameHack として検出されがちです。FLiNG 公式サイトの原本ならほぼ誤検知ですが、出所不明のファイルは絶対に許可しないでください。",
+    "trainerDefenderStep1": "1. 「Windows セキュリティ」→「ウイルスと脅威の防止」→「保護の履歴」を開く",
+    "trainerDefenderStep2": "2. ブロックされたトレーナーの項目を選び →「操作」→「デバイスで許可」",
+    "trainerDefenderStep3": "3. 許可するのはこのファイルだけで十分です。フォルダごと除外に追加しないでください。",
     "trainerDefenderCmdLabel": "PowerShell ワンクリック除外コマンド:",
     "trainerDefenderCopyCmdBtn": "除外コマンドをコピー",
     "trainerSearchPlaceholder": "チート機能を検索（体力、所持金、スピード、スタミナ、一撃必殺など）...",
@@ -35432,7 +39965,7 @@ window.TRANSLATIONS_DATA = {
     "statusExtenderReady": "フレームワーク検証済",
     "statusExtenderPending": "公式ネイティブ",
     "cardAbilityTrainer": "🛡 クリーントレーナー (CLEAN TRAINER)",
-    "statusTrainerReady": "直接DLリンク準備完了",
+    "statusTrainerReady": "FLiNG トレーナーあり",
     "statusTrainerOfficial": "公式コード",
     "cardAbilityBat": "⚡ ワンクリック .BAT",
     "statusAutoInject": "自動設定済 (AUTO INJECT)",
@@ -35455,7 +39988,10 @@ window.TRANSLATIONS_DATA = {
     "cardHeatViolet": "⚡ 殿堂入り人気",
     "cardHeatCyan": "💎 圧倒的人気",
     "cardHeatEmerald": "🌿 名作クラシック",
-    "cardUpdatedLabel": "更新"
+    "cardUpdatedLabel": "更新",
+    "trainerVersionLabel": "対応バージョン",
+    "trainerMetaBadge": "{n} 項目 · {date} 更新",
+    "trainerAntiCheatWarn": "⚠️ このゲームにはアンチチートがあります。トレーナーはオフラインのシングルプレイ専用で、オンラインで使うと BAN される恐れがあります。当サイトはアンチチートの回避方法を一切提供しません。"
   },
   "ko": {
     "siteName": "L-MOD Vault",
@@ -35500,7 +40036,7 @@ window.TRANSLATIONS_DATA = {
     "navMining": "지속적인 테스트 진행 중",
     "navConsole": "공식 콘솔 치트 코드",
     "navMods": "Nexus 엄선 모드 및 패치",
-    "navTrainers": "클린 트레이너 (안전 검증)",
+    "navTrainers": "클린 트레이너 (FLiNG 공식)",
     "navRadar": "Steam 패치 이슈 실시간 레이더",
     "navRecents": "최근 본 게임",
     "recentsEmpty": "최근 기록 없음",
@@ -35558,14 +40094,14 @@ window.TRANSLATIONS_DATA = {
     "batCopiedToast": "스크립트 코드가 복사되었습니다! 새 텍스트 파일에 붙여넣고 .bat으로 변경하세요",
     "trainerHeaderTitle": "FLiNG 공식 직통 다운로드",
     "trainerHeaderSubtitle": "순수 단일 실행파일 · 악성 번들 소프트웨어 차단",
-    "trainerHeaderDesc": "악성 번들 인스톨러를 전면 차단합니다! 공식 원본 소스와 MD5 검증을 통과한 순수 파일만 제공합니다.",
-    "trainerDirectDownloadBtn": "⚡ 초고속 클린 직접 다운로드 (ZIP)",
+    "trainerHeaderDesc": "FLiNG 공식 페이지로만 연결하며 재업로드나 재패키징은 하지 않습니다. 기능 수, 단축키, 지원 버전은 공식 사이트에서 정기적으로 동기화됩니다.",
+    "trainerDirectDownloadBtn": "⚡ FLiNG 공식 사이트에서 다운로드",
     "trainerOfficialPageBtn": "FLiNG 공식 페이지 (예비)",
-    "trainerDefenderTitle": "백신 오진 차단 방지 · 10초 예외 설정 가이드 (Windows Defender)",
-    "trainerDefenderDesc": "트레이너는 게임 메모리에 값을 주입하므로 주요 백신에서 오진(HackTool:Win32 등)이 발생할 수 있습니다. 이는 메모리 수정의 일반적인 특성이며 바이러스가 아닙니다.",
-    "trainerDefenderStep1": "1. 【Windows 보안】 실행 -> 【바이러스 및 위협 방지】 -> 【설정 관리】 클릭",
-    "trainerDefenderStep2": "2. 아래로 스크롤하여 【제외】 -> 【제외 추가 또는 제거】 클릭",
-    "trainerDefenderStep3": "3. 【폴더】 추가 -> 트레이너가 저장된 폴더를 선택하면 오진 없이 원활히 작동합니다!",
+    "trainerDefenderTitle": "백신에 차단되었을 때 (Windows Defender)",
+    "trainerDefenderDesc": "트레이너는 게임 메모리를 수정하기 때문에 백신이 HackTool:Win32/GameHack으로 자주 탐지합니다. FLiNG 공식 사이트의 원본이라면 대부분 오탐이지만, 출처가 불분명한 파일은 절대 허용하지 마세요.",
+    "trainerDefenderStep1": "1. [Windows 보안] → [바이러스 및 위협 방지] → [보호 기록]을 엽니다",
+    "trainerDefenderStep2": "2. 방금 차단된 트레이너 항목을 찾아 → [작업] → [디바이스에서 허용]",
+    "trainerDefenderStep3": "3. 이 파일 하나만 허용하면 충분합니다. 폴더 전체를 예외에 추가하지 마세요.",
     "trainerDefenderCmdLabel": "PowerShell 1클릭 예외 명령어:",
     "trainerDefenderCopyCmdBtn": "예외 명령어 복사",
     "trainerSearchPlaceholder": "트레이너 기능 검색 (체력, 골드, 이동속도, 스태미나, 원샷원킬 등)...",
@@ -35714,7 +40250,7 @@ window.TRANSLATIONS_DATA = {
     "statusExtenderReady": "프레임워크 검증됨",
     "statusExtenderPending": "공식 네이티브",
     "cardAbilityTrainer": "🛡 클린 트레이너 (CLEAN TRAINER)",
-    "statusTrainerReady": "직접 다운로드 준비됨",
+    "statusTrainerReady": "FLiNG 트레이너 있음",
     "statusTrainerOfficial": "공식 코드",
     "cardAbilityBat": "⚡ 원클릭 .BAT",
     "statusAutoInject": "자동 설정됨 (AUTO INJECT)",
@@ -35737,7 +40273,10 @@ window.TRANSLATIONS_DATA = {
     "cardHeatViolet": "⚡ 전설급 인기",
     "cardHeatCyan": "💎 에픽 인기",
     "cardHeatEmerald": "🌿 클래식 명작",
-    "cardUpdatedLabel": "업데이트"
+    "cardUpdatedLabel": "업데이트",
+    "trainerVersionLabel": "지원 버전",
+    "trainerMetaBadge": "{n}개 기능 · {date} 업데이트",
+    "trainerAntiCheatWarn": "⚠️ 이 게임에는 안티치트가 있습니다. 트레이너는 오프라인 싱글 플레이에서만 사용하세요. 온라인에서 사용하면 계정이 정지될 수 있습니다. 본 사이트는 안티치트 우회 방법을 제공하지 않습니다."
   },
   "ru": {
     "siteName": "L-MOD Vault",
@@ -35782,7 +40321,7 @@ window.TRANSLATIONS_DATA = {
     "navMining": "Непрерывное тестирование",
     "navConsole": "Официальные чит-коды консоли",
     "navMods": "Избранные Nexus моды и патчи",
-    "navTrainers": "Чистые трейнеры (Проверено)",
+    "navTrainers": "Чистые трейнеры (официальные FLiNG)",
     "navRadar": "Радар совместимости Steam",
     "navRecents": "История просмотров",
     "recentsEmpty": "Нет недавней истории",
@@ -35840,14 +40379,14 @@ window.TRANSLATIONS_DATA = {
     "batCopiedToast": "Код скопирован! Вставьте в текстовый файл и переименуйте в .bat",
     "trainerHeaderTitle": "FLiNG Официальная прямая ссылка",
     "trainerHeaderSubtitle": "Чистый одиночный файл · Никакого встроенного ПО",
-    "trainerHeaderDesc": "Мы против сторонних установщиков с рекламой! Предоставляем проверенные оригинальные файлы с проверкой MD5.",
-    "trainerDirectDownloadBtn": "⚡ Быстрая прямая загрузка (ZIP)",
+    "trainerHeaderDesc": "Мы даём только ссылку на официальную страницу FLiNG — без перезаливов и переупаковок. Число функций, горячие клавиши и поддерживаемые версии регулярно синхронизируются с официальным сайтом.",
+    "trainerDirectDownloadBtn": "⚡ Скачать на официальном сайте FLiNG",
     "trainerOfficialPageBtn": "Официальный сайт FLiNG (Резерв)",
-    "trainerDefenderTitle": "Решение ложных срабатываний · Исключение в Windows Defender за 10 сек",
-    "trainerDefenderDesc": "Трейнеры изменяют значения в памяти, что вызывает предупреждения антивирусов (HackTool:Win32). Это стандартное поведение таких утилит, а не вирус.",
-    "trainerDefenderStep1": "1. Откройте 【Безопасность Windows】 -> 【Защита от вирусов】 -> 【Управление настройками】",
-    "trainerDefenderStep2": "2. Прокрутите до пункта 【Исключения】 -> 【Добавление или удаление исключений】",
-    "trainerDefenderStep3": "3. Добавить папку -> Выберите папку с трейнерами, чтобы навсегда отключить ложные срабатывания!",
+    "trainerDefenderTitle": "Если антивирус заблокировал (Windows Defender)",
+    "trainerDefenderDesc": "Трейнеры изменяют память игры, поэтому антивирус часто помечает их как HackTool:Win32/GameHack. Для оригинала с официального сайта FLiNG это обычно ложное срабатывание — файлы из неизвестных источников не разрешайте.",
+    "trainerDefenderStep1": "1. Откройте «Безопасность Windows» → «Защита от вирусов и угроз» → «Журнал защиты»",
+    "trainerDefenderStep2": "2. Найдите запись о только что скачанном трейнере → «Действия» → «Разрешить на устройстве»",
+    "trainerDefenderStep3": "3. Достаточно разрешить только этот файл — не добавляйте целые папки в исключения.",
     "trainerDefenderCmdLabel": "Команда исключения в PowerShell в 1 клик:",
     "trainerDefenderCopyCmdBtn": "Скопировать команду исключения",
     "trainerSearchPlaceholder": "Поиск функций трейнера (здоровье, деньги, скорость, бессмертие)...",
@@ -35996,7 +40535,7 @@ window.TRANSLATIONS_DATA = {
     "statusExtenderReady": "Фреймворк проверен",
     "statusExtenderPending": "Оригинальный движок",
     "cardAbilityTrainer": "🛡 ЧИСТЫЙ ТРЕЙНЕР (CLEAN TRAINER)",
-    "statusTrainerReady": "Прямая загрузка готова",
+    "statusTrainerReady": "Есть трейнер FLiNG",
     "statusTrainerOfficial": "Официальные коды",
     "cardAbilityBat": "⚡ В 1 КЛИК .BAT",
     "statusAutoInject": "АВТО-ИНЖЕКТ ГОТОВ",
@@ -36019,7 +40558,10 @@ window.TRANSLATIONS_DATA = {
     "cardHeatViolet": "⚡ ЛЕГЕНДАРНЫЙ",
     "cardHeatCyan": "💎 ЭПИЧЕСКИЙ ТОП",
     "cardHeatEmerald": "🌿 КЛАССИКА",
-    "cardUpdatedLabel": "Обновлено"
+    "cardUpdatedLabel": "Обновлено",
+    "trainerVersionLabel": "Версии игры",
+    "trainerMetaBadge": "Функций: {n} · обновлено {date}",
+    "trainerAntiCheatWarn": "⚠️ В игре есть античит: используйте трейнер только в одиночном режиме офлайн — в сети можно получить бан. Мы не даём способов обхода античита."
   },
   "de": {
     "siteName": "L-MOD Vault",
@@ -36064,7 +40606,7 @@ window.TRANSLATIONS_DATA = {
     "navMining": "Fortlaufende Tests",
     "navConsole": "Offizielle Konsolen-Cheats",
     "navMods": "Kuratierte Nexus Mods & Patches",
-    "navTrainers": "Saubere Trainer (Verifiziert)",
+    "navTrainers": "Saubere Trainer (offiziell von FLiNG)",
     "navRadar": "Steam-Kompatibilitätsradar",
     "navRecents": "Zuletzt angesehen",
     "recentsEmpty": "Kein Verlauf vorhanden",
@@ -36122,14 +40664,14 @@ window.TRANSLATIONS_DATA = {
     "batCopiedToast": "Code kopiert! In eine Textdatei einfügen und in .bat umbenennen",
     "trainerHeaderTitle": "FLiNG Offizieller Direktdownload",
     "trainerHeaderSubtitle": "Saubere Einzeldatei · Keine unerwünschte Software",
-    "trainerHeaderDesc": "Keine Drittanbieter-Adware! Wir bieten verifizierte Originaldateien mit MD5-Prüfsumme.",
-    "trainerDirectDownloadBtn": "⚡ Schneller sauberer Direktdownload (ZIP)",
+    "trainerHeaderDesc": "Wir verlinken nur auf die offizielle FLiNG-Seite – keine Re-Uploads, keine Umpackungen. Optionen, Hotkeys und unterstützte Versionen werden regelmäßig von der offiziellen Seite synchronisiert.",
+    "trainerDirectDownloadBtn": "⚡ Auf der offiziellen FLiNG-Seite herunterladen",
     "trainerOfficialPageBtn": "Offizielle FLiNG-Website (Alternative)",
-    "trainerDefenderTitle": "Fehlalarm-Schutz · 10-Sekunden Ausnahme (Windows Defender)",
-    "trainerDefenderDesc": "Trainer modifizieren Spielwerte im Arbeitsspeicher, was Fehlalarme (HackTool:Win32) hervorrufen kann. Dies ist ein Standardverhalten und kein Virus.",
-    "trainerDefenderStep1": "1. 【Windows-Sicherheit】 öffnen -> 【Viren- & Bedrohungsschutz】 -> 【Einstellungen verwalten】",
-    "trainerDefenderStep2": "2. Nach unten scrollen zu 【Ausschlüsse】 -> 【Ausschlüsse hinzufügen oder entfernen】",
-    "trainerDefenderStep3": "3. Ordner hinzufügen -> Ordner der Trainer wählen, um Fehlalarme dauerhaft zu vermeiden!",
+    "trainerDefenderTitle": "Vom Virenschutz blockiert? (Windows Defender)",
+    "trainerDefenderDesc": "Trainer verändern den Spielspeicher, daher meldet der Virenschutz sie oft als HackTool:Win32/GameHack. Beim Original von der offiziellen FLiNG-Seite ist das meist ein Fehlalarm – Dateien unbekannter Herkunft niemals zulassen.",
+    "trainerDefenderStep1": "1. Öffne Windows-Sicherheit → Viren- & Bedrohungsschutz → Schutzverlauf",
+    "trainerDefenderStep2": "2. Eintrag des gerade geladenen Trainers suchen → Aktionen → Auf Gerät zulassen",
+    "trainerDefenderStep3": "3. Es reicht, nur diese eine Datei zuzulassen – keine ganzen Ordner zu den Ausnahmen hinzufügen.",
     "trainerDefenderCmdLabel": "PowerShell 1-Klick Ausnahme-Befehl:",
     "trainerDefenderCopyCmdBtn": "Ausnahme-Befehl kopieren",
     "trainerSearchPlaceholder": "Funktionen durchsuchen (z.B. Gesundheit, Geld, Tempo, One-Hit-Kill)...",
@@ -36278,7 +40820,7 @@ window.TRANSLATIONS_DATA = {
     "statusExtenderReady": "Framework verifiziert",
     "statusExtenderPending": "Natives Spiel",
     "cardAbilityTrainer": "🛡 SAUBERER TRAINER",
-    "statusTrainerReady": "Direkter Download bereit",
+    "statusTrainerReady": "FLiNG-Trainer verfügbar",
     "statusTrainerOfficial": "Offizielle Codes",
     "cardAbilityBat": "⚡ 1-KLICK .BAT",
     "statusAutoInject": "AUTO INJECT BEREIT",
@@ -36301,7 +40843,10 @@ window.TRANSLATIONS_DATA = {
     "cardHeatViolet": "⚡ LEGENDÄR",
     "cardHeatCyan": "💎 EPISCHER HIT",
     "cardHeatEmerald": "🌿 KLASSIKER",
-    "cardUpdatedLabel": "Aktualisiert"
+    "cardUpdatedLabel": "Aktualisiert",
+    "trainerVersionLabel": "Unterstützt",
+    "trainerMetaBadge": "{n} Optionen · aktualisiert am {date}",
+    "trainerAntiCheatWarn": "⚠️ Dieses Spiel hat einen Anti-Cheat: Trainer nur offline im Einzelspieler nutzen – online droht ein Bann. Wir bieten keine Möglichkeit, den Anti-Cheat zu umgehen."
   },
   "es": {
     "siteName": "L-MOD Vault",
@@ -36346,7 +40891,7 @@ window.TRANSLATIONS_DATA = {
     "navMining": "En pruebas continuas",
     "navConsole": "Trucos de consola oficiales",
     "navMods": "Mods de Nexus y parches seleccionados",
-    "navTrainers": "Trainers limpios (Verificados)",
+    "navTrainers": "Trainers limpios (oficiales de FLiNG)",
     "navRadar": "Radar en vivo de Steam",
     "navRecents": "Vistos recientemente",
     "recentsEmpty": "Sin historial reciente",
@@ -36404,14 +40949,14 @@ window.TRANSLATIONS_DATA = {
     "batCopiedToast": "¡Código copiado! Pégalo en un archivo de texto y guárdalo como .bat",
     "trainerHeaderTitle": "Descarga directa oficial de FLiNG",
     "trainerHeaderSubtitle": "Archivo único limpio · Sin instaladores sospechosos",
-    "trainerHeaderDesc": "¡Cero instaladores con adware! Ofrecemos fuentes oficiales con sumas de comprobación MD5 verificadas.",
-    "trainerDirectDownloadBtn": "⚡ Descarga directa rápida y limpia (ZIP)",
+    "trainerHeaderDesc": "Solo enlazamos a la página oficial de FLiNG: sin resubidas ni reempaquetados. Las opciones, atajos y versiones compatibles se sincronizan periódicamente desde el sitio oficial.",
+    "trainerDirectDownloadBtn": "⚡ Descargar en el sitio oficial de FLiNG",
     "trainerOfficialPageBtn": "Página oficial de FLiNG (Alternativa)",
-    "trainerDefenderTitle": "Solución a falsos positivos · Exclusión en Windows Defender en 10 seg",
-    "trainerDefenderDesc": "Los trainers inyectan valores en la memoria, lo que activa alertas (HackTool:Win32). Es el mecanismo habitual de modificación, no un virus.",
-    "trainerDefenderStep1": "1. Abre 【Seguridad de Windows】 -> 【Protección contra virus】 -> 【Administrar la configuración】",
-    "trainerDefenderStep2": "2. Desplázate hacia abajo hasta 【Exclusiones】 -> 【Agregar o quitar exclusiones】",
-    "trainerDefenderStep3": "3. Agregar carpeta -> Selecciona la carpeta de los trainers para evitar bloqueos falsos permanentemente.",
+    "trainerDefenderTitle": "¿Bloqueado por el antivirus? (Windows Defender)",
+    "trainerDefenderDesc": "Los trainers modifican la memoria del juego, por lo que el antivirus suele detectarlos como HackTool:Win32/GameHack. Con el archivo original del sitio oficial de FLiNG suele ser un falso positivo; nunca permitas archivos de origen desconocido.",
+    "trainerDefenderStep1": "1. Abre Seguridad de Windows → Protección antivirus y contra amenazas → Historial de protección",
+    "trainerDefenderStep2": "2. Busca la entrada del trainer recién descargado → Acciones → Permitir en el dispositivo",
+    "trainerDefenderStep3": "3. Basta con permitir este archivo; no añadas carpetas enteras a las exclusiones.",
     "trainerDefenderCmdLabel": "Comando de exclusión en PowerShell en 1 clic:",
     "trainerDefenderCopyCmdBtn": "Copiar comando de exclusión",
     "trainerSearchPlaceholder": "Buscar funciones de teclas rápidas (salud, dinero, velocidad, matar de un golpe)...",
@@ -36560,7 +41105,7 @@ window.TRANSLATIONS_DATA = {
     "statusExtenderReady": "Framework verificado",
     "statusExtenderPending": "Nativo oficial",
     "cardAbilityTrainer": "🛡 TRAINER LIMPIO",
-    "statusTrainerReady": "Descarga directa lista",
+    "statusTrainerReady": "Trainer de FLiNG disponible",
     "statusTrainerOfficial": "Códigos oficiales",
     "cardAbilityBat": "⚡ 1-CLIC .BAT",
     "statusAutoInject": "AUTO INYECCIÓN LISTA",
@@ -36583,6 +41128,9 @@ window.TRANSLATIONS_DATA = {
     "cardHeatViolet": "⚡ LEGENDARIO",
     "cardHeatCyan": "💎 ÉPICO",
     "cardHeatEmerald": "🌿 CLÁSICO",
-    "cardUpdatedLabel": "Actualizado"
+    "cardUpdatedLabel": "Actualizado",
+    "trainerVersionLabel": "Compatible con",
+    "trainerMetaBadge": "{n} opciones · actualizado el {date}",
+    "trainerAntiCheatWarn": "⚠️ Este juego tiene antitrampas: usa el trainer solo sin conexión en modo individual; usarlo en línea puede provocar un baneo. No ofrecemos ningún método para eludir el antitrampas."
   }
 };

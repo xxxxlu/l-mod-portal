@@ -201,7 +201,7 @@ class DeploymentVerifier:
             cats = g.get("consoleCategories", [])
             cmd_count = sum(len(c.get("commands", [])) for c in cats)
             mods = g.get("curatedMods", [])
-            tinfo = g.get("trainerInfo", {})
+            tinfo = g.get("trainerInfo") or {}
             official_t = tinfo.get("officialUrl", "")
             mirror_t = tinfo.get("cleanMirrorUrl", "")
 

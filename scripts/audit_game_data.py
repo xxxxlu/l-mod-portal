@@ -315,18 +315,16 @@ def audit_game(game_id=None, verbose=True):
                 if not is_valid:
                     issues.append(f"语法 Linter 拦截: {linter_err}")
 
-        # 2. 检查修改器
-        trainer = g.get("trainerInfo", {})
-        if not trainer.get("officialUrl") or "flingtrainer.com" not in trainer.get("officialUrl", ""):
-            issues.append("缺少有效的 FLiNG 官方直连 URL")
-        
-        safe_ver = trainer.get("safeVerification", {})
-        if not safe_ver.get("powershellExclusionCmd"):
-            issues.append("缺少一键白名单 PowerShell 排除命令")
-
-        hotkeys = trainer.get("hotkeysCategorized", [])
-        if not hotkeys:
-            issues.append("缺少分类热键矩阵")
+        # 2. 检查修改器（数据由 scripts/fling_trainer_sync.py 从风灵月影官网同步；
+        #    风灵月影没做的游戏 hasTrainer=False，不算问题）
+        trainer = g.get("trainerInfo") or {}
+        if g.get("hasTrainer"):
+            if "flingtrainer.com" not in trainer.get("officialUrl", ""):
+                issues.append("缺少有效的 FLiNG 官方直连 URL")
+            if not trainer.get("hotkeysCategorized"):
+                issues.append("缺少分类热键矩阵")
+        if trainer.get("cleanMirrorUrl") or trainer.get("safeVerification"):
+            issues.append("修改器数据残留未经核实的镜像 / 校验字段（应由 fling_trainer_sync.py 生成）")
 
         # 3. 检查精选 Mod
         mods = g.get("curatedMods", [])
