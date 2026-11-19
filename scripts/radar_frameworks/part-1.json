@@ -1,0 +1,655 @@
+[
+  {
+    "id": "cyberpunk-2077",
+    "rank": 1,
+    "steamAppId": 1091500,
+    "framework": {
+      "name": "Cyber Engine Tweaks / RED4ext",
+      "url": "https://github.com/maximegmd/CyberEngineTweaks"
+    },
+    "hooksExe": true,
+    "modSupport": "community",
+    "afterUpdate": {
+      "zh-CN": "游戏更新后先别急着进，等 CET、RED4ext 等核心 Mod 出适配新版本的更新再玩。",
+      "en": "After a game update, wait for Cyber Engine Tweaks, RED4ext and other core mods to update before playing."
+    },
+    "sources": [
+      "https://github.com/maximegmd/CyberEngineTweaks",
+      "https://github.com/wopss/RED4ext",
+      "https://wiki.redmodding.org/cyberpunk-2077-modding/for-mod-users/user-guide-troubleshooting/users-troubleshooting-after-a-game-update",
+      "https://wiki.redmodding.org/cyberpunk-2077-modding/for-mod-users/user-guide-troubleshooting"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "black-myth-wukong",
+    "rank": 2,
+    "steamAppId": 2358720,
+    "framework": null,
+    "hooksExe": null,
+    "modSupport": null,
+    "afterUpdate": null,
+    "sources": [
+      "https://www.pcgamingwiki.com/wiki/Black_Myth:_Wukong"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "witcher-3",
+    "rank": 3,
+    "steamAppId": 292030,
+    "framework": null,
+    "hooksExe": false,
+    "modSupport": "official",
+    "afterUpdate": {
+      "zh-CN": "更新后先确认所用 Mod 已标注支持新版本再启用。",
+      "en": "After an update, enable mods only once they list support for the new game version."
+    },
+    "sources": [
+      "https://www.pcgamingwiki.com/wiki/The_Witcher_3:_Wild_Hunt",
+      "https://steamcommunity.com/app/292030/workshop/"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "baldurs-gate-3",
+    "rank": 4,
+    "steamAppId": 1086940,
+    "framework": {
+      "name": "BG3 Script Extender",
+      "url": "https://github.com/Norbyte/bg3se"
+    },
+    "hooksExe": true,
+    "modSupport": "official",
+    "afterUpdate": {
+      "zh-CN": "更新（含热修）后 Script Extender 常要作者跟进，等它适配后再玩依赖它的 Mod。",
+      "en": "Even hotfixes can break Script Extender; wait for it to support the new version before using mods that need it."
+    },
+    "sources": [
+      "https://github.com/Norbyte/bg3se",
+      "https://www.pcgamer.com/patch-6-of-baldurs-gate-3-opens-a-pandoras-box-of-glitches-for-some-players-while-a-hotfix-leaves-modders-scratching-their-heads-the-exe-got-completely-reorganised-again/",
+      "https://www.gematsu.com/2024/10/baldurs-gate-iii-patch-7-now-available-adds-new-evil-endings-improved-split-screen-and-mods"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "elden-ring",
+    "rank": 5,
+    "steamAppId": 1245620,
+    "framework": {
+      "name": "Mod Engine 2",
+      "url": "https://github.com/soulsmods/ModEngine2"
+    },
+    "hooksExe": null,
+    "modSupport": "community",
+    "afterUpdate": {
+      "zh-CN": "带 EAC 反作弊，联机模式别用 Mod/修改器；更新后等 Mod Engine 2 和所用 Mod 适配再用。",
+      "en": "Has Easy Anti-Cheat: never use mods or trainers online. After updates, wait for Mod Engine 2 and your mods."
+    },
+    "sources": [
+      "https://github.com/soulsmods/ModEngine2",
+      "https://www.pcgamingwiki.com/wiki/Elden_Ring"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "skyrim-se",
+    "rank": 6,
+    "steamAppId": 489830,
+    "framework": {
+      "name": "SKSE64",
+      "url": "https://skse.silverlock.org/"
+    },
+    "hooksExe": true,
+    "modSupport": "community",
+    "afterUpdate": {
+      "zh-CN": "游戏更新后先别急着进，等 SKSE64 和 SKSE 插件出对应版本再玩；可在 Steam 设成仅在启动时更新。",
+      "en": "After a game update, wait for matching SKSE64 and SKSE plugin builds before playing."
+    },
+    "sources": [
+      "https://skse.silverlock.org/",
+      "https://www.pcgamingwiki.com/wiki/The_Elder_Scrolls_V:_Skyrim_Special_Edition"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "fallout-4",
+    "rank": 7,
+    "steamAppId": 377160,
+    "framework": {
+      "name": "F4SE",
+      "url": "https://f4se.silverlock.org/"
+    },
+    "hooksExe": true,
+    "modSupport": "community",
+    "afterUpdate": {
+      "zh-CN": "游戏更新后先别急着进，等 F4SE 和 F4SE 插件出对应版本再玩；可在 Steam 设成仅在启动时更新。",
+      "en": "After a game update, wait for matching F4SE and F4SE plugin builds before playing."
+    },
+    "sources": [
+      "https://f4se.silverlock.org/",
+      "https://www.pcgamingwiki.com/wiki/Fallout_4"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "palworld",
+    "rank": 8,
+    "steamAppId": 1623730,
+    "framework": {
+      "name": "UE4SS Experimental (Palworld)",
+      "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3625223587"
+    },
+    "hooksExe": false,
+    "modSupport": "workshop",
+    "afterUpdate": {
+      "zh-CN": "小更新一般不用换 UE4SS；大版本更新后先删旧 Mod，等 UE4SS 和 Mod 作者确认适配。",
+      "en": "Minor patches rarely need a new UE4SS; after major updates, remove old mods and wait for UE4SS and mods to update."
+    },
+    "sources": [
+      "https://steamcommunity.com/sharedfiles/filedetails/?id=3625223587",
+      "https://steamcommunity.com/app/1623730/workshop/",
+      "https://www.palmods.gg/blog/palworld-1-0-mod-survival-guide",
+      "https://www.pcgamer.com/games/survival-crafting/palworld-studio-says-delete-your-old-mods-before-the-1-0-release-disabling-them-is-not-enough/"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "starfield",
+    "rank": 9,
+    "steamAppId": 1716740,
+    "framework": {
+      "name": "SFSE",
+      "url": "https://github.com/ianpatt/sfse"
+    },
+    "hooksExe": true,
+    "modSupport": "community",
+    "afterUpdate": {
+      "zh-CN": "游戏更新后先别急着进，等 SFSE 和 SFSE 插件出对应版本再玩；可在 Steam 设成仅在启动时更新。",
+      "en": "After a game update, wait for matching SFSE and SFSE plugin builds before playing."
+    },
+    "sources": [
+      "https://github.com/ianpatt/sfse",
+      "https://www.pcgamingwiki.com/wiki/Starfield"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "gta-v",
+    "rank": 10,
+    "steamAppId": 271590,
+    "framework": {
+      "name": "Script Hook V",
+      "url": "https://www.dev-c.com/gtav/scripthookv/"
+    },
+    "hooksExe": true,
+    "modSupport": "community",
+    "afterUpdate": {
+      "zh-CN": "更新后等 Script Hook V 出对应版本再用脚本 Mod；在线模式带 BattlEye，别用 Mod/修改器。",
+      "en": "After updates, wait for a matching Script Hook V. GTA Online uses BattlEye: never use mods or trainers online."
+    },
+    "sources": [
+      "https://www.dev-c.com/gtav/scripthookv/",
+      "https://www.pcgamingwiki.com/wiki/Grand_Theft_Auto_V"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "rdr2",
+    "rank": 11,
+    "steamAppId": 1174180,
+    "framework": {
+      "name": "Script Hook RDR2",
+      "url": "https://www.dev-c.com/rdr2/scripthookrdr2/"
+    },
+    "hooksExe": null,
+    "modSupport": "community",
+    "afterUpdate": {
+      "zh-CN": "更新后先确认 Script Hook RDR2 等加载器支持新版本；Red Dead Online 里别用 Mod。",
+      "en": "After updates, check that Script Hook RDR2 and other loaders support the new version. No mods in Red Dead Online."
+    },
+    "sources": [
+      "https://www.dev-c.com/rdr2/scripthookrdr2/",
+      "https://www.pcgamingwiki.com/wiki/Red_Dead_Redemption_2"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "monster-hunter-world",
+    "rank": 12,
+    "steamAppId": 582010,
+    "framework": {
+      "name": "Stracker's Loader",
+      "url": "https://github.com/Strackeror/MHW-QuestLoader"
+    },
+    "hooksExe": true,
+    "modSupport": "community",
+    "afterUpdate": {
+      "zh-CN": "游戏更新后等 Stracker's Loader 出新版，再用依赖它的插件类 Mod。",
+      "en": "After a game update, wait for a new Stracker's Loader before using plugin mods that depend on it."
+    },
+    "sources": [
+      "https://github.com/Nexus-Mods/Vortex/wiki/MODDINGWIKI-Users-GameGuides-Modding-Monster-Hunter-World-with-Vortex",
+      "https://github.com/Strackeror/MHW-QuestLoader"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "sekiro",
+    "rank": 13,
+    "steamAppId": 814380,
+    "framework": {
+      "name": "Mod Engine",
+      "url": "https://github.com/katalash/ModEngine"
+    },
+    "hooksExe": null,
+    "modSupport": "community",
+    "afterUpdate": {
+      "zh-CN": "更新后先确认 Mod Engine 和所用 Mod 支持新版本再用。",
+      "en": "After an update, check that Mod Engine and your mods support the new version before playing."
+    },
+    "sources": [
+      "https://github.com/katalash/ModEngine",
+      "https://www.gamesradar.com/sekiro-mods/",
+      "https://www.tweaktown.com/news/65315/sekiro-mod-engine-paves-way-expansive-mods/index.html",
+      "https://github.com/soulsmods/ModEngine2"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "re4-remake",
+    "rank": 14,
+    "steamAppId": 2050650,
+    "framework": {
+      "name": "REFramework",
+      "url": "https://github.com/praydog/REFramework"
+    },
+    "hooksExe": null,
+    "modSupport": "community",
+    "afterUpdate": {
+      "zh-CN": "更新后先确认 REFramework（可试 nightly 版）和所用 Mod 已适配再用。",
+      "en": "After an update, check that REFramework (try a nightly build) and your mods work before playing."
+    },
+    "sources": [
+      "https://github.com/praydog/REFramework",
+      "https://www.pcgamingwiki.com/wiki/Resident_Evil_4_(2023)"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "mount-and-blade-2",
+    "rank": 15,
+    "steamAppId": 261550,
+    "framework": {
+      "name": "Harmony (Bannerlord.Harmony)",
+      "url": "https://github.com/BUTR/Bannerlord.Harmony"
+    },
+    "hooksExe": false,
+    "modSupport": "workshop",
+    "afterUpdate": {
+      "zh-CN": "更新后先确认 Mod 已支持新版本再启用；联机模式带 BattlEye，别用 Mod/修改器。",
+      "en": "After an update, enable mods only once they support the new version. Multiplayer uses BattlEye: no mods or trainers."
+    },
+    "sources": [
+      "https://github.com/BUTR/Bannerlord.Harmony",
+      "https://github.com/pardeike/Harmony",
+      "https://steamcommunity.com/app/261550/workshop/",
+      "https://www.pcgamingwiki.com/wiki/Mount_%26_Blade_II:_Bannerlord"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "stardew-valley",
+    "rank": 16,
+    "steamAppId": 413150,
+    "framework": {
+      "name": "SMAPI",
+      "url": "https://smapi.io/"
+    },
+    "hooksExe": false,
+    "modSupport": "community",
+    "afterUpdate": {
+      "zh-CN": "更新后先把 SMAPI 和 Mod 更新到最新版，再到 smapi.io 兼容列表核对。",
+      "en": "After an update, update SMAPI and your mods, then check the compatibility list on smapi.io."
+    },
+    "sources": [
+      "https://smapi.io/",
+      "https://www.pcgamingwiki.com/wiki/Stardew_Valley"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "terraria",
+    "rank": 17,
+    "steamAppId": 105600,
+    "framework": {
+      "name": "tModLoader",
+      "url": "https://github.com/tModLoader/tModLoader"
+    },
+    "hooksExe": false,
+    "modSupport": "workshop",
+    "afterUpdate": {
+      "zh-CN": "Mod 在独立的 tModLoader 里运行；本体更新后等 tModLoader 和 Mod 跟进即可。",
+      "en": "Mods run in the separate tModLoader app; after a Terraria update, wait for tModLoader and mods to catch up."
+    },
+    "sources": [
+      "https://github.com/tModLoader/tModLoader",
+      "https://steamcommunity.com/app/1281930/workshop/"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "hogwarts-legacy",
+    "rank": 18,
+    "steamAppId": 990080,
+    "framework": null,
+    "hooksExe": false,
+    "modSupport": "official",
+    "afterUpdate": {
+      "zh-CN": "官方 Mod 在游戏内通过 CurseForge 管理，更新后到游戏内 Mod 页检查更新。",
+      "en": "Official mods are managed in-game via CurseForge; after an update, check the in-game mods menu for updates."
+    },
+    "sources": [
+      "https://blog.curseforge.com/official-in-game-mods-are-coming-to-hogwarts-legacy/",
+      "https://www.pcgamingwiki.com/wiki/Hogwarts_Legacy"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "subnautica",
+    "rank": 19,
+    "steamAppId": 264710,
+    "framework": {
+      "name": "BepInEx + Nautilus",
+      "url": "https://github.com/SubnauticaModding/Nautilus"
+    },
+    "hooksExe": false,
+    "modSupport": "community",
+    "afterUpdate": {
+      "zh-CN": "更新后先确认 BepInEx 包和 Nautilus 已支持新版本再用 Mod。",
+      "en": "After an update, make sure the BepInEx pack and Nautilus support the new version before using mods."
+    },
+    "sources": [
+      "https://github.com/SubnauticaModding/Nautilus",
+      "https://github.com/BepInEx/BepInEx"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "dark-souls-3",
+    "rank": 20,
+    "steamAppId": 374320,
+    "framework": {
+      "name": "Mod Engine 2",
+      "url": "https://github.com/soulsmods/ModEngine2"
+    },
+    "hooksExe": null,
+    "modSupport": "community",
+    "afterUpdate": {
+      "zh-CN": "更新后先确认 Mod Engine 2 和所用 Mod 支持新版本再用。",
+      "en": "After an update, check that Mod Engine 2 and your mods support the new version before playing."
+    },
+    "sources": [
+      "https://github.com/soulsmods/ModEngine2",
+      "https://www.pcgamingwiki.com/wiki/Dark_Souls_III"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "valheim",
+    "rank": 21,
+    "steamAppId": 892970,
+    "framework": {
+      "name": "BepInExPack Valheim",
+      "url": "https://github.com/BepInEx/BepInEx"
+    },
+    "hooksExe": false,
+    "modSupport": "community",
+    "afterUpdate": {
+      "zh-CN": "官方不提供 Mod 支持；更新后先更新 BepInExPack，服务器和客户端 Mod 版本保持一致。",
+      "en": "No official mod support. After updates, update BepInExPack first and keep server and client mods on matching versions."
+    },
+    "sources": [
+      "https://github.com/Valheim-Modding/Wiki/wiki/Server-Troubleshooting",
+      "https://github.com/BepInEx/BepInEx",
+      "https://low.ms/knowledgebase/valheim-mods-after-the-1-0-update"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "re-village",
+    "rank": 22,
+    "steamAppId": 1196590,
+    "framework": {
+      "name": "REFramework",
+      "url": "https://github.com/praydog/REFramework"
+    },
+    "hooksExe": null,
+    "modSupport": "community",
+    "afterUpdate": {
+      "zh-CN": "更新后先确认 REFramework（可试 nightly 版）和所用 Mod 已适配再用。",
+      "en": "After an update, check that REFramework (try a nightly build) and your mods work before playing."
+    },
+    "sources": [
+      "https://github.com/praydog/REFramework",
+      "https://www.pcgamingwiki.com/wiki/Resident_Evil_Village"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "dying-light",
+    "rank": 23,
+    "steamAppId": 239140,
+    "framework": null,
+    "hooksExe": null,
+    "modSupport": "workshop",
+    "afterUpdate": null,
+    "sources": [
+      "https://www.pcgamingwiki.com/wiki/Dying_Light",
+      "https://steamcommunity.com/app/239140/workshop/"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "dying-light-2",
+    "rank": 24,
+    "steamAppId": 534380,
+    "framework": null,
+    "hooksExe": false,
+    "modSupport": "official",
+    "afterUpdate": {
+      "zh-CN": "更新后先确认所用 Mod 已适配新版本再启用。",
+      "en": "After an update, enable mods only once they are confirmed to work with the new version."
+    },
+    "sources": [
+      "https://store.steampowered.com/app/2217480/",
+      "https://www.pcgamingwiki.com/wiki/Dying_Light_2_Stay_Human"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "fallout-new-vegas",
+    "rank": 25,
+    "steamAppId": 22380,
+    "framework": {
+      "name": "xNVSE",
+      "url": "https://github.com/xNVSE/NVSE"
+    },
+    "hooksExe": true,
+    "modSupport": "community",
+    "afterUpdate": {
+      "zh-CN": "游戏更新后先别急着进，等 xNVSE 和 NVSE 插件出对应版本再玩。",
+      "en": "After a game update, wait for matching xNVSE and NVSE plugin builds before playing."
+    },
+    "sources": [
+      "http://nvse.silverlock.org/",
+      "https://github.com/xNVSE/NVSE",
+      "https://www.pcgamingwiki.com/wiki/Fallout:_New_Vegas"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "rimworld",
+    "rank": 26,
+    "steamAppId": 294100,
+    "framework": {
+      "name": "Harmony",
+      "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=2009463077"
+    },
+    "hooksExe": false,
+    "modSupport": "workshop",
+    "afterUpdate": {
+      "zh-CN": "大版本更新后，先在 Mod 页确认已支持新版本再启用。",
+      "en": "After a major update, enable mods only after their pages list support for the new version."
+    },
+    "sources": [
+      "https://steamcommunity.com/sharedfiles/filedetails/?id=2009463077",
+      "https://github.com/pardeike/Harmony",
+      "https://steamcommunity.com/app/294100/workshop/"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "project-zomboid",
+    "rank": 27,
+    "steamAppId": 108600,
+    "framework": null,
+    "hooksExe": false,
+    "modSupport": "workshop",
+    "afterUpdate": {
+      "zh-CN": "更新后先确认订阅的 Mod 已适配新版本再启用。",
+      "en": "After an update, enable subscribed mods only once they support the new version."
+    },
+    "sources": [
+      "https://pzwiki.net/wiki/Mods",
+      "https://steamcommunity.com/app/108600/workshop/"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "the-forest",
+    "rank": 28,
+    "steamAppId": 242760,
+    "framework": {
+      "name": "ModAPI",
+      "url": "https://modapi.survivetheforest.net/"
+    },
+    "hooksExe": null,
+    "modSupport": "community",
+    "afterUpdate": {
+      "zh-CN": "更新后先确认 ModAPI 和所用 Mod 支持新版本再用。",
+      "en": "After an update, check that ModAPI and your mods support the new version before playing."
+    },
+    "sources": [
+      "https://modapi.survivetheforest.net/"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "sons-of-the-forest",
+    "rank": 29,
+    "steamAppId": 1326470,
+    "framework": {
+      "name": "RedLoader",
+      "url": "https://github.com/ToniMacaroni/RedLoader"
+    },
+    "hooksExe": null,
+    "modSupport": "community",
+    "afterUpdate": {
+      "zh-CN": "更新后先确认 RedLoader 和所用 Mod 支持新版本再用。",
+      "en": "After an update, check that RedLoader and your mods support the new version before playing."
+    },
+    "sources": [
+      "https://github.com/ToniMacaroni/RedLoader"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "satisfactory",
+    "rank": 30,
+    "steamAppId": 526870,
+    "framework": {
+      "name": "Satisfactory Mod Loader (SML)",
+      "url": "https://docs.ficsit.app/satisfactory-modding/latest/"
+    },
+    "hooksExe": false,
+    "modSupport": "community",
+    "afterUpdate": {
+      "zh-CN": "大更新或换引擎版本后 Mod 多半失效，先等 SML 和 Mod 更新；小补丁风险较低。",
+      "en": "Major or engine updates usually break mods; wait for SML and mod updates. Minor patches are lower risk."
+    },
+    "sources": [
+      "https://satisfactory.wiki.gg/wiki/Modding",
+      "https://docs.ficsit.app/satisfactory-modding/latest/",
+      "https://www.pcgamingwiki.com/wiki/Satisfactory"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "factorio",
+    "rank": 31,
+    "steamAppId": 427520,
+    "framework": null,
+    "hooksExe": false,
+    "modSupport": "official",
+    "afterUpdate": {
+      "zh-CN": "更新后到主菜单的 Mods 里检查并更新 Mod。",
+      "en": "After an update, check for mod updates in the main menu's Mods section."
+    },
+    "sources": [
+      "https://wiki.factorio.com/Modding"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "cities-skylines",
+    "rank": 32,
+    "steamAppId": 255710,
+    "framework": null,
+    "hooksExe": false,
+    "modSupport": "workshop",
+    "afterUpdate": {
+      "zh-CN": "更新后先确认订阅的 Mod 已适配新版本再启用。",
+      "en": "After an update, enable subscribed mods only once they support the new version."
+    },
+    "sources": [
+      "https://www.pcgamingwiki.com/wiki/Cities:_Skylines",
+      "https://steamcommunity.com/app/255710/workshop/"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "civ-6",
+    "rank": 33,
+    "steamAppId": 289070,
+    "framework": null,
+    "hooksExe": false,
+    "modSupport": "workshop",
+    "afterUpdate": {
+      "zh-CN": "更新后先确认订阅的 Mod 已适配新版本再启用。",
+      "en": "After an update, enable subscribed mods only once they support the new version."
+    },
+    "sources": [
+      "https://steamcommunity.com/app/289070/workshop/",
+      "https://www.pcgamingwiki.com/wiki/Sid_Meier%27s_Civilization_VI"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "crusader-kings-3",
+    "rank": 34,
+    "steamAppId": 1158310,
+    "framework": null,
+    "hooksExe": false,
+    "modSupport": "workshop",
+    "afterUpdate": {
+      "zh-CN": "更新后先确认订阅的 Mod 已适配新版本再启用。",
+      "en": "After an update, enable subscribed mods only once they support the new version."
+    },
+    "sources": [
+      "https://steamcommunity.com/app/1158310/workshop/",
+      "https://www.pcgamingwiki.com/wiki/Crusader_Kings_III"
+    ],
+    "checkedAt": "2026-11-19"
+  }
+]
