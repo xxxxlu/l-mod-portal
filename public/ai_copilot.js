@@ -768,7 +768,7 @@
       'quiet': '🟢 近 14 天无更新',
       'recent-update': '🟡 刚更新 · Mod/修改器可能要等适配',
       'trainer-behind': '🟡 修改器早于当前游戏版本',
-      'recent-update-hooks': `🔴 刚更新 · ${fw ? fw.name : 'Mod 框架'} 待适配，先别更新`
+      'recent-update-hooks': `🔴 刚更新 · ${fw ? fw.name : 'Mod 框架'} 可能要等适配，先别更新`
     };
     const legacyMap = {
       'green': '🟢 旧版巡检：无提醒',
@@ -793,7 +793,9 @@
     if (game.latestSteamPatch && newsUrl) res += `- **最新公告**：[${plain(game.latestSteamPatch)}](${newsUrl})\n`;
     else if (game.latestSteamPatch) res += `- **最新公告**：${plain(game.latestSteamPatch)}\n`;
     if (isNew && game.radarRiskTitle) res += `\n#### ${game.radarRiskTitle}\n`;
-    if (isNew && game.radarRiskDesc) res += `${game.radarRiskDesc}\n`;
+    const advice = game.radarAdvice && typeof game.radarAdvice['zh-CN'] === 'string' ? game.radarAdvice['zh-CN'].trim() : '';
+    if (advice) res += `\n**更新后怎么办**：${advice}\n`;
+    else if (isNew && game.radarRiskDesc) res += `${game.radarRiskDesc}\n`;
     if (game.pitfallNote) res += `\n> 💡 **避坑锦囊**：\n> ${game.pitfallNote}\n`;
 
     res += `\n[在《Steam 补丁避坑雷达》里查看这款游戏](radar?game=${game.id})`;

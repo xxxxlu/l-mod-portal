@@ -33,7 +33,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>L-MOD Vault | 全球单机游戏 MOD · 纯净修改器 · 官方控制台代码库</title>
   <!-- SEO & Standard Meta -->
-  <meta name="description" content="L-MOD Vault 全球单机游戏纯净智库：收录 100 款 3A 旗舰单机大作，提供场景化一键指令集、风灵月影修改器官方直达、前置 Mod 生态框架与实时避坑雷达。零假代码，零外链广告，免后端极速分发。">
+  <meta name="description" content="L-MOD Vault 全球单机游戏纯净智库：收录 100 款 3A 旗舰单机大作，提供场景化一键指令集、风灵月影修改器官方直达、前置 Mod 生态框架与每日巡检的 Steam 避坑雷达。零假代码，零外链广告，免后端极速分发。">
   <meta name="keywords" content="单机游戏MOD,控制台代码,修改器下载,赛博朋克2077,黑神话悟空,巫师3,博德之门3,艾尔登法环,Steam补丁避坑,L-MOD Vault">
   <meta name="author" content="L-MOD Team">
   <meta name="theme-color" content="#0c0d0f">
@@ -43,7 +43,7 @@
   <meta property="og:url" content="https://lmod-vault.pages.dev/">
   <meta property="og:site_name" content="L-MOD Vault">
   <meta property="og:title" content="L-MOD Vault | 全球单机游戏 MOD · 纯净修改器 · 官方控制台代码库">
-  <meta property="og:description" content="收录全球 Top 100 单机大作，全息采掘无假代码指令集，集成 风灵月影 / N 网官方直达与 Steam 实时补丁雷达。">
+  <meta property="og:description" content="收录全球 Top 100 单机大作，全息采掘无假代码指令集，集成 风灵月影 / N 网官方直达与 Steam 补丁避坑雷达。">
   <meta property="og:image" content="https://lmod-vault.pages.dev/avatar.jpg">
   <meta property="og:image:width" content="600">
   <meta property="og:image:height" content="600">
@@ -52,7 +52,7 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="L-MOD Vault | 全球单机游戏 MOD · 纯净修改器 · 官方控制台代码库">
-  <meta name="twitter:description" content="收录全球 Top 100 单机大作，全息采掘无假代码指令集，集成 风灵月影 / N 网官方直达与 Steam 实时补丁雷达。">
+  <meta name="twitter:description" content="收录全球 Top 100 单机大作，全息采掘无假代码指令集，集成 风灵月影 / N 网官方直达与 Steam 补丁避坑雷达。">
   <meta name="twitter:image" content="https://lmod-vault.pages.dev/avatar.jpg">
 
   <!-- Favicon & Touch Icons -->
@@ -608,12 +608,12 @@
 
         <button onclick="setFilterAndNavigate('certified')" class="sidebar-nav-btn w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-white/5 transition-all text-left font-medium" data-nav="certified">
           <span class="text-sm">👑</span>
-          <span id="sidebar-nav-certified" class="font-bold text-amber-500 dark:text-amber-400">老L全息精测认证 (前14款)</span>
+          <span id="sidebar-nav-certified" class="font-bold text-amber-500 dark:text-amber-400">老L重点整理 (前14款)</span>
         </button>
 
         <button onclick="setFilterAndNavigate('mining')" class="sidebar-nav-btn w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-white/5 transition-all text-left font-medium" data-nav="mining">
           <span class="text-sm">🛠️</span>
-          <span id="sidebar-nav-mining">持续排雷采掘中 (后续单机)</span>
+          <span id="sidebar-nav-mining">更多单机 (第 15–100 名)</span>
         </button>
 
         <button onclick="setFilterAndNavigate('console')" class="sidebar-nav-btn w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-white/5 transition-all text-left font-medium" data-nav="console">
@@ -635,7 +635,7 @@
         <a href="radar" class="sidebar-nav-btn w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-white/5 transition-all text-left font-medium group">
           <div class="flex items-center space-x-3">
             <span class="text-sm">📡</span>
-            <span id="sidebar-nav-radar" class="font-bold text-amber-500 dark:text-amber-400">Steam 避坑实时雷达</span>
+            <span id="sidebar-nav-radar" class="font-bold text-amber-500 dark:text-amber-400">Steam 避坑雷达</span>
           </div>
           <span class="flex items-center space-x-1">
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
@@ -713,17 +713,11 @@
             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
             <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500"></span>
           </span>
-          <span id="broadcast-bar-title">Steam 补丁避坑紧急广播</span>
+          <span id="broadcast-bar-title">Steam 更新提醒</span>
         </div>
         <div class="flex-1 overflow-hidden h-4">
-          <div class="truncate text-zinc-300 font-medium space-x-6">
-            <span class="text-red-400 font-bold">🔴【辐射4】</span><a href="radar?game=fallout-4" class="hover:underline">次世代大更新破坏近 10 年 Mod 体系，推荐使用 Downgrader 回退 1.10.163</a>
-            <span class="text-zinc-600">|</span>
-            <span class="text-amber-400 font-bold">🟡【上古卷轴5】</span><a href="radar?game=skyrim-se" class="hover:underline">v1.6.1170 前置需更新对齐！认准 SKSE64 2.2.6 与 Engine Fixes</a>
-            <span class="text-zinc-600">|</span>
-            <span class="text-emerald-400 font-bold">🟢【博德之门3】</span><a href="radar?game=baldurs-gate-3" class="hover:underline">Patch 7 官方工坊对齐实测通过！BG3SE v18+ 完全兼容</a>
-            <span class="text-zinc-600">|</span>
-            <span class="text-emerald-400 font-bold">🟢【艾尔登法环】</span><a href="radar?game=elden-ring" class="hover:underline">黄金树幽影 v1.14 离线免封方案已同步！ModEngine2 零封号</a>
+          <div class="truncate text-zinc-300 font-medium space-x-6" id="broadcast-bar-items">
+            <span>每天巡检 Steam 更新，有需要先别更新的游戏会在这里提醒</span>
           </div>
         </div>
         <a href="radar" class="shrink-0 text-purple-400 hover:text-blue-300 font-bold flex items-center gap-1">
@@ -770,7 +764,7 @@
         <!-- STEAM RADAR ACCESS BADGE -->
         <a 
           href="radar" 
-          title="Steam 补丁变动与 Mod 兼容性实时避坑雷达"
+          title="Steam 补丁变动与 Mod 兼容性避坑雷达"
           class="flex items-center space-x-1.5 bg-gradient-to-r from-red-500/10 via-amber-500/10 to-emerald-500/10 hover:from-red-500/20 hover:to-emerald-500/20 text-zinc-800 dark:text-zinc-200 px-3 py-1.5 rounded-full text-xs font-bold border border-amber-500/30 dark:border-amber-400/30 shadow-sm transition-all"
         >
           <span class="relative flex h-2 w-2">
@@ -918,9 +912,9 @@
                 <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
               </span>
               <span class="font-extrabold text-sm sm:text-base tracking-tight text-zinc-900 dark:text-white flex items-center gap-1.5">
-                <span>📡 Steam 补丁变动与 Mod 兼容性实时避坑雷达</span>
+                <span id="home-radar-title">📡 Steam 补丁变动与 Mod 兼容性避坑雷达</span>
               </span>
-              <span class="bg-[#A855F7]/10 dark:bg-[#A855F7]/20 text-[#A855F7] dark:text-purple-400 text-[10px] font-mono px-2 py-0.5 rounded-full border border-[#A855F7]/20 dark:border-[#A855F7]/30 font-bold">24h 智能巡检</span>
+              <span class="bg-[#A855F7]/10 dark:bg-[#A855F7]/20 text-[#A855F7] dark:text-purple-400 text-[10px] font-mono px-2 py-0.5 rounded-full border border-[#A855F7]/20 dark:border-[#A855F7]/30 font-bold" id="home-radar-live">每天巡检一次 Steam 更新</span>
             </div>
 
             <!-- Link to Standalone Radar -->
@@ -928,37 +922,43 @@
               href="radar"
               class="self-start sm:self-auto px-3.5 py-1.5 rounded-full text-xs font-semibold bg-zinc-100 hover:bg-zinc-200 dark:bg-white/10 dark:hover:bg-white/20 text-zinc-700 dark:text-zinc-200 border border-zinc-200 dark:border-white/10 transition-all flex items-center gap-1.5 group cursor-pointer"
             >
-              <span>进入全屏雷达看板</span>
+              <span id="home-radar-open">进入避坑雷达看板</span>
               <svg class="w-3.5 h-3.5 text-zinc-400 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
             </a>
           </div>
 
-          <!-- Status Indicators Row -->
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-1">
+          <!-- Status Indicators Row (counts and labels filled by renderHomeRadar() from GAMES_DATA radar fields) -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-1">
             <div onclick="filterByRadarStatus('green')" class="bg-emerald-50/60 dark:bg-white/5 hover:bg-emerald-100/60 dark:hover:bg-emerald-500/10 border border-emerald-500/25 dark:border-emerald-500/20 rounded-xl p-2.5 transition-all cursor-pointer">
-              <div class="flex items-center justify-between">
-                <span class="text-[11px] text-emerald-700 dark:text-emerald-400 font-bold">🟢 完美兼容实测</span>
-                <span class="text-xs font-mono font-bold text-emerald-700 dark:text-emerald-400">88 款</span>
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-[11px] text-emerald-700 dark:text-emerald-400 font-bold truncate" id="home-radar-green-label">🟢 近期平稳</span>
+                <span class="text-xs font-mono font-bold text-emerald-700 dark:text-emerald-400 shrink-0" id="home-radar-green-count">—</span>
               </div>
-              <p class="text-[10px] text-zinc-600 dark:text-zinc-400 mt-0.5 truncate">最新推送实测稳定运行，点击筛选</p>
+              <p class="text-[10px] text-zinc-600 dark:text-zinc-400 mt-0.5 leading-snug" id="home-radar-green-desc">近 14 天没有新版本，修改器也没落后于近 90 天的更新</p>
             </div>
-
             <div onclick="filterByRadarStatus('yellow')" class="bg-amber-50/60 dark:bg-white/5 hover:bg-amber-100/60 dark:hover:bg-amber-500/10 border border-amber-500/25 dark:border-amber-500/20 rounded-xl p-2.5 transition-all cursor-pointer">
-              <div class="flex items-center justify-between">
-                <span class="text-[11px] text-amber-700 dark:text-amber-400 font-bold">🟡 需更前置/降级</span>
-                <span class="text-xs font-mono font-bold text-amber-700 dark:text-amber-400">9 款</span>
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-[11px] text-amber-700 dark:text-amber-400 font-bold truncate" id="home-radar-yellow-label">🟡 留意更新</span>
+                <span class="text-xs font-mono font-bold text-amber-700 dark:text-amber-400 shrink-0" id="home-radar-yellow-count">—</span>
               </div>
-              <p class="text-[10px] text-zinc-600 dark:text-zinc-400 mt-0.5 truncate">需升级 Script Extender 前置</p>
+              <p class="text-[10px] text-zinc-600 dark:text-zinc-400 mt-0.5 leading-snug" id="home-radar-yellow-desc">14 天内刚更新，或近 90 天的更新后修改器还没跟上</p>
             </div>
-
-            <div onclick="filterByRadarStatus('red')" class="bg-red-50/60 dark:bg-white/5 hover:bg-red-100/60 dark:hover:bg-red-500/10 border border-red-500/25 dark:border-red-500/30 rounded-xl p-2.5 transition-all cursor-pointer">
-              <div class="flex items-center justify-between">
-                <span class="text-[11px] text-red-700 dark:text-red-400 font-bold">🔴 坏档暂停更新</span>
-                <span class="text-xs font-mono font-bold text-red-700 dark:text-red-400">3 款</span>
+            <div onclick="filterByRadarStatus('red')" class="bg-red-50/60 dark:bg-white/5 hover:bg-red-100/60 dark:hover:bg-red-500/10 border border-red-500/25 dark:border-red-500/20 rounded-xl p-2.5 transition-all cursor-pointer">
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-[11px] text-red-700 dark:text-red-400 font-bold truncate" id="home-radar-red-label">🔴 先别更新</span>
+                <span class="text-xs font-mono font-bold text-red-700 dark:text-red-400 shrink-0" id="home-radar-red-count">—</span>
               </div>
-              <p class="text-[10px] text-zinc-600 dark:text-zinc-400 mt-0.5 truncate">次世代破坏老Mod，需锁定更新</p>
+              <p class="text-[10px] text-zinc-600 dark:text-zinc-400 mt-0.5 leading-snug" id="home-radar-red-desc">刚更新，常用 Mod 框架按 exe 版本挂钩，可能要等作者发新版</p>
+            </div>
+            <div onclick="filterByRadarStatus('unchecked')" class="bg-zinc-50/60 dark:bg-white/5 hover:bg-zinc-100/60 dark:hover:bg-white/10 border border-zinc-300/60 dark:border-white/10 rounded-xl p-2.5 transition-all cursor-pointer">
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-[11px] text-zinc-600 dark:text-zinc-400 font-bold truncate" id="home-radar-unchecked-label">⚪ 未巡检</span>
+                <span class="text-xs font-mono font-bold text-zinc-600 dark:text-zinc-400 shrink-0" id="home-radar-unchecked-count">—</span>
+              </div>
+              <p class="text-[10px] text-zinc-600 dark:text-zinc-400 mt-0.5 leading-snug" id="home-radar-unchecked-desc">还没有巡检记录，或不在 Steam 上</p>
             </div>
           </div>
+          <p class="text-[10px] text-zinc-500 dark:text-zinc-500" id="home-radar-meta"></p>
         </div>
 
         <!-- Smart Omnibox Search Bar (Spotlight + Prompt hybrid) -->
@@ -1032,7 +1032,7 @@
                   L
                 </div>
                 <span class="text-sm font-semibold text-zinc-900 dark:text-zinc-100">L-MOD 智能匹配解答</span>
-                <span class="text-[10px] bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 px-2 py-0.5 rounded-full font-mono font-medium">Verified Code</span>
+                <span class="text-[10px] bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 px-2 py-0.5 rounded-full font-mono font-medium">仅供参考</span>
               </div>
               <button onclick="dismissSmartResponse()" class="text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 p-1 rounded-full hover:bg-zinc-100 dark:hover:bg-white/10">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
@@ -1053,8 +1053,8 @@
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-3">
           <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1" id="filter-container">
             <button onclick="setFilter('all')" class="filter-btn active px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 shadow-sm transition-all shrink-0" data-filter="all" id="btn-filter-all">全部 100 款</button>
-            <button onclick="setFilter('certified')" class="filter-btn px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium bg-white/90 dark:bg-white/5 hover:bg-white dark:hover:bg-white/10 text-amber-600 dark:text-amber-400 border border-amber-500/30 transition-all shrink-0" data-filter="certified" id="btn-filter-certified">👑 老L全息精测认证 (前 14 款)</button>
-            <button onclick="setFilter('mining')" class="filter-btn px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium bg-white/90 dark:bg-white/5 hover:bg-white dark:hover:bg-white/10 text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-white/10 transition-all shrink-0" data-filter="mining" id="btn-filter-mining">🛠️ 持续排雷采掘中 (后续单机)</button>
+            <button onclick="setFilter('certified')" class="filter-btn px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium bg-white/90 dark:bg-white/5 hover:bg-white dark:hover:bg-white/10 text-amber-600 dark:text-amber-400 border border-amber-500/30 transition-all shrink-0" data-filter="certified" id="btn-filter-certified">👑 老L重点整理 (前 14 款)</button>
+            <button onclick="setFilter('mining')" class="filter-btn px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium bg-white/90 dark:bg-white/5 hover:bg-white dark:hover:bg-white/10 text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-white/10 transition-all shrink-0" data-filter="mining" id="btn-filter-mining">🛠️ 更多单机 (第 15–100 名)</button>
             <button onclick="setFilter('console')" class="filter-btn px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium bg-white/90 dark:bg-white/5 hover:bg-white dark:hover:bg-white/10 text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-white/10 transition-all shrink-0" data-filter="console" id="btn-filter-console">官方控制台支持</button>
             <button onclick="setFilter('mods')" class="filter-btn px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium bg-white/90 dark:bg-white/5 hover:bg-white dark:hover:bg-white/10 text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-white/10 transition-all shrink-0" data-filter="mods" id="btn-filter-mods">精选 MOD 库</button>
             <button onclick="setFilter('trainers')" class="filter-btn px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium bg-white/90 dark:bg-white/5 hover:bg-white dark:hover:bg-white/10 text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-white/10 transition-all shrink-0" data-filter="trainers" id="btn-filter-trainers">纯净修改器</button>
@@ -1124,7 +1124,7 @@
           <div class="flex items-center space-x-2 text-xs text-zinc-400 dark:text-zinc-500 flex-wrap gap-y-1">
             <span class="inline-flex items-center gap-1 text-emerald-600 dark:text-emerald-400 font-bold bg-emerald-50 dark:bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/20">
               <svg class="w-3.5 h-3.5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-              <span id="detail-cert-text">老L·单机避坑局认证</span>
+              <span id="detail-cert-text">老L·单机避坑局整理</span>
             </span>
             <span>•</span>
             <span id="detail-breadcrumb-genre">Action RPG</span>
@@ -1152,7 +1152,7 @@
                   <!-- Trust Badges -->
                   <span id="detail-patch-badge" class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 inline-flex items-center gap-1 shadow-sm">
                     <svg class="w-3.5 h-3.5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-                    <span id="detail-patch-text">🛡️ 官方最新补丁实测认证</span>
+                    <span id="detail-patch-text">⚪ 未巡检</span>
                   </span>
                   <span id="detail-pure-badge" class="px-3 py-1 rounded-full text-xs font-semibold bg-purple-500/10 dark:bg-[#A855F7]/10 text-[#A855F7] dark:text-purple-400 border border-[#A855F7]/20 inline-flex items-center gap-1 shadow-sm">
                     <span id="detail-clean-guarantee">🚫 拒绝流氓木马 · 官方底层机制</span>
@@ -1231,7 +1231,7 @@
             <div class="flex items-center justify-between flex-wrap gap-3">
               <h3 class="font-bold text-sm sm:text-base text-zinc-900 dark:text-white flex items-center gap-2">
                 <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span id="detail-console-guide-title">控制台开启手把手教学 (官方原生 · 无封号风险)</span>
+                <span id="detail-console-guide-title">控制台开启手把手教学 (官方原生 · 仅限单机)</span>
               </h3>
               <div class="flex items-center space-x-2 flex-wrap gap-2">
                 <!-- 10-Second Lazy Door Opener Button -->
@@ -1303,10 +1303,10 @@
                   <h4 class="font-extrabold text-sm sm:text-base text-zinc-900 dark:text-white">
                     已就绪 5 联 1080×1440 工业级高清避坑卡片
                   </h4>
-                  <span class="text-[10px] bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full font-mono font-bold">小红书/B站对齐</span>
+                  <span class="text-[10px] bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full font-mono font-bold">小红书/B站 3:4</span>
                 </div>
                 <p class="text-xs text-zinc-500 dark:text-zinc-400">
-                  包含痛点避坑卡、小白开门卡、场景套餐卡与自取暗号，100% 通过 Anti-Shadowban 脱敏。
+                  包含痛点避坑卡、小白开门卡、场景套餐卡与自取暗号。
                 </p>
               </div>
             </div>
@@ -1440,7 +1440,7 @@
         <div id="detail-content-reviews" class="hidden space-y-6">
           <div class="flex items-center justify-between px-1">
             <div>
-              <h3 class="text-base font-bold text-zinc-900 dark:text-white">玩家实测反馈与版本避坑问答</h3>
+              <h3 class="text-base font-bold text-zinc-900 dark:text-white">玩家反馈与版本避坑问答</h3>
               <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">针对当前补丁版本的安装经验、排错互助</p>
             </div>
             <button onclick="askSmartAssistant()" class="px-4 py-2 rounded-full bg-white dark:bg-white/10 hover:bg-zinc-50 dark:hover:bg-white/20 text-[#A855F7] dark:text-purple-400 text-xs font-semibold transition-colors flex items-center gap-1.5 border border-zinc-200/80 dark:border-white/10 shadow-sm">
@@ -1496,9 +1496,9 @@
           <div>
             <div class="flex items-center gap-2 flex-wrap">
               <h3 class="text-lg sm:text-xl font-extrabold text-zinc-900 dark:text-white" id="lazy-modal-title">10秒懒人开门 · 游戏控制台一键激活器</h3>
-              <span class="text-[10px] bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 px-2.5 py-0.5 rounded-full font-bold border border-emerald-500/20" id="lazy-modal-tag">100% 开源纯批处理</span>
+              <span class="text-[10px] bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 px-2.5 py-0.5 rounded-full font-bold border border-emerald-500/20" id="lazy-modal-tag">开源纯文本批处理</span>
             </div>
-            <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1" id="lazy-modal-subtitle">针对当前游戏生成零杀软误报、自动备份原配置的极简 .bat 脚本</p>
+            <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1" id="lazy-modal-subtitle">针对当前游戏生成的极简 .bat 脚本</p>
           </div>
         </div>
         <button onclick="closeLazyDoorModal()" class="w-8 h-8 rounded-full bg-zinc-100 dark:bg-white/10 hover:bg-zinc-200 dark:hover:bg-white/20 text-zinc-500 hover:text-zinc-900 dark:hover:text-white flex items-center justify-center transition-colors shrink-0 cursor-pointer">
@@ -1510,10 +1510,10 @@
       <div class="bg-purple-50 dark:bg-[#A855F7]/10 dark:bg-[#A855F7]/10 rounded-2xl p-4 border border-[#A855F7]/20 text-xs text-zinc-700 dark:text-zinc-300 space-y-2">
         <div class="font-bold text-blue-700 dark:text-purple-400 flex items-center gap-1.5 text-xs sm:text-sm">
           <svg class="w-4 h-4 shrink-0 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-          <span id="lazy-safe-title">老L承诺：100% 原生纯净 · 自动备份原文件 (.bak) · 绝无木马捆绑</span>
+          <span id="lazy-safe-title">纯文本批处理 · 可用记事本查看全部代码</span>
         </div>
         <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed text-[11px] sm:text-xs" id="lazy-safe-desc">
-          本脚本为标准 Windows 批处理源码，仅修改游戏官方原生配置文件或预设快捷键，运行时自动生成 <code>.bak</code> 备份文件。代码完全公开透明，可用记事本随时查验，绝不写入任何未知可执行文件！
+          本脚本为标准 Windows 批处理源码，可用记事本打开查看每一行。运行前请先备份游戏配置文件和存档。
         </p>
       </div>
 
@@ -2036,6 +2036,8 @@
       // Ticker & Header
       setElText('broadcast-bar-title', t('broadcastTitle'));
       setElText('broadcast-bar-btn', t('broadcastRadarBtn'));
+      renderRadarBroadcast();
+      renderHomeRadar();
       setElText('header-breadcrumb-title', t('headerBreadcrumb'));
       setElText('header-radar-btn-text', t('radarBtnHeader'));
       setElText('view-mode-gallery-text', t('viewGallery'));
@@ -2294,6 +2296,7 @@
         if (currentFilter === 'console' && !game.hasConsole) return false;
         if (currentFilter === 'mods' && !game.hasMods) return false;
         if (currentFilter === 'trainers' && !game.hasTrainer) return false;
+        if (currentFilter.indexOf('radar-') === 0 && radarStateOf(game).status !== currentFilter.slice(6)) return false;
 
         if (currentSearch) {
           const matchTitleEn = (game.title || '').toLowerCase().includes(currentSearch);
@@ -2377,6 +2380,10 @@
       else if (currentFilter === 'console') filterTag = ` (${t('filterConsole')})`;
       else if (currentFilter === 'mods') filterTag = ` (${t('filterMods')})`;
       else if (currentFilter === 'trainers') filterTag = ` (${t('filterTrainers')})`;
+      else if (currentFilter.indexOf('radar-') === 0) {
+        const radarFilterKey = { green: 'statusCompatibleShort', yellow: 'statusWarningShort', red: 'statusBrokenShort', unchecked: 'statusUncheckedShort' }[currentFilter.slice(6)];
+        if (radarFilterKey) filterTag = ` (${t(radarFilterKey)})`;
+      }
 
       const countBadgeTemplate = t('catalogCountBadge') || '共收录 {total} 款单机神作 • 当前显示 {count} 款{filter}';
       document.getElementById('games-count-display').innerText = countBadgeTemplate
@@ -2399,6 +2406,7 @@
         const downloads = game.nexusStats ? game.nexusStats.totalDownloads : '10.5M';
         const rating = (game.steamRating || '90%').split(' ')[0];
         const isCertified = game.rank <= 14;
+        const radarState = radarStateOf(game);
 
         // 1. POKÉMON HOLOGRAPHIC FOIL TRADING CARD (4-Tier Heat Engine)
         const tier = computeHeatTier(game);
@@ -2490,10 +2498,10 @@
                   ${game.title.charAt(0)}
                 </div>
                 <div class="absolute bottom-2 left-2 px-2 py-0.5 bg-black/80 text-purple-300 font-mono-tech text-[10px] border border-purple-500/40 rounded">
-                  ${game.developer || 'VERIFIED'}
+                  ${game.developer || ''}
                 </div>
-                <div class="absolute top-2 right-2 px-2 py-0.5 bg-black/80 text-emerald-400 font-mono-tech text-[10px] border border-emerald-500/40 rounded font-bold">
-                  ${game.verifiedPatch || 'v2.13 COMPATIBLE'}
+                <div class="absolute top-2 right-2 px-2 py-0.5 bg-black/80 ${RADAR_BADGE_CLASS[radarState.status]} font-mono-tech text-[10px] border rounded font-bold" title="${escHtml(radarState.reasonText)}">
+                  ${escHtml(radarState.shortText)}
                 </div>
               </div>
             </div>
@@ -2689,17 +2697,17 @@
       document.getElementById('detail-title').innerText = localizedTitle;
       document.getElementById('detail-subtitle').innerText = `${game.title} • ${game.developer} (${game.releaseYear}) • ${game.genre}`;
 
-      // Update Patch Verified Trust Badge
+      // Featured badge + radar state (verifiedPatch is no longer shown)
       const patchBadge = document.getElementById('detail-patch-badge');
       const patchBadgeElem = document.getElementById('detail-patch-text');
       if (patchBadgeElem) {
         if (game.rank <= 14) {
-          patchBadgeElem.innerText = `${t('cardCertifiedBadge')} (${game.verifiedPatch || t('detailTestedPatch')} · ${t('cardTestedBadge')})`;
+          patchBadgeElem.innerText = `${t('cardCertifiedBadge')} · ${radarStateOf(game).shortText}`;
           if (patchBadge) {
             patchBadge.className = 'px-3 py-1 rounded-full text-xs font-bold bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/30 inline-flex items-center gap-1 shadow-sm';
           }
         } else {
-          patchBadgeElem.innerText = `${t('cardMiningBadge')} · ${t('cardTestingBadge')}`;
+          patchBadgeElem.innerText = `${t('cardMiningBadge')} · ${radarStateOf(game).shortText}`;
           if (patchBadge) {
             patchBadge.className = 'px-3 py-1 rounded-full text-xs font-medium bg-zinc-100 dark:bg-white/10 text-zinc-600 dark:text-zinc-400 border border-zinc-200/60 dark:border-white/10 inline-flex items-center gap-1 shadow-sm';
           }
@@ -3290,7 +3298,7 @@
                   ${t('scenarioTitle') || '老L·极客推荐场景套餐 (小白 10 秒一键爽到)'}
                 </h3>
                 <span class="text-xs bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 px-2.5 py-0.5 rounded-full font-bold border border-emerald-500/20">
-                  ${t('scenarioPatchTag') || '100% 官方最新补丁实测'}
+                  ${t('scenarioPatchTag') || '场景指令合集'}
                 </span>
               </div>
               <p class="text-xs text-zinc-500 dark:text-zinc-400">
@@ -3425,8 +3433,8 @@
         title: `老L实验室避坑笔记 (《${game.title}》最新版)`,
         tips: [
           "【存盘第一定律】：使用大体量刷物品、改钱或改剧情 Fact 标志位前，务必按 F5 快速存盘或备份存档文件夹，防患于未然！",
-          "【版本匹配铁律】：本站所有代码与套餐均为 Steam 官方最新补丁逐条人工真机实测，拒绝跨大版本硬套废弃语法。",
-          "【纯净无毒承诺】：坚持调用游戏官方底层机制与开源工具，绝不捆绑未知木马，纯净透明。"
+          "【版本匹配铁律】：游戏大版本更新后，旧指令语法可能失效；以当前版本的说明为准，别跨大版本硬套。",
+          "【纯净原则】：优先用游戏官方控制台和开源工具，来路不明的 exe 别运行。"
         ]
       };
 
@@ -3448,7 +3456,7 @@
                 <div class="flex items-center space-x-2 flex-wrap">
                   <span class="font-extrabold text-sm sm:text-base text-zinc-900 dark:text-white">${note.title}</span>
                   <span class="text-[10px] bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 px-2 py-0.5 rounded-full font-bold border border-emerald-500/20">
-                    🛡️ 老L人工验货
+                    📝 老L整理
                   </span>
                 </div>
                 <div class="text-[11px] text-zinc-500 dark:text-zinc-400 mt-0.5">
@@ -3457,7 +3465,7 @@
               </div>
             </div>
             <div class="text-xs font-mono font-bold text-[#A855F7] dark:text-purple-400 bg-white dark:bg-white/10 px-3 py-1 rounded-full border border-zinc-200/60 dark:border-white/10 shadow-sm">
-              ${game.verifiedPatch || 'Steam 最新补丁已认证'}
+              ${escHtml(radarStateOf(game).shortText)}
             </div>
           </div>
 
@@ -3476,6 +3484,15 @@
       if (!container) return;
 
       const secretCode = game.radarSecretCode || '老L单机888';
+      const radar = radarStateOf(game);
+      const dotClass = { green: 'bg-emerald-500', yellow: 'bg-amber-500', red: 'bg-red-500', unchecked: 'bg-zinc-500' }[radar.status];
+      const pillClass = { green: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30', yellow: 'bg-amber-500/20 text-amber-400 border-amber-500/30',
+                          red: 'bg-red-500/20 text-red-400 border-red-500/40', unchecked: 'bg-white/10 text-zinc-300 border-white/20' }[radar.status];
+      const radarFacts = [];
+      const buildDay = radar.status !== 'unchecked' ? radarDay(game.steamBuildUpdatedAt) : null;
+      const checkedDay = radar.status !== 'unchecked' ? radarDay(game.steamLastChecked) : null;
+      if (buildDay) radarFacts.push(`${t('radarFieldBuildUpdated')} ${buildDay}`);
+      if (checkedDay) radarFacts.push(`${t('radarFieldLastChecked')} ${checkedDay}`);
 
       container.innerHTML = `
         <div class="relative overflow-hidden bg-gradient-to-br from-zinc-900 via-zinc-900 to-zinc-950 text-white rounded-[28px] p-6 sm:p-7 border border-white/10 shadow-xl space-y-5">
@@ -3486,16 +3503,20 @@
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div class="flex items-center space-x-2.5">
               <div class="relative flex items-center justify-center w-3 h-3">
-                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                ${radar.status === 'red' ? `<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>` : ''}
+                <span class="relative inline-flex rounded-full h-2.5 w-2.5 ${dotClass}"></span>
               </div>
               <span class="font-extrabold text-sm sm:text-base tracking-tight text-white flex items-center gap-1.5">
-                <span>📡 Steam 补丁变动与 Mod 兼容性实时雷达</span>
+                <span>📡 ${escHtml(t('radarTitle'))}</span>
               </span>
             </div>
-            <span class="text-xs bg-emerald-500/20 text-emerald-400 px-3 py-1 rounded-full font-mono font-medium border border-emerald-500/30 self-start sm:self-auto">
-              🟢 24h 智能巡检 · 最新推送已对齐
+            <span class="text-xs ${pillClass} px-3 py-1 rounded-full font-mono font-medium border self-start sm:self-auto">
+              ${escHtml(radar.shortText)}
             </span>
+          </div>
+          <div class="text-xs text-zinc-300 leading-relaxed -mt-2">
+            <span>${escHtml(radar.reasonText)}</span>
+            ${radarFacts.length ? `<span class="block text-[11px] text-zinc-500 mt-1 font-mono">${escHtml(radarFacts.join(' · '))}</span>` : ''}
           </div>
 
           <!-- Warning & Community Secret Code Card -->
@@ -3506,7 +3527,7 @@
                 <span>若遇游戏半夜突发暗更导致指令失效 / 坏档？</span>
               </div>
               <p class="text-xs text-zinc-300 leading-relaxed">
-                Steam 单机大作频繁推送小补丁容易导致控制台钩子或 Mod 偏移。请保存官方避坑专属暗号，进入【老L·单机避坑雷达急救小分队】获取连夜同步的应急更新包与坏档急救脚本！
+                Steam 更新后，按 exe 版本挂钩的 Mod 框架和修改器可能要等作者发新版。请保存避坑暗号，进入【老L·单机避坑雷达急救小分队】和其他玩家交流更新后的应对办法与坏档急救经验。
               </p>
             </div>
 
@@ -3530,7 +3551,7 @@
 
           <div class="flex items-center justify-between text-[11px] text-zinc-400 pt-1 flex-wrap gap-2">
             <span>💡 进群输入暗号秒领：最新失效补丁包 · 坏档救星 · 极客纯净源</span>
-            <span>100% 玩家共建公益社群 · 严禁任何广告</span>
+            <span>玩家共建公益社群 · 不接广告</span>
           </div>
         </div>
       `;
@@ -3555,11 +3576,11 @@
     };
 
     const CARD_METAS = [
-      { num: 1, name: 'hook', title: 'Slide 1 · 痛点避坑卡', tag: '痛点暴击', desc: '痛点直击 + 杜绝流氓木马 + 官方原生离线认证' },
+      { num: 1, name: 'hook', title: 'Slide 1 · 痛点避坑卡', tag: '痛点暴击', desc: '痛点直击 + 远离来路不明的修改器 + 官方原生离线' },
       { num: 2, name: 'setup', title: 'Slide 2 · 极速开门卡', tag: '小白教程', desc: '3步极速开门 + 批处理脚本 + 键位防呆' },
       { num: 3, name: 'commands', title: 'Slide 3 · 场景套餐卡', tag: '高频指令', desc: '新手破荒 / 意难平救赎 / 二周目神装满配' },
       { num: 4, name: 'mods', title: 'Slide 4 · 护航模组卡', tag: '质变前置', desc: '三大官方痛点质变 Mod + 零冲突破坏' },
-      { num: 5, name: 'cta', title: 'Slide 5 · 避坑雷达自取卡', tag: '私域暗号', desc: 'Steam 大补丁连夜更新对齐 + 专属自取暗号' }
+      { num: 5, name: 'cta', title: 'Slide 5 · 避坑雷达自取卡', tag: '私域暗号', desc: 'Steam 更新提醒 + 专属自取暗号' }
     ];
 
     function renderSocialCardsTab(game) {
@@ -3604,14 +3625,14 @@
                   1080×1440 HD · 3:4 比例
                 </span>
                 <span class="bg-emerald-500/20 text-emerald-300 text-[10px] font-mono px-2.5 py-0.5 rounded-full border border-emerald-500/30 font-bold">
-                  Anti-Shadowban 绿标认证
+                  小红书 / B 站规格
                 </span>
               </div>
               <h3 class="text-lg sm:text-xl font-black tracking-tight text-white flex items-center gap-2">
                 <span>🎨 《${localizedTitle}》官方首发 5 联高清避坑图文卡片</span>
               </h3>
               <p class="text-xs text-zinc-300">
-                严格对齐小红书与 B 站官方分发标准。点击任意卡片即可放大全屏预览 1080×1440 像素原图或一键下载。
+                按小红书与 B 站常用的 3:4 竖图规格制作。点击任意卡片即可放大全屏预览 1080×1440 像素原图或一键下载。
               </p>
             </div>
 
@@ -3692,7 +3713,7 @@
             <!-- Live Text Preview Box -->
             <div class="bg-zinc-50 dark:bg-[#0c0d10] rounded-2xl p-4 border border-zinc-200/80 dark:border-white/10 text-xs text-zinc-700 dark:text-zinc-300 font-mono space-y-2 max-h-56 overflow-y-auto leading-relaxed">
               <div class="text-zinc-400 font-bold border-b border-zinc-200 dark:border-white/5 pb-1">文案核心提炼 (预览)：</div>
-              <p>兄弟们，千万别再去盗版网站下载那些捆绑全家桶弹窗的第三方修改器了！玩【${localizedTitle}】其实游戏引擎底层就保留了官方调试机制与隐藏控制台，完全免费、不报毒、不闪退，100% 走单机原生离线逻辑，不影响成就更无封号风险！老L花了整整两个通宵完成实测，附带新手开荒起飞与意难平救赎套餐，在后台回复暗号【${secretCode}】自取完整懒人免配包与代码合集！</p>
+              <p>兄弟们，别再去盗版网站下载那些捆绑全家桶弹窗的第三方修改器了！玩【${localizedTitle}】可以先看看游戏自带的控制台与调试指令，免费，只在单机离线模式下用，操作前记得备份存档。附带新手开荒起飞与意难平救赎套餐，在后台回复暗号【${secretCode}】自取完整懒人免配包与代码合集！</p>
             </div>
           </div>
 
@@ -3707,10 +3728,10 @@
 
       let text = '';
       if (platform === 'xhs') {
-        text = `【${title}】别再去下带毒修改器了！其实自带官方控制台\n\n兄弟们，千万别再去下载捆绑流氓木马的修改器了！\n90%玩家不知道：《${title}》引擎底层保留了官方调试终端，不报毒、不闪退、零封号风险！\n\n老L整理了【高频逃课救赎套餐】：\n1. 新手破荒起飞包（手残救星）\n2. 意难平救赎包（逆转遗憾支线）\n3. 全神装满配自由代码合集\n\n在后台直接回复暗号：【${secret}】即可秒取完整离线批处理脚本与中文指令手册！\n\n#${title} #单机游戏 #Steam游戏 #单机游戏攻略 #游戏避坑指南`;
-        copyText(text, '📕 小红书 800 字脱敏爆款文案已复制！');
+        text = `【${title}】别再去下来路不明的修改器了！先看看自带控制台\n\n兄弟们，千万别再去下载来路不明、捆绑弹窗的修改器了！\n先试试《${title}》自带的控制台与调试指令，只在单机离线模式下用，操作前记得备份存档。\n\n老L整理了【高频逃课救赎套餐】：\n1. 新手破荒起飞包（手残救星）\n2. 意难平救赎包（逆转遗憾支线）\n3. 全神装满配自由代码合集\n\n在后台直接回复暗号：【${secret}】即可领取离线批处理脚本与中文指令手册！\n\n#${title} #单机游戏 #Steam游戏 #单机游戏攻略 #游戏避坑指南`;
+        copyText(text, '📕 小红书文案已复制！');
       } else {
-        text = `各位游隼/猎魔人/天命人好，我是老L！\n\n《${title}》官方原生控制台实测开门指南正式发布！\n- 🛡️ 实测完全兼容 Steam 最新版本；\n- ⚡ 100% 官方离线底层逻辑，零木马、零报毒；\n- 🎮 附带新手开荒起飞与意难平救赎三大场景套餐；\n- 🛠️ 配备老L编写的双击批处理脚本，10 秒傻瓜自动开门！\n\n高清 5 联图教程见配图，后台私信回复暗号【${secret}】自取！`;
+        text = `各位游隼/猎魔人/天命人好，我是老L！\n\n《${title}》控制台开门指南发布！\n- 📡 Steam 更新情况看避坑雷达，更新后先确认 Mod 和修改器跟上了没有；\n- ⚡ 只在单机离线模式下用，脚本是纯文本，可用记事本查看；\n- 🎮 附带新手开荒起飞与意难平救赎三大场景套餐；\n- 🛠️ 配备老L编写的双击批处理脚本，10 秒傻瓜自动开门！\n\n高清 5 联图教程见配图，后台私信回复暗号【${secret}】自取！`;
         copyText(text, '📺 B站动态/专栏发布文案已复制！');
       }
     }
@@ -3743,33 +3764,102 @@
     }
 
     // ==========================================
+    // RADAR STATE (same rule as radar.html getGameCompatibility)
+    // radarReason (v2 monitor) → colour + wording; only legacy compatibilityStatus →
+    // keep the colour, say it is the old radar; no data / no steamAppId → not checked.
+    // ==========================================
+    const RADAR_REASON_STATUS = { 'recent-update-hooks': 'red', 'recent-update': 'yellow', 'trainer-behind': 'yellow', 'quiet': 'green' };
+    const RADAR_REASON_KEY = { 'recent-update-hooks': 'radarReasonRecentUpdateHooks', 'recent-update': 'radarReasonRecentUpdate', 'trainer-behind': 'radarReasonTrainerBehind', 'quiet': 'radarReasonQuiet' };
+    const RADAR_BADGE_CLASS = {
+      green: 'text-emerald-400 border-emerald-500/40',
+      yellow: 'text-amber-400 border-amber-500/40',
+      red: 'text-red-400 border-red-500/50',
+      unchecked: 'text-zinc-300 border-zinc-500/40'
+    };
+
+    function radarStateOf(game) {
+      const appId = Number(game && game.steamAppId) || 0;
+      let status = 'unchecked', reason = null, legacy = false;
+      if (appId > 0) {
+        if (RADAR_REASON_STATUS[game.radarReason]) {
+          reason = game.radarReason;
+          status = RADAR_REASON_STATUS[reason];
+        } else if (['green', 'yellow', 'red'].includes(game.compatibilityStatus)) {
+          status = game.compatibilityStatus;
+          legacy = true;
+        }
+      }
+      const frameworkName = game && game.radarFramework && game.radarFramework.name ? String(game.radarFramework.name) : t('radarFieldFramework');
+      const shortText = status === 'green' ? t('statusCompatibleShort') : status === 'yellow' ? t('statusWarningShort') :
+                        status === 'red' ? t('statusBrokenShort') : t('statusUncheckedShort');
+      let reasonText;
+      if (reason) reasonText = t(RADAR_REASON_KEY[reason]).replace('{framework}', frameworkName);
+      else if (legacy) reasonText = status === 'red' ? t('radarLegacyRed') : status === 'yellow' ? t('radarLegacyYellow') : t('radarLegacyGreen');
+      else reasonText = appId > 0 ? t('radarUncheckedSteam') : t('radarUncheckedNonSteam');
+      return { status, reason, legacy, shortText, reasonText, frameworkName, appId };
+    }
+
+    // ISO date from the radar → local YYYY-MM-DD (legacy values without a zone are read as UTC).
+    function radarDay(value) {
+      if (!value || typeof value !== 'string') return null;
+      let raw = value.trim().replace(' ', 'T').replace(/(\.\d{3})\d+/, '$1');
+      if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) return raw;
+      const hasZone = /([zZ]|[+-]\d{2}:?\d{2})$/.test(raw);
+      const d = new Date(hasZone ? raw : raw + 'Z');
+      if (isNaN(d.getTime())) return null;
+      const pad = n => (n < 10 ? '0' + n : String(n));
+      return hasZone ? `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}` : `${d.getUTCFullYear()}-${pad(d.getUTCMonth() + 1)}-${pad(d.getUTCDate())}`;
+    }
+
+    // Top ticker: red only (contract 7.2), same as the radar page.
+    function renderRadarBroadcast() {
+      const box = document.getElementById('broadcast-bar-items');
+      if (!box) return;
+      const items = (allGames || []).map(g => ({ g, r: radarStateOf(g) }))
+        .filter(x => x.r.status === 'red')
+        .sort((a, b) => a.g.rank - b.g.rank)
+        .map(({ g, r }) => {
+          const title = (g.titles && g.titles[currentLang]) ? g.titles[currentLang] : g.title;
+          const text = r.legacy ? t('radarTickerLegacy') : t('radarTickerRecentUpdateHooks').replace('{framework}', r.frameworkName);
+          return `<span class="text-red-400 font-bold">🔴【${escHtml(title)}】</span><a href="radar?game=${encodeURIComponent(g.id)}" class="hover:underline">${escHtml(text)}</a>`;
+        });
+      box.innerHTML = items.length ? items.join('<span class="text-zinc-600">|</span>') : `<span>${escHtml(t('radarTickerEmpty'))}</span>`;
+    }
+
+    // Home radar capsule: counts per state + last check, from GAMES_DATA.
+    function renderHomeRadar() {
+      const counts = { green: 0, yellow: 0, red: 0, unchecked: 0 };
+      let lastChecked = null;
+      (allGames || []).forEach(g => {
+        const r = radarStateOf(g);
+        counts[r.status]++;
+        if (r.status !== 'unchecked' && g.steamLastChecked && (!lastChecked || String(g.steamLastChecked) > lastChecked)) lastChecked = String(g.steamLastChecked);
+      });
+      const set = (id, text) => { const el = document.getElementById(id); if (el) el.innerText = text; };
+      const unit = t('gamesUnit');
+      set('home-radar-title', '📡 ' + t('radarTitle'));
+      set('home-radar-live', t('radarInspectingLive'));
+      set('home-radar-open', t('broadcastRadarBtn'));
+      [['green', 'statusCompatibleShort', 'statusCompatibleDesc'], ['yellow', 'statusWarningShort', 'statusWarningDesc'],
+       ['red', 'statusBrokenShort', 'statusBrokenDesc'], ['unchecked', 'statusUncheckedShort', 'statusUncheckedDesc']].forEach(([st, label, desc]) => {
+        set(`home-radar-${st}-label`, t(label));
+        set(`home-radar-${st}-count`, `${counts[st]} ${unit}`);
+        set(`home-radar-${st}-desc`, t(desc));
+      });
+      const day = radarDay(lastChecked);
+      set('home-radar-meta', day ? `${t('radarFieldLastChecked')} ${day}` : t('statusInspectionDesc'));
+    }
+
+    // ==========================================
     // FILTER BY RADAR STATUS (IN-PAGE LIVE FILTER)
     // ==========================================
     function filterByRadarStatus(status) {
-      const RED_IDS = ['fallout-4'];
-      const YELLOW_IDS = ['skyrim-se', 'starfield', 'gta-v'];
-
-      let filtered = [];
-      if (status === 'red') {
-        filtered = allGames.filter(g => RED_IDS.includes(g.id) || (g.developer||'').includes('Bethesda'));
-        showToast(t('filterToastRed'));
-      } else if (status === 'yellow') {
-        filtered = allGames.filter(g => YELLOW_IDS.includes(g.id) || !(g.hasConsole));
-        showToast(t('filterToastYellow'));
-      } else if (status === 'green') {
-        filtered = allGames.filter(g => !RED_IDS.includes(g.id) && !YELLOW_IDS.includes(g.id));
-        showToast(t('filterToastGreen'));
-      }
-
-      const grid = document.getElementById('games-grid');
-      if (grid) {
-        grid.innerHTML = filtered.map(g => renderGameCard(g)).join('');
-      }
-      const countBadge = document.getElementById('catalog-count-badge');
-      if (countBadge) {
-        countBadge.innerText = `已筛选 ${filtered.length} 款`;
-      }
-      window.scrollTo({ top: 380, behavior: 'smooth' });
+      const toastKey = { red: 'filterToastRed', yellow: 'filterToastYellow', green: 'filterToastGreen', unchecked: 'filterToastUnchecked' }[status];
+      if (!toastKey) return;
+      setFilter('radar-' + status);
+      showToast(t(toastKey));
+      const anchor = document.getElementById('games-count-display');
+      if (anchor) anchor.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
     // ==========================================
@@ -3844,16 +3934,15 @@ chcp 65001 >nul
 title 【老L·单机避坑局】${locTitle} 控制台排错与激活助手
 echo ========================================================
 echo   【老L·单机避坑局】《${locTitle}》控制台助手
-echo   官方底层机制 · 100%% 开源透明 · 零木马报毒
+echo   纯文本批处理 · 可用记事本查看全部内容
 echo ========================================================
 echo.
-echo [*] 正在检查当前游戏运行环境...
 echo [i] 请将本脚本放在游戏安装根目录运行。
 echo [i] 常用控制台呼出快捷键：${shortcut}
 echo.
 echo ========================================================
-echo  [√] 准备就绪！启动游戏后按下 ${shortcut}
-echo      直接粘贴老L推荐套餐指令即可畅享！
+echo  [i] 启动游戏后按下 ${shortcut} 打开控制台，
+echo      粘贴老L推荐套餐指令；操作前先备份存档。
 echo ========================================================
 echo.
 pause`;
@@ -3863,16 +3952,15 @@ chcp 65001 >nul
 title [L-MOD Vault] ${locTitle} Console Setup Helper
 echo ========================================================
 echo   [L-MOD Vault] ${locTitle} Console Activator
-echo   Official Native Engine - 100%% Open Source - Zero Malware
+echo   Plain-text batch file - open it in Notepad to read every line
 echo ========================================================
 echo.
-echo [*] Verifying game installation directory...
 echo [i] Please run this batch script inside the game root directory.
 echo [i] Console activation hotkey: ${shortcut}
 echo.
 echo ========================================================
-echo  [√] Environment Ready! Launch game, press ${shortcut}
-echo      and paste L-MOD bundle commands to enjoy!
+echo  [i] Launch the game, press ${shortcut} to open the console,
+echo      then paste the L-MOD bundle commands. Back up saves first.
 echo ========================================================
 echo.
 pause`;
@@ -3989,7 +4077,6 @@ pause`;
                   localG.compatibility_status = live.compatibility_status;
                   localG.verifiedPatch = live.verified_patch || localG.verifiedPatch;
                   localG.latest_steam_patch = live.latest_steam_patch;
-                  localG.radarRiskTitle = live.radar_risk_title || localG.radarRiskTitle;
                   hasChanges = true;
                 }
               }

@@ -381,7 +381,7 @@
           <span class="text-2xl sm:text-3xl font-black font-mono text-emerald-400" id="stat-green">—</span>
           <span class="text-xs text-zinc-400" id="metric-green-unit">款游戏</span>
         </div>
-        <p class="text-[11px] text-zinc-400 mt-1 line-clamp-1" id="metric-green-desc">近 14 天 Steam 没有新版本，修改器也不比游戏旧</p>
+        <p class="text-[11px] text-zinc-400 mt-1 line-clamp-1" id="metric-green-desc">近 14 天没有新版本，修改器也没落后于近 90 天的更新</p>
       </div>
 
       <!-- Card 2: Amber Need Update -->
@@ -397,7 +397,7 @@
           <span class="text-2xl sm:text-3xl font-black font-mono text-amber-400" id="stat-yellow">—</span>
           <span class="text-xs text-zinc-400" id="metric-yellow-unit">款游戏</span>
         </div>
-        <p class="text-[11px] text-zinc-400 mt-1 line-clamp-1" id="metric-yellow-desc">14 天内刚更新，或修改器早于当前游戏版本</p>
+        <p class="text-[11px] text-zinc-400 mt-1 line-clamp-1" id="metric-yellow-desc">14 天内刚更新，或近 90 天的更新后修改器还没跟上</p>
       </div>
 
       <!-- Card 3: Red · framework hooks the exe, hold the update -->
@@ -407,13 +407,13 @@
             <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
             <span id="metric-red-title">先别更新</span>
           </span>
-          <span class="text-[10px] bg-red-500/10 text-red-300 px-2 py-0.5 rounded font-mono" id="metric-red-tag">框架待适配</span>
+          <span class="text-[10px] bg-red-500/10 text-red-300 px-2 py-0.5 rounded font-mono" id="metric-red-tag">框架可能要等适配</span>
         </div>
         <div class="flex items-baseline space-x-2">
           <span class="text-2xl sm:text-3xl font-black font-mono text-red-400" id="stat-red">—</span>
           <span class="text-xs text-zinc-400" id="metric-red-unit">款游戏</span>
         </div>
-        <p class="text-[11px] text-zinc-400 mt-1 line-clamp-1" id="metric-red-desc">刚更新，常用 Mod 框架按 exe 版本挂钩，要等作者发新版</p>
+        <p class="text-[11px] text-zinc-400 mt-1 line-clamp-1" id="metric-red-desc">刚更新，常用 Mod 框架按 exe 版本挂钩，可能要等作者发新版</p>
       </div>
 
       <!-- Card 4: Radar Status / Inspection Info -->
@@ -617,7 +617,7 @@
             <p class="text-xs leading-relaxed" id="drawer-risk-desc"></p>
           </div>
 
-          <p class="text-[11px] text-zinc-500 leading-relaxed" id="drawer-rule-note">判定规则：Steam 公共分支 14 天内有新版本亮黄；常用 Mod 框架按 exe 版本挂钩的亮红；修改器更新早于游戏版本也亮黄。公告只展示，不参与判定。</p>
+          <p class="text-[11px] text-zinc-500 leading-relaxed" id="drawer-rule-note">判定规则：Steam 公共分支 14 天内有新版本亮黄；常用 Mod 框架按 exe 版本挂钩的亮红（Steam 的更新时间分不出改没改 exe，所以只说「可能」）；近 90 天内有更新、而修改器比它早的也亮黄。公告只展示，不参与判定。</p>
         </div>
 
         <!-- Section 2: Exclusive Rescue / Downgrade Plan -->
@@ -1022,7 +1022,8 @@ pause`
     // so it is read as UTC and shown as a date only.
     function parseRadarDate(value) {
       if (!value || typeof value !== 'string') return null;
-      const raw = value.trim().replace(' ', 'T').replace(/(\.\d{3})\d+/, '$1');
+      let raw = value.trim().replace(' ', 'T').replace(/(\.\d{3})\d+/, '$1');
+      if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) raw += 'T00:00:00';
       const hasZone = /([zZ]|[+-]\d{2}:?\d{2})$/.test(raw);
       const d = new Date(hasZone ? raw : raw + 'Z');
       if (isNaN(d.getTime())) return null;
@@ -1177,12 +1178,11 @@ pause`
       if (!Array.isArray(allGames)) return items;
       allGames.forEach(g => {
         const meta = getGameCompatibility(g);
+        // Contract 7.2: only red goes on the ticker (yellow stays on the cards).
         let text = null;
-        if (!meta.legacy && (meta.reason === 'recent-update-hooks' || meta.reason === 'recent-update')) {
-          text = meta.reason === 'recent-update-hooks'
-            ? fillTemplate(t('radarTickerRecentUpdateHooks', '刚更新，{framework} 待适配，先别更新'), { framework: meta.frameworkName })
-            : t('radarTickerRecentUpdate', 'Steam 刚推送新版本，Mod/修改器可能要等适配');
-        } else if (meta.legacy && (meta.status === 'red' || (meta.status === 'yellow' && g.emergencyAlert))) {
+        if (!meta.legacy && meta.reason === 'recent-update-hooks') {
+          text = fillTemplate(t('radarTickerRecentUpdateHooks', '刚更新，{framework} 可能要等适配，先别更新'), { framework: meta.frameworkName });
+        } else if (meta.legacy && meta.status === 'red') {
           // Old radar output (before the v2 monitor runs): keep the colour, drop its wording.
           text = t('radarTickerLegacy', '旧版巡检提示留意，可能误报，以 Steam 更新时间为准');
         }
@@ -1264,7 +1264,7 @@ pause`
       const mgUnit = document.getElementById('metric-green-unit');
       if (mgUnit) mgUnit.innerText = t('metricGreenUnit', '款游戏');
       const mgDesc = document.getElementById('metric-green-desc');
-      if (mgDesc) mgDesc.innerText = t('statusCompatibleDesc', '近 14 天 Steam 没有新版本，修改器也不比游戏旧');
+      if (mgDesc) mgDesc.innerText = t('statusCompatibleDesc', '近 14 天没有新版本，修改器也没落后于近 90 天的更新');
 
       const myTitle = document.getElementById('metric-yellow-title');
       if (myTitle) myTitle.innerText = t('statusWarning', '留意更新');
@@ -1273,16 +1273,16 @@ pause`
       const myUnit = document.getElementById('metric-yellow-unit');
       if (myUnit) myUnit.innerText = t('metricYellowUnit', '款游戏');
       const myDesc = document.getElementById('metric-yellow-desc');
-      if (myDesc) myDesc.innerText = t('statusWarningDesc', '14 天内刚更新，或修改器早于当前游戏版本');
+      if (myDesc) myDesc.innerText = t('statusWarningDesc', '14 天内刚更新，或近 90 天的更新后修改器还没跟上');
 
       const mrTitle = document.getElementById('metric-red-title');
       if (mrTitle) mrTitle.innerText = t('statusBroken', '先别更新');
       const mrTag = document.getElementById('metric-red-tag');
-      if (mrTag) mrTag.innerText = t('statusBrokenTag', '框架待适配');
+      if (mrTag) mrTag.innerText = t('statusBrokenTag', '框架可能要等适配');
       const mrUnit = document.getElementById('metric-red-unit');
       if (mrUnit) mrUnit.innerText = t('metricRedUnit', '款游戏');
       const mrDesc = document.getElementById('metric-red-desc');
-      if (mrDesc) mrDesc.innerText = t('statusBrokenDesc', '刚更新，常用 Mod 框架按 exe 版本挂钩，要等作者发新版');
+      if (mrDesc) mrDesc.innerText = t('statusBrokenDesc', '刚更新，常用 Mod 框架按 exe 版本挂钩，可能要等作者发新版');
 
       const miTitle = document.getElementById('metric-inspection-title');
       if (miTitle) miTitle.innerText = t('statusInspection', '巡检范围');
@@ -1359,7 +1359,7 @@ pause`
       const dPatchCheck = document.getElementById('drawer-patch-check-title');
       if (dPatchCheck) dPatchCheck.innerText = '🔍 ' + t('drawerPatchCheckTitle', '巡检结果');
       const dRule = document.getElementById('drawer-rule-note');
-      if (dRule) dRule.innerText = t('radarRuleNote', '判定规则：Steam 公共分支 14 天内有新版本亮黄；常用 Mod 框架按 exe 版本挂钩的亮红；修改器更新早于游戏版本也亮黄。公告只展示，不参与判定。');
+      if (dRule) dRule.innerText = t('radarRuleNote', '判定规则：Steam 公共分支 14 天内有新版本亮黄；常用 Mod 框架按 exe 版本挂钩的亮红（Steam 的更新时间分不出改没改 exe，所以只说「可能」）；近 90 天内有更新、而修改器比它早的也亮黄。公告只展示，不参与判定。');
       const dRescueTitle = document.getElementById('drawer-rescue-title');
       if (dRescueTitle) dRescueTitle.innerText = t('drawerSafeGuide', '🛠️ 老L独家救砖 / 降级 / 避坑方案');
       const dRescueSub = document.getElementById('drawer-rescue-sub');
@@ -1429,6 +1429,7 @@ pause`
       }
 
       let statusText, summary, riskTitle, riskDesc;
+      let advice = null;
       if (reason) {
         const R = {
           'quiet': ['radarReasonQuiet', 'radarSummaryQuiet', 'radarRiskTitleQuiet', 'radarRiskDescQuiet'],
@@ -1446,6 +1447,13 @@ pause`
           if (game.radarSummary) summary = String(game.radarSummary);
           if (game.radarRiskTitle) riskTitle = String(game.radarRiskTitle);
           if (game.radarRiskDesc) riskDesc = String(game.radarRiskDesc);
+        }
+        // Contract 7.5: radarAdvice = framework's afterUpdate {zh-CN, en} or null.
+        // zh-CN / zh-TW UIs show zh-CN, every other UI shows en; null → generic advice above.
+        if (game.radarAdvice && typeof game.radarAdvice === 'object') {
+          const zhUi = currentLang === 'zh-CN' || currentLang === 'zh-TW';
+          const pick = zhUi ? game.radarAdvice['zh-CN'] : game.radarAdvice['en'];
+          if (typeof pick === 'string' && pick.trim()) advice = pick.trim();
         }
       } else if (legacy) {
         statusText = status === 'red' ? t('radarLegacyRed') : status === 'yellow' ? t('radarLegacyYellow') : t('radarLegacyGreen');
@@ -1474,8 +1482,11 @@ pause`
         shortText,
         summary,
         riskTitle,
-        riskDesc,
+        riskDesc: advice || riskDesc,
+        advice,
         framework: fw,
+        // Contract 7.6: trainer date comes from the existing trainerInfo.lastUpdated.
+        trainerUpdated: reason === 'trainer-behind' && game.trainerInfo ? formatRadarDate(game.trainerInfo.lastUpdated) : null,
         frameworkName,
         buildId: game.steamBuildId ? String(game.steamBuildId) : null,
         buildUpdated: formatRadarDate(game.steamBuildUpdatedAt),
@@ -1527,11 +1538,18 @@ pause`
         ? link(meta.newsUrl, meta.newsTitle || t('radarViewNews', 'Steam 公告页'), 'text-sky-500 dark:text-sky-400')
         : dash;
       const rows = [
-        [t('radarFieldBuildUpdated', 'Steam 最近更新'), build],
+        [t('radarFieldBuildUpdated', 'Steam 最近更新'), build]
+      ];
+      if (meta.reason === 'trainer-behind') {
+        rows.push([t('radarFieldTrainerUpdated', '修改器更新'), meta.trainerUpdated
+          ? `<span class="text-amber-500 dark:text-amber-400" title="${escapeHtml(meta.trainerUpdated.iso)}">${escapeHtml(meta.trainerUpdated.full)}</span>`
+          : dash]);
+      }
+      rows.push(
         [t('radarFieldLastChecked', '上次巡检'), checked],
         [t('radarFieldFramework', 'Mod 框架'), framework],
         [t('radarFieldLatestNews', '最新公告'), news]
-      ];
+      );
       return rows.map(([label, value]) => `
         <dt class="${opts.labelClass}">${escapeHtml(label)}</dt>
         <dd class="${opts.valueClass} min-w-0 truncate">${value}</dd>
@@ -1584,7 +1602,7 @@ pause`
         const secretCode = game.radarSecretCode || '老L单机888';
         const style = STATUS_STYLES[meta.status] || STATUS_STYLES.unchecked;
         const riskHeader = meta.legacy ? meta.riskTitle
-          : meta.reason === 'recent-update-hooks' ? t('cardRiskBroken', '🚨 框架待适配')
+          : meta.reason === 'recent-update-hooks' ? t('cardRiskBroken', '🚨 框架可能要等适配')
           : t('cardRiskWarning', '⚠️ 留意更新');
 
         return `
@@ -1703,7 +1721,12 @@ pause`
       const riskTitle = document.getElementById('drawer-risk-title');
       const riskDesc = document.getElementById('drawer-risk-desc');
       riskTitle.innerText = meta.riskTitle;
-      riskDesc.innerText = meta.riskDesc;
+      if (meta.advice) {
+        const cjk = currentLang === 'zh-CN' || currentLang === 'zh-TW' || currentLang === 'ja';
+        riskDesc.innerText = `${t('radarFieldAdvice', '更新后怎么办')}${cjk ? '：' : ': '}${meta.advice}`;
+      } else {
+        riskDesc.innerText = meta.riskDesc;
+      }
 
       if (meta.status === 'red') {
         riskBox.className = 'p-3.5 rounded-xl border bg-red-950/40 border-red-500/30 text-red-300 space-y-1';

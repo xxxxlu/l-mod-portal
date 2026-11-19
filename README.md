@@ -1,6 +1,6 @@
 # L-MOD Vault (老L·单机游戏模组与避坑智库)
 
-> 全球单机游戏 MOD · 纯净修改器 · 官方控制台代码库 · Steam 补丁变动实时避坑雷达  
+> 全球单机游戏 MOD · 纯净修改器 · 官方控制台代码库 · Steam 补丁变动避坑雷达（每天巡检一次）  
 > **Clean Global Hub for Single-Player Game Mods, Pure Trainers, Official Console Cheats & Patch Radar**
 
 ---
@@ -15,13 +15,15 @@
    - 🇩🇪 Deutsch (`de`) ｜ 🇪🇸 Español (`es`)
 2. **首发全量上线 Top 100 热门单机游戏 (前 7 款旗舰深度全息重构)**：
    - 严格按全网综合热度、Steam 评价数与 MOD 需求量降序排行（#1《赛博朋克2077》至 #100《杀戮尖塔》）。
-   - **Rank 1~7 旗舰大作已 100% 对齐最新官方补丁**（含法环黄金树幽影 v1.14、辐射4次世代版、博德之门3 Patch 7、巫师3次世代完全版等），通过强类型 Schema 校验与语法 Linter。
+   - **Rank 1~7 旗舰大作做了深度整理**（法环黄金树幽影、辐射4次世代版、博德之门3、巫师3次世代完全版等），通过强类型 Schema 校验与语法 Linter。资料没有逐版本实测，Steam 更新后的情况看避坑雷达。
 3. **小白 10 秒一键爽到（场景化套餐与一键开门）**：
    - **极客推荐场景套餐**：【新手破荒包】、【隐藏结局救赎包】、【二周目全神装包】，一键整段打包复制；
    - **懒人双击一键开门**：自动生成极简 `.bat` 批处理，自动备份原文件，双击即搞定控制台注入；
    - **智能滚动无损复位**：从列表进入详情页返回时，精准复位到刚才点击时的滚动视口高度，并附带微光脉冲高亮。
-4. **《Steam 补丁兼容性与坏档避坑实时雷达》(`public/radar.html`)**：
-   - 独立产品化轻量看板，三色指示灯（🟢 完美兼容 / 🟡 需更新前置 / 🔴 坏档预警），内置紧急广播与一键救砖指南。
+4. **《Steam 补丁变动与 Mod 兼容性避坑雷达》(`public/radar.html`)**：
+   - 每天巡检一次 Steam 公共分支的更新时间（GitHub Actions 定时任务，北京时间 10:00）。只比对 Steam 和修改器清单的时间，**不做实机测试**，所以页面上说的都是「可能」。
+   - 四种状态：🔴 先别更新（14 天内刚更新，且常用 Mod 框架按 exe 版本挂钩，可能要等作者发新版）/ 🟡 留意更新（14 天内刚更新；或近 90 天内有更新、修改器还没跟上）/ 🟢 近期平稳（近 14 天没有新版本，修改器也没落后）/ ⚪ 未巡检（还没有巡检记录，或不在 Steam 上）。
+   - 主站首页和雷达页用同一套规则读 `GAMES_DATA` 的雷达字段；顶部滚动条只放 🔴。字段和规则见 `docs/RADAR_V2_CONTRACT.md`。
 5. **社交平台工业级 5 联图出图与合规矩阵 (`social_distribution/`)**：
    - 自动化防限流脱敏词典，一键导出 1080×1440 高清 PNG 5 联图，配套小红书爆款文案与 B 站动态。
 6. **零风险私域中转与商业闭环**：
@@ -35,7 +37,7 @@
 l-mod-portal/
 ├── public/
 │   ├── index.html        # 主应用：响应式极简暗黑单页应用 (Tailwind + Vanilla JS, 零配置秒开)
-│   ├── radar.html        # 独立看板：《Steam 补丁变动与 Mod 兼容性实时避坑雷达》
+│   ├── radar.html        # 独立看板：《Steam 补丁变动与 Mod 兼容性避坑雷达》
 │   ├── data.js           # 100 款游戏数据与 8 语言多语言词条离线脚本 (支持 file:// 与 http://)
 │   ├── avatar.jpg        # 品牌官方主理人「老L」头像
 │   ├── social_distribution/ # 7 款旗舰大作多平台 35 张高清 PNG 卡片与文案包
@@ -58,7 +60,7 @@ l-mod-portal/
 │   ├── render_cards_png.py              # 1080×1440 高清 PNG 工业级出图脚本
 │   └── enrich_rank5_7_flagships.py      # Rank 5~7 旗舰全息数据注入脚本
 ├── scripts/
-│   ├── steam_patch_monitor.py # 24h Steam 补丁自动化巡检机器人与突发坏档实时预警哨兵
+│   ├── steam_patch_monitor.py # Steam 补丁巡检脚本：每天比对 Steam 更新时间，写回 GAMES_DATA 的雷达字段
 │   ├── build_i18n_matrix.py   # 多语言矩阵与离线 data.js 自动化打包器
 │   └── verify_i18n_dual_pages.py # 双页面 8 语言完整性 E2E 质检门禁
 ├── .github/
@@ -66,27 +68,29 @@ l-mod-portal/
 │       └── patch_radar_cron.yml # GitHub Actions 每日 10:00 CST 定时巡检自动化流水线
 ├── docs/
 │   ├── STEAM_PATCH_MONITOR_GUIDE.md # 补丁巡检机器人完整操作手册与演练指南
-│   ├── PATCH_MONITOR_LATEST.md    # 巡检机器人最新生成的官方版本对账简报与群公告
+│   ├── PATCH_MONITOR_LATEST.md    # 巡检脚本最新一次生成的巡检简报与群公告
 │   └── DEPLOYMENT_GUIDE.md        # 独立站全球 CDN 极速部署指南
 └── README.md
 ```
 
 ---
 
-## 🤖 Steam 补丁变动自动化巡检机器人 (Milestone 3)
+## 🤖 Steam 补丁巡检 (Milestone 3)
 
-通过 Steam 官方公共 API 自动化对账各单机大作的官方补丁动向与 Build ID，解决官方突发推送更新导致 Mod 失效和坏档问题：
+`scripts/steam_patch_monitor.py` 读 Steam 公共分支的 build 号和更新时间，结合 Mod 框架资料和修改器清单（`public/trainers.json`）算出每款游戏的雷达状态，写回 `public/data.js` 的 `GAMES_DATA`。它只比对时间，不判断 Mod 是否真的失效。
 
 ```bash
-# 1. 执行巡检并同步至避坑雷达看板
+# 1. 巡检并写回雷达字段（平时由 .github/workflows/patch_radar_cron.yml 每天跑一次）
 python3 scripts/steam_patch_monitor.py --update-radar
 
-# 2. 模拟官方突发大更新（演练避坑预警与群公告生成）
-python3 scripts/steam_patch_monitor.py --simulate-patch cyberpunk-2077 --simulate-version "Update 2.5 (Edgerunners 2)" --simulate-risk red --update-radar
+# 2. 演练「刚更新」流程：不联网、不写回 data.js，只生成巡检简报
+python3 scripts/steam_patch_monitor.py --offline --simulate-patch cyberpunk-2077 --simulate-risk red
 
 # 3. 运行双页面与多语言全量门禁校验
 python3 scripts/verify_i18n_dual_pages.py
 ```
+
+完整参数见 `docs/STEAM_PATCH_MONITOR_GUIDE.md`。
 
 ---
 
@@ -112,4 +116,4 @@ python3 scripts/verify_i18n_dual_pages.py
 由主理人 **`老L`**（老L·单机避坑局）在小红书、B 站发布避坑与隐藏机制爆款图文：
 - **公域内容**：发布 1080×1440 高清 5 联图，痛批流氓捆绑外挂，揭秘官方底层隐藏调试与逃课机制；
 - **合规中转**：评论区置顶暗号，引导至公众号自动获取免配置脚本与独立雷达看板直达；
-- **私域留存**：沉淀至避坑互助群，第一时间同步 Steam 补丁更新与坏档急救，形成“**公域引流 ➔ 独立站体验 ➔ 私域留存 ➔ 良性变现**”的坚实商业闭环。
+- **私域留存**：沉淀至避坑互助群，同步避坑雷达的 Steam 更新提醒与坏档急救经验，形成“**公域引流 ➔ 独立站体验 ➔ 私域留存 ➔ 良性变现**”的坚实商业闭环。
