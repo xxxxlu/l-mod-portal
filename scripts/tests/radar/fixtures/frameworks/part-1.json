@@ -1,0 +1,61 @@
+[
+  {
+    "id": "cyberpunk-2077",
+    "rank": 1,
+    "steamAppId": 1091500,
+    "framework": {
+      "name": "Cyber Engine Tweaks",
+      "url": "https://github.com/maximegmd/CyberEngineTweaks"
+    },
+    "hooksExe": true,
+    "modSupport": "community",
+    "afterUpdate": {
+      "zh-CN": "游戏更新后先等 Cyber Engine Tweaks 出对应版本再进游戏。",
+      "en": "After a game update, wait for a matching Cyber Engine Tweaks release."
+    },
+    "sources": [
+      "https://github.com/maximegmd/CyberEngineTweaks"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "witcher-3",
+    "rank": 3,
+    "steamAppId": 292030,
+    "framework": null,
+    "hooksExe": false,
+    "modSupport": "official",
+    "afterUpdate": null,
+    "sources": [
+      "https://www.thewitcher.com/en/redkit"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "palworld",
+    "rank": 8,
+    "steamAppId": 1623730,
+    "framework": {
+      "name": "UE4SS",
+      "url": "https://github.com/UE4SS-RE/RE-UE4SS"
+    },
+    "hooksExe": "yes",
+    "modSupport": "community",
+    "afterUpdate": null,
+    "sources": [
+      "https://github.com/UE4SS-RE/RE-UE4SS"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "not-a-game",
+    "rank": 99,
+    "steamAppId": 1,
+    "framework": null,
+    "hooksExe": null,
+    "modSupport": null,
+    "afterUpdate": null,
+    "sources": [],
+    "checkedAt": "2026-11-19"
+  }
+]

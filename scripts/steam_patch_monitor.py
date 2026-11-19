@@ -1,821 +1,1075 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-scripts/steam_patch_monitor.py
-L-MOD Vault Steam 补丁变动自动化巡检预警机器人 (Milestone 3)
-24/7 Automated Steam Patch & Version Sentinel for Single-Player Games
+scripts/steam_patch_monitor.py · 补丁雷达 v2 巡检脚本
 
-Capabilities:
-1. Automated inspection of Steam official patch notes & build IDs via public APIs.
-2. Diff comparison against L-MOD Vault's verified baseline (src/data/games_top100.json, or the GAMES_DATA block of public/data.js when the master file is absent, e.g. in CI).
-3. Automated state machine classification (🟢 完美兼容 / 🟡 需注意 / 🔴 坏档预警).
-4. Synchronizes live status to public/data.js and public/radar.html (--update-radar).
-5. Generates structured audit reports (docs/PATCH_MONITOR_LATEST.md) and copy-ready group broadcast alerts.
+判定规则以 docs/RADAR_V2_CONTRACT.md 第 2 节为准，用法见 docs/STEAM_PATCH_MONITOR_GUIDE.md。
+
+每款带 steamAppId 的游戏读四样东西：
+  1. Steam 公共分支当前 build 和它的发布时间 timeupdated（api.steamcmd.net）
+  2. 最新一条官方公告（ISteamNews，只用来展示，不参与判定）
+  3. Mod 框架资料（scripts/radar_frameworks/part-*.json，可能缺文件或缺条目）
+  4. 风灵月影修改器最后更新时间（public/trainers.json → games.<id>.modified）
+
+判定（RECENT_DAYS = 14，含契约第 7 节 v2.1 的修改）：
+  build ≤ 14 天，且框架资料 hooksExe == true          → red    / recent-update-hooks
+  build ≤ 14 天                                      → yellow / recent-update
+  build ≤ 90 天，且修改器更新时间早于 build 超过 1 天  → yellow / trainer-behind
+  其余                                               → green  / quiet
+
+build 信息取不到（超时、HTTP 错误、返回格式不对），这款游戏的雷达字段一律保持原值，报告里列为「本次未取到」；
+公告取不到照常判定，只是公告标题/链接保留上次的值。非 Steam 游戏（steamAppId 为 0 或缺失）不巡检、不写字段。
+emergencyAlert 只给红灯。
+
+报告里写一行 `<!-- radar-new-red: N -->`，工作流读它决定要不要开预警单。
+纯标准库，零第三方依赖。
 """
 
-import os
-import sys
-import json
-import re
-import time
 import argparse
 import datetime
-import urllib.request
+import glob
+import http.client
+import json
+import os
+import re
+import sys
+import time
 import urllib.error
+import urllib.request
 
-# Resolve paths relative to repo root
+# ==============================================================================
+# 路径与常量
+# ==============================================================================
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 GAMES_JSON_PATH = os.path.join(BASE_DIR, 'src/data/games_top100.json')
 DATA_JS_PATH = os.path.join(BASE_DIR, 'public/data.js')
 TRANS_JSON_PATH = os.path.join(BASE_DIR, 'src/i18n/translations.json')
+TRAINERS_PATH = os.path.join(BASE_DIR, 'public/trainers.json')
+FRAMEWORKS_DIR = os.path.join(BASE_DIR, 'scripts/radar_frameworks')
 REPORT_PATH_DEFAULT = os.path.join(BASE_DIR, 'docs/PATCH_MONITOR_LATEST.md')
 
-# public/data.js layout:  window.GAMES_DATA = [...];\n\nwindow.GAMES_DATABASE = ...;
-# The master src/data/games_top100.json is not tracked in git (decoupled in a4a09db), so in CI
-# (and any fresh checkout) public/data.js is the only copy of the game database.
+RECENT_DAYS = 14
+TRAINER_TOLERANCE_DAYS = 1
+TRAINER_BEHIND_MAX_BUILD_AGE_DAYS = 90
+MIN_REQUEST_INTERVAL = 0.5
+DEFAULT_REQUEST_INTERVAL = 0.6
+DEFAULT_TIMEOUT = 10
+RETRY_BACKOFF_SECONDS = 3
+
+UTC = datetime.timezone.utc
+
+# 原因码 → 状态（契约 2.2 节）
+REASON_STATUS = {
+    'recent-update-hooks': 'red',
+    'recent-update': 'yellow',
+    'trainer-behind': 'yellow',
+    'quiet': 'green',
+}
+
+# radarStatusText 固定四句（契约 2.3 节）
+STATUS_TEXT = {
+    'quiet': '🟢 近 14 天无更新',
+    'recent-update': '🟡 刚更新 · Mod/修改器可能要等适配',
+    'trainer-behind': '🟡 修改器早于当前游戏版本',
+    'recent-update-hooks': '🔴 刚更新 · {framework} 可能要等适配，先别更新',
+}
+
+# 写进数据和报告的文案里不许出现的说法（没人做过的事 / 下不了的结论）
+BANNED_PHRASES = ('实测', '完美兼容', '老L团队', '已失效')
+
+# 脚本会写的全部字段；verifiedPatch 不碰
+RADAR_FIELDS = (
+    'compatibilityStatus', 'radarReason', 'radarStatusText', 'latestSteamPatch', 'latestSteamPatchUrl',
+    'steamBuildId', 'steamBuildUpdatedAt', 'steamLastChecked', 'radarFramework', 'radarAdvice',
+    'radarSummary', 'radarRiskTitle', 'radarRiskDesc', 'emergencyAlert',
+)
+
+GENERIC_RISK_DESC = {
+    'default': '游戏更新后，依赖框架的 Mod 和修改器可能要等作者适配；想稳妥可在 Steam 属性里把自动更新改成「仅在启动时更新」，并先备份存档。',
+    'trainer-behind': '修改器早于当前游戏版本时，部分功能可能失效；用之前先备份存档，等修改器更新后再用更稳妥。',
+}
+
+SIMULATED_FRAMEWORK_NAME = 'Mod 框架（演练）'
+
+HTTP_HEADERS = {
+    'User-Agent': 'L-MOD-Patch-Radar/2.0 (+steam_patch_monitor.py)',
+    'Accept': 'application/json',
+}
+
+# public/data.js 的布局：window.GAMES_DATA = [...];\n\nwindow.GAMES_DATABASE = ...;
+# 主数据 src/data/games_top100.json 不进 git，所以 CI 和新克隆里 public/data.js 是唯一一份游戏库。
 GAMES_DATA_HEAD = "window.GAMES_DATA = "
 GAMES_DATA_TAIL = ";\n\nwindow.GAMES_DATABASE"
 
-def _games_data_span(js_text):
-    """Return (start, end) offsets of the GAMES_DATA JSON array inside data.js text."""
+
+# ==============================================================================
+# 时间工具
+# ==============================================================================
+def utc_now():
+    return datetime.datetime.now(UTC)
+
+
+def parse_iso_utc(value):
+    """ISO 8601 字符串 → 带时区的 UTC datetime。没有时区的按 UTC 看；解析不了返回 None。"""
+    if not isinstance(value, str) or not value.strip():
+        return None
+    text = value.strip()
+    if text.endswith('Z') or text.endswith('z'):
+        text = text[:-1] + '+00:00'
+    try:
+        dt = datetime.datetime.fromisoformat(text)
+    except ValueError:
+        return None
+    if dt.tzinfo is None:
+        return dt.replace(tzinfo=UTC)
+    return dt.astimezone(UTC)
+
+
+def iso_z(dt):
+    return dt.astimezone(UTC).strftime('%Y-%m-%dT%H:%M:%SZ')
+
+
+def fmt_date(dt):
+    return dt.astimezone(UTC).strftime('%Y-%m-%d') if dt else '—'
+
+
+def _is_int(value):
+    return isinstance(value, int) and not isinstance(value, bool)
+
+
+def _is_url(value):
+    return isinstance(value, str) and re.match(r'^https?://\S+$', value) is not None
+
+
+def _dig(obj, *keys):
+    for key in keys:
+        if not isinstance(obj, dict):
+            return None
+        obj = obj.get(key)
+    return obj
+
+
+# ==============================================================================
+# 游戏库读写（public/data.js 的 GAMES_DATA 段）
+# ==============================================================================
+def _games_data_span(js_text, path=DATA_JS_PATH):
+    """返回 data.js 文本里 GAMES_DATA 数组的 (start, end) 偏移。"""
     a = js_text.find(GAMES_DATA_HEAD)
     if a < 0:
-        raise ValueError(f"{DATA_JS_PATH}: cannot find '{GAMES_DATA_HEAD.strip()}'")
+        raise ValueError(f"{path}: 找不到 '{GAMES_DATA_HEAD.strip()}'")
     a += len(GAMES_DATA_HEAD)
     b = js_text.find(GAMES_DATA_TAIL, a)
     if b < 0:
-        raise ValueError(f"{DATA_JS_PATH}: cannot find the end of GAMES_DATA ('{GAMES_DATA_TAIL.strip()}')")
+        raise ValueError(f"{path}: 找不到 GAMES_DATA 的结尾（'{GAMES_DATA_TAIL.strip()}'）")
     return a, b
 
-def load_games():
-    """Load the game database: master JSON when present, otherwise the GAMES_DATA block of public/data.js."""
-    if os.path.exists(GAMES_JSON_PATH):
+
+def load_games(data_js_path=DATA_JS_PATH, use_master=None):
+    """读游戏库：本地有主数据 JSON 时读它，否则读 public/data.js 的 GAMES_DATA 段。"""
+    if use_master is None:
+        use_master = os.path.abspath(data_js_path) == DATA_JS_PATH and os.path.exists(GAMES_JSON_PATH)
+    if use_master:
         with open(GAMES_JSON_PATH, 'r', encoding='utf-8') as f:
             return json.load(f)
-    if not os.path.exists(DATA_JS_PATH):
-        raise FileNotFoundError(f"Neither {GAMES_JSON_PATH} nor {DATA_JS_PATH} exists")
-    with open(DATA_JS_PATH, 'r', encoding='utf-8') as f:
+    with open(data_js_path, 'r', encoding='utf-8') as f:
         js_text = f.read()
-    a, b = _games_data_span(js_text)
+    a, b = _games_data_span(js_text, data_js_path)
     return json.loads(js_text[a:b])
 
-# ==============================================================================
-# 1. TOP 14 FLAGSHIP & KEY GAMES REGISTRY
-# ==============================================================================
-TOP_14_REGISTRY = {
-    "cyberpunk-2077": {
-        "rank": 1,
-        "name": "Cyberpunk 2077",
-        "appid": 1091500,
-        "engine": "REDengine 4",
-        "toolchain": "CET v1.33.0 / REDmod",
-        "high_risk": True,  # CET/REDscript breaks immediately on engine exe updates
-        "verified_patch": "Patch 2.13 (往日之影DLC全兼容)",
-        "baseline_version": "2.13"
-    },
-    "black-myth-wukong": {
-        "rank": 2,
-        "name": "Black Myth: Wukong",
-        "appid": 2358720,
-        "engine": "虚幻引擎 5 (UE5)",
-        "toolchain": "UE4SS v3.0.1+ / UE5 Console Enabler",
-        "high_risk": False, # Pak mods usually survive small patches
-        "verified_patch": "v1.0.10.15610 (Steam最新补丁实测)",
-        "baseline_version": "1.0.10.15610"
-    },
-    "witcher-3": {
-        "rank": 3,
-        "name": "The Witcher 3: Wild Hunt",
-        "appid": 292030,
-        "engine": "REDengine 3",
-        "toolchain": "REDkit / Script Merger",
-        "high_risk": False,
-        "verified_patch": "v4.04 (次世代版 / 完全版 - REDkit官方支持)",
-        "baseline_version": "4.04"
-    },
-    "baldurs-gate-3": {
-        "rank": 4,
-        "name": "Baldur's Gate 3",
-        "appid": 1086940,
-        "engine": "Divinity Engine 4.0",
-        "toolchain": "BG3SE v18+ / Native Mod Loader",
-        "high_risk": True,  # BG3SE hooks into memory, crashes game on patch
-        "verified_patch": "Patch 7 (官方MOD管理器全面兼容)",
-        "baseline_version": "Patch 7"
-    },
-    "elden-ring": {
-        "rank": 5,
-        "name": "Elden Ring",
-        "appid": 1245620,
-        "engine": "FromSoft Proprietary",
-        "toolchain": "ModEngine2 / EAC Bypass",
-        "high_risk": True,  # EAC offset and exe patches break ModEngine2
-        "verified_patch": "v1.14 (黄金树幽影DLC完全对齐)",
-        "baseline_version": "1.14"
-    },
-    "skyrim-se": {
-        "rank": 6,
-        "name": "The Elder Scrolls V: Skyrim Special Edition",
-        "appid": 489830,
-        "engine": "Creation Engine",
-        "toolchain": "SKSE64 2.2.6 / Address Library",
-        "high_risk": True,  # SKSE64 version-lock, high risk of cart flying/crash
-        "verified_patch": "v1.6.1170 (与 1.6.1130 AE 深度适配)",
-        "baseline_version": "1.6.1170"
-    },
-    "fallout-4": {
-        "rank": 7,
-        "name": "Fallout 4",
-        "appid": 377160,
-        "engine": "Creation Engine",
-        "toolchain": "F4SE / Downgrader",
-        "high_risk": True,  # Next-Gen update broke 10-year mod archive
-        "verified_patch": "v1.10.984+ (次世代大更新双轨实测)",
-        "baseline_version": "1.10.984"
-    },
-    "palworld": {
-        "rank": 8,
-        "name": "Palworld",
-        "appid": 1623730,
-        "engine": "虚幻引擎 5 (UE5)",
-        "toolchain": "UE4SS-RE / Palworld Modding Kit",
-        "high_risk": False,
-        "verified_patch": "v0.3.x (樱岛版本完全对齐)",
-        "baseline_version": "0.3"
-    },
-    "starfield": {
-        "rank": 9,
-        "name": "Starfield",
-        "appid": 1716740,
-        "engine": "Creation Engine 2",
-        "toolchain": "SFSE / StarfieldCustom.ini",
-        "high_risk": True,  # SFSE script extender breaks on patch
-        "verified_patch": "v1.14 (破碎空间DLC完全对齐)",
-        "baseline_version": "1.14"
-    },
-    "gta-v": {
-        "rank": 10,
-        "name": "Grand Theft Auto V",
-        "appid": 271590,
-        "engine": "RAGE",
-        "toolchain": "ScriptHookV / OpenIV",
-        "high_risk": True,  # ScriptHookV version lock + BattlEye online ban risk
-        "verified_patch": "v1.0.3179 (线上DLC完全对齐)",
-        "baseline_version": "1.0.3179"
-    },
-    "rdr2": {
-        "rank": 11,
-        "name": "Red Dead Redemption 2",
-        "appid": 1174180,
-        "engine": "RAGE",
-        "toolchain": "ScriptHookRDR2 / LML",
-        "high_risk": True,  # ScriptHookRDR2 requires matching exe version
-        "verified_patch": "v1.0.1491 (完全对齐)",
-        "baseline_version": "1.0.1491"
-    },
-    "monster-hunter-world": {
-        "rank": 12,
-        "name": "Monster Hunter: World",
-        "appid": 582010,
-        "engine": "MT Framework",
-        "toolchain": "Stracker's Loader / REFramework",
-        "high_risk": False, # Game in end-of-life maintenance, rare patches
-        "verified_patch": "v15.11 (冰原最终版完全对齐)",
-        "baseline_version": "15.11"
-    },
-    "sekiro": {
-        "rank": 13,
-        "name": "Sekiro: Shadows Die Twice",
-        "appid": 814380,
-        "engine": "FromSoft Proprietary",
-        "toolchain": "Mod Engine / Dinput8 Hook",
-        "high_risk": False, # v1.06 final goty build
-        "verified_patch": "v1.06 (年度版完全对齐)",
-        "baseline_version": "1.06"
-    },
-    "re4-remake": {
-        "rank": 14,
-        "name": "Resident Evil 4 Remake",
-        "appid": 2050650,
-        "engine": "RE Engine",
-        "toolchain": "REFramework / Fluffy Mod Manager",
-        "high_risk": True,  # REFramework DLL offset and Enigma update sensitive
-        "verified_patch": "v1.0+ (逆命殊途DLC完全对齐)",
-        "baseline_version": "1.0"
-    }
-}
+
+def save_games(games, data_js_path=DATA_JS_PATH, use_master=False):
+    """写回游戏库。
+
+    - 有主数据（本地开发）：写 games_top100.json，再整份重新生成 public/data.js（沿用旧行为）。
+    - 没有主数据（GitHub Actions / 新克隆）：只替换 data.js 里 GAMES_DATA 段，
+      TRANSLATIONS_DATA 等其它部分一个字节都不动。
+    修改器字段（hasTrainer / trainerInfo …）归 fling_trainer_sync.py 管，这里原样保留。
+    """
+    if use_master:
+        with open(GAMES_JSON_PATH, 'w', encoding='utf-8') as f:
+            json.dump(games, f, ensure_ascii=False, indent=2)
+        translations = {}
+        if os.path.exists(TRANS_JSON_PATH):
+            with open(TRANS_JSON_PATH, 'r', encoding='utf-8') as f:
+                translations = json.load(f)
+        with open(data_js_path, 'w', encoding='utf-8') as f:
+            f.write("// L-MOD Vault Offline Database (Auto-bundled by Steam Patch Sentinel)\n")
+            f.write(GAMES_DATA_HEAD + json.dumps(games, ensure_ascii=False, indent=2) + ";\n\n")
+            f.write("window.GAMES_DATABASE = window.GAMES_DATA;\n\n")
+            if translations:
+                f.write("window.TRANSLATIONS_DATA = " + json.dumps(translations, ensure_ascii=False, indent=2) + ";\n")
+        return
+    with open(data_js_path, 'r', encoding='utf-8') as f:
+        js_text = f.read()
+    a, b = _games_data_span(js_text, data_js_path)
+    js_text = js_text[:a] + json.dumps(games, ensure_ascii=False, indent=2) + js_text[b:]
+    with open(data_js_path, 'w', encoding='utf-8') as f:
+        f.write(js_text)
+
 
 # ==============================================================================
-# 2. STEAM PUBLIC API PROBE & DETECTOR
+# 框架资料（scripts/radar_frameworks/part-*.json）
 # ==============================================================================
-class SteamProbeClient:
-    """Handles communication with Steam Public APIs with robust fallback & caching."""
-    def __init__(self, timeout=6, offline_mode=False):
-        self.timeout = timeout
-        self.offline_mode = offline_mode
-        self.headers = {
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
-            'Accept': 'application/json, text/plain, */*',
-            'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8'
-        }
+FRAMEWORK_REQUIRED_KEYS = (
+    'id', 'rank', 'steamAppId', 'framework', 'hooksExe', 'modSupport', 'afterUpdate', 'sources', 'checkedAt',
+)
+MOD_SUPPORT_VALUES = ('official', 'workshop', 'community', 'none', None)
+AFTER_UPDATE_LIMITS = {'zh-CN': 60, 'en': 120}
+JUDGMENT_KEYS = ('framework', 'hooksExe', 'modSupport', 'afterUpdate')
 
-    def fetch_steam_announcements(self, appid, count=5):
-        """Fetch official Steam community patch notes/announcements."""
-        if self.offline_mode:
-            return None
 
-        # 1. Try official community announcements feed
-        url = f"https://api.steampowered.com/ISteamNews/GetNewsForApp/v2/?appid={appid}&count={count}&feeds=steam_community_announcements&format=json"
-        try:
-            req = urllib.request.Request(url, headers=self.headers)
-            with urllib.request.urlopen(req, timeout=self.timeout) as resp:
-                data = json.loads(resp.read().decode('utf-8'))
-                items = data.get('appnews', {}).get('newsitems', [])
-                if items:
-                    return items
-        except Exception:
-            pass
+class FrameworkData:
+    """合并后的框架资料。errors = 被跳过的条目/文件，warnings = 照用但要提醒的地方。"""
 
-        # 2. Fallback to general news feed if community announcements filtered nothing
-        url_general = f"https://api.steampowered.com/ISteamNews/GetNewsForApp/v2/?appid={appid}&count={count}&format=json"
-        try:
-            req = urllib.request.Request(url_general, headers=self.headers)
-            with urllib.request.urlopen(req, timeout=self.timeout) as resp:
-                data = json.loads(resp.read().decode('utf-8'))
-                return data.get('appnews', {}).get('newsitems', [])
-        except Exception:
-            return None
+    def __init__(self, directory):
+        self.directory = directory
+        self.entries = {}
+        self.origin = {}
+        self.files = []        # [(文件名, 数组长度)]
+        self.errors = []
+        self.warnings = []
+        self.missing_dir = False
 
-    def fetch_steamcmd_build(self, appid):
-        """Fetch latest public branch buildid & timeupdated via SteamCMD API."""
-        if self.offline_mode:
-            return None, None
-        url = f"https://api.steamcmd.net/v1/info/{appid}"
-        try:
-            req = urllib.request.Request(url, headers=self.headers)
-            with urllib.request.urlopen(req, timeout=min(self.timeout, 4)) as resp:
-                data = json.loads(resp.read().decode('utf-8'))
-                app_data = data.get('data', {}).get(str(appid), {})
-                pub = app_data.get('depots', {}).get('branches', {}).get('public', {})
-                return pub.get('buildid'), pub.get('timeupdated')
-        except Exception:
-            return None, None
+    def get(self, game_id):
+        return self.entries.get(game_id)
 
-# ==============================================================================
-# 3. PATCH DIFF & STATE MACHINE LOGIC
-# ==============================================================================
-class PatchVersionAnalyzer:
-    """Analyzes Steam announcements & build timestamps against verified baselines."""
-    
-    VERSION_REGEXES = [
-        re.compile(r'(?:Patch|Update|Version|Hotfix|Ver|v)\s*([0-9]+(?:\.[0-9]+)+(?:[a-zA-Z0-9_\-\+]*)?)', re.IGNORECASE),
-        re.compile(r'Patch\s*([0-9]+)', re.IGNORECASE),
-        re.compile(r'Hotfix\s*#?([0-9]+)', re.IGNORECASE),
-        re.compile(r'v([0-9]+(?:\.[0-9]+)+)', re.IGNORECASE),
-    ]
 
-    @classmethod
-    def extract_version(cls, text):
-        """Extract standardized version string from title or content snippet."""
-        if not text:
-            return None
-        for rx in cls.VERSION_REGEXES:
-            match = rx.search(text)
-            if match:
-                return match.group(0).strip()
-        return None
+def validate_framework_entry(entry):
+    """校验一条框架资料。返回 (errors, warnings)：有 errors 就整条跳过。"""
+    if not isinstance(entry, dict):
+        return ['不是 JSON 对象'], []
+    errors, warnings = [], []
 
-    @classmethod
-    def evaluate_game_status(cls, game_id, meta, verified_patch, latest_news_item, build_id, build_time, simulation=None):
-        """
-        Evaluate compatibility status for a game.
-        Returns:
-            status: 'green' | 'yellow' | 'red'
-            status_text: localized status title
-            latest_patch_title: headline of the patch
-            latest_patch_date: formatted date
-            alert_text: emergency alert copy
-            summary: radar summary
-            risk_title: radar risk title
-            risk_desc: radar risk description
-            is_new_update: bool
-        """
-        # Baseline defaults
-        now_ts = int(time.time())
-        is_high_risk = meta.get('high_risk', False)
-        base_version = meta.get('baseline_version', '')
+    missing = [k for k in FRAMEWORK_REQUIRED_KEYS if k not in entry]
+    if missing:
+        errors.append('缺字段 ' + '、'.join(missing))
 
-        # 1. Check for Simulation Overrides (for testing & verification)
-        if simulation and simulation.get('game_id') == game_id:
-            sim_version = simulation.get('version', 'Update 2.5 (Emergency)')
-            sim_risk = simulation.get('risk', 'red' if is_high_risk else 'yellow')
-            sim_status_text = "🔴 坏档预警·暂缓更新" if sim_risk == 'red' else "🟡 官方刚推新补丁·老L实测对齐中"
-            
-            return {
-                "status": sim_risk,
-                "status_text": sim_status_text,
-                "latest_patch_title": f"Steam 官方突发更新: {sim_version}",
-                "latest_patch_date": datetime.datetime.now().strftime('%Y-%m-%d %H:%M'),
-                "detected_version": sim_version,
-                "build_id": simulation.get('build_id', '99988811'),
-                "is_new_update": True,
-                "alert_text": {
-                    "zh-CN": f"🚨【{meta['name']}】Steam 刚刚推送 {sim_version}！核心前置可能失效，高危坏档！请开启离线模式暂缓更新！",
-                    "en": f"🚨 [{meta['name']}] Steam pushed {sim_version}! Core frameworks may break. Please switch to Steam Offline Mode!",
-                    "zh-TW": f"🚨【{meta['name']}】Steam 剛剛推送 {sim_version}！核心前置可能失效，高危壞檔！請開啟離線模式暫緩更新！",
-                    "ja": f"🚨【{meta['name']}】Steamが {sim_version} を配信！前提MOD破損の恐れあり。オフライン推奨！",
-                    "ko": f"🚨【{meta['name']}】Steam {sim_version} 긴급 업데이트! 선행 모드 충돌 주의, 오프라인 모드 권장!",
-                    "ru": f"🚨 [{meta['name']}] Вышло обновление {sim_version}! Возможны вылеты модов, включите оффлайн-режим!",
-                    "de": f"🚨 [{meta['name']}] Steam-Update {sim_version} live! Mods gefährdet, Offline-Modus empfohlen!",
-                    "es": f"🚨 [{meta['name']}] ¡Actualización {sim_version} lanzada! Riesgo de daño en partidas, juegue sin conexión!"
-                },
-                "summary": f"官方刚刚推送新补丁（{sim_version}），老L团队正真机实测前置对齐中，请暂缓更新！",
-                "risk_title": "🚨 突发版本更新坏档预警" if sim_risk == 'red' else "⚠️ 官方刚推新补丁·前置对齐中",
-                "risk_desc": f"检测到 Steam 官方推送最新补丁 {sim_version}。旧版核心框架（{meta['toolchain']}）未经重新注入实测，直接启动可能损坏现有游戏存档！强烈建议切换至 Steam 离线模式游玩。"
-            }
+    gid = entry.get('id')
+    if not (isinstance(gid, str) and gid.strip()):
+        errors.append('id 必须是非空字符串')
+    if 'rank' in entry and not _is_int(entry['rank']):
+        errors.append('rank 必须是整数')
+    if 'steamAppId' in entry:
+        appid = entry['steamAppId']
+        if not (appid is None or (_is_int(appid) and appid >= 0)):
+            errors.append('steamAppId 必须是非负整数或 null')
 
-        # 2. Real Steam Data Evaluation
-        latest_title = latest_news_item.get('title', '') if latest_news_item else ''
-        news_date_ts = latest_news_item.get('date', 0) if latest_news_item else 0
-        news_date_str = datetime.datetime.fromtimestamp(news_date_ts).strftime('%Y-%m-%d') if news_date_ts else '---'
-        snippet = latest_news_item.get('contents', '') if latest_news_item else ''
-        detected_ver = cls.extract_version(latest_title) or cls.extract_version(snippet) or 'Steam 最新'
-
-        # Check if patch announcement represents a genuine code update
-        # Key terms: patch, update, hotfix, notes, changelog, live now, out now, release
-        is_patch_announcement = any(k in (latest_title + snippet).lower() for k in [
-            'patch', 'update', 'hotfix', 'out now', 'is live', 'changelog', 'fixes', 'version'
-        ])
-
-        # Check existing verified status
-        # Known legacy statuses: Fallout 4 has known Next-Gen breakage (red); Skyrim SE has SKSE update attention (yellow)
-        is_new_patch_detected = False
-
-        # Compare version token
-        if is_patch_announcement and base_version and detected_ver:
-            # Check if detected version isn't present in verified baseline string
-            cleaned_detected = re.sub(r'[^0-9\.]', '', detected_ver)
-            cleaned_base = re.sub(r'[^0-9\.]', '', base_version)
-            if cleaned_detected and cleaned_base and cleaned_detected != cleaned_base:
-                # If detected version appears newer than base
-                is_new_patch_detected = True
-
-        # Determine status
-        if is_new_patch_detected:
-            status = 'red' if is_high_risk else 'yellow'
-            status_text = "🔴 坏档预警·暂缓更新" if status == 'red' else "🟡 官方刚推新补丁·老L实测对齐中"
-            summary = f"官方刚刚推送新版本（{detected_ver}），老L团队正真机实测前置兼容性，请暂缓更新！"
-            risk_title = "🚨 官方突发补丁坏档预警" if status == 'red' else "⚠️ 官方刚推新补丁·老L实测对齐中"
-            risk_desc = f"检测到 Steam 最新更新 [{latest_title}]。旧版前置工具（{meta['toolchain']}）可能发生内存偏移冲突，请开启 Steam 离线模式并备份存档。"
-            alert_text = {
-                "zh-CN": f"🚨【{meta['name']}】Steam 刚刚推送新更新（{detected_ver}）！前置框架对齐中，请开启离线模式暂缓更新！",
-                "en": f"🚨 [{meta['name']}] Steam update ({detected_ver}) detected! Core frameworks aligning, please use offline mode!",
-                "zh-TW": f"🚨【{meta['name']}】Steam 剛剛推送新更新（{detected_ver}）！前置框架對齊中，請開啟離線模式暫緩更新！",
-                "ja": f"🚨【{meta['name']}】Steam アプデ（{detected_ver}）配信！前提MOD検証中、オフラインプレイ推奨！",
-                "ko": f"🚨【{meta['name']}】Steam 새 패치（{detected_ver}）출시! 모드 정렬 중, 오프라인 모드 권장!",
-                "ru": f"🚨 [{meta['name']}] Steam выпустил патч ({detected_ver})! Идет проверка модов, играйте оффлайн!",
-                "de": f"🚨 [{meta['name']}] Steam-Patch ({detected_ver}) aktiv! Mod-Anpassung läuft, bitte offline spielen!",
-                "es": f"🚨 [{meta['name']}] ¡Parche ({detected_ver}) en Steam! Verificando mods, active el modo sin conexión!"
-            }
+    fw = entry.get('framework')
+    if fw is not None:
+        if not isinstance(fw, dict):
+            errors.append('framework 必须是 {name, url} 或 null')
         else:
-            # Baseline behavior matching current radar defaults
-            if game_id == 'fallout-4':
-                # Was hard-coded red since the 2024 Next-Gen update. F4SE now ships builds for the
-                # Next-Gen (1.10.984) and Anniversary (1.11.x) runtimes (f4se.silverlock.org, checked
-                # 2026-11-19), so a permanent red was stale and re-opened the radar alert every day.
-                # Real new patches are still caught by the new-patch branch above.
-                status = 'yellow'
-                status_text = "🟡 需更新前置 / 注意老插件"
-                summary = "F4SE 已支持次世代版与周年版。游戏更新后先把 F4SE 和依赖它的插件更新到对应版本；仍停在 1.10.163 的老插件可能闪退。"
-                risk_title = "⚠️ F4SE 与插件需对齐游戏版本"
-                risk_desc = "更新游戏后，到 F4SE 官网下载与当前游戏版本对应的构建，并确认常用插件已适配；作者没跟进的老插件会闪退，可先禁用或改用 Downgrader 回退。"
-                alert_text = {
-                    "zh-CN": "F4SE 已支持新版本：更新游戏后请同步更新 F4SE 与插件，老插件可能闪退",
-                    "en": "F4SE supports the current runtimes: update F4SE and your plugins after each game update; outdated plugins may crash."
-                }
-            elif game_id == 'skyrim-se':
-                status = 'yellow'
-                status_text = "🟡 需更新前置 / 需补丁适配"
-                summary = "v1.6.1170 前置需更新对齐！认准 SKSE64 2.2.6 与 SSE Engine Fixes 修复推车飞天。"
-                risk_title = "⚠️ SKSE 版本强校验避坑"
-                risk_desc = "必须精准核对 SKSE64 2.2.6，缺失 Address Library 会直接进游戏黑屏或车夫翻滚卡死。"
-                alert_text = {
-                    "zh-CN": "v1.6.1170 前置需更新对齐！认准 SKSE64 2.2.6 与 SSE Engine Fixes 修复推车飞天",
-                    "en": "v1.6.1170 requires prerequisite updates! Ensure SKSE64 2.2.6 & SSE Engine Fixes are installed."
-                }
-            elif game_id == 'gta-v':
-                status = 'yellow'
-                status_text = "🟡 需更新前置 / 需补丁适配"
-                summary = "需更新 ScriptHookV！BattlEye 反作弊上线，故事模式必须物理隔离。"
-                risk_title = "⚠️ BattlEye 线上封禁风险"
-                risk_desc = "若带 Mod 进入 GTA Online 必定触发 BattlEye 封禁！故事模式单机必须物理隔离。"
-                alert_text = None
-            else:
-                status = 'green'
-                status_text = "🟢 完美兼容实测通过"
-                summary = f"Steam 官方最新推送已对齐，{meta['toolchain']} 100% 稳定运行，未发现恶性坏档报错。"
-                risk_title = "💡 日常游玩避坑提示"
-                risk_desc = "建议在单机离线状态下游玩，大版本更新后优先使用本站批处理脚本核对环境路径。"
-                alert_text = None
+            if not (isinstance(fw.get('name'), str) and fw['name'].strip()):
+                errors.append('framework.name 必须是非空字符串')
+            if not _is_url(fw.get('url')):
+                errors.append('framework.url 必须是 http(s) 链接')
 
-        return {
-            "status": status,
-            "status_text": status_text,
-            "latest_patch_title": latest_title or f"{meta['name']} 最新版",
-            "latest_patch_date": news_date_str,
-            "detected_version": detected_ver,
-            "build_id": build_id or '---',
-            "is_new_update": is_new_patch_detected,
-            "alert_text": alert_text,
-            "summary": summary,
-            "risk_title": risk_title,
-            "risk_desc": risk_desc
-        }
+    hooks = entry.get('hooksExe')
+    if not (hooks is None or isinstance(hooks, bool)):
+        errors.append('hooksExe 只能是 true / false / null')
+    elif hooks is True and fw is None:
+        errors.append('hooksExe 为 true 但 framework 为 null（红灯文案需要框架名）')
+
+    if 'modSupport' in entry and entry['modSupport'] not in MOD_SUPPORT_VALUES:
+        errors.append('modSupport 只能是 official / workshop / community / none / null')
+
+    after = entry.get('afterUpdate')
+    if after is not None:
+        if not isinstance(after, dict):
+            errors.append('afterUpdate 必须是 {"zh-CN", "en"} 或 null')
+        else:
+            for lang, limit in AFTER_UPDATE_LIMITS.items():
+                text = after.get(lang)
+                if not (isinstance(text, str) and text.strip()):
+                    errors.append(f'afterUpdate.{lang} 必须是非空字符串')
+                elif len(text.strip()) > limit:
+                    warnings.append(f'afterUpdate.{lang} 超长（{len(text.strip())} > {limit}）')
+
+    if 'sources' in entry:
+        sources = entry['sources']
+        if not isinstance(sources, list) or not all(_is_url(s) for s in sources):
+            errors.append('sources 必须是 http(s) 链接数组')
+        elif not sources and any(entry.get(k) is not None for k in JUDGMENT_KEYS):
+            errors.append('有非 null 的判断，但 sources 为空')
+
+    checked = entry.get('checkedAt')
+    if 'checkedAt' in entry and not (isinstance(checked, str) and re.match(r'^\d{4}-\d{2}-\d{2}$', checked)):
+        warnings.append('checkedAt 不是 YYYY-MM-DD')
+
+    return errors, warnings
+
+
+def _part_sort_key(path):
+    m = re.search(r'part-(\d+)\.json$', path)
+    return (int(m.group(1)) if m else 10 ** 9, path)
+
+
+def load_frameworks(directory=FRAMEWORKS_DIR, games=None):
+    """把所有 part-*.json 合起来。缺目录、缺文件、缺条目都照常返回；坏文件/坏条目跳过并记下来。"""
+    data = FrameworkData(directory)
+    if not os.path.isdir(directory):
+        data.missing_dir = True
+        return data
+    by_id = {g.get('id'): g for g in games} if games is not None else None
+
+    for path in sorted(glob.glob(os.path.join(directory, 'part-*.json')), key=_part_sort_key):
+        name = os.path.basename(path)
+        try:
+            with open(path, 'r', encoding='utf-8') as f:
+                raw = json.load(f)
+        except (OSError, ValueError) as exc:
+            data.errors.append(f'{name}: 读不了或不是合法 JSON（{exc}），整份跳过')
+            continue
+        if not isinstance(raw, list):
+            data.errors.append(f'{name}: 顶层必须是数组，整份跳过')
+            continue
+        data.files.append((name, len(raw)))
+
+        for idx, entry in enumerate(raw):
+            label = f'{name}[{idx}]'
+            if isinstance(entry, dict) and isinstance(entry.get('id'), str):
+                label += f' {entry["id"]}'
+            errors, warnings = validate_framework_entry(entry)
+            if not errors and by_id is not None:
+                game = by_id.get(entry['id'])
+                if game is None:
+                    errors.append('GAMES_DATA 里没有这个 id')
+                else:
+                    if entry['rank'] != game.get('rank'):
+                        warnings.append(f'rank 与 GAMES_DATA 不一致（{entry["rank"]} ≠ {game.get("rank")}）')
+                    if (entry.get('steamAppId') or 0) != (game.get('steamAppId') or 0):
+                        warnings.append(f'steamAppId 与 GAMES_DATA 不一致（{entry.get("steamAppId")} ≠ {game.get("steamAppId")}）')
+            if errors:
+                data.errors.append(f'{label}: ' + '；'.join(errors))
+                continue
+            gid = entry['id']
+            if gid in data.entries:
+                data.errors.append(f'{label}: id 重复（已在 {data.origin[gid]} 出现），这一条忽略')
+                continue
+            for w in warnings:
+                data.warnings.append(f'{label}: {w}')
+            data.entries[gid] = entry
+            data.origin[gid] = name
+    return data
+
 
 # ==============================================================================
-# 4. RADAR & DATA SYNCHRONIZER
+# 修改器时间（public/trainers.json）
 # ==============================================================================
-class RadarSynchronizer:
-    """Writes fresh inspection data back to the game database.
+def load_trainer_times(path=TRAINERS_PATH):
+    """返回 ({game_id: UTC datetime}, 说明或 None)。modified 是站点本地时间、无时区，按 UTC 看。"""
+    if not os.path.exists(path):
+        return {}, f'{os.path.relpath(path, BASE_DIR)} 不存在，本次不判 trainer-behind'
+    try:
+        with open(path, 'r', encoding='utf-8') as f:
+            manifest = json.load(f)
+    except (OSError, ValueError) as exc:
+        return {}, f'{os.path.relpath(path, BASE_DIR)} 读不了（{exc}），本次不判 trainer-behind'
+    out = {}
+    games = manifest.get('games') if isinstance(manifest, dict) else None
+    if not isinstance(games, dict):
+        return {}, 'trainers.json 里没有 games 对象，本次不判 trainer-behind'
+    for gid, info in games.items():
+        dt = parse_iso_utc(info.get('modified')) if isinstance(info, dict) else None
+        if dt:
+            out[gid] = dt
+    return out, None
 
-    - Master src/data/games_top100.json present (local dev): update it and regenerate public/data.js.
-    - Master absent (GitHub Actions / fresh clone): read and write only the GAMES_DATA block of
-      public/data.js, leaving TRANSLATIONS_DATA and every other part of the file byte-for-byte intact.
-    Either way only radar fields are touched; trainer fields (hasTrainer / trainerHotkeys /
-    trainerInfo / aliases ...) belong to fling_trainer_sync.py and are preserved as-is.
+
+# ==============================================================================
+# Steam 数据
+# ==============================================================================
+class FetchError(Exception):
+    """这一款这次没取到 Steam 数据。"""
+
+
+def store_news_url(appid):
+    return f'https://store.steampowered.com/news/app/{appid}'
+
+
+def parse_steamcmd_payload(payload, appid):
+    """api.steamcmd.net/v1/info/<appid> → {'buildid': str, 'updated_at': datetime}；格式不对抛 FetchError。"""
+    if not isinstance(payload, dict) or payload.get('status') != 'success':
+        raise FetchError('steamcmd 返回的 status 不是 success')
+    public = _dig(payload, 'data', str(appid), 'depots', 'branches', 'public')
+    if not isinstance(public, dict):
+        raise FetchError('steamcmd 返回里没有 depots.branches.public')
+    buildid = public.get('buildid')
+    stamp = public.get('timeupdated') or public.get('timebuildupdated')
+    if buildid is None or not str(buildid).strip().isdigit():
+        raise FetchError(f'public 分支 buildid 不对：{buildid!r}')
+    try:
+        stamp = int(stamp)
+    except (TypeError, ValueError):
+        raise FetchError(f'public 分支 timeupdated 不对：{stamp!r}')
+    if stamp <= 0:
+        raise FetchError(f'public 分支 timeupdated 不对：{stamp!r}')
+    return {'buildid': str(buildid).strip(), 'updated_at': datetime.datetime.fromtimestamp(stamp, UTC)}
+
+
+def parse_news_payload(payload):
+    """ISteamNews/GetNewsForApp → 最新一条 {'title', 'url', 'date'}；没有公告返回 None；格式不对抛 FetchError。"""
+    items = _dig(payload, 'appnews', 'newsitems')
+    if not isinstance(items, list):
+        raise FetchError('ISteamNews 返回里没有 appnews.newsitems')
+    if not items:
+        return None
+    item = items[0] if isinstance(items[0], dict) else {}
+    title = ' '.join(str(item.get('title') or '').split())
+    url = item.get('url') if _is_url(item.get('url')) else None
+    try:
+        stamp = int(item.get('date') or 0)
+    except (TypeError, ValueError):
+        stamp = 0
+    date = datetime.datetime.fromtimestamp(stamp, UTC) if stamp > 0 else None
+    if not title and not url:
+        return None
+    return {'title': title, 'url': url, 'date': date}
+
+
+class SteamClient:
+    """联网取数：每个请求之间至少隔 interval 秒；超时/429/5xx 重试一次；最后还失败就抛 FetchError。"""
+
+    STEAMCMD_URL = 'https://api.steamcmd.net/v1/info/{appid}'
+    NEWS_URL = ('https://api.steampowered.com/ISteamNews/GetNewsForApp/v2/'
+                '?appid={appid}&count=1&maxlength=1&feeds=steam_community_announcements&format=json')
+
+    def __init__(self, timeout=DEFAULT_TIMEOUT, interval=DEFAULT_REQUEST_INTERVAL, retries=1,
+                 sleep=time.sleep, clock=time.monotonic, opener=urllib.request.urlopen):
+        self.timeout = timeout
+        self.interval = max(interval, MIN_REQUEST_INTERVAL)
+        self.retries = retries
+        self._sleep = sleep
+        self._clock = clock
+        self._open = opener
+        self._last_request = None
+        self.request_count = 0
+
+    def _throttle(self):
+        if self._last_request is not None:
+            wait = self.interval - (self._clock() - self._last_request)
+            if wait > 0:
+                self._sleep(wait)
+        self._last_request = self._clock()
+
+    def _get_json(self, url):
+        last_error = '未知错误'
+        for attempt in range(self.retries + 1):
+            self._throttle()
+            self.request_count += 1
+            retryable = True
+            try:
+                req = urllib.request.Request(url, headers=HTTP_HEADERS)
+                with self._open(req, timeout=self.timeout) as resp:
+                    return json.loads(resp.read().decode('utf-8'))
+            except urllib.error.HTTPError as exc:
+                last_error = f'HTTP {exc.code}'
+                retryable = exc.code == 429 or exc.code >= 500
+            except ValueError as exc:  # JSON 解析失败 / 解码失败
+                last_error = f'返回不是合法 JSON（{exc.__class__.__name__}）'
+                retryable = False
+            except (urllib.error.URLError, OSError, http.client.HTTPException) as exc:  # 含超时、断连
+                reason = getattr(exc, 'reason', None) or exc
+                last_error = f'网络错误（{reason}）'
+            if not retryable or attempt >= self.retries:
+                break
+            self._sleep(RETRY_BACKOFF_SECONDS)
+        raise FetchError(last_error)
+
+    def fetch_build(self, appid):
+        try:
+            payload = self._get_json(self.STEAMCMD_URL.format(appid=appid))
+        except FetchError as exc:
+            raise FetchError(f'steamcmd：{exc}')
+        return parse_steamcmd_payload(payload, appid)
+
+    def fetch_latest_news(self, appid):
+        try:
+            payload = self._get_json(self.NEWS_URL.format(appid=appid))
+        except FetchError as exc:
+            raise FetchError(f'ISteamNews：{exc}')
+        return parse_news_payload(payload)
+
+
+class SnapshotClient:
+    """--offline：不联网，从 JSON 快照取数。快照里没有的游戏一律算「没取到」。
+
+    快照格式（键是 appid 字符串）：
+      {"1086940": {"buildid": "123", "timeupdated": "2026-11-17T08:00:00Z",   # 或 "daysAgo": 2
+                   "news": {"title": "...", "url": "https://...", "date": "2026-11-17T08:00:00Z"}},
+       "1245620": {"error": "模拟超时"}}
     """
 
-    @staticmethod
-    def apply_radar_fields(games, inspection_results):
-        """Update radar fields in-place on `games`; return the number of games updated."""
-        updated_count = 0
-        now_iso = datetime.datetime.now().isoformat()
+    def __init__(self, snapshot=None, now=None):
+        self.snapshot = snapshot or {}
+        self.now = now or utc_now()
+        self.request_count = 0
 
-        # Build lookup table
-        result_map = {res['game_id']: res for res in inspection_results}
+    def _entry(self, appid):
+        entry = self.snapshot.get(str(appid))
+        if entry is None:
+            raise FetchError('离线模式：快照里没有这款')
+        if entry.get('error'):
+            raise FetchError(f'离线快照：{entry["error"]}')
+        return entry
 
-        for game in games:
-            gid = game.get('id')
-            if gid in result_map:
-                res = result_map[gid]
-                game['compatibilityStatus'] = res['status']
-                game['radarStatusText'] = res['status_text']
-                game['latestSteamPatch'] = res['latest_patch_title']
-                game['steamBuildId'] = res['build_id']
-                game['steamLastChecked'] = now_iso
-                game['radarSummary'] = res['summary']
-                game['radarRiskTitle'] = res['risk_title']
-                game['radarRiskDesc'] = res['risk_desc']
-                if res.get('alert_text'):
-                    game['emergencyAlert'] = res['alert_text']
-                elif 'emergencyAlert' in game and not res['is_new_update']:
-                    # Keep if legacy or clear if green
-                    if res['status'] == 'green':
-                        game.pop('emergencyAlert', None)
-                updated_count += 1
-        return updated_count
-
-    @staticmethod
-    def sync_to_data_files(inspection_results):
-        """Write results to games_top100.json (if present) and public/data.js."""
-        print("\n🔄 [RadarSynchronizer] Synchronizing inspection results to database...")
-
-        has_master = os.path.exists(GAMES_JSON_PATH)
-        games = load_games()
-        updated_count = RadarSynchronizer.apply_radar_fields(games, inspection_results)
-
-        if has_master:
-            # Master mode: save games_top100.json, then rebuild the whole public/data.js from it
-            with open(GAMES_JSON_PATH, 'w', encoding='utf-8') as f:
-                json.dump(games, f, ensure_ascii=False, indent=2)
-            print(f"✅ Updated {updated_count} games in {GAMES_JSON_PATH}")
-
-            translations = {}
-            if os.path.exists(TRANS_JSON_PATH):
-                with open(TRANS_JSON_PATH, 'r', encoding='utf-8') as f:
-                    translations = json.load(f)
-
-            with open(DATA_JS_PATH, 'w', encoding='utf-8') as f:
-                f.write("// L-MOD Vault Offline Database (Auto-bundled by Steam Patch Sentinel)\n")
-                f.write(GAMES_DATA_HEAD + json.dumps(games, ensure_ascii=False, indent=2) + ";\n\n")
-                f.write("window.GAMES_DATABASE = window.GAMES_DATA;\n\n")
-                if translations:
-                    f.write("window.TRANSLATIONS_DATA = " + json.dumps(translations, ensure_ascii=False, indent=2) + ";\n")
-            print(f"✅ Successfully regenerated {DATA_JS_PATH}")
-            return
-
-        # Master-less mode: replace only the GAMES_DATA block inside public/data.js
-        print(f"ℹ️ {GAMES_JSON_PATH} not found; syncing GAMES_DATA block of {DATA_JS_PATH} only.")
-        with open(DATA_JS_PATH, 'r', encoding='utf-8') as f:
-            js_text = f.read()
-        a, b = _games_data_span(js_text)
-        js_text = js_text[:a] + json.dumps(games, ensure_ascii=False, indent=2) + js_text[b:]
-        with open(DATA_JS_PATH, 'w', encoding='utf-8') as f:
-            f.write(js_text)
-        print(f"✅ Updated {updated_count} games in the GAMES_DATA block of {DATA_JS_PATH} (other blocks untouched)")
-
-# ==============================================================================
-# 5. STRUCTURED REPORT GENERATOR
-# ==============================================================================
-class ReportGenerator:
-    """Generates markdown reports (docs/PATCH_MONITOR_LATEST.md) and group broadcast templates."""
-
-    @staticmethod
-    def generate_markdown_report(results, output_path=REPORT_PATH_DEFAULT):
-        """Generate structured markdown report."""
-        os.makedirs(os.path.dirname(output_path), exist_ok=True)
-        now_cst = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S (CST)')
-        
-        green_count = sum(1 for r in results if r['status'] == 'green')
-        yellow_count = sum(1 for r in results if r['status'] == 'yellow')
-        red_count = sum(1 for r in results if r['status'] == 'red')
-        total_count = len(results)
-        updated_games = [r for r in results if r['is_new_update'] or r['status'] in ('red', 'yellow')]
-
-        lines = [
-            "# 📡 L-MOD Vault Steam 补丁自动化巡检与避坑对账简报",
-            "",
-            "> **Sentinel Live Report** · 自动化对账 Steam 官方 API 补丁动向与控制台/Mod 智库兼容状态  ",
-            f"> **生成时间**：`{now_cst}` ｜ **巡检哨兵**：`L-MOD Patch Monitor v3.0`",
-            "",
-            "---",
-            "",
-            "## 📊 巡检概览与避坑风向标",
-            "",
-            f"- 🎮 **重点监测大作**：`{total_count}` 款",
-            f"- 🟢 **完美兼容·实测通过**：`{green_count}` 款",
-            f"- 🟡 **需更新前置·排查中**：`{yellow_count}` 款",
-            f"- 🔴 **坏档高危·暂停更新**：`{red_count}` 款",
-            "",
-            "---",
-            "",
-            "## 🚨 重点大作最新 Steam 版本对账全览表",
-            "",
-            "| Rank | 游戏大作 (Title) | Steam AppID | 智库校验版本 (Verified) | Steam 最新推送公告 / Build | 兼容状态 | 避坑结论 |",
-            "|:---:|:---|:---:|:---|:---|:---:|:---|"
-        ]
-
-        for r in results:
-            status_badge = (
-                "🟢 **完美兼容**" if r['status'] == 'green' else
-                "🟡 **需更前置**" if r['status'] == 'yellow' else
-                "🔴 **暂停更新**"
-            )
-            title_display = f"**{r['name']}**"
-            patch_display = r['verified_patch']
-            steam_display = f"[{r['latest_patch_title'][:32]}...]({r.get('url', '#')})" if len(r['latest_patch_title']) > 32 else r['latest_patch_title']
-            if r['build_id'] != '---':
-                steam_display += f" `#{r['build_id']}`"
-            conclusion = r['summary'][:38] + ("..." if len(r['summary']) > 38 else "")
-            lines.append(f"| #{r['rank']} | {title_display} | `{r['appid']}` | {patch_display} | {steam_display} | {status_badge} | {conclusion} |")
-
-        lines.extend([
-            "",
-            "---",
-            "",
-            "## ⚠️ 突发更新与坏档预警深度详情",
-            ""
-        ])
-
-        if not updated_games:
-            lines.append("✅ **今日暂无突发大版本更新，所有重点大作 Mod 与控制台前置运行平稳！**")
+    def fetch_build(self, appid):
+        entry = self._entry(appid)
+        if 'daysAgo' in entry:
+            updated = self.now - datetime.timedelta(days=float(entry['daysAgo']))
         else:
-            for ug in updated_games:
-                tag = "🔴【坏档高危·暂停更新】" if ug['status'] == 'red' else "🟡【需更前置·排查测试】"
-                lines.extend([
-                    f"### {tag} 《{ug['name']}》 (Rank #{ug['rank']})",
-                    f"- **Steam AppID**：`{ug['appid']}`",
-                    f"- **底层引擎**：`{ug['engine']}` ｜ **核心工具链**：`{ug['toolchain']}`",
-                    f"- **智库已验证版本**：`{ug['verified_patch']}`",
-                    f"- **Steam 最新推送**：`{ug['latest_patch_title']}` (发布日期: `{ug['latest_patch_date']}`)",
-                    f"- **风险预警说明**：{ug['risk_desc']}",
-                    f"- **紧急避坑建议**：{ug['summary']}",
-                    ""
-                ])
+            updated = parse_iso_utc(entry.get('timeupdated'))
+        if updated is None or not str(entry.get('buildid', '')).isdigit():
+            raise FetchError('离线快照：buildid / timeupdated 不对')
+        return {'buildid': str(entry['buildid']), 'updated_at': updated}
 
-        lines.extend([
-            "---",
-            "",
-            "## 🛡️ 官方原生防坏档推荐操作指南",
-            "",
-            "1. **第一步：锁定 Steam 自动更新**：",
-            "   - 打开 Steam 客户端 ➔ 游戏库 ➔ 右键目标游戏 ➔ 【属性】 ➔ 【更新】 ➔ 将自动更新改为：**「仅在启动时更新」**；",
-            "2. **第二步：开启 Steam 离线模式游玩**：",
-            "   - 左上角 Steam 菜单 ➔ 点击【进入离线模式】 ➔ 离线重启 Steam 客户端后再启动游戏，彻底阻断静默后台下载；",
-            "3. **第三步：重要节点存档备份**：",
-            "   - 运行 L-MOD 提供的极简批处理，自动备份 `Saves` 目录，防止突发脚本注入崩溃损坏存档数据；",
-            "4. **第四步：等待 L-MOD 实机适配包**：",
-            "   - 巡检机器人已报警，老L实验室团队在真机实测前置兼容性，适配完成后将发布对齐补丁与一键更新工具。",
-            "",
-            "---",
-            "",
-            "## 📢 社群与社媒全渠道广播模版 (一键复制发布)",
-            "",
-            "### 💬 微信/QQ 避坑互助群紧急公告模版",
-            "```text"
-        ])
+    def fetch_latest_news(self, appid):
+        entry = self._entry(appid)
+        if entry.get('newsError'):
+            raise FetchError(f'离线快照：{entry["newsError"]}')
+        news = entry.get('news')
+        if not news:
+            return None
+        return {'title': news.get('title') or '', 'url': news.get('url') if _is_url(news.get('url')) else None,
+                'date': parse_iso_utc(news.get('date'))}
 
-        # Pick highest risk game for group broadcast template
-        high_risk_candidates = [r for r in results if r['status'] == 'red'] or [r for r in results if r['status'] == 'yellow']
-        sample_game = high_risk_candidates[0] if high_risk_candidates else results[0]
-
-        lines.extend([
-            f"🚨【老L避坑警报】《{sample_game['name']}》刚刚推送官方更新！",
-            f"⚠️ 风险等级：{sample_game['status_text']}",
-            f"📌 最新更新标题：{sample_game['latest_patch_title']}",
-            f"🔍 智库认证版本：{sample_game['verified_patch']}",
-            "--------------------------------------------------",
-            "🔒 紧急避坑操作提示：",
-            "1. 请大家务必先暂停 Steam 自动更新（游戏属性 -> 更新 -> 仅在启动时更新）！",
-            "2. 严禁直接载入带有高阶 Mod 的老存档，极易引发脚本断裂或坏档卡死！",
-            "3. 建议直接在 Steam 离线模式下运行游戏；",
-            "4. 老L实验室已启动真机实机排查，免坏档兼容整合包稍后推送！",
-            "--------------------------------------------------",
-            "📡 实时避坑雷达看板：https://l-mod.pages.dev/radar.html",
-            "```",
-            "",
-            "### 📱 小红书 / B 站动态避坑快讯模版",
-            "```text",
-            f"【紧急避坑】玩《{sample_game['name']}》打 Mod 的朋友先别更新！Steam 又背刺了！",
-            "",
-            f"今早 Steam 推送了新补丁，老L实机测试发现核心前置极易失效！",
-            "手把手教你 10 秒开启离线锁定，保住你的百小时神仙存档！",
-            "关注老L，修复适配整合包实测后第一时间发在群公告～",
-            "#单机游戏 #游戏MOD #避坑指南 #赛博朋克2077 #黑神话悟空",
-            "```",
-            "",
-            "---",
-            "*Report auto-generated by `scripts/steam_patch_monitor.py` · L-MOD Vault Sentinel Pipeline*"
-        ])
-
-        with open(output_path, 'w', encoding='utf-8') as f:
-            f.write("\n".join(lines) + "\n")
-        print(f"✅ Generated detailed markdown report at {output_path}")
 
 # ==============================================================================
-# 6. MAIN CONTROLLER & CLI
+# 判定
 # ==============================================================================
-def run_monitor():
-    parser = argparse.ArgumentParser(description="L-MOD Vault Steam Patch Sentinel Monitor")
-    parser.add_argument('--appid', type=int, help="Inspect a specific Steam AppID")
-    parser.add_argument('--game', type=str, help="Inspect a specific game ID (e.g. cyberpunk-2077)")
-    parser.add_argument('--all', action='store_true', help="Inspect all games with Steam AppIDs in games_top100.json")
-    parser.add_argument('--update-radar', action='store_true', help="Synchronize results to games_top100.json (if present) and public/data.js (GAMES_DATA block only when the master JSON is absent)")
-    parser.add_argument('--output-report', type=str, default=REPORT_PATH_DEFAULT, help="Markdown report output path")
-    parser.add_argument('--simulate-patch', type=str, help="Simulate a new patch for testing state machine (e.g. cyberpunk-2077)")
-    parser.add_argument('--simulate-version', type=str, default="Update 2.5 (Edgerunners 2)", help="Simulated version string")
-    parser.add_argument('--simulate-risk', type=str, choices=['red', 'yellow'], default='red', help="Simulated risk level")
-    parser.add_argument('--offline', action='store_true', help="Run in offline mode using mock baseline data")
-    parser.add_argument('--timeout', type=int, default=6, help="HTTP request timeout in seconds")
+def classify(now, build_updated_at, framework_entry=None, trainer_modified=None):
+    """契约 2.2 节 + 7.1 节。返回原因码。"""
+    build_age = now - build_updated_at
+    if build_age <= datetime.timedelta(days=RECENT_DAYS):
+        hooks = bool(framework_entry) and framework_entry.get('hooksExe') is True
+        return 'recent-update-hooks' if hooks else 'recent-update'
+    # 7.1：只看近 90 天的 build；更老的游戏修改器早一点也算 quiet
+    if trainer_modified is not None and \
+            build_age <= datetime.timedelta(days=TRAINER_BEHIND_MAX_BUILD_AGE_DAYS) and \
+            trainer_modified < build_updated_at - datetime.timedelta(days=TRAINER_TOLERANCE_DAYS):
+        return 'trainer-behind'
+    return 'quiet'
 
-    args = parser.parse_args()
 
-    print("================================================================================")
-    print("📡 L-MOD Vault Steam 补丁自动化巡检机器人 (Patch Sentinel Monitor)")
-    print("================================================================================")
-    print(f"⏰ Inspection Started: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-    print(f"🌐 Mode: {'OFFLINE (Simulated/Local)' if args.offline else 'ONLINE (Steam Public Web API)'}")
-    if args.simulate_patch:
-        print(f"🧪 Simulation Active: Game '{args.simulate_patch}' -> Version '{args.simulate_version}' (Risk: {args.simulate_risk})")
-    print("--------------------------------------------------------------------------------")
+def status_text(reason, framework_name=None):
+    text = STATUS_TEXT[reason]
+    if reason == 'recent-update-hooks':
+        text = text.format(framework=framework_name or 'Mod 框架')
+    return text
 
-    # Select target games
-    target_games = {}
-    if args.game:
-        if args.game in TOP_14_REGISTRY:
-            target_games[args.game] = TOP_14_REGISTRY[args.game]
-        else:
-            # Look up from the game database (games_top100.json, or public/data.js when absent)
-            all_g = load_games()
-            found = next((g for g in all_g if g['id'] == args.game), None)
-            if not found:
-                print(f"❌ Error: Game '{args.game}' not found in registry or database.")
-                sys.exit(1)
-            target_games[args.game] = {
-                "rank": found.get('rank', 99),
-                "name": found.get('title'),
-                "appid": found.get('steamAppId'),
-                "engine": "Proprietary Engine",
-                "toolchain": "Core Framework",
-                "high_risk": True,
-                "verified_patch": found.get('verifiedPatch', 'v1.0'),
-                "baseline_version": "1.0"
-            }
-    elif args.appid:
-        found_key = next((k for k, v in TOP_14_REGISTRY.items() if v['appid'] == args.appid), None)
-        if found_key:
-            target_games[found_key] = TOP_14_REGISTRY[found_key]
-        else:
-            target_games[f"app-{args.appid}"] = {
-                "rank": 99,
-                "name": f"App {args.appid}",
-                "appid": args.appid,
-                "engine": "Game Engine",
-                "toolchain": "Mod Framework",
-                "high_risk": True,
-                "verified_patch": "Steam Latest",
-                "baseline_version": "1.0"
-            }
-    elif args.all:
-        # Load all from the game database (games_top100.json, or public/data.js when absent)
-        all_g = load_games()
-        for g in all_g:
-            if g.get('steamAppId'):
-                gid = g['id']
-                if gid in TOP_14_REGISTRY:
-                    target_games[gid] = TOP_14_REGISTRY[gid]
-                else:
-                    target_games[gid] = {
-                        "rank": g.get('rank', 99),
-                        "name": g.get('title'),
-                        "appid": g.get('steamAppId'),
-                        "engine": "Game Engine",
-                        "toolchain": "Console/Mod",
-                        "high_risk": False,
-                        "verified_patch": g.get('verifiedPatch', 'v1.0'),
-                        "baseline_version": "1.0"
-                    }
+
+def is_new_red(status, buildid, prev_status, prev_buildid):
+    """契约 2.4 节：这次 red，且上次不是 red 或上次 build 不一样。"""
+    if status != 'red':
+        return False
+    return prev_status != 'red' or str(prev_buildid or '') != str(buildid)
+
+
+def _titles(game):
+    titles = game.get('titles') if isinstance(game.get('titles'), dict) else {}
+    zh = titles.get('zh-CN') or game.get('title') or game.get('id')
+    en = titles.get('en') or game.get('title') or game.get('id')
+    return zh, en
+
+
+def build_radar_fields(game, reason, build, news, framework_entry, trainer_modified, now, framework_name=None,
+                       news_failed=False):
+    """算出要写回的字段（不改 game）。返回 (fields, emergency_alert 或 None)。
+
+    - fields 里值为 None 的 latestSteamPatch 表示「删掉这个字段」（这款游戏没有官方公告）；
+      radarFramework / radarAdvice 为 None 就写 null。
+    - news_failed：公告接口这次失败（7.3 节）。照常判定，fields 里不带 latestSteamPatch（保留上次的值），
+      latestSteamPatchUrl 用上次的值，上次也没有就用 Steam 新闻页。
+    - emergencyAlert 只给红灯（7.2 节）。
+    """
+    status = REASON_STATUS[reason]
+    fw = framework_entry.get('framework') if framework_entry else None
+    fw_name = framework_name or (fw['name'] if fw else None)
+    appid = game.get('steamAppId')
+    zh_title, en_title = _titles(game)
+    build_date = fmt_date(build['updated_at'])
+    buildid = build['buildid']
+
+    if reason == 'quiet':
+        summary = f'Steam 公共分支最近一次更新在 {build_date}（build {buildid}），近 {RECENT_DAYS} 天没有新版本。'
+        risk_title = f'💡 近 {RECENT_DAYS} 天无更新'
+    elif reason == 'recent-update':
+        summary = f'Steam 在 {build_date} 推送了新版本（build {buildid}）。依赖框架的 Mod 和修改器可能要等作者适配。'
+        risk_title = '⚠️ 刚更新 · Mod/修改器可能要等适配'
+    elif reason == 'trainer-behind':
+        summary = (f'风灵月影修改器最后更新于 {fmt_date(trainer_modified)}，早于 Steam 当前版本'
+                   f'（{build_date}，build {buildid}），可能和当前版本对不上。')
+        risk_title = '⚠️ 修改器早于当前游戏版本'
+    else:  # recent-update-hooks；7.4：timeupdated 分不出改没改 exe，只说「可能」
+        summary = (f'Steam 在 {build_date} 推送了新版本（build {buildid}）。{fw_name} 按游戏 exe 的具体版本挂钩，'
+                   f'这次更新后可能要等作者发新版才能用。')
+        risk_title = f'🚨 刚更新 · {fw_name} 可能要等适配'
+
+    after = framework_entry.get('afterUpdate') if framework_entry else None
+    risk_desc = (after or {}).get('zh-CN') or GENERIC_RISK_DESC.get(reason, GENERIC_RISK_DESC['default'])
+    advice = {'zh-CN': after['zh-CN'], 'en': after['en']} if isinstance(after, dict) else None
+
+    fields = {
+        'compatibilityStatus': status,
+        'radarReason': reason,
+        'radarStatusText': status_text(reason, fw_name),
+        'steamBuildId': buildid,
+        'steamBuildUpdatedAt': iso_z(build['updated_at']),
+        'steamLastChecked': iso_z(now),
+        'radarFramework': {'name': fw['name'], 'url': fw['url']} if fw else None,
+        'radarAdvice': advice,
+        'radarSummary': summary,
+        'radarRiskTitle': risk_title,
+        'radarRiskDesc': risk_desc,
+    }
+    if news_failed:
+        fields['latestSteamPatchUrl'] = game.get('latestSteamPatchUrl') or store_news_url(appid)
     else:
-        # Default: Top 14 Flagships
-        target_games = TOP_14_REGISTRY
+        fields['latestSteamPatch'] = news['title'] if news and news.get('title') else None
+        fields['latestSteamPatchUrl'] = (news or {}).get('url') or store_news_url(appid)
 
-    print(f"🎯 Total Targets to Inspect: {len(target_games)} games\n")
+    alert = None
+    if status == 'red':
+        alert = {
+            'zh-CN': f'《{zh_title}》Steam 于 {build_date} 更新，{fw_name} 可能要等作者发新版，先别更新',
+            'en': (f'{en_title} was updated on Steam on {build_date}. {fw_name} may need a new release '
+                   f'to work with this update, so hold off on updating.'),
+        }
+    return fields, alert
 
-    client = SteamProbeClient(timeout=args.timeout, offline_mode=args.offline)
+
+def inspect_game(game, client, framework_entry, trainer_modified, now, simulate=None):
+    """巡检一款。返回结果 dict；fetched=False 时不带 fields（字段保持原值）。"""
+    appid = game.get('steamAppId')
+    zh_title, en_title = _titles(game)
+    result = {
+        'id': game.get('id'), 'rank': game.get('rank'), 'title': zh_title, 'title_en': en_title, 'appid': appid,
+        'prev_status': game.get('compatibilityStatus'), 'prev_buildid': game.get('steamBuildId'),
+        'framework_entry': framework_entry, 'trainer_modified': trainer_modified,
+        'fetched': False, 'error': None, 'simulated': False, 'new_red': False,
+        'build': None, 'news': None, 'reason': None, 'status': None, 'fields': None, 'alert': None,
+        'framework_name': None, 'news_error': None,
+    }
+
+    framework_name = None
+    news_failed = False
+    if simulate and simulate.get('game_id') == game.get('id'):
+        result['simulated'] = True
+        build = {'buildid': str(simulate.get('build_id') or now.strftime('%Y%m%d%H%M')), 'updated_at': now}
+        news = {'title': f'【演练】{simulate.get("version") or "模拟更新"}', 'url': store_news_url(appid), 'date': now}
+        if simulate.get('risk', 'red') == 'red':
+            fw = (framework_entry or {}).get('framework')
+            framework_entry = dict(framework_entry or {}, hooksExe=True, framework=fw)
+            framework_name = None if fw else SIMULATED_FRAMEWORK_NAME
+        else:
+            framework_entry = dict(framework_entry or {}, hooksExe=False) if framework_entry else None
+    else:
+        # 7.3：只有 build 取不到才算「本次未取到」、字段全保持原值；公告取不到照常判定
+        try:
+            build = client.fetch_build(appid)
+        except FetchError as exc:
+            result['error'] = str(exc)
+            return result
+        try:
+            news = client.fetch_latest_news(appid)
+        except FetchError as exc:
+            news, news_failed = None, True
+            result['news_error'] = str(exc)
+
+    reason = classify(now, build['updated_at'], framework_entry, trainer_modified)
+    fields, alert = build_radar_fields(game, reason, build, news, framework_entry, trainer_modified, now,
+                                       framework_name=framework_name, news_failed=news_failed)
+    status = REASON_STATUS[reason]
+    fw = (framework_entry or {}).get('framework')
+    result.update({
+        'fetched': True, 'build': build, 'news': news, 'reason': reason, 'status': status,
+        'fields': fields, 'alert': alert, 'framework_name': framework_name or (fw['name'] if fw else None),
+        'new_red': is_new_red(status, build['buildid'], result['prev_status'], result['prev_buildid']),
+    })
+    return result
+
+
+def select_targets(games, game_id=None, appid=None):
+    """默认全部带 steamAppId 的游戏；--game / --appid 只挑一款。"""
+    steam_games = [g for g in games if g.get('steamAppId')]
+    if game_id:
+        return [g for g in steam_games if g.get('id') == game_id]
+    if appid:
+        return [g for g in steam_games if g.get('steamAppId') == appid]
+    return steam_games
+
+
+def inspect_games(targets, client, frameworks, trainer_times, now, simulate=None, log=print):
     results = []
+    total = len(targets)
+    for i, game in enumerate(targets, 1):
+        res = inspect_game(game, client, frameworks.get(game.get('id')), trainer_times.get(game.get('id')),
+                           now, simulate=simulate)
+        results.append(res)
+        if log:
+            if res['fetched']:
+                icon = {'red': '🔴', 'yellow': '🟡', 'green': '🟢'}[res['status']]
+                extra = f"{res['reason']:<20} build {res['build']['buildid']} @ {fmt_date(res['build']['updated_at'])}"
+                if res['new_red']:
+                    extra += '  ← 新变红'
+                if res['simulated']:
+                    extra += '  (演练)'
+                if res['news_error']:
+                    extra += f"  （公告没取到：{res['news_error']}）"
+            else:
+                icon, extra = '⚪', f"未取到：{res['error']}"
+            log(f"[{i:>3}/{total}] {icon} #{res['rank']:<3} {str(res['title_en'])[:30]:<31} {extra}")
+    return results
 
-    # Prepare simulation object if set
-    sim_obj = None
+
+def results_to_snapshot(results):
+    """把这次取到的 Steam 数据存成 --steam-snapshot 能读的格式（演练的那款不存）。"""
+    snap = {}
+    for r in results:
+        if r['simulated']:
+            continue
+        if not r['fetched']:
+            snap[str(r['appid'])] = {'error': r['error']}
+            continue
+        news = r['news']
+        entry = {
+            'buildid': r['build']['buildid'],
+            'timeupdated': iso_z(r['build']['updated_at']),
+            'news': None if not news else {
+                'title': news.get('title') or '', 'url': news.get('url'),
+                'date': iso_z(news['date']) if news.get('date') else None,
+            },
+        }
+        if r['news_error']:
+            entry['newsError'] = r['news_error']
+        snap[str(r['appid'])] = entry
+    return snap
+
+
+def apply_results(games, results):
+    """把取到数据的结果写进 games（原地改）。没取到的一个字段都不动。返回改了几款。"""
+    by_id = {g.get('id'): g for g in games}
+    updated = 0
+    for res in results:
+        if not res['fetched']:
+            continue
+        game = by_id.get(res['id'])
+        if game is None:
+            continue
+        for key, value in res['fields'].items():
+            if key == 'latestSteamPatch' and value is None:
+                game.pop(key, None)
+            else:
+                game[key] = value
+        if res['alert']:
+            game['emergencyAlert'] = res['alert']
+        else:
+            game.pop('emergencyAlert', None)
+        updated += 1
+    return updated
+
+
+# ==============================================================================
+# 报告（docs/PATCH_MONITOR_LATEST.md，也是预警单正文）
+# ==============================================================================
+def _md(text, limit=None):
+    s = ' '.join(str(text if text is not None else '').split())
+    if limit and len(s) > limit:
+        s = s[:limit - 1] + '…'
+    return s.replace('|', '\\|')
+
+
+def _age_days(now, dt):
+    return (now - dt).total_seconds() / 86400.0 if dt else None
+
+
+def _fw_label(res):
+    fw = (res.get('fields') or {}).get('radarFramework')
+    if fw:
+        return f"[{_md(fw['name'], 40)}]({fw['url']})"
+    if res.get('framework_name'):
+        return _md(res['framework_name'], 40)
+    return '—' if res.get('framework_entry') else '（无资料）'
+
+
+def _hooks_label(entry):
+    if not entry:
+        return '—'
+    return {True: 'true', False: 'false', None: 'null'}.get(entry.get('hooksExe'), '?')
+
+
+def summarize(results):
+    fetched = [r for r in results if r['fetched']]
+    return {
+        'total': len(results),
+        'red': sum(1 for r in fetched if r['status'] == 'red'),
+        'yellow': sum(1 for r in fetched if r['status'] == 'yellow'),
+        'green': sum(1 for r in fetched if r['status'] == 'green'),
+        'missing': sum(1 for r in results if not r['fetched']),
+        'new_red': sum(1 for r in results if r['new_red']),
+    }
+
+
+def render_report(results, now, frameworks, trainer_note=None, mode_notes=(), simulate=None):
+    counts = summarize(results)
+    fetched = [r for r in results if r['fetched']]
+    reds = [r for r in fetched if r['status'] == 'red']
+    yellows = [r for r in fetched if r['status'] == 'yellow']
+    greens = [r for r in fetched if r['status'] == 'green']
+    missing = [r for r in results if not r['fetched']]
+    new_reds = [r for r in results if r['new_red']]
+
+    lines = [
+        '# 📡 补丁雷达巡检报告',
+        '',
+        f'<!-- radar-new-red: {counts["new_red"]} -->',
+        '',
+        f'- 巡检时间：`{iso_z(now)}`（UTC）',
+        f'- 范围：{counts["total"]} 款带 Steam AppID 的游戏（非 Steam 游戏不巡检）',
+        f'- 规则：Steam 公共分支 build 发布时间 ≤ {RECENT_DAYS} 天算「刚更新」；框架资料 `hooksExe` 为 true 才亮红；'
+        f'build ≤ {TRAINER_BEHIND_MAX_BUILD_AGE_DAYS} 天且修改器早于它超过 {TRAINER_TOLERANCE_DAYS} 天亮黄。'
+        f'公告只展示，不参与判定。',
+        '- 没取到 build 信息的游戏，雷达字段保持上次的值不动；只是公告没取到的照常判定，公告标题和链接保留上次的值。',
+    ]
+    if simulate:
+        lines.append(f'- 🧪 **本次是演练**：`{simulate["game_id"]}` 被模拟成刚更新（风险 `{simulate.get("risk", "red")}`），'
+                     f'不是真的 Steam 更新。')
+    for note in mode_notes:
+        lines.append(f'- {note}')
+
+    lines += [
+        '',
+        '## 概览',
+        '',
+        '| 🔴 红 | 🟡 黄 | 🟢 绿 | ⚪ 本次未取到 | 🚨 新变红 |',
+        '|:---:|:---:|:---:|:---:|:---:|',
+        f'| {counts["red"]} | {counts["yellow"]} | {counts["green"]} | {counts["missing"]} | {counts["new_red"]} |',
+        '',
+        f'原因码：`recent-update-hooks` {counts["red"]} · '
+        f'`recent-update` {sum(1 for r in yellows if r["reason"] == "recent-update")} · '
+        f'`trainer-behind` {sum(1 for r in yellows if r["reason"] == "trainer-behind")} · '
+        f'`quiet` {counts["green"]}',
+        '',
+        f'## 🚨 新变红（{len(new_reds)}）',
+        '',
+    ]
+    if not new_reds:
+        lines.append('本次没有新变红的游戏。')
+    else:
+        lines.append('这次是红灯，并且上次不是红灯、或者上次的 build 和这次不一样：')
+        lines.append('')
+        for r in new_reds:
+            prev = r['prev_status'] or '无'
+            prev_build = r['prev_buildid'] or '无'
+            tag = '（演练）' if r['simulated'] else ''
+            lines.append(f"- **#{r['rank']} {_md(r['title'])}**{tag} · AppID `{r['appid']}` · build `{r['build']['buildid']}`"
+                         f"（{fmt_date(r['build']['updated_at'])}）· 框架 {_fw_label(r)} · 上次 `{prev}` / build `{prev_build}`")
+        lines += ['', '可直接转发的提醒（只写事实）：', '', '```text']
+        for r in new_reds:
+            fw_name = r['framework_name'] or 'Mod 框架'
+            drill = '【演练，不是真的更新】' if r['simulated'] else ''
+            lines.append(f"{drill}《{r['title']}》Steam 于 {fmt_date(r['build']['updated_at'])} 更新。{fw_name} 可能要等作者发新版"
+                         f"才能用，带 Mod 玩的先别更新：Steam 库里右键游戏 → 属性 → 更新 → 改成「仅在启动时更新」。")
+        lines.append('```')
+
+    def table(rows, header, sep, render):
+        out = [header, sep]
+        out += [render(r) for r in rows]
+        return out
+
+    lines += ['', f'## 🔴 红灯（{len(reds)}）', '']
+    if reds:
+        lines += table(
+            reds, '| # | 游戏 | 原因 | Steam build | 发布时间 (UTC) | 框架 | 新变红 |', '|:---:|:---|:---|:---|:---|:---|:---:|',
+            lambda r: (f"| {r['rank']} | {_md(r['title'], 40)} | `{r['reason']}` | `{r['build']['buildid']}` | "
+                       f"{iso_z(r['build']['updated_at'])} | {_fw_label(r)} | {'是' if r['new_red'] else ''} |"))
+    else:
+        lines.append('无。')
+
+    lines += ['', f'## 🟡 黄灯（{len(yellows)}）', '']
+    if yellows:
+        lines += table(
+            yellows, '| # | 游戏 | 原因 | Steam build | 发布时间 (UTC) | 修改器更新 | 框架 / hooksExe |',
+            '|:---:|:---|:---|:---|:---|:---|:---|',
+            lambda r: (f"| {r['rank']} | {_md(r['title'], 40)} | `{r['reason']}` | `{r['build']['buildid']}` | "
+                       f"{iso_z(r['build']['updated_at'])} | {fmt_date(r['trainer_modified'])} | "
+                       f"{_fw_label(r)} / `{_hooks_label(r['framework_entry'])}` |"))
+    else:
+        lines.append('无。')
+
+    lines += ['', f'## ⚪ 本次未取到（{len(missing)}，字段保持上次的值）', '']
+    if missing:
+        lines += table(
+            missing, '| # | 游戏 | AppID | 原因 | 上次状态 |', '|:---:|:---|:---:|:---|:---:|',
+            lambda r: f"| {r['rank']} | {_md(r['title'], 40)} | `{r['appid']}` | {_md(r['error'], 80)} | {r['prev_status'] or '—'} |")
+    else:
+        lines.append('无。')
+
+    news_missing = [r for r in results if r.get('news_error')]
+    if news_missing:
+        lines += ['', f'### 公告没取到（{len(news_missing)}，照常判定，公告标题和链接保留上次的值）', '']
+        lines += [f"- #{r['rank']} {_md(r['title'], 40)}：{_md(r['news_error'], 80)}" for r in news_missing]
+
+    lines += ['', f'## 🟢 绿灯（{len(greens)}）', '']
+    if greens:
+        lines.append('、'.join(f"#{r['rank']} {_md(r['title'], 30)}" for r in greens))
+    else:
+        lines.append('无。')
+
+    # 框架资料体检
+    covered = sum(1 for r in results if r['framework_entry'])
+    hooks = {'true': 0, 'false': 0, 'null': 0}
+    for r in results:
+        if r['framework_entry']:
+            hooks[_hooks_label(r['framework_entry'])] += 1
+    lines += ['', '## 🧩 框架资料', '']
+    rel_dir = os.path.relpath(frameworks.directory, BASE_DIR)
+    if frameworks.missing_dir:
+        lines.append(f'- `{rel_dir}/` 目录不存在：全部游戏按「没有框架资料」处理（最多亮黄，不亮红）。')
+    elif not frameworks.files and not frameworks.errors:
+        lines.append(f'- `{rel_dir}/` 里还没有 part-*.json：全部游戏按「没有框架资料」处理（最多亮黄，不亮红）。')
+    else:
+        files = '、'.join(f'`{name}`（{n} 条）' for name, n in frameworks.files) or '无'
+        lines.append(f'- 读到的文件：{files}')
+    lines.append(f'- 覆盖：{covered} / {len(results)} 款巡检目标有可用条目；hooksExe true {hooks["true"]} · '
+                 f'false {hooks["false"]} · null {hooks["null"]}')
+    if frameworks.errors:
+        lines.append(f'- ❌ 跳过（格式不对，{len(frameworks.errors)} 处）：')
+        lines += [f'  - {_md(e, 200)}' for e in frameworks.errors]
+    if frameworks.warnings:
+        lines.append(f'- ⚠️ 提醒（条目照用，{len(frameworks.warnings)} 处）：')
+        lines += [f'  - {_md(w, 200)}' for w in frameworks.warnings]
+    uncovered = [r for r in results if not r['framework_entry']]
+    if uncovered and len(uncovered) < len(results):
+        lines.append('- 没有条目的游戏：' + '、'.join(f"`{r['id']}`" for r in uncovered))
+    if trainer_note:
+        lines += ['', f'- 修改器：{trainer_note}']
+
+    # 全量明细
+    lines += ['', '<details>', f'<summary>全部 {len(results)} 款明细</summary>', '',
+              '| # | 游戏 | 状态 | 原因 | Steam build | 发布时间 (UTC) | 修改器更新 | 最新公告 |',
+              '|:---:|:---|:---:|:---|:---|:---|:---|:---|']
+    for r in sorted(results, key=lambda x: (x['rank'] if _is_int(x['rank']) else 10 ** 6)):
+        if r['fetched']:
+            news = r['news'] or {}
+            title = _md(news.get('title') or ('（公告没取到）' if r.get('news_error') else '（无公告）'), 40)
+            link = (r['fields'] or {}).get('latestSteamPatchUrl')
+            news_cell = f'[{title}]({link})' if link else title
+            icon = {'red': '🔴', 'yellow': '🟡', 'green': '🟢'}[r['status']]
+            lines.append(f"| {r['rank']} | {_md(r['title'], 30)} | {icon} | `{r['reason']}` | `{r['build']['buildid']}` | "
+                         f"{iso_z(r['build']['updated_at'])} | {fmt_date(r['trainer_modified'])} | {news_cell} |")
+        else:
+            lines.append(f"| {r['rank']} | {_md(r['title'], 30)} | ⚪ | 未取到 | — | — | {fmt_date(r['trainer_modified'])} | — |")
+    lines += ['', '</details>', '', '---',
+              '*由 `scripts/steam_patch_monitor.py` 生成 · 规则见 `docs/RADAR_V2_CONTRACT.md` 第 2 节*', '']
+    return '\n'.join(lines)
+
+
+# ==============================================================================
+# 命令行
+# ==============================================================================
+def parse_args(argv=None):
+    p = argparse.ArgumentParser(description='补丁雷达 v2：巡检 Steam build、写报告，可选写回 public/data.js')
+    p.add_argument('--game', help='只巡检这一款（游戏 id，如 baldurs-gate-3）')
+    p.add_argument('--appid', type=int, help='只巡检这个 Steam AppID')
+    p.add_argument('--all', action='store_true', help='兼容旧参数；现在默认就是全部带 steamAppId 的游戏')
+    p.add_argument('--update-radar', action='store_true', help='把结果写回 public/data.js 的 GAMES_DATA 段')
+    p.add_argument('--output-report', default=REPORT_PATH_DEFAULT, help='Markdown 报告输出路径')
+    p.add_argument('--offline', action='store_true', help='不联网；配 --steam-snapshot 用假数据，否则全部算「本次未取到」')
+    p.add_argument('--steam-snapshot', help='--offline 用的 Steam 数据快照 JSON（格式见 SnapshotClient）')
+    p.add_argument('--save-snapshot', help='把这次取到的 Steam 数据存成快照 JSON，之后可 --offline --steam-snapshot 复跑')
+    p.add_argument('--simulate-patch', metavar='GAME_ID', help='演练：把这款游戏模拟成「刚更新」，用来走一遍新变红流程')
+    p.add_argument('--simulate-version', default='模拟更新', help='演练时公告标题里显示的版本名')
+    p.add_argument('--simulate-risk', choices=['red', 'yellow'], default='red',
+                   help='演练风险：red = 当作框架挂钩 exe（会产生新变红），yellow = recent-update')
+    p.add_argument('--simulate-build-id', help='演练用的 build 号（默认按当前时间生成）')
+    p.add_argument('--data-js', default=DATA_JS_PATH, help='游戏库 data.js 路径（默认 public/data.js）')
+    p.add_argument('--frameworks-dir', default=FRAMEWORKS_DIR, help='框架资料目录（默认 scripts/radar_frameworks）')
+    p.add_argument('--trainers', default=TRAINERS_PATH, help='修改器清单（默认 public/trainers.json）')
+    p.add_argument('--now', help='把「现在」固定成这个 ISO 时间（离线复现用）')
+    p.add_argument('--timeout', type=float, default=DEFAULT_TIMEOUT, help='单个请求超时秒数')
+    p.add_argument('--interval', type=float, default=DEFAULT_REQUEST_INTERVAL,
+                   help=f'请求间隔秒数（不小于 {MIN_REQUEST_INTERVAL}）')
+    return p.parse_args(argv)
+
+
+def run_monitor(argv=None, log=print):
+    args = parse_args(argv)
+    now = utc_now()
+    if args.now:
+        now = parse_iso_utc(args.now)
+        if now is None:
+            log(f'❌ --now 不是合法的 ISO 时间：{args.now}')
+            return 2
+
+    data_js = os.path.abspath(args.data_js)
+    use_master = data_js == DATA_JS_PATH and os.path.exists(GAMES_JSON_PATH)
+    games = load_games(data_js, use_master)
+    targets = select_targets(games, game_id=args.game, appid=args.appid)
+    if (args.game or args.appid) and not targets:
+        log(f'❌ 找不到要巡检的游戏（--game {args.game} / --appid {args.appid}）；非 Steam 游戏不巡检。')
+        return 1
+
+    simulate = None
     if args.simulate_patch:
-        sim_obj = {
-            "game_id": args.simulate_patch,
-            "version": args.simulate_version,
-            "risk": args.simulate_risk
-        }
+        if not any(g.get('id') == args.simulate_patch for g in targets):
+            log(f'❌ 演练的游戏 {args.simulate_patch} 不在本次巡检范围里（不存在、没有 steamAppId，或被 --game/--appid 过滤掉）。')
+            return 1
+        simulate = {'game_id': args.simulate_patch, 'version': args.simulate_version,
+                    'risk': args.simulate_risk, 'build_id': args.simulate_build_id}
 
-    # Execute inspection loop
-    for game_id, meta in target_games.items():
-        appid = meta['appid']
-        name = meta['name']
-        rank = meta['rank']
-        
-        # 1. Fetch latest announcements
-        news_items = client.fetch_steam_announcements(appid, count=3)
-        latest_item = news_items[0] if news_items else None
-        
-        # 2. Probe BuildID
-        build_id, build_time = client.fetch_steamcmd_build(appid)
-        
-        # 3. Analyze diff & state machine
-        eval_result = PatchVersionAnalyzer.evaluate_game_status(
-            game_id=game_id,
-            meta=meta,
-            verified_patch=meta.get('verified_patch', 'Steam 最新'),
-            latest_news_item=latest_item,
-            build_id=build_id,
-            build_time=build_time,
-            simulation=sim_obj
-        )
+    frameworks = load_frameworks(os.path.abspath(args.frameworks_dir), games)
+    trainer_times, trainer_note = load_trainer_times(os.path.abspath(args.trainers))
 
-        full_record = {
-            "game_id": game_id,
-            "rank": rank,
-            "name": name,
-            "appid": appid,
-            "engine": meta.get('engine', 'Engine'),
-            "toolchain": meta.get('toolchain', 'Toolchain'),
-            "verified_patch": meta.get('verified_patch', 'Steam 最新'),
-            "url": latest_item.get('url', f"https://store.steampowered.com/news/app/{appid}") if latest_item else f"https://store.steampowered.com/news/app/{appid}",
-            **eval_result
-        }
-        results.append(full_record)
+    mode_notes = []
+    if args.offline:
+        snapshot = {}
+        if args.steam_snapshot:
+            with open(args.steam_snapshot, 'r', encoding='utf-8') as f:
+                snapshot = json.load(f)
+            mode_notes.append(f'离线模式：Steam 数据来自快照 `{os.path.basename(args.steam_snapshot)}`，不是实时数据。')
+        else:
+            mode_notes.append('离线模式：没有 Steam 数据，全部算「本次未取到」。')
+        client = SnapshotClient(snapshot, now=now)
+    else:
+        client = SteamClient(timeout=args.timeout, interval=args.interval)
 
-        # Console Progress indicator
-        status_icon = (
-            "🟢 [PASS]" if full_record['status'] == 'green' else
-            "🟡 [WARN]" if full_record['status'] == 'yellow' else
-            "🔴 [ALERT]"
-        )
-        print(f"#{rank:<2} {status_icon} {name[:24]:<25} | AppID: {appid:<8} | Steam: {full_record['latest_patch_title'][:30]}")
+    log('=' * 80)
+    log('📡 补丁雷达 v2 巡检')
+    log(f'⏰ {iso_z(now)}  ·  {"离线" if args.offline else "联网"}  ·  目标 {len(targets)} 款')
+    log(f'🧩 框架资料：{len(frameworks.entries)} 条可用，{len(frameworks.errors)} 处跳过，{len(frameworks.warnings)} 处提醒')
+    if simulate:
+        log(f'🧪 演练：{simulate["game_id"]}（风险 {simulate["risk"]}）')
+    log('-' * 80)
 
-    print("\n--------------------------------------------------------------------------------")
-    print("📊 INSPECTION SUMMARY")
-    print("--------------------------------------------------------------------------------")
-    green_c = sum(1 for r in results if r['status'] == 'green')
-    yellow_c = sum(1 for r in results if r['status'] == 'yellow')
-    red_c = sum(1 for r in results if r['status'] == 'red')
-    print(f"🟢 Compatible: {green_c} | 🟡 Needs Attention: {yellow_c} | 🔴 Breaking Alert: {red_c}")
+    results = inspect_games(targets, client, frameworks, trainer_times, now, simulate=simulate, log=log)
+    counts = summarize(results)
 
-    # Generate Markdown Report
-    ReportGenerator.generate_markdown_report(results, output_path=args.output_report)
+    report = render_report(results, now, frameworks, trainer_note=trainer_note, mode_notes=mode_notes, simulate=simulate)
+    report_path = os.path.abspath(args.output_report)
+    os.makedirs(os.path.dirname(report_path), exist_ok=True)
+    with open(report_path, 'w', encoding='utf-8') as f:
+        f.write(report)
 
-    # Synchronize to Radar if requested
+    if args.save_snapshot:
+        with open(args.save_snapshot, 'w', encoding='utf-8') as f:
+            json.dump(results_to_snapshot(results), f, ensure_ascii=False, indent=2)
+        log(f'💾 Steam 数据快照：{os.path.abspath(args.save_snapshot)}')
+
+    log('-' * 80)
+    log(f"🔴 {counts['red']}  🟡 {counts['yellow']}  🟢 {counts['green']}  ⚪ 未取到 {counts['missing']}  "
+        f"🚨 新变红 {counts['new_red']}  （请求 {client.request_count} 次）")
+    log(f'📝 报告：{report_path}')
+
     if args.update_radar:
-        RadarSynchronizer.sync_to_data_files(results)
+        updated = apply_results(games, results)
+        save_games(games, data_js, use_master)
+        log(f'💾 已写回 {updated} 款到 {data_js}（未取到的 {counts["missing"]} 款不动）')
+        if simulate:
+            log('⚠️ 演练数据已写进 data.js，别提交。')
+    log('=' * 80)
+    return 0
 
-    print("================================================================================")
-    print("🎉 Steam Patch Sentinel Inspection Completed Successfully!")
-    print("================================================================================")
 
 if __name__ == '__main__':
-    run_monitor()
+    sys.exit(run_monitor())

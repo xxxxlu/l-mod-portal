@@ -1,0 +1,17 @@
+{
+  "schema": 1,
+  "games": {
+    "cyberpunk-2077": {
+      "modified": "2026-10-28T06:36:54"
+    },
+    "witcher-3": {
+      "modified": "2026-09-01T09:07:25"
+    },
+    "baldurs-gate-3": {
+      "modified": "2025-04-16T05:20:55"
+    },
+    "palworld": {
+      "modified": "2026-11-18T00:00:00"
+    }
+  }
+}

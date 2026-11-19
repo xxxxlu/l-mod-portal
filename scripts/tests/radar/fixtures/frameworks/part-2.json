@@ -1,0 +1,21 @@
+[
+  {
+    "id": "skyrim-se",
+    "rank": 5,
+    "steamAppId": 489830,
+    "framework": {
+      "name": "SKSE64",
+      "url": "https://skse.silverlock.org/"
+    },
+    "hooksExe": true,
+    "modSupport": "community",
+    "afterUpdate": {
+      "zh-CN": "游戏更新后先别急着进，等 SKSE64 和 Address Library 出对应版本再玩；可在 Steam 设成仅在启动时更新。",
+      "en": "After a game update, wait for matching SKSE64 and Address Library builds before playing."
+    },
+    "sources": [
+      "https://skse.silverlock.org/"
+    ],
+    "checkedAt": "2026-11-19"
+  }
+]
