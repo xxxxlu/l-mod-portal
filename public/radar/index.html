@@ -669,7 +669,7 @@
             <span class="text-[10px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-full font-mono" id="drawer-secret-card-tag">公益·零广告</span>
           </div>
           <p class="text-xs text-zinc-300 leading-relaxed" id="drawer-secret-card-desc">
-            若遇游戏突发更新失效或极端坏档，请保存官方避坑专属暗号，在微信公众号后台或私信输入暗号，自动秒推连夜更新的应急更新包与坏档急救工具！
+            游戏更新后 Mod 用不了或存档出问题？保存避坑暗号，在公众号后台或私信发送，可以进互助群和其他玩家交流处理办法。
           </p>
           <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-black/50 p-3 rounded-xl border border-white/5">
             <div class="flex items-center space-x-2">
@@ -682,7 +682,7 @@
             </button>
           </div>
           <div class="text-[11px] text-zinc-500 flex items-center justify-between pt-1">
-            <span id="drawer-secret-tip-1">💡 进群输入暗号秒领：最新追更包 · 坏档救星 · 纯净开源源</span>
+            <span id="drawer-secret-tip-1">💡 进群发送暗号：交流 Mod 更新进度与坏档处理经验</span>
             <span id="drawer-secret-tip-2">群文件不放 exe</span>
           </div>
         </div>
@@ -750,10 +750,31 @@ if not exist "bin\\x64\\Cyberpunk2077.exe" (
 echo [√] 已找到游戏主程序。
 echo [i] 常用呼出热键: ~ (波浪键)
 echo [i] 专精指令请认准: Game.SetProficiencyLevel(...)
+pause`,
+        en: {
+          rescueSteps: [
+            "1. After a game update, check that Cyber Engine Tweaks (CET) has a build for the current game version (see the CET release page).",
+            "2. Extract the framework into bin/x64/, then press ~ in game to open it (turn off Caps Lock and switch to an English keyboard layout).",
+            "3. Perk trees were reworked in 2.0, so skip old SetLevel commands from the web; after editing quest facts, quicksave with F5 and reload with F9."
+          ],
+          batPreview: `@echo off
+chcp 65001 >nul
+title [L-MOD Vault] Cyberpunk 2077 console check
+echo [*] Checking the Cyberpunk 2077 install folder...
+if not exist "bin\\x64\\Cyberpunk2077.exe" (
+    echo [!] Run this script from the Cyberpunk 2077 install folder.
+    pause
+    exit /b
+)
+echo [√] Game executable found.
+echo [i] Console hotkey: ~ (tilde)
+echo [i] Proficiency command: Game.SetProficiencyLevel(...)
 pause`
+        }
       },
       "black-myth-wukong": {
-        engine: "虚幻引擎 5 (UE5)",
+        engine: "Unreal Engine 5 (UE5)",
+        engineZh: "虚幻引擎 5 (UE5)",
         rescueSteps: [
           "1. 从 UE4SS 的 GitHub 发布页下载，别用来路不明的打包版。",
           "2. 在 UE4SS 的 mods.txt 里把 ConsoleEnablerMod 设为 1，开启控制台。",
@@ -770,7 +791,26 @@ if not exist "b1\\Binaries\\Win64\\b1-Win64-Shipping.exe" (
 )
 echo [√] 已找到游戏主程序。
 echo [i] 装好 UE4SS 并开启 ConsoleEnablerMod 后，进游戏按 ~ 输入指令。
+pause`,
+        en: {
+          rescueSteps: [
+            "1. Download UE4SS from its GitHub releases page, not from repacks of unknown origin.",
+            "2. In UE4SS's mods.txt, set ConsoleEnablerMod to 1 to enable the console.",
+            "3. Press ~ in game; slomo 0.4 turns on slow motion."
+          ],
+          batPreview: `@echo off
+chcp 65001 >nul
+title [L-MOD Vault] Black Myth: Wukong console check
+echo [*] Checking b1\\Binaries\\Win64...
+if not exist "b1\\Binaries\\Win64\\b1-Win64-Shipping.exe" (
+    echo [!] Put this script in the Black Myth: Wukong install folder.
+    pause
+    exit /b
+)
+echo [√] Game executable found.
+echo [i] With UE4SS installed and ConsoleEnablerMod enabled, press ~ in game to type commands.
 pause`
+        }
       },
       "witcher-3": {
         engine: "REDengine 3",
@@ -796,7 +836,32 @@ if %errorlevel% equ 0 (
     echo [√] 成功写入 DBGConsoleOn=true！
 )
 echo [*] 进游戏按 ~ 键即可使用控制台。
+pause`,
+        en: {
+          rescueSteps: [
+            "1. Open bin/config/base/general.ini in Notepad.",
+            "2. Add a new line DBGConsoleOn=true at the end of the [General] section and save.",
+            "3. Press ~ in game; after finishing Hearts of Stone, additem('Iris\\'s Rose') keeps Iris's rose for good."
+          ],
+          batPreview: `@echo off
+chcp 65001 >nul
+title [L-MOD Vault] The Witcher 3 Next-Gen: enable the native console
+set "INI_FILE=bin\\config\\base\\general.ini"
+if not exist "%INI_FILE%" (
+    echo [!] %INI_FILE% not found. Run this script from The Witcher 3 install folder.
+    pause
+    exit /b
+)
+findstr /i "DBGConsoleOn=true" "%INI_FILE%" >nul
+if %errorlevel% equ 0 (
+    echo [√] general.ini already has DBGConsoleOn=true.
+) else (
+    echo DBGConsoleOn=true >> "%INI_FILE%"
+    echo [√] Added DBGConsoleOn=true.
+)
+echo [*] Press ~ in game to use the console.
 pause`
+        }
       },
       "baldurs-gate-3": {
         engine: "Divinity 4.0",
@@ -816,10 +881,30 @@ if not exist "bin\\bg3.exe" (
 )
 echo [√] 已找到游戏主程序。
 echo [i] 请确认 Script Extender 已更新到当前游戏版本，并删除旧版 ModFixer。
+pause`,
+        en: {
+          rescueSteps: [
+            "1. After a game update, check that BG3 Script Extender has a build for the current game version (see Norbyte's release page).",
+            "2. Since Patch 7 the game manages load order itself; delete old ModFixer from the Mods folder completely.",
+            "3. With the console enabled in the Script Extender config, a debug window opens when the game starts; type Osi commands there."
+          ],
+          batPreview: `@echo off
+chcp 65001 >nul
+title [L-MOD Vault] Baldur's Gate 3 check
+echo [*] Checking the Baldur's Gate 3 bin folder...
+if not exist "bin\\bg3.exe" (
+    echo [!] Run this script from the Baldur's Gate 3 install folder.
+    pause
+    exit /b
+)
+echo [√] Game executable found.
+echo [i] Make sure Script Extender matches the current game version, and remove old ModFixer.
 pause`
+        }
       },
       "elden-ring": {
-        engine: "FromSoftware 专有引擎",
+        engine: "FromSoftware proprietary engine",
+        engineZh: "FromSoftware 专有引擎",
         rescueSteps: [
           "1. ModEngine2 只用于离线单机：把 Mod 放进它的 mod 目录，用它自带的启动脚本启动。",
           "2. 游戏有 EAC 反作弊，带 Mod 或修改器时不要联机，否则可能被封号。",
@@ -835,7 +920,25 @@ if not exist "Game\\eldenring.exe" (
 )
 echo [√] 已找到游戏主程序。
 echo [i] 带 Mod 只在离线模式玩，联机前先移除 Mod。
+pause`,
+        en: {
+          rescueSteps: [
+            "1. Use ModEngine2 for offline play only: put mods in its mod folder and start the game with its own launch script.",
+            "2. The game uses EAC anti-cheat. Don't play online with mods or trainers, or you may be banned.",
+            "3. To play online, remove all mods and launch the unmodded game."
+          ],
+          batPreview: `@echo off
+chcp 65001 >nul
+title [L-MOD Vault] Elden Ring mod check
+if not exist "Game\\eldenring.exe" (
+    echo [!] Run this script from the ELDEN RING install folder.
+    pause
+    exit /b
+)
+echo [√] Game executable found.
+echo [i] Play offline with mods; remove them before going online.
 pause`
+        }
       },
       "skyrim-se": {
         engine: "Creation Engine 1",
@@ -854,7 +957,25 @@ if not exist "SkyrimSE.exe" (
 )
 echo [√] 已找到游戏主程序。
 echo [i] 请确认 SKSE64 与 Address Library 对应当前游戏版本。
+pause`,
+        en: {
+          rescueSteps: [
+            "1. After a game update, check that SKSE64 and Address Library have builds for the current game version (see the SKSE site).",
+            "2. Open Documents/My Games/Skyrim Special Edition/Skyrim.ini and make sure bAllowConsole=1.",
+            "3. If a quest is stuck, don't use caqs; advance it with setstage <QuestID> <Stage>. Leading zeros in FormIDs can be left out."
+          ],
+          batPreview: `@echo off
+chcp 65001 >nul
+title [L-MOD Vault] Skyrim Special Edition check
+if not exist "SkyrimSE.exe" (
+    echo [!] Run this script from the Skyrim Special Edition install folder.
+    pause
+    exit /b
+)
+echo [√] Game executable found.
+echo [i] Make sure SKSE64 and Address Library match the current game version.
 pause`
+        }
       },
       "fallout-4": {
         engine: "Creation Engine 1",
@@ -874,17 +995,46 @@ if not exist "Fallout4.exe" (
 echo [√] 已找到游戏主程序。
 echo [i] 更新游戏后记得同步更新 F4SE 与插件。
 echo [i] 带 F4SE 插件玩时用 f4se_loader.exe 启动。
+pause`,
+        en: {
+          rescueSteps: [
+            "1. F4SE supports the next-gen update: after a game update, get the matching build from the F4SE site and disable old plugins their authors haven't updated.",
+            "2. In your Steam library, right-click Fallout 4 -> Properties -> Updates -> \"Only update this game when I launch it\".",
+            "3. Unlimited workshop build space: press ~, click the workbench, then enter setav 349 9999999 and setav 348 9999999."
+          ],
+          batPreview: `@echo off
+chcp 65001 >nul
+title [L-MOD Vault] Fallout 4 check
+if not exist "Fallout4.exe" (
+    echo [!] Run this script from the Fallout 4 install folder.
+    pause
+    exit /b
+)
+echo [√] Game executable found.
+echo [i] After a game update, update F4SE and your plugins too.
+echo [i] Launch with f4se_loader.exe when using F4SE plugins.
 pause`
+        }
       },
       "palworld": {
-        engine: "虚幻引擎 5 (UE5)",
+        engine: "Unreal Engine 5 (UE5)",
+        engineZh: "虚幻引擎 5 (UE5)",
         rescueSteps: [
           "1. 用 Mod 前先备份本地存档。",
           "2. 联机存档或专用服务器上别随意改帕鲁数值，容易触发服务器校验。"
         ],
         batPreview: `@echo off
 echo [i] 幻兽帕鲁：用 Mod 前先备份存档。
+pause`,
+        en: {
+          rescueSteps: [
+            "1. Back up your local saves before using mods.",
+            "2. On co-op saves or dedicated servers, don't edit Pal stats freely; it can trip the server's checks."
+          ],
+          batPreview: `@echo off
+echo [i] Palworld: back up your saves before using mods.
 pause`
+        }
       },
       "starfield": {
         engine: "Creation Engine 2",
@@ -893,20 +1043,39 @@ pause`
         ],
         batPreview: `@echo off
 echo [i] 星空：游戏更新后先确认 SFSE 已出对应版本。
+pause`,
+        en: {
+          rescueSteps: [
+            "1. After a game update, check that SFSE has a matching build, then make sure StarfieldCustom.ini has bInvalidateExistingFiles=1."
+          ],
+          batPreview: `@echo off
+echo [i] Starfield: after a game update, check that SFSE has a matching build.
 pause`
+        }
       },
       "gta-v": {
-        engine: "RAGE 引擎",
+        engine: "RAGE Engine",
+        engineZh: "RAGE 引擎",
         rescueSteps: [
           "1. 带 Mod 只玩故事模式，别进 GTA Online，否则可能被 BattlEye 封禁。",
           "2. 游戏更新后先确认 ScriptHookV 已出对应版本。"
         ],
         batPreview: `@echo off
 echo [i] GTA V：带 Mod 只玩故事模式，别进 GTA Online。
+pause`,
+        en: {
+          rescueSteps: [
+            "1. Use mods in Story Mode only; don't go into GTA Online, or BattlEye may ban you.",
+            "2. After a game update, check that ScriptHookV has a matching build."
+          ],
+          batPreview: `@echo off
+echo [i] GTA V: use mods in Story Mode only and stay out of GTA Online.
 pause`
+        }
       },
       "rdr2": {
-        engine: "RAGE 引擎",
+        engine: "RAGE Engine",
+        engineZh: "RAGE 引擎",
         rescueSteps: [
           "1. 确认 ScriptHookRDR2.dll 与 dinput8.dll 放入游戏根目录。",
           "2. 带 Mod 时不要进入线上模式 (Red Dead Online)。",
@@ -922,7 +1091,25 @@ if not exist "RDR2.exe" (
 )
 echo [√] 已找到游戏主程序。
 echo [i] 带 Mod 时别进线上模式 (Red Dead Online)。
+pause`,
+        en: {
+          rescueSteps: [
+            "1. Put ScriptHookRDR2.dll and dinput8.dll in the game folder.",
+            "2. Don't go into Red Dead Online with mods installed.",
+            "3. After a game update, check that ScriptHookRDR2 has a matching build."
+          ],
+          batPreview: `@echo off
+chcp 65001 >nul
+title [L-MOD Vault] Red Dead Redemption 2 check
+if not exist "RDR2.exe" (
+    echo [!] Run this script from the Red Dead Redemption 2 install folder.
+    pause
+    exit /b
+)
+echo [√] Game executable found.
+echo [i] Stay out of Red Dead Online with mods installed.
 pause`
+        }
       },
       "monster-hunter-world": {
         engine: "MT Framework",
@@ -939,10 +1126,27 @@ if not exist "MonsterHunterWorld.exe" (
     exit /b
 )
 echo [√] 已找到游戏主程序。
+pause`,
+        en: {
+          rescueSteps: [
+            "1. Put Stracker's Loader's dtdata.dll and hid.dll in the Monster Hunter: World folder.",
+            "2. After a game update, check that Stracker's Loader has a matching build."
+          ],
+          batPreview: `@echo off
+chcp 65001 >nul
+title [L-MOD Vault] Monster Hunter: World check
+if not exist "MonsterHunterWorld.exe" (
+    echo [!] Run this script from the Monster Hunter: World install folder.
+    pause
+    exit /b
+)
+echo [√] Game executable found.
 pause`
+        }
       },
       "sekiro": {
-        engine: "FromSoft Proprietary",
+        engine: "FromSoftware proprietary engine",
+        engineZh: "FromSoftware 专有引擎",
         rescueSteps: [
           "1. 确认 dinput8.dll 和 modengine.ini 位于 sekiro.exe 同级目录。",
           "2. 模型与画质 Mod 放入 mods/ 文件夹，路径避免中文字符；目录名要与 modengine.ini 中的 modOverrideDirectory 一致。"
@@ -956,7 +1160,23 @@ if not exist "sekiro.exe" (
     exit /b
 )
 echo [√] 已找到游戏主程序。
+pause`,
+        en: {
+          rescueSteps: [
+            "1. Make sure dinput8.dll and modengine.ini are next to sekiro.exe.",
+            "2. Put model and graphics mods in the mods/ folder, keep non-ASCII characters out of the path, and keep the folder name the same as modOverrideDirectory in modengine.ini."
+          ],
+          batPreview: `@echo off
+chcp 65001 >nul
+title [L-MOD Vault] Sekiro check
+if not exist "sekiro.exe" (
+    echo [!] Run this script from the Sekiro install folder.
+    pause
+    exit /b
+)
+echo [√] Game executable found.
 pause`
+        }
       },
       "re4-remake": {
         engine: "RE Engine",
@@ -975,9 +1195,66 @@ if not exist "re4.exe" (
 )
 echo [√] 已找到游戏主程序。
 echo [i] 装好 REFramework 后进游戏按 Insert 呼出菜单。
+pause`,
+        en: {
+          rescueSteps: [
+            "1. Put REFramework's dinput8.dll next to re4.exe.",
+            "2. The game creates a reframework folder on first launch; press Insert to open the menu.",
+            "3. Manage outfit and weapon mods with Fluffy Mod Manager; after a game update, check that REFramework has a matching build."
+          ],
+          batPreview: `@echo off
+chcp 65001 >nul
+title [L-MOD Vault] Resident Evil 4 Remake check
+if not exist "re4.exe" (
+    echo [!] Run this script from the Resident Evil 4 Remake install folder.
+    pause
+    exit /b
+)
+echo [√] Game executable found.
+echo [i] With REFramework installed, press Insert in game to open its menu.
 pause`
+        }
       }
     };
+
+    // Guide text by UI language: zh-CN / zh-TW read the Chinese text; every other language reads
+    // the English text (Chinese only if a guide has no English yet). `engineKey` is always the
+    // English engine name so the engine filter works in every language.
+    function localizedGuide(guide, game) {
+      const zhUi = currentLang === 'zh-CN' || currentLang === 'zh-TW';
+      const shortcut = game.consoleShortcut || (zhUi ? '~（波浪键）' : '~ (Tilde)');
+      if (!guide) {
+        const fallbackEngine = engineFromDeveloper(game);
+        if (zhUi) {
+          const zhTitle = (game.titles && game.titles['zh-CN']) || game.title;
+          return {
+            engine: fallbackEngine, engineKey: fallbackEngine,
+            rescueSteps: [
+              `1. Steam 库 → ${zhTitle} → 属性 → 已安装文件，可以打开游戏目录。`,
+              `2. 控制台快捷键：${shortcut}。`,
+              `3. 做关键任务或改剧情标志前，先备份存档。`
+            ],
+            batPreview: `@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】${zhTitle} 小提示\necho [i] 控制台快捷键：${shortcut}\necho [i] 用 Mod 或修改器前先备份存档。\npause`
+          };
+        }
+        return {
+          engine: fallbackEngine, engineKey: fallbackEngine,
+          rescueSteps: [
+            `1. Steam -> ${game.title} -> Properties -> Installed Files.`,
+            `2. Shortcut: ${shortcut}.`,
+            `3. Back up save files before key quests or modifying facts.`
+          ],
+          batPreview: `@echo off\nchcp 65001 >nul\ntitle [L-MOD Vault] ${game.title} Quick Tips\necho [i] Shortcut: ${shortcut}\necho [i] Back up your saves before using mods or trainers.\npause`
+        };
+      }
+      const en = guide.en || {};
+      return {
+        engine: zhUi ? (guide.engineZh || guide.engine) : guide.engine,
+        engineKey: guide.engine,
+        rescueSteps: zhUi ? guide.rescueSteps : (en.rescueSteps || guide.rescueSteps),
+        batPreview: zhUi ? guide.batPreview : (en.batPreview || guide.batPreview)
+      };
+    }
 
     // Engine label only (never a status): developers whose games all share one engine family.
     function engineFromDeveloper(game) {
@@ -1381,13 +1658,13 @@ pause`
       const dSecTag = document.getElementById('drawer-secret-card-tag');
       if (dSecTag) dSecTag.innerText = t('drawerSecretCardTag', '公益·零广告');
       const dSecDesc = document.getElementById('drawer-secret-card-desc');
-      if (dSecDesc) dSecDesc.innerText = t('drawerSecretCardDesc', '若遇游戏突发更新失效或极端坏档，请保存官方避坑专属暗号，在微信公众号后台或私信输入暗号，自动秒推连夜更新的应急更新包与坏档急救工具！');
+      if (dSecDesc) dSecDesc.innerText = t('drawerSecretCardDesc', '游戏更新后 Mod 用不了或存档出问题？保存避坑暗号，在公众号后台或私信发送，可以进互助群和其他玩家交流处理办法。');
       const dSecLabel = document.getElementById('drawer-secret-card-label');
       if (dSecLabel) dSecLabel.innerText = t('drawerSecretCodeLabel', '专属避坑暗号:');
       const dCopyCode = document.getElementById('drawer-btn-copy-code-text');
       if (dCopyCode) dCopyCode.innerText = t('drawerCopyCodeBtn', '一键复制暗号');
       const dTip1 = document.getElementById('drawer-secret-tip-1');
-      if (dTip1) dTip1.innerText = t('drawerSecretTips1', '💡 进群输入暗号秒领：最新追更包 · 坏档救星 · 纯净开源源');
+      if (dTip1) dTip1.innerText = t('drawerSecretTips1', '💡 进群发送暗号：交流 Mod 更新进度与坏档处理经验');
       const dTip2 = document.getElementById('drawer-secret-tip-2');
       if (dTip2) dTip2.innerText = t('drawerSecretTips2', '群文件不放 exe');
       const dMainBtn = document.getElementById('drawer-cta-main-text');
@@ -1406,6 +1683,7 @@ pause`
     //   - neither / no steamAppId        → not checked (never shown as green)
     function getGameCompatibility(game) {
       const guide = RADAR_GUIDES[game.id] || null;
+      const localGuide = localizedGuide(guide, game);
       const appId = Number(game.steamAppId) || 0;
       const isZh = currentLang === 'zh-CN';
 
@@ -1493,14 +1771,10 @@ pause`
         lastChecked: status === 'unchecked' ? null : formatRadarDate(game.steamLastChecked),
         newsTitle: game.latestSteamPatch ? String(game.latestSteamPatch) : null,
         newsUrl,
-        engine: (guide && guide.engine) || engineFromDeveloper(game),
-        rescueSteps: (guide && guide.rescueSteps) || [
-          `1. Steam -> ${game.title} -> Properties -> Installed Files.`,
-          `2. Shortcut: ${game.consoleShortcut || '~ (Tilde)'}.`,
-          `3. Back up save files before key quests or modifying facts.`
-        ],
-        batPreview: (guide && guide.batPreview) ||
-          `@echo off\nchcp 65001 >nul\ntitle [L-MOD Vault] ${game.title} Quick Tips\necho [i] Shortcut: ${game.consoleShortcut || '~'}\necho [i] Back up your saves before using mods or trainers.\npause`
+        engine: localGuide.engine,
+        engineKey: localGuide.engineKey,
+        rescueSteps: localGuide.rescueSteps,
+        batPreview: localGuide.batPreview
       };
     }
 
@@ -1906,7 +2180,7 @@ pause`
         const enTitle = (game.title || '').toLowerCase();
         const appId = String(game.steamAppId || '');
         const dev = (game.developer || '').toLowerCase();
-        const engine = (meta.engine || '').toLowerCase();
+        const engine = (meta.engineKey || '').toLowerCase();
 
         // 1. Status Filter
         if (currentStatusFilter !== 'all' && meta.status !== currentStatusFilter) {
@@ -2009,13 +2283,13 @@ pause`
     }
 
     function copyGroupSecretCode() {
-      copyText('老L单机888', t('toastSecretCopied', '进群暗号已复制！微信后台发送秒领急救包'));
+      copyText('老L单机888', t('toastSecretCopied', '进群暗号已复制！在公众号后台或私信发送即可'));
     }
 
     function copyCurrentSecretCode() {
       if (!activeDrawerGame) return;
       const code = activeDrawerGame.radarSecretCode || '老L单机888';
-      copyText(code, t('toastSecretCopied', '进群暗号已复制！微信后台发送秒领急救包'));
+      copyText(code, t('toastSecretCopied', '进群暗号已复制！在公众号后台或私信发送即可'));
     }
 
     function copyDrawerBat() {

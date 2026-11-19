@@ -3,6 +3,10 @@
 """
 scripts/build_i18n_matrix.py
 L-MOD Vault 8-Language Matrix Generator & Synchronizer
+
+Writes TRANSLATIONS to src/i18n/translations.json and replaces only the
+`window.TRANSLATIONS_DATA = ...;` segment of public/data.js. Everything before
+it (GAMES_DATA, written by the radar and trainer sync jobs) is kept byte-for-byte.
 """
 
 import os
@@ -11,7 +15,7 @@ import json
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TRANS_FILE = os.path.join(BASE_DIR, "src/i18n/translations.json")
 DATA_JS = os.path.join(BASE_DIR, "public/data.js")
-GAMES_JSON = os.path.join(BASE_DIR, "src/data/games_top100.json")
+TRANSLATIONS_MARKER = "window.TRANSLATIONS_DATA = "
 
 # Complete translations for all 8 languages
 TRANSLATIONS = {
@@ -106,7 +110,7 @@ TRANSLATIONS = {
     "activatorSafeDesc": "本脚本为标准 Windows 批处理源码，可用记事本打开查看每一行。运行前请先备份游戏配置文件和存档。",
     "activatorGuideTitle": "极简 3 步使用指引：",
     "activatorStep1": "点击下方【下载 .bat 脚本】将文件保存（或复制代码存为 一键开门.bat）；",
-    "activatorStep2": "将 .bat 放置在该游戏安装根目录，双击运行（脚本自动备份并注入配置）；",
+    "activatorStep2": "将 .bat 放置在该游戏安装根目录，双击运行（脚本不备份存档，运行前请自己备份）；",
     "activatorStep3": "启动游戏，按快捷键呼出控制台，直接粘贴老L推荐套餐即可爽玩！",
     "activatorAdapted": "已自动适配当前游戏：",
     "activatorDownloadBat": "下载 .bat 脚本",
@@ -214,16 +218,16 @@ TRANSLATIONS = {
     "drawerCardsSectionDesc": "已就绪首发 5 联高清卡片，点击任意卡片查看大图：",
     "drawerSecretCardTitle": "【老L·单机避坑局】急救雷达互助群",
     "drawerSecretCardTag": "公益·零广告",
-    "drawerSecretCardDesc": "若遇游戏突发更新失效或极端坏档，请保存官方避坑专属暗号，在微信公众号后台或私信输入暗号，自动秒推连夜更新的应急更新包与坏档急救工具！",
+    "drawerSecretCardDesc": "游戏更新后 Mod 用不了或存档出问题？保存避坑暗号，在公众号后台或私信发送，可以进互助群和其他玩家交流处理办法。",
     "drawerSecretCodeLabel": "专属避坑暗号:",
     "drawerCopyCodeBtn": "一键复制暗号",
-    "drawerSecretTips1": "💡 进群输入暗号秒领：最新追更包 · 坏档救星 · 纯净开源源",
+    "drawerSecretTips1": "💡 进群发送暗号：交流 Mod 更新进度与坏档处理经验",
     "drawerSecretTips2": "群文件不放 exe",
     "drawerMainVaultBtn": "🎮 进入 L-MOD 主库查看完整代码与场景套餐",
     "viewRescueGuide": "查看避坑急救方案",
     "secretCodePrefix": "暗号:",
     "toastCopied": "已复制！",
-    "toastSecretCopied": "进群暗号已复制！微信后台发送秒领急救包",
+    "toastSecretCopied": "进群暗号已复制！在公众号后台或私信发送即可",
     "toastBatCopied": "批处理脚本代码已复制！新建文本改名为 .bat 即可运行",
     "toastLangSwitched": "语言已切换至",
     "filterToastRed": "已筛选：🔴 先别更新的游戏",
@@ -549,16 +553,16 @@ TRANSLATIONS = {
     "drawerCardsSectionDesc": "Official 5-card matrix ready. Click any card to preview full size:",
     "drawerSecretCardTitle": "L-MOD Emergency Rescue Group",
     "drawerSecretCardTag": "Non-profit · Zero Ads",
-    "drawerSecretCardDesc": "In case of sudden game updates or game-breaking crashes, input the rescue code in our channel to instantly receive hotfix packages and rescue tools!",
+    "drawerSecretCardDesc": "Mods stopped working or saves acting up after an update? Save the code and send it to our channel to join the player group and compare fixes.",
     "drawerSecretCodeLabel": "Exclusive Rescue Code:",
     "drawerCopyCodeBtn": "Copy Rescue Code",
-    "drawerSecretTips1": "💡 Instant access: Latest patch fixes, save rescue tools, clean source",
+    "drawerSecretTips1": "💡 Send the code to join the group: mod update news and save-recovery tips from other players",
     "drawerSecretTips2": "No exe files in the group",
     "drawerMainVaultBtn": "🎮 View Full Codes & Scenario Bundles in Main Vault",
     "viewRescueGuide": "View Rescue Guide",
     "secretCodePrefix": "Code:",
     "toastCopied": "Copied!",
-    "toastSecretCopied": "Rescue code copied! Send to chat to get emergency package",
+    "toastSecretCopied": "Code copied! Send it to our channel to join the group",
     "toastBatCopied": "Batch script copied! Save as .bat to run",
     "toastLangSwitched": "Language switched to",
     "filterToastRed": "Filtered: 🔴 Hold the update",
@@ -776,7 +780,7 @@ TRANSLATIONS = {
     "activatorSafeDesc": "本腳本為標準 Windows 批處理源碼，可用記事本打開查看每一行。運行前請先備份遊戲配置文件和存檔。",
     "activatorGuideTitle": "極簡 3 步使用指引：",
     "activatorStep1": "點擊下方【下載 .bat 腳本】將文件保存（或复制代码存為 一鍵開門.bat）；",
-    "activatorStep2": "將 .bat 放置在該遊戲安裝根目錄，雙擊運行（腳本自動備份並注入配置）；",
+    "activatorStep2": "將 .bat 放置在該遊戲安裝根目錄，雙擊運行（腳本不備份存檔，運行前請自己備份）；",
     "activatorStep3": "啟動遊戲，按快捷鍵呼出控制台，直接貼上老L推薦套餐即可爽玩！",
     "activatorAdapted": "已自動適配當前遊戲：",
     "activatorDownloadBat": "下載 .bat 腳本",
@@ -884,16 +888,16 @@ TRANSLATIONS = {
     "drawerCardsSectionDesc": "已就緒首發 5 聯高清卡片，點擊任意卡片查看大圖：",
     "drawerSecretCardTitle": "【老L·單機避坑局】急救雷達互助群",
     "drawerSecretCardTag": "公益·零廣告",
-    "drawerSecretCardDesc": "若遇遊戲突發更新失效或極端壞檔，請保存官方避坑專屬暗號，在微信公眾號後台或私信輸入暗號，自動秒推連夜更新的應急更新包與壞檔急救工具！",
+    "drawerSecretCardDesc": "遊戲更新後 Mod 用不了或存檔出問題？保存避坑暗號，在公眾號後台或私信發送，可以進互助群和其他玩家交流處理辦法。",
     "drawerSecretCodeLabel": "專屬避坑暗號:",
     "drawerCopyCodeBtn": "一鍵複製暗號",
-    "drawerSecretTips1": "💡 進群輸入暗號秒領：最新追更包 · 壞檔救星 · 純淨開源源",
+    "drawerSecretTips1": "💡 進群發送暗號：交流 Mod 更新進度與壞檔處理經驗",
     "drawerSecretTips2": "群檔案不放 exe",
     "drawerMainVaultBtn": "🎮 進入 L-MOD 主庫查看完整代碼與場景套餐",
     "viewRescueGuide": "查看避坑急救方案",
     "secretCodePrefix": "暗號:",
     "toastCopied": "已複製！",
-    "toastSecretCopied": "進群暗號已複製！微信後台發送秒領急救包",
+    "toastSecretCopied": "進群暗號已複製！在公眾號後台或私信發送即可",
     "toastBatCopied": "批處理腳本代碼已複製！新建文本改名為 .bat 即可運行",
     "toastLangSwitched": "語言已切換至",
     "filterToastRed": "已篩選：🔴 先別更新的遊戲",
@@ -1219,16 +1223,16 @@ TRANSLATIONS = {
     "drawerCardsSectionDesc": "公式5連HDカードを公開中。クリックして拡大表示：",
     "drawerSecretCardTitle": "【L-MOD】緊急レスキュー相互協力グループ",
     "drawerSecretCardTag": "非営利 · 広告なし",
-    "drawerSecretCardDesc": "予期せぬアップデートによる不具合やセーブ破損が発生した場合、暗号をメッセージで送信すると、緊急修正ツールが自動配信されます。",
+    "drawerSecretCardDesc": "アップデート後に Mod が動かない、セーブがおかしい場合は、暗号を保存してメッセージで送信してください。プレイヤー同士で対処法を共有するグループに参加できます。",
     "drawerSecretCodeLabel": "専用レスキュー暗号:",
     "drawerCopyCodeBtn": "暗号をコピー",
-    "drawerSecretTips1": "💡 暗号送信で即入手: 最新パッチ修正 · セーブ復旧ツール · クリーンなOSS",
+    "drawerSecretTips1": "💡 暗号を送ってグループへ：Mod の対応状況やセーブ復旧のコツを共有",
     "drawerSecretTips2": "グループには exe を置きません",
     "drawerMainVaultBtn": "🎮 メインハブで全コード＆シナリオバンドルを見る",
     "viewRescueGuide": "救済・回避プランを確認",
     "secretCodePrefix": "暗号:",
     "toastCopied": "コピーしました！",
-    "toastSecretCopied": "暗号をコピーしました！メッセージ送信でレスキューパックを受け取れます",
+    "toastSecretCopied": "暗号をコピーしました！メッセージで送信するとグループに参加できます",
     "toastBatCopied": "バッチスクリプトをコピーしました！.batとして保存して実行できます",
     "toastLangSwitched": "言語を切り替えました:",
     "filterToastRed": "絞り込み：🔴 更新を控えたいゲーム",
@@ -1446,7 +1450,7 @@ TRANSLATIONS = {
     "activatorSafeDesc": "표준 윈도우 배치 스크립트로, 메모장에서 모든 줄을 확인할 수 있습니다. 실행 전에 게임 설정 파일과 세이브를 백업하세요.",
     "activatorGuideTitle": "간단 3단계 이용 가이드:",
     "activatorStep1": "아래의 【.bat 스크립트 다운로드】를 클릭하여 저장 (또는 코드를 복사하여 저장);",
-    "activatorStep2": ".bat 파일을 게임 설치 폴더에 넣고 더블 클릭하여 실행 (자동 백업 및 적용);",
+    "activatorStep2": ".bat 파일을 게임 설치 폴더에 넣고 더블 클릭하여 실행 (스크립트는 세이브를 백업하지 않으니 실행 전에 직접 백업하세요);",
     "activatorStep3": "게임을 실행하고 단축키로 콘솔을 열어 추천 명령어를 붙여넣고 즐기세요!",
     "activatorAdapted": "현재 게임에 자동 맞춤 적용:",
     "activatorDownloadBat": ".bat 스크립트 다운로드",
@@ -1554,16 +1558,16 @@ TRANSLATIONS = {
     "drawerCardsSectionDesc": "공식 5종 고화질 카드가 준비되었습니다. 클릭하여 원본 보기:",
     "drawerSecretCardTitle": "【L-MOD】 긴급 구호 레이더 서포트 그룹",
     "drawerSecretCardTag": "비영리 · 광고 없음",
-    "drawerSecretCardDesc": "게임의 갑작스러운 업데이트나 세이브 파일 손상이 발생한 경우, 전용 코드를 전송하여 즉각적인 응급 패치와 복구 도구를 받아보세요!",
+    "drawerSecretCardDesc": "업데이트 후 모드가 안 되거나 세이브에 문제가 생겼나요? 코드를 저장해 채널로 보내면 플레이어 그룹에서 해결 방법을 함께 나눌 수 있습니다.",
     "drawerSecretCodeLabel": "전용 구호 암호:",
     "drawerCopyCodeBtn": "암호 복사",
-    "drawerSecretTips1": "💡 암호 입력 시 즉시 제공: 최신 업데이트 패치 · 세이브 복구 툴 · 클린 오픈소스",
+    "drawerSecretTips1": "💡 코드를 보내 그룹 참여: 모드 업데이트 소식과 세이브 복구 팁 공유",
     "drawerSecretTips2": "그룹에는 exe 파일을 올리지 않습니다",
     "drawerMainVaultBtn": "🎮 L-MOD 메인에서 전체 코드 및 시나리오 번들 보기",
     "viewRescueGuide": "긴급 구호 가이드 보기",
     "secretCodePrefix": "암호:",
     "toastCopied": "복사되었습니다!",
-    "toastSecretCopied": "구호 암호가 복사되었습니다! 채널에 입력하고 긴급 패키지를 받으세요",
+    "toastSecretCopied": "코드가 복사되었습니다! 채널로 보내 그룹에 참여하세요",
     "toastBatCopied": "배치 스크립트가 복사되었습니다! .bat 파일로 저장하여 실행하세요",
     "toastLangSwitched": "언어가 변경되었습니다:",
     "filterToastRed": "필터링됨: 🔴 업데이트 보류 게임",
@@ -1889,16 +1893,16 @@ TRANSLATIONS = {
     "drawerCardsSectionDesc": "Набор из 5 HD-карточек готов. Нажмите для полноэкранного просмотра:",
     "drawerSecretCardTitle": "Группа взаимопомощи L-MOD",
     "drawerSecretCardTag": "Некоммерческий проект · Без рекламы",
-    "drawerSecretCardDesc": "При внезапных поломках игры отправьте код в наше сообщество для мгновенного получения пакета исправлений!",
+    "drawerSecretCardDesc": "После обновления перестали работать моды или что-то случилось с сохранениями? Сохраните код и отправьте его в наш канал, чтобы попасть в группу игроков и обсудить решения.",
     "drawerSecretCodeLabel": "Код спасения:",
     "drawerCopyCodeBtn": "Скопировать код",
-    "drawerSecretTips1": "💡 По коду доступно: актуальные патчи, утилиты восстановления и чистые моды",
+    "drawerSecretTips1": "💡 Отправьте код, чтобы вступить в группу: новости об обновлениях модов и советы по восстановлению сохранений",
     "drawerSecretTips2": "В группе нет exe-файлов",
     "drawerMainVaultBtn": "🎮 Открыть в базе L-MOD полные коды и наборы",
     "viewRescueGuide": "Смотреть решение",
     "secretCodePrefix": "Код:",
     "toastCopied": "Скопировано!",
-    "toastSecretCopied": "Код скопирован! Отправьте его в сообщество для получения помощи",
+    "toastSecretCopied": "Код скопирован! Отправьте его в наш канал, чтобы вступить в группу",
     "toastBatCopied": "Батник скопирован! Сохраните как .bat для запуска",
     "toastLangSwitched": "Язык переключен на",
     "filterToastRed": "Отфильтровано: 🔴 Не обновлять пока",
@@ -2224,16 +2228,16 @@ TRANSLATIONS = {
     "drawerCardsSectionDesc": "5 offizielle HD-Karten bereit. Klicken Sie auf eine Karte zur Vorschau:",
     "drawerSecretCardTitle": "L-MOD Notfall-Rettungsgruppe",
     "drawerSecretCardTag": "Gemeinnützig · Ohne Werbung",
-    "drawerSecretCardDesc": "Bei unerwarteten Patch-Problemen oder defekten Spielständen erhalten Sie mit dem Rettungscode sofort Notfall-Tools und Updates!",
+    "drawerSecretCardDesc": "Mods laufen nach einem Update nicht mehr oder Spielstände machen Ärger? Speichern Sie den Code und senden Sie ihn an unseren Kanal, um der Spielergruppe beizutreten und Lösungen auszutauschen.",
     "drawerSecretCodeLabel": "Exklusiver Rettungscode:",
     "drawerCopyCodeBtn": "Code kopieren",
-    "drawerSecretTips1": "💡 Mit Code sofort verfügbar: Neueste Patches, Spielstand-Retter & Open-Source-Tools",
+    "drawerSecretTips1": "💡 Code senden und der Gruppe beitreten: Neuigkeiten zu Mod-Updates und Tipps zur Spielstand-Rettung",
     "drawerSecretTips2": "Keine exe-Dateien in der Gruppe",
     "drawerMainVaultBtn": "🎮 Vollständige Codes & Szenarien im Hauptportal ansehen",
     "viewRescueGuide": "Rettungsleitfaden ansehen",
     "secretCodePrefix": "Code:",
     "toastCopied": "Kopiert!",
-    "toastSecretCopied": "Rettungscode kopiert! Im Chat eingeben für das Notfallpaket",
+    "toastSecretCopied": "Code kopiert! An unseren Kanal senden, um der Gruppe beizutreten",
     "toastBatCopied": "Batch-Skript kopiert! Als .bat speichern und ausführen",
     "toastLangSwitched": "Sprache geändert zu",
     "filterToastRed": "Gefiltert: 🔴 Update zurückhalten",
@@ -2559,16 +2563,16 @@ TRANSLATIONS = {
     "drawerCardsSectionDesc": "Matriz de 5 tarjetas HD lista. Haz clic en cualquiera para ampliar:",
     "drawerSecretCardTitle": "Grupo de rescate y auxilio L-MOD",
     "drawerSecretCardTag": "Sin fines de lucro · Cero publicidad",
-    "drawerSecretCardDesc": "En caso de fallos por actualizaciones o partidas corruptas, usa el código de rescate para recibir herramientas y parches de inmediato.",
+    "drawerSecretCardDesc": "¿Los mods dejaron de funcionar o tus partidas fallan tras una actualización? Guarda el código y envíalo a nuestro canal para unirte al grupo de jugadores y compartir soluciones.",
     "drawerSecretCodeLabel": "Código exclusivo de rescate:",
     "drawerCopyCodeBtn": "Copiar código",
-    "drawerSecretTips1": "💡 Al enviar el código obtendrás: últimos parches, recuperador de partidas y herramientas",
+    "drawerSecretTips1": "💡 Envía el código para unirte al grupo: novedades de mods y consejos para recuperar partidas",
     "drawerSecretTips2": "Sin archivos exe en el grupo",
     "drawerMainVaultBtn": "🎮 Ver códigos completos y paquetes en la Bóveda Principal",
     "viewRescueGuide": "Ver guía de rescate",
     "secretCodePrefix": "Código:",
     "toastCopied": "¡Copiado!",
-    "toastSecretCopied": "¡Código de rescate copiado! Envíalo para recibir el paquete de auxilio",
+    "toastSecretCopied": "¡Código copiado! Envíalo a nuestro canal para unirte al grupo",
     "toastBatCopied": "¡Script por lotes copiado! Guárdalo como .bat para ejecutar",
     "toastLangSwitched": "Idioma cambiado a",
     "filterToastRed": "Filtrado: 🔴 Espera para actualizar",
@@ -2697,37 +2701,56 @@ TRANSLATIONS = {
   }
 }
 
+def replace_translations_segment(content, translations):
+    """Return data.js content with only the TRANSLATIONS_DATA literal replaced."""
+    idx = content.find(TRANSLATIONS_MARKER)
+    if idx == -1 or content.find(TRANSLATIONS_MARKER, idx + 1) != -1:
+        raise SystemExit(f"❌ Expected exactly one {TRANSLATIONS_MARKER!r} in {DATA_JS}; nothing written.")
+    body_start = idx + len(TRANSLATIONS_MARKER)
+    try:
+        _, body_len = json.JSONDecoder().raw_decode(content[body_start:])
+    except json.JSONDecodeError as exc:
+        raise SystemExit(f"❌ TRANSLATIONS_DATA in {DATA_JS} is not plain JSON ({exc}); nothing written.")
+    rest = content[body_start + body_len:]
+    if rest.startswith(";"):
+        rest = rest[1:]
+    return content[:body_start] + json.dumps(translations, ensure_ascii=False, indent=2) + ";" + rest
+
+
 def sync_translations():
     # 1. Verify key symmetry across all 8 languages
     languages = list(TRANSLATIONS.keys())
     ref_keys = set(TRANSLATIONS["zh-CN"].keys())
     print(f"Total keys in zh-CN: {len(ref_keys)}")
 
+    asymmetric = False
     for lang in languages:
         cur_keys = set(TRANSLATIONS[lang].keys())
         diff_missing = ref_keys - cur_keys
         diff_extra = cur_keys - ref_keys
         if diff_missing:
+            asymmetric = True
             print(f"❌ Missing keys in {lang}: {diff_missing}")
         if diff_extra:
+            asymmetric = True
             print(f"⚠️ Extra keys in {lang}: {diff_extra}")
+    if asymmetric:
+        raise SystemExit("❌ Key sets differ between languages; nothing written.")
 
-    # 2. Write to src/i18n/translations.json
+    # 2. Build the new data.js first, so a malformed file aborts before anything is written
+    with open(DATA_JS, "r", encoding="utf-8") as f:
+        data_js = f.read()
+    new_data_js = replace_translations_segment(data_js, TRANSLATIONS)
+
+    # 3. Write src/i18n/translations.json
     with open(TRANS_FILE, "w", encoding="utf-8") as f:
-        json.dump(TRANSLATIONS, f, ensure_ascii=False, indent=2)
+        f.write(json.dumps(TRANSLATIONS, ensure_ascii=False, indent=2) + "\n")
     print(f"✅ Written {len(ref_keys)} keys across {len(languages)} languages to {TRANS_FILE}")
 
-    # 3. Read games_top100.json
-    with open(GAMES_JSON, "r", encoding="utf-8") as f:
-        games = json.load(f)
-
-    # 4. Synchronize public/data.js
+    # 4. public/data.js: only the TRANSLATIONS_DATA segment changes; GAMES_DATA is left as is
     with open(DATA_JS, "w", encoding="utf-8") as f:
-        f.write("// L-MOD Vault Offline Database (Auto-bundled)\n")
-        f.write("window.GAMES_DATA = " + json.dumps(games, ensure_ascii=False, indent=2) + ";\n\n")
-        f.write("window.GAMES_DATABASE = window.GAMES_DATA;\n\n")
-        f.write("window.TRANSLATIONS_DATA = " + json.dumps(TRANSLATIONS, ensure_ascii=False, indent=2) + ";\n")
-    print(f"✅ Synchronized {len(games)} games and full translations into {DATA_JS}")
+        f.write(new_data_js)
+    print(f"✅ Updated TRANSLATIONS_DATA in {DATA_JS} (GAMES_DATA untouched)")
 
 if __name__ == "__main__":
     sync_translations()
