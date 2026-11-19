@@ -1,0 +1,550 @@
+[
+  {
+    "id": "hearts-of-iron-4",
+    "rank": 35,
+    "steamAppId": 394360,
+    "framework": null,
+    "hooksExe": false,
+    "modSupport": "workshop",
+    "afterUpdate": {
+      "zh-CN": "大版本更新后创意工坊 Mod 常要等作者适配；急着玩可在 Steam 属性「测试版」里切回旧版本。",
+      "en": "Big updates often break Workshop mods until authors catch up; roll back via Steam Properties > Betas."
+    },
+    "sources": [
+      "https://steamcommunity.com/app/394360/workshop/",
+      "https://support.paradoxplaza.com/hc/en-us/articles/21690250550546-How-to-play-older-versions-of-games-rollback",
+      "https://www.pcgamingwiki.com/wiki/Hearts_of_Iron_IV"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "stellaris",
+    "rank": 36,
+    "steamAppId": 281990,
+    "framework": null,
+    "hooksExe": false,
+    "modSupport": "workshop",
+    "afterUpdate": {
+      "zh-CN": "大版本更新后创意工坊 Mod 常要等作者适配；急着玩可在 Steam 属性「测试版」里切回旧版本。",
+      "en": "Big updates often break Workshop mods until authors catch up; roll back via Steam Properties > Betas."
+    },
+    "sources": [
+      "https://steamcommunity.com/app/281990/workshop/",
+      "https://support.paradoxplaza.com/hc/en-us/articles/21690250550546-How-to-play-older-versions-of-games-rollback",
+      "https://www.pcgamingwiki.com/wiki/Stellaris"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "total-war-warhammer-3",
+    "rank": 37,
+    "steamAppId": 1142710,
+    "framework": null,
+    "hooksExe": false,
+    "modSupport": "workshop",
+    "afterUpdate": {
+      "zh-CN": "更新后部分创意工坊 Mod 要等作者适配；可在 Steam 属性「测试版」里选 rollback_1 回到上个版本。",
+      "en": "Some Workshop mods need author updates after a patch; pick rollback_1 in Steam Properties > Betas to go back."
+    },
+    "sources": [
+      "https://steamcommunity.com/app/1142710/workshop/",
+      "https://steamcommunity.com/app/1142710/discussions/0/688618329542402883/",
+      "https://www.pcgamingwiki.com/wiki/Total_War:_Warhammer_III"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "total-war-three-kingdoms",
+    "rank": 38,
+    "steamAppId": 779340,
+    "framework": null,
+    "hooksExe": false,
+    "modSupport": "workshop",
+    "afterUpdate": null,
+    "sources": [
+      "https://steamcommunity.com/app/779340/workshop/",
+      "https://www.pcgamingwiki.com/wiki/Total_War:_Three_Kingdoms"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "dragons-dogma-2",
+    "rank": 39,
+    "steamAppId": 2054970,
+    "framework": {
+      "name": "REFramework",
+      "url": "https://github.com/praydog/REFramework"
+    },
+    "hooksExe": true,
+    "modSupport": "community",
+    "afterUpdate": {
+      "zh-CN": "游戏更新后 REFramework 常要跟着修，先别急着进，等它出新版（Nightly）、Mod 也更新后再玩。",
+      "en": "Game updates often break REFramework; wait for a new (nightly) REFramework build and updated mods before playing."
+    },
+    "sources": [
+      "https://github.com/praydog/REFramework",
+      "https://github.com/praydog/REFramework/commit/7bd947df30988398e3ce2e3429ca5518b7eeb9e1",
+      "https://github.com/praydog/REFramework/commit/de9a1ba352edd43ac1ea773343982045ee417105",
+      "https://www.nexusmods.com/dragonsdogma2/mods/8"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "armored-core-6",
+    "rank": 40,
+    "steamAppId": 1888160,
+    "framework": {
+      "name": "ModEngine2",
+      "url": "https://github.com/soulsmods/ModEngine2"
+    },
+    "hooksExe": null,
+    "modSupport": "community",
+    "afterUpdate": {
+      "zh-CN": "带 Easy Anti-Cheat 反作弊：联机模式别用 Mod/修改器，以免被封号。",
+      "en": "Uses Easy Anti-Cheat: don't use mods or trainers in online play, or you risk a ban."
+    },
+    "sources": [
+      "https://github.com/soulsmods/ModEngine2/releases/tag/release-2.1.0",
+      "https://github.com/garyttierney/me3",
+      "https://www.pcgamingwiki.com/wiki/Armored_Core_VI:_Fires_of_Rubicon",
+      "https://www.nexusmods.com/armoredcore6firesofrubicon"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "ghost-of-tsushima",
+    "rank": 41,
+    "steamAppId": 2215430,
+    "framework": null,
+    "hooksExe": false,
+    "modSupport": "community",
+    "afterUpdate": null,
+    "sources": [
+      "https://www.nexusmods.com/ghostoftsushima",
+      "https://www.nexusmods.com/ghostoftsushima/mods/174",
+      "https://www.pcgamingwiki.com/wiki/Ghost_of_Tsushima_Director%27s_Cut"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "god-of-war",
+    "rank": 42,
+    "steamAppId": 1593500,
+    "framework": null,
+    "hooksExe": false,
+    "modSupport": "community",
+    "afterUpdate": null,
+    "sources": [
+      "https://www.nexusmods.com/godofwar",
+      "https://www.pcgamingwiki.com/wiki/God_of_War"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "spiderman-remastered",
+    "rank": 43,
+    "steamAppId": 1817070,
+    "framework": {
+      "name": "Overstrike",
+      "url": "https://github.com/Tkachov/Overstrike"
+    },
+    "hooksExe": false,
+    "modSupport": "community",
+    "afterUpdate": {
+      "zh-CN": "游戏更新后先做 toc 重置：删掉 toc 和 toc.BAK，校验游戏文件，再用 Overstrike 重装 Mod。",
+      "en": "After an update, reset toc: delete toc and toc.BAK, verify game files, then reinstall mods with Overstrike."
+    },
+    "sources": [
+      "https://github.com/Tkachov/Overstrike",
+      "https://steamcommunity.com/app/1817070/discussions/0/4409668873656279203",
+      "https://www.nexusmods.com/marvelsspidermanremastered/mods/4199"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "horizon-zero-dawn",
+    "rank": 44,
+    "steamAppId": 1151640,
+    "framework": null,
+    "hooksExe": false,
+    "modSupport": "community",
+    "afterUpdate": null,
+    "sources": [
+      "https://www.nexusmods.com/horizonzerodawn",
+      "https://www.nexusmods.com/horizonzerodawn/mods/46",
+      "https://www.pcgamingwiki.com/wiki/Horizon_Zero_Dawn"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "days-gone",
+    "rank": 45,
+    "steamAppId": 1259420,
+    "framework": null,
+    "hooksExe": false,
+    "modSupport": "community",
+    "afterUpdate": null,
+    "sources": [
+      "https://www.nexusmods.com/daysgone",
+      "https://www.nexusmods.com/daysgone/mods/204",
+      "https://www.pcgamingwiki.com/wiki/Days_Gone"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "death-stranding",
+    "rank": 46,
+    "steamAppId": 1850570,
+    "framework": null,
+    "hooksExe": false,
+    "modSupport": "community",
+    "afterUpdate": null,
+    "sources": [
+      "https://www.nexusmods.com/deathstranding",
+      "https://www.pcgamingwiki.com/wiki/Death_Stranding_Director%27s_Cut"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "detroit-become-human",
+    "rank": 47,
+    "steamAppId": 1222140,
+    "framework": null,
+    "hooksExe": false,
+    "modSupport": "community",
+    "afterUpdate": null,
+    "sources": [
+      "https://www.nexusmods.com/detroitbecomehuman",
+      "https://www.pcgamingwiki.com/wiki/Detroit:_Become_Human"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "kingdom-come-deliverance",
+    "rank": 48,
+    "steamAppId": 379430,
+    "framework": null,
+    "hooksExe": false,
+    "modSupport": "official",
+    "afterUpdate": null,
+    "sources": [
+      "https://www.pcgamingwiki.com/wiki/Kingdom_Come:_Deliverance",
+      "https://www.nexusmods.com/kingdomcomedeliverance"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "mount-and-blade-warband",
+    "rank": 49,
+    "steamAppId": 48700,
+    "framework": null,
+    "hooksExe": false,
+    "modSupport": "official",
+    "afterUpdate": null,
+    "sources": [
+      "https://www.pcgamingwiki.com/wiki/Mount_%26_Blade:_Warband",
+      "https://steamcommunity.com/app/48700/workshop/"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "stalker-shadow-of-chernobyl",
+    "rank": 50,
+    "steamAppId": 4500,
+    "framework": null,
+    "hooksExe": false,
+    "modSupport": "community",
+    "afterUpdate": null,
+    "sources": [
+      "https://www.pcgamingwiki.com/wiki/S.T.A.L.K.E.R.:_Shadow_of_Chernobyl",
+      "https://www.nexusmods.com/stalkershadowofchernobyl"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "metro-exodus",
+    "rank": 51,
+    "steamAppId": 412020,
+    "framework": null,
+    "hooksExe": false,
+    "modSupport": "official",
+    "afterUpdate": null,
+    "sources": [
+      "https://www.deepsilver.com/games/metro-exodus/exodus-sdk",
+      "https://www.pcgamer.com/metro-exodus-ukrainian-devs-release-full-modding-toolkit-in-first-update-since-war-began/",
+      "https://www.nexusmods.com/metroexodus"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "control",
+    "rank": 52,
+    "steamAppId": 870780,
+    "framework": {
+      "name": "Loose Files Loader",
+      "url": "https://www.nexusmods.com/control/mods/11"
+    },
+    "hooksExe": null,
+    "modSupport": "community",
+    "afterUpdate": null,
+    "sources": [
+      "https://www.nexusmods.com/control/mods/11",
+      "https://www.nexusmods.com/control/mods/16",
+      "https://www.nexusmods.com/control"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "alan-wake-2",
+    "rank": 53,
+    "steamAppId": 0,
+    "framework": {
+      "name": "Alan Wake 2 Mod Loader",
+      "url": "https://www.nexusmods.com/alanwake2/mods/19"
+    },
+    "hooksExe": null,
+    "modSupport": "community",
+    "afterUpdate": null,
+    "sources": [
+      "https://www.nexusmods.com/alanwake2/mods/19",
+      "https://www.nexusmods.com/alanwake2",
+      "https://www.pcgamingwiki.com/wiki/Alan_Wake_II"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "doom-eternal",
+    "rank": 54,
+    "steamAppId": 782330,
+    "framework": null,
+    "hooksExe": false,
+    "modSupport": "official",
+    "afterUpdate": null,
+    "sources": [
+      "https://slayersclub.bethesda.net/en-US/news/doom-eternal-pc-mods-update",
+      "https://www.pcgamingwiki.com/wiki/Doom_Eternal"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "borderlands-3",
+    "rank": 55,
+    "steamAppId": 397540,
+    "framework": {
+      "name": "B3HM",
+      "url": "https://www.nexusmods.com/borderlands3/mods/244"
+    },
+    "hooksExe": null,
+    "modSupport": "community",
+    "afterUpdate": null,
+    "sources": [
+      "https://www.nexusmods.com/borderlands3/mods/244",
+      "https://www.nexusmods.com/borderlands3"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "borderlands-2",
+    "rank": 56,
+    "steamAppId": 49520,
+    "framework": {
+      "name": "OpenBLCMM",
+      "url": "https://github.com/BLCM/OpenBLCMM"
+    },
+    "hooksExe": null,
+    "modSupport": "community",
+    "afterUpdate": null,
+    "sources": [
+      "https://github.com/BLCM/OpenBLCMM",
+      "https://www.nexusmods.com/borderlands2/mods/61",
+      "https://www.pcgamingwiki.com/wiki/Borderlands_2"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "bioshock-infinite",
+    "rank": 57,
+    "steamAppId": 8870,
+    "framework": null,
+    "hooksExe": false,
+    "modSupport": "community",
+    "afterUpdate": null,
+    "sources": [
+      "https://www.nexusmods.com/bioshockinfinite",
+      "https://www.pcgamingwiki.com/wiki/BioShock_Infinite"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "dishonored-2",
+    "rank": 58,
+    "steamAppId": 403640,
+    "framework": null,
+    "hooksExe": false,
+    "modSupport": "community",
+    "afterUpdate": null,
+    "sources": [
+      "https://www.nexusmods.com/dishonored2",
+      "https://www.nexusmods.com/dishonored2/mods/31",
+      "https://www.pcgamingwiki.com/wiki/Dishonored_2"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "prey",
+    "rank": 59,
+    "steamAppId": 480490,
+    "framework": null,
+    "hooksExe": false,
+    "modSupport": "community",
+    "afterUpdate": null,
+    "sources": [
+      "https://www.nexusmods.com/prey2017",
+      "https://www.pcgamingwiki.com/wiki/Prey_(2017)"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "hitman-3",
+    "rank": 60,
+    "steamAppId": 1659040,
+    "framework": {
+      "name": "Simple Mod Framework",
+      "url": "https://github.com/atampy25/simple-mod-framework"
+    },
+    "hooksExe": true,
+    "modSupport": "community",
+    "afterUpdate": {
+      "zh-CN": "游戏更新后 SMF 和 Mod SDK 往往要出新版才能用，先别部署 Mod，等两者都更新后再部署。",
+      "en": "Game updates usually break SMF and the Mod SDK; wait for new releases of both before redeploying mods."
+    },
+    "sources": [
+      "https://www.hitmanforum.com/t/woa-smf-issue-with-deployment-updating/22968",
+      "https://github.com/OrfeasZ/ZHMModSDK",
+      "https://www.nexusmods.com/hitman3/mods/200",
+      "https://www.pcgamingwiki.com/wiki/Hitman:_World_of_Assassination"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "ac-odyssey",
+    "rank": 61,
+    "steamAppId": 812140,
+    "framework": {
+      "name": "Forger patch manager",
+      "url": "https://www.nexusmods.com/assassinscreedodyssey/mods/42"
+    },
+    "hooksExe": false,
+    "modSupport": "community",
+    "afterUpdate": null,
+    "sources": [
+      "https://www.nexusmods.com/assassinscreedodyssey/mods/42",
+      "https://www.nexusmods.com/assassinscreedodyssey"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "ac-valhalla",
+    "rank": 62,
+    "steamAppId": 2208920,
+    "framework": {
+      "name": "Forger patch manager",
+      "url": "https://www.nexusmods.com/assassinscreedodyssey/mods/42"
+    },
+    "hooksExe": false,
+    "modSupport": "community",
+    "afterUpdate": null,
+    "sources": [
+      "https://www.nexusmods.com/assassinscreedodyssey/mods/42",
+      "https://www.nexusmods.com/assassinscreedvalhalla/mods/24",
+      "https://www.nexusmods.com/assassinscreedvalhalla/mods/32"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "ac-origins",
+    "rank": 63,
+    "steamAppId": 582160,
+    "framework": null,
+    "hooksExe": false,
+    "modSupport": "community",
+    "afterUpdate": null,
+    "sources": [
+      "https://www.nexusmods.com/assassinscreedorigins",
+      "https://www.nexusmods.com/assassinscreedorigins/mods/8",
+      "https://www.nexusmods.com/assassinscreedodyssey/mods/42"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "far-cry-5",
+    "rank": 64,
+    "steamAppId": 552520,
+    "framework": {
+      "name": "Far Cry Mod Installer",
+      "url": "https://downloads.fcmodding.com/all/mod-installer/"
+    },
+    "hooksExe": false,
+    "modSupport": "community",
+    "afterUpdate": null,
+    "sources": [
+      "https://downloads.fcmodding.com/all/mod-installer/",
+      "https://www.pcgamingwiki.com/wiki/Far_Cry_5"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "far-cry-6",
+    "rank": 65,
+    "steamAppId": 2369390,
+    "framework": {
+      "name": "Far Cry Mod Installer",
+      "url": "https://downloads.fcmodding.com/all/mod-installer/"
+    },
+    "hooksExe": false,
+    "modSupport": "community",
+    "afterUpdate": null,
+    "sources": [
+      "https://downloads.fcmodding.com/all/mod-installer/",
+      "https://www.pcgamingwiki.com/wiki/Far_Cry_6",
+      "https://www.nexusmods.com/farcry6/mods/14"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "watch-dogs-2",
+    "rank": 66,
+    "steamAppId": 447040,
+    "framework": null,
+    "hooksExe": false,
+    "modSupport": "community",
+    "afterUpdate": {
+      "zh-CN": "带 Easy Anti-Cheat 反作弊：联机模式别用 Mod/修改器，以免被封号。",
+      "en": "Uses Easy Anti-Cheat: don't use mods or trainers in online play, or you risk a ban."
+    },
+    "sources": [
+      "https://www.pcgamingwiki.com/wiki/Watch_Dogs_2",
+      "https://www.nexusmods.com/watchdogs2"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "no-mans-sky",
+    "rank": 67,
+    "steamAppId": 275850,
+    "framework": null,
+    "hooksExe": false,
+    "modSupport": "community",
+    "afterUpdate": {
+      "zh-CN": "大更新后旧 Mod 常失效：只留已适配新版本的 Mod，其余先停用或移出 MODS 文件夹，等作者更新。",
+      "en": "Big updates often break mods: keep only mods updated for the new version and disable the rest until they update."
+    },
+    "sources": [
+      "https://stepmodifications.org/wiki/NoMansSky:3.5",
+      "https://www.pcgamer.com/a-new-no-mans-sky-patch-addresses-problems-with-mods/",
+      "https://www.pcgamingwiki.com/wiki/No_Man%27s_Sky",
+      "https://www.nexusmods.com/nomanssky"
+    ],
+    "checkedAt": "2026-11-19"
+  }
+]
