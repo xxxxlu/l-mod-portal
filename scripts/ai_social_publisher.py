@@ -10,6 +10,10 @@ Capabilities:
 2. Built-in industrial-grade anti-censorship desensitization dictionary (避开作弊/修改器/外挂等限流词).
 3. Generates high-CTR headlines, scenario bullet points, and trending topic tags.
 4. Previews generated copy or saves directly to social_distribution/ ready for release.
+
+口径与 scripts/render_cards_png.py 文件头一致（2026-11-19）：不写「实测 / 实机校验 / 认证补丁 /
+零封号 / 实时雷达 / 100 款合集」；雷达状态按 v2 规则读 radarReason（见 docs/RADAR_V2_CONTRACT.md），
+不再读 verifiedPatch 和旧的三色文案。只写 social_distribution/<id>_social_copy.txt（加 --save 时）。
 """
 
 import os
@@ -21,22 +25,57 @@ import urllib.request
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 GAMES_JSON_PATH = os.path.join(BASE_DIR, 'src/data/games_top100.json')
+DATA_JS_PATH = os.path.join(BASE_DIR, 'public/data.js')
 OUTPUT_DIR = os.path.join(BASE_DIR, 'social_distribution')
 
-# Anti-Censorship Word Replacement Map
+# 平台用词替换（只换成不带承诺的中性词；以前把「破解」换成「免翻纯净版」、「作弊」换成「官方指令」）
+# 长词在前，免得「作弊码」先被「作弊」吃掉一半
 ANTI_BAN_DICT = {
-    "作弊": "官方指令",
-    "作弊码": "控制台代码",
-    "修改器": "单机性能优化辅助",
-    "外挂": "前置增强插件",
-    "破解": "免翻纯净版",
+    "作弊码": "控制台指令",
+    "作弊": "调试指令",
+    "修改器": "第三方工具",
+    "外挂": "第三方工具",
+    "破解": "来路不明",
+    "盗版": "来路不明",
     "锁血": "状态保护",
     "无限金币": "资产极速调校",
     "秒杀": "高能一击参数"
 }
 
+# 与网站雷达页同一套状态文案（v2 规则）
+RADAR_REASON_TEXT = {
+    "recent-update-hooks": "🔴 先别更新：刚更新，常用 Mod 框架可能要等适配",
+    "recent-update": "🟡 留意更新：14 天内刚更新",
+    "trainer-behind": "🟡 留意更新：近 90 天内有更新，修改器还没跟上",
+    "quiet": "🟢 近期平稳：近 14 天没有新版本",
+}
+
+
+def radar_status_text(game):
+    if (game.get('steamAppId') or 0) <= 0:
+        return "⚪ 不在 Steam 上，不巡检"
+    reason = game.get('radarReason')
+    if reason in RADAR_REASON_TEXT:
+        return RADAR_REASON_TEXT[reason]
+    if game.get('compatibilityStatus'):
+        return "旧版巡检结果，可能误报，以避坑雷达页面为准"
+    return "⚪ 还没有巡检记录"
+
+
+def load_games():
+    """只读：优先 src/data/games_top100.json（本地未入库），没有就解析 public/data.js 的 GAMES_DATA。"""
+    if os.path.exists(GAMES_JSON_PATH):
+        with open(GAMES_JSON_PATH, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    with open(DATA_JS_PATH, 'r', encoding='utf-8') as f:
+        text = f.read()
+    start = text.index('[', text.index('window.GAMES_DATA ='))
+    games, _ = json.JSONDecoder().raw_decode(text, start)
+    return games
+
+
 def desensitize(text):
-    """Replaces sensitive words with compliant gaming terms."""
+    """Replaces sensitive words with neutral terms (no promises)."""
     result = text
     for bad, good in ANTI_BAN_DICT.items():
         result = result.replace(bad, good)
@@ -47,12 +86,12 @@ def generate_copy_for_game(game, platform="all"):
     title = (game.get('titles') and game.get('titles', {}).get('zh-CN')) or game.get('title')
     rank = game.get('rank', 99)
     shortcut = game.get('consoleShortcut', '~ 键呼出')
-    status = game.get('compatibilityStatus', 'green')
-    status_text = "🟢 补丁完美兼容" if status == 'green' else ("🟡 需更新前置" if status == 'yellow' else "🔴 坏档预警")
-    verified = game.get('verifiedPatch', '最新官方版本')
+    status_text = radar_status_text(game)
 
     # Helper to extract name and code safely
     def format_cmd(c):
+        if isinstance(c, str):  # 有的游戏 popularCommands 是纯字符串（如艾尔登法环）
+            return f"▫️ {c}"
         raw_name = c.get('name')
         if isinstance(raw_name, dict):
             name = raw_name.get('zh-CN') or raw_name.get('en') or list(raw_name.values())[0]
@@ -76,21 +115,22 @@ def generate_copy_for_game(game, platform="all"):
     # 1. Xiaohongshu (小红书) Format
     redbook = f"""📕 【小红书爆款文案 · Rank #{rank}《{title}》】
 ━━━━━━━━━━━━━━━━━━━━━━━━
-🔥 标题：终于找到了！《{title}》官方开发者指令与避坑全指南（建议收藏）
+🔥 标题：终于找到了！《{title}》控制台指令与避坑指南（建议收藏）
 
 👋 宝子们！单机打到中后期卡关或者想爽玩二周目？
-老L整理了《{title}》目前最全的【官方原生指令】与【避坑指南】！
-绝无任何流氓假代码，对齐最新官方补丁（{verified}）实测可用！
+老L整理了《{title}》常用的【控制台指令】与【避坑指南】！
+先说清楚：指令没有逐条在游戏里实测，版本不同可能失效，用之前先手动备份存档。
 
 ✨ 【必用场景化指令】
 {cmds_formatted}
 
 🎮 【怎么在游戏里开启？】
-进入游戏后，按下【{shortcut}】呼出输入框，直接粘贴回车即可生效！
+进入游戏后，按下【{shortcut}】呼出输入框，粘贴后回车！
 
 🛡️ 【Steam 避坑雷达状态】
 当前状态：{status_text}
-单机玩家放心食用，零封号风险！进游戏前进群或主站可拿完整全套 100 款神作合集！
+（雷达每天比对一次 Steam 更新时间，不做实机测试，所以只说「可能」）
+只在单机 / 离线下用，别带进联机。完整指令清单在 L-MOD Vault 网站本游戏页（链接见主页）。
 
 🏷️ 标签：
 #{title} #{title}攻略 #Steam单机游戏 #单机游戏推荐 #单机游戏避坑 #Steam好游戏 #游戏日常
@@ -101,15 +141,15 @@ def generate_copy_for_game(game, platform="all"):
 ━━━━━━━━━━━━━━━━━━━━━━━━
 【老L单机智库】全球 100 款单机神作 · 第 {rank} 期：《{title}》
 
-很多老哥私信问更新后旧 Mod 崩溃、控制台代码打不开的问题，今天把实机校验后的纯净代码与避坑指南整理出来了：
+很多老哥私信问更新后旧 Mod 崩溃、控制台代码打不开的问题，今天把整理好的指令与避坑指南放出来：
 
-📌 当前 Steam 对账状态：{status_text} (认证补丁: {verified})
+📌 Steam 避坑雷达状态：{status_text}
 📌 控制台唤出方式：{shortcut}
-📌 核心代码预览：
+📌 核心代码预览（没有逐条实测，执行前先存档）：
 {cmds_formatted}
 
-纯净无广，无需翻墙，拒绝流氓捆绑下载器。
-完整 100 款单机大作数据库与 Steam 补丁实时避坑雷达请直接戳独立站查阅！
+不接广告，无需翻墙，不用来路不明的下载器。
+单机游戏资料库与 Steam 避坑雷达（每天比对一次 Steam 更新时间）请到 L-MOD Vault 网站查阅！
 """
 
     # Apply desensitization filter
@@ -128,8 +168,7 @@ def main():
     parser.add_argument('--save', action='store_true', help="将文案保存到 social_distribution/")
     args = parser.parse_args()
 
-    with open(GAMES_JSON_PATH, 'r', encoding='utf-8') as f:
-        games = json.load(f)
+    games = load_games()
 
     target = next((g for g in games if g['id'] == args.game), None)
     if not target:
