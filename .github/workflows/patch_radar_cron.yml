@@ -23,6 +23,13 @@ permissions:
   contents: write
   pull-requests: write
   issues: write
+  actions: write   # 用 GITHUB_TOKEN 推的提交不会触发 deploy.yml，需手动派发一次部署
+
+# 和修改器同步任务（trainer_sync_cron.yml）共用同一把锁：两条流水线都会改 public/data.js 的
+# GAMES_DATA 段并推 main，串行执行才不会互相覆盖/撞车。
+concurrency:
+  group: data-js-writers
+  cancel-in-progress: false
 
 jobs:
   inspect-steam-patches:
@@ -83,13 +90,23 @@ jobs:
           fi
 
       - name: 🚀 Commit and Push Radar Sync Changes
+        id: push
         if: steps.git_status.outputs.has_changes == 'true'
         run: |
           git config --local user.name "github-actions[bot]"
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add public/data.js docs/PATCH_MONITOR_LATEST.md
           git commit -m "chore(radar): automated steam patch sentinel sync [skip ci]"
-          git push
+          # 推送前先并入最新提交（修改器同步任务 / 人工推送），避免 non-fast-forward 被拒
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
+          echo "pushed=true" >> "$GITHUB_OUTPUT"
+
+      - name: 🌐 Redeploy site with the new radar data
+        if: steps.push.outputs.pushed == 'true' && github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy.yml --ref main
 
       - name: 📢 Open GitHub Issue on Breaking Patch Alert
         if: steps.check_risk.outputs.high_risk_detected == 'true'

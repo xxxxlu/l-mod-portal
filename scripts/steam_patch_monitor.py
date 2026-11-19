@@ -7,7 +7,7 @@ L-MOD Vault Steam 补丁变动自动化巡检预警机器人 (Milestone 3)
 
 Capabilities:
 1. Automated inspection of Steam official patch notes & build IDs via public APIs.
-2. Diff comparison against L-MOD Vault's verified baseline (src/data/games_top100.json).
+2. Diff comparison against L-MOD Vault's verified baseline (src/data/games_top100.json, or the GAMES_DATA block of public/data.js when the master file is absent, e.g. in CI).
 3. Automated state machine classification (🟢 完美兼容 / 🟡 需注意 / 🔴 坏档预警).
 4. Synchronizes live status to public/data.js and public/radar.html (--update-radar).
 5. Generates structured audit reports (docs/PATCH_MONITOR_LATEST.md) and copy-ready group broadcast alerts.
@@ -29,6 +29,35 @@ GAMES_JSON_PATH = os.path.join(BASE_DIR, 'src/data/games_top100.json')
 DATA_JS_PATH = os.path.join(BASE_DIR, 'public/data.js')
 TRANS_JSON_PATH = os.path.join(BASE_DIR, 'src/i18n/translations.json')
 REPORT_PATH_DEFAULT = os.path.join(BASE_DIR, 'docs/PATCH_MONITOR_LATEST.md')
+
+# public/data.js layout:  window.GAMES_DATA = [...];\n\nwindow.GAMES_DATABASE = ...;
+# The master src/data/games_top100.json is not tracked in git (decoupled in a4a09db), so in CI
+# (and any fresh checkout) public/data.js is the only copy of the game database.
+GAMES_DATA_HEAD = "window.GAMES_DATA = "
+GAMES_DATA_TAIL = ";\n\nwindow.GAMES_DATABASE"
+
+def _games_data_span(js_text):
+    """Return (start, end) offsets of the GAMES_DATA JSON array inside data.js text."""
+    a = js_text.find(GAMES_DATA_HEAD)
+    if a < 0:
+        raise ValueError(f"{DATA_JS_PATH}: cannot find '{GAMES_DATA_HEAD.strip()}'")
+    a += len(GAMES_DATA_HEAD)
+    b = js_text.find(GAMES_DATA_TAIL, a)
+    if b < 0:
+        raise ValueError(f"{DATA_JS_PATH}: cannot find the end of GAMES_DATA ('{GAMES_DATA_TAIL.strip()}')")
+    return a, b
+
+def load_games():
+    """Load the game database: master JSON when present, otherwise the GAMES_DATA block of public/data.js."""
+    if os.path.exists(GAMES_JSON_PATH):
+        with open(GAMES_JSON_PATH, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    if not os.path.exists(DATA_JS_PATH):
+        raise FileNotFoundError(f"Neither {GAMES_JSON_PATH} nor {DATA_JS_PATH} exists")
+    with open(DATA_JS_PATH, 'r', encoding='utf-8') as f:
+        js_text = f.read()
+    a, b = _games_data_span(js_text)
+    return json.loads(js_text[a:b])
 
 # ==============================================================================
 # 1. TOP 14 FLAGSHIP & KEY GAMES REGISTRY
@@ -403,20 +432,18 @@ class PatchVersionAnalyzer:
 # 4. RADAR & DATA SYNCHRONIZER
 # ==============================================================================
 class RadarSynchronizer:
-    """Updates games_top100.json and public/data.js with fresh inspection data."""
-    
+    """Writes fresh inspection data back to the game database.
+
+    - Master src/data/games_top100.json present (local dev): update it and regenerate public/data.js.
+    - Master absent (GitHub Actions / fresh clone): read and write only the GAMES_DATA block of
+      public/data.js, leaving TRANSLATIONS_DATA and every other part of the file byte-for-byte intact.
+    Either way only radar fields are touched; trainer fields (hasTrainer / trainerHotkeys /
+    trainerInfo / aliases ...) belong to fling_trainer_sync.py and are preserved as-is.
+    """
+
     @staticmethod
-    def sync_to_data_files(inspection_results):
-        """Write results to games_top100.json and rebuild public/data.js."""
-        print("\n🔄 [RadarSynchronizer] Synchronizing inspection results to database...")
-        
-        # 1. Load games_top100.json
-        if not os.path.exists(GAMES_JSON_PATH):
-            raise FileNotFoundError(f"Missing {GAMES_JSON_PATH}")
-
-        with open(GAMES_JSON_PATH, 'r', encoding='utf-8') as f:
-            games = json.load(f)
-
+    def apply_radar_fields(games, inspection_results):
+        """Update radar fields in-place on `games`; return the number of games updated."""
         updated_count = 0
         now_iso = datetime.datetime.now().isoformat()
 
@@ -442,26 +469,46 @@ class RadarSynchronizer:
                     if res['status'] == 'green':
                         game.pop('emergencyAlert', None)
                 updated_count += 1
+        return updated_count
 
-        # 2. Save games_top100.json
-        with open(GAMES_JSON_PATH, 'w', encoding='utf-8') as f:
-            json.dump(games, f, ensure_ascii=False, indent=2)
-        print(f"✅ Updated {updated_count} games in {GAMES_JSON_PATH}")
+    @staticmethod
+    def sync_to_data_files(inspection_results):
+        """Write results to games_top100.json (if present) and public/data.js."""
+        print("\n🔄 [RadarSynchronizer] Synchronizing inspection results to database...")
 
-        # 3. Synchronize public/data.js
-        # Load translations
-        translations = {}
-        if os.path.exists(TRANS_JSON_PATH):
-            with open(TRANS_JSON_PATH, 'r', encoding='utf-8') as f:
-                translations = json.load(f)
+        has_master = os.path.exists(GAMES_JSON_PATH)
+        games = load_games()
+        updated_count = RadarSynchronizer.apply_radar_fields(games, inspection_results)
 
+        if has_master:
+            # Master mode: save games_top100.json, then rebuild the whole public/data.js from it
+            with open(GAMES_JSON_PATH, 'w', encoding='utf-8') as f:
+                json.dump(games, f, ensure_ascii=False, indent=2)
+            print(f"✅ Updated {updated_count} games in {GAMES_JSON_PATH}")
+
+            translations = {}
+            if os.path.exists(TRANS_JSON_PATH):
+                with open(TRANS_JSON_PATH, 'r', encoding='utf-8') as f:
+                    translations = json.load(f)
+
+            with open(DATA_JS_PATH, 'w', encoding='utf-8') as f:
+                f.write("// L-MOD Vault Offline Database (Auto-bundled by Steam Patch Sentinel)\n")
+                f.write(GAMES_DATA_HEAD + json.dumps(games, ensure_ascii=False, indent=2) + ";\n\n")
+                f.write("window.GAMES_DATABASE = window.GAMES_DATA;\n\n")
+                if translations:
+                    f.write("window.TRANSLATIONS_DATA = " + json.dumps(translations, ensure_ascii=False, indent=2) + ";\n")
+            print(f"✅ Successfully regenerated {DATA_JS_PATH}")
+            return
+
+        # Master-less mode: replace only the GAMES_DATA block inside public/data.js
+        print(f"ℹ️ {GAMES_JSON_PATH} not found; syncing GAMES_DATA block of {DATA_JS_PATH} only.")
+        with open(DATA_JS_PATH, 'r', encoding='utf-8') as f:
+            js_text = f.read()
+        a, b = _games_data_span(js_text)
+        js_text = js_text[:a] + json.dumps(games, ensure_ascii=False, indent=2) + js_text[b:]
         with open(DATA_JS_PATH, 'w', encoding='utf-8') as f:
-            f.write("// L-MOD Vault Offline Database (Auto-bundled by Steam Patch Sentinel)\n")
-            f.write("window.GAMES_DATA = " + json.dumps(games, ensure_ascii=False, indent=2) + ";\n\n")
-            f.write("window.GAMES_DATABASE = window.GAMES_DATA;\n\n")
-            if translations:
-                f.write("window.TRANSLATIONS_DATA = " + json.dumps(translations, ensure_ascii=False, indent=2) + ";\n")
-        print(f"✅ Successfully regenerated {DATA_JS_PATH}")
+            f.write(js_text)
+        print(f"✅ Updated {updated_count} games in the GAMES_DATA block of {DATA_JS_PATH} (other blocks untouched)")
 
 # ==============================================================================
 # 5. STRUCTURED REPORT GENERATOR
@@ -609,7 +656,7 @@ def run_monitor():
     parser.add_argument('--appid', type=int, help="Inspect a specific Steam AppID")
     parser.add_argument('--game', type=str, help="Inspect a specific game ID (e.g. cyberpunk-2077)")
     parser.add_argument('--all', action='store_true', help="Inspect all games with Steam AppIDs in games_top100.json")
-    parser.add_argument('--update-radar', action='store_true', help="Synchronize results to games_top100.json and public/data.js")
+    parser.add_argument('--update-radar', action='store_true', help="Synchronize results to games_top100.json (if present) and public/data.js (GAMES_DATA block only when the master JSON is absent)")
     parser.add_argument('--output-report', type=str, default=REPORT_PATH_DEFAULT, help="Markdown report output path")
     parser.add_argument('--simulate-patch', type=str, help="Simulate a new patch for testing state machine (e.g. cyberpunk-2077)")
     parser.add_argument('--simulate-version', type=str, default="Update 2.5 (Edgerunners 2)", help="Simulated version string")
@@ -634,9 +681,8 @@ def run_monitor():
         if args.game in TOP_14_REGISTRY:
             target_games[args.game] = TOP_14_REGISTRY[args.game]
         else:
-            # Look up from games_top100.json
-            with open(GAMES_JSON_PATH, 'r', encoding='utf-8') as f:
-                all_g = json.load(f)
+            # Look up from the game database (games_top100.json, or public/data.js when absent)
+            all_g = load_games()
             found = next((g for g in all_g if g['id'] == args.game), None)
             if not found:
                 print(f"❌ Error: Game '{args.game}' not found in registry or database.")
@@ -667,9 +713,8 @@ def run_monitor():
                 "baseline_version": "1.0"
             }
     elif args.all:
-        # Load all from games_top100.json
-        with open(GAMES_JSON_PATH, 'r', encoding='utf-8') as f:
-            all_g = json.load(f)
+        # Load all from the game database (games_top100.json, or public/data.js when absent)
+        all_g = load_games()
         for g in all_g:
             if g.get('steamAppId'):
                 gid = g['id']
