@@ -762,21 +762,43 @@
   }
 
   function buildPatchRadarResponse(game, title) {
-    const statusMap = {
-      'green': '🟢 完美兼容 (可放心安装/无需降级)',
-      'yellow': '🟡 需更新前置 (部分脚本 Mod 需等待更新)',
-      'red': '🔴 坏档预警 (大版本更新，旧存档与 Mod 严重失效)'
+    // Same wording as the radar page (radarReason from scripts/steam_patch_monitor.py).
+    const fw = game.radarFramework && game.radarFramework.name ? game.radarFramework : null;
+    const reasonMap = {
+      'quiet': '🟢 近 14 天无更新',
+      'recent-update': '🟡 刚更新 · Mod/修改器可能要等适配',
+      'trainer-behind': '🟡 修改器早于当前游戏版本',
+      'recent-update-hooks': `🔴 刚更新 · ${fw ? fw.name : 'Mod 框架'} 可能要等适配，先别更新`
     };
+    const legacyMap = {
+      'green': '🟢 旧版巡检：无提醒',
+      'yellow': '🟡 旧版巡检：提示留意更新（可能误报）',
+      'red': '🔴 旧版巡检：提示先别更新（可能误报）'
+    };
+    const isNew = !!reasonMap[game.radarReason];
+    const appId = Number(game.steamAppId) || 0;
+    const statusBadge = !appId ? '⚪ 不在 Steam 上，不巡检'
+      : isNew ? reasonMap[game.radarReason]
+      : (legacyMap[game.compatibilityStatus] || '⚪ 还没有巡检记录');
+    const plain = s => String(s).replace(/[\[\]()<>`*]/g, ' ').trim();
+    const httpUrl = u => (typeof u === 'string' && /^https?:\/\/[^\s()]+$/i.test(u) ? u : null);
+    const day = s => (typeof s === 'string' && /^\d{4}-\d{2}-\d{2}/.test(s) ? s.slice(0, 10) : null);
 
-    const statusBadge = statusMap[game.compatibilityStatus] || '🟢 正常稳定';
-    let res = `### 📡 《${title}》Steam 补丁兼容性与避坑雷达\n\n`;
+    let res = `### 📡 《${title}》Steam 补丁与 Mod 避坑雷达\n\n`;
     res += `- **当前雷达状态**：${statusBadge}\n`;
-    if (game.verifiedPatch) res += `- **老L 已认证补丁**：\`${game.verifiedPatch}\`\n`;
-    if (game.latestSteamPatch) res += `- **Steam 最新推送补丁**：\`${game.latestSteamPatch}\`\n`;
-    if (game.radarRiskTitle) res += `\n#### ⚠️ 风险通报：${game.radarRiskTitle}\n`;
+    if (day(game.steamBuildUpdatedAt)) res += `- **Steam 最近更新**：${day(game.steamBuildUpdatedAt)}\n`;
+    if (appId && day(game.steamLastChecked)) res += `- **上次巡检**：${day(game.steamLastChecked)}\n`;
+    if (fw) res += httpUrl(fw.url) ? `- **Mod 框架**：[${plain(fw.name)}](${httpUrl(fw.url)})\n` : `- **Mod 框架**：${plain(fw.name)}\n`;
+    const newsUrl = httpUrl(game.latestSteamPatchUrl) || (appId ? `https://store.steampowered.com/news/app/${appId}` : null);
+    if (game.latestSteamPatch && newsUrl) res += `- **最新公告**：[${plain(game.latestSteamPatch)}](${newsUrl})\n`;
+    else if (game.latestSteamPatch) res += `- **最新公告**：${plain(game.latestSteamPatch)}\n`;
+    if (isNew && game.radarRiskTitle) res += `\n#### ${game.radarRiskTitle}\n`;
+    const advice = game.radarAdvice && typeof game.radarAdvice['zh-CN'] === 'string' ? game.radarAdvice['zh-CN'].trim() : '';
+    if (advice) res += `\n**更新后怎么办**：${advice}\n`;
+    else if (isNew && game.radarRiskDesc) res += `${game.radarRiskDesc}\n`;
     if (game.pitfallNote) res += `\n> 💡 **避坑锦囊**：\n> ${game.pitfallNote}\n`;
 
-    res += `\n[进入《Steam 补丁避坑雷达独立看板》查看完整 100 款对账](radar?game=${game.id})`;
+    res += `\n[在《Steam 补丁避坑雷达》里查看这款游戏](radar?game=${game.id})`;
     return { text: res };
   }
 
