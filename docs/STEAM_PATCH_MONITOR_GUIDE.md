@@ -78,6 +78,22 @@
 
 文案里不出现「实测」「完美兼容」「老L团队」「已失效」——没人测过的事、下不了的结论都不写（测试里有检查）。
 
+### 同时生成 `public/radar_status.json`（给 Cloudflare Functions 读）
+
+带 `--update-radar` 写完 data.js 后，脚本按 `GAMES_DATA` 再生成一份 `public/radar_status.json`（约 80 KB）：
+AI 助手（`/api/v1/ai/*`）、`/api/v1/radar/*`、`/api/v1/games*` 等 Functions 通过 `env.ASSETS.fetch` 读它，
+不再读 D1 `games` 表里的旧雷达列，也不在 Function 里解析 1.4 MB 的 data.js（免费版 CPU 不够）。
+
+- 内容是 data.js 的投影，**不重新判定**：只收带 `steamAppId` 且有 v2 `radarReason` 的游戏，
+  每款带 `rank` / `title` / `titleZh` / `steamAppId` 和 `compatibilityStatus`、`radarReason`、`radarStatusText`、
+  `steamBuildId`、`steamBuildUpdatedAt`、`steamLastChecked`、`latestSteamPatch`、`latestSteamPatchUrl`、
+  `radarFramework`、`radarAdvice`、`radarSummary`；`radarRiskTitle` / `radarRiskDesc` / `emergencyAlert` 能推出来，不重复放。
+- 文件头：`version`（2）、`updatedAt`（各款 `steamLastChecked` 的最大值）、`recentDays`、
+  `genericAdvice`（没有 `radarAdvice` 时用的两句通用建议，和 `radarRiskDesc` 的兜底同源）。
+- 一款游戏一行，每天的差异按游戏看。定时任务把它和 data.js 一起提交。
+- 手改了 data.js 的雷达字段后要重新生成：`python3 scripts/steam_patch_monitor.py --export-radar-status`
+  （不联网、不巡检；测试里有一条检查仓库里的文件和 data.js 是否一致）。
+
 ---
 
 ## 四、框架资料（`scripts/radar_frameworks/part-*.json`）
@@ -105,20 +121,25 @@
 # 联网巡检全部带 steamAppId 的游戏，只写报告（不改 data.js）
 python3 scripts/steam_patch_monitor.py
 
-# 联网巡检并写回 public/data.js（定时任务就是这么跑的）
+# 联网巡检并写回 public/data.js 和 public/radar_status.json（定时任务就是这么跑的）
 python3 scripts/steam_patch_monitor.py --update-radar
+
+# 不巡检，只按 data.js 现有字段重新生成 public/radar_status.json
+python3 scripts/steam_patch_monitor.py --export-radar-status
 
 # 只看一款
 python3 scripts/steam_patch_monitor.py --game baldurs-gate-3
 python3 scripts/steam_patch_monitor.py --appid 1086940
 ```
 
-⚠️ 本地跑默认会覆盖 `docs/PATCH_MONITOR_LATEST.md`，带 `--update-radar` 还会改 `public/data.js`。
-这两个文件由定时任务维护，本地试跑请用 `--output-report` 指到临时目录、不带 `--update-radar`，或者跑完 `git checkout` 还原。
+⚠️ 本地跑默认会覆盖 `docs/PATCH_MONITOR_LATEST.md`，带 `--update-radar` 还会改 `public/data.js` 和 `public/radar_status.json`。
+这几个文件由定时任务维护，本地试跑请用 `--output-report` 指到临时目录、不带 `--update-radar`，或者跑完 `git checkout` 还原。
 
 | 参数 | 说明 |
 |---|---|
-| `--update-radar` | 写回 `public/data.js` 的 `GAMES_DATA` 段（本地有 `src/data/games_top100.json` 时写主数据并整份重建 data.js） |
+| `--update-radar` | 写回 `public/data.js` 的 `GAMES_DATA` 段（本地有 `src/data/games_top100.json` 时写主数据并整份重建 data.js），并重新生成 `radar_status.json` |
+| `--export-radar-status` | 不巡检、不联网，只按 data.js 现有雷达字段重新生成 `radar_status.json` |
+| `--radar-status PATH` | `radar_status.json` 的路径，默认和 `--data-js` 同目录（测试用临时 data.js 时就落在临时目录） |
 | `--output-report PATH` | 报告路径，默认 `docs/PATCH_MONITOR_LATEST.md` |
 | `--game ID` / `--appid N` | 只巡检一款 |
 | `--offline` | 不联网；配 `--steam-snapshot` 用快照数据，否则全部算「本次未取到」 |
@@ -165,7 +186,7 @@ python3 scripts/steam_patch_monitor.py --offline --steam-snapshot $F/steam_snaps
 
 1. 每天 UTC 02:00（北京时间 10:00）跑 `python3 scripts/steam_patch_monitor.py --update-radar`；
 2. 跑 `scripts/verify_i18n_dual_pages.py` 门禁；
-3. `public/data.js` 或报告有变化就提交推送，并派发一次 `deploy.yml`；
+3. `public/data.js`、`public/radar_status.json` 或报告有变化就一起提交推送，并派发一次 `deploy.yml`；
 4. **`check_risk` 只读报告里的 `<!-- radar-new-red: N -->`**：`N > 0` 才开单（已有未关闭的 `radar-alert` 单就在下面评论），
    `N = 0` 什么都不做。读不到这一行按 0 处理并在日志里给警告。
 

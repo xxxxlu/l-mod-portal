@@ -7,7 +7,8 @@
  * 1. 统一后台配置与密钥安全脱敏：玩家端零门槛免 Key，站长中台安全配置集中管控
  * 2. 4 大专属 Agentic Skills 拦截链：
  *    - 技能 A【Game Vault RAG】：从 D1 库检索 100% 真实的底层控制台代码与语法
- *    - 技能 B【Patch Sentinel】：Steam 补丁哨兵实时比对，预警 Mod 兼容性与坏档风险
+ *    - 技能 B【Patch Sentinel】：读每日 Steam 更新雷达结果（public/radar_status.json，不读 D1 旧雷达列），
+ *      讲清原因、Steam 更新时间、常用 Mod 框架和更新后怎么办
  *    - 技能 C【Crash Diagnostic】：针对各引擎 (CET/UE5/EAC/Creation) 闪退报错权威诊断
  *    - 技能 D【General Gaming Oracle】：全域单机智库通用问答与逃课攻略
  * 3. 高性能 Server-Sent Events (SSE) 流式打字机逐字输出
@@ -16,6 +17,7 @@
 
 // 游戏别名统一来自游戏数据的 aliases 字段（scripts/build_game_aliases.py 生成），按长度从长到短排好
 import { GAME_ALIASES } from './_game_aliases.js';
+import { loadRadarStatus, radarEntry, radarContextFor, radarDaysAgo, RADAR_METHOD_NOTE } from '../../_radar_status.js';
 
 export async function onRequestPost(context) {
   const { request, env } = context;
@@ -91,9 +93,8 @@ export async function onRequestPost(context) {
       try {
         matchedGame = await db.prepare(
           `SELECT id, rank, title, title_zh, developer, release_year,
-                  has_console, console_shortcut, console_guide_zh,
-                  verified_patch, latest_steam_patch, compatibility_status,
-                  radar_risk_title, radar_risk_desc, pitfall_note
+                  steam_app_id, has_console, console_shortcut, console_guide_zh,
+                  pitfall_note
            FROM games WHERE id = ?`
         ).bind(targetGameId).first();
       } catch (e) {
@@ -114,9 +115,8 @@ export async function onRequestPost(context) {
               targetGameId = g.id;
               matchedGame = await db.prepare(
                 `SELECT id, rank, title, title_zh, developer, release_year,
-                        has_console, console_shortcut, console_guide_zh,
-                        verified_patch, latest_steam_patch, compatibility_status,
-                        radar_risk_title, radar_risk_desc, pitfall_note
+                        steam_app_id, has_console, console_shortcut, console_guide_zh,
+                        pitfall_note
                  FROM games WHERE id = ?`
               ).bind(g.id).first();
               break;
@@ -124,6 +124,23 @@ export async function onRequestPost(context) {
           }
         }
       } catch (e) {}
+    }
+
+    // D1 不可用（没绑定 / 空库）时，按 radar_status.json 里的游戏名做同样的匹配，雷达问答照常可用
+    if (!targetGameId && rawQuery.length >= 2) {
+      const radarForMatch = await loadRadarStatus(context);
+      if (radarForMatch) {
+        const qNorm = rawQuery.toLowerCase().replace(/[\s:：·\-]/g, '');
+        const entries = Object.entries(radarForMatch.games).sort(([, a], [, b]) => (a.rank || 0) - (b.rank || 0));
+        for (const [id, e] of entries) {
+          const mainZh = (e.titleZh || '').split(/[:：\(\)（）\s]/)[0].toLowerCase().replace(/[\s:：·\-]/g, '');
+          const mainEn = (e.title || '').split(/[:：\(\)（）\s\-]/)[0].toLowerCase().replace(/[\s:：·\-]/g, '');
+          if ((mainZh.length >= 2 && qNorm.includes(mainZh)) || (mainEn.length >= 4 && qNorm.includes(mainEn))) {
+            targetGameId = id;
+            break;
+          }
+        }
+      }
     }
 
     // 3. 执行 4 大专属 Agentic Skills 技能拦截链
@@ -227,7 +244,7 @@ export async function onRequestPost(context) {
           skillsTriggered.push({
             id: 'game_vault_rag',
             name: '游戏指令与模组检索器',
-            detail: `从 D1 库秒级召回 ${retrievedCommands.length} 条已核验真实底层代码`
+            detail: `从 D1 库召回 ${retrievedCommands.length} 条站内整理的指令`
           });
         }
       } catch (err) {
@@ -236,36 +253,31 @@ export async function onRequestPost(context) {
     }
 
     // -------------------------------------------------------------------------
-    // 技能 B【Steam 补丁哨兵巡检 · Patch Sentinel】
+    // 技能 B【Steam 更新雷达 · Patch Sentinel】
+    // 只读每日巡检结果 public/radar_status.json；不读 D1 旧雷达列和 patch_radar_logs（都是早期手灌/模拟的数据）。
+    // 没有 D1 时也能按别名认出游戏并回答雷达状态。
     // -------------------------------------------------------------------------
-    if (config.skills.patch_sentinel && matchedGame) {
-      let latestRadarLog = null;
-      if (db) {
-        try {
-          latestRadarLog = await db.prepare(
-            `SELECT patch_title, patch_date, build_id, status, risk_title, risk_desc, emergency_broadcast, checked_at
-             FROM patch_radar_logs WHERE game_id = ?
-             ORDER BY id DESC LIMIT 1`
-          ).bind(matchedGame.id).first();
-        } catch (e) {}
+    if (config.skills.patch_sentinel && targetGameId) {
+      const radarStatus = await loadRadarStatus(context);
+      const entry = radarEntry(radarStatus, targetGameId);
+      if (matchedGame || entry) {
+        const radar = radarContextFor(targetGameId, radarStatus, matchedGame ? matchedGame.steam_app_id : undefined);
+        radarStatusInfo = {
+          game_id: targetGameId,
+          game_title: matchedGame ? (matchedGame.title_zh || matchedGame.title) : (entry.titleZh || entry.title),
+          rank: matchedGame ? matchedGame.rank : entry.rank,
+          days_since_update: entry ? radarDaysAgo(entry.steamBuildUpdatedAt) : null,
+          ...radar
+        };
+
+        skillsTriggered.push({
+          id: 'patch_sentinel',
+          name: 'Steam 更新雷达',
+          detail: radar.tracked
+            ? `Steam build ${radar.steam_build_id || '-'}（${radar.steam_updated_on || '日期未知'} 更新）· ${radar.status_text || radar.status}`
+            : radar.note
+        });
       }
-
-      radarStatusInfo = {
-        game_title: matchedGame.title_zh || matchedGame.title,
-        verified_patch: matchedGame.verified_patch || '最新基准',
-        latest_steam_patch: matchedGame.latest_steam_patch || '官方最新',
-        status: matchedGame.compatibility_status || 'green',
-        risk_title: matchedGame.radar_risk_title || (latestRadarLog ? latestRadarLog.risk_title : null),
-        risk_desc: matchedGame.radar_risk_desc || (latestRadarLog ? latestRadarLog.risk_desc : null),
-        pitfall: matchedGame.pitfall_note,
-        latest_log: latestRadarLog
-      };
-
-      skillsTriggered.push({
-        id: 'patch_sentinel',
-        name: 'Steam 补丁哨兵巡检',
-        detail: `版本比对: 基准 [${radarStatusInfo.verified_patch}] vs Steam最新 [${radarStatusInfo.latest_steam_patch}]，状态: ${radarStatusInfo.status.toUpperCase()}`
-      });
     }
 
     // -------------------------------------------------------------------------
@@ -273,7 +285,7 @@ export async function onRequestPost(context) {
     // -------------------------------------------------------------------------
     const isCrashQuery = /闪退|崩溃|打不开|进不去|跳出|报错|黑屏|无响应|crash|freeze|error|0xc0000005|dinput8|dxgi|version\.dll|ue4ss|cet|skse|f4se|eac|easyanticheat|c\+\+|directx|dx11|dx12|regulation\.bin/i.test(rawQuery);
     if (config.skills.crash_diagnostic && isCrashQuery) {
-      crashGuideInfo = buildEngineCrashKnowledge(matchedGame?.id, rawQuery);
+      crashGuideInfo = buildEngineCrashKnowledge(matchedGame?.id || targetGameId, rawQuery);
       skillsTriggered.push({
         id: 'crash_diagnostic',
         name: '游戏报错与崩溃诊断专家',
@@ -348,7 +360,11 @@ export async function onRequestPost(context) {
               id: matchedGame.id,
               title: matchedGame.title_zh || matchedGame.title,
               rank: matchedGame.rank
-            } : null,
+            } : (radarStatusInfo ? {
+              id: radarStatusInfo.game_id,
+              title: radarStatusInfo.game_title,
+              rank: radarStatusInfo.rank
+            } : null),
             skills_triggered: skillsTriggered,
             commands_count: retrievedCommands.length,
             model_route: primaryRoute.modelName,
@@ -483,6 +499,7 @@ export async function onRequestPost(context) {
         data: {
           text: fullText,
           game: matchedGame,
+          radar: radarStatusInfo,
           skills_triggered: skillsTriggered,
           retrieved_commands: retrievedCommands,
           model_route: activeRoute ? activeRoute.modelName : primaryRoute.modelName
@@ -582,7 +599,7 @@ function buildSynthesizedPrompt({
   prompt += `3. **避坑与坏档警示**：对修改金币数亿、直接满级、跳过剧情等高危指令，必须用 '> ⚠️ **老L 独家避坑警示**：' 强提示备份存档！\n\n`;
 
   if (matchedGame) {
-    prompt += `### 【当前锚定游戏画像 (D1 认证)】\n`;
+    prompt += `### 【当前锚定游戏画像 (站内资料)】\n`;
     prompt += `- 游戏名称: 《${matchedGame.title_zh || matchedGame.title}》 (${matchedGame.title})\n`;
     prompt += `- 排名与开发商: 全网 Rank #${matchedGame.rank} · ${matchedGame.developer || '未知'}\n`;
     prompt += `- 控制台快捷键: \`${matchedGame.console_shortcut || '无原生控制台/需前置注入'}\`\n`;
@@ -606,15 +623,28 @@ function buildSynthesizedPrompt({
   }
 
   if (radarStatusInfo) {
-    prompt += `### 【Steam 补丁哨兵实时巡检数据】\n`;
-    prompt += `- 老L 认证基准补丁: ${radarStatusInfo.verified_patch}\n`;
-    prompt += `- Steam 最新推送版本: ${radarStatusInfo.latest_steam_patch}\n`;
-    prompt += `- 兼容性指示灯: ${radarStatusInfo.status.toUpperCase()}\n`;
-    if (radarStatusInfo.risk_title) {
-      prompt += `- 风险预警标题: ${radarStatusInfo.risk_title}\n`;
-      prompt += `- 影响详情: ${radarStatusInfo.risk_desc || '暂无详细描述'}\n`;
+    const r = radarStatusInfo;
+    prompt += `### 【Steam 更新雷达（每日巡检结果）】\n`;
+    if (!r.tracked) {
+      prompt += `- ${r.note}\n`;
+    } else {
+      prompt += `- 雷达状态: ${r.status_text || r.status}\n`;
+      prompt += `- 原因: ${r.reason_text}\n`;
+      if (r.summary) prompt += `- 巡检摘要: ${r.summary}\n`;
+      prompt += `- Steam 当前版本: build ${r.steam_build_id || '未知'}，${r.steam_updated_on || '日期未知'} 发布`;
+      prompt += r.days_since_update !== null && r.days_since_update !== undefined ? `（距今 ${r.days_since_update} 天）\n` : `\n`;
+      prompt += `- 上次巡检: ${r.last_checked_on || '未知'}\n`;
+      prompt += r.framework
+        ? `- 常用 Mod 框架: ${r.framework.name}（${r.framework.url}）\n`
+        : `- 常用 Mod 框架: 资料里没有记录这款游戏依赖的 Mod 框架\n`;
+      prompt += `- 更新后怎么办: ${r.after_update || '先备份存档，等 Mod 和修改器作者适配新版本再用。'}\n`;
+      if (r.latest_announcement) {
+        prompt += `- 最新官方公告: ${r.latest_announcement.title || '（无标题）'} ${r.latest_announcement.url}\n`;
+      }
     }
-    prompt += `\n`;
+    prompt += `- 判定方法: ${RADAR_METHOD_NOTE}\n`;
+    prompt += `- 回答要求: 玩家问到更新、补丁、版本、能不能装 Mod/修改器时，按上面的数据讲清楚原因、Steam 更新时间、常用框架和更新后怎么办；`;
+    prompt += `只说「可能」，不要说「实测」「已认证补丁」「完美兼容」，不要编造版本号或兼容结论。\n\n`;
   }
 
   if (crashGuideInfo) {
@@ -902,7 +932,9 @@ function generateEdgeEngineFallbackAnswer({
 }) {
   let res = '';
 
-  const gameTitle = matchedGame ? (matchedGame.title_zh || matchedGame.title) : '单机游戏';
+  const gameTitle = matchedGame
+    ? (matchedGame.title_zh || matchedGame.title)
+    : ((radarStatusInfo && radarStatusInfo.game_title) || '单机游戏');
 
   // 1. 高危坏档提示
   if (isHighRiskQuery) {
@@ -921,8 +953,8 @@ function generateEdgeEngineFallbackAnswer({
 
   // 3. 指令召回结果
   if (retrievedCommands && retrievedCommands.length > 0) {
-    res += `### 🎮 《${gameTitle}》针对 "${query}" 的真实指令核验结果\n\n`;
-    res += `已从 L-MOD 官方 D1 智库秒级调出 **${retrievedCommands.length}** 条经老L认证的控制台底层代码：\n\n`;
+    res += `### 🎮 《${gameTitle}》针对 "${query}" 的指令检索结果\n\n`;
+    res += `从 L-MOD 站内资料里找到 **${retrievedCommands.length}** 条相关的控制台指令（站内整理，游戏更新后可能失效，用前先备份存档）：\n\n`;
 
     for (const cmd of retrievedCommands) {
       const name = cmd.name_zh || cmd.name_en;
@@ -936,21 +968,28 @@ function generateEdgeEngineFallbackAnswer({
     }
   }
 
-  // 4. Steam 补丁雷达巡检
-  if (radarStatusInfo && (query.includes('补丁') || query.includes('雷达') || query.includes('更新') || query.includes('版本') || !retrievedCommands.length)) {
-    const statusMap = {
-      'green': '🟢 完美兼容 (可放心安装/无需降级)',
-      'yellow': '🟡 需更新前置扩展 (部分脚本Mod需等待适配)',
-      'red': '🔴 坏档预警 (大版本更新，旧Mod与存档严重冲突)'
-    };
-    res += `### 📡 《${gameTitle}》Steam 补丁兼容性哨兵巡检\n\n`;
-    res += `- **雷达状态指示灯**：${statusMap[radarStatusInfo.status] || radarStatusInfo.status}\n`;
-    res += `- **老L 已认证基准补丁**：\`${radarStatusInfo.verified_patch}\`\n`;
-    res += `- **Steam 最新推送补丁**：\`${radarStatusInfo.latest_steam_patch}\`\n`;
-    if (radarStatusInfo.risk_title) {
-      res += `- **风险预警通报**：${radarStatusInfo.risk_title} (${radarStatusInfo.risk_desc || ''})\n`;
+  // 4. Steam 更新雷达（每日巡检结果）
+  if (radarStatusInfo && (/补丁|雷达|更新|版本|能玩|兼容|patch|update/i.test(query) || !retrievedCommands.length)) {
+    const r = radarStatusInfo;
+    const mdText = (t) => String(t || '').replace(/[\[\]]/g, ' ').trim();
+    res += `### 📡 《${gameTitle}》Steam 更新雷达\n\n`;
+    if (!r.tracked) {
+      res += `- **雷达状态**：⚪ ${r.note}\n\n`;
+    } else {
+      res += `- **雷达状态**：${r.status_text || r.status}\n`;
+      res += `- **原因**：${r.reason_text}\n`;
+      const ago = r.days_since_update !== null && r.days_since_update !== undefined ? `，${r.days_since_update} 天前` : '';
+      res += `- **Steam 最近更新**：${r.steam_updated_on || '日期未知'}（build ${r.steam_build_id || '-'}${ago}）\n`;
+      res += r.framework
+        ? `- **常用 Mod 框架**：[${mdText(r.framework.name)}](${r.framework.url})\n`
+        : `- **常用 Mod 框架**：资料里没有记录\n`;
+      res += `- **更新后怎么办**：${r.after_update || '先备份存档，等 Mod 和修改器作者适配新版本再用。'}\n`;
+      if (r.latest_announcement) {
+        res += `- **最新官方公告**：[${mdText(r.latest_announcement.title) || '查看公告'}](${r.latest_announcement.url})\n`;
+      }
+      res += `- **上次巡检**：${r.last_checked_on || '未知'}\n\n`;
+      res += `> ${RADAR_METHOD_NOTE}\n\n`;
     }
-    res += `\n`;
   }
 
   // 5. 若既无指令也无报错但有游戏
@@ -968,12 +1007,12 @@ function generateEdgeEngineFallbackAnswer({
     res += `### 🤖 老L·AI 官方智库顾问已收到你的提问：“${query}”\n\n`;
     res += `当前已激活 **4 大专属 Skills** 联动检索：\n`;
     res += `- 🔍 **Game Vault RAG**：D1 智库 1093+ 条真实控制台代码\n`;
-    res += `- 📡 **Steam 补丁哨兵**：100 款单机大作版本对账雷达\n`;
+    res += `- 📡 **Steam 更新雷达**：每天巡检站内 Steam 游戏的更新时间，提醒哪些 Mod 框架可能要等适配\n`;
     res += `- 💥 **Crash 故障专家**：覆盖 CET、UE5、EAC、Creation 等主流引擎\n\n`;
     res += `💡 **提问建议**：推荐带上具体游戏名称或报错特征，例如：\n`;
     res += `- “2077怎么刷四季宝和强尼保时捷”\n`;
     res += `- “黑神话虚幻5着色器报错0xc0000005怎么修”\n`;
-    res += `- “法环黄金树幽影1.14补丁能打无敌mod吗”\n`;
+    res += `- “法环最近更新了吗，现在装 Mod 要注意什么”\n`;
   }
 
   if (routeMsg) {

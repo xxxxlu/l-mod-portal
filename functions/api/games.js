@@ -2,7 +2,12 @@
  * Cloudflare Pages Function: /api/games
  * Global Edge API endpoint for L-MOD Vault Game Database.
  * Runs on Cloudflare's 300+ Edge Data Centers with Anycast routing.
+ *
+ * 雷达字段：不输出 D1 里的旧雷达列 / raw_json 里的旧雷达字段，改用 public/radar_status.json 的 v2 结果
+ * （见 ./_radar_status.js）。
  */
+
+import { loadRadarStatus, withRadar, withRadarRawGame } from './_radar_status.js';
 
 export async function onRequestGet(context) {
   const { request, env } = context;
@@ -23,6 +28,7 @@ export async function onRequestGet(context) {
     const db = env.DB || env.lmod_vault_db;
     // 1. If Cloudflare D1 Database binding is available
     if (db) {
+      const radarStatus = await loadRadarStatus(context);
       if (gameId) {
         const { results } = await db.prepare(
           'SELECT * FROM games WHERE id = ?'
@@ -36,15 +42,19 @@ export async function onRequestGet(context) {
         }
 
         const game = results[0];
-        // Parse JSON fields
+        // raw_json 是早期灌库时的整份游戏数据（data.js 形状）：去掉里面的旧雷达字段，换成 v2 结果
         if (game.raw_json) {
-          return new Response(game.raw_json, { headers: corsHeaders });
+          try {
+            const raw = JSON.parse(game.raw_json);
+            return new Response(JSON.stringify(withRadarRawGame(raw, radarStatus)), { headers: corsHeaders });
+          } catch (e) {}
         }
-        return new Response(JSON.stringify(game), { headers: corsHeaders });
+        const { raw_json, ...row } = game;
+        return new Response(JSON.stringify(withRadar(row, radarStatus)), { headers: corsHeaders });
       }
 
       // Query list of all games (lightweight projection)
-      let sql = 'SELECT id, rank, title, title_zh, developer, release_year, genre, steam_rating, compatibility_status, verified_patch, latest_steam_patch, radar_risk_title FROM games';
+      let sql = 'SELECT id, rank, title, title_zh, developer, release_year, genre, steam_rating FROM games';
       const params = [];
 
       if (query) {
@@ -59,8 +69,10 @@ export async function onRequestGet(context) {
 
       return new Response(JSON.stringify({
         source: 'cloudflare_d1_edge',
+        radar_source: radarStatus ? 'radar_status.json' : null,
+        radar_updated_at: radarStatus ? radarStatus.updatedAt : null,
         total: results.length,
-        games: results
+        games: results.map(row => withRadar(row, radarStatus))
       }), { headers: corsHeaders });
     }
 

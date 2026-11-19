@@ -551,7 +551,9 @@ class TrainerTimesTest(unittest.TestCase):
 # ==============================================================================
 # 离线端到端：假数据跑一遍完整命令
 # ==============================================================================
-class OfflineEndToEndTest(unittest.TestCase):
+class OfflineHarness:
+    """离线跑整套脚本用的夹具：临时目录里放一份 data_min.js，报告也写在临时目录。"""
+
     def setUp(self):
         self.tmp = tempfile.mkdtemp()
         self.data_js = os.path.join(self.tmp, 'data.js')
@@ -583,6 +585,8 @@ class OfflineEndToEndTest(unittest.TestCase):
         m = re.search(r'<!-- radar-new-red: (\d+) -->', report)
         return int(m.group(1)) if m else None
 
+
+class OfflineEndToEndTest(OfflineHarness, unittest.TestCase):
     def test_full_offline_run_with_update(self):
         before_games = self.games()
         before_raw = self.raw()
@@ -696,6 +700,143 @@ class OfflineEndToEndTest(unittest.TestCase):
         self.assertIn('newsError', snap['292030'])
 
 
+# ==============================================================================
+# public/radar_status.json（Cloudflare Functions 读的雷达结果）
+# ==============================================================================
+class RadarStatusBuildTest(unittest.TestCase):
+    def v2_game(self, gid, rank, appid, reason='quiet', checked='2026-11-19T02:00:00Z', **extra):
+        fields = {
+            'compatibilityStatus': spm.REASON_STATUS[reason], 'radarReason': reason,
+            'radarStatusText': spm.status_text(reason, 'SKSE64'), 'steamBuildId': '42',
+            'steamBuildUpdatedAt': '2026-11-10T00:00:00Z', 'steamLastChecked': checked,
+            'latestSteamPatch': 'Hotfix 1', 'latestSteamPatchUrl': 'https://example.com/news',
+            'radarFramework': {'name': 'SKSE64', 'url': 'https://skse.silverlock.org/'},
+            'radarAdvice': {'zh-CN': '等 SKSE64 出新版再玩。', 'en': 'Wait for SKSE64.'},
+            'radarSummary': '摘要', 'radarRiskTitle': '标题', 'radarRiskDesc': '说明',
+            'emergencyAlert': {'zh-CN': '预警', 'en': 'alert'},
+        }
+        fields.update(extra)
+        return make_game(gid, rank, appid, **fields)
+
+    def test_only_steam_games_with_v2_reason_are_listed_in_rank_order(self):
+        games = [
+            self.v2_game('late', 9, 900),
+            self.v2_game('early', 2, 200),
+            make_game('legacy', 3, 300, compatibilityStatus='red', radarStatusText='🟢 完美兼容实测通过'),
+            make_game('non-steam', 4, 0, radarReason='quiet', compatibilityStatus='green'),
+            make_game('bad-reason', 5, 500, radarReason='whatever', compatibilityStatus='green'),
+        ]
+        status = spm.build_radar_status(games)
+        self.assertEqual(list(status['games']), ['early', 'late'])
+        self.assertEqual(status['version'], 2)
+        self.assertEqual(status['recentDays'], spm.RECENT_DAYS)
+        self.assertEqual(status['genericAdvice'], spm.GENERIC_RISK_DESC)
+
+    def test_entry_copies_v2_fields_and_drops_derivable_and_legacy_ones(self):
+        game = self.v2_game('skyrim-se', 6, 489830, 'recent-update-hooks')
+        entry = spm.build_radar_status([game])['games']['skyrim-se']
+        self.assertEqual(entry['rank'], 6)
+        self.assertEqual(entry['steamAppId'], 489830)
+        self.assertEqual(entry['title'], 'Skyrim-Se')
+        self.assertEqual(entry['titleZh'], '游戏skyrim-se')
+        for key in spm.RADAR_STATUS_FIELDS:
+            self.assertEqual(entry[key], game[key], key)
+        for key in ('verifiedPatch', 'radarRiskTitle', 'radarRiskDesc', 'emergencyAlert', 'titles', 'id'):
+            self.assertNotIn(key, entry)
+
+    def test_null_framework_and_advice_are_kept_missing_announcement_is_omitted(self):
+        game = self.v2_game('a', 1, 100, radarFramework=None, radarAdvice=None)
+        del game['latestSteamPatch']
+        entry = spm.build_radar_status([game])['games']['a']
+        self.assertIsNone(entry['radarFramework'])
+        self.assertIsNone(entry['radarAdvice'])
+        self.assertNotIn('latestSteamPatch', entry)
+
+    def test_updated_at_is_latest_check_not_now(self):
+        games = [self.v2_game('a', 1, 100, checked='2026-11-18T02:00:00Z'),
+                 self.v2_game('b', 2, 200, checked='2026-11-19T02:00:05Z'),
+                 self.v2_game('c', 3, 300, checked=None)]
+        self.assertEqual(spm.build_radar_status(games)['updatedAt'], '2026-11-19T02:00:05Z')
+        self.assertIsNone(spm.build_radar_status([])['updatedAt'])
+
+    def test_render_is_valid_json_with_one_game_per_line(self):
+        games = [self.v2_game('a', 1, 100), self.v2_game('b', 2, 200, 'trainer-behind')]
+        status = spm.build_radar_status(games)
+        text = spm.render_radar_status(status)
+        self.assertEqual(json.loads(text), status)
+        game_lines = [line for line in text.splitlines() if line.startswith('    "')]
+        self.assertEqual(len(game_lines), 2)
+        self.assertTrue(game_lines[0].startswith('    "a": {"rank":1,'))
+        self.assertEqual(json.loads(spm.render_radar_status(spm.build_radar_status([])))['games'], {})
+
+    def test_default_path_sits_next_to_data_js(self):
+        self.assertEqual(spm.default_radar_status_path('/tmp/x/data.js'), '/tmp/x/radar_status.json')
+        self.assertEqual(spm.default_radar_status_path(spm.DATA_JS_PATH),
+                         os.path.join(REPO, 'public', 'radar_status.json'))
+
+
+class RadarStatusEndToEndTest(OfflineHarness, unittest.TestCase):
+    """--update-radar 写 data.js 的同时生成 radar_status.json；内容永远等于 data.js 的投影。"""
+
+    def status_path(self):
+        return os.path.join(self.tmp, 'radar_status.json')
+
+    def read_status(self, path=None):
+        with open(path or self.status_path(), encoding='utf-8') as f:
+            return json.load(f)
+
+    def test_update_radar_writes_status_next_to_data_js(self):
+        code, _ = self.run_monitor('--update-radar')
+        self.assertEqual(code, 0)
+        status = self.read_status()
+        self.assertEqual(status, spm.build_radar_status(spm.load_games(self.data_js, use_master=False)))
+        self.assertEqual({gid: e['compatibilityStatus'] for gid, e in status['games'].items()}, {
+            'cyberpunk-2077': 'red', 'witcher-3': 'green', 'baldurs-gate-3': 'yellow',
+            'skyrim-se': 'red', 'palworld': 'yellow',
+        })
+        # 没取到的旧数据（elden-ring）和非 Steam 游戏不进文件
+        self.assertNotIn('elden-ring', status['games'])
+        self.assertNotIn('alan-wake-2', status['games'])
+        self.assertEqual(status['updatedAt'], '2026-11-19T00:00:00Z')
+        self.assertEqual(status['games']['cyberpunk-2077']['radarFramework']['name'], 'Cyber Engine Tweaks')
+        with open(self.status_path(), encoding='utf-8') as f:
+            text = f.read()
+        for phrase in spm.BANNED_PHRASES:
+            self.assertNotIn(phrase, text)
+
+    def test_without_update_flag_no_status_file(self):
+        self.run_monitor()
+        self.assertFalse(os.path.exists(self.status_path()))
+
+    def test_failed_fetch_keeps_previous_entry(self):
+        self.run_monitor('--update-radar')
+        first = self.read_status()['games']['cyberpunk-2077']
+        # 第二次全部取不到：data.js 一个字段都不动，radar_status.json 里的这款也照旧
+        code = spm.run_monitor(['--offline', '--data-js', self.data_js, '--output-report', self.report,
+                                '--frameworks-dir', os.path.join(FIXTURES, 'frameworks'), '--update-radar'],
+                               log=self.logs.append)
+        self.assertEqual(code, 0)
+        self.assertEqual(self.read_status()['games']['cyberpunk-2077'], first)
+
+    def test_custom_status_path(self):
+        custom = os.path.join(self.tmp, 'sub', 'status.json')
+        self.run_monitor('--update-radar', '--radar-status', custom)
+        self.assertTrue(os.path.exists(custom))
+        self.assertFalse(os.path.exists(self.status_path()))
+
+    def test_export_only_reads_data_js(self):
+        self.run_monitor('--update-radar')
+        os.remove(self.status_path())
+        os.remove(self.report)
+        before = self.raw()
+        code = spm.run_monitor(['--offline', '--data-js', self.data_js, '--output-report', self.report,
+                                '--export-radar-status'], log=self.logs.append)
+        self.assertEqual(code, 0)
+        self.assertEqual(self.raw(), before)
+        self.assertFalse(os.path.exists(self.report))  # 不巡检，也不写报告
+        self.assertEqual(self.read_status(), spm.build_radar_status(spm.load_games(self.data_js, use_master=False)))
+
+
 class RealDataTest(unittest.TestCase):
     """只读真实 public/data.js，确认默认巡检范围 = 全部带 steamAppId 的游戏。"""
 
@@ -705,6 +846,19 @@ class RealDataTest(unittest.TestCase):
         self.assertEqual(len(targets), sum(1 for g in games if g.get('steamAppId')))
         self.assertNotIn('alan-wake-2', [g['id'] for g in targets])
         self.assertGreaterEqual(len(targets), 99)
+
+    def test_committed_radar_status_matches_data_js(self):
+        """仓库里的 public/radar_status.json 必须和 data.js 一致；不一致就跑 --export-radar-status。"""
+        path = spm.default_radar_status_path(spm.DATA_JS_PATH)
+        with open(path, encoding='utf-8') as f:
+            text = f.read()
+        games = spm.load_games(spm.DATA_JS_PATH, use_master=False)
+        self.assertEqual(text, spm.render_radar_status(spm.build_radar_status(games)),
+                         'public/radar_status.json 过期了：python3 scripts/steam_patch_monitor.py --export-radar-status')
+        # Functions 每次请求都要解析它：控制在 100 KB 以内
+        self.assertLess(len(text.encode('utf-8')), 100 * 1024)
+        for phrase in spm.BANNED_PHRASES:
+            self.assertNotIn(phrase, text)
 
 
 # ==============================================================================
