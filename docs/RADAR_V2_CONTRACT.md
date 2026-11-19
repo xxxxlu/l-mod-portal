@@ -94,13 +94,13 @@ v2 的目标：**全部 99 款上了 Steam 的游戏都巡检；只用能核实�
 ```json
 {
   "id": "skyrim-se",
-  "rank": 5,
+  "rank": 6,
   "steamAppId": 489830,
   "framework": { "name": "SKSE64", "url": "https://skse.silverlock.org/" },
   "hooksExe": true,
   "modSupport": "community",
   "afterUpdate": {
-    "zh-CN": "游戏更新后先别急着进，等 SKSE64 和 Address Library 出对应版本再玩；可在 Steam 设成仅在启动时更新。",
+    "zh-CN": "游戏更新后先别急着进，等 SKSE64 和 Address Library 出对应版本再玩。",
     "en": "After a game update, wait for matching SKSE64 and Address Library builds before playing."
   },
   "sources": ["https://skse.silverlock.org/"],
@@ -145,3 +145,22 @@ v2 的目标：**全部 99 款上了 Steam 的游戏都巡检；只用能核实�
 - 仓库是公开的：提交里不写真名，不放任何密钥。
 - 不下载修改器或任何可执行文件。
 - 提交信息结尾带 `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>`。
+
+## 7. 第一轮交付后的决定（v2.1，11-19，协调人定）
+
+以下条款覆盖前文。
+
+1. **`trainer-behind` 只看近 90 天**：只有 `buildAge ≤ 90 天` 时才判这一条。build 更老的，修改器早一点也算 `quiet`。
+   这样做是因为长期不更新的老游戏，修改器早几周发布基本不影响使用；不加这个限制，99 款里有 52 款会常亮黄灯，黄灯就失去提醒作用了。
+2. **跑马灯和 `emergencyAlert` 只给红灯**：`recent-update`（黄）不写 `emergencyAlert`，雷达页的滚动预警条只放红灯。
+3. **公告取不到不影响判定**：只有 Steam build 信息取不到时，才算「本次未取到」并保持原值。
+   公告接口失败时照常判定，`latestSteamPatch` 和 `latestSteamPatchUrl` 保留上次的值；如果上次也没有，就用 Steam 新闻页链接。
+4. **红灯说法要留余地**：Steam 的 `timeupdated` 分不出这次改没改 exe，只更新资源也会刷新。所以红灯文案改成
+   `🔴 刚更新 · <框架名> 可能要等适配，先别更新`，摘要里也写「可能」，不写「已失效」。
+5. **新增字段 `radarAdvice`**：类型是 `{ "zh-CN": string, "en": string } | null`，原样取框架资料里的 `afterUpdate`。
+   雷达页在简体中文和繁体中文界面显示 zh-CN，其它语言显示 en；为 null 时用通用建议。`radarRiskDesc` 仍按 2.3 节写简体中文。
+6. **修改器更新时间**：页面直接读 `GAMES_DATA` 里已有的 `trainerInfo.lastUpdated`，不新增字段。
+7. **`hooksExe` 为 true 但 `framework` 为 null 的条目**：整条跳过，并在报告里列出（radar-engine 的做法，确认采用）。
+8. **演练模式**：不改 `data.js`、不推送、不部署，只走开单流程，标题加「【演练】」（radar-engine 的做法，确认采用）。
+9. **radar-page 第二轮新增归属**：`public/index.html`（雷达状态相关的写死名单和说法、「100% / 零木马」这类没做过的承诺、不再展示 `verifiedPatch`）、
+   `README.md` 里讲雷达的段落、`scripts/build_i18n_matrix.py` 里的旧词条（改成和现行词条一致，防止重跑把假文案写回来）。
