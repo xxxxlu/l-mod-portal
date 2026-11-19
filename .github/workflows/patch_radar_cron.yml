@@ -119,10 +119,21 @@ jobs:
             if (fs.existsSync(reportPath)) {
               content = fs.readFileSync(reportPath, 'utf8');
             }
-            await github.rest.issues.create({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              title: '🚨【紧急避坑预警】Steam 官方推送突发补丁 · 避坑雷达已自动更新预警',
-              body: content,
-              labels: ['radar-alert', 'breaking-patch', 'mod-incompatible']
+            const { owner, repo } = context.repo;
+            // 去重：已有未关闭的雷达预警 Issue 时不再新开，改为在那条下面追加本次巡检报告
+            const { data: openAlerts } = await github.rest.issues.listForRepo({
+              owner, repo, labels: 'radar-alert', state: 'open', per_page: 1
             });
+            if (openAlerts.length > 0) {
+              await github.rest.issues.createComment({
+                owner, repo, issue_number: openAlerts[0].number, body: content
+              });
+              core.info(`Appended report to open radar-alert issue #${openAlerts[0].number}`);
+            } else {
+              await github.rest.issues.create({
+                owner, repo,
+                title: '🚨【紧急避坑预警】Steam 官方推送突发补丁 · 避坑雷达已自动更新预警',
+                body: content,
+                labels: ['radar-alert', 'breaking-patch', 'mod-incompatible']
+              });
+            }
