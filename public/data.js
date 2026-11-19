@@ -29,7 +29,7 @@ window.GAMES_DATA = [
     "hasConsole": true,
     "consoleShortcut": "~ (Cyber Engine Tweaks 快捷唤出)",
     "consoleEnableGuide": {
-      "zh-CN": "1. 必须先安装 Cyber Engine Tweaks (CET) 核心前置，将解压后的 bin 文件夹直接放入《赛博朋克2077》安装根目录；\n2. 启动游戏，首次运行会在屏幕中央弹出热键绑定窗口，按一下键盘 ~ 键（或自定义键）完成绑定；\n3. 游戏内随时按下 ~ 键呼出 CET 控制台界面，直接将下列 Lua 指令复制粘贴到最下方输入框并按回车执行即可秒级生效！所有代码均针对 2.0/2.13 版本进行了真实校验，绝无过期语法。",
+      "zh-CN": "1. 必须先安装 Cyber Engine Tweaks (CET) 核心前置，将解压后的 bin 文件夹直接放入《赛博朋克2077》安装根目录；\n2. 启动游戏，首次运行会在屏幕中央弹出热键绑定窗口，按一下键盘 ~ 键（或自定义键）完成绑定；\n3. 游戏内随时按下 ~ 键呼出 CET 控制台界面，直接将下列 Lua 指令复制粘贴到最下方输入框并按回车执行。指令按 2.0/2.13 版本的写法整理，没有逐条在游戏里实测，版本不同可能失效，执行前先手动存档。",
       "en": "1. Install Cyber Engine Tweaks (CET) into the bin\\x64 directory.\n2. Bind your console key (~ by default).\n3. Press ~ in-game, paste any Lua command below, and press Enter to execute."
     },
     "popularCommands": [
@@ -145,7 +145,7 @@ window.GAMES_DATA = [
       "totalDownloads": "342.8M",
       "totalEndorsements": "1.84M",
       "totalMods": "14,280",
-      "latestPatch": "Patch 2.13 Ready"
+      "latestPatch": "Patch 2.13"
     },
     "consoleCategories": [
       {
@@ -1981,12 +1981,12 @@ window.GAMES_DATA = [
       "source": "trainers.json"
     },
     "latestPatch": "Patch 2.13 & 往日之影 (Steam/Epic/GOG 全版本兼容)",
-    "verifiedPatch": "2.13 (往日之影DLC全兼容)",
+    "verifiedPatch": "2.13（未实测）",
     "radarSecretCode": "老L单机888",
     "pitfallNote": {
-      "title": "老L实验室避坑笔记 (赛博朋克2077 v2.13)",
+      "title": "老L避坑笔记 (赛博朋克2077 v2.13)",
       "tips": [
-        "【版本语法避坑】：2.0+ 往日之影彻底重构了专精成长树，千万别运行网上旧版 1.63 的 SetLevel 代码，否则专精树直接永久卡死！本站套餐已全面换用 2.13 安全合规的 SetProficiencyLevel 函数。",
+        "【版本语法避坑】：2.0+ 往日之影彻底重构了专精成长树，千万别运行网上旧版 1.63 的 SetLevel 代码，否则专精树直接永久卡死！本站套餐改用了 2.0 之后的 SetProficiencyLevel 写法（没有逐条实测）。",
         "【CET热键防呆】：首次进入游戏按 ~ 键若没反应，请先切换到英文输入法（Caps Lock关）。CET 控制台必须在全屏或无边框窗口模式下呼出。",
         "【剧情Fact生效机理】：救赎包里的 Fact 标志位修改后，建议立刻进行一次快速存档 (F5) 再读档 (F9)，即可瞬间刷新 NPC 状态机与夜之城任务树。"
       ]
@@ -2006,7 +2006,7 @@ window.GAMES_DATA = [
           "50 本特权书 + 20 本属性技能书点满核心",
           "金色 5 阶制造组件与军火弹药全满"
         ],
-        "code": "-- [老L·极客场景套餐] 赛博朋克2077 新手破荒起飞包 (v2.13 实测)\nGame.GodMode(true)\nGame.InfiniteStamina(true)\nGame.AddToInventory(\"Items.money\", 2000000)\nGame.AddToInventory(\"Items.PerkPointSkillbook\", 50)\nGame.AddToInventory(\"Items.AttributePointSkillbook\", 20)\nGame.AddToInventory(\"Items.LegendaryMaterial1\", 2000)\nGame.AddToInventory(\"Items.QuickHackLegendaryMaterial1\", 2000)\nGame.AddToInventory(\"Items.CyberwareMaterial5\", 1000)"
+        "code": "-- [老L·极客场景套餐] 赛博朋克2077 新手破荒起飞包 (v2.13，未实测)\nGame.GodMode(true)\nGame.InfiniteStamina(true)\nGame.AddToInventory(\"Items.money\", 2000000)\nGame.AddToInventory(\"Items.PerkPointSkillbook\", 50)\nGame.AddToInventory(\"Items.AttributePointSkillbook\", 20)\nGame.AddToInventory(\"Items.LegendaryMaterial1\", 2000)\nGame.AddToInventory(\"Items.QuickHackLegendaryMaterial1\", 2000)\nGame.AddToInventory(\"Items.CyberwareMaterial5\", 1000)"
       },
       {
         "id": "cp_salvation_bundle",
@@ -2022,7 +2022,7 @@ window.GAMES_DATA = [
           "夜之城全图 150+ 快速旅行数据终端瞬开",
           "一键消散 NCPD 全城警星与暴恐机动队通缉"
         ],
-        "code": "-- [老L·极客场景套餐] 赛博朋克2077 隐藏结局与意难平救赎包 (v2.13 实测)\nGame.GetQuestsSystem():SetFactStr(\"sq032_johnny_friend\", 1)\nGame.GetQuestsSystem():SetFactStr(\"fast_travel_all_unlocked\", 1)\nGame.GetQuestsSystem():SetFactStr(\"judy_romanceable\", 1)\nGame.GetQuestsSystem():SetFactStr(\"panam_romanceable\", 1)\nGame.GetQuestsSystem():SetFactStr(\"q115_done\", 1)\nGame.GetPreventionSpawnSystem():RequestDespawnPreventionAgents()"
+        "code": "-- [老L·极客场景套餐] 赛博朋克2077 隐藏结局与意难平救赎包 (v2.13，未实测)\nGame.GetQuestsSystem():SetFactStr(\"sq032_johnny_friend\", 1)\nGame.GetQuestsSystem():SetFactStr(\"fast_travel_all_unlocked\", 1)\nGame.GetQuestsSystem():SetFactStr(\"judy_romanceable\", 1)\nGame.GetQuestsSystem():SetFactStr(\"panam_romanceable\", 1)\nGame.GetQuestsSystem():SetFactStr(\"q115_done\", 1)\nGame.GetPreventionSpawnSystem():RequestDespawnPreventionAgents()"
       },
       {
         "id": "cp_arsenal_bundle",
@@ -2038,10 +2038,10 @@ window.GAMES_DATA = [
           "奇美拉核心插件（爆裂穿透动能高爆 + 终极壁垒200%穿墙）",
           "全夜之城所有载具与保时捷911超跑全买断"
         ],
-        "code": "-- [老L·极客场景套餐] 赛博朋克2077 二周目全神装满配包 (v2.13 实测)\nlocal ds = PlayerDevelopmentSystem.GetInstance(Game.GetPlayer()):GetDevelopmentData(Game.GetPlayer()) for _, p in ipairs({\"Headhunter\", \"Netrunner\", \"Shinobi\", \"Solo\", \"Engineer\"}) do ds:SetProficiencyLevel(gamedataProficiencyType[p], 60, telemetryLevelGainReason.Gameplay) end\nGame.AddToInventory(\"Items.AdvancedSandevistanApogeePlusPlus\", 1)\nGame.AddToInventory(\"Items.HauntedCyberdeck_LegendaryPlusPlus\", 1)\nGame.AddToInventory(\"Items.AdvancedTimeBankLegendaryPlusPlus\", 1)\nGame.AddToInventory(\"Items.Preset_Borg4a_HauntedGun\", 1)\nGame.AddToInventory(\"Items.Preset_Hercules_Prototype\", 1)\nGame.AddToInventory(\"Items.Preset_Katana_Saburo\", 1)\nGame.AddToInventory(\"Items.Preset_Knife_Saburo\", 1)\nGame.AddToInventory(\"Items.Preset_Katana_Wakako\", 1)\nGame.AddToInventory(\"Items.ChimeraPowerMod\", 1)\nGame.AddToInventory(\"Items.ChimeraTechMod\", 1)\nGame.GetVehicleSystem():EnableAllPlayerVehicles()"
+        "code": "-- [老L·极客场景套餐] 赛博朋克2077 二周目全神装满配包 (v2.13，未实测)\nlocal ds = PlayerDevelopmentSystem.GetInstance(Game.GetPlayer()):GetDevelopmentData(Game.GetPlayer()) for _, p in ipairs({\"Headhunter\", \"Netrunner\", \"Shinobi\", \"Solo\", \"Engineer\"}) do ds:SetProficiencyLevel(gamedataProficiencyType[p], 60, telemetryLevelGainReason.Gameplay) end\nGame.AddToInventory(\"Items.AdvancedSandevistanApogeePlusPlus\", 1)\nGame.AddToInventory(\"Items.HauntedCyberdeck_LegendaryPlusPlus\", 1)\nGame.AddToInventory(\"Items.AdvancedTimeBankLegendaryPlusPlus\", 1)\nGame.AddToInventory(\"Items.Preset_Borg4a_HauntedGun\", 1)\nGame.AddToInventory(\"Items.Preset_Hercules_Prototype\", 1)\nGame.AddToInventory(\"Items.Preset_Katana_Saburo\", 1)\nGame.AddToInventory(\"Items.Preset_Knife_Saburo\", 1)\nGame.AddToInventory(\"Items.Preset_Katana_Wakako\", 1)\nGame.AddToInventory(\"Items.ChimeraPowerMod\", 1)\nGame.AddToInventory(\"Items.ChimeraTechMod\", 1)\nGame.GetVehicleSystem():EnableAllPlayerVehicles()"
       }
     ],
-    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】赛博朋克2077 控制台环境一键检测与开门\necho ========================================================\necho   【老L·单机避坑局】赛博朋克2077 控制台一键检测与绑定脚本\necho   适用最新 2.13/往日之影 · 零木马 · 极速配置\necho ========================================================\necho.\n\nset \"CET_DIR=bin\\x64\\plugins\\cyber_engine_tweaks\"\nset \"BIND_FILE=%CET_DIR%\\bindings.json\"\n\nif not exist \"bin\\x64\\Cyberpunk2077.exe\" (\n    echo [!] 未在当前目录下检测到 Cyberpunk2077.exe\n    echo     请将本 bat 脚本放置在《赛博朋克2077》游戏安装根目录下运行！\n    echo.\n    pause\n    exit /b\n)\n\nif not exist \"%CET_DIR%\" mkdir \"%CET_DIR%\"\n\necho [*] 正在配置默认控制台呼出快捷键为 ~ 键 (OEM_3 键位代码 192) ...\nif exist \"%BIND_FILE%\" copy /y \"%BIND_FILE%\" \"%BIND_FILE%.bak\" >nul\n\necho {\"overlay_key\": 192}>\"%BIND_FILE%\"\necho [+] 快捷键绑定已就绪：默认按 ~ (波浪键) 呼出 CET 控制台！\n\necho.\necho ========================================================\necho  [√] 开门环境就绪！\necho      请确保 bin\\x64 目录下已放置 CET 核心前置文件。\necho      启动游戏按 ~ 键即可粘贴老L套餐指令代码！\necho ========================================================\necho.\npause",
+    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】赛博朋克2077 CET 呼出键设置\necho ========================================================\necho   【老L·单机避坑局】赛博朋克2077 CET 呼出键设置脚本\necho   把 CET 的呼出键写成 ~ 键；改之前把原 bindings.json 另存为 .bak\necho ========================================================\necho.\n\nset \"CET_DIR=bin\\x64\\plugins\\cyber_engine_tweaks\"\nset \"BIND_FILE=%CET_DIR%\\bindings.json\"\n\nif not exist \"bin\\x64\\Cyberpunk2077.exe\" (\n    echo [!] 当前目录下没有 bin\\x64\\Cyberpunk2077.exe，脚本什么都没改。\n    echo     请把本脚本放到《赛博朋克2077》游戏安装根目录再运行。\n    echo.\n    pause\n    exit /b\n)\n\nif not exist \"%CET_DIR%\" (\n    echo [i] 没找到 %CET_DIR%，CET 可能还没装；先把这个目录建好。\n    mkdir \"%CET_DIR%\"\n)\n\nif exist \"%BIND_FILE%\" (\n    copy /y \"%BIND_FILE%\" \"%BIND_FILE%.bak\" >nul\n    echo [+] 原来的 bindings.json 已另存为 bindings.json.bak\n)\n\necho {\"cet\": {\"overlay_key\": 54043195528445952}}>\"%BIND_FILE%\"\necho [+] 已写入 %BIND_FILE%：CET 呼出键 = ~ 键\necho     按 CET 源码里的格式写的，没在游戏里试过；原文件里其它 Mod 的按键会被清掉，要用就从 .bak 拷回来。\necho.\necho ========================================================\necho  [i] 还要你自己确认：bin\\x64 下已经放好 CET 的文件。\necho      进游戏按 ~ 没反应：删掉 bindings.json 再启动，CET 会弹窗让你重新绑键。\necho      脚本不备份存档；指令没有逐条在游戏里实测，执行前先手动存档。\necho ========================================================\necho.\npause\n",
     "compatibilityStatus": "green",
     "radarStatusText": "🟢 近 14 天无更新",
     "latestSteamPatch": "REDstreams – Cyberpunk: Edgerunners 2",
@@ -2092,7 +2092,7 @@ window.GAMES_DATA = [
     "hasConsole": true,
     "consoleShortcut": "F10 键 或 ~ 键 (需装载 UE4SS 调试插件)",
     "consoleEnableGuide": {
-      "zh-CN": "1. 【前置依赖】将 RE-UE4SS 解压放入游戏安装目录 `b1\\Binaries\\Win64\\` 文件夹下；\n2. 【启动验证】进入游戏关卡，随时按下 F10 键即可呼出图形控制台，按 ~ 键开启虚幻5原生命令行；\n3. 【一键注入 GM 指令】针对全神兵、全精魄与无限道具，配合 WukongGM 模组（位于 `b1\\Binaries\\Win64\\ue4ss\\Mods\\WukongGM\\`），游戏内按 F7 键直接秒级调用游戏底层原生函数库 `BGUFunctionLibraryManaged:RunScriptGM` 极速生效，绝无版本失效困扰！",
+      "zh-CN": "1. 【前置依赖】将 RE-UE4SS 解压放入游戏安装目录 `b1\\Binaries\\Win64\\` 文件夹下；\n2. 【启动验证】进入游戏关卡，随时按下 F10 键即可呼出图形控制台，按 ~ 键开启虚幻5原生命令行；\n3. 【一键注入 GM 指令】针对全神兵、全精魄与无限道具，配合 WukongGM 模组（位于 `b1\\Binaries\\Win64\\ue4ss\\Mods\\WukongGM\\`），游戏内按 F7 键直接秒级调用游戏底层原生函数库 `BGUFunctionLibraryManaged:RunScriptGM` 执行；游戏或 Mod 更新后可能失效。",
       "en": "1. Extract RE-UE4SS into `b1\\Binaries\\Win64\\` directory.\n2. In-game, press F10 to toggle the UE4SS developer console or ~ for the native command bar.\n3. For GM commands and item batches, install WukongGM to `b1\\Binaries\\Win64\\ue4ss\\Mods\\WukongGM\\` and press F7 in-game to execute."
     },
     "popularCommands": [
@@ -2187,7 +2187,7 @@ window.GAMES_DATA = [
       "totalDownloads": "128.4M",
       "totalEndorsements": "840K",
       "totalMods": "3,120",
-      "latestPatch": "v1.0.10.15610 Ready"
+      "latestPatch": "v1.0.10.15610"
     },
     "consoleCategories": [
       {
@@ -3156,7 +3156,7 @@ window.GAMES_DATA = [
         "downloads": "4.2M",
         "endorsements": "120K",
         "category": "实用工具 (Utility)",
-        "desc": "利用游戏自身导出的 BGUFunctionLibraryManaged 函数库，热键一键派发原生指令，免疫版本更新失效！",
+        "desc": "利用游戏自身导出的 BGUFunctionLibraryManaged 函数库，热键一键派发原生指令；游戏更新后可能要等作者适配。",
         "dependencies": [
           "UE4SS"
         ],
@@ -3441,14 +3441,14 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "v1.0.10.15610 (Steam最新补丁实测)",
+    "verifiedPatch": "v1.0.10.15610（未实测）",
     "radarSecretCode": "老L单机888",
     "pitfallNote": {
-      "title": "老L实验室避坑笔记 (黑神话：悟空)",
+      "title": "老L避坑笔记 (黑神话：悟空)",
       "tips": [
         "【打坐存盘后执行】：招式变身与道具全收集指令建议在土地庙打坐存盘后输入，避免由于过场动画强制卸载模型导致镜头卡顿。",
         "【0.4x 子弹时间妙用】：对于手残党，开启 slomo 0.4 子弹时间不仅能轻松看清 Boss 抬手，还能大幅延长看破识破判定帧，极其优雅地通关！",
-        "【UE4SS前置保障】：请认准 UE4SS 官方签名版本，本站批处理自动将 ConsoleEnablerMod 设为 1，杜绝第三方修改器报毒风险。"
+        "【UE4SS 前置】：UE4SS 到它的 GitHub 发布页下载。本站的 .bat 会把 mods.txt 里的 ConsoleEnablerMod 从 0 改成 1（改之前另存 mods.txt.bak）；mods.txt 里没有这一行的话要自己加。"
       ]
     },
     "scenarioBundles": [
@@ -3500,7 +3500,7 @@ window.GAMES_DATA = [
         "code": "# [老L·极客场景套餐] 黑神话悟空 二周目全神装满配包\nallweapon\nallequip\nallsoulskill\nallhulu\nallwine"
       }
     ],
-    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】黑神话悟空 调试控制台一键激活\necho ========================================================\necho   【老L·单机避坑局】黑神话悟空 调试控制台一键激活器\necho   基于虚幻5原生控制台 · 自动备份 · 绿色透明\necho ========================================================\necho.\n\nset \"MODS_TXT=b1\\Binaries\\Win64\\ue4ss\\mods.txt\"\n\nif not exist \"b1\\Binaries\\Win64\" (\n    echo [!] 未在当前目录下检测到 b1\\Binaries\\Win64\n    echo     请将本 bat 脚本放置在《黑神话：悟空》安装根目录下运行！\n    echo.\n    pause\n    exit /b\n)\n\nif exist \"%MODS_TXT%\" (\n    echo [*] 正在备份 mods.txt 到 %MODS_TXT%.bak ...\n    copy /y \"%MODS_TXT%\" \"%MODS_TXT%.bak\" >nul\n    powershell -Command \"(Get-Content '%MODS_TXT%') -replace 'ConsoleEnablerMod\\s*:\\s*0', 'ConsoleEnablerMod : 1' | Set-Content '%MODS_TXT%'\"\n    echo [+] 调试控制台模块已激活为 1！\n) else (\n    echo [i] 未检测到 ue4ss\\mods.txt，请确保已安装 UE4SS 调试前置。\n)\n\necho.\necho ========================================================\necho  [√] 搞定！进入游戏按 F10 或 ~ 键呼出控制台！\necho      直接粘贴老L推荐套餐代码即可畅玩！\necho ========================================================\necho.\npause",
+    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】黑神话悟空 UE4SS 控制台开关\necho ========================================================\necho   【老L·单机避坑局】黑神话悟空 UE4SS 控制台开关脚本\necho   把 mods.txt 里的 ConsoleEnablerMod 改成 1；改之前另存 mods.txt.bak\necho ========================================================\necho.\n\nset \"WIN64=b1\\Binaries\\Win64\"\n\nif not exist \"b1\\Binaries\\Win64\" (\n    echo [!] 当前目录下没有 b1\\Binaries\\Win64，脚本什么都没改。\n    echo     请把本脚本放到《黑神话：悟空》游戏安装根目录再运行。\n    echo.\n    pause\n    exit /b\n)\n\nset \"MODS_TXT=\"\nif exist \"%WIN64%\\ue4ss\\Mods\\mods.txt\" set \"MODS_TXT=%WIN64%\\ue4ss\\Mods\\mods.txt\"\nif not defined MODS_TXT if exist \"%WIN64%\\Mods\\mods.txt\" set \"MODS_TXT=%WIN64%\\Mods\\mods.txt\"\n\nif not defined MODS_TXT (\n    echo [!] %WIN64%\\ue4ss\\Mods\\ 和 %WIN64%\\Mods\\ 下都没有 mods.txt，脚本什么都没改。\n    echo     请先把 UE4SS 解压到 %WIN64%\\ 再运行本脚本。\n    echo.\n    pause\n    exit /b\n)\n\ncopy /y \"%MODS_TXT%\" \"%MODS_TXT%.bak\" >nul\necho [+] 已另存 %MODS_TXT%.bak\npowershell -NoProfile -Command \"(Get-Content '%MODS_TXT%') -replace 'ConsoleEnablerMod\\s*:\\s*0', 'ConsoleEnablerMod : 1' | Set-Content '%MODS_TXT%'\"\n\nfindstr /r /i /c:\"ConsoleEnablerMod *: *1\" \"%MODS_TXT%\" >nul\nif errorlevel 1 (\n    echo [!] %MODS_TXT% 里没有 ConsoleEnablerMod 这一行。\n    echo     请用记事本打开它，自己加一行：ConsoleEnablerMod : 1\n) else (\n    echo [+] %MODS_TXT% 里 ConsoleEnablerMod 现在是 1。\n)\n\necho.\necho ========================================================\necho  [i] 进游戏按 F10 或 ~ 键试试控制台。\necho      脚本不备份存档；指令没有逐条在游戏里实测，执行前先手动存档。\necho ========================================================\necho.\npause\n",
     "compatibilityStatus": "green",
     "radarStatusText": "🟢 近 14 天无更新",
     "latestSteamPatch": "Black Myth: Wukong — 30% Off Coming Soon",
@@ -3661,7 +3661,7 @@ window.GAMES_DATA = [
       "totalDownloads": "194.5M",
       "totalEndorsements": "885K",
       "totalMods": "7,840",
-      "latestPatch": "Next-Gen v4.04 Ready"
+      "latestPatch": "Next-Gen v4.04"
     },
     "consoleCategories": [
       {
@@ -5567,7 +5567,7 @@ window.GAMES_DATA = [
         "downloads": "13.2M",
         "endorsements": "365K",
         "category": "画面材质 (Visuals / Textures)",
-        "desc": "全网公认最强《巫师3》材质MOD！次世代版 / 完全版专属重构，彻底重绘所有岩石、植被、砖墙、木纹与建筑材质，完美适配 DX12 光线追踪！",
+        "desc": "全网公认最强《巫师3》材质MOD！次世代版 / 完全版专属重构，彻底重绘所有岩石、植被、砖墙、木纹与建筑材质，面向次世代 DX12 版。",
         "dependencies": [
           "None"
         ],
@@ -5895,13 +5895,13 @@ window.GAMES_DATA = [
       "source": "trainers.json"
     },
     "latestPatch": "v4.04 (次世代版 / 完全版 - 官方 REDkit & 工坊支持)",
-    "verifiedPatch": "v4.04 (次世代版 / 完全版 - REDkit官方支持)",
+    "verifiedPatch": "v4.04（未实测）",
     "radarSecretCode": "老L单机888",
     "pitfallNote": {
-      "title": "老L实验室避坑笔记 (巫师3 次世代版 v4.04)",
+      "title": "老L避坑笔记 (巫师3 次世代版 v4.04)",
       "tips": [
         "【零注入原生开启】：次世代版 4.04 官方原生隐藏了调试控制台，只需改动 general.ini 添加 DBGConsoleOn=true 即可，根本不需要下载任何可能报毒的第三方 exe！",
-        "【昆特牌无脑秒胜】：打牌输了想砸键盘？控制台输入 winGwint(true) 直接判定胜利，既不毁档又能稳拿全成就！",
+        "【昆特牌无脑秒胜】：打牌输了想砸键盘？控制台输入 winGwint(true) 直接判定胜利（执行前先存档）。",
         "【爱丽丝玫瑰与湖女剑】：石之心通关后遗憾把玫瑰交出去了？输入 additem('Iris\\'s Rose') 即可让紫色玫瑰永远留在杰洛特背包与白鸦葡萄园！"
       ]
     },
@@ -5921,7 +5921,7 @@ window.GAMES_DATA = [
           "AllowFT(1) 解除路标限制，野外随时随地自由传送",
           "红绿蓝极品大突变诱发物各 10 个"
         ],
-        "code": "// [老L·极客场景套餐] 巫师3次世代版 新手破荒起飞包 (v4.04 实测)\ngod\nlikeaboss\naddmoney(100000)\nShowAllFT(1)\nAllowFT(1)\nadditem('Greater mutagen red', 10)\nadditem('Greater mutagen blue', 10)\nadditem('Greater mutagen green', 10)"
+        "code": "// [老L·极客场景套餐] 巫师3次世代版 新手破荒起飞包 (v4.04，未实测)\ngod\nlikeaboss\naddmoney(100000)\nShowAllFT(1)\nAllowFT(1)\nadditem('Greater mutagen red', 10)\nadditem('Greater mutagen blue', 10)\nadditem('Greater mutagen green', 10)"
       },
       {
         "id": "w3_salvation_bundle",
@@ -5937,7 +5937,7 @@ window.GAMES_DATA = [
           "secretgwint 五大阵营顶级英雄昆特牌全收集",
           "winGwint(true) 昆特牌局无脑秒胜，救赎打牌遗憾"
         ],
-        "code": "// [老L·极客场景套餐] 巫师3次世代版 拯救爱丽丝与完美救赎包 (v4.04 实测)\nadditem('Aerondight EP2')\nadditem('Olgierd Sabre')\nadditem('Iris\\'s Rose')\nsecretgwint\nwinGwint(true)"
+        "code": "// [老L·极客场景套餐] 巫师3次世代版 拯救爱丽丝与完美救赎包 (v4.04，未实测)\nadditem('Aerondight EP2')\nadditem('Olgierd Sabre')\nadditem('Iris\\'s Rose')\nsecretgwint\nwinGwint(true)"
       },
       {
         "id": "w3_arsenal_bundle",
@@ -5954,10 +5954,10 @@ window.GAMES_DATA = [
           "宗师级猫学派极品银剑（剑舞回旋流）",
           "师匠级飞狮怪银剑（暴击瘾头流）"
         ],
-        "code": "// [老L·极客场景套餐] 巫师3次世代版 二周目宗师神装满配包 (v4.04 实测)\nsetlevel(100)\nadditem('White Tiger Armor')\nadditem('White Tiger Boots')\nadditem('Wolf School Silver Sword 4')\nadditem('Wolf School Steel Sword 4')\nadditem('Bear School silver sword 4')\nadditem('Bear School steel sword 4')\nadditem('Lynx School silver sword 4')\nadditem('Red Wolf Silver Sword 1')\nadditem('Aerondight EP2')\nadditem('Olgierd Sabre')"
+        "code": "// [老L·极客场景套餐] 巫师3次世代版 二周目宗师神装满配包 (v4.04，未实测)\nsetlevel(100)\nadditem('White Tiger Armor')\nadditem('White Tiger Boots')\nadditem('Wolf School Silver Sword 4')\nadditem('Wolf School Steel Sword 4')\nadditem('Bear School silver sword 4')\nadditem('Bear School steel sword 4')\nadditem('Lynx School silver sword 4')\nadditem('Red Wolf Silver Sword 1')\nadditem('Aerondight EP2')\nadditem('Olgierd Sabre')"
       }
     ],
-    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】巫师3次世代版 控制台一键开门工具\necho ========================================================\necho   【老L·单机避坑局】巫师3次世代版 控制台一键开门脚本\necho   官方底层原生开关 · 100%% 开源透明 · 自动备份原文件\necho ========================================================\necho.\n\nset \"TARGET_DIR=bin\\config\\base\"\nset \"TARGET_FILE=%TARGET_DIR%\\general.ini\"\n\nif not exist \"%TARGET_FILE%\" (\n    echo [!] 未在当前目录下检测到 %TARGET_FILE%\n    echo     请将本 bat 脚本直接复制到《巫师3》游戏安装根目录运行！\n    echo.\n    pause\n    exit /b\n)\n\necho [*] 正在备份原始配置文件到 %TARGET_FILE%.bak ...\ncopy /y \"%TARGET_FILE%\" \"%TARGET_FILE%.bak\" >nul\necho [+] 备份完成！原配置文件已安全保留。\n\necho [*] 正在注入官方原生控制台开关 DBGConsoleOn=true ...\nfindstr /i \"DBGConsoleOn\" \"%TARGET_FILE%\" >nul\nif %errorlevel% equ 0 (\n    echo [i] 配置文件中已存在 DBGConsoleOn，正在更新为 true ...\n    powershell -Command \"(Get-Content '%TARGET_FILE%') -replace '(?i)DBGConsoleOn\\s*=\\s*false', 'DBGConsoleOn=true' | Set-Content '%TARGET_FILE%'\"\n) else (\n    echo.>>\"%TARGET_FILE%\"\n    echo [General]>>\"%TARGET_FILE%\"\n    echo DBGConsoleOn=true>>\"%TARGET_FILE%\"\n)\n\necho.\necho ========================================================\necho  [√] 搞定！控制台已成功开启！\necho      进入游戏按 ~ (波浪键) 或 @ 键即可呼出控制台！\necho      若遇任何问题，可随时将 %TARGET_FILE%.bak 还原。\necho ========================================================\necho.\npause",
+    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】巫师3次世代版 控制台开关\necho ========================================================\necho   【老L·单机避坑局】巫师3次世代版 控制台开关脚本\necho   在 general.ini 里打开 DBGConsoleOn；改之前另存 general.ini.bak\necho ========================================================\necho.\n\nset \"TARGET_DIR=bin\\config\\base\"\nset \"TARGET_FILE=%TARGET_DIR%\\general.ini\"\n\nif not exist \"bin\\config\\base\\general.ini\" (\n    echo [!] 当前目录下没有 bin\\config\\base\\general.ini，脚本什么都没改。\n    echo     请把本脚本放到《巫师3》游戏安装根目录再运行。\n    echo.\n    pause\n    exit /b\n)\n\ncopy /y \"%TARGET_FILE%\" \"%TARGET_FILE%.bak\" >nul\necho [+] 已另存 %TARGET_FILE%.bak\n\nfindstr /i \"DBGConsoleOn\" \"%TARGET_FILE%\" >nul\nif %errorlevel% equ 0 (\n    echo [i] general.ini 里已有 DBGConsoleOn，把 false 改成 true ...\n    powershell -NoProfile -Command \"(Get-Content '%TARGET_FILE%') -replace '(?i)DBGConsoleOn\\s*=\\s*false', 'DBGConsoleOn=true' | Set-Content '%TARGET_FILE%'\"\n) else (\n    echo.>>\"%TARGET_FILE%\"\n    echo [General]>>\"%TARGET_FILE%\"\n    echo DBGConsoleOn=true>>\"%TARGET_FILE%\"\n    echo [+] 已在 general.ini 末尾加上 [General] 和 DBGConsoleOn=true\n)\n\nfindstr /r /i /c:\"DBGConsoleOn *= *true\" \"%TARGET_FILE%\" >nul\nif errorlevel 1 (\n    echo [!] general.ini 里没找到 DBGConsoleOn=true，请用记事本打开 %TARGET_FILE% 自己检查。\n) else (\n    echo [+] general.ini 里现在有 DBGConsoleOn=true。\n)\n\necho.\necho ========================================================\necho  [i] 进游戏按 ~ (波浪键) 或 @ 键试试控制台。\necho      想还原：把 %TARGET_FILE%.bak 改回 general.ini。\necho      脚本不备份存档；指令没有逐条在游戏里实测，执行前先手动存档。\necho ========================================================\necho.\npause\n",
     "compatibilityStatus": "yellow",
     "radarStatusText": "🟡 修改器早于当前游戏版本",
     "latestSteamPatch": "Patch 5.01 is live!",
@@ -6004,8 +6004,8 @@ window.GAMES_DATA = [
     "hasConsole": true,
     "consoleShortcut": "Norbyte Script Extender 控制台黑窗 (回车即时执行)",
     "consoleEnableGuide": {
-      "zh-CN": "1. 【下载与部署前置】下载最新版 Norbyte's BG3 Script Extender，解压得到 DWrite.dll 文件；\n2. 【放置主程序目录】将 DWrite.dll 复制放入《博德之门3》安装根目录的 bin\\ 文件夹下（与 bg3.exe 和 bg3_dx11.exe 位于同一级目录）；\n3. 【启用控制台黑窗】在 bin\\ 目录下新建一个文本文件并重命名为 ScriptExtenderSettings.json，用记事本打开填入 {\"CreateConsole\": true} 并保存；\n4. 【呼出与代码执行】启动游戏，屏幕旁会自动伴随弹出一个透明的 Windows 控制台黑色终端窗口；在控制台窗口内直接按下回车键激活输入光标，将下列任意 Osi 函数指令复制粘贴进去并回车，游戏内道具即刻秒级刷入当前操控角色背包中！\n5. 【Patch 7 官方模组工坊说明】拉瑞安官方在 Patch 7 中内置了官方模组浏览器，本站推荐代码与全部精选 Mod 均已针对 Patch 7 官方加载链与本地管理器完成了全面兼容排错。",
-      "en": "1. Download Norbyte's BG3 Script Extender and extract DWrite.dll.\n2. Place DWrite.dll into 'Baldur's Gate 3\\bin\\' (same folder as bg3.exe).\n3. In bin\\, create ScriptExtenderSettings.json containing '{\"CreateConsole\": true}'.\n4. Launch the game; an interactive console terminal window will open alongside it. Press Enter in the terminal, paste any Osi command below, and press Enter to execute.\n5. Fully compatible with Patch 7 in-game Mod Manager."
+      "zh-CN": "1. 【下载与部署前置】下载最新版 Norbyte's BG3 Script Extender，解压得到 DWrite.dll 文件；\n2. 【放置主程序目录】将 DWrite.dll 复制放入《博德之门3》安装根目录的 bin\\ 文件夹下（与 bg3.exe 和 bg3_dx11.exe 位于同一级目录）；\n3. 【启用控制台黑窗】在 bin\\ 目录下新建一个文本文件并重命名为 ScriptExtenderSettings.json，用记事本打开填入 {\"CreateConsole\": true} 并保存；\n4. 【呼出与代码执行】启动游戏，屏幕旁会自动伴随弹出一个透明的 Windows 控制台黑色终端窗口；在控制台窗口内直接按下回车键激活输入光标，将下列任意 Osi 函数指令复制粘贴进去并回车，游戏内道具即刻秒级刷入当前操控角色背包中！\n5. 【Patch 7 官方模组工坊说明】拉瑞安官方在 Patch 7 中内置了官方模组浏览器，本站整理的指令和精选 Mod 没有针对 Patch 7 及之后的版本逐一实测，装 Mod 前先看 Mod 页面写的支持版本。",
+      "en": "1. Download Norbyte's BG3 Script Extender and extract DWrite.dll.\n2. Place DWrite.dll into 'Baldur's Gate 3\\bin\\' (same folder as bg3.exe).\n3. In bin\\, create ScriptExtenderSettings.json containing '{\"CreateConsole\": true}'.\n4. Launch the game; an interactive console terminal window will open alongside it. Press Enter in the terminal, paste any Osi command below, and press Enter to execute.\n5. The commands and mods listed here were not individually tested on Patch 7 or later; check each mod page for the game versions it supports."
     },
     "popularCommands": [
       {
@@ -6120,7 +6120,7 @@ window.GAMES_DATA = [
       "totalDownloads": "165.2M",
       "totalEndorsements": "780K",
       "totalMods": "8,920",
-      "latestPatch": "Patch 7 Ready"
+      "latestPatch": "Patch 7"
     },
     "consoleCategories": [
       {
@@ -6992,7 +6992,7 @@ window.GAMES_DATA = [
         "id": "improved-ui",
         "title": "ImprovedUI ReleaseReady (全面屏与全分辨率UI核心增强库)",
         "author": "AlanaSP & The ImprovedUI Team",
-        "version": "v3.25.0 (Patch 7 Ready)",
+        "version": "v3.25.0",
         "size": "15.2 MB",
         "downloads": "12.8M",
         "endorsements": "310K",
@@ -7287,12 +7287,12 @@ window.GAMES_DATA = [
       "source": "trainers.json"
     },
     "latestPatch": "Patch 7 (官方内置模组管理器与全新邪恶结局更新)",
-    "verifiedPatch": "Patch 7 (官方MOD管理器全面兼容)",
+    "verifiedPatch": "Patch 7（未实测）",
     "radarSecretCode": "老L单机888",
     "pitfallNote": {
-      "title": "老L实验室避坑笔记 (博德之门3 Patch 7)",
+      "title": "老L避坑笔记 (博德之门3 Patch 7)",
       "tips": [
-        "【原生控制台黑窗】：Patch 7 官方模组管理器上线后，请认准 Norbyte Script Extender 原生黑窗，直接在黑窗内执行 Osi 代码不会被判定为作弊或破坏成就！",
+        "【Script Extender 控制台】：Patch 7 有了官方模组管理器，但控制台还是要靠 Norbyte 的 Script Extender。用控制台会不会影响成就没有人核实过（Script Extender 默认开着 EnableAchievements，用来恢复装 Mod 后的成就），执行前先存档。",
         "【长休补给一劳永逸】：博德之门3经常为搜刮营地苹果烤肠烦恼？直接注入 50 个营地补给包即可永久实现全员满血法术位拉满。",
         "【队友满好感时机】：好感度指令 SetAttitude 建议在第一章营地初次对话后使用，不仅能稳稳触发影心、阿斯代伦、盖尔的恋爱事件，还能避开剧情好感锁死。"
       ]
@@ -7312,7 +7312,7 @@ window.GAMES_DATA = [
           "赋予常驻自由飞行 (FLY)，轻松跨越断崖天堑",
           "30只夺心魔寄生虫标本，点满全脑池至尊灵能"
         ],
-        "code": "-- [老L·极客场景套餐] 博德之门3 新手破荒起飞包 (Patch 7 实测)\nOsi.AddGold(GetHostCharacter(), 100000)\nOsi.TemplateAddTo(\"1a95e0c5-59b4-4b5b-98cf-19da6d393796\", GetHostCharacter(), 50)\nOsi.ApplyStatus(GetHostCharacter(), \"HASTE\", -1)\nOsi.ApplyStatus(GetHostCharacter(), \"FLY\", -1)\nOsi.TemplateAddTo(\"5d94726a-939b-449e-b9b3-57c2df47b855\", GetHostCharacter(), 30)"
+        "code": "-- [老L·极客场景套餐] 博德之门3 新手破荒起飞包 (Patch 7，未实测)\nOsi.AddGold(GetHostCharacter(), 100000)\nOsi.TemplateAddTo(\"1a95e0c5-59b4-4b5b-98cf-19da6d393796\", GetHostCharacter(), 50)\nOsi.ApplyStatus(GetHostCharacter(), \"HASTE\", -1)\nOsi.ApplyStatus(GetHostCharacter(), \"FLY\", -1)\nOsi.TemplateAddTo(\"5d94726a-939b-449e-b9b3-57c2df47b855\", GetHostCharacter(), 30)"
       },
       {
         "id": "bg3_salvation_bundle",
@@ -7328,7 +7328,7 @@ window.GAMES_DATA = [
           "星界灌注蝌蚪解锁半夺心魔至尊灵能与自由飞行",
           "无敌护罩卷轴 x10 (范围内全员绝对无敌，死保关键剧情NPC)"
         ],
-        "code": "-- [老L·极客场景套餐] 博德之门3 队友全满好感与意难平救赎包 (Patch 7 实测)\nOsi.SetAttitude(GetHostCharacter(), \"S_Player_Shadowheart_c7c13742-c166-4fec-bb4b-dc254dc2e080\", 100)\nOsi.SetAttitude(GetHostCharacter(), \"S_Player_Astarion_c7c13742-c166-4fec-bb4b-dc254dc2e080\", 100)\nOsi.SetAttitude(GetHostCharacter(), \"S_Player_Gale_ad9af97d-75da-406a-ae13-7071c563f604\", 100)\nOsi.TemplateAddTo(\"02359419-74d7-4632-af82-c5180f1350a4\", GetHostCharacter(), 1)\nOsi.TemplateAddTo(\"7f9b846e-1d5d-4f11-b0db-6e9faea18501\", GetHostCharacter(), 10)"
+        "code": "-- [老L·极客场景套餐] 博德之门3 队友全满好感与意难平救赎包 (Patch 7，未实测)\nOsi.SetAttitude(GetHostCharacter(), \"S_Player_Shadowheart_c7c13742-c166-4fec-bb4b-dc254dc2e080\", 100)\nOsi.SetAttitude(GetHostCharacter(), \"S_Player_Astarion_c7c13742-c166-4fec-bb4b-dc254dc2e080\", 100)\nOsi.SetAttitude(GetHostCharacter(), \"S_Player_Gale_ad9af97d-75da-406a-ae13-7071c563f604\", 100)\nOsi.TemplateAddTo(\"02359419-74d7-4632-af82-c5180f1350a4\", GetHostCharacter(), 1)\nOsi.TemplateAddTo(\"7f9b846e-1d5d-4f11-b0db-6e9faea18501\", GetHostCharacter(), 10)"
       },
       {
         "id": "bg3_arsenal_bundle",
@@ -7345,10 +7345,10 @@ window.GAMES_DATA = [
           "全套地狱火传奇重装（21AC 免熟练穿戴与绝对免火伤）",
           "体质锁23「高等健康护符」+ 力量锁23「山丘巨人手套」"
         ],
-        "code": "-- [老L·极客场景套餐] 博德之门3 二周目绝世传奇神兵满配包 (Patch 7 实测)\nOsi.TemplateAddTo(\"3b6b2512-cf49-411a-8260-cb56220b0805\", GetHostCharacter(), 1)\nOsi.TemplateAddTo(\"222e43bc-42f0-4667-8495-2be26ec490a4\", GetHostCharacter(), 1)\nOsi.TemplateAddTo(\"a8ff2900-349c-4f76-8d54-159e1ab5a7fa\", GetHostCharacter(), 1)\nOsi.TemplateAddTo(\"0c6aaec8-cbe9-450f-9f79-6a56ec94bb0a\", GetHostCharacter(), 1)\nOsi.TemplateAddTo(\"026fe827-ce47-49f3-855c-e587e91eb3c8\", GetHostCharacter(), 1)\nOsi.TemplateAddTo(\"33734689-d4bc-4676-9d3d-c12e52bca7e0\", GetHostCharacter(), 1)\nOsi.TemplateAddTo(\"fbb8968f-f179-4672-91d1-6677f523c9e6\", GetHostCharacter(), 1)\nOsi.TemplateAddTo(\"b272f04e-eb5d-4a15-b73f-d309074815a5\", GetHostCharacter(), 1)\nOsi.TemplateAddTo(\"9c9b7405-b778-4f05-8946-b333421295db\", GetHostCharacter(), 1)\nOsi.TemplateAddTo(\"d41dfa98-8ec1-4e4b-97e3-0d340b6e9a66\", GetHostCharacter(), 20)"
+        "code": "-- [老L·极客场景套餐] 博德之门3 二周目绝世传奇神兵满配包 (Patch 7，未实测)\nOsi.TemplateAddTo(\"3b6b2512-cf49-411a-8260-cb56220b0805\", GetHostCharacter(), 1)\nOsi.TemplateAddTo(\"222e43bc-42f0-4667-8495-2be26ec490a4\", GetHostCharacter(), 1)\nOsi.TemplateAddTo(\"a8ff2900-349c-4f76-8d54-159e1ab5a7fa\", GetHostCharacter(), 1)\nOsi.TemplateAddTo(\"0c6aaec8-cbe9-450f-9f79-6a56ec94bb0a\", GetHostCharacter(), 1)\nOsi.TemplateAddTo(\"026fe827-ce47-49f3-855c-e587e91eb3c8\", GetHostCharacter(), 1)\nOsi.TemplateAddTo(\"33734689-d4bc-4676-9d3d-c12e52bca7e0\", GetHostCharacter(), 1)\nOsi.TemplateAddTo(\"fbb8968f-f179-4672-91d1-6677f523c9e6\", GetHostCharacter(), 1)\nOsi.TemplateAddTo(\"b272f04e-eb5d-4a15-b73f-d309074815a5\", GetHostCharacter(), 1)\nOsi.TemplateAddTo(\"9c9b7405-b778-4f05-8946-b333421295db\", GetHostCharacter(), 1)\nOsi.TemplateAddTo(\"d41dfa98-8ec1-4e4b-97e3-0d340b6e9a66\", GetHostCharacter(), 20)"
       }
     ],
-    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】博德之门3 Script Extender 控制台开门工具\necho ========================================================\necho   【老L·单机避坑局】博德之门3 控制台黑窗一键开启\necho   基于 Norbyte 官方底层原生机制 · 自动备份 · 无毒纯净\necho ========================================================\necho.\n\nset \"SE_PATH=%LocalAppData%\\Larian Studios\\Baldur's Gate 3\\ScriptExtender\"\nif not exist \"%SE_PATH%\" mkdir \"%SE_PATH%\"\n\nset \"CFG_FILE=%SE_PATH%\\ScriptExtenderSettings.json\"\nif exist \"%CFG_FILE%\" copy /y \"%CFG_FILE%\" \"%CFG_FILE%.bak\" >nul\n\necho {\"CreateConsole\": true, \"EnableLua\": true}>\"%CFG_FILE%\"\n\necho [+] 已成功开启控制台黑窗配置：CreateConsole = true！\necho.\necho ========================================================\necho  [√] 开启成功！\necho      启动游戏时会自动弹出一个控制台黑窗口，\necho      直接在控制台黑窗口内粘贴老L套餐指令按回车即可生效！\necho ========================================================\necho.\npause",
+    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】博德之门3 Script Extender 控制台开关\necho ========================================================\necho   【老L·单机避坑局】博德之门3 Script Extender 控制台开关脚本\necho   在 bin\\ScriptExtenderSettings.json 里打开 CreateConsole；改之前另存 .bak\necho ========================================================\necho.\n\nset \"BIN_DIR=\"\nif exist \"bin\\bg3.exe\" set \"BIN_DIR=bin\"\nif not defined BIN_DIR if exist \"bg3.exe\" set \"BIN_DIR=.\"\n\nif not defined BIN_DIR (\n    echo [!] 当前目录下没有 bin\\bg3.exe，脚本什么都没改。\n    echo     请把本脚本放到《博德之门3》游戏安装根目录再运行。\n    echo.\n    pause\n    exit /b\n)\n\nif not exist \"%BIN_DIR%\\DWrite.dll\" (\n    echo [!] %BIN_DIR% 下没有 DWrite.dll：Script Extender 可能还没装，装好以后这个设置才起作用。\n)\n\nset \"CFG_FILE=%BIN_DIR%\\ScriptExtenderSettings.json\"\nif exist \"%CFG_FILE%\" (\n    copy /y \"%CFG_FILE%\" \"%CFG_FILE%.bak\" >nul\n    echo [+] 原来的 ScriptExtenderSettings.json 已另存为 ScriptExtenderSettings.json.bak\n)\n\necho {\"CreateConsole\": true}>\"%CFG_FILE%\"\necho [+] 已写入 %CFG_FILE%：CreateConsole = true\necho     原文件里的其它设置会被清掉，要用就从 .bak 拷回来。\necho.\necho ========================================================\necho  [i] 启动游戏时会多出一个 Script Extender 控制台窗口。\necho      在窗口里先按回车进入输入模式，再粘贴指令、回车执行。\necho      设置文件放在 bin 目录，依据是 Norbyte/bg3se 官方文档 Docs/Debugger.md。\necho      脚本不备份存档；指令没有逐条在游戏里实测，执行前先手动存档。\necho ========================================================\necho.\npause\n",
     "compatibilityStatus": "yellow",
     "radarStatusText": "🟡 修改器早于当前游戏版本",
     "latestSteamPatch": "Hotfix #36 Now Live!",
@@ -7402,8 +7402,8 @@ window.GAMES_DATA = [
     "hasConsole": true,
     "consoleShortcut": "无原生打字终端 (采用 ModEngine2 离线引导 + The Grand Archives CT 表 / FLiNG 修改器)",
     "consoleEnableGuide": {
-      "zh-CN": "【100%安全离线防封指南】\n1. 方案一 (ModEngine2 免修改文件)：解压 ModEngine2，将模组放入 /mod 目录，直接双击 launchmod_eldenring.bat 启动，该启动器会自动拦截 EAC 并进入纯净离线环境，绝无联机封号风险！\n2. 方案二 (替换引导)：进入游戏根目录 Game/，将原版 start_protected_game.exe 重命名为 .bak，将 eldenring.exe 复制一份并重命名为 start_protected_game.exe，新建文本文件 steam_appid.txt 写入 1245620，启动即可离线畅玩。\n3. 方案三 (无缝联机 Seamless Co-op)：该模组使用独立 .co2 存档与第三方离线 P2P 协议，与官方服务器完全隔离，支持多人联机无封禁！",
-      "en": "EAC Offline Bypass & ModEngine2 Launch Guide: Launch via launchmod_eldenring.bat or rename start_protected_game.exe and place steam_appid.txt (1245620) to safely bypass Easy Anti-Cheat in offline mode without ban risk."
+      "zh-CN": "【离线启动指南（只在单机离线用）】\n1. 方案一 (ModEngine2 免修改文件)：解压 ModEngine2，将模组放入 /mod 目录，直接双击 launchmod_eldenring.bat 启动，这样启动不加载 EAC，只能离线玩；别带着改过的游戏或存档上线。\n2. 方案二 (替换引导)：进入游戏根目录 Game/，将原版 start_protected_game.exe 重命名为 .bak，将 eldenring.exe 复制一份并重命名为 start_protected_game.exe，新建文本文件 steam_appid.txt 写入 1245620，启动即可离线畅玩。\n3. 方案三 (无缝联机 Seamless Co-op)：该模组使用独立的 .co2 存档，走自己的联机方式、不连官方匹配服务器。它是第三方 Mod，会不会被封号没有人能担保。",
+      "en": "EAC Offline Bypass & ModEngine2 Launch Guide: Launch via launchmod_eldenring.bat or rename start_protected_game.exe and place steam_appid.txt (1245620) to start without Easy Anti-Cheat (offline only). Never take a modded game or save online; nothing here can guarantee you won't be banned."
     },
     "popularCommands": [
       "Num 1",
@@ -7471,7 +7471,7 @@ window.GAMES_DATA = [
       "totalDownloads": "115.5M",
       "totalEndorsements": "1674K",
       "totalMods": "12,705",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [
       {
@@ -7486,7 +7486,7 @@ window.GAMES_DATA = [
             "syntax_type": "trainer_hotkey",
             "code": "Num 1",
             "desc": "开启后主角免疫一切物理、属性、状态异常与高空坠落致死伤害，生命条强制锁死为最大值，手残党救赎核心！",
-            "min_version": "v1.14+ (DLC 对齐)",
+            "min_version": "v1.14+",
             "framework_required": "FLiNG Trainer / ModEngine2"
           },
           {
@@ -7498,7 +7498,7 @@ window.GAMES_DATA = [
             "syntax_type": "trainer_hotkey",
             "code": "Num 3",
             "desc": "战技、骨灰召唤以及高阶法术与祷告完全不消耗任何专注值 (FP)，随时化身无限法力炮台！",
-            "min_version": "v1.14+ (DLC 对齐)",
+            "min_version": "v1.14+",
             "framework_required": "FLiNG Trainer"
           },
           {
@@ -7510,7 +7510,7 @@ window.GAMES_DATA = [
             "syntax_type": "trainer_hotkey",
             "code": "Num 4",
             "desc": "精力耐力条永远保持满格，连续翻滚闪避、重击举盾防御不会破防或消耗耐力。",
-            "min_version": "v1.14+ (DLC 对齐)",
+            "min_version": "v1.14+",
             "framework_required": "FLiNG Trainer"
           },
           {
@@ -7522,7 +7522,7 @@ window.GAMES_DATA = [
             "syntax_type": "trainer_hotkey",
             "code": "Ctrl+Num 3",
             "desc": "将全局物理与动作流速放慢至 0.3 倍速，Boss 出招前摇清晰可见，轻松掌握弹反与翻滚时机！",
-            "min_version": "v1.14+ (DLC 对齐)",
+            "min_version": "v1.14+",
             "framework_required": "FLiNG Trainer"
           },
           {
@@ -7534,7 +7534,7 @@ window.GAMES_DATA = [
             "syntax_type": "trainer_hotkey",
             "code": "Num 9",
             "desc": "主角的任何攻击将造成数十倍架势条伤害，即便是狂龙贝勒或女武神也是一击破韧跪地，尽情享受处决快感！",
-            "min_version": "v1.14+ (DLC 对齐)",
+            "min_version": "v1.14+",
             "framework_required": "FLiNG Trainer"
           },
           {
@@ -7546,7 +7546,7 @@ window.GAMES_DATA = [
             "syntax_type": "trainer_hotkey",
             "code": "Num 5",
             "desc": "将所有已穿戴防具和手持重型武器负重强制归零，无论穿多么厚重的铠甲均拥有超快轻翻滚无敌帧！",
-            "min_version": "v1.14+ (DLC 对齐)",
+            "min_version": "v1.14+",
             "framework_required": "FLiNG Trainer"
           }
         ]
@@ -7563,7 +7563,7 @@ window.GAMES_DATA = [
             "syntax_type": "trainer_hotkey",
             "code": "Ctrl+Num 1",
             "desc": "向角色背囊瞬间注入 100 万点卢恩，可自由连续分配属性升级或在圆桌厅堂扫荡全部消耗品！",
-            "min_version": "v1.14+ (DLC 对齐)",
+            "min_version": "v1.14+",
             "framework_required": "FLiNG Trainer"
           },
           {
@@ -7575,7 +7575,7 @@ window.GAMES_DATA = [
             "syntax_type": "trainer_hotkey",
             "code": "Ctrl+Num 2",
             "desc": "角色阵亡后身上携带的卢恩完整保留，彻底告别在深坑和悬崖边捡魂翻车的折磨体验。",
-            "min_version": "v1.14+ (DLC 对齐)",
+            "min_version": "v1.14+",
             "framework_required": "FLiNG Trainer"
           },
           {
@@ -7587,7 +7587,7 @@ window.GAMES_DATA = [
             "syntax_type": "trainer_hotkey",
             "code": "[CT表] Item Gib -> Upgrade Materials -> Somber Ancient Dragon Smithing Stone x10",
             "desc": "派发满额特殊武器毕业所需的古龙岩失色锻造石，无需通关雪原或天空城即可提前满级！",
-            "min_version": "v1.14+ (DLC 对齐)",
+            "min_version": "v1.14+",
             "framework_required": "The Grand Archives CT"
           },
           {
@@ -7599,7 +7599,7 @@ window.GAMES_DATA = [
             "syntax_type": "trainer_hotkey",
             "code": "[CT表] Item Gib -> Upgrade Materials -> Ancient Dragon Smithing Stone x10",
             "desc": "派发普通武器升至 +25 满级所需的珍稀古龙岩锻造石，批量强化你的武器库！",
-            "min_version": "v1.14+ (DLC 对齐)",
+            "min_version": "v1.14+",
             "framework_required": "The Grand Archives CT"
           },
           {
@@ -7611,7 +7611,7 @@ window.GAMES_DATA = [
             "syntax_type": "trainer_hotkey",
             "code": "[CT表] Player Data -> Respec -> Free Attribute Points Allocation",
             "desc": "无需击败满月女王或消耗稀缺的泪滴幼体，随时打开面板自由重塑 8 大核心属性！",
-            "min_version": "v1.14+ (DLC 对齐)",
+            "min_version": "v1.14+",
             "framework_required": "The Grand Archives CT"
           }
         ]
@@ -7628,7 +7628,7 @@ window.GAMES_DATA = [
             "syntax_type": "trainer_hotkey",
             "code": "[CT表] Scripts -> Shadow Realm Blessings -> Set Scadutree Blessing to 20",
             "desc": "瞬间将幽影之地的核心数值系统【幽影树庇护】升至最高 20 级满级，攻击力与减伤率直接翻倍，拒绝幽影受苦！",
-            "min_version": "v1.14+ (DLC 对齐)",
+            "min_version": "v1.14+",
             "framework_required": "The Grand Archives CT"
           },
           {
@@ -7640,7 +7640,7 @@ window.GAMES_DATA = [
             "syntax_type": "trainer_hotkey",
             "code": "[CT表] Scripts -> Shadow Realm Blessings -> Set Revered Spirit Ash to 10",
             "desc": "将骨灰召唤物与托雷特灵马的强化数值【灵灰庇护】升满至 10 级，召唤物坦度飞跃提升！",
-            "min_version": "v1.14+ (DLC 对齐)",
+            "min_version": "v1.14+",
             "framework_required": "The Grand Archives CT"
           },
           {
@@ -7652,7 +7652,7 @@ window.GAMES_DATA = [
             "syntax_type": "trainer_hotkey",
             "code": "[CT表] Item Gib -> Key Items -> Scadutree Fragment x50",
             "desc": "直接向背囊注入全部 50 颗幽影树碎片，省去在复杂的立体地图里爬悬崖翻罐子的痛苦折磨！",
-            "min_version": "v1.14+ (DLC 对齐)",
+            "min_version": "v1.14+",
             "framework_required": "The Grand Archives CT"
           },
           {
@@ -7664,7 +7664,7 @@ window.GAMES_DATA = [
             "syntax_type": "trainer_hotkey",
             "code": "[CT表] Item Gib -> Key Items -> Revered Spirit Ash x25",
             "desc": "派发全套灵灰碎片，用于在赐福点解锁顶级灵灰强化层级。",
-            "min_version": "v1.14+ (DLC 对齐)",
+            "min_version": "v1.14+",
             "framework_required": "The Grand Archives CT"
           },
           {
@@ -7676,7 +7676,7 @@ window.GAMES_DATA = [
             "syntax_type": "trainer_hotkey",
             "code": "[CT表] Item Gib -> Weapons -> Bloodfiend's Arm (+25 Blood Affinity)",
             "desc": "派发黄金树幽影 DLC 最强重击出血神器【血怪手臂】，搭配感应流蓄力重击一击即爆万点出血伤害！",
-            "min_version": "v1.14+ (DLC 对齐)",
+            "min_version": "v1.14+",
             "framework_required": "The Grand Archives CT"
           }
         ]
@@ -7693,7 +7693,7 @@ window.GAMES_DATA = [
             "syntax_type": "trainer_hotkey",
             "code": "[CT表] Item Gib -> Weapons -> Blasphemous Blade (+10)",
             "desc": "派发击败大蛇拉卡德追忆兑换的信仰大剑【亵渎圣剑】，战技超远距离击飞敌人并疯狂吸血回复生命！",
-            "min_version": "v1.14+ (DLC 对齐)",
+            "min_version": "v1.14+",
             "framework_required": "The Grand Archives CT"
           },
           {
@@ -7705,7 +7705,7 @@ window.GAMES_DATA = [
             "syntax_type": "trainer_hotkey",
             "code": "[CT表] Item Gib -> Weapons -> Hand of Malenia (+10)",
             "desc": "派发女武神追忆武器太刀，自带华丽绝伦的三段空中连续斩杀技【水鸟乱舞】！",
-            "min_version": "v1.14+ (DLC 对齐)",
+            "min_version": "v1.14+",
             "framework_required": "The Grand Archives CT"
           },
           {
@@ -7717,7 +7717,7 @@ window.GAMES_DATA = [
             "syntax_type": "trainer_hotkey",
             "code": "[CT表] Item Gib -> Weapons -> Dark Moon Greatsword (+10)",
             "desc": "派发菈妮支线终极定情信物【暗月大剑】，附魔后蓄力重击释放零耗蓝极寒冰冻月光剑气！",
-            "min_version": "v1.14+ (DLC 对齐)",
+            "min_version": "v1.14+",
             "framework_required": "The Grand Archives CT"
           },
           {
@@ -7729,7 +7729,7 @@ window.GAMES_DATA = [
             "syntax_type": "trainer_hotkey",
             "code": "[CT表] Item Gib -> Weapons -> Sacred Relic Sword (+10)",
             "desc": "派发艾尔登之兽追忆武器，战技【黄金波动】扇形横扫全屏秒杀敌人，乌鸦悬崖刷卢恩必备神兵！",
-            "min_version": "v1.14+ (DLC 对齐)",
+            "min_version": "v1.14+",
             "framework_required": "The Grand Archives CT"
           },
           {
@@ -7741,7 +7741,7 @@ window.GAMES_DATA = [
             "syntax_type": "trainer_hotkey",
             "code": "[CT表] Item Gib -> Weapons -> Mohgwyn's Sacred Spear (+10)",
             "desc": "鲜血君王追忆重矛，高举战矛连续释放三段大范围穿墙出血结界，Boss 战轮椅神器！",
-            "min_version": "v1.14+ (DLC 对齐)",
+            "min_version": "v1.14+",
             "framework_required": "The Grand Archives CT"
           }
         ]
@@ -7758,7 +7758,7 @@ window.GAMES_DATA = [
             "syntax_type": "trainer_hotkey",
             "code": "[CT表] Item Gib -> Spirit Ashes -> Mimic Tear Ashes (+10)",
             "desc": "派发最强传说骨灰大哥！完整复刻主角身上的全套防具、武器、战灰与道具，单挑各大顶级 Boss！",
-            "min_version": "v1.14+ (DLC 对齐)",
+            "min_version": "v1.14+",
             "framework_required": "The Grand Archives CT"
           },
           {
@@ -7770,7 +7770,7 @@ window.GAMES_DATA = [
             "syntax_type": "trainer_hotkey",
             "code": "[CT表] Item Gib -> Spirit Ashes -> Black Knife Tiche (+10)",
             "desc": "派发超敏捷传说刺客狄希，释放命定之死红光斩击，按百分比削减敌方生命上限并造成强力灼烧！",
-            "min_version": "v1.14+ (DLC 对齐)",
+            "min_version": "v1.14+",
             "framework_required": "The Grand Archives CT"
           },
           {
@@ -7782,7 +7782,7 @@ window.GAMES_DATA = [
             "syntax_type": "trainer_hotkey",
             "code": "[CT表] Item Gib -> Spirit Ashes -> Latenna the Albinauric (+10)",
             "desc": "派发固定炮台勒缇娜，超视距连续发射魔力箭矢，对付飞龙与体型庞大的野外巨兽有奇效！",
-            "min_version": "v1.14+ (DLC 对齐)",
+            "min_version": "v1.14+",
             "framework_required": "The Grand Archives CT"
           },
           {
@@ -7794,7 +7794,7 @@ window.GAMES_DATA = [
             "syntax_type": "trainer_hotkey",
             "code": "[CT表] Item Gib -> Ashes of War -> Ash of War: Bloodhound's Step",
             "desc": "赋予武器超长无敌帧的快速瞬身位移能力，能在毒沼、熔岩与密集攻击中如入无人之境！",
-            "min_version": "v1.14+ (DLC 对齐)",
+            "min_version": "v1.14+",
             "framework_required": "The Grand Archives CT"
           },
           {
@@ -7806,7 +7806,7 @@ window.GAMES_DATA = [
             "syntax_type": "trainer_hotkey",
             "code": "[CT表] Item Gib -> Ashes of War -> Ash of War: Seppuku",
             "desc": "双太刀出血流核心战灰，刺击自身腹部使武器沾满鲜血，大幅提升物理攻击力与异常出血累计效率！",
-            "min_version": "v1.14+ (DLC 对齐)",
+            "min_version": "v1.14+",
             "framework_required": "The Grand Archives CT"
           }
         ]
@@ -7823,7 +7823,7 @@ window.GAMES_DATA = [
             "syntax_type": "trainer_hotkey",
             "code": "[CT表] Item Gib -> Talismans -> Shard of Alexander",
             "desc": "全流派必带核心毕业护符，战技伤害直接无条件提升 15%，大幅强化各种轮椅技能威力！",
-            "min_version": "v1.14+ (DLC 对齐)",
+            "min_version": "v1.14+",
             "framework_required": "The Grand Archives CT"
           },
           {
@@ -7835,7 +7835,7 @@ window.GAMES_DATA = [
             "syntax_type": "trainer_hotkey",
             "code": "[CT表] Item Gib -> Talismans -> Rotten Winged Sword Insignia",
             "desc": "连击流与出血流神装，连续命中敌人后层层叠加强攻 Buff，最高增伤达 13%！",
-            "min_version": "v1.14+ (DLC 对齐)",
+            "min_version": "v1.14+",
             "framework_required": "The Grand Archives CT"
           },
           {
@@ -7847,7 +7847,7 @@ window.GAMES_DATA = [
             "syntax_type": "trainer_hotkey",
             "code": "[CT表] Item Gib -> Talismans -> Dragoncrest Greatshield Talisman",
             "desc": "保命第一神符！常驻无条件提供高达 20% 的巨额物理减伤率，极大降低高周目被一招秒杀的风险！",
-            "min_version": "v1.14+ (DLC 对齐)",
+            "min_version": "v1.14+",
             "framework_required": "The Grand Archives CT"
           },
           {
@@ -7859,7 +7859,7 @@ window.GAMES_DATA = [
             "syntax_type": "trainer_hotkey",
             "code": "[CT表] Item Gib -> Tears -> Cerulean Hidden Tear",
             "desc": "法师一炮秒杀流核心灵药！服下后 15 秒内一切法力消耗直接降为 0，配合彗星亚兹勒实现无限激光轰击！",
-            "min_version": "v1.14+ (DLC 对齐)",
+            "min_version": "v1.14+",
             "framework_required": "The Grand Archives CT"
           },
           {
@@ -7871,7 +7871,7 @@ window.GAMES_DATA = [
             "syntax_type": "trainer_hotkey",
             "code": "[CT表] Item Gib -> Tears -> Thorny Cracked Tear",
             "desc": "调制进入灵药圣杯瓶，饮用后极大强化连续攻击的伤害叠加上限，近战速杀必备！",
-            "min_version": "v1.14+ (DLC 对齐)",
+            "min_version": "v1.14+",
             "framework_required": "The Grand Archives CT"
           }
         ]
@@ -7888,7 +7888,7 @@ window.GAMES_DATA = [
             "syntax_type": "trainer_hotkey",
             "code": "[CT表] Scripts -> World -> Unlock All Sites of Grace (Base Game)",
             "desc": "瞬间点亮交界地主世界、雪原、地下世界与天空城的所有赐福传送点，省去跑图探路时间！",
-            "min_version": "v1.14+ (DLC 对齐)",
+            "min_version": "v1.14+",
             "framework_required": "The Grand Archives CT"
           },
           {
@@ -7900,7 +7900,7 @@ window.GAMES_DATA = [
             "syntax_type": "trainer_hotkey",
             "code": "[CT表] Scripts -> World -> Unlock DLC Sites of Grace (Shadow Realm)",
             "desc": "点亮幽影之地全部复杂分层地形上的所有赐福点，随心所欲直达目标区域！",
-            "min_version": "v1.14+ (DLC 对齐)",
+            "min_version": "v1.14+",
             "framework_required": "The Grand Archives CT"
           },
           {
@@ -7912,7 +7912,7 @@ window.GAMES_DATA = [
             "syntax_type": "trainer_hotkey",
             "code": "[CT表] Scripts -> Camera -> Enable FreeCam & Freeze Time",
             "desc": "脱离角色控制束缚，摄像机自由穿墙升空飞行动作定格，用于拍摄超高清壁纸与Boss特写！",
-            "min_version": "v1.14+ (DLC 对齐)",
+            "min_version": "v1.14+",
             "framework_required": "The Grand Archives CT"
           },
           {
@@ -7924,7 +7924,7 @@ window.GAMES_DATA = [
             "syntax_type": "trainer_hotkey",
             "code": "[CT表] Scripts -> World -> Allow Fast Travel Everywhere",
             "desc": "解除大地图传送限制，即使身处红色地下墓穴或被 Boss 围困追击也能秒开地图传送逃脱！",
-            "min_version": "v1.14+ (DLC 对齐)",
+            "min_version": "v1.14+",
             "framework_required": "The Grand Archives CT"
           },
           {
@@ -7936,7 +7936,7 @@ window.GAMES_DATA = [
             "syntax_type": "trainer_hotkey",
             "code": "[CT表] Item Gib -> Incantations -> Ancient Dragons' Lightning Strike",
             "desc": "对付黄金树幽影大体型 Boss (如狂龙贝勒、罗刹、幽影树化身) 最强逃课核弹，蓄力释放引落漫天红雷引发数万点多段爆发判定！",
-            "min_version": "v1.14+ (DLC 对齐)",
+            "min_version": "v1.14+",
             "framework_required": "The Grand Archives CT"
           },
           {
@@ -7948,7 +7948,7 @@ window.GAMES_DATA = [
             "syntax_type": "trainer_hotkey",
             "code": "[CT表] Scripts -> Player Data -> Instant Torrent Revival (No Flask)",
             "desc": "灵马战死后无需扣除一瓶红露滴原罪瓶，吹响灵马哨笛直接无读条满血秒骑乘！",
-            "min_version": "v1.14+ (DLC 对齐)",
+            "min_version": "v1.14+",
             "framework_required": "The Grand Archives CT"
           }
         ]
@@ -7965,7 +7965,7 @@ window.GAMES_DATA = [
             "syntax_type": "trainer_hotkey",
             "code": "[CT表] Scripts -> Event Flags -> Clear NPC Aggro / Absolution",
             "desc": "如果不小心手滑打中友好 NPC 导致对方拔刀追杀，执行本项可立即清空全部仇恨状态恢复和平！",
-            "min_version": "v1.14+ (DLC 对齐)",
+            "min_version": "v1.14+",
             "framework_required": "The Grand Archives CT"
           },
           {
@@ -7977,7 +7977,7 @@ window.GAMES_DATA = [
             "syntax_type": "trainer_hotkey",
             "code": "[CT表] Scripts -> Event Flags -> Revive Dead NPCs",
             "desc": "重置被误杀或意外阵亡的关键支线 NPC 的存活标志位，使他们重返原点继续推进任务线！",
-            "min_version": "v1.14+ (DLC 对齐)",
+            "min_version": "v1.14+",
             "framework_required": "The Grand Archives CT"
           },
           {
@@ -7989,7 +7989,7 @@ window.GAMES_DATA = [
             "syntax_type": "trainer_hotkey",
             "code": "[CT表] Item Gib -> Key Items -> All Bell Bearings (Smithing / Somber / Glovewort)",
             "desc": "直接派发全套锻造石铃珠、失色铃珠与墓地铃兰铃珠，在孪生老妪处直接购买全部强化材料！",
-            "min_version": "v1.14+ (DLC 对齐)",
+            "min_version": "v1.14+",
             "framework_required": "The Grand Archives CT"
           },
           {
@@ -8001,7 +8001,7 @@ window.GAMES_DATA = [
             "syntax_type": "trainer_hotkey",
             "code": "[CT表] Scripts -> Key Items -> Unlock All Great Runes (Restored)",
             "desc": "派发葛瑞克、拉塔恩、玛莲妮亚、莫格等全部大卢恩并自动完成神授塔充能激活，随时随地享受全属性加成！",
-            "min_version": "v1.14+ (DLC 对齐)",
+            "min_version": "v1.14+",
             "framework_required": "The Grand Archives CT"
           }
         ]
@@ -8017,7 +8017,7 @@ window.GAMES_DATA = [
         "downloads": "4,200,000+",
         "endorsements": "180,000+",
         "category": "多人联机与系统大修",
-        "desc": "魂系联机体验天花板！彻底移除打完Boss被强行遣返的联机限制，全图无空气墙无缝跑图、死亡围观复活、共乘托雷特灵马、独立 .co2 存档绝对不连官方服务器，100% 零封号！",
+        "desc": "魂系联机体验天花板！彻底移除打完Boss被强行遣返的联机限制，全图无空气墙无缝跑图、死亡围观复活、共乘托雷特灵马、用独立的 .co2 存档、不连官方匹配服务器（第三方 Mod，会不会被封号没有人能担保）。",
         "dependencies": [
           "None (自带独立引导器)"
         ],
@@ -8041,7 +8041,7 @@ window.GAMES_DATA = [
         "downloads": "3,800,000+",
         "endorsements": "150,000+",
         "category": "底层框架与核心前置",
-        "desc": "法环挂载全类型 Mod 的核心基石！免解包直接挂载 .dcx, .param, regulation.bin 等资源，自带 EAC 离线安全启动引导，绝不篡改游戏原版文件。",
+        "desc": "法环挂载全类型 Mod 的核心基石！免解包直接挂载 .dcx, .param, regulation.bin 等资源，自带不加载 EAC 的启动方式（只能离线玩），不改游戏原版文件。",
         "dependencies": [
           "Microsoft Visual C++ 2015-2022 Redistributable"
         ],
@@ -8049,7 +8049,7 @@ window.GAMES_DATA = [
         "installSteps": [
           "解压 ModEngine2 压缩包到任意纯英文路径 (推荐放到游戏根目录下)",
           "将下载的武器、服装或平衡性 Mod 解压后扔进 ModEngine2/mod/ 文件夹中",
-          "双击运行 launchmod_eldenring.bat 即可一键安全免封启动游戏！"
+          "双击运行 launchmod_eldenring.bat 启动游戏（不加载 EAC，只能离线玩）。"
         ],
         "downloadUrl": "https://github.com/soulsmods/ModEngine2/releases/download/v2.1.0.0/ModEngine-2.1.0.0-win64.zip",
         "downloadFilename": "ModEngine-2.1.0.0-win64.zip",
@@ -8059,7 +8059,7 @@ window.GAMES_DATA = [
         "id": "mod_grand_archives_ct",
         "title": "The Grand Archives (TGA) 全能离线内存调试表",
         "author": "TGA Reverse Engineering Team",
-        "version": "v1.14 (Shadow of the Erdtree Ready)",
+        "version": "v1.14",
         "size": "3.5 MB",
         "downloads": "2,900,000+",
         "endorsements": "120,000+",
@@ -8301,14 +8301,14 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "v1.14 (黄金树幽影DLC完全对齐)",
+    "verifiedPatch": "v1.14（未实测）",
     "radarSecretCode": "法环",
     "pitfallNote": {
-      "title": "老L实验室避坑笔记 (艾尔登法环 黄金树幽影 v1.14)",
+      "title": "老L避坑笔记 (艾尔登法环 黄金树幽影 v1.14)",
       "tips": [
-        "【EAC离线防封准则】：FromSoftware 的 Easy Anti-Cheat 会在上报内存修改时对账号进行 180 天隔离小黑屋处罚！切勿在官方联机在线状态下注入，必须使用 ModEngine2 管道拦截或替换启动。",
+        "【EAC 与封号】：FromSoftware 的 Easy Anti-Cheat 会在上报内存修改时对账号进行 180 天隔离小黑屋处罚！切勿在官方联机在线状态下注入，改游戏只在离线下进行（用 ModEngine2 或替换启动的方式不加载 EAC，只能离线玩）。",
         "【幽影树庇护机制】：幽影之地独立于本篇等级，受折磨卡关时重点是将 Scadutree Blessing（幽影树庇护）调至 Lv20 满级，攻防减伤直接翻倍，即可彻底解除幽影受苦！",
-        "【无缝联机独立存档】：与好友联机请认准 Seamless Co-op，其采用独立的 .co2 存档格式，与官方云存档物理隔离，100% 零封号安全。"
+        "【无缝联机独立存档】：Seamless Co-op 用独立的 .co2 存档，不连官方匹配服务器。它是第三方 Mod，会不会被封号没有人能担保；别把 .co2 存档改回原版存档带上线。"
       ]
     },
     "scenarioBundles": [
@@ -8325,7 +8325,7 @@ window.GAMES_DATA = [
           "仿身泪滴骨灰+10（最强逃课大哥）",
           "红蓝圣杯瓶强化至 +12 最大恢复量"
         ],
-        "code": "-- [老L·极客场景套餐] 艾尔登法环 新手开荒起飞包 (离线实测)\n-- 启动方式：ModEngine2 离线引导 / The Grand Archives CT 表\n[ModEngine2 离线环境已就绪]\nSet GodMode = 1\nAddRunes(2000000)\nAddItem(100, 1) -- 仿身泪滴骨灰 +10\nSetFlaskLevel(12) -- 圣杯瓶满级强化"
+        "code": "-- [老L·极客场景套餐] 艾尔登法环 新手开荒起飞包 (未实测)\n-- 启动方式：ModEngine2 离线引导 / The Grand Archives CT 表\nSet GodMode = 1\nAddRunes(2000000)\nAddItem(100, 1) -- 仿身泪滴骨灰 +10\nSetFlaskLevel(12) -- 圣杯瓶满级强化"
       },
       {
         "id": "er_salvation_bundle",
@@ -8340,7 +8340,7 @@ window.GAMES_DATA = [
           "0.3x 全局子弹时间，Boss 抬手前摇无所遁形",
           "狂龙贝勒、双月骑士、梅瑟莫全追忆直接兑换"
         ],
-        "code": "-- [老L·极客场景套餐] 艾尔登法环 幽影之地轮椅救赎包 (v1.14 实测)\nSetScadutreeBlessing(20)\nSetReveredSpiritAsh(10)\nSetGameSpeed(0.3) -- 0.3x 慢动作看破\nUnlockRemembrance(\"MessmerTheImpaler\")\nUnlockRemembrance(\"BayleTheDread\")"
+        "code": "-- [老L·极客场景套餐] 艾尔登法环 幽影之地轮椅救赎包 (v1.14，未实测)\nSetScadutreeBlessing(20)\nSetReveredSpiritAsh(10)\nSetGameSpeed(0.3) -- 0.3x 慢动作看破\nUnlockRemembrance(\"MessmerTheImpaler\")\nUnlockRemembrance(\"BayleTheDread\")"
       },
       {
         "id": "er_godmode_bundle",
@@ -8358,7 +8358,7 @@ window.GAMES_DATA = [
         "code": "-- [老L·极客场景套餐] 艾尔登法环 全追忆神兵真神满配包\nUnlockAllSitesOfGrace()\nSetInfiniteFP(1)\nSetInfiniteStamina(1)\nAddItem(\"Item_Talisman_DragoncrestGreatshield\", 1)\nAddItem(\"Item_Weapon_AncientMeteoricOreGreatsword\", 1)"
       }
     ],
-    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】艾尔登法环 离线防封引导助手\necho ========================================================\necho   【老L·单机避坑局】艾尔登法环 纯净离线引导工具\necho   自动截断 EAC 守护进程 · 物理隔离云存档 · 零封号\necho ========================================================\necho.\nif not exist \"Game\\eldenring.exe\" (\n    echo [!] 提示: 请将本脚本放在 ELDEN RING 游戏安装根目录！\n    pause\n    exit /b\n)\necho [*] 正在检查 ModEngine2 与 EAC 状态...\necho [√] 离线管道准备就绪！\necho [i] 启动游戏后主菜单右下角将强制显示“离线模式”。\necho.\npause",
+    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】艾尔登法环 离线启动说明\necho ========================================================\necho   【老L·单机避坑局】艾尔登法环 离线启动说明\necho   本脚本只检查游戏主程序在不在，不改任何文件\necho ========================================================\necho.\nif not exist \"Game\\eldenring.exe\" (\n    echo [!] 当前目录下没有 Game\\eldenring.exe，脚本什么都没改。\n    echo     请把本脚本放到 ELDEN RING 游戏安装根目录再运行。\n    echo.\n    pause\n    exit /b\n)\necho [+] 找到 Game\\eldenring.exe\necho [i] 用 Mod：解压 ModEngine2，Mod 放进它的 mod 目录，双击它自带的 launchmod_eldenring.bat 启动。\necho     这样启动不加载 EAC，只能离线玩；别带着改过的游戏或存档上线，有封号风险。\necho [i] 本脚本没有检查 ModEngine2 和 EAC，也不会替你启动游戏。\necho [i] 脚本不备份存档；指令没有逐条在游戏里实测，执行前先手动存档。\necho.\npause\n",
     "compatibilityStatus": "yellow",
     "radarStatusText": "🟡 修改器早于当前游戏版本",
     "latestSteamPatch": "Alexander, Warrior Jar Artisan Keycap has arrived!",
@@ -8411,7 +8411,7 @@ window.GAMES_DATA = [
     "hasConsole": true,
     "consoleShortcut": "~ (Tilde 键)",
     "consoleEnableGuide": {
-      "zh-CN": "Bethesda Creation 引擎原生提供全功能控制台：\n1. 快捷键：游戏中随时按下键盘左上角【~】键 (波浪键 / ESC下方) 暂停并呼出全屏控制台；\n2. 输入法避坑：若无反应，请在 Windows 任务栏切换为'英语(美国)'美式键盘输入法，或在 Documents/My Games/Skyrim Special Edition/Skyrim.ini 的 [General] 下确认 bAllowConsole=1；\n3. 成就与防闪退：使用控制台或打 Mod 会打上脏标记锁定 Steam 成就，强烈建议安装 SSE Engine Fixes 恢复成就并彻底防止 60Hz+ 物理抽搐与 CTD 闪退！\n4. 简写技巧：FormID 开头的多余 0 可省略，如 player.additem 0000000F 10000 可简写为 player.additem f 10000！",
+      "zh-CN": "Bethesda Creation 引擎原生提供全功能控制台：\n1. 快捷键：游戏中随时按下键盘左上角【~】键 (波浪键 / ESC下方) 暂停并呼出全屏控制台；\n2. 输入法避坑：若无反应，请在 Windows 任务栏切换为'英语(美国)'美式键盘输入法，或在 Documents/My Games/Skyrim Special Edition/Skyrim.ini 的 [General] 下确认 bAllowConsole=1；\n3. 成就与防闪退：使用控制台或打 Mod 会打上脏标记锁定 Steam 成就，强烈建议安装 SSE Engine Fixes 恢复成就，它还修了一批引擎问题，但不能保证不闪退。\n4. 简写技巧：FormID 开头的多余 0 可省略，如 player.additem 0000000F 10000 可简写为 player.additem f 10000！",
       "en": "Bethesda Creation Engine Native Console: Press ~ (Tilde) key in-game to toggle. Supports Hex FormIDs, batch (.bat) scripts, quest stage jumping, and free camera."
     },
     "popularCommands": [
@@ -8481,7 +8481,7 @@ window.GAMES_DATA = [
       "totalDownloads": "1.25B",
       "totalEndorsements": "8.9M",
       "totalMods": "68,400",
-      "latestPatch": "SE / AE 1.6.1170 Ready"
+      "latestPatch": "SE / AE 1.6.1170"
     },
     "consoleCategories": [
       {
@@ -9197,10 +9197,10 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "v1.6.1170 (与 1.6.1130 AE 深度适配)",
+    "verifiedPatch": "v1.6.1170（未实测）",
     "radarSecretCode": "老滚5",
     "pitfallNote": {
-      "title": "老L实验室避坑笔记 (上古卷轴5 天际重制版 v1.6.1170)",
+      "title": "老L避坑笔记 (上古卷轴5 天际重制版 v1.6.1170)",
       "tips": [
         "【FormID省略前导零】：控制台输入代码时，前导 000 全部可以省略！比如金币 0000000F，直接输入 player.additem f 100000 即可生效。",
         "【严禁盲目运行 caqs】：任务卡关千万不要运行 caqs（强制完成全游戏所有任务），这会导致全图 NPC 状态机彻底崩溃毁坏全档！必须定向使用 setstage <QuestID> <Stage>。",
@@ -9254,7 +9254,7 @@ window.GAMES_DATA = [
         "code": "; [老L·极客场景套餐] 上古卷轴5 16大魔神器与全龙吼满配包\nplayer.additem 2ac61 1 ; 莫拉格·巴尔之槌\nplayer.additem 240d2 1 ; 破晓者\nplayer.additem 2ac6f 1 ; 瓦巴杰克\nplayer.additem 63b8b 1 ; 黑暗魔经\nplayer.additem 300300f 200 ; 萨维石\nplayer.modav shoutrecoverymult 0 ; 龙吼零CD"
       }
     ],
-    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】上古卷轴5 v1.6.1170 控制台排错助手\necho ========================================================\necho   【老L·单机避坑局】天际重制版 控制台与前置排错\necho   官方 Creation 引擎原生机制 · FormID 前导零精简\necho ========================================================\necho.\nif not exist \"SkyrimSE.exe\" (\n    echo [!] 提示: 请将本脚本放在 Skyrim Special Edition 根目录！\n    pause\n    exit /b\n)\necho [*] 正在核验 Skyrim.ini 控制台开关...\necho [√] bAllowConsole=1 正常就绪！\necho [i] 进游戏按 ~ (波浪键) 呼出控制台，前导 000 全部可省略！\necho.\npause",
+    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】上古卷轴5 天际重制版 控制台说明\necho ========================================================\necho   【老L·单机避坑局】天际重制版 控制台说明\necho   本脚本只检查游戏主程序在不在，不改任何文件\necho ========================================================\necho.\nif not exist \"SkyrimSE.exe\" (\n    echo [!] 当前目录下没有 SkyrimSE.exe，脚本什么都没改。\n    echo     请把本脚本放到 Skyrim Special Edition 游戏安装根目录再运行。\n    echo.\n    pause\n    exit /b\n)\necho [+] 找到 SkyrimSE.exe\necho [i] 进游戏按 ~ (波浪键) 呼出控制台；没反应就先切到英文输入法。\necho [i] FormID 开头的 0 可以省略，比如 player.additem 0000000F 100 可以写成 player.additem f 100。\necho [i] 脚本不备份存档；指令没有逐条在游戏里实测，执行前先手动存档。\necho.\npause\n",
     "compatibilityStatus": "yellow",
     "radarStatusText": "🟡 修改器早于当前游戏版本",
     "latestSteamPatch": "Celebrate 15 Years of Skyrim with the Anniversary Creation Bundle",
@@ -9304,7 +9304,7 @@ window.GAMES_DATA = [
     "hasConsole": true,
     "consoleShortcut": "~ (Tilde 键)",
     "consoleEnableGuide": {
-      "zh-CN": "【次世代大更新避坑与控制台开启】\n1. 控制台呼出：游戏中按下【~】(波浪键) 暂停并呼出控制台；\n2. 2024 次世代大更新 (v1.10.980/984) 避坑必看：\n   - 路径一 (次世代原生模式)：若玩次世代新版，必须安装对应次世代分支的 F4SE (v0.7.2+) 与 Address Library Next-Gen，并在 Steam 游戏属性中设置【仅在我启动该游戏时更新】防二次破坏；\n   - 路径二 (经典降级模式)：若想享受数万款旧 Mod，使用【Fallout 4 Downgrader】一键将主程序回退至 1.10.163 黄金稳定版；\n3. 极速批处理 (bat 命令)：在游戏根目录新建文本文件 (如 all_materials.txt)，游戏中只需在控制台输入 bat all_materials，瞬间一次性执行上百条指令！",
+      "zh-CN": "【次世代大更新避坑与控制台开启】\n1. 控制台呼出：游戏中按下【~】(波浪键) 暂停并呼出控制台；\n2. 2024 次世代大更新 (v1.10.980/984) 避坑必看：\n   - 路径一 (次世代原生模式)：若玩次世代新版，必须安装对应次世代分支的 F4SE (v0.7.2+) 与 Address Library Next-Gen，并在 Steam 游戏属性中设置【仅在我启动该游戏时更新】减少后台自动更新（不能保证不被更新）；\n   - 路径二 (经典降级模式)：若想享受数万款旧 Mod，使用【Fallout 4 Downgrader】一键将主程序回退至 1.10.163 黄金稳定版；\n3. 极速批处理 (bat 命令)：在游戏根目录新建文本文件 (如 all_materials.txt)，游戏中只需在控制台输入 bat all_materials，瞬间一次性执行上百条指令！",
       "en": "Fallout 4 Creation Engine Console: Press ~ (Tilde) to toggle. Next-Gen Update (v1.10.980+) compatible with F4SE v0.7.2+ or use Downgrader to v1.10.163. Supports bat batch scripts and dynamic legendary attachmod enchantments."
     },
     "popularCommands": [
@@ -9375,7 +9375,7 @@ window.GAMES_DATA = [
       "totalDownloads": "96.0M",
       "totalEndorsements": "1392K",
       "totalMods": "10,560",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [
       {
@@ -10166,12 +10166,12 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "v1.10.984+ (次世代大更新双轨实测)",
+    "verifiedPatch": "v1.10.984+（未实测）",
     "radarSecretCode": "辐射4",
     "pitfallNote": {
-      "title": "老L实验室避坑笔记 (辐射4 次世代更新版 v1.10.984)",
+      "title": "老L避坑笔记 (辐射4 次世代更新版 v1.10.984)",
       "tips": [
-        "【次世代避坑防暗更】：Steam 属性中必须将更新策略设置为“仅在我启动该游戏时更新”，日常启动一律通过 f4se_loader.exe，彻底规避强制推送打碎 Mod 框架！",
+        "【减少自动更新】：Steam 属性里把更新设成“仅在我启动该游戏时更新”，装了 F4SE 的话日常用 f4se_loader.exe 启动。这只能减少后台更新，不能保证游戏不被更新；更新后 F4SE 和依赖它的 Mod 可能要等作者发新版。",
         "【聚落空间无限解除】：走到工坊工作台按 ~ 选中工作台（出现 000249dc），输入 setav 349 9999999 与 setav 348 9999999，容量条瞬间清零，实现真正的无限建造！",
         "【死亡三角区闪退预防】：联邦西北角庇护山丘、红火箭与阿伯纳西农场相隔极近，切勿在三地同时高密建造几万件建筑物体，防止内存溢出导致 CTD 闪退。"
       ]
@@ -10223,7 +10223,7 @@ window.GAMES_DATA = [
         "code": "; [老L·极客场景套餐] 辐射4 传奇武器词条自定义附魔\n; 按 ~ 鼠标左键点击自己扔在地上的武器，输入：\nattachmod 1cc2a6 ; 附魔【双弹 (Two Shot)】\n; 补给 100 发胖子核弹与高斯步枪弹药：\nplayer.additem e6b2e 100\nplayer.additem 18abdf 500"
       }
     ],
-    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】辐射4次世代防暗更与环境核验\necho ========================================================\necho   【老L·单机避坑局】辐射4 次世代更新防暗更助手\necho   锁定 Steam 自动推送 · 聚落容量解除指南\necho ========================================================\necho.\nif not exist \"Fallout4.exe\" (\n    echo [!] 提示: 请将脚本置于 Fallout 4 根目录下！\n    pause\n    exit /b\n)\necho [*] 正在检查 F4SE 与次世代版本...\necho [i] 请在 Steam 库右键 Fallout 4 -> 属性 -> 更新 -> 设置为【仅在我启动该游戏时更新】。\necho [√] 日常启动请一律运行 f4se_loader.exe 规避强制推送！\necho.\npause",
+    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】辐射4 F4SE 启动说明\necho ========================================================\necho   【老L·单机避坑局】辐射4 F4SE 启动说明\necho   本脚本只检查有没有 f4se_loader.exe，不改任何文件\necho ========================================================\necho.\nif not exist \"Fallout4.exe\" (\n    echo [!] 当前目录下没有 Fallout4.exe，脚本什么都没改。\n    echo     请把本脚本放到 Fallout 4 游戏安装根目录再运行。\n    echo.\n    pause\n    exit /b\n)\nif exist \"f4se_loader.exe\" (\n    echo [+] 找到 f4se_loader.exe：装了 F4SE 的话，日常用它启动游戏。\n) else (\n    echo [i] 没找到 f4se_loader.exe：还没装 F4SE，或者没放在游戏根目录。\n)\necho [i] 想减少自动更新：Steam 库里右键 Fallout 4 → 属性 → 更新，设为【仅在我启动该游戏时更新】。\necho     这只能减少后台更新，不能保证游戏不被更新；更新后 F4SE 和依赖它的 Mod 可能要等作者发新版。\necho [i] 脚本不备份存档；指令没有逐条在游戏里实测，执行前先手动存档。\necho.\npause\n",
     "compatibilityStatus": "green",
     "radarStatusText": "🟢 近 14 天无更新",
     "latestSteamPatch": "Happy Fallout Day!",
@@ -10341,7 +10341,7 @@ window.GAMES_DATA = [
       "totalDownloads": "89.2M",
       "totalEndorsements": "1293K",
       "totalMods": "9,812",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [
       {
@@ -10875,7 +10875,7 @@ window.GAMES_DATA = [
         "downloads": "2.1M",
         "endorsements": "115K",
         "category": "Core Framework (核心前置)",
-        "desc": "幻兽帕鲁运行全部 Lua 模组、UI 扩展与控制台打字命令的绝对核心前置库，零注入误报，极客必备。",
+        "desc": "幻兽帕鲁运行全部 Lua 模组、UI 扩展与控制台打字命令的绝对核心前置库，极客必备。",
         "dependencies": [
           "None (Native Injector)"
         ],
@@ -11213,7 +11213,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "v0.3.x (樱岛版本完全对齐)",
+    "verifiedPatch": "v0.3.x（未实测）",
     "radarSecretCode": "帕鲁",
     "scenarioBundles": [
       {
@@ -11229,7 +11229,7 @@ window.GAMES_DATA = [
           "1,000,000 黄金现金黑市扫货",
           "随身负重清零自由搬运矿石"
         ],
-        "code": "-- [老L·极客场景套餐] 幻兽帕鲁 新手开荒神宠起飞包 (离线实测)\nspawn Anubis 50\ngive PalSphere_Legend 100\ngive Money 1000000\naddtalentpoint 50"
+        "code": "-- [老L·极客场景套餐] 幻兽帕鲁 新手开荒神宠起飞包 (未实测)\nspawn Anubis 50\ngive PalSphere_Legend 100\ngive Money 1000000\naddtalentpoint 50"
       },
       {
         "id": "pal_salvation_bundle",
@@ -11244,7 +11244,7 @@ window.GAMES_DATA = [
           "骑乘导弹发射器超强清屏火力",
           "0.3x 慢动作锁定 Boss 弱点投球"
         ],
-        "code": "-- [老L·极客场景套餐] 幻兽帕鲁 神兽捕捉与极速孵化包 (离线实测)\nspawn Jetragon 50\nspawn Frostallion 50\ngive Weapon_Jetragon_Missile 1\nslomo 0.3"
+        "code": "-- [老L·极客场景套餐] 幻兽帕鲁 神兽捕捉与极速孵化包 (未实测)\nspawn Jetragon 50\nspawn Frostallion 50\ngive Weapon_Jetragon_Missile 1\nslomo 0.3"
       },
       {
         "id": "pal_godmode_bundle",
@@ -11263,14 +11263,14 @@ window.GAMES_DATA = [
       }
     ],
     "pitfallNote": {
-      "title": "老L实验室避坑笔记 (幻兽帕鲁 樱岛最新版)",
+      "title": "老L避坑笔记 (幻兽帕鲁 樱岛最新版)",
       "tips": [
-        "【防封禁与反作弊】：本作单人单机模式与自建离线本地房间绝无 VAC 或官方封禁风险。若加入官方防作弊服务器，务必完全移除 UE4SS 注入 dll，切勿在公开天梯联机作弊！",
+        "【联机前先移除】：UE4SS 只在单人模式或自己开的本地房间里用，会不会被封没有人能担保。进官方或别人的服务器前，先把 UE4SS 的 dll 移走，别在公开服务器作弊。",
         "【帕鲁抑郁生病治愈】：据点帕鲁容易因地形卡住无法进食而导致【抑郁症/骨折】。使用 give Med_Low 10 获取高级药品直接投喂，并在箱子旁放置温泉以彻底稳定 SAN 值。",
         "【负重过载急救】：金属矿区挖掘超载走不动时，掏出抓钩枪对着地面或树干射击，利用抓钩拉力可以直接无视任何负重限制飞速前行。"
       ]
     },
-    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】幻兽帕鲁 UE4SS 模组引导助手\necho ========================================================\necho   【老L·单机避坑局】幻兽帕鲁 纯净模组环境检查工具\necho   纯净离线加载 · 零杀软误报 · 快捷备份配置\necho ========================================================\necho.\nif not exist \"Pal\\Binaries\\Win64\\Palworld-Win64-Shipping.exe\" (\n    echo [!] 提示: 请将本脚本放在 Palworld 游戏安装根目录！\n    pause\n    exit /b\n)\necho [*] 正在检查 UE4SS.dll 与 xinput1_3.dll 状态...\nif exist \"Pal\\Binaries\\Win64\\UE4SS.dll\" (\n    echo [√] UE4SS 底层前置挂载正常！游戏内按 F10 唤出菜单。\n) else (\n    echo [!] 未检测到 UE4SS，请解压 UE4SS 至 Pal/Binaries/Win64/。\n)\necho.\npause\n",
+    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】幻兽帕鲁 UE4SS 检查\necho ========================================================\necho   【老L·单机避坑局】幻兽帕鲁 UE4SS 检查脚本\necho   只检查 UE4SS.dll 在不在，不改任何文件\necho ========================================================\necho.\n\nset \"WIN64=Pal\\Binaries\\Win64\"\nif not exist \"Pal\\Binaries\\Win64\\Palworld-Win64-Shipping.exe\" (\n    echo [!] 当前目录下没有 Pal\\Binaries\\Win64\\Palworld-Win64-Shipping.exe，脚本什么都没改。\n    echo     请把本脚本放到 Palworld 游戏安装根目录再运行。\n    echo.\n    pause\n    exit /b\n)\nset \"UE4SS_DLL=\"\nif exist \"%WIN64%\\ue4ss\\UE4SS.dll\" set \"UE4SS_DLL=%WIN64%\\ue4ss\\UE4SS.dll\"\nif not defined UE4SS_DLL if exist \"%WIN64%\\UE4SS.dll\" set \"UE4SS_DLL=%WIN64%\\UE4SS.dll\"\nif defined UE4SS_DLL (\n    echo [+] 找到 %UE4SS_DLL%。只检查了文件在不在，没检查版本，也没检查能不能加载。\n    echo [i] 游戏内按 F10 试试 UE4SS 菜单。\n) else (\n    echo [!] 没找到 UE4SS.dll：请把 UE4SS 解压到 %WIN64%\\ 。\n)\necho [i] 只在单人模式或自己开的房间里用；进别人的服务器前先把 UE4SS 移走。\necho [i] 脚本不备份存档；指令没有逐条在游戏里实测，执行前先手动存档。\necho.\npause\n",
     "compatibilityStatus": "yellow",
     "radarStatusText": "🟡 修改器早于当前游戏版本",
     "latestSteamPatch": "Palworld × Graveyard Keeper 2 Steam Bundle is Out Now!",
@@ -11387,7 +11387,7 @@ window.GAMES_DATA = [
       "totalDownloads": "83.6M",
       "totalEndorsements": "1212K",
       "totalMods": "9,196",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [
       {
@@ -11921,7 +11921,7 @@ window.GAMES_DATA = [
         "downloads": "3.5M",
         "endorsements": "180K",
         "category": "Core Framework (核心前置)",
-        "desc": "星空运行全部高阶 UI 模组、飞船构建突破与游戏机制大修的绝对基石前置。原生扩展游戏内存指针，安全可靠。",
+        "desc": "星空运行全部高阶 UI 模组、飞船构建突破与游戏机制大修的绝对基石前置。原生扩展游戏内存指针；游戏更新后要等作者发新版。",
         "dependencies": [
           "None (Native Extender)"
         ],
@@ -12231,7 +12231,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "v1.14 (破碎空间DLC完全对齐)",
+    "verifiedPatch": "v1.14（未实测）",
     "radarSecretCode": "星空",
     "scenarioBundles": [
       {
@@ -12247,7 +12247,7 @@ window.GAMES_DATA = [
           "100 把数码撬棒，见箱就开",
           "负重上限 9,999 吨，垃圾随便捡"
         ],
-        "code": "-- [老L·极客场景套餐] 星空 新手星际启航起飞包 (原生控制台实测)\ntgm\nplayer.additem 0000000F 1000000\nplayer.additem 0000000A 100\nplayer.setav carryweight 9999"
+        "code": "-- [老L·极客场景套餐] 星空 新手星际启航起飞包 (原生控制台，未实测)\ntgm\nplayer.additem 0000000F 1000000\nplayer.additem 0000000A 100\nplayer.setav carryweight 9999"
       },
       {
         "id": "sf_salvation_bundle",
@@ -12281,14 +12281,14 @@ window.GAMES_DATA = [
       }
     ],
     "pitfallNote": {
-      "title": "老L实验室避坑笔记 (星空 破碎空间 DLC 完全版)",
+      "title": "老L避坑笔记 (星空 破碎空间 DLC 完全版)",
       "tips": [
-        "【Steam成就防锁死门禁】：Bethesda 在输入控制台命令时会标记存档为 Modded 并禁用 Steam 成就！必须先安装 Baka Achievement Enabler 或通过 SFSE 挂钩，才能在爽用控制台的同时点亮 100% 全成就！",
+        "【Steam成就防锁死门禁】：Bethesda 在输入控制台命令时会标记存档为 Modded 并禁用 Steam 成就！可以装 Baka Achievement Enabler（需要 SFSE），让开过控制台的存档继续拿成就；游戏更新后它可能要等作者适配。",
         "【改船部件重叠报错破解】：在官方造船厂经常遇到【模块存在重叠】无法保存。下载安装本站推荐的 Ship Builder Tolerance Tweaks 即可完全无视空间重叠，打造致密外装母舰。",
         "【卡死与恶性任务急救】：若因 NPC 浮空或被锁在门后无法交任务，打开控制台输入 tcl 开启穿墙飞入室内，或使用 setstage 命令直接强行推进断掉的任务流程节点。"
       ]
     },
-    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】星空 SFSE 纯净启动助手\necho ========================================================\necho   【老L·单机避坑局】星空 SFSE 扩展环境一键诊断工具\necho   防成就锁死 · 解除改船限制 · 极速 60FPS 菜单\necho ========================================================\necho.\nif not exist \"Starfield.exe\" (\n    echo [!] 提示: 请将本脚本放在 Starfield 游戏安装根目录！\n    pause\n    exit /b\n)\necho [*] 正在检查 sfse_loader.exe 状态...\nif exist \"sfse_loader.exe\" (\n    echo [√] SFSE 扩展引导已就绪！即将通过 SFSE 启动游戏...\n    start \"\" \"sfse_loader.exe\"\n) else (\n    echo [!] 未检测到 sfse_loader.exe，正在以原版模式拉起...\n    start \"\" \"Starfield.exe\"\n)\necho.\npause\n",
+    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】星空 SFSE 启动助手\necho ========================================================\necho   【老L·单机避坑局】星空 SFSE 启动脚本\necho   找到 sfse_loader.exe 就用它启动，找不到就用原版启动\necho ========================================================\necho.\nif not exist \"Starfield.exe\" (\n    echo [!] 当前目录下没有 Starfield.exe，脚本什么都没改。\n    echo     请把本脚本放到 Starfield 游戏安装根目录再运行。\n    echo.\n    pause\n    exit /b\n)\nif exist \"sfse_loader.exe\" (\n    echo [+] 找到 sfse_loader.exe，用它启动游戏 ...\n    start \"\" \"sfse_loader.exe\"\n) else (\n    echo [i] 没找到 sfse_loader.exe，用 Starfield.exe 原版启动 ...\n    start \"\" \"Starfield.exe\"\n)\necho [i] 脚本不备份存档；指令没有逐条在游戏里实测，执行前先手动存档。\necho.\npause\n",
     "compatibilityStatus": "green",
     "radarStatusText": "🟢 近 14 天无更新",
     "latestSteamPatch": "New worlds to explore with Starfield Creations!",
@@ -12339,7 +12339,7 @@ window.GAMES_DATA = [
     "hasConsole": true,
     "consoleShortcut": "~ (故事模式原生官方秘籍终端) 或 F4 (ScriptHookV 内置纯净修改菜单)",
     "consoleEnableGuide": {
-      "zh-CN": "【单机故事模式 100% 离线防封指南】\n1. 官方原生秘籍：进入单机故事模式后，直接按键盘左上角 ~ 键输入全英文秘籍并回车；\n2. ScriptHookV 离线内置菜单：将 ScriptHookV.dll、dinput8.dll 以及 NativeTrainer.asi 放入 GTA5 游戏根目录；\n3. 在故事模式按 F4 呼出图形化修改菜单，小键盘 8/2/4/6 切换方向，5 确认，0 返回；\n4. ⚠️ 严禁携带任何 ASI 插件或修改器文件进入 GTA Online 线上模式，否则必被 R星反作弊封号！重返线上前只需将 dinput8.dll 重命名为 .bak 即可完全断开模组隔离。",
+      "zh-CN": "【单机故事模式指南】\n1. 官方原生秘籍：进入单机故事模式后，直接按键盘左上角 ~ 键输入全英文秘籍并回车；\n2. ScriptHookV 离线内置菜单：将 ScriptHookV.dll、dinput8.dll 以及 NativeTrainer.asi 放入 GTA5 游戏根目录；\n3. 在故事模式按 F4 呼出图形化修改菜单，小键盘 8/2/4/6 切换方向，5 确认，0 返回；\n4. ⚠️ 别带着 ASI 插件或修改器文件进 GTA Online 线上模式，有封号风险。把 dinput8.dll 改名为 .bak 只是停掉 ASI 加载器；mods 文件夹、改过的 rpf 等其它改动要自己移走。",
       "en": "Press ~ to input native cheats or press F4 with ScriptHookV for offline Native Trainer. NEVER go online with mods."
     },
     "popularCommands": [
@@ -12408,7 +12408,7 @@ window.GAMES_DATA = [
       "totalDownloads": "78.9M",
       "totalEndorsements": "1144K",
       "totalMods": "8,679",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [
       {
@@ -13175,7 +13175,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "v1.0.3179 (线上DLC完全对齐)",
+    "verifiedPatch": "v1.0.3179（未实测）",
     "radarSecretCode": "洛圣都",
     "scenarioBundles": [
       {
@@ -13191,7 +13191,7 @@ window.GAMES_DATA = [
           "TOOLUP 武器军火弹药全满",
           "LAWYERUP 警匪追捕一秒消除"
         ],
-        "code": "-- [老L·极客场景套餐] GTA5 洛圣都教父财富起飞包 (单机实测)\nPAINKILLER\nTURTLE\nTOOLUP\nLAWYERUP\n[Menyoo] Add $1,000,000,000 to All Characters"
+        "code": "-- [老L·极客场景套餐] GTA5 洛圣都教父财富起飞包 (未实测)\nPAINKILLER\nTURTLE\nTOOLUP\nLAWYERUP\n[Menyoo] Add $1,000,000,000 to All Characters"
       },
       {
         "id": "gta_salvation_bundle",
@@ -13225,14 +13225,14 @@ window.GAMES_DATA = [
       }
     ],
     "pitfallNote": {
-      "title": "老L实验室避坑笔记 (GTA 5 故事模式与防封圣经)",
+      "title": "老L避坑笔记 (GTA 5 故事模式)",
       "tips": [
-        "【绝对防线上封号铁律】：Rockstar 的 GTA Online 对内存注入实行严苛封号政策！单机玩腻准备进入线上模式联机前，必须彻底将游戏根目录中的 dinput8.dll 改名为 dinput8.dll.bak，确保没有任何 ASI 钩子被加载，即可 100% 确保线上账号绝对安全！",
+        "【进线上前】：Rockstar 的 GTA Online 对内存注入查得很严。进线上模式前，把游戏根目录的 dinput8.dll 改名为 dinput8.dll.bak（停掉 ASI 加载器），mods 文件夹、改过的 rpf 等其它改动也要移走；没有办法保证不被封号。",
         "【故事模式股票暴富机制】：麦克的莱斯特刺杀任务千万别提前做！等通关大结局‘联合储蓄’劫案拿到 2800 万初始本金后，再分批次接暗杀任务并全仓买入对应做空做多股票，本金可直接滚至 21 亿上限！",
-        "【打不开 F4 菜单】：若按 F4 毫无反应，说明缺失 Visual C++ 2015~2022 运行库或 DirectX 组件。重新安装微软官方合集包即可完美修复。"
+        "【打不开 F4 菜单】：若按 F4 毫无反应，说明缺失 Visual C++ 2015~2022 运行库或 DirectX 组件。去微软官网重新安装 Visual C++ 运行库和 DirectX 后再试。"
       ]
     },
-    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】GTA5 线上/单机模式安全切换助手\necho ========================================================\necho   【老L·单机避坑局】GTA5 离线防封一键隔离切换器\necho   线上/单机物理隔离 · 绝对杜绝封号误操作\necho ========================================================\necho.\nif not exist \"GTA5.exe\" (\n    echo [!] 提示: 请将本脚本放在 Grand Theft Auto V 游戏安装根目录！\n    pause\n    exit /b\n)\nif exist \"dinput8.dll\" (\n    echo [当前状态]: 【单机 Mod 模式】已开启 (严禁进入线上模式！)\n    echo.\n    set /p choice=\"是否切换为【纯净线上模式】(输入 Y 确认): \"\n    if /i \"%choice%\"==\"Y\" (\n        ren \"dinput8.dll\" \"dinput8.dll.bak\"\n        echo [√] 已安全切断模组管道！现在可安全进入 GTA Online。\n    )\n) else if exist \"dinput8.dll.bak\" (\n    echo [当前状态]: 【纯净线上模式】已启用 (Mod 处于隔离休眠状态)\n    echo.\n    set /p choice=\"是否激活【单机离线 Mod 模式】(输入 Y 确认): \"\n    if /i \"%choice%\"==\"Y\" (\n        ren \"dinput8.dll.bak\" \"dinput8.dll\"\n        echo [√] 已激活 ScriptHookV 离线模组环境！按 F4 呼出菜单。\n    )\n)\necho.\npause\n",
+    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】GTA5 ASI 加载器开关\necho ========================================================\necho   【老L·单机避坑局】GTA5 ASI 加载器开关脚本\necho   把 dinput8.dll 改名为 dinput8.dll.bak 来停用，或改回来启用\necho ========================================================\necho.\nif not exist \"GTA5.exe\" (\n    echo [!] 当前目录下没有 GTA5.exe，脚本什么都没改。\n    echo     请把本脚本放到 Grand Theft Auto V 游戏安装根目录再运行。\n    echo.\n    pause\n    exit /b\n)\n\nset \"MODE=\"\nif exist \"dinput8.dll\" set \"MODE=on\"\nif not defined MODE if exist \"dinput8.dll.bak\" set \"MODE=off\"\nif not defined MODE (\n    echo [i] 没有 dinput8.dll，也没有 dinput8.dll.bak：没装 ASI 加载器，脚本什么都没改。\n    echo.\n    pause\n    exit /b\n)\n\nset \"choice=\"\nif \"%MODE%\"==\"on\" echo [当前状态] 有 dinput8.dll：ASI 加载器会加载 ScriptHookV 等插件，只能玩故事模式。\nif \"%MODE%\"==\"on\" set /p \"choice=把 dinput8.dll 改名为 dinput8.dll.bak、停用 ASI 加载器？输入 Y 确认: \"\nif \"%MODE%\"==\"off\" echo [当前状态] 只有 dinput8.dll.bak：ASI 加载器已停用。\nif \"%MODE%\"==\"off\" set /p \"choice=把 dinput8.dll.bak 改回 dinput8.dll、重新启用 ASI 加载器？输入 Y 确认: \"\n\nif /i not \"%choice%\"==\"Y\" (\n    echo [i] 没有输入 Y，脚本什么都没改。\n    echo.\n    pause\n    exit /b\n)\n\nif \"%MODE%\"==\"on\" ren \"dinput8.dll\" \"dinput8.dll.bak\"\nif \"%MODE%\"==\"off\" ren \"dinput8.dll.bak\" \"dinput8.dll\"\n\nif exist \"dinput8.dll\" (\n    echo [结果] 现在有 dinput8.dll：ASI 加载器会被加载，故事模式按 F4 试试菜单。\n) else (\n    echo [结果] 现在没有 dinput8.dll：ASI 加载器不会被加载。\n)\necho.\necho ========================================================\necho  [i] 这个脚本只改 dinput8.dll 这一个文件的名字。\necho      其它改过的文件（mods 文件夹、改过的 rpf 等）它不管；进 GTA Online 前要自己全部移走，有封号风险。\necho      脚本不备份存档，改之前先手动备份。\necho ========================================================\necho.\npause\n",
     "compatibilityStatus": "green",
     "radarStatusText": "🟢 近 14 天无更新",
     "latestSteamPatch": "Take Down the Kortz Center and More High-Value Targets in The Heist Event",
@@ -13285,7 +13285,7 @@ window.GAMES_DATA = [
     "hasConsole": true,
     "consoleShortcut": "F5 (ScriptHookRDR2 原生离线修改器) 或 游戏内设置-作弊码",
     "consoleEnableGuide": {
-      "zh-CN": "【单机故事模式 100% 离线防封指南】\n1. 官方秘籍输入：进入故事模式 -> 按 Esc 暂停 -> 选择【设置 (Settings)】-> 按左下角【作弊 (Cheats)】或 Shift 键 -> 输入对应英文短语并回车保存；\n2. ScriptHookRDR2 离线内置菜单：将 ScriptHookRDR2.dll、dinput8.dll 以及 NativeTrainer.asi 解压至游戏根目录；\n3. 启动故事模式按 F5 键唤出图形修改菜单，小键盘 8/2/4/6 控制，5 确认，0 返回；\n4. ⚠️ 绝无封号风险（进入 RDO 线上前只需将 dinput8.dll 重命名为 .bak 即可完全断开）。",
+      "zh-CN": "【单机故事模式指南】\n1. 官方秘籍输入：进入故事模式 -> 按 Esc 暂停 -> 选择【设置 (Settings)】-> 按左下角【作弊 (Cheats)】或 Shift 键 -> 输入对应英文短语并回车保存；\n2. ScriptHookRDR2 离线内置菜单：将 ScriptHookRDR2.dll、dinput8.dll 以及 NativeTrainer.asi 解压至游戏根目录；\n3. 启动故事模式按 F5 键唤出图形修改菜单，小键盘 8/2/4/6 控制，5 确认，0 返回；\n4. ⚠️ 别带着 Mod 进 RDO 线上模式，有封号风险。把 dinput8.dll 改名为 .bak 只是停掉 ASI 加载器，其它改过的文件要自己移走。",
       "en": "Enter official cheat phrases in Settings -> Cheats, or press F5 with ScriptHookRDR2 in offline story mode."
     },
     "popularCommands": [
@@ -13344,7 +13344,7 @@ window.GAMES_DATA = [
       "totalDownloads": "74.9M",
       "totalEndorsements": "1086K",
       "totalMods": "8,239",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [
       {
@@ -13748,7 +13748,7 @@ window.GAMES_DATA = [
         "downloads": "5.6M",
         "endorsements": "310K",
         "category": "Core Framework (核心前置)",
-        "desc": "荒野大镖客2运行任何 ASI 模组、刷车刷马工具与离线菜单的官方核心基石。自带防联机误入机制，安全可靠。",
+        "desc": "荒野大镖客2运行任何 ASI 模组、刷车刷马工具与离线菜单的核心前置（第三方工具，不是官方的）。只在故事模式用，进线上前把它移走。",
         "dependencies": [
           "None (Native DLL)"
         ],
@@ -13937,7 +13937,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "v1.0.1491 (完全对齐)",
+    "verifiedPatch": "v1.0.1491（未实测）",
     "radarSecretCode": "大表哥",
     "scenarioBundles": [
       {
@@ -13987,14 +13987,14 @@ window.GAMES_DATA = [
       }
     ],
     "pitfallNote": {
-      "title": "老L实验室避坑笔记 (荒野大镖客2 故事模式防封圣经)",
+      "title": "老L避坑笔记 (荒野大镖客2 故事模式)",
       "tips": [
-        "【绝对防联机封号隔离】：R星对 RDO 荒野大镖客线上模式同样严查。在登录线上战局前，务必把游戏根目录的 dinput8.dll 改名为 dinput8.dll.bak，彻底切断所有 ScriptHook 挂钩，绝无封号之忧！",
+        "【进线上前】：R星对 RDO 线上模式同样严查。进线上战局前，把游戏根目录的 dinput8.dll 改名为 dinput8.dll.bak（停掉 ASI 加载器），其它改过的文件也要移走；没有办法保证不被封号。",
         "【捕猎毛皮品质保护】：想要获得三星完美毛皮，务必击杀头上本来就是三星的动物，并掏出春田步枪击中头部一击毙命；若嫌繁琐，直接使用本库一键添加全部三星皮！",
         "【作弊码保存限制】：在官方设置里激活作弊码后，系统会默认暂时禁止保存新存档。若需保存修改后的金钱与装备，请使用 ScriptHookRDR2 或风灵月影修改器，它们不会禁用存档功能！"
       ]
     },
-    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】荒野大镖客2 离线防封助手\necho ========================================================\necho   【老L·单机避坑局】荒野大镖客2 纯净离线隔离切换器\necho   故事模式一键畅玩 · 物理隔离线上 RDO · 零封号\necho ========================================================\necho.\nif not exist \"RDR2.exe\" (\n    echo [!] 提示: 请将本脚本放在 Red Dead Redemption 2 游戏安装根目录！\n    pause\n    exit /b\n)\nif exist \"dinput8.dll\" (\n    echo [当前状态]: 【单机 Mod 模式】已开启 (切勿进入线上战局！)\n    echo.\n    set /p choice=\"是否切换为【纯净线上 RDO 模式】(输入 Y 确认): \"\n    if /i \"%choice%\"==\"Y\" (\n        ren \"dinput8.dll\" \"dinput8.dll.bak\"\n        echo [√] 已切断模组管道！现在可安全启动 RDO 线上战局。\n    )\n) else if exist \"dinput8.dll.bak\" (\n    echo [当前状态]: 【纯净线上模式】已启用 (Mod 处于隔离状态)\n    echo.\n    set /p choice=\"是否激活【单机离线 Mod 模式】(输入 Y 确认): \"\n    if /i \"%choice%\"==\"Y\" (\n        ren \"dinput8.dll.bak\" \"dinput8.dll\"\n        echo [√] 已激活 ScriptHookRDR2 离线环境！按 F5 呼出修改菜单。\n    )\n)\necho.\npause\n",
+    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】荒野大镖客2 ASI 加载器开关\necho ========================================================\necho   【老L·单机避坑局】荒野大镖客2 ASI 加载器开关脚本\necho   把 dinput8.dll 改名为 dinput8.dll.bak 来停用，或改回来启用\necho ========================================================\necho.\nif not exist \"RDR2.exe\" (\n    echo [!] 当前目录下没有 RDR2.exe，脚本什么都没改。\n    echo     请把本脚本放到 Red Dead Redemption 2 游戏安装根目录再运行。\n    echo.\n    pause\n    exit /b\n)\n\nset \"MODE=\"\nif exist \"dinput8.dll\" set \"MODE=on\"\nif not defined MODE if exist \"dinput8.dll.bak\" set \"MODE=off\"\nif not defined MODE (\n    echo [i] 没有 dinput8.dll，也没有 dinput8.dll.bak：没装 ASI 加载器，脚本什么都没改。\n    echo.\n    pause\n    exit /b\n)\n\nset \"choice=\"\nif \"%MODE%\"==\"on\" echo [当前状态] 有 dinput8.dll：ASI 加载器会加载 ScriptHookRDR2 等插件，只能玩故事模式。\nif \"%MODE%\"==\"on\" set /p \"choice=把 dinput8.dll 改名为 dinput8.dll.bak、停用 ASI 加载器？输入 Y 确认: \"\nif \"%MODE%\"==\"off\" echo [当前状态] 只有 dinput8.dll.bak：ASI 加载器已停用。\nif \"%MODE%\"==\"off\" set /p \"choice=把 dinput8.dll.bak 改回 dinput8.dll、重新启用 ASI 加载器？输入 Y 确认: \"\n\nif /i not \"%choice%\"==\"Y\" (\n    echo [i] 没有输入 Y，脚本什么都没改。\n    echo.\n    pause\n    exit /b\n)\n\nif \"%MODE%\"==\"on\" ren \"dinput8.dll\" \"dinput8.dll.bak\"\nif \"%MODE%\"==\"off\" ren \"dinput8.dll.bak\" \"dinput8.dll\"\n\nif exist \"dinput8.dll\" (\n    echo [结果] 现在有 dinput8.dll：ASI 加载器会被加载，故事模式按 F5 试试菜单。\n) else (\n    echo [结果] 现在没有 dinput8.dll：ASI 加载器不会被加载。\n)\necho.\necho ========================================================\necho  [i] 这个脚本只改 dinput8.dll 这一个文件的名字。\necho      其它改过的文件它不管；进 RDO 线上模式前要自己全部移走，有封号风险。\necho      脚本不备份存档，改之前先手动备份。\necho ========================================================\necho.\npause\n",
     "compatibilityStatus": "green",
     "radarStatusText": "🟢 近 14 天无更新",
     "latestSteamPatch": "A Bustling Frontier Benefits All Roles in Red Dead Online",
@@ -14103,7 +14103,7 @@ window.GAMES_DATA = [
       "totalDownloads": "71.4M",
       "totalEndorsements": "1035K",
       "totalMods": "7,854",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [
       {
@@ -14578,7 +14578,7 @@ window.GAMES_DATA = [
         "downloads": "2.5M",
         "endorsements": "160K",
         "category": "Performance (性能加速)",
-        "desc": "移除冰原反作弊死循环冗余检测，大幅消除 100% CPU 占用导致的掉帧卡顿，平均提升 15~25 帧并降低 CPU 核心温度 8-10℃！",
+        "desc": "移除冰原反作弊死循环冗余检测，大幅消除 100% CPU 占用导致的掉帧卡顿。效果因电脑而异，本站没有测过具体帧数。",
         "dependencies": [
           "Stracker's Loader"
         ],
@@ -14919,7 +14919,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "v15.11 (冰原最终版完全对齐)",
+    "verifiedPatch": "v15.11（未实测）",
     "radarSecretCode": "苍蓝星",
     "scenarioBundles": [
       {
@@ -14969,14 +14969,14 @@ window.GAMES_DATA = [
       }
     ],
     "pitfallNote": {
-      "title": "老L实验室避坑笔记 (怪物猎人世界 冰原终极避坑指南)",
+      "title": "老L避坑笔记 (怪物猎人世界 冰原终极避坑指南)",
       "tips": [
-        "【联机防踢与尊重原则】：卡普空对单机与好友自建私人房间使用 Mod 极为宽松（无 VAC 封号机制）。但在加入路人公开救援时，请务必关闭【一击必杀】与【锁血】，使用 SmartHunter 纯净显示血量即可，切勿破坏其他真实玩家的狩猎乐趣！",
+        "【联机防踢与尊重原则】：卡普空对单机与好友自建私人房间使用 Mod 比较宽松，但没有人能担保不封号。但在加入路人公开救援时，请务必关闭【一击必杀】与【锁血】，使用 SmartHunter 纯净显示血量即可，切勿破坏其他真实玩家的狩猎乐趣！",
         "【黑屏无限加载急救】：安装模组后游戏无法启动或黑屏卡死，99% 是由于游戏大更新后 Stracker's Loader 未更新或 nativePC 遗留了过期前置。删除游戏根目录的 dinput8.dll 即可瞬间恢复正常启动！",
         "【CPU 100% 掉帧发热排查】：冰原自带的反作弊线程存在内存死循环 Bug。请务必安装本站推荐的 Performance Booster 补丁，直接禁用该死循环，显卡性能完全释放。"
       ]
     },
-    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】怪猎世界 Stracker Loader 诊断工具\necho ========================================================\necho   【老L·单机避坑局】怪物猎人世界 模组环境自动诊断器\necho   CRC 绕过检测 · 自动备份 nativePC · 零卡死\necho ========================================================\necho.\nif not exist \"MonsterHunterWorld.exe\" (\n    echo [!] 提示: 请将本脚本放在 Monster Hunter World 游戏安装根目录！\n    pause\n    exit /b\n)\necho [*] 正在检查 dinput8.dll 与 nativePC 状态...\nif exist \"dinput8.dll\" (\n    echo [√] Stracker's Loader 前置挂载正常！\n) else (\n    echo [!] 未检测到 dinput8.dll，部分 nativePC 模组可能无法正常加载。\n)\nif not exist \"nativePC\" (\n    mkdir nativePC\n    echo [+] 已为您自动创建 nativePC 模组目录。\n)\necho.\npause\n",
+    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】怪猎世界 Mod 目录检查\necho ========================================================\necho   【老L·单机避坑局】怪物猎人世界 Mod 目录检查脚本\necho   检查 dinput8.dll 在不在；没有 nativePC 目录就新建一个\necho ========================================================\necho.\nif not exist \"MonsterHunterWorld.exe\" (\n    echo [!] 当前目录下没有 MonsterHunterWorld.exe，脚本什么都没改。\n    echo     请把本脚本放到 Monster Hunter World 游戏安装根目录再运行。\n    echo.\n    pause\n    exit /b\n)\nif exist \"dinput8.dll\" (\n    echo [+] 找到 dinput8.dll：Stracker's Loader 用的就是这个文件名。只检查了文件在不在。\n) else (\n    echo [!] 没找到 dinput8.dll，依赖 Stracker's Loader 的 Mod 可能加载不了。\n)\nif not exist \"nativePC\" (\n    mkdir nativePC\n    echo [+] 已新建 nativePC 目录。\n) else (\n    echo [i] nativePC 目录已经有了，没有改动。\n)\necho [i] 脚本不备份存档，装 Mod 前先手动备份。\necho.\npause\n",
     "compatibilityStatus": "green",
     "radarStatusText": "🟢 近 14 天无更新",
     "latestSteamPatch": "Monster Hunter: World has sold over 30 million copies worldwide!",
@@ -15024,7 +15024,7 @@ window.GAMES_DATA = [
     "hasConsole": true,
     "consoleShortcut": "ModEngine 挂钩引导 + 小键盘热键 / 慢动作防御弹刀辅助",
     "consoleEnableGuide": {
-      "zh-CN": "【只狼 纯净模组与弹刀防反教学指南】\n1. 安装 ModEngine：将 dinput8.dll 与 modengine.ini 放入只狼游戏根目录 (与 sekiro.exe 同目录)；\n2. 新建 mods/ 文件夹，将下载的角色时装、材质与招式 Mod 放入该目录；\n3. 启动游戏无任何 EAC 反作弊，离线游玩绝无封号风险；\n4. 开启 F1 键可进入 0.3x 防御完美弹刀子弹时间，轻松看破任何 Boss 的连续乱舞招式！",
+      "zh-CN": "【只狼 纯净模组与弹刀防反教学指南】\n1. 安装 ModEngine：将 dinput8.dll 与 modengine.ini 放入只狼游戏根目录 (与 sekiro.exe 同目录)；\n2. 新建 mods/ 文件夹，将下载的角色时装、材质与招式 Mod 放入该目录；\n3. 只狼没有 EAC 反作弊，也没有联机模式；\n4. 开启 F1 键可进入 0.3x 防御完美弹刀子弹时间，轻松看破任何 Boss 的连续乱舞招式！",
       "en": "Install ModEngine into Sekiro root. Press F1 for 0.3x parry window bullet time and hotkeys for infinite spirit emblems."
     },
     "popularCommands": [
@@ -15083,7 +15083,7 @@ window.GAMES_DATA = [
       "totalDownloads": "55.4M",
       "totalEndorsements": "803K",
       "totalMods": "6,094",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [
       {
@@ -15727,7 +15727,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "v1.06 (年度版完全对齐)",
+    "verifiedPatch": "v1.06（未实测）",
     "radarSecretCode": "只狼",
     "scenarioBundles": [
       {
@@ -15777,14 +15777,14 @@ window.GAMES_DATA = [
       }
     ],
     "pitfallNote": {
-      "title": "老L实验室避坑笔记 (只狼：影逝二度 极客避坑指南)",
+      "title": "老L避坑笔记 (只狼：影逝二度 极客避坑指南)",
       "tips": [
-        "【零封号与完全单机】：只狼是 FromSoftware 难得的完全无任何 EAC 反作弊、无在线联机入侵的单机作品。所有修改器与 ModEngine 均为 100% 绝对安全，不会有任何小黑屋风险！",
+        "【完全单机】：只狼没有 EAC 反作弊，也没有联机和入侵，不存在联机封号的问题。修改器和 ModEngine 是第三方工具，用之前先备份存档。",
         "【龙咳机制真相破除】：很多新手害怕因多次死亡导致 NPC【龙咳】而心惊胆战。实际上龙咳只会暂时挂起支线对话，绝对不会造成任何 NPC 死亡！只要用一滴【龙胤之露】在鬼佛处祷告，即可瞬间痊愈全苇名国所有人的龙咳，完全不必有心理压力！",
         "【弹刀时机与按键节奏】：频繁狂按防御键 L1 会被系统判定为狂躁按键，弹刀判定窗口会从正常的 0.5 秒骤降至 0.1 秒！使用本站推荐的 0.3x 子弹时间慢动作，看准刀刃即将接触的瞬间单次按压，才能培养出最地道的节奏肌肉记忆。"
       ]
     },
-    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】只狼 ModEngine 环境助手\necho ========================================================\necho   【老L·单机避坑局】只狼 模组加载引擎自动检测器\necho   零注入误报 · 纯净离线环境 · 144Hz 解锁引导\necho ========================================================\necho.\nif not exist \"sekiro.exe\" (\n    echo [!] 提示: 请将本脚本放在 Sekiro 游戏安装根目录！\n    pause\n    exit /b\n)\necho [*] 正在检查 dinput8.dll 与 mods 目录...\nif exist \"dinput8.dll\" (\n    echo [√] ModEngine 前置就绪！\n) else (\n    echo [!] 未检测到 dinput8.dll，请解压 ModEngine 至根目录。\n)\nif not exist \"mods\" (\n    mkdir mods\n    echo [+] 已为您自动创建 mods 模组目录。\n)\necho.\npause\n",
+    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】只狼 ModEngine 目录检查\necho ========================================================\necho   【老L·单机避坑局】只狼 ModEngine 目录检查脚本\necho   检查 dinput8.dll 在不在；没有 mods 目录就新建一个\necho ========================================================\necho.\nif not exist \"sekiro.exe\" (\n    echo [!] 当前目录下没有 sekiro.exe，脚本什么都没改。\n    echo     请把本脚本放到 Sekiro 游戏安装根目录再运行。\n    echo.\n    pause\n    exit /b\n)\nif exist \"dinput8.dll\" (\n    echo [+] 找到 dinput8.dll：ModEngine 用的就是这个文件名。只检查了文件在不在。\n) else (\n    echo [!] 没找到 dinput8.dll，请把 ModEngine 解压到游戏根目录。\n)\nif not exist \"mods\" (\n    mkdir mods\n    echo [+] 已新建 mods 目录。\n) else (\n    echo [i] mods 目录已经有了，没有改动。\n)\necho [i] 脚本不备份存档，装 Mod 前先手动备份。\necho.\npause\n",
     "compatibilityStatus": "green",
     "radarStatusText": "🟢 近 14 天无更新",
     "latestSteamPatch": "Steam Awards are here!",
@@ -15892,7 +15892,7 @@ window.GAMES_DATA = [
       "totalDownloads": "52.5M",
       "totalEndorsements": "761K",
       "totalMods": "5,775",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [
       {
@@ -16320,7 +16320,7 @@ window.GAMES_DATA = [
         "downloads": "5.5M",
         "endorsements": "340K",
         "category": "Mod Manager",
-        "desc": "生化危机系列公认最强模组安装器：一键安装、启用、禁用上千款角色外观、艾达王特工服、发型与武器贴图替换，绝不污染游戏原版归档！",
+        "desc": "生化危机系列公认最强模组安装器：一键安装、启用、禁用上千款角色外观、艾达王特工服、发型与武器贴图替换。",
         "dependencies": [
           "None (Stand-alone Tool)"
         ],
@@ -16585,7 +16585,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "v1.0+ (逆命殊途DLC完全对齐)",
+    "verifiedPatch": "v1.0+（未实测）",
     "radarSecretCode": "生化4",
     "scenarioBundles": [
       {
@@ -16635,14 +16635,14 @@ window.GAMES_DATA = [
       }
     ],
     "pitfallNote": {
-      "title": "老L实验室避坑笔记 (生化危机4：重制版 专家避坑指南)",
+      "title": "老L避坑笔记 (生化危机4：重制版 专家避坑指南)",
       "tips": [
         "【专业难度 S+ 评价核心机制】：想要拿到专业 S+ 评价解锁猫耳（全武器无限弹药），必须在新游戏开局、游戏时间在 5 小时 30 分钟以内且【全流程保存存档次数不超过 15 次】！在进入城堡前尽量将存档留在巨人与双电锯前，避免坏档！",
         "【碍事梨防扛绝技】：到了城堡拿到阿什莉骑士铠甲后，请务必在附加内容菜单中为阿什莉换上！换上后所有邪教徒企图抱起她时都会被压趴在地上，直接永久解除护送后顾之忧！",
         "【晕 3D 与视场角调整】：本作第一人称举枪时默认后背拉得很近，导致不少玩家剧烈恶心。安装本站推荐的 REFramework 与 No Zoom On Aim 补丁，即可将 FOV 拉远至 95 度，视野舒畅开阔。"
       ]
     },
-    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】生化危机4重制版 REFramework 诊断助手\necho ========================================================\necho   【老L·单机避坑局】生化危机4重制版 纯净前置诊断器\necho   一键检查 dinput8.dll · 快捷呼出 Insert 菜单 · 零报错\necho ========================================================\necho.\nif not exist \"re4.exe\" (\n    echo [!] 提示: 请将本脚本放在 Resident Evil 4 Remake 游戏安装根目录！\n    pause\n    exit /b\n)\necho [*] 正在检查 REFramework 前置状态...\nif exist \"dinput8.dll\" (\n    echo [√] REFramework 挂载正常！游戏内按键盘 Insert 键开启菜单。\n) else (\n    echo [!] 未检测到 dinput8.dll，请解压 REFramework 至根目录。\n)\necho.\npause\n",
+    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】生化危机4重制版 REFramework 检查\necho ========================================================\necho   【老L·单机避坑局】生化危机4重制版 REFramework 检查脚本\necho   只检查 dinput8.dll 在不在，不改任何文件\necho ========================================================\necho.\nif not exist \"re4.exe\" (\n    echo [!] 当前目录下没有 re4.exe，脚本什么都没改。\n    echo     请把本脚本放到 Resident Evil 4 Remake 游戏安装根目录再运行。\n    echo.\n    pause\n    exit /b\n)\nif exist \"dinput8.dll\" (\n    echo [+] 找到 dinput8.dll：REFramework 用的就是这个文件名。只检查了文件在不在。\n    echo [i] 游戏内按 Insert 键试试 REFramework 菜单。\n) else (\n    echo [!] 没找到 dinput8.dll，请把 REFramework 解压到游戏根目录。\n)\necho [i] 脚本不备份存档，装 Mod 前先手动备份。\necho.\npause\n",
     "compatibilityStatus": "green",
     "radarStatusText": "🟢 近 14 天无更新",
     "latestSteamPatch": "Resident Evil Veronica Store Page now open!",
@@ -16779,7 +16779,7 @@ window.GAMES_DATA = [
       "totalDownloads": "63.1M",
       "totalEndorsements": "914K",
       "totalMods": "6,941",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [
       {
@@ -16794,7 +16794,7 @@ window.GAMES_DATA = [
             "desc": "激活全部战役指令与大地图全军瞬移特权",
             "id": "mount-and-blade-2_cmd_1",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -16806,7 +16806,7 @@ window.GAMES_DATA = [
             "desc": "随意雇佣全大陆雇佣军团与招揽封臣领主",
             "id": "mount-and-blade-2_cmd_2",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -16818,7 +16818,7 @@ window.GAMES_DATA = [
             "desc": "快速跃升 6 级最高家族等级，大幅扩充带兵军力上限",
             "id": "mount-and-blade-2_cmd_3",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -16830,7 +16830,7 @@ window.GAMES_DATA = [
             "desc": "随意在王国议会推行专制法令与封地分配决议",
             "id": "mount-and-blade-2_cmd_4",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -16842,7 +16842,7 @@ window.GAMES_DATA = [
             "desc": "单手剑、长偃月刀、弓箭与统御谋略全部神级成型",
             "id": "mount-and-blade-2_cmd_5",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           }
         ]
@@ -16859,7 +16859,7 @@ window.GAMES_DATA = [
             "desc": "卡拉迪亚陆战最重甲铁壁重骑兵，冲锋践踏一切步兵线",
             "id": "mount-and-blade-2_cmd_6",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -16871,7 +16871,7 @@ window.GAMES_DATA = [
             "desc": "全大陆射程最远、伤害最高的超远距离灭世箭雨",
             "id": "mount-and-blade-2_cmd_7",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -16883,7 +16883,7 @@ window.GAMES_DATA = [
             "desc": "机动性极强，配偃月刀兼具恐怖近战能力的游击骑射之王",
             "id": "mount-and-blade-2_cmd_8",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -16895,7 +16895,7 @@ window.GAMES_DATA = [
             "desc": "超高骑枪冲刺伤害的西欧骑士",
             "id": "mount-and-blade-2_cmd_9",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -16907,7 +16907,7 @@ window.GAMES_DATA = [
             "desc": "打完硬仗瞬间满血满员，连续攻城略地不歇气",
             "id": "mount-and-blade-2_cmd_10",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           }
         ]
@@ -17145,7 +17145,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-10-07",
     "heatTier": "violet",
@@ -17279,7 +17279,7 @@ window.GAMES_DATA = [
       "totalDownloads": "60.9M",
       "totalEndorsements": "883K",
       "totalMods": "6,699",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [
       {
@@ -17294,7 +17294,7 @@ window.GAMES_DATA = [
             "desc": "动物购买时命名输入：每次呼叫获得五彩碎片、鱼王传说之鱼与永久体力上限星之果实！",
             "id": "stardew-valley_cmd_1",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "SMAPI"
           },
           {
@@ -17306,7 +17306,7 @@ window.GAMES_DATA = [
             "desc": "获得顶级銥锭与全属性强力增益糖冰棍",
             "id": "stardew-valley_cmd_2",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "SMAPI"
           },
           {
@@ -17318,7 +17318,7 @@ window.GAMES_DATA = [
             "desc": "孵化恐龙与丰收节顶级珍藏",
             "id": "stardew-valley_cmd_3",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "SMAPI"
           }
         ]
@@ -17335,7 +17335,7 @@ window.GAMES_DATA = [
             "desc": "解锁银河剑与换取沙漠绿洲稀有宝物",
             "id": "stardew-valley_cmd_4",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "SMAPI"
           },
           {
@@ -17347,7 +17347,7 @@ window.GAMES_DATA = [
             "desc": "升级终极温室与豪宅酒窖",
             "id": "stardew-valley_cmd_5",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "SMAPI"
           },
           {
@@ -17359,7 +17359,7 @@ window.GAMES_DATA = [
             "desc": "采矿超时直接重置，避免凌晨 2 点昏厥扣钱",
             "id": "stardew-valley_cmd_6",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "SMAPI"
           },
           {
@@ -17371,7 +17371,7 @@ window.GAMES_DATA = [
             "desc": "免浇水灌溉，钓取下雨天限定稀有鱼种",
             "id": "stardew-valley_cmd_7",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "SMAPI"
           },
           {
@@ -17383,7 +17383,7 @@ window.GAMES_DATA = [
             "desc": "直接面见齐先生获取铱蛇牛奶提升体力",
             "id": "stardew-valley_cmd_8",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "SMAPI"
           }
         ]
@@ -17619,7 +17619,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-10-01",
     "heatTier": "violet",
@@ -17667,8 +17667,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Terraria》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Terraria does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Terraria》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Terraria does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -17719,7 +17719,7 @@ window.GAMES_DATA = [
       "totalDownloads": "58.9M",
       "totalEndorsements": "854K",
       "totalMods": "6,479",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -17864,7 +17864,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-29",
     "heatTier": "violet",
@@ -17913,8 +17913,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Hogwarts Legacy》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Hogwarts Legacy does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Hogwarts Legacy》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Hogwarts Legacy does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -17965,7 +17965,7 @@ window.GAMES_DATA = [
       "totalDownloads": "57.1M",
       "totalEndorsements": "827K",
       "totalMods": "6,281",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -18203,7 +18203,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-10-06",
     "heatTier": "violet",
@@ -18333,7 +18333,7 @@ window.GAMES_DATA = [
       "totalDownloads": "68.3M",
       "totalEndorsements": "990K",
       "totalMods": "7,513",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [
       {
@@ -18348,7 +18348,7 @@ window.GAMES_DATA = [
             "desc": "潜水服与载具完全免疫一切攻击与利维坦死神撕咬",
             "id": "subnautica_cmd_1",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -18360,7 +18360,7 @@ window.GAMES_DATA = [
             "desc": "深潜马里亚纳海沟永不窒息缺氧",
             "id": "subnautica_cmd_2",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -18372,7 +18372,7 @@ window.GAMES_DATA = [
             "desc": "制造舱所有装备、潜艇部件无材料直接打印",
             "id": "subnautica_cmd_3",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -18384,7 +18384,7 @@ window.GAMES_DATA = [
             "desc": "对准水下基地走廊与多功能舱秒级搭建完工",
             "id": "subnautica_cmd_4",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -18396,7 +18396,7 @@ window.GAMES_DATA = [
             "desc": "瞬间解锁独眼巨人号、海虾号装甲与火箭逃生舱全蓝图",
             "id": "subnautica_cmd_5",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           }
         ]
@@ -18413,7 +18413,7 @@ window.GAMES_DATA = [
             "desc": "基地建造基石核心金属",
             "id": "subnautica_cmd_6",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -18425,7 +18425,7 @@ window.GAMES_DATA = [
             "desc": "制造铜线、芯片与电池的关键原材料",
             "id": "subnautica_cmd_7",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -18437,7 +18437,7 @@ window.GAMES_DATA = [
             "desc": "熔岩区最珍贵矿石，升级海虾号深度模块必备",
             "id": "subnautica_cmd_8",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -18449,7 +18449,7 @@ window.GAMES_DATA = [
             "desc": "强化切割枪与激光焊枪必须素材",
             "id": "subnautica_cmd_9",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -18461,7 +18461,7 @@ window.GAMES_DATA = [
             "desc": "外星科技先驱者电池，容量高达 500% 超长续航",
             "id": "subnautica_cmd_10",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           }
         ]
@@ -18478,7 +18478,7 @@ window.GAMES_DATA = [
             "desc": "在面前海域直接生成一艘满状态小型海蛾号",
             "id": "subnautica_cmd_11",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -18490,7 +18490,7 @@ window.GAMES_DATA = [
             "desc": "直接空投一台附带双拳动力装甲深潜采矿机甲",
             "id": "subnautica_cmd_12",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -18502,7 +18502,7 @@ window.GAMES_DATA = [
             "desc": "在开阔深水区直接召唤百米级大型潜艇母舰",
             "id": "subnautica_cmd_13",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           }
         ]
@@ -18661,7 +18661,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-19",
     "heatTier": "violet",
@@ -18710,8 +18710,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Dark Souls III》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Dark Souls III does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Dark Souls III》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Dark Souls III does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -18762,7 +18762,7 @@ window.GAMES_DATA = [
       "totalDownloads": "53.9M",
       "totalEndorsements": "781K",
       "totalMods": "5,929",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -18984,7 +18984,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-10-05",
     "heatTier": "violet",
@@ -19117,7 +19117,7 @@ window.GAMES_DATA = [
       "totalDownloads": "65.6M",
       "totalEndorsements": "951K",
       "totalMods": "7,215",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [
       {
@@ -19132,7 +19132,7 @@ window.GAMES_DATA = [
             "desc": "解锁所有后续高级作弊与刷物命令的核心主钥匙",
             "id": "valheim_cmd_1",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -19144,7 +19144,7 @@ window.GAMES_DATA = [
             "desc": "按 Z 键原地飞天漫游、按 K 键秒杀全屏敌人、按 B 键免工作台无材料无限建造！",
             "id": "valheim_cmd_2",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -19156,7 +19156,7 @@ window.GAMES_DATA = [
             "desc": "生命锁死，免疫巨魔猛砸与毒雾窒息",
             "id": "valheim_cmd_3",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -19168,7 +19168,7 @@ window.GAMES_DATA = [
             "desc": "怪物直接无视玩家存在",
             "id": "valheim_cmd_4",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -19180,7 +19180,7 @@ window.GAMES_DATA = [
             "desc": "驱散全九界迷雾，准确定位商人位置与五大 Boss 献祭祭坛",
             "id": "valheim_cmd_5",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -19192,7 +19192,7 @@ window.GAMES_DATA = [
             "desc": "移动速度极大增强",
             "id": "valheim_cmd_6",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           }
         ]
@@ -19209,7 +19209,7 @@ window.GAMES_DATA = [
             "desc": "平原时代锻造最锋利武器核心黑金属",
             "id": "valheim_cmd_7",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -19221,7 +19221,7 @@ window.GAMES_DATA = [
             "desc": "沼泽时代核心建筑材料与铁甲装备",
             "id": "valheim_cmd_8",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -19233,7 +19233,7 @@ window.GAMES_DATA = [
             "desc": "雪山时代银剑与狼皮防寒护甲",
             "id": "valheim_cmd_9",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -19245,7 +19245,7 @@ window.GAMES_DATA = [
             "desc": "打造维京长船与高级家具传送门必备木材",
             "id": "valheim_cmd_10",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -19257,7 +19257,7 @@ window.GAMES_DATA = [
             "desc": "修建巨型维京长屋大梁支柱",
             "id": "valheim_cmd_11",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           }
         ]
@@ -19274,7 +19274,7 @@ window.GAMES_DATA = [
             "desc": "自带持续剧毒伤害的毕业极品战弓",
             "id": "valheim_cmd_12",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -19286,7 +19286,7 @@ window.GAMES_DATA = [
             "desc": "近战最高爆发物理伤害单手剑",
             "id": "valheim_cmd_13",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -19298,7 +19298,7 @@ window.GAMES_DATA = [
             "desc": "常驻抗寒免受极寒冻伤，雪山自由探索",
             "id": "valheim_cmd_14",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -19310,7 +19310,7 @@ window.GAMES_DATA = [
             "desc": "范围 AOE 重击群伤锤击",
             "id": "valheim_cmd_15",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           }
         ]
@@ -19326,7 +19326,7 @@ window.GAMES_DATA = [
         "downloads": "14.5M",
         "endorsements": "280K",
         "category": "核心前置 (Core Engine)",
-        "desc": "几乎所有 Valheim 模组的唯一前置基石，性能极佳零冲突。",
+        "desc": "几乎所有 Valheim 模组的唯一前置基石。",
         "dependencies": [
           "None"
         ],
@@ -19498,7 +19498,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-10-04",
     "heatTier": "violet",
@@ -19548,8 +19548,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Resident Evil Village》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Resident Evil Village does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Resident Evil Village》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Resident Evil Village does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -19600,7 +19600,7 @@ window.GAMES_DATA = [
       "totalDownloads": "51.1M",
       "totalEndorsements": "740K",
       "totalMods": "5,621",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -19794,7 +19794,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-28",
     "heatTier": "violet",
@@ -19842,8 +19842,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Dying Light》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Dying Light does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Dying Light》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Dying Light does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -19894,7 +19894,7 @@ window.GAMES_DATA = [
       "totalDownloads": "49.9M",
       "totalEndorsements": "723K",
       "totalMods": "5,489",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -20124,7 +20124,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-03",
     "heatTier": "violet",
@@ -20167,8 +20167,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Dying Light 2 Stay Human》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Dying Light 2 Stay Human does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Dying Light 2 Stay Human》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Dying Light 2 Stay Human does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -20219,7 +20219,7 @@ window.GAMES_DATA = [
       "totalDownloads": "48.8M",
       "totalEndorsements": "707K",
       "totalMods": "5,368",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -20453,7 +20453,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-27",
     "heatTier": "violet",
@@ -20551,7 +20551,7 @@ window.GAMES_DATA = [
       "totalDownloads": "47.7M",
       "totalEndorsements": "691K",
       "totalMods": "5,247",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [
       {
@@ -20566,7 +20566,7 @@ window.GAMES_DATA = [
             "desc": "生命、AP、子弹全锁定无限，武器耐久不减",
             "id": "fallout-new-vegas_cmd_1",
             "syntax_type": "creation_hex",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -20578,7 +20578,7 @@ window.GAMES_DATA = [
             "desc": "穿透堵门巨石与封闭建筑",
             "id": "fallout-new-vegas_cmd_2",
             "syntax_type": "creation_hex",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -20590,7 +20590,7 @@ window.GAMES_DATA = [
             "desc": "解锁新维加斯大道、胡佛大坝等全部地标",
             "id": "fallout-new-vegas_cmd_3",
             "syntax_type": "creation_hex",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           }
         ]
@@ -20607,7 +20607,7 @@ window.GAMES_DATA = [
             "desc": "新维加斯赌场与军火贩子任意采购",
             "id": "fallout-new-vegas_cmd_4",
             "syntax_type": "creation_hex",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -20619,7 +20619,7 @@ window.GAMES_DATA = [
             "desc": "瞬间回复满血消除肢体伤残",
             "id": "fallout-new-vegas_cmd_5",
             "syntax_type": "creation_hex",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -20631,7 +20631,7 @@ window.GAMES_DATA = [
             "desc": "秒开废土全部门锁",
             "id": "fallout-new-vegas_cmd_6",
             "syntax_type": "creation_hex",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           }
         ]
@@ -20648,7 +20648,7 @@ window.GAMES_DATA = [
             "desc": ".50 高爆穿甲弹秒杀死亡爪之王的神枪",
             "id": "fallout-new-vegas_cmd_7",
             "syntax_type": "creation_hex",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -20660,7 +20660,7 @@ window.GAMES_DATA = [
             "desc": "NCR 资深游骑兵专属雕花传奇转轮手枪",
             "id": "fallout-new-vegas_cmd_8",
             "syntax_type": "creation_hex",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -20672,7 +20672,7 @@ window.GAMES_DATA = [
             "desc": "34 号避难所迷彩特种步枪，射速高精度极佳",
             "id": "fallout-new-vegas_cmd_9",
             "syntax_type": "creation_hex",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -20684,7 +20684,7 @@ window.GAMES_DATA = [
             "desc": "封面同款黑色防尘大衣与防弹胸甲",
             "id": "fallout-new-vegas_cmd_10",
             "syntax_type": "creation_hex",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -20696,7 +20696,7 @@ window.GAMES_DATA = [
             "desc": "标志性发光红眼面罩",
             "id": "fallout-new-vegas_cmd_11",
             "syntax_type": "creation_hex",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -20708,7 +20708,7 @@ window.GAMES_DATA = [
             "desc": "前英克雷最高防御力动力装甲",
             "id": "fallout-new-vegas_cmd_12",
             "syntax_type": "creation_hex",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           }
         ]
@@ -20756,7 +20756,7 @@ window.GAMES_DATA = [
     "steamAppId": 22380,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/22380/header.jpg",
     "trainerInfo": {},
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-05",
     "heatTier": "violet",
@@ -20857,7 +20857,7 @@ window.GAMES_DATA = [
       "totalDownloads": "46.7M",
       "totalEndorsements": "677K",
       "totalMods": "5,137",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [
       {
@@ -20872,7 +20872,7 @@ window.GAMES_DATA = [
             "desc": "点击开启！地图上摆放任何建筑、地砖、防卫炮塔瞬间秒建，无需任何材料与建造时间！",
             "id": "rimworld_cmd_1",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -20884,7 +20884,7 @@ window.GAMES_DATA = [
             "desc": "从电力、地热、微电子到太空飞船反应堆全部瞬间秒研发！",
             "id": "rimworld_cmd_2",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -20896,7 +20896,7 @@ window.GAMES_DATA = [
             "desc": "点击激活，鼠标点击任何海盗袭击者、机械飞螳或虫巢瞬间粉碎蒸发！",
             "id": "rimworld_cmd_3",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -20908,7 +20908,7 @@ window.GAMES_DATA = [
             "desc": "点击殖民者身体，瞬间治愈一切枪伤、烧伤、断臂、断腿与脑部永久损伤！",
             "id": "rimworld_cmd_4",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           }
         ]
@@ -20925,7 +20925,7 @@ window.GAMES_DATA = [
             "desc": "高科技装甲与终极太空飞船核心结构材",
             "id": "rimworld_cmd_5",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -20937,7 +20937,7 @@ window.GAMES_DATA = [
             "desc": "仿生器官与精密机床组装必不可缺",
             "id": "rimworld_cmd_6",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -20949,7 +20949,7 @@ window.GAMES_DATA = [
             "desc": "100% 手术成功率与绝症治愈神药",
             "id": "rimworld_cmd_7",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -20961,7 +20961,7 @@ window.GAMES_DATA = [
             "desc": "单兵最强穿甲能量速射步枪",
             "id": "rimworld_cmd_8",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           }
         ]
@@ -21028,7 +21028,7 @@ window.GAMES_DATA = [
     "steamAppId": 294100,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/294100/header.jpg",
     "trainerInfo": {},
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-26",
     "heatTier": "violet",
@@ -21074,8 +21074,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Project Zomboid》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Project Zomboid does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Project Zomboid》没有游戏自带的打字控制台，本站也没有收录它的修改器，可以看下方【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Project Zomboid does not have a built-in typing console, and no trainer is listed for it here; see the Mods tab below. Use mods offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -21093,7 +21093,7 @@ window.GAMES_DATA = [
       "totalDownloads": "45.7M",
       "totalEndorsements": "662K",
       "totalMods": "5,027",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -21158,7 +21158,7 @@ window.GAMES_DATA = [
     "steamAppId": 108600,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/108600/header.jpg",
     "trainerInfo": {},
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-25",
     "heatTier": "violet",
@@ -21201,8 +21201,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《The Forest》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "The Forest does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《The Forest》没有游戏自带的打字控制台，本站也没有收录它的修改器，可以看下方【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "The Forest does not have a built-in typing console, and no trainer is listed for it here; see the Mods tab below. Use mods offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -21220,7 +21220,7 @@ window.GAMES_DATA = [
       "totalDownloads": "44.8M",
       "totalEndorsements": "649K",
       "totalMods": "4,928",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -21285,7 +21285,7 @@ window.GAMES_DATA = [
     "steamAppId": 242760,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/242760/header.jpg",
     "trainerInfo": {},
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-13",
     "heatTier": "cyan",
@@ -21418,7 +21418,7 @@ window.GAMES_DATA = [
       "totalDownloads": "43.9M",
       "totalEndorsements": "636K",
       "totalMods": "4,829",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [
       {
@@ -21433,7 +21433,7 @@ window.GAMES_DATA = [
             "desc": "角色生命锁定无敌，饥饿口渴完全不掉",
             "id": "sons-of-the-forest_cmd_1",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -21445,7 +21445,7 @@ window.GAMES_DATA = [
             "desc": "瞬间获得全套枪械、手电筒、登山镐与食物补给",
             "id": "sons-of-the-forest_cmd_2",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -21457,7 +21457,7 @@ window.GAMES_DATA = [
             "desc": "手中木头永远用不完，建基地造庄园最强神技！",
             "id": "sons-of-the-forest_cmd_3",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -21469,7 +21469,7 @@ window.GAMES_DATA = [
             "desc": "打开建筑手册点击任何树屋或木墙直接秒建完工",
             "id": "sons-of-the-forest_cmd_4",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -21481,7 +21481,7 @@ window.GAMES_DATA = [
             "desc": "直接获取重型泵动散弹枪",
             "id": "sons-of-the-forest_cmd_5",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -21493,7 +21493,7 @@ window.GAMES_DATA = [
             "desc": "获取近战威力极强的锋利武士刀",
             "id": "sons-of-the-forest_cmd_6",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -21505,7 +21505,7 @@ window.GAMES_DATA = [
             "desc": "彻底告别漆黑深夜恐惧",
             "id": "sons-of-the-forest_cmd_7",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           }
         ]
@@ -21669,7 +21669,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-10-03",
     "heatTier": "cyan",
@@ -21802,7 +21802,7 @@ window.GAMES_DATA = [
       "totalDownloads": "43.1M",
       "totalEndorsements": "624K",
       "totalMods": "4,741",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [
       {
@@ -21817,7 +21817,7 @@ window.GAMES_DATA = [
             "desc": "在空中俯瞰建造巨型高架多层工厂，双击空格即可空中悬停漫游！",
             "id": "satisfactory_cmd_1",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -21829,7 +21829,7 @@ window.GAMES_DATA = [
             "desc": "无需奔波采矿，所有机器、传送带与核电站零消耗直接摆放",
             "id": "satisfactory_cmd_2",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -21841,7 +21841,7 @@ window.GAMES_DATA = [
             "desc": "无需连结电线与燃煤发电机，所有设备通电自动运转",
             "id": "satisfactory_cmd_3",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -21853,7 +21853,7 @@ window.GAMES_DATA = [
             "desc": "在控制台输入，消除超分模糊呈现原生细腻工业质感",
             "id": "satisfactory_cmd_4",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           }
         ]
@@ -21976,7 +21976,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-10-21",
     "heatTier": "cyan",
@@ -22076,7 +22076,7 @@ window.GAMES_DATA = [
       "totalDownloads": "42.4M",
       "totalEndorsements": "614K",
       "totalMods": "4,664",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [
       {
@@ -22091,7 +22091,7 @@ window.GAMES_DATA = [
             "desc": "随身直接免费无限制造所有高级流水线工厂、化工厂与极速蓝带！",
             "id": "factorio_cmd_1",
             "syntax_type": "lua_function",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -22103,7 +22103,7 @@ window.GAMES_DATA = [
             "desc": "无需任何科技包瓶子，核电、火箭发射仓全科技秒开！",
             "id": "factorio_cmd_2",
             "syntax_type": "lua_function",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -22115,7 +22115,7 @@ window.GAMES_DATA = [
             "desc": "原本几十秒的手工制作瞬间秒造出炉",
             "id": "factorio_cmd_3",
             "syntax_type": "lua_function",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -22127,7 +22127,7 @@ window.GAMES_DATA = [
             "desc": "拥有最大插槽网格的终极工程师战甲",
             "id": "factorio_cmd_4",
             "syntax_type": "lua_function",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -22139,7 +22139,7 @@ window.GAMES_DATA = [
             "desc": "最高吞吐量物流极速传送带",
             "id": "factorio_cmd_5",
             "syntax_type": "lua_function",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -22151,7 +22151,7 @@ window.GAMES_DATA = [
             "desc": "瞬间清空地图所有外星异形虫",
             "id": "factorio_cmd_6",
             "syntax_type": "lua_function",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           }
         ]
@@ -22199,7 +22199,7 @@ window.GAMES_DATA = [
     "steamAppId": 427520,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/427520/header.jpg",
     "trainerInfo": {},
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-10-02",
     "heatTier": "cyan",
@@ -22244,8 +22244,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Cities: Skylines》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Cities: Skylines does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Cities: Skylines》没有游戏自带的打字控制台，本站也没有收录它的修改器，可以看下方【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Cities: Skylines does not have a built-in typing console, and no trainer is listed for it here; see the Mods tab below. Use mods offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -22263,7 +22263,7 @@ window.GAMES_DATA = [
       "totalDownloads": "41.6M",
       "totalEndorsements": "603K",
       "totalMods": "4,576",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -22328,7 +22328,7 @@ window.GAMES_DATA = [
     "steamAppId": 255710,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/255710/header.jpg",
     "trainerInfo": {},
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-24",
     "heatTier": "cyan",
@@ -22374,8 +22374,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Sid Meier's Civilization VI》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Sid Meier's Civilization VI does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Sid Meier's Civilization VI》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Sid Meier's Civilization VI does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -22426,7 +22426,7 @@ window.GAMES_DATA = [
       "totalDownloads": "40.9M",
       "totalEndorsements": "593K",
       "totalMods": "4,499",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -22611,7 +22611,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-08",
     "heatTier": "cyan",
@@ -22743,7 +22743,7 @@ window.GAMES_DATA = [
       "totalDownloads": "40.3M",
       "totalEndorsements": "584K",
       "totalMods": "4,433",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [
       {
@@ -22758,7 +22758,7 @@ window.GAMES_DATA = [
             "desc": "所有 AI 领主与教皇无条件同意你的宣战媾和、入赘联姻与无偿宣称！",
             "id": "crusader-kings-3_cmd_1",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Clausewitz Engine (-debug_mode)"
           },
           {
@@ -22770,7 +22770,7 @@ window.GAMES_DATA = [
             "desc": "所有城堡、城墙、大教堂与农庄男爵领瞬间落成",
             "id": "crusader-kings-3_cmd_2",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Clausewitz Engine (-debug_mode)"
           },
           {
@@ -22782,7 +22782,7 @@ window.GAMES_DATA = [
             "desc": "瞬间跨越部落、早期中世纪、盛期中世纪进入晚期中世纪！",
             "id": "crusader-kings-3_cmd_3",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Clausewitz Engine (-debug_mode)"
           }
         ]
@@ -22799,7 +22799,7 @@ window.GAMES_DATA = [
             "desc": "招募全欧洲最强雇佣军骑士团，大肆赏赐封臣封赏",
             "id": "crusader-kings-3_cmd_4",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Clausewitz Engine (-debug_mode)"
           },
           {
@@ -22811,7 +22811,7 @@ window.GAMES_DATA = [
             "desc": "威望等级直接封顶“活着的传奇”，随心创建自定义帝国头衔",
             "id": "crusader-kings-3_cmd_5",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Clausewitz Engine (-debug_mode)"
           },
           {
@@ -22823,7 +22823,7 @@ window.GAMES_DATA = [
             "desc": "虔诚等级达到“圣人”，随时发起自创异端宗教宗教改革",
             "id": "crusader-kings-3_cmd_6",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Clausewitz Engine (-debug_mode)"
           }
         ]
@@ -22840,7 +22840,7 @@ window.GAMES_DATA = [
             "desc": "外交、军事、管理、谋略、学识全属性各 +5，经验获取暴增",
             "id": "crusader-kings-3_cmd_7",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Clausewitz Engine (-debug_mode)"
           },
           {
@@ -22852,7 +22852,7 @@ window.GAMES_DATA = [
             "desc": "外交 +3，生育力 +30%，全领主好感度大幅攀升",
             "id": "crusader-kings-3_cmd_8",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Clausewitz Engine (-debug_mode)"
           },
           {
@@ -22864,7 +22864,7 @@ window.GAMES_DATA = [
             "desc": "勇武 +8，健康度极大强化，百病不侵",
             "id": "crusader-kings-3_cmd_9",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Clausewitz Engine (-debug_mode)"
           },
           {
@@ -22876,7 +22876,7 @@ window.GAMES_DATA = [
             "desc": "倒退生理年龄，延长统治盛世",
             "id": "crusader-kings-3_cmd_10",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Clausewitz Engine (-debug_mode)"
           }
         ]
@@ -23048,7 +23048,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-13",
     "heatTier": "cyan",
@@ -23181,7 +23181,7 @@ window.GAMES_DATA = [
       "totalDownloads": "39.6M",
       "totalEndorsements": "574K",
       "totalMods": "4,356",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [
       {
@@ -23196,7 +23196,7 @@ window.GAMES_DATA = [
             "desc": "点击开启！军用工厂、海军造船厂、防空炮与雷达站放置瞬间秒建完工",
             "id": "hearts-of-iron-4_cmd_1",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Clausewitz Engine (-debug_mode)"
           },
           {
@@ -23208,7 +23208,7 @@ window.GAMES_DATA = [
             "desc": "陆军学说、喷气航母、现代主战坦克与原子弹全谱系秒开！",
             "id": "hearts-of-iron-4_cmd_2",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Clausewitz Engine (-debug_mode)"
           },
           {
@@ -23220,7 +23220,7 @@ window.GAMES_DATA = [
             "desc": "卫星级宏观视野监控全球所有敌军师团移动走向",
             "id": "hearts-of-iron-4_cmd_3",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Clausewitz Engine (-debug_mode)"
           }
         ]
@@ -23237,7 +23237,7 @@ window.GAMES_DATA = [
             "desc": "随意改组内阁法律、指定工业巨头与国家焦点推进",
             "id": "hearts-of-iron-4_cmd_4",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Clausewitz Engine (-debug_mode)"
           },
           {
@@ -23249,7 +23249,7 @@ window.GAMES_DATA = [
             "desc": "将领特技提拔与空军战术演习随心开启",
             "id": "hearts-of-iron-4_cmd_5",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Clausewitz Engine (-debug_mode)"
           },
           {
@@ -23261,7 +23261,7 @@ window.GAMES_DATA = [
             "desc": "组建数百个精锐机械化重装师团兵员无忧",
             "id": "hearts-of-iron-4_cmd_6",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Clausewitz Engine (-debug_mode)"
           },
           {
@@ -23273,7 +23273,7 @@ window.GAMES_DATA = [
             "desc": "随心改装主战坦克、航母舰载机与装甲师编制模板",
             "id": "hearts-of-iron-4_cmd_7",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Clausewitz Engine (-debug_mode)"
           }
         ]
@@ -23290,7 +23290,7 @@ window.GAMES_DATA = [
             "desc": "给全军士兵全员换装三代先进单兵半自动突击步枪",
             "id": "hearts-of-iron-4_cmd_8",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Clausewitz Engine (-debug_mode)"
           },
           {
@@ -23302,7 +23302,7 @@ window.GAMES_DATA = [
             "desc": "武装起数十个横扫战场的钢铁装甲洪流师",
             "id": "hearts-of-iron-4_cmd_9",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Clausewitz Engine (-debug_mode)"
           },
           {
@@ -23314,7 +23314,7 @@ window.GAMES_DATA = [
             "desc": "配合战略轰炸机夺取制空权实施战略核威慑",
             "id": "hearts-of-iron-4_cmd_10",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Clausewitz Engine (-debug_mode)"
           },
           {
@@ -23326,7 +23326,7 @@ window.GAMES_DATA = [
             "desc": "例如 annex FRA 瞬间将法国全境工业与版图纳入直辖",
             "id": "hearts-of-iron-4_cmd_11",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Clausewitz Engine (-debug_mode)"
           }
         ]
@@ -23449,7 +23449,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-24",
     "heatTier": "cyan",
@@ -23579,7 +23579,7 @@ window.GAMES_DATA = [
       "totalDownloads": "39.0M",
       "totalEndorsements": "565K",
       "totalMods": "4,290",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [
       {
@@ -23594,7 +23594,7 @@ window.GAMES_DATA = [
             "desc": "戴森球、环形世界、物质解压器与无畏舰秒级落成完工！",
             "id": "stellaris_cmd_1",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Clausewitz Engine (-debug_mode)"
           },
           {
@@ -23606,7 +23606,7 @@ window.GAMES_DATA = [
             "desc": "直接获取天灾飞升、暗物质护盾与快子光矛顶级科技",
             "id": "stellaris_cmd_2",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Clausewitz Engine (-debug_mode)"
           },
           {
@@ -23618,7 +23618,7 @@ window.GAMES_DATA = [
             "desc": "锁死护盾与装甲，硬抗堕落帝国与高维恶魔集火",
             "id": "stellaris_cmd_3",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Clausewitz Engine (-debug_mode)"
           },
           {
@@ -23630,7 +23630,7 @@ window.GAMES_DATA = [
             "desc": "鼠标选定任何敌方恒星基地或泰坦战舰瞬间打爆",
             "id": "stellaris_cmd_4",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Clausewitz Engine (-debug_mode)"
           }
         ]
@@ -23647,7 +23647,7 @@ window.GAMES_DATA = [
             "desc": "支持爆造数十个满编泰坦无畏舰队",
             "id": "stellaris_cmd_5",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Clausewitz Engine (-debug_mode)"
           },
           {
@@ -23659,7 +23659,7 @@ window.GAMES_DATA = [
             "desc": "全银河自由贸易与维护巨大帝国",
             "id": "stellaris_cmd_6",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Clausewitz Engine (-debug_mode)"
           },
           {
@@ -23671,7 +23671,7 @@ window.GAMES_DATA = [
             "desc": "点满全部传统飞升天赋树，完成机械飞升或灵能飞升",
             "id": "stellaris_cmd_7",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Clausewitz Engine (-debug_mode)"
           },
           {
@@ -23683,7 +23683,7 @@ window.GAMES_DATA = [
             "desc": "疯狂圈地铺设前哨基地与主导星际理事会决议",
             "id": "stellaris_cmd_8",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Clausewitz Engine (-debug_mode)"
           }
         ]
@@ -23699,7 +23699,7 @@ window.GAMES_DATA = [
         "downloads": "14.2M",
         "endorsements": "310K",
         "category": "界面交互大修 (UI Overhaul)",
-        "desc": "群星最强必备 UI 模组！重做星球管理、飞船设计器与科研界面，完美适配高分辨率大屏幕。",
+        "desc": "群星最强必备 UI 模组！重做星球管理、飞船设计器与科研界面，适合高分辨率大屏幕。",
         "dependencies": [
           "None"
         ],
@@ -23863,7 +23863,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-25",
     "heatTier": "cyan",
@@ -23909,8 +23909,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Total War: WARHAMMER III》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Total War: WARHAMMER III does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Total War: WARHAMMER III》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Total War: WARHAMMER III does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -23961,7 +23961,7 @@ window.GAMES_DATA = [
       "totalDownloads": "38.4M",
       "totalEndorsements": "556K",
       "totalMods": "4,224",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -24231,7 +24231,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-23",
     "heatTier": "cyan",
@@ -24277,8 +24277,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Total War: Three Kingdoms》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Total War: Three Kingdoms does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Total War: Three Kingdoms》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Total War: Three Kingdoms does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -24329,7 +24329,7 @@ window.GAMES_DATA = [
       "totalDownloads": "37.9M",
       "totalEndorsements": "549K",
       "totalMods": "4,169",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -24535,7 +24535,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-31",
     "heatTier": "cyan",
@@ -24577,8 +24577,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Dragon's Dogma 2》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Dragon's Dogma 2 does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Dragon's Dogma 2》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Dragon's Dogma 2 does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -24629,7 +24629,7 @@ window.GAMES_DATA = [
       "totalDownloads": "37.3M",
       "totalEndorsements": "540K",
       "totalMods": "4,103",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -24875,7 +24875,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-10-17",
     "heatTier": "cyan",
@@ -24923,8 +24923,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Armored Core VI: Fires of Rubicon》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Armored Core VI: Fires of Rubicon does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Armored Core VI: Fires of Rubicon》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Armored Core VI: Fires of Rubicon does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -24975,7 +24975,7 @@ window.GAMES_DATA = [
       "totalDownloads": "36.8M",
       "totalEndorsements": "533K",
       "totalMods": "4,047",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -25135,7 +25135,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-22",
     "heatTier": "cyan",
@@ -25184,8 +25184,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Ghost of Tsushima DIRECTOR'S CUT》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Ghost of Tsushima DIRECTOR'S CUT does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Ghost of Tsushima DIRECTOR'S CUT》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Ghost of Tsushima DIRECTOR'S CUT does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -25236,7 +25236,7 @@ window.GAMES_DATA = [
       "totalDownloads": "36.3M",
       "totalEndorsements": "526K",
       "totalMods": "3,992",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -25470,7 +25470,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-21",
     "heatTier": "cyan",
@@ -25513,8 +25513,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《God of War》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "God of War does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《God of War》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "God of War does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -25565,7 +25565,7 @@ window.GAMES_DATA = [
       "totalDownloads": "35.8M",
       "totalEndorsements": "519K",
       "totalMods": "3,937",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -25727,7 +25727,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-20",
     "heatTier": "cyan",
@@ -25770,8 +25770,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Marvel's Spider-Man Remastered》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Marvel's Spider-Man Remastered does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Marvel's Spider-Man Remastered》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Marvel's Spider-Man Remastered does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -25822,7 +25822,7 @@ window.GAMES_DATA = [
       "totalDownloads": "35.4M",
       "totalEndorsements": "513K",
       "totalMods": "3,894",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -26044,7 +26044,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-19",
     "heatTier": "cyan",
@@ -26092,8 +26092,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Horizon Zero Dawn》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Horizon Zero Dawn does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Horizon Zero Dawn》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Horizon Zero Dawn does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -26144,7 +26144,7 @@ window.GAMES_DATA = [
       "totalDownloads": "34.9M",
       "totalEndorsements": "506K",
       "totalMods": "3,839",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -26362,7 +26362,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-03",
     "heatTier": "cyan",
@@ -26402,8 +26402,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Days Gone》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Days Gone does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Days Gone》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Days Gone does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -26454,7 +26454,7 @@ window.GAMES_DATA = [
       "totalDownloads": "34.5M",
       "totalEndorsements": "500K",
       "totalMods": "3,795",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -26692,7 +26692,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-20",
     "heatTier": "cyan",
@@ -26734,8 +26734,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Death Stranding Director's Cut》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Death Stranding Director's Cut does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Death Stranding Director's Cut》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Death Stranding Director's Cut does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -26786,7 +26786,7 @@ window.GAMES_DATA = [
       "totalDownloads": "34.1M",
       "totalEndorsements": "494K",
       "totalMods": "3,751",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -26990,7 +26990,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-18",
     "heatTier": "cyan",
@@ -27032,8 +27032,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Detroit: Become Human》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Detroit: Become Human does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Detroit: Become Human》没有游戏自带的打字控制台，本站也没有收录它的修改器，可以看下方【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Detroit: Become Human does not have a built-in typing console, and no trainer is listed for it here; see the Mods tab below. Use mods offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": false,
@@ -27045,7 +27045,7 @@ window.GAMES_DATA = [
       "totalDownloads": "33.7M",
       "totalEndorsements": "488K",
       "totalMods": "3,707",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -27110,7 +27110,7 @@ window.GAMES_DATA = [
     "steamAppId": 1222140,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1222140/header.jpg",
     "trainerInfo": {},
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-04",
     "heatTier": "cyan",
@@ -27237,7 +27237,7 @@ window.GAMES_DATA = [
       "totalDownloads": "33.3M",
       "totalEndorsements": "482K",
       "totalMods": "3,662",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [
       {
@@ -27252,7 +27252,7 @@ window.GAMES_DATA = [
             "desc": "彻底治愈原版射箭无准星晃动的噩梦，命中率翻倍！",
             "id": "kingdom-come-deliverance_cmd_1",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Cheat Mod (-devmode)"
           },
           {
@@ -27264,7 +27264,7 @@ window.GAMES_DATA = [
             "desc": "摆脱中世纪深夜漆黑无光",
             "id": "kingdom-come-deliverance_cmd_2",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Cheat Mod (-devmode)"
           },
           {
@@ -27276,7 +27276,7 @@ window.GAMES_DATA = [
             "desc": "画面更锐利清晰消除头晕",
             "id": "kingdom-come-deliverance_cmd_3",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Cheat Mod (-devmode)"
           },
           {
@@ -27288,7 +27288,7 @@ window.GAMES_DATA = [
             "desc": "买断全拉泰城所有铁匠顶级重型板甲",
             "id": "kingdom-come-deliverance_cmd_4",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Cheat Mod (-devmode)"
           },
           {
@@ -27300,7 +27300,7 @@ window.GAMES_DATA = [
             "desc": "告别昂贵的施命救主雪利酒，随时随地安全存盘",
             "id": "kingdom-come-deliverance_cmd_5",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Cheat Mod (-devmode)"
           }
         ]
@@ -27453,7 +27453,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-22",
     "heatTier": "cyan",
@@ -27497,8 +27497,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Mount & Blade: Warband》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Mount & Blade: Warband does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Mount & Blade: Warband》没有游戏自带的打字控制台，本站也没有收录它的修改器，可以看下方【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Mount & Blade: Warband does not have a built-in typing console, and no trainer is listed for it here; see the Mods tab below. Use mods offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -27516,7 +27516,7 @@ window.GAMES_DATA = [
       "totalDownloads": "32.9M",
       "totalEndorsements": "477K",
       "totalMods": "3,619",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -27581,7 +27581,7 @@ window.GAMES_DATA = [
     "steamAppId": 48700,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/48700/header.jpg",
     "trainerInfo": {},
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-06",
     "heatTier": "cyan",
@@ -27621,8 +27621,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《S.T.A.L.K.E.R.: Shadow of Chernobyl》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "S.T.A.L.K.E.R.: Shadow of Chernobyl does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《S.T.A.L.K.E.R.: Shadow of Chernobyl》没有游戏自带的打字控制台，本站也没有收录它的修改器，可以看下方【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "S.T.A.L.K.E.R.: Shadow of Chernobyl does not have a built-in typing console, and no trainer is listed for it here; see the Mods tab below. Use mods offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -27640,7 +27640,7 @@ window.GAMES_DATA = [
       "totalDownloads": "32.6M",
       "totalEndorsements": "472K",
       "totalMods": "3,586",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -27705,7 +27705,7 @@ window.GAMES_DATA = [
     "steamAppId": 4500,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/4500/header.jpg",
     "trainerInfo": {},
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-25",
     "heatTier": "cyan",
@@ -27745,8 +27745,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Metro Exodus》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Metro Exodus does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Metro Exodus》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Metro Exodus does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -27797,7 +27797,7 @@ window.GAMES_DATA = [
       "totalDownloads": "32.2M",
       "totalEndorsements": "466K",
       "totalMods": "3,542",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -27929,7 +27929,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-26",
     "heatTier": "cyan",
@@ -27969,8 +27969,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Control Ultimate Edition》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Control Ultimate Edition does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Control Ultimate Edition》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Control Ultimate Edition does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -28021,7 +28021,7 @@ window.GAMES_DATA = [
       "totalDownloads": "31.9M",
       "totalEndorsements": "462K",
       "totalMods": "3,509",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -28169,7 +28169,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-21",
     "heatTier": "cyan",
@@ -28212,8 +28212,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Alan Wake 2》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Alan Wake 2 does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Alan Wake 2》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Alan Wake 2 does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -28264,7 +28264,7 @@ window.GAMES_DATA = [
       "totalDownloads": "31.5M",
       "totalEndorsements": "456K",
       "totalMods": "3,465",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -28517,7 +28517,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-17",
     "heatTier": "cyan"
@@ -28544,8 +28544,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《DOOM Eternal》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "DOOM Eternal does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《DOOM Eternal》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "DOOM Eternal does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -28596,7 +28596,7 @@ window.GAMES_DATA = [
       "totalDownloads": "31.2M",
       "totalEndorsements": "452K",
       "totalMods": "3,432",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -28776,7 +28776,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-14",
     "heatTier": "cyan",
@@ -28816,8 +28816,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Borderlands 3》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Borderlands 3 does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Borderlands 3》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Borderlands 3 does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -28868,7 +28868,7 @@ window.GAMES_DATA = [
       "totalDownloads": "30.9M",
       "totalEndorsements": "448K",
       "totalMods": "3,399",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -29105,7 +29105,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-06",
     "heatTier": "cyan",
@@ -29148,8 +29148,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Borderlands 2》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Borderlands 2 does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Borderlands 2》没有游戏自带的打字控制台，本站也没有收录它的修改器，可以看下方【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Borderlands 2 does not have a built-in typing console, and no trainer is listed for it here; see the Mods tab below. Use mods offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -29167,7 +29167,7 @@ window.GAMES_DATA = [
       "totalDownloads": "30.6M",
       "totalEndorsements": "443K",
       "totalMods": "3,366",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -29232,7 +29232,7 @@ window.GAMES_DATA = [
     "steamAppId": 49520,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/49520/header.jpg",
     "trainerInfo": {},
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-24",
     "heatTier": "cyan",
@@ -29275,8 +29275,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《BioShock Infinite》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "BioShock Infinite does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《BioShock Infinite》没有游戏自带的打字控制台，本站也没有收录它的修改器，可以看下方【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "BioShock Infinite does not have a built-in typing console, and no trainer is listed for it here; see the Mods tab below. Use mods offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": false,
@@ -29288,7 +29288,7 @@ window.GAMES_DATA = [
       "totalDownloads": "30.3M",
       "totalEndorsements": "439K",
       "totalMods": "3,333",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -29353,7 +29353,7 @@ window.GAMES_DATA = [
     "steamAppId": 8870,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/8870/header.jpg",
     "trainerInfo": {},
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-08",
     "heatTier": "cyan",
@@ -29393,8 +29393,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Dishonored 2》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Dishonored 2 does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Dishonored 2》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Dishonored 2 does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -29445,7 +29445,7 @@ window.GAMES_DATA = [
       "totalDownloads": "30.0M",
       "totalEndorsements": "435K",
       "totalMods": "3,300",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -29602,7 +29602,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-16",
     "heatTier": "cyan",
@@ -29642,8 +29642,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Prey》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Prey does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Prey》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Prey does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -29694,7 +29694,7 @@ window.GAMES_DATA = [
       "totalDownloads": "29.7M",
       "totalEndorsements": "430K",
       "totalMods": "3,267",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -29826,7 +29826,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-20",
     "heatTier": "cyan",
@@ -29866,8 +29866,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《HITMAN World of Assassination》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "HITMAN World of Assassination does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《HITMAN World of Assassination》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "HITMAN World of Assassination does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -29918,7 +29918,7 @@ window.GAMES_DATA = [
       "totalDownloads": "29.5M",
       "totalEndorsements": "427K",
       "totalMods": "3,245",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -30062,7 +30062,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-16",
     "heatTier": "cyan",
@@ -30108,8 +30108,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Assassin's Creed Odyssey》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Assassin's Creed Odyssey does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Assassin's Creed Odyssey》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Assassin's Creed Odyssey does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -30160,7 +30160,7 @@ window.GAMES_DATA = [
       "totalDownloads": "29.2M",
       "totalEndorsements": "423K",
       "totalMods": "3,212",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -30370,7 +30370,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-04",
     "heatTier": "emerald",
@@ -30413,8 +30413,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Assassin's Creed Valhalla》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Assassin's Creed Valhalla does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Assassin's Creed Valhalla》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Assassin's Creed Valhalla does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -30465,7 +30465,7 @@ window.GAMES_DATA = [
       "totalDownloads": "28.9M",
       "totalEndorsements": "419K",
       "totalMods": "3,179",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -30651,7 +30651,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-08",
     "heatTier": "emerald",
@@ -30694,8 +30694,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Assassin's Creed Origins》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Assassin's Creed Origins does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Assassin's Creed Origins》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Assassin's Creed Origins does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": false,
@@ -30740,7 +30740,7 @@ window.GAMES_DATA = [
       "totalDownloads": "28.7M",
       "totalEndorsements": "416K",
       "totalMods": "3,157",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -30914,7 +30914,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-20",
     "heatTier": "emerald",
@@ -30954,8 +30954,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Far Cry 5》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Far Cry 5 does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Far Cry 5》没有游戏自带的打字控制台，本站也没有收录它的修改器，可以看下方【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Far Cry 5 does not have a built-in typing console, and no trainer is listed for it here; see the Mods tab below. Use mods offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -30973,7 +30973,7 @@ window.GAMES_DATA = [
       "totalDownloads": "28.4M",
       "totalEndorsements": "411K",
       "totalMods": "3,124",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -31038,7 +31038,7 @@ window.GAMES_DATA = [
     "steamAppId": 552520,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/552520/header.jpg",
     "trainerInfo": {},
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-21",
     "heatTier": "emerald",
@@ -31081,8 +31081,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Far Cry 6》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Far Cry 6 does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Far Cry 6》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Far Cry 6 does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -31133,7 +31133,7 @@ window.GAMES_DATA = [
       "totalDownloads": "28.2M",
       "totalEndorsements": "408K",
       "totalMods": "3,102",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -31387,7 +31387,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-09",
     "heatTier": "emerald",
@@ -31430,8 +31430,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Watch Dogs 2》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Watch Dogs 2 does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Watch Dogs 2》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Watch Dogs 2 does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -31482,7 +31482,7 @@ window.GAMES_DATA = [
       "totalDownloads": "28.0M",
       "totalEndorsements": "406K",
       "totalMods": "3,080",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -31615,7 +31615,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-09",
     "heatTier": "emerald",
@@ -31658,8 +31658,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《No Man's Sky》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "No Man's Sky does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《No Man's Sky》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "No Man's Sky does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -31710,7 +31710,7 @@ window.GAMES_DATA = [
       "totalDownloads": "27.7M",
       "totalEndorsements": "401K",
       "totalMods": "3,047",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -31915,7 +31915,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-15",
     "heatTier": "emerald",
@@ -31958,8 +31958,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Astroneer》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Astroneer does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Astroneer》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Astroneer does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": false,
@@ -32004,7 +32004,7 @@ window.GAMES_DATA = [
       "totalDownloads": "27.5M",
       "totalEndorsements": "398K",
       "totalMods": "3,025",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -32136,7 +32136,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-04",
     "heatTier": "emerald",
@@ -32182,8 +32182,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Raft》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Raft does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Raft》没有游戏自带的打字控制台，本站也没有收录它的修改器，可以看下方【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Raft does not have a built-in typing console, and no trainer is listed for it here; see the Mods tab below. Use mods offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -32201,7 +32201,7 @@ window.GAMES_DATA = [
       "totalDownloads": "27.3M",
       "totalEndorsements": "395K",
       "totalMods": "3,003",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -32266,7 +32266,7 @@ window.GAMES_DATA = [
     "steamAppId": 648800,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/648800/header.jpg",
     "trainerInfo": {},
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-14",
     "heatTier": "emerald",
@@ -32312,8 +32312,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Grounded》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Grounded does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Grounded》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Grounded does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -32364,7 +32364,7 @@ window.GAMES_DATA = [
       "totalDownloads": "27.1M",
       "totalEndorsements": "392K",
       "totalMods": "2,981",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -32540,7 +32540,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-02",
     "heatTier": "emerald",
@@ -32580,8 +32580,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Green Hell》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Green Hell does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Green Hell》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Green Hell does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -32632,7 +32632,7 @@ window.GAMES_DATA = [
       "totalDownloads": "26.9M",
       "totalEndorsements": "390K",
       "totalMods": "2,959",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -32789,7 +32789,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-02",
     "heatTier": "emerald",
@@ -32916,7 +32916,7 @@ window.GAMES_DATA = [
       "totalDownloads": "26.6M",
       "totalEndorsements": "385K",
       "totalMods": "2,926",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [
       {
@@ -32931,7 +32931,7 @@ window.GAMES_DATA = [
             "desc": "按 Q 键开启上帝锁血模式、按 H 键开启自由飞天、按 ESC 可自由调节白天黑夜时间！",
             "id": "7-days-to-die_cmd_1",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -32943,7 +32943,7 @@ window.GAMES_DATA = [
             "desc": "输入后游戏中按下键盘 U 键，直接打开包含全游戏所有 5000+ 武器、建材与陷阱的刷物界面！",
             "id": "7-days-to-die_cmd_2",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -32955,7 +32955,7 @@ window.GAMES_DATA = [
             "desc": "飞速升级，点满智力科技、枪械大师与建筑专精天赋",
             "id": "7-days-to-die_cmd_3",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -32967,7 +32967,7 @@ window.GAMES_DATA = [
             "desc": "空投降落伞直接刷在脚下，获取稀有蓝图与食物药品",
             "id": "7-days-to-die_cmd_4",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -32979,7 +32979,7 @@ window.GAMES_DATA = [
             "desc": "血月尸潮瞬间清场解围",
             "id": "7-days-to-die_cmd_5",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           }
         ]
@@ -33184,7 +33184,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-14",
     "heatTier": "emerald",
@@ -33314,7 +33314,7 @@ window.GAMES_DATA = [
       "totalDownloads": "26.4M",
       "totalEndorsements": "382K",
       "totalMods": "2,904",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [
       {
@@ -33329,7 +33329,7 @@ window.GAMES_DATA = [
             "desc": "随身全科技树免材料制造、无限负重、双击跳跃自由飞行！",
             "id": "ark-survival-evolved_cmd_1",
             "syntax_type": "ue_console",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -33341,7 +33341,7 @@ window.GAMES_DATA = [
             "desc": "准星对准任何霸王龙、南方巨兽龙瞬间完成 100% 驯养！",
             "id": "ark-survival-evolved_cmd_2",
             "syntax_type": "ue_console",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -33353,7 +33353,7 @@ window.GAMES_DATA = [
             "desc": "空中自由航行建家，输入 cheat walk 落地恢复正常",
             "id": "ark-survival-evolved_cmd_3",
             "syntax_type": "ue_console",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -33365,7 +33365,7 @@ window.GAMES_DATA = [
             "desc": "瞬间满级，属性点自由加点",
             "id": "ark-survival-evolved_cmd_4",
             "syntax_type": "ue_console",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           }
         ]
@@ -33382,7 +33382,7 @@ window.GAMES_DATA = [
             "desc": "驱动所有泰克发电机、泰克枪与泰克装甲动力",
             "id": "ark-survival-evolved_cmd_5",
             "syntax_type": "ue_console",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -33394,7 +33394,7 @@ window.GAMES_DATA = [
             "desc": "自带喷气背包、超音速冲撞狂奔与深海无限呼吸水下头盔",
             "id": "ark-survival-evolved_cmd_6",
             "syntax_type": "ue_console",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -33406,7 +33406,7 @@ window.GAMES_DATA = [
             "desc": "夜视热成像透视穿墙射杀一切生物",
             "id": "ark-survival-evolved_cmd_7",
             "syntax_type": "ue_console",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           }
         ]
@@ -33583,7 +33583,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-13",
     "heatTier": "emerald",
@@ -33626,8 +33626,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Rust》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Rust does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Rust》没有游戏自带的打字控制台，本站也没有收录它的修改器，可以看下方【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Rust does not have a built-in typing console, and no trainer is listed for it here; see the Mods tab below. Use mods offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -33645,7 +33645,7 @@ window.GAMES_DATA = [
       "totalDownloads": "26.2M",
       "totalEndorsements": "379K",
       "totalMods": "2,882",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -33710,7 +33710,7 @@ window.GAMES_DATA = [
     "steamAppId": 252490,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/252490/header.jpg",
     "trainerInfo": {},
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-29",
     "heatTier": "emerald",
@@ -33760,8 +33760,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Conan Exiles》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Conan Exiles does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Conan Exiles》没有游戏自带的打字控制台，本站也没有收录它的修改器，可以看下方【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Conan Exiles does not have a built-in typing console, and no trainer is listed for it here; see the Mods tab below. Use mods offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -33779,7 +33779,7 @@ window.GAMES_DATA = [
       "totalDownloads": "26.1M",
       "totalEndorsements": "378K",
       "totalMods": "2,871",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -33844,7 +33844,7 @@ window.GAMES_DATA = [
     "steamAppId": 440900,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/440900/header.jpg",
     "trainerInfo": {},
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-07",
     "heatTier": "emerald",
@@ -33887,8 +33887,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Medieval Dynasty》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Medieval Dynasty does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Medieval Dynasty》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Medieval Dynasty does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": false,
@@ -33933,7 +33933,7 @@ window.GAMES_DATA = [
       "totalDownloads": "25.9M",
       "totalEndorsements": "375K",
       "totalMods": "2,849",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -34077,7 +34077,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-11",
     "heatTier": "emerald",
@@ -34123,8 +34123,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Kenshi》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Kenshi does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Kenshi》没有游戏自带的打字控制台，本站也没有收录它的修改器，可以看下方【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Kenshi does not have a built-in typing console, and no trainer is listed for it here; see the Mods tab below. Use mods offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -34142,7 +34142,7 @@ window.GAMES_DATA = [
       "totalDownloads": "25.7M",
       "totalEndorsements": "372K",
       "totalMods": "2,827",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -34207,7 +34207,7 @@ window.GAMES_DATA = [
     "steamAppId": 233860,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/233860/header.jpg",
     "trainerInfo": {},
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-06",
     "heatTier": "emerald",
@@ -34301,7 +34301,7 @@ window.GAMES_DATA = [
       "totalDownloads": "25.5M",
       "totalEndorsements": "369K",
       "totalMods": "2,805",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [
       {
@@ -34316,7 +34316,7 @@ window.GAMES_DATA = [
             "desc": "解锁 Shift + 点击市民的全部隐藏调试动作菜单",
             "id": "the-sims-4_cmd_1",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -34328,7 +34328,7 @@ window.GAMES_DATA = [
             "desc": "饥饿、膀胱、精力、社交、娱乐与卫生瞬间拉至最满！",
             "id": "the-sims-4_cmd_2",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -34340,7 +34340,7 @@ window.GAMES_DATA = [
             "desc": "突破游戏限制，在生活模式中随时进入捏人界面重新整形捏脸",
             "id": "the-sims-4_cmd_3",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           }
         ]
@@ -34357,7 +34357,7 @@ window.GAMES_DATA = [
             "desc": "经典传奇代码，家庭账户直接到账 5 万现金",
             "id": "the-sims-4_cmd_4",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -34369,7 +34369,7 @@ window.GAMES_DATA = [
             "desc": "随心买下微风山庄等最高档豪华海景地皮",
             "id": "the-sims-4_cmd_5",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -34381,7 +34381,7 @@ window.GAMES_DATA = [
             "desc": "搬家界面任意豪宅全部零元直接入住",
             "id": "the-sims-4_cmd_6",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           }
         ]
@@ -34398,7 +34398,7 @@ window.GAMES_DATA = [
             "desc": "建筑师必备！按 9 键抬升物品高度、按 0 键下降、按 [ 或 ] 自由放大缩小物品！",
             "id": "the-sims-4_cmd_7",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -34410,7 +34410,7 @@ window.GAMES_DATA = [
             "desc": "无需达成宇航员、黑客职业满级即可使用专属家具",
             "id": "the-sims-4_cmd_8",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -34422,7 +34422,7 @@ window.GAMES_DATA = [
             "desc": "在建筑搜索栏输入 debug 即可使用游戏内所有隐藏树木与餐盘",
             "id": "the-sims-4_cmd_9",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           }
         ]
@@ -34489,7 +34489,7 @@ window.GAMES_DATA = [
     "steamAppId": 1222670,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1222670/header.jpg",
     "trainerInfo": {},
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-11",
     "heatTier": "emerald",
@@ -34532,8 +34532,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Planet Zoo》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Planet Zoo does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Planet Zoo》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Planet Zoo does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -34580,7 +34580,7 @@ window.GAMES_DATA = [
       "totalDownloads": "25.3M",
       "totalEndorsements": "366K",
       "totalMods": "2,783",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -34705,7 +34705,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-28",
     "heatTier": "emerald",
@@ -34751,8 +34751,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Jurassic World Evolution 2》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Jurassic World Evolution 2 does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Jurassic World Evolution 2》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Jurassic World Evolution 2 does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -34803,7 +34803,7 @@ window.GAMES_DATA = [
       "totalDownloads": "25.1M",
       "totalEndorsements": "363K",
       "totalMods": "2,761",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -34953,7 +34953,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-28",
     "heatTier": "emerald",
@@ -35054,7 +35054,7 @@ window.GAMES_DATA = [
       "totalDownloads": "25.0M",
       "totalEndorsements": "362K",
       "totalMods": "2,750",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [
       {
@@ -35069,7 +35069,7 @@ window.GAMES_DATA = [
             "desc": "摆脱长途卡车堵车或翻车卡死困境，瞬间将卡车平稳放置在镜头正下方！",
             "id": "euro-truck-simulator-2_cmd_1",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -35081,7 +35081,7 @@ window.GAMES_DATA = [
             "desc": "彻底告别漆黑视距不良的漫漫夜路",
             "id": "euro-truck-simulator-2_cmd_2",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -35093,7 +35093,7 @@ window.GAMES_DATA = [
             "desc": "消除暴雨挡风玻璃视线模糊",
             "id": "euro-truck-simulator-2_cmd_3",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -35105,7 +35105,7 @@ window.GAMES_DATA = [
             "desc": "加快按 0 视角漫游全欧洲大陆的速度",
             "id": "euro-truck-simulator-2_cmd_4",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -35117,7 +35117,7 @@ window.GAMES_DATA = [
             "desc": "一键清空高速公路所有慢速卡车，自己畅快飙车",
             "id": "euro-truck-simulator-2_cmd_5",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           }
         ]
@@ -35165,7 +35165,7 @@ window.GAMES_DATA = [
     "steamAppId": 227300,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/227300/header.jpg",
     "trainerInfo": {},
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-18",
     "heatTier": "emerald",
@@ -35208,8 +35208,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《SnowRunner》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "SnowRunner does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《SnowRunner》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "SnowRunner does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -35260,7 +35260,7 @@ window.GAMES_DATA = [
       "totalDownloads": "24.8M",
       "totalEndorsements": "359K",
       "totalMods": "2,728",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -35394,7 +35394,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-29",
     "heatTier": "emerald",
@@ -35434,8 +35434,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Forza Horizon 5》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Forza Horizon 5 does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Forza Horizon 5》没有游戏自带的打字控制台，本站也没有收录它的修改器，可以看下方【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Forza Horizon 5 does not have a built-in typing console, and no trainer is listed for it here; see the Mods tab below. Use mods offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": false,
@@ -35447,7 +35447,7 @@ window.GAMES_DATA = [
       "totalDownloads": "24.6M",
       "totalEndorsements": "356K",
       "totalMods": "2,706",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -35512,7 +35512,7 @@ window.GAMES_DATA = [
     "steamAppId": 1551360,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1551360/header.jpg",
     "trainerInfo": {},
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-12",
     "heatTier": "emerald",
@@ -35552,8 +35552,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Assetto Corsa》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Assetto Corsa does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Assetto Corsa》没有游戏自带的打字控制台，本站也没有收录它的修改器，可以看下方【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Assetto Corsa does not have a built-in typing console, and no trainer is listed for it here; see the Mods tab below. Use mods offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -35571,7 +35571,7 @@ window.GAMES_DATA = [
       "totalDownloads": "24.5M",
       "totalEndorsements": "355K",
       "totalMods": "2,695",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -35636,7 +35636,7 @@ window.GAMES_DATA = [
     "steamAppId": 244210,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/244210/header.jpg",
     "trainerInfo": {},
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-18",
     "heatTier": "emerald",
@@ -35734,7 +35734,7 @@ window.GAMES_DATA = [
       "totalDownloads": "24.3M",
       "totalEndorsements": "352K",
       "totalMods": "2,673",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [
       {
@@ -35749,7 +35749,7 @@ window.GAMES_DATA = [
             "desc": "无论车辆被碾压粉碎成什么程度，按 Insert 原地满血复活！",
             "id": "beamng-drive_cmd_1",
             "syntax_type": "lua_function",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -35761,7 +35761,7 @@ window.GAMES_DATA = [
             "desc": "将爱车随意传送到摩天大楼楼顶或悬崖峭壁边缘",
             "id": "beamng-drive_cmd_2",
             "syntax_type": "lua_function",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -35773,7 +35773,7 @@ window.GAMES_DATA = [
             "desc": "自由增减坡道、高空跳台、调节引力与物理光照",
             "id": "beamng-drive_cmd_3",
             "syntax_type": "lua_function",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -35785,7 +35785,7 @@ window.GAMES_DATA = [
             "desc": "在 Lua 控制台中运行，享受电影级极速慢动作破坏物理",
             "id": "beamng-drive_cmd_4",
             "syntax_type": "lua_function",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           }
         ]
@@ -35833,7 +35833,7 @@ window.GAMES_DATA = [
     "steamAppId": 284160,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/284160/header.jpg",
     "trainerInfo": {},
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-11",
     "heatTier": "emerald",
@@ -35876,8 +35876,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Persona 5 Royal》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Persona 5 Royal does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Persona 5 Royal》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Persona 5 Royal does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -35928,7 +35928,7 @@ window.GAMES_DATA = [
       "totalDownloads": "24.2M",
       "totalEndorsements": "350K",
       "totalMods": "2,662",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -36168,7 +36168,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-10",
     "heatTier": "emerald",
@@ -36211,8 +36211,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Persona 3 Reload》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Persona 3 Reload does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Persona 3 Reload》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Persona 3 Reload does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -36263,7 +36263,7 @@ window.GAMES_DATA = [
       "totalDownloads": "24.0M",
       "totalEndorsements": "348K",
       "totalMods": "2,640",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -36508,7 +36508,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-10-13",
     "heatTier": "emerald",
@@ -36551,8 +36551,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Final Fantasy VII Remake Intergrade》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Final Fantasy VII Remake Intergrade does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Final Fantasy VII Remake Intergrade》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Final Fantasy VII Remake Intergrade does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -36603,7 +36603,7 @@ window.GAMES_DATA = [
       "totalDownloads": "23.9M",
       "totalEndorsements": "346K",
       "totalMods": "2,629",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -36805,7 +36805,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-09",
     "heatTier": "emerald",
@@ -36845,8 +36845,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Final Fantasy XVI》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Final Fantasy XVI does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Final Fantasy XVI》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Final Fantasy XVI does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -36897,7 +36897,7 @@ window.GAMES_DATA = [
       "totalDownloads": "23.7M",
       "totalEndorsements": "343K",
       "totalMods": "2,607",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -37103,7 +37103,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-21",
     "heatTier": "emerald",
@@ -37146,8 +37146,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《NieR:Automata》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "NieR:Automata does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《NieR:Automata》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "NieR:Automata does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -37198,7 +37198,7 @@ window.GAMES_DATA = [
       "totalDownloads": "23.6M",
       "totalEndorsements": "342K",
       "totalMods": "2,596",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -37379,7 +37379,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-08",
     "heatTier": "emerald",
@@ -37419,8 +37419,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Tales of Arise》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Tales of Arise does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Tales of Arise》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Tales of Arise does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -37471,7 +37471,7 @@ window.GAMES_DATA = [
       "totalDownloads": "23.4M",
       "totalEndorsements": "339K",
       "totalMods": "2,574",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -37692,7 +37692,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-14",
     "heatTier": "emerald",
@@ -37732,8 +37732,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Like a Dragon: Infinite Wealth》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Like a Dragon: Infinite Wealth does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Like a Dragon: Infinite Wealth》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Like a Dragon: Infinite Wealth does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -37784,7 +37784,7 @@ window.GAMES_DATA = [
       "totalDownloads": "23.3M",
       "totalEndorsements": "337K",
       "totalMods": "2,563",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -38145,7 +38145,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-28",
     "heatTier": "emerald",
@@ -38188,8 +38188,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Yakuza: Like a Dragon》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Yakuza: Like a Dragon does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Yakuza: Like a Dragon》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Yakuza: Like a Dragon does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -38240,7 +38240,7 @@ window.GAMES_DATA = [
       "totalDownloads": "23.1M",
       "totalEndorsements": "334K",
       "totalMods": "2,541",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -38464,7 +38464,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-09",
     "heatTier": "emerald",
@@ -38507,8 +38507,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Star Wars Jedi: Survivor》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Star Wars Jedi: Survivor does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Star Wars Jedi: Survivor》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Star Wars Jedi: Survivor does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -38559,7 +38559,7 @@ window.GAMES_DATA = [
       "totalDownloads": "23.0M",
       "totalEndorsements": "333K",
       "totalMods": "2,530",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -38744,7 +38744,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-07",
     "heatTier": "emerald",
@@ -38784,8 +38784,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Star Wars Jedi: Fallen Order》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Star Wars Jedi: Fallen Order does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Star Wars Jedi: Fallen Order》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Star Wars Jedi: Fallen Order does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -38832,7 +38832,7 @@ window.GAMES_DATA = [
       "totalDownloads": "22.9M",
       "totalEndorsements": "332K",
       "totalMods": "2,519",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -38952,7 +38952,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-24",
     "heatTier": "emerald",
@@ -38992,8 +38992,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Dead Space Remake》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Dead Space Remake does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Dead Space Remake》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Dead Space Remake does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -39044,7 +39044,7 @@ window.GAMES_DATA = [
       "totalDownloads": "22.7M",
       "totalEndorsements": "329K",
       "totalMods": "2,497",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -39193,7 +39193,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-06",
     "heatTier": "emerald",
@@ -39236,8 +39236,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Dead Cells》无官方原生打字控制台命令行。为保证游戏单机体验与存档安全，已为您校准并直连官方经认证的 FLiNG 纯净修改器（支持按键自由映射与多倍经验/不减物资）及开源前置环境，请前往【修改器】或【精选 MOD】专区直接获取。",
-      "en": "Dead Cells does not feature a native in-game typing console. For safe single-player offline exploration, please refer to the verified FLiNG Trainer (clean hotkey toggles) or open-source community frameworks in the Trainer and Mods tabs below."
+      "zh-CN": "《Dead Cells》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Dead Cells does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -39288,7 +39288,7 @@ window.GAMES_DATA = [
       "totalDownloads": "22.6M",
       "totalEndorsements": "327K",
       "totalMods": "2,486",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [],
     "curatedMods": [
@@ -39442,7 +39442,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-05",
     "heatTier": "emerald",
@@ -39562,7 +39562,7 @@ window.GAMES_DATA = [
       "totalDownloads": "22.5M",
       "totalEndorsements": "326K",
       "totalMods": "2,475",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [
       {
@@ -39577,7 +39577,7 @@ window.GAMES_DATA = [
             "desc": "每次阵亡永久叠加 2% 减伤，最高高达 80% 减伤硬刚哈迪斯！",
             "id": "hades_cmd_1",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -39589,7 +39589,7 @@ window.GAMES_DATA = [
             "desc": "在安装 ModPrereqs 后按 ~ 输入，快速点满死里逃生三条命",
             "id": "hades_cmd_2",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           },
           {
@@ -39601,7 +39601,7 @@ window.GAMES_DATA = [
             "desc": "一键解锁并升满关羽矛、亚瑟圣剑、罗摩弓等终极隐藏形态！",
             "id": "hades_cmd_3",
             "syntax_type": "gm_command",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Native Engine Console"
           }
         ]
@@ -39744,7 +39744,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-04",
     "heatTier": "emerald",
@@ -39874,7 +39874,7 @@ window.GAMES_DATA = [
       "totalDownloads": "22.4M",
       "totalEndorsements": "324K",
       "totalMods": "2,464",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [
       {
@@ -39889,7 +39889,7 @@ window.GAMES_DATA = [
             "desc": "免疫一切地形尖刺与 Boss 接触伤害，畅通苦痛之路",
             "id": "hollow-knight_cmd_1",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Scarab / DebugMod"
           },
           {
@@ -39901,7 +39901,7 @@ window.GAMES_DATA = [
             "desc": "法术机关枪无限连发，随时凝聚回血",
             "id": "hollow-knight_cmd_2",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Scarab / DebugMod"
           },
           {
@@ -39913,7 +39913,7 @@ window.GAMES_DATA = [
             "desc": "自由穿透铁门封锁与隐藏岩壁",
             "id": "hollow-knight_cmd_3",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Scarab / DebugMod"
           },
           {
@@ -39925,7 +39925,7 @@ window.GAMES_DATA = [
             "desc": "直接获取虚空之心、快砍、萨满之石等全部毕业护符",
             "id": "hollow-knight_cmd_4",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Scarab / DebugMod"
           },
           {
@@ -39937,7 +39937,7 @@ window.GAMES_DATA = [
             "desc": "直接传送至泪水之城或螳螂村长椅",
             "id": "hollow-knight_cmd_5",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "Scarab / DebugMod"
           }
         ]
@@ -40059,7 +40059,7 @@ window.GAMES_DATA = [
       ],
       "source": "trainers.json"
     },
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-03",
     "heatTier": "emerald",
@@ -40159,7 +40159,7 @@ window.GAMES_DATA = [
       "totalDownloads": "22.2M",
       "totalEndorsements": "321K",
       "totalMods": "2,442",
-      "latestPatch": "2026 Verified Clean"
+      "latestPatch": "未记录"
     },
     "consoleCategories": [
       {
@@ -40174,7 +40174,7 @@ window.GAMES_DATA = [
             "desc": "在商店中任意买下所有遗物卡牌与移除诅咒",
             "id": "slay-the-spire_cmd_1",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "ModTheSpire + BaseMod"
           },
           {
@@ -40186,7 +40186,7 @@ window.GAMES_DATA = [
             "desc": "消耗卡牌随机获得新牌，配合腐化直接无脑通关",
             "id": "slay-the-spire_cmd_2",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "ModTheSpire + BaseMod"
           },
           {
@@ -40198,7 +40198,7 @@ window.GAMES_DATA = [
             "desc": "每回合多抽两张牌，高费卡牌减费流核心",
             "id": "slay-the-spire_cmd_3",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "ModTheSpire + BaseMod"
           },
           {
@@ -40210,7 +40210,7 @@ window.GAMES_DATA = [
             "desc": "受到致命伤害时自动复活并恢复 30% 生命",
             "id": "slay-the-spire_cmd_4",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "ModTheSpire + BaseMod"
           },
           {
@@ -40222,7 +40222,7 @@ window.GAMES_DATA = [
             "desc": "血量上限极大提升，从容抵御心脏大招",
             "id": "slay-the-spire_cmd_5",
             "syntax_type": "unity_dev",
-            "min_version": "v1.0+ (Latest Official Patch)",
+            "min_version": "v1.0+",
             "framework_required": "ModTheSpire + BaseMod"
           }
         ]
@@ -40290,7 +40290,7 @@ window.GAMES_DATA = [
     "steamAppId": 646570,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/646570/header.jpg",
     "trainerInfo": {},
-    "verifiedPatch": "Steam 最新版本实测",
+    "verifiedPatch": "未实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-02",
     "heatTier": "emerald",
