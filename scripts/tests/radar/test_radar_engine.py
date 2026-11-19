@@ -114,6 +114,15 @@ class ClassifyTest(unittest.TestCase):
         over = build_time - DAY - datetime.timedelta(seconds=1)
         self.assertEqual(spm.classify(NOW, build_time, None, trainer_modified=over), 'trainer-behind')
 
+    def test_trainer_behind_only_within_90_days_of_build(self):
+        # 契约 7.1：build 超过 90 天的老游戏，修改器早一点也算 quiet
+        at_limit = days_ago(90)
+        self.assertEqual(spm.classify(NOW, at_limit, None, trainer_modified=at_limit - 30 * DAY), 'trainer-behind')
+        just_over = NOW - datetime.timedelta(days=90, seconds=1)
+        self.assertEqual(spm.classify(NOW, just_over, None, trainer_modified=just_over - 30 * DAY), 'quiet')
+        very_old = days_ago(6 * 365)
+        self.assertEqual(spm.classify(NOW, very_old, None, trainer_modified=very_old - 22 * DAY), 'quiet')
+
     def test_no_trainer_and_old_build_is_green(self):
         reason = spm.classify(NOW, days_ago(200), fw_entry(hooks=True))
         self.assertEqual(reason, 'quiet')
@@ -130,7 +139,16 @@ class StatusTextTest(unittest.TestCase):
         self.assertEqual(spm.status_text('quiet'), '🟢 近 14 天无更新')
         self.assertEqual(spm.status_text('recent-update'), '🟡 刚更新 · Mod/修改器可能要等适配')
         self.assertEqual(spm.status_text('trainer-behind'), '🟡 修改器早于当前游戏版本')
-        self.assertEqual(spm.status_text('recent-update-hooks', 'SKSE64'), '🔴 刚更新 · SKSE64 待适配，先别更新')
+        self.assertEqual(spm.status_text('recent-update-hooks', 'SKSE64'), '🔴 刚更新 · SKSE64 可能要等适配，先别更新')
+
+    def test_red_copy_hedges_with_maybe(self):
+        # 契约 7.4：红灯只说「可能」
+        fields, alert = spm.build_radar_fields(make_game(), 'recent-update-hooks', build(), None,
+                                               fw_entry(hooks=True, name='SKSE64'), None, NOW)
+        self.assertIn('可能', fields['radarSummary'])
+        self.assertIn('可能', fields['radarRiskTitle'])
+        self.assertIn('可能', alert['zh-CN'])
+        self.assertIn('may', alert['en'])
 
     def test_no_banned_phrases_in_any_generated_text(self):
         game = make_game()
@@ -195,12 +213,24 @@ class ApplyResultsTest(unittest.TestCase):
         self.assertIn('fake build failure', res['error'])
         self.assertEqual(after, before)
 
-    def test_news_fetch_failure_also_keeps_every_field(self):
-        game = make_game(compatibilityStatus='green', steamBuildId='1')
-        before = copy.deepcopy(game)
-        after, res = self.run_one(game, FakeClient({100: build()}, {100: RuntimeError()}))
-        self.assertFalse(res['fetched'])
-        self.assertEqual(after, before)
+    def test_news_failure_still_judges_and_keeps_previous_announcement(self):
+        # 契约 7.3：公告取不到照常判定，公告标题和链接保留上次的值
+        game = make_game(compatibilityStatus='green', steamBuildId='1', latestSteamPatch='上次的公告',
+                         latestSteamPatchUrl='https://store.steampowered.com/news/app/100/view/1')
+        after, res = self.run_one(game, FakeClient({100: build('2', days_ago(3))}, {100: RuntimeError()}),
+                                  fw_entry(hooks=True))
+        self.assertTrue(res['fetched'])
+        self.assertIn('fake news failure', res['news_error'])
+        self.assertEqual(after['compatibilityStatus'], 'red')
+        self.assertEqual(after['steamBuildId'], '2')
+        self.assertEqual(after['latestSteamPatch'], '上次的公告')
+        self.assertEqual(after['latestSteamPatchUrl'], 'https://store.steampowered.com/news/app/100/view/1')
+
+    def test_news_failure_without_previous_link_uses_store_news_page(self):
+        after, res = self.run_one(make_game(), FakeClient({100: build(when=days_ago(60))}, {100: RuntimeError()}))
+        self.assertTrue(res['fetched'])
+        self.assertNotIn('latestSteamPatch', after)
+        self.assertEqual(after['latestSteamPatchUrl'], 'https://store.steampowered.com/news/app/100')
 
     def test_red_writes_all_fields_and_alert(self):
         entry = fw_entry(hooks=True, name='SKSE64', after={'zh-CN': '等 SKSE64 更新再玩。', 'en': 'Wait for SKSE64.'})
@@ -209,7 +239,7 @@ class ApplyResultsTest(unittest.TestCase):
         after, res = self.run_one(game, FakeClient({100: build('555', days_ago(3))}, {100: news}), entry)
         self.assertEqual(after['compatibilityStatus'], 'red')
         self.assertEqual(after['radarReason'], 'recent-update-hooks')
-        self.assertEqual(after['radarStatusText'], '🔴 刚更新 · SKSE64 待适配，先别更新')
+        self.assertEqual(after['radarStatusText'], '🔴 刚更新 · SKSE64 可能要等适配，先别更新')
         self.assertEqual(after['steamBuildId'], '555')
         self.assertEqual(after['steamBuildUpdatedAt'], '2026-11-16T00:00:00Z')
         self.assertEqual(after['steamLastChecked'], '2026-11-19T00:00:00Z')
@@ -217,17 +247,39 @@ class ApplyResultsTest(unittest.TestCase):
         self.assertEqual(after['latestSteamPatch'], 'Patch 1.2')
         self.assertEqual(after['latestSteamPatchUrl'], news['url'])
         self.assertEqual(after['radarRiskDesc'], '等 SKSE64 更新再玩。')
+        self.assertEqual(after['radarAdvice'], {'zh-CN': '等 SKSE64 更新再玩。', 'en': 'Wait for SKSE64.'})
         self.assertEqual(set(after['emergencyAlert']), {'zh-CN', 'en'})
         self.assertIn('SKSE64', after['emergencyAlert']['zh-CN'])
         self.assertEqual(after['verifiedPatch'], '保持不动')
         for key in ('radarSummary', 'radarRiskTitle'):
             self.assertTrue(after[key])
 
-    def test_recent_update_writes_alert(self):
-        after, _ = self.run_one(make_game(), FakeClient({100: build()}, {100: None}))
+    def test_recent_update_has_no_alert(self):
+        # 契约 7.2：emergencyAlert 只给红灯；黄灯的旧预警也要删掉
+        game = make_game(emergencyAlert={'zh-CN': '旧预警', 'en': 'old'})
+        after, _ = self.run_one(game, FakeClient({100: build()}, {100: None}))
         self.assertEqual(after['radarReason'], 'recent-update')
-        self.assertIn('emergencyAlert', after)
+        self.assertNotIn('emergencyAlert', after)
         self.assertIsNone(after['radarFramework'])
+        self.assertIsNone(after['radarAdvice'])
+
+    def test_radar_advice_copies_after_update_or_null(self):
+        # 契约 7.5：radarAdvice 原样取 afterUpdate；没有就写 null（旧值也要清掉）
+        entry = fw_entry(hooks=False, after={'zh-CN': '更新后先备份存档。', 'en': 'Back up saves after updates.'})
+        after, _ = self.run_one(make_game(), FakeClient({100: build(when=days_ago(60))}), entry)
+        self.assertEqual(after['radarAdvice'], entry['afterUpdate'])
+        self.assertIsNot(after['radarAdvice'], entry['afterUpdate'])
+
+        game = make_game(radarAdvice={'zh-CN': '旧建议', 'en': 'old'})
+        after, _ = self.run_one(game, FakeClient({100: build(when=days_ago(60))}), fw_entry(hooks=False))
+        self.assertIn('radarAdvice', after)
+        self.assertIsNone(after['radarAdvice'])
+
+    def test_every_radar_field_written_on_success(self):
+        after, _ = self.run_one(make_game(), FakeClient({100: build()}, {100: {'title': 't', 'url': None}}),
+                                fw_entry(hooks=True))
+        for key in spm.RADAR_FIELDS:
+            self.assertIn(key, after, key)
 
     def test_alert_removed_for_quiet_and_trainer_behind(self):
         old_alert = {'zh-CN': '旧预警', 'en': 'old'}
@@ -554,7 +606,17 @@ class OfflineEndToEndTest(unittest.TestCase):
 
         # emergencyAlert：红和 recent-update 写，其余删
         self.assertIn('emergencyAlert', after['cyberpunk-2077'])
-        self.assertIn('emergencyAlert', after['palworld'])
+        self.assertNotIn('emergencyAlert', after['palworld'])
+
+        # 巫师 3 公告接口失败：照常判定，公告标题和链接保留上次的值
+        self.assertEqual(after['witcher-3']['latestSteamPatch'], before_games['witcher-3']['latestSteamPatch'])
+        self.assertEqual(after['witcher-3']['latestSteamPatchUrl'], before_games['witcher-3']['latestSteamPatchUrl'])
+        self.assertIn('模拟公告接口超时', report)
+
+        # radarAdvice
+        self.assertEqual(after['cyberpunk-2077']['radarAdvice']['en'],
+                         'After a game update, wait for a matching Cyber Engine Tweaks release.')
+        self.assertIsNone(after['palworld']['radarAdvice'])
         self.assertNotIn('emergencyAlert', after['witcher-3'])
         self.assertNotIn('emergencyAlert', after['baldurs-gate-3'])
 
@@ -631,6 +693,7 @@ class OfflineEndToEndTest(unittest.TestCase):
             snap = json.load(f)
         self.assertEqual(snap['1086940']['buildid'], '25605617')
         self.assertIn('error', snap['1245620'])
+        self.assertIn('newsError', snap['292030'])
 
 
 class RealDataTest(unittest.TestCase):

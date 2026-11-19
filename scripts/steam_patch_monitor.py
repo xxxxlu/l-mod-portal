@@ -11,14 +11,15 @@ scripts/steam_patch_monitor.py · 补丁雷达 v2 巡检脚本
   3. Mod 框架资料（scripts/radar_frameworks/part-*.json，可能缺文件或缺条目）
   4. 风灵月影修改器最后更新时间（public/trainers.json → games.<id>.modified）
 
-判定（RECENT_DAYS = 14）：
-  build ≤ 14 天，且框架资料 hooksExe == true  → red    / recent-update-hooks
-  build ≤ 14 天                              → yellow / recent-update
-  修改器更新时间早于 build 超过 1 天          → yellow / trainer-behind
-  其余                                       → green  / quiet
+判定（RECENT_DAYS = 14，含契约第 7 节 v2.1 的修改）：
+  build ≤ 14 天，且框架资料 hooksExe == true          → red    / recent-update-hooks
+  build ≤ 14 天                                      → yellow / recent-update
+  build ≤ 90 天，且修改器更新时间早于 build 超过 1 天  → yellow / trainer-behind
+  其余                                               → green  / quiet
 
-任何一个 Steam 请求失败（超时、HTTP 错误、返回格式不对），这款游戏的雷达字段一律保持原值，
-报告里列为「本次未取到」。非 Steam 游戏（steamAppId 为 0 或缺失）不巡检、不写字段。
+build 信息取不到（超时、HTTP 错误、返回格式不对），这款游戏的雷达字段一律保持原值，报告里列为「本次未取到」；
+公告取不到照常判定，只是公告标题/链接保留上次的值。非 Steam 游戏（steamAppId 为 0 或缺失）不巡检、不写字段。
+emergencyAlert 只给红灯。
 
 报告里写一行 `<!-- radar-new-red: N -->`，工作流读它决定要不要开预警单。
 纯标准库，零第三方依赖。
@@ -49,6 +50,7 @@ REPORT_PATH_DEFAULT = os.path.join(BASE_DIR, 'docs/PATCH_MONITOR_LATEST.md')
 
 RECENT_DAYS = 14
 TRAINER_TOLERANCE_DAYS = 1
+TRAINER_BEHIND_MAX_BUILD_AGE_DAYS = 90
 MIN_REQUEST_INTERVAL = 0.5
 DEFAULT_REQUEST_INTERVAL = 0.6
 DEFAULT_TIMEOUT = 10
@@ -69,16 +71,16 @@ STATUS_TEXT = {
     'quiet': '🟢 近 14 天无更新',
     'recent-update': '🟡 刚更新 · Mod/修改器可能要等适配',
     'trainer-behind': '🟡 修改器早于当前游戏版本',
-    'recent-update-hooks': '🔴 刚更新 · {framework} 待适配，先别更新',
+    'recent-update-hooks': '🔴 刚更新 · {framework} 可能要等适配，先别更新',
 }
 
-# 写进数据和报告的文案里不许出现的说法（没人做过的事）
-BANNED_PHRASES = ('实测', '完美兼容', '老L团队')
+# 写进数据和报告的文案里不许出现的说法（没人做过的事 / 下不了的结论）
+BANNED_PHRASES = ('实测', '完美兼容', '老L团队', '已失效')
 
 # 脚本会写的全部字段；verifiedPatch 不碰
 RADAR_FIELDS = (
     'compatibilityStatus', 'radarReason', 'radarStatusText', 'latestSteamPatch', 'latestSteamPatchUrl',
-    'steamBuildId', 'steamBuildUpdatedAt', 'steamLastChecked', 'radarFramework',
+    'steamBuildId', 'steamBuildUpdatedAt', 'steamLastChecked', 'radarFramework', 'radarAdvice',
     'radarSummary', 'radarRiskTitle', 'radarRiskDesc', 'emergencyAlert',
 )
 
@@ -536,12 +538,14 @@ class SnapshotClient:
 # 判定
 # ==============================================================================
 def classify(now, build_updated_at, framework_entry=None, trainer_modified=None):
-    """契约 2.2 节。返回原因码。"""
+    """契约 2.2 节 + 7.1 节。返回原因码。"""
     build_age = now - build_updated_at
     if build_age <= datetime.timedelta(days=RECENT_DAYS):
         hooks = bool(framework_entry) and framework_entry.get('hooksExe') is True
         return 'recent-update-hooks' if hooks else 'recent-update'
+    # 7.1：只看近 90 天的 build；更老的游戏修改器早一点也算 quiet
     if trainer_modified is not None and \
+            build_age <= datetime.timedelta(days=TRAINER_BEHIND_MAX_BUILD_AGE_DAYS) and \
             trainer_modified < build_updated_at - datetime.timedelta(days=TRAINER_TOLERANCE_DAYS):
         return 'trainer-behind'
     return 'quiet'
@@ -568,10 +572,15 @@ def _titles(game):
     return zh, en
 
 
-def build_radar_fields(game, reason, build, news, framework_entry, trainer_modified, now, framework_name=None):
+def build_radar_fields(game, reason, build, news, framework_entry, trainer_modified, now, framework_name=None,
+                       news_failed=False):
     """算出要写回的字段（不改 game）。返回 (fields, emergency_alert 或 None)。
 
-    fields 里值为 None 的 latestSteamPatch 表示「删掉这个字段」；radarFramework 为 None 就写 null。
+    - fields 里值为 None 的 latestSteamPatch 表示「删掉这个字段」（这款游戏没有官方公告）；
+      radarFramework / radarAdvice 为 None 就写 null。
+    - news_failed：公告接口这次失败（7.3 节）。照常判定，fields 里不带 latestSteamPatch（保留上次的值），
+      latestSteamPatchUrl 用上次的值，上次也没有就用 Steam 新闻页。
+    - emergencyAlert 只给红灯（7.2 节）。
     """
     status = REASON_STATUS[reason]
     fw = framework_entry.get('framework') if framework_entry else None
@@ -591,40 +600,40 @@ def build_radar_fields(game, reason, build, news, framework_entry, trainer_modif
         summary = (f'风灵月影修改器最后更新于 {fmt_date(trainer_modified)}，早于 Steam 当前版本'
                    f'（{build_date}，build {buildid}），可能和当前版本对不上。')
         risk_title = '⚠️ 修改器早于当前游戏版本'
-    else:  # recent-update-hooks
+    else:  # recent-update-hooks；7.4：timeupdated 分不出改没改 exe，只说「可能」
         summary = (f'Steam 在 {build_date} 推送了新版本（build {buildid}）。{fw_name} 按游戏 exe 的具体版本挂钩，'
-                   f'游戏一更新通常要等作者发新版才能用。')
-        risk_title = f'🚨 刚更新 · {fw_name} 待适配'
+                   f'这次更新后可能要等作者发新版才能用。')
+        risk_title = f'🚨 刚更新 · {fw_name} 可能要等适配'
 
     after = framework_entry.get('afterUpdate') if framework_entry else None
     risk_desc = (after or {}).get('zh-CN') or GENERIC_RISK_DESC.get(reason, GENERIC_RISK_DESC['default'])
+    advice = {'zh-CN': after['zh-CN'], 'en': after['en']} if isinstance(after, dict) else None
 
     fields = {
         'compatibilityStatus': status,
         'radarReason': reason,
         'radarStatusText': status_text(reason, fw_name),
-        'latestSteamPatch': news['title'] if news and news.get('title') else None,
-        'latestSteamPatchUrl': (news or {}).get('url') or store_news_url(appid),
         'steamBuildId': buildid,
         'steamBuildUpdatedAt': iso_z(build['updated_at']),
         'steamLastChecked': iso_z(now),
         'radarFramework': {'name': fw['name'], 'url': fw['url']} if fw else None,
+        'radarAdvice': advice,
         'radarSummary': summary,
         'radarRiskTitle': risk_title,
         'radarRiskDesc': risk_desc,
     }
+    if news_failed:
+        fields['latestSteamPatchUrl'] = game.get('latestSteamPatchUrl') or store_news_url(appid)
+    else:
+        fields['latestSteamPatch'] = news['title'] if news and news.get('title') else None
+        fields['latestSteamPatchUrl'] = (news or {}).get('url') or store_news_url(appid)
 
     alert = None
     if status == 'red':
         alert = {
-            'zh-CN': f'《{zh_title}》Steam 于 {build_date} 更新，{fw_name} 通常要等作者发新版，先别更新',
-            'en': (f'{en_title} was updated on Steam on {build_date}. {fw_name} usually needs a new release '
-                   f'after each game update, so hold off on updating.'),
-        }
-    elif reason == 'recent-update':
-        alert = {
-            'zh-CN': f'《{zh_title}》Steam 于 {build_date} 更新，Mod/修改器可能要等适配',
-            'en': f'{en_title} was updated on Steam on {build_date}. Mods and trainers may need time to catch up.',
+            'zh-CN': f'《{zh_title}》Steam 于 {build_date} 更新，{fw_name} 可能要等作者发新版，先别更新',
+            'en': (f'{en_title} was updated on Steam on {build_date}. {fw_name} may need a new release '
+                   f'to work with this update, so hold off on updating.'),
         }
     return fields, alert
 
@@ -639,10 +648,11 @@ def inspect_game(game, client, framework_entry, trainer_modified, now, simulate=
         'framework_entry': framework_entry, 'trainer_modified': trainer_modified,
         'fetched': False, 'error': None, 'simulated': False, 'new_red': False,
         'build': None, 'news': None, 'reason': None, 'status': None, 'fields': None, 'alert': None,
-        'framework_name': None,
+        'framework_name': None, 'news_error': None,
     }
 
     framework_name = None
+    news_failed = False
     if simulate and simulate.get('game_id') == game.get('id'):
         result['simulated'] = True
         build = {'buildid': str(simulate.get('build_id') or now.strftime('%Y%m%d%H%M')), 'updated_at': now}
@@ -654,16 +664,21 @@ def inspect_game(game, client, framework_entry, trainer_modified, now, simulate=
         else:
             framework_entry = dict(framework_entry or {}, hooksExe=False) if framework_entry else None
     else:
+        # 7.3：只有 build 取不到才算「本次未取到」、字段全保持原值；公告取不到照常判定
         try:
             build = client.fetch_build(appid)
-            news = client.fetch_latest_news(appid)
         except FetchError as exc:
             result['error'] = str(exc)
             return result
+        try:
+            news = client.fetch_latest_news(appid)
+        except FetchError as exc:
+            news, news_failed = None, True
+            result['news_error'] = str(exc)
 
     reason = classify(now, build['updated_at'], framework_entry, trainer_modified)
     fields, alert = build_radar_fields(game, reason, build, news, framework_entry, trainer_modified, now,
-                                       framework_name=framework_name)
+                                       framework_name=framework_name, news_failed=news_failed)
     status = REASON_STATUS[reason]
     fw = (framework_entry or {}).get('framework')
     result.update({
@@ -699,6 +714,8 @@ def inspect_games(targets, client, frameworks, trainer_times, now, simulate=None
                     extra += '  ← 新变红'
                 if res['simulated']:
                     extra += '  (演练)'
+                if res['news_error']:
+                    extra += f"  （公告没取到：{res['news_error']}）"
             else:
                 icon, extra = '⚪', f"未取到：{res['error']}"
             log(f"[{i:>3}/{total}] {icon} #{res['rank']:<3} {str(res['title_en'])[:30]:<31} {extra}")
@@ -715,7 +732,7 @@ def results_to_snapshot(results):
             snap[str(r['appid'])] = {'error': r['error']}
             continue
         news = r['news']
-        snap[str(r['appid'])] = {
+        entry = {
             'buildid': r['build']['buildid'],
             'timeupdated': iso_z(r['build']['updated_at']),
             'news': None if not news else {
@@ -723,6 +740,9 @@ def results_to_snapshot(results):
                 'date': iso_z(news['date']) if news.get('date') else None,
             },
         }
+        if r['news_error']:
+            entry['newsError'] = r['news_error']
+        snap[str(r['appid'])] = entry
     return snap
 
 
@@ -807,8 +827,9 @@ def render_report(results, now, frameworks, trainer_note=None, mode_notes=(), si
         f'- 巡检时间：`{iso_z(now)}`（UTC）',
         f'- 范围：{counts["total"]} 款带 Steam AppID 的游戏（非 Steam 游戏不巡检）',
         f'- 规则：Steam 公共分支 build 发布时间 ≤ {RECENT_DAYS} 天算「刚更新」；框架资料 `hooksExe` 为 true 才亮红；'
-        f'修改器早于当前 build 超过 {TRAINER_TOLERANCE_DAYS} 天亮黄。公告只展示，不参与判定。',
-        '- 没取到 Steam 数据的游戏，雷达字段保持上次的值不动。',
+        f'build ≤ {TRAINER_BEHIND_MAX_BUILD_AGE_DAYS} 天且修改器早于它超过 {TRAINER_TOLERANCE_DAYS} 天亮黄。'
+        f'公告只展示，不参与判定。',
+        '- 没取到 build 信息的游戏，雷达字段保持上次的值不动；只是公告没取到的照常判定，公告标题和链接保留上次的值。',
     ]
     if simulate:
         lines.append(f'- 🧪 **本次是演练**：`{simulate["game_id"]}` 被模拟成刚更新（风险 `{simulate.get("risk", "red")}`），'
@@ -847,7 +868,7 @@ def render_report(results, now, frameworks, trainer_note=None, mode_notes=(), si
         for r in new_reds:
             fw_name = r['framework_name'] or 'Mod 框架'
             drill = '【演练，不是真的更新】' if r['simulated'] else ''
-            lines.append(f"{drill}《{r['title']}》Steam 于 {fmt_date(r['build']['updated_at'])} 更新。{fw_name} 通常要等作者发新版"
+            lines.append(f"{drill}《{r['title']}》Steam 于 {fmt_date(r['build']['updated_at'])} 更新。{fw_name} 可能要等作者发新版"
                          f"才能用，带 Mod 玩的先别更新：Steam 库里右键游戏 → 属性 → 更新 → 改成「仅在启动时更新」。")
         lines.append('```')
 
@@ -883,6 +904,11 @@ def render_report(results, now, frameworks, trainer_note=None, mode_notes=(), si
             lambda r: f"| {r['rank']} | {_md(r['title'], 40)} | `{r['appid']}` | {_md(r['error'], 80)} | {r['prev_status'] or '—'} |")
     else:
         lines.append('无。')
+
+    news_missing = [r for r in results if r.get('news_error')]
+    if news_missing:
+        lines += ['', f'### 公告没取到（{len(news_missing)}，照常判定，公告标题和链接保留上次的值）', '']
+        lines += [f"- #{r['rank']} {_md(r['title'], 40)}：{_md(r['news_error'], 80)}" for r in news_missing]
 
     lines += ['', f'## 🟢 绿灯（{len(greens)}）', '']
     if greens:
@@ -926,7 +952,7 @@ def render_report(results, now, frameworks, trainer_note=None, mode_notes=(), si
     for r in sorted(results, key=lambda x: (x['rank'] if _is_int(x['rank']) else 10 ** 6)):
         if r['fetched']:
             news = r['news'] or {}
-            title = _md(news.get('title') or '（无公告）', 40)
+            title = _md(news.get('title') or ('（公告没取到）' if r.get('news_error') else '（无公告）'), 40)
             link = (r['fields'] or {}).get('latestSteamPatchUrl')
             news_cell = f'[{title}]({link})' if link else title
             icon = {'red': '🔴', 'yellow': '🟡', 'green': '🟢'}[r['status']]

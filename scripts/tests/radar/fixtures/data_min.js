@@ -33,6 +33,8 @@ window.GAMES_DATA = [
     "compatibilityStatus": "yellow",
     "radarStatusText": "🟡 官方刚推新补丁·老L实测对齐中",
     "steamBuildId": "26238013",
+    "latestSteamPatch": "Patch 5.01 is live!",
+    "latestSteamPatchUrl": "https://store.steampowered.com/news/app/292030/view/2",
     "emergencyAlert": {
       "zh-CN": "旧预警",
       "en": "old alert"

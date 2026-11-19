@@ -16,7 +16,8 @@
       "title": "Patch 5.01 is live!",
       "url": "https://store.steampowered.com/news/app/292030/view/2",
       "date": "2026-08-10T08:00:00Z"
-    }
+    },
+    "newsError": "模拟公告接口超时"
   },
   "1086940": {
     "buildid": "25605617",

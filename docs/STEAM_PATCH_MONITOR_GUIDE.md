@@ -1,7 +1,7 @@
 # 📡 补丁雷达巡检脚本使用说明（v2）
 
 > 适用：`scripts/steam_patch_monitor.py` ｜ `.github/workflows/patch_radar_cron.yml` ｜ 测试 `scripts/tests/radar/`
-> 规则真源：`docs/RADAR_V2_CONTRACT.md` 第 2 节。本文和契约冲突时以契约为准。
+> 规则真源：`docs/RADAR_V2_CONTRACT.md` 第 2 节，以及覆盖它的第 7 节（v2.1）。本文和契约冲突时以契约为准。
 
 ---
 
@@ -21,7 +21,7 @@
 | Mod 框架资料 | `scripts/radar_frameworks/part-*.json`（可能缺文件、缺条目） | `hooksExe`、框架名和链接、`afterUpdate` 建议 |
 | 风灵月影修改器最后更新时间 | `public/trainers.json` → `games.<id>.modified` | 判断修改器是否早于当前 build |
 
-然后按下面的规则给每款游戏定状态，写进 `public/data.js` 的 `GAMES_DATA`，生成报告 `docs/PATCH_MONITOR_LATEST.md`；
+然后按下面的规则给每款游戏定状态，写进 `public/data.js` 的 `GAMES_DATA`，生成报告 `docs/PATCH_MONITOR_LATEST.md`。
 只有出现**新变红**的游戏时才开预警单或在已开的预警单下评论。
 
 旧版那套「写死 14 款 + 拿公告标题里的版本号比基线」已经删掉：博德之门 3 出个 Hotfix #36 就判红、每天追加评论，就是那套规则造成的。
@@ -34,14 +34,18 @@
 
 | 优先级 | 条件 | `compatibilityStatus` | `radarReason` | `radarStatusText` |
 |---|---|---|---|---|
-| 1 | `buildAge ≤ 14 天` 且框架资料 `hooksExe == true` | `red` | `recent-update-hooks` | `🔴 刚更新 · <框架名> 待适配，先别更新` |
+| 1 | `buildAge ≤ 14 天` 且框架资料 `hooksExe == true` | `red` | `recent-update-hooks` | `🔴 刚更新 · <框架名> 可能要等适配，先别更新` |
 | 2 | `buildAge ≤ 14 天`（没有框架资料，或 `hooksExe` 为 false / null） | `yellow` | `recent-update` | `🟡 刚更新 · Mod/修改器可能要等适配` |
-| 3 | 有修改器，且修改器更新时间早于 `timeupdated` 超过 1 天 | `yellow` | `trainer-behind` | `🟡 修改器早于当前游戏版本` |
+| 3 | `buildAge ≤ 90 天`，有修改器，且修改器更新时间早于 `timeupdated` 超过 1 天 | `yellow` | `trainer-behind` | `🟡 修改器早于当前游戏版本` |
 | 4 | 其余 | `green` | `quiet` | `🟢 近 14 天无更新` |
 
 - 修改器的 `modified` 是站点本地时间、不带时区，脚本按 UTC 看，所以留了 1 天容差。
-- **没取到 Steam 数据**：任何一个请求失败（超时、HTTP 错误、返回格式不对，公告接口失败也算），
+- `trainer-behind` 只看近 90 天的 build（契约 7.1）：长期不更新的老游戏，修改器早几周发布基本不影响使用，build 超过 90 天的一律算 `quiet`。
+- 红灯只说「可能」（契约 7.4）：`timeupdated` 分不出这次改没改 exe，只更新资源也会刷新，所以文案和摘要都不写「已失效」。
+- **build 信息没取到**：steamcmd 请求失败（超时、HTTP 错误、返回格式不对），
   这款游戏的雷达字段**一个都不动**（`steamLastChecked` 也不动），报告里列在「本次未取到」。不会因为接口抽风把状态翻掉。
+- **只是公告没取到**（契约 7.3）：照常判定、照常写字段，只有 `latestSteamPatch` / `latestSteamPatchUrl` 保留上次的值
+  （上次也没有链接就用 Steam 新闻页），报告里单独列出「公告没取到」。
 - **非 Steam 游戏**（`steamAppId` 为 0 或缺失，目前只有 `alan-wake-2`）：不巡检，不写字段。
 - 请求之间至少隔 0.5 秒（默认 0.6 秒）；超时、429、5xx 会隔 3 秒重试一次，再失败就按「没取到」处理。99 款大约 200 次请求、2～3 分钟。
 
@@ -65,13 +69,14 @@
 | `steamBuildUpdatedAt` | Steam 当前 build 的发布时间，ISO 8601 UTC，带 `Z` |
 | `steamLastChecked` | 这次巡检时间，UTC，带 `Z` |
 | `radarFramework` | `{ name, url }`，来自框架资料；没有就是 `null` |
-| `latestSteamPatch` | 最新官方公告标题；这款游戏没有官方公告时删掉这个字段 |
-| `latestSteamPatchUrl` | 最新公告链接；没有就用 `https://store.steampowered.com/news/app/<appid>` |
+| `radarAdvice` | `{ "zh-CN", "en" }`，原样取框架资料的 `afterUpdate`；没有就写 `null`（契约 7.5，雷达页按界面语言显示） |
+| `latestSteamPatch` | 最新官方公告标题；这款游戏没有官方公告时删掉这个字段；公告接口失败时保留上次的值 |
+| `latestSteamPatchUrl` | 最新公告链接；没有就用 `https://store.steampowered.com/news/app/<appid>`；公告接口失败时保留上次的值 |
 | `radarSummary` / `radarRiskTitle` | 简体中文，只写事实（build 日期、build 号、框架名、修改器日期） |
-| `radarRiskDesc` | 优先用框架资料的 `afterUpdate["zh-CN"]`，没有就用通用的一句 |
-| `emergencyAlert` | `{ "zh-CN", "en" }`，**只在 `red` 和 `recent-update` 时写**，其余状态删掉 |
+| `radarRiskDesc` | 简体中文，优先用框架资料的 `afterUpdate["zh-CN"]`，没有就用通用的一句 |
+| `emergencyAlert` | `{ "zh-CN", "en" }`，**只给红灯**（契约 7.2，雷达页滚动预警条只放红灯），其余状态删掉 |
 
-文案里不出现「实测」「完美兼容」「老L团队」——没人测过的事不写（测试里有检查）。
+文案里不出现「实测」「完美兼容」「老L团队」「已失效」——没人测过的事、下不了的结论都不写（测试里有检查）。
 
 ---
 
@@ -180,8 +185,9 @@ Actions → Steam Patch Sentinel Cron → Run workflow，填 `simulate_game`（�
 python3 -m unittest discover -s scripts/tests/radar -v
 ```
 
-覆盖：四种状态和边界（正好 14 天、修改器 1 天容差、优先级）、接口失败保持原值（build 接口和公告接口各一种）、
-新变红判定、`emergencyAlert` 的写入和清理、框架资料缺目录 / 只有部分文件 / 坏文件 / 坏条目 / 重复 id / 未知 id、
+覆盖：四种状态和边界（正好 14 天、修改器 1 天容差、`trainer-behind` 的 90 天窗口、优先级）、
+build 接口失败保持原值、公告接口失败照常判定并保留上次的公告、红灯文案只说「可能」、`radarAdvice`、
+新变红判定、`emergencyAlert` 只给红灯和旧预警的清理、框架资料缺目录 / 只有部分文件 / 坏文件 / 坏条目 / 重复 id / 未知 id、
 请求间隔与重试、离线端到端（含 `GAMES_DATA` 之外一个字节不动）、演练产生新变红、工作流 `check_risk` 那段 shell。
 假数据都在 `scripts/tests/radar/fixtures/`，测试不联网、不改真实文件。
 
