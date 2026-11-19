@@ -2043,15 +2043,26 @@ window.GAMES_DATA = [
     ],
     "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】赛博朋克2077 控制台环境一键检测与开门\necho ========================================================\necho   【老L·单机避坑局】赛博朋克2077 控制台一键检测与绑定脚本\necho   适用最新 2.13/往日之影 · 零木马 · 极速配置\necho ========================================================\necho.\n\nset \"CET_DIR=bin\\x64\\plugins\\cyber_engine_tweaks\"\nset \"BIND_FILE=%CET_DIR%\\bindings.json\"\n\nif not exist \"bin\\x64\\Cyberpunk2077.exe\" (\n    echo [!] 未在当前目录下检测到 Cyberpunk2077.exe\n    echo     请将本 bat 脚本放置在《赛博朋克2077》游戏安装根目录下运行！\n    echo.\n    pause\n    exit /b\n)\n\nif not exist \"%CET_DIR%\" mkdir \"%CET_DIR%\"\n\necho [*] 正在配置默认控制台呼出快捷键为 ~ 键 (OEM_3 键位代码 192) ...\nif exist \"%BIND_FILE%\" copy /y \"%BIND_FILE%\" \"%BIND_FILE%.bak\" >nul\n\necho {\"overlay_key\": 192}>\"%BIND_FILE%\"\necho [+] 快捷键绑定已就绪：默认按 ~ (波浪键) 呼出 CET 控制台！\n\necho.\necho ========================================================\necho  [√] 开门环境就绪！\necho      请确保 bin\\x64 目录下已放置 CET 核心前置文件。\necho      启动游戏按 ~ 键即可粘贴老L套餐指令代码！\necho ========================================================\necho.\npause",
     "compatibilityStatus": "green",
-    "radarStatusText": "🟢 完美兼容实测通过",
+    "radarStatusText": "🟢 近 14 天无更新",
     "latestSteamPatch": "REDstreams – Cyberpunk: Edgerunners 2",
     "steamBuildId": "26161058",
-    "steamLastChecked": "2026-11-19T09:37:19.259944",
-    "radarSummary": "Steam 官方最新推送已对齐，CET v1.33.0 / REDmod 100% 稳定运行，未发现恶性坏档报错。",
-    "radarRiskTitle": "💡 日常游玩避坑提示",
-    "radarRiskDesc": "建议在单机离线状态下游玩，大版本更新后优先使用本站批处理脚本核对环境路径。",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarSummary": "Steam 公共分支最近一次更新在 2026-10-23（build 26161058），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "游戏更新后先别急着进，等 CET、RED4ext 等核心 Mod 出适配新版本的更新再玩。",
     "lastUpdated": "2026-10-25",
-    "heatTier": "solar"
+    "heatTier": "solar",
+    "radarReason": "quiet",
+    "steamBuildUpdatedAt": "2026-10-23T13:33:24Z",
+    "radarFramework": {
+      "name": "Cyber Engine Tweaks / RED4ext",
+      "url": "https://github.com/maximegmd/CyberEngineTweaks"
+    },
+    "radarAdvice": {
+      "zh-CN": "游戏更新后先别急着进，等 CET、RED4ext 等核心 Mod 出适配新版本的更新再玩。",
+      "en": "After a game update, wait for Cyber Engine Tweaks, RED4ext and other core mods to update before playing."
+    },
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1847286114045127"
   },
   {
     "id": "black-myth-wukong",
@@ -3491,15 +3502,20 @@ window.GAMES_DATA = [
     ],
     "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】黑神话悟空 调试控制台一键激活\necho ========================================================\necho   【老L·单机避坑局】黑神话悟空 调试控制台一键激活器\necho   基于虚幻5原生控制台 · 自动备份 · 绿色透明\necho ========================================================\necho.\n\nset \"MODS_TXT=b1\\Binaries\\Win64\\ue4ss\\mods.txt\"\n\nif not exist \"b1\\Binaries\\Win64\" (\n    echo [!] 未在当前目录下检测到 b1\\Binaries\\Win64\n    echo     请将本 bat 脚本放置在《黑神话：悟空》安装根目录下运行！\n    echo.\n    pause\n    exit /b\n)\n\nif exist \"%MODS_TXT%\" (\n    echo [*] 正在备份 mods.txt 到 %MODS_TXT%.bak ...\n    copy /y \"%MODS_TXT%\" \"%MODS_TXT%.bak\" >nul\n    powershell -Command \"(Get-Content '%MODS_TXT%') -replace 'ConsoleEnablerMod\\s*:\\s*0', 'ConsoleEnablerMod : 1' | Set-Content '%MODS_TXT%'\"\n    echo [+] 调试控制台模块已激活为 1！\n) else (\n    echo [i] 未检测到 ue4ss\\mods.txt，请确保已安装 UE4SS 调试前置。\n)\n\necho.\necho ========================================================\necho  [√] 搞定！进入游戏按 F10 或 ~ 键呼出控制台！\necho      直接粘贴老L推荐套餐代码即可畅玩！\necho ========================================================\necho.\npause",
     "compatibilityStatus": "green",
-    "radarStatusText": "🟢 完美兼容实测通过",
+    "radarStatusText": "🟢 近 14 天无更新",
     "latestSteamPatch": "Black Myth: Wukong — 30% Off Coming Soon",
     "steamBuildId": "21393610",
-    "steamLastChecked": "2026-11-19T09:37:19.259944",
-    "radarSummary": "Steam 官方最新推送已对齐，UE4SS v3.0.1+ / UE5 Console Enabler 100% 稳定运行，未发现恶性坏档报错。",
-    "radarRiskTitle": "💡 日常游玩避坑提示",
-    "radarRiskDesc": "建议在单机离线状态下游玩，大版本更新后优先使用本站批处理脚本核对环境路径。",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarSummary": "Steam 公共分支最近一次更新在 2026-01-14（build 21393610），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "游戏更新后，依赖框架的 Mod 和修改器可能要等作者适配；想稳妥可在 Steam 属性里把自动更新改成「仅在启动时更新」，并先备份存档。",
     "lastUpdated": "2026-10-26",
-    "heatTier": "solar"
+    "heatTier": "solar",
+    "radarReason": "quiet",
+    "steamBuildUpdatedAt": "2026-01-14T07:57:07Z",
+    "radarFramework": null,
+    "radarAdvice": null,
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1840310314337994"
   },
   {
     "id": "witcher-3",
@@ -5943,25 +5959,23 @@ window.GAMES_DATA = [
     ],
     "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】巫师3次世代版 控制台一键开门工具\necho ========================================================\necho   【老L·单机避坑局】巫师3次世代版 控制台一键开门脚本\necho   官方底层原生开关 · 100%% 开源透明 · 自动备份原文件\necho ========================================================\necho.\n\nset \"TARGET_DIR=bin\\config\\base\"\nset \"TARGET_FILE=%TARGET_DIR%\\general.ini\"\n\nif not exist \"%TARGET_FILE%\" (\n    echo [!] 未在当前目录下检测到 %TARGET_FILE%\n    echo     请将本 bat 脚本直接复制到《巫师3》游戏安装根目录运行！\n    echo.\n    pause\n    exit /b\n)\n\necho [*] 正在备份原始配置文件到 %TARGET_FILE%.bak ...\ncopy /y \"%TARGET_FILE%\" \"%TARGET_FILE%.bak\" >nul\necho [+] 备份完成！原配置文件已安全保留。\n\necho [*] 正在注入官方原生控制台开关 DBGConsoleOn=true ...\nfindstr /i \"DBGConsoleOn\" \"%TARGET_FILE%\" >nul\nif %errorlevel% equ 0 (\n    echo [i] 配置文件中已存在 DBGConsoleOn，正在更新为 true ...\n    powershell -Command \"(Get-Content '%TARGET_FILE%') -replace '(?i)DBGConsoleOn\\s*=\\s*false', 'DBGConsoleOn=true' | Set-Content '%TARGET_FILE%'\"\n) else (\n    echo.>>\"%TARGET_FILE%\"\n    echo [General]>>\"%TARGET_FILE%\"\n    echo DBGConsoleOn=true>>\"%TARGET_FILE%\"\n)\n\necho.\necho ========================================================\necho  [√] 搞定！控制台已成功开启！\necho      进入游戏按 ~ (波浪键) 或 @ 键即可呼出控制台！\necho      若遇任何问题，可随时将 %TARGET_FILE%.bak 还原。\necho ========================================================\necho.\npause",
     "compatibilityStatus": "yellow",
-    "radarStatusText": "🟡 官方刚推新补丁·老L实测对齐中",
+    "radarStatusText": "🟡 修改器早于当前游戏版本",
     "latestSteamPatch": "Patch 5.01 is live!",
     "steamBuildId": "26238013",
-    "steamLastChecked": "2026-11-19T09:37:19.259944",
-    "radarSummary": "官方刚刚推送新版本（Patch 5.01），老L团队正真机实测前置兼容性，请暂缓更新！",
-    "radarRiskTitle": "⚠️ 官方刚推新补丁·老L实测对齐中",
-    "radarRiskDesc": "检测到 Steam 最新更新 [Patch 5.01 is live!]。旧版前置工具（REDkit / Script Merger）可能发生内存偏移冲突，请开启 Steam 离线模式并备份存档。",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarSummary": "风灵月影修改器最后更新于 2024-05-22，早于 Steam 当前版本（2026-10-29，build 26238013），可能和当前版本对不上。",
+    "radarRiskTitle": "⚠️ 修改器早于当前游戏版本",
+    "radarRiskDesc": "更新后先确认所用 Mod 已标注支持新版本再启用。",
     "lastUpdated": "2026-10-14",
     "heatTier": "solar",
-    "emergencyAlert": {
-      "zh-CN": "🚨【The Witcher 3: Wild Hunt】Steam 刚刚推送新更新（Patch 5.01）！前置框架对齐中，请开启离线模式暂缓更新！",
-      "en": "🚨 [The Witcher 3: Wild Hunt] Steam update (Patch 5.01) detected! Core frameworks aligning, please use offline mode!",
-      "zh-TW": "🚨【The Witcher 3: Wild Hunt】Steam 剛剛推送新更新（Patch 5.01）！前置框架對齊中，請開啟離線模式暫緩更新！",
-      "ja": "🚨【The Witcher 3: Wild Hunt】Steam アプデ（Patch 5.01）配信！前提MOD検証中、オフラインプレイ推奨！",
-      "ko": "🚨【The Witcher 3: Wild Hunt】Steam 새 패치（Patch 5.01）출시! 모드 정렬 중, 오프라인 모드 권장!",
-      "ru": "🚨 [The Witcher 3: Wild Hunt] Steam выпустил патч (Patch 5.01)! Идет проверка модов, играйте оффлайн!",
-      "de": "🚨 [The Witcher 3: Wild Hunt] Steam-Patch (Patch 5.01) aktiv! Mod-Anpassung läuft, bitte offline spielen!",
-      "es": "🚨 [The Witcher 3: Wild Hunt] ¡Parche (Patch 5.01) en Steam! Verificando mods, active el modo sin conexión!"
-    }
+    "radarReason": "trainer-behind",
+    "steamBuildUpdatedAt": "2026-10-29T10:59:52Z",
+    "radarFramework": null,
+    "radarAdvice": {
+      "zh-CN": "更新后先确认所用 Mod 已标注支持新版本再启用。",
+      "en": "After an update, enable mods only once they list support for the new game version."
+    },
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1846018067929400"
   },
   {
     "id": "baldurs-gate-3",
@@ -7335,26 +7349,27 @@ window.GAMES_DATA = [
       }
     ],
     "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】博德之门3 Script Extender 控制台开门工具\necho ========================================================\necho   【老L·单机避坑局】博德之门3 控制台黑窗一键开启\necho   基于 Norbyte 官方底层原生机制 · 自动备份 · 无毒纯净\necho ========================================================\necho.\n\nset \"SE_PATH=%LocalAppData%\\Larian Studios\\Baldur's Gate 3\\ScriptExtender\"\nif not exist \"%SE_PATH%\" mkdir \"%SE_PATH%\"\n\nset \"CFG_FILE=%SE_PATH%\\ScriptExtenderSettings.json\"\nif exist \"%CFG_FILE%\" copy /y \"%CFG_FILE%\" \"%CFG_FILE%.bak\" >nul\n\necho {\"CreateConsole\": true, \"EnableLua\": true}>\"%CFG_FILE%\"\n\necho [+] 已成功开启控制台黑窗配置：CreateConsole = true！\necho.\necho ========================================================\necho  [√] 开启成功！\necho      启动游戏时会自动弹出一个控制台黑窗口，\necho      直接在控制台黑窗口内粘贴老L套餐指令按回车即可生效！\necho ========================================================\necho.\npause",
-    "compatibilityStatus": "red",
-    "radarStatusText": "🔴 坏档预警·暂缓更新",
+    "compatibilityStatus": "yellow",
+    "radarStatusText": "🟡 修改器早于当前游戏版本",
     "latestSteamPatch": "Hotfix #36 Now Live!",
     "steamBuildId": "25605617",
-    "steamLastChecked": "2026-11-19T09:37:19.259944",
-    "radarSummary": "官方刚刚推送新版本（Hotfix #36），老L团队正真机实测前置兼容性，请暂缓更新！",
-    "radarRiskTitle": "🚨 官方突发补丁坏档预警",
-    "radarRiskDesc": "检测到 Steam 最新更新 [Hotfix #36 Now Live!]。旧版前置工具（BG3SE v18+ / Native Mod Loader）可能发生内存偏移冲突，请开启 Steam 离线模式并备份存档。",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarSummary": "风灵月影修改器最后更新于 2025-04-16，早于 Steam 当前版本（2026-09-29，build 25605617），可能和当前版本对不上。",
+    "radarRiskTitle": "⚠️ 修改器早于当前游戏版本",
+    "radarRiskDesc": "更新（含热修）后 Script Extender 常要作者跟进，等它适配后再玩依赖它的 Mod。",
     "lastUpdated": "2026-10-24",
     "heatTier": "solar",
-    "emergencyAlert": {
-      "zh-CN": "🚨【Baldur's Gate 3】Steam 刚刚推送新更新（Hotfix #36）！前置框架对齐中，请开启离线模式暂缓更新！",
-      "en": "🚨 [Baldur's Gate 3] Steam update (Hotfix #36) detected! Core frameworks aligning, please use offline mode!",
-      "zh-TW": "🚨【Baldur's Gate 3】Steam 剛剛推送新更新（Hotfix #36）！前置框架對齊中，請開啟離線模式暫緩更新！",
-      "ja": "🚨【Baldur's Gate 3】Steam アプデ（Hotfix #36）配信！前提MOD検証中、オフラインプレイ推奨！",
-      "ko": "🚨【Baldur's Gate 3】Steam 새 패치（Hotfix #36）출시! 모드 정렬 중, 오프라인 모드 권장!",
-      "ru": "🚨 [Baldur's Gate 3] Steam выпустил патч (Hotfix #36)! Идет проверка модов, играйте оффлайн!",
-      "de": "🚨 [Baldur's Gate 3] Steam-Patch (Hotfix #36) aktiv! Mod-Anpassung läuft, bitte offline spielen!",
-      "es": "🚨 [Baldur's Gate 3] ¡Parche (Hotfix #36) en Steam! Verificando mods, active el modo sin conexión!"
-    }
+    "radarReason": "trainer-behind",
+    "steamBuildUpdatedAt": "2026-09-29T14:55:18Z",
+    "radarFramework": {
+      "name": "BG3 Script Extender",
+      "url": "https://github.com/Norbyte/bg3se"
+    },
+    "radarAdvice": {
+      "zh-CN": "更新（含热修）后 Script Extender 常要作者跟进，等它适配后再玩依赖它的 Mod。",
+      "en": "Even hotfixes can break Script Extender; wait for it to support the new version before using mods that need it."
+    },
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1827626365770693"
   },
   {
     "id": "elden-ring",
@@ -8344,16 +8359,27 @@ window.GAMES_DATA = [
       }
     ],
     "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】艾尔登法环 离线防封引导助手\necho ========================================================\necho   【老L·单机避坑局】艾尔登法环 纯净离线引导工具\necho   自动截断 EAC 守护进程 · 物理隔离云存档 · 零封号\necho ========================================================\necho.\nif not exist \"Game\\eldenring.exe\" (\n    echo [!] 提示: 请将本脚本放在 ELDEN RING 游戏安装根目录！\n    pause\n    exit /b\n)\necho [*] 正在检查 ModEngine2 与 EAC 状态...\necho [√] 离线管道准备就绪！\necho [i] 启动游戏后主菜单右下角将强制显示“离线模式”。\necho.\npause",
-    "compatibilityStatus": "green",
-    "radarStatusText": "🟢 完美兼容实测通过",
+    "compatibilityStatus": "yellow",
+    "radarStatusText": "🟡 修改器早于当前游戏版本",
     "latestSteamPatch": "Alexander, Warrior Jar Artisan Keycap has arrived!",
     "steamBuildId": "25827938",
-    "steamLastChecked": "2026-11-19T09:37:19.259944",
-    "radarSummary": "Steam 官方最新推送已对齐，ModEngine2 / EAC Bypass 100% 稳定运行，未发现恶性坏档报错。",
-    "radarRiskTitle": "💡 日常游玩避坑提示",
-    "radarRiskDesc": "建议在单机离线状态下游玩，大版本更新后优先使用本站批处理脚本核对环境路径。",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarSummary": "风灵月影修改器最后更新于 2026-01-02，早于 Steam 当前版本（2026-10-20，build 25827938），可能和当前版本对不上。",
+    "radarRiskTitle": "⚠️ 修改器早于当前游戏版本",
+    "radarRiskDesc": "带 EAC 反作弊，联机模式别用 Mod/修改器；更新后等 Mod Engine 2 和所用 Mod 适配再用。",
     "lastUpdated": "2026-10-22",
-    "heatTier": "solar"
+    "heatTier": "solar",
+    "radarReason": "trainer-behind",
+    "steamBuildUpdatedAt": "2026-10-20T07:00:45Z",
+    "radarFramework": {
+      "name": "Mod Engine 2",
+      "url": "https://github.com/soulsmods/ModEngine2"
+    },
+    "radarAdvice": {
+      "zh-CN": "带 EAC 反作弊，联机模式别用 Mod/修改器；更新后等 Mod Engine 2 和所用 Mod 适配再用。",
+      "en": "Has Easy Anti-Cheat: never use mods or trainers online. After updates, wait for Mod Engine 2 and your mods."
+    },
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1847920302237841"
   },
   {
     "id": "skyrim-se",
@@ -9230,19 +9256,26 @@ window.GAMES_DATA = [
     ],
     "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】上古卷轴5 v1.6.1170 控制台排错助手\necho ========================================================\necho   【老L·单机避坑局】天际重制版 控制台与前置排错\necho   官方 Creation 引擎原生机制 · FormID 前导零精简\necho ========================================================\necho.\nif not exist \"SkyrimSE.exe\" (\n    echo [!] 提示: 请将本脚本放在 Skyrim Special Edition 根目录！\n    pause\n    exit /b\n)\necho [*] 正在核验 Skyrim.ini 控制台开关...\necho [√] bAllowConsole=1 正常就绪！\necho [i] 进游戏按 ~ (波浪键) 呼出控制台，前导 000 全部可省略！\necho.\npause",
     "compatibilityStatus": "yellow",
-    "radarStatusText": "🟡 需更新前置 / 需补丁适配",
+    "radarStatusText": "🟡 修改器早于当前游戏版本",
     "latestSteamPatch": "Celebrate 15 Years of Skyrim with the Anniversary Creation Bundle",
     "steamBuildId": "24914197",
-    "steamLastChecked": "2026-11-19T09:37:19.259944",
-    "radarSummary": "v1.6.1170 前置需更新对齐！认准 SKSE64 2.2.6 与 SSE Engine Fixes 修复推车飞天。",
-    "radarRiskTitle": "⚠️ SKSE 版本强校验避坑",
-    "radarRiskDesc": "必须精准核对 SKSE64 2.2.6，缺失 Address Library 会直接进游戏黑屏或车夫翻滚卡死。",
-    "emergencyAlert": {
-      "zh-CN": "v1.6.1170 前置需更新对齐！认准 SKSE64 2.2.6 与 SSE Engine Fixes 修复推车飞天",
-      "en": "v1.6.1170 requires prerequisite updates! Ensure SKSE64 2.2.6 & SSE Engine Fixes are installed."
-    },
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarSummary": "风灵月影修改器最后更新于 2023-12-05，早于 Steam 当前版本（2026-08-27，build 24914197），可能和当前版本对不上。",
+    "radarRiskTitle": "⚠️ 修改器早于当前游戏版本",
+    "radarRiskDesc": "游戏更新后先别急着进，等 SKSE64 和 SKSE 插件出对应版本再玩；可在 Steam 设成仅在启动时更新。",
     "lastUpdated": "2026-10-18",
-    "heatTier": "solar"
+    "heatTier": "solar",
+    "radarReason": "trainer-behind",
+    "steamBuildUpdatedAt": "2026-08-27T14:00:09Z",
+    "radarFramework": {
+      "name": "SKSE64",
+      "url": "https://skse.silverlock.org/"
+    },
+    "radarAdvice": {
+      "zh-CN": "游戏更新后先别急着进，等 SKSE64 和 SKSE 插件出对应版本再玩；可在 Steam 设成仅在启动时更新。",
+      "en": "After a game update, wait for matching SKSE64 and SKSE plugin builds before playing."
+    },
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849192144180604"
   },
   {
     "id": "fallout-4",
@@ -10191,20 +10224,27 @@ window.GAMES_DATA = [
       }
     ],
     "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】辐射4次世代防暗更与环境核验\necho ========================================================\necho   【老L·单机避坑局】辐射4 次世代更新防暗更助手\necho   锁定 Steam 自动推送 · 聚落容量解除指南\necho ========================================================\necho.\nif not exist \"Fallout4.exe\" (\n    echo [!] 提示: 请将脚本置于 Fallout 4 根目录下！\n    pause\n    exit /b\n)\necho [*] 正在检查 F4SE 与次世代版本...\necho [i] 请在 Steam 库右键 Fallout 4 -> 属性 -> 更新 -> 设置为【仅在我启动该游戏时更新】。\necho [√] 日常启动请一律运行 f4se_loader.exe 规避强制推送！\necho.\npause",
-    "compatibilityStatus": "yellow",
-    "radarStatusText": "🟡 需更新前置 / 注意老插件",
+    "compatibilityStatus": "green",
+    "radarStatusText": "🟢 近 14 天无更新",
     "latestSteamPatch": "Happy Fallout Day!",
     "steamBuildId": "24564252",
-    "steamLastChecked": "2026-11-19T09:37:19.259944",
-    "radarSummary": "F4SE 已支持次世代版与周年版。游戏更新后先把 F4SE 和依赖它的插件更新到对应版本；仍停在 1.10.163 的老插件可能闪退。",
-    "radarRiskTitle": "⚠️ F4SE 与插件需对齐游戏版本",
-    "radarRiskDesc": "更新游戏后，到 F4SE 官网下载与当前游戏版本对应的构建，并确认常用插件已适配；作者没跟进的老插件会闪退，可先禁用或改用 Downgrader 回退。",
-    "emergencyAlert": {
-      "zh-CN": "F4SE 已支持新版本：更新游戏后请同步更新 F4SE 与插件，老插件可能闪退",
-      "en": "F4SE supports the current runtimes: update F4SE and your plugins after each game update; outdated plugins may crash."
-    },
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarSummary": "Steam 公共分支最近一次更新在 2026-08-18（build 24564252），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "游戏更新后先别急着进，等 F4SE 和 F4SE 插件出对应版本再玩；可在 Steam 设成仅在启动时更新。",
     "lastUpdated": "2026-10-20",
-    "heatTier": "solar"
+    "heatTier": "solar",
+    "radarReason": "quiet",
+    "steamBuildUpdatedAt": "2026-08-18T14:00:28Z",
+    "radarFramework": {
+      "name": "F4SE",
+      "url": "https://f4se.silverlock.org/"
+    },
+    "radarAdvice": {
+      "zh-CN": "游戏更新后先别急着进，等 F4SE 和 F4SE 插件出对应版本再玩；可在 Steam 设成仅在启动时更新。",
+      "en": "After a game update, wait for matching F4SE and F4SE plugin builds before playing."
+    },
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1847286114037070"
   },
   {
     "id": "palworld",
@@ -11231,16 +11271,27 @@ window.GAMES_DATA = [
       ]
     },
     "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】幻兽帕鲁 UE4SS 模组引导助手\necho ========================================================\necho   【老L·单机避坑局】幻兽帕鲁 纯净模组环境检查工具\necho   纯净离线加载 · 零杀软误报 · 快捷备份配置\necho ========================================================\necho.\nif not exist \"Pal\\Binaries\\Win64\\Palworld-Win64-Shipping.exe\" (\n    echo [!] 提示: 请将本脚本放在 Palworld 游戏安装根目录！\n    pause\n    exit /b\n)\necho [*] 正在检查 UE4SS.dll 与 xinput1_3.dll 状态...\nif exist \"Pal\\Binaries\\Win64\\UE4SS.dll\" (\n    echo [√] UE4SS 底层前置挂载正常！游戏内按 F10 唤出菜单。\n) else (\n    echo [!] 未检测到 UE4SS，请解压 UE4SS 至 Pal/Binaries/Win64/。\n)\necho.\npause\n",
-    "compatibilityStatus": "green",
-    "radarStatusText": "🟢 完美兼容实测通过",
+    "compatibilityStatus": "yellow",
+    "radarStatusText": "🟡 修改器早于当前游戏版本",
     "latestSteamPatch": "Palworld × Graveyard Keeper 2 Steam Bundle is Out Now!",
     "steamBuildId": "25246127",
-    "steamLastChecked": "2026-11-19T09:37:19.259944",
-    "radarSummary": "Steam 官方最新推送已对齐，UE4SS-RE / Palworld Modding Kit 100% 稳定运行，未发现恶性坏档报错。",
-    "radarRiskTitle": "💡 日常游玩避坑提示",
-    "radarRiskDesc": "建议在单机离线状态下游玩，大版本更新后优先使用本站批处理脚本核对环境路径。",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarSummary": "风灵月影修改器最后更新于 2026-07-10，早于 Steam 当前版本（2026-09-15，build 25246127），可能和当前版本对不上。",
+    "radarRiskTitle": "⚠️ 修改器早于当前游戏版本",
+    "radarRiskDesc": "小更新一般不用换 UE4SS；大版本更新后先删旧 Mod，等 UE4SS 和 Mod 作者确认适配。",
     "lastUpdated": "2026-10-16",
-    "heatTier": "solar"
+    "heatTier": "solar",
+    "radarReason": "trainer-behind",
+    "steamBuildUpdatedAt": "2026-09-15T03:01:22Z",
+    "radarFramework": {
+      "name": "UE4SS Experimental (Palworld)",
+      "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3625223587"
+    },
+    "radarAdvice": {
+      "zh-CN": "小更新一般不用换 UE4SS；大版本更新后先删旧 Mod，等 UE4SS 和 Mod 作者确认适配。",
+      "en": "Minor patches rarely need a new UE4SS; after major updates, remove old mods and wait for UE4SS and mods to update."
+    },
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1847920302229254"
   },
   {
     "id": "starfield",
@@ -12239,15 +12290,26 @@ window.GAMES_DATA = [
     },
     "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】星空 SFSE 纯净启动助手\necho ========================================================\necho   【老L·单机避坑局】星空 SFSE 扩展环境一键诊断工具\necho   防成就锁死 · 解除改船限制 · 极速 60FPS 菜单\necho ========================================================\necho.\nif not exist \"Starfield.exe\" (\n    echo [!] 提示: 请将本脚本放在 Starfield 游戏安装根目录！\n    pause\n    exit /b\n)\necho [*] 正在检查 sfse_loader.exe 状态...\nif exist \"sfse_loader.exe\" (\n    echo [√] SFSE 扩展引导已就绪！即将通过 SFSE 启动游戏...\n    start \"\" \"sfse_loader.exe\"\n) else (\n    echo [!] 未检测到 sfse_loader.exe，正在以原版模式拉起...\n    start \"\" \"Starfield.exe\"\n)\necho.\npause\n",
     "compatibilityStatus": "green",
-    "radarStatusText": "🟢 完美兼容实测通过",
+    "radarStatusText": "🟢 近 14 天无更新",
     "latestSteamPatch": "New worlds to explore with Starfield Creations!",
     "steamBuildId": "23518663",
-    "steamLastChecked": "2026-11-19T09:37:19.259944",
-    "radarSummary": "Steam 官方最新推送已对齐，SFSE / StarfieldCustom.ini 100% 稳定运行，未发现恶性坏档报错。",
-    "radarRiskTitle": "💡 日常游玩避坑提示",
-    "radarRiskDesc": "建议在单机离线状态下游玩，大版本更新后优先使用本站批处理脚本核对环境路径。",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarSummary": "Steam 公共分支最近一次更新在 2026-06-11（build 23518663），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "游戏更新后先别急着进，等 SFSE 和 SFSE 插件出对应版本再玩；可在 Steam 设成仅在启动时更新。",
     "lastUpdated": "2026-10-15",
-    "heatTier": "solar"
+    "heatTier": "solar",
+    "radarReason": "quiet",
+    "steamBuildUpdatedAt": "2026-06-11T15:00:15Z",
+    "radarFramework": {
+      "name": "SFSE",
+      "url": "https://github.com/ianpatt/sfse"
+    },
+    "radarAdvice": {
+      "zh-CN": "游戏更新后先别急着进，等 SFSE 和 SFSE 插件出对应版本再玩；可在 Steam 设成仅在启动时更新。",
+      "en": "After a game update, wait for matching SFSE and SFSE plugin builds before playing."
+    },
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1835236783563685"
   },
   {
     "id": "gta-v",
@@ -13171,16 +13233,27 @@ window.GAMES_DATA = [
       ]
     },
     "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】GTA5 线上/单机模式安全切换助手\necho ========================================================\necho   【老L·单机避坑局】GTA5 离线防封一键隔离切换器\necho   线上/单机物理隔离 · 绝对杜绝封号误操作\necho ========================================================\necho.\nif not exist \"GTA5.exe\" (\n    echo [!] 提示: 请将本脚本放在 Grand Theft Auto V 游戏安装根目录！\n    pause\n    exit /b\n)\nif exist \"dinput8.dll\" (\n    echo [当前状态]: 【单机 Mod 模式】已开启 (严禁进入线上模式！)\n    echo.\n    set /p choice=\"是否切换为【纯净线上模式】(输入 Y 确认): \"\n    if /i \"%choice%\"==\"Y\" (\n        ren \"dinput8.dll\" \"dinput8.dll.bak\"\n        echo [√] 已安全切断模组管道！现在可安全进入 GTA Online。\n    )\n) else if exist \"dinput8.dll.bak\" (\n    echo [当前状态]: 【纯净线上模式】已启用 (Mod 处于隔离休眠状态)\n    echo.\n    set /p choice=\"是否激活【单机离线 Mod 模式】(输入 Y 确认): \"\n    if /i \"%choice%\"==\"Y\" (\n        ren \"dinput8.dll.bak\" \"dinput8.dll\"\n        echo [√] 已激活 ScriptHookV 离线模组环境！按 F4 呼出菜单。\n    )\n)\necho.\npause\n",
-    "compatibilityStatus": "yellow",
-    "radarStatusText": "🟡 需更新前置 / 需补丁适配",
+    "compatibilityStatus": "green",
+    "radarStatusText": "🟢 近 14 天无更新",
     "latestSteamPatch": "Take Down the Kortz Center and More High-Value Targets in The Heist Event",
     "steamBuildId": "24129523",
-    "steamLastChecked": "2026-11-19T09:37:19.259944",
-    "radarSummary": "需更新 ScriptHookV！BattlEye 反作弊上线，故事模式必须物理隔离。",
-    "radarRiskTitle": "⚠️ BattlEye 线上封禁风险",
-    "radarRiskDesc": "若带 Mod 进入 GTA Online 必定触发 BattlEye 封禁！故事模式单机必须物理隔离。",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarSummary": "Steam 公共分支最近一次更新在 2026-07-14（build 24129523），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "更新后等 Script Hook V 出对应版本再用脚本 Mod；在线模式带 BattlEye，别用 Mod/修改器。",
     "lastUpdated": "2026-10-11",
-    "heatTier": "solar"
+    "heatTier": "solar",
+    "radarReason": "quiet",
+    "steamBuildUpdatedAt": "2026-07-14T09:01:57Z",
+    "radarFramework": {
+      "name": "Script Hook V",
+      "url": "https://www.dev-c.com/gtav/scripthookv/"
+    },
+    "radarAdvice": {
+      "zh-CN": "更新后等 Script Hook V 出对应版本再用脚本 Mod；在线模式带 BattlEye，别用 Mod/修改器。",
+      "en": "After updates, wait for a matching Script Hook V. GTA Online uses BattlEye: never use mods or trainers online."
+    },
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1848664643345005"
   },
   {
     "id": "rdr2",
@@ -13923,15 +13996,26 @@ window.GAMES_DATA = [
     },
     "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】荒野大镖客2 离线防封助手\necho ========================================================\necho   【老L·单机避坑局】荒野大镖客2 纯净离线隔离切换器\necho   故事模式一键畅玩 · 物理隔离线上 RDO · 零封号\necho ========================================================\necho.\nif not exist \"RDR2.exe\" (\n    echo [!] 提示: 请将本脚本放在 Red Dead Redemption 2 游戏安装根目录！\n    pause\n    exit /b\n)\nif exist \"dinput8.dll\" (\n    echo [当前状态]: 【单机 Mod 模式】已开启 (切勿进入线上战局！)\n    echo.\n    set /p choice=\"是否切换为【纯净线上 RDO 模式】(输入 Y 确认): \"\n    if /i \"%choice%\"==\"Y\" (\n        ren \"dinput8.dll\" \"dinput8.dll.bak\"\n        echo [√] 已切断模组管道！现在可安全启动 RDO 线上战局。\n    )\n) else if exist \"dinput8.dll.bak\" (\n    echo [当前状态]: 【纯净线上模式】已启用 (Mod 处于隔离状态)\n    echo.\n    set /p choice=\"是否激活【单机离线 Mod 模式】(输入 Y 确认): \"\n    if /i \"%choice%\"==\"Y\" (\n        ren \"dinput8.dll.bak\" \"dinput8.dll\"\n        echo [√] 已激活 ScriptHookRDR2 离线环境！按 F5 呼出修改菜单。\n    )\n)\necho.\npause\n",
     "compatibilityStatus": "green",
-    "radarStatusText": "🟢 完美兼容实测通过",
+    "radarStatusText": "🟢 近 14 天无更新",
     "latestSteamPatch": "A Bustling Frontier Benefits All Roles in Red Dead Online",
     "steamBuildId": "13773296",
-    "steamLastChecked": "2026-11-19T09:37:19.259944",
-    "radarSummary": "Steam 官方最新推送已对齐，ScriptHookRDR2 / LML 100% 稳定运行，未发现恶性坏档报错。",
-    "radarRiskTitle": "💡 日常游玩避坑提示",
-    "radarRiskDesc": "建议在单机离线状态下游玩，大版本更新后优先使用本站批处理脚本核对环境路径。",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarSummary": "Steam 公共分支最近一次更新在 2024-03-19（build 13773296），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "更新后先确认 Script Hook RDR2 等加载器支持新版本；Red Dead Online 里别用 Mod。",
     "lastUpdated": "2026-10-08",
-    "heatTier": "violet"
+    "heatTier": "violet",
+    "radarReason": "quiet",
+    "steamBuildUpdatedAt": "2024-03-19T10:12:09Z",
+    "radarFramework": {
+      "name": "Script Hook RDR2",
+      "url": "https://www.dev-c.com/rdr2/scripthookrdr2/"
+    },
+    "radarAdvice": {
+      "zh-CN": "更新后先确认 Script Hook RDR2 等加载器支持新版本；Red Dead Online 里别用 Mod。",
+      "en": "After updates, check that Script Hook RDR2 and other loaders support the new version. No mods in Red Dead Online."
+    },
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1833968530900662"
   },
   {
     "id": "monster-hunter-world",
@@ -14894,15 +14978,26 @@ window.GAMES_DATA = [
     },
     "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】怪猎世界 Stracker Loader 诊断工具\necho ========================================================\necho   【老L·单机避坑局】怪物猎人世界 模组环境自动诊断器\necho   CRC 绕过检测 · 自动备份 nativePC · 零卡死\necho ========================================================\necho.\nif not exist \"MonsterHunterWorld.exe\" (\n    echo [!] 提示: 请将本脚本放在 Monster Hunter World 游戏安装根目录！\n    pause\n    exit /b\n)\necho [*] 正在检查 dinput8.dll 与 nativePC 状态...\nif exist \"dinput8.dll\" (\n    echo [√] Stracker's Loader 前置挂载正常！\n) else (\n    echo [!] 未检测到 dinput8.dll，部分 nativePC 模组可能无法正常加载。\n)\nif not exist \"nativePC\" (\n    mkdir nativePC\n    echo [+] 已为您自动创建 nativePC 模组目录。\n)\necho.\npause\n",
     "compatibilityStatus": "green",
-    "radarStatusText": "🟢 完美兼容实测通过",
+    "radarStatusText": "🟢 近 14 天无更新",
     "latestSteamPatch": "Monster Hunter: World has sold over 30 million copies worldwide!",
     "steamBuildId": "15539686",
-    "steamLastChecked": "2026-11-19T09:37:19.259944",
-    "radarSummary": "Steam 官方最新推送已对齐，Stracker's Loader / REFramework 100% 稳定运行，未发现恶性坏档报错。",
-    "radarRiskTitle": "💡 日常游玩避坑提示",
-    "radarRiskDesc": "建议在单机离线状态下游玩，大版本更新后优先使用本站批处理脚本核对环境路径。",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarSummary": "Steam 公共分支最近一次更新在 2024-10-06（build 15539686），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "游戏更新后等 Stracker's Loader 出新版，再用依赖它的插件类 Mod。",
     "lastUpdated": "2026-10-12",
-    "heatTier": "violet"
+    "heatTier": "violet",
+    "radarReason": "quiet",
+    "steamBuildUpdatedAt": "2024-10-06T23:59:03Z",
+    "radarFramework": {
+      "name": "Stracker's Loader",
+      "url": "https://github.com/Strackeror/MHW-QuestLoader"
+    },
+    "radarAdvice": {
+      "zh-CN": "游戏更新后等 Stracker's Loader 出新版，再用依赖它的插件类 Mod。",
+      "en": "After a game update, wait for a new Stracker's Loader before using plugin mods that depend on it."
+    },
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1839041357022880"
   },
   {
     "id": "sekiro",
@@ -15691,15 +15786,26 @@ window.GAMES_DATA = [
     },
     "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】只狼 ModEngine 环境助手\necho ========================================================\necho   【老L·单机避坑局】只狼 模组加载引擎自动检测器\necho   零注入误报 · 纯净离线环境 · 144Hz 解锁引导\necho ========================================================\necho.\nif not exist \"sekiro.exe\" (\n    echo [!] 提示: 请将本脚本放在 Sekiro 游戏安装根目录！\n    pause\n    exit /b\n)\necho [*] 正在检查 dinput8.dll 与 mods 目录...\nif exist \"dinput8.dll\" (\n    echo [√] ModEngine 前置就绪！\n) else (\n    echo [!] 未检测到 dinput8.dll，请解压 ModEngine 至根目录。\n)\nif not exist \"mods\" (\n    mkdir mods\n    echo [+] 已为您自动创建 mods 模组目录。\n)\necho.\npause\n",
     "compatibilityStatus": "green",
-    "radarStatusText": "🟢 完美兼容实测通过",
+    "radarStatusText": "🟢 近 14 天无更新",
     "latestSteamPatch": "Steam Awards are here!",
     "steamBuildId": "5794815",
-    "steamLastChecked": "2026-11-19T09:37:19.259944",
-    "radarSummary": "Steam 官方最新推送已对齐，Mod Engine / Dinput8 Hook 100% 稳定运行，未发现恶性坏档报错。",
-    "radarRiskTitle": "💡 日常游玩避坑提示",
-    "radarRiskDesc": "建议在单机离线状态下游玩，大版本更新后优先使用本站批处理脚本核对环境路径。",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarSummary": "Steam 公共分支最近一次更新在 2020-11-20（build 5794815），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "更新后先确认 Mod Engine 和所用 Mod 支持新版本再用。",
     "lastUpdated": "2026-10-09",
-    "heatTier": "violet"
+    "heatTier": "violet",
+    "radarReason": "quiet",
+    "steamBuildUpdatedAt": "2020-11-20T01:00:31Z",
+    "radarFramework": {
+      "name": "Mod Engine",
+      "url": "https://github.com/katalash/ModEngine"
+    },
+    "radarAdvice": {
+      "zh-CN": "更新后先确认 Mod Engine 和所用 Mod 支持新版本再用。",
+      "en": "After an update, check that Mod Engine and your mods support the new version before playing."
+    },
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/2551782186276932328"
   },
   {
     "id": "re4-remake",
@@ -16538,15 +16644,26 @@ window.GAMES_DATA = [
     },
     "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】生化危机4重制版 REFramework 诊断助手\necho ========================================================\necho   【老L·单机避坑局】生化危机4重制版 纯净前置诊断器\necho   一键检查 dinput8.dll · 快捷呼出 Insert 菜单 · 零报错\necho ========================================================\necho.\nif not exist \"re4.exe\" (\n    echo [!] 提示: 请将本脚本放在 Resident Evil 4 Remake 游戏安装根目录！\n    pause\n    exit /b\n)\necho [*] 正在检查 REFramework 前置状态...\nif exist \"dinput8.dll\" (\n    echo [√] REFramework 挂载正常！游戏内按键盘 Insert 键开启菜单。\n) else (\n    echo [!] 未检测到 dinput8.dll，请解压 REFramework 至根目录。\n)\necho.\npause\n",
     "compatibilityStatus": "green",
-    "radarStatusText": "🟢 完美兼容实测通过",
+    "radarStatusText": "🟢 近 14 天无更新",
     "latestSteamPatch": "Resident Evil Veronica Store Page now open!",
     "steamBuildId": "22377325",
-    "steamLastChecked": "2026-11-19T09:37:19.259944",
-    "radarSummary": "Steam 官方最新推送已对齐，REFramework / Fluffy Mod Manager 100% 稳定运行，未发现恶性坏档报错。",
-    "radarRiskTitle": "💡 日常游玩避坑提示",
-    "radarRiskDesc": "建议在单机离线状态下游玩，大版本更新后优先使用本站批处理脚本核对环境路径。",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarSummary": "Steam 公共分支最近一次更新在 2026-03-31（build 22377325），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "更新后先确认 REFramework（可试 nightly 版）和所用 Mod 已适配再用。",
     "lastUpdated": "2026-10-10",
-    "heatTier": "violet"
+    "heatTier": "violet",
+    "radarReason": "quiet",
+    "steamBuildUpdatedAt": "2026-03-31T01:02:33Z",
+    "radarFramework": {
+      "name": "REFramework",
+      "url": "https://github.com/praydog/REFramework"
+    },
+    "radarAdvice": {
+      "zh-CN": "更新后先确认 REFramework（可试 nightly 版）和所用 Mod 已适配再用。",
+      "en": "After an update, check that REFramework (try a nightly build) and your mods work before playing."
+    },
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1834602721197786"
   },
   {
     "id": "mount-and-blade-2",
@@ -17031,7 +17148,26 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-10-07",
-    "heatTier": "violet"
+    "heatTier": "violet",
+    "compatibilityStatus": "yellow",
+    "radarReason": "recent-update",
+    "radarStatusText": "🟡 刚更新 · Mod/修改器可能要等适配",
+    "steamBuildId": "26566465",
+    "steamBuildUpdatedAt": "2026-11-11T15:29:46Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": {
+      "name": "Harmony (Bannerlord.Harmony)",
+      "url": "https://github.com/BUTR/Bannerlord.Harmony"
+    },
+    "radarAdvice": {
+      "zh-CN": "更新后先确认 Mod 已支持新版本再启用；联机模式带 BattlEye，别用 Mod/修改器。",
+      "en": "After an update, enable mods only once they support the new version. Multiplayer uses BattlEye: no mods or trainers."
+    },
+    "radarSummary": "Steam 在 2026-11-11 推送了新版本（build 26566465）。依赖框架的 Mod 和修改器可能要等作者适配。",
+    "radarRiskTitle": "⚠️ 刚更新 · Mod/修改器可能要等适配",
+    "radarRiskDesc": "更新后先确认 Mod 已支持新版本再启用；联机模式带 BattlEye，别用 Mod/修改器。",
+    "latestSteamPatch": "Patch Notes - WS v1.3.7 / BL v1.5.7",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849192144179132"
   },
   {
     "id": "stardew-valley",
@@ -17486,7 +17622,26 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-10-01",
-    "heatTier": "violet"
+    "heatTier": "violet",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "16826371",
+    "steamBuildUpdatedAt": "2024-12-22T00:19:35Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": {
+      "name": "SMAPI",
+      "url": "https://smapi.io/"
+    },
+    "radarAdvice": {
+      "zh-CN": "更新后先把 SMAPI 和 Mod 更新到最新版，再到 smapi.io 兼容列表核对。",
+      "en": "After an update, update SMAPI and your mods, then check the compatibility list on smapi.io."
+    },
+    "radarSummary": "Steam 公共分支最近一次更新在 2024-12-22（build 16826371），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "更新后先把 SMAPI 和 Mod 更新到最新版，再到 smapi.io 兼容列表核对。",
+    "latestSteamPatch": "Stardew Valley 10-year Anniversary",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1825727806709248"
   },
   {
     "id": "terraria",
@@ -17712,7 +17867,26 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-29",
-    "heatTier": "violet"
+    "heatTier": "violet",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "24893155",
+    "steamBuildUpdatedAt": "2026-08-23T18:47:09Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": {
+      "name": "tModLoader",
+      "url": "https://github.com/tModLoader/tModLoader"
+    },
+    "radarAdvice": {
+      "zh-CN": "Mod 在独立的 tModLoader 里运行；本体更新后等 tModLoader 和 Mod 跟进即可。",
+      "en": "Mods run in the separate tModLoader app; after a Terraria update, wait for tModLoader and mods to catch up."
+    },
+    "radarSummary": "Steam 公共分支最近一次更新在 2026-08-23（build 24893155），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "Mod 在独立的 tModLoader 里运行；本体更新后等 tModLoader 和 Mod 跟进即可。",
+    "latestSteamPatch": "Terraria State of the Game - October 2026",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1847920302235929"
   },
   {
     "id": "hogwarts-legacy",
@@ -18032,7 +18206,23 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-10-06",
-    "heatTier": "violet"
+    "heatTier": "violet",
+    "compatibilityStatus": "yellow",
+    "radarReason": "recent-update",
+    "radarStatusText": "🟡 刚更新 · Mod/修改器可能要等适配",
+    "steamBuildId": "26175237",
+    "steamBuildUpdatedAt": "2026-11-05T16:02:27Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": null,
+    "radarAdvice": {
+      "zh-CN": "官方 Mod 在游戏内通过 CurseForge 管理，更新后到游戏内 Mod 页检查更新。",
+      "en": "Official mods are managed in-game via CurseForge; after an update, check the in-game mods menu for updates."
+    },
+    "radarSummary": "Steam 在 2026-11-05 推送了新版本（build 26175237）。依赖框架的 Mod 和修改器可能要等作者适配。",
+    "radarRiskTitle": "⚠️ 刚更新 · Mod/修改器可能要等适配",
+    "radarRiskDesc": "官方 Mod 在游戏内通过 CurseForge 管理，更新后到游戏内 Mod 页检查更新。",
+    "latestSteamPatch": "Hogwarts Legacy PC Patch – November 5th, 2026",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1848664643342127"
   },
   {
     "id": "subnautica",
@@ -18474,7 +18664,26 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-19",
-    "heatTier": "violet"
+    "heatTier": "violet",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "20241558",
+    "steamBuildUpdatedAt": "2025-10-03T21:32:59Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": {
+      "name": "BepInEx + Nautilus",
+      "url": "https://github.com/SubnauticaModding/Nautilus"
+    },
+    "radarAdvice": {
+      "zh-CN": "更新后先确认 BepInEx 包和 Nautilus 已支持新版本再用 Mod。",
+      "en": "After an update, make sure the BepInEx pack and Nautilus support the new version before using mods."
+    },
+    "radarSummary": "Steam 公共分支最近一次更新在 2025-10-03（build 20241558），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "更新后先确认 BepInEx 包和 Nautilus 已支持新版本再用 Mod。",
+    "latestSteamPatch": "Subnautica Free Weekend & Series Sale",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1828894815555876"
   },
   {
     "id": "dark-souls-3",
@@ -18778,7 +18987,26 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-10-05",
-    "heatTier": "violet"
+    "heatTier": "violet",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "10167187",
+    "steamBuildUpdatedAt": "2023-01-12T09:00:58Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": {
+      "name": "Mod Engine 2",
+      "url": "https://github.com/soulsmods/ModEngine2"
+    },
+    "radarAdvice": {
+      "zh-CN": "更新后先确认 Mod Engine 2 和所用 Mod 支持新版本再用。",
+      "en": "After an update, check that Mod Engine 2 and your mods support the new version before playing."
+    },
+    "radarSummary": "Steam 公共分支最近一次更新在 2023-01-12（build 10167187），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "更新后先确认 Mod Engine 2 和所用 Mod 支持新版本再用。",
+    "latestSteamPatch": "ELDEN RING NIGHTREIGN - Official Pre-Order Trailer",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1791580425958667"
   },
   {
     "id": "valheim",
@@ -19273,7 +19501,26 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-10-04",
-    "heatTier": "violet"
+    "heatTier": "violet",
+    "compatibilityStatus": "yellow",
+    "radarReason": "trainer-behind",
+    "radarStatusText": "🟡 修改器早于当前游戏版本",
+    "steamBuildId": "26249040",
+    "steamBuildUpdatedAt": "2026-10-28T13:10:42Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": {
+      "name": "BepInExPack Valheim",
+      "url": "https://github.com/BepInEx/BepInEx"
+    },
+    "radarAdvice": {
+      "zh-CN": "官方不提供 Mod 支持；更新后先更新 BepInExPack，服务器和客户端 Mod 版本保持一致。",
+      "en": "No official mod support. After updates, update BepInExPack first and keep server and client mods on matching versions."
+    },
+    "radarSummary": "风灵月影修改器最后更新于 2026-09-23，早于 Steam 当前版本（2026-10-28，build 26249040），可能和当前版本对不上。",
+    "radarRiskTitle": "⚠️ 修改器早于当前游戏版本",
+    "radarRiskDesc": "官方不提供 Mod 支持；更新后先更新 BepInExPack，服务器和客户端 Mod 版本保持一致。",
+    "latestSteamPatch": "Patch 1.0.21",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1847920302230913"
   },
   {
     "id": "re-village",
@@ -19550,7 +19797,26 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-28",
-    "heatTier": "violet"
+    "heatTier": "violet",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "22373341",
+    "steamBuildUpdatedAt": "2026-03-31T01:03:35Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": {
+      "name": "REFramework",
+      "url": "https://github.com/praydog/REFramework"
+    },
+    "radarAdvice": {
+      "zh-CN": "更新后先确认 REFramework（可试 nightly 版）和所用 Mod 已适配再用。",
+      "en": "After an update, check that REFramework (try a nightly build) and your mods work before playing."
+    },
+    "radarSummary": "Steam 公共分支最近一次更新在 2026-03-31（build 22373341），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "更新后先确认 REFramework（可试 nightly 版）和所用 Mod 已适配再用。",
+    "latestSteamPatch": "Resident Evil Veronica Store Page now open!",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1834602721197803"
   },
   {
     "id": "dying-light",
@@ -19861,7 +20127,20 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-03",
-    "heatTier": "violet"
+    "heatTier": "violet",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "24076292",
+    "steamBuildUpdatedAt": "2026-07-07T12:09:25Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": null,
+    "radarAdvice": null,
+    "radarSummary": "Steam 公共分支最近一次更新在 2026-07-07（build 24076292），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "游戏更新后，依赖框架的 Mod 和修改器可能要等作者适配；想稳妥可在 Steam 属性里把自动更新改成「仅在启动时更新」，并先备份存档。",
+    "latestSteamPatch": "Steam Halloween Sale X Dying Light now on SALE!",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1847286114046170"
   },
   {
     "id": "dying-light-2",
@@ -20177,7 +20456,23 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-27",
-    "heatTier": "violet"
+    "heatTier": "violet",
+    "compatibilityStatus": "yellow",
+    "radarReason": "recent-update",
+    "radarStatusText": "🟡 刚更新 · Mod/修改器可能要等适配",
+    "steamBuildId": "26404378",
+    "steamBuildUpdatedAt": "2026-11-05T13:01:30Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": null,
+    "radarAdvice": {
+      "zh-CN": "更新后先确认所用 Mod 已适配新版本再启用。",
+      "en": "After an update, enable mods only once they are confirmed to work with the new version."
+    },
+    "radarSummary": "Steam 在 2026-11-05 推送了新版本（build 26404378）。依赖框架的 Mod 和修改器可能要等作者适配。",
+    "radarRiskTitle": "⚠️ 刚更新 · Mod/修改器可能要等适配",
+    "radarRiskDesc": "更新后先确认所用 Mod 已适配新版本再启用。",
+    "latestSteamPatch": "CLAIM YOUR REWARDS Halloween Showdown 2026 has come to an end!",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849458702689537"
   },
   {
     "id": "fallout-new-vegas",
@@ -20464,7 +20759,26 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-05",
-    "heatTier": "violet"
+    "heatTier": "violet",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "1510068",
+    "steamBuildUpdatedAt": "2018-05-08T22:34:07Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": {
+      "name": "xNVSE",
+      "url": "https://github.com/xNVSE/NVSE"
+    },
+    "radarAdvice": {
+      "zh-CN": "游戏更新后先别急着进，等 xNVSE 和 NVSE 插件出对应版本再玩。",
+      "en": "After a game update, wait for matching xNVSE and NVSE plugin builds before playing."
+    },
+    "radarSummary": "Steam 公共分支最近一次更新在 2018-05-08（build 1510068），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "游戏更新后先别急着进，等 xNVSE 和 NVSE 插件出对应版本再玩。",
+    "latestSteamPatch": "Fallout Discounted for Steam Holiday Deals",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/3819571572127262350"
   },
   {
     "id": "rimworld",
@@ -20717,7 +21031,26 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-26",
-    "heatTier": "violet"
+    "heatTier": "violet",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "23969874",
+    "steamBuildUpdatedAt": "2026-06-30T17:12:35Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": {
+      "name": "Harmony",
+      "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=2009463077"
+    },
+    "radarAdvice": {
+      "zh-CN": "大版本更新后，先在 Mod 页确认已支持新版本再启用。",
+      "en": "After a major update, enable mods only after their pages list support for the new version."
+    },
+    "radarSummary": "Steam 公共分支最近一次更新在 2026-06-30（build 23969874），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "大版本更新后，先在 Mod 页确认已支持新版本再启用。",
+    "latestSteamPatch": "It's RimWorld's birthday!",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1847286114046348"
   },
   {
     "id": "project-zomboid",
@@ -20828,7 +21161,23 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-25",
-    "heatTier": "violet"
+    "heatTier": "violet",
+    "compatibilityStatus": "yellow",
+    "radarReason": "recent-update",
+    "radarStatusText": "🟡 刚更新 · Mod/修改器可能要等适配",
+    "steamBuildId": "26486631",
+    "steamBuildUpdatedAt": "2026-11-09T14:03:25Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": null,
+    "radarAdvice": {
+      "zh-CN": "更新后先确认订阅的 Mod 已适配新版本再启用。",
+      "en": "After an update, enable subscribed mods only once they support the new version."
+    },
+    "radarSummary": "Steam 在 2026-11-09 推送了新版本（build 26486631）。依赖框架的 Mod 和修改器可能要等作者适配。",
+    "radarRiskTitle": "⚠️ 刚更新 · Mod/修改器可能要等适配",
+    "radarRiskDesc": "更新后先确认订阅的 Mod 已适配新版本再启用。",
+    "latestSteamPatch": "42.22.2 STABLE Released",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1848664643355564"
   },
   {
     "id": "the-forest",
@@ -20939,7 +21288,26 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-13",
-    "heatTier": "cyan"
+    "heatTier": "cyan",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "20229486",
+    "steamBuildUpdatedAt": "2025-10-03T17:00:09Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": {
+      "name": "ModAPI",
+      "url": "https://modapi.survivetheforest.net/"
+    },
+    "radarAdvice": {
+      "zh-CN": "更新后先确认 ModAPI 和所用 Mod 支持新版本再用。",
+      "en": "After an update, check that ModAPI and your mods support the new version before playing."
+    },
+    "radarSummary": "Steam 公共分支最近一次更新在 2025-10-03（build 20229486），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "更新后先确认 ModAPI 和所用 Mod 支持新版本再用。",
+    "latestSteamPatch": "Unity security update",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1811772772517783"
   },
   {
     "id": "sons-of-the-forest",
@@ -21304,7 +21672,26 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-10-03",
-    "heatTier": "cyan"
+    "heatTier": "cyan",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "20228174",
+    "steamBuildUpdatedAt": "2025-10-03T18:44:52Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": {
+      "name": "RedLoader",
+      "url": "https://github.com/ToniMacaroni/RedLoader"
+    },
+    "radarAdvice": {
+      "zh-CN": "更新后先确认 RedLoader 和所用 Mod 支持新版本再用。",
+      "en": "After an update, check that RedLoader and your mods support the new version before playing."
+    },
+    "radarSummary": "Steam 公共分支最近一次更新在 2025-10-03（build 20228174），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "更新后先确认 RedLoader 和所用 Mod 支持新版本再用。",
+    "latestSteamPatch": "Unity security update",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1811772772517758"
   },
   {
     "id": "satisfactory",
@@ -21592,7 +21979,26 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-10-21",
-    "heatTier": "cyan"
+    "heatTier": "cyan",
+    "compatibilityStatus": "yellow",
+    "radarReason": "recent-update",
+    "radarStatusText": "🟡 刚更新 · Mod/修改器可能要等适配",
+    "steamBuildId": "26728002",
+    "steamBuildUpdatedAt": "2026-11-18T16:22:51Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": {
+      "name": "Satisfactory Mod Loader (SML)",
+      "url": "https://docs.ficsit.app/satisfactory-modding/latest/"
+    },
+    "radarAdvice": {
+      "zh-CN": "大更新或换引擎版本后 Mod 多半失效，先等 SML 和 Mod 更新；小补丁风险较低。",
+      "en": "Major or engine updates usually break mods; wait for SML and mod updates. Minor patches are lower risk."
+    },
+    "radarSummary": "Steam 在 2026-11-18 推送了新版本（build 26728002）。依赖框架的 Mod 和修改器可能要等作者适配。",
+    "radarRiskTitle": "⚠️ 刚更新 · Mod/修改器可能要等适配",
+    "radarRiskDesc": "大更新或换引擎版本后 Mod 多半失效，先等 SML 和 Mod 更新；小补丁风险较低。",
+    "latestSteamPatch": "Satisfactory Update v1.2.5.1",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849827110424942"
   },
   {
     "id": "factorio",
@@ -21796,7 +22202,23 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-10-02",
-    "heatTier": "cyan"
+    "heatTier": "cyan",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "26246811",
+    "steamBuildUpdatedAt": "2026-10-29T11:29:34Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": null,
+    "radarAdvice": {
+      "zh-CN": "更新后到主菜单的 Mods 里检查并更新 Mod。",
+      "en": "After an update, check for mod updates in the main menu's Mods section."
+    },
+    "radarSummary": "Steam 公共分支最近一次更新在 2026-10-29（build 26246811），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "更新后到主菜单的 Mods 里检查并更新 Mod。",
+    "latestSteamPatch": "Friday Facts #449 - 2.1 Stable",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1847286114035936"
   },
   {
     "id": "cities-skylines",
@@ -21909,7 +22331,23 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-24",
-    "heatTier": "cyan"
+    "heatTier": "cyan",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "22724702",
+    "steamBuildUpdatedAt": "2026-04-15T07:59:45Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": null,
+    "radarAdvice": {
+      "zh-CN": "更新后先确认订阅的 Mod 已适配新版本再启用。",
+      "en": "After an update, enable subscribed mods only once they support the new version."
+    },
+    "radarSummary": "Steam 公共分支最近一次更新在 2026-04-15（build 22724702），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "更新后先确认订阅的 Mod 已适配新版本再启用。",
+    "latestSteamPatch": "Cities: Skylines - Franchise Bundle",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849192144187318"
   },
   {
     "id": "civ-6",
@@ -22176,7 +22614,23 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-08",
-    "heatTier": "cyan"
+    "heatTier": "cyan",
+    "compatibilityStatus": "yellow",
+    "radarReason": "recent-update",
+    "radarStatusText": "🟡 刚更新 · Mod/修改器可能要等适配",
+    "steamBuildId": "26407122",
+    "steamBuildUpdatedAt": "2026-11-05T18:59:10Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": null,
+    "radarAdvice": {
+      "zh-CN": "更新后先确认订阅的 Mod 已适配新版本再启用。",
+      "en": "After an update, enable subscribed mods only once they support the new version."
+    },
+    "radarSummary": "Steam 在 2026-11-05 推送了新版本（build 26407122）。依赖框架的 Mod 和修改器可能要等作者适配。",
+    "radarRiskTitle": "⚠️ 刚更新 · Mod/修改器可能要等适配",
+    "radarRiskDesc": "更新后先确认订阅的 Mod 已适配新版本再启用。",
+    "latestSteamPatch": "[Windows Only] Civilization VI Hotfix: November 2026",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1848664643342775"
   },
   {
     "id": "crusader-kings-3",
@@ -22597,7 +23051,23 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-13",
-    "heatTier": "cyan"
+    "heatTier": "cyan",
+    "compatibilityStatus": "yellow",
+    "radarReason": "recent-update",
+    "radarStatusText": "🟡 刚更新 · Mod/修改器可能要等适配",
+    "steamBuildId": "26757580",
+    "steamBuildUpdatedAt": "2026-11-18T14:58:45Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": null,
+    "radarAdvice": {
+      "zh-CN": "更新后先确认订阅的 Mod 已适配新版本再启用。",
+      "en": "After an update, enable subscribed mods only once they support the new version."
+    },
+    "radarSummary": "Steam 在 2026-11-18 推送了新版本（build 26757580）。依赖框架的 Mod 和修改器可能要等作者适配。",
+    "radarRiskTitle": "⚠️ 刚更新 · Mod/修改器可能要等适配",
+    "radarRiskDesc": "更新后先确认订阅的 Mod 已适配新版本再启用。",
+    "latestSteamPatch": "Update 1.21 Hotfix",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849827110424588"
   },
   {
     "id": "hearts-of-iron-4",
@@ -22982,7 +23452,23 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-24",
-    "heatTier": "cyan"
+    "heatTier": "cyan",
+    "compatibilityStatus": "yellow",
+    "radarReason": "recent-update",
+    "radarStatusText": "🟡 刚更新 · Mod/修改器可能要等适配",
+    "steamBuildId": "26479645",
+    "steamBuildUpdatedAt": "2026-11-12T13:58:20Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": null,
+    "radarAdvice": {
+      "zh-CN": "大版本更新后创意工坊 Mod 常要等作者适配；急着玩可在 Steam 属性「测试版」里切回旧版本。",
+      "en": "Big updates often break Workshop mods until authors catch up; roll back via Steam Properties > Betas."
+    },
+    "radarSummary": "Steam 在 2026-11-12 推送了新版本（build 26479645）。依赖框架的 Mod 和修改器可能要等作者适配。",
+    "radarRiskTitle": "⚠️ 刚更新 · Mod/修改器可能要等适配",
+    "radarRiskDesc": "大版本更新后创意工坊 Mod 常要等作者适配；急着玩可在 Steam 属性「测试版」里切回旧版本。",
+    "latestSteamPatch": "To the Bitter End | Patch Notes",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849827110424406"
   },
   {
     "id": "stellaris",
@@ -23380,7 +23866,23 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-25",
-    "heatTier": "cyan"
+    "heatTier": "cyan",
+    "compatibilityStatus": "yellow",
+    "radarReason": "recent-update",
+    "radarStatusText": "🟡 刚更新 · Mod/修改器可能要等适配",
+    "steamBuildId": "26557690",
+    "steamBuildUpdatedAt": "2026-11-11T10:09:43Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": null,
+    "radarAdvice": {
+      "zh-CN": "大版本更新后创意工坊 Mod 常要等作者适配；急着玩可在 Steam 属性「测试版」里切回旧版本。",
+      "en": "Big updates often break Workshop mods until authors catch up; roll back via Steam Properties > Betas."
+    },
+    "radarSummary": "Steam 在 2026-11-11 推送了新版本（build 26557690）。依赖框架的 Mod 和修改器可能要等作者适配。",
+    "radarRiskTitle": "⚠️ 刚更新 · Mod/修改器可能要等适配",
+    "radarRiskDesc": "大版本更新后创意工坊 Mod 常要等作者适配；急着玩可在 Steam 属性「测试版」里切回旧版本。",
+    "latestSteamPatch": "Stellaris Dev Diary #440 - The Inquisitor Shipset and Galactic Halls",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849192144186987"
   },
   {
     "id": "total-war-warhammer-3",
@@ -23732,7 +24234,23 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-23",
-    "heatTier": "cyan"
+    "heatTier": "cyan",
+    "compatibilityStatus": "yellow",
+    "radarReason": "trainer-behind",
+    "radarStatusText": "🟡 修改器早于当前游戏版本",
+    "steamBuildId": "26403568",
+    "steamBuildUpdatedAt": "2026-11-03T10:53:31Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": null,
+    "radarAdvice": {
+      "zh-CN": "更新后部分创意工坊 Mod 要等作者适配；可在 Steam 属性「测试版」里选 rollback_1 回到上个版本。",
+      "en": "Some Workshop mods need author updates after a patch; pick rollback_1 in Steam Properties > Betas to go back."
+    },
+    "radarSummary": "风灵月影修改器最后更新于 2026-09-29，早于 Steam 当前版本（2026-11-03，build 26403568），可能和当前版本对不上。",
+    "radarRiskTitle": "⚠️ 修改器早于当前游戏版本",
+    "radarRiskDesc": "更新后部分创意工坊 Mod 要等作者适配；可在 Steam 属性「测试版」里选 rollback_1 回到上个版本。",
+    "latestSteamPatch": "Black Friday Sale NOW ON!",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849458702690712"
   },
   {
     "id": "total-war-three-kingdoms",
@@ -24020,7 +24538,20 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-31",
-    "heatTier": "cyan"
+    "heatTier": "cyan",
+    "compatibilityStatus": "yellow",
+    "radarReason": "trainer-behind",
+    "radarStatusText": "🟡 修改器早于当前游戏版本",
+    "steamBuildId": "25370317",
+    "steamBuildUpdatedAt": "2026-09-17T14:04:42Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": null,
+    "radarAdvice": null,
+    "radarSummary": "风灵月影修改器最后更新于 2025-12-06，早于 Steam 当前版本（2026-09-17，build 25370317），可能和当前版本对不上。",
+    "radarRiskTitle": "⚠️ 修改器早于当前游戏版本",
+    "radarRiskDesc": "修改器早于当前游戏版本时，部分功能可能失效；用之前先备份存档，等修改器更新后再用更稳妥。",
+    "latestSteamPatch": "Black Friday Sale NOW ON!",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849458702690723"
   },
   {
     "id": "dragons-dogma-2",
@@ -24347,7 +24878,26 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-10-17",
-    "heatTier": "cyan"
+    "heatTier": "cyan",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "26256634",
+    "steamBuildUpdatedAt": "2026-11-03T23:59:39Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": {
+      "name": "REFramework",
+      "url": "https://github.com/praydog/REFramework"
+    },
+    "radarAdvice": {
+      "zh-CN": "游戏更新后 REFramework 常要跟着修，先别急着进，等它出新版（Nightly）、Mod 也更新后再玩。",
+      "en": "Game updates often break REFramework; wait for a new (nightly) REFramework build and updated mods before playing."
+    },
+    "radarSummary": "Steam 公共分支最近一次更新在 2026-11-03（build 26256634），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "游戏更新后 REFramework 常要跟着修，先别急着进，等它出新版（Nightly）、Mod 也更新后再玩。",
+    "latestSteamPatch": "Delicious in Dungeon × Dragon's Dogma 2: Dark Arisen Collaboration is Served!",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1848557880477490"
   },
   {
     "id": "armored-core-6",
@@ -24588,7 +25138,26 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-22",
-    "heatTier": "cyan"
+    "heatTier": "cyan",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "21034069",
+    "steamBuildUpdatedAt": "2025-12-16T07:03:12Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": {
+      "name": "ModEngine2",
+      "url": "https://github.com/soulsmods/ModEngine2"
+    },
+    "radarAdvice": {
+      "zh-CN": "带 Easy Anti-Cheat 反作弊：联机模式别用 Mod/修改器，以免被封号。",
+      "en": "Uses Easy Anti-Cheat: don't use mods or trainers in online play, or you risk a ban."
+    },
+    "radarSummary": "Steam 公共分支最近一次更新在 2025-12-16（build 21034069），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "带 Easy Anti-Cheat 反作弊：联机模式别用 Mod/修改器，以免被封号。",
+    "latestSteamPatch": "Release Note for 2025/12/16",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1818752592134841"
   },
   {
     "id": "ghost-of-tsushima",
@@ -24904,7 +25473,20 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-21",
-    "heatTier": "cyan"
+    "heatTier": "cyan",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "23879181",
+    "steamBuildUpdatedAt": "2026-07-08T09:07:57Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": null,
+    "radarAdvice": null,
+    "radarSummary": "Steam 公共分支最近一次更新在 2026-07-08（build 23879181），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "游戏更新后，依赖框架的 Mod 和修改器可能要等作者适配；想稳妥可在 Steam 属性里把自动更新改成「仅在启动时更新」，并先备份存档。",
+    "latestSteamPatch": "Improved DualSense Edge support for Ghost of Tsushima DIRECTOR'S CUT",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1836506165580043"
   },
   {
     "id": "god-of-war",
@@ -25148,7 +25730,20 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-20",
-    "heatTier": "cyan"
+    "heatTier": "cyan",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "11168363",
+    "steamBuildUpdatedAt": "2023-05-22T17:15:18Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": null,
+    "radarAdvice": null,
+    "radarSummary": "Steam 公共分支最近一次更新在 2023-05-22（build 11168363），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "游戏更新后，依赖框架的 Mod 和修改器可能要等作者适配；想稳妥可在 Steam 属性里把自动更新改成「仅在启动时更新」，并先备份存档。",
+    "latestSteamPatch": "God of War (2018) Available for Up To 60% off!",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/6250522009517172772"
   },
   {
     "id": "spiderman-remastered",
@@ -25452,7 +26047,26 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-19",
-    "heatTier": "cyan"
+    "heatTier": "cyan",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "23986256",
+    "steamBuildUpdatedAt": "2026-07-08T09:10:12Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": {
+      "name": "Overstrike",
+      "url": "https://github.com/Tkachov/Overstrike"
+    },
+    "radarAdvice": {
+      "zh-CN": "游戏更新后先做 toc 重置：删掉 toc 和 toc.BAK，校验游戏文件，再用 Overstrike 重装 Mod。",
+      "en": "After an update, reset toc: delete toc and toc.BAK, verify game files, then reinstall mods with Overstrike."
+    },
+    "radarSummary": "Steam 公共分支最近一次更新在 2026-07-08（build 23986256），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "游戏更新后先做 toc 重置：删掉 toc 和 toc.BAK，校验游戏文件，再用 Overstrike 重装 Mod。",
+    "latestSteamPatch": "Improved DualSense Edge support for Marvel's Spider-Man Remastered",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1836506165580047"
   },
   {
     "id": "horizon-zero-dawn",
@@ -25751,7 +26365,20 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-03",
-    "heatTier": "cyan"
+    "heatTier": "cyan",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "8040161",
+    "steamBuildUpdatedAt": "2022-01-26T10:02:24Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": null,
+    "radarAdvice": null,
+    "radarSummary": "Steam 公共分支最近一次更新在 2022-01-26（build 8040161），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "游戏更新后，依赖框架的 Mod 和修改器可能要等作者适配；想稳妥可在 Steam 属性里把自动更新改成「仅在启动时更新」，并先备份存档。",
+    "latestSteamPatch": "Horizon Forbidden West Complete Edition out now on PC!",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/5686430301718251854"
   },
   {
     "id": "days-gone",
@@ -26068,7 +26695,20 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-20",
-    "heatTier": "cyan"
+    "heatTier": "cyan",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "19221447",
+    "steamBuildUpdatedAt": "2025-07-21T19:21:03Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": null,
+    "radarAdvice": null,
+    "radarSummary": "Steam 公共分支最近一次更新在 2025-07-21（build 19221447），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "游戏更新后，依赖框架的 Mod 和修改器可能要等作者适配；想稳妥可在 Steam 属性里把自动更新改成「仅在启动时更新」，并先备份存档。",
+    "latestSteamPatch": "Days Gone Beta Branch Option",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1813674388912015"
   },
   {
     "id": "death-stranding",
@@ -26353,7 +26993,20 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-18",
-    "heatTier": "cyan"
+    "heatTier": "cyan",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "13300582",
+    "steamBuildUpdatedAt": "2024-01-29T10:48:49Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": null,
+    "radarAdvice": null,
+    "radarSummary": "Steam 公共分支最近一次更新在 2024-01-29（build 13300582），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "游戏更新后，依赖框架的 Mod 和修改器可能要等作者适配；想稳妥可在 Steam 属性里把自动更新改成「仅在启动时更新」，并先备份存档。",
+    "latestSteamPatch": "FROM A PORTER'S PERSPECTIVE - NOVEMBER 16 2026",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849458702690311"
   },
   {
     "id": "detroit-become-human",
@@ -26460,7 +27113,20 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-04",
-    "heatTier": "cyan"
+    "heatTier": "cyan",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "12158144",
+    "steamBuildUpdatedAt": "2023-09-28T07:41:26Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": null,
+    "radarAdvice": null,
+    "radarSummary": "Steam 公共分支最近一次更新在 2023-09-28（build 12158144），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "游戏更新后，依赖框架的 Mod 和修改器可能要等作者适配；想稳妥可在 Steam 属性里把自动更新改成「仅在启动时更新」，并先备份存档。",
+    "latestSteamPatch": "Nominate us for the Labor of Love Steam Award!",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1784506359154638"
   },
   {
     "id": "kingdom-come-deliverance",
@@ -26790,7 +27456,20 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-22",
-    "heatTier": "cyan"
+    "heatTier": "cyan",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "22623230",
+    "steamBuildUpdatedAt": "2026-04-14T15:01:15Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": null,
+    "radarAdvice": null,
+    "radarSummary": "Steam 公共分支最近一次更新在 2026-04-14（build 22623230），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "游戏更新后，依赖框架的 Mod 和修改器可能要等作者适配；想稳妥可在 Steam 属性里把自动更新改成「仅在启动时更新」，并先备份存档。",
+    "latestSteamPatch": "Experience the music of Kingdom Come: Deliverance II.",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1845383656386437"
   },
   {
     "id": "mount-and-blade-warband",
@@ -26905,7 +27584,20 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-06",
-    "heatTier": "cyan"
+    "heatTier": "cyan",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "23983102",
+    "steamBuildUpdatedAt": "2026-07-02T11:33:58Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": null,
+    "radarAdvice": null,
+    "radarSummary": "Steam 公共分支最近一次更新在 2026-07-02（build 23983102），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "游戏更新后，依赖框架的 Mod 和修改器可能要等作者适配；想稳妥可在 Steam 属性里把自动更新改成「仅在启动时更新」，并先备份存档。",
+    "latestSteamPatch": "Viking Conquest 2.072",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1836506165567784"
   },
   {
     "id": "stalker-shadow-of-chernobyl",
@@ -27016,7 +27708,20 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-25",
-    "heatTier": "cyan"
+    "heatTier": "cyan",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "11567845",
+    "steamBuildUpdatedAt": "2023-06-27T10:12:10Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": null,
+    "radarAdvice": null,
+    "radarSummary": "Steam 公共分支最近一次更新在 2023-06-27（build 11567845），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "游戏更新后，依赖框架的 Mod 和修改器可能要等作者适配；想稳妥可在 Steam 属性里把自动更新改成「仅在启动时更新」，并先备份存档。",
+    "latestSteamPatch": "S.T.A.L.K.E.R.: Shadow of Chornobyl Enhanced Edition is now on Steam!",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1799817379622830"
   },
   {
     "id": "metro-exodus",
@@ -27227,7 +27932,20 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-26",
-    "heatTier": "cyan"
+    "heatTier": "cyan",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "6544595",
+    "steamBuildUpdatedAt": "2021-04-15T08:03:41Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": null,
+    "radarAdvice": null,
+    "radarSummary": "Steam 公共分支最近一次更新在 2021-04-15（build 6544595），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "游戏更新后，依赖框架的 Mod 和修改器可能要等作者适配；想稳妥可在 Steam 属性里把自动更新改成「仅在启动时更新」，并先备份存档。",
+    "latestSteamPatch": "METRO 2039 - Pre-order Now!",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1846018067944326"
   },
   {
     "id": "control",
@@ -27454,7 +28172,23 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-21",
-    "heatTier": "cyan"
+    "heatTier": "cyan",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "21225456",
+    "steamBuildUpdatedAt": "2025-12-18T09:44:09Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": {
+      "name": "Loose Files Loader",
+      "url": "https://www.nexusmods.com/control/mods/11"
+    },
+    "radarAdvice": null,
+    "radarSummary": "Steam 公共分支最近一次更新在 2025-12-18（build 21225456），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "游戏更新后，依赖框架的 Mod 和修改器可能要等作者适配；想稳妥可在 Steam 属性里把自动更新改成「仅在启动时更新」，并先备份存档。",
+    "latestSteamPatch": "CONTROL Resonant Is Out Now!",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1846018067929793"
   },
   {
     "id": "alan-wake-2",
@@ -28045,7 +28779,20 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-14",
-    "heatTier": "cyan"
+    "heatTier": "cyan",
+    "compatibilityStatus": "yellow",
+    "radarReason": "trainer-behind",
+    "radarStatusText": "🟡 修改器早于当前游戏版本",
+    "steamBuildId": "25216728",
+    "steamBuildUpdatedAt": "2026-09-17T15:08:34Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": null,
+    "radarAdvice": null,
+    "radarSummary": "风灵月影修改器最后更新于 2021-10-29，早于 Steam 当前版本（2026-09-17，build 25216728），可能和当前版本对不上。",
+    "radarRiskTitle": "⚠️ 修改器早于当前游戏版本",
+    "radarRiskDesc": "修改器早于当前游戏版本时，部分功能可能失效；用之前先备份存档，等修改器更新后再用更稳妥。",
+    "latestSteamPatch": "PC Mods Update",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1807332909579930"
   },
   {
     "id": "borderlands-3",
@@ -28361,7 +29108,23 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-06",
-    "heatTier": "cyan"
+    "heatTier": "cyan",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "15245523",
+    "steamBuildUpdatedAt": "2024-08-08T16:00:22Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": {
+      "name": "B3HM",
+      "url": "https://www.nexusmods.com/borderlands3/mods/244"
+    },
+    "radarAdvice": null,
+    "radarSummary": "Steam 公共分支最近一次更新在 2024-08-08（build 15245523），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "游戏更新后，依赖框架的 Mod 和修改器可能要等作者适配；想稳妥可在 Steam 属性里把自动更新改成「仅在启动时更新」，并先备份存档。",
+    "latestSteamPatch": "The Hunt is back on, alongside a new Twitch Drop!",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1848664643347098"
   },
   {
     "id": "borderlands-2",
@@ -28472,7 +29235,23 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-24",
-    "heatTier": "cyan"
+    "heatTier": "cyan",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "9218157",
+    "steamBuildUpdatedAt": "2022-08-04T22:23:57Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": {
+      "name": "OpenBLCMM",
+      "url": "https://github.com/BLCM/OpenBLCMM"
+    },
+    "radarAdvice": null,
+    "radarSummary": "Steam 公共分支最近一次更新在 2022-08-04（build 9218157），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "游戏更新后，依赖框架的 Mod 和修改器可能要等作者适配；想稳妥可在 Steam 属性里把自动更新改成「仅在启动时更新」，并先备份存档。",
+    "latestSteamPatch": "The Hunt is back on, alongside a new Twitch Drop!",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1848664643347095"
   },
   {
     "id": "bioshock-infinite",
@@ -28577,7 +29356,20 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-08",
-    "heatTier": "cyan"
+    "heatTier": "cyan",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "10404041",
+    "steamBuildUpdatedAt": "2023-02-09T00:21:02Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": null,
+    "radarAdvice": null,
+    "radarSummary": "Steam 公共分支最近一次更新在 2023-02-09（build 10404041），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "游戏更新后，依赖框架的 Mod 和修改器可能要等作者适配；想稳妥可在 Steam 属性里把自动更新改成「仅在启动时更新」，并先备份存档。",
+    "latestSteamPatch": "Cozy Up with 2K: The Autumn Sale is Live on Steam! Save Big Through Oct 8.*",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1845383656383072"
   },
   {
     "id": "dishonored-2",
@@ -28813,7 +29605,20 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-16",
-    "heatTier": "cyan"
+    "heatTier": "cyan",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "17576867",
+    "steamBuildUpdatedAt": "2025-03-18T15:00:51Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": null,
+    "radarAdvice": null,
+    "radarSummary": "Steam 公共分支最近一次更新在 2025-03-18（build 17576867），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "游戏更新后，依赖框架的 Mod 和修改器可能要等作者适配；想稳妥可在 Steam 属性里把自动更新改成「仅在启动时更新」，并先备份存档。",
+    "latestSteamPatch": "Free Content for Dishonored 2 & Death of the Outsider!",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/3244179105161288005"
   },
   {
     "id": "prey",
@@ -29024,7 +29829,20 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-20",
-    "heatTier": "cyan"
+    "heatTier": "cyan",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "5297220",
+    "steamBuildUpdatedAt": "2020-07-23T14:00:32Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": null,
+    "radarAdvice": null,
+    "radarSummary": "Steam 公共分支最近一次更新在 2020-07-23（build 5297220），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "游戏更新后，依赖框架的 Mod 和修改器可能要等作者适配；想稳妥可在 Steam 属性里把自动更新改成「仅在启动时更新」，并先备份存档。",
+    "latestSteamPatch": "Prey: Mooncrash – Typhon Hunter Available Now!",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/2416641943191178150"
   },
   {
     "id": "hitman-3",
@@ -29247,7 +30065,26 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-16",
-    "heatTier": "cyan"
+    "heatTier": "cyan",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "26301025",
+    "steamBuildUpdatedAt": "2026-11-03T09:05:01Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": {
+      "name": "Simple Mod Framework",
+      "url": "https://github.com/atampy25/simple-mod-framework"
+    },
+    "radarAdvice": {
+      "zh-CN": "游戏更新后 SMF 和 Mod SDK 往往要出新版才能用，先别部署 Mod，等两者都更新后再部署。",
+      "en": "Game updates usually break SMF and the Mod SDK; wait for new releases of both before redeploying mods."
+    },
+    "radarSummary": "Steam 公共分支最近一次更新在 2026-11-03（build 26301025），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "游戏更新后 SMF 和 Mod SDK 往往要出新版才能用，先别部署 Mod，等两者都更新后再部署。",
+    "latestSteamPatch": "Get 60% Off World of Assassination!",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849827110425160"
   },
   {
     "id": "ac-odyssey",
@@ -29536,7 +30373,23 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-04",
-    "heatTier": "emerald"
+    "heatTier": "emerald",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "17083392",
+    "steamBuildUpdatedAt": "2025-02-04T14:00:22Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": {
+      "name": "Forger patch manager",
+      "url": "https://www.nexusmods.com/assassinscreedodyssey/mods/42"
+    },
+    "radarAdvice": null,
+    "radarSummary": "Steam 公共分支最近一次更新在 2025-02-04（build 17083392），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "游戏更新后，依赖框架的 Mod 和修改器可能要等作者适配；想稳妥可在 Steam 属性里把自动更新改成「仅在启动时更新」，并先备份存档。",
+    "latestSteamPatch": "AC Black Flag Resynced out now!",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1837955055363115"
   },
   {
     "id": "ac-valhalla",
@@ -29801,7 +30654,23 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-08",
-    "heatTier": "emerald"
+    "heatTier": "emerald",
+    "compatibilityStatus": "yellow",
+    "radarReason": "recent-update",
+    "radarStatusText": "🟡 刚更新 · Mod/修改器可能要等适配",
+    "steamBuildId": "26142239",
+    "steamBuildUpdatedAt": "2026-11-05T13:57:12Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": {
+      "name": "Forger patch manager",
+      "url": "https://www.nexusmods.com/assassinscreedodyssey/mods/42"
+    },
+    "radarAdvice": null,
+    "radarSummary": "Steam 在 2026-11-05 推送了新版本（build 26142239）。依赖框架的 Mod 和修改器可能要等作者适配。",
+    "radarRiskTitle": "⚠️ 刚更新 · Mod/修改器可能要等适配",
+    "radarRiskDesc": "游戏更新后，依赖框架的 Mod 和修改器可能要等作者适配；想稳妥可在 Steam 属性里把自动更新改成「仅在启动时更新」，并先备份存档。",
+    "latestSteamPatch": "Assassin’s Creed Valhalla - Title Update 1.8.0 - The Most Requested Update!",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1848664643341476"
   },
   {
     "id": "ac-origins",
@@ -30048,7 +30917,20 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-20",
-    "heatTier": "emerald"
+    "heatTier": "emerald",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "16965472",
+    "steamBuildUpdatedAt": "2025-01-14T14:00:25Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": null,
+    "radarAdvice": null,
+    "radarSummary": "Steam 公共分支最近一次更新在 2025-01-14（build 16965472），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "游戏更新后，依赖框架的 Mod 和修改器可能要等作者适配；想稳妥可在 Steam 属性里把自动更新改成「仅在启动时更新」，并先备份存档。",
+    "latestSteamPatch": "AC Black Flag Resynced out now!",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1837955055363117"
   },
   {
     "id": "far-cry-5",
@@ -30159,7 +31041,23 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-21",
-    "heatTier": "emerald"
+    "heatTier": "emerald",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "18766066",
+    "steamBuildUpdatedAt": "2025-07-01T08:34:06Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": {
+      "name": "Far Cry Mod Installer",
+      "url": "https://downloads.fcmodding.com/all/mod-installer/"
+    },
+    "radarAdvice": null,
+    "radarSummary": "Steam 公共分支最近一次更新在 2025-07-01（build 18766066），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "游戏更新后，依赖框架的 Mod 和修改器可能要等作者适配；想稳妥可在 Steam 属性里把自动更新改成「仅在启动时更新」，并先备份存档。",
+    "latestSteamPatch": "FARCRY 5 now 85% off",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1832700592786536"
   },
   {
     "id": "far-cry-6",
@@ -30492,7 +31390,23 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-09",
-    "heatTier": "emerald"
+    "heatTier": "emerald",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "11359732",
+    "steamBuildUpdatedAt": "2023-07-27T07:14:53Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": {
+      "name": "Far Cry Mod Installer",
+      "url": "https://downloads.fcmodding.com/all/mod-installer/"
+    },
+    "radarAdvice": null,
+    "radarSummary": "Steam 公共分支最近一次更新在 2023-07-27（build 11359732），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "游戏更新后，依赖框架的 Mod 和修改器可能要等作者适配；想稳妥可在 Steam 属性里把自动更新改成「仅在启动时更新」，并先备份存档。",
+    "latestSteamPatch": "Celebrating Ubi40 w/ @MCFixer [STREAM REPLAY]",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1844751498223771"
   },
   {
     "id": "watch-dogs-2",
@@ -30704,7 +31618,23 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-09",
-    "heatTier": "emerald"
+    "heatTier": "emerald",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "11638094",
+    "steamBuildUpdatedAt": "2023-07-06T09:06:31Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": null,
+    "radarAdvice": {
+      "zh-CN": "带 Easy Anti-Cheat 反作弊：联机模式别用 Mod/修改器，以免被封号。",
+      "en": "Uses Easy Anti-Cheat: don't use mods or trainers in online play, or you risk a ban."
+    },
+    "radarSummary": "Steam 公共分支最近一次更新在 2023-07-06（build 11638094），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "带 Easy Anti-Cheat 反作弊：联机模式别用 Mod/修改器，以免被封号。",
+    "latestSteamPatch": "Achievements Unlocked for Watch Dogs 2",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1790848102593482"
   },
   {
     "id": "no-mans-sky",
@@ -30988,7 +31918,23 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-15",
-    "heatTier": "emerald"
+    "heatTier": "emerald",
+    "compatibilityStatus": "yellow",
+    "radarReason": "recent-update",
+    "radarStatusText": "🟡 刚更新 · Mod/修改器可能要等适配",
+    "steamBuildId": "26540391",
+    "steamBuildUpdatedAt": "2026-11-09T13:25:55Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": null,
+    "radarAdvice": {
+      "zh-CN": "大更新后旧 Mod 常失效：只留已适配新版本的 Mod，其余先停用或移出 MODS 文件夹，等作者更新。",
+      "en": "Big updates often break mods: keep only mods updated for the new version and disable the rest until they update."
+    },
+    "radarSummary": "Steam 在 2026-11-09 推送了新版本（build 26540391）。依赖框架的 Mod 和修改器可能要等作者适配。",
+    "radarRiskTitle": "⚠️ 刚更新 · Mod/修改器可能要等适配",
+    "radarRiskDesc": "大更新后旧 Mod 常失效：只留已适配新版本的 Mod，其余先停用或移出 MODS 文件夹，等作者更新。",
+    "latestSteamPatch": "Introducing..No Man's Sky: FORSAKEN",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1847920302231131"
   },
   {
     "id": "astroneer",
@@ -31193,7 +32139,26 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-04",
-    "heatTier": "emerald"
+    "heatTier": "emerald",
+    "compatibilityStatus": "yellow",
+    "radarReason": "trainer-behind",
+    "radarStatusText": "🟡 修改器早于当前游戏版本",
+    "steamBuildId": "25599237",
+    "steamBuildUpdatedAt": "2026-10-14T16:49:53Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": {
+      "name": "AstroModLoader Classic",
+      "url": "https://github.com/atenfyr/AstroModLoader-Classic"
+    },
+    "radarAdvice": {
+      "zh-CN": "游戏更新后，先在 AstroModLoader 里看各 Mod 标注的兼容版本，不匹配的等作者更新。",
+      "en": "After an update, check each mod's compatible Astroneer version in AstroModLoader; wait if it doesn't match."
+    },
+    "radarSummary": "风灵月影修改器最后更新于 2021-04-07，早于 Steam 当前版本（2026-10-14，build 25599237），可能和当前版本对不上。",
+    "radarRiskTitle": "⚠️ 修改器早于当前游戏版本",
+    "radarRiskDesc": "游戏更新后，先在 AstroModLoader 里看各 Mod 标注的兼容版本，不匹配的等作者更新。",
+    "latestSteamPatch": "Patch 1.45.1",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1846651706674984"
   },
   {
     "id": "raft",
@@ -31304,7 +32269,26 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-14",
-    "heatTier": "emerald"
+    "heatTier": "emerald",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "22312909",
+    "steamBuildUpdatedAt": "2026-03-12T15:13:21Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": {
+      "name": "Raft Mod Loader (RML)",
+      "url": "https://www.raftmodding.com/loader"
+    },
+    "radarAdvice": {
+      "zh-CN": "RML 启动器会自动更新加载器；游戏更新后若 Mod 失效，等 RML 和 Mod 作者适配。",
+      "en": "The RML launcher keeps the loader updated; if mods break after a game update, wait for RML and mod updates."
+    },
+    "radarSummary": "Steam 公共分支最近一次更新在 2026-03-12（build 22312909），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "RML 启动器会自动更新加载器；游戏更新后若 Mod 失效，等 RML 和 Mod 作者适配。",
+    "latestSteamPatch": "Raft 1.1.01 Hotfix",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1826992588592889"
   },
   {
     "id": "grounded",
@@ -31559,7 +32543,20 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-02",
-    "heatTier": "emerald"
+    "heatTier": "emerald",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "18247588",
+    "steamBuildUpdatedAt": "2025-05-12T17:02:33Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": null,
+    "radarAdvice": null,
+    "radarSummary": "Steam 公共分支最近一次更新在 2025-05-12（build 18247588），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "游戏更新后，依赖框架的 Mod 和修改器可能要等作者适配；想稳妥可在 Steam 属性里把自动更新改成「仅在启动时更新」，并先备份存档。",
+    "latestSteamPatch": "Grounded 2 Update: The Toxic Tangle – Available Now!",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1822556746169741"
   },
   {
     "id": "green-hell",
@@ -31795,7 +32792,20 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-02",
-    "heatTier": "emerald"
+    "heatTier": "emerald",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "21698250",
+    "steamBuildUpdatedAt": "2026-02-04T09:47:57Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": null,
+    "radarAdvice": null,
+    "radarSummary": "Steam 公共分支最近一次更新在 2026-02-04（build 21698250），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "游戏更新后，依赖框架的 Mod 和修改器可能要等作者适配；想稳妥可在 Steam 属性里把自动更新改成「仅在启动时更新」，并先备份存档。",
+    "latestSteamPatch": "12 million survivors in Green Hell - Thank you!",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1831432155577478"
   },
   {
     "id": "7-days-to-die",
@@ -32177,7 +33187,23 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-14",
-    "heatTier": "emerald"
+    "heatTier": "emerald",
+    "compatibilityStatus": "yellow",
+    "radarReason": "trainer-behind",
+    "radarStatusText": "🟡 修改器早于当前游戏版本",
+    "steamBuildId": "26309840",
+    "steamBuildUpdatedAt": "2026-11-02T17:00:28Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": null,
+    "radarAdvice": {
+      "zh-CN": "带 EAC 反作弊，联机别用修改器；大版本更新后先确认 Mod 已适配新版本再加载。",
+      "en": "Uses Easy Anti-Cheat: don't use trainers online. After major updates, confirm mods support the new version."
+    },
+    "radarSummary": "风灵月影修改器最后更新于 2026-10-06，早于 Steam 当前版本（2026-11-02，build 26309840），可能和当前版本对不上。",
+    "radarRiskTitle": "⚠️ 修改器早于当前游戏版本",
+    "radarRiskDesc": "带 EAC 反作弊，联机别用修改器；大版本更新后先确认 Mod 已适配新版本再加载。",
+    "latestSteamPatch": "Developer Update: Bandits Are Coming in Early 2027",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849458702694760"
   },
   {
     "id": "ark-survival-evolved",
@@ -32560,7 +33586,23 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-13",
-    "heatTier": "emerald"
+    "heatTier": "emerald",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "21291776",
+    "steamBuildUpdatedAt": "2025-12-23T16:19:47Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": null,
+    "radarAdvice": {
+      "zh-CN": "官方服务器带 BattlEye 反作弊，联机别用修改器。",
+      "en": "Official servers use BattlEye anti-cheat; don't use trainers online."
+    },
+    "radarSummary": "Steam 公共分支最近一次更新在 2025-12-23（build 21291776），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "官方服务器带 BattlEye 反作弊，联机别用修改器。",
+    "latestSteamPatch": "ARK Franchise Sale!",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1837955055357193"
   },
   {
     "id": "rust-single",
@@ -32671,7 +33713,30 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-29",
-    "heatTier": "emerald"
+    "heatTier": "emerald",
+    "compatibilityStatus": "red",
+    "radarReason": "recent-update-hooks",
+    "radarStatusText": "🔴 刚更新 · Oxide (uMod) 可能要等适配，先别更新",
+    "steamBuildId": "26729616",
+    "steamBuildUpdatedAt": "2026-11-18T08:56:33Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": {
+      "name": "Oxide (uMod)",
+      "url": "https://umod.org/games/rust"
+    },
+    "radarAdvice": {
+      "zh-CN": "游戏带 EAC 反作弊，别用修改器；自建服务器等 Oxide 出兼容版再更新。",
+      "en": "Rust uses Easy Anti-Cheat: no trainers. For your own server, wait for a compatible Oxide build before updating."
+    },
+    "radarSummary": "Steam 在 2026-11-18 推送了新版本（build 26729616）。Oxide (uMod) 按游戏 exe 的具体版本挂钩，这次更新后可能要等作者发新版才能用。",
+    "radarRiskTitle": "🚨 刚更新 · Oxide (uMod) 可能要等适配",
+    "radarRiskDesc": "游戏带 EAC 反作弊，别用修改器；自建服务器等 Oxide 出兼容版再更新。",
+    "latestSteamPatch": "PRINTED AND POLISHED",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1848664643342609",
+    "emergencyAlert": {
+      "zh-CN": "《腐蚀 (本地自建服)》Steam 于 2026-11-18 更新，Oxide (uMod) 可能要等作者发新版，先别更新",
+      "en": "Rust was updated on Steam on 2026-11-18. Oxide (uMod) may need a new release to work with this update, so hold off on updating."
+    }
   },
   {
     "id": "conan-exiles",
@@ -32782,7 +33847,23 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-07",
-    "heatTier": "emerald"
+    "heatTier": "emerald",
+    "compatibilityStatus": "yellow",
+    "radarReason": "recent-update",
+    "radarStatusText": "🟡 刚更新 · Mod/修改器可能要等适配",
+    "steamBuildId": "26668213",
+    "steamBuildUpdatedAt": "2026-11-15T13:05:25Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": null,
+    "radarAdvice": {
+      "zh-CN": "官方服务器带 BattlEye 反作弊，联机别用修改器。",
+      "en": "Official servers use BattlEye anti-cheat; don't use trainers online."
+    },
+    "radarSummary": "Steam 在 2026-11-15 推送了新版本（build 26668213）。依赖框架的 Mod 和修改器可能要等作者适配。",
+    "radarRiskTitle": "⚠️ 刚更新 · Mod/修改器可能要等适配",
+    "radarRiskDesc": "官方服务器带 BattlEye 反作弊，联机别用修改器。",
+    "latestSteamPatch": "(Re-release) November Hotfix 3.1.1",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849458702686207"
   },
   {
     "id": "medieval-dynasty",
@@ -32999,7 +34080,26 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-11",
-    "heatTier": "emerald"
+    "heatTier": "emerald",
+    "compatibilityStatus": "yellow",
+    "radarReason": "recent-update",
+    "radarStatusText": "🟡 刚更新 · Mod/修改器可能要等适配",
+    "steamBuildId": "26431490",
+    "steamBuildUpdatedAt": "2026-11-10T13:56:03Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": {
+      "name": "Medieval Dynasty Mod Loader (MDML)",
+      "url": "https://www.nexusmods.com/medievaldynasty/mods/30"
+    },
+    "radarAdvice": {
+      "zh-CN": "游戏更新后，先确认 MDML 已出适配新版本的更新，再加载 Mod。",
+      "en": "After a game update, check that MDML has a release for the new game version before loading mods."
+    },
+    "radarSummary": "Steam 在 2026-11-10 推送了新版本（build 26431490）。依赖框架的 Mod 和修改器可能要等作者适配。",
+    "radarRiskTitle": "⚠️ 刚更新 · Mod/修改器可能要等适配",
+    "radarRiskDesc": "游戏更新后，先确认 MDML 已出适配新版本的更新，再加载 Mod。",
+    "latestSteamPatch": "Patch 2.7.0.5 on the Public Branch",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849192144177650"
   },
   {
     "id": "kenshi",
@@ -33110,7 +34210,20 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-06",
-    "heatTier": "emerald"
+    "heatTier": "emerald",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "13871665",
+    "steamBuildUpdatedAt": "2024-04-01T16:47:52Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": null,
+    "radarAdvice": null,
+    "radarSummary": "Steam 公共分支最近一次更新在 2024-04-01（build 13871665），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "游戏更新后，依赖框架的 Mod 和修改器可能要等作者适配；想稳妥可在 Steam 属性里把自动更新改成「仅在启动时更新」，并先备份存档。",
+    "latestSteamPatch": "Community Update: 3 Million Copies Sold",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1833334318577664"
   },
   {
     "id": "the-sims-4",
@@ -33379,7 +34492,23 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-11",
-    "heatTier": "emerald"
+    "heatTier": "emerald",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "25966929",
+    "steamBuildUpdatedAt": "2026-10-27T17:00:04Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": null,
+    "radarAdvice": {
+      "zh-CN": "更新后游戏会自动停用 Mod；先到作者处确认已适配，再在设置里重新启用。",
+      "en": "Updates auto-disable mods. Check each mod's creator for an update, then re-enable in Game Options > Other."
+    },
+    "radarSummary": "Steam 公共分支最近一次更新在 2026-10-27（build 25966929），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "更新后游戏会自动停用 Mod；先到作者处确认已适配，再在设置里重新启用。",
+    "latestSteamPatch": "Order Up! The Next Quality of Life Update is here!",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1847286114049797"
   },
   {
     "id": "planet-zoo",
@@ -33579,7 +34708,26 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-28",
-    "heatTier": "emerald"
+    "heatTier": "emerald",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "23333923",
+    "steamBuildUpdatedAt": "2026-05-28T14:00:02Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": {
+      "name": "ACSE (Advanced Cobra Script Extender)",
+      "url": "https://github.com/OpenNaja/ACSE"
+    },
+    "radarAdvice": {
+      "zh-CN": "游戏补丁可能让 Mod 失效，更新后先等 ACSE 和各 Mod 作者确认适配。",
+      "en": "Patches can break mods; after an update, wait for ACSE and mod authors to confirm compatibility."
+    },
+    "radarSummary": "Steam 公共分支最近一次更新在 2026-05-28（build 23333923），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "游戏补丁可能让 Mod 失效，更新后先等 ACSE 和各 Mod 作者确认适配。",
+    "latestSteamPatch": "Planet Zoo 2 - OUT NOW! 💚💚",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1846018067944132"
   },
   {
     "id": "jurassic-world-evolution-2",
@@ -33808,7 +34956,26 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-28",
-    "heatTier": "emerald"
+    "heatTier": "emerald",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "18857191",
+    "steamBuildUpdatedAt": "2025-06-19T10:00:04Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": {
+      "name": "ACSE (Advanced Cobra Script Extender)",
+      "url": "https://github.com/OpenNaja/ACSE"
+    },
+    "radarAdvice": {
+      "zh-CN": "游戏补丁可能让 Mod 失效，更新后先等 ACSE 和各 Mod 作者确认适配。",
+      "en": "Patches can break mods; after an update, wait for ACSE and mod authors to confirm compatibility."
+    },
+    "radarSummary": "Steam 公共分支最近一次更新在 2025-06-19（build 18857191），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "游戏补丁可能让 Mod 失效，更新后先等 ACSE 和各 Mod 作者确认适配。",
+    "latestSteamPatch": "Jurassic World Evolution 3 is 33% off!",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1835236783574267"
   },
   {
     "id": "euro-truck-simulator-2",
@@ -34001,7 +35168,23 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-18",
-    "heatTier": "emerald"
+    "heatTier": "emerald",
+    "compatibilityStatus": "yellow",
+    "radarReason": "recent-update",
+    "radarStatusText": "🟡 刚更新 · Mod/修改器可能要等适配",
+    "steamBuildId": "26765198",
+    "steamBuildUpdatedAt": "2026-11-18T18:10:44Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": null,
+    "radarAdvice": {
+      "zh-CN": "大版本更新后，标了兼容版本的 Mod（如地图 Mod）会被停用，需等作者更新。",
+      "en": "After major updates, mods pinned to older game versions (e.g. map mods) are blocked until authors update them."
+    },
+    "radarSummary": "Steam 在 2026-11-18 推送了新版本（build 26765198）。依赖框架的 Mod 和修改器可能要等作者适配。",
+    "radarRiskTitle": "⚠️ 刚更新 · Mod/修改器可能要等适配",
+    "radarRiskDesc": "大版本更新后，标了兼容版本的 Mod（如地图 Mod）会被停用，需等作者更新。",
+    "latestSteamPatch": "Isle of Ireland: Galway",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849827110424837"
   },
   {
     "id": "snowrunner",
@@ -34214,7 +35397,20 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-29",
-    "heatTier": "emerald"
+    "heatTier": "emerald",
+    "compatibilityStatus": "yellow",
+    "radarReason": "trainer-behind",
+    "radarStatusText": "🟡 修改器早于当前游戏版本",
+    "steamBuildId": "26218478",
+    "steamBuildUpdatedAt": "2026-11-02T09:55:58Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": null,
+    "radarAdvice": null,
+    "radarSummary": "风灵月影修改器最后更新于 2022-12-28，早于 Steam 当前版本（2026-11-02，build 26218478），可能和当前版本对不上。",
+    "radarRiskTitle": "⚠️ 修改器早于当前游戏版本",
+    "radarRiskDesc": "修改器早于当前游戏版本时，部分功能可能失效；用之前先备份存档，等修改器更新后再用更稳妥。",
+    "latestSteamPatch": "Hotfix 44.2",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1847920302251258"
   },
   {
     "id": "forza-horizon-5",
@@ -34319,7 +35515,20 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-12",
-    "heatTier": "emerald"
+    "heatTier": "emerald",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "21856128",
+    "steamBuildUpdatedAt": "2026-02-17T15:57:39Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": null,
+    "radarAdvice": null,
+    "radarSummary": "Steam 公共分支最近一次更新在 2026-02-17（build 21856128），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "游戏更新后，依赖框架的 Mod 和修改器可能要等作者适配；想稳妥可在 Steam 属性里把自动更新改成「仅在启动时更新」，并先备份存档。",
+    "latestSteamPatch": "Reward Car Build - November 13th",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849192144187775"
   },
   {
     "id": "assetto-corsa",
@@ -34430,7 +35639,26 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-18",
-    "heatTier": "emerald"
+    "heatTier": "emerald",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "14923034",
+    "steamBuildUpdatedAt": "2024-07-03T20:16:12Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": {
+      "name": "Custom Shaders Patch (CSP)",
+      "url": "https://acstuff.ru/patch/"
+    },
+    "radarAdvice": {
+      "zh-CN": "CSP 只支持特定游戏版本，游戏更新后先等 CSP 出兼容版再玩。",
+      "en": "CSP requires a specific Assetto Corsa version; after a game update, wait for a compatible CSP release."
+    },
+    "radarSummary": "Steam 公共分支最近一次更新在 2024-07-03（build 14923034），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "CSP 只支持特定游戏版本，游戏更新后先等 CSP 出兼容版再玩。",
+    "latestSteamPatch": "Assetto Corsa EVO is OUT NOW in Steam Early Access!",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1789039014339855"
   },
   {
     "id": "beamng-drive",
@@ -34608,7 +35836,23 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-11",
-    "heatTier": "emerald"
+    "heatTier": "emerald",
+    "compatibilityStatus": "yellow",
+    "radarReason": "recent-update",
+    "radarStatusText": "🟡 刚更新 · Mod/修改器可能要等适配",
+    "steamBuildId": "26758896",
+    "steamBuildUpdatedAt": "2026-11-19T09:04:14Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": null,
+    "radarAdvice": {
+      "zh-CN": "大版本更新后游戏会自动停用 Mod，确认 Mod 已更新后再重新启用。",
+      "en": "Major updates auto-disable mods; re-enable them after confirming they have been updated."
+    },
+    "radarSummary": "Steam 在 2026-11-19 推送了新版本（build 26758896）。依赖框架的 Mod 和修改器可能要等作者适配。",
+    "radarRiskTitle": "⚠️ 刚更新 · Mod/修改器可能要等适配",
+    "radarRiskDesc": "大版本更新后游戏会自动停用 Mod，确认 Mod 已更新后再重新启用。",
+    "latestSteamPatch": "Hotfixes for v0.40 Released",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1847286114029423"
   },
   {
     "id": "persona-5-royal",
@@ -34927,7 +36171,23 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-10",
-    "heatTier": "emerald"
+    "heatTier": "emerald",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "15515071",
+    "steamBuildUpdatedAt": "2024-09-06T00:09:16Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": {
+      "name": "Reloaded-II + Persona Essentials (p5rpc.modloader)",
+      "url": "https://github.com/Sewer56/p5rpc.modloader"
+    },
+    "radarAdvice": null,
+    "radarSummary": "Steam 公共分支最近一次更新在 2024-09-06（build 15515071），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "游戏更新后，依赖框架的 Mod 和修改器可能要等作者适配；想稳妥可在 Steam 属性里把自动更新改成「仅在启动时更新」，并先备份存档。",
+    "latestSteamPatch": "Persona Anime Broadcast Sale",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1840310314352081"
   },
   {
     "id": "persona-3-reload",
@@ -35251,7 +36511,23 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-10-13",
-    "heatTier": "emerald"
+    "heatTier": "emerald",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "22672075",
+    "steamBuildUpdatedAt": "2026-04-14T16:58:23Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": {
+      "name": "Reloaded-II + Unreal Essentials",
+      "url": "https://github.com/Reloaded-Project/Reloaded-II"
+    },
+    "radarAdvice": null,
+    "radarSummary": "Steam 公共分支最近一次更新在 2026-04-14（build 22672075），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "游戏更新后，依赖框架的 Mod 和修改器可能要等作者适配；想稳妥可在 Steam 属性里把自动更新改成「仅在启动时更新」，并先备份存档。",
+    "latestSteamPatch": "Persona Anime Broadcast Sale",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1840310314352061"
   },
   {
     "id": "ff7-remake",
@@ -35532,7 +36808,20 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-09",
-    "heatTier": "emerald"
+    "heatTier": "emerald",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "21888968",
+    "steamBuildUpdatedAt": "2026-02-18T04:04:54Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": null,
+    "radarAdvice": null,
+    "radarSummary": "Steam 公共分支最近一次更新在 2026-02-18（build 21888968），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "游戏更新后，依赖框架的 Mod 和修改器可能要等作者适配；想稳妥可在 Steam 属性里把自动更新改成「仅在启动时更新」，并先备份存档。",
+    "latestSteamPatch": "Prepurchase Available!",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1842846814445854"
   },
   {
     "id": "ff16",
@@ -35817,7 +37106,23 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-21",
-    "heatTier": "emerald"
+    "heatTier": "emerald",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "17373708",
+    "steamBuildUpdatedAt": "2025-03-04T03:09:09Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": {
+      "name": "FFXVI Mod Loader (Reloaded-II)",
+      "url": "https://github.com/Nenkai/ff16.utility.modloader"
+    },
+    "radarAdvice": null,
+    "radarSummary": "Steam 公共分支最近一次更新在 2025-03-04（build 17373708），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "游戏更新后，依赖框架的 Mod 和修改器可能要等作者适配；想稳妥可在 Steam 属性里把自动更新改成「仅在启动时更新」，并先备份存档。",
+    "latestSteamPatch": "SQUARE ENIX Publisher Sale 2026",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1826992588604014"
   },
   {
     "id": "nier-automata",
@@ -36077,7 +37382,20 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-08",
-    "heatTier": "emerald"
+    "heatTier": "emerald",
+    "compatibilityStatus": "yellow",
+    "radarReason": "recent-update",
+    "radarStatusText": "🟡 刚更新 · Mod/修改器可能要等适配",
+    "steamBuildId": "26534214",
+    "steamBuildUpdatedAt": "2026-11-09T08:06:56Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": null,
+    "radarAdvice": null,
+    "radarSummary": "Steam 在 2026-11-09 推送了新版本（build 26534214）。依赖框架的 Mod 和修改器可能要等作者适配。",
+    "radarRiskTitle": "⚠️ 刚更新 · Mod/修改器可能要等适配",
+    "radarRiskDesc": "游戏更新后，依赖框架的 Mod 和修改器可能要等作者适配；想稳妥可在 Steam 属性里把自动更新改成「仅在启动时更新」，并先备份存档。",
+    "latestSteamPatch": "Bug Fix Notice",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1848664643354633"
   },
   {
     "id": "tales-of-arise",
@@ -36377,7 +37695,20 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-14",
-    "heatTier": "emerald"
+    "heatTier": "emerald",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "12823607",
+    "steamBuildUpdatedAt": "2023-12-12T01:00:21Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": null,
+    "radarAdvice": null,
+    "radarSummary": "Steam 公共分支最近一次更新在 2023-12-12（build 12823607），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "游戏更新后，依赖框架的 Mod 和修改器可能要等作者适配；想稳妥可在 Steam 属性里把自动更新改成「仅在启动时更新」，并先备份存档。",
+    "latestSteamPatch": "Tales of Eternia Remastered is now available!",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1846651706689775"
   },
   {
     "id": "like-a-dragon-infinite-wealth",
@@ -36817,7 +38148,23 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-28",
-    "heatTier": "emerald"
+    "heatTier": "emerald",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "17233673",
+    "steamBuildUpdatedAt": "2025-03-24T19:02:31Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": {
+      "name": "Shin Ryu Mod Manager (SRMM)",
+      "url": "https://github.com/SRMM-Studio/ShinRyuModManager"
+    },
+    "radarAdvice": null,
+    "radarSummary": "Steam 公共分支最近一次更新在 2025-03-24（build 17233673），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "游戏更新后，依赖框架的 Mod 和修改器可能要等作者适配；想稳妥可在 Steam 属性里把自动更新改成「仅在启动时更新」，并先备份存档。",
+    "latestSteamPatch": "Get a Closer Look at 2 of the 5 Eras to Discover in STRANGER THAN HEAVEN",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849827110422303"
   },
   {
     "id": "yakuza-like-a-dragon",
@@ -37120,7 +38467,23 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-08-09",
-    "heatTier": "emerald"
+    "heatTier": "emerald",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "7362542",
+    "steamBuildUpdatedAt": "2021-09-21T01:00:26Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": {
+      "name": "Shin Ryu Mod Manager (SRMM)",
+      "url": "https://github.com/SRMM-Studio/ShinRyuModManager"
+    },
+    "radarAdvice": null,
+    "radarSummary": "Steam 公共分支最近一次更新在 2021-09-21（build 7362542），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "游戏更新后，依赖框架的 Mod 和修改器可能要等作者适配；想稳妥可在 Steam 属性里把自动更新改成「仅在启动时更新」，并先备份存档。",
+    "latestSteamPatch": "Get a Closer Look at 2 of the 5 Eras to Discover in STRANGER THAN HEAVEN",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849827110422298"
   },
   {
     "id": "star-wars-jedi-survivor",
@@ -37384,7 +38747,20 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-07",
-    "heatTier": "emerald"
+    "heatTier": "emerald",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "15643690",
+    "steamBuildUpdatedAt": "2024-09-12T14:00:39Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": null,
+    "radarAdvice": null,
+    "radarSummary": "Steam 公共分支最近一次更新在 2024-09-12（build 15643690），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "游戏更新后，依赖框架的 Mod 和修改器可能要等作者适配；想稳妥可在 Steam 属性里把自动更新改成「仅在启动时更新」，并先备份存档。",
+    "latestSteamPatch": "Members get full access to 2 Star Wars™ games",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1819386365102514"
   },
   {
     "id": "star-wars-jedi-fallen-order",
@@ -37579,7 +38955,20 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-24",
-    "heatTier": "emerald"
+    "heatTier": "emerald",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "10360016",
+    "steamBuildUpdatedAt": "2023-01-31T12:09:17Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": null,
+    "radarAdvice": null,
+    "radarSummary": "Steam 公共分支最近一次更新在 2023-01-31（build 10360016），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "游戏更新后，依赖框架的 Mod 和修改器可能要等作者适配；想稳妥可在 Steam 属性里把自动更新改成「仅在启动时更新」，并先备份存档。",
+    "latestSteamPatch": "May the 4th be with you",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1798454487642670"
   },
   {
     "id": "dead-space-remake",
@@ -37807,7 +39196,23 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-06",
-    "heatTier": "emerald"
+    "heatTier": "emerald",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "10602756",
+    "steamBuildUpdatedAt": "2023-02-27T16:08:18Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": {
+      "name": "Frosty Mod Manager (Frosty Toolsuite)",
+      "url": "https://github.com/CadeEvs/FrostyToolsuite"
+    },
+    "radarAdvice": null,
+    "radarSummary": "Steam 公共分支最近一次更新在 2023-02-27（build 10602756），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "游戏更新后，依赖框架的 Mod 和修改器可能要等作者适配；想稳妥可在 Steam 属性里把自动更新改成「仅在启动时更新」，并先备份存档。",
+    "latestSteamPatch": "Battlefield 2042 | Dead Space",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/5842939267353603796"
   },
   {
     "id": "dead-cells",
@@ -38040,7 +39445,20 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-05",
-    "heatTier": "emerald"
+    "heatTier": "emerald",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "23762174",
+    "steamBuildUpdatedAt": "2026-06-16T12:31:17Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": null,
+    "radarAdvice": null,
+    "radarSummary": "Steam 公共分支最近一次更新在 2026-06-16（build 23762174），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "游戏更新后，依赖框架的 Mod 和修改器可能要等作者适配；想稳妥可在 Steam 属性里把自动更新改成「仅在启动时更新」，并先备份存档。",
+    "latestSteamPatch": "Dead Cells Stability Patch: Less Null Access, More Monster Slaying.",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1835236783570585"
   },
   {
     "id": "hades",
@@ -38329,7 +39747,23 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-04",
-    "heatTier": "emerald"
+    "heatTier": "emerald",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "10929685",
+    "steamBuildUpdatedAt": "2023-04-12T14:20:17Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": {
+      "name": "Mod Importer (SGG-Modding)",
+      "url": "https://github.com/SGG-Modding/ModImporter"
+    },
+    "radarAdvice": null,
+    "radarSummary": "Steam 公共分支最近一次更新在 2023-04-12（build 10929685），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "游戏更新后，依赖框架的 Mod 和修改器可能要等作者适配；想稳妥可在 Steam 属性里把自动更新改成「仅在启动时更新」，并先备份存档。",
+    "latestSteamPatch": "Watch the Hades Orchestral Concert, Live from London!",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1835236783574995"
   },
   {
     "id": "hollow-knight",
@@ -38628,7 +40062,26 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-03",
-    "heatTier": "emerald"
+    "heatTier": "emerald",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "22529139",
+    "steamBuildUpdatedAt": "2026-03-27T07:37:27Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": {
+      "name": "Hollow Knight Modding API",
+      "url": "https://github.com/hk-modding/api"
+    },
+    "radarAdvice": {
+      "zh-CN": "Modding API 按具体游戏版本发布，游戏更新后先等 API 出对应新版再玩 Mod。",
+      "en": "The Modding API targets a specific game version; after an update, wait for a matching API release."
+    },
+    "radarSummary": "Steam 公共分支最近一次更新在 2026-03-27（build 22529139），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "Modding API 按具体游戏版本发布，游戏更新后先等 API 出对应新版再玩 Mod。",
+    "latestSteamPatch": "Patch Version 1.5.12620 Now Live",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1828441623103525"
   },
   {
     "id": "slay-the-spire",
@@ -38840,7 +40293,23 @@ window.GAMES_DATA = [
     "verifiedPatch": "Steam 最新版本实测",
     "radarSecretCode": "老L单机888",
     "lastUpdated": "2026-09-02",
-    "heatTier": "emerald"
+    "heatTier": "emerald",
+    "compatibilityStatus": "green",
+    "radarReason": "quiet",
+    "radarStatusText": "🟢 近 14 天无更新",
+    "steamBuildId": "10180494",
+    "steamBuildUpdatedAt": "2022-12-20T00:56:37Z",
+    "steamLastChecked": "2026-11-19T10:43:53Z",
+    "radarFramework": {
+      "name": "ModTheSpire",
+      "url": "https://github.com/kiooeht/ModTheSpire"
+    },
+    "radarAdvice": null,
+    "radarSummary": "Steam 公共分支最近一次更新在 2022-12-20（build 10180494），近 14 天没有新版本。",
+    "radarRiskTitle": "💡 近 14 天无更新",
+    "radarRiskDesc": "游戏更新后，依赖框架的 Mod 和修改器可能要等作者适配；想稳妥可在 Steam 属性里把自动更新改成「仅在启动时更新」，并先备份存档。",
+    "latestSteamPatch": "The Neowsletter - October 2026",
+    "latestSteamPatchUrl": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1847920302236890"
   }
 ];
 
