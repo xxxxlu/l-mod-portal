@@ -5,7 +5,10 @@
  * 升级特性：
  * 完整模拟 4 大专属核心技能（Game Vault RAG, Patch Sentinel, Crash Diagnostic, General Oracle）
  * 与安全守卫拦截链的实际执行与决策结果
+ * 技能 B 的雷达状态读 public/radar_status.json 的 v2 结果（见 ../../../_radar_status.js），不读 D1 旧雷达列。
  */
+
+import { loadRadarStatus, radarContextFor } from '../../../_radar_status.js';
 
 export async function onRequestPost(context) {
   const { request, env } = context;
@@ -35,11 +38,11 @@ export async function onRequestPost(context) {
     let game = null;
     if (cleanGameId) {
       game = await db.prepare(
-        `SELECT id, title, title_zh, console_shortcut, verified_patch, latest_steam_patch,
-                compatibility_status, radar_risk_title, radar_risk_desc, pitfall_note
+        `SELECT id, title, title_zh, steam_app_id, console_shortcut, pitfall_note
          FROM games WHERE id = ?`
       ).bind(cleanGameId).first();
     }
+    const radar = game ? radarContextFor(game.id, await loadRadarStatus(context), game.steam_app_id) : null;
 
     // 3. 指令检索 (Game Vault RAG 模拟)
     const keywords = query.trim().split(/\s+/).filter(k => k.length > 1).slice(0, 3);
@@ -86,10 +89,12 @@ export async function onRequestPost(context) {
       },
       patch_sentinel: {
         executed: !!game,
-        status: game ? (game.compatibility_status === 'green' ? 'COMPATIBLE' : 'WARNING') : 'SKIPPED',
-        verdict: game
-          ? `【技能 B 巡检】基于 Steam ${game.latest_steam_patch || '最新'} 对账基准 ${game.verified_patch || '认证'}：当前雷达状态【${game.compatibility_status.toUpperCase()}】。`
-          : '全局模式，未指定单游，跳过补丁比对。'
+        status: !radar ? 'SKIPPED' : (!radar.tracked ? 'NO_RECORD' : (radar.status === 'green' ? 'QUIET' : 'WARNING')),
+        verdict: !radar
+          ? '全局模式，未指定单游，跳过雷达查询。'
+          : (radar.tracked
+            ? `【技能 B 雷达】Steam build ${radar.steam_build_id || '-'}（${radar.steam_updated_on || '日期未知'} 更新，${radar.last_checked_on || '-'} 巡检）：${radar.status_text || radar.status}。原因：${radar.reason_text}`
+            : `【技能 B 雷达】${radar.note}`)
       },
       crash_diagnostic: {
         executed: isCrashQuery,
@@ -119,7 +124,7 @@ export async function onRequestPost(context) {
       game_anchor: game ? {
         title: game.title_zh || game.title,
         shortcut: game.console_shortcut,
-        patch: game.verified_patch,
+        radar,
         pitfall: game.pitfall_note
       } : '全局智库模式',
       retrieved_commands_count: matchedCommands.length,
@@ -139,7 +144,7 @@ export async function onRequestPost(context) {
         synthesized_prompt: synthesizedPrompt,
         skills_audit: skillsAnalysis,
         active_model_route: aiConfig?.primary_model || 'gemini-2.5-flash',
-        simulated_response: `【老L · 避坑核验通过】针对“${query}”，已通过 4 大 Skills 编排流水线：检索到 ${matchedCommands.length} 条真实代码，补丁哨兵状态【${game ? game.compatibility_status.toUpperCase() : 'PASS'}】，防坏档机制就绪。`
+        simulated_response: `【老L · 沙盒预演】针对“${query}”，4 大 Skills 编排流水线：检索到 ${matchedCommands.length} 条站内指令，雷达状态【${radar ? (radar.tracked ? radar.status_text || radar.status : '无巡检记录') : '未指定游戏'}】，防坏档提醒就绪。`
       }
     }), {
       headers: { 'Content-Type': 'application/json; charset=utf-8' }

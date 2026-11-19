@@ -24,10 +24,12 @@ export async function onRequestGet() {
       bat_downloader: true,
       ai_copilot: true
     },
+    // 与雷达页、public/radar_status.json 的 v2 规则一致；雷达只比对 Steam 更新时间，没有实机测试
     radar_legend: {
-      green: { label: '完美适配', desc: '指令与主流Mod全量兼容当前Steam最新版本' },
-      yellow: { label: '部分失效', desc: '脚本扩展(CET/F4SE/UE4SS)需等待更新或打降级补丁' },
-      red: { label: '高危熔断', desc: '游戏底层引擎大改，开启指令或Mod可能导致坏档' }
+      green: { label: '近期平稳', desc: 'Steam 近 14 天没有新版本；近 90 天内有更新的，修改器也不比游戏旧' },
+      yellow: { label: '留意更新', desc: 'Steam 近 14 天有新版本，Mod/修改器可能要等适配；或近 90 天有更新而修改器比游戏旧' },
+      red: { label: '先别更新', desc: 'Steam 近 14 天有新版本，且常用 Mod 框架按 exe 版本挂钩，可能要等作者发新版' },
+      unchecked: { label: '未巡检', desc: '还没有巡检记录，或不在 Steam 上' }
     }
   };
 

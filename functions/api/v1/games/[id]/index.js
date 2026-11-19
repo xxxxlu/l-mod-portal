@@ -1,7 +1,12 @@
 /**
  * Cloudflare Pages Function: /api/v1/games/:id
  * Single Game Full Metadata (excludes heavy command list for lean transfer)
+ *
+ * 雷达字段（compatibility_status / radar）来自 public/radar_status.json 的 v2 结果（见 ../../../_radar_status.js），
+ * 不再输出 D1 的旧雷达列。
  */
+
+import { loadRadarStatus, withRadar } from '../../../_radar_status.js';
 
 export async function onRequestGet(context) {
   const { params, env } = context;
@@ -17,7 +22,7 @@ export async function onRequestGet(context) {
 
   const db = env.DB || env.lmod_vault_db;
   if (!db) {
-    return new Response(JSON.stringify({ code: 50000, message: 'Database binding missing' }), { status: 500 });
+    return new Response(JSON.stringify({ code: 50000, message: 'Database binding missing' }), { status: 503 });
   }
 
   try {
@@ -25,9 +30,7 @@ export async function onRequestGet(context) {
       `SELECT id, rank, title, title_zh, titles_json, developer, release_year, 
               genre, steam_rating, steam_app_id, header_image,
               has_console, console_shortcut, console_guide_zh, console_guide_en,
-              has_mods, mod_install_path, has_trainer,
-              verified_patch, latest_steam_patch, compatibility_status,
-              radar_risk_title, radar_risk_desc, radar_summary, pitfall_note,
+              has_mods, mod_install_path, has_trainer, pitfall_note,
               created_at, updated_at
        FROM games
        WHERE id = ?`
@@ -53,12 +56,13 @@ export async function onRequestGet(context) {
     } catch (e) {}
 
     const { titles_json, ...rest } = game;
+    const radarStatus = await loadRadarStatus(context);
 
     return new Response(JSON.stringify({
       code: 0,
       message: 'success',
       data: {
-        ...rest,
+        ...withRadar(rest, radarStatus),
         titles,
         stats: {
           total_commands: stats?.total_commands || 0,

@@ -1,6 +1,9 @@
 /**
  * Cloudflare Pages Function: GET /api/v1/auth/me
  * Comprehensive Player Profile, Synced Favorites, Radar Alerts & Feedback History
+ *
+ * 收藏和雷达订阅里的 compatibility_status / radar_status_text 来自 public/radar_status.json 的 v2 结果
+ * （见 ../../_radar_status.js），不读 D1 的旧雷达列。
  */
 
 import {
@@ -9,6 +12,7 @@ import {
   extractUserToken,
   verifyUserJwt
 } from './_crypto.js';
+import { loadRadarStatus, radarEntry } from '../../_radar_status.js';
 
 export async function onRequestGet(context) {
   const { request, env } = context;
@@ -61,7 +65,7 @@ export async function onRequestGet(context) {
     // 3. Fetch User Favorites (JOIN games)
     const favRes = await db.prepare(
       `SELECT uf.game_id, uf.created_at, g.rank, g.title, g.title_zh, g.header_image,
-              g.genre, g.compatibility_status, g.verified_patch
+              g.genre
        FROM user_favorites uf
        LEFT JOIN games g ON uf.game_id = g.id
        WHERE uf.user_id = ?
@@ -71,7 +75,7 @@ export async function onRequestGet(context) {
     // 4. Fetch Radar Subscriptions
     const subRes = await db.prepare(
       `SELECT urs.id, urs.game_id, urs.notify_channel, urs.notify_target, urs.created_at,
-              g.title, g.title_zh, g.compatibility_status
+              g.title, g.title_zh
        FROM user_radar_subscriptions urs
        LEFT JOIN games g ON urs.game_id = g.id
        WHERE urs.user_id = ?
@@ -89,8 +93,17 @@ export async function onRequestGet(context) {
        LIMIT 20`
     ).bind(userId, user.email || '').all();
 
-    const favorites = favRes.results || [];
-    const radarSubs = subRes.results || [];
+    const radarStatus = await loadRadarStatus(context);
+    const withRadarState = row => {
+      const entry = radarEntry(radarStatus, row.game_id);
+      return {
+        ...row,
+        compatibility_status: entry ? entry.compatibilityStatus : null,
+        radar_status_text: entry ? entry.radarStatusText || null : null
+      };
+    };
+    const favorites = (favRes.results || []).map(withRadarState);
+    const radarSubs = (subRes.results || []).map(withRadarState);
     const feedbacks = feedbackRes.results || [];
 
     return new Response(JSON.stringify({
