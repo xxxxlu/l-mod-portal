@@ -1,0 +1,552 @@
+[
+  {
+    "id": "astroneer",
+    "rank": 68,
+    "steamAppId": 361420,
+    "framework": {
+      "name": "AstroModLoader Classic",
+      "url": "https://github.com/atenfyr/AstroModLoader-Classic"
+    },
+    "hooksExe": false,
+    "modSupport": "community",
+    "afterUpdate": {
+      "zh-CN": "游戏更新后，先在 AstroModLoader 里看各 Mod 标注的兼容版本，不匹配的等作者更新。",
+      "en": "After an update, check each mod's compatible Astroneer version in AstroModLoader; wait if it doesn't match."
+    },
+    "sources": [
+      "https://github.com/atenfyr/AstroModLoader-Classic"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "raft",
+    "rank": 69,
+    "steamAppId": 648800,
+    "framework": {
+      "name": "Raft Mod Loader (RML)",
+      "url": "https://www.raftmodding.com/loader"
+    },
+    "hooksExe": null,
+    "modSupport": "community",
+    "afterUpdate": {
+      "zh-CN": "RML 启动器会自动更新加载器；游戏更新后若 Mod 失效，等 RML 和 Mod 作者适配。",
+      "en": "The RML launcher keeps the loader updated; if mods break after a game update, wait for RML and mod updates."
+    },
+    "sources": [
+      "https://www.raftmodding.com/loader",
+      "https://www.raftmodding.com/loader/6.2.10"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "grounded",
+    "rank": 70,
+    "steamAppId": 962130,
+    "framework": null,
+    "hooksExe": null,
+    "modSupport": "community",
+    "afterUpdate": null,
+    "sources": [
+      "https://www.nexusmods.com/grounded/mods/149"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "green-hell",
+    "rank": 71,
+    "steamAppId": 815370,
+    "framework": null,
+    "hooksExe": null,
+    "modSupport": "community",
+    "afterUpdate": null,
+    "sources": [
+      "https://greenhellmodding.com/",
+      "https://modapi.survivetheforest.net/"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "7-days-to-die",
+    "rank": 72,
+    "steamAppId": 251570,
+    "framework": null,
+    "hooksExe": false,
+    "modSupport": "official",
+    "afterUpdate": {
+      "zh-CN": "带 EAC 反作弊，联机别用修改器；大版本更新后先确认 Mod 已适配新版本再加载。",
+      "en": "Uses Easy Anti-Cheat: don't use trainers online. After major updates, confirm mods support the new version."
+    },
+    "sources": [
+      "https://wiki.7d2d.net/mods/installation/",
+      "https://store.steampowered.com/app/251570/",
+      "https://www.pcgamingwiki.com/wiki/7_Days_to_Die"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "ark-survival-evolved",
+    "rank": 73,
+    "steamAppId": 346110,
+    "framework": null,
+    "hooksExe": false,
+    "modSupport": "workshop",
+    "afterUpdate": {
+      "zh-CN": "官方服务器带 BattlEye 反作弊，联机别用修改器。",
+      "en": "Official servers use BattlEye anti-cheat; don't use trainers online."
+    },
+    "sources": [
+      "https://store.steampowered.com/app/346110/",
+      "https://www.pcgamingwiki.com/wiki/ARK:_Survival_Evolved"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "rust-single",
+    "rank": 74,
+    "steamAppId": 252490,
+    "framework": {
+      "name": "Oxide (uMod)",
+      "url": "https://umod.org/games/rust"
+    },
+    "hooksExe": true,
+    "modSupport": "community",
+    "afterUpdate": {
+      "zh-CN": "游戏带 EAC 反作弊，别用修改器；自建服务器等 Oxide 出兼容版再更新。",
+      "en": "Rust uses Easy Anti-Cheat: no trainers. For your own server, wait for a compatible Oxide build before updating."
+    },
+    "sources": [
+      "https://umod.org/games/rust",
+      "https://umod.org/community/rust/22076-oxide-update-for-rust-update",
+      "https://umod.org/community/rust/5740-plugins-not-loading-after-rust-update",
+      "https://store.steampowered.com/app/252490/"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "conan-exiles",
+    "rank": 75,
+    "steamAppId": 440900,
+    "framework": null,
+    "hooksExe": false,
+    "modSupport": "workshop",
+    "afterUpdate": {
+      "zh-CN": "官方服务器带 BattlEye 反作弊，联机别用修改器。",
+      "en": "Official servers use BattlEye anti-cheat; don't use trainers online."
+    },
+    "sources": [
+      "https://store.steampowered.com/app/440900/",
+      "https://www.pcgamingwiki.com/wiki/Conan_Exiles"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "medieval-dynasty",
+    "rank": 76,
+    "steamAppId": 1129580,
+    "framework": {
+      "name": "Medieval Dynasty Mod Loader (MDML)",
+      "url": "https://www.nexusmods.com/medievaldynasty/mods/30"
+    },
+    "hooksExe": null,
+    "modSupport": "community",
+    "afterUpdate": {
+      "zh-CN": "游戏更新后，先确认 MDML 已出适配新版本的更新，再加载 Mod。",
+      "en": "After a game update, check that MDML has a release for the new game version before loading mods."
+    },
+    "sources": [
+      "https://www.nexusmods.com/medievaldynasty/mods/30"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "kenshi",
+    "rank": 77,
+    "steamAppId": 233860,
+    "framework": null,
+    "hooksExe": false,
+    "modSupport": "workshop",
+    "afterUpdate": null,
+    "sources": [
+      "https://store.steampowered.com/app/233860/",
+      "https://steamcommunity.com/app/233860/workshop/"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "the-sims-4",
+    "rank": 78,
+    "steamAppId": 1222670,
+    "framework": null,
+    "hooksExe": false,
+    "modSupport": "official",
+    "afterUpdate": {
+      "zh-CN": "更新后游戏会自动停用 Mod；先到作者处确认已适配，再在设置里重新启用。",
+      "en": "Updates auto-disable mods. Check each mod's creator for an update, then re-enable in Game Options > Other."
+    },
+    "sources": [
+      "https://help.ea.com/en/articles/the-sims/the-sims-4/mods-and-the-sims-4-game-updates/"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "planet-zoo",
+    "rank": 79,
+    "steamAppId": 703080,
+    "framework": {
+      "name": "ACSE (Advanced Cobra Script Extender)",
+      "url": "https://github.com/OpenNaja/ACSE"
+    },
+    "hooksExe": null,
+    "modSupport": "community",
+    "afterUpdate": {
+      "zh-CN": "游戏补丁可能让 Mod 失效，更新后先等 ACSE 和各 Mod 作者确认适配。",
+      "en": "Patches can break mods; after an update, wait for ACSE and mod authors to confirm compatibility."
+    },
+    "sources": [
+      "https://github.com/OpenNaja/ACSE"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "jurassic-world-evolution-2",
+    "rank": 80,
+    "steamAppId": 1244460,
+    "framework": {
+      "name": "ACSE (Advanced Cobra Script Extender)",
+      "url": "https://github.com/OpenNaja/ACSE"
+    },
+    "hooksExe": null,
+    "modSupport": "community",
+    "afterUpdate": {
+      "zh-CN": "游戏补丁可能让 Mod 失效，更新后先等 ACSE 和各 Mod 作者确认适配。",
+      "en": "Patches can break mods; after an update, wait for ACSE and mod authors to confirm compatibility."
+    },
+    "sources": [
+      "https://github.com/OpenNaja/ACSE"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "euro-truck-simulator-2",
+    "rank": 81,
+    "steamAppId": 227300,
+    "framework": null,
+    "hooksExe": false,
+    "modSupport": "official",
+    "afterUpdate": {
+      "zh-CN": "大版本更新后，标了兼容版本的 Mod（如地图 Mod）会被停用，需等作者更新。",
+      "en": "After major updates, mods pinned to older game versions (e.g. map mods) are blocked until authors update them."
+    },
+    "sources": [
+      "https://modding.scssoft.com/wiki/Documentation/Engine/Mod_manager",
+      "https://modding.scssoft.com/wiki/Main_Page",
+      "https://store.steampowered.com/app/227300/"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "snowrunner",
+    "rank": 82,
+    "steamAppId": 1465360,
+    "framework": null,
+    "hooksExe": false,
+    "modSupport": "official",
+    "afterUpdate": null,
+    "sources": [
+      "https://www.pcgamingwiki.com/wiki/SnowRunner"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "forza-horizon-5",
+    "rank": 83,
+    "steamAppId": 1551360,
+    "framework": null,
+    "hooksExe": null,
+    "modSupport": null,
+    "afterUpdate": null,
+    "sources": [
+      "https://www.pcgamingwiki.com/wiki/Forza_Horizon_5"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "assetto-corsa",
+    "rank": 84,
+    "steamAppId": 244210,
+    "framework": {
+      "name": "Custom Shaders Patch (CSP)",
+      "url": "https://acstuff.ru/patch/"
+    },
+    "hooksExe": true,
+    "modSupport": "official",
+    "afterUpdate": {
+      "zh-CN": "CSP 只支持特定游戏版本，游戏更新后先等 CSP 出兼容版再玩。",
+      "en": "CSP requires a specific Assetto Corsa version; after a game update, wait for a compatible CSP release."
+    },
+    "sources": [
+      "https://acstuff.ru/patch/",
+      "https://store.steampowered.com/app/244210/"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "beamng-drive",
+    "rank": 85,
+    "steamAppId": 284160,
+    "framework": null,
+    "hooksExe": false,
+    "modSupport": "official",
+    "afterUpdate": {
+      "zh-CN": "大版本更新后游戏会自动停用 Mod，确认 Mod 已更新后再重新启用。",
+      "en": "Major updates auto-disable mods; re-enable them after confirming they have been updated."
+    },
+    "sources": [
+      "https://documentation.beamng.com/known-issues/",
+      "https://www.pcgamingwiki.com/wiki/BeamNG.drive",
+      "https://store.steampowered.com/app/284160/"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "persona-5-royal",
+    "rank": 86,
+    "steamAppId": 1687950,
+    "framework": {
+      "name": "Reloaded-II + Persona Essentials (p5rpc.modloader)",
+      "url": "https://github.com/Sewer56/p5rpc.modloader"
+    },
+    "hooksExe": null,
+    "modSupport": "community",
+    "afterUpdate": null,
+    "sources": [
+      "https://github.com/Sewer56/p5rpc.modloader",
+      "https://docs.shrinefox.com/getting-started/persona-5-royal-pc-mod-support"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "persona-3-reload",
+    "rank": 87,
+    "steamAppId": 2161700,
+    "framework": {
+      "name": "Reloaded-II + Unreal Essentials",
+      "url": "https://github.com/Reloaded-Project/Reloaded-II"
+    },
+    "hooksExe": null,
+    "modSupport": "community",
+    "afterUpdate": null,
+    "sources": [
+      "https://modding.wiki/en/persona3reload/users",
+      "https://github.com/Reloaded-Project/Reloaded-II"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "ff7-remake",
+    "rank": 88,
+    "steamAppId": 1462040,
+    "framework": null,
+    "hooksExe": false,
+    "modSupport": "community",
+    "afterUpdate": null,
+    "sources": [
+      "https://itemlevel.net/?p=19061",
+      "https://www.pcgamingwiki.com/wiki/Final_Fantasy_VII_Remake_Intergrade"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "ff16",
+    "rank": 89,
+    "steamAppId": 2515020,
+    "framework": {
+      "name": "FFXVI Mod Loader (Reloaded-II)",
+      "url": "https://github.com/Nenkai/ff16.utility.modloader"
+    },
+    "hooksExe": null,
+    "modSupport": "community",
+    "afterUpdate": null,
+    "sources": [
+      "https://github.com/Nenkai/ff16.utility.modloader"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "nier-automata",
+    "rank": 90,
+    "steamAppId": 524220,
+    "framework": null,
+    "hooksExe": null,
+    "modSupport": "community",
+    "afterUpdate": null,
+    "sources": [
+      "https://www.pcgamingwiki.com/wiki/NieR:_Automata",
+      "https://wiki.special-k.info/SpecialK/Custom/FAR"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "tales-of-arise",
+    "rank": 91,
+    "steamAppId": 740130,
+    "framework": null,
+    "hooksExe": null,
+    "modSupport": "community",
+    "afterUpdate": null,
+    "sources": [
+      "https://www.pcgamingwiki.com/wiki/Tales_of_Arise"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "like-a-dragon-infinite-wealth",
+    "rank": 92,
+    "steamAppId": 2072450,
+    "framework": {
+      "name": "Shin Ryu Mod Manager (SRMM)",
+      "url": "https://github.com/SRMM-Studio/ShinRyuModManager"
+    },
+    "hooksExe": null,
+    "modSupport": "community",
+    "afterUpdate": null,
+    "sources": [
+      "https://github.com/SRMM-Studio/ShinRyuModManager",
+      "https://github.com/SRMM-Studio/YakuzaParless",
+      "https://www.pcgamingwiki.com/wiki/Like_a_Dragon:_Infinite_Wealth"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "yakuza-like-a-dragon",
+    "rank": 93,
+    "steamAppId": 1235140,
+    "framework": {
+      "name": "Shin Ryu Mod Manager (SRMM)",
+      "url": "https://github.com/SRMM-Studio/ShinRyuModManager"
+    },
+    "hooksExe": null,
+    "modSupport": "community",
+    "afterUpdate": null,
+    "sources": [
+      "https://github.com/SRMM-Studio/ShinRyuModManager",
+      "https://github.com/SRMM-Studio/YakuzaParless",
+      "https://www.pcgamingwiki.com/wiki/Yakuza:_Like_a_Dragon"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "star-wars-jedi-survivor",
+    "rank": 94,
+    "steamAppId": 1774580,
+    "framework": null,
+    "hooksExe": null,
+    "modSupport": "community",
+    "afterUpdate": null,
+    "sources": [
+      "https://www.pcgamingwiki.com/wiki/Star_Wars_Jedi:_Survivor"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "star-wars-jedi-fallen-order",
+    "rank": 95,
+    "steamAppId": 1172380,
+    "framework": null,
+    "hooksExe": null,
+    "modSupport": "community",
+    "afterUpdate": null,
+    "sources": [
+      "https://www.pcgamingwiki.com/wiki/Star_Wars_Jedi:_Fallen_Order"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "dead-space-remake",
+    "rank": 96,
+    "steamAppId": 1693980,
+    "framework": {
+      "name": "Frosty Mod Manager (Frosty Toolsuite)",
+      "url": "https://github.com/CadeEvs/FrostyToolsuite"
+    },
+    "hooksExe": null,
+    "modSupport": "community",
+    "afterUpdate": null,
+    "sources": [
+      "https://www.nexusmods.com/deadspace2023/mods/116",
+      "https://github.com/CadeEvs/FrostyToolsuite"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "dead-cells",
+    "rank": 97,
+    "steamAppId": 588650,
+    "framework": null,
+    "hooksExe": false,
+    "modSupport": "workshop",
+    "afterUpdate": null,
+    "sources": [
+      "https://store.steampowered.com/app/588650/",
+      "https://steamcommunity.com/app/588650/workshop/",
+      "https://www.pcgamer.com/dead-cells-devs-plan-to-add-basic-mod-support-before-launch"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "hades",
+    "rank": 98,
+    "steamAppId": 1145360,
+    "framework": {
+      "name": "Mod Importer (SGG-Modding)",
+      "url": "https://github.com/SGG-Modding/ModImporter"
+    },
+    "hooksExe": false,
+    "modSupport": "community",
+    "afterUpdate": null,
+    "sources": [
+      "https://github.com/SGG-Modding/ModImporter",
+      "https://github.com/SGG-Modding/ModUtil"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "hollow-knight",
+    "rank": 99,
+    "steamAppId": 367520,
+    "framework": {
+      "name": "Hollow Knight Modding API",
+      "url": "https://github.com/hk-modding/api"
+    },
+    "hooksExe": true,
+    "modSupport": "community",
+    "afterUpdate": {
+      "zh-CN": "Modding API 按具体游戏版本发布，游戏更新后先等 API 出对应新版再玩 Mod。",
+      "en": "The Modding API targets a specific game version; after an update, wait for a matching API release."
+    },
+    "sources": [
+      "https://github.com/hk-modding/api/releases",
+      "https://github.com/TheMulhima/Lumafly",
+      "https://www.pcgamingwiki.com/wiki/Hollow_Knight"
+    ],
+    "checkedAt": "2026-11-19"
+  },
+  {
+    "id": "slay-the-spire",
+    "rank": 100,
+    "steamAppId": 646570,
+    "framework": {
+      "name": "ModTheSpire",
+      "url": "https://github.com/kiooeht/ModTheSpire"
+    },
+    "hooksExe": null,
+    "modSupport": "workshop",
+    "afterUpdate": null,
+    "sources": [
+      "https://github.com/kiooeht/ModTheSpire",
+      "https://store.steampowered.com/app/646570/",
+      "https://www.pcgamingwiki.com/wiki/Slay_the_Spire"
+    ],
+    "checkedAt": "2026-11-19"
+  }
+]
