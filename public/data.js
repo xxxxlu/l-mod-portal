@@ -24493,8 +24493,8 @@ window.GAMES_DATA = [
         "upvotes": 243
       }
     ],
-    "steamAppId": 1888120,
-    "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1888120/header.jpg",
+    "steamAppId": 1888160,
+    "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1888160/header.jpg",
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
       "officialUrl": "https://flingtrainer.com/trainer/armored-core-vi-fires-of-rubicon-trainer/",

@@ -55,31 +55,26 @@ HEADERS_CONTENT = """# =========================================================
 # 2. Immutable Static Assets (Images, Icons, Fonts)
 /*.jpg
   Cache-Control: public, max-age=31536000, immutable
-  Access-Control-Allow-Origin: *
 /*.png
   Cache-Control: public, max-age=31536000, immutable
-  Access-Control-Allow-Origin: *
 /*.svg
   Cache-Control: public, max-age=31536000, immutable
-  Access-Control-Allow-Origin: *
 /*.ico
   Cache-Control: public, max-age=31536000, immutable
-  Access-Control-Allow-Origin: *
 /social_distribution/*
   Cache-Control: public, max-age=31536000, immutable
-  Access-Control-Allow-Origin: *
 
 # 3. Core Database Bundle & AI Copilot Script
 /data.js
   Cache-Control: public, max-age=0, must-revalidate
-  Access-Control-Allow-Origin: *
   X-Content-Type-Options: nosniff
 /ai_copilot.js
   Cache-Control: public, max-age=0, must-revalidate
-  Access-Control-Allow-Origin: *
   X-Content-Type-Options: nosniff
 
 # 4. Global Security & CORS for all paths
+#    Access-Control-Allow-Origin lives here only: Cloudflare Pages joins a header set by two matching rules
+#    with a comma ("*, *"), which browsers reject, so per-path rules above must not repeat it.
 /*
   X-Frame-Options: SAMEORIGIN
   X-Content-Type-Options: nosniff
@@ -165,6 +160,16 @@ def verify_or_generate_cf_configs():
         log_pass("已注入/刷新 Cloudflare Pages 生产头配置: public/_headers (长缓存/CORS/安全头)")
     else:
         log_pass("验证通过: public/_headers 符合工业级长缓存与严格安全策略")
+
+    # Cloudflare Pages joins a header set by two matching rules with a comma; for
+    # Access-Control-Allow-Origin that yields "*, *", which browsers reject.
+    acao = [l for l in HEADERS_CONTENT.splitlines()
+            if l.strip().lower().startswith("access-control-allow-origin:")]
+    if len(acao) != 1:
+        log_fail(f"public/_headers 里 Access-Control-Allow-Origin 出现了 {len(acao)} 次（只能写在全站 /* 规则里一次，"
+                 "否则 Cloudflare 会拼成 \"*, *\"，浏览器拒收）")
+        sys.exit(1)
+    log_pass("验证通过: Access-Control-Allow-Origin 只在全站规则里出现一次")
 
     # 2. _redirects
     redirects_path = PUBLIC_DIR / "_redirects"

@@ -380,14 +380,18 @@ class PatchVersionAnalyzer:
         else:
             # Baseline behavior matching current radar defaults
             if game_id == 'fallout-4':
-                status = 'red'
-                status_text = "🔴 恶性坏档 · 暂停更新"
-                summary = "次世代大更新彻底重构内存地址，摧毁近 10 年 F4SE 脚本库。已接入双轨退回方案。"
-                risk_title = "🚨 次世代大更新破坏生态"
-                risk_desc = "Bethesda 次世代更新导致绝大多数 F4SE 插件闪退崩溃，建议使用 Downgrader 回退 1.10.163 稳定版。"
+                # Was hard-coded red since the 2024 Next-Gen update. F4SE now ships builds for the
+                # Next-Gen (1.10.984) and Anniversary (1.11.x) runtimes (f4se.silverlock.org, checked
+                # 2026-11-19), so a permanent red was stale and re-opened the radar alert every day.
+                # Real new patches are still caught by the new-patch branch above.
+                status = 'yellow'
+                status_text = "🟡 需更新前置 / 注意老插件"
+                summary = "F4SE 已支持次世代版与周年版。游戏更新后先把 F4SE 和依赖它的插件更新到对应版本；仍停在 1.10.163 的老插件可能闪退。"
+                risk_title = "⚠️ F4SE 与插件需对齐游戏版本"
+                risk_desc = "更新游戏后，到 F4SE 官网下载与当前游戏版本对应的构建，并确认常用插件已适配；作者没跟进的老插件会闪退，可先禁用或改用 Downgrader 回退。"
                 alert_text = {
-                    "zh-CN": "次世代大更新破坏近 10 年 Mod 体系，高危闪退！推荐使用 Downgrader 回退 1.10.163 稳定版",
-                    "en": "Next-Gen update breaks 10-year mod ecosystem! High crash risk — Downgrader to 1.10.163 recommended."
+                    "zh-CN": "F4SE 已支持新版本：更新游戏后请同步更新 F4SE 与插件，老插件可能闪退",
+                    "en": "F4SE supports the current runtimes: update F4SE and your plugins after each game update; outdated plugins may crash."
                 }
             elif game_id == 'skyrim-se':
                 status = 'yellow'
