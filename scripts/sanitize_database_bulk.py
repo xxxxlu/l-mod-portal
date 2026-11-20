@@ -18,19 +18,21 @@ L-MOD Vault Rank 15~100 批量自动化清洗与无害化去毒引擎 (Milestone
 3. 数据完整性兜底：
    - 校验 8 语言 titles 完整性；
    - 确保 trainerInfo 与 curatedMods 规范完整；
-4. 原子双库同步持久化：
-   - 更新 src/data/games_top100.json；
-   - 同步写回 public/data.js (导出 window.GAMES_DATA, window.GAMES_DATABASE, window.TRANSLATIONS_DATA)。
+4. 写入（gamedata_guard.write_changed_fields）：只写 OWNED_FIELDS 里确实变了的字段，
+   主数据与 public/data.js 的 GAMES_DATA 段同步；雷达、修改器字段和 TRANSLATIONS_DATA 不动
+   （trainerInfo 只由 fling_trainer_sync.py 写）。指令 / 常用指令 / 控制台开关已按来源核实过，
+   守卫不允许脚本改写它们，所以这个脚本现在跑到会改这些字段时会停下、什么都不写。
+
+Usage: python3 scripts/sanitize_database_bulk.py [--dry-run]
 """
 
 import os
 import sys
-import json
-import shutil
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-GAMES_JSON_PATH = os.path.join(BASE_DIR, "src", "data", "games_top100.json")
-DATA_JS_PATH = os.path.join(BASE_DIR, "public", "data.js")
+from gamedata_guard import MASTER_PATH as GAMES_JSON_PATH, load_games_for_edit, write_changed_fields
+
+SCRIPT = "sanitize_database_bulk.py"
+OWNED_FIELDS = ("consoleCategories", "popularCommands", "consoleShortcut", "consoleEnableGuide", "hasConsole", "titles")
 
 # 21 款拥有官方原生打字控制台 / 开发者模式 / 官方调试工具链的游戏 ID 白名单
 NATIVE_CONSOLE_GAMES = {
@@ -113,13 +115,7 @@ def sanitize_database():
         print(f"❌ 错误: 数据文件未找到 {GAMES_JSON_PATH}")
         sys.exit(1)
 
-    # 备份原始数据库防灾
-    backup_path = GAMES_JSON_PATH + ".bak"
-    shutil.copyfile(GAMES_JSON_PATH, backup_path)
-    print(f"📦 已建立原子备份: {backup_path}")
-
-    with open(GAMES_JSON_PATH, "r", encoding="utf-8") as f:
-        games = json.load(f)
+    games = load_games_for_edit(SCRIPT)
 
     print(f"📊 载入游戏总数: {len(games)} 款")
 
@@ -195,63 +191,12 @@ def sanitize_database():
             if lang not in titles or not titles[lang]:
                 titles[lang] = titles.get("en") or title
 
-        trainer = game.setdefault("trainerInfo", {})
-        if not trainer.get("officialUrl"):
-            trainer["officialUrl"] = f"https://flingtrainer.com/trainer/{gid}-trainer/"
-        
-        sv = trainer.setdefault("safeVerification", {})
-        if not sv.get("powershellExclusionCmd"):
-            sv["powershellExclusionCmd"] = 'Add-MpPreference -ExclusionPath "D:\\Games\\Trainers"'
-        if not sv.get("troubleshootSteps"):
-            sv["troubleshootSteps"] = [
-                "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站下载 Standalone 独立版；",
-                "2. 【Windows Defender 报毒排错】内存修改器调用底层系统 API 易被误报为 HackTool，原版绝不含木马；",
-                "3. 【10秒一键白名单】建立专用文件夹并运行上方 PowerShell 指令排除误杀；",
-                "4. 【运行顺序】建议先启动游戏进入战役，再以管理员身份运行修改器激活。"
-            ]
+        # trainerInfo is written by fling_trainer_sync.py only
 
     # -----------------------------------------------------------------
-    # 5. 写入主数据库 src/data/games_top100.json
+    # 5. 只写本脚本负责、且确实变了的字段（gamedata_guard：两份数据同步，雷达/修改器/翻译不动）
     # -----------------------------------------------------------------
-    with open(GAMES_JSON_PATH, "w", encoding="utf-8") as f:
-        json.dump(games, f, ensure_ascii=False, indent=2)
-    print(f"💾 主数据库保存完成: {GAMES_JSON_PATH}")
-
-    # -----------------------------------------------------------------
-    # 6. 读取已有翻译字典并同步写回 public/data.js
-    # -----------------------------------------------------------------
-    translations_data = {}
-    if os.path.exists(DATA_JS_PATH):
-        with open(DATA_JS_PATH, "r", encoding="utf-8") as f:
-            js_raw = f.read()
-            marker = "window.TRANSLATIONS_DATA = "
-            idx = js_raw.find(marker)
-            if idx != -1:
-                t_json_str = js_raw[idx + len(marker):].strip()
-                if t_json_str.endswith(";"):
-                    t_json_str = t_json_str[:-1]
-                try:
-                    translations_data = json.loads(t_json_str)
-                except Exception as e:
-                    print(f"⚠️ 解析 TRANSLATIONS_DATA 出错: {e}")
-
-    # 若未成功提取，从 build_i18n_matrix 模块导入兜底
-    if not translations_data:
-        try:
-            sys.path.append(os.path.join(BASE_DIR, "scripts"))
-            from build_i18n_matrix import TRANSLATIONS
-            translations_data = TRANSLATIONS
-        except Exception as e:
-            print(f"⚠️ 导入 build_i18n_matrix 出错: {e}")
-
-    with open(DATA_JS_PATH, "w", encoding="utf-8") as f:
-        f.write("// L-MOD Vault Offline Database (Auto-bundled & Sanitized)\n")
-        f.write("window.GAMES_DATA = " + json.dumps(games, ensure_ascii=False, indent=2) + ";\n\n")
-        f.write("window.GAMES_DATABASE = window.GAMES_DATA;\n\n")
-        f.write("window.TRANSLATIONS_DATA = " + json.dumps(translations_data, ensure_ascii=False, indent=2) + ";\n")
-    print(f"💾 前端离线数据库双库同步完成: {DATA_JS_PATH}")
-    if os.path.exists(backup_path):
-        os.remove(backup_path)
+    write_changed_fields(SCRIPT, OWNED_FIELDS, games)
 
     print("\n" + "=" * 70)
     print("🎉 清洗汇总统计:")

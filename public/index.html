@@ -2197,53 +2197,65 @@
       currentSearch = query.toLowerCase();
       handleSearch(query);
 
-      let matchedGame = allGames.find(g => {
-        const titleEn = (g.title || '').toLowerCase();
-        const titleLoc = (g.titles && g.titles[currentLang] ? g.titles[currentLang] : '').toLowerCase();
-        return query.toLowerCase().includes(titleEn) || query.toLowerCase().includes(titleLoc) || titleEn.includes(query.toLowerCase()) || titleLoc.includes(query.toLowerCase());
+      // Match on the game's titles and its aliases (from the game data); no guessing when nothing matches
+      const q = query.toLowerCase();
+      const matchedGame = allGames.find(g => {
+        const names = [g.title, ...(g.titles ? Object.values(g.titles) : []), ...(g.aliases || [])]
+          .filter(Boolean).map(x => String(x).toLowerCase());
+        return names.some(n => n && (q.includes(n) || n.includes(q)));
       });
-
-      if (!matchedGame) {
-        if (query.includes('赛博朋克') || query.includes('2077') || query.includes('觉')) matchedGame = allGames.find(g => g.id === 'cyberpunk-2077');
-        else if (query.includes('悟空') || query.includes('黑神话') || query.includes('地图')) matchedGame = allGames.find(g => g.id === 'black-myth-wukong');
-        else if (query.includes('巫师') || query.includes('昆特牌') || query.includes('杰洛特')) matchedGame = allGames.find(g => g.id === 'witcher-3');
-        else if (query.includes('老滚') || query.includes('天际') || query.includes('tgm')) matchedGame = allGames.find(g => g.id === 'skyrim-se');
-        else if (query.includes('生化') || query.includes('里昂') || query.includes('火箭筒')) matchedGame = allGames.find(g => g.id === 're4-remake');
-        else if (query.includes('法环') || query.includes('老头环')) matchedGame = allGames.find(g => g.id === 'elden-ring');
-        else matchedGame = allGames[0];
-      }
 
       const resBox = document.getElementById('smart-ai-response-box');
       const resText = document.getElementById('smart-ai-text');
       const resAction = document.getElementById('smart-ai-action');
 
-      const locTitle = matchedGame.titles[currentLang] || matchedGame.title;
+      if (!matchedGame) {
+        resText.innerHTML = `<p>${escHtml(t('smartNoMatch').replace('{query}', query))}</p>`;
+        resAction.innerHTML = '';
+        resBox.classList.remove('hidden');
+        resBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        return;
+      }
+
+      const locTitle = (matchedGame.titles && matchedGame.titles[currentLang]) || matchedGame.title;
+      const firstPopular = (matchedGame.popularCommands || [])[0];
       let primaryCode = '';
-      if (matchedGame.popularCommands && matchedGame.popularCommands.length > 0) {
-        primaryCode = matchedGame.popularCommands[0].command;
+      if (firstPopular) {
+        primaryCode = typeof firstPopular === 'string' ? firstPopular : (firstPopular.command || '');
       } else if (matchedGame.consoleCategories && matchedGame.consoleCategories[0]?.commands[0]?.code) {
         primaryCode = matchedGame.consoleCategories[0].commands[0].code;
       }
 
-      resText.innerHTML = `
-        <p>为你智能定位到<strong>《${locTitle}》</strong>的相关代码与方案：</p>
+      // What the site actually lists for this game
+      const cmdCount = (matchedGame.consoleCategories || []).reduce((n, c) => n + (c.commands || []).length, 0);
+      const modCount = (matchedGame.curatedMods || []).length;
+      const listed = [];
+      if (cmdCount) listed.push(t('smartHasCommands').replace('{n}', cmdCount));
+      if (modCount) listed.push(t('smartHasMods').replace('{n}', modCount));
+      if (matchedGame.hasTrainer) listed.push(t('smartHasTrainer'));
+      const listedLine = listed.length ? t('smartListed').replace('{items}', listed.join(' · ')) : t('smartHasNothing');
+
+      const codeBox = primaryCode ? `
         <div class="bg-zinc-50 dark:bg-black/40 p-4 rounded-2xl border border-zinc-200/60 dark:border-white/5 my-2">
           <div class="flex items-center justify-between text-xs text-zinc-400 mb-1.5 font-mono">
-            <span>控制台快捷键 (${matchedGame.consoleShortcut || '~'})</span>
-            <button onclick="copyText('${primaryCode.replace(/'/g, "\\'")}')" class="text-[#A855F7] dark:text-purple-400 hover:underline flex items-center space-x-1 font-semibold">
+            <span>${t('smartFirstCommand')}</span>
+            <button onclick="copyText('${jsArgAttr(primaryCode)}')" class="text-[#A855F7] dark:text-purple-400 hover:underline flex items-center space-x-1 font-semibold">
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
-              <span id="trainer-btn-copy-cmd">一键复制指令</span>
+              <span id="trainer-btn-copy-cmd">${t('copyCmdBtn')}</span>
             </button>
           </div>
-          <code class="text-xs sm:text-sm text-emerald-600 dark:text-emerald-400 font-mono font-bold select-all block">${primaryCode}</code>
-        </div>
-        <p class="text-xs text-zinc-500 dark:text-zinc-400">已整理该游戏的官方全套装备代码、核心前置 MOD 与纯净修改器。</p>
+          <code class="text-xs sm:text-sm text-emerald-600 dark:text-emerald-400 font-mono font-bold select-all block">${escHtml(primaryCode)}</code>
+        </div>` : '';
+
+      resText.innerHTML = `
+        <p><strong>${escHtml(t('smartFound').replace('{title}', locTitle))}</strong></p>
+        ${codeBox}
+        <p class="text-xs text-zinc-500 dark:text-zinc-400">${escHtml(listedLine)}</p>
       `;
 
       resAction.innerHTML = `
-        <div class="text-xs text-zinc-400">已匹配最佳结果</div>
         <a href="#/game/${matchedGame.id}" class="inline-flex items-center space-x-1.5 px-4 py-2 rounded-full bg-[#A855F7] hover:bg-[#A855F7] text-white text-xs font-semibold transition-all shadow-sm">
-          <span>进入《${locTitle}》专属二级页面</span>
+          <span>${escHtml(t('smartOpenGame').replace('{title}', locTitle))}</span>
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
         </a>
       `;
@@ -2797,7 +2809,7 @@
           let cmdCards = '';
           cat.commands.forEach(cmd => {
             const cmdName = cmd.name[currentLang] || cmd.name['zh-CN'] || cmd.name['en'] || cmd.name;
-            const escapedCode = cmd.code.replace(/'/g, "\\'");
+            const escapedCode = jsArgAttr(cmd.code);
             // Where the command was checked (wiki / official docs / the console mod's docs)
             let sourceLink = '';
             if (cmd.source && /^https:\/\//.test(cmd.source)) {
@@ -2810,7 +2822,7 @@
                   <div class="font-bold text-sm sm:text-base text-zinc-900 dark:text-white">${cmdName}</div>
                   <div class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">${cmd.desc}</div>
                   <div class="mt-2.5 inline-block bg-zinc-50 dark:bg-black/30 rounded-xl px-3.5 py-1.5 border border-zinc-200/60 dark:border-white/5">
-                    <code class="text-xs text-[#A855F7] dark:text-purple-400 font-mono font-bold select-all">${cmd.code}</code>
+                    <code class="text-xs text-[#A855F7] dark:text-purple-400 font-mono font-bold select-all">${escHtml(cmd.code)}</code>
                   </div>
                   ${sourceLink}
                 </div>
@@ -2941,6 +2953,12 @@
       return String(v == null ? '' : v).replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
     }
 
+    // A string passed as a JS argument inside an onclick="…('…')" attribute: escape for the JS string, then for the attribute
+    function jsArgAttr(v) {
+      return String(v == null ? '' : v).replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/\r?\n/g, '\\n')
+        .replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+    }
+
     // FLiNG trainer tab: data comes from public/trainers.json via scripts/fling_trainer_sync.py (official page link only, no re-hosting)
     function renderTrainerTab(game) {
       const tInfo = game && game.hasTrainer ? game.trainerInfo : null;
@@ -3069,7 +3087,7 @@
       const stepsEl = document.getElementById('mod-modal-steps');
       const nexusLink = document.getElementById('mod-modal-nexus-link');
 
-      if (titleEl) titleEl.innerText = isDirect ? (t('modModalDirectTitle') || '《{title}》下载已在浏览器拉起').replace('{title}', mod.title) : (t('modModalOfficialTitle') || '《{title}》转存与官方页面已直达').replace('{title}', mod.title);
+      if (titleEl) titleEl.innerText = isDirect ? (t('modModalDirectTitle') || '已开始下载作者发布的文件').replace('{title}', mod.title) : (t('modModalOfficialTitle') || '已在新标签页打开来源页面').replace('{title}', mod.title);
       if (badgeEl) {
         badgeEl.innerText = isDirect ? t('modModalDirectBadge') : t('modModalOfficialBadge');
         badgeEl.className = isDirect
@@ -3079,7 +3097,11 @@
       if (subtitleEl) {
         subtitleEl.innerText = isDirect ? t('modModalDirectSubtitle') : t('modModalOfficialSubtitle');
       }
-      if (filenameEl) filenameEl.innerText = mod.downloadFilename || `${mod.id}.zip`;
+      if (filenameEl) {
+        // Only a real file published by the author has a name; otherwise hide the row instead of inventing one
+        filenameEl.innerText = mod.downloadFilename || '';
+        filenameEl.parentElement.style.display = (isDirect && mod.downloadFilename) ? '' : 'none';
+      }
       if (pathEl) pathEl.innerText = activeGame.modInstallPath || '游戏安装根目录';
 
       if (stepsEl) {
@@ -3166,6 +3188,20 @@
 
       // hasConsole means an official console; games that only get one through a mod may still have verified bundles
       if (!game.hasConsole && !(game.scenarioBundles && game.scenarioBundles.length)) {
+        // Say only what this game actually has: a FLiNG trainer, listed mods, both, or neither
+        const hasTrainer = !!game.hasTrainer;
+        const hasMods = !!(game.curatedMods && game.curatedMods.length);
+        const haveText = hasTrainer && hasMods ? t('noConsoleHasBoth')
+          : hasTrainer ? t('noConsoleHasTrainer')
+          : hasMods ? t('noConsoleHasMods') : '';
+        const haveLine = haveText ? `<div class="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">${haveText}</div>` : '';
+        const goTab = hasTrainer ? 'trainers' : (hasMods ? 'mods' : '');
+        const goLabel = hasTrainer ? t('goToTrainers') : t('goToMods');
+        const goBtn = goTab ? `
+            <button onclick="setDetailTab('${goTab}')" class="px-5 py-2.5 rounded-full bg-[#A855F7] hover:bg-[#A855F7] text-white font-bold text-xs transition-all shadow-md shrink-0 flex items-center gap-1.5 cursor-pointer">
+              <span>${goLabel}</span>
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            </button>` : '';
         container.innerHTML = `
           <div class="bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-emerald-500/10 rounded-[28px] p-6 border border-[#A855F7]/20 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
             <div class="flex items-center space-x-3.5">
@@ -3174,13 +3210,9 @@
               </div>
               <div>
                 <div class="font-extrabold text-sm sm:text-base text-zinc-900 dark:text-white">${t('noConsoleTitle')}</div>
-                <div class="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">${t('noConsoleDesc')}</div>
+                ${haveLine}
               </div>
-            </div>
-            <button onclick="setDetailTab('trainers')" class="px-5 py-2.5 rounded-full bg-[#A855F7] hover:bg-[#A855F7] text-white font-bold text-xs transition-all shadow-md shrink-0 flex items-center gap-1.5 cursor-pointer">
-              <span>${t('goToTrainers')}</span>
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-            </button>
+            </div>${goBtn}
           </div>
         `;
         return;

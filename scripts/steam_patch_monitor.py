@@ -191,24 +191,16 @@ def load_games(data_js_path=DATA_JS_PATH, use_master=None):
 def save_games(games, data_js_path=DATA_JS_PATH, use_master=False):
     """写回游戏库。
 
-    - 有主数据（本地开发）：写 games_top100.json，再整份重新生成 public/data.js（沿用旧行为）。
+    - 有主数据（本地开发）：经 gamedata_guard（owner="radar"）只写雷达字段里确实变了的部分，
+      主数据和 data.js 的 GAMES_DATA 段同步改；其它字段、修改器字段和 TRANSLATIONS_DATA 不动。
+      （以前这里会用主数据整份重新生成 data.js。）
     - 没有主数据（GitHub Actions / 新克隆）：只替换 data.js 里 GAMES_DATA 段，
       TRANSLATIONS_DATA 等其它部分一个字节都不动。
     修改器字段（hasTrainer / trainerInfo …）归 fling_trainer_sync.py 管，这里原样保留。
     """
     if use_master:
-        with open(GAMES_JSON_PATH, 'w', encoding='utf-8') as f:
-            json.dump(games, f, ensure_ascii=False, indent=2)
-        translations = {}
-        if os.path.exists(TRANS_JSON_PATH):
-            with open(TRANS_JSON_PATH, 'r', encoding='utf-8') as f:
-                translations = json.load(f)
-        with open(data_js_path, 'w', encoding='utf-8') as f:
-            f.write("// L-MOD Vault Offline Database (Auto-bundled by Steam Patch Sentinel)\n")
-            f.write(GAMES_DATA_HEAD + json.dumps(games, ensure_ascii=False, indent=2) + ";\n\n")
-            f.write("window.GAMES_DATABASE = window.GAMES_DATA;\n\n")
-            if translations:
-                f.write("window.TRANSLATIONS_DATA = " + json.dumps(translations, ensure_ascii=False, indent=2) + ";\n")
+        from gamedata_guard import write_changed_fields
+        write_changed_fields('steam_patch_monitor.py', RADAR_FIELDS, games, dry_run=False, owner='radar')
         return
     with open(data_js_path, 'r', encoding='utf-8') as f:
         js_text = f.read()

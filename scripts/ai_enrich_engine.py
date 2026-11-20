@@ -15,8 +15,12 @@ Features:
    - trainerInfo (FLiNG hotkeys, process name, PowerShell exclusion cmd)
    - curatedMods (top N-Net mods, install path)
    - pitfallNote & compatibility baseline
-5. Validates through scripts/audit_game_data.py Anti-Fake & Syntax Linter Gate.
-6. Automatically bundles and updates public/data.js.
+5. Writes through gamedata_guard (write_changed_fields): only OWNED_FIELDS of the games it
+   changes, in the master data and the GAMES_DATA segment of public/data.js; radar, trainer
+   (trainerInfo comes from fling_trainer_sync.py only) and TRANSLATIONS_DATA are untouched.
+   Commands, popular commands, bundles and the console flag are checked content: the guard
+   stops the run instead of replacing them with generated text. Check the result with
+   scripts/audit_game_data.py after a run.
 """
 
 import os
@@ -28,8 +32,11 @@ import urllib.request
 import urllib.error
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-GAMES_JSON_PATH = os.path.join(BASE_DIR, 'src/data/games_top100.json')
-DATA_JS_PATH = os.path.join(BASE_DIR, 'public/data.js')
+sys.path.insert(0, os.path.join(BASE_DIR, 'scripts'))
+from gamedata_guard import MASTER_PATH as GAMES_JSON_PATH, load_games_for_edit, write_changed_fields  # noqa: E402
+
+SCRIPT = "ai_enrich_engine.py"
+OWNED_FIELDS = ("consoleCategories", "popularCommands", "scenarioBundles", "pitfallNote", "consoleShortcut", "hasConsole")
 
 # Import project audit gate
 sys.path.insert(0, os.path.join(BASE_DIR, 'scripts'))
@@ -326,8 +333,7 @@ def run_enrichment(target_game_id=None, batch_size=5, dry_run=False):
     print("⛏️ L-MOD Vault - AI 游戏数据全息采掘智能体 (Auto-Enrich Engine)")
     print("=" * 72)
 
-    with open(GAMES_JSON_PATH, 'r', encoding='utf-8') as f:
-        games = json.load(f)
+    games = load_games_for_edit(SCRIPT)
 
     enricher = AIEnrichClient()
 
@@ -362,8 +368,6 @@ def run_enrichment(target_game_id=None, batch_size=5, dry_run=False):
             game['popularCommands'] = payload['popularCommands']
         if 'scenarioBundles' in payload and payload['scenarioBundles']:
             game['scenarioBundles'] = payload['scenarioBundles']
-        if 'trainerInfo' in payload and payload['trainerInfo']:
-            game['trainerInfo'] = payload['trainerInfo']
         if 'pitfallNote' in payload and payload['pitfallNote']:
             game['pitfallNote'] = payload['pitfallNote']
         if 'consoleShortcut' in payload and payload['consoleShortcut']:
@@ -374,34 +378,13 @@ def run_enrichment(target_game_id=None, batch_size=5, dry_run=False):
         cmds_count = sum(len(c.get('commands', [])) for c in game.get('consoleCategories', []))
         print(f"   ✨ 生成完成: {cats_count} 个全息分类，共 {cmds_count} 条真实代码")
 
-        # Verify through Audit Gate
-        if audit_game and not dry_run:
-            print(f"   🛡️ 正在运行 audit_game 质量与反假代码门禁...")
-            # Temporarily write to disk to let audit_game inspect
-            with open(GAMES_JSON_PATH, 'w', encoding='utf-8') as f:
-                json.dump(games, f, ensure_ascii=False, indent=2)
-            passed = audit_game(gid, verbose=False)
-            if passed:
-                print(f"   ✅ 门禁质检通过 (PASS)！")
-            else:
-                print(f"   ⚠️ 门禁发现告警，已按规范自动收敛。")
-
         enriched_games.append(game)
         print("-" * 60)
 
-    # Final Save and Compilation
+    # Final save: only the changed owned fields, both data files (gamedata_guard)
     if not dry_run:
-        print(f"\n💾 正在将采掘结果持久化保存至 {GAMES_JSON_PATH}...")
-        with open(GAMES_JSON_PATH, 'w', encoding='utf-8') as f:
-            json.dump(games, f, ensure_ascii=False, indent=2)
-
-        # Trigger build_i18n_matrix.py
-        build_script = os.path.join(BASE_DIR, 'scripts/build_i18n_matrix.py')
-        if os.path.exists(build_script):
-            print("🚀 正在触发 build_i18n_matrix.py 重新打包 public/data.js...")
-            os.system(f"python3 {build_script}")
-
-        print(f"\n🎉 成功完成 {len(enriched_games)} 款游戏的全息采掘与编译分发！")
+        write_changed_fields(SCRIPT, OWNED_FIELDS, games, dry_run=False)
+        print(f"\n🎉 完成 {len(enriched_games)} 款游戏；请再跑 scripts/audit_game_data.py 检查结果。")
     else:
         print("\n🧪 [Dry Run] 演练完成，未修改物理文件。")
 

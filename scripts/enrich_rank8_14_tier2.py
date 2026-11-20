@@ -40,7 +40,7 @@ PALWORLD_DATA = {
             "title": "RE-UE4SS - Mod Loader - Debug Tool - Pak Mod Enabler",
             "author": "UE4SS-RE",
             "category": "Core Framework (核心前置)",
-            "desc": "幻兽帕鲁运行全部 Lua 模组、UI 扩展与控制台打字命令的绝对核心前置库，极客必备。",
+            "desc": "幻兽帕鲁运行 Lua 模组、UI 扩展与控制台命令类 Mod 所需的前置库。",
             "dependencies": [
                 "None (Native Injector)"
             ],
@@ -98,8 +98,8 @@ STARFIELD_DATA = {
             "id": "sfse_core",
             "title": "Starfield Script Extender (SFSE)",
             "author": "SFSE Team",
-            "category": "Core Framework (核心前置)",
-            "desc": "星空运行全部高阶 UI 模组、飞船构建突破与游戏机制大修的绝对基石前置。原生扩展游戏内存指针；游戏更新后要等作者发新版。",
+            "category": "框架 / 前置",
+            "desc": "扩展 Starfield 脚本能力的工具，是许多 UI 与玩法类 Mod 的前置；游戏更新后需要等待作者更新对应版本。",
             "dependencies": [
                 "None (Native Extender)"
             ],
@@ -121,8 +121,8 @@ STARFIELD_DATA = {
             "id": "starfield_community_patch",
             "title": "Starfield Community Patch (SFCP)",
             "author": "Starfield Modding Community",
-            "category": "Bug Fixes (全漏洞修复)",
-            "desc": "由全球顶尖 Modder 共同维护的开源综合漏洞修复包，修复了上千处恶性断任务、NPC 漂浮卡死与飞船无法停泊的底层代码 Bug。",
+            "category": "漏洞修复",
+            "desc": "由社区开发者维护的综合性漏洞修复 Mod，用于修复游戏中的任务、NPC 与其他已知问题。",
             "dependencies": [
                 "SFSE"
             ],
@@ -143,8 +143,8 @@ STARFIELD_DATA = {
             "id": "undelayed_menus",
             "title": "Undelayed Menus",
             "author": "Seb263",
-            "category": "UI / Interface",
-            "desc": "消除打开物品栏、星图与技能界面时长达 0.5 秒的迟钝渐变淡入动画，界面秒开瞬切，操作如丝般顺滑。",
+            "category": "界面",
+            "desc": "移除打开物品栏、星图与技能界面时约 0.5 秒的淡入动画，使菜单响应更快。",
             "dependencies": [
                 "None (SWF Override)"
             ],
@@ -153,7 +153,7 @@ STARFIELD_DATA = {
             "installSteps": [
                 "1. 下载压缩包解压获取 Interface/ 文件夹；",
                 "2. 将其放入 Starfield/Data/ 目录下；",
-                "3. 游戏中按 Tab 打开菜单立刻感受零延迟交互。"
+                "3. 游戏中按 Tab 打开菜单即可感受更快的响应速度。"
             ],
             "nexusUrl": "https://www.nexusmods.com/starfield/mods/404",
             "version": "1.0.6",
@@ -164,17 +164,17 @@ STARFIELD_DATA = {
     ],
     "consoleCategories": [
         {
-            "category": "👑 核心上帝模式与绝对生存 (God Mode & Invulnerability)",
+            "category": "👑 核心上帝模式 (God Mode & Invulnerability)",
             "commands": [
                 {
                     "id": "sf_tgm",
                     "name": {
-                        "zh-CN": "完全上帝模式 (TGM - 锁血/无限氧气/无限子弹)",
+                        "zh-CN": "开关上帝模式 (tgm)",
                         "en": "Toggle God Mode (tgm)"
                     },
                     "syntax_type": "creation_hex",
                     "code": "tgm",
-                    "desc": "Bethesda 经典全能神级代码，生命值、耐力氧气槽、飞船护盾与弹药全部锁定无限。",
+                    "desc": "开启后角色生命值、氧气与弹药不受限制，飞船护盾也保持满值；再次输入关闭。",
                     "framework_required": "None (Native Console)",
                     "source": "https://starfieldwiki.net/wiki/Starfield:Console"
                 },
@@ -186,7 +186,7 @@ STARFIELD_DATA = {
                     },
                     "syntax_type": "creation_hex",
                     "code": "tim",
-                    "desc": "机体会受到正常伤害并显示残血状态，但生命值降至 1 点时绝不会倒下，保留战斗紧张感。",
+                    "desc": "角色仍会正常受到伤害，但生命值不会降到 0 以下而倒下，保留战斗的紧张感。",
                     "framework_required": "None (Native Console)",
                     "source": "https://starfieldwiki.net/wiki/Starfield:Console"
                 },
@@ -218,7 +218,7 @@ STARFIELD_DATA = {
             ]
         },
         {
-            "category": "🚀 飞船建造部件无限制与反应堆电能 (Ship Builder Unlimited & Power)",
+            "category": "🚀 飞船维修与部件补给 (Ship Repair & Parts)",
             "commands": [
                 {
                     "id": "sf_ship_repair",
@@ -235,7 +235,7 @@ STARFIELD_DATA = {
             ]
         },
         {
-            "category": "🧬 角色特质修改、背景天赋与洗点 (Traits, Background & Skills)",
+            "category": "🧬 角色外观、特质与等级调整 (Traits, Background & Leveling)",
             "commands": [
                 {
                     "id": "sf_show_race_menu",
@@ -252,24 +252,24 @@ STARFIELD_DATA = {
                 {
                     "id": "sf_add_trait_hero",
                     "name": {
-                        "zh-CN": "添加特质：英雄崇拜 (招募忠诚狂热粉丝)",
+                        "zh-CN": "添加特质：英雄崇拜 (获得狂热粉丝NPC)",
                         "en": "Add Trait: Hero Worshipped"
                     },
                     "syntax_type": "creation_hex",
                     "code": "player.addperk 00227FD9",
-                    "desc": "解锁极为滑稽搞笑且忠诚的‘狂热粉丝’NPC随从，他会不断夸赞你并赠送免费小礼物。",
+                    "desc": "添加该特质后会获得一位会不定期出现并送礼物的「狂热粉丝」NPC，但他也会频繁打扰你。",
                     "framework_required": "None (Native Console)",
                     "source": "https://starfieldwiki.net/wiki/Starfield:Hero_Worshipped"
                 },
                 {
                     "id": "sf_add_trait_home",
                     "name": {
-                        "zh-CN": "添加特质：梦想家园 (奥林匹斯豪宅钥匙)",
+                        "zh-CN": "添加特质：梦想家园 (获得Nesoi住宅)",
                         "en": "Add Trait: Dream Home"
                     },
                     "syntax_type": "creation_hex",
                     "code": "player.addperk 00227FDF",
-                    "desc": "在风景优美的奥林匹斯星系拥有一座两层豪华独栋别墅，专享私密海景停机坪。",
+                    "desc": "添加该特质后，可在奥林匹斯星系的 Nesoi 获得一套自有住宅；需以每周 500 信用点的方式偿还共 12.5 万信用点的贷款。",
                     "framework_required": "None (Native Console)",
                     "source": "https://starfieldwiki.net/wiki/Starfield:Dream_Home_(Trait)"
                 },
@@ -281,7 +281,7 @@ STARFIELD_DATA = {
                     },
                     "syntax_type": "creation_hex",
                     "code": "player.setlevel 60",
-                    "desc": "跳过低等级刷怪期，让游戏内高阶装备与传奇武器掉落池全部立刻解锁。",
+                    "desc": "将角色等级设置为 60 级，使更高阶的装备与传奇武器在战利品与商店中出现的概率提高。",
                     "framework_required": "None (Native Console)",
                     "source": "https://starfieldwiki.net/wiki/Starfield:Console"
                 }
@@ -293,60 +293,60 @@ STARFIELD_DATA = {
                 {
                     "id": "sf_add_credits_1m",
                     "name": {
-                        "zh-CN": "获得 1,000,000 信用币 (财富自由秒买名舰)",
+                        "zh-CN": "获得 1,000,000 信用币",
                         "en": "Add 1,000,000 Credits"
                     },
                     "syntax_type": "creation_hex",
                     "code": "player.additem 0000000F 1000000",
-                    "desc": "背包直接入账一百万信用币，随意在霓虹城与新亚特兰蒂斯购买顶级现成星际战舰。",
+                    "desc": "向背包增加 1,000,000 信用币。",
                     "framework_required": "None (Native Console)",
                     "source": "https://starfieldwiki.net/wiki/Starfield:Miscellaneous_Items"
                 },
                 {
                     "id": "sf_add_digipicks",
                     "name": {
-                        "zh-CN": "获得数码撬棒 x100 (开锁神器随心解谜)",
+                        "zh-CN": "获得数码撬棒 x100 (开锁小游戏备用)",
                         "en": "Add 100 Digipicks"
                     },
                     "syntax_type": "creation_hex",
                     "code": "player.additem 0000000A 100",
-                    "desc": "获取 100 个开锁数码撬棒，无惧任何专家级与大师级保险箱圆环拼图试错。",
+                    "desc": "向背包增加 100 个数码撬棒，用于开锁小游戏中的试错消耗。",
                     "framework_required": "None (Native Console)",
                     "source": "https://starfieldwiki.net/wiki/Starfield:Miscellaneous_Items"
                 },
                 {
                     "id": "sf_carry_weight_max",
                     "name": {
-                        "zh-CN": "角色随身负重上限提升至 9,999 吨",
+                        "zh-CN": "角色随身负重上限提升至 9,999",
                         "en": "Set Player Carry Weight to 9,999"
                     },
                     "syntax_type": "creation_hex",
                     "code": "player.setav carryweight 9999",
-                    "desc": "将角色随身负重拉至上万点，身上装载几十把重武器与全部矿石亦可健步如飞。",
+                    "desc": "将角色负重上限设置为 9,999，基本不会再因超重而减速。",
                     "framework_required": "None (Native Console)",
                     "source": "https://starfieldwiki.net/wiki/Starfield:Console"
                 },
                 {
                     "id": "sf_pay_bounty",
                     "name": {
-                        "zh-CN": "一键清除全部星系阵营通缉赏金 (清罪免通缉)",
-                        "en": "Clear All Faction Bounties"
+                        "zh-CN": "清除当前目标所属阵营的通缉赏金 (player.paycrimegold)",
+                        "en": "Clear Faction Bounty"
                     },
                     "syntax_type": "creation_hex",
                     "code": "player.paycrimegold 0 0",
-                    "desc": "支付你当前被通缉的、与所瞄准NPC同阵营的赏金（信用币从库存扣除），0 0表示不送监狱且不没收赃物；该命令每次只结清目标所属的一个阵营，并非一键清除全部阵营通缉赏金",
+                    "desc": "支付当前目标所属阵营的通缉赏金（信用点从库存中扣除）；0 0 表示不进监狱也不没收赃物。每次只结清目标所属的那一个阵营，不会清除其他阵营的通缉。",
                     "framework_required": "None (Native Console)",
                     "source": "https://starfieldwiki.net/wiki/Starfield:Console"
                 },
                 {
                     "id": "sf_unlock_target",
                     "name": {
-                        "zh-CN": "强制解锁准星所指之门/保险箱 (秒开万物)",
+                        "zh-CN": "强制解锁准星所指之门/保险箱",
                         "en": "Unlock Target Door / Safe"
                     },
                     "syntax_type": "creation_hex",
                     "code": "unlock",
-                    "desc": "在控制台开启时用鼠标点击锁住的门或货箱，输入 unlock 即可瞬间物理破解开启。",
+                    "desc": "控制台开启时用鼠标点击锁住的门或容器，输入 unlock 即可直接解锁。",
                     "framework_required": "None (Native Console)",
                     "source": "https://starfieldwiki.net/wiki/Starfield:Console"
                 }
@@ -358,36 +358,36 @@ STARFIELD_DATA = {
                 {
                     "id": "sf_weapon_hardtarget",
                     "name": {
-                        "zh-CN": "获得硬靶高精狙击步枪 (超远距离爆头一击必杀)",
+                        "zh-CN": "获得硬靶高精狙击步枪 (Hard Target)",
                         "en": "Give Hard Target Sniper Rifle"
                     },
                     "syntax_type": "creation_hex",
                     "code": "player.additem 000546CC 1",
-                    "desc": ".50 口径高初速反器材狙击步枪，加装消音器与夜视镜后潜行暴击伤害直接拉满。",
+                    "desc": "Combatech 制造的 .50 口径弹药步枪，基础伤害较高。",
                     "framework_required": "None (Native Console)",
                     "source": "https://starfieldwiki.net/wiki/Starfield:Hard_Target"
                 },
                 {
                     "id": "sf_weapon_inflictor",
                     "name": {
-                        "zh-CN": "获得瓦鲁恩折磨者粒子束步枪 (神级双属性输出)",
+                        "zh-CN": "获得瓦鲁恩折磨者粒子束步枪",
                         "en": "Give Va'ruun Inflictor Particle Rifle"
                     },
                     "syntax_type": "creation_hex",
                     "code": "player.additem 0026D8A0 1",
-                    "desc": "瓦鲁恩毒蛇信徒秘造神兵，同时造成物理与能量双重属性伤害，全游戏最强 T0 步枪。",
+                    "desc": "瓦鲁恩教派制造的粒子束步枪，兼具物理与能量伤害。",
                     "framework_required": "None (Native Console)",
                     "source": "https://starfieldwiki.net/wiki/Starfield:Va%27ruun_Inflictor"
                 },
                 {
                     "id": "sf_weapon_bigbang",
                     "name": {
-                        "zh-CN": "获得大爆炸重型粒子束霰弹枪 (近身终极毁灭者)",
+                        "zh-CN": "获得大爆炸粒子束霰弹枪 (Big Bang)",
                         "en": "Give Big Bang Shotgun"
                     },
                     "syntax_type": "creation_hex",
                     "code": "player.additem 0026D963 1",
-                    "desc": "近距离一枪轰杀任何高阶掠夺者与外星异形怪兽，自带扩散粒子灼烧暴击。",
+                    "desc": "Combatech 制造的粒子束霰弹枪，近距离伤害较高。",
                     "framework_required": "None (Native Console)",
                     "source": "https://starfieldwiki.net/wiki/Starfield:Big_Bang"
                 },
@@ -399,7 +399,7 @@ STARFIELD_DATA = {
                     },
                     "syntax_type": "creation_hex",
                     "code": "player.attachmod 000F2012",
-                    "desc": "为当前所持武器附加金色传奇词条【煽动】，对生命值全满的目标造成整整 2 倍致命伤害！",
+                    "desc": "为当前武器附加传奇词条【煽动】：若目标生命值为满，造成 2 倍伤害。",
                     "framework_required": "None (Native Console)",
                     "source": "https://starfieldwiki.net/wiki/Starfield:Effects"
                 }
@@ -411,24 +411,24 @@ STARFIELD_DATA = {
                 {
                     "id": "sf_suit_starborn",
                     "name": {
-                        "zh-CN": "获得星裔天相战甲 (十周目终极神级宇航服)",
+                        "zh-CN": "获得星裔天相战甲 (NG+1 周目开始获得)",
                         "en": "Give Starborn Spacesuit Astra"
                     },
                     "syntax_type": "creation_hex",
                     "code": "player.additem 0012E187 1",
-                    "desc": "通关十周目获得的一体化星裔流光战甲，提供极致物理抗性、极寒耐受与自带隐形斗篷。",
+                    "desc": "进入新游戏+（NG+1）周目开始时获得的一体式宇航服，各项防护数值均衡且较高。",
                     "framework_required": "None (Native Console)",
                     "source": "https://starfieldwiki.net/wiki/Starfield:Starborn_Spacesuit_Astra"
                 },
                 {
                     "id": "sf_suit_mantis",
                     "name": {
-                        "zh-CN": "获得蝠鲼传奇宇航服 (全套太空游侠神装)",
+                        "zh-CN": "获得蝠鲼传奇宇航服 (完成蝠鲼基地据点后获得)",
                         "en": "Give Mantis Spacesuit"
                     },
                     "syntax_type": "creation_hex",
                     "code": "player.additem 00226299 1",
-                    "desc": "蝠鲼秘密基地代代传承的传奇正义宇航服，自带减重与受到近战攻击反弹电弧特效。",
+                    "desc": "完成「蝠鲼的巢穴」任务后，在蝠鲼秘密基地获得的全套宇航服之一。",
                     "framework_required": "None (Native Console)",
                     "source": "https://starfieldwiki.net/wiki/Starfield:Mantis_Spacesuit"
                 },
@@ -459,12 +459,12 @@ STARFIELD_DATA = {
             ]
         },
         {
-            "category": "🌌 全星系地标探索、重力调控与穿墙 (Star Map, Gravity & Exploration)",
+            "category": "🌌 星图探索与镜头/时间控制 (Star Map, Camera & Time)",
             "commands": [
                 {
                     "id": "sf_tmm_all",
                     "name": {
-                        "zh-CN": "星图全部地标与着陆点一键全开 (TMM 1)",
+                        "zh-CN": "点亮星图全部地标与着陆点 (TMM 1)",
                         "en": "Show All Map Markers (tmm 1)"
                     },
                     "syntax_type": "creation_hex",
@@ -493,26 +493,26 @@ STARFIELD_DATA = {
                     },
                     "syntax_type": "creation_hex",
                     "code": "tm",
-                    "desc": "一键隐藏全屏血条、氧气表、指南针与准星，截取好莱坞科幻大片质感的深空照片。",
+                    "desc": "隐藏或恢复血条、氧气表、指南针与准星等界面元素，便于截图。",
                     "framework_required": "None (Native Console)",
                     "source": "https://starfieldwiki.net/wiki/Starfield:Console"
                 },
                 {
                     "id": "sf_kah_enemies",
                     "name": {
-                        "zh-CN": "击杀视野内所有敌对威胁 (KAH 秒杀全敌)",
+                        "zh-CN": "击杀视野内所有敌对目标 (kah)",
                         "en": "Kill All Hostiles (kah)"
                     },
                     "syntax_type": "creation_hex",
                     "code": "kah",
-                    "desc": "瞬间消灭当前场景中所有处于战斗敌对状态的海盗与外星虫群，和平清理战场。",
+                    "desc": "立即杀死当前场景中处于战斗状态的所有敌对目标。",
                     "framework_required": "None (Native Console)",
                     "source": "https://starfield.fandom.com/wiki/Help_command"
                 }
             ]
         },
         {
-            "category": "🛠️ 哨站全工业建材与稀有矿物全满 (Outpost Resources & Exotic Mats)",
+            "category": "🛠️ 哨站建材与稀有矿物补给 (Outpost Resources & Exotic Mats)",
             "commands": [
                 {
                     "id": "sf_res_iron",
@@ -570,7 +570,7 @@ STARFIELD_DATA = {
                     },
                     "syntax_type": "creation_hex",
                     "code": "player.additem 000055CC 300",
-                    "desc": "恶劣大气环境下密封哨站走廊与太空防护服隔绝层必不可少的高分子密封胶。",
+                    "desc": "用于密封哨站走廊与太空服隔绝层的高分子密封材料。",
                     "framework_required": "None (Native Console)",
                     "source": "https://starfieldwiki.net/wiki/Starfield:Miscellaneous_Items"
                 }
@@ -584,8 +584,8 @@ STARFIELD_DATA = {
             "name": "新手星际启航起飞包",
             "tag": "👑 萌新首选 · 零门槛",
             "badge": "星际起航",
-            "desc": "一键激活 TGM 完全无敌 + 100万信用币启动资金 + 100把数码撬棒 + 随身负重万吨上限，萌新开局直接买下顶级战舰开荒！",
-            "highlights": ["完全上帝模式，免受恶劣星球伤害", "1,000,000 信用币随心买船", "100 把数码撬棒，见箱就开", "负重上限 9,999 吨，垃圾随便捡"],
+            "desc": "开启上帝模式 + 获得 100 万信用币 + 100 个数码撬棒 + 负重上限提升至 9,999，方便新手开局。",
+            "highlights": ["上帝模式，角色免疫伤害", "1,000,000 信用币，可用于购买飞船", "100 个数码撬棒，方便开锁", "负重上限 9,999，大幅减少负重限制"],
             "code": "-- [老L·极客场景套餐] 星空 新手星际启航起飞包 (原生控制台，未实测)\ntgm\nplayer.additem 0000000F 1000000\nplayer.additem 0000000A 100\nplayer.setav carryweight 9999"
         },
 
@@ -629,7 +629,7 @@ GTA5_DATA = {
             "title": "Script Hook V",
             "author": "Alexander Blade",
             "category": "Core Framework (核心前置)",
-            "desc": "GTA 5 单机运行所有 ASI 脚本、载具菜单与功能模组的最权威开源前置。自带经典 F4 Native Trainer 离线菜单，包含防线上联机自动切断保护。",
+            "desc": "GTA V 的脚本插件加载库，是运行 ASI 脚本和大多数离线单机 Mod 菜单的前置库。自带 Native Trainer 离线菜单；进入 GTA Online 多人模式时会自动关闭游戏，不能在线上使用。",
             "dependencies": [
                 "None (Native DLL)"
             ],
@@ -639,7 +639,7 @@ GTA5_DATA = {
                 "1. 点击下载 ScriptHookV_1.0.3179.0.zip；",
                 "2. 打开 GTA 5 安装根目录 (包含 GTA5.exe 的文件夹)；",
                 "3. 将 bin/ 目录下的 ScriptHookV.dll、dinput8.dll 和 NativeTrainer.asi 复制到根目录；",
-                "4. 进入单机故事模式按 F4 即可呼出菜单。"
+                "4. 进入单机故事模式按 F4 呼出菜单。"
             ],
             "nexusUrl": "https://www.dev-c.com/gtav/scripthookv/",
             "version": "supports build 1.0.3889.0 / 1.0.1158.13 (current)"
@@ -649,7 +649,7 @@ GTA5_DATA = {
             "title": "Menyoo PC [SP]",
             "author": "MAFINS",
             "category": "Trainer / Menu",
-            "desc": "功能冠绝全网的顶级单机离线菜单：随心刷出全部线上 DLC 豪车与战机、自定义保镖随从战队、建造自定义赛道飞跃跑道、随时更换任何剧情角色外观！",
+            "desc": "单机离线功能菜单，可以刷出载具（含线上 DLC 载具）、自定义随从、搭建赛道障碍物，并更换剧情角色外观。",
             "dependencies": [
                 "ScriptHookV"
             ],
@@ -659,7 +659,7 @@ GTA5_DATA = {
                 "1. 确认已安装 ScriptHookV 前置；",
                 "2. 下载压缩包解压获取 menyooStuff 文件夹和 Menyoo.asi；",
                 "3. 放入 GTA5 游戏根目录；",
-                "4. 故事模式按 F8 即可打开图形化菜单。"
+                "4. 故事模式下按 F8 打开图形化菜单。"
             ],
             "nexusUrl": "https://github.com/MAFINS/MenyooSP",
             "version": "v1.8.1",
@@ -671,7 +671,7 @@ GTA5_DATA = {
             "title": "OpenIV",
             "author": "OpenIV Team",
             "category": "Mod Tool (工具软件)",
-            "desc": "安装现实真车包、高清地图画质材质包与真实枪械声音必备的归档编辑工具。独创 mods 文件夹隔离机制，保护游戏原版文件绝对不受污染破坏。",
+            "desc": "RPF 归档编辑工具，用于安装车辆、材质与音效类 Mod。提供 mods 文件夹机制，替换文件时不会修改游戏原始文件。",
             "dependencies": [
                 "None (Stand-alone Tool)"
             ],
@@ -681,7 +681,7 @@ GTA5_DATA = {
                 "1. 下载运行 OpenIVSetup.exe 安装工具；",
                 "2. 打开 OpenIV 选择 Grand Theft Auto V (Windows)；",
                 "3. 点击 Tools -> ASI Manager，全部点击 Install 安装 ASI 驱动；",
-                "4. 所有后续 RPF 模组均放入 mods 文件夹中无损替换。"
+                "4. 后续模组放入 mods 文件夹生效，不会修改原始游戏文件。"
             ],
             "nexusUrl": "https://openiv.com",
             "version": "4.1"
@@ -690,8 +690,8 @@ GTA5_DATA = {
             "id": "gta_nve_graphics",
             "title": "NaturalVision Evolved",
             "author": "Razed",
-            "category": "Graphics (顶级画质)",
-            "desc": "耗时数年倾力打造的次世代画质圣经，重制全洛圣都天气照明、反射水面、雨天积水倒影与霓虹夜景，赋予老游戏媲美 2026 年大作的电影级真实感！",
+            "category": "Graphics (画面)",
+            "desc": "画面重制类 Mod，调整洛圣都的天气、光照、水面反射与夜景效果。",
             "dependencies": [
                 "OpenIV",
                 "ScriptHookV"
@@ -702,24 +702,24 @@ GTA5_DATA = {
                 "1. 确保安装好 OpenIV 并启用了 ASI 扩展；",
                 "2. 打开 OpenIV 点击 Tools -> Package Installer；",
                 "3. 选中下载的 NVE_Installer.oiv 并安装到 'mods folder'；",
-                "4. 启动游戏享受好莱坞大片级视觉盛宴。"
+                "4. 启动游戏查看效果。"
             ],
             "nexusUrl": "https://www.razedmods.com/gta-v"
         }
     ],
     "consoleCategories": [
         {
-            "category": "👑 经典官方无敌与通缉度调控 (God Mode & Wanted Level Cheats)",
+            "category": "👑 官方秘籍：无敌与通缉等级 (Invincibility & Wanted Level Cheats)",
             "commands": [
                 {
                     "id": "gta_cheat_painkiller",
                     "name": {
-                        "zh-CN": "官方经典无敌 5 分钟 (PAINKILLER)",
+                        "zh-CN": "无敌状态 5 分钟 (PAINKILLER)",
                         "en": "Invincibility for 5 Mins (PAINKILLER)"
                     },
                     "syntax_type": "rage_cheat",
                     "code": "PAINKILLER",
-                    "desc": "官方原生秘籍代码，开启 5 分钟绝对锁血无敌状态，任何爆炸枪击高处坠落毫发无损。",
+                    "desc": "官方秘籍代码，开启 5 分钟无敌状态，免疫爆炸、枪击和坠落造成的伤害。",
                     "framework_required": "None (Native Console)",
                     "source": "https://gtabase.com/grand-theft-auto-v/gta-5-cheats-pc-full-list-of-cheat-codes"
                 },
@@ -731,7 +731,7 @@ GTA5_DATA = {
                     },
                     "syntax_type": "rage_cheat",
                     "code": "TURTLE",
-                    "desc": "立刻回满角色全部血槽与最高级别防弹衣，若身在载具中还会瞬间将汽车彻底修复如初。",
+                    "desc": "瞬间回满角色生命值与护甲至最高等级；如果人在载具中，车辆也会被修复。",
                     "framework_required": "None (Native Console)",
                     "source": "https://gta.fandom.com/wiki/Cheats_in_GTA_V"
                 },
@@ -739,23 +739,23 @@ GTA5_DATA = {
                     "id": "gta_cheat_lawyerup",
                     "name": {
                         "zh-CN": "降低并清除一星通缉度 (LAWYERUP)",
-                        "en": "Clear Wanted Level (LAWYERUP)"
+                        "en": "Lower Wanted Level (LAWYERUP)"
                     },
                     "syntax_type": "rage_cheat",
                     "code": "LAWYERUP",
-                    "desc": "让洛圣都警方降低并撤销当前追捕通缉星级，脱离警用直升机与巡警视野侦测。",
+                    "desc": "官方秘籍代码，每次输入可降低一颗通缉星级，连续输入可逐步清空通缉度。",
                     "framework_required": "None (Native Console)",
                     "source": "https://gtabase.com/grand-theft-auto-v/gta-5-cheats-pc-full-list-of-cheat-codes"
                 },
                 {
                     "id": "gta_cheat_fugitive",
                     "name": {
-                        "zh-CN": "提升一星通缉等级 (FUGITIVE - 挑衅追逐)",
+                        "zh-CN": "提升一星通缉等级 (FUGITIVE)",
                         "en": "Raise Wanted Level (FUGITIVE)"
                     },
                     "syntax_type": "rage_cheat",
                     "code": "FUGITIVE",
-                    "desc": "为当前角色额外增加一颗通缉星，主动引诱特警防暴车与 FIB 探员展开激烈公路追击。",
+                    "desc": "官方秘籍代码，每次输入为角色增加一颗通缉星，引来警方追捕。",
                     "framework_required": "None (Native Console)",
                     "source": "https://gtabase.com/grand-theft-auto-v/gta-5-cheats-pc-full-list-of-cheat-codes"
                 },
@@ -779,60 +779,60 @@ GTA5_DATA = {
                 {
                     "id": "gta_cheat_toolup",
                     "name": {
-                        "zh-CN": "获取全套军火武器库与弹药 (TOOLUP)",
+                        "zh-CN": "获取全部武器与弹药 (TOOLUP)",
                         "en": "All Weapons & Max Ammo (TOOLUP)"
                     },
                     "syntax_type": "rage_cheat",
                     "code": "TOOLUP",
-                    "desc": "瞬间为当前角色配齐手枪、微冲、突击步枪、高精狙击枪、榴弹发射器及黏弹全套装备。",
+                    "desc": "官方秘籍代码，给予游戏中全部武器及对应弹药。",
                     "framework_required": "None (Native Console)",
                     "source": "https://gtabase.com/grand-theft-auto-v/gta-5-cheats-pc-full-list-of-cheat-codes"
                 },
                 {
                     "id": "gta_cheat_highex",
                     "name": {
-                        "zh-CN": "开启高爆破坏子弹 (HIGHEX - 枪枪爆裂)",
+                        "zh-CN": "开启爆炸子弹 (HIGHEX)",
                         "en": "Explosive Bullets (HIGHEX)"
                     },
                     "syntax_type": "rage_cheat",
                     "code": "HIGHEX",
-                    "desc": "所有打出的子弹命中目标瞬间化为剧烈高爆手雷威力，任何路过车辆一枪直接轰至解体起火。",
+                    "desc": "官方秘籍代码，子弹命中目标会产生爆炸，伤害范围更大。",
                     "framework_required": "None (Native Console)",
                     "source": "https://www.gtaboom.com/GTA_5_Cheats_PC"
                 },
                 {
                     "id": "gta_cheat_incendiary",
                     "name": {
-                        "zh-CN": "开启炽热燃烧子弹 (INCENDIARY - 火海蔓延)",
+                        "zh-CN": "开启燃烧子弹 (INCENDIARY)",
                         "en": "Flame Bullets (INCENDIARY)"
                     },
                     "syntax_type": "rage_cheat",
                     "code": "INCENDIARY",
-                    "desc": "射出的每一发子弹命中物体与敌人即刻引发熊熊大火，造成持续性灼烧伤害并点燃周围环境。",
+                    "desc": "官方秘籍代码，子弹命中目标会引燃并造成持续燃烧伤害。",
                     "framework_required": "None (Native Console)",
                     "source": "https://www.gtaboom.com/GTA_5_Cheats_PC"
                 },
                 {
                     "id": "gta_cheat_hothands",
                     "name": {
-                        "zh-CN": "超能爆炸近战拳击 (HOTHANDS - 隔空轰飞)",
+                        "zh-CN": "近战攻击附带爆炸 (HOTHANDS)",
                         "en": "Explosive Melee Attacks (HOTHANDS)"
                     },
                     "syntax_type": "rage_cheat",
                     "code": "HOTHANDS",
-                    "desc": "肉搏挥拳命中目标产生巨大冲击波爆炸，将挡路的警车与路人直接炸飞上几十米高空。",
+                    "desc": "官方秘籍代码，近战攻击命中目标会产生爆炸效果。",
                     "framework_required": "None (Native Console)",
                     "source": "https://www.gtaboom.com/GTA_5_Cheats_PC"
                 },
                 {
                     "id": "gta_cheat_deadeye",
                     "name": {
-                        "zh-CN": "精准瞄准慢动作三段调节 (DEADEYE)",
-                        "en": "Aiming Slomo Matrix (DEADEYE)"
+                        "zh-CN": "瞄准慢动作四段调节 (DEADEYE)",
+                        "en": "Aiming Slow Motion (DEADEYE)"
                     },
                     "syntax_type": "rage_cheat",
                     "code": "DEADEYE",
-                    "desc": "举枪瞄准时自动进入三阶慢动作子弹时间，精准爆头命中移动中的敌方直升机驾驶员。",
+                    "desc": "官方秘籍代码，举枪瞄准时进入慢动作，最多可连续输入四次加深效果，第四次输入恢复正常速度。",
                     "framework_required": "None (Native Console)",
                     "source": "https://www.gtaboom.com/GTA_5_Cheats_PC"
                 }
@@ -849,43 +849,43 @@ GTA5_DATA = {
                     },
                     "syntax_type": "rage_cheat",
                     "code": "COMET",
-                    "desc": "在眼前平地直接召唤一辆高性能经典跑车彗星，极速破百，操控手感灵敏敏捷。",
+                    "desc": "官方秘籍代码，在角色面前召唤一辆 Comet 跑车。",
                     "framework_required": "None (Native Console)",
                     "source": "https://www.gtaboom.com/GTA_5_Cheats_PC"
                 },
                 {
                     "id": "gta_cheat_rapidgt",
                     "name": {
-                        "zh-CN": "召唤疾速 GT 豪华 GT 轿跑 (RAPIDGT)",
+                        "zh-CN": "召唤 Rapid GT 跑车 (RAPIDGT)",
                         "en": "Spawn Rapid GT Coupe (RAPIDGT)"
                     },
                     "syntax_type": "rage_cheat",
                     "code": "RAPIDGT",
-                    "desc": "召唤极具美感的双门豪华硬顶跑车，强劲后驱马力，洛圣都高速公路飙车首选。",
+                    "desc": "官方秘籍代码，在角色面前召唤一辆 Rapid GT 跑车。",
                     "framework_required": "None (Native Console)",
                     "source": "https://www.gtaboom.com/GTA_5_Cheats_PC"
                 },
                 {
                     "id": "gta_cheat_buzzoff",
                     "name": {
-                        "zh-CN": "召唤秃鹰重型武装直升机 (BUZZOFF)",
+                        "zh-CN": "召唤秃鹰武装直升机 (BUZZOFF)",
                         "en": "Spawn Buzzard Attack Helicopter (BUZZOFF)"
                     },
                     "syntax_type": "rage_cheat",
                     "code": "BUZZOFF",
-                    "desc": "直接生成一架配备追踪火箭弹舱与加特林机枪的军用武装直升机，空中火力压制全场。",
+                    "desc": "官方秘籍代码，召唤一架秃鹰武装直升机（配备机枪与导弹）。",
                     "framework_required": "None (Native Console)",
                     "source": "https://gtabase.com/grand-theft-auto-v/gta-5-cheats-pc-full-list-of-cheat-codes"
                 },
                 {
                     "id": "gta_cheat_barnstorm",
                     "name": {
-                        "zh-CN": "召唤麦拉德特技双翼飞行机 (BARNSTORM)",
+                        "zh-CN": "召唤麦拉德特技飞机 (BARNSTORM)",
                         "en": "Spawn Mallard Stunt Plane (BARNSTORM)"
                     },
                     "syntax_type": "rage_cheat",
                     "code": "BARNSTORM",
-                    "desc": "召唤一架机动性极强的高速特技飞行器，在洛圣都摩天大楼与桥梁缝隙中穿梭穿桥。",
+                    "desc": "官方秘籍代码，在角色面前召唤一架 Mallard 特技飞机。",
                     "framework_required": "None (Native Console)",
                     "source": "https://www.pcgamer.com/uk/gta-5-cheats/"
                 },
@@ -904,29 +904,29 @@ GTA5_DATA = {
             ]
         },
         {
-            "category": "🏊 角色超自然能力与世界物理 (Super Jump, Fast Run & Skyfall)",
+            "category": "🏃 角色移动能力与世界物理 (Jump, Speed & Physics)",
             "commands": [
                 {
                     "id": "gta_cheat_hoptoit",
                     "name": {
-                        "zh-CN": "开启绿巨人超级弹跳 (HOPTOIT - 跃上楼顶)",
-                        "en": "Super Jump Leap (HOPTOIT)"
+                        "zh-CN": "开启超级跳跃 (HOPTOIT)",
+                        "en": "Super Jump (HOPTOIT)"
                     },
                     "syntax_type": "rage_cheat",
                     "code": "HOPTOIT",
-                    "desc": "按住跳跃键可直接蓄力腾空跃起十层楼高，跨越矮层建筑屋顶与高架桥围栏。",
+                    "desc": "官方秘籍代码，大幅提升角色跳跃高度。",
                     "framework_required": "None (Native Console)",
                     "source": "https://www.gtaboom.com/GTA_5_Cheats_PC"
                 },
                 {
                     "id": "gta_cheat_catchme",
                     "name": {
-                        "zh-CN": "开启超级短跑极速疾驰 (CATCHME - 健步如飞)",
-                        "en": "Super Fast Sprinting (CATCHME)"
+                        "zh-CN": "开启快速奔跑 (CATCHME)",
+                        "en": "Fast Running (CATCHME)"
                     },
                     "syntax_type": "rage_cheat",
                     "code": "CATCHME",
-                    "desc": "角色奔跑与短跑冲刺速度提升至极限，公路追车甚至能用双腿超越普通代步轿车。",
+                    "desc": "官方秘籍代码，大幅提升角色奔跑速度。",
                     "framework_required": "None (Native Console)",
                     "source": "https://gta.fandom.com/wiki/Cheats_in_GTA_V"
                 },
@@ -938,7 +938,7 @@ GTA5_DATA = {
                     },
                     "syntax_type": "rage_cheat",
                     "code": "GOTGILLS",
-                    "desc": "在海水与游泳池中如离弦之箭极速穿梭，潜水与避让近海饥饿白鲨游刃有余。",
+                    "desc": "官方秘籍代码，大幅提升角色游泳速度。",
                     "framework_required": "None (Native Console)",
                     "source": "https://gta.fandom.com/wiki/Cheats_in_GTA_V"
                 },
@@ -950,19 +950,19 @@ GTA5_DATA = {
                     },
                     "syntax_type": "rage_cheat",
                     "code": "SKYDIVE",
-                    "desc": "立即装备高空跳伞专用降落伞，从乞力耶德山缆车顶端或直升机上一跃而下尽情翱翔。",
+                    "desc": "官方秘籍代码，为角色装备一个降落伞。",
                     "framework_required": "None (Native Console)",
                     "source": "https://gta.fandom.com/wiki/Cheats_in_GTA_V"
                 },
                 {
                     "id": "gta_cheat_skyfall",
                     "name": {
-                        "zh-CN": "万米高空自由落体跳伞模式 (SKYFALL)",
+                        "zh-CN": "高空自由落体 (SKYFALL)",
                         "en": "Skyfall from High Altitude (SKYFALL)"
                     },
                     "syntax_type": "rage_cheat",
                     "code": "SKYFALL",
-                    "desc": "将角色瞬间传送至洛圣都万米云海高空进行无伞自由落体滑翔俯冲（请确保先开无敌）。",
+                    "desc": "官方秘籍代码，将角色传送到高空后进行无伞自由落体，建议配合无敌状态一起使用。",
                     "framework_required": "None (Native Console)",
                     "source": "https://www.gtaboom.com/GTA_5_Cheats_PC"
                 }
@@ -974,12 +974,12 @@ GTA5_DATA = {
                 {
                     "id": "gta_cheat_makeitrain",
                     "name": {
-                        "zh-CN": "切换雷雨暴风雨天气 (MAKEITRAIN)",
-                        "en": "Change Weather to Thunderstorm (MAKEITRAIN)"
+                        "zh-CN": "切换天气 (MAKEITRAIN)",
+                        "en": "Change Weather (MAKEITRAIN)"
                     },
                     "syntax_type": "rage_cheat",
                     "code": "MAKEITRAIN",
-                    "desc": "洛圣都天空乌云密布并降下磅礴大雨与轰鸣闪电，路面湿滑极具电影黑色氛围。",
+                    "desc": "官方秘籍代码，随机切换洛圣都当前的天气状况。",
                     "framework_required": "None (Native Console)",
                     "source": "https://www.gtaboom.com/GTA_5_Cheats_PC"
                 },
@@ -998,8 +998,8 @@ GTA5_DATA = {
                 {
                     "id": "gta_cheat_slowmo",
                     "name": {
-                        "zh-CN": "全局慢动作电影运镜流速 (SLOWMO - 四段循环)",
-                        "en": "Slomo World Matrix (SLOWMO)"
+                        "zh-CN": "全局慢动作 (SLOWMO)",
+                        "en": "Slow Motion World (SLOWMO)"
                     },
                     "syntax_type": "rage_cheat",
                     "code": "SLOWMO",
@@ -1038,21 +1038,27 @@ GTA5_DATA = {
         {
             "id": "gta_salvation_bundle",
             "type": "salvation",
-            "name": "六星狂暴大逃杀激战包",
-            "tag": "🛡️ 意难平救赎 · 告别受苦",
-            "badge": "六星激战",
-            "desc": "呼叫秃鹰重型武装直升机 + 开启 HIGHEX 高爆穿甲子弹 + 超能肉搏冲击波 + 锁定六星极限通缉，单挑整座洛圣都军警装甲力量！",
-            "highlights": ["召唤秃鹰武装直升机空中轰炸", "HIGHEX 爆裂子弹枪枪起爆", "超能肉搏拳击隔空轰碎载具", "六星特警坦克封路大围捕"],
+            "name": "武装直升机追逐套装",
+            "tag": "⚔️ 战斗与追逐向组合",
+            "badge": "武装对抗",
+            "desc": "召唤秃鹰武装直升机，开启高爆子弹 (HIGHEX) 和爆炸近战 (HOTHANDS)，并用两次 FUGITIVE 将通缉等级提高 2 星。",
+            "highlights": ["召唤秃鹰武装直升机", "HIGHEX：子弹命中后产生爆炸", "HOTHANDS：近战攻击附带爆炸", "两次 FUGITIVE 提升 2 星通缉等级"],
             "code": "-- [老L·极客场景套餐] GTA5 六星狂暴大逃杀激战包\nBUZZOFF\nHIGHEX\nHOTHANDS\nFUGITIVE\nFUGITIVE"
         },
         {
             "id": "gta_godmode_bundle",
             "type": "godmode",
-            "name": "超自然空中飞仙终极漫游包",
-            "tag": "⚡ 极客狂欢 · 众神陨落",
-            "badge": "真神漫游",
-            "desc": "万米高空云端自由落体 SKYFALL + 绿巨人十层楼超级跳跃 + 月球低重力微浮力 + 全城圣诞暴风雪，体验前所未见的荒诞洛圣都奇观！",
-            "highlights": ["万米高空自由落体无伞俯冲", "超级跳跃跃过摩天大楼", "月球低重力飞车漫步", "罕见全城圣诞暴风雪漫延"],
+            "name": "高空跳跃漫游套装",
+            "tag": "⚡ 探索向组合",
+            "badge": "自由漫游",
+            "desc": "传送到高空自由落体 (SKYFALL)，配合超级跳跃 (HOPTOIT)、月球重力 (FLOATER)、路面打滑 (SNOWDAY) 与 5 分钟无敌 (PAINKILLER) 一起使用，方便在洛圣都到处探索。",
+            "highlights": [
+                "SKYFALL：传送至高空后自由落体",
+                "HOPTOIT：大幅提升跳跃高度",
+                "FLOATER：切换为月球低重力",
+                "SNOWDAY：路面变得湿滑打滑",
+                "PAINKILLER：5 分钟无敌状态"
+            ],
             "code": "-- [老L·极客场景套餐] GTA5 超自然空中飞仙终极漫游包\nSKYFALL\nHOPTOIT\nFLOATER\nSNOWDAY\nPAINKILLER"
         }
     ],
@@ -1116,7 +1122,7 @@ RDR2_DATA = {
             "title": "Rampage Trainer",
             "author": "RampageDev",
             "category": "Trainer / Menu",
-            "desc": "大镖客界公认最强单机离线功能菜单：随时召唤上百种马匹、变身为印第安酋长或动物、随身衣柜换装、营地升级与瞬移全图。",
+            "desc": "单机离线功能菜单，提供召唤马匹、变身、更换装扮、营地管理与传送地图等功能。",
             "dependencies": [
                 "ScriptHookRDR2"
             ],
@@ -1126,7 +1132,7 @@ RDR2_DATA = {
                 "1. 确保已安装 ScriptHookRDR2；",
                 "2. 下载压缩包解压出 Rampage.asi 和 RampageFiles 文件夹；",
                 "3. 放入 RDR2 根目录；",
-                "4. 故事模式按 F5 或 F7 打开 Rampage 高清菜单。"
+                "4. 在故事模式下按 F5 打开菜单。"
             ],
             "nexusUrl": "https://www.nexusmods.com/reddeadredemption2/mods/233",
             "version": "1.6.9",
@@ -1139,7 +1145,7 @@ RDR2_DATA = {
             "title": "Lenny's Mod Loader RDR",
             "author": "LMS",
             "category": "Mod Manager",
-            "desc": "彻底告别手动解包 RPF 替换文件的繁琐风险！所有新服饰、枪械高清贴图与声音直接放入 lml/ 文件夹即可自动挂载生效。",
+            "desc": "RPF 模组加载工具，新增的服饰、贴图与音效类模组放入 lml/ 文件夹就能生效，不需要手动解包替换游戏原始文件。",
             "dependencies": [
                 "ScriptHookRDR2"
             ],
@@ -1148,7 +1154,7 @@ RDR2_DATA = {
             "installSteps": [
                 "1. 解压 ModLoader 文件夹内全部文件至 RDR2 根目录；",
                 "2. 根目录会自动生成 lml/ 文件夹；",
-                "3. 后续下载的服饰与材质 mod 直接扔进 lml/ 即可。"
+                "3. 后续下载的服饰与材质 mod 放入 lml/ 文件夹。"
             ],
             "nexusUrl": "https://www.rdr2mods.com/downloads/rdr2/tools/76-lennys-mod-loader-rdr/",
             "version": "0.6.8470.31280"
@@ -1158,7 +1164,7 @@ RDR2_DATA = {
             "title": "WhyEm's  DLC",
             "author": "WhyEm",
             "category": "Clothing & Customization",
-            "desc": "西部牛仔终极衣柜拓展包：为亚瑟增添上千件精美皮衣、披风、马甲、定制牛皮枪套、罕见发型与传说动物皮毛羽毛装饰！",
+            "desc": "服饰拓展包，新增 2500 多件服装与配饰，包括皮衣、外套与腰带等。",
             "dependencies": [
                 "ScriptHookRDR2",
                 "Lenny's Mod Loader"
@@ -1169,7 +1175,7 @@ RDR2_DATA = {
                 "1. 确认已正确安装 LML 模组加载器；",
                 "2. 下载压缩包解压获取 WhyEm's DLC 文件夹；",
                 "3. 放入 RDR2/lml/ 文件夹内；",
-                "4. 前往捕兽人或裁缝铺即可选购所有独家服饰。"
+                "4. 前往捕兽人或裁缝铺购买新增的服饰。"
             ],
             "nexusUrl": "https://www.nexusmods.com/reddeadredemption2/mods/671",
             "version": "Final",
@@ -1180,7 +1186,7 @@ RDR2_DATA = {
     ],
     "consoleCategories": [
         {
-            "category": "👑 核心无敌、无限体力与死神之眼 (God Mode, Stamina & Dead Eye)",
+            "category": "👑 核心秘籍合集 (Core Cheats)",
             "commands": [
                 {
                     "id": "rdr_cheat_freedom",
@@ -1190,7 +1196,7 @@ RDR2_DATA = {
                     },
                     "syntax_type": "rage_cheat",
                     "code": "You want freedom",
-                    "desc": "官方秘籍短语，降低亚瑟当前的通缉星级。RDR2 游戏内没有真正的『无敌』秘籍（多个权威来源一致确认）。",
+                    "desc": "官方秘籍短语，降低亚瑟当前的通缉星级。",
                     "framework_required": "None (Native Console)",
                     "source": "https://www.shacknews.com/article/108219/full-cheat-codes-list-in-red-dead-redemption-2"
                 },
@@ -1198,48 +1204,48 @@ RDR2_DATA = {
                     "id": "rdr_cheat_flourish",
                     "name": {
                         "zh-CN": "三核心瞬间回满 (You flourish before you die)",
-                        "en": "Max All Bars (You flourish before you die)"
+                        "en": "Refill All Bars (You flourish before you die)"
                     },
                     "syntax_type": "rage_cheat",
                     "code": "You flourish before you die",
-                    "desc": "立即将生命、体力与死神之眼内侧核心及外侧环槽全部充满至最高数值。",
+                    "desc": "官方秘籍短语，立即回满生命、体力与死神之眼三项状态槽。",
                     "framework_required": "None (Native Console)",
                     "source": "https://www.shacknews.com/article/108219/full-cheat-codes-list-in-red-dead-redemption-2"
                 },
                 {
                     "id": "rdr_cheat_deadeye",
                     "name": {
-                        "zh-CN": "无限死神之眼子弹时间 (Seek all the bounty of this place)",
+                        "zh-CN": "无限死神之眼 (Be greedy only for foresight)",
                         "en": "Infinite Dead Eye"
                     },
                     "syntax_type": "rage_cheat",
                     "code": "Be greedy only for foresight",
-                    "desc": "开启无限死神之眼模式，随心进入拔枪时缓，一次性标定全屏所有匪徒头部。",
+                    "desc": "官方秘籍短语，死神之眼子弹时间效果不再消耗，可持续使用。",
                     "framework_required": "None (Native Console)",
                     "source": "https://www.powerpyx.com/red-dead-redemption-2-cheats/"
                 },
                 {
                     "id": "rdr_cheat_stealth",
                     "name": {
-                        "zh-CN": "悄然无声刺杀暗杀 (Death is silence)",
+                        "zh-CN": "解锁潜行武器 (Death is silence)",
                         "en": "Stealth Weapons (Death is silence)"
                     },
                     "syntax_type": "rage_cheat",
                     "code": "Death is silence",
-                    "desc": "配齐印第安飞斧、飞刀、改良弓箭等全套静音潜行暗杀武器库。",
+                    "desc": "官方秘籍短语，解锁一套潜行武器：弓、火瓶、飞斧、飞刀与砍刀。",
                     "framework_required": "None (Native Console)",
                     "source": "https://www.powerpyx.com/red-dead-redemption-2-cheats/"
                 }
             ]
         },
         {
-            "category": "💰 亚瑟钱包现金、全金条与全背包升级 (Money, Gold Bars & Legend of East Satchel)",
+            "category": "💰 现金 (Money)",
             "commands": [
                 {
                     "id": "rdr_cheat_greed",
                     "name": {
-                        "zh-CN": "获取 $500 现金 (Greed is American virtue)",
-                        "en": "Give $500 Cash (Greed is American virtue)"
+                        "zh-CN": "获取 $500 现金 (Greed is now a virtue)",
+                        "en": "Give $500 Cash (Greed is now a virtue)"
                     },
                     "syntax_type": "rage_cheat",
                     "code": "Greed is now a virtue",
@@ -1250,7 +1256,7 @@ RDR2_DATA = {
             ]
         },
         {
-            "category": "🐎 顶级良驹阿拉伯马与默契度拉满 (Horses Spawner & Max Bonding)",
+            "category": "🐎 马匹默契度 (Horse Bonding)",
             "commands": [
                 {
                     "id": "rdr_cheat_kingdom_horse",
@@ -1260,14 +1266,14 @@ RDR2_DATA = {
                     },
                     "syntax_type": "rage_cheat",
                     "code": "My kingdom is a horse",
-                    "desc": "官方原生秘籍代码，直接拉升当前坐骑的默契等级，解锁急停与侧向滑行步伐。",
+                    "desc": "官方原生秘籍代码，立即提升所有坐骑的默契等级，默契等级越高可解锁更多骑术动作。",
                     "framework_required": "None (Native Console)",
                     "source": "https://www.pcgamesn.com/red-dead-redemption-2/rdr2-cheats-pc"
                 }
             ]
         },
         {
-            "category": "🔫 传奇黑火药军备、稀有枪械与全弹药 (Rare Weapons & Explosive Ammo)",
+            "category": "🔫 武器套装与弹药 (Weapon Sets & Ammo)",
             "commands": [
                 {
                     "id": "rdr_cheat_simple_life",
@@ -1284,12 +1290,12 @@ RDR2_DATA = {
                 {
                     "id": "rdr_cheat_history_fools",
                     "name": {
-                        "zh-CN": "获取全套传奇神枪手武器 (History is written by fools)",
-                        "en": "Gunslinger Rare Weapons"
+                        "zh-CN": "解锁神枪手武器 (History is written by fools)",
+                        "en": "Gunslinger Weapons (History is written by fools)"
                     },
                     "syntax_type": "rage_cheat",
                     "code": "History is written by fools",
-                    "desc": "官方秘籍短语，获得神枪手武器套装（含双动左轮手枪、双管霰弹枪等决斗相关武器）。",
+                    "desc": "官方秘籍短语，解锁 Schofield 左轮手枪、双动左轮手枪与双管霰弹枪。",
                     "framework_required": "None (Native Console)",
                     "source": "https://www.pcgamesn.com/red-dead-redemption-2/rdr2-cheats-pc"
                 },
@@ -1301,36 +1307,36 @@ RDR2_DATA = {
                     },
                     "syntax_type": "rage_cheat",
                     "code": "Abundance is the dullest desire",
-                    "desc": "随身携带的全部枪弹弹药锁定无限，告别去枪械铺逐盒购买子弹的繁琐。",
+                    "desc": "官方秘籍短语，子弹数量变为无限，不会再减少。",
                     "framework_required": "None (Native Console)",
                     "source": "https://www.shacknews.com/article/108219/full-cheat-codes-list-in-red-dead-redemption-2"
                 }
             ]
         },
         {
-            "category": "🌦️ 昼夜天气调控、快速传送与荣誉值 (Honor, Weather & Fast Travel)",
+            "category": "⭐ 荣誉值与通缉等级 (Honor & Wanted Level)",
             "commands": [
                 {
                     "id": "rdr_cheat_virtue",
                     "name": {
-                        "zh-CN": "荣誉值一键提升至最高上限 (Virtue unearned is not virtue)",
+                        "zh-CN": "提升荣誉值至最高 (Virtue unearned is not virtue)",
                         "en": "Max Honor Level (Virtue unearned is not virtue)"
                     },
                     "syntax_type": "rage_cheat",
                     "code": "Virtue unearned is not virtue",
-                    "desc": "官方原生秘籍代码，亚瑟声望瞬间升至满额最高级，商店购物享受 50% 半价折扣特惠。",
+                    "desc": "官方原生秘籍代码，立即将荣誉值提升至最高等级。",
                     "framework_required": "None (Native Console)",
                     "source": "https://www.powerpyx.com/red-dead-redemption-2-cheats/"
                 },
                 {
                     "id": "rdr_cheat_punishment",
                     "name": {
-                        "zh-CN": "提升通缉等级 (You want punishment - 赏金猎人大战)",
-                        "en": "Raise Bounty (You want punishment)"
+                        "zh-CN": "提升通缉等级 (You want punishment)",
+                        "en": "Increase Wanted Level (You want punishment)"
                     },
                     "syntax_type": "rage_cheat",
                     "code": "You want punishment",
-                    "desc": "为亚瑟附加悬赏星级，引来全州最精锐的平克顿侦探与猎犬展开生死决战追杀。",
+                    "desc": "官方秘籍短语，立即提升当前通缉等级。",
                     "framework_required": "None (Native Console)",
                     "source": "https://www.shacknews.com/article/108219/full-cheat-codes-list-in-red-dead-redemption-2"
                 }
@@ -1370,7 +1376,7 @@ MHW_DATA = {
             "title": "Stracker's Loader",
             "author": "Stracker",
             "category": "Core Framework (核心前置)",
-            "desc": "怪猎世界冰原运行 nativePC 外部模组、商店补全插件与透视覆层的绝对核心前置库，包含 CRC 绕过修复。",
+            "desc": "怪物猎人世界：冰原运行 nativePC 外部模组、商店补全插件与透视覆层类 Mod 所需的前置加载库，包含 CRC 校验绕过修复。",
             "dependencies": [
                 "None (Native DLL)"
             ],
@@ -1393,7 +1399,7 @@ MHW_DATA = {
             "title": "Large Shop Assortment for Consumables and Combo Mats (Iceborne)",
             "author": "MHVuze",
             "category": "Economy / Items",
-            "desc": "将月辰与星辰基地的物资补给所商店彻底重制：所有 4 级神珠、古龙大宝玉、聚魔之地客制材料全部上架，统一标价 1 铜币，告别几百小时枯燥刷珠子！",
+            "desc": "将月辰与星辰基地的道具商店物资替换：所有 4 级装饰品（珠子）、古龙大宝玉、聚魔之地专属材料全部上架，统一标价 1 铜币。",
             "dependencies": [
                 "Stracker's Loader"
             ],
@@ -1403,7 +1409,7 @@ MHW_DATA = {
                 "1. 确认已安装 Stracker's Loader 前置；",
                 "2. 下载压缩包解压获取 nativePC 文件夹；",
                 "3. 直接合并覆盖到游戏根目录下；",
-                "4. 到道具屋阿姨处对话即可挑选任何顶级珠子与素材。"
+                "4. 到道具屋阿姨处对话即可购买珠子与素材。"
             ],
             "nexusUrl": "https://www.nexusmods.com/monsterhunterworld/mods/1959",
             "version": "1.02",
@@ -1416,7 +1422,7 @@ MHW_DATA = {
             "title": "SmartHunter",
             "author": "r00telement",
             "category": "UI / Overlay",
-            "desc": "狩猎利器！在屏幕上方优雅悬浮显示怪物真实总血量、当前血百分比、激怒倒计时、麻痹/睡眠积蓄值，以及队伍四人各自输出 DPS 占比统计！",
+            "desc": "在屏幕上方悬浮显示怪物总血量、当前血量百分比、激怒倒计时、麻痹/睡眠积蓄值，以及队伍四人的输出 DPS 占比统计。",
             "dependencies": [
                 "None (Stand-alone Memory Overlay)"
             ],
@@ -1434,7 +1440,7 @@ MHW_DATA = {
             "title": "Performance Booster and Plugin Extender",
             "author": "AsteriskAmpersand and Moonbunnie",
             "category": "Performance (性能加速)",
-            "desc": "移除冰原反作弊死循环冗余检测，大幅消除 100% CPU 占用导致的掉帧卡顿。效果因电脑而异，本站没有测过具体帧数。",
+            "desc": "移除游戏里大量未优化、与游戏功能无关的代码来提升性能，CPU 受限的电脑上效果更明显；也让一些更复杂的插件能正常运行。效果因电脑而异，本站没有测过具体帧数。",
             "dependencies": [
                 "Stracker's Loader"
             ],
@@ -1443,7 +1449,7 @@ MHW_DATA = {
             "installSteps": [
                 "1. 下载压缩包解压出 .dll 插件；",
                 "2. 放入 nativePC/plugins/ 目录；",
-                "3. 启动游戏享受极致丝滑 120FPS 狩猎体验。"
+                "3. 启动游戏查看帧率变化（效果因电脑而异）。"
             ],
             "nexusUrl": "https://www.nexusmods.com/monsterhunterworld/mods/3473",
             "version": "1.3",
@@ -1486,7 +1492,7 @@ SEKIRO_DATA = {
             "title": "ModEngine",
             "author": "Katalash",
             "category": "Core Framework (核心前置)",
-            "desc": "只狼外部材质、流派动作替换与参数修改的绝对基石前置。自动拦截文件加载路径，零修改游戏原版文件，极客必备。",
+            "desc": "用于加载外部材质、动作替换与参数修改类 Mod 的前置框架，通过拦截文件加载路径实现，不修改游戏原始文件。",
             "dependencies": [
                 "None (Native DLL)"
             ],
@@ -1505,7 +1511,7 @@ SEKIRO_DATA = {
             "title": "Sekiro FPS Unlock and More",
             "author": "uberhalit",
             "category": "Performance / Graphics",
-            "desc": "突破官方恶心的 60 帧锁帧限制，支持 144Hz/240Hz 高刷电竞屏，消除 21:9 带鱼屏黑边，完美支持宽屏原生分辨率与无边框窗口化！",
+            "desc": "解除官方 60 帧的帧率限制，支持 144Hz/240Hz 高刷新率显示器，并支持 21:9 带鱼屏分辨率与无边框窗口模式。",
             "dependencies": [
                 "None (Stand-alone Tool)"
             ],
@@ -1513,9 +1519,8 @@ SEKIRO_DATA = {
             "isDirect": True,
             "installSteps": [
                 "1. 下载解压获取 SekiroFpsUnlockAndMore.exe；",
-                "2. 先启动只狼游戏，然后双击运行该工具；",
-                "3. 勾选 'Unlock FPS' 并将上限滑块拉至 144 或 240；",
-                "4. 刀光剑影流畅如丝，再无拖影困扰。"
+                "2. 先启动只狼游戏，然后运行该工具；",
+                "3. 勾选 'Unlock FPS' 并将上限滑块调整为 144 或 240。"
             ],
             "nexusUrl": "https://github.com/uberhalit/SekiroFpsUnlockAndMore",
             "version": "1.2.5.2",
@@ -1527,7 +1532,7 @@ SEKIRO_DATA = {
             "title": "Boss Rush",
             "author": "thefifthmatt",
             "category": "Gameplay / Training",
-            "desc": "在任何鬼佛处直接开启所有 Boss 与精英怪独立连战挑战，无需跑图过剧情，随时随地练习弹刀剑圣苇名一心、义父与怨恨之鬼！",
+            "desc": "在鬼佛处开启 Boss 与精英怪的独立连战挑战，无需重新跑图或触发剧情，可直接挑战剑圣苇名一心、义父与怨恨之鬼等首领。",
             "dependencies": [
                 "Sekiro Mod Engine"
             ],
@@ -1549,7 +1554,7 @@ SEKIRO_DATA = {
             "title": "Sekiro Resurrection",
             "author": "Ionian",
             "category": "Complete Overhaul (全面大修)",
-            "desc": "享誉魂系圈的顶级战斗大修：重做几乎全 Boss 与杂兵招式逻辑、为狼增加全新流派招式与衍生追击，打刀防反手感登峰造极！",
+            "desc": "战斗系统大修 Mod，重做了大部分 Boss 与杂兵的招式逻辑，为狼新增了新的招式与追击派生，并调整了打刀防反的手感。",
             "dependencies": [
                 "Sekiro Mod Engine"
             ],
@@ -1601,7 +1606,7 @@ RE4_DATA = {
             "title": "REFramework",
             "author": "praydog",
             "category": "Core Framework (核心前置)",
-            "desc": "卡普空 RE 引擎游戏绝对核心！集成强大的 ImGui 覆层控制面板、自由运镜摄影机、第一人称视角切换与宽广 FOV 调谐。",
+            "desc": "卡普空 RE 引擎游戏的通用 Mod 框架，提供 ImGui 覆层控制面板、自由视角摄像机、第一人称视角切换与 FOV 调整功能。",
             "dependencies": [
                 "None (Native DLL)"
             ],
@@ -1623,7 +1628,7 @@ RE4_DATA = {
             "title": "Fluffy Manager 5000 (Fluffy Mod Manager)",
             "author": "FluffyQuack",
             "category": "Mod Manager",
-            "desc": "生化危机系列公认最强模组安装器：一键安装、启用、禁用上千款角色外观、艾达王特工服、发型与武器贴图替换。",
+            "desc": "生化危机系列的模组管理工具，用于安装、启用或禁用角色外观、艾达王特工服、发型与武器贴图替换类 Mod。",
             "dependencies": [
                 "None (Stand-alone Tool)"
             ],
@@ -1633,7 +1638,7 @@ RE4_DATA = {
                 "1. 下载解压运行 Modmanager.exe；",
                 "2. 在游戏列表选择 'Resident Evil 4 Remake'；",
                 "3. 将下载的 .rar/.zip 角色外观模组拖入软件窗口；",
-                "4. 点击滑块切换勾选即可一秒生效启用。"
+                "4. 点击滑块勾选即可启用对应 Mod。"
             ],
             "nexusUrl": "https://www.fluffyquack.com"
         },

@@ -8,15 +8,20 @@ deep_enrich_game.py
 - 全套不朽近战太刀与传奇投掷飞刀飞斧
 - 昼夜时间流速精确设置与时间冻结
 - 全套高阶消音器与瞄具
+Writes through gamedata_guard (write_changed_fields): only the fields in OWNED_FIELDS of the
+games it changes, in both the master data and the GAMES_DATA segment of public/data.js
+(radar, trainer and TRANSLATIONS_DATA untouched). The commands and mods it would write are
+older, unchecked versions of content that has since been checked against sources, so the
+guard stops the run without writing anything; the script is kept for its history.
+Usage: python3 scripts/enrich_database_v2.py [--dry-run]
 """
 
-import json
+from gamedata_guard import load_games_for_edit, write_changed_fields
 
-DATA_PATH = '/Users/xiaolu/Desktop/work/l-mod-portal/src/data/games_top100.json'
-PUBLIC_DATA_PATH = '/Users/xiaolu/Desktop/work/l-mod-portal/public/data.js'
+SCRIPT = "enrich_database_v2.py"
+OWNED_FIELDS = ('consoleCategories', 'consoleEnableGuide', 'consoleShortcut', 'latestPatch', 'curatedMods')
 
-with open(DATA_PATH, 'r', encoding='utf-8') as f:
-    games = json.load(f)
+games = load_games_for_edit(SCRIPT)
 
 cp = next(g for g in games if g["id"] == "cyberpunk-2077")
 
@@ -211,14 +216,7 @@ cp["consoleCategories"] = [
     }
 ]
 
-# Save enriched database to JSON
-with open(DATA_PATH, 'w', encoding='utf-8') as f:
-    json.dump(games, f, ensure_ascii=False, indent=2)
-
-# Save to public/data.js
-js_content = f"// L-MOD Vault Offline Database (Enriched v3)\nwindow.GAMES_DATA = {json.dumps(games, ensure_ascii=False, indent=2)};\n"
-with open(PUBLIC_DATA_PATH, 'w', encoding='utf-8') as f:
-    f.write(js_content)
+write_changed_fields(SCRIPT, OWNED_FIELDS, games)
 
 total_cmds = sum(len(c["commands"]) for c in cp["consoleCategories"])
 print(f"Cyberpunk 2077 is now fully enriched with {len(cp['consoleCategories'])} categories, {total_cmds} verified commands, and {len(cp['curatedMods'])} curated mods!")

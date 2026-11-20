@@ -1,11 +1,22 @@
-import json
+#!/usr/bin/env python3
+"""
+scripts/upgrade_cyberpunk_schema.py
+Writes through gamedata_guard (write_changed_fields): only the fields in OWNED_FIELDS of the
+games it changes, in both the master data and the GAMES_DATA segment of public/data.js
+(radar, trainer and TRANSLATIONS_DATA untouched). The commands and mods it would write are
+older, unchecked versions of content that has since been checked against sources, so the
+guard stops the run without writing anything; the script is kept for its history.
+Usage: python3 scripts/upgrade_cyberpunk_schema.py [--dry-run]
+"""
+
 import re
 
-JSON_PATH = '/Users/xiaolu/Desktop/work/l-mod-portal/src/data/games_top100.json'
-JS_PATH = '/Users/xiaolu/Desktop/work/l-mod-portal/public/data.js'
+from gamedata_guard import load_games_for_edit, write_changed_fields
 
-with open(JSON_PATH, 'r', encoding='utf-8') as f:
-    games = json.load(f)
+SCRIPT = "upgrade_cyberpunk_schema.py"
+OWNED_FIELDS = ('consoleCategories',)
+
+games = load_games_for_edit(SCRIPT)
 
 for g in games:
     if g["id"] == "cyberpunk-2077":
@@ -38,15 +49,4 @@ for g in games:
                 cmd_idx += 1
         break
 
-with open(JSON_PATH, 'w', encoding='utf-8') as f:
-    json.dump(games, f, ensure_ascii=False, indent=2)
-
-print(f"✅ Successfully upgraded Cyberpunk commands schema in {JSON_PATH}")
-
-with open(JS_PATH, 'w', encoding='utf-8') as f:
-    f.write('// L-MOD Vault Offline Database (Enriched v3)\n')
-    f.write('window.GAMES_DATA = ')
-    json.dump(games, f, ensure_ascii=False, indent=2)
-    f.write(';\n')
-
-print(f"✅ Successfully synchronized {JS_PATH}")
+write_changed_fields(SCRIPT, OWNED_FIELDS, games)

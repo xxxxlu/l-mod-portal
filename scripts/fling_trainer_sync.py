@@ -548,13 +548,17 @@ def apply_to_game(g, entry):
 
 def write_games(games):
     if os.path.exists(GAMES_JSON_PATH):
+        # 本地有主数据：经 gamedata_guard（owner="trainer"）只写 hasTrainer / trainerHotkeys / trainerInfo
+        # 里确实变了的部分，主数据和 data.js 的 GAMES_DATA 段同步改，其它字段和 TRANSLATIONS_DATA 不动
+        from gamedata_guard import TRAINER_FIELDS, write_changed_fields
         stamp = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
         backup = GAMES_JSON_PATH.replace(".json", f".before-trainer-sync-{stamp}.backup.json")
         shutil.copy2(GAMES_JSON_PATH, backup)
-        with open(GAMES_JSON_PATH, "w", encoding="utf-8") as f:
-            json.dump(games, f, ensure_ascii=False, indent=2)
-        print(f"✅ 已回写 {os.path.relpath(GAMES_JSON_PATH, BASE_DIR)}（备份：{os.path.relpath(backup, BASE_DIR)}）")
+        write_changed_fields("fling_trainer_sync.py", TRAINER_FIELDS, games, dry_run=False, owner="trainer")
+        print(f"✅ 已回写（备份：{os.path.relpath(backup, BASE_DIR)}）")
+        return
 
+    # 没有主数据（GitHub Actions / 新克隆）：只替换 data.js 里 GAMES_DATA 一段
     with open(DATA_JS_PATH, encoding="utf-8") as f:
         s = f.read()
     head = "window.GAMES_DATA = "
