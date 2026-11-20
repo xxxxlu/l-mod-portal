@@ -1182,22 +1182,20 @@
                 <p id="detail-subtitle" class="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400">CD PROJEKT RED (2020) • Open World Action RPG</p>
               </div>
 
-              <!-- Nexus Real Metrics Pills -->
-              <div class="flex items-center gap-2 bg-zinc-100/80 dark:bg-black/40 backdrop-blur-md p-2.5 rounded-2xl shrink-0 border border-zinc-200/80 dark:border-white/10">
-                <div class="px-3 text-center">
-                  <div class="text-[10px] text-zinc-400 font-medium" id="stat-label-downloads">N网总下载</div>
-                  <div id="detail-stat-downloads" class="text-sm sm:text-base font-bold text-[#A855F7] dark:text-purple-400">342.8M</div>
+              <!-- Nexus Mods game stats: shown only when the game has numbers read from Nexus Mods -->
+              <div id="detail-nexus-stats" class="shrink-0 flex flex-col items-end gap-1">
+                <div class="flex items-center gap-2 bg-zinc-100/80 dark:bg-black/40 backdrop-blur-md p-2.5 rounded-2xl border border-zinc-200/80 dark:border-white/10">
+                  <div id="detail-stat-downloads-box" class="px-3 text-center">
+                    <div class="text-[10px] text-zinc-400 font-medium" id="stat-label-downloads">N网总下载</div>
+                    <div id="detail-stat-downloads" class="text-sm sm:text-base font-bold text-[#A855F7] dark:text-purple-400"></div>
+                  </div>
+                  <div id="detail-stat-divider" class="w-px h-7 bg-zinc-200 dark:bg-white/10"></div>
+                  <div id="detail-stat-mods-box" class="px-3 text-center">
+                    <div class="text-[10px] text-zinc-400 font-medium" id="stat-label-mods">N网 Mod 数</div>
+                    <div id="detail-stat-mods" class="text-sm sm:text-base font-bold text-zinc-800 dark:text-zinc-200"></div>
+                  </div>
                 </div>
-                <div class="w-px h-7 bg-zinc-200 dark:bg-white/10"></div>
-                <div class="px-3 text-center">
-                  <div class="text-[10px] text-zinc-400 font-medium" id="stat-label-endorsements">玩家推荐</div>
-                  <div id="detail-stat-endorsements" class="text-sm sm:text-base font-bold text-purple-600 dark:text-purple-400">1.84M</div>
-                </div>
-                <div class="w-px h-7 bg-zinc-200 dark:bg-white/10"></div>
-                <div class="px-3 text-center">
-                  <div class="text-[10px] text-zinc-400 font-medium" id="stat-label-mods">精选模组</div>
-                  <div id="detail-stat-mods" class="text-sm sm:text-base font-bold text-zinc-800 dark:text-zinc-200">14,280</div>
-                </div>
+                <div id="detail-stat-asof" class="text-[10px] text-zinc-400 px-1"></div>
               </div>
             </div>
           </div>
@@ -1966,31 +1964,7 @@
         window.LModTracker.track('view_game', game.id, game.title);
       }
 
-      // Asynchronous command hydration if missing in local bundle
-      if ((!game.consoleCategories || game.consoleCategories.length === 0) && window.LModAPI) {
-        window.LModAPI.fetchGameCommands(game.id).then(res => {
-          if (res && res.commands && res.commands.length > 0) {
-            // Group flat commands into categories
-            const catMap = new Map();
-            res.commands.forEach(cmd => {
-              const catTitle = cmd.category_name_zh || cmd.category_name_en || '通用核心';
-              if (!catMap.has(catTitle)) catMap.set(catTitle, []);
-              catMap.get(catTitle).push({
-                name: { 'zh-CN': cmd.name_zh, en: cmd.name_en },
-                code: cmd.code,
-                desc: cmd.description || ''
-              });
-            });
-            game.consoleCategories = Array.from(catMap.entries()).map(([cat, cmds]) => ({
-              category: cat,
-              commands: cmds
-            }));
-            if (activeGame && activeGame.id === game.id) {
-              renderConsoleCategories(game.consoleCategories);
-            }
-          }
-        }).catch(() => {});
-      }
+      // Commands come only from the static game data. An empty list stays empty (it is not refilled from the D1 copy).
     }
 
     function resetToHome() {
@@ -2062,7 +2036,6 @@
       setElText('detail-cert-text', t('certificationText'));
       setElText('detail-clean-guarantee', t('cleanGuarantee'));
       setElText('stat-label-downloads', t('statNexusDownloads'));
-      setElText('stat-label-endorsements', t('statPlayerRec'));
       setElText('stat-label-mods', t('statCuratedMods'));
 
       // Detail Tabs
@@ -2352,8 +2325,8 @@
         });
       } else if (currentSort === 'heat') {
         filtered.sort((a, b) => {
-          const dlA = parseDownloads(a.nexusStats ? a.nexusStats.totalDownloads : null);
-          const dlB = parseDownloads(b.nexusStats ? b.nexusStats.totalDownloads : null);
+          const dlA = (a.nexusStats && a.nexusStats.totalDownloads) ? parseDownloads(a.nexusStats.totalDownloads) : -1;
+          const dlB = (b.nexusStats && b.nexusStats.totalDownloads) ? parseDownloads(b.nexusStats.totalDownloads) : -1;
           if (dlB !== dlA) return dlB - dlA;
           return (a.rank || 999) - (b.rank || 999);
         });
@@ -2403,7 +2376,7 @@
 
       filtered.forEach(game => {
         const localizedTitle = game.titles && game.titles[currentLang] ? game.titles[currentLang] : game.title;
-        const downloads = game.nexusStats ? game.nexusStats.totalDownloads : '10.5M';
+        const downloads = (game.nexusStats && game.nexusStats.totalDownloads) || '';
         const rating = (game.steamRating || '90%').split(' ')[0];
         const isCertified = game.rank <= 14;
         const radarState = radarStateOf(game);
@@ -2540,7 +2513,7 @@
           <div class="pt-3 border-t border-black/5 dark:border-white/10 flex items-center justify-between text-[11px] font-mono-tech text-zinc-500 dark:text-slate-400">
             <span>${illusCredit}</span>
             <div class="flex items-center gap-2">
-              <span class="text-zinc-900 dark:text-white font-bold">${downloads} ${pullsSuffix}</span>
+              ${downloads ? `<span class="text-zinc-900 dark:text-white font-bold">${downloads} ${pullsSuffix}</span>` : ''}
               <span class="w-4 h-4 rounded-full bg-gradient-to-tr ${starBadgeClass} flex items-center justify-center text-[9px] font-extrabold shadow-sm">
                 ★
               </span>
@@ -2577,7 +2550,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
               </svg>
             </button>
-            <span class="text-xs font-mono-tech text-zinc-500 hidden sm:inline">${downloads} ${pullsSuffix}</span>
+            ${downloads ? `<span class="text-xs font-mono-tech text-zinc-500 hidden sm:inline">${downloads} ${pullsSuffix}</span>` : ''}
             <span class="text-xs text-purple-600 dark:text-purple-400 font-mono-tech">${t('viewDetailCardBtn')} →</span>
           </div>
         `;
@@ -2722,10 +2695,17 @@
         heroImg.style.display = 'none';
       }
 
-      const stats = game.nexusStats || { totalDownloads: "15.0M", totalEndorsements: "120K", totalMods: "1,250" };
-      document.getElementById('detail-stat-downloads').innerText = stats.totalDownloads;
-      document.getElementById('detail-stat-endorsements').innerText = stats.totalEndorsements;
-      document.getElementById('detail-stat-mods').innerText = stats.totalMods;
+      // Nexus Mods numbers: only what was read from Nexus Mods, with the date; nothing when the game has none
+      const stats = game.nexusStats || {};
+      const hasDownloads = !!stats.totalDownloads;
+      const hasModCount = !!stats.totalMods;
+      document.getElementById('detail-nexus-stats').style.display = (hasDownloads || hasModCount) ? '' : 'none';
+      document.getElementById('detail-stat-downloads-box').style.display = hasDownloads ? '' : 'none';
+      document.getElementById('detail-stat-mods-box').style.display = hasModCount ? '' : 'none';
+      document.getElementById('detail-stat-divider').style.display = (hasDownloads && hasModCount) ? '' : 'none';
+      document.getElementById('detail-stat-downloads').innerText = hasDownloads ? stats.totalDownloads : '';
+      document.getElementById('detail-stat-mods').innerText = hasModCount ? stats.totalMods : '';
+      document.getElementById('detail-stat-asof').innerText = stats.checkedAt ? t('statNexusAsOf').replace('{date}', stats.checkedAt) : '';
 
       // Reset In-Tab Search Inputs
       const consoleInput = document.getElementById('console-search-input');
@@ -2737,7 +2717,7 @@
 
       // TAB 1: Console Setup
       const lazyBtn = document.getElementById('btn-open-lazy-door');
-      if (lazyBtn) lazyBtn.style.display = game.hasConsole ? 'flex' : 'none';
+      if (lazyBtn) lazyBtn.style.display = (game.hasConsole || game.batScript) ? 'flex' : 'none';
       document.getElementById('detail-shortcut-key').innerText = game.hasConsole
         ? (game.consoleShortcut ? game.consoleShortcut.split(' ')[0] : '~')
         : t('consoleStatusNone');
@@ -2794,13 +2774,18 @@
           `;
           reviewsList.appendChild(rdiv);
         });
+      } else {
+        const empty = document.createElement('div');
+        empty.className = 'rounded-[24px] p-6 border border-dashed border-zinc-200/80 dark:border-white/10 text-center text-xs sm:text-sm text-zinc-500 dark:text-zinc-400';
+        empty.textContent = t('reviewsEmpty');
+        reviewsList.appendChild(empty);
       }
 
       setDetailTab('console');
     }
 
     // Render Categorized Console Commands
-    function renderConsoleCategories(categories) {
+    function renderConsoleCategories(categories, fromSearch) {
       const catContainer = document.getElementById('detail-console-categories');
       catContainer.innerHTML = '';
       if (categories && categories.length > 0) {
@@ -2813,6 +2798,12 @@
           cat.commands.forEach(cmd => {
             const cmdName = cmd.name[currentLang] || cmd.name['zh-CN'] || cmd.name['en'] || cmd.name;
             const escapedCode = cmd.code.replace(/'/g, "\\'");
+            // Where the command was checked (wiki / official docs / the console mod's docs)
+            let sourceLink = '';
+            if (cmd.source && /^https:\/\//.test(cmd.source)) {
+              const host = new URL(cmd.source).hostname.replace(/^www\./, '');
+              sourceLink = `<a href="${cmd.source}" target="_blank" rel="noopener noreferrer nofollow" class="block mt-2 text-[11px] text-zinc-400 hover:text-[#A855F7] underline-offset-2 hover:underline">${t('cmdSource').replace('{host}', host)}</a>`;
+            }
             cmdCards += `
               <div class="bg-white dark:bg-[#141518] rounded-[20px] p-4 sm:p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all border border-zinc-200/80 dark:border-white/10 shadow-sm hover:border-[#A855F7]/40">
                 <div class="flex-1">
@@ -2821,6 +2812,7 @@
                   <div class="mt-2.5 inline-block bg-zinc-50 dark:bg-black/30 rounded-xl px-3.5 py-1.5 border border-zinc-200/60 dark:border-white/5">
                     <code class="text-xs text-[#A855F7] dark:text-purple-400 font-mono font-bold select-all">${cmd.code}</code>
                   </div>
+                  ${sourceLink}
                 </div>
                 <button onclick="copyText('${escapedCode}')" class="self-start md:self-center px-4 py-2 rounded-full bg-zinc-100 hover:bg-[#A855F7] dark:bg-white/10 dark:hover:bg-[#A855F7] text-zinc-800 dark:text-zinc-200 hover:text-white dark:hover:text-white font-semibold text-xs transition-colors shrink-0 flex items-center gap-1.5 shadow-sm">
                   <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
@@ -2837,7 +2829,9 @@
           catContainer.appendChild(div);
         });
       } else {
-        catContainer.innerHTML = `<div class="bg-white dark:bg-[#141518] rounded-[24px] p-8 text-center text-zinc-400 text-sm border border-zinc-200/80 dark:border-white/10">未找到匹配的控制台指令代码。可在上方搜索其他关键字，或切换至【修改器】Tab体验！</div>`;
+        catContainer.innerHTML = fromSearch
+          ? `<div class="bg-white dark:bg-[#141518] rounded-[24px] p-8 text-center text-zinc-400 text-sm border border-zinc-200/80 dark:border-white/10">未找到匹配的控制台指令代码。可在上方搜索其他关键字，或切换至【修改器】Tab体验！</div>`
+          : `<div class="rounded-[24px] p-6 border border-dashed border-zinc-200/80 dark:border-white/10 text-center text-xs sm:text-sm text-zinc-500 dark:text-zinc-400">${t('consoleEmpty')}</div>`;
       }
     }
 
@@ -2861,11 +2855,11 @@
           filtered.push({ category: cat.category, commands: matchedCmds });
         }
       });
-      renderConsoleCategories(filtered);
+      renderConsoleCategories(filtered, true);
     }
 
     // Render Curated Mods List
-    function renderCuratedMods(mods) {
+    function renderCuratedMods(mods, fromSearch) {
       const modsList = document.getElementById('detail-mods-list');
       modsList.innerHTML = '';
       if (mods && mods.length > 0) {
@@ -2877,21 +2871,23 @@
               <div>
                 <div class="flex items-center gap-2 flex-wrap">
                   <h4 class="font-bold text-base text-zinc-900 dark:text-white">${mod.title}</h4>
-                  <span class="text-xs bg-purple-50 dark:bg-purple-500/10 text-purple-600 dark:text-purple-400 px-2.5 py-0.5 rounded-full font-semibold">${mod.version}</span>
+                  ${mod.version ? `<span class="text-xs bg-purple-50 dark:bg-purple-500/10 text-purple-600 dark:text-purple-400 px-2.5 py-0.5 rounded-full font-semibold">${mod.version}</span>` : ''}
                   <span class="text-xs bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 px-2.5 py-0.5 rounded-full font-semibold">${mod.category}</span>
                 </div>
-                <div class="text-xs text-zinc-400 mt-1">Author: ${mod.author} • Size: ${mod.size}</div>
+                <div class="text-xs text-zinc-400 mt-1">Author: ${mod.author}${mod.size ? ` • Size: ${mod.size}` : ''}${mod.checkedAt ? ` • ${t('statNexusAsOf').replace('{date}', mod.checkedAt)}` : ''}</div>
               </div>
               <div class="flex items-center gap-3 text-xs text-zinc-400">
+                ${mod.downloads ? `
                 <span class="flex items-center gap-1 text-[#A855F7] dark:text-purple-400 font-semibold">
                   <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                   <span>${mod.downloads}</span>
-                </span>
-                <span>•</span>
+                </span>` : ''}
+                ${mod.downloads && mod.endorsements ? '<span>•</span>' : ''}
+                ${mod.endorsements ? `
                 <span class="flex items-center gap-1 text-purple-600 dark:text-purple-400 font-semibold">
                   <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"></path></svg>
                   <span>${mod.endorsements}</span>
-                </span>
+                </span>` : ''}
               </div>
             </div>
 
@@ -2911,17 +2907,19 @@
                     <span>${t('modOriginPageBtn')}</span>
                   </a>
                 ` : ''}
-                <button onclick="downloadMod('${mod.id}')" class="px-5 py-2 rounded-full ${mod.isDirect !== false ? 'bg-[#A855F7] hover:bg-[#A855F7] shadow-blue-500/20' : 'bg-purple-600 hover:bg-purple-500 shadow-purple-500/20'} text-white font-bold text-xs transition-colors shadow-sm flex items-center gap-1.5 cursor-pointer">
+                ${mod.downloadUrl ? `<button onclick="downloadMod('${mod.id}')" class="px-5 py-2 rounded-full ${mod.isDirect !== false ? 'bg-[#A855F7] hover:bg-[#A855F7] shadow-blue-500/20' : 'bg-purple-600 hover:bg-purple-500 shadow-purple-500/20'} text-white font-bold text-xs transition-colors shadow-sm flex items-center gap-1.5 cursor-pointer">
                   <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                   <span>${mod.isDirect !== false ? t('modDirectBtn') : t('modMirrorBtn')}</span>
-                </button>
+                </button>` : ''}
               </div>
             </div>
           `;
           modsList.appendChild(mdiv);
         });
       } else {
-        modsList.innerHTML = `<div class="bg-white dark:bg-[#141518] rounded-[24px] p-8 text-center text-zinc-400 text-sm border border-zinc-200/80 dark:border-white/10">未搜索到相关 MOD。请尝试搜索其他关键字。</div>`;
+        modsList.innerHTML = fromSearch
+          ? `<div class="bg-white dark:bg-[#141518] rounded-[24px] p-8 text-center text-zinc-400 text-sm border border-zinc-200/80 dark:border-white/10">未搜索到相关 MOD。请尝试搜索其他关键字。</div>`
+          : `<div class="rounded-[24px] p-6 border border-dashed border-zinc-200/80 dark:border-white/10 text-center text-xs sm:text-sm text-zinc-500 dark:text-zinc-400">${t('modsEmpty')}</div>`;
       }
     }
 
@@ -2936,7 +2934,7 @@
       const filtered = activeGame.curatedMods.filter(m => {
         return (m.title || '').toLowerCase().includes(q) || (m.desc || '').toLowerCase().includes(q) || (m.category || '').toLowerCase().includes(q);
       });
-      renderCuratedMods(filtered);
+      renderCuratedMods(filtered, true);
     }
 
     function escHtml(v) {
@@ -3166,7 +3164,8 @@
       const container = document.getElementById('detail-scenario-bundles-container');
       if (!container) return;
 
-      if (!game.hasConsole) {
+      // hasConsole means an official console; games that only get one through a mod may still have verified bundles
+      if (!game.hasConsole && !(game.scenarioBundles && game.scenarioBundles.length)) {
         container.innerHTML = `
           <div class="bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-emerald-500/10 rounded-[28px] p-6 border border-[#A855F7]/20 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
             <div class="flex items-center space-x-3.5">
@@ -3187,12 +3186,9 @@
         return;
       }
 
-      const bundles = (game.scenarioBundles && game.scenarioBundles.length > 0)
-        ? game.scenarioBundles
-        : generateDynamicBundles(game);
-
-      if (!bundles || bundles.length === 0) {
-        container.innerHTML = '';
+      const bundles = game.scenarioBundles || [];
+      if (bundles.length === 0) {
+        container.innerHTML = `<div class="rounded-[24px] p-6 border border-dashed border-zinc-200/80 dark:border-white/10 text-center text-xs sm:text-sm text-zinc-500 dark:text-zinc-400">${t('bundlesEmpty')}</div>`;
         return;
       }
 
@@ -3325,92 +3321,11 @@
       `;
     }
 
-    function generateDynamicBundles(game) {
-      if (game.scenarioBundles && game.scenarioBundles.length > 0) {
-        return game.scenarioBundles;
-      }
-      
-      const allCmds = [];
-      if (game.consoleCategories) {
-        game.consoleCategories.forEach(cat => {
-          if (cat.commands) allCmds.push(...cat.commands);
-        });
-      } else if (game.popularCommands) {
-        allCmds.push(...game.popularCommands);
-      }
-
-      if (allCmds.length === 0) return [];
-
-      const starterCmds = allCmds.filter(c => {
-        const text = ((c.name && (c.name[currentLang] || c.name['zh-CN'] || c.name['en'] || c.name)) + ' ' + (c.desc || '') + ' ' + c.code).toLowerCase();
-        return text.includes('无敌') || text.includes('god') || text.includes('生命') || text.includes('health') || text.includes('金钱') || text.includes('金币') || text.includes('money') || text.includes('gold') || text.includes('经验') || text.includes('exp') || text.includes('负重') || text.includes('weight') || text.includes('stamina') || text.includes('耐力');
-      }).slice(0, 6);
-
-      const salvationCmds = allCmds.filter(c => {
-        const text = ((c.name && (c.name[currentLang] || c.name['zh-CN'] || c.name['en'] || c.name)) + ' ' + (c.desc || '') + ' ' + c.code).toLowerCase();
-        return text.includes('地图') || text.includes('map') || text.includes('传送') || text.includes('teleport') || text.includes('travel') || text.includes('解锁') || text.includes('unlock') || text.includes('通缉') || text.includes('wanted') || text.includes('结局') || text.includes('ending') || text.includes('quest') || text.includes('任务');
-      }).slice(0, 6);
-
-      const arsenalCmds = allCmds.filter(c => {
-        const text = ((c.name && (c.name[currentLang] || c.name['zh-CN'] || c.name['en'] || c.name)) + ' ' + (c.desc || '') + ' ' + c.code).toLowerCase();
-        return text.includes('武器') || text.includes('weapon') || text.includes('防具') || text.includes('armor') || text.includes('装备') || text.includes('equip') || text.includes('神装') || text.includes('道具') || text.includes('item') || text.includes('技能') || text.includes('perk') || text.includes('level');
-      }).slice(0, 8);
-
-      const fallbackStarter = starterCmds.length > 0 ? starterCmds : allCmds.slice(0, 4);
-      const fallbackSalvation = salvationCmds.length > 0 ? salvationCmds : allCmds.slice(2, 6);
-      const fallbackArsenal = arsenalCmds.length > 0 ? arsenalCmds : allCmds.slice(4, 10);
-
-      const formatCode = (cmds, title) => {
-        return `-- [老L·极客场景套餐] 《${game.title}》 ${title}\n` + cmds.map(c => c.code).join('\n');
-      };
-
-      const getHighlights = (cmds) => {
-        return cmds.map(c => {
-          return (c.name && (c.name[currentLang] || c.name['zh-CN'] || c.name['en'] || c.name)) || c.code;
-        }).slice(0, 5);
-      };
-
-      return [
-        {
-          id: `${game.id}_starter`,
-          type: 'starter',
-          name: '新手破荒起飞包',
-          tag: '👑 萌新首选 · 零门槛',
-          badge: '开荒推荐',
-          desc: '一键打包当前游戏核心生存、基础资源与高频破荒指令，小白进入游戏无需摸索直接起飞！',
-          highlights: getHighlights(fallbackStarter),
-          code: formatCode(fallbackStarter, '新手破荒起飞包')
-        },
-        {
-          id: `${game.id}_salvation`,
-          type: 'salvation',
-          name: '探索救赎包',
-          tag: '💖 意难平救赎 · 探索党狂喜',
-          badge: '完美探索',
-          desc: '一键打包地图全开、快速传送与探索辅助代码，告别繁琐跑图与漏掉支线的遗憾！',
-          highlights: getHighlights(fallbackSalvation),
-          code: formatCode(fallbackSalvation, '探索救赎包')
-        },
-        {
-          id: `${game.id}_arsenal`,
-          type: 'arsenal',
-          name: '二周目全神装满配包',
-          tag: '⚔️ 战力天花板 · 毕业满配',
-          badge: '满配毕业',
-          desc: '一键打包当前游戏强力武器装备、关键道具与高阶技能代码，体验满配战力碾压！',
-          highlights: getHighlights(fallbackArsenal),
-          code: formatCode(fallbackArsenal, '二周目全神装满配包')
-        }
-      ];
-    }
-
     function copyScenarioBundle(gameId, bundleId) {
       const game = allGames.find(g => g.id === gameId) || activeGame;
       if (!game) return;
 
-      const bundles = (game.scenarioBundles && game.scenarioBundles.length > 0)
-        ? game.scenarioBundles
-        : generateDynamicBundles(game);
+      const bundles = game.scenarioBundles || [];
 
       const bundle = bundles.find(b => b.id === bundleId || b.type === bundleId);
       if (!bundle || !bundle.code) {
