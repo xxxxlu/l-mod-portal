@@ -2022,7 +2022,7 @@ def witcher3_fields():
         "title": "The Witcher 3: Wild Hunt - Complete Edition (Next-Gen)",
         "titles": {
             "en": "The Witcher 3: Wild Hunt - Complete Edition (Next-Gen)",
-            "zh-CN": "巫师 3：狂猎 (次世代版 / 完全版 / 完全版)",
+            "zh-CN": "巫师 3：狂猎 (次世代版 / 完全版)",
             "zh-TW": "巫師 3：狂獵 (次世代重製版 / 完全版)",
             "ja": "ウィッチャー3 ワイルドハント コンプリートエディション (次世代機版)",
             "ko": "더 위쳐 3: 와일드 헌트 - 컴플리트 에디션 (차세대 리마스터)",
@@ -2043,7 +2043,7 @@ def witcher3_fields():
         },
         "consoleShortcut": "~ (波浪键) 或 @ 键 (次世代原生 ini 开启，免 DLL 注入)",
         "consoleEnableGuide": {
-            "zh-CN": "1. 【原生免 Mod 开启控制台】在《巫师3 次世代版 / 完全版》安装根目录进入 bin\\config\\base\\ 文件夹，用记事本打开 general.ini；\n2. 【追加调试参数】在文件末尾 [General] 区块最下方另起一行，添加 DBGConsoleOn=true 并保存退出；\n3. 【呼出与执行】启动游戏（次世代默认 DX12 版本路径为 bin\\x64_dx12\\witcher3.exe），在任何战役关卡按下键盘 ~ (波浪键) 或 @ 键即可弹出顶部控制台，输入下方代码回车直接生效！\n4. 【次世代版 / 完全版原生特色提示】本版本已内置原生「拍照模式」(在游戏中随时按 U 键呼出，支持景深、自由机位与滤镜)、「法印快捷施法」(游戏设置-游戏性中开启，无需呼出法印轮盘)、「自动涂抹剑油」(游戏设置中开启，无需额外Mod)，并全面支持官方 REDkit 编辑器与 Steam 创意工坊！",
+            "zh-CN": "1. 【原生免 Mod 开启控制台】在《巫师3 次世代版 / 完全版》安装根目录进入 bin\\config\\base\\ 文件夹，用记事本打开 general.ini；\n2. 【追加调试参数】在文件末尾 [General] 区块最下方另起一行，添加 DBGConsoleOn=true 并保存退出；\n3. 【呼出与执行】启动游戏（次世代默认 DX12 版本路径为 bin\\x64_dx12\\witcher3.exe），在任何战役关卡按下键盘 ~ (波浪键) 或 @ 键即可弹出顶部控制台，输入下方代码回车直接生效。\n4. 【次世代版 / 完全版原生特色提示】本版本已内置原生「拍照模式」(在游戏中随时按 U 键呼出，支持景深、自由机位与滤镜)、「法印快捷施法」(游戏设置-游戏性中开启，无需呼出法印轮盘)、「自动涂抹剑油」(游戏设置中开启，无需额外Mod)，并全面支持官方 REDkit 编辑器与 Steam 创意工坊。",
             "en": "1. Navigate to 'The Witcher 3\\bin\\config\\base\\', open general.ini in Notepad.\n2. Add 'DBGConsoleOn=true' under [General] and save.\n3. Launch game (DX12 executable is in bin\\x64_dx12\\witcher3.exe), press ~ or @ in-game to open console.\n4. Next-Gen features: Built-in Photo Mode (press U), Quick Sign Casting (in Gameplay settings), Auto-apply Oils, and official REDkit mod editor / Steam Workshop support."
         }
     }

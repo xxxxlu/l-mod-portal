@@ -30,7 +30,7 @@ window.GAMES_DATA = [
     "consoleShortcut": "~ (Cyber Engine Tweaks 快捷唤出)",
     "consoleEnableGuide": {
       "zh-CN": "1. 必须先安装 Cyber Engine Tweaks (CET) 核心前置，将解压后的 bin 文件夹直接放入《赛博朋克2077》安装根目录；\n2. 启动游戏，首次运行会在屏幕中央弹出热键绑定窗口，按一下键盘 ~ 键（或自定义键）完成绑定；\n3. 游戏内随时按下 ~ 键呼出 CET 控制台界面，直接将下列 Lua 指令复制粘贴到最下方输入框并按回车执行。指令按 2.0/2.13 版本的写法整理，没有逐条在游戏里实测，版本不同可能失效，执行前先手动存档。",
-      "en": "1. Install Cyber Engine Tweaks (CET) into the bin\\x64 directory.\n2. Bind your console key (~ by default).\n3. Press ~ in-game, paste any Lua command below, and press Enter to execute."
+      "en": "1. Install Cyber Engine Tweaks (CET) first: extract the downloaded bin folder directly into the Cyberpunk 2077 install root directory.\n2. Launch the game; on first run a keybind window pops up in the middle of the screen — press ~ (or pick your own key) to bind it.\n3. In-game, press ~ any time to open the CET console overlay, paste any Lua command below into the input box at the bottom and press Enter to run it. The commands here are written for game version 2.0/2.13, were not individually tested in-game, may fail on other versions, and you should save manually before running anything."
     },
     "popularCommands": [
       {
@@ -1661,9 +1661,7 @@ window.GAMES_DATA = [
     "pitfallNote": {
       "title": "老L避坑笔记 (赛博朋克2077 v2.13)",
       "tips": [
-        "【版本语法避坑】：2.0+ 往日之影彻底重构了专精成长树，千万别运行网上旧版 1.63 的 SetLevel 代码，否则专精树直接永久卡死！本站套餐改用了 2.0 之后的 SetProficiencyLevel 写法（没有逐条实测）。",
-        "【CET热键防呆】：首次进入游戏按 ~ 键若没反应，请先切换到英文输入法（Caps Lock关）。CET 控制台必须在全屏或无边框窗口模式下呼出。",
-        "【剧情Fact生效机理】：救赎包里的 Fact 标志位修改后，建议立刻进行一次快速存档 (F5) 再读档 (F9)，即可瞬间刷新 NPC 状态机与夜之城任务树。"
+        "【CET热键防呆】：首次进入游戏按 ~ 键（或你自己绑定的键）没反应，可以先切换到英文输入法（Caps Lock 关闭）试试；CET 官方安装要求游戏开在无边框窗口模式下运行，独占全屏模式下可能呼不出来。"
       ]
     },
     "scenarioBundles": [],
@@ -1718,8 +1716,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "F10 键 或 ~ 键 (需装载 UE4SS 调试插件)",
     "consoleEnableGuide": {
-      "zh-CN": "1. 【前置依赖】将 RE-UE4SS 解压放入游戏安装目录 `b1\\Binaries\\Win64\\` 文件夹下；\n2. 【启动验证】进入游戏关卡，随时按下 F10 键即可呼出图形控制台，按 ~ 键开启虚幻5原生命令行；\n3. 【一键注入 GM 指令】针对全神兵、全精魄与无限道具，配合 WukongGM 模组（位于 `b1\\Binaries\\Win64\\ue4ss\\Mods\\WukongGM\\`），游戏内按 F7 键直接秒级调用游戏底层原生函数库 `BGUFunctionLibraryManaged:RunScriptGM` 执行；游戏或 Mod 更新后可能失效。",
-      "en": "1. Extract RE-UE4SS into `b1\\Binaries\\Win64\\` directory.\n2. In-game, press F10 to toggle the UE4SS developer console or ~ for the native command bar.\n3. For GM commands and item batches, install WukongGM to `b1\\Binaries\\Win64\\ue4ss\\Mods\\WukongGM\\` and press F7 in-game to execute."
+      "zh-CN": "1. 【前置依赖】将 RE-UE4SS 解压放入游戏安装目录 `b1\\Binaries\\Win64\\` 文件夹下；\n2. 【启动验证】读档进入游戏后按 F10 键呼出 UE4SS 自带的调试控制台，输入 stat fps，能看到帧数计数器就说明 UE4SS 已经在正常工作；\n3. 【WukongGM 道具/神兵/精魄】将 WukongGM 解压到 `b1\\Binaries\\Win64\\ue4ss\\Mods\\`（解压后会多出 ue4ss\\Mods\\WukongGM\\），用记事本打开其中的 items.txt 或 commands.txt，把想要的数量改好并保存为 ANSI 编码（Notepad 默认的 UTF-8 会带隐藏 BOM，导致第一条指令读不到），读档进入游戏后按 F7 键，游戏会调用自带的 GM 函数 BGUFunctionLibraryManaged:RunScriptGM 把改好的内容写进背包；两个文件每次按 F7 都会重新读取，不用重启游戏；数值改回 0 可以避免重复按 F7 时被重复加物品；游戏或 Mod 更新后可能失效。",
+      "en": "1. Prerequisite: extract RE-UE4SS into the game's `b1\\Binaries\\Win64\\` folder.\n2. Verify it works: load into the game and press F10 to open UE4SS's built-in console, then type `stat fps` — if a frame counter appears, UE4SS is running correctly.\n3. Items/weapons/spells via WukongGM: extract WukongGM into `b1\\Binaries\\Win64\\ue4ss\\Mods\\` (you should end up with `ue4ss\\Mods\\WukongGM\\`); open its items.txt or commands.txt in Notepad, edit the quantities you want and save as ANSI encoding (Notepad's default UTF-8 adds a hidden BOM that breaks the first command). Load into the game and press F7 — the game calls its own built-in GM function, BGUFunctionLibraryManaged:RunScriptGM, to write the edited values into your inventory. Both files are re-read every time you press F7, so you don't need to restart the game; set a value back to 0 to stop it from being re-added on the next press. May break after a game or mod update."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -2075,13 +2073,11 @@ window.GAMES_DATA = [
     "pitfallNote": {
       "title": "老L避坑笔记 (黑神话：悟空)",
       "tips": [
-        "【打坐存盘后执行】：招式变身与道具全收集指令建议在土地庙打坐存盘后输入，避免由于过场动画强制卸载模型导致镜头卡顿。",
-        "【0.4x 子弹时间妙用】：对于手残党，开启 slomo 0.4 子弹时间不仅能轻松看清 Boss 抬手，还能大幅延长看破识破判定帧，极其优雅地通关！",
-        "【UE4SS 前置】：UE4SS 到它的 GitHub 发布页下载。本站的 .bat 会把 mods.txt 里的 ConsoleEnablerMod 从 0 改成 1（改之前另存 mods.txt.bak）；mods.txt 里没有这一行的话要自己加。"
+        "【UE4SS 前置】：UE4SS 去它的 GitHub 发布页下载。本站的 .bat 会把 mods.txt 里的 ConsoleEnablerMod 从 0 改成 1（改之前会另存 mods.txt.bak）；如果 mods.txt 里没有这一行，要自己手动加一行。"
       ]
     },
     "scenarioBundles": [],
-    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】黑神话悟空 UE4SS 控制台开关\necho ========================================================\necho   【老L·单机避坑局】黑神话悟空 UE4SS 控制台开关脚本\necho   把 mods.txt 里的 ConsoleEnablerMod 改成 1；改之前另存 mods.txt.bak\necho ========================================================\necho.\n\nset \"WIN64=b1\\Binaries\\Win64\"\n\nif not exist \"b1\\Binaries\\Win64\" (\n    echo [!] 当前目录下没有 b1\\Binaries\\Win64，脚本什么都没改。\n    echo     请把本脚本放到《黑神话：悟空》游戏安装根目录再运行。\n    echo.\n    pause\n    exit /b\n)\n\nset \"MODS_TXT=\"\nif exist \"%WIN64%\\ue4ss\\Mods\\mods.txt\" set \"MODS_TXT=%WIN64%\\ue4ss\\Mods\\mods.txt\"\nif not defined MODS_TXT if exist \"%WIN64%\\Mods\\mods.txt\" set \"MODS_TXT=%WIN64%\\Mods\\mods.txt\"\n\nif not defined MODS_TXT (\n    echo [!] %WIN64%\\ue4ss\\Mods\\ 和 %WIN64%\\Mods\\ 下都没有 mods.txt，脚本什么都没改。\n    echo     请先把 UE4SS 解压到 %WIN64%\\ 再运行本脚本。\n    echo.\n    pause\n    exit /b\n)\n\ncopy /y \"%MODS_TXT%\" \"%MODS_TXT%.bak\" >nul\necho [+] 已另存 %MODS_TXT%.bak\npowershell -NoProfile -Command \"(Get-Content '%MODS_TXT%') -replace 'ConsoleEnablerMod\\s*:\\s*0', 'ConsoleEnablerMod : 1' | Set-Content '%MODS_TXT%'\"\n\nfindstr /r /i /c:\"ConsoleEnablerMod *: *1\" \"%MODS_TXT%\" >nul\nif errorlevel 1 (\n    echo [!] %MODS_TXT% 里没有 ConsoleEnablerMod 这一行。\n    echo     请用记事本打开它，自己加一行：ConsoleEnablerMod : 1\n) else (\n    echo [+] %MODS_TXT% 里 ConsoleEnablerMod 现在是 1。\n)\n\necho.\necho ========================================================\necho  [i] 进游戏按 F10 或 ~ 键试试控制台。\necho      脚本不备份存档；指令没有逐条在游戏里实测，执行前先手动存档。\necho ========================================================\necho.\npause\n",
+    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】黑神话悟空 UE4SS 控制台开关\necho ========================================================\necho   【老L·单机避坑局】黑神话悟空 UE4SS 控制台开关脚本\necho   把 mods.txt 里的 ConsoleEnablerMod 改成 1；改之前另存 mods.txt.bak\necho ========================================================\necho.\n\nset \"WIN64=b1\\Binaries\\Win64\"\n\nif not exist \"b1\\Binaries\\Win64\" (\n    echo [!] 当前目录下没有 b1\\Binaries\\Win64，脚本什么都没改。\n    echo     请把本脚本放到《黑神话：悟空》游戏安装根目录再运行。\n    echo.\n    pause\n    exit /b\n)\n\nset \"MODS_TXT=\"\nif exist \"%WIN64%\\ue4ss\\Mods\\mods.txt\" set \"MODS_TXT=%WIN64%\\ue4ss\\Mods\\mods.txt\"\nif not defined MODS_TXT if exist \"%WIN64%\\Mods\\mods.txt\" set \"MODS_TXT=%WIN64%\\Mods\\mods.txt\"\n\nif not defined MODS_TXT (\n    echo [!] %WIN64%\\ue4ss\\Mods\\ 和 %WIN64%\\Mods\\ 下都没有 mods.txt，脚本什么都没改。\n    echo     请先把 UE4SS 解压到 %WIN64%\\ 再运行本脚本。\n    echo.\n    pause\n    exit /b\n)\n\ncopy /y \"%MODS_TXT%\" \"%MODS_TXT%.bak\" >nul\necho [+] 已另存 %MODS_TXT%.bak\npowershell -NoProfile -Command \"(Get-Content '%MODS_TXT%') -replace 'ConsoleEnablerMod\\s*:\\s*0', 'ConsoleEnablerMod : 1' | Set-Content '%MODS_TXT%'\"\n\nfindstr /r /i /c:\"ConsoleEnablerMod *: *1\" \"%MODS_TXT%\" >nul\nif errorlevel 1 (\n    echo [!] %MODS_TXT% 里没有 ConsoleEnablerMod 这一行。\n    echo     请用记事本打开它，自己加一行：ConsoleEnablerMod : 1\n) else (\n    echo [+] %MODS_TXT% 里 ConsoleEnablerMod 现在是 1。\n)\n\necho.\necho ========================================================\necho  [i] 进游戏按 F10 试试控制台。\necho      脚本不备份存档；指令没有逐条在游戏里实测，执行前先手动存档。\necho ========================================================\necho.\npause\n",
     "compatibilityStatus": "green",
     "radarStatusText": "🟢 近 14 天无更新",
     "latestSteamPatch": "Black Myth: Wukong — 30% Off Coming Soon",
@@ -2104,7 +2100,7 @@ window.GAMES_DATA = [
     "title": "The Witcher 3: Wild Hunt - Complete Edition (Next-Gen)",
     "titles": {
       "en": "The Witcher 3: Wild Hunt - Complete Edition (Next-Gen)",
-      "zh-CN": "巫师 3：狂猎 (次世代版 / 完全版 / 完全版)",
+      "zh-CN": "巫师 3：狂猎 (次世代版 / 完全版)",
       "zh-TW": "巫師 3：狂獵 (次世代重製版 / 完全版)",
       "ja": "ウィッチャー3 ワイルドハント コンプリートエディション (次世代機版)",
       "ko": "더 위쳐 3: 와일드 헌트 - 컴플리트 에디션 (차세대 리마스터)",
@@ -2126,7 +2122,7 @@ window.GAMES_DATA = [
     "hasConsole": true,
     "consoleShortcut": "~ (波浪键) 或 @ 键 (次世代原生 ini 开启，免 DLL 注入)",
     "consoleEnableGuide": {
-      "zh-CN": "1. 【原生免 Mod 开启控制台】在《巫师3 次世代版 / 完全版》安装根目录进入 bin\\config\\base\\ 文件夹，用记事本打开 general.ini；\n2. 【追加调试参数】在文件末尾 [General] 区块最下方另起一行，添加 DBGConsoleOn=true 并保存退出；\n3. 【呼出与执行】启动游戏（次世代默认 DX12 版本路径为 bin\\x64_dx12\\witcher3.exe），在任何战役关卡按下键盘 ~ (波浪键) 或 @ 键即可弹出顶部控制台，输入下方代码回车直接生效！\n4. 【次世代版 / 完全版原生特色提示】本版本已内置原生「拍照模式」(在游戏中随时按 U 键呼出，支持景深、自由机位与滤镜)、「法印快捷施法」(游戏设置-游戏性中开启，无需呼出法印轮盘)、「自动涂抹剑油」(游戏设置中开启，无需额外Mod)，并全面支持官方 REDkit 编辑器与 Steam 创意工坊！",
+      "zh-CN": "1. 【原生免 Mod 开启控制台】在《巫师3 次世代版 / 完全版》安装根目录进入 bin\\config\\base\\ 文件夹，用记事本打开 general.ini；\n2. 【追加调试参数】在文件末尾 [General] 区块最下方另起一行，添加 DBGConsoleOn=true 并保存退出；\n3. 【呼出与执行】启动游戏（次世代默认 DX12 版本路径为 bin\\x64_dx12\\witcher3.exe），在任何战役关卡按下键盘 ~ (波浪键) 或 @ 键即可弹出顶部控制台，输入下方代码回车直接生效。\n4. 【次世代版 / 完全版原生特色提示】本版本已内置原生「拍照模式」(在游戏中随时按 U 键呼出，支持景深、自由机位与滤镜)、「法印快捷施法」(游戏设置-游戏性中开启，无需呼出法印轮盘)、「自动涂抹剑油」(游戏设置中开启，无需额外Mod)，并全面支持官方 REDkit 编辑器与 Steam 创意工坊。",
       "en": "1. Navigate to 'The Witcher 3\\bin\\config\\base\\', open general.ini in Notepad.\n2. Add 'DBGConsoleOn=true' under [General] and save.\n3. Launch game (DX12 executable is in bin\\x64_dx12\\witcher3.exe), press ~ or @ in-game to open console.\n4. Next-Gen features: Built-in Photo Mode (press U), Quick Sign Casting (in Gameplay settings), Auto-apply Oils, and official REDkit mod editor / Steam Workshop support."
     },
     "popularCommands": [
@@ -4343,9 +4339,9 @@ window.GAMES_DATA = [
     "pitfallNote": {
       "title": "老L避坑笔记 (巫师3 次世代版 v4.04)",
       "tips": [
-        "【零注入原生开启】：次世代版 4.04 官方原生隐藏了调试控制台，只需改动 general.ini 添加 DBGConsoleOn=true 即可，根本不需要下载任何可能报毒的第三方 exe！",
-        "【昆特牌无脑秒胜】：打牌输了想砸键盘？控制台输入 winGwint(true) 直接判定胜利（执行前先存档）。",
-        "【爱丽丝玫瑰与湖女剑】：石之心通关后遗憾把玫瑰交出去了？输入 additem('Iris\\'s Rose') 即可让紫色玫瑰永远留在杰洛特背包与白鸦葡萄园！"
+        "【零注入原生开启】：次世代版 4.04 官方原生隐藏了调试控制台，只需改动 general.ini 添加 DBGConsoleOn=true 即可，不需要下载任何第三方 exe。",
+        "【昆特牌速胜】：打牌输了想砸键盘？控制台输入 winGwint(true) 可以直接判定赢下当前这局牌（执行前先存档）。",
+        "【把紫玫瑰要回来】：石之心 DLC 剧情里如果把紫色玫瑰（Violet rose）这个任务道具交出去了，可以用控制台补一支回背包：additem('Violet rose')（执行前先存档）。"
       ]
     },
     "scenarioBundles": [
@@ -4414,8 +4410,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "Norbyte Script Extender 控制台黑窗 (回车即时执行)",
     "consoleEnableGuide": {
-      "zh-CN": "1. 【下载与部署前置】下载最新版 Norbyte's BG3 Script Extender，解压得到 DWrite.dll 文件；\n2. 【放置主程序目录】将 DWrite.dll 复制放入《博德之门3》安装根目录的 bin\\ 文件夹下（与 bg3.exe 和 bg3_dx11.exe 位于同一级目录）；\n3. 【启用控制台黑窗】在 bin\\ 目录下新建一个文本文件并重命名为 ScriptExtenderSettings.json，用记事本打开填入 {\"CreateConsole\": true} 并保存；\n4. 【呼出与代码执行】启动游戏，屏幕旁会自动伴随弹出一个透明的 Windows 控制台黑色终端窗口；在控制台窗口内直接按下回车键激活输入光标，将下列任意 Osi 函数指令复制粘贴进去并回车，游戏内道具即刻秒级刷入当前操控角色背包中！\n5. 【Patch 7 官方模组工坊说明】拉瑞安官方在 Patch 7 中内置了官方模组浏览器，本站整理的指令和精选 Mod 没有针对 Patch 7 及之后的版本逐一实测，装 Mod 前先看 Mod 页面写的支持版本。",
-      "en": "1. Download Norbyte's BG3 Script Extender and extract DWrite.dll.\n2. Place DWrite.dll into 'Baldur's Gate 3\\bin\\' (same folder as bg3.exe).\n3. In bin\\, create ScriptExtenderSettings.json containing '{\"CreateConsole\": true}'.\n4. Launch the game; an interactive console terminal window will open alongside it. Press Enter in the terminal, paste any Osi command below, and press Enter to execute.\n5. The commands and mods listed here were not individually tested on Patch 7 or later; check each mod page for the game versions it supports."
+      "zh-CN": "1. 【下载与部署前置】下载最新版 Norbyte's BG3 Script Extender，解压得到 DWrite.dll 文件；\n2. 【放置主程序目录】将 DWrite.dll 复制放入《博德之门3》安装根目录的 bin\\ 文件夹下（与 bg3.exe 和 bg3_dx11.exe 位于同一级目录）；\n3. 【启用控制台黑窗】在 bin\\ 目录下新建一个文本文件并重命名为 ScriptExtenderSettings.json，用记事本打开填入 {\"CreateConsole\": true} 并保存；\n4. 【呼出与代码执行】启动游戏，屏幕旁会弹出一个 Script Extender 的控制台终端窗口；在控制台窗口内按一下回车键进入输入模式，把下列任意 Osi 函数指令粘贴进去再按回车执行，效果会直接作用在当前操控的角色身上。\n5. 【Patch 7 官方模组工坊说明】拉瑞安官方在 Patch 7 中内置了官方模组浏览器，本站整理的指令和精选 Mod 没有针对 Patch 7 及之后的版本逐一实测，装 Mod 前先看 Mod 页面写的支持版本。",
+      "en": "1. Download Norbyte's BG3 Script Extender and extract DWrite.dll.\n2. Place DWrite.dll into 'Baldur's Gate 3\\bin\\' (same folder as bg3.exe).\n3. In bin\\, create ScriptExtenderSettings.json containing '{\"CreateConsole\": true}'.\n4. Launch the game; a Script Extender console terminal window will open alongside it. Press Enter in that window to enter input mode, then paste any Osi command below and press Enter — it runs against your currently controlled character.\n5. The commands and mods listed here were not individually tested on Patch 7 or later; check each mod page for the game versions it supports."
     },
     "popularCommands": [
       {
@@ -5504,13 +5500,13 @@ window.GAMES_DATA = [
     "pitfallNote": {
       "title": "老L避坑笔记 (博德之门3 Patch 7)",
       "tips": [
-        "【Script Extender 控制台】：Patch 7 有了官方模组管理器，但控制台还是要靠 Norbyte 的 Script Extender。用控制台会不会影响成就没有人核实过（Script Extender 默认开着 EnableAchievements，用来恢复装 Mod 后的成就），执行前先存档。",
-        "【长休补给一劳永逸】：博德之门3经常为搜刮营地苹果烤肠烦恼？直接注入 50 个营地补给包即可永久实现全员满血法术位拉满。",
-        "【队友满好感时机】：好感度指令 SetAttitude 建议在第一章营地初次对话后使用，不仅能稳稳触发影心、阿斯代伦、盖尔的恋爱事件，还能避开剧情好感锁死。"
+        "【Script Extender 控制台】：Patch 7 有了官方模组管理器，但控制台还是要靠 Norbyte 的 Script Extender。它默认开着 EnableAchievements，就是用来恢复装 Mod 后的成就的；用控制台具体会不会影响成就没有人核实过，执行前先存档。",
+        "【长休不用囤太多补给】：长休 (Long Rest) 只要凑够 40 点营地补给 (Camp Supplies) 就会触发——一份 Supply Pack 本身就有 40 点；战术难度 (Tactician) 门槛是 80 点，自定义难度最高到 120 点。凑够门槛后全队就会回满生命值和法术位，补给囤得比门槛还多也不会有额外效果。",
+        "【队友好感时机】：BG3 官方 Osiris 文档里没有 SetAttitude 这个改好感度的函数——Attitude 管的是 NPC 交易价格，队友好感用的是 ChangeApprovalRating。建议在第一章营地初次对话后再用它改好感，比较容易触发影心、阿斯代伦、盖尔等人的好感剧情，也能避开剧情好感上限卡住的情况。执行前先存档。"
       ]
     },
     "scenarioBundles": [],
-    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】博德之门3 Script Extender 控制台开关\necho ========================================================\necho   【老L·单机避坑局】博德之门3 Script Extender 控制台开关脚本\necho   在 bin\\ScriptExtenderSettings.json 里打开 CreateConsole；改之前另存 .bak\necho ========================================================\necho.\n\nset \"BIN_DIR=\"\nif exist \"bin\\bg3.exe\" set \"BIN_DIR=bin\"\nif not defined BIN_DIR if exist \"bg3.exe\" set \"BIN_DIR=.\"\n\nif not defined BIN_DIR (\n    echo [!] 当前目录下没有 bin\\bg3.exe，脚本什么都没改。\n    echo     请把本脚本放到《博德之门3》游戏安装根目录再运行。\n    echo.\n    pause\n    exit /b\n)\n\nif not exist \"%BIN_DIR%\\DWrite.dll\" (\n    echo [!] %BIN_DIR% 下没有 DWrite.dll：Script Extender 可能还没装，装好以后这个设置才起作用。\n)\n\nset \"CFG_FILE=%BIN_DIR%\\ScriptExtenderSettings.json\"\nif exist \"%CFG_FILE%\" (\n    copy /y \"%CFG_FILE%\" \"%CFG_FILE%.bak\" >nul\n    echo [+] 原来的 ScriptExtenderSettings.json 已另存为 ScriptExtenderSettings.json.bak\n)\n\necho {\"CreateConsole\": true}>\"%CFG_FILE%\"\necho [+] 已写入 %CFG_FILE%：CreateConsole = true\necho     原文件里的其它设置会被清掉，要用就从 .bak 拷回来。\necho.\necho ========================================================\necho  [i] 启动游戏时会多出一个 Script Extender 控制台窗口。\necho      在窗口里先按回车进入输入模式，再粘贴指令、回车执行。\necho      设置文件放在 bin 目录，依据是 Norbyte/bg3se 官方文档 Docs/Debugger.md。\necho      脚本不备份存档；指令没有逐条在游戏里实测，执行前先手动存档。\necho ========================================================\necho.\npause\n",
+    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】博德之门3 Script Extender 控制台开关\necho ========================================================\necho   【老L·单机避坑局】博德之门3 Script Extender 控制台开关脚本\necho   在 bin\\ScriptExtenderSettings.json 里打开 CreateConsole；改之前另存 .bak\necho ========================================================\necho.\n\nset \"BIN_DIR=\"\nif exist \"bin\\bg3.exe\" set \"BIN_DIR=bin\"\nif not defined BIN_DIR if exist \"bg3.exe\" set \"BIN_DIR=.\"\n\nif not defined BIN_DIR (\n    echo [!] 当前目录下没有 bin\\bg3.exe，脚本什么都没改。\n    echo     请把本脚本放到《博德之门3》游戏安装根目录再运行。\n    echo.\n    pause\n    exit /b\n)\n\nif not exist \"%BIN_DIR%\\DWrite.dll\" (\n    echo [!] %BIN_DIR% 下没有 DWrite.dll：Script Extender 可能还没装，装好以后这个设置才起作用。\n)\n\nset \"CFG_FILE=%BIN_DIR%\\ScriptExtenderSettings.json\"\nif exist \"%CFG_FILE%\" (\n    copy /y \"%CFG_FILE%\" \"%CFG_FILE%.bak\" >nul\n    echo [+] 原来的 ScriptExtenderSettings.json 已另存为 ScriptExtenderSettings.json.bak\n)\n\necho {\"CreateConsole\": true}>\"%CFG_FILE%\"\necho [+] 已写入 %CFG_FILE%：CreateConsole = true\necho     原文件里的其它设置会被清掉，要用就从 .bak 拷回来。\necho.\necho ========================================================\necho  [i] 启动游戏时会多出一个 Script Extender 控制台窗口。\necho      在窗口里先按回车进入输入模式，再粘贴指令、回车执行。\necho      设置文件放在 bin 目录，依据是 Norbyte/bg3se 官方 README 的配置项说明表。\necho      脚本不备份存档；指令没有逐条在游戏里实测，执行前先手动存档。\necho ========================================================\necho.\npause\n",
     "compatibilityStatus": "yellow",
     "radarStatusText": "🟡 修改器早于当前游戏版本",
     "latestSteamPatch": "Hotfix #36 Now Live!",
@@ -5564,7 +5560,7 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字终端 (采用 ModEngine2 离线引导 + The Grand Archives CT 表 / FLiNG 修改器)",
     "consoleEnableGuide": {
-      "zh-CN": "【离线启动指南（只在单机离线用）】\n1. 方案一 (ModEngine2 免修改文件)：解压 ModEngine2，将模组放入 /mod 目录，直接双击 launchmod_eldenring.bat 启动，这样启动不加载 EAC，只能离线玩；别带着改过的游戏或存档上线。\n2. 方案二 (替换引导)：进入游戏根目录 Game/，将原版 start_protected_game.exe 重命名为 .bak，将 eldenring.exe 复制一份并重命名为 start_protected_game.exe，新建文本文件 steam_appid.txt 写入 1245620，启动即可离线畅玩。\n3. 方案三 (无缝联机 Seamless Co-op)：该模组使用独立的 .co2 存档，走自己的联机方式、不连官方匹配服务器。它是第三方 Mod，会不会被封号没有人能担保。",
+      "zh-CN": "【离线启动指南（只在单机离线用）】\n1. 方案一 (ModEngine2 免修改文件)：解压 ModEngine2，将模组放入 /mod 目录，直接双击 launchmod_eldenring.bat 启动，这样启动不加载 EAC，只能离线玩；别带着改过的游戏或存档上线。\n2. 方案二 (替换引导)：进入游戏根目录 Game/，将原版 start_protected_game.exe 重命名为 .bak，将 eldenring.exe 复制一份并重命名为 start_protected_game.exe，新建文本文件 steam_appid.txt 写入 1245620，启动后只能离线玩。\n3. 方案三 (无缝联机 Seamless Co-op)：该模组使用独立的 .co2 存档，走自己的联机方式、不连官方匹配服务器。它是第三方 Mod，会不会被封号没有人能担保。",
       "en": "EAC Offline Bypass & ModEngine2 Launch Guide: Launch via launchmod_eldenring.bat or rename start_protected_game.exe and place steam_appid.txt (1245620) to start without Easy Anti-Cheat (offline only). Never take a modded game or save online; nothing here can guarantee you won't be banned."
     },
     "popularCommands": [],
@@ -5898,8 +5894,8 @@ window.GAMES_DATA = [
     "pitfallNote": {
       "title": "老L避坑笔记 (艾尔登法环 黄金树幽影 v1.14)",
       "tips": [
-        "【EAC 与封号】：FromSoftware 的 Easy Anti-Cheat 会在上报内存修改时对账号进行 180 天隔离小黑屋处罚！切勿在官方联机在线状态下注入，改游戏只在离线下进行（用 ModEngine2 或替换启动的方式不加载 EAC，只能离线玩）。",
-        "【幽影树庇护机制】：幽影之地独立于本篇等级，受折磨卡关时重点是将 Scadutree Blessing（幽影树庇护）调至 Lv20 满级，攻防减伤直接翻倍，即可彻底解除幽影受苦！",
+        "【EAC 与封号】：FromSoftware 的 Easy Anti-Cheat 检测到内存修改会对账号做处罚，具体处罚时长官方没有公开说明，网上流传的天数也无法确认。切勿在官方联机在线状态下注入，改游戏只在离线下进行（用 ModEngine2 或替换启动的方式不加载 EAC，只能离线玩）。",
+        "【幽影树庇护机制】：幽影之地的难度主要看幽影树庇护（Scadutree Blessing），它和角色等级分开计算。在赐福点使用收集到的幽影树碎片可以提升庇护，提高造成的伤害、降低受到的伤害；它只在幽影之地生效。卡关时优先找碎片。",
         "【无缝联机独立存档】：Seamless Co-op 用独立的 .co2 存档，不连官方匹配服务器。它是第三方 Mod，会不会被封号没有人能担保；别把 .co2 存档改回原版存档带上线。"
       ]
     },
@@ -5957,8 +5953,8 @@ window.GAMES_DATA = [
     "hasConsole": true,
     "consoleShortcut": "~ (Tilde 键)",
     "consoleEnableGuide": {
-      "zh-CN": "Bethesda Creation 引擎原生提供全功能控制台：\n1. 快捷键：游戏中随时按下键盘左上角【~】键 (波浪键 / ESC下方) 暂停并呼出全屏控制台；\n2. 输入法避坑：若无反应，请在 Windows 任务栏切换为'英语(美国)'美式键盘输入法，或在 Documents/My Games/Skyrim Special Edition/Skyrim.ini 的 [General] 下确认 bAllowConsole=1；\n3. 成就与防闪退：使用控制台或打 Mod 会打上脏标记锁定 Steam 成就，强烈建议安装 SSE Engine Fixes 恢复成就，它还修了一批引擎问题，但不能保证不闪退。\n4. 简写技巧：FormID 开头的多余 0 可省略，如 player.additem 0000000F 10000 可简写为 player.additem f 10000！",
-      "en": "Bethesda Creation Engine Native Console: Press ~ (Tilde) key in-game to toggle. Supports Hex FormIDs, batch (.bat) scripts, quest stage jumping, and free camera."
+      "zh-CN": "Bethesda Creation 引擎原生自带控制台：\n1. 快捷键：游戏中随时按下键盘左上角【~】键 (波浪键 / ESC下方) 暂停并呼出全屏控制台；\n2. 输入法避坑：若无反应，请在 Windows 任务栏切换为'英语(美国)'美式键盘输入法，或在 Documents/My Games/Skyrim Special Edition/Skyrim.ini 的 [General] 下确认 bAllowConsole=1；\n3. 防闪退：想减少意外闪退，可以装 SSE Engine Fixes，它修了一批引擎层面的问题，但不能保证完全不闪退。\n4. 简写技巧：FormID 开头的 0 可以全部省略，比如金币的 FormID 是 0000000F，player.additem 0000000F 10000 可以写成 player.additem f 10000。",
+      "en": "The Bethesda Creation Engine has a full native console:\n1. Hotkey: press ~ (Tilde, below Esc) in-game any time to pause and open the full-screen console.\n2. If it doesn't respond: switch Windows to a US English keyboard layout, or check bAllowConsole=1 under [General] in Documents/My Games/Skyrim Special Edition/Skyrim.ini.\n3. Crash reduction: installing SSE Engine Fixes patches a number of engine-level bugs and can reduce (not guarantee against) crashes.\n4. Shorthand: all leading zeros in a FormID can be dropped — Gold's FormID is 0000000F, so 'player.additem 0000000F 10000' can be written as 'player.additem f 10000'."
     },
     "popularCommands": [
       "tgm",
@@ -6728,9 +6724,8 @@ window.GAMES_DATA = [
     "pitfallNote": {
       "title": "老L避坑笔记 (上古卷轴5 天际重制版 v1.6.1170)",
       "tips": [
-        "【FormID省略前导零】：控制台输入代码时，前导 000 全部可以省略！比如金币 0000000F，直接输入 player.additem f 100000 即可生效。",
-        "【严禁盲目运行 caqs】：任务卡关千万不要运行 caqs（强制完成全游戏所有任务），这会导致全图 NPC 状态机彻底崩溃毁坏全档！必须定向使用 setstage <QuestID> <Stage>。",
-        "【高刷推车飞天修复】：高刷新率显示器（60Hz+）必须配合 SSE Engine Fixes 锁定物理引擎帧率，防止开局马车翻滚抽搐飞天。"
+        "【FormID省略前导零】：控制台输入代码时，前导的 0 可以全部省略。比如金币的 FormID 是 0000000F，直接输入 player.additem f 100000 也能生效。",
+        "【别随手跑 caqs】：任务卡关不要图省事运行 caqs（强制推进全游戏的任务进度）——UESP 上写的是“不建议日常使用，可能导致游戏崩溃”，卡关应该用 setstage <QuestID> <Stage> 针对性处理具体那个任务。"
       ]
     },
     "scenarioBundles": [
@@ -6815,8 +6810,8 @@ window.GAMES_DATA = [
     "hasConsole": true,
     "consoleShortcut": "~ (Tilde 键)",
     "consoleEnableGuide": {
-      "zh-CN": "【次世代大更新避坑与控制台开启】\n1. 控制台呼出：游戏中按下【~】(波浪键) 暂停并呼出控制台；\n2. 2024 次世代大更新 (v1.10.980/984) 避坑必看：\n   - 路径一 (次世代原生模式)：若玩次世代新版，必须安装对应次世代分支的 F4SE (v0.7.2+) 与 Address Library Next-Gen，并在 Steam 游戏属性中设置【仅在我启动该游戏时更新】减少后台自动更新（不能保证不被更新）；\n   - 路径二 (经典降级模式)：若想享受数万款旧 Mod，使用【Fallout 4 Downgrader】一键将主程序回退至 1.10.163 黄金稳定版；\n3. 极速批处理 (bat 命令)：在游戏根目录新建文本文件 (如 all_materials.txt)，游戏中只需在控制台输入 bat all_materials，瞬间一次性执行上百条指令！",
-      "en": "Fallout 4 Creation Engine Console: Press ~ (Tilde) to toggle. Next-Gen Update (v1.10.980+) compatible with F4SE v0.7.2+ or use Downgrader to v1.10.163. Supports bat batch scripts and dynamic legendary attachmod enchantments."
+      "zh-CN": "【次世代更新避坑与控制台开启】\n1. 控制台呼出：游戏中按下【~】(波浪键) 暂停并呼出控制台；\n2. 次世代更新 (v1.10.980 起) 避坑必看：\n   - 路径一 (次世代原生模式)：若玩次世代新版，需要装支持次世代更新的 F4SE 版本和对应的 Address Library（旧版本插件要等作者更新后才能用），并在 Steam 游戏属性中设置【仅在我启动该游戏时更新】减少后台自动更新（不能保证不被更新）；\n   - 路径二 (经典降级模式)：若想用老 Mod，可以用 Fallout 4 Downgrader 把主程序回退到次世代更新前的 1.10.163 版本；\n3. 批处理 (bat 命令)：在游戏根目录新建文本文件 (如 all_materials.txt，每行一条指令)，游戏中在控制台输入 bat all_materials 就能按文件内容依次执行里面的指令。",
+      "en": "Next-Gen Update Pitfalls & Console:\n1. Press ~ (Tilde) in-game to pause and open the console.\n2. Next-Gen update (v1.10.980+): if you're on the new build, you need an F4SE version that supports the Next-Gen update plus the matching Address Library (old plugins won't load until their authors update them); in Steam properties set updates to 'Only update this game when I launch it' to cut down background auto-updates (not guaranteed to stop them).\n   If you want to keep using older mods instead, Fallout 4 Downgrader can roll the main executable back to the pre-Next-Gen 1.10.163 build.\n3. Batch files: create a text file in the game's root folder (e.g. all_materials.txt, one command per line); typing 'bat all_materials' in the console runs every command in that file in order."
     },
     "popularCommands": [
       "tgm",
@@ -7613,8 +7608,7 @@ window.GAMES_DATA = [
       "title": "老L避坑笔记 (辐射4 次世代更新版 v1.10.984)",
       "tips": [
         "【减少自动更新】：Steam 属性里把更新设成“仅在我启动该游戏时更新”，装了 F4SE 的话日常用 f4se_loader.exe 启动。这只能减少后台更新，不能保证游戏不被更新；更新后 F4SE 和依赖它的 Mod 可能要等作者发新版。",
-        "【聚落空间无限解除】：走到工坊工作台按 ~ 选中工作台（出现 000249dc），输入 setav 349 9999999 与 setav 348 9999999，容量条瞬间清零，实现真正的无限建造！",
-        "【死亡三角区闪退预防】：联邦西北角庇护山丘、红火箭与阿伯纳西农场相隔极近，切勿在三地同时高密建造几万件建筑物体，防止内存溢出导致 CTD 闪退。"
+        "【聚落建造空间不够用】：走到工坊按 ~ 选中工作台（会出现类似 000249dc 的编号）；349 是三角面数量的建造上限，调大它（比如 setav 349 9999999）能放宽建造上限；348 是当前已经用掉的量，想腾地方要把它调小（比如 setav 348 0），调大 348 只会让游戏以为你已经把预算用满，别调反了。"
       ]
     },
     "scenarioBundles": [
@@ -7683,8 +7677,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "F10 或 ~ (需安装 RE-UE4SS xinput1_3.dll 注入底层)",
     "consoleEnableGuide": {
-      "zh-CN": "【UE4SS 注入与打字控制台开启指南】\n1. 下载 UE4SS (v3.0.1 纯净版)，将压缩包解压至游戏根目录：Palworld/Pal/Binaries/Win64/；\n2. 确认该目录下存在 UE4SS.dll、xinput1_3.dll 以及 mods/ 文件夹；\n3. 启动游戏，在单机或本地专用服务器中按 F10 唤出 UE4SS 图形控制台，或按 ~ 唤出原生终端；\n4. 即可直接运行闪光帕鲁生成、全图鉴解锁、属性注入与自由镜头摄影！",
-      "en": "Install UE4SS (v3.0.1) into Palworld/Pal/Binaries/Win64/. Press F10 or ~ in-game to bring up Lua console for Pal spawner and Paldeck unlocks."
+      "zh-CN": "【UE4SS 安装与控制台开启指南】\n1. 从 UE4SS 的 GitHub Releases 下载一个正式版本（例如 v3.0.1），解压到游戏目录 Palworld/Pal/Binaries/Win64/；\n2. 确认该目录下出现了 UE4SS.dll 和 mods/ 文件夹（具体还会带哪个注入用的 dll，以你下载的那个版本的说明为准）；\n3. 启动游戏（单人或自己开的本地/专用服务器），按 F10 或 @ 键可以打开 UE4SS 自带的控制台（这是 UE4SS 内置的 ConsoleEnablerMod 解锁的游戏原生控制台）；另外也可以在 UE4SS-settings.ini 里把 GUI 控制台打开，它会作为独立窗口显示；\n4. UE4SS 本身是一个 Lua/蓝图模组平台，自带属性查看编辑器（Live Property Viewer）等调试工具；像生成稀有帕鲁、解锁全图鉴这类具体效果，需要额外装由其他作者做的 Lua 模组才能实现，不是 UE4SS 自己自带的功能。",
+      "en": "[Installing UE4SS and Opening the Console]\n1. Download an official UE4SS release (e.g. v3.0.1) from GitHub and extract it into Palworld/Pal/Binaries/Win64/.\n2. Make sure UE4SS.dll and a mods/ folder now exist in that folder (which exact injector file ships alongside depends on the release you grabbed).\n3. Launch the game (singleplayer, or your own local/dedicated server) and press F10 or @ to open UE4SS's built-in console (this is the game's native console, unlocked by UE4SS's bundled ConsoleEnablerMod). You can also enable the separate GUI console window in UE4SS-settings.ini.\n4. UE4SS itself is a Lua/Blueprint modding platform with tools like the Live Property Viewer; specific effects such as spawning rare Pals or unlocking the full Paldex require extra Lua mods made by other authors - UE4SS does not provide those on its own."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -8010,9 +8004,9 @@ window.GAMES_DATA = [
     "pitfallNote": {
       "title": "老L避坑笔记 (幻兽帕鲁 樱岛最新版)",
       "tips": [
-        "【联机前先移除】：UE4SS 只在单人模式或自己开的本地房间里用，会不会被封没有人能担保。进官方或别人的服务器前，先把 UE4SS 的 dll 移走，别在公开服务器作弊。",
-        "【帕鲁抑郁生病治愈】：据点帕鲁容易因地形卡住无法进食而导致【抑郁症/骨折】。使用 give Med_Low 10 获取高级药品直接投喂，并在箱子旁放置温泉以彻底稳定 SAN 值。",
-        "【负重过载急救】：金属矿区挖掘超载走不动时，掏出抓钩枪对着地面或树干射击，利用抓钩拉力可以直接无视任何负重限制飞速前行。"
+        "【联机前先移除】：UE4SS 建议只在单人模式或自己开的本地房间里用，能不能被封号没有人能担保。进官方服务器或别人的服务器前，先把 UE4SS 的注入文件移走，别带着它进公开服务器。",
+        "【帕鲁骨折/情绪低落急救】：帕鲁心情值（SAN）过低或工作中受伤，会出现骨折（工作/移动速度下降，需要用医疗用品治疗）、虚弱或沮丧（下降幅度更大，需要用高级医疗用品治疗）等状态；在据点放一个温泉，可以帮帕鲁更快恢复 SAN，减少这些状态出现的概率。",
+        "【负重过载时的脱困办法】：角色超重后，跑步、跳跃、翻滚、滑翔、下蹲收招等动作会被禁用，走路速度也会变慢；如果人已经扒在墙上可以继续往上爬，抓钩枪也还能正常用来勾住目标点，可以借此脱离卡住的地形，但抓钩本身有 12 秒冷却，不能连续用。"
       ]
     },
     "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】幻兽帕鲁 UE4SS 检查\necho ========================================================\necho   【老L·单机避坑局】幻兽帕鲁 UE4SS 检查脚本\necho   只检查 UE4SS.dll 在不在，不改任何文件\necho ========================================================\necho.\n\nset \"WIN64=Pal\\Binaries\\Win64\"\nif not exist \"Pal\\Binaries\\Win64\\Palworld-Win64-Shipping.exe\" (\n    echo [!] 当前目录下没有 Pal\\Binaries\\Win64\\Palworld-Win64-Shipping.exe，脚本什么都没改。\n    echo     请把本脚本放到 Palworld 游戏安装根目录再运行。\n    echo.\n    pause\n    exit /b\n)\nset \"UE4SS_DLL=\"\nif exist \"%WIN64%\\ue4ss\\UE4SS.dll\" set \"UE4SS_DLL=%WIN64%\\ue4ss\\UE4SS.dll\"\nif not defined UE4SS_DLL if exist \"%WIN64%\\UE4SS.dll\" set \"UE4SS_DLL=%WIN64%\\UE4SS.dll\"\nif defined UE4SS_DLL (\n    echo [+] 找到 %UE4SS_DLL%。只检查了文件在不在，没检查版本，也没检查能不能加载。\n    echo [i] 游戏内按 F10 试试 UE4SS 菜单。\n) else (\n    echo [!] 没找到 UE4SS.dll：请把 UE4SS 解压到 %WIN64%\\ 。\n)\necho [i] 只在单人模式或自己开的房间里用；进别人的服务器前先把 UE4SS 移走。\necho [i] 脚本不备份存档；指令没有逐条在游戏里实测，执行前先手动存档。\necho.\npause\n",
@@ -8063,8 +8057,8 @@ window.GAMES_DATA = [
     "hasConsole": true,
     "consoleShortcut": "~ (波浪键直接唤出 Bethesda Creation 2 原生终端)",
     "consoleEnableGuide": {
-      "zh-CN": "【Creation 2 原生控制台与防成就锁死指南】\n1. 键盘直接按 ~ 键呼出原生控制台；\n2. 首次输入指令前，建议安装 Baka Achievement Enabler 模组，防止开启控制台后 Steam 成就失效；\n3. 控制台支持全部物品 Hex 编号注入、飞船建造部件尺寸突破、特质修改与场景漫游！",
-      "en": "Press ~ to open Creation 2 console. Install SFSE and Baka Achievement Enabler to prevent achievements from being disabled."
+      "zh-CN": "【Creation 2 原生控制台与防成就锁死指南】\n1. 键盘按 ~（非美式键盘上可能是同一位置的其它符号键）即可呼出原生控制台；\n2. Bethesda 的引擎只要用过控制台指令，就会把存档标记为已修改并关闭 Steam 成就；想继续拿成就，可以装需要 SFSE 的 Baka Achievement Enabler (SFSE) 模组；\n3. 控制台可以用十六进制的物品 ID 给自己加东西（additem 命令）、用 tcl 关掉碰撞穿墙穿地自由移动、用 slm player <预设ID> 重新进入角色创建界面改背景和特质（特质最多 3 个）等。",
+      "en": "[Native Creation 2 Console & Avoiding the Achievement Lock]\n1. Press ~ (or whatever key sits in the same spot on a non-US keyboard) to open the native console.\n2. Bethesda's engine flags your save as modified and turns off Steam achievements the moment you use a console command; to keep earning them, you can install Baka Achievement Enabler (SFSE), which requires SFSE.\n3. The console lets you add items by their hex form ID with additem, fly through walls and terrain with tcl (no-clip), and reopen character creation with 'slm player <preset ID>' to change your background and traits (max 3 traits)."
     },
     "popularCommands": [
       "player.additem 0000000F 1000000",
@@ -8843,9 +8837,9 @@ window.GAMES_DATA = [
     "pitfallNote": {
       "title": "老L避坑笔记 (星空 破碎空间 DLC 完全版)",
       "tips": [
-        "【Steam成就防锁死门禁】：Bethesda 在输入控制台命令时会标记存档为 Modded 并禁用 Steam 成就！可以装 Baka Achievement Enabler（需要 SFSE），让开过控制台的存档继续拿成就；游戏更新后它可能要等作者适配。",
-        "【改船部件重叠报错破解】：在官方造船厂经常遇到【模块存在重叠】无法保存。下载安装本站推荐的 Ship Builder Tolerance Tweaks 即可完全无视空间重叠，打造致密外装母舰。",
-        "【卡死与恶性任务急救】：若因 NPC 浮空或被锁在门后无法交任务，打开控制台输入 tcl 开启穿墙飞入室内，或使用 setstage 命令直接强行推进断掉的任务流程节点。"
+        "【Steam 成就防锁死】：Bethesda 的引擎只要输入过控制台命令，就会把存档标记为 Modded 并关掉 Steam 成就。可以装 Baka Achievement Enabler (SFSE)（需要先装 SFSE），让开过控制台的存档继续拿成就；游戏更新后这个模组可能要等作者适配才能用。",
+        "【改船部件重叠报错】：官方造船厂里模块重叠时会提示无法保存。可以装 Ship Builder Tolerance Tweaks，装完后在控制台输入 bat toleranceBig 提高重叠容差，或输入 bat toleranceHuge 基本关闭重叠检查；想复原就输入 bat toleranceReset。",
+        "【卡死与任务卡关急救】：若因 NPC 浮空或被锁在门后交不了任务，打开控制台输入 tcl 关掉碰撞穿墙进屋，或用 setstage <任务ID> <阶段号> 直接把卡住的任务推到下一阶段。"
       ]
     },
     "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】星空 SFSE 启动助手\necho ========================================================\necho   【老L·单机避坑局】星空 SFSE 启动脚本\necho   找到 sfse_loader.exe 就用它启动，找不到就用原版启动\necho ========================================================\necho.\nif not exist \"Starfield.exe\" (\n    echo [!] 当前目录下没有 Starfield.exe，脚本什么都没改。\n    echo     请把本脚本放到 Starfield 游戏安装根目录再运行。\n    echo.\n    pause\n    exit /b\n)\nif exist \"sfse_loader.exe\" (\n    echo [+] 找到 sfse_loader.exe，用它启动游戏 ...\n    start \"\" \"sfse_loader.exe\"\n) else (\n    echo [i] 没找到 sfse_loader.exe，用 Starfield.exe 原版启动 ...\n    start \"\" \"Starfield.exe\"\n)\necho [i] 脚本不备份存档；指令没有逐条在游戏里实测，执行前先手动存档。\necho.\npause\n",
@@ -8899,8 +8893,8 @@ window.GAMES_DATA = [
     "hasConsole": true,
     "consoleShortcut": "~ (故事模式原生官方秘籍终端) 或 F4 (ScriptHookV 内置纯净修改菜单)",
     "consoleEnableGuide": {
-      "zh-CN": "【单机故事模式指南】\n1. 官方原生秘籍：进入单机故事模式后，直接按键盘左上角 ~ 键输入全英文秘籍并回车；\n2. ScriptHookV 离线内置菜单：将 ScriptHookV.dll、dinput8.dll 以及 NativeTrainer.asi 放入 GTA5 游戏根目录；\n3. 在故事模式按 F4 呼出图形化修改菜单，小键盘 8/2/4/6 切换方向，5 确认，0 返回；\n4. ⚠️ 别带着 ASI 插件或修改器文件进 GTA Online 线上模式，有封号风险。把 dinput8.dll 改名为 .bak 只是停掉 ASI 加载器；mods 文件夹、改过的 rpf 等其它改动要自己移走。",
-      "en": "Press ~ to input native cheats or press F4 with ScriptHookV for offline Native Trainer. NEVER go online with mods."
+      "zh-CN": "【单机故事模式指南】\n1. 官方原生秘籍：进入单机故事模式后，按键盘左上角 ~ 键或 / 键呼出输入框，输入全英文秘籍再回车；\n2. ScriptHookV 离线内置菜单：把 ScriptHookV.dll、配套的 dinput8.dll（ASI 加载器）以及 NativeTrainer.asi 放进 GTA5 游戏根目录（与 GTA5.exe 同目录）；\n3. 在故事模式按 F4 呼出内置的图形化修改菜单（具体操作按键以菜单界面上的提示为准）；\n4. 别带着 ASI 插件或修改器文件进 GTA Online 线上模式，有封号风险。把 dinput8.dll 改名为 .bak 只是停掉 ASI 加载器；mods 文件夹、改过的 rpf 等其它改动要自己移走。",
+      "en": "[Story Mode Guide]\n1. Native cheats: in single-player story mode, press ~ or / (top-left of the keyboard) to open the input box, type an all-English cheat phrase, and press Enter.\n2. ScriptHookV's offline built-in menu: put ScriptHookV.dll, its companion dinput8.dll (the ASI loader), and NativeTrainer.asi into the GTA V install folder (same folder as GTA5.exe).\n3. In story mode, press F4 to open the built-in trainer menu (follow the on-screen prompts for its exact controls).\n4. Never take ASI plugins or trainer files into GTA Online - it risks a ban. Renaming dinput8.dll to .bak only disables the ASI loader; you still have to manually remove any other changes yourself (a mods folder, edited .rpf files, etc.)."
     },
     "popularCommands": [
       "PAINKILLER",
@@ -9537,9 +9531,9 @@ window.GAMES_DATA = [
     "pitfallNote": {
       "title": "老L避坑笔记 (GTA 5 故事模式)",
       "tips": [
-        "【进线上前】：Rockstar 的 GTA Online 对内存注入查得很严。进线上模式前，把游戏根目录的 dinput8.dll 改名为 dinput8.dll.bak（停掉 ASI 加载器），mods 文件夹、改过的 rpf 等其它改动也要移走；没有办法保证不被封号。",
-        "【故事模式股票暴富机制】：麦克的莱斯特刺杀任务千万别提前做！等通关大结局‘联合储蓄’劫案拿到 2800 万初始本金后，再分批次接暗杀任务并全仓买入对应做空做多股票，本金可直接滚至 21 亿上限！",
-        "【打不开 F4 菜单】：若按 F4 毫无反应，说明缺失 Visual C++ 2015~2022 运行库或 DirectX 组件。去微软官网重新安装 Visual C++ 运行库和 DirectX 后再试。"
+        "【进线上前】：Rockstar 对 GTA Online 的内存注入查得很严。进线上模式前，把游戏根目录的 dinput8.dll 改名为 dinput8.dll.bak（停掉 ASI 加载器），mods 文件夹、改过的 rpf 等其它改动也要自己移走；没有人能担保不会被封号。",
+        "【故事模式股票机制】：麦克的莱斯特刺杀任务别提前做。按游戏维基整理的测试数据，建议打完《大结局》任一结局线拿到分成后，再分批接暗杀任务、把三位角色的钱提前压在对应股票上，等涨幅出现再卖（例如 Vice 任务后对应股票大约涨 25%~33%，Bus 任务后对应股票涨幅能接近翻倍）。另外游戏对单个角色的现金有 2,147,483,648 美元（约 21.47 亿）的硬性上限，这是 32 位整数导致的，超过这个数游戏就会开始出错，钱也滚不上去了。",
+        "【打不开 F4 菜单】：按 F4 没反应，通常是缺少 Visual C++ 2015~2022 运行库或者 DirectX 组件导致 ASI 插件加载不了。去微软官网重新装一遍 Visual C++ 运行库和 DirectX 再试。"
       ]
     },
     "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】GTA5 ASI 加载器开关\necho ========================================================\necho   【老L·单机避坑局】GTA5 ASI 加载器开关脚本\necho   把 dinput8.dll 改名为 dinput8.dll.bak 来停用，或改回来启用\necho ========================================================\necho.\nif not exist \"GTA5.exe\" (\n    echo [!] 当前目录下没有 GTA5.exe，脚本什么都没改。\n    echo     请把本脚本放到 Grand Theft Auto V 游戏安装根目录再运行。\n    echo.\n    pause\n    exit /b\n)\n\nset \"MODE=\"\nif exist \"dinput8.dll\" set \"MODE=on\"\nif not defined MODE if exist \"dinput8.dll.bak\" set \"MODE=off\"\nif not defined MODE (\n    echo [i] 没有 dinput8.dll，也没有 dinput8.dll.bak：没装 ASI 加载器，脚本什么都没改。\n    echo.\n    pause\n    exit /b\n)\n\nset \"choice=\"\nif \"%MODE%\"==\"on\" echo [当前状态] 有 dinput8.dll：ASI 加载器会加载 ScriptHookV 等插件，只能玩故事模式。\nif \"%MODE%\"==\"on\" set /p \"choice=把 dinput8.dll 改名为 dinput8.dll.bak、停用 ASI 加载器？输入 Y 确认: \"\nif \"%MODE%\"==\"off\" echo [当前状态] 只有 dinput8.dll.bak：ASI 加载器已停用。\nif \"%MODE%\"==\"off\" set /p \"choice=把 dinput8.dll.bak 改回 dinput8.dll、重新启用 ASI 加载器？输入 Y 确认: \"\n\nif /i not \"%choice%\"==\"Y\" (\n    echo [i] 没有输入 Y，脚本什么都没改。\n    echo.\n    pause\n    exit /b\n)\n\nif \"%MODE%\"==\"on\" ren \"dinput8.dll\" \"dinput8.dll.bak\"\nif \"%MODE%\"==\"off\" ren \"dinput8.dll.bak\" \"dinput8.dll\"\n\nif exist \"dinput8.dll\" (\n    echo [结果] 现在有 dinput8.dll：ASI 加载器会被加载，故事模式按 F4 试试菜单。\n) else (\n    echo [结果] 现在没有 dinput8.dll：ASI 加载器不会被加载。\n)\necho.\necho ========================================================\necho  [i] 这个脚本只改 dinput8.dll 这一个文件的名字。\necho      其它改过的文件（mods 文件夹、改过的 rpf 等）它不管；进 GTA Online 前要自己全部移走，有封号风险。\necho      脚本不备份存档，改之前先手动备份。\necho ========================================================\necho.\npause\n",
@@ -9595,8 +9589,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "F5 (ScriptHookRDR2 原生离线修改器) 或 游戏内设置-作弊码",
     "consoleEnableGuide": {
-      "zh-CN": "【单机故事模式指南】\n1. 官方秘籍输入：进入故事模式 -> 按 Esc 暂停 -> 选择【设置 (Settings)】-> 按左下角【作弊 (Cheats)】或 Shift 键 -> 输入对应英文短语并回车保存；\n2. ScriptHookRDR2 离线内置菜单：将 ScriptHookRDR2.dll、dinput8.dll 以及 NativeTrainer.asi 解压至游戏根目录；\n3. 启动故事模式按 F5 键唤出图形修改菜单，小键盘 8/2/4/6 控制，5 确认，0 返回；\n4. ⚠️ 别带着 Mod 进 RDO 线上模式，有封号风险。把 dinput8.dll 改名为 .bak 只是停掉 ASI 加载器，其它改过的文件要自己移走。",
-      "en": "Enter official cheat phrases in Settings -> Cheats, or press F5 with ScriptHookRDR2 in offline story mode."
+      "zh-CN": "【单机故事模式指南】\n1. 官方秘籍输入：进入故事模式 -> 按 Esc 打开暂停菜单 -> 选择【设置 (Settings)】-> 在设置界面右下角进入【作弊 (Cheats)】列表 -> 输入对应英文短语并回车；成功输入一次后，之后可以直接在列表里开关这个作弊；\n2. ScriptHookRDR2 + Rampage Trainer 离线内置菜单：把 ScriptHookRDR2.dll、dinput8.dll（或其它兼容的 ASI Loader）以及 Rampage Trainer 的 Rampage.asi 和 RampageFiles 文件夹解压到游戏根目录（与 RDR2.exe 同目录）；\n3. 启动故事模式按 F5 键唤出 Rampage 的图形修改菜单，小键盘 8/2/4/6 控制方向，Enter 确认，小键盘 0 返回（这些按键都可以在 Settings.json 或游戏内设置里改）；\n4. 别带着 Mod 进 RDO 线上模式，有封号风险。把 dinput8.dll 改名为 .bak 只是停掉 ASI 加载器，其它改过的文件要自己移走。",
+      "en": "[Story Mode Guide]\n1. Native cheats: in story mode, press Esc to open the pause menu -> go to Settings -> open the Cheats list from the bottom-right prompt -> type the English cheat phrase and press Enter. Once you've entered a cheat successfully, you can just toggle it on or off in the list afterward.\n2. ScriptHookRDR2 + Rampage Trainer's offline built-in menu: put ScriptHookRDR2.dll, dinput8.dll (or another compatible ASI loader), and Rampage Trainer's Rampage.asi and RampageFiles folder into the game's install folder (same folder as RDR2.exe).\n3. In story mode, press F5 to open Rampage's trainer menu; Numpad 8/2/4/6 moves the cursor, Enter selects, and Numpad 0 goes back (all of these keys can be changed in Settings.json or the in-game settings).\n4. Never take mods into RDO online - it risks a ban. Renaming dinput8.dll to .bak only disables the ASI loader; you still have to manually remove any other changed files yourself."
     },
     "popularCommands": [
       "You want freedom",
@@ -9979,9 +9973,9 @@ window.GAMES_DATA = [
     "pitfallNote": {
       "title": "老L避坑笔记 (荒野大镖客2 故事模式)",
       "tips": [
-        "【进线上前】：R星对 RDO 线上模式同样严查。进线上战局前，把游戏根目录的 dinput8.dll 改名为 dinput8.dll.bak（停掉 ASI 加载器），其它改过的文件也要移走；没有办法保证不被封号。",
-        "【捕猎毛皮品质保护】：想要获得三星完美毛皮，务必击杀头上本来就是三星的动物，并掏出春田步枪击中头部一击毙命；若嫌繁琐，直接使用本库一键添加全部三星皮！",
-        "【作弊码保存限制】：在官方设置里激活作弊码后，系统会默认暂时禁止保存新存档。若需保存修改后的金钱与装备，请使用 ScriptHookRDR2 或风灵月影修改器，它们不会禁用存档功能！"
+        "【进线上前】：R星对 RDO 线上模式同样严查。进线上战局前，把游戏根目录的 dinput8.dll 改名为 dinput8.dll.bak（停掉 ASI 加载器），其它改过的文件也要移走；没有人能担保不会被封号。",
+        "【毛皮品质机制】：想拿到「完美 (Perfect)」品质的毛皮，关键是一击致命——同一只动物挨的枪越多，毛皮品质就越差。要瞄准头、肺等要害部位，并按动物体型换合适的武器（小型动物用弓箭/瓦明步枪，中大型动物用普通/连发步枪，巨型动物用狙击枪），用望远镜查看动物信息可以提前看到推荐武器。",
+        "【作弊码会锁存档】：在官方设置里的作弊列表里激活一条作弊后，游戏会暂时禁止保存新进度。想继续边作弊边存档，可以改用 ScriptHookRDR2 配合 Rampage Trainer 这类离线修改器，它们走的是另一套机制，不会触发官方作弊系统那个「不让存档」的限制。"
       ]
     },
     "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】荒野大镖客2 ASI 加载器开关\necho ========================================================\necho   【老L·单机避坑局】荒野大镖客2 ASI 加载器开关脚本\necho   把 dinput8.dll 改名为 dinput8.dll.bak 来停用，或改回来启用\necho ========================================================\necho.\nif not exist \"RDR2.exe\" (\n    echo [!] 当前目录下没有 RDR2.exe，脚本什么都没改。\n    echo     请把本脚本放到 Red Dead Redemption 2 游戏安装根目录再运行。\n    echo.\n    pause\n    exit /b\n)\n\nset \"MODE=\"\nif exist \"dinput8.dll\" set \"MODE=on\"\nif not defined MODE if exist \"dinput8.dll.bak\" set \"MODE=off\"\nif not defined MODE (\n    echo [i] 没有 dinput8.dll，也没有 dinput8.dll.bak：没装 ASI 加载器，脚本什么都没改。\n    echo.\n    pause\n    exit /b\n)\n\nset \"choice=\"\nif \"%MODE%\"==\"on\" echo [当前状态] 有 dinput8.dll：ASI 加载器会加载 ScriptHookRDR2 等插件，只能玩故事模式。\nif \"%MODE%\"==\"on\" set /p \"choice=把 dinput8.dll 改名为 dinput8.dll.bak、停用 ASI 加载器？输入 Y 确认: \"\nif \"%MODE%\"==\"off\" echo [当前状态] 只有 dinput8.dll.bak：ASI 加载器已停用。\nif \"%MODE%\"==\"off\" set /p \"choice=把 dinput8.dll.bak 改回 dinput8.dll、重新启用 ASI 加载器？输入 Y 确认: \"\n\nif /i not \"%choice%\"==\"Y\" (\n    echo [i] 没有输入 Y，脚本什么都没改。\n    echo.\n    pause\n    exit /b\n)\n\nif \"%MODE%\"==\"on\" ren \"dinput8.dll\" \"dinput8.dll.bak\"\nif \"%MODE%\"==\"off\" ren \"dinput8.dll.bak\" \"dinput8.dll\"\n\nif exist \"dinput8.dll\" (\n    echo [结果] 现在有 dinput8.dll：ASI 加载器会被加载，故事模式按 F5 试试菜单。\n) else (\n    echo [结果] 现在没有 dinput8.dll：ASI 加载器不会被加载。\n)\necho.\necho ========================================================\necho  [i] 这个脚本只改 dinput8.dll 这一个文件的名字。\necho      其它改过的文件它不管；进 RDO 线上模式前要自己全部移走，有封号风险。\necho      脚本不备份存档，改之前先手动备份。\necho ========================================================\necho.\npause\n",
@@ -10034,8 +10028,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "Insert 唤出 REFramework 覆盖菜单 / F10 调出调试控制台",
     "consoleEnableGuide": {
-      "zh-CN": "【怪物猎人世界 纯净模组与控制台指南】\n1. 下载 Stracker's Loader (包含 dinput8.dll 与 loader-config.json) 解压至游戏根目录 (Monster Hunter World/)；\n2. 将 REFramework 或 All Items in Shop 模组解压放入 nativePC/ 对应目录；\n3. 启动游戏，按键盘 Insert 键即可在屏幕左上角唤出 REFramework 菜单；\n4. 支持全珠子全素材一键补齐、聚魔之地等级随心调节与伤害血量实时透视！",
-      "en": "Install Stracker's Loader into MHW root. Press Insert to open REFramework menu for decorations, materials, and SmartHunter overlay."
+      "zh-CN": "【怪物猎人世界 模组安装指南】\n1. 下载并解压 Stracker's Loader 到游戏根目录（与 MonsterHunterWorld.exe 同目录），让 nativePC/ 里的替换文件重新生效；较新版本的 Stracker's Loader 还要求一起装它所需的 CRC fix（也就是 Performance Booster and Plugin Extender）插件，官方更新日志写明没装会导致怪物/任务相关的自制内容随机崩溃；\n2. 把想用的资源类模组（例如本站收录的商店售卖量扩充模组 Large Shop Assortment，会把几乎所有消耗品和连击素材加进道具商店）按说明解压进 nativePC/ 对应目录；\n3. SmartHunter 是一个独立运行的悬浮窗叠加程序，不是游戏内菜单：先正常启动游戏，再单独运行 SmartHunter.exe，它会实时显示受击伤害、DPS、目标部位血量等战斗信息；\n4. 本作用的是 MT Framework 引擎，并不支持 REFramework（那是给《生化危机2重制版》《怪物猎人崛起》《怪物猎人荒野》等 RE 引擎游戏用的工具），装错了也不会生效。",
+      "en": "[Monster Hunter: World Modding Guide]\n1. Download and extract Stracker's Loader into the game's install folder (same folder as MonsterHunterWorld.exe) so files in nativePC/ load again; newer versions of Stracker's Loader also require its CRC fix plugin (Performance Booster and Plugin Extender) - the official changelog states that without it, monster/quest custom content can crash randomly.\n2. Extract any resource-type mods you want (for example, the Large Shop Assortment mod listed on this site, which adds nearly all consumables and combo materials to the item shop) into nativePC/ as instructed.\n3. SmartHunter is a standalone overlay program, not an in-game menu: launch the game normally first, then separately run SmartHunter.exe; it shows live combat info such as damage taken, DPS, and target part health.\n4. This game runs on the MT Framework engine and does not support REFramework (that tool is for RE Engine titles like Resident Evil 2 Remake, Monster Hunter Rise, and Monster Hunter Wilds) - installing it here simply won't do anything."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -10478,11 +10472,11 @@ window.GAMES_DATA = [
     "radarSecretCode": "苍蓝星",
     "scenarioBundles": [],
     "pitfallNote": {
-      "title": "老L避坑笔记 (怪物猎人世界 冰原终极避坑指南)",
+      "title": "老L避坑笔记 (怪物猎人世界 冰原版)",
       "tips": [
-        "【联机防踢与尊重原则】：卡普空对单机与好友自建私人房间使用 Mod 比较宽松，但没有人能担保不封号。但在加入路人公开救援时，请务必关闭【一击必杀】与【锁血】，使用 SmartHunter 纯净显示血量即可，切勿破坏其他真实玩家的狩猎乐趣！",
-        "【黑屏无限加载急救】：安装模组后游戏无法启动或黑屏卡死，99% 是由于游戏大更新后 Stracker's Loader 未更新或 nativePC 遗留了过期前置。删除游戏根目录的 dinput8.dll 即可瞬间恢复正常启动！",
-        "【CPU 100% 掉帧发热排查】：冰原自带的反作弊线程存在内存死循环 Bug。请务必安装本站推荐的 Performance Booster 补丁，直接禁用该死循环，显卡性能完全释放。"
+        "【联机防踢与尊重他人】：卡普空对单机和自建私人房间用 Mod 比较宽松，但没有人能担保不封号。加入路人公开救援时，务必关掉一击必杀和锁血之类的效果，用 SmartHunter 纯看数据就好，别影响其他真实玩家的体验。",
+        "【黑屏/卡死排查】：装了 Stracker's Loader 相关模组后游戏打不开或卡黑屏，常见原因是游戏更新后 Stracker's Loader 还没适配，或者 nativePC 里留着和当前版本不兼容的旧模组文件；可以先删掉或改名游戏根目录下的 dinput8.dll（相当于关掉 Stracker's Loader），能正常进游戏就说明问题出在加载器或 nativePC 里的模组上，再逐个排查。",
+        "【CPU 占用过高排查】：游戏自带一段反复做内存 CRC 校验的代码，频繁检查大块内存区域，对 CPU 占用影响明显；可以装 Performance Booster and Plugin Extender（需要先装好 Stracker's Loader 及其要求的 VC++ 运行库）去掉这段校验来降低 CPU 占用，作者说法是测试过连续运行 20 小时没问题，但这不是官方支持的改法，稳定性自己判断。"
       ]
     },
     "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】怪猎世界 Mod 目录检查\necho ========================================================\necho   【老L·单机避坑局】怪物猎人世界 Mod 目录检查脚本\necho   检查 dinput8.dll 在不在；没有 nativePC 目录就新建一个\necho ========================================================\necho.\nif not exist \"MonsterHunterWorld.exe\" (\n    echo [!] 当前目录下没有 MonsterHunterWorld.exe，脚本什么都没改。\n    echo     请把本脚本放到 Monster Hunter World 游戏安装根目录再运行。\n    echo.\n    pause\n    exit /b\n)\nif exist \"dinput8.dll\" (\n    echo [+] 找到 dinput8.dll：Stracker's Loader 用的就是这个文件名。只检查了文件在不在。\n) else (\n    echo [!] 没找到 dinput8.dll，依赖 Stracker's Loader 的 Mod 可能加载不了。\n)\nif not exist \"nativePC\" (\n    mkdir nativePC\n    echo [+] 已新建 nativePC 目录。\n) else (\n    echo [i] nativePC 目录已经有了，没有改动。\n)\necho [i] 脚本不备份存档，装 Mod 前先手动备份。\necho.\npause\n",
@@ -10533,8 +10527,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "ModEngine 挂钩引导 + 小键盘热键 / 慢动作防御弹刀辅助",
     "consoleEnableGuide": {
-      "zh-CN": "【只狼 纯净模组与弹刀防反教学指南】\n1. 安装 ModEngine：将 dinput8.dll 与 modengine.ini 放入只狼游戏根目录 (与 sekiro.exe 同目录)；\n2. 新建 mods/ 文件夹，将下载的角色时装、材质与招式 Mod 放入该目录；\n3. 只狼没有 EAC 反作弊，也没有联机模式；\n4. 开启 F1 键可进入 0.3x 防御完美弹刀子弹时间，轻松看破任何 Boss 的连续乱舞招式！",
-      "en": "Install ModEngine into Sekiro root. Press F1 for 0.3x parry window bullet time and hotkeys for infinite spirit emblems."
+      "zh-CN": "【只狼 Mod Engine 安装说明】\n1. 安装 Mod Engine：把 dinput8.dll 和 modengine.ini 放进只狼游戏根目录（与 sekiro.exe 同目录）；\n2. 新建一个 mods 文件夹，把下载的角色、材质、招式类 Mod 放进去，再打开 modengine.ini 确认 modOverrideDirectory 指向这个目录（默认就是 \\mods）；\n3. 只狼没有 EAC 之类的反作弊，也没有联机模式，不存在因为用 Mod 被封号的问题；想卸载 Mod Engine，删掉或改名 dinput8.dll 就行；\n4. 如果想练弹反节奏，可以另外装一个独立运行的小工具 Sekiro FPS Unlock and More（不走 dinput8.dll，每次玩之前都要单独启动它来打内存补丁），里面带一个全局游戏速度调节功能，默认用 Ctrl+M 开关，可以把整体节奏放慢来辅助练习，但它不是针对某个招式专门做的，调太慢时某些过场动画或 NPC 互动可能会崩溃。",
+      "en": "[Installing Mod Engine for Sekiro]\n1. Install Mod Engine: copy dinput8.dll and modengine.ini into the Sekiro install folder (same folder as sekiro.exe).\n2. Create a 'mods' folder and drop the cosmetic/texture/moveset mod files you downloaded into it, then open modengine.ini and confirm modOverrideDirectory points to it (it defaults to \\mods).\n3. Sekiro has no EAC-style anti-cheat and no online mode, so there's no ban risk from using mods. To uninstall Mod Engine, just delete or rename dinput8.dll.\n4. If you want a parry-timing practice aid, you can separately run Sekiro FPS Unlock and More (it doesn't go through dinput8.dll - you have to start it every session to reapply its memory patch). It has a global game-speed slider toggled with Ctrl+M by default, which slows the whole game down to help with practice; it isn't tuned for any specific attack, and setting it too low can crash certain cutscenes or NPC interactions."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -10811,9 +10805,8 @@ window.GAMES_DATA = [
     "pitfallNote": {
       "title": "老L避坑笔记 (只狼：影逝二度 极客避坑指南)",
       "tips": [
-        "【完全单机】：只狼没有 EAC 反作弊，也没有联机和入侵，不存在联机封号的问题。修改器和 ModEngine 是第三方工具，用之前先备份存档。",
-        "【龙咳机制真相破除】：很多新手害怕因多次死亡导致 NPC【龙咳】而心惊胆战。实际上龙咳只会暂时挂起支线对话，绝对不会造成任何 NPC 死亡！只要用一滴【龙胤之露】在鬼佛处祷告，即可瞬间痊愈全苇名国所有人的龙咳，完全不必有心理压力！",
-        "【弹刀时机与按键节奏】：频繁狂按防御键 L1 会被系统判定为狂躁按键，弹刀判定窗口会从正常的 0.5 秒骤降至 0.1 秒！使用本站推荐的 0.3x 子弹时间慢动作，看准刀刃即将接触的瞬间单次按压，才能培养出最地道的节奏肌肉记忆。"
+        "【完全单机】：只狼没有 EAC 反作弊，也没有联机和入侵，不存在因为用 Mod 被封号的问题。修改器和 Mod Engine 都是第三方工具，用之前先备份存档。",
+        "【龙咳机制】：角色因【复活】而反复死亡，会扩散【龙咳】，部分 NPC 会咳嗽生病，但龙咳只会卡住部分支线剧情、不会直接导致 NPC 死亡。拿到艾玛给的治疗御守后，带一滴【龙胤之露】在任意鬼佛那里选择龙咳超度，可以一次治好当前所有患龙咳的人。"
       ]
     },
     "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】只狼 ModEngine 目录检查\necho ========================================================\necho   【老L·单机避坑局】只狼 ModEngine 目录检查脚本\necho   检查 dinput8.dll 在不在；没有 mods 目录就新建一个\necho ========================================================\necho.\nif not exist \"sekiro.exe\" (\n    echo [!] 当前目录下没有 sekiro.exe，脚本什么都没改。\n    echo     请把本脚本放到 Sekiro 游戏安装根目录再运行。\n    echo.\n    pause\n    exit /b\n)\nif exist \"dinput8.dll\" (\n    echo [+] 找到 dinput8.dll：ModEngine 用的就是这个文件名。只检查了文件在不在。\n) else (\n    echo [!] 没找到 dinput8.dll，请把 ModEngine 解压到游戏根目录。\n)\nif not exist \"mods\" (\n    mkdir mods\n    echo [+] 已新建 mods 目录。\n) else (\n    echo [i] mods 目录已经有了，没有改动。\n)\necho [i] 脚本不备份存档，装 Mod 前先手动备份。\necho.\npause\n",
@@ -10865,8 +10858,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "Insert 键呼出 REFramework 图形化 ImGui 菜单 / 自由运镜摄影",
     "consoleEnableGuide": {
-      "zh-CN": "【生化危机4重制版 REFramework 控制台指南】\n1. 下载 REFramework for RE4 (praydog 核心库，含 dinput8.dll)；\n2. 解压缩并将 dinput8.dll 放入游戏根目录 (包含 re4.exe 的目录)；\n3. 启动游戏，在任何过场动画或战斗中按键盘 Insert 键唤出 ImGui 控制台面板；\n4. 支持全公文包武器解锁、无敌锁血、无限火箭筒调出、佣兵无限连击与第一人称/宽 FOV 视场角调节！",
-      "en": "Install REFramework (dinput8.dll) into RE4 Remake root. Press Insert to toggle ImGui console for weapons, infinite ammo, and Mercenaries S++ rank."
+      "zh-CN": "【生化危机4重制版 REFramework 使用指南】\n1. 下载 REFramework（praydog 制作，支持本作等多款 RE 引擎游戏）；\n2. 把压缩包里的 dinput8.dll 解压放进游戏根目录（与 re4.exe 同目录）；\n3. 启动游戏后随时按 Insert 键即可唤出 REFramework 的 ImGui 菜单（按键可以在菜单的 Configuration 里改）；\n4. REFramework 本身自带自由摄像机、FOV 滑条、场景时间缩放（慢动作）、隐藏 UI 等通用功能；至于解锁武器、改无限弹药这类具体效果，需要另外装社区做的 Lua 脚本或修改器，不是 REFramework 自带的。",
+      "en": "[REFramework Guide for Resident Evil 4 Remake]\n1. Download REFramework (made by praydog, supports this game along with several other RE Engine titles).\n2. Extract dinput8.dll from the archive into the game's install folder (same folder as re4.exe).\n3. Once the game is running, press Insert at any time to open REFramework's ImGui menu (the key can be changed under its Configuration tab).\n4. REFramework itself ships with generic tools like a free camera, an FOV slider, scene timescale (slow motion), and a UI hider; specific effects such as unlocking weapons or giving infinite ammo need separate community-made Lua scripts or trainers - REFramework doesn't provide those on its own."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -11148,9 +11141,8 @@ window.GAMES_DATA = [
     "pitfallNote": {
       "title": "老L避坑笔记 (生化危机4：重制版 专家避坑指南)",
       "tips": [
-        "【专业难度 S+ 评价核心机制】：想要拿到专业 S+ 评价解锁猫耳（全武器无限弹药），必须在新游戏开局、游戏时间在 5 小时 30 分钟以内且【全流程保存存档次数不超过 15 次】！在进入城堡前尽量将存档留在巨人与双电锯前，避免坏档！",
-        "【碍事梨防扛绝技】：到了城堡拿到阿什莉骑士铠甲后，请务必在附加内容菜单中为阿什莉换上！换上后所有邪教徒企图抱起她时都会被压趴在地上，直接永久解除护送后顾之忧！",
-        "【晕 3D 与视场角调整】：本作第一人称举枪时默认后背拉得很近，导致不少玩家剧烈恶心。安装本站推荐的 REFramework 与 No Zoom On Aim 补丁，即可将 FOV 拉远至 95 度，视野舒畅开阔。"
+        "【专业难度 S+ 评价】：在专业难度下以 S+ 评价通关主线，会完成挑战「Leon \"S+\" Kennedy」，奖励 3000 CP 和配饰「猫耳」（Cat Ears）。S+ 的具体评分条件以游戏内挑战说明和结算画面为准。",
+        "【瞄准时眩晕排查】：本作举枪瞄准时镜头会自动收窄视野（类似变相缩小 FOV），容易让部分玩家觉得晕；可以用 REFramework 的 FOV 滑条把平时的视场角调大一些，再配合社区做的 No aiming zoom 模组取消瞄准时镜头收窄的效果来缓解，具体调多大看个人舒适度，没有一个统一的最佳数值。"
       ]
     },
     "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】生化危机4重制版 REFramework 检查\necho ========================================================\necho   【老L·单机避坑局】生化危机4重制版 REFramework 检查脚本\necho   只检查 dinput8.dll 在不在，不改任何文件\necho ========================================================\necho.\nif not exist \"re4.exe\" (\n    echo [!] 当前目录下没有 re4.exe，脚本什么都没改。\n    echo     请把本脚本放到 Resident Evil 4 Remake 游戏安装根目录再运行。\n    echo.\n    pause\n    exit /b\n)\nif exist \"dinput8.dll\" (\n    echo [+] 找到 dinput8.dll：REFramework 用的就是这个文件名。只检查了文件在不在。\n    echo [i] 游戏内按 Insert 键试试 REFramework 菜单。\n) else (\n    echo [!] 没找到 dinput8.dll，请把 REFramework 解压到游戏根目录。\n)\necho [i] 脚本不备份存档，装 Mod 前先手动备份。\necho.\npause\n",
@@ -11205,8 +11197,8 @@ window.GAMES_DATA = [
     "hasConsole": true,
     "consoleShortcut": "Alt + ~ (Tilde 键)",
     "consoleEnableGuide": {
-      "zh-CN": "按 Alt + ~ 打开终端，输入 config.cheat_mode 1 按回车激活作弊系统。大地图按 Ctrl + 左键可直接瞬移，战斗中按 Ctrl + H 瞬间回血。",
-      "en": "按 Alt + ~ 打开终端，输入 config.cheat_mode 1 按回车激活作弊系统。大地图按 Ctrl + 左键可直接瞬移，战斗中按 Ctrl + H 瞬间回血。"
+      "zh-CN": "按 Alt + ~ 打开控制台，输入 config.cheat_mode 1 并回车以启用作弊指令系统，启用后可继续输入 campaign.* 等作弊指令。",
+      "en": "Press Alt + ~ to open the console, then type config.cheat_mode 1 and press Enter to enable the cheat command system. Once enabled, you can go on entering further cheat commands such as the campaign.* ones."
     },
     "popularCommands": [
       {
@@ -11684,8 +11676,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "SMAPI 命令行终端 / 动物命名法",
     "consoleEnableGuide": {
-      "zh-CN": "在玛妮农场购买小鸡或动物时，将动物名称命名为 [74][163][434]，每次农夫与村民交谈触发名字，背包将直接掉落五彩碎片、传说之鱼与星之果实！亦可在 SMAPI 后台直接输入指令。",
-      "en": "在玛妮农场购买小鸡或动物时，将动物名称命名为 [74][163][434]，每次农夫与村民交谈触发名字，背包将直接掉落五彩碎片、传说之鱼与星之果实！亦可在 SMAPI 后台直接输入指令。"
+      "zh-CN": "本作没有原生控制台，有两种方式实现类似效果：①（仅 PC 和手机版）创建角色、给孩子或动物起名时，把名字设为方括号括起来的物品 ID，例如 [645][499][(O)163]；之后每当有 NPC 在对话里提到这个名字，就会得到对应的物品（这个例子是铱金洒水器 Iridium Sprinkler、上古种子 Ancient Seeds 和传说之鱼 Legend），同时聊天框会弹出一条调侃的话。②安装 SMAPI 后，游戏会多出一个独立的命令行窗口，可以在里面输入 SMAPI 控制台指令。",
+      "en": "This game has no native console, but there are two ways to get a similar effect: 1) PC and mobile only: when naming your character, a child or a farm animal, use item IDs in brackets, e.g. [645][499][(O)163]. Whenever an NPC mentions that name, you receive the matching items (here an Iridium Sprinkler, Ancient Seeds and a Legend), and a joking message appears in the chat box. 2) After installing SMAPI, the game opens a separate command-line window where you can type SMAPI console commands."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -12491,8 +12483,8 @@ window.GAMES_DATA = [
     "hasConsole": true,
     "consoleShortcut": "Shift + Enter 或 ~ 键",
     "consoleEnableGuide": {
-      "zh-CN": "游戏内按 F3 和 F8 调出菜单，鼠标取消勾选左上角 'Disable Console'，然后按 Shift + Enter 或 ~ 即可打开底部控制台输入代码。",
-      "en": "游戏内按 F3 和 F8 调出菜单，鼠标取消勾选左上角 'Disable Console'，然后按 Shift + Enter 或 ~ 即可打开底部控制台输入代码。"
+      "zh-CN": "游戏内同时按住 Shift 和 Enter，或者按 `（数字 1 左边的反引号/波浪号键）即可打开控制台输入框，输入指令后回车执行，按 ↑ 键可以翻看之前输入过的指令。",
+      "en": "In-game, hold Shift and Enter together, or press ` (the key to the left of the 1 key), to open the console input box. Type a command and press Enter to run it; press the Up arrow key to scroll through previously entered commands."
     },
     "popularCommands": [
       {
@@ -13193,8 +13185,8 @@ window.GAMES_DATA = [
     "hasConsole": true,
     "consoleShortcut": "F5 键",
     "consoleEnableGuide": {
-      "zh-CN": "Steam 库中右键 Valheim -> 属性 -> 通用 -> 启动选项中输入 -console。进游戏按 F5 唤出终端，输入 devcommands 按回车激活作弊模式！",
-      "en": "Steam 库中右键 Valheim -> 属性 -> 通用 -> 启动选项中输入 -console。进游戏按 F5 唤出终端，输入 devcommands 按回车激活作弊模式！"
+      "zh-CN": "Steam 库中右键 Valheim -> 属性 -> 通用 -> 启动选项中输入 -console。进游戏按 F5 唤出控制台窗口，输入 devcommands 并回车即可启用作弊指令（再次输入 devcommands 可以关闭）。",
+      "en": "In Steam, right-click Valheim -> Properties -> General -> Launch Options, and enter -console. In-game, press F5 to open the console window, then type devcommands and press Enter to enable cheat commands (type devcommands again to turn them off)."
     },
     "popularCommands": [
       {
@@ -14438,8 +14430,8 @@ window.GAMES_DATA = [
     "hasConsole": true,
     "consoleShortcut": "~ (Tilde 键)",
     "consoleEnableGuide": {
-      "zh-CN": "游戏内随时按 ~ 打开控制台，输入指令回车即可生效。",
-      "en": "游戏内随时按 ~ 打开控制台，输入指令回车即可生效。"
+      "zh-CN": "游戏内随时按 ~ 打开控制台，输入指令后回车即可生效。",
+      "en": "In-game, press ~ at any time to open the console; type a command and press Enter to run it."
     },
     "popularCommands": [
       {
@@ -14723,8 +14715,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "ESC 选项勾选 '开发人员模式' (Development Mode)",
     "consoleEnableGuide": {
-      "zh-CN": "按 ESC 进入选项 (Options) -> 勾选 '开发人员模式 (Development Mode)'。屏幕最顶部会立刻常驻一排白色调试图标，包含瞬建免材料的 God Mode 按钮以及打开全能刷物刷事件的 Debug Actions Menu！",
-      "en": "按 ESC 进入选项 (Options) -> 勾选 '开发人员模式 (Development Mode)'。屏幕最顶部会立刻常驻一排白色调试图标，包含瞬建免材料的 God Mode 按钮以及打开全能刷物刷事件的 Debug Actions Menu！"
+      "zh-CN": "按 ESC 进入选项 (Options) -> 勾选「开发者模式 (Development Mode)」。开启后屏幕顶部会常驻一排调试工具图标：God Mode 按钮开启后，放置建筑蓝图可以免研究、免材料且直接建成；Debug Actions Menu 可以用来生成物品和角色、触发事件等调试操作。",
+      "en": "Press Esc, go into Options, and tick 'Development Mode.' Once it's on, a row of debug tool icons stays visible at the top of the screen: the God Mode button makes building blueprints go up instantly, with no research and no material cost; the Debug Actions Menu lets you spawn items and pawns, trigger events, and do other debug actions."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -14946,8 +14938,8 @@ window.GAMES_DATA = [
     "hasConsole": true,
     "consoleShortcut": "在暂停菜单盲打 cheatstick 后按 F1 键",
     "consoleEnableGuide": {
-      "zh-CN": "在游戏暂停界面或主菜单中，不用打开任何输入框，直接键盘盲打输入英文单词 cheatstick，然后按下 F1 键即可在屏幕左侧呼出完整命令终端！",
-      "en": "在游戏暂停界面或主菜单中，不用打开任何输入框，直接键盘盲打输入英文单词 cheatstick，然后按下 F1 键即可在屏幕左侧呼出完整命令终端！"
+      "zh-CN": "在游戏暂停界面中，不用打开任何输入框，直接用键盘盲打英文单词 cheatstick，然后按一下 F1 键检查指令是否生效。生效后可以用同样的方式继续盲打其他指令，不会出现可见的输入框；部分指令需要连续输入两次才会真正执行。",
+      "en": "From the pause screen, without opening any text box, blind-type the word cheatstick on your keyboard, then press F1 to check whether it worked. Once it's active, you can keep entering other commands the same way — typed blind, with no visible input box — though some commands have to be typed twice in a row before they actually take effect."
     },
     "popularCommands": [
       {
@@ -15304,8 +15296,8 @@ window.GAMES_DATA = [
     "hasConsole": true,
     "consoleShortcut": "Ctrl + Shift + L 激活后按 ~ 键",
     "consoleEnableGuide": {
-      "zh-CN": "游戏内随时按下 Ctrl + Shift + L 激活控制台支持，然后按下 ~ 键即可唤出终端。更推荐在载入游戏时在高级游戏设置 (Advanced Game Settings) 中直接勾选内置飞行模式与免电力模式！",
-      "en": "游戏内随时按下 Ctrl + Shift + L 激活控制台支持，然后按下 ~ 键即可唤出终端。更推荐在载入游戏时在高级游戏设置 (Advanced Game Settings) 中直接勾选内置飞行模式与免电力模式！"
+      "zh-CN": "游戏内随时按下 §/`/~ 键（具体哪个键看你的键盘布局）即可打开调试控制台，但它只能查看坐标、辐射源列表这类调试信息，或者关闭雾效、开启 FPS 计数器之类的显示选项，不能用来作弊（比如刷物品）。如果想要飞行模式、取消建筑耗电之类的效果，应该在新建游戏时选择 Creative Mode（1.2 版之前叫 Advanced Game Settings），里面可以直接勾选 Flight Mode、No Power 等选项。",
+      "en": "In-game, press §/`/~ (whichever one is on your keyboard) at any time to open the debug console — but it's only for debug data such as coordinates or a list of radiation sources, or for toggling display options like disabling fog or an FPS counter; it cannot be used to cheat (e.g. to spawn items). If you want things like Flight Mode or removing the power requirement, start a new game and pick Creative Mode (called Advanced Game Settings before Update 1.2), where you can tick options such as Flight Mode and No Power directly."
     },
     "popularCommands": [
       {
@@ -15524,8 +15516,8 @@ window.GAMES_DATA = [
     "hasConsole": true,
     "consoleShortcut": "~ 键 或 / 键",
     "consoleEnableGuide": {
-      "zh-CN": "游戏内随时按下 ~ 或 / 呼出控制台输入 Lua 指令。注意使用作弊指令会导致当前存档 Steam 成就暂停。",
-      "en": "游戏内随时按下 ~ 或 / 呼出控制台输入 Lua 指令。注意使用作弊指令会导致当前存档 Steam 成就暂停。"
+      "zh-CN": "游戏内随时按下 ~ 或 / 呼出控制台输入 Lua 指令。注意：一旦使用了脚本类/作弊类指令，该存档的 Steam 成就就会被永久禁用，无法恢复。",
+      "en": "In-game, press ~ or / at any time to open the console and enter Lua commands. Note: once you use a scripting/cheat command, Steam achievements are permanently disabled for that save — they cannot be turned back on."
     },
     "popularCommands": [
       {
@@ -15996,8 +15988,8 @@ window.GAMES_DATA = [
     "hasConsole": true,
     "consoleShortcut": "~ (Tilde 键)",
     "consoleEnableGuide": {
-      "zh-CN": "Steam 库右键属性 -> 启动选项中加入 -debug_mode。进游戏按下 ~ 或 Shift + Alt + C 即可呼出全能开发者控制台。",
-      "en": "Steam 库右键属性 -> 启动选项中加入 -debug_mode。进游戏按下 ~ 或 Shift + Alt + C 即可呼出全能开发者控制台。"
+      "zh-CN": "Steam 库右键属性 -> 启动选项中加入 -debug_mode。进游戏按下 ~ 或 Shift + Alt + C 即可呼出开发者控制台。",
+      "en": "In Steam, right-click the game -> Properties, and add -debug_mode to the launch options. In-game, press ~ or Shift + Alt + C to open the developer console."
     },
     "popularCommands": [
       {
@@ -16408,8 +16400,8 @@ window.GAMES_DATA = [
     "hasConsole": true,
     "consoleShortcut": "~ (Tilde 键) 或 Shift + 2",
     "consoleEnableGuide": {
-      "zh-CN": "单人游戏中直接按下键盘左上角 ~ 键即可唤出控制台输入指令。",
-      "en": "单人游戏中直接按下键盘左上角 ~ 键即可唤出控制台输入指令。"
+      "zh-CN": "单人游戏中直接按下键盘左上角的 ~ 键，即可唤出控制台输入指令。",
+      "en": "In a single-player game, press the ~ key in the top-left corner of your keyboard to open the console and enter commands."
     },
     "popularCommands": [
       {
@@ -16779,8 +16771,8 @@ window.GAMES_DATA = [
     "hasConsole": true,
     "consoleShortcut": "~ (Tilde 键)",
     "consoleEnableGuide": {
-      "zh-CN": "非铁人模式下单人游戏直接按 ~ 键呼出控制台输入指令。",
-      "en": "非铁人模式下单人游戏直接按 ~ 键呼出控制台输入指令。"
+      "zh-CN": "非铁人模式下，单人游戏里直接按 ~ 键即可呼出控制台输入指令。",
+      "en": "Outside Ironman mode, in a single-player game, press ~ to open the console and enter commands."
     },
     "popularCommands": [
       {
@@ -19657,8 +19649,8 @@ window.GAMES_DATA = [
     "hasConsole": true,
     "consoleShortcut": "~ (Tilde 键)",
     "consoleEnableGuide": {
-      "zh-CN": "Steam 启动项加入 -devmode。进游戏按 ~ 键呼出控制台。搭配 Cheat Mod 可直接在控制台输入作弊指令。",
-      "en": "Steam 启动项加入 -devmode。进游戏按 ~ 键呼出控制台。搭配 Cheat Mod 可直接在控制台输入作弊指令。"
+      "zh-CN": "Steam 启动项中加入 -devmode。进游戏按 ~ 键呼出控制台；搭配 Nexus 上的 Cheat 模组，就可以直接在控制台里输入生成物品、传送、改金钱等作弊指令。",
+      "en": "Add -devmode to the Steam launch options. In-game, press ~ to open the console; combined with the 'Cheat' mod on Nexus Mods, you can type console commands directly to spawn items, teleport, change money, and more."
     },
     "popularCommands": [
       {
@@ -23723,8 +23715,8 @@ window.GAMES_DATA = [
     "hasConsole": true,
     "consoleShortcut": "F1 键",
     "consoleEnableGuide": {
-      "zh-CN": "游戏内随时按下 F1 唤出控制台终端，输入 dm 按回车激活调试模式 (Debug Menu)，输入 cm 激活创造模式 (Creative Menu)！",
-      "en": "游戏内随时按下 F1 唤出控制台终端，输入 dm 按回车激活调试模式 (Debug Menu)，输入 cm 激活创造模式 (Creative Menu)！"
+      "zh-CN": "游戏内随时按下 F1 唤出控制台终端，输入 dm 并回车切换调试模式 (Debug Menu)，输入 cm 切换创造模式 (Creative Menu)。",
+      "en": "In-game, press F1 at any time to open the console. Type dm and press Enter to toggle Debug Menu, or type cm to toggle Creative Menu."
     },
     "popularCommands": [
       {
@@ -24098,8 +24090,8 @@ window.GAMES_DATA = [
     "hasConsole": true,
     "consoleShortcut": "Tab 键",
     "consoleEnableGuide": {
-      "zh-CN": "单人游戏中直接按下 Tab 键唤出控制台命令行，直接输入 cheat 后接具体指令即可瞬间生效。",
-      "en": "单人游戏中直接按下 Tab 键唤出控制台命令行，直接输入 cheat 后接具体指令即可瞬间生效。"
+      "zh-CN": "单人游戏中按 Tab 键唤出控制台输入框，直接输入具体指令（例如 god、infinitestats）即可生效，单人模式不需要加 cheat 前缀。只有在联机服务器上使用这些指令时，才需要先用 enablecheats 验证管理员身份，并在指令前加上 cheat 或 admincheat。",
+      "en": "In single-player, press Tab to open the console input and type a command directly (for example god or infinitestats) to apply it — no cheat prefix is needed in single-player. Only on a multiplayer server do you first need to authenticate with enablecheats and then prefix commands with cheat or admincheat."
     },
     "popularCommands": [
       {
@@ -24821,8 +24813,8 @@ window.GAMES_DATA = [
     "hasConsole": true,
     "consoleShortcut": "Ctrl + Shift + C 键",
     "consoleEnableGuide": {
-      "zh-CN": "游戏内按快捷键 Ctrl + Shift + C 唤出顶部秘籍输入框，必须先输入 testingcheats true 按回车激活作弊总开关，然后即可输入 motherlode 或任意秘籍。",
-      "en": "游戏内按快捷键 Ctrl + Shift + C 唤出顶部秘籍输入框，必须先输入 testingcheats true 按回车激活作弊总开关，然后即可输入 motherlode 或任意秘籍。"
+      "zh-CN": "游戏内按 Ctrl + Shift + C 打开秘籍输入框，可以直接输入 motherlode（获得 50000 西姆币）、rosebud 或 kaching（各获得 1000 西姆币）等秘籍。如果要用 Shift + 点击 物体或角色触发的秘籍（比如改变心情、传送角色），则需要先输入 testingcheats true 并回车启用。",
+      "en": "In-game, press Ctrl + Shift + C to open the cheat box. Cheats like motherlode (50,000 Simoleons) or rosebud/kaching (1,000 Simoleons each) can be typed directly. For cheats triggered by Shift-clicking an object or Sim (such as changing a Sim's mood or teleporting them), you need to type testingcheats true and press Enter first."
     },
     "popularCommands": [
       {
@@ -25408,8 +25400,8 @@ window.GAMES_DATA = [
     "hasConsole": true,
     "consoleShortcut": "~ (Tilde 键)",
     "consoleEnableGuide": {
-      "zh-CN": "用记事本打开文档中 Euro Truck Simulator 2\\config.cfg，将 uset g_developer \"0\" 改为 \"1\"，uset g_console \"0\" 改为 \"1\" 并保存。进游戏按 ~ 打开终端！按 0 键进入自由摄像机，按 Ctrl + F9 瞬间瞬移卡车！",
-      "en": "用记事本打开文档中 Euro Truck Simulator 2\\config.cfg，将 uset g_developer \"0\" 改为 \"1\"，uset g_console \"0\" 改为 \"1\" 并保存。进游戏按 ~ 打开终端！按 0 键进入自由摄像机，按 Ctrl + F9 瞬间瞬移卡车！"
+      "zh-CN": "用记事本打开 文档\\Euro Truck Simulator 2\\config.cfg，把 uset g_developer \"0\" 改成 \"1\"，uset g_console \"0\" 改成 \"1\" 并保存。进游戏后按 ~ 打开控制台输入指令。",
+      "en": "Open Documents\\Euro Truck Simulator 2\\config.cfg in Notepad, change uset g_developer \"0\" to \"1\" and uset g_console \"0\" to \"1\", then save the file. In-game, press ~ to open the console and enter commands."
     },
     "popularCommands": [
       {
@@ -25839,8 +25831,8 @@ window.GAMES_DATA = [
     "hasConsole": true,
     "consoleShortcut": "~ 键 (Lua控制台) / F11 键 (世界编辑器)",
     "consoleEnableGuide": {
-      "zh-CN": "游戏内随时按 ~ 唤出 GE Lua 控制台，按 F11 直接开启强大的内置 World & Vehicle 物理编辑器！按 Insert 原地满血修车，按 Shift + C 自由镜头后按 F7 瞬移车辆。",
-      "en": "游戏内随时按 ~ 唤出 GE Lua 控制台，按 F11 直接开启强大的内置 World & Vehicle 物理编辑器！按 Insert 原地满血修车，按 Shift + C 自由镜头后按 F7 瞬移车辆。"
+      "zh-CN": "游戏内随时按 ~ 键唤出 GE Lua 控制台用于输入 Lua 指令，按 F11 可以打开内置的 World Editor（世界编辑器）。另外，按 Insert 键可以修复并回正当前车辆（官方称 Repair / Rewind）；先按 Shift + C 切换到自由镜头，再按 F7 可以把车辆/角色移动到镜头所在位置（官方称 Drop Player at Camera）。",
+      "en": "In-game, press ~ at any time to bring up the GE Lua console for entering Lua commands, and press F11 to open the built-in World Editor. Separately, pressing Insert repairs and resets the current vehicle (officially named Repair / Rewind); press Shift + C to switch to the free camera, then F7 to move the vehicle/character to wherever the camera currently is (officially named Drop Player at Camera)."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -28678,8 +28670,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "选项内置 '神魔模式' (God Mode) 或 Mod 控制台 (~)",
     "consoleEnableGuide": {
-      "zh-CN": "游戏设置中自带官方原汁原味 '神魔模式 (God Mode)'！开启后初始获得 20% 伤害减免，每次阵亡常驻提升 2% 减伤，最高可叠至 80% 减伤！轻松畅爽通关！",
-      "en": "游戏设置中自带官方原汁原味 '神魔模式 (God Mode)'！开启后初始获得 20% 伤害减免，每次阵亡常驻提升 2% 减伤，最高可叠至 80% 减伤！轻松畅爽通关！"
+      "zh-CN": "游戏设置菜单中可以随时开启官方自带的「神魔模式 (God Mode)」（铁人模式存档下不可用）。开启后角色获得 20% 伤害减免；此后每局游戏以死亡结束（而不是成功逃离冥界）就会再增加 2% 减免，最高可以叠到 80%。该模式能随时在选项里开关：关闭后会保留已经叠加的百分比，不会清零；使用该模式不会锁定成就或内容。",
+      "en": "The built-in God Mode can be switched on at any time from the settings menu (it's unavailable on a Hell Mode save). Once enabled, you get 20% damage resistance; after that, each run that ends in death — rather than a successful escape — adds another 2%, up to a cap of 80%. It can be toggled on and off at any time in the options: turning it off keeps whatever percentage you've already built up instead of resetting it, and using it does not lock you out of achievements or content."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -28866,8 +28858,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "F1 键 (通过 Scarab 安装 DebugMod)",
     "consoleEnableGuide": {
-      "zh-CN": "使用官方 Scarab 模组安装器一键安装 DebugMod。进游戏按下键盘 F1 即可唤出图形化调试菜单！包含无敌、无限灵魂回血、全护符集齐与任意长椅传送！",
-      "en": "使用官方 Scarab 模组安装器一键安装 DebugMod。进游戏按下键盘 F1 即可唤出图形化调试菜单！包含无敌、无限灵魂回血、全护符集齐与任意长椅传送！"
+      "zh-CN": "通过 Scarab 模组管理器安装 DebugMod。进游戏后默认按 F1 唤出完整的图形化调试菜单 (Toggle All UI)，里面有无敌 (Invincible) 和无限灵魂 (Infinite Soul) 开关，还可以解锁或修复全部护符；另外可以用存档点 (Save States) 和梦之门位置标记，在已经记录过的地点之间快速传送。",
+      "en": "Install DebugMod through the Scarab mod manager. In-game, the default key F1 brings up the full graphical debug menu (Toggle All UI), which includes Invincible and Infinite Soul toggles and lets you unlock or repair every charm. It also lets you warp quickly between recorded locations using Save States and Dream Gate position markers."
     },
     "popularCommands": [],
     "hasMods": true,
@@ -29057,8 +29049,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "~ (通过 ModTheSpire + BaseMod 唤出终端)",
     "consoleEnableGuide": {
-      "zh-CN": "在 Steam 创意工坊订阅 ModTheSpire 与 BaseMod，启动游戏选择以 ModTheSpire 模式运行。进游戏按下 ~ 即可呼出全功能文本控制台！",
-      "en": "在 Steam 创意工坊订阅 ModTheSpire 与 BaseMod，启动游戏选择以 ModTheSpire 模式运行。进游戏按下 ~ 即可呼出全功能文本控制台！"
+      "zh-CN": "在 Steam 创意工坊订阅 ModTheSpire 与 BaseMod，用 ModTheSpire 启动游戏。先在游戏内的 BaseMod 配置里把 Console（控制台）选项打开，然后按 `（反引号/波浪号）键即可呼出文本控制台。",
+      "en": "Subscribe to ModTheSpire and BaseMod on the Steam Workshop, then launch the game through ModTheSpire. First turn on the Console option in BaseMod's in-game mod config, then press ` (the backtick/tilde key) to open the text console."
     },
     "popularCommands": [
       {
@@ -29215,6 +29207,13 @@ window.TRANSLATIONS_DATA = {
     "smartFirstCommand": "第一条指令",
     "smartOpenGame": "查看《{title}》",
     "favMarkedToast": "已在列表中标出你收藏的 {n} 款游戏",
+    "consoleGuideTitleNoConsole": "这款游戏没有原生控制台",
+    "consoleGuideTitleViaMod": "指令使用方法（游戏没有原生控制台）",
+    "btnOpenHelperBat": "📄 查看说明脚本 (.bat)",
+    "helperBatTitle": "说明脚本 (.bat)",
+    "helperBatStep1": "用下方的下载按钮保存文件（或复制代码另存为 .bat 文件）；",
+    "helperBatStep3": "脚本只做它显示出来的检查和改动；游戏本身没有控制台，具体怎么用见上方说明。",
+    "helperBatDownloadedToast": "已开始下载说明脚本，放到游戏根目录后双击运行",
     "tabSocialCards": "🎨 官方 5 联卡片",
     "consoleStatusAvailable": "官方控制台可用",
     "consoleStatusNone": "官方无内置控制台",
@@ -29568,9 +29567,16 @@ window.TRANSLATIONS_DATA = {
     "smartFirstCommand": "First command",
     "smartOpenGame": "Open {title}",
     "favMarkedToast": "Your {n} favorite games are marked in the list",
+    "consoleGuideTitleNoConsole": "This game has no built-in console",
+    "consoleGuideTitleViaMod": "How to use these commands (no built-in console)",
+    "btnOpenHelperBat": "📄 View helper script (.bat)",
+    "helperBatTitle": "Helper script (.bat)",
+    "helperBatStep1": "Save the file with the download button below (or copy the code and save it as a .bat file);",
+    "helperBatStep3": "The script only does the checks and changes it prints. The game itself has no console; see the guide above for how to use it.",
+    "helperBatDownloadedToast": "Download started. Put the script in the game folder and double-click it.",
     "tabSocialCards": "🎨 5-Card Matrix Preview",
     "consoleStatusAvailable": "Official Console Supported",
-    "consoleStatusNone": "No official console (use Mods/Trainers)",
+    "consoleStatusNone": "No built-in console",
     "consoleShortcutLabel": "Activation Key:",
     "consoleGuideTitle": "How to open the console",
     "consoleGuideSubtitle": "How to open the console",
@@ -29921,6 +29927,13 @@ window.TRANSLATIONS_DATA = {
     "smartFirstCommand": "第一條指令",
     "smartOpenGame": "查看《{title}》",
     "favMarkedToast": "已在列表中標出你收藏的 {n} 款遊戲",
+    "consoleGuideTitleNoConsole": "這款遊戲沒有原生控制台",
+    "consoleGuideTitleViaMod": "指令使用方法（遊戲沒有原生控制台）",
+    "btnOpenHelperBat": "📄 查看說明腳本 (.bat)",
+    "helperBatTitle": "說明腳本 (.bat)",
+    "helperBatStep1": "用下方的下載按鈕保存檔案（或複製代碼另存為 .bat 檔案）；",
+    "helperBatStep3": "腳本只做它顯示出來的檢查和改動；遊戲本身沒有控制台，具體怎麼用見上方說明。",
+    "helperBatDownloadedToast": "已開始下載說明腳本，放到遊戲根目錄後雙擊執行",
     "tabSocialCards": "🎨 官方 5 聯卡片",
     "consoleStatusAvailable": "官方控制台可用",
     "consoleStatusNone": "官方無內建控制台",
@@ -30274,9 +30287,16 @@ window.TRANSLATIONS_DATA = {
     "smartFirstCommand": "最初のコマンド",
     "smartOpenGame": "{title} を開く",
     "favMarkedToast": "お気に入りの {n} 本をリストで強調表示しました",
+    "consoleGuideTitleNoConsole": "このゲームには標準のコンソールがありません",
+    "consoleGuideTitleViaMod": "コマンドの使い方（標準のコンソールはありません）",
+    "btnOpenHelperBat": "📄 補助スクリプトを見る (.bat)",
+    "helperBatTitle": "補助スクリプト (.bat)",
+    "helperBatStep1": "下のダウンロードボタンで保存します（またはコードをコピーして .bat ファイルとして保存）；",
+    "helperBatStep3": "スクリプトは表示どおりの確認と変更だけを行います。ゲーム本体にコンソールはありません。使い方は上の説明を見てください。",
+    "helperBatDownloadedToast": "ダウンロードを開始しました。ゲームフォルダに置いてダブルクリックで実行してください",
     "tabSocialCards": "🎨 公式5連カード",
     "consoleStatusAvailable": "公式コンソール利用可能",
-    "consoleStatusNone": "公式コンソール非搭載 (MOD/チート推奨)",
+    "consoleStatusNone": "公式コンソールなし",
     "consoleShortcutLabel": "起動キー:",
     "consoleGuideTitle": "コンソールの開き方",
     "consoleGuideSubtitle": "コンソールの開き方",
@@ -30627,9 +30647,16 @@ window.TRANSLATIONS_DATA = {
     "smartFirstCommand": "첫 번째 명령어",
     "smartOpenGame": "{title} 보기",
     "favMarkedToast": "즐겨찾기한 게임 {n}개를 목록에 표시했습니다",
+    "consoleGuideTitleNoConsole": "이 게임에는 기본 콘솔이 없습니다",
+    "consoleGuideTitleViaMod": "명령어 사용 방법 (기본 콘솔 없음)",
+    "btnOpenHelperBat": "📄 도움 스크립트 보기 (.bat)",
+    "helperBatTitle": "도움 스크립트 (.bat)",
+    "helperBatStep1": "아래 다운로드 버튼으로 저장합니다(또는 코드를 복사해 .bat 파일로 저장);",
+    "helperBatStep3": "스크립트는 화면에 표시되는 확인과 변경만 합니다. 게임 자체에는 콘솔이 없으니 사용법은 위 안내를 보세요.",
+    "helperBatDownloadedToast": "다운로드를 시작했습니다. 게임 폴더에 넣고 더블클릭해 실행하세요",
     "tabSocialCards": "🎨 공식 5연속 카드",
     "consoleStatusAvailable": "공식 콘솔 사용 가능",
-    "consoleStatusNone": "공식 콘솔 없음 (MOD/트레이너 사용)",
+    "consoleStatusNone": "공식 콘솔 없음",
     "consoleShortcutLabel": "호출 키:",
     "consoleGuideTitle": "콘솔 여는 방법",
     "consoleGuideSubtitle": "콘솔 여는 방법",
@@ -30980,9 +31007,16 @@ window.TRANSLATIONS_DATA = {
     "smartFirstCommand": "Первая команда",
     "smartOpenGame": "Открыть {title}",
     "favMarkedToast": "Избранные игры ({n}) отмечены в списке",
+    "consoleGuideTitleNoConsole": "В этой игре нет встроенной консоли",
+    "consoleGuideTitleViaMod": "Как использовать эти команды (встроенной консоли нет)",
+    "btnOpenHelperBat": "📄 Открыть вспомогательный скрипт (.bat)",
+    "helperBatTitle": "Вспомогательный скрипт (.bat)",
+    "helperBatStep1": "Сохраните файл кнопкой загрузки ниже (или скопируйте код и сохраните как .bat);",
+    "helperBatStep3": "Скрипт выполняет только те проверки и изменения, которые выводит. В самой игре консоли нет; как пользоваться — в инструкции выше.",
+    "helperBatDownloadedToast": "Загрузка началась. Положите скрипт в папку игры и запустите двойным щелчком.",
     "tabSocialCards": "🎨 5 карточек-гайдов",
     "consoleStatusAvailable": "Официальная консоль доступна",
-    "consoleStatusNone": "Консоли нет (используйте моды/трейнеры)",
+    "consoleStatusNone": "Встроенной консоли нет",
     "consoleShortcutLabel": "Клавиша активации:",
     "consoleGuideTitle": "Как открыть консоль",
     "consoleGuideSubtitle": "Как открыть консоль",
@@ -31333,9 +31367,16 @@ window.TRANSLATIONS_DATA = {
     "smartFirstCommand": "Erster Befehl",
     "smartOpenGame": "{title} öffnen",
     "favMarkedToast": "Deine {n} Favoriten sind in der Liste markiert",
+    "consoleGuideTitleNoConsole": "Dieses Spiel hat keine eingebaute Konsole",
+    "consoleGuideTitleViaMod": "So nutzt du diese Befehle (keine eingebaute Konsole)",
+    "btnOpenHelperBat": "📄 Hilfsskript ansehen (.bat)",
+    "helperBatTitle": "Hilfsskript (.bat)",
+    "helperBatStep1": "Speichere die Datei mit dem Download-Button unten (oder kopiere den Code und speichere ihn als .bat);",
+    "helperBatStep3": "Das Skript führt nur die angezeigten Prüfungen und Änderungen aus. Das Spiel selbst hat keine Konsole; wie es geht, steht in der Anleitung oben.",
+    "helperBatDownloadedToast": "Download gestartet. Lege das Skript in den Spielordner und starte es per Doppelklick.",
     "tabSocialCards": "🎨 5-Karten Matrix",
     "consoleStatusAvailable": "Offizielle Konsole verfügbar",
-    "consoleStatusNone": "Keine offizielle Konsole (Mods/Trainer nutzen)",
+    "consoleStatusNone": "Keine eingebaute Konsole",
     "consoleShortcutLabel": "Aktivierungstaste:",
     "consoleGuideTitle": "So öffnest du die Konsole",
     "consoleGuideSubtitle": "So öffnest du die Konsole",
@@ -31686,9 +31727,16 @@ window.TRANSLATIONS_DATA = {
     "smartFirstCommand": "Primer comando",
     "smartOpenGame": "Abrir {title}",
     "favMarkedToast": "Tus {n} juegos favoritos están marcados en la lista",
+    "consoleGuideTitleNoConsole": "Este juego no tiene consola integrada",
+    "consoleGuideTitleViaMod": "Cómo usar estos comandos (sin consola integrada)",
+    "btnOpenHelperBat": "📄 Ver script de ayuda (.bat)",
+    "helperBatTitle": "Script de ayuda (.bat)",
+    "helperBatStep1": "Guarda el archivo con el botón de descarga de abajo (o copia el código y guárdalo como .bat);",
+    "helperBatStep3": "El script solo hace las comprobaciones y cambios que muestra. El juego no tiene consola; consulta la guía de arriba para saber cómo usarlo.",
+    "helperBatDownloadedToast": "Descarga iniciada. Coloca el script en la carpeta del juego y ábrelo con doble clic.",
     "tabSocialCards": "🎨 Matriz de 5 tarjetas",
     "consoleStatusAvailable": "Consola Oficial Disponible",
-    "consoleStatusNone": "Sin consola oficial (usar Mods/Trainers)",
+    "consoleStatusNone": "Sin consola integrada",
     "consoleShortcutLabel": "Tecla de Activación:",
     "consoleGuideTitle": "Cómo abrir la consola",
     "consoleGuideSubtitle": "Cómo abrir la consola",

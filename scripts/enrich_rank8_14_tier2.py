@@ -29,8 +29,8 @@ PALWORLD_DATA = {
     "hasConsole": False,
     "consoleShortcut": "F10 或 ~ (需安装 RE-UE4SS xinput1_3.dll 注入底层)",
     "consoleEnableGuide": {
-        "zh-CN": "【UE4SS 注入与打字控制台开启指南】\n1. 下载 UE4SS (v3.0.1 纯净版)，将压缩包解压至游戏根目录：Palworld/Pal/Binaries/Win64/；\n2. 确认该目录下存在 UE4SS.dll、xinput1_3.dll 以及 mods/ 文件夹；\n3. 启动游戏，在单机或本地专用服务器中按 F10 唤出 UE4SS 图形控制台，或按 ~ 唤出原生终端；\n4. 即可直接运行闪光帕鲁生成、全图鉴解锁、属性注入与自由镜头摄影！",
-        "en": "Install UE4SS (v3.0.1) into Palworld/Pal/Binaries/Win64/. Press F10 or ~ in-game to bring up Lua console for Pal spawner and Paldeck unlocks."
+        "zh-CN": "【UE4SS 安装与控制台开启指南】\n1. 从 UE4SS 的 GitHub Releases 下载一个正式版本（例如 v3.0.1），解压到游戏目录 Palworld/Pal/Binaries/Win64/；\n2. 确认该目录下出现了 UE4SS.dll 和 mods/ 文件夹（具体还会带哪个注入用的 dll，以你下载的那个版本的说明为准）；\n3. 启动游戏（单人或自己开的本地/专用服务器），按 F10 或 @ 键可以打开 UE4SS 自带的控制台（这是 UE4SS 内置的 ConsoleEnablerMod 解锁的游戏原生控制台）；另外也可以在 UE4SS-settings.ini 里把 GUI 控制台打开，它会作为独立窗口显示；\n4. UE4SS 本身是一个 Lua/蓝图模组平台，自带属性查看编辑器（Live Property Viewer）等调试工具；像生成稀有帕鲁、解锁全图鉴这类具体效果，需要额外装由其他作者做的 Lua 模组才能实现，不是 UE4SS 自己自带的功能。",
+        "en": "[Installing UE4SS and Opening the Console]\n1. Download an official UE4SS release (e.g. v3.0.1) from GitHub and extract it into Palworld/Pal/Binaries/Win64/.\n2. Make sure UE4SS.dll and a mods/ folder now exist in that folder (which exact injector file ships alongside depends on the release you grabbed).\n3. Launch the game (singleplayer, or your own local/dedicated server) and press F10 or @ to open UE4SS's built-in console (this is the game's native console, unlocked by UE4SS's bundled ConsoleEnablerMod). You can also enable the separate GUI console window in UE4SS-settings.ini.\n4. UE4SS itself is a Lua/Blueprint modding platform with tools like the Live Property Viewer; specific effects such as spawning rare Pals or unlocking the full Paldex require extra Lua mods made by other authors - UE4SS does not provide those on its own."
     },
     "popularCommands": [],
     "hasMods": True,
@@ -64,9 +64,9 @@ PALWORLD_DATA = {
     "pitfallNote": {
         "title": "老L避坑笔记 (幻兽帕鲁 樱岛最新版)",
         "tips": [
-            "【联机前先移除】：UE4SS 只在单人模式或自己开的本地房间里用，会不会被封没有人能担保。进官方或别人的服务器前，先把 UE4SS 的 dll 移走，别在公开服务器作弊。",
-            "【帕鲁抑郁生病治愈】：据点帕鲁容易因地形卡住无法进食而导致【抑郁症/骨折】。使用 give Med_Low 10 获取高级药品直接投喂，并在箱子旁放置温泉以彻底稳定 SAN 值。",
-            "【负重过载急救】：金属矿区挖掘超载走不动时，掏出抓钩枪对着地面或树干射击，利用抓钩拉力可以直接无视任何负重限制飞速前行。"
+            "【联机前先移除】：UE4SS 建议只在单人模式或自己开的本地房间里用，能不能被封号没有人能担保。进官方服务器或别人的服务器前，先把 UE4SS 的注入文件移走，别带着它进公开服务器。",
+            "【帕鲁骨折/情绪低落急救】：帕鲁心情值（SAN）过低或工作中受伤，会出现骨折（工作/移动速度下降，需要用医疗用品治疗）、虚弱或沮丧（下降幅度更大，需要用高级医疗用品治疗）等状态；在据点放一个温泉，可以帮帕鲁更快恢复 SAN，减少这些状态出现的概率。",
+            "【负重过载时的脱困办法】：角色超重后，跑步、跳跃、翻滚、滑翔、下蹲收招等动作会被禁用，走路速度也会变慢；如果人已经扒在墙上可以继续往上爬，抓钩枪也还能正常用来勾住目标点，可以借此脱离卡住的地形，但抓钩本身有 12 秒冷却，不能连续用。"
         ]
     },
     "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】幻兽帕鲁 UE4SS 检查\necho ========================================================\necho   【老L·单机避坑局】幻兽帕鲁 UE4SS 检查脚本\necho   只检查 UE4SS.dll 在不在，不改任何文件\necho ========================================================\necho.\n\nset \"WIN64=Pal\\Binaries\\Win64\"\nif not exist \"Pal\\Binaries\\Win64\\Palworld-Win64-Shipping.exe\" (\n    echo [!] 当前目录下没有 Pal\\Binaries\\Win64\\Palworld-Win64-Shipping.exe，脚本什么都没改。\n    echo     请把本脚本放到 Palworld 游戏安装根目录再运行。\n    echo.\n    pause\n    exit /b\n)\nset \"UE4SS_DLL=\"\nif exist \"%WIN64%\\ue4ss\\UE4SS.dll\" set \"UE4SS_DLL=%WIN64%\\ue4ss\\UE4SS.dll\"\nif not defined UE4SS_DLL if exist \"%WIN64%\\UE4SS.dll\" set \"UE4SS_DLL=%WIN64%\\UE4SS.dll\"\nif defined UE4SS_DLL (\n    echo [+] 找到 %UE4SS_DLL%。只检查了文件在不在，没检查版本，也没检查能不能加载。\n    echo [i] 游戏内按 F10 试试 UE4SS 菜单。\n) else (\n    echo [!] 没找到 UE4SS.dll：请把 UE4SS 解压到 %WIN64%\\ 。\n)\necho [i] 只在单人模式或自己开的房间里用；进别人的服务器前先把 UE4SS 移走。\necho [i] 脚本不备份存档；指令没有逐条在游戏里实测，执行前先手动存档。\necho.\npause\n",
@@ -82,8 +82,8 @@ STARFIELD_DATA = {
     "hasConsole": True,
     "consoleShortcut": "~ (波浪键直接唤出 Bethesda Creation 2 原生终端)",
     "consoleEnableGuide": {
-        "zh-CN": "【Creation 2 原生控制台与防成就锁死指南】\n1. 键盘直接按 ~ 键呼出原生控制台；\n2. 首次输入指令前，建议安装 Baka Achievement Enabler 模组，防止开启控制台后 Steam 成就失效；\n3. 控制台支持全部物品 Hex 编号注入、飞船建造部件尺寸突破、特质修改与场景漫游！",
-        "en": "Press ~ to open Creation 2 console. Install SFSE and Baka Achievement Enabler to prevent achievements from being disabled."
+        "zh-CN": "【Creation 2 原生控制台与防成就锁死指南】\n1. 键盘按 ~（非美式键盘上可能是同一位置的其它符号键）即可呼出原生控制台；\n2. Bethesda 的引擎只要用过控制台指令，就会把存档标记为已修改并关闭 Steam 成就；想继续拿成就，可以装需要 SFSE 的 Baka Achievement Enabler (SFSE) 模组；\n3. 控制台可以用十六进制的物品 ID 给自己加东西（additem 命令）、用 tcl 关掉碰撞穿墙穿地自由移动、用 slm player <预设ID> 重新进入角色创建界面改背景和特质（特质最多 3 个）等。",
+        "en": "[Native Creation 2 Console & Avoiding the Achievement Lock]\n1. Press ~ (or whatever key sits in the same spot on a non-US keyboard) to open the native console.\n2. Bethesda's engine flags your save as modified and turns off Steam achievements the moment you use a console command; to keep earning them, you can install Baka Achievement Enabler (SFSE), which requires SFSE.\n3. The console lets you add items by their hex form ID with additem, fly through walls and terrain with tcl (no-clip), and reopen character creation with 'slm player <preset ID>' to change your background and traits (max 3 traits)."
     },
     "popularCommands": [
         "player.additem 0000000F 1000000",
@@ -593,9 +593,9 @@ STARFIELD_DATA = {
     "pitfallNote": {
         "title": "老L避坑笔记 (星空 破碎空间 DLC 完全版)",
         "tips": [
-            "【Steam成就防锁死门禁】：Bethesda 在输入控制台命令时会标记存档为 Modded 并禁用 Steam 成就！可以装 Baka Achievement Enabler（需要 SFSE），让开过控制台的存档继续拿成就；游戏更新后它可能要等作者适配。",
-            "【改船部件重叠报错破解】：在官方造船厂经常遇到【模块存在重叠】无法保存。下载安装本站推荐的 Ship Builder Tolerance Tweaks 即可完全无视空间重叠，打造致密外装母舰。",
-            "【卡死与恶性任务急救】：若因 NPC 浮空或被锁在门后无法交任务，打开控制台输入 tcl 开启穿墙飞入室内，或使用 setstage 命令直接强行推进断掉的任务流程节点。"
+            "【Steam 成就防锁死】：Bethesda 的引擎只要输入过控制台命令，就会把存档标记为 Modded 并关掉 Steam 成就。可以装 Baka Achievement Enabler (SFSE)（需要先装 SFSE），让开过控制台的存档继续拿成就；游戏更新后这个模组可能要等作者适配才能用。",
+            "【改船部件重叠报错】：官方造船厂里模块重叠时会提示无法保存。可以装 Ship Builder Tolerance Tweaks，装完后在控制台输入 bat toleranceBig 提高重叠容差，或输入 bat toleranceHuge 基本关闭重叠检查；想复原就输入 bat toleranceReset。",
+            "【卡死与任务卡关急救】：若因 NPC 浮空或被锁在门后交不了任务，打开控制台输入 tcl 关掉碰撞穿墙进屋，或用 setstage <任务ID> <阶段号> 直接把卡住的任务推到下一阶段。"
         ]
     },
     "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】星空 SFSE 启动助手\necho ========================================================\necho   【老L·单机避坑局】星空 SFSE 启动脚本\necho   找到 sfse_loader.exe 就用它启动，找不到就用原版启动\necho ========================================================\necho.\nif not exist \"Starfield.exe\" (\n    echo [!] 当前目录下没有 Starfield.exe，脚本什么都没改。\n    echo     请把本脚本放到 Starfield 游戏安装根目录再运行。\n    echo.\n    pause\n    exit /b\n)\nif exist \"sfse_loader.exe\" (\n    echo [+] 找到 sfse_loader.exe，用它启动游戏 ...\n    start \"\" \"sfse_loader.exe\"\n) else (\n    echo [i] 没找到 sfse_loader.exe，用 Starfield.exe 原版启动 ...\n    start \"\" \"Starfield.exe\"\n)\necho [i] 脚本不备份存档；指令没有逐条在游戏里实测，执行前先手动存档。\necho.\npause\n",
@@ -611,8 +611,8 @@ GTA5_DATA = {
     "hasConsole": True,
     "consoleShortcut": "~ (故事模式原生官方秘籍终端) 或 F4 (ScriptHookV 内置纯净修改菜单)",
     "consoleEnableGuide": {
-        "zh-CN": "【单机故事模式指南】\n1. 官方原生秘籍：进入单机故事模式后，直接按键盘左上角 ~ 键输入全英文秘籍并回车；\n2. ScriptHookV 离线内置菜单：将 ScriptHookV.dll、dinput8.dll 以及 NativeTrainer.asi 放入 GTA5 游戏根目录；\n3. 在故事模式按 F4 呼出图形化修改菜单，小键盘 8/2/4/6 切换方向，5 确认，0 返回；\n4. ⚠️ 别带着 ASI 插件或修改器文件进 GTA Online 线上模式，有封号风险。把 dinput8.dll 改名为 .bak 只是停掉 ASI 加载器；mods 文件夹、改过的 rpf 等其它改动要自己移走。",
-        "en": "Press ~ to input native cheats or press F4 with ScriptHookV for offline Native Trainer. NEVER go online with mods."
+        "zh-CN": "【单机故事模式指南】\n1. 官方原生秘籍：进入单机故事模式后，按键盘左上角 ~ 键或 / 键呼出输入框，输入全英文秘籍再回车；\n2. ScriptHookV 离线内置菜单：把 ScriptHookV.dll、配套的 dinput8.dll（ASI 加载器）以及 NativeTrainer.asi 放进 GTA5 游戏根目录（与 GTA5.exe 同目录）；\n3. 在故事模式按 F4 呼出内置的图形化修改菜单（具体操作按键以菜单界面上的提示为准）；\n4. 别带着 ASI 插件或修改器文件进 GTA Online 线上模式，有封号风险。把 dinput8.dll 改名为 .bak 只是停掉 ASI 加载器；mods 文件夹、改过的 rpf 等其它改动要自己移走。",
+        "en": "[Story Mode Guide]\n1. Native cheats: in single-player story mode, press ~ or / (top-left of the keyboard) to open the input box, type an all-English cheat phrase, and press Enter.\n2. ScriptHookV's offline built-in menu: put ScriptHookV.dll, its companion dinput8.dll (the ASI loader), and NativeTrainer.asi into the GTA V install folder (same folder as GTA5.exe).\n3. In story mode, press F4 to open the built-in trainer menu (follow the on-screen prompts for its exact controls).\n4. Never take ASI plugins or trainer files into GTA Online - it risks a ban. Renaming dinput8.dll to .bak only disables the ASI loader; you still have to manually remove any other changes yourself (a mods folder, edited .rpf files, etc.)."
     },
     "popularCommands": [
         "PAINKILLER",
@@ -1065,9 +1065,9 @@ GTA5_DATA = {
     "pitfallNote": {
         "title": "老L避坑笔记 (GTA 5 故事模式)",
         "tips": [
-            "【进线上前】：Rockstar 的 GTA Online 对内存注入查得很严。进线上模式前，把游戏根目录的 dinput8.dll 改名为 dinput8.dll.bak（停掉 ASI 加载器），mods 文件夹、改过的 rpf 等其它改动也要移走；没有办法保证不被封号。",
-            "【故事模式股票暴富机制】：麦克的莱斯特刺杀任务千万别提前做！等通关大结局‘联合储蓄’劫案拿到 2800 万初始本金后，再分批次接暗杀任务并全仓买入对应做空做多股票，本金可直接滚至 21 亿上限！",
-            "【打不开 F4 菜单】：若按 F4 毫无反应，说明缺失 Visual C++ 2015~2022 运行库或 DirectX 组件。去微软官网重新安装 Visual C++ 运行库和 DirectX 后再试。"
+            "【进线上前】：Rockstar 对 GTA Online 的内存注入查得很严。进线上模式前，把游戏根目录的 dinput8.dll 改名为 dinput8.dll.bak（停掉 ASI 加载器），mods 文件夹、改过的 rpf 等其它改动也要自己移走；没有人能担保不会被封号。",
+            "【故事模式股票机制】：麦克的莱斯特刺杀任务别提前做。按游戏维基整理的测试数据，建议打完《大结局》任一结局线拿到分成后，再分批接暗杀任务、把三位角色的钱提前压在对应股票上，等涨幅出现再卖（例如 Vice 任务后对应股票大约涨 25%~33%，Bus 任务后对应股票涨幅能接近翻倍）。另外游戏对单个角色的现金有 2,147,483,648 美元（约 21.47 亿）的硬性上限，这是 32 位整数导致的，超过这个数游戏就会开始出错，钱也滚不上去了。",
+            "【打不开 F4 菜单】：按 F4 没反应，通常是缺少 Visual C++ 2015~2022 运行库或者 DirectX 组件导致 ASI 插件加载不了。去微软官网重新装一遍 Visual C++ 运行库和 DirectX 再试。"
         ]
     },
     "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】GTA5 ASI 加载器开关\necho ========================================================\necho   【老L·单机避坑局】GTA5 ASI 加载器开关脚本\necho   把 dinput8.dll 改名为 dinput8.dll.bak 来停用，或改回来启用\necho ========================================================\necho.\nif not exist \"GTA5.exe\" (\n    echo [!] 当前目录下没有 GTA5.exe，脚本什么都没改。\n    echo     请把本脚本放到 Grand Theft Auto V 游戏安装根目录再运行。\n    echo.\n    pause\n    exit /b\n)\n\nset \"MODE=\"\nif exist \"dinput8.dll\" set \"MODE=on\"\nif not defined MODE if exist \"dinput8.dll.bak\" set \"MODE=off\"\nif not defined MODE (\n    echo [i] 没有 dinput8.dll，也没有 dinput8.dll.bak：没装 ASI 加载器，脚本什么都没改。\n    echo.\n    pause\n    exit /b\n)\n\nset \"choice=\"\nif \"%MODE%\"==\"on\" echo [当前状态] 有 dinput8.dll：ASI 加载器会加载 ScriptHookV 等插件，只能玩故事模式。\nif \"%MODE%\"==\"on\" set /p \"choice=把 dinput8.dll 改名为 dinput8.dll.bak、停用 ASI 加载器？输入 Y 确认: \"\nif \"%MODE%\"==\"off\" echo [当前状态] 只有 dinput8.dll.bak：ASI 加载器已停用。\nif \"%MODE%\"==\"off\" set /p \"choice=把 dinput8.dll.bak 改回 dinput8.dll、重新启用 ASI 加载器？输入 Y 确认: \"\n\nif /i not \"%choice%\"==\"Y\" (\n    echo [i] 没有输入 Y，脚本什么都没改。\n    echo.\n    pause\n    exit /b\n)\n\nif \"%MODE%\"==\"on\" ren \"dinput8.dll\" \"dinput8.dll.bak\"\nif \"%MODE%\"==\"off\" ren \"dinput8.dll.bak\" \"dinput8.dll\"\n\nif exist \"dinput8.dll\" (\n    echo [结果] 现在有 dinput8.dll：ASI 加载器会被加载，故事模式按 F4 试试菜单。\n) else (\n    echo [结果] 现在没有 dinput8.dll：ASI 加载器不会被加载。\n)\necho.\necho ========================================================\necho  [i] 这个脚本只改 dinput8.dll 这一个文件的名字。\necho      其它改过的文件（mods 文件夹、改过的 rpf 等）它不管；进 GTA Online 前要自己全部移走，有封号风险。\necho      脚本不备份存档，改之前先手动备份。\necho ========================================================\necho.\npause\n",
@@ -1085,8 +1085,8 @@ RDR2_DATA = {
     "hasConsole": False,
     "consoleShortcut": "F5 (ScriptHookRDR2 原生离线修改器) 或 游戏内设置-作弊码",
     "consoleEnableGuide": {
-        "zh-CN": "【单机故事模式指南】\n1. 官方秘籍输入：进入故事模式 -> 按 Esc 暂停 -> 选择【设置 (Settings)】-> 按左下角【作弊 (Cheats)】或 Shift 键 -> 输入对应英文短语并回车保存；\n2. ScriptHookRDR2 离线内置菜单：将 ScriptHookRDR2.dll、dinput8.dll 以及 NativeTrainer.asi 解压至游戏根目录；\n3. 启动故事模式按 F5 键唤出图形修改菜单，小键盘 8/2/4/6 控制，5 确认，0 返回；\n4. ⚠️ 别带着 Mod 进 RDO 线上模式，有封号风险。把 dinput8.dll 改名为 .bak 只是停掉 ASI 加载器，其它改过的文件要自己移走。",
-        "en": "Enter official cheat phrases in Settings -> Cheats, or press F5 with ScriptHookRDR2 in offline story mode."
+        "zh-CN": "【单机故事模式指南】\n1. 官方秘籍输入：进入故事模式 -> 按 Esc 打开暂停菜单 -> 选择【设置 (Settings)】-> 在设置界面右下角进入【作弊 (Cheats)】列表 -> 输入对应英文短语并回车；成功输入一次后，之后可以直接在列表里开关这个作弊；\n2. ScriptHookRDR2 + Rampage Trainer 离线内置菜单：把 ScriptHookRDR2.dll、dinput8.dll（或其它兼容的 ASI Loader）以及 Rampage Trainer 的 Rampage.asi 和 RampageFiles 文件夹解压到游戏根目录（与 RDR2.exe 同目录）；\n3. 启动故事模式按 F5 键唤出 Rampage 的图形修改菜单，小键盘 8/2/4/6 控制方向，Enter 确认，小键盘 0 返回（这些按键都可以在 Settings.json 或游戏内设置里改）；\n4. 别带着 Mod 进 RDO 线上模式，有封号风险。把 dinput8.dll 改名为 .bak 只是停掉 ASI 加载器，其它改过的文件要自己移走。",
+        "en": "[Story Mode Guide]\n1. Native cheats: in story mode, press Esc to open the pause menu -> go to Settings -> open the Cheats list from the bottom-right prompt -> type the English cheat phrase and press Enter. Once you've entered a cheat successfully, you can just toggle it on or off in the list afterward.\n2. ScriptHookRDR2 + Rampage Trainer's offline built-in menu: put ScriptHookRDR2.dll, dinput8.dll (or another compatible ASI loader), and Rampage Trainer's Rampage.asi and RampageFiles folder into the game's install folder (same folder as RDR2.exe).\n3. In story mode, press F5 to open Rampage's trainer menu; Numpad 8/2/4/6 moves the cursor, Enter selects, and Numpad 0 goes back (all of these keys can be changed in Settings.json or the in-game settings).\n4. Never take mods into RDO online - it risks a ban. Renaming dinput8.dll to .bak only disables the ASI loader; you still have to manually remove any other changed files yourself."
     },
     "popularCommands": [
         "You want freedom",
@@ -1347,9 +1347,9 @@ RDR2_DATA = {
     "pitfallNote": {
         "title": "老L避坑笔记 (荒野大镖客2 故事模式)",
         "tips": [
-            "【进线上前】：R星对 RDO 线上模式同样严查。进线上战局前，把游戏根目录的 dinput8.dll 改名为 dinput8.dll.bak（停掉 ASI 加载器），其它改过的文件也要移走；没有办法保证不被封号。",
-            "【捕猎毛皮品质保护】：想要获得三星完美毛皮，务必击杀头上本来就是三星的动物，并掏出春田步枪击中头部一击毙命；若嫌繁琐，直接使用本库一键添加全部三星皮！",
-            "【作弊码保存限制】：在官方设置里激活作弊码后，系统会默认暂时禁止保存新存档。若需保存修改后的金钱与装备，请使用 ScriptHookRDR2 或风灵月影修改器，它们不会禁用存档功能！"
+            "【进线上前】：R星对 RDO 线上模式同样严查。进线上战局前，把游戏根目录的 dinput8.dll 改名为 dinput8.dll.bak（停掉 ASI 加载器），其它改过的文件也要移走；没有人能担保不会被封号。",
+            "【毛皮品质机制】：想拿到「完美 (Perfect)」品质的毛皮，关键是一击致命——同一只动物挨的枪越多，毛皮品质就越差。要瞄准头、肺等要害部位，并按动物体型换合适的武器（小型动物用弓箭/瓦明步枪，中大型动物用普通/连发步枪，巨型动物用狙击枪），用望远镜查看动物信息可以提前看到推荐武器。",
+            "【作弊码会锁存档】：在官方设置里的作弊列表里激活一条作弊后，游戏会暂时禁止保存新进度。想继续边作弊边存档，可以改用 ScriptHookRDR2 配合 Rampage Trainer 这类离线修改器，它们走的是另一套机制，不会触发官方作弊系统那个「不让存档」的限制。"
         ]
     },
     "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】荒野大镖客2 ASI 加载器开关\necho ========================================================\necho   【老L·单机避坑局】荒野大镖客2 ASI 加载器开关脚本\necho   把 dinput8.dll 改名为 dinput8.dll.bak 来停用，或改回来启用\necho ========================================================\necho.\nif not exist \"RDR2.exe\" (\n    echo [!] 当前目录下没有 RDR2.exe，脚本什么都没改。\n    echo     请把本脚本放到 Red Dead Redemption 2 游戏安装根目录再运行。\n    echo.\n    pause\n    exit /b\n)\n\nset \"MODE=\"\nif exist \"dinput8.dll\" set \"MODE=on\"\nif not defined MODE if exist \"dinput8.dll.bak\" set \"MODE=off\"\nif not defined MODE (\n    echo [i] 没有 dinput8.dll，也没有 dinput8.dll.bak：没装 ASI 加载器，脚本什么都没改。\n    echo.\n    pause\n    exit /b\n)\n\nset \"choice=\"\nif \"%MODE%\"==\"on\" echo [当前状态] 有 dinput8.dll：ASI 加载器会加载 ScriptHookRDR2 等插件，只能玩故事模式。\nif \"%MODE%\"==\"on\" set /p \"choice=把 dinput8.dll 改名为 dinput8.dll.bak、停用 ASI 加载器？输入 Y 确认: \"\nif \"%MODE%\"==\"off\" echo [当前状态] 只有 dinput8.dll.bak：ASI 加载器已停用。\nif \"%MODE%\"==\"off\" set /p \"choice=把 dinput8.dll.bak 改回 dinput8.dll、重新启用 ASI 加载器？输入 Y 确认: \"\n\nif /i not \"%choice%\"==\"Y\" (\n    echo [i] 没有输入 Y，脚本什么都没改。\n    echo.\n    pause\n    exit /b\n)\n\nif \"%MODE%\"==\"on\" ren \"dinput8.dll\" \"dinput8.dll.bak\"\nif \"%MODE%\"==\"off\" ren \"dinput8.dll.bak\" \"dinput8.dll\"\n\nif exist \"dinput8.dll\" (\n    echo [结果] 现在有 dinput8.dll：ASI 加载器会被加载，故事模式按 F5 试试菜单。\n) else (\n    echo [结果] 现在没有 dinput8.dll：ASI 加载器不会被加载。\n)\necho.\necho ========================================================\necho  [i] 这个脚本只改 dinput8.dll 这一个文件的名字。\necho      其它改过的文件它不管；进 RDO 线上模式前要自己全部移走，有封号风险。\necho      脚本不备份存档，改之前先手动备份。\necho ========================================================\necho.\npause\n",
@@ -1365,8 +1365,8 @@ MHW_DATA = {
     "hasConsole": False,
     "consoleShortcut": "Insert 唤出 REFramework 覆盖菜单 / F10 调出调试控制台",
     "consoleEnableGuide": {
-        "zh-CN": "【怪物猎人世界 纯净模组与控制台指南】\n1. 下载 Stracker's Loader (包含 dinput8.dll 与 loader-config.json) 解压至游戏根目录 (Monster Hunter World/)；\n2. 将 REFramework 或 All Items in Shop 模组解压放入 nativePC/ 对应目录；\n3. 启动游戏，按键盘 Insert 键即可在屏幕左上角唤出 REFramework 菜单；\n4. 支持全珠子全素材一键补齐、聚魔之地等级随心调节与伤害血量实时透视！",
-        "en": "Install Stracker's Loader into MHW root. Press Insert to open REFramework menu for decorations, materials, and SmartHunter overlay."
+        "zh-CN": "【怪物猎人世界 模组安装指南】\n1. 下载并解压 Stracker's Loader 到游戏根目录（与 MonsterHunterWorld.exe 同目录），让 nativePC/ 里的替换文件重新生效；较新版本的 Stracker's Loader 还要求一起装它所需的 CRC fix（也就是 Performance Booster and Plugin Extender）插件，官方更新日志写明没装会导致怪物/任务相关的自制内容随机崩溃；\n2. 把想用的资源类模组（例如本站收录的商店售卖量扩充模组 Large Shop Assortment，会把几乎所有消耗品和连击素材加进道具商店）按说明解压进 nativePC/ 对应目录；\n3. SmartHunter 是一个独立运行的悬浮窗叠加程序，不是游戏内菜单：先正常启动游戏，再单独运行 SmartHunter.exe，它会实时显示受击伤害、DPS、目标部位血量等战斗信息；\n4. 本作用的是 MT Framework 引擎，并不支持 REFramework（那是给《生化危机2重制版》《怪物猎人崛起》《怪物猎人荒野》等 RE 引擎游戏用的工具），装错了也不会生效。",
+        "en": "[Monster Hunter: World Modding Guide]\n1. Download and extract Stracker's Loader into the game's install folder (same folder as MonsterHunterWorld.exe) so files in nativePC/ load again; newer versions of Stracker's Loader also require its CRC fix plugin (Performance Booster and Plugin Extender) - the official changelog states that without it, monster/quest custom content can crash randomly.\n2. Extract any resource-type mods you want (for example, the Large Shop Assortment mod listed on this site, which adds nearly all consumables and combo materials to the item shop) into nativePC/ as instructed.\n3. SmartHunter is a standalone overlay program, not an in-game menu: launch the game normally first, then separately run SmartHunter.exe; it shows live combat info such as damage taken, DPS, and target part health.\n4. This game runs on the MT Framework engine and does not support REFramework (that tool is for RE Engine titles like Resident Evil 2 Remake, Monster Hunter Rise, and Monster Hunter Wilds) - installing it here simply won't do anything."
     },
     "popularCommands": [],
     "hasMods": True,
@@ -1461,11 +1461,11 @@ MHW_DATA = {
     "consoleCategories": [],
     "scenarioBundles": [],
     "pitfallNote": {
-        "title": "老L避坑笔记 (怪物猎人世界 冰原终极避坑指南)",
+        "title": "老L避坑笔记 (怪物猎人世界 冰原版)",
         "tips": [
-            "【联机防踢与尊重原则】：卡普空对单机与好友自建私人房间使用 Mod 比较宽松，但没有人能担保不封号。但在加入路人公开救援时，请务必关闭【一击必杀】与【锁血】，使用 SmartHunter 纯净显示血量即可，切勿破坏其他真实玩家的狩猎乐趣！",
-            "【黑屏无限加载急救】：安装模组后游戏无法启动或黑屏卡死，99% 是由于游戏大更新后 Stracker's Loader 未更新或 nativePC 遗留了过期前置。删除游戏根目录的 dinput8.dll 即可瞬间恢复正常启动！",
-            "【CPU 100% 掉帧发热排查】：冰原自带的反作弊线程存在内存死循环 Bug。请务必安装本站推荐的 Performance Booster 补丁，直接禁用该死循环，显卡性能完全释放。"
+            "【联机防踢与尊重他人】：卡普空对单机和自建私人房间用 Mod 比较宽松，但没有人能担保不封号。加入路人公开救援时，务必关掉一击必杀和锁血之类的效果，用 SmartHunter 纯看数据就好，别影响其他真实玩家的体验。",
+            "【黑屏/卡死排查】：装了 Stracker's Loader 相关模组后游戏打不开或卡黑屏，常见原因是游戏更新后 Stracker's Loader 还没适配，或者 nativePC 里留着和当前版本不兼容的旧模组文件；可以先删掉或改名游戏根目录下的 dinput8.dll（相当于关掉 Stracker's Loader），能正常进游戏就说明问题出在加载器或 nativePC 里的模组上，再逐个排查。",
+            "【CPU 占用过高排查】：游戏自带一段反复做内存 CRC 校验的代码，频繁检查大块内存区域，对 CPU 占用影响明显；可以装 Performance Booster and Plugin Extender（需要先装好 Stracker's Loader 及其要求的 VC++ 运行库）去掉这段校验来降低 CPU 占用，作者说法是测试过连续运行 20 小时没问题，但这不是官方支持的改法，稳定性自己判断。"
         ]
     },
     "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】怪猎世界 Mod 目录检查\necho ========================================================\necho   【老L·单机避坑局】怪物猎人世界 Mod 目录检查脚本\necho   检查 dinput8.dll 在不在；没有 nativePC 目录就新建一个\necho ========================================================\necho.\nif not exist \"MonsterHunterWorld.exe\" (\n    echo [!] 当前目录下没有 MonsterHunterWorld.exe，脚本什么都没改。\n    echo     请把本脚本放到 Monster Hunter World 游戏安装根目录再运行。\n    echo.\n    pause\n    exit /b\n)\nif exist \"dinput8.dll\" (\n    echo [+] 找到 dinput8.dll：Stracker's Loader 用的就是这个文件名。只检查了文件在不在。\n) else (\n    echo [!] 没找到 dinput8.dll，依赖 Stracker's Loader 的 Mod 可能加载不了。\n)\nif not exist \"nativePC\" (\n    mkdir nativePC\n    echo [+] 已新建 nativePC 目录。\n) else (\n    echo [i] nativePC 目录已经有了，没有改动。\n)\necho [i] 脚本不备份存档，装 Mod 前先手动备份。\necho.\npause\n",
@@ -1481,8 +1481,8 @@ SEKIRO_DATA = {
     "hasConsole": False,
     "consoleShortcut": "ModEngine 挂钩引导 + 小键盘热键 / 慢动作防御弹刀辅助",
     "consoleEnableGuide": {
-        "zh-CN": "【只狼 纯净模组与弹刀防反教学指南】\n1. 安装 ModEngine：将 dinput8.dll 与 modengine.ini 放入只狼游戏根目录 (与 sekiro.exe 同目录)；\n2. 新建 mods/ 文件夹，将下载的角色时装、材质与招式 Mod 放入该目录；\n3. 只狼没有 EAC 反作弊，也没有联机模式；\n4. 开启 F1 键可进入 0.3x 防御完美弹刀子弹时间，轻松看破任何 Boss 的连续乱舞招式！",
-        "en": "Install ModEngine into Sekiro root. Press F1 for 0.3x parry window bullet time and hotkeys for infinite spirit emblems."
+        "zh-CN": "【只狼 Mod Engine 安装说明】\n1. 安装 Mod Engine：把 dinput8.dll 和 modengine.ini 放进只狼游戏根目录（与 sekiro.exe 同目录）；\n2. 新建一个 mods 文件夹，把下载的角色、材质、招式类 Mod 放进去，再打开 modengine.ini 确认 modOverrideDirectory 指向这个目录（默认就是 \\mods）；\n3. 只狼没有 EAC 之类的反作弊，也没有联机模式，不存在因为用 Mod 被封号的问题；想卸载 Mod Engine，删掉或改名 dinput8.dll 就行；\n4. 如果想练弹反节奏，可以另外装一个独立运行的小工具 Sekiro FPS Unlock and More（不走 dinput8.dll，每次玩之前都要单独启动它来打内存补丁），里面带一个全局游戏速度调节功能，默认用 Ctrl+M 开关，可以把整体节奏放慢来辅助练习，但它不是针对某个招式专门做的，调太慢时某些过场动画或 NPC 互动可能会崩溃。",
+        "en": "[Installing Mod Engine for Sekiro]\n1. Install Mod Engine: copy dinput8.dll and modengine.ini into the Sekiro install folder (same folder as sekiro.exe).\n2. Create a 'mods' folder and drop the cosmetic/texture/moveset mod files you downloaded into it, then open modengine.ini and confirm modOverrideDirectory points to it (it defaults to \\mods).\n3. Sekiro has no EAC-style anti-cheat and no online mode, so there's no ban risk from using mods. To uninstall Mod Engine, just delete or rename dinput8.dll.\n4. If you want a parry-timing practice aid, you can separately run Sekiro FPS Unlock and More (it doesn't go through dinput8.dll - you have to start it every session to reapply its memory patch). It has a global game-speed slider toggled with Ctrl+M by default, which slows the whole game down to help with practice; it isn't tuned for any specific attack, and setting it too low can crash certain cutscenes or NPC interactions."
     },
     "popularCommands": [],
     "hasMods": True,
@@ -1577,9 +1577,8 @@ SEKIRO_DATA = {
     "pitfallNote": {
         "title": "老L避坑笔记 (只狼：影逝二度 极客避坑指南)",
         "tips": [
-            "【完全单机】：只狼没有 EAC 反作弊，也没有联机和入侵，不存在联机封号的问题。修改器和 ModEngine 是第三方工具，用之前先备份存档。",
-            "【龙咳机制真相破除】：很多新手害怕因多次死亡导致 NPC【龙咳】而心惊胆战。实际上龙咳只会暂时挂起支线对话，绝对不会造成任何 NPC 死亡！只要用一滴【龙胤之露】在鬼佛处祷告，即可瞬间痊愈全苇名国所有人的龙咳，完全不必有心理压力！",
-            "【弹刀时机与按键节奏】：频繁狂按防御键 L1 会被系统判定为狂躁按键，弹刀判定窗口会从正常的 0.5 秒骤降至 0.1 秒！使用本站推荐的 0.3x 子弹时间慢动作，看准刀刃即将接触的瞬间单次按压，才能培养出最地道的节奏肌肉记忆。"
+            "【完全单机】：只狼没有 EAC 反作弊，也没有联机和入侵，不存在因为用 Mod 被封号的问题。修改器和 Mod Engine 都是第三方工具，用之前先备份存档。",
+            "【龙咳机制】：角色因【复活】而反复死亡，会扩散【龙咳】，部分 NPC 会咳嗽生病，但龙咳只会卡住部分支线剧情、不会直接导致 NPC 死亡。拿到艾玛给的治疗御守后，带一滴【龙胤之露】在任意鬼佛那里选择龙咳超度，可以一次治好当前所有患龙咳的人。"
         ]
     },
     "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】只狼 ModEngine 目录检查\necho ========================================================\necho   【老L·单机避坑局】只狼 ModEngine 目录检查脚本\necho   检查 dinput8.dll 在不在；没有 mods 目录就新建一个\necho ========================================================\necho.\nif not exist \"sekiro.exe\" (\n    echo [!] 当前目录下没有 sekiro.exe，脚本什么都没改。\n    echo     请把本脚本放到 Sekiro 游戏安装根目录再运行。\n    echo.\n    pause\n    exit /b\n)\nif exist \"dinput8.dll\" (\n    echo [+] 找到 dinput8.dll：ModEngine 用的就是这个文件名。只检查了文件在不在。\n) else (\n    echo [!] 没找到 dinput8.dll，请把 ModEngine 解压到游戏根目录。\n)\nif not exist \"mods\" (\n    mkdir mods\n    echo [+] 已新建 mods 目录。\n) else (\n    echo [i] mods 目录已经有了，没有改动。\n)\necho [i] 脚本不备份存档，装 Mod 前先手动备份。\necho.\npause\n",
@@ -1595,8 +1594,8 @@ RE4_DATA = {
     "hasConsole": False,
     "consoleShortcut": "Insert 键呼出 REFramework 图形化 ImGui 菜单 / 自由运镜摄影",
     "consoleEnableGuide": {
-        "zh-CN": "【生化危机4重制版 REFramework 控制台指南】\n1. 下载 REFramework for RE4 (praydog 核心库，含 dinput8.dll)；\n2. 解压缩并将 dinput8.dll 放入游戏根目录 (包含 re4.exe 的目录)；\n3. 启动游戏，在任何过场动画或战斗中按键盘 Insert 键唤出 ImGui 控制台面板；\n4. 支持全公文包武器解锁、无敌锁血、无限火箭筒调出、佣兵无限连击与第一人称/宽 FOV 视场角调节！",
-        "en": "Install REFramework (dinput8.dll) into RE4 Remake root. Press Insert to toggle ImGui console for weapons, infinite ammo, and Mercenaries S++ rank."
+        "zh-CN": "【生化危机4重制版 REFramework 使用指南】\n1. 下载 REFramework（praydog 制作，支持本作等多款 RE 引擎游戏）；\n2. 把压缩包里的 dinput8.dll 解压放进游戏根目录（与 re4.exe 同目录）；\n3. 启动游戏后随时按 Insert 键即可唤出 REFramework 的 ImGui 菜单（按键可以在菜单的 Configuration 里改）；\n4. REFramework 本身自带自由摄像机、FOV 滑条、场景时间缩放（慢动作）、隐藏 UI 等通用功能；至于解锁武器、改无限弹药这类具体效果，需要另外装社区做的 Lua 脚本或修改器，不是 REFramework 自带的。",
+        "en": "[REFramework Guide for Resident Evil 4 Remake]\n1. Download REFramework (made by praydog, supports this game along with several other RE Engine titles).\n2. Extract dinput8.dll from the archive into the game's install folder (same folder as re4.exe).\n3. Once the game is running, press Insert at any time to open REFramework's ImGui menu (the key can be changed under its Configuration tab).\n4. REFramework itself ships with generic tools like a free camera, an FOV slider, scene timescale (slow motion), and a UI hider; specific effects such as unlocking weapons or giving infinite ammo need separate community-made Lua scripts or trainers - REFramework doesn't provide those on its own."
     },
     "popularCommands": [],
     "hasMods": True,
@@ -1649,9 +1648,8 @@ RE4_DATA = {
     "pitfallNote": {
         "title": "老L避坑笔记 (生化危机4：重制版 专家避坑指南)",
         "tips": [
-            "【专业难度 S+ 评价核心机制】：想要拿到专业 S+ 评价解锁猫耳（全武器无限弹药），必须在新游戏开局、游戏时间在 5 小时 30 分钟以内且【全流程保存存档次数不超过 15 次】！在进入城堡前尽量将存档留在巨人与双电锯前，避免坏档！",
-            "【碍事梨防扛绝技】：到了城堡拿到阿什莉骑士铠甲后，请务必在附加内容菜单中为阿什莉换上！换上后所有邪教徒企图抱起她时都会被压趴在地上，直接永久解除护送后顾之忧！",
-            "【晕 3D 与视场角调整】：本作第一人称举枪时默认后背拉得很近，导致不少玩家剧烈恶心。安装本站推荐的 REFramework 与 No Zoom On Aim 补丁，即可将 FOV 拉远至 95 度，视野舒畅开阔。"
+            "【专业难度 S+ 评价】：在专业难度下以 S+ 评价通关主线，会完成挑战「Leon \"S+\" Kennedy」，奖励 3000 CP 和配饰「猫耳」（Cat Ears）。S+ 的具体评分条件以游戏内挑战说明和结算画面为准。",
+            "【瞄准时眩晕排查】：本作举枪瞄准时镜头会自动收窄视野（类似变相缩小 FOV），容易让部分玩家觉得晕；可以用 REFramework 的 FOV 滑条把平时的视场角调大一些，再配合社区做的 No aiming zoom 模组取消瞄准时镜头收窄的效果来缓解，具体调多大看个人舒适度，没有一个统一的最佳数值。"
         ]
     },
     "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】生化危机4重制版 REFramework 检查\necho ========================================================\necho   【老L·单机避坑局】生化危机4重制版 REFramework 检查脚本\necho   只检查 dinput8.dll 在不在，不改任何文件\necho ========================================================\necho.\nif not exist \"re4.exe\" (\n    echo [!] 当前目录下没有 re4.exe，脚本什么都没改。\n    echo     请把本脚本放到 Resident Evil 4 Remake 游戏安装根目录再运行。\n    echo.\n    pause\n    exit /b\n)\nif exist \"dinput8.dll\" (\n    echo [+] 找到 dinput8.dll：REFramework 用的就是这个文件名。只检查了文件在不在。\n    echo [i] 游戏内按 Insert 键试试 REFramework 菜单。\n) else (\n    echo [!] 没找到 dinput8.dll，请把 REFramework 解压到游戏根目录。\n)\necho [i] 脚本不备份存档，装 Mod 前先手动备份。\necho.\npause\n",
