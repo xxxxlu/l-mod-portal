@@ -1,33 +1,30 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Enrich flagship games (Cyberpunk 2077, Black Myth Wukong, Witcher 3, Baldur's Gate 3)
-with scenario bundles, pitfall notes, batch opener scripts, and verified patch tags.
-Also synchronizes games_top100.json and public/data.js with window.TRANSLATIONS_DATA.
+Scenario bundles, pitfall notes, batch helper scripts and patch tags for the
+flagship games listed in FLAGSHIP_DATA.
+
+Writes only those five fields of those games, through gamedata_guard: the master
+data must exist, radar and trainer fields are never written, and in public/data.js
+only the GAMES_DATA segment changes (TRANSLATIONS_DATA is left alone).
+Other games are not touched (this script used to reset every other game's
+verifiedPatch / radarSecretCode, overwriting the values other scripts set).
+
+Usage: python3 scripts/enrich_flagship_scenarios.py [--dry-run]
 """
 
-import json
-import os
+from gamedata_guard import write_owned_fields
 
-BASE_DIR = '/Users/xiaolu/Desktop/work/l-mod-portal'
-JSON_PATH = os.path.join(BASE_DIR, 'src/data/games_top100.json')
-JS_PATH = os.path.join(BASE_DIR, 'public/data.js')
-TRANS_PATH = os.path.join(BASE_DIR, 'src/i18n/translations.json')
-
-with open(JSON_PATH, 'r', encoding='utf-8') as f:
-    games = json.load(f)
-
-with open(TRANS_PATH, 'r', encoding='utf-8') as f:
-    translations = json.load(f)
+OWNED_FIELDS = ("verifiedPatch", "radarSecretCode", "pitfallNote", "scenarioBundles", "batScript")
 
 FLAGSHIP_DATA = {
     "cyberpunk-2077": {
-        "verifiedPatch": "2.13 (往日之影DLC全兼容)",
+        "verifiedPatch": "2.13（未实测）",
         "radarSecretCode": "老L单机888",
         "pitfallNote": {
-            "title": "老L实验室避坑笔记 (赛博朋克2077 v2.13)",
+            "title": "老L避坑笔记 (赛博朋克2077 v2.13)",
             "tips": [
-                "【版本语法避坑】：2.0+ 往日之影彻底重构了专精成长树，千万别运行网上旧版 1.63 的 SetLevel 代码，否则专精树直接永久卡死！本站套餐已全面换用 2.13 安全合规的 SetProficiencyLevel 函数。",
+                "【版本语法避坑】：2.0+ 往日之影彻底重构了专精成长树，千万别运行网上旧版 1.63 的 SetLevel 代码，否则专精树直接永久卡死！本站套餐改用了 2.0 之后的 SetProficiencyLevel 写法（没有逐条实测）。",
                 "【CET热键防呆】：首次进入游戏按 ~ 键若没反应，请先切换到英文输入法（Caps Lock关）。CET 控制台必须在全屏或无边框窗口模式下呼出。",
                 "【剧情Fact生效机理】：救赎包里的 Fact 标志位修改后，建议立刻进行一次快速存档 (F5) 再读档 (F9)，即可瞬间刷新 NPC 状态机与夜之城任务树。"
             ]
@@ -47,7 +44,7 @@ FLAGSHIP_DATA = {
                     "50 本特权书 + 20 本属性技能书点满核心",
                     "金色 5 阶制造组件与军火弹药全满"
                 ],
-                "code": """-- [老L·极客场景套餐] 赛博朋克2077 新手破荒起飞包 (v2.13 实测)
+                "code": """-- [老L·极客场景套餐] 赛博朋克2077 新手破荒起飞包 (v2.13，未实测)
 Game.GodMode(true)
 Game.InfiniteStamina(true)
 Game.AddToInventory("Items.money", 2000000)
@@ -71,7 +68,7 @@ Game.AddToInventory("Items.CyberwareMaterial5", 1000)"""
                     "夜之城全图 150+ 快速旅行数据终端瞬开",
                     "一键消散 NCPD 全城警星与暴恐机动队通缉"
                 ],
-                "code": """-- [老L·极客场景套餐] 赛博朋克2077 隐藏结局与意难平救赎包 (v2.13 实测)
+                "code": """-- [老L·极客场景套餐] 赛博朋克2077 隐藏结局与意难平救赎包 (v2.13，未实测)
 Game.GetQuestsSystem():SetFactStr("sq032_johnny_friend", 1)
 Game.GetQuestsSystem():SetFactStr("fast_travel_all_unlocked", 1)
 Game.GetQuestsSystem():SetFactStr("judy_romanceable", 1)
@@ -93,7 +90,7 @@ Game.GetPreventionSpawnSystem():RequestDespawnPreventionAgents()"""
                     "奇美拉核心插件（爆裂穿透动能高爆 + 终极壁垒200%穿墙）",
                     "全夜之城所有载具与保时捷911超跑全买断"
                 ],
-                "code": """-- [老L·极客场景套餐] 赛博朋克2077 二周目全神装满配包 (v2.13 实测)
+                "code": """-- [老L·极客场景套餐] 赛博朋克2077 二周目全神装满配包 (v2.13，未实测)
 local ds = PlayerDevelopmentSystem.GetInstance(Game.GetPlayer()):GetDevelopmentData(Game.GetPlayer()) for _, p in ipairs({"Headhunter", "Netrunner", "Shinobi", "Solo", "Engineer"}) do ds:SetProficiencyLevel(gamedataProficiencyType[p], 60, telemetryLevelGainReason.Gameplay) end
 Game.AddToInventory("Items.AdvancedSandevistanApogeePlusPlus", 1)
 Game.AddToInventory("Items.HauntedCyberdeck_LegendaryPlusPlus", 1)
@@ -110,10 +107,10 @@ Game.GetVehicleSystem():EnableAllPlayerVehicles()"""
         ],
         "batScript": """@echo off
 chcp 65001 >nul
-title 【老L·单机避坑局】赛博朋克2077 控制台环境一键检测与开门
+title 【老L·单机避坑局】赛博朋克2077 CET 呼出键设置
 echo ========================================================
-echo   【老L·单机避坑局】赛博朋克2077 控制台一键检测与绑定脚本
-echo   适用最新 2.13/往日之影 · 零木马 · 极速配置
+echo   【老L·单机避坑局】赛博朋克2077 CET 呼出键设置脚本
+echo   把 CET 的呼出键写成 ~ 键；改之前把原 bindings.json 另存为 .bak
 echo ========================================================
 echo.
 
@@ -121,40 +118,46 @@ set "CET_DIR=bin\\x64\\plugins\\cyber_engine_tweaks"
 set "BIND_FILE=%CET_DIR%\\bindings.json"
 
 if not exist "bin\\x64\\Cyberpunk2077.exe" (
-    echo [!] 未在当前目录下检测到 Cyberpunk2077.exe
-    echo     请将本 bat 脚本放置在《赛博朋克2077》游戏安装根目录下运行！
+    echo [!] 当前目录下没有 bin\\x64\\Cyberpunk2077.exe，脚本什么都没改。
+    echo     请把本脚本放到《赛博朋克2077》游戏安装根目录再运行。
     echo.
     pause
     exit /b
 )
 
-if not exist "%CET_DIR%" mkdir "%CET_DIR%"
+if not exist "%CET_DIR%" (
+    echo [i] 没找到 %CET_DIR%，CET 可能还没装；先把这个目录建好。
+    mkdir "%CET_DIR%"
+)
 
-echo [*] 正在配置默认控制台呼出快捷键为 ~ 键 (OEM_3 键位代码 192) ...
-if exist "%BIND_FILE%" copy /y "%BIND_FILE%" "%BIND_FILE%.bak" >nul
+if exist "%BIND_FILE%" (
+    copy /y "%BIND_FILE%" "%BIND_FILE%.bak" >nul
+    echo [+] 原来的 bindings.json 已另存为 bindings.json.bak
+)
 
-echo {"overlay_key": 192}>"%BIND_FILE%"
-echo [+] 快捷键绑定已就绪：默认按 ~ (波浪键) 呼出 CET 控制台！
-
+echo {"cet": {"overlay_key": 54043195528445952}}>"%BIND_FILE%"
+echo [+] 已写入 %BIND_FILE%：CET 呼出键 = ~ 键
+echo     按 CET 源码里的格式写的，没在游戏里试过；原文件里其它 Mod 的按键会被清掉，要用就从 .bak 拷回来。
 echo.
 echo ========================================================
-echo  [√] 开门环境就绪！
-echo      请确保 bin\\x64 目录下已放置 CET 核心前置文件。
-echo      启动游戏按 ~ 键即可粘贴老L套餐指令代码！
+echo  [i] 还要你自己确认：bin\\x64 下已经放好 CET 的文件。
+echo      进游戏按 ~ 没反应：删掉 bindings.json 再启动，CET 会弹窗让你重新绑键。
+echo      脚本不备份存档；指令没有逐条在游戏里实测，执行前先手动存档。
 echo ========================================================
 echo.
-pause"""
+pause
+"""
     },
 
     "black-myth-wukong": {
-        "verifiedPatch": "v1.0.10.15610 (Steam最新补丁实测)",
+        "verifiedPatch": "v1.0.10.15610（未实测）",
         "radarSecretCode": "老L单机888",
         "pitfallNote": {
-            "title": "老L实验室避坑笔记 (黑神话：悟空)",
+            "title": "老L避坑笔记 (黑神话：悟空)",
             "tips": [
                 "【打坐存盘后执行】：招式变身与道具全收集指令建议在土地庙打坐存盘后输入，避免由于过场动画强制卸载模型导致镜头卡顿。",
                 "【0.4x 子弹时间妙用】：对于手残党，开启 slomo 0.4 子弹时间不仅能轻松看清 Boss 抬手，还能大幅延长看破识破判定帧，极其优雅地通关！",
-                "【UE4SS前置保障】：请认准 UE4SS 官方签名版本，本站批处理自动将 ConsoleEnablerMod 设为 1，杜绝第三方修改器报毒风险。"
+                "【UE4SS 前置】：UE4SS 到它的 GitHub 发布页下载。本站的 .bat 会把 mods.txt 里的 ConsoleEnablerMod 从 0 改成 1（改之前另存 mods.txt.bak）；mods.txt 里没有这一行的话要自己加。"
             ]
         },
         "scenarioBundles": [
@@ -222,49 +225,65 @@ allwine"""
         ],
         "batScript": """@echo off
 chcp 65001 >nul
-title 【老L·单机避坑局】黑神话悟空 调试控制台一键激活
+title 【老L·单机避坑局】黑神话悟空 UE4SS 控制台开关
 echo ========================================================
-echo   【老L·单机避坑局】黑神话悟空 调试控制台一键激活器
-echo   基于虚幻5原生控制台 · 自动备份 · 绿色透明
+echo   【老L·单机避坑局】黑神话悟空 UE4SS 控制台开关脚本
+echo   把 mods.txt 里的 ConsoleEnablerMod 改成 1；改之前另存 mods.txt.bak
 echo ========================================================
 echo.
 
-set "MODS_TXT=b1\\Binaries\\Win64\\ue4ss\\mods.txt"
+set "WIN64=b1\\Binaries\\Win64"
 
 if not exist "b1\\Binaries\\Win64" (
-    echo [!] 未在当前目录下检测到 b1\\Binaries\\Win64
-    echo     请将本 bat 脚本放置在《黑神话：悟空》安装根目录下运行！
+    echo [!] 当前目录下没有 b1\\Binaries\\Win64，脚本什么都没改。
+    echo     请把本脚本放到《黑神话：悟空》游戏安装根目录再运行。
     echo.
     pause
     exit /b
 )
 
-if exist "%MODS_TXT%" (
-    echo [*] 正在备份 mods.txt 到 %MODS_TXT%.bak ...
-    copy /y "%MODS_TXT%" "%MODS_TXT%.bak" >nul
-    powershell -Command "(Get-Content '%MODS_TXT%') -replace 'ConsoleEnablerMod\\s*:\\s*0', 'ConsoleEnablerMod : 1' | Set-Content '%MODS_TXT%'"
-    echo [+] 调试控制台模块已激活为 1！
+set "MODS_TXT="
+if exist "%WIN64%\\ue4ss\\Mods\\mods.txt" set "MODS_TXT=%WIN64%\\ue4ss\\Mods\\mods.txt"
+if not defined MODS_TXT if exist "%WIN64%\\Mods\\mods.txt" set "MODS_TXT=%WIN64%\\Mods\\mods.txt"
+
+if not defined MODS_TXT (
+    echo [!] %WIN64%\\ue4ss\\Mods\\ 和 %WIN64%\\Mods\\ 下都没有 mods.txt，脚本什么都没改。
+    echo     请先把 UE4SS 解压到 %WIN64%\\ 再运行本脚本。
+    echo.
+    pause
+    exit /b
+)
+
+copy /y "%MODS_TXT%" "%MODS_TXT%.bak" >nul
+echo [+] 已另存 %MODS_TXT%.bak
+powershell -NoProfile -Command "(Get-Content '%MODS_TXT%') -replace 'ConsoleEnablerMod\\s*:\\s*0', 'ConsoleEnablerMod : 1' | Set-Content '%MODS_TXT%'"
+
+findstr /r /i /c:"ConsoleEnablerMod *: *1" "%MODS_TXT%" >nul
+if errorlevel 1 (
+    echo [!] %MODS_TXT% 里没有 ConsoleEnablerMod 这一行。
+    echo     请用记事本打开它，自己加一行：ConsoleEnablerMod : 1
 ) else (
-    echo [i] 未检测到 ue4ss\\mods.txt，请确保已安装 UE4SS 调试前置。
+    echo [+] %MODS_TXT% 里 ConsoleEnablerMod 现在是 1。
 )
 
 echo.
 echo ========================================================
-echo  [√] 搞定！进入游戏按 F10 或 ~ 键呼出控制台！
-echo      直接粘贴老L推荐套餐代码即可畅玩！
+echo  [i] 进游戏按 F10 或 ~ 键试试控制台。
+echo      脚本不备份存档；指令没有逐条在游戏里实测，执行前先手动存档。
 echo ========================================================
 echo.
-pause"""
+pause
+"""
     },
 
     "witcher-3": {
-        "verifiedPatch": "v4.04 (次世代版 / 完全版 - REDkit官方支持)",
+        "verifiedPatch": "v4.04（未实测）",
         "radarSecretCode": "老L单机888",
         "pitfallNote": {
-            "title": "老L实验室避坑笔记 (巫师3 次世代版 v4.04)",
+            "title": "老L避坑笔记 (巫师3 次世代版 v4.04)",
             "tips": [
                 "【零注入原生开启】：次世代版 4.04 官方原生隐藏了调试控制台，只需改动 general.ini 添加 DBGConsoleOn=true 即可，根本不需要下载任何可能报毒的第三方 exe！",
-                "【昆特牌无脑秒胜】：打牌输了想砸键盘？控制台输入 winGwint(true) 直接判定胜利，既不毁档又能稳拿全成就！",
+                "【昆特牌无脑秒胜】：打牌输了想砸键盘？控制台输入 winGwint(true) 直接判定胜利（执行前先存档）。",
                 "【爱丽丝玫瑰与湖女剑】：石之心通关后遗憾把玫瑰交出去了？输入 additem('Iris\\'s Rose') 即可让紫色玫瑰永远留在杰洛特背包与白鸦葡萄园！"
             ]
         },
@@ -284,7 +303,7 @@ pause"""
                     "AllowFT(1) 解除路标限制，野外随时随地自由传送",
                     "红绿蓝极品大突变诱发物各 10 个"
                 ],
-                "code": """// [老L·极客场景套餐] 巫师3次世代版 新手破荒起飞包 (v4.04 实测)
+                "code": """// [老L·极客场景套餐] 巫师3次世代版 新手破荒起飞包 (v4.04，未实测)
 god
 likeaboss
 addmoney(100000)
@@ -308,7 +327,7 @@ additem('Greater mutagen green', 10)"""
                     "secretgwint 五大阵营顶级英雄昆特牌全收集",
                     "winGwint(true) 昆特牌局无脑秒胜，救赎打牌遗憾"
                 ],
-                "code": """// [老L·极客场景套餐] 巫师3次世代版 拯救爱丽丝与完美救赎包 (v4.04 实测)
+                "code": """// [老L·极客场景套餐] 巫师3次世代版 拯救爱丽丝与完美救赎包 (v4.04，未实测)
 additem('Aerondight EP2')
 additem('Olgierd Sabre')
 additem('Iris\\'s Rose')
@@ -330,7 +349,7 @@ winGwint(true)"""
                     "宗师级猫学派极品银剑（剑舞回旋流）",
                     "师匠级飞狮怪银剑（暴击瘾头流）"
                 ],
-                "code": """// [老L·极客场景套餐] 巫师3次世代版 二周目宗师神装满配包 (v4.04 实测)
+                "code": """// [老L·极客场景套餐] 巫师3次世代版 二周目宗师神装满配包 (v4.04，未实测)
 setlevel(100)
 additem('White Tiger Armor')
 additem('White Tiger Boots')
@@ -346,56 +365,63 @@ additem('Olgierd Sabre')"""
         ],
         "batScript": """@echo off
 chcp 65001 >nul
-title 【老L·单机避坑局】巫师3次世代版 控制台一键开门工具
+title 【老L·单机避坑局】巫师3次世代版 控制台开关
 echo ========================================================
-echo   【老L·单机避坑局】巫师3次世代版 控制台一键开门脚本
-echo   官方底层原生开关 · 100%% 开源透明 · 自动备份原文件
+echo   【老L·单机避坑局】巫师3次世代版 控制台开关脚本
+echo   在 general.ini 里打开 DBGConsoleOn；改之前另存 general.ini.bak
 echo ========================================================
 echo.
 
 set "TARGET_DIR=bin\\config\\base"
 set "TARGET_FILE=%TARGET_DIR%\\general.ini"
 
-if not exist "%TARGET_FILE%" (
-    echo [!] 未在当前目录下检测到 %TARGET_FILE%
-    echo     请将本 bat 脚本直接复制到《巫师3》游戏安装根目录运行！
+if not exist "bin\\config\\base\\general.ini" (
+    echo [!] 当前目录下没有 bin\\config\\base\\general.ini，脚本什么都没改。
+    echo     请把本脚本放到《巫师3》游戏安装根目录再运行。
     echo.
     pause
     exit /b
 )
 
-echo [*] 正在备份原始配置文件到 %TARGET_FILE%.bak ...
 copy /y "%TARGET_FILE%" "%TARGET_FILE%.bak" >nul
-echo [+] 备份完成！原配置文件已安全保留。
+echo [+] 已另存 %TARGET_FILE%.bak
 
-echo [*] 正在注入官方原生控制台开关 DBGConsoleOn=true ...
 findstr /i "DBGConsoleOn" "%TARGET_FILE%" >nul
 if %errorlevel% equ 0 (
-    echo [i] 配置文件中已存在 DBGConsoleOn，正在更新为 true ...
-    powershell -Command "(Get-Content '%TARGET_FILE%') -replace '(?i)DBGConsoleOn\\s*=\\s*false', 'DBGConsoleOn=true' | Set-Content '%TARGET_FILE%'"
+    echo [i] general.ini 里已有 DBGConsoleOn，把 false 改成 true ...
+    powershell -NoProfile -Command "(Get-Content '%TARGET_FILE%') -replace '(?i)DBGConsoleOn\\s*=\\s*false', 'DBGConsoleOn=true' | Set-Content '%TARGET_FILE%'"
 ) else (
     echo.>>"%TARGET_FILE%"
     echo [General]>>"%TARGET_FILE%"
     echo DBGConsoleOn=true>>"%TARGET_FILE%"
+    echo [+] 已在 general.ini 末尾加上 [General] 和 DBGConsoleOn=true
+)
+
+findstr /r /i /c:"DBGConsoleOn *= *true" "%TARGET_FILE%" >nul
+if errorlevel 1 (
+    echo [!] general.ini 里没找到 DBGConsoleOn=true，请用记事本打开 %TARGET_FILE% 自己检查。
+) else (
+    echo [+] general.ini 里现在有 DBGConsoleOn=true。
 )
 
 echo.
 echo ========================================================
-echo  [√] 搞定！控制台已成功开启！
-echo      进入游戏按 ~ (波浪键) 或 @ 键即可呼出控制台！
-echo      若遇任何问题，可随时将 %TARGET_FILE%.bak 还原。
+echo  [i] 进游戏按 ~ (波浪键) 或 @ 键试试控制台。
+echo      想还原：把 %TARGET_FILE%.bak 改回 general.ini。
+echo      脚本不备份存档；指令没有逐条在游戏里实测，执行前先手动存档。
 echo ========================================================
 echo.
-pause"""
+pause
+"""
     },
 
     "baldurs-gate-3": {
-        "verifiedPatch": "Patch 7 (官方MOD管理器全面兼容)",
+        "verifiedPatch": "Patch 7（未实测）",
         "radarSecretCode": "老L单机888",
         "pitfallNote": {
-            "title": "老L实验室避坑笔记 (博德之门3 Patch 7)",
+            "title": "老L避坑笔记 (博德之门3 Patch 7)",
             "tips": [
-                "【原生控制台黑窗】：Patch 7 官方模组管理器上线后，请认准 Norbyte Script Extender 原生黑窗，直接在黑窗内执行 Osi 代码不会被判定为作弊或破坏成就！",
+                "【Script Extender 控制台】：Patch 7 有了官方模组管理器，但控制台还是要靠 Norbyte 的 Script Extender。用控制台会不会影响成就没有人核实过（Script Extender 默认开着 EnableAchievements，用来恢复装 Mod 后的成就），执行前先存档。",
                 "【长休补给一劳永逸】：博德之门3经常为搜刮营地苹果烤肠烦恼？直接注入 50 个营地补给包即可永久实现全员满血法术位拉满。",
                 "【队友满好感时机】：好感度指令 SetAttitude 建议在第一章营地初次对话后使用，不仅能稳稳触发影心、阿斯代伦、盖尔的恋爱事件，还能避开剧情好感锁死。"
             ]
@@ -415,7 +441,7 @@ pause"""
                     "赋予常驻自由飞行 (FLY)，轻松跨越断崖天堑",
                     "30只夺心魔寄生虫标本，点满全脑池至尊灵能"
                 ],
-                "code": """-- [老L·极客场景套餐] 博德之门3 新手破荒起飞包 (Patch 7 实测)
+                "code": """-- [老L·极客场景套餐] 博德之门3 新手破荒起飞包 (Patch 7，未实测)
 Osi.AddGold(GetHostCharacter(), 100000)
 Osi.TemplateAddTo("1a95e0c5-59b4-4b5b-98cf-19da6d393796", GetHostCharacter(), 50)
 Osi.ApplyStatus(GetHostCharacter(), "HASTE", -1)
@@ -436,7 +462,7 @@ Osi.TemplateAddTo("5d94726a-939b-449e-b9b3-57c2df47b855", GetHostCharacter(), 30
                     "星界灌注蝌蚪解锁半夺心魔至尊灵能与自由飞行",
                     "无敌护罩卷轴 x10 (范围内全员绝对无敌，死保关键剧情NPC)"
                 ],
-                "code": """-- [老L·极客场景套餐] 博德之门3 队友全满好感与意难平救赎包 (Patch 7 实测)
+                "code": """-- [老L·极客场景套餐] 博德之门3 队友全满好感与意难平救赎包 (Patch 7，未实测)
 Osi.SetAttitude(GetHostCharacter(), "S_Player_Shadowheart_c7c13742-c166-4fec-bb4b-dc254dc2e080", 100)
 Osi.SetAttitude(GetHostCharacter(), "S_Player_Astarion_c7c13742-c166-4fec-bb4b-dc254dc2e080", 100)
 Osi.SetAttitude(GetHostCharacter(), "S_Player_Gale_ad9af97d-75da-406a-ae13-7071c563f604", 100)
@@ -458,7 +484,7 @@ Osi.TemplateAddTo("7f9b846e-1d5d-4f11-b0db-6e9faea18501", GetHostCharacter(), 10
                     "全套地狱火传奇重装（21AC 免熟练穿戴与绝对免火伤）",
                     "体质锁23「高等健康护符」+ 力量锁23「山丘巨人手套」"
                 ],
-                "code": """-- [老L·极客场景套餐] 博德之门3 二周目绝世传奇神兵满配包 (Patch 7 实测)
+                "code": """-- [老L·极客场景套餐] 博德之门3 二周目绝世传奇神兵满配包 (Patch 7，未实测)
 Osi.TemplateAddTo("3b6b2512-cf49-411a-8260-cb56220b0805", GetHostCharacter(), 1)
 Osi.TemplateAddTo("222e43bc-42f0-4667-8495-2be26ec490a4", GetHostCharacter(), 1)
 Osi.TemplateAddTo("a8ff2900-349c-4f76-8d54-159e1ab5a7fa", GetHostCharacter(), 1)
@@ -473,129 +499,90 @@ Osi.TemplateAddTo("d41dfa98-8ec1-4e4b-97e3-0d340b6e9a66", GetHostCharacter(), 20
         ],
         "batScript": """@echo off
 chcp 65001 >nul
-title 【老L·单机避坑局】博德之门3 Script Extender 控制台开门工具
+title 【老L·单机避坑局】博德之门3 Script Extender 控制台开关
 echo ========================================================
-echo   【老L·单机避坑局】博德之门3 控制台黑窗一键开启
-echo   基于 Norbyte 官方底层原生机制 · 自动备份 · 无毒纯净
+echo   【老L·单机避坑局】博德之门3 Script Extender 控制台开关脚本
+echo   在 bin\\ScriptExtenderSettings.json 里打开 CreateConsole；改之前另存 .bak
 echo ========================================================
 echo.
 
-set "SE_PATH=%LocalAppData%\\Larian Studios\\Baldur's Gate 3\\ScriptExtender"
-if not exist "%SE_PATH%" mkdir "%SE_PATH%"
+set "BIN_DIR="
+if exist "bin\\bg3.exe" set "BIN_DIR=bin"
+if not defined BIN_DIR if exist "bg3.exe" set "BIN_DIR=."
 
-set "CFG_FILE=%SE_PATH%\\ScriptExtenderSettings.json"
-if exist "%CFG_FILE%" copy /y "%CFG_FILE%" "%CFG_FILE%.bak" >nul
-
-echo {"CreateConsole": true, "EnableLua": true}>"%CFG_FILE%"
-
-echo [+] 已成功开启控制台黑窗配置：CreateConsole = true！
-echo.
-echo ========================================================
-echo  [√] 开启成功！
-echo      启动游戏时会自动弹出一个控制台黑窗口，
-echo      直接在控制台黑窗口内粘贴老L套餐指令按回车即可生效！
-echo ========================================================
-echo.
-pause"""
-    },
-    "elden-ring": {
-        "verifiedPatch": "v1.14 (黄金树幽影DLC完全对齐)",
-        "radarSecretCode": "法环",
-        "pitfallNote": {
-            "title": "老L实验室避坑笔记 (艾尔登法环 黄金树幽影 v1.14)",
-            "tips": [
-                "【EAC离线防封准则】：FromSoftware 的 Easy Anti-Cheat 会在上报内存修改时对账号进行 180 天隔离小黑屋处罚！切勿在官方联机在线状态下注入，必须使用 ModEngine2 管道拦截或替换启动。",
-                "【幽影树庇护机制】：幽影之地独立于本篇等级，受折磨卡关时重点是将 Scadutree Blessing（幽影树庇护）调至 Lv20 满级，攻防减伤直接翻倍，即可彻底解除幽影受苦！",
-                "【无缝联机独立存档】：与好友联机请认准 Seamless Co-op，其采用独立的 .co2 存档格式，与官方云存档物理隔离，100% 零封号安全。"
-            ]
-        },
-        "scenarioBundles": [
-            {
-                "id": "er_starter_bundle",
-                "type": "starter",
-                "name": "新手开荒起飞包",
-                "tag": "👑 萌新首选 · 零门槛",
-                "badge": "开荒神装",
-                "desc": "一键激活绝对免伤无敌 + 200万卢恩启动财富 + 仿身泪滴+10 带头大哥 + 30瓶满级圣杯瓶，新手探索交界地零受苦！",
-                "highlights": [
-                    "无敌锁血手残救星模式",
-                    "2,000,000 卢恩秒到账自由洗点升级",
-                    "仿身泪滴骨灰+10（最强逃课大哥）",
-                    "红蓝圣杯瓶强化至 +12 最大恢复量"
-                ],
-                "code": """-- [老L·极客场景套餐] 艾尔登法环 新手开荒起飞包 (离线实测)
--- 启动方式：ModEngine2 离线引导 / The Grand Archives CT 表
-[ModEngine2 离线环境已就绪]
-Set GodMode = 1
-AddRunes(2000000)
-AddItem(100, 1) -- 仿身泪滴骨灰 +10
-SetFlaskLevel(12) -- 圣杯瓶满级强化"""
-            },
-            {
-                "id": "er_salvation_bundle",
-                "type": "salvation",
-                "name": "幽影之地轮椅救赎包",
-                "tag": "🛡️ 意难平救赎 · 告别受苦",
-                "badge": "幽影轮椅",
-                "desc": "幽影树庇护 Lv20 满级 + 灵灰庇护 Lv10 满级 + 0.3x 子弹时间慢动作弹反识破，轻松攻克狂龙贝勒与约定之王！",
-                "highlights": [
-                    "幽影树庇护一键拉满 Lv20（攻防直接翻倍）",
-                    "灵灰庇护拉满 Lv10（骨灰与战马极致强化）",
-                    "0.3x 全局子弹时间，Boss 抬手前摇无所遁形",
-                    "狂龙贝勒、双月骑士、梅瑟莫全追忆直接兑换"
-                ],
-                "code": """-- [老L·极客场景套餐] 艾尔登法环 幽影之地轮椅救赎包 (v1.14 实测)
-SetScadutreeBlessing(20)
-SetReveredSpiritAsh(10)
-SetGameSpeed(0.3) -- 0.3x 慢动作看破
-UnlockRemembrance("MessmerTheImpaler")
-UnlockRemembrance("BayleTheDread")"""
-            },
-            {
-                "id": "er_godmode_bundle",
-                "type": "godmode",
-                "name": "全追忆神兵真神满配包",
-                "tag": "⚡ 极客狂欢 · 众神陨落",
-                "badge": "真神毕业",
-                "desc": "全 DLC 追忆神兵武器全收集 + 全魔法祷告解锁 + 全地图赐福点一键点亮，化身交界地艾尔登之王！",
-                "highlights": [
-                    "全本篇及 DLC 38 种追忆武器满强化",
-                    "交界地与幽影之地 300+ 赐福点全开传送",
-                    "无限精力奔跑 + 无限专注值施法",
-                    "全套高阶护符（黄金树恩惠+2 / 龙徽大盾护符）"
-                ],
-                "code": """-- [老L·极客场景套餐] 艾尔登法环 全追忆神兵真神满配包
-UnlockAllSitesOfGrace()
-SetInfiniteFP(1)
-SetInfiniteStamina(1)
-AddItem("Item_Talisman_DragoncrestGreatshield", 1)
-AddItem("Item_Weapon_AncientMeteoricOreGreatsword", 1)"""
-            }
-        ],
-        "batScript": """@echo off
-chcp 65001 >nul
-title 【老L·单机避坑局】艾尔登法环 离线防封引导助手
-echo ========================================================
-echo   【老L·单机避坑局】艾尔登法环 纯净离线引导工具
-echo   自动截断 EAC 守护进程 · 物理隔离云存档 · 零封号
-echo ========================================================
-echo.
-if not exist "Game\\eldenring.exe" (
-    echo [!] 提示: 请将本脚本放在 ELDEN RING 游戏安装根目录！
+if not defined BIN_DIR (
+    echo [!] 当前目录下没有 bin\\bg3.exe，脚本什么都没改。
+    echo     请把本脚本放到《博德之门3》游戏安装根目录再运行。
+    echo.
     pause
     exit /b
 )
-echo [*] 正在检查 ModEngine2 与 EAC 状态...
-echo [√] 离线管道准备就绪！
-echo [i] 启动游戏后主菜单右下角将强制显示“离线模式”。
+
+if not exist "%BIN_DIR%\\DWrite.dll" (
+    echo [!] %BIN_DIR% 下没有 DWrite.dll：Script Extender 可能还没装，装好以后这个设置才起作用。
+)
+
+set "CFG_FILE=%BIN_DIR%\\ScriptExtenderSettings.json"
+if exist "%CFG_FILE%" (
+    copy /y "%CFG_FILE%" "%CFG_FILE%.bak" >nul
+    echo [+] 原来的 ScriptExtenderSettings.json 已另存为 ScriptExtenderSettings.json.bak
+)
+
+echo {"CreateConsole": true}>"%CFG_FILE%"
+echo [+] 已写入 %CFG_FILE%：CreateConsole = true
+echo     原文件里的其它设置会被清掉，要用就从 .bak 拷回来。
 echo.
-pause"""
+echo ========================================================
+echo  [i] 启动游戏时会多出一个 Script Extender 控制台窗口。
+echo      在窗口里先按回车进入输入模式，再粘贴指令、回车执行。
+echo      设置文件放在 bin 目录，依据是 Norbyte/bg3se 官方文档 Docs/Debugger.md。
+echo      脚本不备份存档；指令没有逐条在游戏里实测，执行前先手动存档。
+echo ========================================================
+echo.
+pause
+"""
+    },
+    "elden-ring": {
+        "verifiedPatch": "v1.14（未实测）",
+        "radarSecretCode": "法环",
+        "pitfallNote": {
+            "title": "老L避坑笔记 (艾尔登法环 黄金树幽影 v1.14)",
+            "tips": [
+                "【EAC 与封号】：FromSoftware 的 Easy Anti-Cheat 会在上报内存修改时对账号进行 180 天隔离小黑屋处罚！切勿在官方联机在线状态下注入，改游戏只在离线下进行（用 ModEngine2 或替换启动的方式不加载 EAC，只能离线玩）。",
+                "【幽影树庇护机制】：幽影之地独立于本篇等级，受折磨卡关时重点是将 Scadutree Blessing（幽影树庇护）调至 Lv20 满级，攻防减伤直接翻倍，即可彻底解除幽影受苦！",
+                "【无缝联机独立存档】：Seamless Co-op 用独立的 .co2 存档，不连官方匹配服务器。它是第三方 Mod，会不会被封号没有人能担保；别把 .co2 存档改回原版存档带上线。"
+            ]
+        },
+        "scenarioBundles": [],
+        "batScript": """@echo off
+chcp 65001 >nul
+title 【老L·单机避坑局】艾尔登法环 离线启动说明
+echo ========================================================
+echo   【老L·单机避坑局】艾尔登法环 离线启动说明
+echo   本脚本只检查游戏主程序在不在，不改任何文件
+echo ========================================================
+echo.
+if not exist "Game\\eldenring.exe" (
+    echo [!] 当前目录下没有 Game\\eldenring.exe，脚本什么都没改。
+    echo     请把本脚本放到 ELDEN RING 游戏安装根目录再运行。
+    echo.
+    pause
+    exit /b
+)
+echo [+] 找到 Game\\eldenring.exe
+echo [i] 用 Mod：解压 ModEngine2，Mod 放进它的 mod 目录，双击它自带的 launchmod_eldenring.bat 启动。
+echo     这样启动不加载 EAC，只能离线玩；别带着改过的游戏或存档上线，有封号风险。
+echo [i] 本脚本没有检查 ModEngine2 和 EAC，也不会替你启动游戏。
+echo [i] 脚本不备份存档；指令没有逐条在游戏里实测，执行前先手动存档。
+echo.
+pause
+"""
     },
     "skyrim-se": {
-        "verifiedPatch": "v1.6.1170 (与 1.6.1130 AE 深度适配)",
+        "verifiedPatch": "v1.6.1170（未实测）",
         "radarSecretCode": "老滚5",
         "pitfallNote": {
-            "title": "老L实验室避坑笔记 (上古卷轴5 天际重制版 v1.6.1170)",
+            "title": "老L避坑笔记 (上古卷轴5 天际重制版 v1.6.1170)",
             "tips": [
                 "【FormID省略前导零】：控制台输入代码时，前导 000 全部可以省略！比如金币 0000000F，直接输入 player.additem f 100000 即可生效。",
                 "【严禁盲目运行 caqs】：任务卡关千万不要运行 caqs（强制完成全游戏所有任务），这会导致全图 NPC 状态机彻底崩溃毁坏全档！必须定向使用 setstage <QuestID> <Stage>。",
@@ -666,30 +653,34 @@ player.modav shoutrecoverymult 0 ; 龙吼零CD"""
         ],
         "batScript": """@echo off
 chcp 65001 >nul
-title 【老L·单机避坑局】上古卷轴5 v1.6.1170 控制台排错助手
+title 【老L·单机避坑局】上古卷轴5 天际重制版 控制台说明
 echo ========================================================
-echo   【老L·单机避坑局】天际重制版 控制台与前置排错
-echo   官方 Creation 引擎原生机制 · FormID 前导零精简
+echo   【老L·单机避坑局】天际重制版 控制台说明
+echo   本脚本只检查游戏主程序在不在，不改任何文件
 echo ========================================================
 echo.
 if not exist "SkyrimSE.exe" (
-    echo [!] 提示: 请将本脚本放在 Skyrim Special Edition 根目录！
+    echo [!] 当前目录下没有 SkyrimSE.exe，脚本什么都没改。
+    echo     请把本脚本放到 Skyrim Special Edition 游戏安装根目录再运行。
+    echo.
     pause
     exit /b
 )
-echo [*] 正在核验 Skyrim.ini 控制台开关...
-echo [√] bAllowConsole=1 正常就绪！
-echo [i] 进游戏按 ~ (波浪键) 呼出控制台，前导 000 全部可省略！
+echo [+] 找到 SkyrimSE.exe
+echo [i] 进游戏按 ~ (波浪键) 呼出控制台；没反应就先切到英文输入法。
+echo [i] FormID 开头的 0 可以省略，比如 player.additem 0000000F 100 可以写成 player.additem f 100。
+echo [i] 脚本不备份存档；指令没有逐条在游戏里实测，执行前先手动存档。
 echo.
-pause"""
+pause
+"""
     },
     "fallout-4": {
-        "verifiedPatch": "v1.10.984+ (次世代大更新双轨实测)",
+        "verifiedPatch": "v1.10.984+（未实测）",
         "radarSecretCode": "辐射4",
         "pitfallNote": {
-            "title": "老L实验室避坑笔记 (辐射4 次世代更新版 v1.10.984)",
+            "title": "老L避坑笔记 (辐射4 次世代更新版 v1.10.984)",
             "tips": [
-                "【次世代避坑防暗更】：Steam 属性中必须将更新策略设置为“仅在我启动该游戏时更新”，日常启动一律通过 f4se_loader.exe，彻底规避强制推送打碎 Mod 框架！",
+                "【减少自动更新】：Steam 属性里把更新设成“仅在我启动该游戏时更新”，装了 F4SE 的话日常用 f4se_loader.exe 启动。这只能减少后台更新，不能保证游戏不被更新；更新后 F4SE 和依赖它的 Mod 可能要等作者发新版。",
                 "【聚落空间无限解除】：走到工坊工作台按 ~ 选中工作台（出现 000249dc），输入 setav 349 9999999 与 setav 348 9999999，容量条瞬间清零，实现真正的无限建造！",
                 "【死亡三角区闪退预防】：联邦西北角庇护山丘、红火箭与阿伯纳西农场相隔极近，切勿在三地同时高密建造几万件建筑物体，防止内存溢出导致 CTD 闪退。"
             ]
@@ -757,52 +748,38 @@ player.additem 18abdf 500"""
         ],
         "batScript": """@echo off
 chcp 65001 >nul
-title 【老L·单机避坑局】辐射4次世代防暗更与环境核验
+title 【老L·单机避坑局】辐射4 F4SE 启动说明
 echo ========================================================
-echo   【老L·单机避坑局】辐射4 次世代更新防暗更助手
-echo   锁定 Steam 自动推送 · 聚落容量解除指南
+echo   【老L·单机避坑局】辐射4 F4SE 启动说明
+echo   本脚本只检查有没有 f4se_loader.exe，不改任何文件
 echo ========================================================
 echo.
 if not exist "Fallout4.exe" (
-    echo [!] 提示: 请将脚本置于 Fallout 4 根目录下！
+    echo [!] 当前目录下没有 Fallout4.exe，脚本什么都没改。
+    echo     请把本脚本放到 Fallout 4 游戏安装根目录再运行。
+    echo.
     pause
     exit /b
 )
-echo [*] 正在检查 F4SE 与次世代版本...
-echo [i] 请在 Steam 库右键 Fallout 4 -> 属性 -> 更新 -> 设置为【仅在我启动该游戏时更新】。
-echo [√] 日常启动请一律运行 f4se_loader.exe 规避强制推送！
+if exist "f4se_loader.exe" (
+    echo [+] 找到 f4se_loader.exe：装了 F4SE 的话，日常用它启动游戏。
+) else (
+    echo [i] 没找到 f4se_loader.exe：还没装 F4SE，或者没放在游戏根目录。
+)
+echo [i] 想减少自动更新：Steam 库里右键 Fallout 4 → 属性 → 更新，设为【仅在我启动该游戏时更新】。
+echo     这只能减少后台更新，不能保证游戏不被更新；更新后 F4SE 和依赖它的 Mod 可能要等作者发新版。
+echo [i] 脚本不备份存档；指令没有逐条在游戏里实测，执行前先手动存档。
 echo.
-pause"""
+pause
+"""
     }
 }
 
-# Apply to games
-for g in games:
-    gid = g["id"]
-    if gid in FLAGSHIP_DATA:
-        info = FLAGSHIP_DATA[gid]
-        g["verifiedPatch"] = info["verifiedPatch"]
-        g["radarSecretCode"] = info["radarSecretCode"]
-        g["pitfallNote"] = info["pitfallNote"]
-        g["scenarioBundles"] = info["scenarioBundles"]
-        g["batScript"] = info["batScript"]
-    else:
-        # Default verified patch fallback
-        g["verifiedPatch"] = "Steam 最新版本实测"
-        g["radarSecretCode"] = "老L单机888"
 
-# Write JSON
-with open(JSON_PATH, 'w', encoding='utf-8') as f:
-    json.dump(games, f, ensure_ascii=False, indent=2)
-print(f"Updated {JSON_PATH} with flagship scenarios.")
+def main():
+    updates = {gid: {field: info[field] for field in OWNED_FIELDS} for gid, info in FLAGSHIP_DATA.items()}
+    write_owned_fields("enrich_flagship_scenarios.py", OWNED_FIELDS, updates)
 
-# Write JS with window.TRANSLATIONS_DATA
-with open(JS_PATH, 'w', encoding='utf-8') as f:
-    f.write('// L-MOD Vault Offline Database (Enriched v3 + Scenarios)\n')
-    f.write('window.GAMES_DATA = ')
-    json.dump(games, f, ensure_ascii=False, indent=2)
-    f.write(';\n\n')
-    f.write('window.TRANSLATIONS_DATA = ')
-    json.dump(translations, f, ensure_ascii=False, indent=2)
-    f.write(';\n')
-print(f"Updated {JS_PATH} with games and translations data.")
+
+if __name__ == "__main__":
+    main()

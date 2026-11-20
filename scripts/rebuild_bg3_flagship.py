@@ -1,11 +1,21 @@
-import json
-import os
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+scripts/rebuild_bg3_flagship.py
+Content for Baldur's Gate 3 (console guide, command categories, curated mods,
+metadata).
 
-JSON_PATH = '/Users/xiaolu/Desktop/work/l-mod-portal/src/data/games_top100.json'
-JS_PATH = '/Users/xiaolu/Desktop/work/l-mod-portal/public/data.js'
+Writes only the fields in OWNED_FIELDS of baldurs-gate-3, through gamedata_guard: the
+master data must exist, radar and trainer fields are never written (trainer data
+comes from fling_trainer_sync.py), and in public/data.js only the GAMES_DATA segment
+changes (TRANSLATIONS_DATA is left alone).
 
-with open(JSON_PATH, 'r', encoding='utf-8') as f:
-    games = json.load(f)
+Usage: python3 scripts/rebuild_bg3_flagship.py [--dry-run]
+"""
+
+from gamedata_guard import write_owned_fields
+
+GAME_ID = "baldurs-gate-3"
 
 bg3_categories = [
     {
@@ -705,13 +715,16 @@ bg3_mods = [
             "1. 下载解压得到 DWrite.dll 文件；",
             "2. 直接复制放入 Baldur's Gate 3\\bin\\ 目录（与 bg3.exe 同级）；",
             "3. 在 bin 目录新建 ScriptExtenderSettings.json，写入 {\"CreateConsole\": true} 即可开机自动弹窗呼出命令控制台。"
-        ]
+        ],
+        "downloadUrl": "https://github.com/Norbyte/bg3se/releases/download/updater-v1/BG3SE-Updater-with-Console-20241001.zip",
+        "downloadFilename": "BG3SE-Updater-with-Console-20241001.zip",
+        "isDirect": True
     },
     {
         "id": "improved-ui",
         "title": "ImprovedUI ReleaseReady (全面屏与全分辨率UI核心增强库)",
         "author": "AlanaSP & The ImprovedUI Team",
-        "version": "v3.25.0 (Patch 7 Ready)",
+        "version": "v3.25.0",
         "size": "15.2 MB",
         "downloads": "12.8M",
         "endorsements": "310K",
@@ -722,7 +735,10 @@ bg3_mods = [
         "installSteps": [
             "1. 下载 ImprovedUI.pak 并放入 LocalAppData 模组目录；",
             "2. 使用官方 Patch 7 模组管理器或 BG3 Mod Manager 激活并置于加载顺序顶端。"
-        ]
+        ],
+        "downloadUrl": "https://github.com/LaughingLeader/BG3ModManager/releases/download/1.0.11.2/BG3ModManager_Latest.zip",
+        "downloadFilename": "BG3ModManager_Latest.zip",
+        "isDirect": True
     },
     {
         "id": "party-limit-begone",
@@ -739,7 +755,10 @@ bg3_mods = [
         "installSteps": [
             "1. 将压缩包中的 Mods 文件夹与 bin 文件夹直接解压覆盖到《博德之门3》安装根目录；",
             "2. 进入游戏即可直接在营地招募所有伙伴入队。"
-        ]
+        ],
+        "downloadUrl": "https://github.com/l-mod-vault/mirrors/releases/download/bg3/5eSpells_v2.1.zip",
+        "downloadFilename": "5eSpells_v2.1.zip",
+        "isDirect": True
     },
     {
         "id": "5e-spells",
@@ -756,7 +775,10 @@ bg3_mods = [
         "installSteps": [
             "1. 将 5eSpells.pak 放入 Mods 目录；",
             "2. 使用模组管理器导出活动加载顺序。"
-        ]
+        ],
+        "downloadUrl": "https://github.com/l-mod-vault/mirrors/releases/download/vault-mods/5e-spells.zip",
+        "downloadFilename": "5e-spells.zip",
+        "isDirect": True
     },
     {
         "id": "bags-bags-bags-reforged",
@@ -773,7 +795,10 @@ bg3_mods = [
         "installSteps": [
             "1. 安装 .pak 模组；",
             "2. 找第一章新手村提夫林商人艾隆即可购买全套专用收纳袋。"
-        ]
+        ],
+        "downloadUrl": "https://github.com/l-mod-vault/mirrors/releases/download/vault-mods/bags-bags-bags-reforged.zip",
+        "downloadFilename": "bags-bags-bags-reforged.zip",
+        "isDirect": True
     },
     {
         "id": "native-camera-tweaks",
@@ -791,7 +816,10 @@ bg3_mods = [
             "1. 确保已安装 BG3 Script Extender；",
             "2. 将 NativeCameraTweaks.dll 与 .ini 放入 bin\\NativeMods\\ 目录；",
             "3. 在游戏中按下滚轮即可自由无限制仰望。"
-        ]
+        ],
+        "downloadUrl": "https://github.com/l-mod-vault/mirrors/releases/download/vault-mods/native-camera-tweaks.zip",
+        "downloadFilename": "native-camera-tweaks.zip",
+        "isDirect": True
     },
     {
         "id": "wasd-character-movement",
@@ -808,7 +836,10 @@ bg3_mods = [
         "installSteps": [
             "1. 将 wasd.dll 与 wasd.ini 放入 bin\\NativeMods 目录；",
             "2. 游戏中直接按 CapsLock 键可在鼠标点击模式与键盘直控模式间一键切换。"
-        ]
+        ],
+        "downloadUrl": "https://github.com/l-mod-vault/mirrors/releases/download/vault-mods/wasd-character-movement.zip",
+        "downloadFilename": "wasd-character-movement.zip",
+        "isDirect": True
     },
     {
         "id": "tavs-hair-salon",
@@ -825,75 +856,37 @@ bg3_mods = [
         "installSteps": [
             "1. 将 Tavs_Hair_Salon.pak 放入 Mods 目录；",
             "2. 在创建角色或魔镜捏脸时直接选择全新发型序号。"
-        ]
+        ],
+        "downloadUrl": "https://github.com/l-mod-vault/mirrors/releases/download/vault-mods/tavs-hair-salon.zip",
+        "downloadFilename": "tavs-hair-salon.zip",
+        "isDirect": True
     }
 ]
 
-bg3_trainer = {
-    "author": "风灵月影 (FLiNG)",
-    "version": "Patch 7 (官方内置模组管理器更新专版)",
-    "officialUrl": "https://flingtrainer.com/trainer/baldurs-gate-3-trainer/",
-    "cleanMirrorUrl": "https://flingtrainer.com/trainer/baldurs-gate-3-trainer/",
-    "safeVerification": {
-        "isCleanVerified": True,
-        "hasBundledAds": False,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-            "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-            "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-            "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-            "4. 【运行顺序】建议先启动 Steam / GOG 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-    },
-    "hotkeysCategorized": [
-        {
-            "category": "⚔️ 战斗与法术位 (Combat & Spells)",
-            "items": [
-                {"key": "Num 1", "action": "无限生命 (Infinite Health)"},
-                {"key": "Num 2", "action": "无限行动点/动作/附赠动作 (Infinite Actions)"},
-                {"key": "Num 3", "action": "无限法术位与法力环位 (Infinite Spell Slots)"},
-                {"key": "Num 4", "action": "极速施法无需长休 (Instant Cast & Rest)"},
-                {"key": "Num 0", "action": "一击必杀 (One Hit Kill)"}
-            ]
-        },
-        {
-            "category": "🎲 骰子与养成 (Dice & Progression)",
-            "items": [
-                {"key": "Ctrl+Num 1", "action": "投骰子必出 20 大成功 (D20 Always Natural 20)"},
-                {"key": "Ctrl+Num 2", "action": "增加 100,000 金币 (Add 100,000 Gold)"},
-                {"key": "Ctrl+Num 3", "action": "无限夺心魔幼虫标本 (Infinite Illithid Parasites)"},
-                {"key": "Ctrl+Num 4", "action": "负重上限锁定 9999 (Max Carry Weight)"}
-            ]
-        }
-    ]
-}
+OWNED_FIELDS = (
+    "title",
+    "titles",
+    "developer",
+    "releaseYear",
+    "genre",
+    "steamRating",
+    "steamAppId",
+    "latestPatch",
+    "hasConsole",
+    "consoleShortcut",
+    "consoleEnableGuide",
+    "consoleCategories",
+    "popularCommands",
+    "curatedMods",
+    "modInstallPath",
+    "nexusStats",
+)
 
-bg3_reviews = [
-    {
-        "user": "TavPaladin99",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-18",
-        "title": "Patch 7 完美适配！Script Extender 注入太顺滑了！",
-        "content": "改 ScriptExtenderSettings.json 开启黑窗，一秒刷出博德安的巨人杀手和尼鲁纳三叉戟！全员解除队伍上限 16 人跑图，沉浸感爆棚！",
-        "upvotes": 740
-    },
-    {
-        "user": "ShadowheartDevotee",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-19",
-        "title": "好感度指令救我狗命，全法术位无限刷简直爽死！",
-        "content": "一键把影心好感度拉到 100，终于赶在第三章前解锁了救赎沙滩浪漫戏！配合无敌护罩和多重目标箭矢，钢铁卫士泰坦直接乱杀！",
-        "upvotes": 580
-    }
-]
 
-# Update baldurs-gate-3
-for g in games:
-    if g["id"] == "baldurs-gate-3":
-        g["title"] = "Baldur's Gate 3"
-        g["titles"] = {
+def bg3_fields():
+    return {
+        "title": "Baldur's Gate 3",
+        "titles": {
             "en": "Baldur's Gate 3",
             "zh-CN": "博德之门 3",
             "zh-TW": "柏德之門 3",
@@ -902,42 +895,31 @@ for g in games:
             "ru": "Baldur's Gate 3",
             "de": "Baldur's Gate 3",
             "es": "Baldur's Gate 3"
-        }
-        g["developer"] = "Larian Studios"
-        g["releaseYear"] = 2023
-        g["genre"] = "CRPG / Turn-Based Tactics"
-        g["steamRating"] = "96% Overwhelmingly Positive"
-        g["steamAppId"] = 1086940
-        g["latestPatch"] = "Patch 7 (官方内置模组管理器与全新邪恶结局更新)"
-        g["hasConsole"] = True
-        g["consoleShortcut"] = "Norbyte Script Extender 控制台黑窗 (回车即时执行)"
-        g["consoleEnableGuide"] = {
-            "zh-CN": "1. 【下载与部署前置】下载最新版 Norbyte's BG3 Script Extender，解压得到 DWrite.dll 文件；\n2. 【放置主程序目录】将 DWrite.dll 复制放入《博德之门3》安装根目录的 bin\\ 文件夹下（与 bg3.exe 和 bg3_dx11.exe 位于同一级目录）；\n3. 【启用控制台黑窗】在 bin\\ 目录下新建一个文本文件并重命名为 ScriptExtenderSettings.json，用记事本打开填入 {\"CreateConsole\": true} 并保存；\n4. 【呼出与代码执行】启动游戏，屏幕旁会自动伴随弹出一个透明的 Windows 控制台黑色终端窗口；在控制台窗口内直接按下回车键激活输入光标，将下列任意 Osi 函数指令复制粘贴进去并回车，游戏内道具即刻秒级刷入当前操控角色背包中！\n5. 【Patch 7 官方模组工坊说明】拉瑞安官方在 Patch 7 中内置了官方模组浏览器，本站推荐代码与全部精选 Mod 均已针对 Patch 7 官方加载链与本地管理器完成了全面兼容排错。",
-            "en": "1. Download Norbyte's BG3 Script Extender and extract DWrite.dll.\n2. Place DWrite.dll into 'Baldur's Gate 3\\bin\\' (same folder as bg3.exe).\n3. In bin\\, create ScriptExtenderSettings.json containing '{\"CreateConsole\": true}'.\n4. Launch the game; an interactive console terminal window will open alongside it. Press Enter in the terminal, paste any Osi command below, and press Enter to execute.\n5. Fully compatible with Patch 7 in-game Mod Manager."
-        }
-        g["consoleCategories"] = bg3_categories
-        g["popularCommands"] = bg3_popular
-        g["curatedMods"] = bg3_mods
-        g["trainerInfo"] = bg3_trainer
-        g["communityReviews"] = bg3_reviews
-        g["modInstallPath"] = "%LocalAppData%\\Larian Studios\\Baldur's Gate 3\\Mods\\"
-        g["nexusStats"] = {
+        },
+        "developer": "Larian Studios",
+        "releaseYear": 2023,
+        "genre": "CRPG / Turn-Based Tactics",
+        "steamRating": "96% Overwhelmingly Positive",
+        "steamAppId": 1086940,
+        "latestPatch": "Patch 7 (官方内置模组管理器与全新邪恶结局更新)",
+        "hasConsole": True,
+        "consoleShortcut": "Norbyte Script Extender 控制台黑窗 (回车即时执行)",
+        "consoleEnableGuide": {
+            "zh-CN": "1. 【下载与部署前置】下载最新版 Norbyte's BG3 Script Extender，解压得到 DWrite.dll 文件；\n2. 【放置主程序目录】将 DWrite.dll 复制放入《博德之门3》安装根目录的 bin\\ 文件夹下（与 bg3.exe 和 bg3_dx11.exe 位于同一级目录）；\n3. 【启用控制台黑窗】在 bin\\ 目录下新建一个文本文件并重命名为 ScriptExtenderSettings.json，用记事本打开填入 {\"CreateConsole\": true} 并保存；\n4. 【呼出与代码执行】启动游戏，屏幕旁会自动伴随弹出一个透明的 Windows 控制台黑色终端窗口；在控制台窗口内直接按下回车键激活输入光标，将下列任意 Osi 函数指令复制粘贴进去并回车，游戏内道具即刻秒级刷入当前操控角色背包中！\n5. 【Patch 7 官方模组工坊说明】拉瑞安官方在 Patch 7 中内置了官方模组浏览器，本站整理的指令和精选 Mod 没有针对 Patch 7 及之后的版本逐一实测，装 Mod 前先看 Mod 页面写的支持版本。",
+            "en": "1. Download Norbyte's BG3 Script Extender and extract DWrite.dll.\n2. Place DWrite.dll into 'Baldur's Gate 3\\bin\\' (same folder as bg3.exe).\n3. In bin\\, create ScriptExtenderSettings.json containing '{\"CreateConsole\": true}'.\n4. Launch the game; an interactive console terminal window will open alongside it. Press Enter in the terminal, paste any Osi command below, and press Enter to execute.\n5. The commands and mods listed here were not individually tested on Patch 7 or later; check each mod page for the game versions it supports."
+        },
+        "consoleCategories": bg3_categories,
+        "popularCommands": bg3_popular,
+        "curatedMods": bg3_mods,
+        "modInstallPath": "%LocalAppData%\\Larian Studios\\Baldur's Gate 3\\Mods\\",
+        "nexusStats": {
             "totalDownloads": "165.2M",
             "totalEndorsements": "780K",
             "totalMods": "8,920",
-            "latestPatch": "Patch 7 Ready"
+            "latestPatch": "Patch 7"
         }
-        break
+    }
 
-with open(JSON_PATH, 'w', encoding='utf-8') as f:
-    json.dump(games, f, ensure_ascii=False, indent=2)
 
-print(f"✅ Successfully updated {JSON_PATH}")
-
-with open(JS_PATH, 'w', encoding='utf-8') as f:
-    f.write('// L-MOD Vault Offline Database (Enriched v3)\n')
-    f.write('window.GAMES_DATA = ')
-    json.dump(games, f, ensure_ascii=False, indent=2)
-    f.write(';\n')
-
-print(f"✅ Successfully synchronized {JS_PATH}")
+if __name__ == "__main__":
+    write_owned_fields("rebuild_bg3_flagship.py", OWNED_FIELDS, {GAME_ID: bg3_fields()})

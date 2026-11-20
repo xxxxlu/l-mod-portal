@@ -2,8 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 scripts/enrich_rank8_14_tier2.py
-L-MOD Vault 第二梯队 (Rank 8~14) 核心大作全息采掘注入引擎
-对齐游戏：
+Content for ranks 8-14:
   - Rank 8: 幻兽帕鲁 (Palworld) [UE5 + UE4SS]
   - Rank 9: 星空 (Starfield) [Creation 2]
   - Rank 10: 侠盗猎车手5 (Grand Theft Auto V) [RAGE + ScriptHookV]
@@ -11,16 +10,17 @@ L-MOD Vault 第二梯队 (Rank 8~14) 核心大作全息采掘注入引擎
   - Rank 12: 怪物猎人：世界 (Monster Hunter: World) [MT Framework + Stracker / REFramework]
   - Rank 13: 只狼：影逝二度 (Sekiro: Shadows Die Twice) [FromSoftware + ModEngine]
   - Rank 14: 生化危机4：重制版 (Resident Evil 4 Remake) [RE Engine + REFramework]
-同时为 Rank 1~7 游戏补齐 Mod 真实直链与下载文件名。
+Also fills downloadUrl / downloadFilename / isDirect into the curated mods of ranks 1-7.
+
+Writes only the fields in OWNED_FIELDS, through gamedata_guard: the master data must
+exist, radar and trainer fields are never written (trainer data comes from
+fling_trainer_sync.py), the order of the games is kept, and in public/data.js only
+the GAMES_DATA segment changes (TRANSLATIONS_DATA is left alone).
+
+Usage: python3 scripts/enrich_rank8_14_tier2.py [--dry-run]
 """
 
-import json
-import os
-import sys
-
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-JSON_PATH = os.path.join(BASE_DIR, "src/data/games_top100.json")
-JS_PATH = os.path.join(BASE_DIR, "public/data.js")
+from gamedata_guard import write_owned_fields
 
 # ==============================================================================
 # RANK 8: 幻兽帕鲁 (Palworld)
@@ -41,56 +41,6 @@ PALWORLD_DATA = {
         "slomo 0.3",
         "r.ViewDistanceScale 3"
     ],
-    "hasTrainer": True,
-    "trainerInfo": {
-        "author": "风灵月影 (FLiNG)",
-        "version": "v0.3.x+ (Sakurajima 樱岛版本完全对齐)",
-        "officialUrl": "https://flingtrainer.com/trainer/palworld-trainer/",
-        "cleanMirrorUrl": "https://github.com/l-mod-vault/mirrors/releases/download/palworld/Palworld_v0.3_Plus_33_Trainer.zip",
-        "safeVerification": {
-            "isCleanVerified": True,
-            "hasBundledAds": False,
-            "virusTotalRatio": "0/72 Clean (零误报极客纯净版)",
-            "md5CheckSum": "7c8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a",
-            "powershellExclusionCmd": "Add-MpPreference -ExclusionProcess 'Palworld Trainer.exe'",
-            "troubleshootSteps": [
-                "必须在单人世界或自建离线房间中运行修改器，请勿在官方 VAC/反作弊服务器使用",
-                "若 Windows Defender 拦截，以管理员身份运行上方 PowerShell 白名单放行指令",
-                "建议先进入游戏加载完人物后，再按对应小键盘快捷键激活修改项目"
-            ]
-        },
-        "hotkeysCategorized": [
-            {
-                "category": "🛡️ 核心生存与无敌状态",
-                "items": [
-                    {"key": "Num 1", "action": "无敌模式 (God Mode / 锁血锁盾)"},
-                    {"key": "Num 2", "action": "无限体力 (奔跑/攀爬/滑翔零耐力消耗)"},
-                    {"key": "Num 3", "action": "饱食度全满 (不再产生饥饿感)"},
-                    {"key": "Num 4", "action": "无限帕鲁体力与饱食度"},
-                    {"key": "Num 5", "action": "温度恒定舒适 (免疫炎热与严寒)"}
-                ]
-            },
-            {
-                "category": "🎒 装备耐久与随身负重",
-                "items": [
-                    {"key": "Num 6", "action": "无限武器装备耐久度 (永不损坏)"},
-                    {"key": "Num 7", "action": "随身负重清零 (无限捡取矿石与建材)"},
-                    {"key": "Num 8", "action": "100% 帕鲁捕捉成功率 (哪怕普通球抓神兽)"},
-                    {"key": "Num 9", "action": "帕鲁球数量不减 (投掷不消耗)"}
-                ]
-            },
-            {
-                "category": "⚡ 经验财富与时间流速",
-                "items": [
-                    {"key": "Ctrl+Num 1", "action": "编辑玩家金钱金币 (999,999)"},
-                    {"key": "Ctrl+Num 2", "action": "无限古代科技点数与普通科技点"},
-                    {"key": "Ctrl+Num 3", "action": "瞬间孵蛋 (孵化器无需漫长等待)"},
-                    {"key": "Ctrl+Num 4", "action": "据点帕鲁 SAN 值全满锁定 (永不抑郁生病)"},
-                    {"key": "Ctrl+Num 5", "action": "自定移动速度与全局时间倍率 (0.5x~5.0x)"}
-                ]
-            }
-        ]
-    },
     "hasMods": True,
     "curatedMods": [
         {
@@ -102,7 +52,7 @@ PALWORLD_DATA = {
             "downloads": "2.1M",
             "endorsements": "115K",
             "category": "Core Framework (核心前置)",
-            "desc": "幻兽帕鲁运行全部 Lua 模组、UI 扩展与控制台打字命令的绝对核心前置库，零注入误报，极客必备。",
+            "desc": "幻兽帕鲁运行全部 Lua 模组、UI 扩展与控制台打字命令的绝对核心前置库，极客必备。",
             "dependencies": ["None (Native Injector)"],
             "installPath": "Palworld/Pal/Binaries/Win64/",
             "downloadUrl": "https://github.com/UE4SS-RE/RE-UE4SS/releases/download/v3.0.1/UE4SS_v3.0.1.zip",
@@ -581,48 +531,17 @@ PALWORLD_DATA = {
             ]
         }
     ],
-    "scenarioBundles": [
-        {
-            "id": "pal_starter_bundle",
-            "type": "starter",
-            "name": "新手开荒神宠起飞包",
-            "tag": "👑 萌新首选 · 零门槛",
-            "badge": "开荒神宠",
-            "desc": "一键获取 50 级打工皇帝阿努比斯 + 100 颗高阶帕鲁球 + 100万金币启动资金 + 负重上限百万解除，开局即享工业化自动据点！",
-            "highlights": ["阿努比斯 (手工Lv4 最强基建工匠)", "100 颗高阶帕鲁球，见宠即抓", "1,000,000 黄金现金黑市扫货", "随身负重清零自由搬运矿石"],
-            "code": "-- [老L·极客场景套餐] 幻兽帕鲁 新手开荒神宠起飞包 (离线实测)\nspawn Anubis 50\ngive PalSphere_Legend 100\ngive Money 1000000\naddtalentpoint 50"
-        },
-        {
-            "id": "pal_salvation_bundle",
-            "type": "salvation",
-            "name": "神兽捕捉与极速孵化包",
-            "tag": "🛡️ 意难平救赎 · 告别受苦",
-            "badge": "神兽毕业",
-            "desc": "召唤超音速巡航神兽空涡龙 + 极寒神兽唤冬兽 + 专用导弹鞍具 + 0.3x 子弹时间慢动作捕捉，告别手残与神兽擦肩而过！",
-            "highlights": ["全服最快飞行坐骑空涡龙直接入队", "唤冬兽冰系霸主守护战力", "骑乘导弹发射器超强清屏火力", "0.3x 慢动作锁定 Boss 弱点投球"],
-            "code": "-- [老L·极客场景套餐] 幻兽帕鲁 神兽捕捉与极速孵化包 (离线实测)\nspawn Jetragon 50\nspawn Frostallion 50\ngive Weapon_Jetragon_Missile 1\nslomo 0.3"
-        },
-        {
-            "id": "pal_godmode_bundle",
-            "type": "godmode",
-            "name": "现代重工真神毕业满配包",
-            "tag": "⚡ 极客狂欢 · 众神陨落",
-            "badge": "真神毕业",
-            "desc": "4 阶金色传奇火箭发射器 + 传奇霰弹枪 + 帕鲁金属神装 + 500发高爆火箭弹 + 帕鲁金属全建材，化身帕鲁大陆现代机械之神！",
-            "highlights": ["4 阶金色火箭筒 (单发万点巨额爆发)", "全套帕鲁金属防具 (免除冷热恶劣天气)", "500 发高爆弹药随心挥霍轰炸", "工业合金金属锭无限制堆积建造"],
-            "code": "-- [老L·极客场景套餐] 幻兽帕鲁 现代重工真神毕业满配包\ngive Weapon_RocketLauncher_4 1\ngive Weapon_PumpActionShotgun_4 1\ngive Armor_PalMetal_4 1\ngive RocketAmmon 500\ngive Ingot_PalMetal 500"
-        }
-    ],
+    "scenarioBundles": [],
     "pitfallNote": {
-        "title": "老L实验室避坑笔记 (幻兽帕鲁 樱岛最新版)",
+        "title": "老L避坑笔记 (幻兽帕鲁 樱岛最新版)",
         "tips": [
-            "【防封禁与反作弊】：本作单人单机模式与自建离线本地房间绝无 VAC 或官方封禁风险。若加入官方防作弊服务器，务必完全移除 UE4SS 注入 dll，切勿在公开天梯联机作弊！",
+            "【联机前先移除】：UE4SS 只在单人模式或自己开的本地房间里用，会不会被封没有人能担保。进官方或别人的服务器前，先把 UE4SS 的 dll 移走，别在公开服务器作弊。",
             "【帕鲁抑郁生病治愈】：据点帕鲁容易因地形卡住无法进食而导致【抑郁症/骨折】。使用 give Med_Low 10 获取高级药品直接投喂，并在箱子旁放置温泉以彻底稳定 SAN 值。",
             "【负重过载急救】：金属矿区挖掘超载走不动时，掏出抓钩枪对着地面或树干射击，利用抓钩拉力可以直接无视任何负重限制飞速前行。"
         ]
     },
-    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】幻兽帕鲁 UE4SS 模组引导助手\necho ========================================================\necho   【老L·单机避坑局】幻兽帕鲁 纯净模组环境检查工具\necho   纯净离线加载 · 零杀软误报 · 快捷备份配置\necho ========================================================\necho.\nif not exist \"Pal\\Binaries\\Win64\\Palworld-Win64-Shipping.exe\" (\n    echo [!] 提示: 请将本脚本放在 Palworld 游戏安装根目录！\n    pause\n    exit /b\n)\necho [*] 正在检查 UE4SS.dll 与 xinput1_3.dll 状态...\nif exist \"Pal\\Binaries\\Win64\\UE4SS.dll\" (\n    echo [√] UE4SS 底层前置挂载正常！游戏内按 F10 唤出菜单。\n) else (\n    echo [!] 未检测到 UE4SS，请解压 UE4SS 至 Pal/Binaries/Win64/。\n)\necho.\npause\n",
-    "verifiedPatch": "v0.3.x (樱岛版本完全对齐)",
+    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】幻兽帕鲁 UE4SS 检查\necho ========================================================\necho   【老L·单机避坑局】幻兽帕鲁 UE4SS 检查脚本\necho   只检查 UE4SS.dll 在不在，不改任何文件\necho ========================================================\necho.\n\nset \"WIN64=Pal\\Binaries\\Win64\"\nif not exist \"Pal\\Binaries\\Win64\\Palworld-Win64-Shipping.exe\" (\n    echo [!] 当前目录下没有 Pal\\Binaries\\Win64\\Palworld-Win64-Shipping.exe，脚本什么都没改。\n    echo     请把本脚本放到 Palworld 游戏安装根目录再运行。\n    echo.\n    pause\n    exit /b\n)\nset \"UE4SS_DLL=\"\nif exist \"%WIN64%\\ue4ss\\UE4SS.dll\" set \"UE4SS_DLL=%WIN64%\\ue4ss\\UE4SS.dll\"\nif not defined UE4SS_DLL if exist \"%WIN64%\\UE4SS.dll\" set \"UE4SS_DLL=%WIN64%\\UE4SS.dll\"\nif defined UE4SS_DLL (\n    echo [+] 找到 %UE4SS_DLL%。只检查了文件在不在，没检查版本，也没检查能不能加载。\n    echo [i] 游戏内按 F10 试试 UE4SS 菜单。\n) else (\n    echo [!] 没找到 UE4SS.dll：请把 UE4SS 解压到 %WIN64%\\ 。\n)\necho [i] 只在单人模式或自己开的房间里用；进别人的服务器前先把 UE4SS 移走。\necho [i] 脚本不备份存档；指令没有逐条在游戏里实测，执行前先手动存档。\necho.\npause\n",
+    "verifiedPatch": "v0.3.x（未实测）",
     "radarSecretCode": "帕鲁"
 }
 
@@ -645,56 +564,6 @@ STARFIELD_DATA = {
         "setstage 0001638D 1000",
         "tcl"
     ],
-    "hasTrainer": True,
-    "trainerInfo": {
-        "author": "风灵月影 (FLiNG)",
-        "version": "v1.14+ (Shattered Space 破碎空间 DLC 完全对齐)",
-        "officialUrl": "https://flingtrainer.com/trainer/starfield-trainer/",
-        "cleanMirrorUrl": "https://github.com/l-mod-vault/mirrors/releases/download/starfield/Starfield_v1.14_Plus_35_Trainer.zip",
-        "safeVerification": {
-            "isCleanVerified": True,
-            "hasBundledAds": False,
-            "virusTotalRatio": "0/72 Clean (零误报极客纯净版)",
-            "md5CheckSum": "6a5b4c3d2e1f0a9b8c7d6e5f4a3b2c1d",
-            "powershellExclusionCmd": "Add-MpPreference -ExclusionProcess 'Starfield Trainer.exe'",
-            "troubleshootSteps": [
-                "B社单机无联机服务器，修改器 100% 安全离线使用",
-                "若 Windows Defender 拦截，以管理员身份运行上方 PowerShell 白名单放行指令",
-                "进入游戏主菜单或飞船驾驶舱后再激活修改器热键"
-            ]
-        },
-        "hotkeysCategorized": [
-            {
-                "category": "🛡️ 角色生存与飞船绝对无敌",
-                "items": [
-                    {"key": "Num 1", "action": "无敌模式 (God Mode / 锁血锁氧气)"},
-                    {"key": "Num 2", "action": "无限喷气背包推力 (随心翱翔空中)"},
-                    {"key": "Num 3", "action": "无限武器弹药与零重新装填"},
-                    {"key": "Num 4", "action": "飞船护盾无限锁定 (抗击舰队围攻)"},
-                    {"key": "Num 5", "action": "飞船舰载武器无限能源与零过热"}
-                ]
-            },
-            {
-                "category": "🎒 财富开锁与随身负重",
-                "items": [
-                    {"key": "Num 6", "action": "无限信用币金钱 (999,999,999)"},
-                    {"key": "Num 7", "action": "无限数码撬棒 (Digipicks 开锁不减)"},
-                    {"key": "Num 8", "action": "随身负重无限突破 (99,999 负重上限)"},
-                    {"key": "Num 9", "action": "100% 潜行隐蔽成功率 (不被卫兵发现)"}
-                ]
-            },
-            {
-                "category": "🚀 飞船建造与研究制造",
-                "items": [
-                    {"key": "Ctrl+Num 1", "action": "飞船建造部件免费 (无需花费信用币)"},
-                    {"key": "Ctrl+Num 2", "action": "哨站建造全材料免费"},
-                    {"key": "Ctrl+Num 3", "action": "全部实验室科研项目瞬间完成"},
-                    {"key": "Ctrl+Num 4", "action": "最高星系快速跃迁距离 (无视重力引擎限制)"},
-                    {"key": "Ctrl+Num 5", "action": "超级移动速度与时间流速调节 (0.5x~5.0x)"}
-                ]
-            }
-        ]
-    },
     "hasMods": True,
     "curatedMods": [
         {
@@ -706,7 +575,7 @@ STARFIELD_DATA = {
             "downloads": "3.5M",
             "endorsements": "180K",
             "category": "Core Framework (核心前置)",
-            "desc": "星空运行全部高阶 UI 模组、飞船构建突破与游戏机制大修的绝对基石前置。原生扩展游戏内存指针，安全可靠。",
+            "desc": "星空运行全部高阶 UI 模组、飞船构建突破与游戏机制大修的绝对基石前置。原生扩展游戏内存指针；游戏更新后要等作者发新版。",
             "dependencies": ["None (Native Extender)"],
             "installPath": "Starfield/ (游戏根目录)",
             "downloadUrl": "https://github.com/ianpatt/sfse/releases/download/v0.2.14/sfse_0_02_14.7z",
@@ -1194,7 +1063,7 @@ STARFIELD_DATA = {
             "badge": "星际起航",
             "desc": "一键激活 TGM 完全无敌 + 100万信用币启动资金 + 100把数码撬棒 + 随身负重万吨上限，萌新开局直接买下顶级战舰开荒！",
             "highlights": ["完全上帝模式，免受恶劣星球伤害", "1,000,000 信用币随心买船", "100 把数码撬棒，见箱就开", "负重上限 9,999 吨，垃圾随便捡"],
-            "code": "-- [老L·极客场景套餐] 星空 新手星际启航起飞包 (原生控制台实测)\ntgm\nplayer.additem 0000000F 1000000\nplayer.additem 0000000A 100\nplayer.setav carryweight 9999"
+            "code": "-- [老L·极客场景套餐] 星空 新手星际启航起飞包 (原生控制台，未实测)\ntgm\nplayer.additem 0000000F 1000000\nplayer.additem 0000000A 100\nplayer.setav carryweight 9999"
         },
         {
             "id": "sf_salvation_bundle",
@@ -1218,15 +1087,15 @@ STARFIELD_DATA = {
         }
     ],
     "pitfallNote": {
-        "title": "老L实验室避坑笔记 (星空 破碎空间 DLC 完全版)",
+        "title": "老L避坑笔记 (星空 破碎空间 DLC 完全版)",
         "tips": [
-            "【Steam成就防锁死门禁】：Bethesda 在输入控制台命令时会标记存档为 Modded 并禁用 Steam 成就！必须先安装 Baka Achievement Enabler 或通过 SFSE 挂钩，才能在爽用控制台的同时点亮 100% 全成就！",
+            "【Steam成就防锁死门禁】：Bethesda 在输入控制台命令时会标记存档为 Modded 并禁用 Steam 成就！可以装 Baka Achievement Enabler（需要 SFSE），让开过控制台的存档继续拿成就；游戏更新后它可能要等作者适配。",
             "【改船部件重叠报错破解】：在官方造船厂经常遇到【模块存在重叠】无法保存。下载安装本站推荐的 Ship Builder Tolerance Tweaks 即可完全无视空间重叠，打造致密外装母舰。",
             "【卡死与恶性任务急救】：若因 NPC 浮空或被锁在门后无法交任务，打开控制台输入 tcl 开启穿墙飞入室内，或使用 setstage 命令直接强行推进断掉的任务流程节点。"
         ]
     },
-    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】星空 SFSE 纯净启动助手\necho ========================================================\necho   【老L·单机避坑局】星空 SFSE 扩展环境一键诊断工具\necho   防成就锁死 · 解除改船限制 · 极速 60FPS 菜单\necho ========================================================\necho.\nif not exist \"Starfield.exe\" (\n    echo [!] 提示: 请将本脚本放在 Starfield 游戏安装根目录！\n    pause\n    exit /b\n)\necho [*] 正在检查 sfse_loader.exe 状态...\nif exist \"sfse_loader.exe\" (\n    echo [√] SFSE 扩展引导已就绪！即将通过 SFSE 启动游戏...\n    start \"\" \"sfse_loader.exe\"\n) else (\n    echo [!] 未检测到 sfse_loader.exe，正在以原版模式拉起...\n    start \"\" \"Starfield.exe\"\n)\necho.\npause\n",
-    "verifiedPatch": "v1.14 (破碎空间DLC完全对齐)",
+    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】星空 SFSE 启动助手\necho ========================================================\necho   【老L·单机避坑局】星空 SFSE 启动脚本\necho   找到 sfse_loader.exe 就用它启动，找不到就用原版启动\necho ========================================================\necho.\nif not exist \"Starfield.exe\" (\n    echo [!] 当前目录下没有 Starfield.exe，脚本什么都没改。\n    echo     请把本脚本放到 Starfield 游戏安装根目录再运行。\n    echo.\n    pause\n    exit /b\n)\nif exist \"sfse_loader.exe\" (\n    echo [+] 找到 sfse_loader.exe，用它启动游戏 ...\n    start \"\" \"sfse_loader.exe\"\n) else (\n    echo [i] 没找到 sfse_loader.exe，用 Starfield.exe 原版启动 ...\n    start \"\" \"Starfield.exe\"\n)\necho [i] 脚本不备份存档；指令没有逐条在游戏里实测，执行前先手动存档。\necho.\npause\n",
+    "verifiedPatch": "v1.14（未实测）",
     "radarSecretCode": "星空"
 }
 
@@ -1238,7 +1107,7 @@ GTA5_DATA = {
     "hasConsole": True,
     "consoleShortcut": "~ (故事模式原生官方秘籍终端) 或 F4 (ScriptHookV 内置纯净修改菜单)",
     "consoleEnableGuide": {
-        "zh-CN": "【单机故事模式 100% 离线防封指南】\n1. 官方原生秘籍：进入单机故事模式后，直接按键盘左上角 ~ 键输入全英文秘籍并回车；\n2. ScriptHookV 离线内置菜单：将 ScriptHookV.dll、dinput8.dll 以及 NativeTrainer.asi 放入 GTA5 游戏根目录；\n3. 在故事模式按 F4 呼出图形化修改菜单，小键盘 8/2/4/6 切换方向，5 确认，0 返回；\n4. ⚠️ 严禁携带任何 ASI 插件或修改器文件进入 GTA Online 线上模式，否则必被 R星反作弊封号！重返线上前只需将 dinput8.dll 重命名为 .bak 即可完全断开模组隔离。",
+        "zh-CN": "【单机故事模式指南】\n1. 官方原生秘籍：进入单机故事模式后，直接按键盘左上角 ~ 键输入全英文秘籍并回车；\n2. ScriptHookV 离线内置菜单：将 ScriptHookV.dll、dinput8.dll 以及 NativeTrainer.asi 放入 GTA5 游戏根目录；\n3. 在故事模式按 F4 呼出图形化修改菜单，小键盘 8/2/4/6 切换方向，5 确认，0 返回；\n4. ⚠️ 别带着 ASI 插件或修改器文件进 GTA Online 线上模式，有封号风险。把 dinput8.dll 改名为 .bak 只是停掉 ASI 加载器；mods 文件夹、改过的 rpf 等其它改动要自己移走。",
         "en": "Press ~ to input native cheats or press F4 with ScriptHookV for offline Native Trainer. NEVER go online with mods."
     },
     "popularCommands": [
@@ -1249,56 +1118,6 @@ GTA5_DATA = {
         "BUZZOFF",
         "LAWYERUP"
     ],
-    "hasTrainer": True,
-    "trainerInfo": {
-        "author": "风灵月影 (FLiNG)",
-        "version": "v1.0.3179.0+ (最新故事模式完全对齐)",
-        "officialUrl": "https://flingtrainer.com/trainer/grand-theft-auto-v-trainer/",
-        "cleanMirrorUrl": "https://github.com/l-mod-vault/mirrors/releases/download/gta-v/Grand_Theft_Auto_V_v1.0.3179_Trainer.zip",
-        "safeVerification": {
-            "isCleanVerified": True,
-            "hasBundledAds": False,
-            "virusTotalRatio": "0/72 Clean (零误报极客纯净版)",
-            "md5CheckSum": "5b4a3c2d1e0f9a8b7c6d5e4f3a2b1c0d",
-            "powershellExclusionCmd": "Add-MpPreference -ExclusionProcess 'Grand Theft Auto V Trainer.exe'",
-            "troubleshootSteps": [
-                "绝对仅限单人线下故事模式使用，切勿在官方线上战局中开启运行",
-                "若 Windows Defender 拦截，以管理员身份运行上方 PowerShell 白名单放行指令",
-                "进入游戏加载出麦克/富兰克林/崔佛人物后再切换出桌面启动修改器"
-            ]
-        },
-        "hotkeysCategorized": [
-            {
-                "category": "🛡️ 角色生存与通缉度调控",
-                "items": [
-                    {"key": "Num 1", "action": "无敌模式 (God Mode / 锁血锁护甲)"},
-                    {"key": "Num 2", "action": "无限体力 (奔跑/游泳/潜水零衰减)"},
-                    {"key": "Num 3", "action": "无限特殊能力槽 (麦克子弹时间/小富驾驶/崔佛狂暴)"},
-                    {"key": "Num 4", "action": "通缉星级清零 (警察立刻放弃追捕)"},
-                    {"key": "Num 5", "action": "锁定六星顶级通缉 (极限警察围剿大逃杀)"}
-                ]
-            },
-            {
-                "category": "🔫 军火弹药与特种爆炸能力",
-                "items": [
-                    {"key": "Num 6", "action": "无限弹药与免装弹 (打靶连射无需换弹匣)"},
-                    {"key": "Num 7", "action": "超级近战肉搏拳头 (一拳击飞路人与汽车)"},
-                    {"key": "Num 8", "action": "爆炸近战与燃烧子弹 (弹无虚发火海轰炸)"},
-                    {"key": "Num 9", "action": "超级跳跃与从天而降 (从万米高空滑翔俯冲)"}
-                ]
-            },
-            {
-                "category": "🚗 载具极速改装与洛圣都天气",
-                "items": [
-                    {"key": "Ctrl+Num 1", "action": "载具无敌状态 (撞击永不损坏变型)"},
-                    {"key": "Ctrl+Num 2", "action": "载具无限氮气加速 (随时瞬间飙车冲刺)"},
-                    {"key": "Ctrl+Num 3", "action": "编辑故事模式当前角色现金 (十亿美金)"},
-                    {"key": "Ctrl+Num 4", "action": "昼夜时间自由倒流与快进调节"},
-                    {"key": "Ctrl+Num 5", "action": "随意切换洛圣都天气 (晴朗/雷暴/暴风雪)"}
-                ]
-            }
-        ]
-    },
     "hasMods": True,
     "curatedMods": [
         {
@@ -1794,16 +1613,6 @@ GTA5_DATA = {
     ],
     "scenarioBundles": [
         {
-            "id": "gta_starter_bundle",
-            "type": "starter",
-            "name": "洛圣都教父财富起飞包",
-            "tag": "👑 萌新首选 · 零门槛",
-            "badge": "教父起飞",
-            "desc": "全三主角账户各注入十亿美金 + PAINKILLER 锁血无敌 + 全套军火库配齐 + 警徽通缉度随心清零，新手开局直接晋升洛圣都终极教父！",
-            "highlights": ["富兰克林/麦克/崔佛各拥有 10 亿现金", "PAINKILLER 官方锁血无敌", "TOOLUP 武器军火弹药全满", "LAWYERUP 警匪追捕一秒消除"],
-            "code": "-- [老L·极客场景套餐] GTA5 洛圣都教父财富起飞包 (单机实测)\nPAINKILLER\nTURTLE\nTOOLUP\nLAWYERUP\n[Menyoo] Add $1,000,000,000 to All Characters"
-        },
-        {
             "id": "gta_salvation_bundle",
             "type": "salvation",
             "name": "六星狂暴大逃杀激战包",
@@ -1825,15 +1634,15 @@ GTA5_DATA = {
         }
     ],
     "pitfallNote": {
-        "title": "老L实验室避坑笔记 (GTA 5 故事模式与防封圣经)",
+        "title": "老L避坑笔记 (GTA 5 故事模式)",
         "tips": [
-            "【绝对防线上封号铁律】：Rockstar 的 GTA Online 对内存注入实行严苛封号政策！单机玩腻准备进入线上模式联机前，必须彻底将游戏根目录中的 dinput8.dll 改名为 dinput8.dll.bak，确保没有任何 ASI 钩子被加载，即可 100% 确保线上账号绝对安全！",
+            "【进线上前】：Rockstar 的 GTA Online 对内存注入查得很严。进线上模式前，把游戏根目录的 dinput8.dll 改名为 dinput8.dll.bak（停掉 ASI 加载器），mods 文件夹、改过的 rpf 等其它改动也要移走；没有办法保证不被封号。",
             "【故事模式股票暴富机制】：麦克的莱斯特刺杀任务千万别提前做！等通关大结局‘联合储蓄’劫案拿到 2800 万初始本金后，再分批次接暗杀任务并全仓买入对应做空做多股票，本金可直接滚至 21 亿上限！",
-            "【打不开 F4 菜单】：若按 F4 毫无反应，说明缺失 Visual C++ 2015~2022 运行库或 DirectX 组件。重新安装微软官方合集包即可完美修复。"
+            "【打不开 F4 菜单】：若按 F4 毫无反应，说明缺失 Visual C++ 2015~2022 运行库或 DirectX 组件。去微软官网重新安装 Visual C++ 运行库和 DirectX 后再试。"
         ]
     },
-    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】GTA5 线上/单机模式安全切换助手\necho ========================================================\necho   【老L·单机避坑局】GTA5 离线防封一键隔离切换器\necho   线上/单机物理隔离 · 绝对杜绝封号误操作\necho ========================================================\necho.\nif not exist \"GTA5.exe\" (\n    echo [!] 提示: 请将本脚本放在 Grand Theft Auto V 游戏安装根目录！\n    pause\n    exit /b\n)\nif exist \"dinput8.dll\" (\n    echo [当前状态]: 【单机 Mod 模式】已开启 (严禁进入线上模式！)\n    echo.\n    set /p choice=\"是否切换为【纯净线上模式】(输入 Y 确认): \"\n    if /i \"%choice%\"==\"Y\" (\n        ren \"dinput8.dll\" \"dinput8.dll.bak\"\n        echo [√] 已安全切断模组管道！现在可安全进入 GTA Online。\n    )\n) else if exist \"dinput8.dll.bak\" (\n    echo [当前状态]: 【纯净线上模式】已启用 (Mod 处于隔离休眠状态)\n    echo.\n    set /p choice=\"是否激活【单机离线 Mod 模式】(输入 Y 确认): \"\n    if /i \"%choice%\"==\"Y\" (\n        ren \"dinput8.dll.bak\" \"dinput8.dll\"\n        echo [√] 已激活 ScriptHookV 离线模组环境！按 F4 呼出菜单。\n    )\n)\necho.\npause\n",
-    "verifiedPatch": "v1.0.3179 (线上DLC完全对齐)",
+    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】GTA5 ASI 加载器开关\necho ========================================================\necho   【老L·单机避坑局】GTA5 ASI 加载器开关脚本\necho   把 dinput8.dll 改名为 dinput8.dll.bak 来停用，或改回来启用\necho ========================================================\necho.\nif not exist \"GTA5.exe\" (\n    echo [!] 当前目录下没有 GTA5.exe，脚本什么都没改。\n    echo     请把本脚本放到 Grand Theft Auto V 游戏安装根目录再运行。\n    echo.\n    pause\n    exit /b\n)\n\nset \"MODE=\"\nif exist \"dinput8.dll\" set \"MODE=on\"\nif not defined MODE if exist \"dinput8.dll.bak\" set \"MODE=off\"\nif not defined MODE (\n    echo [i] 没有 dinput8.dll，也没有 dinput8.dll.bak：没装 ASI 加载器，脚本什么都没改。\n    echo.\n    pause\n    exit /b\n)\n\nset \"choice=\"\nif \"%MODE%\"==\"on\" echo [当前状态] 有 dinput8.dll：ASI 加载器会加载 ScriptHookV 等插件，只能玩故事模式。\nif \"%MODE%\"==\"on\" set /p \"choice=把 dinput8.dll 改名为 dinput8.dll.bak、停用 ASI 加载器？输入 Y 确认: \"\nif \"%MODE%\"==\"off\" echo [当前状态] 只有 dinput8.dll.bak：ASI 加载器已停用。\nif \"%MODE%\"==\"off\" set /p \"choice=把 dinput8.dll.bak 改回 dinput8.dll、重新启用 ASI 加载器？输入 Y 确认: \"\n\nif /i not \"%choice%\"==\"Y\" (\n    echo [i] 没有输入 Y，脚本什么都没改。\n    echo.\n    pause\n    exit /b\n)\n\nif \"%MODE%\"==\"on\" ren \"dinput8.dll\" \"dinput8.dll.bak\"\nif \"%MODE%\"==\"off\" ren \"dinput8.dll.bak\" \"dinput8.dll\"\n\nif exist \"dinput8.dll\" (\n    echo [结果] 现在有 dinput8.dll：ASI 加载器会被加载，故事模式按 F4 试试菜单。\n) else (\n    echo [结果] 现在没有 dinput8.dll：ASI 加载器不会被加载。\n)\necho.\necho ========================================================\necho  [i] 这个脚本只改 dinput8.dll 这一个文件的名字。\necho      其它改过的文件（mods 文件夹、改过的 rpf 等）它不管；进 GTA Online 前要自己全部移走，有封号风险。\necho      脚本不备份存档，改之前先手动备份。\necho ========================================================\necho.\npause\n",
+    "verifiedPatch": "v1.0.3179（未实测）",
     "radarSecretCode": "洛圣都"
 }
 
@@ -1847,7 +1656,7 @@ RDR2_DATA = {
     "hasConsole": True,
     "consoleShortcut": "F5 (ScriptHookRDR2 原生离线修改器) 或 游戏内设置-作弊码",
     "consoleEnableGuide": {
-        "zh-CN": "【单机故事模式 100% 离线防封指南】\n1. 官方秘籍输入：进入故事模式 -> 按 Esc 暂停 -> 选择【设置 (Settings)】-> 按左下角【作弊 (Cheats)】或 Shift 键 -> 输入对应英文短语并回车保存；\n2. ScriptHookRDR2 离线内置菜单：将 ScriptHookRDR2.dll、dinput8.dll 以及 NativeTrainer.asi 解压至游戏根目录；\n3. 启动故事模式按 F5 键唤出图形修改菜单，小键盘 8/2/4/6 控制，5 确认，0 返回；\n4. ⚠️ 绝无封号风险（进入 RDO 线上前只需将 dinput8.dll 重命名为 .bak 即可完全断开）。",
+        "zh-CN": "【单机故事模式指南】\n1. 官方秘籍输入：进入故事模式 -> 按 Esc 暂停 -> 选择【设置 (Settings)】-> 按左下角【作弊 (Cheats)】或 Shift 键 -> 输入对应英文短语并回车保存；\n2. ScriptHookRDR2 离线内置菜单：将 ScriptHookRDR2.dll、dinput8.dll 以及 NativeTrainer.asi 解压至游戏根目录；\n3. 启动故事模式按 F5 键唤出图形修改菜单，小键盘 8/2/4/6 控制，5 确认，0 返回；\n4. ⚠️ 别带着 Mod 进 RDO 线上模式，有封号风险。把 dinput8.dll 改名为 .bak 只是停掉 ASI 加载器，其它改过的文件要自己移走。",
         "en": "Enter official cheat phrases in Settings -> Cheats, or press F5 with ScriptHookRDR2 in offline story mode."
     },
     "popularCommands": [
@@ -1858,56 +1667,6 @@ RDR2_DATA = {
         "Greed is American virtue",
         "[F5] ScriptHookRDR2 -> Horse -> Spawn -> Arabian White"
     ],
-    "hasTrainer": True,
-    "trainerInfo": {
-        "author": "风灵月影 (FLiNG)",
-        "version": "v1.0.1491.17+ (全离线故事模式对齐)",
-        "officialUrl": "https://flingtrainer.com/trainer/red-dead-redemption-2-trainer/",
-        "cleanMirrorUrl": "https://github.com/l-mod-vault/mirrors/releases/download/rdr2/Red_Dead_Redemption_2_v1491_Plus_31_Trainer.zip",
-        "safeVerification": {
-            "isCleanVerified": True,
-            "hasBundledAds": False,
-            "virusTotalRatio": "0/72 Clean (零误报极客纯净版)",
-            "md5CheckSum": "4a3b2c1d0e9f8a7b6c5d4e3f2a1b0c9d",
-            "powershellExclusionCmd": "Add-MpPreference -ExclusionProcess 'Red Dead Redemption 2 Trainer.exe'",
-            "troubleshootSteps": [
-                "绝对仅限线下单机故事模式使用，切勿在 RDO 线上战局使用",
-                "若 Windows Defender 拦截，以管理员身份运行上方 PowerShell 白名单放行指令",
-                "进入游戏主界面操作亚瑟骑马行动后，再按小键盘热键激活"
-            ]
-        },
-        "hotkeysCategorized": [
-            {
-                "category": "🛡️ 亚瑟生存与死神之眼",
-                "items": [
-                    {"key": "Num 1", "action": "亚瑟无敌模式 (God Mode / 锁血锁核心)"},
-                    {"key": "Num 2", "action": "无限体力 (疾跑/潜水/拉弓零疲劳)"},
-                    {"key": "Num 3", "action": "无限死神之眼 (Dead Eye 随时定格标点)"},
-                    {"key": "Num 4", "action": "核心状态锁定全满 (生命/体力/死眼三核心不衰减)"},
-                    {"key": "Num 5", "action": "亚瑟温度适宜 (严寒雪山单衣不掉血)"}
-                ]
-            },
-            {
-                "category": "🐎 爱马机能与随身背包",
-                "items": [
-                    {"key": "Num 6", "action": "马匹无敌模式 (撞树/坠崖/遭野兽围攻不倒)"},
-                    {"key": "Num 7", "action": "马匹无限体力与胆量 (面对灰熊巨鳄永不受惊甩下)"},
-                    {"key": "Num 8", "action": "无限枪械弹药与无需换弹匣"},
-                    {"key": "Num 9", "action": "枪械武器永不生锈磨损 (状态完美如新)"}
-                ]
-            },
-            {
-                "category": "💰 财富金条与西部时间",
-                "items": [
-                    {"key": "Ctrl+Num 1", "action": "编辑亚瑟钱包现金 (直接增加 $10,000)"},
-                    {"key": "Ctrl+Num 2", "action": "通缉悬赏金清零 (警长立刻放弃追缉)"},
-                    {"key": "Ctrl+Num 3", "action": "锁定最高荣誉值 (圣人亚瑟救赎之道)"},
-                    {"key": "Ctrl+Num 4", "action": "100% 捕猎完美三星毛皮 (任何枪支射杀均保完美)"},
-                    {"key": "Ctrl+Num 5", "action": "时间昼夜流速调节与自由传送"}
-                ]
-            }
-        ]
-    },
     "hasMods": True,
     "curatedMods": [
         {
@@ -1919,7 +1678,7 @@ RDR2_DATA = {
             "downloads": "5.6M",
             "endorsements": "310K",
             "category": "Core Framework (核心前置)",
-            "desc": "荒野大镖客2运行任何 ASI 模组、刷车刷马工具与离线菜单的官方核心基石。自带防联机误入机制，安全可靠。",
+            "desc": "荒野大镖客2运行任何 ASI 模组、刷车刷马工具与离线菜单的核心前置（第三方工具，不是官方的）。只在故事模式用，进线上前把它移走。",
             "dependencies": ["None (Native DLL)"],
             "installPath": "Red Dead Redemption 2/ (游戏根目录)",
             "downloadUrl": "https://github.com/l-mod-vault/mirrors/releases/download/scripthookrdr2/ScriptHookRDR2_1.0.1491.17.zip",
@@ -2300,48 +2059,17 @@ RDR2_DATA = {
             ]
         }
     ],
-    "scenarioBundles": [
-        {
-            "id": "rdr_starter_bundle",
-            "type": "starter",
-            "name": "新手西部拓荒起飞包",
-            "tag": "👑 萌新首选 · 零门槛",
-            "badge": "拓荒起飞",
-            "desc": "一键激活 You want freedom 锁血无敌 + 白斑纯血阿拉伯神马 + 30 块纯金条兑现 + 东部传说背包 99 堆叠，开荒西部零受苦！",
-            "highlights": ["官方锁血无敌，告别野兽袭击暴毙", "白斑纯血阿拉伯神驹伴你行", "30 块纯金条入账瞬间成为大富翁", "东部传说背包 99 道具携带上限"],
-            "code": "-- [老L·极客场景套餐] 大镖客2 新手西部拓荒起飞包\nYou want freedom\nYou flourish before you die\n[F5] ScriptHookRDR2 -> Horse -> Spawn -> Arabian White\n[F5] ScriptHookRDR2 -> Items -> Add 30 Gold Bars"
-        },
-        {
-            "id": "rdr_salvation_bundle",
-            "type": "salvation",
-            "name": "圣人亚瑟救赎圆满包",
-            "tag": "🛡️ 意难平救赎 · 告别受苦",
-            "badge": "圣人救赎",
-            "desc": "荣誉值满级 Virture + 全套神枪手绝版武器 + 全传说动物毛皮各 5 张 + 营地全设施顶级升级，给亚瑟一个最体面圆满的归宿！",
-            "highlights": ["荣誉值满级圣人亚瑟路线", "全套四大传奇神枪手雕花手枪", "全传说动物毛皮，捕兽人全套做齐", "范德林德帮营地温馨全满配置"],
-            "code": "-- [老L·极客场景套餐] 大镖客2 圣人亚瑟救赎圆满包\nVirtue unearned is not virtue\nHistory is written by fools\n[F5] ScriptHookRDR2 -> Inventory -> Add All Perfect Pelts\n[F5] ScriptHookRDR2 -> Camp -> Pearson Upgrade Max"
-        },
-        {
-            "id": "rdr_godmode_bundle",
-            "type": "godmode",
-            "name": "荒野死神火力真神包",
-            "tag": "⚡ 极客狂欢 · 众神陨落",
-            "badge": "荒野死神",
-            "desc": "无限死神之眼 Seek all the bounty + 独头高爆霰弹全满 + 震撼西部雷暴 + 瞬移圣丹尼斯，化身横行西部的荒野死神！",
-            "highlights": ["无限死神之眼子弹时间定格", "独头高爆霰弹枪一枪碎车", "震撼西部真实雷暴大电影质感", "瞬移圣丹尼斯无需骑马赶路"],
-            "code": "-- [老L·极客场景套餐] 大镖客2 荒野死神火力真神包\nSeek all the bounty of this place\n[F5] ScriptHookRDR2 -> Weapons -> Explosive Slug Ammo\n[F5] ScriptHookRDR2 -> Weather -> Thunderstorm\n[F5] ScriptHookRDR2 -> Teleport -> Fast Travel to Saint Denis"
-        }
-    ],
+    "scenarioBundles": [],
     "pitfallNote": {
-        "title": "老L实验室避坑笔记 (荒野大镖客2 故事模式防封圣经)",
+        "title": "老L避坑笔记 (荒野大镖客2 故事模式)",
         "tips": [
-            "【绝对防联机封号隔离】：R星对 RDO 荒野大镖客线上模式同样严查。在登录线上战局前，务必把游戏根目录的 dinput8.dll 改名为 dinput8.dll.bak，彻底切断所有 ScriptHook 挂钩，绝无封号之忧！",
+            "【进线上前】：R星对 RDO 线上模式同样严查。进线上战局前，把游戏根目录的 dinput8.dll 改名为 dinput8.dll.bak（停掉 ASI 加载器），其它改过的文件也要移走；没有办法保证不被封号。",
             "【捕猎毛皮品质保护】：想要获得三星完美毛皮，务必击杀头上本来就是三星的动物，并掏出春田步枪击中头部一击毙命；若嫌繁琐，直接使用本库一键添加全部三星皮！",
             "【作弊码保存限制】：在官方设置里激活作弊码后，系统会默认暂时禁止保存新存档。若需保存修改后的金钱与装备，请使用 ScriptHookRDR2 或风灵月影修改器，它们不会禁用存档功能！"
         ]
     },
-    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】荒野大镖客2 离线防封助手\necho ========================================================\necho   【老L·单机避坑局】荒野大镖客2 纯净离线隔离切换器\necho   故事模式一键畅玩 · 物理隔离线上 RDO · 零封号\necho ========================================================\necho.\nif not exist \"RDR2.exe\" (\n    echo [!] 提示: 请将本脚本放在 Red Dead Redemption 2 游戏安装根目录！\n    pause\n    exit /b\n)\nif exist \"dinput8.dll\" (\n    echo [当前状态]: 【单机 Mod 模式】已开启 (切勿进入线上战局！)\n    echo.\n    set /p choice=\"是否切换为【纯净线上 RDO 模式】(输入 Y 确认): \"\n    if /i \"%choice%\"==\"Y\" (\n        ren \"dinput8.dll\" \"dinput8.dll.bak\"\n        echo [√] 已切断模组管道！现在可安全启动 RDO 线上战局。\n    )\n) else if exist \"dinput8.dll.bak\" (\n    echo [当前状态]: 【纯净线上模式】已启用 (Mod 处于隔离状态)\n    echo.\n    set /p choice=\"是否激活【单机离线 Mod 模式】(输入 Y 确认): \"\n    if /i \"%choice%\"==\"Y\" (\n        ren \"dinput8.dll.bak\" \"dinput8.dll\"\n        echo [√] 已激活 ScriptHookRDR2 离线环境！按 F5 呼出修改菜单。\n    )\n)\necho.\npause\n",
-    "verifiedPatch": "v1.0.1491 (完全对齐)",
+    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】荒野大镖客2 ASI 加载器开关\necho ========================================================\necho   【老L·单机避坑局】荒野大镖客2 ASI 加载器开关脚本\necho   把 dinput8.dll 改名为 dinput8.dll.bak 来停用，或改回来启用\necho ========================================================\necho.\nif not exist \"RDR2.exe\" (\n    echo [!] 当前目录下没有 RDR2.exe，脚本什么都没改。\n    echo     请把本脚本放到 Red Dead Redemption 2 游戏安装根目录再运行。\n    echo.\n    pause\n    exit /b\n)\n\nset \"MODE=\"\nif exist \"dinput8.dll\" set \"MODE=on\"\nif not defined MODE if exist \"dinput8.dll.bak\" set \"MODE=off\"\nif not defined MODE (\n    echo [i] 没有 dinput8.dll，也没有 dinput8.dll.bak：没装 ASI 加载器，脚本什么都没改。\n    echo.\n    pause\n    exit /b\n)\n\nset \"choice=\"\nif \"%MODE%\"==\"on\" echo [当前状态] 有 dinput8.dll：ASI 加载器会加载 ScriptHookRDR2 等插件，只能玩故事模式。\nif \"%MODE%\"==\"on\" set /p \"choice=把 dinput8.dll 改名为 dinput8.dll.bak、停用 ASI 加载器？输入 Y 确认: \"\nif \"%MODE%\"==\"off\" echo [当前状态] 只有 dinput8.dll.bak：ASI 加载器已停用。\nif \"%MODE%\"==\"off\" set /p \"choice=把 dinput8.dll.bak 改回 dinput8.dll、重新启用 ASI 加载器？输入 Y 确认: \"\n\nif /i not \"%choice%\"==\"Y\" (\n    echo [i] 没有输入 Y，脚本什么都没改。\n    echo.\n    pause\n    exit /b\n)\n\nif \"%MODE%\"==\"on\" ren \"dinput8.dll\" \"dinput8.dll.bak\"\nif \"%MODE%\"==\"off\" ren \"dinput8.dll.bak\" \"dinput8.dll\"\n\nif exist \"dinput8.dll\" (\n    echo [结果] 现在有 dinput8.dll：ASI 加载器会被加载，故事模式按 F5 试试菜单。\n) else (\n    echo [结果] 现在没有 dinput8.dll：ASI 加载器不会被加载。\n)\necho.\necho ========================================================\necho  [i] 这个脚本只改 dinput8.dll 这一个文件的名字。\necho      其它改过的文件它不管；进 RDO 线上模式前要自己全部移走，有封号风险。\necho      脚本不备份存档，改之前先手动备份。\necho ========================================================\necho.\npause\n",
+    "verifiedPatch": "v1.0.1491（未实测）",
     "radarSecretCode": "大表哥"
 }
 
@@ -2364,56 +2092,6 @@ MHW_DATA = {
         "[REFramework] -> Economy -> Add 10,000,000 Zenny",
         "[SmartHunter] -> Overlay -> Show Monster Realtime HP Bar"
     ],
-    "hasTrainer": True,
-    "trainerInfo": {
-        "author": "风灵月影 (FLiNG)",
-        "version": "v15.11+ (Iceborne 冰原终极版本完全对齐)",
-        "officialUrl": "https://flingtrainer.com/trainer/monster-hunter-world-trainer/",
-        "cleanMirrorUrl": "https://github.com/l-mod-vault/mirrors/releases/download/mhw/Monster_Hunter_World_Iceborne_Plus_47_Trainer.zip",
-        "safeVerification": {
-            "isCleanVerified": True,
-            "hasBundledAds": False,
-            "virusTotalRatio": "0/72 Clean (零误报极客纯净版)",
-            "md5CheckSum": "3b2a1c0d9e8f7a6b5c4d3e2f1a0b9c8d",
-            "powershellExclusionCmd": "Add-MpPreference -ExclusionProcess 'Monster Hunter World Trainer.exe'",
-            "troubleshootSteps": [
-                "冰原单人离线与好友私人房间均可正常使用，请勿在公开救援任务滥用一击必杀",
-                "若 Windows Defender 拦截，以管理员身份运行上方 PowerShell 白名单放行指令",
-                "进入月辰据点或接取任务营地后再开启修改功能"
-            ]
-        },
-        "hotkeysCategorized": [
-            {
-                "category": "🛡️ 猎人生存与武器斩味",
-                "items": [
-                    {"key": "Num 1", "action": "猎人无敌锁血 (God Mode / 免受伤害)"},
-                    {"key": "Num 2", "action": "无限耐力 (奔跑/蓄力/滑步零消耗)"},
-                    {"key": "Num 3", "action": "武器无限斩味 (紫斩白斩永不磨损掉斩)"},
-                    {"key": "Num 4", "action": "太刀红刃练气全满锁定 (随时释放登龙气刃斩)"},
-                    {"key": "Num 5", "action": "盾斧红盾红剑超解瓶子无限锁定"}
-                ]
-            },
-            {
-                "category": "🎒 装备珠子与客制素材",
-                "items": [
-                    {"key": "Num 6", "action": "无限随身道具与弹药 (秘药/闪光弹无限用)"},
-                    {"key": "Num 7", "action": "100% 极品 4 级珠子掉落概率 (攻击珠II/达人珠II)"},
-                    {"key": "Num 8", "action": "装备锻造与客制强化无需任何素材"},
-                    {"key": "Num 9", "action": "武器防具强化等级直接拉至上限"}
-                ]
-            },
-            {
-                "category": "🐉 聚魔之地与狩猎生态",
-                "items": [
-                    {"key": "Ctrl+Num 1", "action": "聚魔之地全区域等级直接锁定 Lv7"},
-                    {"key": "Ctrl+Num 2", "action": "编辑调查点数与金钱金币 (99,999,999)"},
-                    {"key": "Ctrl+Num 3", "action": "怪物一击倒地断尾破坏 (部位破坏狂)"},
-                    {"key": "Ctrl+Num 4", "action": "超高剥取次数 (单只古龙剥取 20 次)"},
-                    {"key": "Ctrl+Num 5", "action": "随从猫六大特殊装备全满级"}
-                ]
-            }
-        ]
-    },
     "hasMods": True,
     "curatedMods": [
         {
@@ -2490,7 +2168,7 @@ MHW_DATA = {
             "downloads": "2.5M",
             "endorsements": "160K",
             "category": "Performance (性能加速)",
-            "desc": "移除冰原反作弊死循环冗余检测，大幅消除 100% CPU 占用导致的掉帧卡顿，平均提升 15~25 帧并降低 CPU 核心温度 8-10℃！",
+            "desc": "移除冰原反作弊死循环冗余检测，大幅消除 100% CPU 占用导致的掉帧卡顿。效果因电脑而异，本站没有测过具体帧数。",
             "dependencies": ["Stracker's Loader"],
             "installPath": "Monster Hunter World/nativePC/plugins/",
             "downloadUrl": "https://github.com/l-mod-vault/mirrors/releases/download/mhw/PerformanceBooster_Iceborne.zip",
@@ -2805,48 +2483,17 @@ MHW_DATA = {
             ]
         }
     ],
-    "scenarioBundles": [
-        {
-            "id": "mhw_starter_bundle",
-            "type": "starter",
-            "name": "新手苍蓝星逃课起飞包",
-            "tag": "👑 萌新首选 · 零门槛",
-            "badge": "逃课起飞",
-            "desc": "一键激活锁血锁斩味无敌 + 全 4 级攻击珠达人珠 1 铜币直购 + 一千万资金 + 随从猫掠夺刀 15 级，新手畅享丝滑爽快大狩猎！",
-            "highlights": ["锁血无敌免受猫车折磨", "攻击珠II/达人珠II 1铜币全买齐", "武器紫斩永不磨损掉斩", "一千万金币工匠强化财富自由"],
-            "code": "-- [老L·极客场景套餐] 怪猎世界 新手苍蓝星逃课起飞包\n[REFramework] -> Player Stats -> Invincibility (God Mode)\n[REFramework] -> Weapon Stats -> Infinite Sharpness\n[Shop] -> Buy Item -> Attack Jewel 4\n[Shop] -> Buy Item -> Expert Jewel 4"
-        },
-        {
-            "id": "mhw_salvation_bundle",
-            "type": "salvation",
-            "name": "聚魔之地客制满配救赎包",
-            "tag": "🛡️ 意难平救赎 · 告别受苦",
-            "badge": "聚魔满配",
-            "desc": "聚魔之地全六大区域直接拉满 Lv7 + 大灵脉玉 100 个 + 历战灭尽龙角 50 个 + 武器吸血客制全开，告别肝聚魔地质学折磨！",
-            "highlights": ["全六大区域直接全锁定 Lv7 满级", "大灵脉玉 100 个随心解除上限", "近战武器吸血客制直接拉满", "刀刀吸血站撸历战古龙"],
-            "code": "-- [老L·极客场景套餐] 怪猎世界 聚魔之地客制满配救赎包\n[REFramework] -> Guiding Lands -> Set All Regions to Level 7\n[REFramework] -> Items -> Add Great Spiritvein Gem x100\n[REFramework] -> Items -> Add Tempered Ruinhorn x50\n[REFramework] -> Equipment -> Unlock All Weapon Augments"
-        },
-        {
-            "id": "mhw_godmode_bundle",
-            "type": "godmode",
-            "name": "黑龙真髓真神毕业包",
-            "tag": "⚡ 极客狂欢 · 众神陨落",
-            "badge": "真神毕业",
-            "desc": "黑龙全套毕业神装 + 极限面板黑龙大剑 + SmartHunter 怪物实时血量部位耐久透视 + 全服装外观幻化，终结新大陆狩猎终点！",
-            "highlights": ["黑龙真髓全套 4 级孔位神级装备", "物理伤害天花板黑龙大剑", "SmartHunter 实时血量部位破坏透视", "全外观幻化全解锁美型猎人"],
-            "code": "-- [老L·极客场景套餐] 怪猎世界 黑龙真髓真神毕业包\n[REFramework] -> Equipment -> Unlock Full Fatalis Armor Set\n[REFramework] -> Equipment -> Unlock Fatalis Zagges\n[SmartHunter] -> Overlay -> Show Monster Realtime HP Bar\n[REFramework] -> Equipment -> Unlock All Layered Armor"
-        }
-    ],
+    "scenarioBundles": [],
     "pitfallNote": {
-        "title": "老L实验室避坑笔记 (怪物猎人世界 冰原终极避坑指南)",
+        "title": "老L避坑笔记 (怪物猎人世界 冰原终极避坑指南)",
         "tips": [
-            "【联机防踢与尊重原则】：卡普空对单机与好友自建私人房间使用 Mod 极为宽松（无 VAC 封号机制）。但在加入路人公开救援时，请务必关闭【一击必杀】与【锁血】，使用 SmartHunter 纯净显示血量即可，切勿破坏其他真实玩家的狩猎乐趣！",
+            "【联机防踢与尊重原则】：卡普空对单机与好友自建私人房间使用 Mod 比较宽松，但没有人能担保不封号。但在加入路人公开救援时，请务必关闭【一击必杀】与【锁血】，使用 SmartHunter 纯净显示血量即可，切勿破坏其他真实玩家的狩猎乐趣！",
             "【黑屏无限加载急救】：安装模组后游戏无法启动或黑屏卡死，99% 是由于游戏大更新后 Stracker's Loader 未更新或 nativePC 遗留了过期前置。删除游戏根目录的 dinput8.dll 即可瞬间恢复正常启动！",
             "【CPU 100% 掉帧发热排查】：冰原自带的反作弊线程存在内存死循环 Bug。请务必安装本站推荐的 Performance Booster 补丁，直接禁用该死循环，显卡性能完全释放。"
         ]
     },
-    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】怪猎世界 Stracker Loader 诊断工具\necho ========================================================\necho   【老L·单机避坑局】怪物猎人世界 模组环境自动诊断器\necho   CRC 绕过检测 · 自动备份 nativePC · 零卡死\necho ========================================================\necho.\nif not exist \"MonsterHunterWorld.exe\" (\n    echo [!] 提示: 请将本脚本放在 Monster Hunter World 游戏安装根目录！\n    pause\n    exit /b\n)\necho [*] 正在检查 dinput8.dll 与 nativePC 状态...\nif exist \"dinput8.dll\" (\n    echo [√] Stracker's Loader 前置挂载正常！\n) else (\n    echo [!] 未检测到 dinput8.dll，部分 nativePC 模组可能无法正常加载。\n)\nif not exist \"nativePC\" (\n    mkdir nativePC\n    echo [+] 已为您自动创建 nativePC 模组目录。\n)\necho.\npause\n",
-    "verifiedPatch": "v15.11 (冰原最终版完全对齐)",
+    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】怪猎世界 Mod 目录检查\necho ========================================================\necho   【老L·单机避坑局】怪物猎人世界 Mod 目录检查脚本\necho   检查 dinput8.dll 在不在；没有 nativePC 目录就新建一个\necho ========================================================\necho.\nif not exist \"MonsterHunterWorld.exe\" (\n    echo [!] 当前目录下没有 MonsterHunterWorld.exe，脚本什么都没改。\n    echo     请把本脚本放到 Monster Hunter World 游戏安装根目录再运行。\n    echo.\n    pause\n    exit /b\n)\nif exist \"dinput8.dll\" (\n    echo [+] 找到 dinput8.dll：Stracker's Loader 用的就是这个文件名。只检查了文件在不在。\n) else (\n    echo [!] 没找到 dinput8.dll，依赖 Stracker's Loader 的 Mod 可能加载不了。\n)\nif not exist \"nativePC\" (\n    mkdir nativePC\n    echo [+] 已新建 nativePC 目录。\n) else (\n    echo [i] nativePC 目录已经有了，没有改动。\n)\necho [i] 脚本不备份存档，装 Mod 前先手动备份。\necho.\npause\n",
+    "verifiedPatch": "v15.11（未实测）",
     "radarSecretCode": "苍蓝星"
 }
 
@@ -2858,7 +2505,7 @@ SEKIRO_DATA = {
     "hasConsole": True,
     "consoleShortcut": "ModEngine 挂钩引导 + 小键盘热键 / 慢动作防御弹刀辅助",
     "consoleEnableGuide": {
-        "zh-CN": "【只狼 纯净模组与弹刀防反教学指南】\n1. 安装 ModEngine：将 dinput8.dll 与 modengine.ini 放入只狼游戏根目录 (与 sekiro.exe 同目录)；\n2. 新建 mods/ 文件夹，将下载的角色时装、材质与招式 Mod 放入该目录；\n3. 启动游戏无任何 EAC 反作弊，离线游玩绝无封号风险；\n4. 开启 F1 键可进入 0.3x 防御完美弹刀子弹时间，轻松看破任何 Boss 的连续乱舞招式！",
+        "zh-CN": "【只狼 纯净模组与弹刀防反教学指南】\n1. 安装 ModEngine：将 dinput8.dll 与 modengine.ini 放入只狼游戏根目录 (与 sekiro.exe 同目录)；\n2. 新建 mods/ 文件夹，将下载的角色时装、材质与招式 Mod 放入该目录；\n3. 只狼没有 EAC 反作弊，也没有联机模式；\n4. 开启 F1 键可进入 0.3x 防御完美弹刀子弹时间，轻松看破任何 Boss 的连续乱舞招式！",
         "en": "Install ModEngine into Sekiro root. Press F1 for 0.3x parry window bullet time and hotkeys for infinite spirit emblems."
     },
     "popularCommands": [
@@ -2869,56 +2516,6 @@ SEKIRO_DATA = {
         "[CT表] Combat Arts -> Unlock Sakura Dance (秘传·樱舞空中避雷雷返神技)",
         "[CT表] Inventory -> Add 9 Gourd Seeds (9颗葫芦种子回满10瓶药)"
     ],
-    "hasTrainer": True,
-    "trainerInfo": {
-        "author": "风灵月影 (FLiNG)",
-        "version": "v1.06 (年度版与全Boss连战完全对齐)",
-        "officialUrl": "https://flingtrainer.com/trainer/sekiro-shadows-die-twice-trainer/",
-        "cleanMirrorUrl": "https://github.com/l-mod-vault/mirrors/releases/download/sekiro/Sekiro_Shadows_Die_Twice_v1.06_Plus_24_Trainer.zip",
-        "safeVerification": {
-            "isCleanVerified": True,
-            "hasBundledAds": False,
-            "virusTotalRatio": "0/72 Clean (零误报极客纯净版)",
-            "md5CheckSum": "2a1b0c9d8e7f6a5b4c3d2e1f0a9b8c7d",
-            "powershellExclusionCmd": "Add-MpPreference -ExclusionProcess 'Sekiro Shadows Die Twice Trainer.exe'",
-            "troubleshootSteps": [
-                "只狼纯单机离线运行，无任何网络联机或 EAC 封号风险，100% 安全",
-                "若 Windows Defender 拦截，以管理员身份运行上方 PowerShell 白名单放行指令",
-                "进入游戏操控狼行动后再按对应快捷键激活功能"
-            ]
-        },
-        "hotkeysCategorized": [
-            {
-                "category": "🛡️ 狼机体生存与躯干防御",
-                "items": [
-                    {"key": "Num 1", "action": "无敌模式 (God Mode / 绝对格挡免伤)"},
-                    {"key": "Num 2", "action": "躯干架势槽锁定不崩 (Posture Lock)"},
-                    {"key": "Num 3", "action": "无限回生次数 (倒下后随时原地满血再起)"},
-                    {"key": "Num 4", "action": "免疫全异常状态 (防恐怖/防中毒/防火焚)"},
-                    {"key": "Num 5", "action": "完全光学潜行隐身 (敌人视若无睹)"}
-                ]
-            },
-            {
-                "category": "🥋 躯干秒崩与忍具纸人",
-                "items": [
-                    {"key": "Num 6", "action": "一击崩解敌方躯干架势 (瞬间触发红点忍杀)"},
-                    {"key": "Num 7", "action": "超级伤害/一击必杀 (One Hit Kill)"},
-                    {"key": "Num 8", "action": "无限白金纸人 (999 纸人无限释放义手神技)"},
-                    {"key": "Num 9", "action": "伤药葫芦与药丸使用不减"}
-                ]
-            },
-            {
-                "category": "⚡ 金钱经验与慢动作练习",
-                "items": [
-                    {"key": "Ctrl+Num 1", "action": "编辑金钱金币 (999,999 随心购买仙峰寺飞镖)"},
-                    {"key": "Ctrl+Num 2", "action": "无限技能技能点 (随时点满全流派秘籍)"},
-                    {"key": "Ctrl+Num 3", "action": "死亡不掉落金钱与经验 (龙咳概率清零)"},
-                    {"key": "Ctrl+Num 4", "action": "0.3x 子弹时间慢动作 (观察剑圣抬手前摇)"},
-                    {"key": "Ctrl+Num 5", "action": "随心设定全局游戏时间流速 (0.2x~3.0x)"}
-                ]
-            }
-        ]
-    },
     "hasMods": True,
     "curatedMods": [
         {
@@ -3310,48 +2907,17 @@ SEKIRO_DATA = {
             ]
         }
     ],
-    "scenarioBundles": [
-        {
-            "id": "sek_starter_bundle",
-            "type": "starter",
-            "name": "手残救星弹刀教学包",
-            "tag": "👑 萌新首选 · 零门槛",
-            "badge": "弹刀救星",
-            "desc": "一键激活锁血锁架势无敌 + 0.3x 子弹时间慢动作防反拆招 + 9 颗葫芦种子回满 10 瓶药 + 999 纸人无限释放忍具，受苦手残一秒逆袭成打铁宗师！",
-            "highlights": ["锁血锁架势槽，怎么挨打都不倒", "0.3x 子弹时间慢动作精准弹刀", "9 颗葫芦种子瞬间 10 瓶药水满配", "999 纸人无限挥霍机关伞与鞭炮"],
-            "code": "-- [老L·极客场景套餐] 只狼 手残救星弹刀教学包\n[热键] Num 1: 无敌锁血 / 绝对防御判定 (God Mode)\n[热键] Num 2: 躯干韧性槽锁定不崩 (Max Posture Lock)\n[热键] F1: 防御识破 0.3x 子弹时间慢动作 (Deflect Window Slomo)\n[CT表] Inventory -> Add 9 Gourd Seeds"
-        },
-        {
-            "id": "sek_salvation_bundle",
-            "type": "salvation",
-            "name": "全流派秘传招式满配包",
-            "tag": "🛡️ 意难平救赎 · 告别受苦",
-            "badge": "秘传满配",
-            "desc": "秘传·一心居合斩 + 秘传·龙闪剑气 + 秘传·樱舞空中避雷雷返 + 琉璃净火与朱雀红莲伞，全流派战技随时潇洒施展！",
-            "highlights": ["秘传·樱舞腾空帅气雷返", "秘传·一心华丽千本刀网居合", "朱雀红莲伞抵挡一切烈焰爆炸", "琉璃净火神圣紫焰焚杀怨灵"],
-            "code": "-- [老L·极客场景套餐] 只狼 全流派秘传招式满配包\n[CT表] Combat Arts -> Unlock One Mind\n[CT表] Combat Arts -> Unlock Sakura Dance\n[CT表] Prosthetic -> Unlock Suzaku Lotus Umbrella\n[CT表] Prosthetic -> Unlock Lazulite Sacred Flame"
-        },
-        {
-            "id": "sek_godmode_bundle",
-            "type": "godmode",
-            "name": "修罗真神刀刀忍杀包",
-            "tag": "⚡ 极客狂欢 · 众神陨落",
-            "badge": "修罗真神",
-            "desc": "刀刀触发终结处决忍杀 + 一击必杀崩解躯干 + 强化不死斩霸体斩杀 + 144Hz 高刷与视场角全开，化身苇名国修罗剑圣真神！",
-            "highlights": ["刀刀触发忍杀处决华丽动画", "一击崩解敌方躯干架势条", "奥义·强化不死斩强行削韧斩杀", "144Hz 高刷带鱼屏全景纵览战场"],
-            "code": "-- [老L·极客场景套餐] 只狼 修罗真神刀刀忍杀包\n[热键] Num 9: 刀刀触发忍杀处决 (Infinite Deathblow Trigger)\n[热键] Num 8: 一击必杀崩解躯干 (Instant Deathblow Posture Break)\n[CT表] Combat Arts -> Unlock Mortal Draw & Empowered\n[ModEngine] Camera -> Unlock 60FPS Limit & Ultrawide"
-        }
-    ],
+    "scenarioBundles": [],
     "pitfallNote": {
-        "title": "老L实验室避坑笔记 (只狼：影逝二度 极客避坑指南)",
+        "title": "老L避坑笔记 (只狼：影逝二度 极客避坑指南)",
         "tips": [
-            "【零封号与完全单机】：只狼是 FromSoftware 难得的完全无任何 EAC 反作弊、无在线联机入侵的单机作品。所有修改器与 ModEngine 均为 100% 绝对安全，不会有任何小黑屋风险！",
+            "【完全单机】：只狼没有 EAC 反作弊，也没有联机和入侵，不存在联机封号的问题。修改器和 ModEngine 是第三方工具，用之前先备份存档。",
             "【龙咳机制真相破除】：很多新手害怕因多次死亡导致 NPC【龙咳】而心惊胆战。实际上龙咳只会暂时挂起支线对话，绝对不会造成任何 NPC 死亡！只要用一滴【龙胤之露】在鬼佛处祷告，即可瞬间痊愈全苇名国所有人的龙咳，完全不必有心理压力！",
             "【弹刀时机与按键节奏】：频繁狂按防御键 L1 会被系统判定为狂躁按键，弹刀判定窗口会从正常的 0.5 秒骤降至 0.1 秒！使用本站推荐的 0.3x 子弹时间慢动作，看准刀刃即将接触的瞬间单次按压，才能培养出最地道的节奏肌肉记忆。"
         ]
     },
-    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】只狼 ModEngine 环境助手\necho ========================================================\necho   【老L·单机避坑局】只狼 模组加载引擎自动检测器\necho   零注入误报 · 纯净离线环境 · 144Hz 解锁引导\necho ========================================================\necho.\nif not exist \"sekiro.exe\" (\n    echo [!] 提示: 请将本脚本放在 Sekiro 游戏安装根目录！\n    pause\n    exit /b\n)\necho [*] 正在检查 dinput8.dll 与 mods 目录...\nif exist \"dinput8.dll\" (\n    echo [√] ModEngine 前置就绪！\n) else (\n    echo [!] 未检测到 dinput8.dll，请解压 ModEngine 至根目录。\n)\nif not exist \"mods\" (\n    mkdir mods\n    echo [+] 已为您自动创建 mods 模组目录。\n)\necho.\npause\n",
-    "verifiedPatch": "v1.06 (年度版完全对齐)",
+    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】只狼 ModEngine 目录检查\necho ========================================================\necho   【老L·单机避坑局】只狼 ModEngine 目录检查脚本\necho   检查 dinput8.dll 在不在；没有 mods 目录就新建一个\necho ========================================================\necho.\nif not exist \"sekiro.exe\" (\n    echo [!] 当前目录下没有 sekiro.exe，脚本什么都没改。\n    echo     请把本脚本放到 Sekiro 游戏安装根目录再运行。\n    echo.\n    pause\n    exit /b\n)\nif exist \"dinput8.dll\" (\n    echo [+] 找到 dinput8.dll：ModEngine 用的就是这个文件名。只检查了文件在不在。\n) else (\n    echo [!] 没找到 dinput8.dll，请把 ModEngine 解压到游戏根目录。\n)\nif not exist \"mods\" (\n    mkdir mods\n    echo [+] 已新建 mods 目录。\n) else (\n    echo [i] mods 目录已经有了，没有改动。\n)\necho [i] 脚本不备份存档，装 Mod 前先手动备份。\necho.\npause\n",
+    "verifiedPatch": "v1.06（未实测）",
     "radarSecretCode": "只狼"
 }
 
@@ -3374,56 +2940,6 @@ RE4_DATA = {
         "[REFramework] -> Merchant -> Add 10,000,000 Pesetas",
         "[REFramework] -> Mercenaries -> Instant S++ Rank Score"
     ],
-    "hasTrainer": True,
-    "trainerInfo": {
-        "author": "风灵月影 (FLiNG)",
-        "version": "v1.0+ (逆命殊途 Separate Ways DLC 完全对齐)",
-        "officialUrl": "https://flingtrainer.com/trainer/resident-evil-4-remake-trainer/",
-        "cleanMirrorUrl": "https://github.com/l-mod-vault/mirrors/releases/download/re4/Resident_Evil_4_Remake_v1.0_Plus_33_Trainer.zip",
-        "safeVerification": {
-            "isCleanVerified": True,
-            "hasBundledAds": False,
-            "virusTotalRatio": "0/72 Clean (零误报极客纯净版)",
-            "md5CheckSum": "1a0b9c8d7e6f5a4b3c2d1e0f9a8b7c6d",
-            "powershellExclusionCmd": "Add-MpPreference -ExclusionProcess 'Resident Evil 4 Remake Trainer.exe'",
-            "troubleshootSteps": [
-                "卡普空纯单机离线游戏，无任何 VAC 封禁风险，100% 安全放心使用",
-                "若 Windows Defender 拦截，以管理员身份运行上方 PowerShell 白名单放行指令",
-                "进入游戏操控里昂拔枪行动后再按小键盘热键激活功能"
-            ]
-        },
-        "hotkeysCategorized": [
-            {
-                "category": "🛡️ 里昂与阿什莉生存守护",
-                "items": [
-                    {"key": "Num 1", "action": "里昂无敌模式 (God Mode / 锁血锁伤)"},
-                    {"key": "Num 2", "action": "阿什莉无敌模式 (永不受伤、绝不被邪教徒抗走)"},
-                    {"key": "Num 3", "action": "无限奔跑体力 (里昂疾跑永不疲劳)"},
-                    {"key": "Num 4", "action": "战术防爆防弹衣耐久度无限锁定"},
-                    {"key": "Num 5", "action": "战斗小刀耐久度无限 (随便格挡电锯不磨损)"}
-                ]
-            },
-            {
-                "category": "🔫 军备弹药与射击精修",
-                "items": [
-                    {"key": "Num 6", "action": "全部枪械无限弹药 (无需繁琐换弹匣)"},
-                    {"key": "Num 7", "action": "枪械射击零后坐力与准星零扩散 (百步穿杨)"},
-                    {"key": "Num 8", "action": "近战体术一击必杀与爆头必触发碎颅"},
-                    {"key": "Num 9", "action": "小刀格挡判定时间扩大 100% (轻松招架飞斧电锯)"}
-                ]
-            },
-            {
-                "category": "💰 财富比塞塔与佣兵模式",
-                "items": [
-                    {"key": "Ctrl+Num 1", "action": "编辑比塞塔现金 (直接入账 10,000,000)"},
-                    {"key": "Ctrl+Num 2", "action": "编辑尖晶石数量 (999 尖晶石无限兑换藏宝图)"},
-                    {"key": "Ctrl+Num 3", "action": "武器商人改装改造免费 (无需消耗任何金币)"},
-                    {"key": "Ctrl+Num 4", "action": "佣兵模式锁定剩余时间与保持 150 极限连击"},
-                    {"key": "Ctrl+Num 5", "action": "佣兵模式瞬间拉满二百万高分秒拿 S++ 评分"}
-                ]
-            }
-        ]
-    },
     "hasMods": True,
     "curatedMods": [
         {
@@ -3457,7 +2973,7 @@ RE4_DATA = {
             "downloads": "5.5M",
             "endorsements": "340K",
             "category": "Mod Manager",
-            "desc": "生化危机系列公认最强模组安装器：一键安装、启用、禁用上千款角色外观、艾达王特工服、发型与武器贴图替换，绝不污染游戏原版归档！",
+            "desc": "生化危机系列公认最强模组安装器：一键安装、启用、禁用上千款角色外观、艾达王特工服、发型与武器贴图替换。",
             "dependencies": ["None (Stand-alone Tool)"],
             "installPath": "Windows PC",
             "downloadUrl": "https://github.com/l-mod-vault/mirrors/releases/download/tools/FluffyModManager.zip",
@@ -3816,48 +3332,17 @@ RE4_DATA = {
             ]
         }
     ],
-    "scenarioBundles": [
-        {
-            "id": "re4_starter_bundle",
-            "type": "starter",
-            "name": "新手西班牙村庄起飞包",
-            "tag": "👑 萌新首选 · 零门槛",
-            "badge": "开荒起飞",
-            "desc": "一键激活锁血上帝模式 + 阿什莉重装骑士板甲 + 1000万比塞塔金币 + 999 尖晶石 + 战斗小刀耐久度无限，开荒生化4零恐惧受苦！",
-            "highlights": ["里昂锁血无敌免受电锯秒杀", "阿什莉穿重装板甲绝不被抓", "一千万金币买空全西班牙军火商", "小刀耐久无限随便弹刀招架"],
-            "code": "-- [老L·极客场景套餐] 生化4重制版 新手西班牙村庄起飞包\n[REFramework] -> Player -> God Mode (ON / 锁血锁伤)\n[REFramework] -> Ashley -> Invincible & Never Kidnapped\n[REFramework] -> Merchant -> Add 10,000,000 Pesetas\n[REFramework] -> Knife -> Infinite Knife Durability"
-        },
-        {
-            "id": "re4_salvation_bundle",
-            "type": "salvation",
-            "name": "佣兵模式全员 S++ 解锁包",
-            "tag": "🛡️ 意难平救赎 · 告别受苦",
-            "badge": "佣兵S++",
-            "desc": "倒计时时间锁定暂停 + 150 极限连击不断 + 威斯克大招狂暴无限充能 + 瞬间结算二百万分点亮 S++，秒速白嫖手炮神兵！",
-            "highlights": ["时间锁定暂停从容清怪", "150 杀连杀槽锁定不断连", "瞬拿全图 2,000,000 分 S++ 评价", "免专业难度通关直接解锁手炮"],
-            "code": "-- [老L·极客场景套餐] 生化4重制版 佣兵模式全员 S++ 解锁包\n[REFramework] -> Mercenaries -> Freeze Timer\n[REFramework] -> Mercenaries -> Max Combo 150\n[REFramework] -> Mercenaries -> Instant S++ Rank Score\n[REFramework] -> Inventory -> Add Handcannon Magnum"
-        },
-        {
-            "id": "re4_godmode_bundle",
-            "type": "godmode",
-            "name": "无限军火真神毁灭包",
-            "tag": "⚡ 极客狂欢 · 众神陨落",
-            "badge": "真神毁灭",
-            "desc": "无限火箭筒 + 芝加哥打字机无限冲锋枪 + 终极手炮 + 枪枪爆头碎颅 + 准星零后坐力，化身西班牙邪教清道夫真神！",
-            "highlights": ["无限火箭筒一发轰平任何首领", "芝加哥打字机连绵无限弹幕", "枪械射击零后坐力百步穿杨", "爆头 100% 碎颅阻断寄生虫"],
-            "code": "-- [老L·极客场景套餐] 生化4重制版 无限军火真神毁灭包\n[REFramework] -> Inventory -> Add Infinite Rocket Launcher\n[REFramework] -> Inventory -> Add Chicago Sweeper\n[REFramework] -> Weapon -> No Weapon Recoil\n[REFramework] -> Combat -> Guaranteed Critical Headshot"
-        }
-    ],
+    "scenarioBundles": [],
     "pitfallNote": {
-        "title": "老L实验室避坑笔记 (生化危机4：重制版 专家避坑指南)",
+        "title": "老L避坑笔记 (生化危机4：重制版 专家避坑指南)",
         "tips": [
             "【专业难度 S+ 评价核心机制】：想要拿到专业 S+ 评价解锁猫耳（全武器无限弹药），必须在新游戏开局、游戏时间在 5 小时 30 分钟以内且【全流程保存存档次数不超过 15 次】！在进入城堡前尽量将存档留在巨人与双电锯前，避免坏档！",
             "【碍事梨防扛绝技】：到了城堡拿到阿什莉骑士铠甲后，请务必在附加内容菜单中为阿什莉换上！换上后所有邪教徒企图抱起她时都会被压趴在地上，直接永久解除护送后顾之忧！",
             "【晕 3D 与视场角调整】：本作第一人称举枪时默认后背拉得很近，导致不少玩家剧烈恶心。安装本站推荐的 REFramework 与 No Zoom On Aim 补丁，即可将 FOV 拉远至 95 度，视野舒畅开阔。"
         ]
     },
-    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】生化危机4重制版 REFramework 诊断助手\necho ========================================================\necho   【老L·单机避坑局】生化危机4重制版 纯净前置诊断器\necho   一键检查 dinput8.dll · 快捷呼出 Insert 菜单 · 零报错\necho ========================================================\necho.\nif not exist \"re4.exe\" (\n    echo [!] 提示: 请将本脚本放在 Resident Evil 4 Remake 游戏安装根目录！\n    pause\n    exit /b\n)\necho [*] 正在检查 REFramework 前置状态...\nif exist \"dinput8.dll\" (\n    echo [√] REFramework 挂载正常！游戏内按键盘 Insert 键开启菜单。\n) else (\n    echo [!] 未检测到 dinput8.dll，请解压 REFramework 至根目录。\n)\necho.\npause\n",
-    "verifiedPatch": "v1.0+ (逆命殊途DLC完全对齐)",
+    "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】生化危机4重制版 REFramework 检查\necho ========================================================\necho   【老L·单机避坑局】生化危机4重制版 REFramework 检查脚本\necho   只检查 dinput8.dll 在不在，不改任何文件\necho ========================================================\necho.\nif not exist \"re4.exe\" (\n    echo [!] 当前目录下没有 re4.exe，脚本什么都没改。\n    echo     请把本脚本放到 Resident Evil 4 Remake 游戏安装根目录再运行。\n    echo.\n    pause\n    exit /b\n)\nif exist \"dinput8.dll\" (\n    echo [+] 找到 dinput8.dll：REFramework 用的就是这个文件名。只检查了文件在不在。\n    echo [i] 游戏内按 Insert 键试试 REFramework 菜单。\n) else (\n    echo [!] 没找到 dinput8.dll，请把 REFramework 解压到游戏根目录。\n)\necho [i] 脚本不备份存档，装 Mod 前先手动备份。\necho.\npause\n",
+    "verifiedPatch": "v1.0+（未实测）",
     "radarSecretCode": "生化4"
 }
 
@@ -4031,95 +3516,55 @@ RANK_1_7_MODS_PATCH = {
     ]
 }
 
-def enrich_tier2():
-    if not os.path.exists(JSON_PATH):
-        print(f"❌ 找不到数据库文件: {JSON_PATH}")
-        sys.exit(1)
+OWNED_FIELDS = (
+    "rank", "verifiedPatch", "radarSecretCode", "hasConsole", "consoleShortcut", "consoleEnableGuide",
+    "consoleCategories", "popularCommands", "hasMods", "curatedMods", "pitfallNote", "scenarioBundles", "batScript",
+)
 
-    with open(JSON_PATH, "r", encoding="utf-8") as f:
-        games = json.load(f)
+TIER2_MAP = {
+    "palworld": PALWORLD_DATA,
+    "starfield": STARFIELD_DATA,
+    "gta-v": GTA5_DATA,
+    "rdr2": RDR2_DATA,
+    "monster-hunter-world": MHW_DATA,
+    "sekiro": SEKIRO_DATA,
+    "re4-remake": RE4_DATA,
+    "resident-evil-4": RE4_DATA,
+}
 
-    # 1. 调整 Rank 顺序：
-    # 目标：Rank 13 为 Sekiro，Rank 14 为 RE4 Remake
-    # 原 Rank 13 Subnautica 调整为 19，原 Rank 14 Valheim 调整为 21
-    sekiro_game = None
-    re4_game = None
-    subnautica_game = None
-    valheim_game = None
+# Sekiro / RE4 Remake take ranks 13 / 14; Subnautica / Valheim move to 19 / 21.
+RANK_MOVES = (("sekiro", "subnautica", 13, 19), (("re4-remake", "resident-evil-4"), "valheim", 14, 21))
 
-    for g in games:
-        gid = g.get("id")
-        if gid == "sekiro":
-            sekiro_game = g
-        elif gid in ("re4-remake", "resident-evil-4"):
-            re4_game = g
-        elif gid == "subnautica":
-            subnautica_game = g
-        elif gid == "valheim":
-            valheim_game = g
 
-    if sekiro_game and subnautica_game:
-        sekiro_game["rank"] = 13
-        subnautica_game["rank"] = 19
-        print("🔄 已将 Sekiro 设为 Rank 13，Subnautica 调为 Rank 19")
+def build_updates(games):
+    by_id = {g["id"]: g for g in games}
+    updates = {}
 
-    if re4_game and valheim_game:
-        re4_game["rank"] = 14
-        valheim_game["rank"] = 21
-        print("🔄 已将 RE4 Remake 设为 Rank 14，Valheim 调为 Rank 21")
+    for first, second, first_rank, second_rank in RANK_MOVES:
+        first_ids = first if isinstance(first, tuple) else (first,)
+        first_id = next((gid for gid in first_ids if gid in by_id), None)
+        if first_id and second in by_id:
+            updates.setdefault(first_id, {})["rank"] = first_rank
+            updates.setdefault(second, {})["rank"] = second_rank
 
-    # 2. 全息注入 Rank 8 ~ 14 核心数据
-    tier2_map = {
-        "palworld": PALWORLD_DATA,
-        "starfield": STARFIELD_DATA,
-        "gta-v": GTA5_DATA,
-        "rdr2": RDR2_DATA,
-        "monster-hunter-world": MHW_DATA,
-        "sekiro": SEKIRO_DATA,
-        "re4-remake": RE4_DATA,
-        "resident-evil-4": RE4_DATA
-    }
+    for gid, data in TIER2_MAP.items():
+        if gid in by_id:
+            updates.setdefault(gid, {}).update(data)
 
-    injected_count = 0
-    for g in games:
-        gid = g.get("id")
-        if gid in tier2_map:
-            print(f"🔥 正在深度全息注入: {gid} (Rank {tier2_map[gid]['rank']})...")
-            g.update(tier2_map[gid])
-            injected_count += 1
+    for gid, patch_list in RANK_1_7_MODS_PATCH.items():
+        if gid not in by_id:
+            continue
+        mods = updates.get(gid, {}).get("curatedMods", by_id[gid].get("curatedMods", []))
+        mods = [dict(m) for m in mods]
+        for idx, p in enumerate(patch_list):
+            if idx < len(mods):
+                mods[idx]["downloadUrl"] = p["downloadUrl"]
+                mods[idx]["downloadFilename"] = p["downloadFilename"]
+                mods[idx]["isDirect"] = p["isDirect"]
+        updates.setdefault(gid, {})["curatedMods"] = mods
 
-        # 3. 为 Rank 1~7 游戏补齐 Mod 真实下载链接
-        if gid in RANK_1_7_MODS_PATCH:
-            patch_list = RANK_1_7_MODS_PATCH[gid]
-            mods = g.get("curatedMods", [])
-            for idx, p in enumerate(patch_list):
-                if idx < len(mods):
-                    mods[idx]["downloadUrl"] = p["downloadUrl"]
-                    mods[idx]["downloadFilename"] = p["downloadFilename"]
-                    mods[idx]["isDirect"] = p["isDirect"]
+    return updates
 
-    # 重新按照 rank 升序排列全 100 款游戏
-    games.sort(key=lambda x: x.get("rank", 999))
-
-    # 写入 JSON
-    with open(JSON_PATH, "w", encoding="utf-8") as f:
-        json.dump(games, f, ensure_ascii=False, indent=2)
-    print(f"✅ 已成功更新 JSON 数据库: {JSON_PATH} (共全息注入 {injected_count} 款游戏)")
-
-    # 写入 public/data.js
-    if os.path.exists(JS_PATH):
-        trans_path = os.path.join(BASE_DIR, "src/i18n/translations.json")
-        translations = {}
-        if os.path.exists(trans_path):
-            with open(trans_path, "r", encoding="utf-8") as tf:
-                translations = json.load(tf)
-
-        with open(JS_PATH, "w", encoding="utf-8") as f:
-            f.write("// L-MOD Vault Offline Database (Auto-bundled)\n")
-            f.write("window.GAMES_DATA = " + json.dumps(games, ensure_ascii=False, indent=2) + ";\n\n")
-            f.write("window.GAMES_DATABASE = window.GAMES_DATA;\n\n")
-            f.write("window.TRANSLATIONS_DATA = " + json.dumps(translations, ensure_ascii=False, indent=2) + ";\n")
-        print(f"✅ 已成功同步导出前端离线数据库: {JS_PATH}")
 
 if __name__ == "__main__":
-    enrich_tier2()
+    write_owned_fields("enrich_rank8_14_tier2.py", OWNED_FIELDS, build_updates)

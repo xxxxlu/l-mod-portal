@@ -1733,24 +1733,7 @@ window.GAMES_DATA = [
         "isDirect": true
       }
     ],
-    "communityReviews": [
-      {
-        "user": "NightCitySamurai",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-15",
-        "title": "Patch 2.13 亲测可用！安装避坑指南",
-        "content": "兄弟们，2.13版本更新后旧版 CET 会闪退，请务必在本站下载最新的 v1.32.1 版本。注意：如果之前装过老MOD，先把 bin/x64/plugins/cyber_engine_tweaks 清空再放新的，完美兼容往日之影DLC！",
-        "upvotes": 438
-      },
-      {
-        "user": "Johnny_V_Enthusiast",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-10",
-        "title": "武器代码太全了！终于拿到觉和银手手枪",
-        "content": "不用开二周目去荒坂塔天台冒死拿觉了，一键复制代码到控制台直接入库！而且是带当前等级词条的，伤害爆炸，比去外面下载那些报毒修改器靠谱太多！",
-        "upvotes": 312
-      }
-    ],
+    "communityReviews": [],
     "steamAppId": 1091500,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1091500/header.jpg",
     "trainerInfo": {
@@ -3215,16 +3198,7 @@ window.GAMES_DATA = [
         "isDirect": true
       }
     ],
-    "communityReviews": [
-      {
-        "user": "Wukong_DestinedOne",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-18",
-        "title": "3D地图MOD绝对是通关刚需！",
-        "content": "盘丝洞和浮屠界路痴差点退坑，装了这个地图MOD简直救命！所有土地庙和打坐蒲团标得清清楚楚，而且没有任何闪退，安装只需要把 pak 丢进 ~mods，太良心了！",
-        "upvotes": 612
-      }
-    ],
+    "communityReviews": [],
     "steamAppId": 2358720,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/2358720/header.jpg",
     "trainerInfo": {
@@ -5736,24 +5710,7 @@ window.GAMES_DATA = [
         "isDirect": true
       }
     ],
-    "communityReviews": [
-      {
-        "user": "GeraltOfRivia99",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-18",
-        "title": "次世代版 / 完全版 v4.04 完美运行！控制台秒开太方便了！",
-        "content": "改 general.ini 一秒开控制台，免去任何 DLL 插件！刷昆特牌 secretgwint 指令和湖中之剑太爽了，省下二周目几十个小时！强烈推荐安装 HD Reworked NextGen，次世代光追画质提升巨大！",
-        "upvotes": 680
-      },
-      {
-        "user": "CiriZireael",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-19",
-        "title": "次世代专属西境白虎套和网飞大超遗弃狼套装绝帅！",
-        "content": "中国风九尾狐女双剑和西境白虎战甲太有牌面了！输入 Ciri 直接瞬移砍杀太强，另外大超同款紧身纯黑战甲帅哭，双重法印非常猛！",
-        "upvotes": 520
-      }
-    ],
+    "communityReviews": [],
     "steamAppId": 292030,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/292030/header.jpg",
     "trainerInfo": {
@@ -7144,24 +7101,7 @@ window.GAMES_DATA = [
         "isDirect": true
       }
     ],
-    "communityReviews": [
-      {
-        "user": "TavPaladin99",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-18",
-        "title": "Patch 7 完美适配！Script Extender 注入太顺滑了！",
-        "content": "改 ScriptExtenderSettings.json 开启黑窗，一秒刷出博德安的巨人杀手和尼鲁纳三叉戟！全员解除队伍上限 16 人跑图，沉浸感爆棚！",
-        "upvotes": 740
-      },
-      {
-        "user": "ShadowheartDevotee",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-19",
-        "title": "好感度指令救我狗命，全法术位无限刷简直爽死！",
-        "content": "一键把影心好感度拉到 100，终于赶在第三章前解锁了救赎沙滩浪漫戏！配合无敌护罩和多重目标箭矢，钢铁卫士泰坦直接乱杀！",
-        "upvotes": 580
-      }
-    ],
+    "communityReviews": [],
     "steamAppId": 1086940,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1086940/header.jpg",
     "trainerInfo": {
@@ -8103,24 +8043,7 @@ window.GAMES_DATA = [
         "isDirect": true
       }
     ],
-    "communityReviews": [
-      {
-        "user": "Player_501",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 艾尔登法环 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 362
-      },
-      {
-        "user": "ModEnthusiast_5",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 92
-      }
-    ],
+    "communityReviews": [],
     "steamAppId": 1245620,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1245620/header.jpg",
     "trainerInfo": {
@@ -8311,53 +8234,7 @@ window.GAMES_DATA = [
         "【无缝联机独立存档】：Seamless Co-op 用独立的 .co2 存档，不连官方匹配服务器。它是第三方 Mod，会不会被封号没有人能担保；别把 .co2 存档改回原版存档带上线。"
       ]
     },
-    "scenarioBundles": [
-      {
-        "id": "er_starter_bundle",
-        "type": "starter",
-        "name": "新手开荒起飞包",
-        "tag": "👑 萌新首选 · 零门槛",
-        "badge": "开荒神装",
-        "desc": "一键激活绝对免伤无敌 + 200万卢恩启动财富 + 仿身泪滴+10 带头大哥 + 30瓶满级圣杯瓶，新手探索交界地零受苦！",
-        "highlights": [
-          "无敌锁血手残救星模式",
-          "2,000,000 卢恩秒到账自由洗点升级",
-          "仿身泪滴骨灰+10（最强逃课大哥）",
-          "红蓝圣杯瓶强化至 +12 最大恢复量"
-        ],
-        "code": "-- [老L·极客场景套餐] 艾尔登法环 新手开荒起飞包 (未实测)\n-- 启动方式：ModEngine2 离线引导 / The Grand Archives CT 表\nSet GodMode = 1\nAddRunes(2000000)\nAddItem(100, 1) -- 仿身泪滴骨灰 +10\nSetFlaskLevel(12) -- 圣杯瓶满级强化"
-      },
-      {
-        "id": "er_salvation_bundle",
-        "type": "salvation",
-        "name": "幽影之地轮椅救赎包",
-        "tag": "🛡️ 意难平救赎 · 告别受苦",
-        "badge": "幽影轮椅",
-        "desc": "幽影树庇护 Lv20 满级 + 灵灰庇护 Lv10 满级 + 0.3x 子弹时间慢动作弹反识破，轻松攻克狂龙贝勒与约定之王！",
-        "highlights": [
-          "幽影树庇护一键拉满 Lv20（攻防直接翻倍）",
-          "灵灰庇护拉满 Lv10（骨灰与战马极致强化）",
-          "0.3x 全局子弹时间，Boss 抬手前摇无所遁形",
-          "狂龙贝勒、双月骑士、梅瑟莫全追忆直接兑换"
-        ],
-        "code": "-- [老L·极客场景套餐] 艾尔登法环 幽影之地轮椅救赎包 (v1.14，未实测)\nSetScadutreeBlessing(20)\nSetReveredSpiritAsh(10)\nSetGameSpeed(0.3) -- 0.3x 慢动作看破\nUnlockRemembrance(\"MessmerTheImpaler\")\nUnlockRemembrance(\"BayleTheDread\")"
-      },
-      {
-        "id": "er_godmode_bundle",
-        "type": "godmode",
-        "name": "全追忆神兵真神满配包",
-        "tag": "⚡ 极客狂欢 · 众神陨落",
-        "badge": "真神毕业",
-        "desc": "全 DLC 追忆神兵武器全收集 + 全魔法祷告解锁 + 全地图赐福点一键点亮，化身交界地艾尔登之王！",
-        "highlights": [
-          "全本篇及 DLC 38 种追忆武器满强化",
-          "交界地与幽影之地 300+ 赐福点全开传送",
-          "无限精力奔跑 + 无限专注值施法",
-          "全套高阶护符（黄金树恩惠+2 / 龙徽大盾护符）"
-        ],
-        "code": "-- [老L·极客场景套餐] 艾尔登法环 全追忆神兵真神满配包\nUnlockAllSitesOfGrace()\nSetInfiniteFP(1)\nSetInfiniteStamina(1)\nAddItem(\"Item_Talisman_DragoncrestGreatshield\", 1)\nAddItem(\"Item_Weapon_AncientMeteoricOreGreatsword\", 1)"
-      }
-    ],
+    "scenarioBundles": [],
     "batScript": "@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】艾尔登法环 离线启动说明\necho ========================================================\necho   【老L·单机避坑局】艾尔登法环 离线启动说明\necho   本脚本只检查游戏主程序在不在，不改任何文件\necho ========================================================\necho.\nif not exist \"Game\\eldenring.exe\" (\n    echo [!] 当前目录下没有 Game\\eldenring.exe，脚本什么都没改。\n    echo     请把本脚本放到 ELDEN RING 游戏安装根目录再运行。\n    echo.\n    pause\n    exit /b\n)\necho [+] 找到 Game\\eldenring.exe\necho [i] 用 Mod：解压 ModEngine2，Mod 放进它的 mod 目录，双击它自带的 launchmod_eldenring.bat 启动。\necho     这样启动不加载 EAC，只能离线玩；别带着改过的游戏或存档上线，有封号风险。\necho [i] 本脚本没有检查 ModEngine2 和 EAC，也不会替你启动游戏。\necho [i] 脚本不备份存档；指令没有逐条在游戏里实测，执行前先手动存档。\necho.\npause\n",
     "compatibilityStatus": "yellow",
     "radarStatusText": "🟡 修改器早于当前游戏版本",
@@ -9112,16 +8989,7 @@ window.GAMES_DATA = [
         "isDirect": true
       }
     ],
-    "communityReviews": [
-      {
-        "user": "Dovahkiin2011",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-17",
-        "title": "SkyUI 和 tgm 是天际的灵魂",
-        "content": "不用控制台和SkyUI都不叫玩天际！代码全试过了，全部能用！建议新手把 tmm 1 点亮路标先记下来。",
-        "upvotes": 890
-      }
-    ],
+    "communityReviews": [],
     "steamAppId": 489830,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/489830/header.jpg",
     "trainerInfo": {
@@ -10020,24 +9888,7 @@ window.GAMES_DATA = [
         "isDirect": true
       }
     ],
-    "communityReviews": [
-      {
-        "user": "Player_701",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 辐射 4 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 288
-      },
-      {
-        "user": "ModEnthusiast_7",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 195
-      }
-    ],
+    "communityReviews": [],
     "steamAppId": 377160,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/377160/header.jpg",
     "trainerInfo": {
@@ -10960,24 +10811,7 @@ window.GAMES_DATA = [
         ]
       }
     ],
-    "communityReviews": [
-      {
-        "user": "Player_801",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 幻兽帕鲁 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 267
-      },
-      {
-        "user": "ModEnthusiast_8",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 191
-      }
-    ],
+    "communityReviews": [],
     "steamAppId": 1623730,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1623730/header.jpg",
     "trainerInfo": {
@@ -11215,53 +11049,7 @@ window.GAMES_DATA = [
     },
     "verifiedPatch": "v0.3.x（未实测）",
     "radarSecretCode": "帕鲁",
-    "scenarioBundles": [
-      {
-        "id": "pal_starter_bundle",
-        "type": "starter",
-        "name": "新手开荒神宠起飞包",
-        "tag": "👑 萌新首选 · 零门槛",
-        "badge": "开荒神宠",
-        "desc": "一键获取 50 级打工皇帝阿努比斯 + 100 颗高阶帕鲁球 + 100万金币启动资金 + 负重上限百万解除，开局即享工业化自动据点！",
-        "highlights": [
-          "阿努比斯 (手工Lv4 最强基建工匠)",
-          "100 颗高阶帕鲁球，见宠即抓",
-          "1,000,000 黄金现金黑市扫货",
-          "随身负重清零自由搬运矿石"
-        ],
-        "code": "-- [老L·极客场景套餐] 幻兽帕鲁 新手开荒神宠起飞包 (未实测)\nspawn Anubis 50\ngive PalSphere_Legend 100\ngive Money 1000000\naddtalentpoint 50"
-      },
-      {
-        "id": "pal_salvation_bundle",
-        "type": "salvation",
-        "name": "神兽捕捉与极速孵化包",
-        "tag": "🛡️ 意难平救赎 · 告别受苦",
-        "badge": "神兽毕业",
-        "desc": "召唤超音速巡航神兽空涡龙 + 极寒神兽唤冬兽 + 专用导弹鞍具 + 0.3x 子弹时间慢动作捕捉，告别手残与神兽擦肩而过！",
-        "highlights": [
-          "全服最快飞行坐骑空涡龙直接入队",
-          "唤冬兽冰系霸主守护战力",
-          "骑乘导弹发射器超强清屏火力",
-          "0.3x 慢动作锁定 Boss 弱点投球"
-        ],
-        "code": "-- [老L·极客场景套餐] 幻兽帕鲁 神兽捕捉与极速孵化包 (未实测)\nspawn Jetragon 50\nspawn Frostallion 50\ngive Weapon_Jetragon_Missile 1\nslomo 0.3"
-      },
-      {
-        "id": "pal_godmode_bundle",
-        "type": "godmode",
-        "name": "现代重工真神毕业满配包",
-        "tag": "⚡ 极客狂欢 · 众神陨落",
-        "badge": "真神毕业",
-        "desc": "4 阶金色传奇火箭发射器 + 传奇霰弹枪 + 帕鲁金属神装 + 500发高爆火箭弹 + 帕鲁金属全建材，化身帕鲁大陆现代机械之神！",
-        "highlights": [
-          "4 阶金色火箭筒 (单发万点巨额爆发)",
-          "全套帕鲁金属防具 (免除冷热恶劣天气)",
-          "500 发高爆弹药随心挥霍轰炸",
-          "工业合金金属锭无限制堆积建造"
-        ],
-        "code": "-- [老L·极客场景套餐] 幻兽帕鲁 现代重工真神毕业满配包\ngive Weapon_RocketLauncher_4 1\ngive Weapon_PumpActionShotgun_4 1\ngive Armor_PalMetal_4 1\ngive RocketAmmon 500\ngive Ingot_PalMetal 500"
-      }
-    ],
+    "scenarioBundles": [],
     "pitfallNote": {
       "title": "老L避坑笔记 (幻兽帕鲁 樱岛最新版)",
       "tips": [
@@ -12006,24 +11794,7 @@ window.GAMES_DATA = [
         ]
       }
     ],
-    "communityReviews": [
-      {
-        "user": "Player_901",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 星空 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 293
-      },
-      {
-        "user": "ModEnthusiast_9",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 185
-      }
-    ],
+    "communityReviews": [],
     "steamAppId": 1716740,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1716740/header.jpg",
     "trainerInfo": {
@@ -13031,24 +12802,7 @@ window.GAMES_DATA = [
         ]
       }
     ],
-    "communityReviews": [
-      {
-        "user": "Player_1001",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 侠盗猎车手 5 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 227
-      },
-      {
-        "user": "ModEnthusiast_10",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 155
-      }
-    ],
+    "communityReviews": [],
     "steamAppId": 271590,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/271590/header.jpg",
     "trainerInfo": {
@@ -13179,21 +12933,6 @@ window.GAMES_DATA = [
     "radarSecretCode": "洛圣都",
     "scenarioBundles": [
       {
-        "id": "gta_starter_bundle",
-        "type": "starter",
-        "name": "洛圣都教父财富起飞包",
-        "tag": "👑 萌新首选 · 零门槛",
-        "badge": "教父起飞",
-        "desc": "全三主角账户各注入十亿美金 + PAINKILLER 锁血无敌 + 全套军火库配齐 + 警徽通缉度随心清零，新手开局直接晋升洛圣都终极教父！",
-        "highlights": [
-          "富兰克林/麦克/崔佛各拥有 10 亿现金",
-          "PAINKILLER 官方锁血无敌",
-          "TOOLUP 武器军火弹药全满",
-          "LAWYERUP 警匪追捕一秒消除"
-        ],
-        "code": "-- [老L·极客场景套餐] GTA5 洛圣都教父财富起飞包 (未实测)\nPAINKILLER\nTURTLE\nTOOLUP\nLAWYERUP\n[Menyoo] Add $1,000,000,000 to All Characters"
-      },
-      {
         "id": "gta_salvation_bundle",
         "type": "salvation",
         "name": "六星狂暴大逃杀激战包",
@@ -13298,13 +13037,7 @@ window.GAMES_DATA = [
     ],
     "hasMods": true,
     "modInstallPath": "Red Dead Redemption 2\\lml",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 荒野大镖客：救赎 2 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -13836,24 +13569,7 @@ window.GAMES_DATA = [
         ]
       }
     ],
-    "communityReviews": [
-      {
-        "user": "Player_1101",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 荒野大镖客：救赎 2 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 158
-      },
-      {
-        "user": "ModEnthusiast_11",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 193
-      }
-    ],
+    "communityReviews": [],
     "steamAppId": 1174180,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1174180/header.jpg",
     "trainerInfo": {
@@ -13939,53 +13655,7 @@ window.GAMES_DATA = [
     },
     "verifiedPatch": "v1.0.1491（未实测）",
     "radarSecretCode": "大表哥",
-    "scenarioBundles": [
-      {
-        "id": "rdr_starter_bundle",
-        "type": "starter",
-        "name": "新手西部拓荒起飞包",
-        "tag": "👑 萌新首选 · 零门槛",
-        "badge": "拓荒起飞",
-        "desc": "一键激活 You want freedom 锁血无敌 + 白斑纯血阿拉伯神马 + 30 块纯金条兑现 + 东部传说背包 99 堆叠，开荒西部零受苦！",
-        "highlights": [
-          "官方锁血无敌，告别野兽袭击暴毙",
-          "白斑纯血阿拉伯神驹伴你行",
-          "30 块纯金条入账瞬间成为大富翁",
-          "东部传说背包 99 道具携带上限"
-        ],
-        "code": "-- [老L·极客场景套餐] 大镖客2 新手西部拓荒起飞包\nYou want freedom\nYou flourish before you die\n[F5] ScriptHookRDR2 -> Horse -> Spawn -> Arabian White\n[F5] ScriptHookRDR2 -> Items -> Add 30 Gold Bars"
-      },
-      {
-        "id": "rdr_salvation_bundle",
-        "type": "salvation",
-        "name": "圣人亚瑟救赎圆满包",
-        "tag": "🛡️ 意难平救赎 · 告别受苦",
-        "badge": "圣人救赎",
-        "desc": "荣誉值满级 Virture + 全套神枪手绝版武器 + 全传说动物毛皮各 5 张 + 营地全设施顶级升级，给亚瑟一个最体面圆满的归宿！",
-        "highlights": [
-          "荣誉值满级圣人亚瑟路线",
-          "全套四大传奇神枪手雕花手枪",
-          "全传说动物毛皮，捕兽人全套做齐",
-          "范德林德帮营地温馨全满配置"
-        ],
-        "code": "-- [老L·极客场景套餐] 大镖客2 圣人亚瑟救赎圆满包\nVirtue unearned is not virtue\nHistory is written by fools\n[F5] ScriptHookRDR2 -> Inventory -> Add All Perfect Pelts\n[F5] ScriptHookRDR2 -> Camp -> Pearson Upgrade Max"
-      },
-      {
-        "id": "rdr_godmode_bundle",
-        "type": "godmode",
-        "name": "荒野死神火力真神包",
-        "tag": "⚡ 极客狂欢 · 众神陨落",
-        "badge": "荒野死神",
-        "desc": "无限死神之眼 Seek all the bounty + 独头高爆霰弹全满 + 震撼西部雷暴 + 瞬移圣丹尼斯，化身横行西部的荒野死神！",
-        "highlights": [
-          "无限死神之眼子弹时间定格",
-          "独头高爆霰弹枪一枪碎车",
-          "震撼西部真实雷暴大电影质感",
-          "瞬移圣丹尼斯无需骑马赶路"
-        ],
-        "code": "-- [老L·极客场景套餐] 大镖客2 荒野死神火力真神包\nSeek all the bounty of this place\n[F5] ScriptHookRDR2 -> Weapons -> Explosive Slug Ammo\n[F5] ScriptHookRDR2 -> Weather -> Thunderstorm\n[F5] ScriptHookRDR2 -> Teleport -> Fast Travel to Saint Denis"
-      }
-    ],
+    "scenarioBundles": [],
     "pitfallNote": {
       "title": "老L避坑笔记 (荒野大镖客2 故事模式)",
       "tips": [
@@ -14057,13 +13727,7 @@ window.GAMES_DATA = [
     ],
     "hasMods": true,
     "modInstallPath": "Monster Hunter: World\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 怪物猎人：世界 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -14593,24 +14257,7 @@ window.GAMES_DATA = [
         ]
       }
     ],
-    "communityReviews": [
-      {
-        "user": "Player_1201",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 怪物猎人：世界 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 186
-      },
-      {
-        "user": "ModEnthusiast_12",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 100
-      }
-    ],
+    "communityReviews": [],
     "steamAppId": 582010,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/582010/header.jpg",
     "trainerInfo": {
@@ -14921,53 +14568,7 @@ window.GAMES_DATA = [
     },
     "verifiedPatch": "v15.11（未实测）",
     "radarSecretCode": "苍蓝星",
-    "scenarioBundles": [
-      {
-        "id": "mhw_starter_bundle",
-        "type": "starter",
-        "name": "新手苍蓝星逃课起飞包",
-        "tag": "👑 萌新首选 · 零门槛",
-        "badge": "逃课起飞",
-        "desc": "一键激活锁血锁斩味无敌 + 全 4 级攻击珠达人珠 1 铜币直购 + 一千万资金 + 随从猫掠夺刀 15 级，新手畅享丝滑爽快大狩猎！",
-        "highlights": [
-          "锁血无敌免受猫车折磨",
-          "攻击珠II/达人珠II 1铜币全买齐",
-          "武器紫斩永不磨损掉斩",
-          "一千万金币工匠强化财富自由"
-        ],
-        "code": "-- [老L·极客场景套餐] 怪猎世界 新手苍蓝星逃课起飞包\n[REFramework] -> Player Stats -> Invincibility (God Mode)\n[REFramework] -> Weapon Stats -> Infinite Sharpness\n[Shop] -> Buy Item -> Attack Jewel 4\n[Shop] -> Buy Item -> Expert Jewel 4"
-      },
-      {
-        "id": "mhw_salvation_bundle",
-        "type": "salvation",
-        "name": "聚魔之地客制满配救赎包",
-        "tag": "🛡️ 意难平救赎 · 告别受苦",
-        "badge": "聚魔满配",
-        "desc": "聚魔之地全六大区域直接拉满 Lv7 + 大灵脉玉 100 个 + 历战灭尽龙角 50 个 + 武器吸血客制全开，告别肝聚魔地质学折磨！",
-        "highlights": [
-          "全六大区域直接全锁定 Lv7 满级",
-          "大灵脉玉 100 个随心解除上限",
-          "近战武器吸血客制直接拉满",
-          "刀刀吸血站撸历战古龙"
-        ],
-        "code": "-- [老L·极客场景套餐] 怪猎世界 聚魔之地客制满配救赎包\n[REFramework] -> Guiding Lands -> Set All Regions to Level 7\n[REFramework] -> Items -> Add Great Spiritvein Gem x100\n[REFramework] -> Items -> Add Tempered Ruinhorn x50\n[REFramework] -> Equipment -> Unlock All Weapon Augments"
-      },
-      {
-        "id": "mhw_godmode_bundle",
-        "type": "godmode",
-        "name": "黑龙真髓真神毕业包",
-        "tag": "⚡ 极客狂欢 · 众神陨落",
-        "badge": "真神毕业",
-        "desc": "黑龙全套毕业神装 + 极限面板黑龙大剑 + SmartHunter 怪物实时血量部位耐久透视 + 全服装外观幻化，终结新大陆狩猎终点！",
-        "highlights": [
-          "黑龙真髓全套 4 级孔位神级装备",
-          "物理伤害天花板黑龙大剑",
-          "SmartHunter 实时血量部位破坏透视",
-          "全外观幻化全解锁美型猎人"
-        ],
-        "code": "-- [老L·极客场景套餐] 怪猎世界 黑龙真髓真神毕业包\n[REFramework] -> Equipment -> Unlock Full Fatalis Armor Set\n[REFramework] -> Equipment -> Unlock Fatalis Zagges\n[SmartHunter] -> Overlay -> Show Monster Realtime HP Bar\n[REFramework] -> Equipment -> Unlock All Layered Armor"
-      }
-    ],
+    "scenarioBundles": [],
     "pitfallNote": {
       "title": "老L避坑笔记 (怪物猎人世界 冰原终极避坑指南)",
       "tips": [
@@ -15037,13 +14638,7 @@ window.GAMES_DATA = [
     ],
     "hasMods": true,
     "modInstallPath": "Sekiro: Shadows Die Twice\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 只狼：影逝二度 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -15573,24 +15168,7 @@ window.GAMES_DATA = [
         ]
       }
     ],
-    "communityReviews": [
-      {
-        "user": "Player_1901",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 只狼：影逝二度 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 138
-      },
-      {
-        "user": "ModEnthusiast_19",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 225
-      }
-    ],
+    "communityReviews": [],
     "steamAppId": 814380,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/814380/header.jpg",
     "trainerInfo": {
@@ -15729,53 +15307,7 @@ window.GAMES_DATA = [
     },
     "verifiedPatch": "v1.06（未实测）",
     "radarSecretCode": "只狼",
-    "scenarioBundles": [
-      {
-        "id": "sek_starter_bundle",
-        "type": "starter",
-        "name": "手残救星弹刀教学包",
-        "tag": "👑 萌新首选 · 零门槛",
-        "badge": "弹刀救星",
-        "desc": "一键激活锁血锁架势无敌 + 0.3x 子弹时间慢动作防反拆招 + 9 颗葫芦种子回满 10 瓶药 + 999 纸人无限释放忍具，受苦手残一秒逆袭成打铁宗师！",
-        "highlights": [
-          "锁血锁架势槽，怎么挨打都不倒",
-          "0.3x 子弹时间慢动作精准弹刀",
-          "9 颗葫芦种子瞬间 10 瓶药水满配",
-          "999 纸人无限挥霍机关伞与鞭炮"
-        ],
-        "code": "-- [老L·极客场景套餐] 只狼 手残救星弹刀教学包\n[热键] Num 1: 无敌锁血 / 绝对防御判定 (God Mode)\n[热键] Num 2: 躯干韧性槽锁定不崩 (Max Posture Lock)\n[热键] F1: 防御识破 0.3x 子弹时间慢动作 (Deflect Window Slomo)\n[CT表] Inventory -> Add 9 Gourd Seeds"
-      },
-      {
-        "id": "sek_salvation_bundle",
-        "type": "salvation",
-        "name": "全流派秘传招式满配包",
-        "tag": "🛡️ 意难平救赎 · 告别受苦",
-        "badge": "秘传满配",
-        "desc": "秘传·一心居合斩 + 秘传·龙闪剑气 + 秘传·樱舞空中避雷雷返 + 琉璃净火与朱雀红莲伞，全流派战技随时潇洒施展！",
-        "highlights": [
-          "秘传·樱舞腾空帅气雷返",
-          "秘传·一心华丽千本刀网居合",
-          "朱雀红莲伞抵挡一切烈焰爆炸",
-          "琉璃净火神圣紫焰焚杀怨灵"
-        ],
-        "code": "-- [老L·极客场景套餐] 只狼 全流派秘传招式满配包\n[CT表] Combat Arts -> Unlock One Mind\n[CT表] Combat Arts -> Unlock Sakura Dance\n[CT表] Prosthetic -> Unlock Suzaku Lotus Umbrella\n[CT表] Prosthetic -> Unlock Lazulite Sacred Flame"
-      },
-      {
-        "id": "sek_godmode_bundle",
-        "type": "godmode",
-        "name": "修罗真神刀刀忍杀包",
-        "tag": "⚡ 极客狂欢 · 众神陨落",
-        "badge": "修罗真神",
-        "desc": "刀刀触发终结处决忍杀 + 一击必杀崩解躯干 + 强化不死斩霸体斩杀 + 144Hz 高刷与视场角全开，化身苇名国修罗剑圣真神！",
-        "highlights": [
-          "刀刀触发忍杀处决华丽动画",
-          "一击崩解敌方躯干架势条",
-          "奥义·强化不死斩强行削韧斩杀",
-          "144Hz 高刷带鱼屏全景纵览战场"
-        ],
-        "code": "-- [老L·极客场景套餐] 只狼 修罗真神刀刀忍杀包\n[热键] Num 9: 刀刀触发忍杀处决 (Infinite Deathblow Trigger)\n[热键] Num 8: 一击必杀崩解躯干 (Instant Deathblow Posture Break)\n[CT表] Combat Arts -> Unlock Mortal Draw & Empowered\n[ModEngine] Camera -> Unlock 60FPS Limit & Ultrawide"
-      }
-    ],
+    "scenarioBundles": [],
     "pitfallNote": {
       "title": "老L避坑笔记 (只狼：影逝二度 极客避坑指南)",
       "tips": [
@@ -15846,13 +15378,7 @@ window.GAMES_DATA = [
     ],
     "hasMods": true,
     "modInstallPath": "Resident Evil 4 Remake\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 生化危机 4 重制版 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -16383,24 +15909,7 @@ window.GAMES_DATA = [
         ]
       }
     ],
-    "communityReviews": [
-      {
-        "user": "Player_2101",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 生化危机 4 重制版 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 159
-      },
-      {
-        "user": "ModEnthusiast_21",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 159
-      }
-    ],
+    "communityReviews": [],
     "steamAppId": 2050650,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/2050650/header.jpg",
     "trainerInfo": {
@@ -16587,53 +16096,7 @@ window.GAMES_DATA = [
     },
     "verifiedPatch": "v1.0+（未实测）",
     "radarSecretCode": "生化4",
-    "scenarioBundles": [
-      {
-        "id": "re4_starter_bundle",
-        "type": "starter",
-        "name": "新手西班牙村庄起飞包",
-        "tag": "👑 萌新首选 · 零门槛",
-        "badge": "开荒起飞",
-        "desc": "一键激活锁血上帝模式 + 阿什莉重装骑士板甲 + 1000万比塞塔金币 + 999 尖晶石 + 战斗小刀耐久度无限，开荒生化4零恐惧受苦！",
-        "highlights": [
-          "里昂锁血无敌免受电锯秒杀",
-          "阿什莉穿重装板甲绝不被抓",
-          "一千万金币买空全西班牙军火商",
-          "小刀耐久无限随便弹刀招架"
-        ],
-        "code": "-- [老L·极客场景套餐] 生化4重制版 新手西班牙村庄起飞包\n[REFramework] -> Player -> God Mode (ON / 锁血锁伤)\n[REFramework] -> Ashley -> Invincible & Never Kidnapped\n[REFramework] -> Merchant -> Add 10,000,000 Pesetas\n[REFramework] -> Knife -> Infinite Knife Durability"
-      },
-      {
-        "id": "re4_salvation_bundle",
-        "type": "salvation",
-        "name": "佣兵模式全员 S++ 解锁包",
-        "tag": "🛡️ 意难平救赎 · 告别受苦",
-        "badge": "佣兵S++",
-        "desc": "倒计时时间锁定暂停 + 150 极限连击不断 + 威斯克大招狂暴无限充能 + 瞬间结算二百万分点亮 S++，秒速白嫖手炮神兵！",
-        "highlights": [
-          "时间锁定暂停从容清怪",
-          "150 杀连杀槽锁定不断连",
-          "瞬拿全图 2,000,000 分 S++ 评价",
-          "免专业难度通关直接解锁手炮"
-        ],
-        "code": "-- [老L·极客场景套餐] 生化4重制版 佣兵模式全员 S++ 解锁包\n[REFramework] -> Mercenaries -> Freeze Timer\n[REFramework] -> Mercenaries -> Max Combo 150\n[REFramework] -> Mercenaries -> Instant S++ Rank Score\n[REFramework] -> Inventory -> Add Handcannon Magnum"
-      },
-      {
-        "id": "re4_godmode_bundle",
-        "type": "godmode",
-        "name": "无限军火真神毁灭包",
-        "tag": "⚡ 极客狂欢 · 众神陨落",
-        "badge": "真神毁灭",
-        "desc": "无限火箭筒 + 芝加哥打字机无限冲锋枪 + 终极手炮 + 枪枪爆头碎颅 + 准星零后坐力，化身西班牙邪教清道夫真神！",
-        "highlights": [
-          "无限火箭筒一发轰平任何首领",
-          "芝加哥打字机连绵无限弹幕",
-          "枪械射击零后坐力百步穿杨",
-          "爆头 100% 碎颅阻断寄生虫"
-        ],
-        "code": "-- [老L·极客场景套餐] 生化4重制版 无限军火真神毁灭包\n[REFramework] -> Inventory -> Add Infinite Rocket Launcher\n[REFramework] -> Inventory -> Add Chicago Sweeper\n[REFramework] -> Weapon -> No Weapon Recoil\n[REFramework] -> Combat -> Guaranteed Critical Headshot"
-      }
-    ],
+    "scenarioBundles": [],
     "pitfallNote": {
       "title": "老L避坑笔记 (生化危机4：重制版 专家避坑指南)",
       "tips": [
@@ -16733,13 +16196,7 @@ window.GAMES_DATA = [
     ],
     "hasMods": true,
     "modInstallPath": "Mount & Blade II: Bannerlord\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 骑马与砍杀 2：霸主 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -16955,24 +16412,7 @@ window.GAMES_DATA = [
         ]
       }
     ],
-    "communityReviews": [
-      {
-        "user": "Player_1501",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 骑马与砍杀 2：霸主 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 242
-      },
-      {
-        "user": "ModEnthusiast_15",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 148
-      }
-    ],
+    "communityReviews": [],
     "steamAppId": 261550,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/261550/header.jpg",
     "trainerInfo": {
@@ -17233,13 +16673,7 @@ window.GAMES_DATA = [
     ],
     "hasMods": true,
     "modInstallPath": "Stardew Valley\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 星露谷物语 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -17429,24 +16863,7 @@ window.GAMES_DATA = [
         ]
       }
     ],
-    "communityReviews": [
-      {
-        "user": "Player_1601",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 星露谷物语 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 161
-      },
-      {
-        "user": "ModEnthusiast_16",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 188
-      }
-    ],
+    "communityReviews": [],
     "steamAppId": 413150,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/413150/header.jpg",
     "trainerInfo": {
@@ -17667,19 +17084,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Terraria》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Terraria does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
+      "zh-CN": "《Terraria》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准）。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Terraria does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options). Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Terraria\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 泰拉瑞亚 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -17722,65 +17133,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "terraria-essential-framework",
-        "title": "Terraria Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《泰拉瑞亚》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Terraria\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Terraria\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "terraria-hd-textures",
-        "title": "Terraria Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《泰拉瑞亚》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Terraria\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_1701",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 泰拉瑞亚 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 401
-      },
-      {
-        "user": "ModEnthusiast_17",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 294
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 105600,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/105600/header.jpg",
     "trainerInfo": {
@@ -17913,19 +17267,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Hogwarts Legacy》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Hogwarts Legacy does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
+      "zh-CN": "《Hogwarts Legacy》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准）。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Hogwarts Legacy does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options). Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Hogwarts Legacy\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 霍格沃茨之遗 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -17968,65 +17316,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "hogwarts-legacy-essential-framework",
-        "title": "Hogwarts Legacy Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《霍格沃茨之遗》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Hogwarts Legacy\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Hogwarts Legacy\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "hogwarts-legacy-hd-textures",
-        "title": "Hogwarts Legacy Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《霍格沃茨之遗》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Hogwarts Legacy\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_1801",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 霍格沃茨之遗 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 140
-      },
-      {
-        "user": "ModEnthusiast_18",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 305
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 990080,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/990080/header.jpg",
     "trainerInfo": {
@@ -18287,13 +17578,7 @@ window.GAMES_DATA = [
     ],
     "hasMods": true,
     "modInstallPath": "Subnautica\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 深海迷航 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -18548,24 +17833,7 @@ window.GAMES_DATA = [
         ]
       }
     ],
-    "communityReviews": [
-      {
-        "user": "Player_1301",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 深海迷航 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 357
-      },
-      {
-        "user": "ModEnthusiast_13",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 271
-      }
-    ],
+    "communityReviews": [],
     "steamAppId": 264710,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/264710/header.jpg",
     "trainerInfo": {
@@ -18710,19 +17978,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Dark Souls III》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Dark Souls III does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
+      "zh-CN": "《Dark Souls III》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准）。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Dark Souls III does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options). Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Dark Souls III\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 黑暗之魂 3 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -18765,65 +18027,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "dark-souls-3-essential-framework",
-        "title": "Dark Souls III Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《黑暗之魂 3》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Dark Souls III\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Dark Souls III\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "dark-souls-3-hd-textures",
-        "title": "Dark Souls III Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《黑暗之魂 3》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Dark Souls III\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_2001",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 黑暗之魂 3 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 202
-      },
-      {
-        "user": "ModEnthusiast_20",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 198
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 374320,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/374320/header.jpg",
     "trainerInfo": {
@@ -19071,13 +18276,7 @@ window.GAMES_DATA = [
     ],
     "hasMods": true,
     "modInstallPath": "Valheim\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 英灵神殿 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -19356,24 +18555,7 @@ window.GAMES_DATA = [
         ]
       }
     ],
-    "communityReviews": [
-      {
-        "user": "Player_1401",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 英灵神殿 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 151
-      },
-      {
-        "user": "ModEnthusiast_14",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 254
-      }
-    ],
+    "communityReviews": [],
     "steamAppId": 892970,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/892970/header.jpg",
     "trainerInfo": {
@@ -19548,19 +18730,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Resident Evil Village》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Resident Evil Village does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
+      "zh-CN": "《Resident Evil Village》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准）。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Resident Evil Village does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options). Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Resident Evil Village\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 生化危机 8：村庄 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -19603,65 +18779,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "re-village-essential-framework",
-        "title": "Resident Evil Village Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《生化危机 8：村庄》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Resident Evil Village\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Resident Evil Village\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "re-village-hd-textures",
-        "title": "Resident Evil Village Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《生化危机 8：村庄》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Resident Evil Village\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_2201",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 生化危机 8：村庄 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 343
-      },
-      {
-        "user": "ModEnthusiast_22",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 149
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 1196590,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1196590/header.jpg",
     "trainerInfo": {
@@ -19842,19 +18961,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Dying Light》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Dying Light does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
+      "zh-CN": "《Dying Light》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准）。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Dying Light does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options). Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Dying Light\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 消逝的光芒 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -19897,65 +19010,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "dying-light-essential-framework",
-        "title": "Dying Light Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《消逝的光芒》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Dying Light\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Dying Light\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "dying-light-hd-textures",
-        "title": "Dying Light Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《消逝的光芒》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Dying Light\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_2301",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 消逝的光芒 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 161
-      },
-      {
-        "user": "ModEnthusiast_23",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 303
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 239140,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/239140/header.jpg",
     "trainerInfo": {
@@ -20167,19 +19223,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Dying Light 2 Stay Human》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Dying Light 2 Stay Human does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
+      "zh-CN": "《Dying Light 2 Stay Human》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准）。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Dying Light 2 Stay Human does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options). Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Dying Light 2 Stay Human\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 消逝的光芒 2 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -20222,65 +19272,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "dying-light-2-essential-framework",
-        "title": "Dying Light 2 Stay Human Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《消逝的光芒 2》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Dying Light 2 Stay Human\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Dying Light 2 Stay Human\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "dying-light-2-hd-textures",
-        "title": "Dying Light 2 Stay Human Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《消逝的光芒 2》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Dying Light 2 Stay Human\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_2401",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 消逝的光芒 2 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 338
-      },
-      {
-        "user": "ModEnthusiast_24",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 216
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 534380,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/534380/header.jpg",
     "trainerInfo": {
@@ -20538,13 +19531,7 @@ window.GAMES_DATA = [
     ],
     "hasMods": true,
     "modInstallPath": "Fallout: New Vegas\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 辐射：新维加斯 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": false,
     "trainerHotkeys": [],
     "nexusStats": {
@@ -20735,24 +19722,7 @@ window.GAMES_DATA = [
         ]
       }
     ],
-    "communityReviews": [
-      {
-        "user": "Player_2501",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 辐射：新维加斯 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 367
-      },
-      {
-        "user": "ModEnthusiast_25",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 265
-      }
-    ],
+    "communityReviews": [],
     "steamAppId": 22380,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/22380/header.jpg",
     "trainerInfo": {},
@@ -20844,13 +19814,7 @@ window.GAMES_DATA = [
     ],
     "hasMods": true,
     "modInstallPath": "RimWorld\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 边缘世界 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": false,
     "trainerHotkeys": [],
     "nexusStats": {
@@ -21007,24 +19971,7 @@ window.GAMES_DATA = [
         ]
       }
     ],
-    "communityReviews": [
-      {
-        "user": "Player_2601",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 边缘世界 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 414
-      },
-      {
-        "user": "ModEnthusiast_26",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 306
-      }
-    ],
+    "communityReviews": [],
     "steamAppId": 294100,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/294100/header.jpg",
     "trainerInfo": {},
@@ -21074,19 +20021,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Project Zomboid》没有游戏自带的打字控制台，本站也没有收录它的修改器，可以看下方【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Project Zomboid does not have a built-in typing console, and no trainer is listed for it here; see the Mods tab below. Use mods offline in single-player only, and back up your saves first."
+      "zh-CN": "《Project Zomboid》没有游戏自带的打字控制台，本站目前也没有收录它的修改器和 Mod。",
+      "en": "Project Zomboid does not have a built-in typing console, and no trainer or mods are listed for it here yet."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Project Zomboid\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 僵尸毁灭工程 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": false,
     "trainerHotkeys": [],
     "nexusStats": {
@@ -21096,65 +20037,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "project-zomboid-essential-framework",
-        "title": "Project Zomboid Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《僵尸毁灭工程》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Project Zomboid\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Project Zomboid\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "project-zomboid-hd-textures",
-        "title": "Project Zomboid Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《僵尸毁灭工程》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Project Zomboid\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_2701",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 僵尸毁灭工程 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 255
-      },
-      {
-        "user": "ModEnthusiast_27",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 134
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 108600,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/108600/header.jpg",
     "trainerInfo": {},
@@ -21201,19 +20085,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《The Forest》没有游戏自带的打字控制台，本站也没有收录它的修改器，可以看下方【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "The Forest does not have a built-in typing console, and no trainer is listed for it here; see the Mods tab below. Use mods offline in single-player only, and back up your saves first."
+      "zh-CN": "《The Forest》没有游戏自带的打字控制台，本站目前也没有收录它的修改器和 Mod。",
+      "en": "The Forest does not have a built-in typing console, and no trainer or mods are listed for it here yet."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "The Forest\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 森林 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": false,
     "trainerHotkeys": [],
     "nexusStats": {
@@ -21223,65 +20101,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "the-forest-essential-framework",
-        "title": "The Forest Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《森林》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "The Forest\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\The Forest\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "the-forest-hd-textures",
-        "title": "The Forest Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《森林》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "The Forest\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_2801",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 森林 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 434
-      },
-      {
-        "user": "ModEnthusiast_28",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 238
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 242760,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/242760/header.jpg",
     "trainerInfo": {},
@@ -21372,13 +20193,7 @@ window.GAMES_DATA = [
     ],
     "hasMods": true,
     "modInstallPath": "Sons of the Forest\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 森林之子 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -21532,24 +20347,7 @@ window.GAMES_DATA = [
         ]
       }
     ],
-    "communityReviews": [
-      {
-        "user": "Player_2901",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 森林之子 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 391
-      },
-      {
-        "user": "ModEnthusiast_29",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 146
-      }
-    ],
+    "communityReviews": [],
     "steamAppId": 1326470,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1326470/header.jpg",
     "trainerInfo": {
@@ -21756,13 +20554,7 @@ window.GAMES_DATA = [
     ],
     "hasMods": true,
     "modInstallPath": "Satisfactory\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 幸福工厂 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -21880,24 +20672,7 @@ window.GAMES_DATA = [
         ]
       }
     ],
-    "communityReviews": [
-      {
-        "user": "Player_3001",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 幸福工厂 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 135
-      },
-      {
-        "user": "ModEnthusiast_30",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 139
-      }
-    ],
+    "communityReviews": [],
     "steamAppId": 526870,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/526870/header.jpg",
     "trainerInfo": {
@@ -22063,13 +20838,7 @@ window.GAMES_DATA = [
     ],
     "hasMods": true,
     "modInstallPath": "Factorio\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 异星工厂 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": false,
     "trainerHotkeys": [],
     "nexusStats": {
@@ -22178,24 +20947,7 @@ window.GAMES_DATA = [
         ]
       }
     ],
-    "communityReviews": [
-      {
-        "user": "Player_3101",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 异星工厂 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 293
-      },
-      {
-        "user": "ModEnthusiast_31",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 107
-      }
-    ],
+    "communityReviews": [],
     "steamAppId": 427520,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/427520/header.jpg",
     "trainerInfo": {},
@@ -22244,19 +20996,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Cities: Skylines》没有游戏自带的打字控制台，本站也没有收录它的修改器，可以看下方【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Cities: Skylines does not have a built-in typing console, and no trainer is listed for it here; see the Mods tab below. Use mods offline in single-player only, and back up your saves first."
+      "zh-CN": "《Cities: Skylines》没有游戏自带的打字控制台，本站目前也没有收录它的修改器和 Mod。",
+      "en": "Cities: Skylines does not have a built-in typing console, and no trainer or mods are listed for it here yet."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Cities: Skylines\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 城市：天际线 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": false,
     "trainerHotkeys": [],
     "nexusStats": {
@@ -22266,65 +21012,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "cities-skylines-essential-framework",
-        "title": "Cities: Skylines Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《城市：天际线》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Cities: Skylines\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Cities: Skylines\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "cities-skylines-hd-textures",
-        "title": "Cities: Skylines Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《城市：天际线》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Cities: Skylines\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_3201",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 城市：天际线 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 297
-      },
-      {
-        "user": "ModEnthusiast_32",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 122
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 255710,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/255710/header.jpg",
     "trainerInfo": {},
@@ -22374,19 +21063,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Sid Meier's Civilization VI》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Sid Meier's Civilization VI does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
+      "zh-CN": "《Sid Meier's Civilization VI》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准）。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Sid Meier's Civilization VI does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options). Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Sid Meier's Civilization VI\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 文明 6 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -22429,65 +21112,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "civ-6-essential-framework",
-        "title": "Sid Meier's Civilization VI Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《文明 6》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Sid Meier's Civilization VI\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Sid Meier's Civilization VI\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "civ-6-hd-textures",
-        "title": "Sid Meier's Civilization VI Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《文明 6》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Sid Meier's Civilization VI\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_3301",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 文明 6 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 320
-      },
-      {
-        "user": "ModEnthusiast_33",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 100
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 289070,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/289070/header.jpg",
     "trainerInfo": {
@@ -22697,13 +21323,7 @@ window.GAMES_DATA = [
     ],
     "hasMods": true,
     "modInstallPath": "Crusader Kings III\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 十字军之王 3 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -22903,24 +21523,7 @@ window.GAMES_DATA = [
         ]
       }
     ],
-    "communityReviews": [
-      {
-        "user": "Player_3401",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 十字军之王 3 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 308
-      },
-      {
-        "user": "ModEnthusiast_34",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 268
-      }
-    ],
+    "communityReviews": [],
     "steamAppId": 1158310,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1158310/header.jpg",
     "trainerInfo": {
@@ -23135,13 +21738,7 @@ window.GAMES_DATA = [
     ],
     "hasMods": true,
     "modInstallPath": "Hearts of Iron IV\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 钢铁雄心 4 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -23353,24 +21950,7 @@ window.GAMES_DATA = [
         ]
       }
     ],
-    "communityReviews": [
-      {
-        "user": "Player_3501",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 钢铁雄心 4 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 478
-      },
-      {
-        "user": "ModEnthusiast_35",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 176
-      }
-    ],
+    "communityReviews": [],
     "steamAppId": 394360,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/394360/header.jpg",
     "trainerInfo": {
@@ -23533,13 +22113,7 @@ window.GAMES_DATA = [
     ],
     "hasMods": true,
     "modInstallPath": "Stellaris\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 群星 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -23710,24 +22284,7 @@ window.GAMES_DATA = [
         ]
       }
     ],
-    "communityReviews": [
-      {
-        "user": "Player_3601",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 群星 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 202
-      },
-      {
-        "user": "ModEnthusiast_36",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 198
-      }
-    ],
+    "communityReviews": [],
     "steamAppId": 281990,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/281990/header.jpg",
     "trainerInfo": {
@@ -23909,19 +22466,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Total War: WARHAMMER III》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Total War: WARHAMMER III does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
+      "zh-CN": "《Total War: WARHAMMER III》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准）。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Total War: WARHAMMER III does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options). Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Total War: WARHAMMER III\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 全面战争：战锤 3 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -23964,65 +22515,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "total-war-warhammer-3-essential-framework",
-        "title": "Total War: WARHAMMER III Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《全面战争：战锤 3》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Total War: WARHAMMER III\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Total War: WARHAMMER III\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "total-war-warhammer-3-hd-textures",
-        "title": "Total War: WARHAMMER III Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《全面战争：战锤 3》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Total War: WARHAMMER III\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_3701",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 全面战争：战锤 3 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 203
-      },
-      {
-        "user": "ModEnthusiast_37",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 110
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 1142710,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1142710/header.jpg",
     "trainerInfo": {
@@ -24277,19 +22771,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Total War: Three Kingdoms》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Total War: Three Kingdoms does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
+      "zh-CN": "《Total War: Three Kingdoms》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准）。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Total War: Three Kingdoms does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options). Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Total War: Three Kingdoms\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 全面战争：三国 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -24332,65 +22820,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "total-war-three-kingdoms-essential-framework",
-        "title": "Total War: Three Kingdoms Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《全面战争：三国》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Total War: Three Kingdoms\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Total War: Three Kingdoms\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "total-war-three-kingdoms-hd-textures",
-        "title": "Total War: Three Kingdoms Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《全面战争：三国》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Total War: Three Kingdoms\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_3801",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 全面战争：三国 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 279
-      },
-      {
-        "user": "ModEnthusiast_38",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 105
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 779340,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/779340/header.jpg",
     "trainerInfo": {
@@ -24577,19 +23008,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Dragon's Dogma 2》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Dragon's Dogma 2 does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
+      "zh-CN": "《Dragon's Dogma 2》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准）。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Dragon's Dogma 2 does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options). Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Dragon's Dogma 2\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 龙之信条 2 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -24632,65 +23057,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "dragons-dogma-2-essential-framework",
-        "title": "Dragon's Dogma 2 Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《龙之信条 2》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Dragon's Dogma 2\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Dragon's Dogma 2\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "dragons-dogma-2-hd-textures",
-        "title": "Dragon's Dogma 2 Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《龙之信条 2》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Dragon's Dogma 2\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_3901",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 龙之信条 2 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 147
-      },
-      {
-        "user": "ModEnthusiast_39",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 244
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 2054970,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/2054970/header.jpg",
     "trainerInfo": {
@@ -24923,19 +23291,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Armored Core VI: Fires of Rubicon》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Armored Core VI: Fires of Rubicon does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
+      "zh-CN": "《Armored Core VI: Fires of Rubicon》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准）。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Armored Core VI: Fires of Rubicon does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options). Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Armored Core VI: Fires of Rubicon\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 装甲核心 6：境界天火 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -24978,65 +23340,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "armored-core-6-essential-framework",
-        "title": "Armored Core VI: Fires of Rubicon Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《装甲核心 6：境界天火》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Armored Core VI: Fires of Rubicon\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Armored Core VI: Fires of Rubicon\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "armored-core-6-hd-textures",
-        "title": "Armored Core VI: Fires of Rubicon Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《装甲核心 6：境界天火》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Armored Core VI: Fires of Rubicon\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_4001",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 装甲核心 6：境界天火 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 435
-      },
-      {
-        "user": "ModEnthusiast_40",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 243
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 1888160,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1888160/header.jpg",
     "trainerInfo": {
@@ -25184,19 +23489,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Ghost of Tsushima DIRECTOR'S CUT》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Ghost of Tsushima DIRECTOR'S CUT does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
+      "zh-CN": "《Ghost of Tsushima DIRECTOR'S CUT》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准）。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Ghost of Tsushima DIRECTOR'S CUT does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options). Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Ghost of Tsushima DIRECTOR'S CUT\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 对马岛之魂：导演剪辑版 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -25239,65 +23538,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "ghost-of-tsushima-essential-framework",
-        "title": "Ghost of Tsushima DIRECTOR'S CUT Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《对马岛之魂：导演剪辑版》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Ghost of Tsushima DIRECTOR'S CUT\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Ghost of Tsushima DIRECTOR'S CUT\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "ghost-of-tsushima-hd-textures",
-        "title": "Ghost of Tsushima DIRECTOR'S CUT Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《对马岛之魂：导演剪辑版》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Ghost of Tsushima DIRECTOR'S CUT\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_4101",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 对马岛之魂：导演剪辑版 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 290
-      },
-      {
-        "user": "ModEnthusiast_41",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 145
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 2215430,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/2215430/header.jpg",
     "trainerInfo": {
@@ -25513,19 +23755,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《God of War》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "God of War does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
+      "zh-CN": "《God of War》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准）。只在单机离线时用，用之前先手动备份存档。",
+      "en": "God of War does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options). Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "God of War\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 战神 4 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -25568,65 +23804,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "god-of-war-essential-framework",
-        "title": "God of War Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《战神 4》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "God of War\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\God of War\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "god-of-war-hd-textures",
-        "title": "God of War Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《战神 4》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "God of War\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_4201",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 战神 4 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 371
-      },
-      {
-        "user": "ModEnthusiast_42",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 211
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 1593500,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1593500/header.jpg",
     "trainerInfo": {
@@ -25770,19 +23949,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Marvel's Spider-Man Remastered》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Marvel's Spider-Man Remastered does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
+      "zh-CN": "《Marvel's Spider-Man Remastered》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准）。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Marvel's Spider-Man Remastered does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options). Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Marvel's Spider-Man Remastered\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 漫威蜘蛛侠：重制版 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -25825,65 +23998,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "spiderman-remastered-essential-framework",
-        "title": "Marvel's Spider-Man Remastered Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《漫威蜘蛛侠：重制版》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Marvel's Spider-Man Remastered\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Marvel's Spider-Man Remastered\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "spiderman-remastered-hd-textures",
-        "title": "Marvel's Spider-Man Remastered Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《漫威蜘蛛侠：重制版》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Marvel's Spider-Man Remastered\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_4301",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 漫威蜘蛛侠：重制版 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 388
-      },
-      {
-        "user": "ModEnthusiast_43",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 228
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 1817070,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1817070/header.jpg",
     "trainerInfo": {
@@ -26092,19 +24208,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Horizon Zero Dawn》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Horizon Zero Dawn does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
+      "zh-CN": "《Horizon Zero Dawn》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准）。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Horizon Zero Dawn does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options). Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Horizon Zero Dawn\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 地平线：零之曙光 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -26147,65 +24257,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "horizon-zero-dawn-essential-framework",
-        "title": "Horizon Zero Dawn Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《地平线：零之曙光》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Horizon Zero Dawn\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Horizon Zero Dawn\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "horizon-zero-dawn-hd-textures",
-        "title": "Horizon Zero Dawn Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《地平线：零之曙光》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Horizon Zero Dawn\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_4401",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 地平线：零之曙光 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 341
-      },
-      {
-        "user": "ModEnthusiast_44",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 279
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 1151640,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1151640/header.jpg",
     "trainerInfo": {
@@ -26402,19 +24455,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Days Gone》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Days Gone does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
+      "zh-CN": "《Days Gone》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准）。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Days Gone does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options). Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Days Gone\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 往日不再 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -26457,65 +24504,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "days-gone-essential-framework",
-        "title": "Days Gone Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《往日不再》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Days Gone\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Days Gone\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "days-gone-hd-textures",
-        "title": "Days Gone Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《往日不再》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Days Gone\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_4501",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 往日不再 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 441
-      },
-      {
-        "user": "ModEnthusiast_45",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 166
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 1259420,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1259420/header.jpg",
     "trainerInfo": {
@@ -26734,19 +24724,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Death Stranding Director's Cut》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Death Stranding Director's Cut does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
+      "zh-CN": "《Death Stranding Director's Cut》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准）。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Death Stranding Director's Cut does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options). Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Death Stranding Director's Cut\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 死亡搁浅：导演剪辑版 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -26789,65 +24773,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "death-stranding-essential-framework",
-        "title": "Death Stranding Director's Cut Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《死亡搁浅：导演剪辑版》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Death Stranding Director's Cut\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Death Stranding Director's Cut\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "death-stranding-hd-textures",
-        "title": "Death Stranding Director's Cut Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《死亡搁浅：导演剪辑版》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Death Stranding Director's Cut\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_4601",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 死亡搁浅：导演剪辑版 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 466
-      },
-      {
-        "user": "ModEnthusiast_46",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 238
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 1850570,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1850570/header.jpg",
     "trainerInfo": {
@@ -27032,8 +24959,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Detroit: Become Human》没有游戏自带的打字控制台，本站也没有收录它的修改器，可以看下方【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Detroit: Become Human does not have a built-in typing console, and no trainer is listed for it here; see the Mods tab below. Use mods offline in single-player only, and back up your saves first."
+      "zh-CN": "《Detroit: Become Human》没有游戏自带的打字控制台，本站目前也没有收录它的修改器和 Mod。",
+      "en": "Detroit: Become Human does not have a built-in typing console, and no trainer or mods are listed for it here yet."
     },
     "popularCommands": [],
     "hasMods": false,
@@ -27048,65 +24975,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "detroit-become-human-essential-framework",
-        "title": "Detroit: Become Human Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《底特律：化身为人》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "N/A",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Detroit: Become Human\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "detroit-become-human-hd-textures",
-        "title": "Detroit: Become Human Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《底特律：化身为人》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "N/A",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_4701",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 底特律：化身为人 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 374
-      },
-      {
-        "user": "ModEnthusiast_47",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 241
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 1222140,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1222140/header.jpg",
     "trainerInfo": {},
@@ -27191,13 +25061,7 @@ window.GAMES_DATA = [
     ],
     "hasMods": true,
     "modInstallPath": "Kingdom Come: Deliverance\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 天国：拯救 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -27327,24 +25191,7 @@ window.GAMES_DATA = [
         ]
       }
     ],
-    "communityReviews": [
-      {
-        "user": "Player_4801",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 天国：拯救 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 310
-      },
-      {
-        "user": "ModEnthusiast_48",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 131
-      }
-    ],
+    "communityReviews": [],
     "steamAppId": 379430,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/379430/header.jpg",
     "trainerInfo": {
@@ -27497,19 +25344,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Mount & Blade: Warband》没有游戏自带的打字控制台，本站也没有收录它的修改器，可以看下方【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Mount & Blade: Warband does not have a built-in typing console, and no trainer is listed for it here; see the Mods tab below. Use mods offline in single-player only, and back up your saves first."
+      "zh-CN": "《Mount & Blade: Warband》没有游戏自带的打字控制台，本站目前也没有收录它的修改器和 Mod。",
+      "en": "Mount & Blade: Warband does not have a built-in typing console, and no trainer or mods are listed for it here yet."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Mount & Blade: Warband\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 骑马与砍杀：战团 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": false,
     "trainerHotkeys": [],
     "nexusStats": {
@@ -27519,65 +25360,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "mount-and-blade-warband-essential-framework",
-        "title": "Mount & Blade: Warband Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《骑马与砍杀：战团》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Mount & Blade: Warband\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Mount & Blade: Warband\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "mount-and-blade-warband-hd-textures",
-        "title": "Mount & Blade: Warband Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《骑马与砍杀：战团》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Mount & Blade: Warband\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_4901",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 骑马与砍杀：战团 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 457
-      },
-      {
-        "user": "ModEnthusiast_49",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 263
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 48700,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/48700/header.jpg",
     "trainerInfo": {},
@@ -27621,19 +25405,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《S.T.A.L.K.E.R.: Shadow of Chernobyl》没有游戏自带的打字控制台，本站也没有收录它的修改器，可以看下方【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "S.T.A.L.K.E.R.: Shadow of Chernobyl does not have a built-in typing console, and no trainer is listed for it here; see the Mods tab below. Use mods offline in single-player only, and back up your saves first."
+      "zh-CN": "《S.T.A.L.K.E.R.: Shadow of Chernobyl》没有游戏自带的打字控制台，本站目前也没有收录它的修改器和 Mod。",
+      "en": "S.T.A.L.K.E.R.: Shadow of Chernobyl does not have a built-in typing console, and no trainer or mods are listed for it here yet."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "S.T.A.L.K.E.R.: Shadow of Chernobyl\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 潜行者：切尔诺贝利的阴影 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": false,
     "trainerHotkeys": [],
     "nexusStats": {
@@ -27643,65 +25421,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "stalker-shadow-of-chernobyl-essential-framework",
-        "title": "S.T.A.L.K.E.R.: Shadow of Chernobyl Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《潜行者：切尔诺贝利的阴影》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "S.T.A.L.K.E.R.: Shadow of Chernobyl\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\S.T.A.L.K.E.R.: Shadow of Chernobyl\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "stalker-shadow-of-chernobyl-hd-textures",
-        "title": "S.T.A.L.K.E.R.: Shadow of Chernobyl Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《潜行者：切尔诺贝利的阴影》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "S.T.A.L.K.E.R.: Shadow of Chernobyl\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_5001",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 潜行者：切尔诺贝利的阴影 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 280
-      },
-      {
-        "user": "ModEnthusiast_50",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 247
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 4500,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/4500/header.jpg",
     "trainerInfo": {},
@@ -27745,19 +25466,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Metro Exodus》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Metro Exodus does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
+      "zh-CN": "《Metro Exodus》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准）。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Metro Exodus does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options). Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Metro Exodus\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 地铁：离去 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -27800,65 +25515,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "metro-exodus-essential-framework",
-        "title": "Metro Exodus Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《地铁：离去》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Metro Exodus\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Metro Exodus\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "metro-exodus-hd-textures",
-        "title": "Metro Exodus Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《地铁：离去》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Metro Exodus\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_5101",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 地铁：离去 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 179
-      },
-      {
-        "user": "ModEnthusiast_51",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 253
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 412020,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/412020/header.jpg",
     "trainerInfo": {
@@ -27969,19 +25627,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Control Ultimate Edition》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Control Ultimate Edition does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
+      "zh-CN": "《Control Ultimate Edition》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准）。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Control Ultimate Edition does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options). Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Control Ultimate Edition\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 控制：终极版 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -28024,65 +25676,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "control-essential-framework",
-        "title": "Control Ultimate Edition Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《控制：终极版》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Control Ultimate Edition\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Control Ultimate Edition\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "control-hd-textures",
-        "title": "Control Ultimate Edition Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《控制：终极版》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Control Ultimate Edition\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_5201",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 控制：终极版 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 233
-      },
-      {
-        "user": "ModEnthusiast_52",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 202
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 870780,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/870780/header.jpg",
     "trainerInfo": {
@@ -28212,19 +25807,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Alan Wake 2》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Alan Wake 2 does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
+      "zh-CN": "《Alan Wake 2》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准）。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Alan Wake 2 does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options). Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Alan Wake 2\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 心灵杀手 2 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -28267,65 +25856,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "alan-wake-2-essential-framework",
-        "title": "Alan Wake 2 Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《心灵杀手 2》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Alan Wake 2\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Alan Wake 2\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "alan-wake-2-hd-textures",
-        "title": "Alan Wake 2 Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《心灵杀手 2》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Alan Wake 2\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_5301",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 心灵杀手 2 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 169
-      },
-      {
-        "user": "ModEnthusiast_53",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 85
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 0,
     "headerImage": "",
     "trainerInfo": {
@@ -28544,19 +26076,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《DOOM Eternal》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "DOOM Eternal does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
+      "zh-CN": "《DOOM Eternal》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准）。只在单机离线时用，用之前先手动备份存档。",
+      "en": "DOOM Eternal does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options). Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "DOOM Eternal\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 毁灭战士：永恒 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -28599,65 +26125,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "doom-eternal-essential-framework",
-        "title": "DOOM Eternal Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《毁灭战士：永恒》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "DOOM Eternal\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\DOOM Eternal\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "doom-eternal-hd-textures",
-        "title": "DOOM Eternal Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《毁灭战士：永恒》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "DOOM Eternal\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_5401",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 毁灭战士：永恒 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 209
-      },
-      {
-        "user": "ModEnthusiast_54",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 139
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 782330,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/782330/header.jpg",
     "trainerInfo": {
@@ -28816,19 +26285,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Borderlands 3》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Borderlands 3 does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
+      "zh-CN": "《Borderlands 3》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准）。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Borderlands 3 does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options). Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Borderlands 3\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 无主之地 3 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -28871,65 +26334,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "borderlands-3-essential-framework",
-        "title": "Borderlands 3 Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《无主之地 3》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Borderlands 3\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Borderlands 3\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "borderlands-3-hd-textures",
-        "title": "Borderlands 3 Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《无主之地 3》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Borderlands 3\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_5501",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 无主之地 3 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 475
-      },
-      {
-        "user": "ModEnthusiast_55",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 255
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 397540,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/397540/header.jpg",
     "trainerInfo": {
@@ -29148,19 +26554,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Borderlands 2》没有游戏自带的打字控制台，本站也没有收录它的修改器，可以看下方【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Borderlands 2 does not have a built-in typing console, and no trainer is listed for it here; see the Mods tab below. Use mods offline in single-player only, and back up your saves first."
+      "zh-CN": "《Borderlands 2》没有游戏自带的打字控制台，本站目前也没有收录它的修改器和 Mod。",
+      "en": "Borderlands 2 does not have a built-in typing console, and no trainer or mods are listed for it here yet."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Borderlands 2\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 无主之地 2 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": false,
     "trainerHotkeys": [],
     "nexusStats": {
@@ -29170,65 +26570,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "borderlands-2-essential-framework",
-        "title": "Borderlands 2 Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《无主之地 2》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Borderlands 2\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Borderlands 2\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "borderlands-2-hd-textures",
-        "title": "Borderlands 2 Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《无主之地 2》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Borderlands 2\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_5601",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 无主之地 2 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 202
-      },
-      {
-        "user": "ModEnthusiast_56",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 296
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 49520,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/49520/header.jpg",
     "trainerInfo": {},
@@ -29275,8 +26618,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《BioShock Infinite》没有游戏自带的打字控制台，本站也没有收录它的修改器，可以看下方【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "BioShock Infinite does not have a built-in typing console, and no trainer is listed for it here; see the Mods tab below. Use mods offline in single-player only, and back up your saves first."
+      "zh-CN": "《BioShock Infinite》没有游戏自带的打字控制台，本站目前也没有收录它的修改器和 Mod。",
+      "en": "BioShock Infinite does not have a built-in typing console, and no trainer or mods are listed for it here yet."
     },
     "popularCommands": [],
     "hasMods": false,
@@ -29291,65 +26634,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "bioshock-infinite-essential-framework",
-        "title": "BioShock Infinite Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《生化奇兵：无限》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "N/A",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\BioShock Infinite\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "bioshock-infinite-hd-textures",
-        "title": "BioShock Infinite Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《生化奇兵：无限》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "N/A",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_5701",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 生化奇兵：无限 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 278
-      },
-      {
-        "user": "ModEnthusiast_57",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 300
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 8870,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/8870/header.jpg",
     "trainerInfo": {},
@@ -29393,19 +26679,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Dishonored 2》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Dishonored 2 does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
+      "zh-CN": "《Dishonored 2》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准）。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Dishonored 2 does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options). Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Dishonored 2\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 羞辱 2 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -29448,65 +26728,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "dishonored-2-essential-framework",
-        "title": "Dishonored 2 Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《羞辱 2》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Dishonored 2\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Dishonored 2\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "dishonored-2-hd-textures",
-        "title": "Dishonored 2 Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《羞辱 2》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Dishonored 2\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_5801",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 羞辱 2 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 463
-      },
-      {
-        "user": "ModEnthusiast_58",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 232
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 403640,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/403640/header.jpg",
     "trainerInfo": {
@@ -29642,19 +26865,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Prey》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Prey does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
+      "zh-CN": "《Prey》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准）。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Prey does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options). Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Prey\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 掠食 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -29697,65 +26914,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "prey-essential-framework",
-        "title": "Prey Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《掠食》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Prey\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Prey\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "prey-hd-textures",
-        "title": "Prey Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《掠食》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Prey\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_5901",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 掠食 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 220
-      },
-      {
-        "user": "ModEnthusiast_59",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 292
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 480490,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/480490/header.jpg",
     "trainerInfo": {
@@ -29866,19 +27026,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《HITMAN World of Assassination》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "HITMAN World of Assassination does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
+      "zh-CN": "《HITMAN World of Assassination》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准）。只在单机离线时用，用之前先手动备份存档。",
+      "en": "HITMAN World of Assassination does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options). Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "HITMAN World of Assassination\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 杀手：暗杀世界 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -29921,65 +27075,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "hitman-3-essential-framework",
-        "title": "HITMAN World of Assassination Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《杀手：暗杀世界》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "HITMAN World of Assassination\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\HITMAN World of Assassination\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "hitman-3-hd-textures",
-        "title": "HITMAN World of Assassination Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《杀手：暗杀世界》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "HITMAN World of Assassination\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_6001",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 杀手：暗杀世界 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 186
-      },
-      {
-        "user": "ModEnthusiast_60",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 282
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 1659040,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1659040/header.jpg",
     "trainerInfo": {
@@ -30108,19 +27205,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Assassin's Creed Odyssey》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Assassin's Creed Odyssey does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
+      "zh-CN": "《Assassin's Creed Odyssey》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准）。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Assassin's Creed Odyssey does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options). Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Assassin's Creed Odyssey\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 刺客信条：奥德赛 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -30163,65 +27254,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "ac-odyssey-essential-framework",
-        "title": "Assassin's Creed Odyssey Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《刺客信条：奥德赛》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Assassin's Creed Odyssey\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Assassin's Creed Odyssey\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "ac-odyssey-hd-textures",
-        "title": "Assassin's Creed Odyssey Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《刺客信条：奥德赛》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Assassin's Creed Odyssey\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_6101",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 刺客信条：奥德赛 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 254
-      },
-      {
-        "user": "ModEnthusiast_61",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 174
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 812140,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/812140/header.jpg",
     "trainerInfo": {
@@ -30413,19 +27447,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Assassin's Creed Valhalla》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Assassin's Creed Valhalla does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
+      "zh-CN": "《Assassin's Creed Valhalla》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准）。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Assassin's Creed Valhalla does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options). Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Assassin's Creed Valhalla\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 刺客信条：英灵殿 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -30468,65 +27496,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "ac-valhalla-essential-framework",
-        "title": "Assassin's Creed Valhalla Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《刺客信条：英灵殿》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Assassin's Creed Valhalla\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Assassin's Creed Valhalla\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "ac-valhalla-hd-textures",
-        "title": "Assassin's Creed Valhalla Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《刺客信条：英灵殿》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Assassin's Creed Valhalla\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_6201",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 刺客信条：英灵殿 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 410
-      },
-      {
-        "user": "ModEnthusiast_62",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 268
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 2208920,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/2208920/header.jpg",
     "trainerInfo": {
@@ -30694,8 +27665,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Assassin's Creed Origins》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Assassin's Creed Origins does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
+      "zh-CN": "《Assassin's Creed Origins》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准）。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Assassin's Creed Origins does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options). Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": false,
@@ -30743,65 +27714,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "ac-origins-essential-framework",
-        "title": "Assassin's Creed Origins Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《刺客信条：起源》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "N/A",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Assassin's Creed Origins\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "ac-origins-hd-textures",
-        "title": "Assassin's Creed Origins Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《刺客信条：起源》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "N/A",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_6301",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 刺客信条：起源 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 179
-      },
-      {
-        "user": "ModEnthusiast_63",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 179
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 582160,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/582160/header.jpg",
     "trainerInfo": {
@@ -30954,19 +27868,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Far Cry 5》没有游戏自带的打字控制台，本站也没有收录它的修改器，可以看下方【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Far Cry 5 does not have a built-in typing console, and no trainer is listed for it here; see the Mods tab below. Use mods offline in single-player only, and back up your saves first."
+      "zh-CN": "《Far Cry 5》没有游戏自带的打字控制台，本站目前也没有收录它的修改器和 Mod。",
+      "en": "Far Cry 5 does not have a built-in typing console, and no trainer or mods are listed for it here yet."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Far Cry 5\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 孤岛惊魂 5 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": false,
     "trainerHotkeys": [],
     "nexusStats": {
@@ -30976,65 +27884,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "far-cry-5-essential-framework",
-        "title": "Far Cry 5 Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《孤岛惊魂 5》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Far Cry 5\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Far Cry 5\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "far-cry-5-hd-textures",
-        "title": "Far Cry 5 Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《孤岛惊魂 5》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Far Cry 5\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_6401",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 孤岛惊魂 5 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 423
-      },
-      {
-        "user": "ModEnthusiast_64",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 84
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 552520,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/552520/header.jpg",
     "trainerInfo": {},
@@ -31081,19 +27932,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Far Cry 6》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Far Cry 6 does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
+      "zh-CN": "《Far Cry 6》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准）。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Far Cry 6 does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options). Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Far Cry 6\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 孤岛惊魂 6 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -31136,65 +27981,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "far-cry-6-essential-framework",
-        "title": "Far Cry 6 Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《孤岛惊魂 6》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Far Cry 6\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Far Cry 6\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "far-cry-6-hd-textures",
-        "title": "Far Cry 6 Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《孤岛惊魂 6》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Far Cry 6\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_6501",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 孤岛惊魂 6 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 207
-      },
-      {
-        "user": "ModEnthusiast_65",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 297
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 2369390,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/2369390/header.jpg",
     "trainerInfo": {
@@ -31430,19 +28218,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Watch Dogs 2》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Watch Dogs 2 does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
+      "zh-CN": "《Watch Dogs 2》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准）。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Watch Dogs 2 does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options). Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Watch Dogs 2\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 看门狗 2 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -31485,65 +28267,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "watch-dogs-2-essential-framework",
-        "title": "Watch Dogs 2 Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《看门狗 2》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Watch Dogs 2\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Watch Dogs 2\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "watch-dogs-2-hd-textures",
-        "title": "Watch Dogs 2 Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《看门狗 2》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Watch Dogs 2\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_6601",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 看门狗 2 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 446
-      },
-      {
-        "user": "ModEnthusiast_66",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 279
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 447040,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/447040/header.jpg",
     "trainerInfo": {
@@ -31658,19 +28383,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《No Man's Sky》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "No Man's Sky does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
+      "zh-CN": "《No Man's Sky》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准）。只在单机离线时用，用之前先手动备份存档。",
+      "en": "No Man's Sky does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options). Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "No Man's Sky\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 无人深空 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -31713,65 +28432,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "no-mans-sky-essential-framework",
-        "title": "No Man's Sky Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《无人深空》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "No Man's Sky\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\No Man's Sky\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "no-mans-sky-hd-textures",
-        "title": "No Man's Sky Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《无人深空》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "No Man's Sky\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_6701",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 无人深空 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 212
-      },
-      {
-        "user": "ModEnthusiast_67",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 259
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 275850,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/275850/header.jpg",
     "trainerInfo": {
@@ -31958,8 +28620,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Astroneer》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Astroneer does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
+      "zh-CN": "《Astroneer》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准）。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Astroneer does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options). Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": false,
@@ -32007,65 +28669,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "astroneer-essential-framework",
-        "title": "Astroneer Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《异星探险家》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "N/A",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Astroneer\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "astroneer-hd-textures",
-        "title": "Astroneer Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《异星探险家》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "N/A",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_6801",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 异星探险家 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 462
-      },
-      {
-        "user": "ModEnthusiast_68",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 105
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 361420,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/361420/header.jpg",
     "trainerInfo": {
@@ -32182,19 +28787,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Raft》没有游戏自带的打字控制台，本站也没有收录它的修改器，可以看下方【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Raft does not have a built-in typing console, and no trainer is listed for it here; see the Mods tab below. Use mods offline in single-player only, and back up your saves first."
+      "zh-CN": "《Raft》没有游戏自带的打字控制台，本站目前也没有收录它的修改器和 Mod。",
+      "en": "Raft does not have a built-in typing console, and no trainer or mods are listed for it here yet."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Raft\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 木筏求生 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": false,
     "trainerHotkeys": [],
     "nexusStats": {
@@ -32204,65 +28803,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "raft-essential-framework",
-        "title": "Raft Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《木筏求生》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Raft\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Raft\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "raft-hd-textures",
-        "title": "Raft Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《木筏求生》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Raft\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_6901",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 木筏求生 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 452
-      },
-      {
-        "user": "ModEnthusiast_69",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 257
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 648800,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/648800/header.jpg",
     "trainerInfo": {},
@@ -32312,19 +28854,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Grounded》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Grounded does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
+      "zh-CN": "《Grounded》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准）。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Grounded does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options). Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Grounded\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 禁闭求生 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -32367,65 +28903,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "grounded-essential-framework",
-        "title": "Grounded Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《禁闭求生》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Grounded\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Grounded\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "grounded-hd-textures",
-        "title": "Grounded Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《禁闭求生》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Grounded\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_7001",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 禁闭求生 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 435
-      },
-      {
-        "user": "ModEnthusiast_70",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 153
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 962130,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/962130/header.jpg",
     "trainerInfo": {
@@ -32580,19 +29059,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Green Hell》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Green Hell does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
+      "zh-CN": "《Green Hell》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准）。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Green Hell does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options). Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Green Hell\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 丛林地狱 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -32635,65 +29108,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "green-hell-essential-framework",
-        "title": "Green Hell Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《丛林地狱》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Green Hell\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Green Hell\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "green-hell-hd-textures",
-        "title": "Green Hell Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《丛林地狱》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Green Hell\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_7101",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 丛林地狱 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 319
-      },
-      {
-        "user": "ModEnthusiast_71",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 136
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 815370,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/815370/header.jpg",
     "trainerInfo": {
@@ -32870,13 +29286,7 @@ window.GAMES_DATA = [
     ],
     "hasMods": true,
     "modInstallPath": "7 Days to Die\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 七日杀 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -33006,24 +29416,7 @@ window.GAMES_DATA = [
         ]
       }
     ],
-    "communityReviews": [
-      {
-        "user": "Player_7201",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 七日杀 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 257
-      },
-      {
-        "user": "ModEnthusiast_72",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 128
-      }
-    ],
+    "communityReviews": [],
     "steamAppId": 251570,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/251570/header.jpg",
     "trainerInfo": {
@@ -33268,13 +29661,7 @@ window.GAMES_DATA = [
     ],
     "hasMods": true,
     "modInstallPath": "ARK: Survival Evolved\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 方舟：生存进化 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -33433,24 +29820,7 @@ window.GAMES_DATA = [
         ]
       }
     ],
-    "communityReviews": [
-      {
-        "user": "Player_7301",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 方舟：生存进化 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 281
-      },
-      {
-        "user": "ModEnthusiast_73",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 126
-      }
-    ],
+    "communityReviews": [],
     "steamAppId": 346110,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/346110/header.jpg",
     "trainerInfo": {
@@ -33626,19 +29996,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Rust》没有游戏自带的打字控制台，本站也没有收录它的修改器，可以看下方【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Rust does not have a built-in typing console, and no trainer is listed for it here; see the Mods tab below. Use mods offline in single-player only, and back up your saves first."
+      "zh-CN": "《Rust》没有游戏自带的打字控制台，本站目前也没有收录它的修改器和 Mod。",
+      "en": "Rust does not have a built-in typing console, and no trainer or mods are listed for it here yet."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Rust\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 腐蚀 (本地自建服) 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": false,
     "trainerHotkeys": [],
     "nexusStats": {
@@ -33648,65 +30012,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "rust-single-essential-framework",
-        "title": "Rust Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《腐蚀 (本地自建服)》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Rust\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Rust\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "rust-single-hd-textures",
-        "title": "Rust Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《腐蚀 (本地自建服)》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Rust\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_7401",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 腐蚀 (本地自建服) 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 291
-      },
-      {
-        "user": "ModEnthusiast_74",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 87
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 252490,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/252490/header.jpg",
     "trainerInfo": {},
@@ -33760,19 +30067,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Conan Exiles》没有游戏自带的打字控制台，本站也没有收录它的修改器，可以看下方【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Conan Exiles does not have a built-in typing console, and no trainer is listed for it here; see the Mods tab below. Use mods offline in single-player only, and back up your saves first."
+      "zh-CN": "《Conan Exiles》没有游戏自带的打字控制台，本站目前也没有收录它的修改器和 Mod。",
+      "en": "Conan Exiles does not have a built-in typing console, and no trainer or mods are listed for it here yet."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Conan Exiles\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 流放者柯南 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": false,
     "trainerHotkeys": [],
     "nexusStats": {
@@ -33782,65 +30083,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "conan-exiles-essential-framework",
-        "title": "Conan Exiles Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《流放者柯南》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Conan Exiles\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Conan Exiles\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "conan-exiles-hd-textures",
-        "title": "Conan Exiles Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《流放者柯南》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Conan Exiles\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_7501",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 流放者柯南 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 295
-      },
-      {
-        "user": "ModEnthusiast_75",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 208
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 440900,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/440900/header.jpg",
     "trainerInfo": {},
@@ -33887,8 +30131,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Medieval Dynasty》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Medieval Dynasty does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
+      "zh-CN": "《Medieval Dynasty》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准）。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Medieval Dynasty does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options). Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": false,
@@ -33936,65 +30180,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "medieval-dynasty-essential-framework",
-        "title": "Medieval Dynasty Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《中世纪王朝》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "N/A",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Medieval Dynasty\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "medieval-dynasty-hd-textures",
-        "title": "Medieval Dynasty Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《中世纪王朝》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "N/A",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_7601",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 中世纪王朝 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 463
-      },
-      {
-        "user": "ModEnthusiast_76",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 135
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 1129580,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1129580/header.jpg",
     "trainerInfo": {
@@ -34123,19 +30310,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Kenshi》没有游戏自带的打字控制台，本站也没有收录它的修改器，可以看下方【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Kenshi does not have a built-in typing console, and no trainer is listed for it here; see the Mods tab below. Use mods offline in single-player only, and back up your saves first."
+      "zh-CN": "《Kenshi》没有游戏自带的打字控制台，本站目前也没有收录它的修改器和 Mod。",
+      "en": "Kenshi does not have a built-in typing console, and no trainer or mods are listed for it here yet."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Kenshi\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 剑士 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": false,
     "trainerHotkeys": [],
     "nexusStats": {
@@ -34145,65 +30326,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "kenshi-essential-framework",
-        "title": "Kenshi Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《剑士》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Kenshi\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Kenshi\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "kenshi-hd-textures",
-        "title": "Kenshi Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《剑士》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Kenshi\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_7701",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 剑士 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 251
-      },
-      {
-        "user": "ModEnthusiast_77",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 179
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 233860,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/233860/header.jpg",
     "trainerInfo": {},
@@ -34288,13 +30412,7 @@ window.GAMES_DATA = [
     ],
     "hasMods": true,
     "modInstallPath": "The Sims 4\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 模拟人生 4 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": false,
     "trainerHotkeys": [],
     "nexusStats": {
@@ -34468,24 +30586,7 @@ window.GAMES_DATA = [
         ]
       }
     ],
-    "communityReviews": [
-      {
-        "user": "Player_7801",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 模拟人生 4 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 451
-      },
-      {
-        "user": "ModEnthusiast_78",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 138
-      }
-    ],
+    "communityReviews": [],
     "steamAppId": 1222670,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1222670/header.jpg",
     "trainerInfo": {},
@@ -34532,19 +30633,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Planet Zoo》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Planet Zoo does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
+      "zh-CN": "《Planet Zoo》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准）。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Planet Zoo does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options). Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Planet Zoo\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 动物园之星 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -34583,65 +30678,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "planet-zoo-essential-framework",
-        "title": "Planet Zoo Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《动物园之星》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Planet Zoo\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Planet Zoo\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "planet-zoo-hd-textures",
-        "title": "Planet Zoo Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《动物园之星》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Planet Zoo\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_7901",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 动物园之星 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 253
-      },
-      {
-        "user": "ModEnthusiast_79",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 206
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 703080,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/703080/header.jpg",
     "trainerInfo": {
@@ -34751,19 +30789,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Jurassic World Evolution 2》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Jurassic World Evolution 2 does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
+      "zh-CN": "《Jurassic World Evolution 2》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准）。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Jurassic World Evolution 2 does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options). Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Jurassic World Evolution 2\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 侏罗纪世界：进化 2 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -34806,65 +30838,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "jurassic-world-evolution-2-essential-framework",
-        "title": "Jurassic World Evolution 2 Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《侏罗纪世界：进化 2》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Jurassic World Evolution 2\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Jurassic World Evolution 2\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "jurassic-world-evolution-2-hd-textures",
-        "title": "Jurassic World Evolution 2 Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《侏罗纪世界：进化 2》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Jurassic World Evolution 2\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_8001",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 侏罗纪世界：进化 2 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 314
-      },
-      {
-        "user": "ModEnthusiast_80",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 258
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 1244460,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1244460/header.jpg",
     "trainerInfo": {
@@ -35041,13 +31016,7 @@ window.GAMES_DATA = [
     ],
     "hasMods": true,
     "modInstallPath": "Euro Truck Simulator 2\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 欧洲卡车模拟 2 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": false,
     "trainerHotkeys": [],
     "nexusStats": {
@@ -35144,24 +31113,7 @@ window.GAMES_DATA = [
         ]
       }
     ],
-    "communityReviews": [
-      {
-        "user": "Player_8101",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 欧洲卡车模拟 2 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 298
-      },
-      {
-        "user": "ModEnthusiast_81",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 193
-      }
-    ],
+    "communityReviews": [],
     "steamAppId": 227300,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/227300/header.jpg",
     "trainerInfo": {},
@@ -35208,19 +31160,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《SnowRunner》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "SnowRunner does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
+      "zh-CN": "《SnowRunner》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准）。只在单机离线时用，用之前先手动备份存档。",
+      "en": "SnowRunner does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options). Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "SnowRunner\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 雪地奔驰 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -35263,65 +31209,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "snowrunner-essential-framework",
-        "title": "SnowRunner Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《雪地奔驰》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "SnowRunner\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\SnowRunner\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "snowrunner-hd-textures",
-        "title": "SnowRunner Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《雪地奔驰》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "SnowRunner\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_8201",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 雪地奔驰 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 183
-      },
-      {
-        "user": "ModEnthusiast_82",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 140
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 1465360,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1465360/header.jpg",
     "trainerInfo": {
@@ -35434,8 +31323,8 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Forza Horizon 5》没有游戏自带的打字控制台，本站也没有收录它的修改器，可以看下方【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Forza Horizon 5 does not have a built-in typing console, and no trainer is listed for it here; see the Mods tab below. Use mods offline in single-player only, and back up your saves first."
+      "zh-CN": "《Forza Horizon 5》没有游戏自带的打字控制台，本站目前也没有收录它的修改器和 Mod。",
+      "en": "Forza Horizon 5 does not have a built-in typing console, and no trainer or mods are listed for it here yet."
     },
     "popularCommands": [],
     "hasMods": false,
@@ -35450,65 +31339,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "forza-horizon-5-essential-framework",
-        "title": "Forza Horizon 5 Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《极限竞速：地平线 5》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "N/A",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Forza Horizon 5\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "forza-horizon-5-hd-textures",
-        "title": "Forza Horizon 5 Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《极限竞速：地平线 5》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "N/A",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_8301",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 极限竞速：地平线 5 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 437
-      },
-      {
-        "user": "ModEnthusiast_83",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 165
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 1551360,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1551360/header.jpg",
     "trainerInfo": {},
@@ -35552,19 +31384,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Assetto Corsa》没有游戏自带的打字控制台，本站也没有收录它的修改器，可以看下方【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Assetto Corsa does not have a built-in typing console, and no trainer is listed for it here; see the Mods tab below. Use mods offline in single-player only, and back up your saves first."
+      "zh-CN": "《Assetto Corsa》没有游戏自带的打字控制台，本站目前也没有收录它的修改器和 Mod。",
+      "en": "Assetto Corsa does not have a built-in typing console, and no trainer or mods are listed for it here yet."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Assetto Corsa\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 神力科莎 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": false,
     "trainerHotkeys": [],
     "nexusStats": {
@@ -35574,65 +31400,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "assetto-corsa-essential-framework",
-        "title": "Assetto Corsa Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《神力科莎》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Assetto Corsa\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Assetto Corsa\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "assetto-corsa-hd-textures",
-        "title": "Assetto Corsa Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《神力科莎》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Assetto Corsa\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_8401",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 神力科莎 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 364
-      },
-      {
-        "user": "ModEnthusiast_84",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 297
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 244210,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/244210/header.jpg",
     "trainerInfo": {},
@@ -35721,13 +31490,7 @@ window.GAMES_DATA = [
     ],
     "hasMods": true,
     "modInstallPath": "BeamNG.drive\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 BeamNG.drive 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": false,
     "trainerHotkeys": [],
     "nexusStats": {
@@ -35812,24 +31575,7 @@ window.GAMES_DATA = [
         ]
       }
     ],
-    "communityReviews": [
-      {
-        "user": "Player_8501",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 BeamNG.drive 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 244
-      },
-      {
-        "user": "ModEnthusiast_85",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 140
-      }
-    ],
+    "communityReviews": [],
     "steamAppId": 284160,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/284160/header.jpg",
     "trainerInfo": {},
@@ -35876,19 +31622,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Persona 5 Royal》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Persona 5 Royal does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
+      "zh-CN": "《Persona 5 Royal》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准）。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Persona 5 Royal does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options). Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Persona 5 Royal\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 女神异闻录 5 皇家版 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -35931,65 +31671,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "persona-5-royal-essential-framework",
-        "title": "Persona 5 Royal Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《女神异闻录 5 皇家版》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Persona 5 Royal\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Persona 5 Royal\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "persona-5-royal-hd-textures",
-        "title": "Persona 5 Royal Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《女神异闻录 5 皇家版》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Persona 5 Royal\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_8601",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 女神异闻录 5 皇家版 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 459
-      },
-      {
-        "user": "ModEnthusiast_86",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 181
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 1687950,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1687950/header.jpg",
     "trainerInfo": {
@@ -36211,19 +31894,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Persona 3 Reload》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Persona 3 Reload does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
+      "zh-CN": "《Persona 3 Reload》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准）。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Persona 3 Reload does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options). Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Persona 3 Reload\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 女神异闻录 3 重制版 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -36266,65 +31943,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "persona-3-reload-essential-framework",
-        "title": "Persona 3 Reload Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《女神异闻录 3 重制版》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Persona 3 Reload\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Persona 3 Reload\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "persona-3-reload-hd-textures",
-        "title": "Persona 3 Reload Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《女神异闻录 3 重制版》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Persona 3 Reload\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_8701",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 女神异闻录 3 重制版 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 223
-      },
-      {
-        "user": "ModEnthusiast_87",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 112
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 2161700,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/2161700/header.jpg",
     "trainerInfo": {
@@ -36551,19 +32171,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Final Fantasy VII Remake Intergrade》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Final Fantasy VII Remake Intergrade does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
+      "zh-CN": "《Final Fantasy VII Remake Intergrade》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准）。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Final Fantasy VII Remake Intergrade does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options). Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Final Fantasy VII Remake Intergrade\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 最终幻想 7 重制版 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -36606,65 +32220,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "ff7-remake-essential-framework",
-        "title": "Final Fantasy VII Remake Intergrade Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《最终幻想 7 重制版》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Final Fantasy VII Remake Intergrade\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Final Fantasy VII Remake Intergrade\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "ff7-remake-hd-textures",
-        "title": "Final Fantasy VII Remake Intergrade Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《最终幻想 7 重制版》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Final Fantasy VII Remake Intergrade\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_8801",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 最终幻想 7 重制版 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 230
-      },
-      {
-        "user": "ModEnthusiast_88",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 274
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 1462040,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1462040/header.jpg",
     "trainerInfo": {
@@ -36845,19 +32402,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Final Fantasy XVI》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Final Fantasy XVI does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
+      "zh-CN": "《Final Fantasy XVI》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准）。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Final Fantasy XVI does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options). Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Final Fantasy XVI\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 最终幻想 16 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -36900,65 +32451,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "ff16-essential-framework",
-        "title": "Final Fantasy XVI Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《最终幻想 16》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Final Fantasy XVI\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Final Fantasy XVI\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "ff16-hd-textures",
-        "title": "Final Fantasy XVI Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《最终幻想 16》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Final Fantasy XVI\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_8901",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 最终幻想 16 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 152
-      },
-      {
-        "user": "ModEnthusiast_89",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 303
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 2515020,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/2515020/header.jpg",
     "trainerInfo": {
@@ -37146,19 +32640,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《NieR:Automata》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "NieR:Automata does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
+      "zh-CN": "《NieR:Automata》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准）。只在单机离线时用，用之前先手动备份存档。",
+      "en": "NieR:Automata does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options). Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "NieR:Automata\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 尼尔：机械纪元 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -37201,65 +32689,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "nier-automata-essential-framework",
-        "title": "NieR:Automata Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《尼尔：机械纪元》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "NieR:Automata\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\NieR:Automata\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "nier-automata-hd-textures",
-        "title": "NieR:Automata Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《尼尔：机械纪元》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "NieR:Automata\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_9001",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 尼尔：机械纪元 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 247
-      },
-      {
-        "user": "ModEnthusiast_90",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 150
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 524220,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/524220/header.jpg",
     "trainerInfo": {
@@ -37419,19 +32850,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Tales of Arise》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Tales of Arise does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
+      "zh-CN": "《Tales of Arise》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准）。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Tales of Arise does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options). Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Tales of Arise\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 破晓传说 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -37474,65 +32899,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "tales-of-arise-essential-framework",
-        "title": "Tales of Arise Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《破晓传说》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Tales of Arise\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Tales of Arise\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "tales-of-arise-hd-textures",
-        "title": "Tales of Arise Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《破晓传说》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Tales of Arise\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_9101",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 破晓传说 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 407
-      },
-      {
-        "user": "ModEnthusiast_91",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 85
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 740130,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/740130/header.jpg",
     "trainerInfo": {
@@ -37732,19 +33100,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Like a Dragon: Infinite Wealth》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Like a Dragon: Infinite Wealth does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
+      "zh-CN": "《Like a Dragon: Infinite Wealth》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准）。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Like a Dragon: Infinite Wealth does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options). Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Like a Dragon: Infinite Wealth\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 人中之龙 8 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -37787,65 +33149,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "like-a-dragon-infinite-wealth-essential-framework",
-        "title": "Like a Dragon: Infinite Wealth Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《人中之龙 8》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Like a Dragon: Infinite Wealth\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Like a Dragon: Infinite Wealth\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "like-a-dragon-infinite-wealth-hd-textures",
-        "title": "Like a Dragon: Infinite Wealth Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《人中之龙 8》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Like a Dragon: Infinite Wealth\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_9201",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 人中之龙 8 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 279
-      },
-      {
-        "user": "ModEnthusiast_92",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 202
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 2072450,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/2072450/header.jpg",
     "trainerInfo": {
@@ -38188,19 +33493,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Yakuza: Like a Dragon》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Yakuza: Like a Dragon does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
+      "zh-CN": "《Yakuza: Like a Dragon》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准）。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Yakuza: Like a Dragon does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options). Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Yakuza: Like a Dragon\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 人中之龙 7 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -38243,65 +33542,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "yakuza-like-a-dragon-essential-framework",
-        "title": "Yakuza: Like a Dragon Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《人中之龙 7》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Yakuza: Like a Dragon\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Yakuza: Like a Dragon\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "yakuza-like-a-dragon-hd-textures",
-        "title": "Yakuza: Like a Dragon Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《人中之龙 7》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Yakuza: Like a Dragon\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_9301",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 人中之龙 7 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 470
-      },
-      {
-        "user": "ModEnthusiast_93",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 95
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 1235140,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1235140/header.jpg",
     "trainerInfo": {
@@ -38507,19 +33749,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Star Wars Jedi: Survivor》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Star Wars Jedi: Survivor does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
+      "zh-CN": "《Star Wars Jedi: Survivor》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准）。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Star Wars Jedi: Survivor does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options). Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Star Wars Jedi: Survivor\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 星球大战绝地：幸存者 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -38562,65 +33798,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "star-wars-jedi-survivor-essential-framework",
-        "title": "Star Wars Jedi: Survivor Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《星球大战绝地：幸存者》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Star Wars Jedi: Survivor\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Star Wars Jedi: Survivor\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "star-wars-jedi-survivor-hd-textures",
-        "title": "Star Wars Jedi: Survivor Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《星球大战绝地：幸存者》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Star Wars Jedi: Survivor\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_9401",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 星球大战绝地：幸存者 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 361
-      },
-      {
-        "user": "ModEnthusiast_94",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 254
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 1774580,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1774580/header.jpg",
     "trainerInfo": {
@@ -38784,19 +33963,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Star Wars Jedi: Fallen Order》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Star Wars Jedi: Fallen Order does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
+      "zh-CN": "《Star Wars Jedi: Fallen Order》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准）。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Star Wars Jedi: Fallen Order does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options). Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Star Wars Jedi: Fallen Order\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 星球大战绝地：陨落的武士团 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -38835,65 +34008,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "star-wars-jedi-fallen-order-essential-framework",
-        "title": "Star Wars Jedi: Fallen Order Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《星球大战绝地：陨落的武士团》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Star Wars Jedi: Fallen Order\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Star Wars Jedi: Fallen Order\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "star-wars-jedi-fallen-order-hd-textures",
-        "title": "Star Wars Jedi: Fallen Order Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《星球大战绝地：陨落的武士团》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Star Wars Jedi: Fallen Order\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_9501",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 星球大战绝地：陨落的武士团 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 140
-      },
-      {
-        "user": "ModEnthusiast_95",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 250
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 1172380,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1172380/header.jpg",
     "trainerInfo": {
@@ -38992,19 +34108,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Dead Space Remake》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Dead Space Remake does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
+      "zh-CN": "《Dead Space Remake》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准）。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Dead Space Remake does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options). Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Dead Space Remake\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 死亡空间：重制版 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -39047,65 +34157,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "dead-space-remake-essential-framework",
-        "title": "Dead Space Remake Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《死亡空间：重制版》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Dead Space Remake\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Dead Space Remake\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "dead-space-remake-hd-textures",
-        "title": "Dead Space Remake Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《死亡空间：重制版》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Dead Space Remake\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_9601",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 死亡空间：重制版 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 472
-      },
-      {
-        "user": "ModEnthusiast_96",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 209
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 1693980,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1693980/header.jpg",
     "trainerInfo": {
@@ -39236,19 +34289,13 @@ window.GAMES_DATA = [
     "hasConsole": false,
     "consoleShortcut": "无原生打字控制台 (请使用纯净修改器或离线前置)",
     "consoleEnableGuide": {
-      "zh-CN": "《Dead Cells》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准），或【精选 MOD】专区。只在单机离线时用，用之前先手动备份存档。",
-      "en": "Dead Cells does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options) or the Mods tab. Use it offline in single-player only, and back up your saves first."
+      "zh-CN": "《Dead Cells》没有游戏自带的打字控制台。想改数值可以看下方【修改器】专区（风灵月影 FLiNG 的第三方修改器，功能以修改器页面为准）。只在单机离线时用，用之前先手动备份存档。",
+      "en": "Dead Cells does not have a built-in typing console. See the Trainer tab below (a third-party FLiNG trainer; check its page for the actual options). Use it offline in single-player only, and back up your saves first."
     },
     "popularCommands": [],
     "hasMods": true,
     "modInstallPath": "Dead Cells\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 死亡细胞 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -39291,65 +34338,8 @@ window.GAMES_DATA = [
       "latestPatch": "未记录"
     },
     "consoleCategories": [],
-    "curatedMods": [
-      {
-        "id": "dead-cells-essential-framework",
-        "title": "Dead Cells Essential Core Framework & Bugfix Patch",
-        "author": "NexusDevTeam",
-        "version": "v2.5.0",
-        "size": "12.4 MB",
-        "downloads": "4.8M",
-        "endorsements": "95K",
-        "category": "必备优化补丁 (Must-Have QoL)",
-        "desc": "针对《死亡细胞》的社区高分修复整合包，优化原生掉帧、跳过启动动画并支持 21:9 带鱼屏原生渲染。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Dead Cells\\Mods",
-        "installSteps": [
-          "1. 打开 Steam 库中游戏安装目录：steamapps\\common\\Dead Cells\\；",
-          "2. 将压缩包解压直接覆盖放入 Mods 或根目录；",
-          "3. 正常启动游戏即可自动生效。"
-        ]
-      },
-      {
-        "id": "dead-cells-hd-textures",
-        "title": "Dead Cells Ultra HD 4K Overhaul Texture Pack",
-        "author": "VisualMaster",
-        "version": "v1.6.0",
-        "size": "480 MB",
-        "downloads": "2.2M",
-        "endorsements": "48K",
-        "category": "画质材质增强 (Visuals)",
-        "desc": "重塑《死亡细胞》地貌与人物服装纹理细节，大幅提升光照与反射质感。",
-        "dependencies": [
-          "None"
-        ],
-        "installPath": "Dead Cells\\Mods",
-        "installSteps": [
-          "1. 将下载的材质包文件解压覆盖入游戏安装目录；",
-          "2. 进入游戏图像设置将材质质量调节至最高 Ultra。"
-        ]
-      }
-    ],
-    "communityReviews": [
-      {
-        "user": "Player_9701",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 死亡细胞 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 153
-      },
-      {
-        "user": "ModEnthusiast_97",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 163
-      }
-    ],
+    "curatedMods": [],
+    "communityReviews": [],
     "steamAppId": 588650,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/588650/header.jpg",
     "trainerInfo": {
@@ -39516,13 +34506,7 @@ window.GAMES_DATA = [
     ],
     "hasMods": true,
     "modInstallPath": "Hades\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 黑帝斯 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -39628,24 +34612,7 @@ window.GAMES_DATA = [
         ]
       }
     ],
-    "communityReviews": [
-      {
-        "user": "Player_9801",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 黑帝斯 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 366
-      },
-      {
-        "user": "ModEnthusiast_98",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 150
-      }
-    ],
+    "communityReviews": [],
     "steamAppId": 1145360,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1145360/header.jpg",
     "trainerInfo": {
@@ -39828,13 +34795,7 @@ window.GAMES_DATA = [
     ],
     "hasMods": true,
     "modInstallPath": "Hollow Knight\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 空洞骑士 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": true,
     "trainerHotkeys": [
       {
@@ -39964,24 +34925,7 @@ window.GAMES_DATA = [
         ]
       }
     ],
-    "communityReviews": [
-      {
-        "user": "Player_9901",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 空洞骑士 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 465
-      },
-      {
-        "user": "ModEnthusiast_99",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 169
-      }
-    ],
+    "communityReviews": [],
     "steamAppId": 367520,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/367520/header.jpg",
     "trainerInfo": {
@@ -40146,13 +35090,7 @@ window.GAMES_DATA = [
     ],
     "hasMods": true,
     "modInstallPath": "Slay the Spire\\Mods",
-    "mustHaveMods": [
-      {
-        "name": "Community Essential Patch / QoL",
-        "category": "QoL & Fixes",
-        "desc": "针对 杀戮尖塔 的社区必备体验与性能优化补丁包"
-      }
-    ],
+    "mustHaveMods": [],
     "hasTrainer": false,
     "trainerHotkeys": [],
     "nexusStats": {
@@ -40269,24 +35207,7 @@ window.GAMES_DATA = [
         ]
       }
     ],
-    "communityReviews": [
-      {
-        "user": "Player_10001",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-14",
-        "title": "安装指南太清晰了，小白一遍过！",
-        "content": "之前找 杀戮尖塔 的安装路径在网上翻了几十个帖子全对不上，本站直接给出了 Steam 确切的文件夹层级，一键复制路径直接搞定，赞！",
-        "upvotes": 450
-      },
-      {
-        "user": "ModEnthusiast_100",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-08",
-        "title": "纯净单文件修改器点赞",
-        "content": "不用注册各种会员，没有全家桶捆绑，按键映射表一目了然，卡关时救大命了！",
-        "upvotes": 165
-      }
-    ],
+    "communityReviews": [],
     "steamAppId": 646570,
     "headerImage": "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/646570/header.jpg",
     "trainerInfo": {},
@@ -40333,6 +35254,7 @@ window.TRANSLATIONS_DATA = {
     "tabMods": "📦 精选 MOD",
     "tabTrainers": "⚡ 纯净修改器",
     "tabReviews": "💬 玩家讨论与排错",
+    "reviewsEmpty": "还没有玩家评价",
     "tabSocialCards": "🎨 官方 5 联卡片",
     "consoleStatusAvailable": "官方控制台可用",
     "consoleStatusNone": "官方无内置控制台",
@@ -40668,6 +35590,7 @@ window.TRANSLATIONS_DATA = {
     "tabMods": "📦 Curated Mods & Guides",
     "tabTrainers": "⚡ Trainers & Hotkeys",
     "tabReviews": "💬 Player Reviews & Fixes",
+    "reviewsEmpty": "No player reviews yet",
     "tabSocialCards": "🎨 5-Card Matrix Preview",
     "consoleStatusAvailable": "Official Console Supported",
     "consoleStatusNone": "No official console (use Mods/Trainers)",
@@ -41003,6 +35926,7 @@ window.TRANSLATIONS_DATA = {
     "tabMods": "📦 精選 MOD",
     "tabTrainers": "⚡ 純淨修改器",
     "tabReviews": "💬 玩家討論與排錯",
+    "reviewsEmpty": "還沒有玩家評價",
     "tabSocialCards": "🎨 官方 5 聯卡片",
     "consoleStatusAvailable": "官方控制台可用",
     "consoleStatusNone": "官方無內建控制台",
@@ -41338,6 +36262,7 @@ window.TRANSLATIONS_DATA = {
     "tabMods": "📦 厳選MOD＆ガイド",
     "tabTrainers": "⚡ チートツール＆ホットキー",
     "tabReviews": "💬 レビュー＆不具合対策",
+    "reviewsEmpty": "まだプレイヤーのレビューはありません",
     "tabSocialCards": "🎨 公式5連カード",
     "consoleStatusAvailable": "公式コンソール利用可能",
     "consoleStatusNone": "公式コンソール非搭載 (MOD/チート推奨)",
@@ -41673,6 +36598,7 @@ window.TRANSLATIONS_DATA = {
     "tabMods": "📦 엄선 MOD 및 가이드",
     "tabTrainers": "⚡ 트레이너 및 단축키",
     "tabReviews": "💬 유저 토론 및 문제 해결",
+    "reviewsEmpty": "아직 플레이어 리뷰가 없습니다",
     "tabSocialCards": "🎨 공식 5연속 카드",
     "consoleStatusAvailable": "공식 콘솔 사용 가능",
     "consoleStatusNone": "공식 콘솔 없음 (MOD/트레이너 사용)",
@@ -42008,6 +36934,7 @@ window.TRANSLATIONS_DATA = {
     "tabMods": "📦 Избранные моды",
     "tabTrainers": "⚡ Трейнеры и клавиши",
     "tabReviews": "💬 Обсуждения и фиксы",
+    "reviewsEmpty": "Отзывов игроков пока нет",
     "tabSocialCards": "🎨 5 карточек-гайдов",
     "consoleStatusAvailable": "Официальная консоль доступна",
     "consoleStatusNone": "Консоли нет (используйте моды/трейнеры)",
@@ -42343,6 +37270,7 @@ window.TRANSLATIONS_DATA = {
     "tabMods": "📦 Ausgewählte Mods & Guides",
     "tabTrainers": "⚡ Trainer & Hotkeys",
     "tabReviews": "💬 Diskussionen & Fehlerbehebung",
+    "reviewsEmpty": "Noch keine Spielerbewertungen",
     "tabSocialCards": "🎨 5-Karten Matrix",
     "consoleStatusAvailable": "Offizielle Konsole verfügbar",
     "consoleStatusNone": "Keine offizielle Konsole (Mods/Trainer nutzen)",
@@ -42678,6 +37606,7 @@ window.TRANSLATIONS_DATA = {
     "tabMods": "📦 Mods Destacados y Guías",
     "tabTrainers": "⚡ Trainers y Teclas Rápidas",
     "tabReviews": "💬 Reseñas y Soluciones",
+    "reviewsEmpty": "Aún no hay reseñas de jugadores",
     "tabSocialCards": "🎨 Matriz de 5 tarjetas",
     "consoleStatusAvailable": "Consola Oficial Disponible",
     "consoleStatusNone": "Sin consola oficial (usar Mods/Trainers)",

@@ -2,21 +2,18 @@
 # -*- coding: utf-8 -*-
 """
 scripts/enrich_rank5_7_flagships.py
-L-MOD Vault 旗舰游戏全息深度采掘注入引擎 (Milestone 3)
-严格对齐 game-vault-enricher v2.5 全部 Schema 规范：
-- game_command.schema.json
-- game_full.schema.json
-- trainer_info.schema.json
-- curated_mod.schema.json
+Console, command and curated-mod content for ranks 5-7
+(Elden Ring, Skyrim Special Edition, Fallout 4).
+
+Writes only the fields in OWNED_FIELDS of those three games, through gamedata_guard:
+the master data must exist, radar and trainer fields are never written (trainer data
+comes from fling_trainer_sync.py), and in public/data.js only the GAMES_DATA segment
+changes (TRANSLATIONS_DATA is left alone).
+
+Usage: python3 scripts/enrich_rank5_7_flagships.py [--dry-run]
 """
 
-import json
-import os
-import sys
-
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-JSON_PATH = os.path.join(BASE_DIR, "src/data/games_top100.json")
-JS_PATH = os.path.join(BASE_DIR, "public/data.js")
+from gamedata_guard import write_owned_fields
 
 # ==============================================================================
 # RANK 5: 艾尔登法环 (Elden Ring)
@@ -25,8 +22,8 @@ ELDEN_RING_DATA = {
     "hasConsole": True,
     "consoleShortcut": "无原生打字终端 (采用 ModEngine2 离线引导 + The Grand Archives CT 表 / FLiNG 修改器)",
     "consoleEnableGuide": {
-        "zh-CN": "【100%安全离线防封指南】\n1. 方案一 (ModEngine2 免修改文件)：解压 ModEngine2，将模组放入 /mod 目录，直接双击 launchmod_eldenring.bat 启动，该启动器会自动拦截 EAC 并进入纯净离线环境，绝无联机封号风险！\n2. 方案二 (替换引导)：进入游戏根目录 Game/，将原版 start_protected_game.exe 重命名为 .bak，将 eldenring.exe 复制一份并重命名为 start_protected_game.exe，新建文本文件 steam_appid.txt 写入 1245620，启动即可离线畅玩。\n3. 方案三 (无缝联机 Seamless Co-op)：该模组使用独立 .co2 存档与第三方离线 P2P 协议，与官方服务器完全隔离，支持多人联机无封禁！",
-        "en": "EAC Offline Bypass & ModEngine2 Launch Guide: Launch via launchmod_eldenring.bat or rename start_protected_game.exe and place steam_appid.txt (1245620) to safely bypass Easy Anti-Cheat in offline mode without ban risk."
+        "zh-CN": "【离线启动指南（只在单机离线用）】\n1. 方案一 (ModEngine2 免修改文件)：解压 ModEngine2，将模组放入 /mod 目录，直接双击 launchmod_eldenring.bat 启动，这样启动不加载 EAC，只能离线玩；别带着改过的游戏或存档上线。\n2. 方案二 (替换引导)：进入游戏根目录 Game/，将原版 start_protected_game.exe 重命名为 .bak，将 eldenring.exe 复制一份并重命名为 start_protected_game.exe，新建文本文件 steam_appid.txt 写入 1245620，启动即可离线畅玩。\n3. 方案三 (无缝联机 Seamless Co-op)：该模组使用独立的 .co2 存档，走自己的联机方式、不连官方匹配服务器。它是第三方 Mod，会不会被封号没有人能担保。",
+        "en": "EAC Offline Bypass & ModEngine2 Launch Guide: Launch via launchmod_eldenring.bat or rename start_protected_game.exe and place steam_appid.txt (1245620) to start without Easy Anti-Cheat (offline only). Never take a modded game or save online; nothing here can guarantee you won't be banned."
     },
     "popularCommands": [
         "Num 1",
@@ -36,52 +33,6 @@ ELDEN_RING_DATA = {
         "Ctrl+Num 1",
         "Num 9"
     ],
-    "hasTrainer": True,
-    "trainerInfo": {
-        "author": "风灵月影 (FLiNG)",
-        "version": "v1.14+ (Shadow of the Erdtree DLC 对齐)",
-        "officialUrl": "https://flingtrainer.com/trainer/elden-ring-trainer/",
-        "cleanMirrorUrl": "https://github.com/l-mod-vault/mirrors/releases/download/v1.14/Elden_Ring_v1.14_Plus_34_Trainer.zip",
-        "safeVerification": {
-            "isCleanVerified": True,
-            "hasBundledAds": False,
-            "virusTotalRatio": "0/72 Clean (零误报极客纯净版)",
-            "md5CheckSum": "8f4a1c7e9b0d2e3f5a6b7c8d9e0f1a2b",
-            "powershellExclusionCmd": "Add-MpPreference -ExclusionProcess 'Elden Ring Trainer.exe'",
-            "troubleshootSteps": [
-                "必须先通过 launchmod_eldenring.bat 或 EAC 离线替换引导启动游戏，进入主菜单后再运行修改器",
-                "若 Windows Defender 拦截报毒，请以管理员身份运行上方 PowerShell 白名单命令",
-                "关闭游戏后若需重返线上联机，务必删除作弊非法生成的越级强化道具与测试装备"
-            ]
-        },
-        "hotkeysCategorized": [
-            {
-                "category": "🛡️ 核心生存与战斗无敌",
-                "items": [
-                    {"key": "Num 1", "action": "无敌模式 (God Mode / 免受一切伤害与异常状态)"},
-                    {"key": "Num 2", "action": "无限生命 (Infinite HP)"},
-                    {"key": "Num 3", "action": "无限专注值/法力 (Infinite FP - 战技与魔法无限释放)"},
-                    {"key": "Num 4", "action": "无限精力/耐力 (Infinite Stamina - 翻滚冲刺不减)"},
-                    {"key": "Num 5", "action": "零重量 (Zero Weight - 随时处于轻盈翻滚状态)"},
-                    {"key": "Num 6", "action": "装备耐久度不减 (Weapon Durability)"},
-                    {"key": "Num 7", "action": "100% 掉落率 (100% Item Drop Rate)"},
-                    {"key": "Num 8", "action": "幽影树庇护点数不减 (Shadow Realm Blessing Edit)"}
-                ]
-            },
-            {
-                "category": "⚡ 战斗伤害与攻防调校",
-                "items": [
-                    {"key": "Num 9", "action": "一击削韧倒地 (Super Stance Damage / 处决破韧)"},
-                    {"key": "Num 0", "action": "超级伤害/一击必杀 (One Hit Kill)"},
-                    {"key": "Num .", "action": "绝对防御免伤 (Defense Multiplier)"},
-                    {"key": "Ctrl+Num 1", "action": "编辑持有的卢恩货币 (Edit Runes Amount)"},
-                    {"key": "Ctrl+Num 2", "action": "死亡不掉落卢恩 (Runes Won't Drop on Death)"},
-                    {"key": "Ctrl+Num 3", "action": "游戏全局慢动作 0.3x 识破 (Slomo 0.3x Reflex)"},
-                    {"key": "Ctrl+Num 4", "action": "游戏全局超速奔跑 1.5x (Super Speed Exploration)"}
-                ]
-            }
-        ]
-    },
     "hasMods": True,
     "modInstallPath": "<SteamLibrary>/steamapps/common/ELDEN RING/Game/mod/",
     "curatedMods": [
@@ -94,7 +45,7 @@ ELDEN_RING_DATA = {
             "downloads": "4,200,000+",
             "endorsements": "180,000+",
             "category": "多人联机与系统大修",
-            "desc": "魂系联机体验天花板！彻底移除打完Boss被强行遣返的联机限制，全图无空气墙无缝跑图、死亡围观复活、共乘托雷特灵马、独立 .co2 存档绝对不连官方服务器，100% 零封号！",
+            "desc": "魂系联机体验天花板！彻底移除打完Boss被强行遣返的联机限制，全图无空气墙无缝跑图、死亡围观复活、共乘托雷特灵马、用独立的 .co2 存档、不连官方匹配服务器（第三方 Mod，会不会被封号没有人能担保）。",
             "dependencies": ["None (自带独立引导器)"],
             "installPath": "<GameRoot>/Game/ersc/",
             "installSteps": [
@@ -102,7 +53,10 @@ ELDEN_RING_DATA = {
                 "将上述文件直接复制进游戏目录 Game/ 下",
                 "用记事本打开 Game/ersc/ersc_settings.ini，在 cooppassword = 后面输入你和小伙伴约定的联机密码",
                 "双击 launch_elden_ring_seamlesscoop.exe 启动，进入游戏后使用道具包里的【小人偶】即可无缝联机！"
-            ]
+            ],
+            "downloadUrl": "https://github.com/LukeYui/EldenRingSeamlessCoopRelease/releases/download/v1.8.6/SeamlessCoop_v1.8.6.zip",
+            "downloadFilename": "SeamlessCoop_v1.8.6.zip",
+            "isDirect": True
         },
         {
             "id": "mod_modengine2",
@@ -113,20 +67,23 @@ ELDEN_RING_DATA = {
             "downloads": "3,800,000+",
             "endorsements": "150,000+",
             "category": "底层框架与核心前置",
-            "desc": "法环挂载全类型 Mod 的核心基石！免解包直接挂载 .dcx, .param, regulation.bin 等资源，自带 EAC 离线安全启动引导，绝不篡改游戏原版文件。",
+            "desc": "法环挂载全类型 Mod 的核心基石！免解包直接挂载 .dcx, .param, regulation.bin 等资源，自带不加载 EAC 的启动方式（只能离线玩），不改游戏原版文件。",
             "dependencies": ["Microsoft Visual C++ 2015-2022 Redistributable"],
             "installPath": "<GameRoot>/ModEngine2/",
             "installSteps": [
                 "解压 ModEngine2 压缩包到任意纯英文路径 (推荐放到游戏根目录下)",
                 "将下载的武器、服装或平衡性 Mod 解压后扔进 ModEngine2/mod/ 文件夹中",
-                "双击运行 launchmod_eldenring.bat 即可一键安全免封启动游戏！"
-            ]
+                "双击运行 launchmod_eldenring.bat 启动游戏（不加载 EAC，只能离线玩）。"
+            ],
+            "downloadUrl": "https://github.com/soulsmods/ModEngine2/releases/download/v2.1.0.0/ModEngine-2.1.0.0-win64.zip",
+            "downloadFilename": "ModEngine-2.1.0.0-win64.zip",
+            "isDirect": True
         },
         {
             "id": "mod_grand_archives_ct",
             "title": "The Grand Archives (TGA) 全能离线内存调试表",
             "author": "TGA Reverse Engineering Team",
-            "version": "v1.14 (Shadow of the Erdtree Ready)",
+            "version": "v1.14",
             "size": "3.5 MB",
             "downloads": "2,900,000+",
             "endorsements": "120,000+",
@@ -139,7 +96,10 @@ ELDEN_RING_DATA = {
                 "先运行 launchmod_eldenring.bat 进入游戏并载入存档",
                 "双击打开 EldenRing.CT 表，点击左上角电脑图标附着到 eldenring.exe 进程",
                 "勾选 Open 表头，展开 Scripts -> Item Gib 即可按图鉴无痛派发全套装备！"
-            ]
+            ],
+            "downloadUrl": "https://github.com/uberhalit/EldenRingFpsUnlockAndMore/releases/download/v1.1.0.0/EldenRingFpsUnlockAndMore.zip",
+            "downloadFilename": "EldenRingFpsUnlockAndMore.zip",
+            "isDirect": True
         },
         {
             "id": "mod_err_reforged",
@@ -156,7 +116,10 @@ ELDEN_RING_DATA = {
             "installSteps": [
                 "下载 ERR 安装包，将其解压覆盖至 ModEngine2/mod/ 目录下",
                 "启动 launchmod_eldenring.bat 开始全新的交界地冒险！"
-            ]
+            ],
+            "downloadUrl": "https://github.com/l-mod-vault/mirrors/releases/download/vault-mods/mod_err_reforged.zip",
+            "downloadFilename": "mod_err_reforged.zip",
+            "isDirect": True
         }
     ],
     "consoleCategories": [
@@ -169,7 +132,7 @@ ELDEN_RING_DATA = {
                     "syntax_type": "trainer_hotkey",
                     "code": "Num 1",
                     "desc": "开启后主角免疫一切物理、属性、状态异常与高空坠落致死伤害，生命条强制锁死为最大值，手残党救赎核心！",
-                    "min_version": "v1.14+ (DLC 对齐)",
+                    "min_version": "v1.14+",
                     "framework_required": "FLiNG Trainer / ModEngine2"
                 },
                 {
@@ -178,7 +141,7 @@ ELDEN_RING_DATA = {
                     "syntax_type": "trainer_hotkey",
                     "code": "Num 3",
                     "desc": "战技、骨灰召唤以及高阶法术与祷告完全不消耗任何专注值 (FP)，随时化身无限法力炮台！",
-                    "min_version": "v1.14+ (DLC 对齐)",
+                    "min_version": "v1.14+",
                     "framework_required": "FLiNG Trainer"
                 },
                 {
@@ -187,7 +150,7 @@ ELDEN_RING_DATA = {
                     "syntax_type": "trainer_hotkey",
                     "code": "Num 4",
                     "desc": "精力耐力条永远保持满格，连续翻滚闪避、重击举盾防御不会破防或消耗耐力。",
-                    "min_version": "v1.14+ (DLC 对齐)",
+                    "min_version": "v1.14+",
                     "framework_required": "FLiNG Trainer"
                 },
                 {
@@ -196,7 +159,7 @@ ELDEN_RING_DATA = {
                     "syntax_type": "trainer_hotkey",
                     "code": "Ctrl+Num 3",
                     "desc": "将全局物理与动作流速放慢至 0.3 倍速，Boss 出招前摇清晰可见，轻松掌握弹反与翻滚时机！",
-                    "min_version": "v1.14+ (DLC 对齐)",
+                    "min_version": "v1.14+",
                     "framework_required": "FLiNG Trainer"
                 },
                 {
@@ -205,7 +168,7 @@ ELDEN_RING_DATA = {
                     "syntax_type": "trainer_hotkey",
                     "code": "Num 9",
                     "desc": "主角的任何攻击将造成数十倍架势条伤害，即便是狂龙贝勒或女武神也是一击破韧跪地，尽情享受处决快感！",
-                    "min_version": "v1.14+ (DLC 对齐)",
+                    "min_version": "v1.14+",
                     "framework_required": "FLiNG Trainer"
                 },
                 {
@@ -214,7 +177,7 @@ ELDEN_RING_DATA = {
                     "syntax_type": "trainer_hotkey",
                     "code": "Num 5",
                     "desc": "将所有已穿戴防具和手持重型武器负重强制归零，无论穿多么厚重的铠甲均拥有超快轻翻滚无敌帧！",
-                    "min_version": "v1.14+ (DLC 对齐)",
+                    "min_version": "v1.14+",
                     "framework_required": "FLiNG Trainer"
                 }
             ]
@@ -228,7 +191,7 @@ ELDEN_RING_DATA = {
                     "syntax_type": "trainer_hotkey",
                     "code": "Ctrl+Num 1",
                     "desc": "向角色背囊瞬间注入 100 万点卢恩，可自由连续分配属性升级或在圆桌厅堂扫荡全部消耗品！",
-                    "min_version": "v1.14+ (DLC 对齐)",
+                    "min_version": "v1.14+",
                     "framework_required": "FLiNG Trainer"
                 },
                 {
@@ -237,7 +200,7 @@ ELDEN_RING_DATA = {
                     "syntax_type": "trainer_hotkey",
                     "code": "Ctrl+Num 2",
                     "desc": "角色阵亡后身上携带的卢恩完整保留，彻底告别在深坑和悬崖边捡魂翻车的折磨体验。",
-                    "min_version": "v1.14+ (DLC 对齐)",
+                    "min_version": "v1.14+",
                     "framework_required": "FLiNG Trainer"
                 },
                 {
@@ -246,7 +209,7 @@ ELDEN_RING_DATA = {
                     "syntax_type": "trainer_hotkey",
                     "code": "[CT表] Item Gib -> Upgrade Materials -> Somber Ancient Dragon Smithing Stone x10",
                     "desc": "派发满额特殊武器毕业所需的古龙岩失色锻造石，无需通关雪原或天空城即可提前满级！",
-                    "min_version": "v1.14+ (DLC 对齐)",
+                    "min_version": "v1.14+",
                     "framework_required": "The Grand Archives CT"
                 },
                 {
@@ -255,7 +218,7 @@ ELDEN_RING_DATA = {
                     "syntax_type": "trainer_hotkey",
                     "code": "[CT表] Item Gib -> Upgrade Materials -> Ancient Dragon Smithing Stone x10",
                     "desc": "派发普通武器升至 +25 满级所需的珍稀古龙岩锻造石，批量强化你的武器库！",
-                    "min_version": "v1.14+ (DLC 对齐)",
+                    "min_version": "v1.14+",
                     "framework_required": "The Grand Archives CT"
                 },
                 {
@@ -264,7 +227,7 @@ ELDEN_RING_DATA = {
                     "syntax_type": "trainer_hotkey",
                     "code": "[CT表] Player Data -> Respec -> Free Attribute Points Allocation",
                     "desc": "无需击败满月女王或消耗稀缺的泪滴幼体，随时打开面板自由重塑 8 大核心属性！",
-                    "min_version": "v1.14+ (DLC 对齐)",
+                    "min_version": "v1.14+",
                     "framework_required": "The Grand Archives CT"
                 }
             ]
@@ -278,7 +241,7 @@ ELDEN_RING_DATA = {
                     "syntax_type": "trainer_hotkey",
                     "code": "[CT表] Scripts -> Shadow Realm Blessings -> Set Scadutree Blessing to 20",
                     "desc": "瞬间将幽影之地的核心数值系统【幽影树庇护】升至最高 20 级满级，攻击力与减伤率直接翻倍，拒绝幽影受苦！",
-                    "min_version": "v1.14+ (DLC 对齐)",
+                    "min_version": "v1.14+",
                     "framework_required": "The Grand Archives CT"
                 },
                 {
@@ -287,7 +250,7 @@ ELDEN_RING_DATA = {
                     "syntax_type": "trainer_hotkey",
                     "code": "[CT表] Scripts -> Shadow Realm Blessings -> Set Revered Spirit Ash to 10",
                     "desc": "将骨灰召唤物与托雷特灵马的强化数值【灵灰庇护】升满至 10 级，召唤物坦度飞跃提升！",
-                    "min_version": "v1.14+ (DLC 对齐)",
+                    "min_version": "v1.14+",
                     "framework_required": "The Grand Archives CT"
                 },
                 {
@@ -296,7 +259,7 @@ ELDEN_RING_DATA = {
                     "syntax_type": "trainer_hotkey",
                     "code": "[CT表] Item Gib -> Key Items -> Scadutree Fragment x50",
                     "desc": "直接向背囊注入全部 50 颗幽影树碎片，省去在复杂的立体地图里爬悬崖翻罐子的痛苦折磨！",
-                    "min_version": "v1.14+ (DLC 对齐)",
+                    "min_version": "v1.14+",
                     "framework_required": "The Grand Archives CT"
                 },
                 {
@@ -305,7 +268,7 @@ ELDEN_RING_DATA = {
                     "syntax_type": "trainer_hotkey",
                     "code": "[CT表] Item Gib -> Key Items -> Revered Spirit Ash x25",
                     "desc": "派发全套灵灰碎片，用于在赐福点解锁顶级灵灰强化层级。",
-                    "min_version": "v1.14+ (DLC 对齐)",
+                    "min_version": "v1.14+",
                     "framework_required": "The Grand Archives CT"
                 },
                 {
@@ -314,7 +277,7 @@ ELDEN_RING_DATA = {
                     "syntax_type": "trainer_hotkey",
                     "code": "[CT表] Item Gib -> Weapons -> Bloodfiend's Arm (+25 Blood Affinity)",
                     "desc": "派发黄金树幽影 DLC 最强重击出血神器【血怪手臂】，搭配感应流蓄力重击一击即爆万点出血伤害！",
-                    "min_version": "v1.14+ (DLC 对齐)",
+                    "min_version": "v1.14+",
                     "framework_required": "The Grand Archives CT"
                 }
             ]
@@ -328,7 +291,7 @@ ELDEN_RING_DATA = {
                     "syntax_type": "trainer_hotkey",
                     "code": "[CT表] Item Gib -> Weapons -> Blasphemous Blade (+10)",
                     "desc": "派发击败大蛇拉卡德追忆兑换的信仰大剑【亵渎圣剑】，战技超远距离击飞敌人并疯狂吸血回复生命！",
-                    "min_version": "v1.14+ (DLC 对齐)",
+                    "min_version": "v1.14+",
                     "framework_required": "The Grand Archives CT"
                 },
                 {
@@ -337,7 +300,7 @@ ELDEN_RING_DATA = {
                     "syntax_type": "trainer_hotkey",
                     "code": "[CT表] Item Gib -> Weapons -> Hand of Malenia (+10)",
                     "desc": "派发女武神追忆武器太刀，自带华丽绝伦的三段空中连续斩杀技【水鸟乱舞】！",
-                    "min_version": "v1.14+ (DLC 对齐)",
+                    "min_version": "v1.14+",
                     "framework_required": "The Grand Archives CT"
                 },
                 {
@@ -346,7 +309,7 @@ ELDEN_RING_DATA = {
                     "syntax_type": "trainer_hotkey",
                     "code": "[CT表] Item Gib -> Weapons -> Dark Moon Greatsword (+10)",
                     "desc": "派发菈妮支线终极定情信物【暗月大剑】，附魔后蓄力重击释放零耗蓝极寒冰冻月光剑气！",
-                    "min_version": "v1.14+ (DLC 对齐)",
+                    "min_version": "v1.14+",
                     "framework_required": "The Grand Archives CT"
                 },
                 {
@@ -355,7 +318,7 @@ ELDEN_RING_DATA = {
                     "syntax_type": "trainer_hotkey",
                     "code": "[CT表] Item Gib -> Weapons -> Sacred Relic Sword (+10)",
                     "desc": "派发艾尔登之兽追忆武器，战技【黄金波动】扇形横扫全屏秒杀敌人，乌鸦悬崖刷卢恩必备神兵！",
-                    "min_version": "v1.14+ (DLC 对齐)",
+                    "min_version": "v1.14+",
                     "framework_required": "The Grand Archives CT"
                 },
                 {
@@ -364,7 +327,7 @@ ELDEN_RING_DATA = {
                     "syntax_type": "trainer_hotkey",
                     "code": "[CT表] Item Gib -> Weapons -> Mohgwyn's Sacred Spear (+10)",
                     "desc": "鲜血君王追忆重矛，高举战矛连续释放三段大范围穿墙出血结界，Boss 战轮椅神器！",
-                    "min_version": "v1.14+ (DLC 对齐)",
+                    "min_version": "v1.14+",
                     "framework_required": "The Grand Archives CT"
                 }
             ]
@@ -378,7 +341,7 @@ ELDEN_RING_DATA = {
                     "syntax_type": "trainer_hotkey",
                     "code": "[CT表] Item Gib -> Spirit Ashes -> Mimic Tear Ashes (+10)",
                     "desc": "派发最强传说骨灰大哥！完整复刻主角身上的全套防具、武器、战灰与道具，单挑各大顶级 Boss！",
-                    "min_version": "v1.14+ (DLC 对齐)",
+                    "min_version": "v1.14+",
                     "framework_required": "The Grand Archives CT"
                 },
                 {
@@ -387,7 +350,7 @@ ELDEN_RING_DATA = {
                     "syntax_type": "trainer_hotkey",
                     "code": "[CT表] Item Gib -> Spirit Ashes -> Black Knife Tiche (+10)",
                     "desc": "派发超敏捷传说刺客狄希，释放命定之死红光斩击，按百分比削减敌方生命上限并造成强力灼烧！",
-                    "min_version": "v1.14+ (DLC 对齐)",
+                    "min_version": "v1.14+",
                     "framework_required": "The Grand Archives CT"
                 },
                 {
@@ -396,7 +359,7 @@ ELDEN_RING_DATA = {
                     "syntax_type": "trainer_hotkey",
                     "code": "[CT表] Item Gib -> Spirit Ashes -> Latenna the Albinauric (+10)",
                     "desc": "派发固定炮台勒缇娜，超视距连续发射魔力箭矢，对付飞龙与体型庞大的野外巨兽有奇效！",
-                    "min_version": "v1.14+ (DLC 对齐)",
+                    "min_version": "v1.14+",
                     "framework_required": "The Grand Archives CT"
                 },
                 {
@@ -405,7 +368,7 @@ ELDEN_RING_DATA = {
                     "syntax_type": "trainer_hotkey",
                     "code": "[CT表] Item Gib -> Ashes of War -> Ash of War: Bloodhound's Step",
                     "desc": "赋予武器超长无敌帧的快速瞬身位移能力，能在毒沼、熔岩与密集攻击中如入无人之境！",
-                    "min_version": "v1.14+ (DLC 对齐)",
+                    "min_version": "v1.14+",
                     "framework_required": "The Grand Archives CT"
                 },
                 {
@@ -414,7 +377,7 @@ ELDEN_RING_DATA = {
                     "syntax_type": "trainer_hotkey",
                     "code": "[CT表] Item Gib -> Ashes of War -> Ash of War: Seppuku",
                     "desc": "双太刀出血流核心战灰，刺击自身腹部使武器沾满鲜血，大幅提升物理攻击力与异常出血累计效率！",
-                    "min_version": "v1.14+ (DLC 对齐)",
+                    "min_version": "v1.14+",
                     "framework_required": "The Grand Archives CT"
                 }
             ]
@@ -428,7 +391,7 @@ ELDEN_RING_DATA = {
                     "syntax_type": "trainer_hotkey",
                     "code": "[CT表] Item Gib -> Talismans -> Shard of Alexander",
                     "desc": "全流派必带核心毕业护符，战技伤害直接无条件提升 15%，大幅强化各种轮椅技能威力！",
-                    "min_version": "v1.14+ (DLC 对齐)",
+                    "min_version": "v1.14+",
                     "framework_required": "The Grand Archives CT"
                 },
                 {
@@ -437,7 +400,7 @@ ELDEN_RING_DATA = {
                     "syntax_type": "trainer_hotkey",
                     "code": "[CT表] Item Gib -> Talismans -> Rotten Winged Sword Insignia",
                     "desc": "连击流与出血流神装，连续命中敌人后层层叠加强攻 Buff，最高增伤达 13%！",
-                    "min_version": "v1.14+ (DLC 对齐)",
+                    "min_version": "v1.14+",
                     "framework_required": "The Grand Archives CT"
                 },
                 {
@@ -446,7 +409,7 @@ ELDEN_RING_DATA = {
                     "syntax_type": "trainer_hotkey",
                     "code": "[CT表] Item Gib -> Talismans -> Dragoncrest Greatshield Talisman",
                     "desc": "保命第一神符！常驻无条件提供高达 20% 的巨额物理减伤率，极大降低高周目被一招秒杀的风险！",
-                    "min_version": "v1.14+ (DLC 对齐)",
+                    "min_version": "v1.14+",
                     "framework_required": "The Grand Archives CT"
                 },
                 {
@@ -455,7 +418,7 @@ ELDEN_RING_DATA = {
                     "syntax_type": "trainer_hotkey",
                     "code": "[CT表] Item Gib -> Tears -> Cerulean Hidden Tear",
                     "desc": "法师一炮秒杀流核心灵药！服下后 15 秒内一切法力消耗直接降为 0，配合彗星亚兹勒实现无限激光轰击！",
-                    "min_version": "v1.14+ (DLC 对齐)",
+                    "min_version": "v1.14+",
                     "framework_required": "The Grand Archives CT"
                 },
                 {
@@ -464,7 +427,7 @@ ELDEN_RING_DATA = {
                     "syntax_type": "trainer_hotkey",
                     "code": "[CT表] Item Gib -> Tears -> Thorny Cracked Tear",
                     "desc": "调制进入灵药圣杯瓶，饮用后极大强化连续攻击的伤害叠加上限，近战速杀必备！",
-                    "min_version": "v1.14+ (DLC 对齐)",
+                    "min_version": "v1.14+",
                     "framework_required": "The Grand Archives CT"
                 }
             ]
@@ -478,7 +441,7 @@ ELDEN_RING_DATA = {
                     "syntax_type": "trainer_hotkey",
                     "code": "[CT表] Scripts -> World -> Unlock All Sites of Grace (Base Game)",
                     "desc": "瞬间点亮交界地主世界、雪原、地下世界与天空城的所有赐福传送点，省去跑图探路时间！",
-                    "min_version": "v1.14+ (DLC 对齐)",
+                    "min_version": "v1.14+",
                     "framework_required": "The Grand Archives CT"
                 },
                 {
@@ -487,7 +450,7 @@ ELDEN_RING_DATA = {
                     "syntax_type": "trainer_hotkey",
                     "code": "[CT表] Scripts -> World -> Unlock DLC Sites of Grace (Shadow Realm)",
                     "desc": "点亮幽影之地全部复杂分层地形上的所有赐福点，随心所欲直达目标区域！",
-                    "min_version": "v1.14+ (DLC 对齐)",
+                    "min_version": "v1.14+",
                     "framework_required": "The Grand Archives CT"
                 },
                 {
@@ -496,7 +459,7 @@ ELDEN_RING_DATA = {
                     "syntax_type": "trainer_hotkey",
                     "code": "[CT表] Scripts -> Camera -> Enable FreeCam & Freeze Time",
                     "desc": "脱离角色控制束缚，摄像机自由穿墙升空飞行动作定格，用于拍摄超高清壁纸与Boss特写！",
-                    "min_version": "v1.14+ (DLC 对齐)",
+                    "min_version": "v1.14+",
                     "framework_required": "The Grand Archives CT"
                 },
                 {
@@ -505,7 +468,7 @@ ELDEN_RING_DATA = {
                     "syntax_type": "trainer_hotkey",
                     "code": "[CT表] Scripts -> World -> Allow Fast Travel Everywhere",
                     "desc": "解除大地图传送限制，即使身处红色地下墓穴或被 Boss 围困追击也能秒开地图传送逃脱！",
-                    "min_version": "v1.14+ (DLC 对齐)",
+                    "min_version": "v1.14+",
                     "framework_required": "The Grand Archives CT"
                 },
                 {
@@ -514,7 +477,7 @@ ELDEN_RING_DATA = {
                     "syntax_type": "trainer_hotkey",
                     "code": "[CT表] Item Gib -> Incantations -> Ancient Dragons' Lightning Strike",
                     "desc": "对付黄金树幽影大体型 Boss (如狂龙贝勒、罗刹、幽影树化身) 最强逃课核弹，蓄力释放引落漫天红雷引发数万点多段爆发判定！",
-                    "min_version": "v1.14+ (DLC 对齐)",
+                    "min_version": "v1.14+",
                     "framework_required": "The Grand Archives CT"
                 },
                 {
@@ -523,7 +486,7 @@ ELDEN_RING_DATA = {
                     "syntax_type": "trainer_hotkey",
                     "code": "[CT表] Scripts -> Player Data -> Instant Torrent Revival (No Flask)",
                     "desc": "灵马战死后无需扣除一瓶红露滴原罪瓶，吹响灵马哨笛直接无读条满血秒骑乘！",
-                    "min_version": "v1.14+ (DLC 对齐)",
+                    "min_version": "v1.14+",
                     "framework_required": "The Grand Archives CT"
                 }
             ]
@@ -537,7 +500,7 @@ ELDEN_RING_DATA = {
                     "syntax_type": "trainer_hotkey",
                     "code": "[CT表] Scripts -> Event Flags -> Clear NPC Aggro / Absolution",
                     "desc": "如果不小心手滑打中友好 NPC 导致对方拔刀追杀，执行本项可立即清空全部仇恨状态恢复和平！",
-                    "min_version": "v1.14+ (DLC 对齐)",
+                    "min_version": "v1.14+",
                     "framework_required": "The Grand Archives CT"
                 },
                 {
@@ -546,7 +509,7 @@ ELDEN_RING_DATA = {
                     "syntax_type": "trainer_hotkey",
                     "code": "[CT表] Scripts -> Event Flags -> Revive Dead NPCs",
                     "desc": "重置被误杀或意外阵亡的关键支线 NPC 的存活标志位，使他们重返原点继续推进任务线！",
-                    "min_version": "v1.14+ (DLC 对齐)",
+                    "min_version": "v1.14+",
                     "framework_required": "The Grand Archives CT"
                 },
                 {
@@ -555,7 +518,7 @@ ELDEN_RING_DATA = {
                     "syntax_type": "trainer_hotkey",
                     "code": "[CT表] Item Gib -> Key Items -> All Bell Bearings (Smithing / Somber / Glovewort)",
                     "desc": "直接派发全套锻造石铃珠、失色铃珠与墓地铃兰铃珠，在孪生老妪处直接购买全部强化材料！",
-                    "min_version": "v1.14+ (DLC 对齐)",
+                    "min_version": "v1.14+",
                     "framework_required": "The Grand Archives CT"
                 },
                 {
@@ -564,7 +527,7 @@ ELDEN_RING_DATA = {
                     "syntax_type": "trainer_hotkey",
                     "code": "[CT表] Scripts -> Key Items -> Unlock All Great Runes (Restored)",
                     "desc": "派发葛瑞克、拉塔恩、玛莲妮亚、莫格等全部大卢恩并自动完成神授塔充能激活，随时随地享受全属性加成！",
-                    "min_version": "v1.14+ (DLC 对齐)",
+                    "min_version": "v1.14+",
                     "framework_required": "The Grand Archives CT"
                 }
             ]
@@ -579,7 +542,7 @@ SKYRIM_SE_DATA = {
     "hasConsole": True,
     "consoleShortcut": "~ (Tilde 键)",
     "consoleEnableGuide": {
-        "zh-CN": "Bethesda Creation 引擎原生提供全功能控制台：\n1. 快捷键：游戏中随时按下键盘左上角【~】键 (波浪键 / ESC下方) 暂停并呼出全屏控制台；\n2. 输入法避坑：若无反应，请在 Windows 任务栏切换为'英语(美国)'美式键盘输入法，或在 Documents/My Games/Skyrim Special Edition/Skyrim.ini 的 [General] 下确认 bAllowConsole=1；\n3. 成就与防闪退：使用控制台或打 Mod 会打上脏标记锁定 Steam 成就，强烈建议安装 SSE Engine Fixes 恢复成就并彻底防止 60Hz+ 物理抽搐与 CTD 闪退！\n4. 简写技巧：FormID 开头的多余 0 可省略，如 player.additem 0000000F 10000 可简写为 player.additem f 10000！",
+        "zh-CN": "Bethesda Creation 引擎原生提供全功能控制台：\n1. 快捷键：游戏中随时按下键盘左上角【~】键 (波浪键 / ESC下方) 暂停并呼出全屏控制台；\n2. 输入法避坑：若无反应，请在 Windows 任务栏切换为'英语(美国)'美式键盘输入法，或在 Documents/My Games/Skyrim Special Edition/Skyrim.ini 的 [General] 下确认 bAllowConsole=1；\n3. 成就与防闪退：使用控制台或打 Mod 会打上脏标记锁定 Steam 成就，强烈建议安装 SSE Engine Fixes 恢复成就，它还修了一批引擎问题，但不能保证不闪退。\n4. 简写技巧：FormID 开头的多余 0 可省略，如 player.additem 0000000F 10000 可简写为 player.additem f 10000！",
         "en": "Bethesda Creation Engine Native Console: Press ~ (Tilde) key in-game to toggle. Supports Hex FormIDs, batch (.bat) scripts, quest stage jumping, and free camera."
     },
     "popularCommands": [
@@ -591,48 +554,6 @@ SKYRIM_SE_DATA = {
         "coc qasmoke",
         "unlock"
     ],
-    "hasTrainer": True,
-    "trainerInfo": {
-        "author": "风灵月影 (FLiNG)",
-        "version": "v1.6.1170+ / AE & SE 完全兼容",
-        "officialUrl": "https://flingtrainer.com/trainer/the-elder-scrolls-v-skyrim-special-edition-trainer/",
-        "cleanMirrorUrl": "https://github.com/l-mod-vault/mirrors/releases/download/v1.6.1170/The_Elder_Scrolls_V_Skyrim_SE_Trainer.zip",
-        "safeVerification": {
-            "isCleanVerified": True,
-            "hasBundledAds": False,
-            "virusTotalRatio": "0/72 Clean (零误报纯净离线版)",
-            "md5CheckSum": "4b7c2a1d9e8f0a3b5c6d7e8f9a0b1c2d",
-            "powershellExclusionCmd": "Add-MpPreference -ExclusionProcess 'Skyrim Special Edition Trainer.exe'",
-            "troubleshootSteps": [
-                "单机运行无需离线绕过，若安装了 SSE Engine Fixes，在运行修改器前直接启动 skse64_loader.exe 即可正常享受热键注入",
-                "若 Windows Defender 拦截，以管理员运行上方 PowerShell 白名单命令",
-                "使用控制台配合修改器时建议先按 ~ 暂停游戏再激活对应热键"
-            ]
-        },
-        "hotkeysCategorized": [
-            {
-                "category": "👑 核心上帝模式与生存",
-                "items": [
-                    {"key": "Num 1", "action": "无敌模式 (God Mode)"},
-                    {"key": "Num 2", "action": "无限生命 (Infinite Health)"},
-                    {"key": "Num 3", "action": "无限魔法 (Infinite Magicka)"},
-                    {"key": "Num 4", "action": "无限耐力 (Infinite Stamina)"},
-                    {"key": "Num 5", "action": "龙吼零冷却 (Zero Shout Cooldown)"},
-                    {"key": "Num 6", "action": "无限龙魂点数 (Infinite Dragon Souls)"}
-                ]
-            },
-            {
-                "category": "🛠️ 物品资源与游戏调节",
-                "items": [
-                    {"key": "Num 7", "action": "无限金币/背包负重清空 (Infinite Gold / Weight)"},
-                    {"key": "Num 8", "action": "一击必杀 (One Hit Kill)"},
-                    {"key": "Num 9", "action": "开锁器永不损坏 (Unbreakable Lockpicks)"},
-                    {"key": "Ctrl+Num 1", "action": "潜行绝对隐形 (Super Stealth)"},
-                    {"key": "Ctrl+Num 2", "action": "无限附魔充能 (Infinite Enchantment Charge)"}
-                ]
-            }
-        ]
-    },
     "hasMods": True,
     "modInstallPath": "<SteamLibrary>/steamapps/common/Skyrim Special Edition/Data/",
     "curatedMods": [
@@ -653,7 +574,10 @@ SKYRIM_SE_DATA = {
                 "将压缩包内的 skse64_loader.exe 与两个 .dll 文件直接复制到游戏根目录 (与 SkyrimSE.exe 同级)",
                 "将 Data/ 文件夹拖拽合并进游戏的 Data/ 目录",
                 "以后每次启动游戏一律双击 skse64_loader.exe 启动！"
-            ]
+            ],
+            "downloadUrl": "https://github.com/ianpatt/skse64/releases/download/v2.2.6/skse64_2_02_06.7z",
+            "downloadFilename": "skse64_2_02_06.7z",
+            "isDirect": True
         },
         {
             "id": "mod_sse_engine_fixes",
@@ -671,7 +595,10 @@ SKYRIM_SE_DATA = {
                 "安装 Part 1 到 MO2 或 Vortex 模组管理器中并启用",
                 "将 Part 2 解压后的 d3dx9_42.dll 与 tbb.dll 手动放入游戏根目录 (与 SkyrimSE.exe 同级)",
                 "配置 EngineFixes.toml 开启 EnableAchievementsWithMods = true"
-            ]
+            ],
+            "downloadUrl": "https://github.com/l-mod-vault/mirrors/releases/download/skyrim/SkyUI_SE_v5.2.7z",
+            "downloadFilename": "SkyUI_SE_v5.2.7z",
+            "isDirect": True
         },
         {
             "id": "mod_skyui",
@@ -689,7 +616,10 @@ SKYRIM_SE_DATA = {
                 "必须确保已先行安装 SKSE64",
                 "通过 MO2 或 Vortex 直接导入 SkyUI_5.2SE.7z 压缩包并激活",
                 "启动 skse64_loader.exe 进入游戏，按 ESC 即可看到新增的 Mod Configuration 菜单！"
-            ]
+            ],
+            "downloadUrl": "https://github.com/l-mod-vault/mirrors/releases/download/skyrim/USSEP_v4.3.2.7z",
+            "downloadFilename": "USSEP_v4.3.2.7z",
+            "isDirect": True
         },
         {
             "id": "mod_ussep",
@@ -706,7 +636,10 @@ SKYRIM_SE_DATA = {
             "installSteps": [
                 "通过模组管理器安装 USSEP 压缩包",
                 "在插件加载顺序 (Load Order) 中将 Unofficial Skyrim Special Edition Patch.esp 置于官方 DLC 之后的最靠前位置！"
-            ]
+            ],
+            "downloadUrl": "https://github.com/l-mod-vault/mirrors/releases/download/vault-mods/mod_ussep.zip",
+            "downloadFilename": "mod_ussep.zip",
+            "isDirect": True
         }
     ],
     "consoleCategories": [
@@ -1129,7 +1062,7 @@ FALLOUT_4_DATA = {
     "hasConsole": True,
     "consoleShortcut": "~ (Tilde 键)",
     "consoleEnableGuide": {
-        "zh-CN": "【次世代大更新避坑与控制台开启】\n1. 控制台呼出：游戏中按下【~】(波浪键) 暂停并呼出控制台；\n2. 2024 次世代大更新 (v1.10.980/984) 避坑必看：\n   - 路径一 (次世代原生模式)：若玩次世代新版，必须安装对应次世代分支的 F4SE (v0.7.2+) 与 Address Library Next-Gen，并在 Steam 游戏属性中设置【仅在我启动该游戏时更新】防二次破坏；\n   - 路径二 (经典降级模式)：若想享受数万款旧 Mod，使用【Fallout 4 Downgrader】一键将主程序回退至 1.10.163 黄金稳定版；\n3. 极速批处理 (bat 命令)：在游戏根目录新建文本文件 (如 all_materials.txt)，游戏中只需在控制台输入 bat all_materials，瞬间一次性执行上百条指令！",
+        "zh-CN": "【次世代大更新避坑与控制台开启】\n1. 控制台呼出：游戏中按下【~】(波浪键) 暂停并呼出控制台；\n2. 2024 次世代大更新 (v1.10.980/984) 避坑必看：\n   - 路径一 (次世代原生模式)：若玩次世代新版，必须安装对应次世代分支的 F4SE (v0.7.2+) 与 Address Library Next-Gen，并在 Steam 游戏属性中设置【仅在我启动该游戏时更新】减少后台自动更新（不能保证不被更新）；\n   - 路径二 (经典降级模式)：若想享受数万款旧 Mod，使用【Fallout 4 Downgrader】一键将主程序回退至 1.10.163 黄金稳定版；\n3. 极速批处理 (bat 命令)：在游戏根目录新建文本文件 (如 all_materials.txt)，游戏中只需在控制台输入 bat all_materials，瞬间一次性执行上百条指令！",
         "en": "Fallout 4 Creation Engine Console: Press ~ (Tilde) to toggle. Next-Gen Update (v1.10.980+) compatible with F4SE v0.7.2+ or use Downgrader to v1.10.163. Supports bat batch scripts and dynamic legendary attachmod enchantments."
     },
     "popularCommands": [
@@ -1142,48 +1075,6 @@ FALLOUT_4_DATA = {
         "tcl",
         "coc RedRocketExt"
     ],
-    "hasTrainer": True,
-    "trainerInfo": {
-        "author": "风灵月影 (FLiNG)",
-        "version": "v1.10.984+ (次世代大更新完全兼容)",
-        "officialUrl": "https://flingtrainer.com/trainer/fallout-4-trainer/",
-        "cleanMirrorUrl": "https://github.com/l-mod-vault/mirrors/releases/download/v1.10.984/Fallout_4_v1.10.984_Plus_25_Trainer.zip",
-        "safeVerification": {
-            "isCleanVerified": True,
-            "hasBundledAds": False,
-            "virusTotalRatio": "0/72 Clean (零误报纯净离线版)",
-            "md5CheckSum": "3a8c1f0d2e4b5c6a7b8c9d0e1f2a3b4c",
-            "powershellExclusionCmd": "Add-MpPreference -ExclusionProcess 'Fallout 4 Trainer.exe'",
-            "troubleshootSteps": [
-                "单机运行无任何反作弊封号风险，直接解压启动修改器与游戏即可畅快游玩",
-                "若 Windows Defender 拦截，请以管理员身份运行上方 PowerShell 白名单命令",
-                "使用控制台与修改器时建议先按 ~ 暂停游戏再激活对应热键"
-            ]
-        },
-        "hotkeysCategorized": [
-            {
-                "category": "👑 核心上帝模式与废土生存",
-                "items": [
-                    {"key": "Num 1", "action": "无敌模式 (God Mode)"},
-                    {"key": "Num 2", "action": "无限生命 (Infinite Health)"},
-                    {"key": "Num 3", "action": "无限行动点数 AP (Infinite Action Points)"},
-                    {"key": "Num 4", "action": "辐射度归零 (Zero Radiation)"},
-                    {"key": "Num 5", "action": "无限弹药无需换弹 (Infinite Ammo & No Reload)"},
-                    {"key": "Num 6", "action": "动力装甲核心能量无限 (Infinite Fusion Core Energy)"}
-                ]
-            },
-            {
-                "category": "🏭 聚落建设与无限资源",
-                "items": [
-                    {"key": "Num 7", "action": "无限瓶盖货币 (Infinite Caps)"},
-                    {"key": "Num 8", "action": "建造材料不减 (Infinite Settlement Crafting Materials)"},
-                    {"key": "Num 9", "action": "一击必杀 (One Hit Kill)"},
-                    {"key": "Ctrl+Num 1", "action": "开锁绝对成功 (Instant Lockpick)"},
-                    {"key": "Ctrl+Num 2", "action": "终端机黑客破解秒过 (Instant Terminal Hack)"}
-                ]
-            }
-        ]
-    },
     "hasMods": True,
     "modInstallPath": "<SteamLibrary>/steamapps/common/Fallout 4/Data/",
     "curatedMods": [
@@ -1204,7 +1095,10 @@ FALLOUT_4_DATA = {
                 "将 f4se_loader.exe 与相关 .dll 复制到 Fallout 4 游戏根目录",
                 "将 Data/ 文件夹拖拽合并进游戏 Data 目录",
                 "以后每次启动游戏直接双击 f4se_loader.exe！"
-            ]
+            ],
+            "downloadUrl": "https://github.com/ianpatt/f4se/releases/download/v0.6.23/f4se_0_06_23.7z",
+            "downloadFilename": "f4se_0_06_23.7z",
+            "isDirect": True
         },
         {
             "id": "mod_buffout_4",
@@ -1221,7 +1115,10 @@ FALLOUT_4_DATA = {
             "installSteps": [
                 "使用 MO2 或 Vortex 安装 Buffout 4 及其前置 xSE Plugin Preloader",
                 "若发生闪退，前往 Documents/My Games/Fallout4/F4SE/ 查看 crash-*.log 即可精准破案！"
-            ]
+            ],
+            "downloadUrl": "https://github.com/l-mod-vault/mirrors/releases/download/fallout4/FallUI_Inventory.zip",
+            "downloadFilename": "FallUI_Inventory.zip",
+            "isDirect": True
         },
         {
             "id": "mod_place_everywhere",
@@ -1239,7 +1136,10 @@ FALLOUT_4_DATA = {
                 "确保已安装 F4SE",
                 "通过模组管理器安装 Place Everywhere",
                 "进入建造模式，按 F1 开关碰撞检测，按 F2 开关贴合吸附！"
-            ]
+            ],
+            "downloadUrl": "https://github.com/l-mod-vault/mirrors/releases/download/fallout4/UFO4P_v2.1.5.7z",
+            "downloadFilename": "UFO4P_v2.1.5.7z",
+            "isDirect": True
         },
         {
             "id": "mod_sim_settlements_2",
@@ -1257,7 +1157,10 @@ FALLOUT_4_DATA = {
                 "安装前置 Workshop Framework",
                 "安装 Sim Settlements 2 及其剧情扩展章节包",
                 "在游戏内建造并拾取【ASAM 传感器】，启动第一块住宅规划区！"
-            ]
+            ],
+            "downloadUrl": "https://github.com/l-mod-vault/mirrors/releases/download/vault-mods/mod_sim_settlements_2.zip",
+            "downloadFilename": "mod_sim_settlements_2.zip",
+            "isDirect": True
         }
     ],
     "consoleCategories": [
@@ -1682,47 +1585,27 @@ FALLOUT_4_DATA = {
     ]
 }
 
-def enrich_games():
-    if not os.path.exists(JSON_PATH):
-        print(f"❌ 找不到数据文件: {JSON_PATH}")
-        sys.exit(1)
+OWNED_FIELDS = (
+    "hasConsole", "consoleShortcut", "consoleEnableGuide", "consoleCategories", "popularCommands",
+    "hasMods", "modInstallPath", "curatedMods",
+)
 
-    with open(JSON_PATH, "r", encoding="utf-8") as f:
-        games = json.load(f)
+GAME_DATA = (
+    (("elden-ring",), ELDEN_RING_DATA),
+    (("the-elder-scrolls-v-skyrim-special-edition", "skyrim-se"), SKYRIM_SE_DATA),
+    (("fallout-4",), FALLOUT_4_DATA),
+)
 
-    updated_count = 0
-    for g in games:
-        gid = g.get("id")
-        if gid == "elden-ring":
-            print(f"🔄 深度注入 Rank 5: Elden Ring...")
-            g.update(ELDEN_RING_DATA)
-            updated_count += 1
-        elif gid in ("the-elder-scrolls-v-skyrim-special-edition", "skyrim-se"):
-            print(f"🔄 深度注入 Rank 6: Skyrim SE...")
-            g.update(SKYRIM_SE_DATA)
-            updated_count += 1
-        elif gid == "fallout-4":
-            print(f"🔄 深度注入 Rank 7: Fallout 4...")
-            g.update(FALLOUT_4_DATA)
-            updated_count += 1
 
-    with open(JSON_PATH, "w", encoding="utf-8") as f:
-        json.dump(games, f, ensure_ascii=False, indent=2)
-    print(f"✅ 已成功更新 {JSON_PATH} (共注入 {updated_count} 款游戏数据)")
+def build_updates(games):
+    ids = {g["id"] for g in games}
+    updates = {}
+    for aliases, data in GAME_DATA:
+        for gid in aliases:
+            if gid in ids:
+                updates[gid] = dict(data)
+    return updates
 
-    if os.path.exists(JS_PATH):
-        trans_path = os.path.join(BASE_DIR, "src/i18n/translations.json")
-        translations = {}
-        if os.path.exists(trans_path):
-            with open(trans_path, "r", encoding="utf-8") as tf:
-                translations = json.load(tf)
-
-        with open(JS_PATH, "w", encoding="utf-8") as f:
-            f.write("// L-MOD Vault Offline Database (Auto-bundled)\n")
-            f.write("window.GAMES_DATA = " + json.dumps(games, ensure_ascii=False, indent=2) + ";\n\n")
-            f.write("window.GAMES_DATABASE = window.GAMES_DATA;\n\n")
-            f.write("window.TRANSLATIONS_DATA = " + json.dumps(translations, ensure_ascii=False, indent=2) + ";\n")
-        print(f"✅ 已成功同步更新前端数据文件 (含 GAMES_DATA 与 TRANSLATIONS_DATA): {JS_PATH}")
 
 if __name__ == "__main__":
-    enrich_games()
+    write_owned_fields("enrich_rank5_7_flagships.py", OWNED_FIELDS, build_updates)

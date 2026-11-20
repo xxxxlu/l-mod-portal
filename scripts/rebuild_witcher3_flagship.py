@@ -1,11 +1,21 @@
-import json
-import os
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+scripts/rebuild_witcher3_flagship.py
+Content for The Witcher 3 (console guide, command categories, curated mods,
+metadata).
 
-JSON_PATH = '/Users/xiaolu/Desktop/work/l-mod-portal/src/data/games_top100.json'
-JS_PATH = '/Users/xiaolu/Desktop/work/l-mod-portal/public/data.js'
+Writes only the fields in OWNED_FIELDS of witcher-3, through gamedata_guard: the master
+data must exist, radar and trainer fields are never written (trainer data comes from
+fling_trainer_sync.py), and in public/data.js only the GAMES_DATA segment changes
+(TRANSLATIONS_DATA is left alone). No player reviews are written.
 
-with open(JSON_PATH, 'r', encoding='utf-8') as f:
-    games = json.load(f)
+Usage: python3 scripts/rebuild_witcher3_flagship.py [--dry-run]
+"""
+
+from gamedata_guard import write_owned_fields
+
+GAME_ID = "witcher-3"
 
 witcher_categories = [
     {
@@ -1492,14 +1502,17 @@ witcher_mods = [
         "downloads": "13.2M",
         "endorsements": "365K",
         "category": "画面材质 (Visuals / Textures)",
-        "desc": "全网公认最强《巫师3》材质MOD！次世代版 / 完全版专属重构，彻底重绘所有岩石、植被、砖墙、木纹与建筑材质，完美适配 DX12 光线追踪！",
+        "desc": "全网公认最强《巫师3》材质MOD！次世代版 / 完全版专属重构，彻底重绘所有岩石、植被、砖墙、木纹与建筑材质，面向次世代 DX12 版。",
         "dependencies": ["None"],
         "installPath": "The Witcher 3\\Mods\\",
         "installSteps": [
             "1. 确认游戏已升级至次世代版本 (v4.04+)；",
             "2. 下载后直接运行安装程序，指定《巫师3》安装根目录；",
             "3. 进入游戏视频选项，将材质品质调至最高 'HDReworked' 即可生效。"
-        ]
+        ],
+        "downloadUrl": "https://github.com/l-mod-vault/mirrors/releases/download/witcher3/HDReworkedProjectNextGen.zip",
+        "downloadFilename": "HDReworkedProjectNextGen.zip",
+        "isDirect": True
     },
     {
         "id": "the-witcher-3-redkit",
@@ -1516,7 +1529,10 @@ witcher_mods = [
         "installSteps": [
             "1. 在 Steam 商店直接搜索免费领取 'The Witcher 3 REDkit'；",
             "2. 启动后可自由在 Steam 创意工坊一键订阅 Mod 并由游戏主程序自动加载。"
-        ]
+        ],
+        "downloadUrl": "https://github.com/l-mod-vault/mirrors/releases/download/witcher3/ScriptMerger_v0.6.5.zip",
+        "downloadFilename": "ScriptMerger_v0.6.5.zip",
+        "isDirect": True
     },
     {
         "id": "witcher-3-script-merger",
@@ -1533,7 +1549,10 @@ witcher_mods = [
         "installSteps": [
             "1. 解压后运行 ScriptMerger.exe，在设置中指定《巫师3》安装根目录；",
             "2. 点击 'Refresh' 扫描，勾选检测到的有冲突的脚本点击 'Create Merged Script' 即可。"
-        ]
+        ],
+        "downloadUrl": "https://github.com/l-mod-vault/mirrors/releases/download/witcher3/FastTravelFromAnywhere.zip",
+        "downloadFilename": "FastTravelFromAnywhere.zip",
+        "isDirect": True
     },
     {
         "id": "brothers-in-arms-nextgen",
@@ -1550,7 +1569,10 @@ witcher_mods = [
         "installSteps": [
             "1. 下载解压后将 modBrothersInArms 放入 The Witcher 3\\Mods\\ 目录；",
             "2. 若安装了其他剧本或交互 Mod，务必运行 Script Merger 合并冲突脚本。"
-        ]
+        ],
+        "downloadUrl": "https://github.com/l-mod-vault/mirrors/releases/download/witcher3/AllQuestObjectivesOnMap.zip",
+        "downloadFilename": "AllQuestObjectivesOnMap.zip",
+        "isDirect": True
     },
     {
         "id": "fast-travel-from-anywhere",
@@ -1567,7 +1589,10 @@ witcher_mods = [
         "installSteps": [
             "1. 下载解压得到 modFastTravelFromAnywhere 文件夹；",
             "2. 直接复制粘贴到游戏根目录 The Witcher 3\\Mods 文件夹即可。"
-        ]
+        ],
+        "downloadUrl": "https://github.com/l-mod-vault/mirrors/releases/download/vault-mods/fast-travel-from-anywhere.zip",
+        "downloadFilename": "fast-travel-from-anywhere.zip",
+        "isDirect": True
     },
     {
         "id": "all-quest-objectives-on-map",
@@ -1584,7 +1609,10 @@ witcher_mods = [
         "installSteps": [
             "1. 将下载的 modAllQuestObjectivesOnMap 放入 The Witcher 3\\Mods 目录；",
             "2. 启动游戏在大地图左侧勾选全部任务筛选。"
-        ]
+        ],
+        "downloadUrl": "https://github.com/l-mod-vault/mirrors/releases/download/vault-mods/all-quest-objectives-on-map.zip",
+        "downloadFilename": "all-quest-objectives-on-map.zip",
+        "isDirect": True
     },
     {
         "id": "over-9000-weight-limit",
@@ -1601,7 +1629,10 @@ witcher_mods = [
         "installSteps": [
             "1. 将 modOver9000 文件夹放入 The Witcher 3\\Mods 目录；",
             "2. 进游戏背包负重上限变为 9000。"
-        ]
+        ],
+        "downloadUrl": "https://github.com/l-mod-vault/mirrors/releases/download/vault-mods/over-9000-weight-limit.zip",
+        "downloadFilename": "over-9000-weight-limit.zip",
+        "isDirect": True
     },
     {
         "id": "friendly-hud-nextgen",
@@ -1618,78 +1649,32 @@ witcher_mods = [
         "installSteps": [
             "1. 将 modFriendlyHUD 解压放入 The Witcher 3\\Mods\\ 文件夹；",
             "2. 将 bin 文件夹覆盖到游戏安装目录以整合配置菜单。"
-        ]
+        ],
+        "downloadUrl": "https://github.com/l-mod-vault/mirrors/releases/download/vault-mods/friendly-hud-nextgen.zip",
+        "downloadFilename": "friendly-hud-nextgen.zip",
+        "isDirect": True
     }
 ]
 
-witcher_trainer = {
-    "author": "风灵月影 (FLiNG)",
-    "version": "Next-Gen v4.04 (次世代官方最新版本全功能修改器)",
-    "officialUrl": "https://flingtrainer.com/trainer/the-witcher-3-wild-hunt-trainer/",
-    "cleanMirrorUrl": "https://flingtrainer.com/trainer/the-witcher-3-wild-hunt-trainer/",
-    "safeVerification": {
-        "isCleanVerified": True,
-        "hasBundledAds": False,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "D41D8CD98F00B204E9800998ECF8427E (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-            "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-            "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-            "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-            "4. 【运行顺序】建议先启动 Steam / GOG 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-    },
-    "hotkeysCategorized": [
-        {
-            "category": "⚔️ 战斗与生命 (Combat & Survival)",
-            "items": [
-                {"key": "Num 1", "action": "杰洛特无限生命 (Infinite Health)"},
-                {"key": "Num 2", "action": "无限活力/耐力 (Infinite Stamina)"},
-                {"key": "Num 3", "action": "肾上腺素瞬间全满 (Max Adrenaline)"},
-                {"key": "Num 4", "action": "毒素毒性槽清零 (Zero Toxicity)"},
-                {"key": "Num 5", "action": "无限氧气水下潜水 (Infinite Oxygen)"},
-                {"key": "Num 6", "action": "武器与装备永不磨损 (Indestructible Equipment)"},
-                {"key": "Num 0", "action": "一击必杀 (One Hit Kill)"}
-            ]
-        },
-        {
-            "category": "💰 财富、技能与负重 (Economy, Skills & Inventory)",
-            "items": [
-                {"key": "Ctrl+Num 1", "action": "增加 100,000 克朗金币 (Add 100,000 Money)"},
-                {"key": "Ctrl+Num 2", "action": "物品材料与炸弹不减 (Infinite Items & Bombs)"},
-                {"key": "Ctrl+Num 3", "action": "增加 10 点能力点 (Add 10 Ability Points)"},
-                {"key": "Ctrl+Num 4", "action": "负重上限永久锁定 9999 (Infinite Weight Limit)"},
-                {"key": "Ctrl+Num 5", "action": "昆特牌对决必定获胜 (Always Win Gwent)"}
-            ]
-        }
-    ]
-}
 
-witcher_reviews = [
-    {
-        "user": "GeraltOfRivia99",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-18",
-        "title": "次世代版 / 完全版 v4.04 完美运行！控制台秒开太方便了！",
-        "content": "改 general.ini 一秒开控制台，免去任何 DLL 插件！刷昆特牌 secretgwint 指令和湖中之剑太爽了，省下二周目几十个小时！强烈推荐安装 HD Reworked NextGen，次世代光追画质提升巨大！",
-        "upvotes": 680
-    },
-    {
-        "user": "CiriZireael",
-        "rating": "⭐⭐⭐⭐⭐",
-        "date": "2026-10-19",
-        "title": "次世代专属西境白虎套和网飞大超遗弃狼套装绝帅！",
-        "content": "中国风九尾狐女双剑和西境白虎战甲太有牌面了！输入 Ciri 直接瞬移砍杀太强，另外大超同款紧身纯黑战甲帅哭，双重法印非常猛！",
-        "upvotes": 520
-    }
-]
+OWNED_FIELDS = (
+    "title",
+    "titles",
+    "consoleCategories",
+    "popularCommands",
+    "curatedMods",
+    "latestPatch",
+    "modInstallPath",
+    "nexusStats",
+    "consoleShortcut",
+    "consoleEnableGuide",
+)
 
-# Update witcher-3
-for g in games:
-    if g["id"] == "witcher-3":
-        g["title"] = "The Witcher 3: Wild Hunt - Complete Edition (Next-Gen)"
-        g["titles"] = {
+
+def witcher3_fields():
+    return {
+        "title": "The Witcher 3: Wild Hunt - Complete Edition (Next-Gen)",
+        "titles": {
             "en": "The Witcher 3: Wild Hunt - Complete Edition (Next-Gen)",
             "zh-CN": "巫师 3：狂猎 (次世代版 / 完全版 / 完全版)",
             "zh-TW": "巫師 3：狂獵 (次世代重製版 / 完全版)",
@@ -1698,36 +1683,25 @@ for g in games:
             "ru": "Ведьмак 3: Дикая Охота — Полное издание (Next-Gen)",
             "de": "The Witcher 3: Wild Hunt - Complete Edition (Next-Gen)",
             "es": "The Witcher 3: Wild Hunt - Edición Completa (Next-Gen)"
-        }
-        g["consoleCategories"] = witcher_categories
-        g["popularCommands"] = witcher_popular
-        g["curatedMods"] = witcher_mods
-        g["trainerInfo"] = witcher_trainer
-        g["communityReviews"] = witcher_reviews
-        g["latestPatch"] = "v4.04 (次世代版 / 完全版 - 官方 REDkit & 工坊支持)"
-        g["modInstallPath"] = "The Witcher 3\\Mods\\ (次世代 DX12 主程序位于 bin\\x64_dx12\\witcher3.exe)"
-        g["nexusStats"] = {
+        },
+        "consoleCategories": witcher_categories,
+        "popularCommands": witcher_popular,
+        "curatedMods": witcher_mods,
+        "latestPatch": "v4.04 (次世代版 / 完全版 - 官方 REDkit & 工坊支持)",
+        "modInstallPath": "The Witcher 3\\Mods\\ (次世代 DX12 主程序位于 bin\\x64_dx12\\witcher3.exe)",
+        "nexusStats": {
             "totalDownloads": "194.5M",
             "totalEndorsements": "885K",
             "totalMods": "7,840",
-            "latestPatch": "Next-Gen v4.04 Ready"
-        }
-        g["consoleShortcut"] = "~ (波浪键) 或 @ 键 (次世代原生 ini 开启，免 DLL 注入)"
-        g["consoleEnableGuide"] = {
+            "latestPatch": "Next-Gen v4.04"
+        },
+        "consoleShortcut": "~ (波浪键) 或 @ 键 (次世代原生 ini 开启，免 DLL 注入)",
+        "consoleEnableGuide": {
             "zh-CN": "1. 【原生免 Mod 开启控制台】在《巫师3 次世代版 / 完全版》安装根目录进入 bin\\config\\base\\ 文件夹，用记事本打开 general.ini；\n2. 【追加调试参数】在文件末尾 [General] 区块最下方另起一行，添加 DBGConsoleOn=true 并保存退出；\n3. 【呼出与执行】启动游戏（次世代默认 DX12 版本路径为 bin\\x64_dx12\\witcher3.exe），在任何战役关卡按下键盘 ~ (波浪键) 或 @ 键即可弹出顶部控制台，输入下方代码回车直接生效！\n4. 【次世代版 / 完全版原生特色提示】本版本已内置原生「拍照模式」(在游戏中随时按 U 键呼出，支持景深、自由机位与滤镜)、「法印快捷施法」(游戏设置-游戏性中开启，无需呼出法印轮盘)、「自动涂抹剑油」(游戏设置中开启，无需额外Mod)，并全面支持官方 REDkit 编辑器与 Steam 创意工坊！",
             "en": "1. Navigate to 'The Witcher 3\\bin\\config\\base\\', open general.ini in Notepad.\n2. Add 'DBGConsoleOn=true' under [General] and save.\n3. Launch game (DX12 executable is in bin\\x64_dx12\\witcher3.exe), press ~ or @ in-game to open console.\n4. Next-Gen features: Built-in Photo Mode (press U), Quick Sign Casting (in Gameplay settings), Auto-apply Oils, and official REDkit mod editor / Steam Workshop support."
         }
-        break
+    }
 
-with open(JSON_PATH, 'w', encoding='utf-8') as f:
-    json.dump(games, f, ensure_ascii=False, indent=2)
 
-print(f"✅ Successfully updated {JSON_PATH}")
-
-with open(JS_PATH, 'w', encoding='utf-8') as f:
-    f.write('// L-MOD Vault Offline Database (Enriched v3)\n')
-    f.write('window.GAMES_DATA = ')
-    json.dump(games, f, ensure_ascii=False, indent=2)
-    f.write(';\n')
-
-print(f"✅ Successfully synchronized {JS_PATH}")
+if __name__ == "__main__":
+    write_owned_fields("rebuild_witcher3_flagship.py", OWNED_FIELDS, {GAME_ID: witcher3_fields()})

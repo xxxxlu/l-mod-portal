@@ -1,12 +1,29 @@
 #!/usr/bin/env python3
 """
 generate_games_data.py
-Generates the authoritative 100 Games Dataset ranked by all-time popularity / modding demand.
-Supports 8 major gaming languages: EN, ZH-CN, ZH-TW, JA, KO, RU, DE, ES.
+Bootstrap for the master data (src/data/games_top100.json): the 100 games with
+titles in 8 languages (EN, ZH-CN, ZH-TW, JA, KO, RU, DE, ES) and base metadata.
+
+Only for starting from nothing: if the master data already exists, it stops
+without writing (writing it would replace every game, including the radar fields
+from steam_patch_monitor.py and the trainer fields from fling_trainer_sync.py).
+It does not write public/data.js.
+
+Ranks 11-100 get no placeholder content: no made-up mods, commands or trainer
+hotkeys (trainer data comes from fling_trainer_sync.py).
 """
 
 import json
 import os
+import sys
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+OUTPUT_DIR = os.path.join(BASE_DIR, "src/data")
+TARGET_PATH = os.path.join(OUTPUT_DIR, "games_top100.json")
+
+if os.path.exists(TARGET_PATH):
+    sys.exit(f"❌ {TARGET_PATH} already exists; this bootstrap would replace every game "
+             f"(radar and trainer fields included). Nothing written.")
 
 # Definition of the Top 100 Games with deep metadata
 TOP_100_GAMES = [
@@ -608,7 +625,7 @@ for rank_offset, item in enumerate(REMAINING_GAMES_METADATA, start=11):
         "genre": genre,
         "steamRating": rating,
         "hasConsole": has_console,
-        "consoleShortcut": "~ / F1 / Settings" if has_console else "无官方控制台 (支持修改器/MOD)",
+        "consoleShortcut": "~ / F1 / Settings" if has_console else "无官方控制台",
         "consoleEnableGuide": {
             "zh-CN": console_guide,
             "en": f"Official Console / Developer Guide for {en_title}: {console_guide}",
@@ -619,29 +636,19 @@ for rank_offset, item in enumerate(REMAINING_GAMES_METADATA, start=11):
             "de": f"Offizielle Konsole & Mod-Anleitung für {en_title}: {console_guide}",
             "es": f"Guía oficial de consola y mods para {en_title}: {console_guide}"
         },
-        "popularCommands": [
-            {"name": {"zh-CN": "常用便捷指令 / 修改方案", "en": "General Cheat / Config"}, "command": "godmode / cheat / trainer", "desc": console_guide}
-        ] if has_console else [],
+        "popularCommands": [],
         "hasMods": has_mods,
         "modInstallPath": f"{en_title}\\Mods" if has_mods else "N/A",
-        "mustHaveMods": [
-            {"name": "Community Essential Patch / QoL", "category": "QoL & Fixes", "desc": f"针对 {zh_title} 的社区必备体验与性能优化补丁包"}
-        ] if has_mods else [],
+        "mustHaveMods": [],
         "hasTrainer": has_trainer,
-        "trainerHotkeys": [
-            {"key": "Num 1", "action": "Infinite Health (无限生命)"},
-            {"key": "Num 2", "action": "Infinite Ammo / Stamina (无限子弹/耐力)"},
-            {"key": "Num 3", "action": "Infinite Money / Resources (无限金钱/资源)"}
-        ] if has_trainer else []
+        "trainerHotkeys": []
     }
     all_games.append(game_obj)
 
 # Ensure output dir exists
-output_dir = "/Users/xiaolu/Desktop/work/l-mod-portal/src/data"
-os.makedirs(output_dir, exist_ok=True)
+os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-target_path = os.path.join(output_dir, "games_top100.json")
-with open(target_path, "w", encoding="utf-8") as f:
+with open(TARGET_PATH, "w", encoding="utf-8") as f:
     json.dump(all_games, f, ensure_ascii=False, indent=2)
 
-print(f"Successfully generated {len(all_games)} games in {target_path}")
+print(f"Successfully generated {len(all_games)} games in {TARGET_PATH}")

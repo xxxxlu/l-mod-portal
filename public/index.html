@@ -2794,6 +2794,11 @@
           `;
           reviewsList.appendChild(rdiv);
         });
+      } else {
+        const empty = document.createElement('div');
+        empty.className = 'rounded-[24px] p-6 border border-dashed border-zinc-200/80 dark:border-white/10 text-center text-xs sm:text-sm text-zinc-500 dark:text-zinc-400';
+        empty.textContent = t('reviewsEmpty');
+        reviewsList.appendChild(empty);
       }
 
       setDetailTab('console');
