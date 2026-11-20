@@ -19,12 +19,12 @@ GAME_ID = "baldurs-gate-3"
 
 bg3_categories = [
     {
-        "category": "👑 核心生存、豁免锁死与全法术位无限长休 (God Mode, Spell Slots & Long Rest)",
+        "category": "👑 核心生存与状态恢复 (Survival & Status Recovery)",
         "commands": [
             {
                 "id": "bg3_apply_sanctuary",
                 "name": {
-                    "zh-CN": "赋予常驻庇护术状态 (绝对免受单体攻击)",
+                    "zh-CN": "赋予常驻庇护术状态（免疫单体锁定攻击）",
                     "en": "Permanent Sanctuary Buff"
                 },
                 "syntax_type": "lua_function",
@@ -60,34 +60,34 @@ bg3_categories = [
         ]
     },
     {
-        "category": "🎯 角色等级直升、经验值与职业兼修洗点 (Level, XP & Respec)",
+        "category": "🎯 复活与急救道具 (Revival Items)",
         "commands": [
             {
                 "id": "bg3_spawn_revivify_scroll",
                 "name": {
-                    "zh-CN": "获得复活卷轴 x10 (野外救急与守墓人洗点备用)",
+                    "zh-CN": "复活卷轴 x10（无需长休即可复活队友）",
                     "en": "Scroll of Revivify x10"
                 },
                 "syntax_type": "lua_function",
                 "code": "Osi.TemplateAddTo(\"c1c3e4fb-d68c-4e10-afdc-d4550238d50e\", GetHostCharacter(), 10)",
-                "desc": "向背包添加 10 张神圣复活卷轴，无需长休即可随时拉起倒下的战友。",
+                "desc": "向背包添加 10 张复活卷轴，无需长休即可随时拉起倒下的战友。",
                 "framework_required": "BG3 Script Extender (Norbyte)",
                 "source": "https://bg3.wiki/wiki/Scroll_of_Revivify"
             }
         ]
     },
     {
-        "category": "💰 财富自由、负重解限与全营地补给物资 (Gold, Weight & Camp Supplies)",
+        "category": "💰 金币、营地补给与工具道具 (Gold, Camp Supplies & Tools)",
         "commands": [
             {
                 "id": "bg3_add_gold_100k",
                 "name": {
-                    "zh-CN": "增加 100,000 金币 (博德之门首富)",
+                    "zh-CN": "增加 100,000 金币",
                     "en": "Add 100,000 Gold"
                 },
                 "syntax_type": "lua_function",
                 "code": "Osi.AddGold(GetHostCharacter(), 100000)",
-                "desc": "向背包注入 10 万金币，随心所欲搬空第三章巫术杂货铺与各大商贩所有稀世魔法装备！",
+                "desc": "向背包注入 10 万金币，可用于购买商店中的装备和物资。",
                 "framework_required": "BG3 Script Extender (Norbyte)",
                 "source": "https://docs.baldursgate3.game/index.php?title=AddGold"
             },
@@ -106,72 +106,72 @@ bg3_categories = [
             {
                 "id": "bg3_camp_supplies_pack",
                 "name": {
-                    "zh-CN": "营地补给补给包 x50 (永久告别搜刮食物长休)",
+                    "zh-CN": "营地补给包 x50",
                     "en": "Camp Supply Pack x50 (Full Rest Supply)"
                 },
                 "syntax_type": "lua_function",
                 "code": "Osi.TemplateAddTo(\"398e7328-ce90-4c02-94a2-93341fac499a\", GetHostCharacter(), 50)",
-                "desc": "每个补给包提供整整 40 点补给点，50 包足够连续进行 50 次完全长休，无限次触发营地剧情与法术位重置！",
+                "desc": "每个补给包提供 40 点补给，50 个补给包足够进行 50 次完全长休，用于触发营地剧情与恢复法术位。",
                 "framework_required": "BG3 Script Extender (Norbyte)",
                 "source": "https://bg3.wiki/wiki/Supply_Pack"
             },
             {
                 "id": "bg3_thieves_tools",
                 "name": {
-                    "zh-CN": "高级盗贼工具 x30 (秒撬全大陆所有宝箱大门)",
+                    "zh-CN": "高级盗贼工具 x30",
                     "en": "Thieves' Tools x30"
                 },
                 "syntax_type": "lua_function",
                 "code": "Osi.TemplateAddTo(\"e32a200c-5b63-414d-ae57-00e7b38f125b\", GetHostCharacter(), 30)",
-                "desc": "阿斯代伦撬锁专用高阶工具，轻松开遍地城密室与银行金库。",
+                "desc": "阿斯塔利昂撬锁专用的高阶工具，可用于打开上锁的箱子与房门。",
                 "framework_required": "BG3 Script Extender (Norbyte)",
                 "source": "https://bg3.wiki/wiki/Thieves%27_Tools"
             },
             {
                 "id": "bg3_trap_disarm_tools",
                 "name": {
-                    "zh-CN": "陷阱解除工具包 x30 (安全拆除全地城陷阱)",
+                    "zh-CN": "陷阱拆除工具包 x30",
                     "en": "Trap Disarm Toolkit x30"
                 },
                 "syntax_type": "lua_function",
                 "code": "Osi.TemplateAddTo(\"22c74b5e-bef2-41b1-b9ed-f4acc766d4ee\", GetHostCharacter(), 30)",
-                "desc": "安全拆除火球、落石与爆炸毒雾陷阱，探险零伤亡。",
+                "desc": "用于拆除火球、落石、毒雾等陷阱，避免触发陷阱造成的伤害。",
                 "framework_required": "BG3 Script Extender (Norbyte)",
                 "source": "https://bg3.wiki/wiki/Trap_Disarm_Toolkit"
             }
         ]
     },
     {
-        "category": "🧠 夺心魔蝌蚪寄生虫与至尊灵能潜能 (Illithid Parasites & Powers)",
+        "category": "🧠 夺心魔寄生虫与灵能 (Illithid Parasites & Powers)",
         "commands": [
             {
                 "id": "bg3_illithid_parasites_30",
                 "name": {
-                    "zh-CN": "夺心魔寄生虫标本 x30 (点满全员脑池灵能潜能)",
+                    "zh-CN": "夺心魔寄生虫标本 x30（用于解锁灵能异能）",
                     "en": "Mind Flayer Parasite Specimen x30"
                 },
                 "syntax_type": "lua_function",
                 "code": "Osi.TemplateAddTo(\"1ec327be-3b7f-4502-9586-860e057e09ae\", GetHostCharacter(), 30)",
-                "desc": "一次性获得 30 只夺心魔蝌蚪，直接将主角与全队所有伙伴的脑部异能树（灵能过载、强运不利、灵能反冲等）全部点满！",
+                "desc": "一次性获得 30 个夺心魔寄生虫标本，可用于解锁主角与队友的灵能异能（如灵能过载、强运不利、灵能反冲等）。",
                 "framework_required": "BG3 Script Extender (Norbyte)",
                 "source": "https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen"
             },
             {
                 "id": "bg3_astral_tadpole",
                 "name": {
-                    "zh-CN": "受星界灌注的蝌蚪 (解锁半夺心魔至尊灵能与自由飞行)",
+                    "zh-CN": "受星界感染的蝌蚪（解锁半夺心魔形态与飞行）",
                     "en": "Astral-Touched Tadpole (Half-Illithid)"
                 },
                 "syntax_type": "lua_function",
                 "code": "Osi.TemplateAddTo(\"4a82e6f2-839f-434e-addf-b07dd1578194\", GetHostCharacter(), 1)",
-                "desc": "君主赠予的至尊星界蝌蚪，食用后立刻晋升为半夺心魔形态，解锁三层终极外圈技能与永久无消耗全图无障碍自由飞行！",
+                "desc": "君主赠予的特殊蝌蚪，食用后角色变为半夺心魔形态，解锁三层外圈异能，并获得无消耗的自由飞行能力。",
                 "framework_required": "BG3 Script Extender (Norbyte)",
                 "source": "https://bg3.wiki/wiki/Astral-Touched_Tadpole"
             }
         ]
     },
     {
-        "category": "🗡️ 绝世金色传奇近战神兵 (Legendary Melee Weapons)",
+        "category": "🗡️ 传奇近战武器 (Legendary Melee Weapons)",
         "commands": [
             {
                 "id": "bg3_balduran_giantslayer",
@@ -181,132 +181,132 @@ bg3_categories = [
                 },
                 "syntax_type": "lua_function",
                 "code": "Osi.TemplateAddTo(\"7219fca3-5f41-43a0-8253-f4c09d8b6308\", GetHostCharacter(), 1)",
-                "desc": "安苏巨龙巢穴最强神兵！力量调整值双倍附加伤害，自带「巨人体型」技能，体型暴增且攻击造成额外巨额武器力场打击！",
+                "desc": "安苏巨龙巢穴掉落的双手巨剑，攻击伤害额外增加等同于两倍力量调整值的加成，并自带「巨人体型」技能，使角色体型变大。",
                 "framework_required": "BG3 Script Extender (Norbyte)",
                 "source": "https://bg3.wiki/wiki/Balduran%27s_Giantslayer"
             },
             {
                 "id": "bg3_nyrulna_trident",
                 "name": {
-                    "zh-CN": "尼鲁纳三叉戟 (投掷流至尊神器 - 自动回手与雷鸣爆破)",
+                    "zh-CN": "尼鲁纳三叉戟 (投掷武器 - 自动回手与雷鸣爆炸)",
                     "en": "Nyrulna (Legendary Returning Trident)"
                 },
                 "syntax_type": "lua_function",
                 "code": "Osi.TemplateAddTo(\"daf0be7f-87d9-448a-b94e-471ffec40ac5\", GetHostCharacter(), 1)",
-                "desc": "末日马戏团头奖神器！投掷后无论飞出多远都会自动飞回手中，落地伴随大范围 3d4 雷鸣爆炸，全游戏投掷蛮子与战士的毕业神武！",
+                "desc": "马戏团剧情获得的三叉戟，投掷出去后会自动飞回手中，落地时造成范围 3d4 雷鸣伤害。",
                 "framework_required": "BG3 Script Extender (Norbyte)",
                 "source": "https://bg3.wiki/wiki/Nyrulna"
             },
             {
                 "id": "bg3_markoheshkir_staff",
                 "name": {
-                    "zh-CN": "玛科赫什基传奇法杖 (全法系毕业终极神杖 - 免费免消耗施法)",
+                    "zh-CN": "玛科赫什基法杖 (传奇法杖 - 免消耗施放法术)",
                     "en": "Markoheshkir (Legendary Staff)"
                 },
                 "syntax_type": "lua_function",
                 "code": "Osi.TemplateAddTo(\"7e39ad11-f8c3-421a-940c-05348c420c7d\", GetHostCharacter(), 1)",
-                "desc": "拉玛吉斯高塔顶层至尊法杖！法术豁免难度与攻击掷骰 +1，自带「凯瑟里克之宠」多重元素附魔，每场战斗可免费免消耗释放一次 6 环终极法术！",
+                "desc": "拉玛吉斯高塔获得的法杖，使法术豁免难度和攻击掷骰 +1，并带有多重元素附魔，每场战斗可免费施放一次 6 环法术。",
                 "framework_required": "BG3 Script Extender (Norbyte)",
                 "source": "https://bg3.wiki/wiki/Markoheshkir"
             },
             {
                 "id": "bg3_blood_of_lathander",
                 "name": {
-                    "zh-CN": "洛山达之血钉头锤 (第一章传奇神锤 - 盲目不死生物与自动免死重生)",
+                    "zh-CN": "洛山达之血钉头锤 (传奇钉头锤 - 致盲不死生物与自动复苏)",
                     "en": "The Blood of Lathander (Legendary Mace)"
                 },
                 "syntax_type": "lua_function",
                 "code": "Osi.TemplateAddTo(\"7b961f08-46c1-46b1-99bc-c59283831a0b\", GetHostCharacter(), 1)",
-                "desc": "晨曦之神洛山达的圣物，常驻 6 米范围内所有不死生物与邪魔致盲，生命归零时立即原地回血复苏并为全队回血！",
+                "desc": "晨曦之神洛山达的圣物，范围 6 米内的不死生物与邪魔会被致盲；生命归零时自动回复生命而非倒地，并为附近队友回血。",
                 "framework_required": "BG3 Script Extender (Norbyte)",
                 "source": "https://bg3.wiki/wiki/The_Blood_of_Lathander"
             },
             {
                 "id": "bg3_silver_sword_astral",
                 "name": {
-                    "zh-CN": "星界银剑 (吉斯洋基人至尊巨剑 - 灵能伤害与心灵伤害免疫)",
+                    "zh-CN": "星界银剑 (传奇大剑 - 吉斯洋基人持有者专属加成)",
                     "en": "Silver Sword of the Astral Plane"
                 },
                 "syntax_type": "lua_function",
                 "code": "Osi.TemplateAddTo(\"f01c3f5d-c542-420f-86c5-bdddf7819e29\", GetHostCharacter(), 1)",
-                "desc": "洋基妹莱埃泽尔专属神器，由沃斯百夫长所赐，附带额外 1d6 心灵伤害，持有者完全免疫魅惑与心灵震慑伤害！",
+                "desc": "传奇+3巨剑，基础伤害为 2d6+3 加力量调整值；若由吉斯洋基人（如莱埃泽尔）持有，则额外获得心灵伤害加成、魅惑免疫与多项豁免优势。",
                 "framework_required": "BG3 Script Extender (Norbyte)",
                 "source": "https://bg3.wiki/wiki/Silver_Sword_of_the_Astral_Plane"
             },
             {
                 "id": "bg3_crimson_mischief",
                 "name": {
-                    "zh-CN": "猩红恶意短剑 (奥林巴尔神选近战短剑)",
+                    "zh-CN": "猩红恶意短剑 (传奇短剑)",
                     "en": "Crimson Mischief (Legendary Shortsword)"
                 },
                 "syntax_type": "lua_function",
                 "code": "Osi.TemplateAddTo(\"5961d027-75fd-4ad7-964c-8b786b5839fb\", GetHostCharacter(), 1)",
-                "desc": "击杀血腥奥林获取的刺杀神器，对处于优势的敌人额外追加 7 点纯穿刺伤害加成！",
+                "desc": "击败血腥奥林获得的短剑；主手攻击对生命值低于一半的目标追加 1d4 穿刺伤害，副手持握且攻击带有优势时追加 7 点穿刺伤害。",
                 "framework_required": "BG3 Script Extender (Norbyte)",
                 "source": "https://bg3.wiki/wiki/Crimson_Mischief"
             },
             {
                 "id": "bg3_bloodthirst_dagger",
                 "name": {
-                    "zh-CN": "嗜血狂怒匕首 (增加暴击率与反弹借机攻击)",
+                    "zh-CN": "嗜血狂怒匕首 (传奇匕首 - 暴击率提升与反击)",
                     "en": "Bloodthirst (Legendary Dagger)"
                 },
                 "syntax_type": "lua_function",
                 "code": "Osi.TemplateAddTo(\"d90abf24-3c4e-4bbf-84aa-def05ca9962a\", GetHostCharacter(), 1)",
-                "desc": "暴击所需点数降低 1 点，击中敌人施加穿刺易伤 Debuff，主手装备时近战攻击落空会自动反击！",
+                "desc": "传奇+2匕首；主手持握时暴击所需点数降低 1 点，副手持握时近战命中会使目标易受穿刺伤害，且敌人攻击落空时可用反应发动反击。",
                 "framework_required": "BG3 Script Extender (Norbyte)",
                 "source": "https://bg3.wiki/wiki/Bloodthirst"
             },
             {
                 "id": "bg3_duelist_prerogative",
                 "name": {
-                    "zh-CN": "决斗者的特权细剑 (双重附赠动作与额外借机攻击)",
+                    "zh-CN": "决斗者的特权细剑 (传奇细剑 - 额外反应与暴击加成)",
                     "en": "Duelist's Prerogative (Legendary Rapier)"
                 },
                 "syntax_type": "lua_function",
                 "code": "Osi.TemplateAddTo(\"d49bf05e-4f94-4860-bd8c-ae63dae811be\", GetHostCharacter(), 1)",
-                "desc": "单手持握时每回合额外获得一次附赠动作与反应机会，暴击阈值大幅下降，自带坏死伤害挑战决斗技能！",
+                "desc": "传奇细剑，副手空闲时额外获得一次反应机会，且掷骰 19 或 20 即视为暴击；命中敌人时可用反应追加等同熟练加值的坏死伤害。",
                 "framework_required": "BG3 Script Extender (Norbyte)",
                 "source": "https://bg3.wiki/wiki/Duellist%27s_Prerogative"
             },
             {
                 "id": "bg3_selune_spear_night",
                 "name": {
-                    "zh-CN": "塞伦涅的黑夜之矛 (月之圣矛 - 黑暗视觉与全豁免优势)",
+                    "zh-CN": "塞伦涅的黑夜之矛 (传奇长枪 - 黑暗视觉与感知优势)",
                     "en": "Selûne's Spear of Night"
                 },
                 "syntax_type": "lua_function",
                 "code": "Osi.TemplateAddTo(\"2eeabe97-8f29-4f4f-827e-6cfcd8fd1779\", GetHostCharacter(), 1)",
-                "desc": "影心救赎线专属圣矛，赋予持有者黑暗视觉与感知豁免优势，附带「月之微光」与「月之护盾」神圣技能！",
+                "desc": "影心救赎结局专属武器，攻击与伤害 +3，赋予黑暗视觉、感知检定与感知豁免优势，并可每次长休施放一次「月光束」和「月斑」。",
                 "framework_required": "BG3 Script Extender (Norbyte)",
                 "source": "https://bg3.wiki/wiki/Selûne%27s_Spear_of_Night"
             },
             {
                 "id": "bg3_shar_spear_evening",
                 "name": {
-                    "zh-CN": "莎尔的暮色之矛 (黑夜法官专属神器 - 黑暗视觉与隐形)",
+                    "zh-CN": "莎尔的暮色之矛 (传奇长枪 - 黑暗免疫与遮蔽加成)",
                     "en": "Shar's Spear of Evening"
                 },
                 "syntax_type": "lua_function",
                 "code": "Osi.TemplateAddTo(\"61f31bf6-47ec-41e1-9385-2f6c26facc87\", GetHostCharacter(), 1)",
-                "desc": "影心堕落成为暗夜法官之刃，在魔法黑暗中视物无阻且造成额外 1d6 伤害，自带「莎尔之拥」自由隐形！",
+                "desc": "黑夜法官专属武器，佩戴者免疫致盲并可在魔法黑暗中视物，对处于隐蔽状态的目标攻击额外造成 1d6 伤害；可每回合施放一次「莎尔的黑暗」法术。",
                 "framework_required": "BG3 Script Extender (Norbyte)",
                 "source": "https://bg3.wiki/wiki/Shar%27s_Spear_of_Evening"
             }
         ]
     },
     {
-        "category": "🏹 绝世传奇远程武器与高阶箭矢 (Legendary Ranged Weapons & Ammo)",
+        "category": "🏹 传奇远程武器与特殊箭矢 (Legendary Ranged Weapons & Ammo)",
         "commands": [
             {
                 "id": "bg3_gontr_mael",
                 "name": {
-                    "zh-CN": "冈特·耶尔传奇长弓 (钢铁卫士铸造厂泰坦神弓 - 恒定加速与神圣引导)",
+                    "zh-CN": "冈特·耶尔长弓 (传奇长弓 - 命中附加效果与急速术)",
                     "en": "Gontr Mael (Legendary Longbow)"
                 },
                 "syntax_type": "lua_function",
                 "code": "Osi.TemplateAddTo(\"7e81bb6a-f465-4fe9-b1db-7ce6198246ba\", GetHostCharacter(), 1)",
-                "desc": "击败钢铁卫士泰坦获取的神弓！bg3.wiki 标注其武器类型为长弓（Longbow），并非原目录所写的“重弩”；攻击命中敌人概率施加「发光光辉」，自带「天界加速术」。",
+                "desc": "击败钢铁巨人获得的传奇+3长弓；bg3.wiki 标注其武器类型为长弓（而非原目录所写的重弩）。命中有概率对目标施加「发光光辉」，并可每次长休使用一次「天界急速术」获得急速状态。",
                 "framework_required": "BG3 Script Extender (Norbyte)",
                 "source": "https://bg3.wiki/wiki/Gontr_Mael"
             },
@@ -318,7 +318,7 @@ bg3_categories = [
                 },
                 "syntax_type": "lua_function",
                 "code": "Osi.TemplateAddTo(\"269b2b03-aaaf-4635-98e2-e9b32dab5ffa\", GetHostCharacter(), 1)",
-                "desc": "神射手流派核心远程武器，将致命一击需求降低 1 点，并使攻击掷骰的熟练加值直接翻倍！",
+                "desc": "将暴击所需骰值降低 1 点（可叠加，影响全部攻击），并使用该弓进行远程攻击时熟练加值翻倍。",
                 "framework_required": "BG3 Script Extender (Norbyte)",
                 "source": "https://bg3.wiki/wiki/The_Dead_Shot"
             },
@@ -330,19 +330,19 @@ bg3_categories = [
                 },
                 "syntax_type": "lua_function",
                 "code": "Osi.TemplateAddTo(\"13236988-83df-4bf2-8005-b4ac31f21ff4\", GetHostCharacter(), 1)",
-                "desc": "配合巨人药水实现伤害最大化的变态长弓，在敏捷加成之外将全额力量加成叠加在每一箭上！",
+                "desc": "长弓在敏捷加成之外，额外将力量调整值加入每次远程攻击伤害，可配合力量增益药水提升输出。",
                 "framework_required": "BG3 Script Extender (Norbyte)",
                 "source": "https://bg3.wiki/wiki/Titanstring_Bow"
             },
             {
                 "id": "bg3_arrows_many_targets",
                 "name": {
-                    "zh-CN": "多重目标箭 x30 (一箭串联散射全屏小怪)",
+                    "zh-CN": "弹射箭 x30 (命中后弹射至最多 3 个额外目标)",
                     "en": "Arrow of Many Targets x30"
                 },
                 "syntax_type": "lua_function",
                 "code": "Osi.TemplateAddTo(\"b11b3f7f-d8ec-41db-93b9-24474aea31e3\", GetHostCharacter(), 30)",
-                "desc": "射出后自动弹射至目标周围最多 3 名额外敌人，清图效率最狂暴的高阶箭矢！",
+                "desc": "射中目标后会弹射，额外命中附近最多 3 个目标（弹射伤害为武器伤害的一半）。",
                 "framework_required": "BG3 Script Extender (Norbyte)",
                 "source": "https://bg3.wiki/wiki/Arrow_of_Many_Targets"
             },
@@ -354,291 +354,291 @@ bg3_categories = [
                 },
                 "syntax_type": "lua_function",
                 "code": "Osi.TemplateAddTo(\"437835b4-0d13-47b7-8aca-5da4f948783b\", GetHostCharacter(), 10)",
-                "desc": "决战安苏巨龙与耐色瑞尔红龙必备，命中造成两倍绝对暴击伤害！",
+                "desc": "只能用于攻击巨龙，命中巨龙时造成两倍武器伤害。",
                 "framework_required": "BG3 Script Extender (Norbyte)",
                 "source": "https://bg3.wiki/wiki/Arrow_of_Dragon_Slaying"
             }
         ]
     },
     {
-        "category": "🛡️ 绝世传奇护甲与地狱火重装 (Legendary Armour & Helldusk Set)",
+        "category": "🛡️ 传奇护甲与地狱火套装 (Legendary Armour & Helldusk Set)",
         "commands": [
             {
                 "id": "bg3_helldusk_armor",
                 "name": {
-                    "zh-CN": "地狱火胸甲 (21点高AC重甲 - 全职业免熟练项穿戴与绝对免火伤)",
+                    "zh-CN": "地狱火胸甲 (传奇重甲 - AC 21，全职业免熟练要求)",
                     "en": "Helldusk Armour (AC 21 Legendary)"
                 },
                 "syntax_type": "lua_function",
                 "code": "Osi.TemplateAddTo(\"7ae705fd-1cfd-4482-a584-d2e68f9c1262\", GetHostCharacter(), 1)",
-                "desc": "希望之邸拉斐尔掉落的终极重铠！高达 21 护甲等级，任何职业穿戴自动获得熟练项且不会阻碍施法，完全免疫燃烧并削减 3 点所有受到的伤害！",
+                "desc": "希望之邸拉斐尔处获得的重甲，护甲等级 21，任何职业穿戴都视为熟练；对火焰伤害有抗性且不会被点燃，并减少所受到的一切伤害 3 点。",
                 "framework_required": "BG3 Script Extender (Norbyte)",
                 "source": "https://bg3.wiki/wiki/Helldusk_Armour"
             },
             {
                 "id": "bg3_helldusk_helmet",
                 "name": {
-                    "zh-CN": "地狱火头盔 (免疫暴击、震慑与附加劣势)",
+                    "zh-CN": "地狱火头盔 (免疫暴击、黑暗视觉与法术豁免加值)",
                     "en": "Helldusk Helmet"
                 },
                 "syntax_type": "lua_function",
                 "code": "Osi.TemplateAddTo(\"1c198060-6b6a-41c5-82ce-a3d3c3d76404\", GetHostCharacter(), 1)",
-                "desc": "绝对免疫暴击打击，自带魔法抗性豁免优势与地狱火视界黑暗视觉，附带「灼热射线」法术！",
+                "desc": "佩戴后攻击者无法对佩戴者造成暴击，对法术豁免检定 +2，并获得不受黑暗影响的黑暗视觉，同时附带「灼热凝视」法术。",
                 "framework_required": "BG3 Script Extender (Norbyte)",
                 "source": "https://bg3.wiki/wiki/Helldusk_Helmet"
             },
             {
                 "id": "bg3_helldusk_gloves",
                 "name": {
-                    "zh-CN": "地狱火手套 (附加火焰坏死法术与近战双重伤害)",
+                    "zh-CN": "地狱火手套 (武器附加火焰伤害，空手附加坏死伤害)",
                     "en": "Helldusk Gloves"
                 },
                 "syntax_type": "lua_function",
                 "code": "Osi.TemplateAddTo(\"ad219a90-ab3d-4821-8206-011293f5837b\", GetHostCharacter(), 1)",
-                "desc": "武器攻击附带额外 1d6 火焰伤害，空手打击附加 1d6 坏死伤害并施加流血！",
+                "desc": "武器攻击附带额外 1d6 火焰伤害，空手攻击附加 1d6 坏死伤害并可能施加流血。",
                 "framework_required": "BG3 Script Extender (Norbyte)",
                 "source": "https://bg3.wiki/wiki/Helldusk_Gloves"
             },
             {
                 "id": "bg3_helldusk_boots",
                 "name": {
-                    "zh-CN": "地狱火靴子 (免疫强风与地面位移摔倒)",
+                    "zh-CN": "地狱火靴子 (免疫强制位移与部分困难地形)",
                     "en": "Helldusk Boots"
                 },
                 "syntax_type": "lua_function",
                 "code": "Osi.TemplateAddTo(\"bc82f909-ade5-4ada-9b94-cec7ca1d4a68\", GetHostCharacter(), 1)",
-                "desc": "绝对不会被法术击退或强制移动，免疫光滑冰面与油脂打滑，附带「地狱步」瞬移传送技能！",
+                "desc": "佩戴后不会被敌方效果强制击退或移动，并免疫熔岩、泥浆、藤蔓、蛛网等困难地形的减速效果；另附带「地狱爬行」瞬移技能，落地造成范围火焰伤害。",
                 "framework_required": "BG3 Script Extender (Norbyte)",
                 "source": "https://bg3.wiki/wiki/Helldusk_Boots"
             },
             {
                 "id": "bg3_helm_of_balduran",
                 "name": {
-                    "zh-CN": "博德安的头盔 (每回合自愈2点生命与绝对免疫暴击)",
+                    "zh-CN": "博德安的头盔 (每回合回复生命与免疫暴击)",
                     "en": "Helm of Balduran"
                 },
                 "syntax_type": "lua_function",
                 "code": "Osi.TemplateAddTo(\"0a64283a-1fc4-45cd-9e5e-f463f6b762ea\", GetHostCharacter(), 1)",
-                "desc": "博德之门传奇创始人头盔，AC +1，每回合开始自动恢复 2 点生命值，免疫一切致晕与暴击伤害！",
+                "desc": "博德之门创始人留下的头盔，提供 AC 和豁免 +1，战斗中每回合开始恢复 2 点生命，并使佩戴者免疫暴击和大部分致晕效果（部分特殊致晕来源除外）。",
                 "framework_required": "BG3 Script Extender (Norbyte)",
                 "source": "https://bg3.wiki/wiki/Helm_of_Balduran"
             },
             {
                 "id": "bg3_viconia_shield",
                 "name": {
-                    "zh-CN": "维康尼亚的行走要塞 (传奇重盾 - +3AC与法术反弹结界)",
+                    "zh-CN": "维康尼亚的行走要塞 (传奇盾牌 - +3AC 与反击效果)",
                     "en": "Viconia's Walking Fortress (Legendary Shield)"
                 },
                 "syntax_type": "lua_function",
                 "code": "Osi.TemplateAddTo(\"4f313dde-14bb-43a2-abdd-07b2eb38b33a\", GetHostCharacter(), 1)",
-                "desc": "哀伤之邸击败维康尼亚获得的至尊盾牌！高达 +3 护甲等级，对抗法术获得优势，被攻击时可使用反应力场直接将敌人击退震翻！",
+                "desc": "击败维康尼亚获得的盾牌，提供 +3 护甲等级与对抗法术的豁免优势；被近战攻击命中时可用反应造成力场伤害并尝试将敌人击倒在地。",
                 "framework_required": "BG3 Script Extender (Norbyte)",
                 "source": "https://bg3.wiki/wiki/Viconia%27s_Walking_Fortress"
             },
             {
                 "id": "bg3_bhaalist_armour",
                 "name": {
-                    "zh-CN": "巴尔信徒护甲 (赋予周围敌人穿刺易伤光环 - 物理伤害直接翻倍)",
+                    "zh-CN": "巴尔信徒护甲 (周围敌人穿刺伤害易伤光环)",
                     "en": "Bhaalist Armour (Aura of Murder)"
                 },
                 "syntax_type": "lua_function",
                 "code": "Osi.TemplateAddTo(\"443b2caf-8d36-42cf-b389-d774229ed18c\", GetHostCharacter(), 1)",
-                "desc": "刺客与弓手流派的核心神装，周围 2 米内所有非穿刺抗性敌人自动获得穿刺伤害翻倍易伤 Debuff！",
+                "desc": "刺客/弓手向流派防具，使周围 3 米内非穿刺免疫的敌人穿刺伤害翻倍，并获得 +2 先攻加值。",
                 "framework_required": "BG3 Script Extender (Norbyte)",
                 "source": "https://bg3.wiki/wiki/Bhaalist_Armour"
             },
             {
                 "id": "bg3_vest_soul_rejuvenation",
                 "name": {
-                    "zh-CN": "灵魂复苏胸甲 (武僧毕业神甲 - 反弹近战反击与法术自愈)",
+                    "zh-CN": "灵魂复苏胸甲 (AC+2，法术豁免回血与反击)",
                     "en": "Vest of Soul Rejuvenation"
                 },
                 "syntax_type": "lua_function",
                 "code": "Osi.TemplateAddTo(\"1c69a87e-9136-4e13-90af-c0f02d0fc81f\", GetHostCharacter(), 1)",
-                "desc": "散打宗武僧终极毕业防具，敌人近战攻击落空时可立即使用反应施展徒手攻击痛击对手！",
+                "desc": "防具提供 AC+2，法术豁免成功时回复 1d4 生命值；敌人近战攻击落空时可用反应发动一次徒手反击。",
                 "framework_required": "BG3 Script Extender (Norbyte)",
                 "source": "https://bg3.wiki/wiki/Vest_of_Soul_Rejuvenation"
             }
         ]
     },
     {
-        "category": "💍 传奇首饰、属性锁死护符与关键戒指 (Legendary Rings & Amulets)",
+        "category": "💍 传奇首饰与戒指 (Legendary Rings & Amulets)",
         "commands": [
             {
                 "id": "bg3_amulet_greater_health",
                 "name": {
-                    "zh-CN": "高等健康护符 (体质属性直接锁死 23 点与体质豁免优势)",
+                    "zh-CN": "高等健康护符 (体质设为 23 点)",
                     "en": "Amulet of Greater Health (Con 23)"
                 },
                 "syntax_type": "lua_function",
                 "code": "Osi.TemplateAddTo(\"5ed63342-30c9-456d-9a57-a88c8596c0c9\", GetHostCharacter(), 1)",
-                "desc": "佩戴后将佩戴者的体质属性直接拉满并强制锁死为 23 点，生命值暴涨上百点，法术专注检定获得常驻优势！",
+                "desc": "若佩戴者当前体质低于 23，会将其体质属性设为 23 点（体质已达到或超过 23 时无效），从而提高生命值上限。",
                 "framework_required": "BG3 Script Extender (Norbyte)",
                 "source": "https://bg3.wiki/wiki/Amulet_of_Greater_Health"
             },
             {
                 "id": "bg3_gauntlets_hill_giant",
                 "name": {
-                    "zh-CN": "山丘巨人力量手套 (力量属性直接锁死 23 点)",
+                    "zh-CN": "山丘巨人力量手套 (力量设为 23 点)",
                     "en": "Gauntlets of Hill Giant Strength (Str 23)"
                 },
                 "syntax_type": "lua_function",
                 "code": "Osi.TemplateAddTo(\"9481aa27-ce9c-414c-84ff-5e974fd64d89\", GetHostCharacter(), 1)",
-                "desc": "将佩戴者的力量属性直接恒定锁死为 23 点，无论法师或游荡者佩戴都能拥有撼动山丘的物理爆发与跳跃距离！",
+                "desc": "若佩戴者当前力量低于 23，会将其力量属性设为 23 点（力量已达到或超过 23 时无效）。",
                 "framework_required": "BG3 Script Extender (Norbyte)",
                 "source": "https://bg3.wiki/wiki/Gauntlets_of_Hill_Giant_Strength"
             },
             {
                 "id": "bg3_ring_regeneration",
                 "name": {
-                    "zh-CN": "再生之戒 (每回合开始自动回复 1d4 生命值)",
+                    "zh-CN": "再生之戒 (战斗中每回合回复 1d4 生命值)",
                     "en": "Ring of Regeneration"
                 },
                 "syntax_type": "lua_function",
                 "code": "Osi.TemplateAddTo(\"d6ee2594-7373-4fed-a167-f9d95cb4ecfd\", GetHostCharacter(), 1)",
-                "desc": "巫术杂货铺洛若坎售卖的传说戒指，战斗中与非战斗状态持续自愈回血。",
+                "desc": "洛若坎出售的戒指，战斗中每回合开始时恢复 1d4 生命值（非战斗状态下无效，角色倒地时也不会触发）。",
                 "framework_required": "BG3 Script Extender (Norbyte)",
                 "source": "https://bg3.wiki/wiki/Ring_of_Regeneration"
             },
             {
                 "id": "bg3_risky_ring",
                 "name": {
-                    "zh-CN": "风险之戒 (所有攻击掷骰常驻获得优势)",
+                    "zh-CN": "风险之戒 (攻击掷骰优势，但豁免检定劣势)",
                     "en": "Risky Ring (All Attack Rolls Advantage)"
                 },
                 "syntax_type": "lua_function",
                 "code": "Osi.TemplateAddTo(\"6fa51fb6-0c99-4e2e-bf3c-f4fe18fd64a7\", GetHostCharacter(), 1)",
-                "desc": "战术家与硬核玩家必备神戒，所有近战与远程攻击必定拥有双骰优势，触发暴击概率翻倍！",
+                "desc": "佩戴后所有攻击掷骰获得优势，但豁免检定会因此获得劣势，是有取舍的戒指。",
                 "framework_required": "BG3 Script Extender (Norbyte)",
                 "source": "https://bg3.wiki/wiki/Risky_Ring"
             },
             {
                 "id": "bg3_ring_free_action",
                 "name": {
-                    "zh-CN": "自由行动之戒 (免疫麻痹、禁锢与困难地形)",
+                    "zh-CN": "自由行动之戒 (免疫麻痹、束缚与困难地形)",
                     "en": "Ring of Free Action"
                 },
                 "syntax_type": "lua_function",
                 "code": "Osi.TemplateAddTo(\"50379f58-7892-44cb-be6e-146a60070055\", GetHostCharacter(), 1)",
-                "desc": "彻底无视藤蔓缠绕、冰面减速与一切麻痹眩晕控制技能，在战场中穿梭自如。",
+                "desc": "佩戴后免疫麻痹、束缚（Restrained）以及困难地形的减速效果，但不能免疫冰面、油脂等打滑效果。",
                 "framework_required": "BG3 Script Extender (Norbyte)",
                 "source": "https://bg3.wiki/wiki/Ring_of_Free_Action"
             },
             {
                 "id": "bg3_killer_sweetheart",
                 "name": {
-                    "zh-CN": "杀手的甜心戒指 (击杀目标后下一次攻击必定触发暴击)",
+                    "zh-CN": "杀手的甜心戒指 (击杀后下一次攻击必定暴击)",
                     "en": "Killer's Sweetheart"
                 },
                 "syntax_type": "lua_function",
                 "code": "Osi.TemplateAddTo(\"2f2d4bf3-6a14-43f5-81fe-e14aa9871215\", GetHostCharacter(), 1)",
-                "desc": "击杀任意敌人后激活，下一次无论使用什么武器攻击都必定判定为致命一击（Natural 20）！",
+                "desc": "击杀敌人后触发，下一次武器攻击必定暴击，每次长休只能触发一次。",
                 "framework_required": "BG3 Script Extender (Norbyte)",
                 "source": "https://bg3.wiki/wiki/Killer%27s_Sweetheart"
             }
         ]
     },
     {
-        "category": "📜 全职业 6 环终极魔法卷轴 (Level 6 Master Scrolls)",
+        "category": "📜 全职业 6 环魔法卷轴 (Level 6 Scrolls)",
         "commands": [
             {
                 "id": "bg3_scroll_globe_invulnerability",
                 "name": {
-                    "zh-CN": "无敌护罩卷轴 x10 (范围内全员绝对无敌免疫一切伤害)",
+                    "zh-CN": "Globe of Invulnerability 卷轴 x10（法术无效结界）",
                     "en": "Scroll of Globe of Invulnerability x10"
                 },
                 "syntax_type": "lua_function",
                 "code": "Osi.TemplateAddTo(\"8d4c06d1-e504-49b0-a4fa-5179ab717f1e\", GetHostCharacter(), 10)",
-                "desc": "战役通关神器！释放半径 3 米的绝对屏障金钟罩，圆圈内所有友方免疫包括龙炎、神圣与力场在内的一切伤害！",
+                "desc": "释放后在范围内形成结界，范围内生物免疫 5 环及以下的法术效果（不阻挡武器攻击等非法术伤害）。",
                 "framework_required": "BG3 Script Extender (Norbyte)",
                 "source": "https://bg3.wiki/wiki/Scroll_of_Globe_of_Invulnerability"
             },
             {
                 "id": "bg3_scroll_disintegrate",
                 "name": {
-                    "zh-CN": "解离术卷轴 x10 (10d6+40 点毁灭力场伤害直接化为灰烬)",
+                    "zh-CN": "解离术卷轴 x10 (10d6+40 点力场伤害)",
                     "en": "Scroll of Disintegrate x10"
                 },
                 "syntax_type": "lua_function",
                 "code": "Osi.TemplateAddTo(\"3f737706-57ca-45e6-b0d1-45238da76329\", GetHostCharacter(), 10)",
-                "desc": "超高单体爆发射线，目标生命降为 0 时直接瓦解为一堆灰烬，彻底阻止复活机制。",
+                "desc": "对单个目标造成 10d6+40 点力场伤害，若目标生命降至 0，会化为灰烬，无法用常规方式复活。",
                 "framework_required": "BG3 Script Extender (Norbyte)",
                 "source": "https://bg3.wiki/wiki/Scroll_of_Disintegrate"
             },
             {
                 "id": "bg3_scroll_chain_lightning",
                 "name": {
-                    "zh-CN": "链状闪电卷轴 x10 (10d8 点连锁闪电轰炸多名强敌)",
+                    "zh-CN": "链状闪电卷轴 x10 (10d8 点闪电伤害，可连锁 3 个目标)",
                     "en": "Scroll of Chain Lightning x10"
                 },
                 "syntax_type": "lua_function",
                 "code": "Osi.TemplateAddTo(\"13105f7d-55fa-4292-abfe-b9d80054b48e\", GetHostCharacter(), 10)",
-                "desc": "召唤极速电光在目标及周围 3 名敌对实体之间疯狂弹射，水面潮湿状态下伤害暴涨 200%！",
+                "desc": "对目标及最多 3 个额外目标造成 10d8 点闪电伤害（豁免成功减半），若目标处于潮湿状态伤害会进一步提高。",
                 "framework_required": "BG3 Script Extender (Norbyte)",
                 "source": "https://bg3.wiki/wiki/Scroll_of_Chain_Lightning"
             },
             {
                 "id": "bg3_scroll_sunbeam",
                 "name": {
-                    "zh-CN": "阳光术卷轴 x10 (每回合持续释放耀光并致盲敌人)",
+                    "zh-CN": "阳光术卷轴 x10 (范围光耀伤害，可连续发射)",
                     "en": "Scroll of Sunbeam x10"
                 },
                 "syntax_type": "lua_function",
                 "code": "Osi.TemplateAddTo(\"049d70c4-7ea3-4b6c-af6f-44dab7813a89\", GetHostCharacter(), 10)",
-                "desc": "召唤炽热日光射线，对不死生物造成高额克制光耀伤害，每回合无需额外消耗法术位即可重新发射。",
+                "desc": "召唤光耀射线对范围内生物造成伤害并可能致盲，不死生物与软泥怪的豁免判定处于劣势；发动后可在后续回合免费重新发射，无需消耗额外法术位。",
                 "framework_required": "BG3 Script Extender (Norbyte)",
                 "source": "https://bg3.wiki/wiki/Scroll_of_Sunbeam"
             },
             {
                 "id": "bg3_scroll_freezing_sphere",
                 "name": {
-                    "zh-CN": "奥提路克冰封球卷轴 x10 (10d6 点大范围严寒冰冻)",
+                    "zh-CN": "奥提路克冰封球卷轴 x10 (10d6 点范围冰冷伤害)",
                     "en": "Scroll of Otiluke's Freezing Sphere x10"
                 },
                 "syntax_type": "lua_function",
                 "code": "Osi.TemplateAddTo(\"74d0e4f0-de97-4097-a7e7-f5759a375c81\", GetHostCharacter(), 10)",
-                "desc": "在目标区域引爆超大范围冰霜风暴，冻结一切液体并将敌人双足冻结在地面上。",
+                "desc": "在目标点引发范围冰爆，造成 10d6 点冰冷伤害，并会将接触到的水面冻结成冰面。",
                 "framework_required": "BG3 Script Extender (Norbyte)",
                 "source": "https://bg3.wiki/wiki/Scroll_of_Otiluke%27s_Freezing_Sphere"
             }
         ]
     },
     {
-        "category": "🧪 传奇灵药与飞行隐形药剂 (Legendary Elixirs & Potions)",
+        "category": "🧪 灵药与药剂 (Elixirs & Potions)",
         "commands": [
             {
                 "id": "bg3_elixir_cloud_giant",
                 "name": {
-                    "zh-CN": "云巨人力量灵药 x20 (力量属性拉满至 27 点极限神力)",
+                    "zh-CN": "云巨人力量灵药 x20 (力量设为 27 点，直至长休)",
                     "en": "Elixir of Cloud Giant Strength x20 (Str 27)"
                 },
                 "syntax_type": "lua_function",
                 "code": "Osi.TemplateAddTo(\"e6490cc8-7f81-4aac-95e8-a58ce5e88a31\", GetHostCharacter(), 20)",
-                "desc": "全游戏最强力量药水！药效持续直至下一次长休，将力量直接飙升至游戏设定的绝对上限 27 点（+8 攻击与伤害修正加成）！",
+                "desc": "饮用后将力量属性设为 27 点，效果持续至下次长休（投掷命中时效果持续 10 回合）。",
                 "framework_required": "BG3 Script Extender (Norbyte)",
                 "source": "https://bg3.wiki/wiki/Elixir_of_Cloud_Giant_Strength"
             },
             {
                 "id": "bg3_elixir_bloodlust",
                 "name": {
-                    "zh-CN": "嗜血灵药 x20 (每击杀一人立即额外获得一个完整动作)",
+                    "zh-CN": "嗜血灵药 x20 (每回合首次击杀获得额外动作与临时生命)",
                     "en": "Bloodlust Elixir x20 (Extra Action on Kill)"
                 },
                 "syntax_type": "lua_function",
                 "code": "Osi.TemplateAddTo(\"45a775f8-2cf9-440d-b9eb-4ee5f17efca8\", GetHostCharacter(), 20)",
-                "desc": "持续至长休，每回合首次击杀敌人后立即恢复一个完整的战斗动作并获得 5 点临时生命，砍倒全场！",
+                "desc": "效果持续至下次长休；每回合首次击杀敌人后，获得一个额外动作和 5 点临时生命值（击晕不触发）。",
                 "framework_required": "BG3 Script Extender (Norbyte)",
                 "source": "https://bg3.wiki/wiki/Elixir_of_Bloodlust"
             },
             {
                 "id": "bg3_potion_angelic_slumber",
                 "name": {
-                    "zh-CN": "天使轻眠药水 x10 (就地陷入浅睡等效一次完整长休)",
-                    "en": "Potion of Angelic Slumber x10 (Instant Long Rest)"
+                    "zh-CN": "天使轻眠药水 x10（睡 2 回合后获得长休效果）",
+                    "en": "Potion of Angelic Slumber x10"
                 },
                 "syntax_type": "lua_function",
                 "code": "Osi.TemplateAddTo(\"4d801c1a-691e-47c8-88e7-78367b4e2c8e\", GetHostCharacter(), 10)",
-                "desc": "在红名禁止长休的决战副本中就地进入 2 回合浅睡，醒来完全恢复所有 1~6 环法术位与全部生命值！",
+                "desc": "饮用后睡眠 2 回合，醒来时获得长休效果；睡眠被打断则不生效。据 bg3.wiki，部分需要长休恢复的能力不会被它恢复。",
                 "framework_required": "BG3 Script Extender (Norbyte)",
                 "source": "https://bg3.wiki/wiki/Potion_of_Angelic_Slumber"
             },
@@ -650,48 +650,48 @@ bg3_categories = [
                 },
                 "syntax_type": "lua_function",
                 "code": "Osi.TemplateAddTo(\"ad9f3f24-d755-48b6-aa7b-c34da068209f\", GetHostCharacter(), 20)",
-                "desc": "快速进入 3 回合加速状态，每回合多一次施法或普攻机会，移动速度翻倍。",
+                "desc": "饮用后进入 3 回合急速状态：每回合多一次动作、移动速度 +9 米、AC+2，并对敏捷豁免有优势；效果结束后会陷入疲乏状态，下回合无法行动。",
                 "framework_required": "BG3 Script Extender (Norbyte)",
                 "source": "https://bg3.wiki/wiki/Potion_of_Speed"
             }
         ]
     },
     {
-        "category": "⏱️ 动作掌控、常驻全图飞行与急速爆发 (Actions, Flight & Movement)",
+        "category": "⏱️ 状态增益：急速、飞行与移动 (Status Buffs: Haste, Flight & Movement)",
         "commands": [
             {
                 "id": "bg3_apply_haste",
                 "name": {
-                    "zh-CN": "常驻绝对急速术 (动作翻倍且永不疲劳瘫痪)",
+                    "zh-CN": "赋予常驻急速术（HASTE）",
                     "en": "Permanent Haste Buff"
                 },
                 "syntax_type": "lua_function",
                 "code": "Osi.ApplyStatus(GetHostCharacter(), \"HASTE\", -1)",
-                "desc": "为主角施加永久生效的急速术，每回合直接额外获取一个完整的法术或武器攻击动作，移动速度翻倍，且绝对不会因为被打断而陷入 1 回合虚脱！",
+                "desc": "为主角施加持续生效的急速状态：每回合可额外执行一次动作，移动速度与敏捷豁免获得提升，且因手动施加不会到期触发急速结束后的疲乏状态。",
                 "framework_required": "BG3 Script Extender (Norbyte)",
                 "source": "https://docs.baldursgate3.game/index.php?title=ApplyStatus"
             },
             {
                 "id": "bg3_apply_fly",
                 "name": {
-                    "zh-CN": "赋予常驻全图自由飞行能力 (无视地形跨越断崖)",
+                    "zh-CN": "赋予常驻飞行状态 (FLY)",
                     "en": "Permanent Fly Buff"
                 },
                 "syntax_type": "lua_function",
                 "code": "Osi.ApplyStatus(GetHostCharacter(), \"FLY\", -1)",
-                "desc": "直接赋予主角飞天遁地能力，免去攀爬楼梯与跳跃落脚点限制，直飞高台抢占先攻优势！",
+                "desc": "为主角施加飞行状态，可自由飞越地形与高低差，无需走楼梯或跳跃。",
                 "framework_required": "BG3 Script Extender (Norbyte)",
                 "source": "https://docs.baldursgate3.game/index.php?title=ApplyStatus"
             },
             {
                 "id": "bg3_apply_see_invis",
                 "name": {
-                    "zh-CN": "赋予常驻识破隐形破除虚妄视界",
+                    "zh-CN": "赋予常驻识破隐形状态",
                     "en": "Permanent See Invisibility"
                 },
                 "syntax_type": "lua_function",
                 "code": "Osi.ApplyStatus(GetHostCharacter(), \"SEE_INVISIBILITY\", -1)",
-                "desc": "9 米范围内任何试图隐形的幽灵、鬼婆或盗贼直接被识破真身显形暴露无遗！",
+                "desc": "为主角施加识破隐形状态，使其能看见附近范围内隐形的敌人。",
                 "framework_required": "BG3 Script Extender (Norbyte)",
                 "source": "https://docs.baldursgate3.game/index.php?title=ApplyStatus"
             },
@@ -715,31 +715,31 @@ bg3_popular = [
     {
         "name": {"zh-CN": "增加金币 (100,000 金币)", "en": "Add 100,000 Gold"},
         "command": "Osi.AddGold(GetHostCharacter(), 100000)",
-        "desc": "瞬间化身博德之门巨富，搬空全大陆所有商贩的绝世装备。",
+        "desc": "向背包增加 10 万金币，可用于购买装备和物资。",
         "source": "https://docs.baldursgate3.game/index.php?title=AddGold"
     },
     {
         "name": {"zh-CN": "获得夺心魔寄生虫标本 x30", "en": "Add 30 Illithid Parasites"},
         "command": "Osi.TemplateAddTo(\"1ec327be-3b7f-4502-9586-860e057e09ae\", GetHostCharacter(), 30)",
-        "desc": "一次性点满主角与全队所有伙伴的脑池异能潜能。",
+        "desc": "一次性获得 30 个夺心魔寄生虫标本，可用于解锁主角与队友的灵能异能。",
         "source": "https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen"
     },
     {
         "name": {"zh-CN": "获得博德安的巨人杀手巨剑 (传奇双手巨剑)", "en": "Add Balduran's Giantslayer"},
         "command": "Osi.TemplateAddTo(\"7219fca3-5f41-43a0-8253-f4c09d8b6308\", GetHostCharacter(), 1)",
-        "desc": "获取力量加倍并自带巨人体型的最强近战巨剑。",
+        "desc": "获得攻击伤害额外附加两倍力量调整值、并带有「巨人体型」技能的双手巨剑。",
         "source": "https://bg3.wiki/wiki/Balduran%27s_Giantslayer"
     },
     {
         "name": {"zh-CN": "获得地狱火全套胸甲 (21AC全职业免熟练)", "en": "Add Helldusk Armour"},
         "command": "Osi.TemplateAddTo(\"7ae705fd-1cfd-4482-a584-d2e68f9c1262\", GetHostCharacter(), 1)",
-        "desc": "拉斐尔终极重铠，全职业穿戴免熟练项且免疫火伤。",
+        "desc": "获得拉斐尔掉落的重甲，AC 21，任何职业穿戴都视为熟练，并对火焰伤害有抗性。",
         "source": "https://bg3.wiki/wiki/Helldusk_Armour"
     },
     {
-        "name": {"zh-CN": "赋予常驻急速术 (动作翻倍且永不疲劳)", "en": "Permanent Haste Buff"},
+        "name": {"zh-CN": "赋予常驻急速术 (HASTE)", "en": "Permanent Haste Buff"},
         "command": "Osi.ApplyStatus(GetHostCharacter(), \"HASTE\", -1)",
-        "desc": "战斗动作常驻翻倍，移动速度翻倍且断专注不虚脱。",
+        "desc": "持续施加急速状态：每回合多一次动作、移动速度提升，且因手动施加不会到期陷入疲乏状态。",
         "source": "https://docs.baldursgate3.game/index.php?title=ApplyStatus"
     }
 ]
@@ -750,7 +750,7 @@ bg3_mods = [
         "title": "BG3 Script Extender (bg3se)",
         "author": "Norbyte",
         "category": "核心底层工具 (Core Utility / Framework)",
-        "desc": "全网公认最核心的博德之门3底层框架！劫持 DWrite.dll 开启游戏底层 Osiris 引擎控制台黑窗，提供极速内存注入与所有高级 Mod 的前置运行支持。",
+        "desc": "博德之门3的底层模组框架，通过劫持 DWrite.dll 开启游戏内置的 Osiris 控制台，是许多高级 Mod 运行所需的前置库。",
         "dependencies": [
             "None"
         ],
@@ -768,7 +768,7 @@ bg3_mods = [
         "title": "ImpUI (ImprovedUI)",
         "author": "AlanaSP ShinyHobo Djmr Zee and bibsan",
         "category": "界面增强 (UI / QoL)",
-        "desc": "彻底解除捏脸、背包与战斗界面的布局限制，支持宽屏 21:9 / 32:9 分辨率，杜绝 Mod 导致的剧情对话黑框与捏脸滑条重叠问题。",
+        "desc": "解除捏脸、背包与战斗界面的布局限制，支持 21:9 / 32:9 宽屏分辨率，并修复部分 Mod 导致的对话黑框与捏脸滑条重叠问题。",
         "dependencies": [
             "None"
         ],
@@ -789,7 +789,7 @@ bg3_mods = [
         "title": "Party Limit Begone",
         "author": "Sildur",
         "category": "玩法规则 (Gameplay / Party)",
-        "desc": "强迫症玩家必装！将联机上限提升至 8 人，单人战役队伍上限直接提升至 16 人！全员伙伴（影心、阿斯代伦、卡菈克、盖尔、莱埃泽尔等）全员随队，再也不会错过任何旷世野外拌嘴对话！",
+        "desc": "将联机人数上限提升至 8 人，单人战役的队伍人数上限提升至 16 人，可让所有同伴（影心、阿斯代伦、卡菈克、盖尔、莱埃泽尔等）同时随队。",
         "dependencies": [
             "None"
         ],
@@ -810,7 +810,7 @@ bg3_mods = [
         "title": "5e Spells",
         "author": "Celes",
         "category": "法术与战斗 (Spells / Combat)",
-        "desc": "将龙与地下城第五版规则书中拉瑞安未采用的 100+ 个经典法术（如绿色火焰之刃、寒冰之触、闪电箭、心灵尖刺等）全部按官方平衡性无缝实装到全职业法术树中！",
+        "desc": "将龙与地下城第五版规则书中拉瑞安未采用的 100 余个法术（如绿色火焰之刃、寒冰之触、闪电箭、心灵尖刺等）添加到全部职业的法术列表中，并参考官方数值进行平衡。",
         "dependencies": [
             "ImprovedUI"
         ],
@@ -831,7 +831,7 @@ bg3_mods = [
         "title": "Native Camera Tweaks",
         "author": "Ershin",
         "category": "镜头视角 (Camera / Immersion)",
-        "desc": "彻底解除原版俯视角镜头俯仰角被锁死在 45 度的限制！允许将镜头下压至水平视线，以完全沉浸式的越肩第三人称动作 RPG 视角仰望巍峨的博德之门大都市！",
+        "desc": "解除原版镜头俯仰角被限制在 45 度以内的限制，可将镜头下压至接近水平视角，实现越肩第三人称视角。",
         "dependencies": [
             "BG3 Script Extender"
         ],
@@ -839,7 +839,7 @@ bg3_mods = [
         "installSteps": [
             "1. 确保已安装 BG3 Script Extender；",
             "2. 将 NativeCameraTweaks.dll 与 .ini 放入 bin\\NativeMods\\ 目录；",
-            "3. 在游戏中按下滚轮即可自由无限制仰望。"
+            "3. 游戏中滚动鼠标滚轮即可调整镜头俯仰角度。"
         ],
         "isDirect": False,
         "nexusUrl": "https://www.nexusmods.com/baldursgate3/mods/945",
@@ -853,14 +853,14 @@ bg3_mods = [
         "title": "WASD Character Movement",
         "author": "Ch4nKyy",
         "category": "操控手感 (Controls / Movement)",
-        "desc": "告别鼠标点地寻路！直接使用键盘 WASD 键平滑操控角色向前后左右自由奔跑奔行，配合 Native Camera Tweaks 瞬间将博德之门3变身为巫师3级别的第三人称动作大作！",
+        "desc": "使用键盘 WASD 键直接控制角色移动，替代鼠标点地寻路；配合 Native Camera Tweaks 可实现越肩第三人称视角的操控方式。",
         "dependencies": [
             "Native Camera Tweaks"
         ],
         "installPath": "Baldur's Gate 3\\bin\\NativeMods\\",
         "installSteps": [
             "1. 将 wasd.dll 与 wasd.ini 放入 bin\\NativeMods 目录；",
-            "2. 游戏中直接按 CapsLock 键可在鼠标点击模式与键盘直控模式间一键切换。"
+            "2. 游戏中按 CapsLock 键可在鼠标点击模式与键盘直控模式间切换。"
         ],
         "isDirect": False,
         "nexusUrl": "https://www.nexusmods.com/baldursgate3/mods/781",
@@ -874,7 +874,7 @@ bg3_mods = [
         "title": "Tav's Hair Salon",
         "author": "Toarie",
         "category": "外观美化 (Visuals / Character Creation)",
-        "desc": "全网热度最高的发型模组！为所有人类、精灵、半精灵、卓尔、提夫林男女角色增加数十款极致飘逸唯美的现代与奇幻长发、辫发与发饰，捏脸党必备！",
+        "desc": "为人类、精灵、半精灵、卓尔、提夫林等种族的男女角色新增数十款长发、辫发与发饰造型，可在捏脸界面中选择。",
         "dependencies": [
             "ImprovedUI"
         ],

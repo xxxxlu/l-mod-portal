@@ -47,7 +47,7 @@
       downloadBat: '生成 .bat 脚本',
       close: '关闭',
       clearHistory: '清空会话',
-      welcomeMessage: '我是**老L**，L-MOD Vault 官方单机游戏智库首席顾问！\n\n已为你接入**官方统一云端智能体**与 **4 大专属 Skills 技能链**：\n- 🔍 **查核心控制台代码**：“给我赛博朋克2077强尼的保时捷代码”\n- 💥 **闪退坏档逃课排查**：“博德之门3打Mod闪退怎么解决”\n- 📡 **Steam 补丁避坑雷达**：“艾尔登法环当前版本能打Mod吗”\n- 🎮 **单机攻略与配置通识**：“黑神话悟空推荐画质设置”',
+      welcomeMessage: '我是**老L**，可以回答这几类问题：\n- 🔍 **查控制台指令**：“给我赛博朋克2077强尼的保时捷代码”\n- 💥 **Mod 闪退排查**：“博德之门3打Mod闪退怎么解决”\n- 📡 **补丁雷达状态**：“艾尔登法环当前版本能打Mod吗”\n- 🎮 **一般攻略和设置**：“黑神话悟空推荐画质设置”',
       pillCommands: '🔍 查核心作弊代码',
       pillCrash: '💥 闪退与冲突排查',
       pillPatch: '📡 最新补丁避坑状态',
@@ -68,7 +68,7 @@
       downloadBat: 'Download .bat',
       close: 'Close',
       clearHistory: 'Clear Chat',
-      welcomeMessage: "I'm **Old L**, your official single-player game modding and console command advisor!\n\nArmed with **Official Cloud Agent + 4 Exclusive Skills**:\n- 🔍 **Find Real Commands**: 'Johnny Silverhand Porsche code for Cyberpunk 2077'\n- 💥 **Crash & Mod Fixes**: 'Baldur\\'s Gate 3 crashes with mods, how to fix?'\n- 📡 **Patch Radar**: 'Can I safely mod on the latest Elden Ring patch?'\n- 🎮 **General Guide**: 'Best graphics settings for Black Myth: Wukong'",
+      welcomeMessage: "I'm **Old L**. I can help with:\n- 🔍 **Console commands**: 'Johnny Silverhand Porsche code for Cyberpunk 2077'\n- 💥 **Crashes with mods**: 'Baldur\\'s Gate 3 crashes with mods, how to fix?'\n- 📡 **Patch radar status**: 'Can I mod on the latest Elden Ring patch?'\n- 🎮 **General guides and settings**: 'Graphics settings for Black Myth: Wukong'",
       pillCommands: '🔍 Key Console Codes',
       pillCrash: '💥 Crash & Mod Doctor',
       pillPatch: '📡 Patch Radar Status',
@@ -886,16 +886,22 @@
   }
 
   function buildPopularCommandsFallback(game, title, query) {
-    let res = `### 🎮 《${title}》常用核心官方指令\n\n`;
-    res += `未找到精确包含 "${query}" 的特定代码，已为您调出该游戏的常用核心代码：\n\n`;
+    // popularCommands entries are either a plain code string or {name: {lang: …}, command, desc}
+    const lang = getLang();
+    const cmds = game.popularCommands.slice(0, 5).map(p => typeof p === 'string'
+      ? { name: '', code: p, desc: '' }
+      : { name: (p.name && (p.name[lang] || p.name['zh-CN'] || p.name.en)) || '', code: p.command || '', desc: p.desc || '' })
+      .filter(c => c.code);
+    let res = `### 🎮 《${title}》常用指令\n\n`;
+    res += `没有找到包含 "${query}" 的指令，下面是本站收录的这款游戏的常用指令：\n\n`;
 
-    for (const cmd of game.popularCommands.slice(0, 5)) {
-      res += `#### 📌 ${cmd.name}\n`;
+    for (const cmd of cmds) {
+      res += `#### 📌 ${cmd.name || cmd.code}\n`;
       if (cmd.desc) res += `${cmd.desc}\n`;
       res += `\`\`\`lua\n${cmd.code}\n\`\`\`\n\n`;
     }
 
-    return { text: res, commands: game.popularCommands.slice(0, 5), game: game };
+    return { text: res, commands: cmds, game: game };
   }
 
   function searchAcrossAllGames(query, games) {

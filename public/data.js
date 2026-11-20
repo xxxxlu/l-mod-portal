@@ -57,25 +57,25 @@ window.GAMES_DATA = [
           "en": "Max Street Cred (50)"
         },
         "command": "Game.SetLevel(\"StreetCred\", 50)",
-        "desc": "解锁夜之城所有武器义体购买权限",
+        "desc": "解锁夜之城对应等级的中间人委托与义体医生商品购买权限",
         "source": "https://wiki.redmodding.org/cyber-engine-tweaks/console/console/how-do-i"
       },
       {
         "name": {
-          "zh-CN": "重置并获取专精点数",
+          "zh-CN": "增加 50 点专精点数",
           "en": "Add Perk Points"
         },
         "command": "PlayerDevelopmentSystem.GetInstance(Game.GetPlayer()):GetDevelopmentData(Game.GetPlayer()):AddDevelopmentPoints(50, gamedataDevelopmentPointType.Primary)",
-        "desc": "增加 50 点核心属性点数",
+        "desc": "增加 50 点可用于解锁天赋树技能的专精点数（Perk Points）",
         "source": "https://wiki.redmodding.org/cyber-engine-tweaks/console/console/how-do-i"
       },
       {
         "name": {
-          "zh-CN": "添加不朽武士刀【觉】",
+          "zh-CN": "添加太刀【觉】",
           "en": "Add Satori Katana"
         },
         "command": "Game.AddToInventory(\"Items.Preset_Katana_Saburo\", 1)",
-        "desc": "荒坂三郎随身佩剑，极高暴伤",
+        "desc": "荒坂三郎的佩剑，可向远处敌人跃进攻击并发动居合斩造成流血效果",
         "source": "https://wiki.redmodding.org/cyberpunk-2077-modding/for-mod-creators/references-lists-and-overviews/cheat-sheet-tweak-ids/weapons/iconic-effects-by-weapon"
       },
       {
@@ -84,7 +84,7 @@ window.GAMES_DATA = [
           "en": "Add Malorian Arms 3516"
         },
         "command": "Game.AddToInventory(\"Items.Preset_Silverhand_3516\", 1)",
-        "desc": "强尼·银手经典喷火换弹手枪",
+        "desc": "强尼·银手专属手枪，快速近战攻击可点燃敌人，但会消耗枪内剩余全部子弹",
         "source": "https://cyberpunk.fandom.com/wiki/Malorian_Arms_3516_(2077)"
       }
     ],
@@ -94,7 +94,7 @@ window.GAMES_DATA = [
       {
         "name": "Cyber Engine Tweaks",
         "category": "Core Framework",
-        "desc": "全MOD运行底座与控制台必备",
+        "desc": "提供 Mod 运行环境与游戏内控制台",
         "url": "https://www.nexusmods.com/cyberpunk2077/mods/107"
       },
       {
@@ -159,11 +159,11 @@ window.GAMES_DATA = [
     },
     "consoleCategories": [
       {
-        "category": "👑 核心无敌与角色属性上限 (God Mode & Core Attributes)",
+        "category": "👑 角色等级、声望与基础属性 (Level, Street Cred & Attributes)",
         "commands": [
           {
             "name": {
-              "zh-CN": "无限耐力狂奔",
+              "zh-CN": "无限耐力",
               "en": "Infinite Stamina"
             },
             "code": "Game.InfiniteStamina(true)",
@@ -175,11 +175,11 @@ window.GAMES_DATA = [
           },
           {
             "name": {
-              "zh-CN": "角色等级直升 60 级满级",
+              "zh-CN": "角色等级设为 60 级（满级）",
               "en": "Set Level 60"
             },
             "code": "Game.SetLevel(\"Level\", 60)",
-            "desc": "2.0 版本新等级上限，解锁全部高阶技能槽位",
+            "desc": "将角色等级直接设置为 60 级（当前版本等级上限）。",
             "id": "cp_set_level_60",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -187,11 +187,11 @@ window.GAMES_DATA = [
           },
           {
             "name": {
-              "zh-CN": "街头声望锁定 50 级满额",
+              "zh-CN": "街头声望设为 50 级（满级）",
               "en": "Set Street Cred 50"
             },
             "code": "Game.SetLevel(\"StreetCred\", 50)",
-            "desc": "解锁全夜之城所有中间人委托与顶级义体医生购买权限",
+            "desc": "将街头声望直接设置为 50 级（满级），解锁对应等级的中间人委托与义体医生商品。",
             "id": "cp_set_street_cred_50",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -200,7 +200,7 @@ window.GAMES_DATA = [
         ]
       },
       {
-        "category": "💰 财富与技能书圣物点数 (Eddies, Perks & Relic Points)",
+        "category": "💰 财富、专精点数与义体容量 (Eddies, Perk Points & Cyberware Capacity)",
         "commands": [
           {
             "name": {
@@ -208,7 +208,7 @@ window.GAMES_DATA = [
               "en": "Add 1,000,000 Eddies"
             },
             "code": "Game.AddToInventory(\"Items.money\", 1000000)",
-            "desc": "买断全夜之城所有顶层豪宅公寓与极速跑车",
+            "desc": "给当前角色增加 1,000,000 欧元（游戏内货币）现金。",
             "id": "cp_add_1_000_000_eddies",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -220,7 +220,7 @@ window.GAMES_DATA = [
               "en": "Add 50 Perk Books"
             },
             "code": "Game.AddToInventory(\"Items.PerkPointSkillbook\", 50)",
-            "desc": "点满全部五大核心天赋技能树所有终极技能",
+            "desc": "获得 50 本特权点数技能书，可用于增加可投入天赋树的专精点数。",
             "id": "cp_add_50_perk_books",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -232,7 +232,7 @@ window.GAMES_DATA = [
               "en": "Add Cyberware Capacity Shards"
             },
             "code": "Game.AddToInventory(\"Items.CWCapacityPermaReward_Legendary\", 50)",
-            "desc": "永久增加义体容量上限，全身装满顶级金色义体不触发赛博精神病限制！",
+            "desc": "永久提升义体容量上限，可装备更多高阶义体。",
             "id": "cp_add_cyberware_capacity_shards",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -241,15 +241,15 @@ window.GAMES_DATA = [
         ]
       },
       {
-        "category": "🦾 2.0 & 往日之影终极金色 5++ 阶全槽位义体 (Cyberware Tier 5++)",
+        "category": "🦾 2.0 & 往日之影 5++ 阶义体 (Cyberware Tier 5++)",
         "commands": [
           {
             "name": {
-              "zh-CN": "斯安威斯坦「远地点」Tier 5++ (最强时停操作系统)",
+              "zh-CN": "斯安威斯坦「远地点」Tier 5++（时停系统）",
               "en": "Militech Apogee Sandevistan 5++"
             },
             "code": "Game.AddToInventory(\"Items.AdvancedSandevistanApogeePlusPlus\", 1)",
-            "desc": "全游戏最强子弹时间！减慢时间85%，击杀敌人自动延长时停时间与恢复耐力",
+            "desc": "激活后可将时间减慢 85%，并提升暴击率、暴击伤害与爆头伤害；击杀敌人可延长时停持续时间并恢复体力。",
             "id": "cp_militech_apogee_sandevistan_5",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -257,11 +257,11 @@ window.GAMES_DATA = [
           },
           {
             "name": {
-              "zh-CN": "「黑墙」网络接入仓 Canto Mk.6 5++ (黑客终极)",
+              "zh-CN": "「黑墙」网络接入仓 Canto Mk.6 5++",
               "en": "Militech Canto Mk.6 (Blackwall)"
             },
             "code": "Game.AddToInventory(\"Items.HauntedCyberdeck_LegendaryPlusPlus\", 1)",
-            "desc": "携带流窜黑墙 AI，释放黑墙网关自动蔓延穿透处决整群敌人！",
+            "desc": "扫描状态下可直接对敌人与设备发动快速破解，并解锁「黑墙网关」快速破解程序。",
             "id": "cp_militech_canto_mk_6_blackwall",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -273,7 +273,7 @@ window.GAMES_DATA = [
               "en": "Quantum Tuner 5++"
             },
             "code": "Game.AddToInventory(\"Items.AdvancedTimeBankLegendaryPlusPlus\", 1)",
-            "desc": "义体进入冷却时瞬间完全重置冷却！支持连续开两轮斯安威斯坦或狂暴！",
+            "desc": "其他已装备义体冷却耗尽时可立即重置其冷却时间（自身有 60 秒冷却），并被动降低全部义体的冷却时间。",
             "id": "cp_quantum_tuner_5",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -285,7 +285,7 @@ window.GAMES_DATA = [
               "en": "Axolotl 5++"
             },
             "code": "Game.AddToInventory(\"Items.IconicAdvancedSubdermalCoProcessorLegendaryPlusPlus\", 1)",
-            "desc": "每次消灭敌人立即可恢复所有已装备义体 12.5% 的冷却时间",
+            "desc": "每次消灭敌人立即恢复所有已装备义体最多 7.5% 的冷却时间。",
             "id": "cp_axolotl_5",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -297,7 +297,7 @@ window.GAMES_DATA = [
               "en": "COX-2 Optimizer 5++"
             },
             "code": "Game.AddToInventory(\"Items.AdvancedBioConductorsLegendary_PlusPlus\", 1)",
-            "desc": "使黑客快速破解伤害 100% 能够造成致命暴击",
+            "desc": "使快速破解伤害可以造成暴击，暴击率 15%-35%，但会降低 RAM 上限。",
             "id": "cp_cox_2_optimizer_5",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -309,7 +309,7 @@ window.GAMES_DATA = [
               "en": "Second Heart 5++"
             },
             "code": "Game.AddToInventory(\"Items.AdvancedSecondHeartLegendaryPlusPlus\", 1)",
-            "desc": "生命值归零时瞬间满血复活 100% 生命，自带免死金牌",
+            "desc": "生命值归零时可触发一次满血复活，之后有 220-300 秒的冷却时间。",
             "id": "cp_second_heart_5",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -321,7 +321,7 @@ window.GAMES_DATA = [
               "en": "Biomonitor 5++"
             },
             "code": "Game.AddToInventory(\"Items.AdvancedBiomonitorLegendaryPlusPlus\", 1)",
-            "desc": "生命低于 35% 时自动无需动手使用治疗药瓶，零前摇回血",
+            "desc": "生命值低于 50% 时自动使用已装备的治疗物品回复生命。",
             "id": "cp_biomonitor_5",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -333,7 +333,7 @@ window.GAMES_DATA = [
               "en": "Gorilla Arms 5++"
             },
             "code": "Game.AddToInventory(\"Items.AdvancedStrongArmsLegendaryPlusPlus\", 1)",
-            "desc": "近战蓄力重拳轰飞敌人，肉体属性检定判定 +6 点",
+            "desc": "近战武器，攻击造成物理伤害并有流血几率，肉体属性检定 +6。",
             "id": "cp_gorilla_arms_5",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -345,7 +345,7 @@ window.GAMES_DATA = [
               "en": "Mantis Blades 5++"
             },
             "code": "Game.AddToInventory(\"Items.AdvancedMantisBladesLegendaryPlusPlus\", 1)",
-            "desc": "手臂隐藏双刃，超远距离飞跃斩杀与空中处决",
+            "desc": "手臂拔出双刃武器，可近战快速连斩，也可向目标发起跳跃突袭造成大量伤害。",
             "id": "cp_mantis_blades_5",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -357,7 +357,7 @@ window.GAMES_DATA = [
               "en": "Monowire 5++"
             },
             "code": "Game.AddToInventory(\"Items.AdvancedNanoWiresLegendaryPlusPlus\", 1)",
-            "desc": "大范围光刃鞭击，命中敌人可自动为其植入快速破解",
+            "desc": "鞭状武器，可同时抽打多名敌人，并留有一个可装入快速破解的插槽。",
             "id": "cp_monowire_5",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -381,7 +381,7 @@ window.GAMES_DATA = [
               "en": "Reinforced Tendons (Double Jump) 5++"
             },
             "code": "Game.AddToInventory(\"Items.AdvancedBoostedTendonsLegendaryPlusPlus\", 1)",
-            "desc": "空中再次跳跃，跑酷攀爬高楼与滞空机动必备",
+            "desc": "装备后可在空中进行二段跳跃，便于攀爬与移动。",
             "id": "cp_reinforced_tendons_double_jump_5",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -389,11 +389,11 @@ window.GAMES_DATA = [
           },
           {
             "name": {
-              "zh-CN": "光学迷彩 Tier 5++ (表皮系统 - 完全隐形)",
+              "zh-CN": "光学迷彩 Tier 5++ (表皮系统 - 隐身)",
               "en": "Optical Camo 5++"
             },
             "code": "Game.AddToInventory(\"Items.AdvancedOpticalCamoLegendaryPlusPlus\", 1)",
-            "desc": "激活进入 90% 完全隐形幽灵状态，敌对敌人与监控摄像头视若无睹",
+            "desc": "激活后一段时间内（4-7 秒）大幅降低敌人发现你的概率（最高 90%），战斗中也更难被命中，之后有 50-70 秒冷却时间。",
             "id": "cp_optical_camo_5",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -402,7 +402,7 @@ window.GAMES_DATA = [
         ]
       },
       {
-        "category": "🧲 奇美拉核心四大不朽武器插件 (Chimera Core Mods - 告别四选一纠结)",
+        "category": "🧲 奇美拉核心武器插件 (Chimera Core Mods)",
         "commands": [
           {
             "name": {
@@ -410,7 +410,7 @@ window.GAMES_DATA = [
               "en": "Chimera Firecracker Mod"
             },
             "code": "Game.AddToInventory(\"Items.ChimeraPowerMod\", 1)",
-            "desc": "狗镇击败奇美拉专属插件：使动能枪械射击的子弹全部化为高爆弹，引发群体震波与肢解！",
+            "desc": "狗镇任务后可获得的插件，为动能武器的普通子弹替换为爆炸弹药（若武器已带爆炸弹药则提升其伤害）。",
             "id": "cp_chimera_firecracker_mod",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -418,11 +418,11 @@ window.GAMES_DATA = [
           },
           {
             "name": {
-              "zh-CN": "终极壁垒 (Wallpuncher - 科技武器200%蓄力穿墙)",
+              "zh-CN": "壁垒 (Wallpuncher - 科技武器蓄力穿透)",
               "en": "Chimera Wallpuncher Mod"
             },
             "code": "Game.AddToInventory(\"Items.ChimeraTechMod\", 1)",
-            "desc": "科技枪械蓄力上限提升至 200%，无视掩体直接以 100% 护甲穿透轰杀厚重掩体后的目标！",
+            "desc": "科技武器蓄力上限提升至 200%（不增加蓄力时间），护甲穿透能力翻倍，穿透掩体时无伤害惩罚。",
             "id": "cp_chimera_wallpuncher_mod",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -430,11 +430,11 @@ window.GAMES_DATA = [
           },
           {
             "name": {
-              "zh-CN": "智能电涌 (Hackatomy - 智能武器自动黑客传染)",
+              "zh-CN": "智能电涌 (Hackatomy - 智能武器几率附加快速破解)",
               "en": "Chimera Hackatomy Mod"
             },
             "code": "Game.AddToInventory(\"Items.ChimeraSmartMod\", 1)",
-            "desc": "智能武器射中敌人弱点时，自动为其灌入失明、短路或赛博精神病快速破解！",
+            "desc": "智能武器命中要害时有 5% 几率附加快速破解效果，依命中部位不同而不同：头部致盲式干扰、手臂武器故障、腿部行动迟缓、躯干义体故障。",
             "id": "cp_chimera_hackatomy_mod",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -442,11 +442,11 @@ window.GAMES_DATA = [
           },
           {
             "name": {
-              "zh-CN": "斩首断肢 (Severance - 近战半血斩首秒杀)",
+              "zh-CN": "斩首断肢 (Severance)",
               "en": "Chimera Severance Mod"
             },
             "code": "Game.AddToInventory(\"Items.ChimeraMeleeMod\", 1)",
-            "desc": "敌人生命低于 50% 时，每次击中头部或四肢有 20% 概率瞬间斩首或砍断肢体直接处决！",
+            "desc": "敌人生命低于 50% 时，每次击中头部或四肢有 20% 概率瞬间斩首或砍断肢体直接处决。",
             "id": "cp_chimera_severance_mod",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -458,7 +458,7 @@ window.GAMES_DATA = [
               "en": "Active Chimera Core"
             },
             "code": "Game.AddToInventory(\"Items.Q302_Chimera_Core\", 1)",
-            "desc": "奇美拉机甲战车掉落的稀有传奇核心原材料，可放在公寓桌上收藏",
+            "desc": "《往日之影》任务中获得的奇美拉原型核心道具，可用于合成奇美拉武器插件，也可摆放在公寓中展示。",
             "id": "cp_active_chimera_core",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -467,7 +467,7 @@ window.GAMES_DATA = [
         ]
       },
       {
-        "category": "💾 终极快速破解程序 (Legendary Quickhacks & Blackwall)",
+        "category": "💾 传奇快速破解程序与黑墙网关 (Legendary Quickhacks & Blackwall)",
         "commands": [
           {
             "name": {
@@ -475,7 +475,7 @@ window.GAMES_DATA = [
               "en": "Blackwall Gateway Program"
             },
             "code": "Game.AddToInventory(\"Items.BlackWallProgramLvl4\", 1)",
-            "desc": "引动黑墙毁灭性恶性代码，在敌人躯体之间像瘟疫般跳跃瞬间化为灰烬！",
+            "desc": "释放黑墙程序，可在 20 米内跳跃感染最多 3 名敌人造成致命伤害；机甲、无人机、炮塔等机械类敌人会被直接瘫痪。",
             "id": "cp_blackwall_gateway_program",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -487,7 +487,7 @@ window.GAMES_DATA = [
               "en": "Cyberpsychosis Quickhack"
             },
             "code": "Game.AddToInventory(\"Items.MadnessLvl4Program\", 1)",
-            "desc": "使目标陷入狂暴，不分敌我疯狂屠杀其周围的友军",
+            "desc": "强制目标攻击附近的友方或敌方单位，周围没有可攻击目标时则会自尽。",
             "id": "cp_cyberpsychosis_quickhack",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -499,7 +499,7 @@ window.GAMES_DATA = [
               "en": "Suicide Quickhack"
             },
             "code": "Game.AddToInventory(\"Items.SuicideLvl4Program\", 1)",
-            "desc": "强制目标举枪自我了断，终结高威胁机枪手或重装机甲",
+            "desc": "强制目标举枪自尽，直接淘汰该敌人。",
             "id": "cp_suicide_quickhack",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -507,11 +507,11 @@ window.GAMES_DATA = [
           },
           {
             "name": {
-              "zh-CN": "系统崩溃 (System Collapse Tier 5 - 潜行秒杀)",
+              "zh-CN": "系统崩溃 (System Collapse Tier 5 - 潜行昏迷)",
               "en": "System Collapse Quickhack"
             },
             "code": "Game.AddToInventory(\"Items.SystemCollapseLvl4Program\", 1)",
-            "desc": "使目标神经中枢瞬间断电昏迷，零声响、不触发警报、不引起敌人警觉",
+            "desc": "使目标神经系统瞬间瘫痪并无声昏迷，该快速破解无法被追踪。",
             "id": "cp_system_collapse_quickhack",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -523,7 +523,7 @@ window.GAMES_DATA = [
               "en": "Synapse Burnout Quickhack"
             },
             "code": "Game.AddToInventory(\"Items.BrainMeltLvl4Program\", 1)",
-            "desc": "根据已消耗的 RAM 造成毁灭性过载暴击伤害，消灭目标后延长超频时间",
+            "desc": "造成持续伤害，消耗 RAM 越多伤害越高（最高 +300%，图标版本 +400%）；搭配超频使用时，击杀目标可延长超频持续时间。",
             "id": "cp_synapse_burnout_quickhack",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -535,7 +535,7 @@ window.GAMES_DATA = [
               "en": "Short Circuit Quickhack"
             },
             "code": "Game.AddToInventory(\"Items.EMPOverloadLvl4Program\", 1)",
-            "desc": "高能 EMP 电磁脉冲，对机械、无人机与高护甲敌人造成致命电击伤害",
+            "desc": "造成电击伤害，对机械、无人机与炮塔等目标伤害更高。",
             "id": "cp_short_circuit_quickhack",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -544,7 +544,7 @@ window.GAMES_DATA = [
         ]
       },
       {
-        "category": "⚔️ 往日之影 (Phantom Liberty) 绝版不朽神装武器",
+        "category": "⚔️ 往日之影 (Phantom Liberty) 传奇武器",
         "commands": [
           {
             "name": {
@@ -552,7 +552,7 @@ window.GAMES_DATA = [
               "en": "Erebus Blackwall SMG"
             },
             "code": "Game.AddToInventory(\"Items.Preset_Borg4a_HauntedGun\", 1)",
-            "desc": "封印有黑墙恶性人工智能的致命微型冲锋枪，射击伴随恶魔尖叫并直接侵入处决敌人！",
+            "desc": "子弹带有来自黑墙的能量，对低生命值的敌人效果更好。",
             "id": "cp_erebus_blackwall_smg",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -564,7 +564,7 @@ window.GAMES_DATA = [
               "en": "Militech Hercules 3AX"
             },
             "code": "Game.AddToInventory(\"Items.Preset_Hercules_Prototype\", 1)",
-            "desc": "智能突击步枪，将击中的目标化为剧毒酸蚀水塘并引爆周围群体",
+            "desc": "智能步枪，命中有几率使敌人中剧毒（中毒目标更易被暴击），击杀后目标会爆炸并留下酸池。",
             "id": "cp_militech_hercules_3ax",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -576,7 +576,7 @@ window.GAMES_DATA = [
               "en": "Rosco Power Revolver"
             },
             "code": "Game.AddToInventory(\"Items.Preset_Overture_Dodger\", 1)",
-            "desc": "击中敌人腿部使其倒地后，接爆头射击必定触发暴击致死伤害",
+            "desc": "击中敌人腿部更容易使其倒地，倒地后爆头射击必定触发暴击。",
             "id": "cp_rosco_power_revolver",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -588,7 +588,7 @@ window.GAMES_DATA = [
               "en": "Fang Iconic Knife"
             },
             "code": "Game.AddToInventory(\"Items.Preset_Knife_Kurtz_1\", 1)",
-            "desc": "投掷命中击残敌人，近战连续挥击大幅强化斩杀威力",
+            "desc": "投掷命中可使敌人残废（无法逃跑），近战连续攻击伤害会提升。",
             "id": "cp_fang_iconic_knife",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -600,7 +600,7 @@ window.GAMES_DATA = [
               "en": "Bald Eagle Revolver"
             },
             "code": "Game.AddToInventory(\"Items.Preset_Metel_Kurt\", 1)",
-            "desc": "破甲重炮左轮，搭配飞刀尖牙可触发粉碎双倍暴击",
+            "desc": "左轮手枪，配合飞刀「尖牙」命中敌人腿部后朝同一部位射击可将其炸碎并收回飞刀，对移动目标更有效；自带爆炸弹药。",
             "id": "cp_bald_eagle_revolver",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -612,7 +612,7 @@ window.GAMES_DATA = [
               "en": "Wild Dog LMG"
             },
             "code": "Game.AddToInventory(\"Items.Preset_Defender_Kurt\", 1)",
-            "desc": "狂暴连射轻机枪，子弹命中提升暴击率，弹夹打空接挥拳处决",
+            "desc": "连续命中可提升射速与暴击率，弹药打空后快速近战攻击伤害大幅提升。",
             "id": "cp_wild_dog_lmg",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -624,7 +624,7 @@ window.GAMES_DATA = [
               "en": "Agaou Iconic Axe"
             },
             "code": "Game.AddToInventory(\"Items.Preset_VB_Axe\", 1)",
-            "desc": "投掷重型战斧，暴击命中在敌人头颅引发扩散电弧闪电风暴！",
+            "desc": "投掷战斧，暴击命中会产生冲击波，可对范围内多名敌人造成伤害。",
             "id": "cp_agaou_iconic_axe",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -636,7 +636,7 @@ window.GAMES_DATA = [
               "en": "Amstaff Iconic Shotgun"
             },
             "code": "Game.AddToInventory(\"Items.Preset_Crusher_Amazon\", 1)",
-            "desc": "狗镇空投专属重炮，连续命中造成无法愈合的燃烧爆炸",
+            "desc": "霰弹枪，击杀或肢解敌人后提升移动速度，移动越快伤害越高。",
             "id": "cp_amstaff_iconic_shotgun",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -644,11 +644,11 @@ window.GAMES_DATA = [
           },
           {
             "name": {
-              "zh-CN": "罗刹 (Rasetsu - 狗镇高科技穿墙智能狙击枪)",
+              "zh-CN": "罗刹 (Rasetsu - 狗镇科技狙击枪)",
               "en": "Rasetsu Tech Sniper"
             },
             "code": "Game.AddToInventory(\"Items.Preset_Rasetsu_Prototype\", 1)",
-            "desc": "蓄力射击发射高能穿透激光，一枪连续贯穿击穿整栋大楼掩体后的多名敌人",
+            "desc": "蓄力射击的子弹可穿透敌人并自动偏转弹道，命中多个目标。",
             "id": "cp_rasetsu_tech_sniper",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -656,11 +656,11 @@ window.GAMES_DATA = [
           },
           {
             "name": {
-              "zh-CN": "逃兵 (Dezerter - 极端狂暴双管双喷)",
+              "zh-CN": "逃兵 (Dezerter - 双管霰弹枪)",
               "en": "Dezerter Shotgun"
             },
             "code": "Game.AddToInventory(\"Items.Preset_Testera_Nicolas\", 1)",
-            "desc": "近距离一枪轰碎 Boss，击杀敌人后获得移速暴击但自身会受到自燃挑战",
+            "desc": "近距离威力很高的霰弹枪，击杀敌人后会短暂被火焰包裹并获得移速加成与更高的伤害减免几率（生命值过低时不触发）。",
             "id": "cp_dezerter_shotgun",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -669,7 +669,7 @@ window.GAMES_DATA = [
         ]
       },
       {
-        "category": "🗡️ 原版传奇不朽武器全家桶 (Classic Iconic Arsenal - 剑枪齐全)",
+        "category": "🗡️ 原版标志性武器合集 (Classic Iconic Arsenal)",
         "commands": [
           {
             "name": {
@@ -677,7 +677,7 @@ window.GAMES_DATA = [
               "en": "Satori Katana"
             },
             "code": "Game.AddToInventory(\"Items.Preset_Katana_Saburo\", 1)",
-            "desc": "序章大厦天台遗物，高达 500% 的极品致命暴击伤害",
+            "desc": "可向远处敌人跃进攻击；收刀状态下长按攻击键发动居合斩，必定造成流血，若敌人已被「涅槃」附加流血则改为造成大出血（持续扣敌血并回复自身生命）。",
             "id": "cp_satori_katana",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -701,7 +701,7 @@ window.GAMES_DATA = [
               "en": "Byakko Katana"
             },
             "code": "Game.AddToInventory(\"Items.Preset_Katana_Wakako\", 1)",
-            "desc": "冈田和子委托全清奖励：挥刀自带超远距离前冲飞跃斩杀，连斩手感冠绝全游戏！",
+            "desc": "冈田和子委托全清奖励：挥刀可向敌人跃进突击，击杀目标后可短暂进行连续快速攻击。",
             "id": "cp_byakko_katana",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -713,7 +713,7 @@ window.GAMES_DATA = [
               "en": "Gwynbleidd Witcher Sword"
             },
             "code": "Game.AddToInventory(\"Items.Preset_Sword_Witcher\", 1)",
-            "desc": "猎魔人杰洛特专属符文剑，连续斩杀触发红光剑芒斩风",
+            "desc": "对首领级敌人造成更高伤害；连续快速击杀敌人后一段时间内攻击必定暴击，生命值过低时攻击也必定暴击。",
             "id": "cp_gwynbleidd_witcher_sword",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -721,11 +721,11 @@ window.GAMES_DATA = [
           },
           {
             "name": {
-              "zh-CN": "吹毛求疵 (Errata - 2.0 热能自燃太刀)",
+              "zh-CN": "吹毛求疵 (Errata - 2.0 太刀)",
               "en": "Errata Thermal Katana"
             },
             "code": "Game.AddToInventory(\"Items.Preset_Katana_E3\", 1)",
-            "desc": "刀身附带高温灼烧，攻击燃烧状态的目标必定触发暴击",
+            "desc": "可向敌人跃进攻击；攻击处于燃烧状态的目标必定触发暴击。",
             "id": "cp_errata_thermal_katana",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -737,7 +737,7 @@ window.GAMES_DATA = [
               "en": "Jinchu-Maru Katana"
             },
             "code": "Game.AddToInventory(\"Items.Preset_Katana_Takemura\", 1)",
-            "desc": "开启斯安威斯坦时暴击率锁定 100%，连击终结技造成双倍伤害",
+            "desc": "连击最后一击必定暴击；光学迷彩激活时所有攻击都会暴击并可向目标突进；对精英敌人伤害更高。",
             "id": "cp_jinchu_maru_katana",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -749,7 +749,7 @@ window.GAMES_DATA = [
               "en": "Tsumetogi Katana"
             },
             "code": "Game.AddToInventory(\"Items.Preset_Katana_Hiromi\", 1)",
-            "desc": "攻击附带高频电击与抗电护盾，居合斩杀流利器",
+            "desc": "攻击附带少量电击伤害并有几率使敌人触电；非常规攻击伤害更高。",
             "id": "cp_tsumetogi_katana",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -761,7 +761,7 @@ window.GAMES_DATA = [
               "en": "Cocktail Stick"
             },
             "code": "Game.AddToInventory(\"Items.Preset_Katana_Cocktail\", 1)",
-            "desc": "艾芙琳更衣室拾取，粉红色荧光刀刃无视敌人部分护甲",
+            "desc": "艾芙琳更衣室拾取；光学迷彩激活时命中敌人会造成持续时间更长的流血效果。",
             "id": "cp_cocktail_stick",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -785,7 +785,7 @@ window.GAMES_DATA = [
               "en": "Blue Fang Knife"
             },
             "code": "Game.AddToInventory(\"Items.Preset_Neurotoxin_Knife_Iconic\", 1)",
-            "desc": "命中直接击晕强敌，潜行暗杀与控制神兵",
+            "desc": "命中后使敌人硬直：爆头 1 秒后、其他部位 3 秒后触发；非战斗状态下的敌人会立即被击晕。",
             "id": "cp_blue_fang_knife",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -797,7 +797,7 @@ window.GAMES_DATA = [
               "en": "Headhunter Knife"
             },
             "code": "Game.AddToInventory(\"Items.Preset_Punk_Knife_Iconic\", 1)",
-            "desc": "命中目标后附加标记，后续爆头伤害暴增 250%",
+            "desc": "命中后标记目标，之后用任意武器命中其头部可造成 200% 伤害，并收回飞刀、清除标记。",
             "id": "cp_headhunter_knife",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -809,7 +809,7 @@ window.GAMES_DATA = [
               "en": "Malorian Arms 3516"
             },
             "code": "Game.AddToInventory(\"Items.Preset_Silverhand_3516\", 1)",
-            "desc": "帅气转轮拔枪动作，近距离近战可喷射扇形高温烈焰",
+            "desc": "强尼·银手专属手枪，快速近战攻击可点燃敌人并造成大量伤害，但会消耗枪内剩余全部子弹。",
             "id": "cp_malorian_arms_3516",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -817,11 +817,11 @@ window.GAMES_DATA = [
           },
           {
             "name": {
-              "zh-CN": "守望 (Overwatch - 帕南专属消音大狙)",
+              "zh-CN": "守望 (Overwatch - 帕南专属消音狙击枪)",
               "en": "Overwatch Sniper"
             },
             "code": "Game.AddToInventory(\"Items.Preset_Grad_Panam\", 1)",
-            "desc": "全夜之城唯一自带消音器的极品穿墙栓动反器材重型狙击步枪",
+            "desc": "狙击步枪，自带消音器并提升换弹速度。",
             "id": "cp_overwatch_sniper",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -833,7 +833,7 @@ window.GAMES_DATA = [
               "en": "Ba Xing Chong"
             },
             "code": "Game.AddToInventory(\"Items.Legendary_Zhuo_Eight_Star\", 1)",
-            "desc": "重锤秘密储藏室获取，发射群发高爆追踪导弹，近身秒杀一切精英",
+            "desc": "重锤秘密储藏室获取，智能霰弹武器，可发射爆炸弹药并同时锁定最多 6 名敌人，爆炸范围较大（对自己也有伤害风险）；生命值较低时换弹更快、灼烧几率更高。",
             "id": "cp_ba_xing_chong",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -845,7 +845,7 @@ window.GAMES_DATA = [
               "en": "Guts Shotgun (Rebecca)"
             },
             "code": "Game.AddToInventory(\"Items.Preset_Carnage_Edgerunners\", 1)",
-            "desc": "荒坂塔下拾取，后坐力极度夸张的狂暴多弹丸近距离轰杀重喷",
+            "desc": "荒坂塔下拾取，霰弹枪，射速与伤害提升，但精准度下降。",
             "id": "cp_guts_shotgun_rebecca",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -857,7 +857,7 @@ window.GAMES_DATA = [
               "en": "Widow Maker"
             },
             "code": "Game.AddToInventory(\"Items.Preset_Achilles_Nash\", 1)",
-            "desc": "高穿透科技步枪，带强烈化学毒性伤害与穿掩体穿透",
+            "desc": "科技步枪，每次射击发射两发子弹并造成化学伤害，提升中毒几率；蓄力射击伤害更高。",
             "id": "cp_widow_maker",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -869,7 +869,7 @@ window.GAMES_DATA = [
               "en": "Comrade's Hammer"
             },
             "code": "Game.AddToInventory(\"Items.Legendary_Burya_Comrade\", 1)",
-            "desc": "单发高爆穿甲重弹，一枪触发大范围爆轰秒杀",
+            "desc": "左轮手枪，弹膛改装为单发高爆弹，快速近战攻击后会自动装填。",
             "id": "cp_comrade_s_hammer",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -881,7 +881,7 @@ window.GAMES_DATA = [
               "en": "Skippy Smart Pistol"
             },
             "code": "Game.AddToInventory(\"Items.Preset_Yukimura_Skippy\", 1)",
-            "desc": "会说话、唱歌的 AI 智能手枪，可锁定冷酷无情锁头杀戮模式",
+            "desc": "会说话的智能手枪，可在「仁慈新人」（专打肢体）与「冷血杀手」（专打头部）两种模式间切换。",
             "id": "cp_skippy_smart_pistol",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -893,7 +893,7 @@ window.GAMES_DATA = [
               "en": "Yinglong Smart SMG"
             },
             "code": "Game.AddToInventory(\"Items.Preset_Dian_Yinglong\", 1)",
-            "desc": "子弹自动索敌跟踪，高概率引发大范围 EMP 电磁脉冲连环爆炸",
+            "desc": "智能冲锋枪，子弹可追踪目标，并有几率造成额外电击伤害与小范围 EMP 效果。",
             "id": "cp_yinglong_smart_smg",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -905,7 +905,7 @@ window.GAMES_DATA = [
               "en": "Shingen Mk.V Prototype"
             },
             "code": "Game.AddToInventory(\"Items.Preset_Shingen_Prototype\", 1)",
-            "desc": "荒坂工业园集装箱获取，子弹自动锁定三人并伴随高温爆炸",
+            "desc": "荒坂工业园集装箱获取，智能冲锋枪，子弹可自动锁定最多 3 个目标并发射爆炸弹药，灼烧几率提升。",
             "id": "cp_shingen_mk_v_prototype",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -917,7 +917,7 @@ window.GAMES_DATA = [
               "en": "Pride Pistol (Rogue)"
             },
             "code": "Game.AddToInventory(\"Items.Preset_Liberty_Rogue\", 1)",
-            "desc": "结局击败亚当重锤掉落，爆头伤害与击倒概率全游戏手枪之最",
+            "desc": "结局击败亚当·重锤后掉落，手枪，首发必定暴击，生命值较高时爆头伤害提升，对精英敌人的爆头伤害也有加成。",
             "id": "cp_pride_pistol_rogue",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -929,7 +929,7 @@ window.GAMES_DATA = [
               "en": "Amnesty Revolver"
             },
             "code": "Game.AddToInventory(\"Items.Preset_Overture_Cassidy\", 1)",
-            "desc": "阿德卡多老兵卡西迪手枪，拔枪极速且后坐力极小",
+            "desc": "左轮手枪，拔枪后快速腰射爆头必定触发暴击伤害。",
             "id": "cp_amnesty_revolver",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -941,7 +941,7 @@ window.GAMES_DATA = [
               "en": "Sir John Phallustiff"
             },
             "code": "Game.AddToInventory(\"Items.Preset_Dildo_Stout\", 1)",
-            "desc": "汽车旅馆幽会获得，全夜之城攻速极快且自带震动打击特效的非致命钝器",
+            "desc": "汽车旅馆幽会获得的钝器武器，攻击为非致命。",
             "id": "cp_sir_john_phallustiff",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -950,15 +950,15 @@ window.GAMES_DATA = [
         ]
       },
       {
-        "category": "🚗 全载具一键解锁与名车 (Vehicles Spawner)",
+        "category": "🚗 载具解锁与名车 (Vehicles)",
         "commands": [
           {
             "name": {
-              "zh-CN": "一键解锁全夜之城所有载具！(全买断)",
+              "zh-CN": "解锁全部载具",
               "en": "Unlock All Vehicles"
             },
             "code": "vs = Game.GetVehicleSystem() vs:EnableAllPlayerVehicles()",
-            "desc": "按 V 呼叫菜单直接解锁全游戏所有汽车、卡车与摩托车！",
+            "desc": "使用后可通过呼叫菜单（按 V）直接召唤游戏中所有已登记的汽车、卡车与摩托车。",
             "id": "cp_unlock_all_vehicles",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -1088,7 +1088,7 @@ window.GAMES_DATA = [
               "en": "Tier 5 Weapon Components x1000"
             },
             "code": "Game.AddToInventory(\"Items.LegendaryMaterial1\", 1000)",
-            "desc": "将所有武器直接升满 Tier 5++ 终极品阶",
+            "desc": "可用于将武器升级至 Tier 5++ 传奇品阶。",
             "id": "cp_tier_5_weapon_components_x1000",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -1100,7 +1100,7 @@ window.GAMES_DATA = [
               "en": "Tier 5 Quickhack Components x1000"
             },
             "code": "Game.AddToInventory(\"Items.QuickHackLegendaryMaterial1\", 1000)",
-            "desc": "制造终极黑客快速破解插件：赛博精神病、突触熔断",
+            "desc": "用于制造高阶黑客快速破解程序，如赛博精神病、突触熔断等。",
             "id": "cp_tier_5_quickhack_components_x1000",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -1189,7 +1189,7 @@ window.GAMES_DATA = [
               "en": "Set Time: 12:00 Noon"
             },
             "code": "Game.GetTimeSystem():SetGameTimeByHMS(12, 0, 0)",
-            "desc": "告别漆黑深夜，一键调节到大白天正午",
+            "desc": "将游戏内时间设置为正午 12:00。",
             "id": "cp_set_time_12_00_noon",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -1201,7 +1201,7 @@ window.GAMES_DATA = [
               "en": "Set Time: Midnight 00:00"
             },
             "code": "Game.GetTimeSystem():SetGameTimeByHMS(0, 0, 0)",
-            "desc": "一键切换至深夜，欣赏五彩霓虹灯光",
+            "desc": "将游戏内时间设置为凌晨 00:00（夜晚，霓虹灯光效果更明显）。",
             "id": "cp_set_time_midnight_00_00",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -1209,11 +1209,11 @@ window.GAMES_DATA = [
           },
           {
             "name": {
-              "zh-CN": "【拍照神技】彻底冻结游戏昼夜时间流逝",
+              "zh-CN": "冻结游戏时间流逝（拍照用）",
               "en": "Freeze Time Progression"
             },
             "code": "Game.GetTimeSystem():SetPausedState(true, \"\")",
-            "desc": "时间永远定格在当前秒数，光影角度固定不变，专心构图拍照！",
+            "desc": "暂停游戏内时间流逝，光影角度保持不变，便于拍照构图。",
             "id": "cp_freeze_time_progression",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -1234,15 +1234,15 @@ window.GAMES_DATA = [
         ]
       },
       {
-        "category": "📜 隐藏结局、全员恋爱与剧情控制 (Secret Endings & Romances)",
+        "category": "📜 隐藏结局解锁 (Secret Endings)",
         "commands": [
           {
             "name": {
-              "zh-CN": "强制解锁隐藏单挑荒坂塔结局 (不用等对话!)",
+              "zh-CN": "设置强尼友谊剧情标记（隐藏结局前置）",
               "en": "Unlock Secret Ending (Solo Raid)"
             },
             "code": "Game.GetQuestsSystem():SetFactStr(\"sq032_johnny_friend\", 1)",
-            "desc": "直接修复油田对话！在天台选择结局时静默发呆 4 分钟，强尼就会主动提议单人单挑杀入荒坂塔（不要害怕死神）！",
+            "desc": "将与强尼友谊相关的剧情标记设为 1，这是解锁隐藏结局（天台单人结局选项）的前置条件之一。",
             "id": "cp_unlock_secret_ending_solo_raid",
             "syntax_type": "lua_function",
             "framework_required": "Cyber Engine Tweaks",
@@ -1257,7 +1257,7 @@ window.GAMES_DATA = [
         "title": "Cyber Engine Tweaks",
         "author": "yamashi",
         "category": "核心运行库 (Core Framework)",
-        "desc": "赛博朋克2077绝对前置基石！修复原生内存漏洞，提供全局按键控制台与 Lua 脚本接口。",
+        "desc": "为 Mod 开发者提供 Lua 脚本框架，并提供游戏内按键控制台；同时修复了游戏的一处原生内存安全漏洞。",
         "dependencies": [
           "None"
         ],
@@ -1265,7 +1265,7 @@ window.GAMES_DATA = [
         "installSteps": [
           "1. 下载压缩包解压，将 bin 文件夹直接放入《赛博朋克2077》安装根目录；",
           "2. 启动游戏，首次启动屏幕中央会弹出热键绑定窗口，按下键盘 ~ 键绑定；",
-          "3. 后续游戏随时按下 ~ 即可呼出控制台运行所有作弊与MOD命令。"
+          "3. 后续游戏中随时按下 ~ 键即可呼出控制台，用于运行 Lua 脚本与部分作弊指令。"
         ],
         "isDirect": false,
         "nexusUrl": "https://www.nexusmods.com/cyberpunk2077/mods/107",
@@ -1300,14 +1300,14 @@ window.GAMES_DATA = [
         "title": "ArchiveXL",
         "author": "psiberx",
         "category": "资源前置 (Resource Loader)",
-        "desc": "突破原生资源限制，无需覆盖原版游戏文件即可无冲突载入数千套新服装、发型与义体外观。",
+        "desc": "扩展游戏的资源加载方式，可在不覆盖原版文件的情况下加载额外的服装、发型与义体外观模组。",
         "dependencies": [
           "RED4ext"
         ],
         "installPath": "Cyberpunk 2077\\red4ext\\plugins\\ArchiveXL\\",
         "installSteps": [
           "1. 将压缩包解压拖拽入游戏根目录覆盖；",
-          "2. 配合 TweakXL 使用以确保全量外观 MOD 完美加载。"
+          "2. 建议搭配 TweakXL 一起使用，以提升外观类 Mod 的兼容性。"
         ],
         "isDirect": false,
         "nexusUrl": "https://www.nexusmods.com/cyberpunk2077/mods/4198",
@@ -1342,7 +1342,7 @@ window.GAMES_DATA = [
         "title": "AMM - Appearance Menu Mod",
         "author": "MaximiliumM",
         "category": "随从外观与拍照导演 (Tool)",
-        "desc": "2077 最强功能性菜单！随时召唤朱迪、帕南、强尼做随从跟你并肩战斗，自由给 NPC 换衣服、随处摆放家具装修、自定义摄影棚打光！",
+        "desc": "功能菜单类 Mod，可召唤朱迪、帕南、强尼等 NPC 作为随从同行、更换 NPC 外观、摆放家具装饰房间，并提供拍照模式的灯光与镜头控制。",
         "dependencies": [
           "Cyber Engine Tweaks"
         ],
@@ -1363,7 +1363,7 @@ window.GAMES_DATA = [
         "title": "Equipment-EX",
         "author": "psiberx and DJ_Kovrik",
         "category": "穿搭衣柜扩展 (Wardrobe Overhaul)",
-        "desc": "彻底颠覆原版少得可怜的几个装备槽！提供上百个细分穿搭槽位（内衣、外套、战术背心、项链、耳饰、腰带、枪套等），可自由层叠穿搭而不穿模覆盖。",
+        "desc": "扩展装备穿搭系统，提供更多分类穿搭槽位（如内衣、外套、战术背心、项链、耳饰、腰带、枪套等），可叠穿多件装备而外观互不覆盖。",
         "dependencies": [
           "ArchiveXL",
           "TweakXL",
@@ -1372,7 +1372,7 @@ window.GAMES_DATA = [
         "installPath": "Cyberpunk 2077\\r6\\scripts\\EquipmentEX\\",
         "installSteps": [
           "1. 将 r6 文件夹覆盖至游戏根目录；",
-          "2. 打开任意公寓的衣柜即可开启全新的高阶穿搭界面。"
+          "2. 打开任意公寓的衣柜即可使用新的穿搭界面。"
         ],
         "isDirect": false,
         "nexusUrl": "https://www.nexusmods.com/cyberpunk2077/mods/6945",
@@ -1386,7 +1386,7 @@ window.GAMES_DATA = [
         "title": "Let There Be Flight",
         "author": "Jack Humbert",
         "category": "飞行载具 (Vehicles)",
-        "desc": "让夜之城所有跑车具备空中变形起飞能力！四个轮子折叠喷射火焰，双击跳跃直接升空，在摩天大楼霓虹之间自由巡航穿梭。",
+        "desc": "为载具添加可配置的飞行系统，车轮折叠并喷射推进特效，可通过按键切换至飞行形态。",
         "dependencies": [
           "RED4ext",
           "Cyber Engine Tweaks"
@@ -1394,7 +1394,7 @@ window.GAMES_DATA = [
         "installPath": "Cyberpunk 2077\\red4ext\\plugins\\let_there_be_flight\\",
         "installSteps": [
           "1. 解压放入游戏根目录；",
-          "2. 驾驶任意汽车长按 E 即可切换飞行形态，使用飞行摇杆或键鼠平稳驾驶。"
+          "2. 驾驶载具时长按 E 键切换至飞行形态，用方向键/摇杆或键鼠控制飞行。"
         ],
         "isDirect": false,
         "nexusUrl": "https://www.nexusmods.com/cyberpunk2077/mods/5208",
@@ -1768,7 +1768,7 @@ window.GAMES_DATA = [
     },
     "consoleCategories": [
       {
-        "category": "🎥 虚幻5引擎镜头画质与截图打光调优 (UE5 Camera & Graphics Engine)",
+        "category": "📊 性能监控 (Performance Monitoring)",
         "commands": [
           {
             "id": "bmw_stat_fps",
@@ -1814,7 +1814,7 @@ window.GAMES_DATA = [
         "title": "WukongGM Commands too unlock all items armor will and exp",
         "author": "LazyYoru",
         "category": "实用工具 (Utility)",
-        "desc": "利用游戏自身导出的 BGUFunctionLibraryManaged 函数库，热键一键派发原生指令；游戏更新后可能要等作者适配。",
+        "desc": "利用游戏自身导出的 BGUFunctionLibraryManaged 函数库，通过热键执行原生指令；游戏更新后可能需要等待作者适配。",
         "dependencies": [
           "UE4SS"
         ],
@@ -2132,11 +2132,11 @@ window.GAMES_DATA = [
     "popularCommands": [
       {
         "name": {
-          "zh-CN": "完全无敌上帝模式 (God Mode)",
+          "zh-CN": "上帝模式 (God Mode)",
           "en": "God Mode"
         },
         "command": "god",
-        "desc": "杰洛特完全无敌，生命值与昆恩法印锁死，免疫一切物理与魔法伤害。",
+        "desc": "开启后杰洛特免疫伤害，生命值与昆恩法印锁定，不会受到物理与法术伤害。",
         "source": "https://commands.gg/witcher3/god"
       },
       {
@@ -2145,34 +2145,34 @@ window.GAMES_DATA = [
           "en": "Add 100,000 Crowns"
         },
         "command": "addmoney(100000)",
-        "desc": "随心所欲锻造六大宗师学派神装与陶森特庄园改造。",
+        "desc": "增加 100,000 克朗，可用于购买宗师级装备材料或陶森特庄园升级等花费较高的内容。",
         "source": "https://commands.gg/witcher3/addmoney"
       },
       {
         "name": {
-          "zh-CN": "一键集齐全套昆特牌",
+          "zh-CN": "开始一局昆特牌对局",
           "en": "Add All Gwent Cards"
         },
         "command": "secretgwint",
-        "desc": "直接集齐所有阵营与中立全套英雄昆特牌。",
+        "desc": "立即开始一局与 AI 对战的昆特牌比赛；不会直接把全部卡牌加入牌库。",
         "source": "https://commands.gg/witcher3/secretgwint"
       },
       {
         "name": {
-          "zh-CN": "直接获得湖中之剑 (血与酒最强成长银剑)",
+          "zh-CN": "直接获得湖中之剑 (血与酒成长型银剑)",
           "en": "Add Aerondight Sword"
         },
         "command": "additem('Aerondight EP2')",
-        "desc": "获得永远可成长暴击的陶森特至尊神剑。",
+        "desc": "获得会随战斗表现持续强化基础伤害的银剑（Aerondight）。",
         "source": "https://witcher.fandom.com/wiki/Aerondight"
       },
       {
         "name": {
-          "zh-CN": "大地图点亮全大陆 100% 快速旅行路标",
+          "zh-CN": "大地图点亮全部快速旅行路标",
           "en": "Show All Fast Travel"
         },
         "command": "ShowAllFT(1)",
-        "desc": "瞬间解锁白果园、威伦、诺维格瑞、群岛与陶森特全部十字路标。",
+        "desc": "瞬间解锁白果园、威伦、诺维格瑞、群岛与陶森特的全部快速旅行路标。",
         "source": "https://commands.gg/witcher3/showallft"
       },
       {
@@ -2191,7 +2191,7 @@ window.GAMES_DATA = [
       {
         "name": "The Witcher 3 HD Reworked Project NextGen Edition",
         "category": "Graphics",
-        "desc": "全材质终极 4K 材质画质增强重制",
+        "desc": "4K 材质画质增强重制包。",
         "url": "https://www.nexusmods.com/witcher3/mods/9963"
       },
       {
@@ -2261,12 +2261,12 @@ window.GAMES_DATA = [
           {
             "id": "w3_god",
             "name": {
-              "zh-CN": "完全无敌上帝模式 (生命与法印锁死)",
+              "zh-CN": "上帝模式",
               "en": "God Mode"
             },
             "syntax_type": "redengine_cmd",
             "code": "god",
-            "desc": "杰洛特完全无敌，生命值与昆恩法印锁死不掉血，免疫所有怪物抓击、挥砍、毒素、坠落摔伤与狂猎霜冻，再次输入可解除无敌状态。",
+            "desc": "开启后杰洛特免疫伤害：生命值和昆恩法印护盾锁定，不会被怪物攻击、挥砍、中毒、摔落或狂猎霜冻击破；再次输入指令可关闭。",
             "framework_required": "None (Native Console)",
             "source": "https://commands.gg/witcher3/god"
           },
@@ -2297,24 +2297,24 @@ window.GAMES_DATA = [
           {
             "id": "w3_killall",
             "name": {
-              "zh-CN": "秒杀全屏视野敌人",
+              "zh-CN": "清除视野内敌人",
               "en": "Kill All Enemies"
             },
             "syntax_type": "redengine_cmd",
             "code": "killall",
-            "desc": "直接蒸发当前战斗视线范围内所有妖灵、狂猎士兵、孽鬼与大型 Boss！",
+            "desc": "清除当前战斗视野范围内的敌人，包括妖灵、狂猎士兵、孽鬼与部分 Boss。",
             "framework_required": "None (Native Console)",
             "source": "https://web.archive.org/web/20260518032436/https://primagames.com/tips/witcher-3-next-gen-console-commands-full-list-of-cheats"
           },
           {
             "id": "w3_witchcraft",
             "name": {
-              "zh-CN": "终极宝库一键装填 (全游戏所有道具各注入一份)",
+              "zh-CN": "添加全部道具各 1 份",
               "en": "Witchcraft All Items"
             },
             "syntax_type": "redengine_cmd",
             "code": "witchcraft",
-            "desc": "将游戏中包括全部武器、防具、原料、图纸在内的所有物品全部各添加 1 份至背包（执行会略微卡顿，背包负重会剧增）。",
+            "desc": "将游戏中武器、防具、原料、图纸等物品各添加 1 份到背包（执行时可能有短暂卡顿，背包负重会明显增加）。",
             "framework_required": "None (Native Console)",
             "source": "https://commands.gg/witcher3/witchcraft"
           }
@@ -2326,12 +2326,12 @@ window.GAMES_DATA = [
           {
             "id": "w3_setlevel_100",
             "name": {
-              "zh-CN": "角色等级直升 100 级满级",
+              "zh-CN": "角色等级直接设为 100 级",
               "en": "Set Level 100"
             },
             "syntax_type": "redengine_cmd",
             "code": "setlevel(100)",
-            "desc": "将杰洛特的人物等级直接设定为最高 100 级，直接破除全陶森特与石之心顶级神装的穿戴门槛。",
+            "desc": "将杰洛特的等级直接设为 100 级（游戏等级上限），满足陶森特与石之心部分装备的等级需求。",
             "framework_required": "None (Native Console)",
             "source": "https://commands.gg/witcher3/setlevel"
           },
@@ -2362,12 +2362,12 @@ window.GAMES_DATA = [
           {
             "id": "w3_addskillpoints_50",
             "name": {
-              "zh-CN": "获得 50 点技能点数 (点亮全技能树)",
+              "zh-CN": "获得 50 点技能点",
               "en": "Add 50 Skill Points"
             },
             "syntax_type": "redengine_cmd",
             "code": "addskillpoints(50)",
-            "desc": "直接增加 50 点未分配能力点数，随心所欲点亮战斗、法印、炼金与突变全技能树！",
+            "desc": "直接增加 50 点未分配的技能点，可用于点出战斗、法印、炼金与突变分支中的更多技能。",
             "framework_required": "None (Native Console)",
             "source": "https://commands.gg/witcher3/addskillpoints"
           },
@@ -2410,17 +2410,17 @@ window.GAMES_DATA = [
         ]
       },
       {
-        "category": "💰 财富自由、负重突破与大突变诱发物 (Crowns, Weight & Greater Mutagens)",
+        "category": "💰 金币、负重上限与大突变诱发物 (Crowns, Weight & Greater Mutagens)",
         "commands": [
           {
             "id": "w3_addmoney_100k",
             "name": {
-              "zh-CN": "增加 100,000 克朗金币 (奥森弗特首富)",
+              "zh-CN": "增加 100,000 克朗金币",
               "en": "Add 100,000 Crowns"
             },
             "syntax_type": "redengine_cmd",
             "code": "addmoney(100000)",
-            "desc": "随心所欲锻造六大宗师学派神装与陶森特白葡萄庄园全设施扩建升级！",
+            "desc": "增加 100,000 克朗，可用于购买宗师级装备材料或陶森特庄园升级等花费较高的内容。",
             "framework_required": "None (Native Console)",
             "source": "https://commands.gg/witcher3/addmoney"
           },
@@ -2451,55 +2451,55 @@ window.GAMES_DATA = [
           {
             "id": "w3_mutagen_red_greater",
             "name": {
-              "zh-CN": "大红突变诱发物 x10 (剑术攻击力暴涨)",
+              "zh-CN": "大红突变诱发物 x10",
               "en": "Greater Red Mutagen x10"
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('Greater mutagen red', 10)",
-            "desc": "最稀缺珍贵的大红诱发物，解锁并激活血与酒最强剑术瘾头增伤突变核心！",
+            "desc": "可镶嵌到红色技能格中，每镶嵌一个使相关攻击力提升 10%（最多叠加到 +40%）；也可用于合成对应的突变煎药。",
             "framework_required": "None (Native Console)",
             "source": "https://commands.gg/witcher3/items/greater-mutagen-red"
           },
           {
             "id": "w3_mutagen_blue_greater",
             "name": {
-              "zh-CN": "大蓝突变诱发物 x10 (法印强度暴涨)",
+              "zh-CN": "大蓝突变诱发物 x10",
               "en": "Greater Blue Mutagen x10"
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('Greater mutagen blue', 10)",
-            "desc": "狮鹫学派法印轰炸流必备，大幅强化阿尔德推力与伊格尼点燃几率！",
+            "desc": "可镶嵌到蓝色技能格中，每镶嵌一个使法印强度提升 10%（最多叠加到 +40%）；也可用于合成对应的突变煎药。",
             "framework_required": "None (Native Console)",
             "source": "https://commands.gg/witcher3/items/greater-mutagen-blue"
           },
           {
             "id": "w3_mutagen_green_greater",
             "name": {
-              "zh-CN": "大绿突变诱发物 x10 (最大生命值上限暴涨)",
+              "zh-CN": "大绿突变诱发物 x10",
               "en": "Greater Green Mutagen x10"
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('Greater mutagen green', 10)",
-            "desc": "炼金熊学派坦克流核心，搭配协同作用技能让杰洛特血量突破万血！",
+            "desc": "可镶嵌到绿色技能格中，每镶嵌一个使最大生命值提升 150 点（最多叠加到 +600）；也可用于合成对应的突变煎药。",
             "framework_required": "None (Native Console)",
             "source": "https://commands.gg/witcher3/items/greater-mutagen-green"
           },
           {
             "id": "w3_horse_bag_3",
             "name": {
-              "zh-CN": "鲍克兰极品马鞍袋 (官方最高等级背包容量上限)",
+              "zh-CN": "陶森特马鞍袋 (最高等级)",
               "en": "Beauclair Saddlebags (Max Capacity)"
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('Horse Bag 3')",
-            "desc": "直接获得陶森特极品豪华马鞍袋，将背包负重基准上限永久大幅扩充！",
+            "desc": "获得陶森特马鞍袋，提升杰洛特的背包负重上限；是该类马鞍袋中的最高等级。",
             "framework_required": "None (Native Console)",
             "source": "https://commands.gg/witcher3/items/horse-bag-3"
           }
         ]
       },
       {
-        "category": "🌟 次世代版 / 完全版专属神装与特典联动 (Next-Gen Remaster Exclusives & Netflix Rewards)",
+        "category": "🌟 次世代版 / 完全版专属装备与网飞联动 (Next-Gen Remaster Exclusives & Netflix Rewards)",
         "commands": [
           {
             "id": "w3_white_tiger_armor",
@@ -2684,7 +2684,7 @@ window.GAMES_DATA = [
           {
             "id": "w3_netflix_armor_1",
             "name": {
-              "zh-CN": "极品遗忘狼学派胸甲 (网飞进阶版)",
+              "zh-CN": "精制遗忘狼学派胸甲 (网飞进阶版)",
               "en": "Mastercrafted Forgotten Wolven Armor"
             },
             "syntax_type": "redengine_cmd",
@@ -2696,24 +2696,24 @@ window.GAMES_DATA = [
           {
             "id": "w3_netflix_steel_1",
             "name": {
-              "zh-CN": "极品遗忘狼学派钢剑",
+              "zh-CN": "精制遗忘狼学派钢剑",
               "en": "Mastercrafted Forgotten Wolven Steel Sword"
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('Netflix steel sword 1')",
-            "desc": "极品阶段遗忘狼钢剑，大幅强化亚登与阿尔德法印协同轰炸威力。",
+            "desc": "精制遗忘狼钢剑：+6% 法印强度、+9% 肾上腺素点获取、+15% 暴击伤害加成、+6% 暴击率、+5% 流血几率、+5% 人形与非人类敌人经验加成。",
             "framework_required": "None (Native Console)",
             "source": "https://witcher.fandom.com/wiki/Forgotten_Wolven_steel_sword_-_mastercrafted"
           },
           {
             "id": "w3_netflix_silver_1",
             "name": {
-              "zh-CN": "极品遗忘狼学派银剑",
+              "zh-CN": "精制遗忘狼学派银剑",
               "en": "Mastercrafted Forgotten Wolven Silver Sword"
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('Netflix silver sword 1')",
-            "desc": "极品阶段遗忘狼银剑，攻击击中受亚登影响的目标必定触发暴击。",
+            "desc": "精制遗忘狼银剑：+9% 法印强度、+4% 肾上腺素点获取、+30% 暴击伤害加成、+13% 暴击率、+8% 流血几率、+6% 怪物经验加成。",
             "framework_required": "None (Native Console)",
             "source": "https://witcher.fandom.com/wiki/Legendary_forgotten_Wolven_silver_sword_-_mastercrafted"
           },
@@ -2725,7 +2725,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('gwint_card_roach')",
-            "desc": "CDPR 在次世代版 / 完全版中新加入的官方中立昆特英雄牌，攻击力为 3 点，打出后可自动从牌库拉出同伴支援，自带萝卜鬼畜站房顶插画！",
+            "desc": "次世代版 / 完全版新增的中立昆特牌，战力 3 点，为普通单位卡（非英雄卡），本身没有特殊技能。",
             "framework_required": "None (Native Console)",
             "source": "https://witcher.fandom.com/wiki/Roach_(gwent_card)"
           }
@@ -2754,7 +2754,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('Wolf School steel sword 4')",
-            "desc": "凯尔莫罕正统传承至尊钢剑，大幅强化斩击伤害与肾上腺素获取速度。",
+            "desc": "狼学派宗师级钢剑：+11% 法印强度、+11% 肾上腺素点获取、+11% 暴击率、+11% 流血几率、+5% 人形与非人类敌人经验加成。",
             "framework_required": "None (Native Console)",
             "source": "https://commands.gg/witcher3/items/wolf-school-steel-sword-4"
           },
@@ -2766,7 +2766,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('Wolf Armor 4')",
-            "desc": "陶森特宗师级铸造大师打造，激活剑油加成与炸弹多重投掷特效！",
+            "desc": "宗师级狼学派胸甲。次世代版套装特效：对流血目标造成的长剑伤害提升（按已穿戴套装件数叠加）；穿满 6 件后，肾上腺素点数会提升单个敌人可叠加的流血层数上限。",
             "framework_required": "None (Native Console)",
             "source": "https://commands.gg/witcher3/items/wolf-armor-4"
           },
@@ -2809,12 +2809,12 @@ window.GAMES_DATA = [
           {
             "id": "w3_netflix_silver_2",
             "name": {
-              "zh-CN": "宗师级遗弃狼银剑 (网飞剧版第二季终极神兵)",
+              "zh-CN": "宗师级遗弃狼银剑 (网飞剧版同款外观)",
               "en": "Grandmaster Forgotten Wolven Silver Sword"
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('Netflix silver sword 2')",
-            "desc": "次世代专属最高级遗弃狼银剑，亚登与阿尔德法印伤害提升超 300%！",
+            "desc": "宗师级遗弃狼银剑：+10% 法印强度、+7% 肾上腺素点获取、+35% 暴击伤害加成、+15% 暴击率、+10% 流血几率、+10% 怪物经验加成。",
             "framework_required": "None (Native Console)",
             "source": "https://witcher.fandom.com/wiki/Grandmaster_forgotten_Wolven_silver_sword"
           },
@@ -2826,19 +2826,19 @@ window.GAMES_DATA = [
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('Netflix steel sword 2')",
-            "desc": "宗师级遗弃狼钢剑，附加高额肾上腺素充能与肢解斩杀几率。",
+            "desc": "宗师级遗弃狼钢剑：+7% 法印强度、+10% 肾上腺素点获取、+20% 暴击伤害加成、+7% 暴击率、+5% 流血几率、+10% 人形与非人类敌人经验加成。",
             "framework_required": "None (Native Console)",
             "source": "https://witcher.fandom.com/wiki/Grandmaster_forgotten_Wolven_steel_sword"
           },
           {
             "id": "w3_netflix_armor_2",
             "name": {
-              "zh-CN": "宗师级遗弃狼防具胸甲 (大超同款紧身皮甲战袍)",
+              "zh-CN": "宗师级遗弃狼防具胸甲 (网飞剧版同款外观)",
               "en": "Grandmaster Forgotten Wolven Armor"
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('Netflix Armor 2')",
-            "desc": "激活次世代最强套装特效：亚登法印圈内敌人受到伤害时额外产生魔法爆破，药水药效延长！",
+            "desc": "宗师级遗弃狼胸甲：+20% 攻击力、+20% 肾上腺素点获取，以及穿刺、斩击、怪物与元素伤害抗性加成。次世代套装特效：3 件时提升药水持续时间（每件 +7%）；6 件时，受亚登影响的敌人被阿尔德法印击中会额外受到 10% 伤害。",
             "framework_required": "None (Native Console)",
             "source": "https://witcher.fandom.com/wiki/Grandmaster_forgotten_Wolven_armor"
           },
@@ -2850,7 +2850,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('Netflix Gloves 2')",
-            "desc": "宗师级遗弃狼护手，提升攻击速度与法印连发韧性。",
+            "desc": "宗师级遗弃狼护手：+12% 阿尔德法印强度，以及穿刺、斩击、怪物与元素伤害抗性加成。",
             "framework_required": "None (Native Console)",
             "source": "https://witcher.fandom.com/wiki/Grandmaster_forgotten_Wolven_gauntlets"
           },
@@ -2862,7 +2862,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('Netflix Pants 2')",
-            "desc": "宗师级遗弃狼战裙长裤，兼顾敏捷翻滚与高防御。",
+            "desc": "宗师级遗弃狼战裙：+12% 法印强度，以及斩击、怪物与元素伤害抗性加成。",
             "framework_required": "None (Native Console)",
             "source": "https://witcher.fandom.com/wiki/Grandmaster_forgotten_Wolven_trousers"
           },
@@ -2874,14 +2874,14 @@ window.GAMES_DATA = [
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('Netflix Boots 2')",
-            "desc": "宗师级遗弃狼重型皮靴，抗击退与抗元素伤害大幅跃升。",
+            "desc": "宗师级遗弃狼靴子：+12% 亚登法印强度，以及穿刺、钝击、斩击与怪物伤害抗性加成。",
             "framework_required": "None (Native Console)",
             "source": "https://witcher.fandom.com/wiki/Grandmaster_forgotten_Wolven_boots"
           }
         ]
       },
       {
-        "category": "🐻 宗师级熊学派全套重装 (Grandmaster Ursine School Set - 拜年重击流)",
+        "category": "🐻 宗师级熊学派全套重甲 (Grandmaster Ursine School Set)",
         "commands": [
           {
             "id": "w3_gm_bear_silver",
@@ -2903,7 +2903,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('Bear School steel sword 4')",
-            "desc": "重击流对人专属大剑，一刀碎甲打断任何强敌招架！",
+            "desc": "宗师级熊学派钢剑：+22% 肾上腺素点获取、+75% 暴击伤害加成、+5% 暴击率、+14% 肢解几率、+5% 人形与非人类敌人经验加成。",
             "framework_required": "None (Native Console)",
             "source": "https://commands.gg/witcher3/items/bear-school-steel-sword-4"
           },
@@ -2915,7 +2915,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('Bear Armor 4')",
-            "desc": "全游戏最坚固的重铠战袍！套装特效有概率无消耗瞬发强效昆恩护盾！",
+            "desc": "宗师级熊学派重甲胸甲：+22% 肾上腺素点获取，以及穿刺、钝击、斩击与怪物伤害抗性加成。套装特效：昆恩护盾破碎时有几率免耗蓝重新生成（每件 +5%，六件时上限 30%）；穿满 6 件后，与昆恩法印相关技能造成的伤害 +200%。",
             "framework_required": "None (Native Console)",
             "source": "https://commands.gg/witcher3/items/bear-armor-4"
           },
@@ -2939,7 +2939,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('Bear Pants 4')",
-            "desc": "重型板甲下装，提供极致的怪物抓击伤害抵抗。",
+            "desc": "宗师级熊学派裤子：+11% 肾上腺素点获取，以及穿刺、斩击、怪物与元素伤害抗性加成。",
             "framework_required": "None (Native Console)",
             "source": "https://commands.gg/witcher3/items/bear-pants-4"
           },
@@ -2951,14 +2951,14 @@ window.GAMES_DATA = [
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('Bear Boots 4')",
-            "desc": "厚重战靴，彻底免疫被怪物撞击击倒击晕。",
+            "desc": "宗师级熊学派靴子：+11% 肾上腺素点获取，以及穿刺、钝击、斩击与怪物伤害抗性加成。",
             "framework_required": "None (Native Console)",
             "source": "https://commands.gg/witcher3/items/bear-boots-4"
           }
         ]
       },
       {
-        "category": "🐱 宗师级猫学派刺客轻装 (Grandmaster Feline School Set - 回旋剑舞流)",
+        "category": "🐱 宗师级猫学派轻甲套装 (Grandmaster Feline School Set)",
         "commands": [
           {
             "id": "w3_gm_cat_silver",
@@ -2968,7 +2968,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('Lynx School silver sword 4')",
-            "desc": "回旋剑舞流神剑，大幅提升攻击速度、流血概率与暴击几率！",
+            "desc": "宗师级猫学派银剑：+15% 阿尔德法印强度、+10% 暴击率、+15% 流血几率、+10% 肢解几率、+20% 怪物经验加成。",
             "framework_required": "None (Native Console)",
             "source": "https://commands.gg/witcher3/items/lynx-school-silver-sword-4"
           },
@@ -2980,7 +2980,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('Lynx School steel sword 4')",
-            "desc": "高暴击轻刃钢剑，面对土匪强盗群直接化身旋风斩绞肉机！",
+            "desc": "宗师级猫学派钢剑：+15% 阿尔德法印强度、+10% 暴击率、+15% 流血几率、+10% 肢解几率、+5% 人形与非人类敌人经验加成。",
             "framework_required": "None (Native Console)",
             "source": "https://commands.gg/witcher3/items/lynx-school-steel-sword-4"
           },
@@ -2992,7 +2992,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('Lynx Armor 4')",
-            "desc": "带兜帽的刺客皮甲，后背偷袭伤害翻倍，套装特效强化连续轻击爆发！",
+            "desc": "宗师级猫学派轻甲（带兜帽的刺客皮甲）：+22% 攻击力，以及穿刺、斩击、怪物与元素伤害抗性加成。套装特效：重击命中后 3 秒内快速攻击伤害提升（按已穿戴件数叠加）；穿满 6 件后，背后攻击伤害 +50% 并有几率眩晕目标（消耗 1 点肾上腺素）。",
             "framework_required": "None (Native Console)",
             "source": "https://commands.gg/witcher3/items/lynx-armor-4"
           },
@@ -3004,7 +3004,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('Lynx Gloves 4')",
-            "desc": "轻型战斗皮手套，极大增加每次攻击造成的物理攻击力！",
+            "desc": "宗师级猫学派手套：+11% 攻击力，以及穿刺、斩击、怪物与元素伤害抗性加成。",
             "framework_required": "None (Native Console)",
             "source": "https://commands.gg/witcher3/items/lynx-gloves-4"
           },
@@ -3035,7 +3035,7 @@ window.GAMES_DATA = [
         ]
       },
       {
-        "category": "🦅 宗师级狮鹫学派法印轰炸流 (Grandmaster Griffin School Set)",
+        "category": "🦅 宗师级狮鹫学派法印套装 (Grandmaster Griffin School Set)",
         "commands": [
           {
             "id": "w3_gm_griffin_silver",
@@ -3069,7 +3069,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('Gryphon Armor 4')",
-            "desc": "激活最强法印特效：施放法印后 3 秒内施放下一个法印无需消耗活力，伊格尼火烧全场！",
+            "desc": "宗师级狮鹫学派胸甲：+22% 法印强度，以及穿刺、钝击、斩击与怪物伤害抗性加成。套装特效：用耐力施放一次法印后，3 秒内下一个法印施放不消耗耐力；穿满 6 件后亚登陷阱范围 +40%，站在亚登陷阱内时耐力回复与法印强度大幅提升，受到的伤害降低。",
             "framework_required": "None (Native Console)",
             "source": "https://commands.gg/witcher3/items/gryphon-armor-4"
           },
@@ -3081,7 +3081,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('Gryphon Gloves 4')",
-            "desc": "宗师级狮鹫手套，全法印强度大幅飙升！",
+            "desc": "宗师级狮鹫学派手套：+11% 法印强度，以及穿刺、斩击、怪物与元素伤害抗性加成。",
             "framework_required": "None (Native Console)",
             "source": "https://commands.gg/witcher3/items/gryphon-gloves-4"
           },
@@ -3112,7 +3112,7 @@ window.GAMES_DATA = [
         ]
       },
       {
-        "category": "🐍 师匠级飞狮怪与毒蛇学派神装 (Manticore & Viper School Sets - 瘾头暴击流)",
+        "category": "🐍 飞狮怪与毒蛇学派套装 (Manticore & Viper School Sets)",
         "commands": [
           {
             "id": "w3_gm_manticore_silver",
@@ -3134,7 +3134,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('Red Wolf School steel sword 1')",
-            "desc": "具有高穿甲与中毒概率的炼金流至尊钢剑！",
+            "desc": "飞狮怪钢剑：+250 护甲穿透、+50% 暴击伤害加成、+5% 暴击率、+10% 流血几率、+5% 人形与非人类敌人经验加成。",
             "framework_required": "None (Native Console)",
             "source": "https://witcher.fandom.com/wiki/Manticore_steel_sword"
           },
@@ -3146,7 +3146,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('Red Wolf Armor 1')",
-            "desc": "巫师1初版经典皮甲造型，增加最大毒性上限，完美同时磕下 4 瓶强力煎药！",
+            "desc": "飞狮怪防具胸甲：+5 最大毒性上限，以及穿刺、斩击与怪物伤害抗性加成、+25% 暴击伤害加成。套装特效：暴击率与暴击伤害加成同样作用于炸弹，且炸弹投掷无延迟；穿满 6 件后炼金道具最大携带充能数 +1。",
             "framework_required": "None (Native Console)",
             "source": "https://commands.gg/witcher3/items/red-wolf-armor-1"
           },
@@ -3189,12 +3189,12 @@ window.GAMES_DATA = [
           {
             "id": "w3_viper_silver",
             "name": {
-              "zh-CN": "毒蛇剧毒银剑 (石之心绝版神兵)",
+              "zh-CN": "毒蛇剧毒银剑",
               "en": "Viper Venomous Silver Sword"
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('EP1 Viper School silver sword')",
-            "desc": "石之心迷宫中隐藏的绝世神兵，攻击敌人必定附加致命剧毒伤害！",
+            "desc": "毒蛇学派银剑：+25% 阿尔德法印强度、+75% 暴击伤害加成、+10% 暴击率、15% 中毒几率、+20% 怪物经验加成。",
             "framework_required": "None (Native Console)",
             "source": "https://commands.gg/witcher3/items/ep1-viper-school-silver-sword"
           },
@@ -3206,19 +3206,19 @@ window.GAMES_DATA = [
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('EP1 Viper School steel sword')",
-            "desc": "拍卖行地下金库专属钢剑，高暴击高淬毒高穿甲！",
+            "desc": "毒蛇学派钢剑：+25% 阿尔德法印强度、+75% 暴击伤害加成、+10% 暴击率、15% 中毒几率、+5% 人形与非人类敌人经验加成。",
             "framework_required": "None (Native Console)",
             "source": "https://commands.gg/witcher3/items/ep1-viper-school-steel-sword"
           },
           {
             "id": "w3_viper_armor",
             "name": {
-              "zh-CN": "毒蛇学派护甲 (开场 CG 帅气黑皮甲)",
+              "zh-CN": "毒蛇学派护甲 (开场 CG 同款黑皮甲)",
               "en": "Viper Armor"
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('EP1 Witcher Armor')",
-            "desc": "与白果园开场 CG 一致的纯黑鳞片皮甲，全毒素免疫与全面抗性极佳！",
+            "desc": "与白果园开场动画同款的黑色鳞甲：+50% 中毒抗性，以及穿刺、斩击、怪物与元素伤害抗性加成。",
             "framework_required": "None (Native Console)",
             "source": "https://witcher.fandom.com/wiki/Legendary_Viper_armor"
           },
@@ -3261,53 +3261,53 @@ window.GAMES_DATA = [
         ]
       },
       {
-        "category": "🗡️ 绝版传奇神兵与石之心/血与酒不朽圣物 (Legendary Relics & Iconic Blades)",
+        "category": "🗡️ 传奇武器与资料片专属装备 (Legendary Relics & Iconic Blades)",
         "commands": [
           {
             "id": "w3_aerondight",
             "name": {
-              "zh-CN": "湖中之剑 (血与酒湖中仙女最强成长银剑)",
+              "zh-CN": "湖中之剑 (血与酒成长型银剑)",
               "en": "Aerondight (Endless Growth)"
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('Aerondight EP2')",
-            "desc": "全游戏最强银剑！每砍一刀充能一层增伤10%，10层必定 100% 暴击且击杀永久永久增加基础物理攻击力！",
+            "desc": "每次命中为该剑叠加一层能量（最多 10 层），每层增伤 10%；满层时攻击必定暴击，若在满层状态下击杀敌人，会永久提升该剑的基础伤害（上限随角色等级提高）。",
             "framework_required": "None (Native Console)",
             "source": "https://witcher.fandom.com/wiki/Aerondight"
           },
           {
             "id": "w3_iris_olgierd_sabre",
             "name": {
-              "zh-CN": "爱丽丝 (石之心欧吉尔德赠予血弯刀)",
+              "zh-CN": "爱丽丝 (欧吉尔德的血弯刀)",
               "en": "Iris (Olgierd Sabre)"
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('Olgierd Sabre')",
-            "desc": "斩击积蓄赤红能量，重击释放摧毁一切防守的强力冲击波！",
+            "desc": "战斗中会随攻击积蓄能量，剑身变红后使用重击可打出一次威力更强的攻击，但会消耗杰洛特自身部分生命值。",
             "framework_required": "None (Native Console)",
             "source": "https://commands.gg/witcher3/items/olgierd-sabre"
           },
           {
             "id": "w3_caretaker_shovel",
             "name": {
-              "zh-CN": "看门人的铲子 (吸血鬼级吸血钝器)",
+              "zh-CN": "看门人的铲子",
               "en": "Caretaker Shovel"
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('Caretaker Shovel')",
-            "desc": "欧吉尔德庄园怪异铲子，每次攻击造成的伤害直接按 10% 转化为生命值回复杰洛特！",
+            "desc": "欧吉尔德庄园中的铲子，攻击造成的伤害有 10% 转化为生命值回复给杰洛特。",
             "framework_required": "None (Native Console)",
             "source": "https://commands.gg/witcher3/items/caretaker-shovel"
           },
           {
             "id": "w3_winters_blade",
             "name": {
-              "zh-CN": "冬之刃 (克拉奇家传名剑)",
+              "zh-CN": "冬之刃 (克拉奇家传剑)",
               "en": "Winter's Blade"
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('q402 Skellige sword 3')",
-            "desc": "附带极高冰冻与破甲属性的史凯利格群岛家族神兵。",
+            "desc": "史凯利格克拉奇家族传剑：+40 护甲穿透、+55% 暴击伤害加成、+10% 冻结几率；次世代版本下伤害会随角色等级自动调整。",
             "framework_required": "None (Native Console)",
             "source": "https://witcher.fandom.com/wiki/Winter%27s_Blade"
           },
@@ -3319,31 +3319,31 @@ window.GAMES_DATA = [
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('Fate')",
-            "desc": "拥有 3 个符文镶嵌孔的经典极品银剑，法印与暴击加成极高。",
+            "desc": "拥有 3 个符文镶嵌孔的银剑：+2%～10% 伊格尼法印强度、+2%～10% 亚克西法印强度（两者数值相同、随机生成）、+10% 击晕几率。",
             "framework_required": "None (Native Console)",
             "source": "https://commands.gg/witcher3/items/fate"
           },
           {
             "id": "w3_toussaint_steel_3",
             "name": {
-              "zh-CN": "陶森特骑士钢剑 (血与酒最强人属性钢剑)",
+              "zh-CN": "陶森特骑士钢剑",
               "en": "Toussaint Knight's Steel Sword"
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('Toussaint steel sword 3')",
-            "desc": "高达 +300 护甲穿透，+100% 暴击伤害与 +20% 暴击率，公认最强钢剑！",
+            "desc": "陶森特骑士钢剑：+300 护甲穿透、+30% 昆恩法印强度、+100% 暴击伤害加成、+20% 暴击率、+15% 点燃几率。",
             "framework_required": "None (Native Console)",
             "source": "https://commands.gg/witcher3/items/toussaint-steel-sword-3"
           },
           {
             "id": "w3_vampire_mask_q704",
             "name": {
-              "zh-CN": "亨盖得吸血鬼面具 (血与酒暗影长者之穴红面具)",
+              "zh-CN": "亨盖得吸血鬼面具",
               "en": "Hen Gaidth Vampire Mask"
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('q704_vampire_mask')",
-            "desc": "暗影长者洞穴中搜寻到的吸血鬼仪式假面，击杀敌人立即按百分比回血！",
+            "desc": "暗影长者之穴中找到的吸血鬼面具；与亨盖得全套装备搭配时，击杀敌人可回复生命值，回复量为已穿戴套装件数 × 最大生命值的 1%。",
             "framework_required": "None (Native Console)",
             "source": "https://commands.gg/witcher3/items/q704-vampire-mask"
           },
@@ -3367,7 +3367,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('q704 vampire steel sword')",
-            "desc": "亨盖得套装专属吸血钢剑，对人形敌人附带极高暴击与流血吸血特效！",
+            "desc": "亨盖得套装钢剑：+150 护甲穿透、+75% 暴击伤害加成、+15% 暴击率、+15% 流血几率、+15% 眩晕几率。",
             "framework_required": "None (Native Console)",
             "source": "https://commands.gg/witcher3/items/q704-vampire-steel-sword"
           },
@@ -3398,29 +3398,29 @@ window.GAMES_DATA = [
         ]
       },
       {
-        "category": "🧪 高等炼金魔药与极品吸血煎药 (Superior Potions & Decoctions)",
+        "category": "🧪 高等魔药与炼金药 (Superior Potions & Decoctions)",
         "commands": [
           {
             "id": "w3_potion_swallow_sup",
             "name": {
-              "zh-CN": "高等燕子魔药 (极速持续回血)",
+              "zh-CN": "高等燕子魔药",
               "en": "Superior Swallow"
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('Swallow 3')",
-            "desc": "最高等级燕子，高额瞬间生命回复，战斗中保命神药！",
+            "desc": "加速生命值回复，且受到伤害不会打断回复效果；战斗中同样持续回血。",
             "framework_required": "None (Native Console)",
             "source": "https://segmentnext.com/witcher-3-item-codes"
           },
           {
             "id": "w3_potion_thunderbolt_sup",
             "name": {
-              "zh-CN": "高等雷霆魔药 (大幅提升攻击力)",
+              "zh-CN": "高等雷霆魔药",
               "en": "Superior Thunderbolt"
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('Thunderbolt 3')",
-            "desc": "大幅强化所有攻击的物理伤害，暴风雨天气下攻击必定暴击！",
+            "desc": "延长药效持续时间，并提升攻击力（约 +35%）；暴风雨天气下攻击必定暴击。",
             "framework_required": "None (Native Console)",
             "source": "https://segmentnext.com/witcher-3-item-codes"
           },
@@ -3439,31 +3439,31 @@ window.GAMES_DATA = [
           {
             "id": "w3_potion_tawny_owl_sup",
             "name": {
-              "zh-CN": "高等黄褐色猫头鹰 (夜间无限恢复活力)",
+              "zh-CN": "高等黄褐色猫头鹰",
               "en": "Superior Tawny Owl"
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('Tawny Owl 3')",
-            "desc": "大幅提高战斗中耐力与活力恢复，日落后药效持续时间锁定为永久！",
+            "desc": "加速活力（耐力）回复速度并延长药效持续时间；夜晚期间药效不会过期。",
             "framework_required": "None (Native Console)",
             "source": "https://segmentnext.com/witcher-3-item-codes"
           },
           {
             "id": "w3_dec_ekhidna",
             "name": {
-              "zh-CN": "海克娜煎药 (施法翻滚跳跃即回血)",
+              "zh-CN": "海克娜煎药",
               "en": "Ekhidna Decoction"
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('Mutagen 21')",
-            "desc": "每当做出消耗活力的动作（放法印、跳跃、回旋斩）时立即回复 10% 生命！",
+            "desc": "做出消耗活力的动作（如施放法印、翻滚）时回复一定生命值。",
             "framework_required": "None (Native Console)",
             "source": "https://witcher.fandom.com/wiki/Ekhidna_decoction"
           },
           {
             "id": "w3_dec_ekimmara",
             "name": {
-              "zh-CN": "极品吸血煎药 (艾基马拉煎药)",
+              "zh-CN": "艾基马拉煎药",
               "en": "Ekimmara Decoction"
             },
             "syntax_type": "redengine_cmd",
@@ -3475,12 +3475,12 @@ window.GAMES_DATA = [
           {
             "id": "w3_dec_troll",
             "name": {
-              "zh-CN": "巨魔煎药 (战斗中持续被动回血)",
+              "zh-CN": "巨魔煎药 (战斗内外持续回血)",
               "en": "Troll Decoction"
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('Mutagen 12')",
-            "desc": "战斗中与非战斗状态每秒稳定恢复 100 点生命，保命容错极高。",
+            "desc": "战斗内外持续回复生命值；次世代版本下，战斗中每击杀一名敌人额外回复 20 点生命，药效持续 30 分钟。",
             "framework_required": "None (Native Console)",
             "source": "https://witcher.fandom.com/wiki/Troll_decoction"
           },
@@ -3492,7 +3492,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('Mutagen 1')",
-            "desc": "提高 5% 额外暴击几率，猫学派与瘾头暴击流核心搭配。",
+            "desc": "次世代版本下恒定提升 10% 暴击几率（此前版本为 5%）。",
             "framework_required": "None (Native Console)",
             "source": "https://witcher.fandom.com/wiki/Katakan_decoction"
           },
@@ -3511,89 +3511,89 @@ window.GAMES_DATA = [
           {
             "id": "w3_dec_griffin",
             "name": {
-              "zh-CN": "大狮鹫煎药 (重击按目标最大生命值百分比扣血)",
+              "zh-CN": "大狮鹫煎药",
               "en": "Archgriffin Decoction"
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('Mutagen 4')",
-            "desc": "活力全满时的重击直接按敌方最大生命值的 5% 扣除，越级击杀高级怪利器！",
+            "desc": "若还有剩余活力，重击会消耗全部活力，并在造成普通伤害后额外扣除目标最大生命值 5% 的生命值。",
             "framework_required": "None (Native Console)",
             "source": "https://witcher.fandom.com/wiki/Archgriffin_decoction"
           }
         ]
       },
       {
-        "category": "💣 高阶剑油、传奇炸弹与极品符文石 (Superior Oils, Bombs & Greater Runes)",
+        "category": "💣 高级剑油、炸弹与特级符文石 (Superior Oils, Bombs & Greater Runes)",
         "commands": [
           {
             "id": "w3_oil_specter_sup",
             "name": {
-              "zh-CN": "高等残灵生物油 (克制日间妖灵/日间女妖+50%伤害)",
+              "zh-CN": "高等残灵生物油 (克制妖灵类)",
               "en": "Superior Specter Oil"
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('Specter Oil 3')",
-            "desc": "对妖灵、女妖等一切灵体生物造成额外 50% 的真实斩击伤害加成！",
+            "desc": "对妖灵等灵体类怪物（Specter）造成的攻击力提升 50%。",
             "framework_required": "None (Native Console)",
             "source": "https://commands.gg/witcher3/items/specter-oil-3"
           },
           {
             "id": "w3_oil_necrophage_sup",
             "name": {
-              "zh-CN": "高等食尸生物油 (+50%伤害克制水鬼/水婆婆)",
+              "zh-CN": "高等食尸生物油 (克制水鬼/食尸鬼类)",
               "en": "Superior Necrophage Oil"
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('Necrophage Oil 3')",
-            "desc": "大范围清理威伦泥沼水鬼、食尸鬼与孽鬼群必备剑油。",
+            "desc": "对食尸生物（如水鬼、食尸鬼、孽鬼等 Necrophage）造成的攻击力提升 50%。",
             "framework_required": "None (Native Console)",
             "source": "https://commands.gg/witcher3/items/necrophage-oil-3"
           },
           {
             "id": "w3_oil_vampire_sup",
             "name": {
-              "zh-CN": "高等吸血鬼油 (陶森特血与酒必带神油)",
+              "zh-CN": "高等吸血鬼油 (克制吸血鬼类)",
               "en": "Superior Vampire Oil"
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('Vampire Oil 3')",
-            "desc": "克制卡塔卡恩、蝠翼魔、隐形吸血女妖与狄拉夫狄克森等吸血种族。",
+            "desc": "对吸血鬼类怪物（如卡塔卡恩、蝠翼魔、吸血女妖等 Vampire）造成的攻击力提升 50%。",
             "framework_required": "None (Native Console)",
             "source": "https://commands.gg/witcher3/items/vampire-oil-3"
           },
           {
             "id": "w3_oil_cursed_sup",
             "name": {
-              "zh-CN": "高等诅咒生物油 (克制狼人/尸婴/狂猎战犬)",
+              "zh-CN": "高等诅咒生物油 (克制狼人/尸婴类)",
               "en": "Superior Cursed Oil"
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('Cursed Oil 3')",
-            "desc": "有效遏制狼人变态的每秒自愈回血机制，重击造成强力破防撕裂！",
+            "desc": "对诅咒类生物（如狼人、尸婴等 Cursed One）造成的攻击力提升 50%。",
             "framework_required": "None (Native Console)",
             "source": "https://commands.gg/witcher3/items/cursed-oil-3"
           },
           {
             "id": "w3_oil_relict_sup",
             "name": {
-              "zh-CN": "高等类魔油 (克制林中夫人/煮婆/鹿首精)",
+              "zh-CN": "高等类魔油 (克制鹿首精/林中夫人类)",
               "en": "Superior Relict Oil"
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('Relic Oil 3')",
-            "desc": "对鹿首精、地灵、林中三巫妪等远古魔法造物造成毁灭性加成伤害！",
+            "desc": "对远古魔法类生物（Relict，如鹿首精、林中夫人等）造成的攻击力提升 50%。",
             "framework_required": "None (Native Console)",
             "source": "https://commands.gg/witcher3/items/relic-oil-3"
           },
           {
             "id": "w3_bomb_grapeshot_sup",
             "name": {
-              "zh-CN": "高等蜂窝炸弹 (一发炸平怪物巢穴)",
+              "zh-CN": "高等蜂窝炸弹",
               "en": "Superior Grapeshot"
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('Grapeshot 3', 10)",
-            "desc": "爆破产生密集破片撕裂周围敌人，瞬间摧毁全大陆孽鬼和水鬼巢穴！",
+            "desc": "对爆炸范围内的敌人造成破片与火焰伤害，伤害无视护甲，可摧毁怪物巢穴。",
             "framework_required": "None (Native Console)",
             "source": "https://segmentnext.com/witcher-3-item-codes"
           },
@@ -3612,31 +3612,31 @@ window.GAMES_DATA = [
           {
             "id": "w3_bomb_northern_wind_sup",
             "name": {
-              "zh-CN": "高等北风炸弹 (绝对冰冻控制强敌)",
+              "zh-CN": "高等北风炸弹",
               "en": "Superior Northern Wind"
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('White Frost 3', 10)",
-            "desc": "瞬间冰封半径 5 米内所有敌人数秒，冻结期间受到的伤害暴涨 300%！",
+            "desc": "使爆炸范围内的敌人陷入冰冻（持续约 10 秒），命中冻结目标会造成额外伤害，并有几率直接即死。",
             "framework_required": "None (Native Console)",
             "source": "https://segmentnext.com/witcher-3-item-codes"
           },
           {
             "id": "w3_bomb_dimeritium_sup",
             "name": {
-              "zh-CN": "高等阻魔金炸弹 (彻底封印魔法与瞬移技能)",
+              "zh-CN": "高等阻魔金炸弹",
               "en": "Superior Dimeritium Bomb"
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('Dwimeritium Bomb 3', 10)",
-            "desc": "扩散阻魔金粉尘，封锁狂猎法师的霜冻传送门与妖灵的虚体潜行！",
+            "desc": "释放阻魔金粉尘，短时间内阻断范围内怪物使用魔法类能力，云雾消散后效果还会再持续一段时间，总持续约 30 秒。",
             "framework_required": "None (Native Console)",
             "source": "https://segmentnext.com/witcher-3-item-codes"
           },
           {
             "id": "w3_rune_chernobog_sup",
             "name": {
-              "zh-CN": "极品元素符文石 x10",
+              "zh-CN": "特级元素符文石 x10",
               "en": "Greater Elemental Rune x10"
             },
             "syntax_type": "redengine_cmd",
@@ -3648,19 +3648,19 @@ window.GAMES_DATA = [
           {
             "id": "w3_glyph_quen_sup",
             "name": {
-              "zh-CN": "极品昆恩字印 x10 (+10%昆恩护盾强度)",
+              "zh-CN": "特级昆恩字印 x10 (+10% 昆恩护盾强度)",
               "en": "Greater Glyph of Quen x10"
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('Glyph quen greater', 10)",
-            "desc": "防具终极保命镶嵌符文，护甲防具四件插满直接增加 40% 昆恩伤害吸收上限！",
+            "desc": "镶嵌在护甲符文卡槽中的字印，提供 +10% 昆恩法印强度；装备在多件护甲上时效果可叠加。",
             "framework_required": "None (Native Console)",
             "source": "https://commands.gg/witcher3/items/glyph-quen-greater"
           }
         ]
       },
       {
-        "category": "🃏 昆特牌全阵营五大势力英雄牌库与秒胜 (Gwent Decks & Instant Win Cheats)",
+        "category": "🃏 昆特牌牌组与对局指令 (Gwent Decks & Match Commands)",
         "commands": [
           {
             "id": "w3_secretgwint",
@@ -3677,12 +3677,12 @@ window.GAMES_DATA = [
           {
             "id": "w3_wingwint",
             "name": {
-              "zh-CN": "当前昆特牌对决立即判定以绝对优势获胜",
+              "zh-CN": "直接判定当前昆特牌对局获胜",
               "en": "Instant Win Current Gwent Match"
             },
             "syntax_type": "redengine_cmd",
             "code": "winGwint(true)",
-            "desc": "打牌开局或任意回合中输入，直接触发对方认输结算，无悬念秒赢帕席芬拉大赌局！",
+            "desc": "在对局进行中的任意时刻输入，直接判定当前昆特牌对局获胜（对方直接认输结算）。",
             "framework_required": "None (Native Console)",
             "source": "https://commands.gg/witcher3/wingwint"
           },
@@ -3706,7 +3706,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('gwint_card_geralt')",
-            "desc": "昆特牌最强单兵金卡之一，不受任何天气与烧灼特殊效果影响。",
+            "desc": "中立近战英雄卡，战力 15 点；作为英雄牌免疫特殊卡牌效果，登场时会额外从牌库中找出并打出萝卜卡。",
             "framework_required": "None (Native Console)",
             "source": "https://segmentnext.com/witcher-3-item-codes"
           },
@@ -3718,7 +3718,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('gwint_card_ciri')",
-            "desc": "拥有 15 点极高战力的中立英雄牌，压制敌方关键点数战局翻盘神器。",
+            "desc": "中立近战英雄卡，战力 15 点；作为英雄牌免疫特殊卡牌效果，登场时会额外从牌库中找出并打出萝卜卡。",
             "framework_required": "None (Native Console)",
             "source": "https://segmentnext.com/witcher-3-item-codes"
           },
@@ -3730,31 +3730,31 @@ window.GAMES_DATA = [
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('gwint_card_yennefer')",
-            "desc": "打出后可直接从己方墓地将任意废弃作战卡牌复活拉回战场！",
+            "desc": "中立远程英雄卡，战力 7 点；登场时可从己方墓地选择一张普通单位卡（不含英雄与特殊卡）直接复活打出。",
             "framework_required": "None (Native Console)",
             "source": "https://segmentnext.com/witcher-3-item-codes"
           },
           {
             "id": "w3_card_mysterious_elf",
             "name": {
-              "zh-CN": "神秘精灵阿瓦拉克 (0点无敌间谍神卡)",
+              "zh-CN": "神秘精灵阿瓦拉克 (0点间谍金卡)",
               "en": "Gwent Card: Avallac'h (0 Pt Spy)"
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('gwint_card_avallach')",
-            "desc": "全昆特牌最强间谍！送给对面 0 点点数，己方直接白嫖抽 2 张新手牌！",
+            "desc": "0 点点数的间谍卡：登场后置于对方场上（计入对方总分），同时可从自己牌库抽 2 张牌；作为英雄牌免疫特殊卡牌效果。",
             "framework_required": "None (Native Console)",
             "source": "https://segmentnext.com/witcher-3-item-codes"
           },
           {
             "id": "w3_card_roach",
             "name": {
-              "zh-CN": "萝卜 (次世代新版中立联动牌)",
+              "zh-CN": "萝卜 (次世代新版中立牌)",
               "en": "Gwent Card: Roach (Next-Gen)"
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('gwint_card_roach')",
-            "desc": "战力 3 点带自动集结召唤特技的次世代专属中立英雄昆特牌。",
+            "desc": "次世代版 / 完全版新增的中立昆特牌，战力 3 点，为普通单位卡（非英雄卡），本身没有特殊技能。",
             "framework_required": "None (Native Console)",
             "source": "https://witcher.fandom.com/wiki/Roach_(gwent_card)"
           }
@@ -3766,24 +3766,24 @@ window.GAMES_DATA = [
           {
             "id": "w3_showallft",
             "name": {
-              "zh-CN": "大地图点亮全大陆 100% 快速旅行路标",
+              "zh-CN": "解锁全部快速旅行路标",
               "en": "Show All Fast Travel Signposts"
             },
             "syntax_type": "redengine_cmd",
             "code": "ShowAllFT(1)",
-            "desc": "瞬间解锁白果园、威伦、诺维格瑞、群岛与陶森特大地图上全部绿色十字路标！",
+            "desc": "解锁大地图上白果园、威伦、诺维格瑞、史凯利格与陶森特的全部快速旅行路标。",
             "framework_required": "None (Native Console)",
             "source": "https://commands.gg/witcher3/showallft"
           },
           {
             "id": "w3_allowft",
             "name": {
-              "zh-CN": "允许在全图任意位置直接快速旅行 (摆脱路标木桩限制)",
+              "zh-CN": "允许在地图任意位置快速旅行",
               "en": "Allow Fast Travel Anywhere"
             },
             "syntax_type": "redengine_cmd",
             "code": "AllowFT(1)",
-            "desc": "彻底免去跑路寻桩过程！在深山老林地牢只要按 M 打开地图点击路标即可瞬移！",
+            "desc": "允许在地图上任意已探索位置直接打开地图进行快速旅行，无需先跑到路标旁。",
             "framework_required": "None (Native Console)",
             "source": "https://commands.gg/witcher3/allowft"
           },
@@ -3879,12 +3879,12 @@ window.GAMES_DATA = [
           {
             "id": "w3_settime_12",
             "name": {
-              "zh-CN": "将世界时间跳转至正午 12:00 (艳阳高照拍照黄金时刻)",
+              "zh-CN": "将游戏内时间设为正午 12:00",
               "en": "Set Time to Noon (12:00)"
             },
             "syntax_type": "redengine_cmd",
             "code": "settime(1, 12, 0, 0)",
-            "desc": "将大陆时间定格在正午，光照最强阴影最通透，搭配次世代光追拍照效果拉满！",
+            "desc": "将游戏内时间设置为正午 12 点。",
             "framework_required": "None (Native Console)",
             "source": "https://commands.gg/witcher3/settime"
           },
@@ -3903,72 +3903,72 @@ window.GAMES_DATA = [
           {
             "id": "w3_makeitrain",
             "name": {
-              "zh-CN": "立即召唤暴雨天气",
+              "zh-CN": "召唤降雨天气",
               "en": "Make It Rain"
             },
             "syntax_type": "redengine_cmd",
             "code": "makeitrain",
-            "desc": "呼风唤雨，电闪雷鸣，激发出杰洛特雷霆药水必定暴击的特殊气象被动！",
+            "desc": "将当前天气切换为下雨。",
             "framework_required": "None (Native Console)",
             "source": "https://commands.gg/witcher3/makeitrain"
           },
           {
             "id": "w3_stoprain",
             "name": {
-              "zh-CN": "立即驱散阴雨天气 (转为晴空万里)",
+              "zh-CN": "停止降雨",
               "en": "Stop Rain"
             },
             "syntax_type": "redengine_cmd",
             "code": "stoprain",
-            "desc": "瞬时驱散漫天阴霾雨滴与雷暴，使视野恢复干爽晴朗。",
+            "desc": "停止当前的降雨天气。",
             "framework_required": "None (Native Console)",
             "source": "https://commands.gg/witcher3/stoprain"
           },
           {
             "id": "w3_weather_storm",
             "name": {
-              "zh-CN": "切换为特大暴风暴雨雷电天气",
+              "zh-CN": "切换为暴风雨天气",
               "en": "Set Storm Weather"
             },
             "syntax_type": "redengine_cmd",
             "code": "changeweather('WT_Rain_Storm')",
-            "desc": "呼出极度真实逼真的次世代物理级狂风骤雨，树木随风狂摆树叶漫天狂飞！",
+            "desc": "将天气切换为暴风雨。",
             "framework_required": "None (Native Console)",
             "source": "https://commands.gg/witcher3/weather"
           },
           {
             "id": "w3_weather_clear",
             "name": {
-              "zh-CN": "切换为极致纯净碧空晴朗天气",
+              "zh-CN": "切换为晴朗天气",
               "en": "Set Clear Weather"
             },
             "syntax_type": "redengine_cmd",
             "code": "changeweather('WT_Clear')",
-            "desc": "晴空万里无云，次世代光线追踪全局光照与水面反射表现力最强的气象环境。",
+            "desc": "将天气切换为晴朗无云。",
             "framework_required": "None (Native Console)",
             "source": "https://commands.gg/witcher3/weather"
           },
           {
             "id": "w3_horse_saddle_4",
             "name": {
-              "zh-CN": "鲍克兰极品骑兵马鞍 (马匹体力极限扩充)",
+              "zh-CN": "鲍克兰骑兵马鞍 (提升马匹体力上限)",
               "en": "Beauclair Cavalry Saddle (Max Stamina)"
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('Horse Saddle 4')",
-            "desc": "为萝卜装备陶森特最高规格骑兵马鞍，长途奔袭疾驰耐力用之不竭！",
+            "desc": "为萝卜装备陶森特骑兵马鞍，提升其体力（耐力）上限。",
             "framework_required": "None (Native Console)",
             "source": "https://commands.gg/witcher3/items/horse-saddle-4"
           },
           {
             "id": "w3_horse_blinders_3",
             "name": {
-              "zh-CN": "鲍克兰极品马盲目镜 (彻底免疫怪物惊吓摔下马)",
+              "zh-CN": "鲍克兰马盲目镜 (+60 惊慌度上限)",
               "en": "Beauclair Blinders (Anti-Panic)"
             },
             "syntax_type": "redengine_cmd",
             "code": "additem('Horse Blinder 3')",
-            "desc": "将萝卜的惊慌度上限大幅增加，即使被水鬼狼群包围也绝不甩下杰洛特！",
+            "desc": "为萝卜装备陶森特马用眼罩，使其惊慌度上限 +60，更不容易因怪物惊吓而将杰洛特甩下马。",
             "framework_required": "None (Native Console)",
             "source": "https://segmentnext.com/witcher-3-item-codes"
           }
@@ -3980,12 +3980,12 @@ window.GAMES_DATA = [
           {
             "id": "w3_ciri_switch",
             "name": {
-              "zh-CN": "直接切换操控主角为希里 (Ciri - 瞬移闪烁绝招)",
+              "zh-CN": "切换操控角色为希里",
               "en": "Switch Player to Ciri"
             },
             "syntax_type": "redengine_cmd",
             "code": "Ciri",
-            "desc": "在全大陆任何自由行动关卡中直接将当前操控角色无缝切换为时空之女希里，独享绿色瞬移突进与闪烁大招！",
+            "desc": "将当前操控角色切换为希里，可使用她的瞬移突进能力。",
             "framework_required": "None (Native Console)",
             "source": "https://commands.gg/witcher3/ciri"
           },
@@ -4004,12 +4004,12 @@ window.GAMES_DATA = [
           {
             "id": "w3_shave",
             "name": {
-              "zh-CN": "瞬间剃净杰洛特胡须 (清爽面容)",
+              "zh-CN": "剃除杰洛特胡须",
               "en": "Shave Geralt Beard"
             },
             "syntax_type": "redengine_cmd",
             "code": "shave",
-            "desc": "免去寻找理发师的繁琐，随时随地将杰洛特面部胡须剃得干干净净。",
+            "desc": "立即剃除杰洛特的胡须。",
             "framework_required": "None (Native Console)",
             "source": "https://commands.gg/witcher3/shave"
           },
@@ -4028,12 +4028,12 @@ window.GAMES_DATA = [
           {
             "id": "w3_dismember",
             "name": {
-              "zh-CN": "剑术攻击必定触发慢动作断肢处决特写",
+              "zh-CN": "开启击杀必定触发断肢效果",
               "en": "Always Dismember on Kill"
             },
             "syntax_type": "redengine_cmd",
             "code": "dismember",
-            "desc": "开启猎魔人暴虐战斗镜头特写，每次最后一击击杀敌人都必定触发腰斩或削首电影级断肢慢动作！",
+            "desc": "开启后，终结敌人的最后一击会触发慢动作断肢效果。",
             "framework_required": "None (Native Console)",
             "source": "https://commands.gg/witcher3/dismember"
           },
@@ -4094,7 +4094,7 @@ window.GAMES_DATA = [
         "title": "The Witcher 3 HD Reworked Project NextGen Edition",
         "author": "Halk Hogan PL",
         "category": "画面材质 (Visuals / Textures)",
-        "desc": "全网公认最强《巫师3》材质MOD！次世代版 / 完全版专属重构，彻底重绘所有岩石、植被、砖墙、木纹与建筑材质，面向次世代 DX12 版。",
+        "desc": "次世代版 / 完全版的材质重制 Mod，重绘岩石、植被、砖墙、木纹等大量场景材质，面向次世代 DX12 版本。",
         "dependencies": [
           "None"
         ],
@@ -4116,7 +4116,7 @@ window.GAMES_DATA = [
         "title": "Script Merger (CLASSIC)",
         "author": "AnotherSymbiote",
         "category": "核心排错工具 (Utility / Conflict Resolver)",
-        "desc": "次世代 Mod 必备排错神器！自动检测并一键合并多个 Mod 之间的 WitcherScript 冲突代码，彻底解决游戏启动报 Script Compilation Error 问题。",
+        "desc": "用于检测并合并多个 Mod 之间的 WitcherScript 冲突代码，解决因脚本冲突导致的 Script Compilation Error 报错。",
         "dependencies": [
           "None"
         ],
@@ -4137,7 +4137,7 @@ window.GAMES_DATA = [
         "title": "Brothers in Arms - TW3 Bug Fix and Restored Content Collection - Next-Gen",
         "author": "PaulR0013 - MerseyRockoff - konyme",
         "category": "剧情与修复 (Gameplay / Bug Fixes / Cut Content)",
-        "desc": "由全网顶级 Mod 团队数年打磨的旷世神作！修复本体与双 DLC 中数百个原版遗留 Bug、未采用的 NPC 互动对话、截断的过场动画与丢失的任务物品。",
+        "desc": "修复《巫师3》本体与两个资料片中的多个遗留 Bug、未使用的 NPC 对话、被截断的过场动画片段与部分任务物品缺失问题。",
         "dependencies": [
           "Script Merger (若有其他脚本Mod)"
         ],
@@ -4158,7 +4158,7 @@ window.GAMES_DATA = [
         "title": "All Quest Objectives On Map",
         "author": "Wolfmark",
         "category": "界面导航 (UI / Map)",
-        "desc": "强迫症玩家必备！同时在大地图上显示所有未完成的主线、支线、猎魔委托与寻宝任务目标点，顺路一次性清空周边任务。",
+        "desc": "在大地图上同时显示所有未完成的主线、支线、猎魔委托与寻宝任务的目标点。",
         "dependencies": [
           "None"
         ],
@@ -4179,7 +4179,7 @@ window.GAMES_DATA = [
         "title": "(Next Gen Edition) Friendly HUD",
         "author": "wghost81 aka Wasteland Ghost",
         "category": "界面交互 (UI / Immersion)",
-        "desc": "非战斗状态自动隐藏全部小地图与血条，猎魔人感官开启时在真实 3D 世界中浮现任务标记与罗盘，极致视听沉浸享受。",
+        "desc": "非战斗状态下自动隐藏小地图与血条，猎魔人感官开启时在 3D 场景中显示任务标记与罗盘。",
         "dependencies": [
           "None"
         ],
@@ -4352,17 +4352,17 @@ window.GAMES_DATA = [
       {
         "id": "w3_starter_bundle",
         "type": "starter",
-        "name": "新手破荒起飞包",
-        "tag": "👑 萌新首选 · 猎魔无双",
-        "badge": "白狼无双",
-        "desc": "一键激活绝对无敌 + 一击必杀秒杀一切狂猎孽鬼 + 10万克朗财富自由 + 全大陆路标瞬移全开 + 随时随地自由传送！",
+        "name": "新手入门指令包",
+        "tag": "萌新入门",
+        "badge": "入门套装",
+        "desc": "开启上帝模式 + 提升攻击伤害 + 获得 100,000 克朗 + 解锁全部快速旅行路标 + 解除路标距离限制，用于快速搭建一个轻松的游戏环境。",
         "highlights": [
-          "god 开启杰洛特完全无敌模式",
-          "likeaboss 一击必杀，秒杀任何高难度狂猎与野怪",
-          "addmoney(100000) 注入 100,000 克朗自由消费",
-          "ShowAllFT(1) 全大陆所有快速旅行路标瞬移全开",
-          "AllowFT(1) 解除路标限制，野外随时随地自由传送",
-          "红绿蓝极品大突变诱发物各 10 个"
+          "god 开启上帝模式（杰洛特免疫伤害）",
+          "likeaboss 攻击伤害变为敌方最大生命值的 40%（不影响杰洛特受到的伤害）",
+          "addmoney(100000) 增加 100,000 克朗",
+          "ShowAllFT(1) 解锁全部快速旅行路标",
+          "AllowFT(1) 解除路标限制，可在地图任意已探索位置直接快速旅行",
+          "大红/大蓝/大绿突变诱发物各 10 个"
         ],
         "code": "// [老L·极客场景套餐] 巫师3次世代版 新手破荒起飞包 (v4.04，未实测)\ngod\nlikeaboss\naddmoney(100000)\nShowAllFT(1)\nAllowFT(1)\nadditem('Greater mutagen red', 10)\nadditem('Greater mutagen blue', 10)\nadditem('Greater mutagen green', 10)"
       }
@@ -4424,7 +4424,7 @@ window.GAMES_DATA = [
           "en": "Add 100,000 Gold"
         },
         "command": "Osi.AddGold(GetHostCharacter(), 100000)",
-        "desc": "瞬间化身博德之门巨富，搬空全大陆所有商贩的绝世装备。",
+        "desc": "向背包增加 10 万金币，可用于购买装备和物资。",
         "source": "https://docs.baldursgate3.game/index.php?title=AddGold"
       },
       {
@@ -4433,7 +4433,7 @@ window.GAMES_DATA = [
           "en": "Add 30 Illithid Parasites"
         },
         "command": "Osi.TemplateAddTo(\"1ec327be-3b7f-4502-9586-860e057e09ae\", GetHostCharacter(), 30)",
-        "desc": "一次性点满主角与全队所有伙伴的脑池异能潜能。",
+        "desc": "一次性获得 30 个夺心魔寄生虫标本，可用于解锁主角与队友的灵能异能。",
         "source": "https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen"
       },
       {
@@ -4442,7 +4442,7 @@ window.GAMES_DATA = [
           "en": "Add Balduran's Giantslayer"
         },
         "command": "Osi.TemplateAddTo(\"7219fca3-5f41-43a0-8253-f4c09d8b6308\", GetHostCharacter(), 1)",
-        "desc": "获取力量加倍并自带巨人体型的最强近战巨剑。",
+        "desc": "获得攻击伤害额外附加两倍力量调整值、并带有「巨人体型」技能的双手巨剑。",
         "source": "https://bg3.wiki/wiki/Balduran%27s_Giantslayer"
       },
       {
@@ -4451,16 +4451,16 @@ window.GAMES_DATA = [
           "en": "Add Helldusk Armour"
         },
         "command": "Osi.TemplateAddTo(\"7ae705fd-1cfd-4482-a584-d2e68f9c1262\", GetHostCharacter(), 1)",
-        "desc": "拉斐尔终极重铠，全职业穿戴免熟练项且免疫火伤。",
+        "desc": "获得拉斐尔掉落的重甲，AC 21，任何职业穿戴都视为熟练，并对火焰伤害有抗性。",
         "source": "https://bg3.wiki/wiki/Helldusk_Armour"
       },
       {
         "name": {
-          "zh-CN": "赋予常驻急速术 (动作翻倍且永不疲劳)",
+          "zh-CN": "赋予常驻急速术 (HASTE)",
           "en": "Permanent Haste Buff"
         },
         "command": "Osi.ApplyStatus(GetHostCharacter(), \"HASTE\", -1)",
-        "desc": "战斗动作常驻翻倍，移动速度翻倍且断专注不虚脱。",
+        "desc": "持续施加急速状态：每回合多一次动作、移动速度提升，且因手动施加不会到期陷入疲乏状态。",
         "source": "https://docs.baldursgate3.game/index.php?title=ApplyStatus"
       }
     ],
@@ -4470,25 +4470,25 @@ window.GAMES_DATA = [
       {
         "name": "Party Limit Begone",
         "category": "Gameplay",
-        "desc": "允许带齐全部 16 名起源队友一起冒险与对话",
+        "desc": "将队伍人数上限提升至 16，可同时带上所有可招募的同伴",
         "url": "https://www.nexusmods.com/baldursgate3/mods/327"
       },
       {
         "name": "5e Spells",
         "category": "Content",
-        "desc": "补齐官方桌面跑团规则书所有高级法术",
+        "desc": "补充游戏未收录的官方桌面跑团法术",
         "url": "https://www.nexusmods.com/baldursgate3/mods/125"
       },
       {
         "name": "Bags Bags Bags",
         "category": "QoL",
-        "desc": "药剂、卷轴、箭矢自动归类，背包清爽度翻倍",
+        "desc": "药剂、卷轴、箭矢等物品自动归类整理背包",
         "url": "https://www.nexusmods.com/baldursgate3/mods/880"
       },
       {
         "name": "Native Camera Tweaks",
         "category": "Camera",
-        "desc": "支持拉到平视越肩第三人称沉浸式视角",
+        "desc": "支持将镜头拉至平视的越肩第三人称视角",
         "url": "https://www.nexusmods.com/baldursgate3/mods/945"
       }
     ],
@@ -4535,12 +4535,12 @@ window.GAMES_DATA = [
     },
     "consoleCategories": [
       {
-        "category": "👑 核心生存、豁免锁死与全法术位无限长休 (God Mode, Spell Slots & Long Rest)",
+        "category": "👑 核心生存与状态恢复 (Survival & Status Recovery)",
         "commands": [
           {
             "id": "bg3_apply_sanctuary",
             "name": {
-              "zh-CN": "赋予常驻庇护术状态 (绝对免受单体攻击)",
+              "zh-CN": "赋予常驻庇护术状态（免疫单体锁定攻击）",
               "en": "Permanent Sanctuary Buff"
             },
             "syntax_type": "lua_function",
@@ -4576,34 +4576,34 @@ window.GAMES_DATA = [
         ]
       },
       {
-        "category": "🎯 角色等级直升、经验值与职业兼修洗点 (Level, XP & Respec)",
+        "category": "🎯 复活与急救道具 (Revival Items)",
         "commands": [
           {
             "id": "bg3_spawn_revivify_scroll",
             "name": {
-              "zh-CN": "获得复活卷轴 x10 (野外救急与守墓人洗点备用)",
+              "zh-CN": "复活卷轴 x10（无需长休即可复活队友）",
               "en": "Scroll of Revivify x10"
             },
             "syntax_type": "lua_function",
             "code": "Osi.TemplateAddTo(\"c1c3e4fb-d68c-4e10-afdc-d4550238d50e\", GetHostCharacter(), 10)",
-            "desc": "向背包添加 10 张神圣复活卷轴，无需长休即可随时拉起倒下的战友。",
+            "desc": "向背包添加 10 张复活卷轴，无需长休即可随时拉起倒下的战友。",
             "framework_required": "BG3 Script Extender (Norbyte)",
             "source": "https://bg3.wiki/wiki/Scroll_of_Revivify"
           }
         ]
       },
       {
-        "category": "💰 财富自由、负重解限与全营地补给物资 (Gold, Weight & Camp Supplies)",
+        "category": "💰 金币、营地补给与工具道具 (Gold, Camp Supplies & Tools)",
         "commands": [
           {
             "id": "bg3_add_gold_100k",
             "name": {
-              "zh-CN": "增加 100,000 金币 (博德之门首富)",
+              "zh-CN": "增加 100,000 金币",
               "en": "Add 100,000 Gold"
             },
             "syntax_type": "lua_function",
             "code": "Osi.AddGold(GetHostCharacter(), 100000)",
-            "desc": "向背包注入 10 万金币，随心所欲搬空第三章巫术杂货铺与各大商贩所有稀世魔法装备！",
+            "desc": "向背包注入 10 万金币，可用于购买商店中的装备和物资。",
             "framework_required": "BG3 Script Extender (Norbyte)",
             "source": "https://docs.baldursgate3.game/index.php?title=AddGold"
           },
@@ -4622,72 +4622,72 @@ window.GAMES_DATA = [
           {
             "id": "bg3_camp_supplies_pack",
             "name": {
-              "zh-CN": "营地补给补给包 x50 (永久告别搜刮食物长休)",
+              "zh-CN": "营地补给包 x50",
               "en": "Camp Supply Pack x50 (Full Rest Supply)"
             },
             "syntax_type": "lua_function",
             "code": "Osi.TemplateAddTo(\"398e7328-ce90-4c02-94a2-93341fac499a\", GetHostCharacter(), 50)",
-            "desc": "每个补给包提供整整 40 点补给点，50 包足够连续进行 50 次完全长休，无限次触发营地剧情与法术位重置！",
+            "desc": "每个补给包提供 40 点补给，50 个补给包足够进行 50 次完全长休，用于触发营地剧情与恢复法术位。",
             "framework_required": "BG3 Script Extender (Norbyte)",
             "source": "https://bg3.wiki/wiki/Supply_Pack"
           },
           {
             "id": "bg3_thieves_tools",
             "name": {
-              "zh-CN": "高级盗贼工具 x30 (秒撬全大陆所有宝箱大门)",
+              "zh-CN": "高级盗贼工具 x30",
               "en": "Thieves' Tools x30"
             },
             "syntax_type": "lua_function",
             "code": "Osi.TemplateAddTo(\"e32a200c-5b63-414d-ae57-00e7b38f125b\", GetHostCharacter(), 30)",
-            "desc": "阿斯代伦撬锁专用高阶工具，轻松开遍地城密室与银行金库。",
+            "desc": "阿斯塔利昂撬锁专用的高阶工具，可用于打开上锁的箱子与房门。",
             "framework_required": "BG3 Script Extender (Norbyte)",
             "source": "https://bg3.wiki/wiki/Thieves%27_Tools"
           },
           {
             "id": "bg3_trap_disarm_tools",
             "name": {
-              "zh-CN": "陷阱解除工具包 x30 (安全拆除全地城陷阱)",
+              "zh-CN": "陷阱拆除工具包 x30",
               "en": "Trap Disarm Toolkit x30"
             },
             "syntax_type": "lua_function",
             "code": "Osi.TemplateAddTo(\"22c74b5e-bef2-41b1-b9ed-f4acc766d4ee\", GetHostCharacter(), 30)",
-            "desc": "安全拆除火球、落石与爆炸毒雾陷阱，探险零伤亡。",
+            "desc": "用于拆除火球、落石、毒雾等陷阱，避免触发陷阱造成的伤害。",
             "framework_required": "BG3 Script Extender (Norbyte)",
             "source": "https://bg3.wiki/wiki/Trap_Disarm_Toolkit"
           }
         ]
       },
       {
-        "category": "🧠 夺心魔蝌蚪寄生虫与至尊灵能潜能 (Illithid Parasites & Powers)",
+        "category": "🧠 夺心魔寄生虫与灵能 (Illithid Parasites & Powers)",
         "commands": [
           {
             "id": "bg3_illithid_parasites_30",
             "name": {
-              "zh-CN": "夺心魔寄生虫标本 x30 (点满全员脑池灵能潜能)",
+              "zh-CN": "夺心魔寄生虫标本 x30（用于解锁灵能异能）",
               "en": "Mind Flayer Parasite Specimen x30"
             },
             "syntax_type": "lua_function",
             "code": "Osi.TemplateAddTo(\"1ec327be-3b7f-4502-9586-860e057e09ae\", GetHostCharacter(), 30)",
-            "desc": "一次性获得 30 只夺心魔蝌蚪，直接将主角与全队所有伙伴的脑部异能树（灵能过载、强运不利、灵能反冲等）全部点满！",
+            "desc": "一次性获得 30 个夺心魔寄生虫标本，可用于解锁主角与队友的灵能异能（如灵能过载、强运不利、灵能反冲等）。",
             "framework_required": "BG3 Script Extender (Norbyte)",
             "source": "https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen"
           },
           {
             "id": "bg3_astral_tadpole",
             "name": {
-              "zh-CN": "受星界灌注的蝌蚪 (解锁半夺心魔至尊灵能与自由飞行)",
+              "zh-CN": "受星界感染的蝌蚪（解锁半夺心魔形态与飞行）",
               "en": "Astral-Touched Tadpole (Half-Illithid)"
             },
             "syntax_type": "lua_function",
             "code": "Osi.TemplateAddTo(\"4a82e6f2-839f-434e-addf-b07dd1578194\", GetHostCharacter(), 1)",
-            "desc": "君主赠予的至尊星界蝌蚪，食用后立刻晋升为半夺心魔形态，解锁三层终极外圈技能与永久无消耗全图无障碍自由飞行！",
+            "desc": "君主赠予的特殊蝌蚪，食用后角色变为半夺心魔形态，解锁三层外圈异能，并获得无消耗的自由飞行能力。",
             "framework_required": "BG3 Script Extender (Norbyte)",
             "source": "https://bg3.wiki/wiki/Astral-Touched_Tadpole"
           }
         ]
       },
       {
-        "category": "🗡️ 绝世金色传奇近战神兵 (Legendary Melee Weapons)",
+        "category": "🗡️ 传奇近战武器 (Legendary Melee Weapons)",
         "commands": [
           {
             "id": "bg3_balduran_giantslayer",
@@ -4697,132 +4697,132 @@ window.GAMES_DATA = [
             },
             "syntax_type": "lua_function",
             "code": "Osi.TemplateAddTo(\"7219fca3-5f41-43a0-8253-f4c09d8b6308\", GetHostCharacter(), 1)",
-            "desc": "安苏巨龙巢穴最强神兵！力量调整值双倍附加伤害，自带「巨人体型」技能，体型暴增且攻击造成额外巨额武器力场打击！",
+            "desc": "安苏巨龙巢穴掉落的双手巨剑，攻击伤害额外增加等同于两倍力量调整值的加成，并自带「巨人体型」技能，使角色体型变大。",
             "framework_required": "BG3 Script Extender (Norbyte)",
             "source": "https://bg3.wiki/wiki/Balduran%27s_Giantslayer"
           },
           {
             "id": "bg3_nyrulna_trident",
             "name": {
-              "zh-CN": "尼鲁纳三叉戟 (投掷流至尊神器 - 自动回手与雷鸣爆破)",
+              "zh-CN": "尼鲁纳三叉戟 (投掷武器 - 自动回手与雷鸣爆炸)",
               "en": "Nyrulna (Legendary Returning Trident)"
             },
             "syntax_type": "lua_function",
             "code": "Osi.TemplateAddTo(\"daf0be7f-87d9-448a-b94e-471ffec40ac5\", GetHostCharacter(), 1)",
-            "desc": "末日马戏团头奖神器！投掷后无论飞出多远都会自动飞回手中，落地伴随大范围 3d4 雷鸣爆炸，全游戏投掷蛮子与战士的毕业神武！",
+            "desc": "马戏团剧情获得的三叉戟，投掷出去后会自动飞回手中，落地时造成范围 3d4 雷鸣伤害。",
             "framework_required": "BG3 Script Extender (Norbyte)",
             "source": "https://bg3.wiki/wiki/Nyrulna"
           },
           {
             "id": "bg3_markoheshkir_staff",
             "name": {
-              "zh-CN": "玛科赫什基传奇法杖 (全法系毕业终极神杖 - 免费免消耗施法)",
+              "zh-CN": "玛科赫什基法杖 (传奇法杖 - 免消耗施放法术)",
               "en": "Markoheshkir (Legendary Staff)"
             },
             "syntax_type": "lua_function",
             "code": "Osi.TemplateAddTo(\"7e39ad11-f8c3-421a-940c-05348c420c7d\", GetHostCharacter(), 1)",
-            "desc": "拉玛吉斯高塔顶层至尊法杖！法术豁免难度与攻击掷骰 +1，自带「凯瑟里克之宠」多重元素附魔，每场战斗可免费免消耗释放一次 6 环终极法术！",
+            "desc": "拉玛吉斯高塔获得的法杖，使法术豁免难度和攻击掷骰 +1，并带有多重元素附魔，每场战斗可免费施放一次 6 环法术。",
             "framework_required": "BG3 Script Extender (Norbyte)",
             "source": "https://bg3.wiki/wiki/Markoheshkir"
           },
           {
             "id": "bg3_blood_of_lathander",
             "name": {
-              "zh-CN": "洛山达之血钉头锤 (第一章传奇神锤 - 盲目不死生物与自动免死重生)",
+              "zh-CN": "洛山达之血钉头锤 (传奇钉头锤 - 致盲不死生物与自动复苏)",
               "en": "The Blood of Lathander (Legendary Mace)"
             },
             "syntax_type": "lua_function",
             "code": "Osi.TemplateAddTo(\"7b961f08-46c1-46b1-99bc-c59283831a0b\", GetHostCharacter(), 1)",
-            "desc": "晨曦之神洛山达的圣物，常驻 6 米范围内所有不死生物与邪魔致盲，生命归零时立即原地回血复苏并为全队回血！",
+            "desc": "晨曦之神洛山达的圣物，范围 6 米内的不死生物与邪魔会被致盲；生命归零时自动回复生命而非倒地，并为附近队友回血。",
             "framework_required": "BG3 Script Extender (Norbyte)",
             "source": "https://bg3.wiki/wiki/The_Blood_of_Lathander"
           },
           {
             "id": "bg3_silver_sword_astral",
             "name": {
-              "zh-CN": "星界银剑 (吉斯洋基人至尊巨剑 - 灵能伤害与心灵伤害免疫)",
+              "zh-CN": "星界银剑 (传奇大剑 - 吉斯洋基人持有者专属加成)",
               "en": "Silver Sword of the Astral Plane"
             },
             "syntax_type": "lua_function",
             "code": "Osi.TemplateAddTo(\"f01c3f5d-c542-420f-86c5-bdddf7819e29\", GetHostCharacter(), 1)",
-            "desc": "洋基妹莱埃泽尔专属神器，由沃斯百夫长所赐，附带额外 1d6 心灵伤害，持有者完全免疫魅惑与心灵震慑伤害！",
+            "desc": "传奇+3巨剑，基础伤害为 2d6+3 加力量调整值；若由吉斯洋基人（如莱埃泽尔）持有，则额外获得心灵伤害加成、魅惑免疫与多项豁免优势。",
             "framework_required": "BG3 Script Extender (Norbyte)",
             "source": "https://bg3.wiki/wiki/Silver_Sword_of_the_Astral_Plane"
           },
           {
             "id": "bg3_crimson_mischief",
             "name": {
-              "zh-CN": "猩红恶意短剑 (奥林巴尔神选近战短剑)",
+              "zh-CN": "猩红恶意短剑 (传奇短剑)",
               "en": "Crimson Mischief (Legendary Shortsword)"
             },
             "syntax_type": "lua_function",
             "code": "Osi.TemplateAddTo(\"5961d027-75fd-4ad7-964c-8b786b5839fb\", GetHostCharacter(), 1)",
-            "desc": "击杀血腥奥林获取的刺杀神器，对处于优势的敌人额外追加 7 点纯穿刺伤害加成！",
+            "desc": "击败血腥奥林获得的短剑；主手攻击对生命值低于一半的目标追加 1d4 穿刺伤害，副手持握且攻击带有优势时追加 7 点穿刺伤害。",
             "framework_required": "BG3 Script Extender (Norbyte)",
             "source": "https://bg3.wiki/wiki/Crimson_Mischief"
           },
           {
             "id": "bg3_bloodthirst_dagger",
             "name": {
-              "zh-CN": "嗜血狂怒匕首 (增加暴击率与反弹借机攻击)",
+              "zh-CN": "嗜血狂怒匕首 (传奇匕首 - 暴击率提升与反击)",
               "en": "Bloodthirst (Legendary Dagger)"
             },
             "syntax_type": "lua_function",
             "code": "Osi.TemplateAddTo(\"d90abf24-3c4e-4bbf-84aa-def05ca9962a\", GetHostCharacter(), 1)",
-            "desc": "暴击所需点数降低 1 点，击中敌人施加穿刺易伤 Debuff，主手装备时近战攻击落空会自动反击！",
+            "desc": "传奇+2匕首；主手持握时暴击所需点数降低 1 点，副手持握时近战命中会使目标易受穿刺伤害，且敌人攻击落空时可用反应发动反击。",
             "framework_required": "BG3 Script Extender (Norbyte)",
             "source": "https://bg3.wiki/wiki/Bloodthirst"
           },
           {
             "id": "bg3_duelist_prerogative",
             "name": {
-              "zh-CN": "决斗者的特权细剑 (双重附赠动作与额外借机攻击)",
+              "zh-CN": "决斗者的特权细剑 (传奇细剑 - 额外反应与暴击加成)",
               "en": "Duelist's Prerogative (Legendary Rapier)"
             },
             "syntax_type": "lua_function",
             "code": "Osi.TemplateAddTo(\"d49bf05e-4f94-4860-bd8c-ae63dae811be\", GetHostCharacter(), 1)",
-            "desc": "单手持握时每回合额外获得一次附赠动作与反应机会，暴击阈值大幅下降，自带坏死伤害挑战决斗技能！",
+            "desc": "传奇细剑，副手空闲时额外获得一次反应机会，且掷骰 19 或 20 即视为暴击；命中敌人时可用反应追加等同熟练加值的坏死伤害。",
             "framework_required": "BG3 Script Extender (Norbyte)",
             "source": "https://bg3.wiki/wiki/Duellist%27s_Prerogative"
           },
           {
             "id": "bg3_selune_spear_night",
             "name": {
-              "zh-CN": "塞伦涅的黑夜之矛 (月之圣矛 - 黑暗视觉与全豁免优势)",
+              "zh-CN": "塞伦涅的黑夜之矛 (传奇长枪 - 黑暗视觉与感知优势)",
               "en": "Selûne's Spear of Night"
             },
             "syntax_type": "lua_function",
             "code": "Osi.TemplateAddTo(\"2eeabe97-8f29-4f4f-827e-6cfcd8fd1779\", GetHostCharacter(), 1)",
-            "desc": "影心救赎线专属圣矛，赋予持有者黑暗视觉与感知豁免优势，附带「月之微光」与「月之护盾」神圣技能！",
+            "desc": "影心救赎结局专属武器，攻击与伤害 +3，赋予黑暗视觉、感知检定与感知豁免优势，并可每次长休施放一次「月光束」和「月斑」。",
             "framework_required": "BG3 Script Extender (Norbyte)",
             "source": "https://bg3.wiki/wiki/Selûne%27s_Spear_of_Night"
           },
           {
             "id": "bg3_shar_spear_evening",
             "name": {
-              "zh-CN": "莎尔的暮色之矛 (黑夜法官专属神器 - 黑暗视觉与隐形)",
+              "zh-CN": "莎尔的暮色之矛 (传奇长枪 - 黑暗免疫与遮蔽加成)",
               "en": "Shar's Spear of Evening"
             },
             "syntax_type": "lua_function",
             "code": "Osi.TemplateAddTo(\"61f31bf6-47ec-41e1-9385-2f6c26facc87\", GetHostCharacter(), 1)",
-            "desc": "影心堕落成为暗夜法官之刃，在魔法黑暗中视物无阻且造成额外 1d6 伤害，自带「莎尔之拥」自由隐形！",
+            "desc": "黑夜法官专属武器，佩戴者免疫致盲并可在魔法黑暗中视物，对处于隐蔽状态的目标攻击额外造成 1d6 伤害；可每回合施放一次「莎尔的黑暗」法术。",
             "framework_required": "BG3 Script Extender (Norbyte)",
             "source": "https://bg3.wiki/wiki/Shar%27s_Spear_of_Evening"
           }
         ]
       },
       {
-        "category": "🏹 绝世传奇远程武器与高阶箭矢 (Legendary Ranged Weapons & Ammo)",
+        "category": "🏹 传奇远程武器与特殊箭矢 (Legendary Ranged Weapons & Ammo)",
         "commands": [
           {
             "id": "bg3_gontr_mael",
             "name": {
-              "zh-CN": "冈特·耶尔传奇长弓 (钢铁卫士铸造厂泰坦神弓 - 恒定加速与神圣引导)",
+              "zh-CN": "冈特·耶尔长弓 (传奇长弓 - 命中附加效果与急速术)",
               "en": "Gontr Mael (Legendary Longbow)"
             },
             "syntax_type": "lua_function",
             "code": "Osi.TemplateAddTo(\"7e81bb6a-f465-4fe9-b1db-7ce6198246ba\", GetHostCharacter(), 1)",
-            "desc": "击败钢铁卫士泰坦获取的神弓！bg3.wiki 标注其武器类型为长弓（Longbow），并非原目录所写的“重弩”；攻击命中敌人概率施加「发光光辉」，自带「天界加速术」。",
+            "desc": "击败钢铁巨人获得的传奇+3长弓；bg3.wiki 标注其武器类型为长弓（而非原目录所写的重弩）。命中有概率对目标施加「发光光辉」，并可每次长休使用一次「天界急速术」获得急速状态。",
             "framework_required": "BG3 Script Extender (Norbyte)",
             "source": "https://bg3.wiki/wiki/Gontr_Mael"
           },
@@ -4834,7 +4834,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "lua_function",
             "code": "Osi.TemplateAddTo(\"269b2b03-aaaf-4635-98e2-e9b32dab5ffa\", GetHostCharacter(), 1)",
-            "desc": "神射手流派核心远程武器，将致命一击需求降低 1 点，并使攻击掷骰的熟练加值直接翻倍！",
+            "desc": "将暴击所需骰值降低 1 点（可叠加，影响全部攻击），并使用该弓进行远程攻击时熟练加值翻倍。",
             "framework_required": "BG3 Script Extender (Norbyte)",
             "source": "https://bg3.wiki/wiki/The_Dead_Shot"
           },
@@ -4846,19 +4846,19 @@ window.GAMES_DATA = [
             },
             "syntax_type": "lua_function",
             "code": "Osi.TemplateAddTo(\"13236988-83df-4bf2-8005-b4ac31f21ff4\", GetHostCharacter(), 1)",
-            "desc": "配合巨人药水实现伤害最大化的变态长弓，在敏捷加成之外将全额力量加成叠加在每一箭上！",
+            "desc": "长弓在敏捷加成之外，额外将力量调整值加入每次远程攻击伤害，可配合力量增益药水提升输出。",
             "framework_required": "BG3 Script Extender (Norbyte)",
             "source": "https://bg3.wiki/wiki/Titanstring_Bow"
           },
           {
             "id": "bg3_arrows_many_targets",
             "name": {
-              "zh-CN": "多重目标箭 x30 (一箭串联散射全屏小怪)",
+              "zh-CN": "弹射箭 x30 (命中后弹射至最多 3 个额外目标)",
               "en": "Arrow of Many Targets x30"
             },
             "syntax_type": "lua_function",
             "code": "Osi.TemplateAddTo(\"b11b3f7f-d8ec-41db-93b9-24474aea31e3\", GetHostCharacter(), 30)",
-            "desc": "射出后自动弹射至目标周围最多 3 名额外敌人，清图效率最狂暴的高阶箭矢！",
+            "desc": "射中目标后会弹射，额外命中附近最多 3 个目标（弹射伤害为武器伤害的一半）。",
             "framework_required": "BG3 Script Extender (Norbyte)",
             "source": "https://bg3.wiki/wiki/Arrow_of_Many_Targets"
           },
@@ -4870,291 +4870,291 @@ window.GAMES_DATA = [
             },
             "syntax_type": "lua_function",
             "code": "Osi.TemplateAddTo(\"437835b4-0d13-47b7-8aca-5da4f948783b\", GetHostCharacter(), 10)",
-            "desc": "决战安苏巨龙与耐色瑞尔红龙必备，命中造成两倍绝对暴击伤害！",
+            "desc": "只能用于攻击巨龙，命中巨龙时造成两倍武器伤害。",
             "framework_required": "BG3 Script Extender (Norbyte)",
             "source": "https://bg3.wiki/wiki/Arrow_of_Dragon_Slaying"
           }
         ]
       },
       {
-        "category": "🛡️ 绝世传奇护甲与地狱火重装 (Legendary Armour & Helldusk Set)",
+        "category": "🛡️ 传奇护甲与地狱火套装 (Legendary Armour & Helldusk Set)",
         "commands": [
           {
             "id": "bg3_helldusk_armor",
             "name": {
-              "zh-CN": "地狱火胸甲 (21点高AC重甲 - 全职业免熟练项穿戴与绝对免火伤)",
+              "zh-CN": "地狱火胸甲 (传奇重甲 - AC 21，全职业免熟练要求)",
               "en": "Helldusk Armour (AC 21 Legendary)"
             },
             "syntax_type": "lua_function",
             "code": "Osi.TemplateAddTo(\"7ae705fd-1cfd-4482-a584-d2e68f9c1262\", GetHostCharacter(), 1)",
-            "desc": "希望之邸拉斐尔掉落的终极重铠！高达 21 护甲等级，任何职业穿戴自动获得熟练项且不会阻碍施法，完全免疫燃烧并削减 3 点所有受到的伤害！",
+            "desc": "希望之邸拉斐尔处获得的重甲，护甲等级 21，任何职业穿戴都视为熟练；对火焰伤害有抗性且不会被点燃，并减少所受到的一切伤害 3 点。",
             "framework_required": "BG3 Script Extender (Norbyte)",
             "source": "https://bg3.wiki/wiki/Helldusk_Armour"
           },
           {
             "id": "bg3_helldusk_helmet",
             "name": {
-              "zh-CN": "地狱火头盔 (免疫暴击、震慑与附加劣势)",
+              "zh-CN": "地狱火头盔 (免疫暴击、黑暗视觉与法术豁免加值)",
               "en": "Helldusk Helmet"
             },
             "syntax_type": "lua_function",
             "code": "Osi.TemplateAddTo(\"1c198060-6b6a-41c5-82ce-a3d3c3d76404\", GetHostCharacter(), 1)",
-            "desc": "绝对免疫暴击打击，自带魔法抗性豁免优势与地狱火视界黑暗视觉，附带「灼热射线」法术！",
+            "desc": "佩戴后攻击者无法对佩戴者造成暴击，对法术豁免检定 +2，并获得不受黑暗影响的黑暗视觉，同时附带「灼热凝视」法术。",
             "framework_required": "BG3 Script Extender (Norbyte)",
             "source": "https://bg3.wiki/wiki/Helldusk_Helmet"
           },
           {
             "id": "bg3_helldusk_gloves",
             "name": {
-              "zh-CN": "地狱火手套 (附加火焰坏死法术与近战双重伤害)",
+              "zh-CN": "地狱火手套 (武器附加火焰伤害，空手附加坏死伤害)",
               "en": "Helldusk Gloves"
             },
             "syntax_type": "lua_function",
             "code": "Osi.TemplateAddTo(\"ad219a90-ab3d-4821-8206-011293f5837b\", GetHostCharacter(), 1)",
-            "desc": "武器攻击附带额外 1d6 火焰伤害，空手打击附加 1d6 坏死伤害并施加流血！",
+            "desc": "武器攻击附带额外 1d6 火焰伤害，空手攻击附加 1d6 坏死伤害并可能施加流血。",
             "framework_required": "BG3 Script Extender (Norbyte)",
             "source": "https://bg3.wiki/wiki/Helldusk_Gloves"
           },
           {
             "id": "bg3_helldusk_boots",
             "name": {
-              "zh-CN": "地狱火靴子 (免疫强风与地面位移摔倒)",
+              "zh-CN": "地狱火靴子 (免疫强制位移与部分困难地形)",
               "en": "Helldusk Boots"
             },
             "syntax_type": "lua_function",
             "code": "Osi.TemplateAddTo(\"bc82f909-ade5-4ada-9b94-cec7ca1d4a68\", GetHostCharacter(), 1)",
-            "desc": "绝对不会被法术击退或强制移动，免疫光滑冰面与油脂打滑，附带「地狱步」瞬移传送技能！",
+            "desc": "佩戴后不会被敌方效果强制击退或移动，并免疫熔岩、泥浆、藤蔓、蛛网等困难地形的减速效果；另附带「地狱爬行」瞬移技能，落地造成范围火焰伤害。",
             "framework_required": "BG3 Script Extender (Norbyte)",
             "source": "https://bg3.wiki/wiki/Helldusk_Boots"
           },
           {
             "id": "bg3_helm_of_balduran",
             "name": {
-              "zh-CN": "博德安的头盔 (每回合自愈2点生命与绝对免疫暴击)",
+              "zh-CN": "博德安的头盔 (每回合回复生命与免疫暴击)",
               "en": "Helm of Balduran"
             },
             "syntax_type": "lua_function",
             "code": "Osi.TemplateAddTo(\"0a64283a-1fc4-45cd-9e5e-f463f6b762ea\", GetHostCharacter(), 1)",
-            "desc": "博德之门传奇创始人头盔，AC +1，每回合开始自动恢复 2 点生命值，免疫一切致晕与暴击伤害！",
+            "desc": "博德之门创始人留下的头盔，提供 AC 和豁免 +1，战斗中每回合开始恢复 2 点生命，并使佩戴者免疫暴击和大部分致晕效果（部分特殊致晕来源除外）。",
             "framework_required": "BG3 Script Extender (Norbyte)",
             "source": "https://bg3.wiki/wiki/Helm_of_Balduran"
           },
           {
             "id": "bg3_viconia_shield",
             "name": {
-              "zh-CN": "维康尼亚的行走要塞 (传奇重盾 - +3AC与法术反弹结界)",
+              "zh-CN": "维康尼亚的行走要塞 (传奇盾牌 - +3AC 与反击效果)",
               "en": "Viconia's Walking Fortress (Legendary Shield)"
             },
             "syntax_type": "lua_function",
             "code": "Osi.TemplateAddTo(\"4f313dde-14bb-43a2-abdd-07b2eb38b33a\", GetHostCharacter(), 1)",
-            "desc": "哀伤之邸击败维康尼亚获得的至尊盾牌！高达 +3 护甲等级，对抗法术获得优势，被攻击时可使用反应力场直接将敌人击退震翻！",
+            "desc": "击败维康尼亚获得的盾牌，提供 +3 护甲等级与对抗法术的豁免优势；被近战攻击命中时可用反应造成力场伤害并尝试将敌人击倒在地。",
             "framework_required": "BG3 Script Extender (Norbyte)",
             "source": "https://bg3.wiki/wiki/Viconia%27s_Walking_Fortress"
           },
           {
             "id": "bg3_bhaalist_armour",
             "name": {
-              "zh-CN": "巴尔信徒护甲 (赋予周围敌人穿刺易伤光环 - 物理伤害直接翻倍)",
+              "zh-CN": "巴尔信徒护甲 (周围敌人穿刺伤害易伤光环)",
               "en": "Bhaalist Armour (Aura of Murder)"
             },
             "syntax_type": "lua_function",
             "code": "Osi.TemplateAddTo(\"443b2caf-8d36-42cf-b389-d774229ed18c\", GetHostCharacter(), 1)",
-            "desc": "刺客与弓手流派的核心神装，周围 2 米内所有非穿刺抗性敌人自动获得穿刺伤害翻倍易伤 Debuff！",
+            "desc": "刺客/弓手向流派防具，使周围 3 米内非穿刺免疫的敌人穿刺伤害翻倍，并获得 +2 先攻加值。",
             "framework_required": "BG3 Script Extender (Norbyte)",
             "source": "https://bg3.wiki/wiki/Bhaalist_Armour"
           },
           {
             "id": "bg3_vest_soul_rejuvenation",
             "name": {
-              "zh-CN": "灵魂复苏胸甲 (武僧毕业神甲 - 反弹近战反击与法术自愈)",
+              "zh-CN": "灵魂复苏胸甲 (AC+2，法术豁免回血与反击)",
               "en": "Vest of Soul Rejuvenation"
             },
             "syntax_type": "lua_function",
             "code": "Osi.TemplateAddTo(\"1c69a87e-9136-4e13-90af-c0f02d0fc81f\", GetHostCharacter(), 1)",
-            "desc": "散打宗武僧终极毕业防具，敌人近战攻击落空时可立即使用反应施展徒手攻击痛击对手！",
+            "desc": "防具提供 AC+2，法术豁免成功时回复 1d4 生命值；敌人近战攻击落空时可用反应发动一次徒手反击。",
             "framework_required": "BG3 Script Extender (Norbyte)",
             "source": "https://bg3.wiki/wiki/Vest_of_Soul_Rejuvenation"
           }
         ]
       },
       {
-        "category": "💍 传奇首饰、属性锁死护符与关键戒指 (Legendary Rings & Amulets)",
+        "category": "💍 传奇首饰与戒指 (Legendary Rings & Amulets)",
         "commands": [
           {
             "id": "bg3_amulet_greater_health",
             "name": {
-              "zh-CN": "高等健康护符 (体质属性直接锁死 23 点与体质豁免优势)",
+              "zh-CN": "高等健康护符 (体质设为 23 点)",
               "en": "Amulet of Greater Health (Con 23)"
             },
             "syntax_type": "lua_function",
             "code": "Osi.TemplateAddTo(\"5ed63342-30c9-456d-9a57-a88c8596c0c9\", GetHostCharacter(), 1)",
-            "desc": "佩戴后将佩戴者的体质属性直接拉满并强制锁死为 23 点，生命值暴涨上百点，法术专注检定获得常驻优势！",
+            "desc": "若佩戴者当前体质低于 23，会将其体质属性设为 23 点（体质已达到或超过 23 时无效），从而提高生命值上限。",
             "framework_required": "BG3 Script Extender (Norbyte)",
             "source": "https://bg3.wiki/wiki/Amulet_of_Greater_Health"
           },
           {
             "id": "bg3_gauntlets_hill_giant",
             "name": {
-              "zh-CN": "山丘巨人力量手套 (力量属性直接锁死 23 点)",
+              "zh-CN": "山丘巨人力量手套 (力量设为 23 点)",
               "en": "Gauntlets of Hill Giant Strength (Str 23)"
             },
             "syntax_type": "lua_function",
             "code": "Osi.TemplateAddTo(\"9481aa27-ce9c-414c-84ff-5e974fd64d89\", GetHostCharacter(), 1)",
-            "desc": "将佩戴者的力量属性直接恒定锁死为 23 点，无论法师或游荡者佩戴都能拥有撼动山丘的物理爆发与跳跃距离！",
+            "desc": "若佩戴者当前力量低于 23，会将其力量属性设为 23 点（力量已达到或超过 23 时无效）。",
             "framework_required": "BG3 Script Extender (Norbyte)",
             "source": "https://bg3.wiki/wiki/Gauntlets_of_Hill_Giant_Strength"
           },
           {
             "id": "bg3_ring_regeneration",
             "name": {
-              "zh-CN": "再生之戒 (每回合开始自动回复 1d4 生命值)",
+              "zh-CN": "再生之戒 (战斗中每回合回复 1d4 生命值)",
               "en": "Ring of Regeneration"
             },
             "syntax_type": "lua_function",
             "code": "Osi.TemplateAddTo(\"d6ee2594-7373-4fed-a167-f9d95cb4ecfd\", GetHostCharacter(), 1)",
-            "desc": "巫术杂货铺洛若坎售卖的传说戒指，战斗中与非战斗状态持续自愈回血。",
+            "desc": "洛若坎出售的戒指，战斗中每回合开始时恢复 1d4 生命值（非战斗状态下无效，角色倒地时也不会触发）。",
             "framework_required": "BG3 Script Extender (Norbyte)",
             "source": "https://bg3.wiki/wiki/Ring_of_Regeneration"
           },
           {
             "id": "bg3_risky_ring",
             "name": {
-              "zh-CN": "风险之戒 (所有攻击掷骰常驻获得优势)",
+              "zh-CN": "风险之戒 (攻击掷骰优势，但豁免检定劣势)",
               "en": "Risky Ring (All Attack Rolls Advantage)"
             },
             "syntax_type": "lua_function",
             "code": "Osi.TemplateAddTo(\"6fa51fb6-0c99-4e2e-bf3c-f4fe18fd64a7\", GetHostCharacter(), 1)",
-            "desc": "战术家与硬核玩家必备神戒，所有近战与远程攻击必定拥有双骰优势，触发暴击概率翻倍！",
+            "desc": "佩戴后所有攻击掷骰获得优势，但豁免检定会因此获得劣势，是有取舍的戒指。",
             "framework_required": "BG3 Script Extender (Norbyte)",
             "source": "https://bg3.wiki/wiki/Risky_Ring"
           },
           {
             "id": "bg3_ring_free_action",
             "name": {
-              "zh-CN": "自由行动之戒 (免疫麻痹、禁锢与困难地形)",
+              "zh-CN": "自由行动之戒 (免疫麻痹、束缚与困难地形)",
               "en": "Ring of Free Action"
             },
             "syntax_type": "lua_function",
             "code": "Osi.TemplateAddTo(\"50379f58-7892-44cb-be6e-146a60070055\", GetHostCharacter(), 1)",
-            "desc": "彻底无视藤蔓缠绕、冰面减速与一切麻痹眩晕控制技能，在战场中穿梭自如。",
+            "desc": "佩戴后免疫麻痹、束缚（Restrained）以及困难地形的减速效果，但不能免疫冰面、油脂等打滑效果。",
             "framework_required": "BG3 Script Extender (Norbyte)",
             "source": "https://bg3.wiki/wiki/Ring_of_Free_Action"
           },
           {
             "id": "bg3_killer_sweetheart",
             "name": {
-              "zh-CN": "杀手的甜心戒指 (击杀目标后下一次攻击必定触发暴击)",
+              "zh-CN": "杀手的甜心戒指 (击杀后下一次攻击必定暴击)",
               "en": "Killer's Sweetheart"
             },
             "syntax_type": "lua_function",
             "code": "Osi.TemplateAddTo(\"2f2d4bf3-6a14-43f5-81fe-e14aa9871215\", GetHostCharacter(), 1)",
-            "desc": "击杀任意敌人后激活，下一次无论使用什么武器攻击都必定判定为致命一击（Natural 20）！",
+            "desc": "击杀敌人后触发，下一次武器攻击必定暴击，每次长休只能触发一次。",
             "framework_required": "BG3 Script Extender (Norbyte)",
             "source": "https://bg3.wiki/wiki/Killer%27s_Sweetheart"
           }
         ]
       },
       {
-        "category": "📜 全职业 6 环终极魔法卷轴 (Level 6 Master Scrolls)",
+        "category": "📜 全职业 6 环魔法卷轴 (Level 6 Scrolls)",
         "commands": [
           {
             "id": "bg3_scroll_globe_invulnerability",
             "name": {
-              "zh-CN": "无敌护罩卷轴 x10 (范围内全员绝对无敌免疫一切伤害)",
+              "zh-CN": "Globe of Invulnerability 卷轴 x10（法术无效结界）",
               "en": "Scroll of Globe of Invulnerability x10"
             },
             "syntax_type": "lua_function",
             "code": "Osi.TemplateAddTo(\"8d4c06d1-e504-49b0-a4fa-5179ab717f1e\", GetHostCharacter(), 10)",
-            "desc": "战役通关神器！释放半径 3 米的绝对屏障金钟罩，圆圈内所有友方免疫包括龙炎、神圣与力场在内的一切伤害！",
+            "desc": "释放后在范围内形成结界，范围内生物免疫 5 环及以下的法术效果（不阻挡武器攻击等非法术伤害）。",
             "framework_required": "BG3 Script Extender (Norbyte)",
             "source": "https://bg3.wiki/wiki/Scroll_of_Globe_of_Invulnerability"
           },
           {
             "id": "bg3_scroll_disintegrate",
             "name": {
-              "zh-CN": "解离术卷轴 x10 (10d6+40 点毁灭力场伤害直接化为灰烬)",
+              "zh-CN": "解离术卷轴 x10 (10d6+40 点力场伤害)",
               "en": "Scroll of Disintegrate x10"
             },
             "syntax_type": "lua_function",
             "code": "Osi.TemplateAddTo(\"3f737706-57ca-45e6-b0d1-45238da76329\", GetHostCharacter(), 10)",
-            "desc": "超高单体爆发射线，目标生命降为 0 时直接瓦解为一堆灰烬，彻底阻止复活机制。",
+            "desc": "对单个目标造成 10d6+40 点力场伤害，若目标生命降至 0，会化为灰烬，无法用常规方式复活。",
             "framework_required": "BG3 Script Extender (Norbyte)",
             "source": "https://bg3.wiki/wiki/Scroll_of_Disintegrate"
           },
           {
             "id": "bg3_scroll_chain_lightning",
             "name": {
-              "zh-CN": "链状闪电卷轴 x10 (10d8 点连锁闪电轰炸多名强敌)",
+              "zh-CN": "链状闪电卷轴 x10 (10d8 点闪电伤害，可连锁 3 个目标)",
               "en": "Scroll of Chain Lightning x10"
             },
             "syntax_type": "lua_function",
             "code": "Osi.TemplateAddTo(\"13105f7d-55fa-4292-abfe-b9d80054b48e\", GetHostCharacter(), 10)",
-            "desc": "召唤极速电光在目标及周围 3 名敌对实体之间疯狂弹射，水面潮湿状态下伤害暴涨 200%！",
+            "desc": "对目标及最多 3 个额外目标造成 10d8 点闪电伤害（豁免成功减半），若目标处于潮湿状态伤害会进一步提高。",
             "framework_required": "BG3 Script Extender (Norbyte)",
             "source": "https://bg3.wiki/wiki/Scroll_of_Chain_Lightning"
           },
           {
             "id": "bg3_scroll_sunbeam",
             "name": {
-              "zh-CN": "阳光术卷轴 x10 (每回合持续释放耀光并致盲敌人)",
+              "zh-CN": "阳光术卷轴 x10 (范围光耀伤害，可连续发射)",
               "en": "Scroll of Sunbeam x10"
             },
             "syntax_type": "lua_function",
             "code": "Osi.TemplateAddTo(\"049d70c4-7ea3-4b6c-af6f-44dab7813a89\", GetHostCharacter(), 10)",
-            "desc": "召唤炽热日光射线，对不死生物造成高额克制光耀伤害，每回合无需额外消耗法术位即可重新发射。",
+            "desc": "召唤光耀射线对范围内生物造成伤害并可能致盲，不死生物与软泥怪的豁免判定处于劣势；发动后可在后续回合免费重新发射，无需消耗额外法术位。",
             "framework_required": "BG3 Script Extender (Norbyte)",
             "source": "https://bg3.wiki/wiki/Scroll_of_Sunbeam"
           },
           {
             "id": "bg3_scroll_freezing_sphere",
             "name": {
-              "zh-CN": "奥提路克冰封球卷轴 x10 (10d6 点大范围严寒冰冻)",
+              "zh-CN": "奥提路克冰封球卷轴 x10 (10d6 点范围冰冷伤害)",
               "en": "Scroll of Otiluke's Freezing Sphere x10"
             },
             "syntax_type": "lua_function",
             "code": "Osi.TemplateAddTo(\"74d0e4f0-de97-4097-a7e7-f5759a375c81\", GetHostCharacter(), 10)",
-            "desc": "在目标区域引爆超大范围冰霜风暴，冻结一切液体并将敌人双足冻结在地面上。",
+            "desc": "在目标点引发范围冰爆，造成 10d6 点冰冷伤害，并会将接触到的水面冻结成冰面。",
             "framework_required": "BG3 Script Extender (Norbyte)",
             "source": "https://bg3.wiki/wiki/Scroll_of_Otiluke%27s_Freezing_Sphere"
           }
         ]
       },
       {
-        "category": "🧪 传奇灵药与飞行隐形药剂 (Legendary Elixirs & Potions)",
+        "category": "🧪 灵药与药剂 (Elixirs & Potions)",
         "commands": [
           {
             "id": "bg3_elixir_cloud_giant",
             "name": {
-              "zh-CN": "云巨人力量灵药 x20 (力量属性拉满至 27 点极限神力)",
+              "zh-CN": "云巨人力量灵药 x20 (力量设为 27 点，直至长休)",
               "en": "Elixir of Cloud Giant Strength x20 (Str 27)"
             },
             "syntax_type": "lua_function",
             "code": "Osi.TemplateAddTo(\"e6490cc8-7f81-4aac-95e8-a58ce5e88a31\", GetHostCharacter(), 20)",
-            "desc": "全游戏最强力量药水！药效持续直至下一次长休，将力量直接飙升至游戏设定的绝对上限 27 点（+8 攻击与伤害修正加成）！",
+            "desc": "饮用后将力量属性设为 27 点，效果持续至下次长休（投掷命中时效果持续 10 回合）。",
             "framework_required": "BG3 Script Extender (Norbyte)",
             "source": "https://bg3.wiki/wiki/Elixir_of_Cloud_Giant_Strength"
           },
           {
             "id": "bg3_elixir_bloodlust",
             "name": {
-              "zh-CN": "嗜血灵药 x20 (每击杀一人立即额外获得一个完整动作)",
+              "zh-CN": "嗜血灵药 x20 (每回合首次击杀获得额外动作与临时生命)",
               "en": "Bloodlust Elixir x20 (Extra Action on Kill)"
             },
             "syntax_type": "lua_function",
             "code": "Osi.TemplateAddTo(\"45a775f8-2cf9-440d-b9eb-4ee5f17efca8\", GetHostCharacter(), 20)",
-            "desc": "持续至长休，每回合首次击杀敌人后立即恢复一个完整的战斗动作并获得 5 点临时生命，砍倒全场！",
+            "desc": "效果持续至下次长休；每回合首次击杀敌人后，获得一个额外动作和 5 点临时生命值（击晕不触发）。",
             "framework_required": "BG3 Script Extender (Norbyte)",
             "source": "https://bg3.wiki/wiki/Elixir_of_Bloodlust"
           },
           {
             "id": "bg3_potion_angelic_slumber",
             "name": {
-              "zh-CN": "天使轻眠药水 x10 (就地陷入浅睡等效一次完整长休)",
-              "en": "Potion of Angelic Slumber x10 (Instant Long Rest)"
+              "zh-CN": "天使轻眠药水 x10（睡 2 回合后获得长休效果）",
+              "en": "Potion of Angelic Slumber x10"
             },
             "syntax_type": "lua_function",
             "code": "Osi.TemplateAddTo(\"4d801c1a-691e-47c8-88e7-78367b4e2c8e\", GetHostCharacter(), 10)",
-            "desc": "在红名禁止长休的决战副本中就地进入 2 回合浅睡，醒来完全恢复所有 1~6 环法术位与全部生命值！",
+            "desc": "饮用后睡眠 2 回合，醒来时获得长休效果；睡眠被打断则不生效。据 bg3.wiki，部分需要长休恢复的能力不会被它恢复。",
             "framework_required": "BG3 Script Extender (Norbyte)",
             "source": "https://bg3.wiki/wiki/Potion_of_Angelic_Slumber"
           },
@@ -5166,48 +5166,48 @@ window.GAMES_DATA = [
             },
             "syntax_type": "lua_function",
             "code": "Osi.TemplateAddTo(\"ad9f3f24-d755-48b6-aa7b-c34da068209f\", GetHostCharacter(), 20)",
-            "desc": "快速进入 3 回合加速状态，每回合多一次施法或普攻机会，移动速度翻倍。",
+            "desc": "饮用后进入 3 回合急速状态：每回合多一次动作、移动速度 +9 米、AC+2，并对敏捷豁免有优势；效果结束后会陷入疲乏状态，下回合无法行动。",
             "framework_required": "BG3 Script Extender (Norbyte)",
             "source": "https://bg3.wiki/wiki/Potion_of_Speed"
           }
         ]
       },
       {
-        "category": "⏱️ 动作掌控、常驻全图飞行与急速爆发 (Actions, Flight & Movement)",
+        "category": "⏱️ 状态增益：急速、飞行与移动 (Status Buffs: Haste, Flight & Movement)",
         "commands": [
           {
             "id": "bg3_apply_haste",
             "name": {
-              "zh-CN": "常驻绝对急速术 (动作翻倍且永不疲劳瘫痪)",
+              "zh-CN": "赋予常驻急速术（HASTE）",
               "en": "Permanent Haste Buff"
             },
             "syntax_type": "lua_function",
             "code": "Osi.ApplyStatus(GetHostCharacter(), \"HASTE\", -1)",
-            "desc": "为主角施加永久生效的急速术，每回合直接额外获取一个完整的法术或武器攻击动作，移动速度翻倍，且绝对不会因为被打断而陷入 1 回合虚脱！",
+            "desc": "为主角施加持续生效的急速状态：每回合可额外执行一次动作，移动速度与敏捷豁免获得提升，且因手动施加不会到期触发急速结束后的疲乏状态。",
             "framework_required": "BG3 Script Extender (Norbyte)",
             "source": "https://docs.baldursgate3.game/index.php?title=ApplyStatus"
           },
           {
             "id": "bg3_apply_fly",
             "name": {
-              "zh-CN": "赋予常驻全图自由飞行能力 (无视地形跨越断崖)",
+              "zh-CN": "赋予常驻飞行状态 (FLY)",
               "en": "Permanent Fly Buff"
             },
             "syntax_type": "lua_function",
             "code": "Osi.ApplyStatus(GetHostCharacter(), \"FLY\", -1)",
-            "desc": "直接赋予主角飞天遁地能力，免去攀爬楼梯与跳跃落脚点限制，直飞高台抢占先攻优势！",
+            "desc": "为主角施加飞行状态，可自由飞越地形与高低差，无需走楼梯或跳跃。",
             "framework_required": "BG3 Script Extender (Norbyte)",
             "source": "https://docs.baldursgate3.game/index.php?title=ApplyStatus"
           },
           {
             "id": "bg3_apply_see_invis",
             "name": {
-              "zh-CN": "赋予常驻识破隐形破除虚妄视界",
+              "zh-CN": "赋予常驻识破隐形状态",
               "en": "Permanent See Invisibility"
             },
             "syntax_type": "lua_function",
             "code": "Osi.ApplyStatus(GetHostCharacter(), \"SEE_INVISIBILITY\", -1)",
-            "desc": "9 米范围内任何试图隐形的幽灵、鬼婆或盗贼直接被识破真身显形暴露无遗！",
+            "desc": "为主角施加识破隐形状态，使其能看见附近范围内隐形的敌人。",
             "framework_required": "BG3 Script Extender (Norbyte)",
             "source": "https://docs.baldursgate3.game/index.php?title=ApplyStatus"
           },
@@ -5232,7 +5232,7 @@ window.GAMES_DATA = [
         "title": "BG3 Script Extender (bg3se)",
         "author": "Norbyte",
         "category": "核心底层工具 (Core Utility / Framework)",
-        "desc": "全网公认最核心的博德之门3底层框架！劫持 DWrite.dll 开启游戏底层 Osiris 引擎控制台黑窗，提供极速内存注入与所有高级 Mod 的前置运行支持。",
+        "desc": "博德之门3的底层模组框架，通过劫持 DWrite.dll 开启游戏内置的 Osiris 控制台，是许多高级 Mod 运行所需的前置库。",
         "dependencies": [
           "None"
         ],
@@ -5250,7 +5250,7 @@ window.GAMES_DATA = [
         "title": "ImpUI (ImprovedUI)",
         "author": "AlanaSP ShinyHobo Djmr Zee and bibsan",
         "category": "界面增强 (UI / QoL)",
-        "desc": "彻底解除捏脸、背包与战斗界面的布局限制，支持宽屏 21:9 / 32:9 分辨率，杜绝 Mod 导致的剧情对话黑框与捏脸滑条重叠问题。",
+        "desc": "解除捏脸、背包与战斗界面的布局限制，支持 21:9 / 32:9 宽屏分辨率，并修复部分 Mod 导致的对话黑框与捏脸滑条重叠问题。",
         "dependencies": [
           "None"
         ],
@@ -5271,7 +5271,7 @@ window.GAMES_DATA = [
         "title": "Party Limit Begone",
         "author": "Sildur",
         "category": "玩法规则 (Gameplay / Party)",
-        "desc": "强迫症玩家必装！将联机上限提升至 8 人，单人战役队伍上限直接提升至 16 人！全员伙伴（影心、阿斯代伦、卡菈克、盖尔、莱埃泽尔等）全员随队，再也不会错过任何旷世野外拌嘴对话！",
+        "desc": "将联机人数上限提升至 8 人，单人战役的队伍人数上限提升至 16 人，可让所有同伴（影心、阿斯代伦、卡菈克、盖尔、莱埃泽尔等）同时随队。",
         "dependencies": [
           "None"
         ],
@@ -5292,7 +5292,7 @@ window.GAMES_DATA = [
         "title": "5e Spells",
         "author": "Celes",
         "category": "法术与战斗 (Spells / Combat)",
-        "desc": "将龙与地下城第五版规则书中拉瑞安未采用的 100+ 个经典法术（如绿色火焰之刃、寒冰之触、闪电箭、心灵尖刺等）全部按官方平衡性无缝实装到全职业法术树中！",
+        "desc": "将龙与地下城第五版规则书中拉瑞安未采用的 100 余个法术（如绿色火焰之刃、寒冰之触、闪电箭、心灵尖刺等）添加到全部职业的法术列表中，并参考官方数值进行平衡。",
         "dependencies": [
           "ImprovedUI"
         ],
@@ -5313,7 +5313,7 @@ window.GAMES_DATA = [
         "title": "Native Camera Tweaks",
         "author": "Ershin",
         "category": "镜头视角 (Camera / Immersion)",
-        "desc": "彻底解除原版俯视角镜头俯仰角被锁死在 45 度的限制！允许将镜头下压至水平视线，以完全沉浸式的越肩第三人称动作 RPG 视角仰望巍峨的博德之门大都市！",
+        "desc": "解除原版镜头俯仰角被限制在 45 度以内的限制，可将镜头下压至接近水平视角，实现越肩第三人称视角。",
         "dependencies": [
           "BG3 Script Extender"
         ],
@@ -5321,7 +5321,7 @@ window.GAMES_DATA = [
         "installSteps": [
           "1. 确保已安装 BG3 Script Extender；",
           "2. 将 NativeCameraTweaks.dll 与 .ini 放入 bin\\NativeMods\\ 目录；",
-          "3. 在游戏中按下滚轮即可自由无限制仰望。"
+          "3. 游戏中滚动鼠标滚轮即可调整镜头俯仰角度。"
         ],
         "isDirect": false,
         "nexusUrl": "https://www.nexusmods.com/baldursgate3/mods/945",
@@ -5335,14 +5335,14 @@ window.GAMES_DATA = [
         "title": "WASD Character Movement",
         "author": "Ch4nKyy",
         "category": "操控手感 (Controls / Movement)",
-        "desc": "告别鼠标点地寻路！直接使用键盘 WASD 键平滑操控角色向前后左右自由奔跑奔行，配合 Native Camera Tweaks 瞬间将博德之门3变身为巫师3级别的第三人称动作大作！",
+        "desc": "使用键盘 WASD 键直接控制角色移动，替代鼠标点地寻路；配合 Native Camera Tweaks 可实现越肩第三人称视角的操控方式。",
         "dependencies": [
           "Native Camera Tweaks"
         ],
         "installPath": "Baldur's Gate 3\\bin\\NativeMods\\",
         "installSteps": [
           "1. 将 wasd.dll 与 wasd.ini 放入 bin\\NativeMods 目录；",
-          "2. 游戏中直接按 CapsLock 键可在鼠标点击模式与键盘直控模式间一键切换。"
+          "2. 游戏中按 CapsLock 键可在鼠标点击模式与键盘直控模式间切换。"
         ],
         "isDirect": false,
         "nexusUrl": "https://www.nexusmods.com/baldursgate3/mods/781",
@@ -5356,7 +5356,7 @@ window.GAMES_DATA = [
         "title": "Tav's Hair Salon",
         "author": "Toarie",
         "category": "外观美化 (Visuals / Character Creation)",
-        "desc": "全网热度最高的发型模组！为所有人类、精灵、半精灵、卓尔、提夫林男女角色增加数十款极致飘逸唯美的现代与奇幻长发、辫发与发饰，捏脸党必备！",
+        "desc": "为人类、精灵、半精灵、卓尔、提夫林等种族的男女角色新增数十款长发、辫发与发饰造型，可在捏脸界面中选择。",
         "dependencies": [
           "ImprovedUI"
         ],
@@ -5574,7 +5574,7 @@ window.GAMES_DATA = [
       {
         "name": "Elden Ring Seamless Co-op",
         "category": "Multiplayer",
-        "desc": "与好友同屏全流程推图、骑马、不因死亡被遣返",
+        "desc": "与好友联机推进全程剧情、骑乘灵马，且不会因死亡被遣返回单人世界",
         "url": "https://github.com/yuiamoroll/EldenRingSeamlessCoopRelease"
       },
       {
@@ -5586,7 +5586,7 @@ window.GAMES_DATA = [
       {
         "name": "Pause the game",
         "category": "QoL",
-        "desc": "按 P 键真正暂停游戏，上厕所倒水不暴毙",
+        "desc": "按 P 键暂停游戏，适合中途离开时使用",
         "url": "https://www.nexusmods.com/eldenring/mods/43"
       }
     ],
@@ -5631,17 +5631,17 @@ window.GAMES_DATA = [
         "id": "mod_seamless_coop",
         "title": "Elden Ring Seamless Co-op",
         "author": "yuiamoroll",
-        "category": "多人联机与系统大修",
-        "desc": "魂系联机体验天花板！彻底移除打完Boss被强行遣返的联机限制，全图无空气墙无缝跑图、死亡围观复活、共乘托雷特灵马、用独立的 .co2 存档、不连官方匹配服务器（第三方 Mod，会不会被封号没有人能担保）。",
+        "category": "多人联机 (Multiplayer)",
+        "desc": "联机模组，移除了击败 Boss 后被遣返回单人世界的限制，支持全图联机、死亡后围观队友复活、共乘灵马，使用独立的 .co2 存档，不连接官方匹配服务器（第三方 Mod，存在导致封号的风险）。",
         "dependencies": [
           "None (自带独立引导器)"
         ],
         "installPath": "<GameRoot>/Game/ersc/",
         "installSteps": [
           "解压 SeamlessCoop.zip 得到 ersc 文件夹与 launch_elden_ring_seamlesscoop.exe",
-          "将上述文件直接复制进游戏目录 Game/ 下",
-          "用记事本打开 Game/ersc/ersc_settings.ini，在 cooppassword = 后面输入你和小伙伴约定的联机密码",
-          "双击 launch_elden_ring_seamlesscoop.exe 启动，进入游戏后使用道具包里的【小人偶】即可无缝联机！"
+          "将上述文件复制进游戏目录 Game/ 下",
+          "用记事本打开 Game/ersc/ersc_settings.ini，在 cooppassword = 后面输入你和队友约定的联机密码",
+          "双击 launch_elden_ring_seamlesscoop.exe 启动游戏，进入游戏后使用道具栏中的【小人偶】进行联机"
         ],
         "isDirect": true,
         "nexusUrl": "https://github.com/yuiamoroll/EldenRingSeamlessCoopRelease",
@@ -5653,8 +5653,8 @@ window.GAMES_DATA = [
         "id": "mod_modengine2",
         "title": "ModEngine2",
         "author": "soulsmods",
-        "category": "底层框架与核心前置",
-        "desc": "法环挂载全类型 Mod 的核心基石！免解包直接挂载 .dcx, .param, regulation.bin 等资源，自带不加载 EAC 的启动方式（只能离线玩），不改游戏原版文件。",
+        "category": "框架 / 前置 (Core Framework)",
+        "desc": "用于加载各类 Mod 资源（如 .dcx、.param、regulation.bin 等）而无需解包游戏文件，自带不加载 EAC 的离线启动方式，不修改游戏原始文件。",
         "dependencies": [
           "Microsoft Visual C++ 2015-2022 Redistributable"
         ],
@@ -5674,8 +5674,8 @@ window.GAMES_DATA = [
         "id": "mod_grand_archives_ct",
         "title": "Elden Ring CT (The Grand Archives / TGA)",
         "author": "The Grand Archives",
-        "category": "极客调试与数据检索",
-        "desc": "法环极客神器！包含全DLC 物品一键生成 (Item Gib)、全赐福传送点秒亮、360° 自由飞行摄影相机、NPC 赎罪与死人复生、BOSS 随时重置挑战。",
+        "category": "调试工具 (Debug / Cheat Tool)",
+        "desc": "用于调试与资源查看的 Cheat Engine 表，可生成包含 DLC 在内的全部物品 (Item Gib)、点亮全部赐福传送点、开启自由视角飞行摄像机、复活 NPC，以及重置 Boss 挑战状态。",
         "dependencies": [
           "Cheat Engine 7.5+",
           "EAC Offline Bypass"
@@ -5685,7 +5685,7 @@ window.GAMES_DATA = [
           "下载并安装 Cheat Engine 7.5+",
           "先运行 launchmod_eldenring.bat 进入游戏并载入存档",
           "双击打开 EldenRing.CT 表，点击左上角电脑图标附着到 eldenring.exe 进程",
-          "勾选 Open 表头，展开 Scripts -> Item Gib 即可按图鉴无痛派发全套装备！"
+          "勾选 Open 表头，展开 Scripts -> Item Gib 即可按列表生成对应装备"
         ],
         "isDirect": false,
         "nexusUrl": "https://github.com/The-Grand-Archives/Elden-Ring-CT-TGA"
@@ -5694,15 +5694,15 @@ window.GAMES_DATA = [
         "id": "mod_err_reforged",
         "title": "ERR - ELDEN RING Reforged",
         "author": "Kirnifr and the Reforged team",
-        "category": "玩法机制全面重构",
-        "desc": "重构交界地战斗机制：新增《只狼》完美招架弹反、全新法术连招、复仇者难度模式、赐福点 Boss 连战挑战！",
+        "category": "玩法机制调整 (Gameplay Overhaul)",
+        "desc": "重新设计交界地的战斗机制：加入类似《只狼》的招架弹反系统、新的法术连段、复仇者难度模式，以及赐福点 Boss 连战挑战。",
         "dependencies": [
           "ModEngine2"
         ],
         "installPath": "<ModEngine2Root>/mod/",
         "installSteps": [
           "下载 ERR 安装包，将其解压覆盖至 ModEngine2/mod/ 目录下",
-          "启动 launchmod_eldenring.bat 开始全新的交界地冒险！"
+          "启动 launchmod_eldenring.bat 进入游戏"
         ],
         "isDirect": false,
         "nexusUrl": "https://www.nexusmods.com/eldenring/mods/541",
@@ -5981,13 +5981,13 @@ window.GAMES_DATA = [
       {
         "name": "SkyUI",
         "category": "UI Overhaul",
-        "desc": "彻底重构原生烂UI，PC端键鼠体验天花板",
+        "desc": "优化原版界面，改善 PC 端的鼠标键盘操作体验。",
         "url": "https://www.nexusmods.com/skyrimspecialedition/mods/12604"
       },
       {
         "name": "Unofficial Skyrim Special Edition Patch - USSEP",
         "category": "Bug Fixes",
-        "desc": "非官方万项原版BUG修复大补丁",
+        "desc": "非官方的综合性原版 BUG 修复补丁。",
         "url": "https://www.nexusmods.com/skyrimspecialedition/mods/266"
       }
     ],
@@ -6034,17 +6034,17 @@ window.GAMES_DATA = [
     },
     "consoleCategories": [
       {
-        "category": "👑 角色状态与神级上帝模式 (God Mode & Invulnerability)",
+        "category": "👑 角色状态与上帝模式 (God Mode & Invulnerability)",
         "commands": [
           {
             "id": "skyrim_tgm",
             "name": {
-              "zh-CN": "开关全能上帝模式 (Toggle God Mode: 无敌/无限魔/无限耐/无限负重)",
+              "zh-CN": "开关上帝模式 (tgm)",
               "en": "Toggle God Mode (tgm)"
             },
             "syntax_type": "creation_hex",
             "code": "tgm",
-            "desc": "开启后主角免疫任何物理与魔法伤害、受击不掉血、奔跑施法不消耗耐力与魔法、背包负重锁定无惩罚，爽快畅游天际！",
+            "desc": "开启后角色免疫伤害，耐力与魔法不再消耗，负重不受限制；再次输入可关闭。",
             "framework_required": "None (Native Console)",
             "source": "https://en.uesp.net/wiki/Skyrim:Console"
           },
@@ -6063,24 +6063,24 @@ window.GAMES_DATA = [
           {
             "id": "skyrim_tcl",
             "name": {
-              "zh-CN": "开关穿墙穿模模式 (Toggle Collision: 悬浮飞行自由穿墙)",
+              "zh-CN": "开关穿墙穿模模式 (Toggle Collision)",
               "en": "Toggle Collision (tcl)"
             },
             "syntax_type": "creation_hex",
             "code": "tcl",
-            "desc": "关闭物理碰撞检测，角色可以在空中任意方向自由漫步飞行、穿透地下墓穴石壁或被卡在山谷缝隙时一秒脱困！",
+            "desc": "关闭物理碰撞检测，角色可以在空中自由移动并穿过墙体，可用于脱离被卡住的地形。",
             "framework_required": "None (Native Console)",
             "source": "https://en.uesp.net/wiki/Skyrim:Console"
           },
           {
             "id": "skyrim_carryweight",
             "name": {
-              "zh-CN": "永久扩增随身背包负重上限至 99,999 (垃圾佬必备)",
+              "zh-CN": "将背包负重上限设为 99,999",
               "en": "Set Carry Weight Upper Limit"
             },
             "syntax_type": "creation_hex",
             "code": "player.setav carryweight 99999",
-            "desc": "将角色背包基础最大负重上限直接修改为 99,999 磅，下地城扫荡几百把重甲龙骨武器依然健步如飞！",
+            "desc": "将角色负重上限直接设置为 99,999 磅，基本不会再因超重而减速。",
             "framework_required": "None (Native Console)",
             "source": "https://en.uesp.net/wiki/Skyrim_Mod:Actor_Value_Indices"
           },
@@ -6092,14 +6092,14 @@ window.GAMES_DATA = [
             },
             "syntax_type": "creation_hex",
             "code": "player.setav speedmult 150",
-            "desc": "将基础移动速度调为 150% (修改后收刀或拔刀一次即可激活生效)，大幅加快天际原野跑图赶路节奏！",
+            "desc": "将移动速度基础值设为 150%（默认 100），收起或拔出武器一次后生效，可加快跑图速度。",
             "framework_required": "None (Native Console)",
             "source": "https://en.uesp.net/wiki/Skyrim_Mod:Actor_Value_Indices"
           }
         ]
       },
       {
-        "category": "💰 货币、开锁与全技能熟练度满级 (Gold, Lockpicks & Master Skills)",
+        "category": "💰 货币、开锁与技能熟练度提升 (Gold, Lockpicks & Skill Training)",
         "commands": [
           {
             "id": "skyrim_add_gold_100k",
@@ -6109,7 +6109,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "creation_hex",
             "code": "player.additem 0000000F 100000",
-            "desc": "瞬间向背囊注入 10 万金币，直接买下独孤城傲慢尖塔与各大要塞豪华房产！可简写为 player.additem f 100000。",
+            "desc": "向背包增加 10 万金币。可简写为 player.additem f 100000。",
             "framework_required": "None (Native Console)",
             "source": "https://en.uesp.net/wiki/Skyrim:Gold"
           },
@@ -6121,72 +6121,72 @@ window.GAMES_DATA = [
             },
             "syntax_type": "creation_hex",
             "code": "player.additem 0000000A 1000",
-            "desc": "派发 1,000 个天际开锁器，地牢宝箱随便撬开不再担心耗尽！可简写为 player.additem a 1000。",
+            "desc": "向背包增加 1,000 个开锁器。可简写为 player.additem a 1000。",
             "framework_required": "None (Native Console)",
             "source": "https://en.uesp.net/wiki/Skyrim:Lockpick"
           },
           {
             "id": "skyrim_add_dragon_souls",
             "name": {
-              "zh-CN": "直接获取 100 个龙魂 (用于解锁全套龙吼铭文)",
+              "zh-CN": "获取 100 个龙魂",
               "en": "Add 100 Dragon Souls"
             },
             "syntax_type": "creation_hex",
             "code": "player.setav dragonsouls 100",
-            "desc": "直接向角色赋予 100 个龙魂，省去满世界追逐随机巨龙吸取龙魂的繁琐流程，随时解锁任意龙吼！",
+            "desc": "向角色增加 100 个龙魂，可用于解锁已习得词语的龙吼技能。",
             "framework_required": "None (Native Console)",
             "source": "https://en.uesp.net/wiki/Skyrim_Mod:Actor_Value_Indices"
           },
           {
             "id": "skyrim_advskill_smithing",
             "name": {
-              "zh-CN": "锻造技能熟练度秒升 100 满级",
+              "zh-CN": "锻造技能等级提升至 100",
               "en": "Advance Smithing Skill to 100"
             },
             "syntax_type": "creation_hex",
             "code": "player.advskill smithing 999999",
-            "desc": "向锻造专业技能注入海量经验，无需重复打铁几千把铁匕首，直接点满魔族与龙骨锻造 Perk！",
+            "desc": "为锻造技能注入大量经验，使其升至满级 100（对应 Perk 仍需自行点出）。",
             "framework_required": "None (Native Console)",
             "source": "https://en.uesp.net/wiki/Skyrim:Console"
           },
           {
             "id": "skyrim_advskill_enchanting",
             "name": {
-              "zh-CN": "附魔技能熟练度秒升 100 满级",
+              "zh-CN": "附魔技能等级提升至 100",
               "en": "Advance Enchanting Skill to 100"
             },
             "syntax_type": "creation_hex",
             "code": "player.advskill enchanting 999999",
-            "desc": "附魔专业一秒满级，点出终极双重附魔 Perk，为一件装备同时铭刻两大强力神性词条！",
+            "desc": "为附魔技能注入大量经验，使其升至满级 100（对应 Perk 仍需自行点出）。",
             "framework_required": "None (Native Console)",
             "source": "https://en.uesp.net/wiki/Skyrim:Console"
           },
           {
             "id": "skyrim_advskill_alchemy",
             "name": {
-              "zh-CN": "炼金术熟练度秒升 100 满级",
+              "zh-CN": "炼金技能等级提升至 100",
               "en": "Advance Alchemy Skill to 100"
             },
             "syntax_type": "creation_hex",
             "code": "player.advskill alchemy 999999",
-            "desc": "炼金专业秒满级，随时调制出增幅数倍伤害与恢复效能的超强药剂！",
+            "desc": "为炼金技能注入大量经验，使其升至满级 100。",
             "framework_required": "None (Native Console)",
             "source": "https://en.uesp.net/wiki/Skyrim:Console"
           }
         ]
       },
       {
-        "category": "🐉 全龙吼解锁与零冷却释放 (Dragon Shouts Mastery & Zero Cooldown)",
+        "category": "🐉 龙吼学习与冷却时间调整 (Dragon Shouts & Cooldown)",
         "commands": [
           {
             "id": "skyrim_shout_unrelenting_force",
             "name": {
-              "zh-CN": "习得并解锁全三段【不卸之力】龙吼 (Fus Ro Dah)",
-              "en": "Teach Unrelenting Force (Fus Ro Dah)"
+              "zh-CN": "习得不卸之力龙吼第一段 (Fus)",
+              "en": "Teach Unrelenting Force, word 1 (Fus)"
             },
             "syntax_type": "creation_hex",
             "code": "player.teachword 13e22",
-            "desc": "直接习得天际最著名的标志性龙吼【伏斯·洛·达】(不卸之力) 第一段铭文 (二段 13e23, 三段 13e24)，将敌人直接吼飞悬崖！",
+            "desc": "习得龙吼【不卸之力】第一段（Fus），可击退敌人；第二段词条ID为13e23，第三段为13e24。",
             "framework_required": "None (Native Console)",
             "source": "https://en.uesp.net/wiki/Skyrim:Unrelenting_Force"
           },
@@ -6217,19 +6217,19 @@ window.GAMES_DATA = [
           {
             "id": "skyrim_zero_shout_recovery",
             "name": {
-              "zh-CN": "龙吼冷却时间清零 (无限连续释放龙吼大招)",
+              "zh-CN": "龙吼冷却时间归零 (可连续释放龙吼)",
               "en": "Set Shout Recovery Cooldown to Zero"
             },
             "syntax_type": "creation_hex",
             "code": "player.setav shoutrecoverymult 0",
-            "desc": "将龙吼冷却恢复乘数设置为 0，完全消除吼声施放后的漫长倒计时，化身真正的天际龙吼发射加农炮！",
+            "desc": "将龙吼冷却恢复倍率设为 0，使龙吼可以连续释放，无需等待冷却。",
             "framework_required": "None (Native Console)",
             "source": "https://en.uesp.net/wiki/Skyrim_Mod:Actor_Value_Indices"
           }
         ]
       },
       {
-        "category": "⚡ 全 16 件魔神器与远古神装 (Daedric Artifacts & Legendary Weapons)",
+        "category": "⚡ 魔神器与传奇武器 (Daedric Artifacts & Legendary Weapons)",
         "commands": [
           {
             "id": "skyrim_spawn_dawnbreaker",
@@ -6239,7 +6239,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "creation_hex",
             "code": "player.additem 0004e4ee 1",
-            "desc": "派发美瑞蒂亚光明神剑破晓者，攻击亡灵或尸鬼有极大几率引发大范围神圣爆炸消灭全场尸群！",
+            "desc": "美瑞蒂亚的魔神器单手剑，攻击附加 10 点火焰伤害；击杀亡灵时有几率引发火焰爆炸，使周围亡灵着火并可能被烧毁。",
             "framework_required": "None (Native Console)",
             "source": "https://en.uesp.net/wiki/Skyrim:Dawnbreaker"
           },
@@ -6251,31 +6251,31 @@ window.GAMES_DATA = [
             },
             "syntax_type": "creation_hex",
             "code": "player.additem 000233e3 1",
-            "desc": "残虐魔神钉头锤，击中敌人造成巨量耐力与魔法伤害，并施加 3 秒灵魂陷阱自动灌满黑色灵魂石！",
+            "desc": "莫拉格·巴尔的魔神器钉头锤，每次命中造成 25 点耐力和 25 点魔法伤害，并施加 3 秒灵魂陷阱效果。",
             "framework_required": "None (Native Console)",
             "source": "https://en.uesp.net/wiki/Skyrim:Mace_of_Molag_Bal"
           },
           {
             "id": "skyrim_spawn_mehrunes_razor",
             "name": {
-              "zh-CN": "派发魔神器：梅鲁涅斯的剃刀 (近战微小几率一击秒杀一切)",
+              "zh-CN": "派发魔神器：梅鲁涅斯的剃刀 (小概率直接击杀目标)",
               "en": "Spawn Mehrunes' Razor (000240d2)"
             },
             "syntax_type": "creation_hex",
             "code": "player.additem 000240d2 1",
-            "desc": "破坏魔神匕首，攻速极快且每次攻击均有 1.98% 几率直接斩杀无视目标生命值判定（对上古巨龙同样生效）！",
+            "desc": "破坏魔神的匕首，每次命中有 1.98% 的几率直接击杀目标。",
             "framework_required": "None (Native Console)",
             "source": "https://en.uesp.net/wiki/Skyrim:Mehrunes_Razor"
           },
           {
             "id": "skyrim_spawn_azuras_star",
             "name": {
-              "zh-CN": "派发魔神器：阿祖拉之星 (永不破碎的无限灵魂石)",
+              "zh-CN": "派发魔神器：阿祖拉之星 (可重复使用的灵魂石)",
               "en": "Spawn Azura's Star (00063b27)"
             },
             "syntax_type": "creation_hex",
             "code": "player.additem 00063b27 1",
-            "desc": "附魔极客终极神器！捕获灵魂为装备充能后星体永远不会消耗碎裂，可永久反复循环使用！",
+            "desc": "可重复使用的大型灵魂石，为武器或装备充能时只消耗其中储存的灵魂，星体本身不会被消耗。",
             "framework_required": "None (Native Console)",
             "source": "https://en.uesp.net/wiki/Skyrim:Azura%27s_Star"
           },
@@ -6287,7 +6287,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "creation_hex",
             "code": "player.additem 00045f96 1",
-            "desc": "瘟疫魔神重盾，格挡举盾时自动在面前张开一层抵御 50 点法术伤害的神圣护盾，完克法师与巨龙吐息！",
+            "desc": "瘟疫魔神的重盾，格挡时生成可抵御最多 50 点法术伤害的护盾。",
             "framework_required": "None (Native Console)",
             "source": "https://en.uesp.net/wiki/Skyrim:Spellbreaker"
           },
@@ -6299,14 +6299,14 @@ window.GAMES_DATA = [
             },
             "syntax_type": "creation_hex",
             "code": "player.additem 0002ac6f 1",
-            "desc": "谢尔格拉疯神法杖，释放随机不可预测的荒诞魔法：将敌人变成甜甜圈、甜甜圈或者泥沼蟹！",
+            "desc": "谢尔格拉的魔神法杖，攻击会触发随机效果：可能造成元素伤害、治疗目标、使目标隐形，或把目标变成鸡、兔子、泥沼蟹等动物，偶尔会直接杀死目标。",
             "framework_required": "None (Native Console)",
             "source": "https://en.uesp.net/wiki/Skyrim:Wabbajack"
           }
         ]
       },
       {
-        "category": "🛠️ 锻造神装、龙骨魔族与满级素材 (Daedric/Dragon Armor & Materials)",
+        "category": "🛠️ 锻造装备与材料 (Daedric/Dragon Armor & Materials)",
         "commands": [
           {
             "id": "skyrim_spawn_daedric_sword",
@@ -6316,7 +6316,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "creation_hex",
             "code": "player.additem 000139b9 1",
-            "desc": "派发天际最高面板基础双手武器之一魔族巨剑，锋利无比造型狰狞霸气！",
+            "desc": "派发魔族巨剑，基础伤害在天际双手武器中较高。",
             "framework_required": "None (Native Console)",
             "source": "https://en.uesp.net/wiki/Skyrim:Daedric_Smithing"
           },
@@ -6328,7 +6328,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "creation_hex",
             "code": "player.additem 0001396b 1",
-            "desc": "派发魔族全套重铠的核心胸甲部分，天际顶级护甲值物理免伤担当！",
+            "desc": "派发魔族重甲的胸甲部件，护甲值在天际重甲中处于较高水平。",
             "framework_required": "None (Native Console)",
             "source": "https://en.uesp.net/wiki/Skyrim:Daedric_Smithing"
           },
@@ -6340,7 +6340,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "creation_hex",
             "code": "player.additem 0003ad5b 100",
-            "desc": "批量派发天际极度珍贵的魔族之心，用于在铁匠铺锻造全套魔族护甲与武器！",
+            "desc": "一次性获得 100 颗魔族之心，是锻造魔族护甲与武器所需的材料。",
             "framework_required": "None (Native Console)",
             "source": "https://en.uesp.net/wiki/Skyrim:Daedra_Heart"
           },
@@ -6352,7 +6352,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "creation_hex",
             "code": "player.additem 0003ada3 100",
-            "desc": "批量派发龙鳞，配合龙骨锻造轻甲防御之王【龙鳞轻甲】全套！",
+            "desc": "一次性获得 100 个龙鳞，是锻造龙鳞轻甲等龙骨装备所需的材料。",
             "framework_required": "None (Native Console)",
             "source": "https://en.uesp.net/wiki/Skyrim:Dragon_Scales"
           },
@@ -6364,48 +6364,48 @@ window.GAMES_DATA = [
             },
             "syntax_type": "creation_hex",
             "code": "player.additem 0005ad9d 100",
-            "desc": "批量派发乌木锭，用于在砂轮和工作台将魔族装备强化至【传奇】(Legendary) 级！",
+            "desc": "一次性获得 100 个乌木锭，可用于在工作台强化装备（含强化至「传奇」等级）。",
             "framework_required": "None (Native Console)",
             "source": "https://en.uesp.net/wiki/Skyrim:Ebony_Ingot"
           }
         ]
       },
       {
-        "category": "🚨 恶性死循环任务急救与强行推进 (Quest Bug Fixes & SetStage)",
+        "category": "🚨 任务卡关修复与进度推进 (Quest Bug Fixes & SetStage)",
         "commands": [
           {
             "id": "skyrim_fix_greybeards_mq105",
             "name": {
-              "zh-CN": "强行修复高吼峰灰胡子吼声任务卡关 (setstage MQ105 10)",
+              "zh-CN": "修复高吼峰灰胡子召唤卡关 (setstage MQ105 10)",
               "en": "Fix Greybeards Call Quest (MQ105)"
             },
             "syntax_type": "creation_hex",
             "code": "setstage MQ105 10",
-            "desc": "击败第一条飞龙后，若灰胡子召唤吼声迟迟不触发无法前往高吼峰，输入此指令强制推进任务阶段开启觐见！",
+            "desc": "若击败第一条飞龙后灰胡子的召唤吼声未能触发，可用此指令强制推进任务阶段。",
             "framework_required": "None (Native Console)",
             "source": "https://en.uesp.net/wiki/Skyrim:The_Way_of_the_Voice"
           },
           {
             "id": "skyrim_fix_alduins_wall_mq203",
             "name": {
-              "zh-CN": "强行修复【奥杜因之墙】戴尔芬与伊思本站桩不动卡关",
+              "zh-CN": "修复【奥杜因之墙】NPC卡关 (setstage MQ203 280)",
               "en": "Fix Alduin's Wall Quest Bug (MQ203)"
             },
             "syntax_type": "creation_hex",
             "code": "setstage MQ203 280",
-            "desc": "天空庇护之庙中伊思本不肯点火把或不讲解石壁壁画的祖传恶性 Bug，执行此行直接标记该步完成推进至下一幕！",
+            "desc": "若伊思本或戴尔芬卡在该步骤不触发后续对话，可用此指令强制将任务推进到下一阶段。",
             "framework_required": "None (Native Console)",
             "source": "https://en.uesp.net/wiki/Skyrim:Alduin%27s_Wall"
           },
           {
             "id": "skyrim_fix_vaermina_da16",
             "name": {
-              "zh-CN": "强行修复晨星城噩梦瓦尔米娜苏醒之梦喝药不进回忆",
+              "zh-CN": "修复【苏醒之梦】卡关 (setstage DA16 200)",
               "en": "Fix Waking Nightmare Quest Bug (DA16)"
             },
             "syntax_type": "creation_hex",
             "code": "setstage DA16 200",
-            "desc": "晨星城祭司喝下折磨药水后卡死无法进入梦境回忆的恶性问题，直接跳至净化完成阶段！",
+            "desc": "若喝下药水后无法进入梦境回忆而卡关，可用此指令将任务跳到净化完成阶段。",
             "framework_required": "None (Native Console)",
             "source": "https://en.uesp.net/wiki/Skyrim:Waking_Nightmare"
           },
@@ -6417,7 +6417,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "creation_hex",
             "code": "sqt",
-            "desc": "在控制台输出当前激活任务的真实 Quest ID 与目标内部代号，排查卡关必备诊断指令！",
+            "desc": "在控制台输出当前激活任务的 Quest ID 与目标内部代号，用于排查任务卡关。",
             "framework_required": "None (Native Console)",
             "source": "https://en.uesp.net/wiki/Skyrim:Console"
           },
@@ -6429,14 +6429,14 @@ window.GAMES_DATA = [
             },
             "syntax_type": "creation_hex",
             "code": "prid 000a2c94\nmoveto player",
-            "desc": "例如将失踪的莱妹莱迪亚 (Lydia 000A2C94) 瞬移回自己面前，再也不用担心伙伴掉队失踪丢失全身家当！",
+            "desc": "可将卡在地形中或走丢的随从（例如莱迪亚 Lydia，ID 000A2C94）传送到玩家面前。",
             "framework_required": "None (Native Console)",
             "source": "https://en.uesp.net/wiki/Skyrim:Console"
           }
         ]
       },
       {
-        "category": "🏡 炉火 DLC 观湖庄园全建材直装与领地免罪 (Hearthfire & Crime Clearing)",
+        "category": "🏡 炉火 DLC 建材补给与清除悬赏 (Hearthfire & Crime Clearing)",
         "commands": [
           {
             "id": "skyrim_hearthfire_quarried_stone",
@@ -6446,7 +6446,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "creation_hex",
             "code": "player.additem 0300306c 500",
-            "desc": "炉火 DLC 自建豪宅（观湖庄园/风亭庄园）必备建材，无需在采石坑按E手动镐击挖掘半小时！",
+            "desc": "炉火 DLC 建造房屋所需的建材之一，省去在采石坑手动挖掘的步骤。",
             "framework_required": "None (Native Console)",
             "source": "https://en.uesp.net/wiki/Skyrim:Quarried_Stone"
           },
@@ -6458,7 +6458,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "creation_hex",
             "code": "player.additem 03003043 500",
-            "desc": "派发全套自建房所需粘土，用于快速搭建门厅、主厅、炼金塔与陈列室！",
+            "desc": "一次性获得 500 块粘土，是建造炉火房屋部分房间所需的材料之一。",
             "framework_required": "None (Native Console)",
             "source": "https://en.uesp.net/wiki/Skyrim:Clay"
           },
@@ -6470,19 +6470,19 @@ window.GAMES_DATA = [
             },
             "syntax_type": "creation_hex",
             "code": "player.additem 0005ace4 300",
-            "desc": "建造庄园需要成百上千根铁钉、门铰链与铁配件，派发铁锭在铁砧上一键敲打成型！",
+            "desc": "一次性获得 300 块铁锭，可在铁砧上加工成铁钉等建材。",
             "framework_required": "None (Native Console)",
             "source": "https://en.uesp.net/wiki/Skyrim:Iron_Ingot"
           },
           {
             "id": "skyrim_clear_bounty",
             "name": {
-              "zh-CN": "清空当前要塞所有通缉悬赏罪名 (秒免罪无需坐牢)",
+              "zh-CN": "清空当前要塞所有通缉悬赏罪名",
               "en": "Clear All Crime Bounty"
             },
             "syntax_type": "creation_hex",
             "code": "player.setcrimegold 0",
-            "desc": "不小心打翻鸡或者误砍卫兵被全城通缉？输入本指令瞬间将悬赏清零，卫兵立即收刀停止敌对！",
+            "desc": "将当前悬赏金清零，卫兵会停止敌对状态，无需入狱或缴纳罚款。",
             "framework_required": "None (Native Console)",
             "source": "https://en.uesp.net/wiki/Skyrim:Console"
           }
@@ -6499,7 +6499,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "creation_hex",
             "code": "coc qasmoke",
-            "desc": "Bethesda 官方全物品展示房间！整齐摆放着全天际所有武器、防具、附魔装备、药水、原料的分类宝箱，随意拿取！输入 coc riverwood 即可传回溪木镇！",
+            "desc": "Bethesda 官方的测试房间，摆放着按分类整理的全部物品宝箱，可直接拿取。输入 coc riverwood 可传送回溪木镇。",
             "framework_required": "None (Native Console)",
             "source": "https://en.uesp.net/wiki/Skyrim:Console"
           },
@@ -6511,7 +6511,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "creation_hex",
             "code": "tmm 1",
-            "desc": "一键点亮天际省全部 400 余个地下城、山峰、营地与城市地标，且全部支持直接大地图快速传送！",
+            "desc": "点亮地图上约 400 个地下城、山峰、营地与城市地标，并可直接快速旅行至这些地点。",
             "framework_required": "None (Native Console)",
             "source": "https://en.uesp.net/wiki/Skyrim:Console"
           },
@@ -6523,7 +6523,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "creation_hex",
             "code": "psb",
-            "desc": "将毁灭系、恢复系、变化系、幻术系与召唤系以及所有未实装的隐藏测试法术全部写入法术书！",
+            "desc": "将游戏中所有法术（包括未在游戏中实际使用的测试法术）加入角色的法术书。",
             "framework_required": "None (Native Console)",
             "source": "https://en.uesp.net/wiki/Skyrim:Console"
           },
@@ -6535,7 +6535,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "creation_hex",
             "code": "tfc 1",
-            "desc": "脱离角色躯体，摄像机在空中 360 度任意穿行缩放，游戏画面定格暂停，拍摄天际极光与壮丽战斗大片的必备利器！",
+            "desc": "开启自由摄像机并暂停游戏画面，可脱离角色视角在场景中自由移动和缩放，便于截图。",
             "framework_required": "None (Native Console)",
             "source": "https://en.uesp.net/wiki/Skyrim:Console"
           },
@@ -6547,7 +6547,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "creation_hex",
             "code": "tm",
-            "desc": "隐藏全屏血条、罗盘、准星与菜单界面 (注意隐藏后按 ~ 依然能输入，再次盲打 tm 回车即可恢复菜单)！",
+            "desc": "隐藏或恢复血条、罗盘、准星等界面元素（隐藏后仍可打开控制台重新输入 tm 恢复）。",
             "framework_required": "None (Native Console)",
             "source": "https://en.uesp.net/wiki/Skyrim:Console"
           }
@@ -6559,17 +6559,17 @@ window.GAMES_DATA = [
         "id": "mod_skse64",
         "title": "Skyrim Script Extender (SKSE64)",
         "author": "Ian Patterson and Stephen Abel (ianpatt, behippo)",
-        "category": "底层框架与核心前置",
-        "desc": "天际Mod生态绝对的基石！大幅拓展 Papyrus 脚本引擎 API，现代 95% 以上的高级 UI、动作与功能 Mod 的强制前置依赖。",
+        "category": "框架 / 前置",
+        "desc": "扩展 Papyrus 脚本引擎功能的工具，是许多高级 UI 与功能类 Mod 的前置。",
         "dependencies": [
           "None (独立启动器)"
         ],
         "installPath": "<GameRoot>/",
         "installSteps": [
-          "根据游戏版本下载对应的 SKSE64 压缩包 (当前最新版解压 skse64_2_02_06.7z)",
-          "将压缩包内的 skse64_loader.exe 与两个 .dll 文件直接复制到游戏根目录 (与 SkyrimSE.exe 同级)",
-          "将 Data/ 文件夹拖拽合并进游戏的 Data/ 目录",
-          "以后每次启动游戏一律双击 skse64_loader.exe 启动！"
+          "下载与当前游戏版本匹配的 SKSE64 压缩包",
+          "将压缩包内的 skse64_loader.exe 与 .dll 文件复制到游戏根目录（与 SkyrimSE.exe 同级）",
+          "将 Data/ 文件夹合并进游戏的 Data/ 目录",
+          "之后启动游戏请运行 skse64_loader.exe"
         ],
         "isDirect": true,
         "nexusUrl": "https://github.com/ianpatt/skse64",
@@ -6584,8 +6584,8 @@ window.GAMES_DATA = [
         "id": "mod_sse_engine_fixes",
         "title": "SSE Engine Fixes (skse64 plugin)",
         "author": "aers - Nukem - Ryan",
-        "category": "引擎优化与Bug修复",
-        "desc": "必装神级插件！彻底修复高帧率物理抽搐、Lip Sync 嘴唇不同步、内存泄漏与各种原因导致的 CTD 崩溃，并自动解锁控制台与 Mod 状态下的 Steam 官方成就！",
+        "category": "引擎修复",
+        "desc": "SKSE64 插件，用于修复引擎相关问题，包括高帧率下的物理异常、口型不同步、部分内存泄漏与崩溃问题；可选配置在使用 Mod 时仍启用 Steam 成就。",
         "dependencies": [
           "SKSE64",
           "Address Library for SKSE Plugins"
@@ -6607,16 +6607,16 @@ window.GAMES_DATA = [
         "id": "mod_skyui",
         "title": "SkyUI",
         "author": "SkyUI Team",
-        "category": "界面增强与UI大修",
-        "desc": "彻底颠覆原版主机风格的列表背包！提供强大的分类过滤、关键词搜索、装备属性多栏对照以及核心的 MCM (Mod 配置菜单)！",
+        "category": "界面",
+        "desc": "为 PC 玩家优化界面的 Mod，提供物品列表排序/搜索、分类收藏夹，以及 MCM（Mod 配置菜单）等功能。",
         "dependencies": [
           "SKSE64"
         ],
         "installPath": "<GameRoot>/Data/",
         "installSteps": [
-          "必须确保已先行安装 SKSE64",
-          "通过 MO2 或 Vortex 直接导入 SkyUI_5.2SE.7z 压缩包并激活",
-          "启动 skse64_loader.exe 进入游戏，按 ESC 即可看到新增的 Mod Configuration 菜单！"
+          "需先安装 SKSE64",
+          "通过 MO2 或 Vortex 安装 SkyUI 压缩包并启用",
+          "用 skse64_loader.exe 启动游戏后，按 ESC 可看到 Mod Configuration 菜单"
         ],
         "isDirect": false,
         "nexusUrl": "https://www.nexusmods.com/skyrimspecialedition/mods/12604",
@@ -6629,15 +6629,15 @@ window.GAMES_DATA = [
         "id": "mod_ussep",
         "title": "Unofficial Skyrim Special Edition Patch - USSEP",
         "author": "The Unofficial Patch Project Team",
-        "category": "综合Bug全修与稳定增强",
-        "desc": "耗时十余年修复了天际原版多达数万处恶性任务卡关、网格丢失、材质破损、NPC浮空与文字逻辑错误的总集补丁！",
+        "category": "漏洞修复",
+        "desc": "综合性的漏洞修复补丁，目标是修复官方未解决的大量任务、网格、材质与文本等问题。",
         "dependencies": [
           "Skyrim Special Edition 官方三大DLC"
         ],
         "installPath": "<GameRoot>/Data/",
         "installSteps": [
-          "通过模组管理器安装 USSEP 压缩包",
-          "在插件加载顺序 (Load Order) 中将 Unofficial Skyrim Special Edition Patch.esp 置于官方 DLC 之后的最靠前位置！"
+          "通过模组管理器安装 USSEP",
+          "在插件加载顺序中将该补丁放在官方 DLC 之后、其余 Mod 之前"
         ],
         "isDirect": false,
         "nexusUrl": "https://www.nexusmods.com/skyrimspecialedition/mods/266",
@@ -6740,12 +6740,12 @@ window.GAMES_DATA = [
         "name": "抓根宝开荒起飞包",
         "tag": "👑 萌新首选 · 零门槛",
         "badge": "天际首富",
-        "desc": "一键激活上帝模式 + 10万金币启动资金 + 负重上限扩充至 50,000 + 解除卡石缝绝境，舒适开局！",
+        "desc": "开启上帝模式 + 立即获得 10 万金币 + 负重上限提升至 50,000 + 可用于脱离卡住的地形，方便新手开局。",
         "highlights": [
-          "tgm 上帝模式（无限生命/魔力/耐力/弹药）",
-          "player.additem f 100000（瞬间到账 10 万塞普汀）",
-          "player.modav carryweight 50000（背包永远装不满）",
-          "tcl 穿墙脱困开关（一秒脱离地形卡死）"
+          "tgm 上帝模式（角色免疫伤害，耐力与魔法不消耗，负重不受限制）",
+          "player.additem f 100000（获得 10 万金币）",
+          "player.modav carryweight 50000（提升负重上限）",
+          "tcl 穿墙开关（可用于脱离卡住的地形）"
         ],
         "code": "; [老L·极客场景套餐] 上古卷轴5 抓根宝开荒起飞包\ntgm\nplayer.additem f 100000\nplayer.modav carryweight 50000\nplayer.setav speedmult 130"
       },
@@ -6753,14 +6753,14 @@ window.GAMES_DATA = [
         "id": "skyrim_salvation_bundle",
         "type": "salvation",
         "name": "恶性卡关与NPC复活救赎包",
-        "tag": "🛡️ 坏档急救 · 逆天改命",
-        "badge": "救砖神技",
-        "desc": "定向解决任务 NPC 发呆死锁 + 死去关键随从原地满血复活 + 官方开发者全宝箱烟雾房直达，心血存档救星！",
+        "tag": "🛠️ 坏档急救",
+        "badge": "急救工具",
+        "desc": "用于解决任务 NPC 卡死不动、复活重要随从、快速进入官方测试房间等情况。",
         "highlights": [
-          "resurrect 1（点击NPC尸体瞬间满血原地复活）",
-          "coc qasmoke（瞬间传送官方全物品开发者房；输入 coc riverwood 返回溪木镇）",
-          "setstage 定向推进死循环任务，绝不破坏全图进度",
-          "tai / tcai 解除发呆木桩状态机死锁"
+          "resurrect 1（点击NPC尸体使其复活并回满生命值）",
+          "coc qasmoke（传送到官方测试房间；输入 coc riverwood 返回溪木镇）",
+          "setstage 用于强制推进卡住的任务",
+          "tai / tcai 用于解除 NPC 的 AI 死锁状态"
         ],
         "code": "; [老L·极客场景套餐] 上古卷轴5 恶性卡关与NPC复活救赎包\n; 救活NPC：按 ~ 鼠标左键点击尸体后输入 resurrect 1\n; 进入开发者烟雾房：\ncoc qasmoke\n; 修复卡关任务（以唤醒巨龙为例，定向推进到击杀米尔墨尼尔）：\nsetstage MQ104 90"
       }
@@ -6840,7 +6840,7 @@ window.GAMES_DATA = [
       {
         "name": "Unofficial Fallout 4 Patch - UFO4P",
         "category": "Bug Fixes",
-        "desc": "B社官方多年未修的数千个恶性BUG综合修复",
+        "desc": "非官方的综合性 BUG 修复补丁，修复大量官方未解决的问题。",
         "url": "https://www.nexusmods.com/fallout4/mods/4598"
       },
       {
@@ -6892,24 +6892,24 @@ window.GAMES_DATA = [
           {
             "id": "fo4_tgm",
             "name": {
-              "zh-CN": "开关全能上帝模式 (Toggle God Mode: 无敌/弹药无限/负重无限)",
+              "zh-CN": "开关上帝模式 (tgm)",
               "en": "Toggle God Mode (tgm)"
             },
             "syntax_type": "creation_hex",
             "code": "tgm",
-            "desc": "开启后主角免疫一切枪弹物理打击与高空坠落、无限 AP 行动点、弹药无限且无需重新换弹、背包负重解除惩罚！",
+            "desc": "开启后角色免疫伤害、辐射伤害与水下缺氧伤害，弹药、负重与行动点不受限制，且无需换弹；再次输入关闭。",
             "framework_required": "None (Native Console)",
             "source": "https://fallout.fandom.com/wiki/Fallout_4_console_commands"
           },
           {
             "id": "fo4_tim",
             "name": {
-              "zh-CN": "开关不死锁血模式 (Toggle Immortal Mode: 挨打掉血但绝对不死)",
+              "zh-CN": "开关不死锁血模式 (tim)",
               "en": "Toggle Immortal Mode (tim)"
             },
             "syntax_type": "creation_hex",
             "code": "tim",
-            "desc": "沉浸式战斗首选！角色受到攻击会正常流血受创与显示残废动画，但生命值降至最低点时锁死为 1，绝不会死亡坏档！",
+            "desc": "角色仍会正常受到伤害显示效果，但生命值不会降到 0 而死亡；不会获得辐射免疫、无限行动点或弹药。注意：遇到处决类死亡动画时可能导致角色异常，请谨慎使用存档。",
             "framework_required": "None (Native Console)",
             "source": "https://fallout.fandom.com/wiki/Fallout_4_console_commands"
           },
@@ -6921,19 +6921,19 @@ window.GAMES_DATA = [
             },
             "syntax_type": "creation_hex",
             "code": "tcl",
-            "desc": "关闭物理体积碰撞，主角可在废土废墟大楼和废土深坑之间自由穿墙穿模飞行，卡进地形时秒脱困！",
+            "desc": "关闭物理碰撞，角色可以穿过地形与建筑自由移动，可用于脱离卡住的地形。",
             "framework_required": "None (Native Console)",
             "source": "https://fallout.fandom.com/wiki/Fallout_4_console_commands"
           },
           {
             "id": "fo4_rads_zero",
             "name": {
-              "zh-CN": "角色辐射污染彻底清零 (消除红色上限减血条)",
+              "zh-CN": "角色辐射污染清零 (消除红色上限减血条)",
               "en": "Clear Radiation Pollution"
             },
             "syntax_type": "creation_hex",
             "code": "player.setav rads 0",
-            "desc": "跳进发光海被重度辐射污染？输入本指令瞬间将体内的辐射累积清零，完整释放被红条侵占的生命上限！",
+            "desc": "将角色当前的辐射值清零，恢复因辐射占用而减少的生命上限。",
             "framework_required": "None (Native Console)",
             "source": "https://fallout.fandom.com/wiki/Fallout_4_console_commands"
           },
@@ -6945,7 +6945,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "creation_hex",
             "code": "player.setav carryweight 99999",
-            "desc": "将基础负重提升至 10 万磅，废土上的破轮胎、风扇、显微镜、核子可乐瓶通通搬走不再超重减速！",
+            "desc": "将角色负重上限设置为 99,999，基本不会再因负重超限而减速。",
             "framework_required": "None (Native Console)",
             "source": "https://fallout.fandom.com/wiki/Fallout_4_console_commands"
           }
@@ -6962,7 +6962,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "creation_hex",
             "code": "player.additem 0000000F 100000",
-            "desc": "向背囊注入 10 万瓶盖，秒变废土顶级资本巨鳄，钻石城全部商铺随便扫荡！可简写为 player.additem f 100000。",
+            "desc": "向背包增加 10 万瓶盖。可简写为 player.additem f 100000。",
             "framework_required": "None (Native Console)",
             "source": "https://fallout.fandom.com/wiki/Fallout_4_console_commands"
           },
@@ -6974,7 +6974,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "creation_hex",
             "code": "player.additem 0000000A 1000",
-            "desc": "生成 1,000 根发夹，撬开全联邦所有主保险箱与锁闭铁门！可简写为 player.additem a 1000。",
+            "desc": "向背包增加 1,000 根发夹，用于撬锁。可简写为 player.additem a 1000。",
             "framework_required": "None (Native Console)",
             "source": "https://fallout.fandom.com/wiki/Bobby_pin_(Fallout_4)"
           },
@@ -6986,7 +6986,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "creation_hex",
             "code": "player.additem 00075fe4 100",
-            "desc": "派发 100 颗满电量核聚变核心，动力装甲喷气背包随便飞，彻底告别电量焦虑！",
+            "desc": "向背包增加 100 颗满电的核聚变核心，用于给动力装甲供电。",
             "framework_required": "None (Native Console)",
             "source": "https://fallout.fandom.com/wiki/Fallout_4_console_commands"
           },
@@ -6998,7 +6998,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "creation_hex",
             "code": "player.additem 00023736 200",
-            "desc": "随身携带 200 支军规治疗针，快捷栏绑定随时续命！",
+            "desc": "向背包增加 200 支治疗针。",
             "framework_required": "None (Native Console)",
             "source": "https://fallout.fandom.com/wiki/Stimpak_(Fallout_4)"
           },
@@ -7017,17 +7017,17 @@ window.GAMES_DATA = [
         ]
       },
       {
-        "category": "🏗️ 聚落建造空间无限解除与全建材 (Infinite Settlement & Building Mats)",
+        "category": "🏗️ 聚落建造空间与建材补给 (Settlement Building & Materials)",
         "commands": [
           {
             "id": "fo4_settlement_size_bypass",
             "name": {
-              "zh-CN": "彻底解除聚落建造空间容量上限 (setav 349 9999999)",
+              "zh-CN": "解除聚落建造空间容量上限 (setav 349 9999999)",
               "en": "Bypass Settlement Building Size Budget"
             },
             "syntax_type": "creation_hex",
             "code": "setav 349 9999999",
-            "desc": "走到工房控制台前按下 ~ 鼠标点击工房，输入此代码将空间预算最大值提升至千万级，右上角建造容量条直接清空，随心所欲盖摩天大楼！",
+            "desc": "在工房模式下对着工房控制台使用本指令，可将建造空间预算上限提高到极大值，使建造容量条基本不会用满。",
             "framework_required": "None (Native Console)",
             "source": "https://fallout.fandom.com/wiki/Fallout_4_console_commands"
           },
@@ -7063,7 +7063,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "creation_hex",
             "code": "player.additem 000731a4 1000",
-            "desc": "派发 1,000 块钢铁，用于搭建混凝土墙、金属工字钢架构与避难所大门！",
+            "desc": "向背包增加 1,000 块钢铁，是建造所需的基础材料之一。",
             "framework_required": "None (Native Console)",
             "source": "https://fallout.fandom.com/wiki/Fallout_4_console_commands"
           },
@@ -7075,7 +7075,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "creation_hex",
             "code": "player.additem 000731a3 1000",
-            "desc": "派发 1,000 捆木料，快速建造谷仓、木屋、地板与哨塔防御设施！",
+            "desc": "向背包增加 1,000 捆木材，是建造所需的基础材料之一。",
             "framework_required": "None (Native Console)",
             "source": "https://fallout.fandom.com/wiki/Fallout_4_console_commands"
           },
@@ -7087,7 +7087,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "creation_hex",
             "code": "player.additem 0006907c 500",
-            "desc": "聚落通电最紧缺的金属铜，批量派发，随意搭建核能发电机、电线塔与防御重型激光炮塔！",
+            "desc": "向背包增加 500 块铜，铜是搭建发电机、电线塔等通电设施所需的材料。",
             "framework_required": "None (Native Console)",
             "source": "https://fallout.fandom.com/wiki/Fallout_4_console_commands"
           }
@@ -7099,60 +7099,60 @@ window.GAMES_DATA = [
           {
             "id": "fo4_attachmod_two_shot",
             "name": {
-              "zh-CN": "手持武器附魔【双弹】传奇词条 (伤害直接翻倍: 001cc2ac)",
+              "zh-CN": "手持武器附魔【双弹】传奇词条 (多发射一发弹药)",
               "en": "Attach Legendary Mod: Two Shot"
             },
             "syntax_type": "creation_hex",
             "code": "attachmod 001cc2ad",
-            "desc": "把武器扔在地上，按 ~ 呼出控制台鼠标点击武器，输入此代码即可瞬间赋予【双弹】前缀，每次扣扳机射出双倍弹头，伤害翻倍！",
+            "desc": "为当前手持武器附加传奇词条【双弹】：每次射击额外多发射一发弹药，但后坐力增加 25%。",
             "framework_required": "None (Native Console)",
             "source": "https://fallout.fandom.com/wiki/Fallout_4_legendary_weapon_effects"
           },
           {
             "id": "fo4_attachmod_explosive",
             "name": {
-              "zh-CN": "手持武器附魔【爆破】传奇词条 (每发附带范围爆炸: 001e7c20)",
+              "zh-CN": "手持武器附魔【爆破】传奇词条 (子弹命中后产生范围爆炸)",
               "en": "Attach Legendary Mod: Explosive"
             },
             "syntax_type": "creation_hex",
             "code": "attachmod 001e73bd",
-            "desc": "给冲锋枪、加特林或霰弹枪附魔爆破词条，子弹命中引发连锁范围剧烈爆炸，扫荡泥沼蟹与掠夺者如割草！",
+            "desc": "为武器附加传奇词条【爆破】：子弹命中后造成 15 点范围爆炸伤害。",
             "framework_required": "None (Native Console)",
             "source": "https://fallout.fandom.com/wiki/Fallout_4_legendary_weapon_effects"
           },
           {
             "id": "fo4_attachmod_furious",
             "name": {
-              "zh-CN": "手持武器附魔【狂怒】传奇词条 (连续命中伤害无限叠加: 001f6ad4)",
+              "zh-CN": "手持武器附魔【狂怒】传奇词条 (近战连续命中递增伤害)",
               "en": "Attach Legendary Mod: Furious"
             },
             "syntax_type": "creation_hex",
             "code": "attachmod 001ef481",
-            "desc": "近战刀剑或高射速武器神器，每次命中同一目标伤害逐级倍增，单挑狂暴传奇死爪只需数秒！",
+            "desc": "近战武器专属词条：连续命中同一目标时，每次伤害提高 15%。",
             "framework_required": "None (Native Console)",
             "source": "https://fallout.fandom.com/wiki/Fallout_4_legendary_weapon_effects"
           },
           {
             "id": "fo4_attachmod_never_ending",
             "name": {
-              "zh-CN": "手持武器附魔【无底洞】传奇词条 (无限弹匣免换弹: 001ed37e)",
+              "zh-CN": "手持武器附魔【无底洞】传奇词条 (弹匣容量等于携带弹药数)",
               "en": "Attach Legendary Mod: Never Ending"
             },
             "syntax_type": "creation_hex",
             "code": "attachmod 001cc2ac",
-            "desc": "消除武器换弹动作，弹匣容量直接与背包总弹药打通，扣住扳机无限持续狂风骤雨般倾泻火力！",
+            "desc": "将弹匣容量设置为与携带的备用弹药数量相同，可以减少换弹次数（镭射火枪、注射器枪、鱼叉枪与垃圾枪除外）。",
             "framework_required": "None (Native Console)",
             "source": "https://fallout.fandom.com/wiki/Fallout_4_legendary_weapon_effects"
           },
           {
             "id": "fo4_attachmod_kneecapper",
             "name": {
-              "zh-CN": "手持武器附魔【膝盖收割者】传奇词条 (20%几率打断腿瘫痪: 001f1048)",
+              "zh-CN": "手持武器附魔【膝盖收割者】传奇词条 (20%几率使双腿瘫痪)",
               "en": "Attach Legendary Mod: Kneecapper"
             },
             "syntax_type": "creation_hex",
             "code": "attachmod 001f1048",
-            "desc": "废土安全感神器，攻击命中敌人有 20% 几率强制打断其双腿，让凶残的狂暴死爪与突袭者当场倒地爬行！",
+            "desc": "命中敌人有 20% 几率使其双腿瘫痪，大幅降低移动速度。",
             "framework_required": "None (Native Console)",
             "source": "https://fallout.fandom.com/wiki/Fallout_4_legendary_weapon_effects"
           },
@@ -7164,7 +7164,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "creation_hex",
             "code": "attachmod 001f04b8",
-            "desc": "潜行狙击流终极核心，开幕潜行爆头搭配消音武器打出高达数千点的极限毁灭数字！",
+            "desc": "若目标生命值为满，本次攻击造成双倍伤害；适合用于遭遇战的第一击。",
             "framework_required": "None (Native Console)",
             "source": "https://fallout.fandom.com/wiki/Fallout_4_legendary_weapon_effects"
           }
@@ -7181,7 +7181,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "creation_hex",
             "code": "player.additem 00154ac5 1",
-            "desc": "派发辐射4最高等级动力装甲 X-01 头盔，装甲工作台上可升级高亮侦测红外 HUD！",
+            "desc": "派发 X-01 动力装甲头盔，可在装甲工作台升级，加装红外线侦测等模组。",
             "framework_required": "None (Native Console)",
             "source": "https://fallout.fandom.com/wiki/X-01_power_armor_(Fallout_4)"
           },
@@ -7193,7 +7193,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "creation_hex",
             "code": "player.additem 00154ac8 1",
-            "desc": "派发 X-01 动力装甲躯干核心，可改装装备喷气飞行背包 (Jetpack) 实现翱翔飞行！",
+            "desc": "派发 X-01 动力装甲躯干部件，可改装喷气背包（Jetpack）实现飞行。",
             "framework_required": "None (Native Console)",
             "source": "https://fallout.fandom.com/wiki/X-01_power_armor_(Fallout_4)"
           },
@@ -7205,7 +7205,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "creation_hex",
             "code": "player.additem 00154ac3 1",
-            "desc": "派发 X-01 左右双臂组件，可加装特斯拉线圈提高近战格斗与电击反伤威力！",
+            "desc": "派发 X-01 左右臂部件，可改装特斯拉线圈等近战强化模组。",
             "framework_required": "None (Native Console)",
             "source": "https://fallout.fandom.com/wiki/X-01_power_armor_(Fallout_4)"
           },
@@ -7217,7 +7217,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "creation_hex",
             "code": "player.additem 00154ac6 1",
-            "desc": "派发 X-01 左右腿部装甲，改装校准减震器提供额外 100 磅巨额随身负重加成！",
+            "desc": "派发 X-01 左右腿部装甲，改装校准减震器可额外增加 100 点负重上限。",
             "framework_required": "None (Native Console)",
             "source": "https://fallout.fandom.com/wiki/X-01_power_armor_(Fallout_4)"
           },
@@ -7229,7 +7229,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "creation_hex",
             "code": "player.additem 000bd56f 1",
-            "desc": "派发废土单兵战略核武器胖子发射器！搭配 player.additem 000e6b2e 20 获得 20 枚迷你核弹，弹指间强虏灰飞烟灭！",
+            "desc": "派发胖子核弹发射器；可搭配 player.additem 000e6b2e 20 额外获得 20 枚迷你核弹。",
             "framework_required": "None (Native Console)",
             "source": "https://fallout.fandom.com/wiki/Fat_Man_(Fallout_4)"
           },
@@ -7241,7 +7241,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "creation_hex",
             "code": "player.additem 000d1eb0 1",
-            "desc": "废土单发伤害之王高斯步枪，蓄力电磁加速射击造成毁灭性穿透伤害！",
+            "desc": "派发高斯步枪，蓄力后可发射高伤害的穿透弹药。",
             "framework_required": "None (Native Console)",
             "source": "https://fallout.fandom.com/wiki/Gauss_rifle_(Fallout_4)"
           }
@@ -7253,43 +7253,43 @@ window.GAMES_DATA = [
           {
             "id": "fo4_max_companion_affinity",
             "name": {
-              "zh-CN": "伙伴好感度瞬间拉满 1000 (秒触发专属任务与终极Perk)",
+              "zh-CN": "伙伴好感度设为 1000",
               "en": "Max Companion Affinity (setav CA_affinity 1000)"
             },
             "syntax_type": "creation_hex",
             "code": "setav CA_affinity 1000",
-            "desc": "按 ~ 打开控制台鼠标点击同伴 (如派普、居里、凯特、丹斯)，输入此代码瞬间将好感度升至 1000 崇拜满级，立即触发告白对话并解锁强力专属永久被动 Perk！",
+            "desc": "点击目标同伴后输入本指令，可将好感度设为 1000（好感事件在 250/500/750/1000 触发；若该同伴可恋爱，上限为 1100），并解锁对应的专属 Perk。",
             "framework_required": "None (Native Console)",
             "source": "https://fallout.fandom.com/wiki/Fallout_4_console_commands"
           },
           {
             "id": "fo4_fix_cambridge_danse",
             "name": {
-              "zh-CN": "强行修复剑桥警察局丹斯战斗后不说话卡关 (setstage BoS100 40)",
+              "zh-CN": "修复剑桥警察局丹斯战斗后不说话卡关 (setstage BoS100 40)",
               "en": "Fix Cambridge Police Danse Dialog Bug"
             },
             "syntax_type": "creation_hex",
             "code": "setstage BoS100 40",
-            "desc": "剑桥警察局消灭狂暴尸鬼后，丹斯一直警戒重复'检查四周'不触发对话的经典祖传恶性 Bug，执行此行直接推进任务解冻对话！",
+            "desc": "若剑桥警察局战斗结束后丹斯未触发后续对话而卡住，可用此指令强制推进任务阶段。",
             "framework_required": "None (Native Console)",
             "source": "https://fallout.fandom.com/wiki/Fire_Support"
           },
           {
             "id": "fo4_companion_moveto",
             "name": {
-              "zh-CN": "失踪伙伴与狗肉瞬移召回身旁 (player.moveto)",
+              "zh-CN": "失踪伙伴与狗肉传送回身旁 (player.moveto)",
               "en": "Teleport Missing Companion (Dogmeat) to Player"
             },
             "syntax_type": "creation_hex",
             "code": "0001d162.moveto player",
-            "desc": "寻找走丢的心爱狗肉 (Dogmeat 0001D162) 或把走散的同伴秒传到主角跟前，再也不怕在废土走失！",
+            "desc": "可将狗肉（Dogmeat，ID 0001D162）或走散的同伴传送到玩家面前。",
             "framework_required": "None (Native Console)",
             "source": "https://fallout.fandom.com/wiki/Dogmeat_(Fallout_4)"
           }
         ]
       },
       {
-        "category": "⚡ SPECIAL 属性拉满与批处理极速调优 (SPECIAL & Bat Scripts)",
+        "category": "⚡ 属性与等级调整 (SPECIAL & Leveling)",
         "commands": [
           {
             "id": "fo4_max_all_special",
@@ -7311,7 +7311,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "creation_hex",
             "code": "player.setlevel 50",
-            "desc": "将角色等级瞬间提升至 50 级，废土所有军火商与野外动力装甲骨架将直接刷出顶级 X-01 装备！",
+            "desc": "将角色等级设置为 50 级，使商店与战利品池中出现更高等级装备（包括 X-01 动力装甲）的概率提高。",
             "framework_required": "None (Native Console)",
             "source": "https://fallout.fandom.com/wiki/Fallout_4_console_commands"
           },
@@ -7323,7 +7323,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "creation_hex",
             "code": "cgf \"Game.AddPerkPoints\" 10",
-            "desc": "向角色点数池注入 10 点专属 Perk 点，随心所欲点满枪侠、突击手与神秘客技能！",
+            "desc": "为角色增加 10 点 Perk 点数，可用于点出更多技能。",
             "framework_required": "None (Native Console)",
             "source": "https://fallout.fandom.com/wiki/Fallout_4_console_commands"
           }
@@ -7340,19 +7340,19 @@ window.GAMES_DATA = [
             },
             "syntax_type": "creation_hex",
             "code": "tmm 1",
-            "desc": "一键激活大地图所有庇护山丘、钻石城、发光海与钢铁兄弟会飞艇全部数百个地标，省去漫长探路！",
+            "desc": "点亮地图上的全部地标，并解锁对应的快速旅行。",
             "framework_required": "None (Native Console)",
             "source": "https://fallout.fandom.com/wiki/Fallout_4_console_commands"
           },
           {
             "id": "fo4_coc_redrocket",
             "name": {
-              "zh-CN": "瞬间传送至红火箭维修站基地 (coc RedRocketExt)",
+              "zh-CN": "传送至红火箭维修站基地 (coc RedRocketExt)",
               "en": "Teleport to Red Rocket Truck Stop"
             },
             "syntax_type": "creation_hex",
             "code": "coc RedRocketExt",
-            "desc": "不管身在何方遇到险境，输入本指令瞬间脱出并传送回红火箭维修站工房大本营！",
+            "desc": "将玩家传送到红火箭维修站（Red Rocket Truck Stop）。",
             "framework_required": "None (Native Console)",
             "source": "https://fallout.fandom.com/wiki/Fallout_4_console_commands"
           },
@@ -7364,7 +7364,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "creation_hex",
             "code": "tfc 1",
-            "desc": "暂停废土一切动作，相机脱离主角躯体自由升空俯瞰波士顿废墟壮观全景，拍摄工业级壁纸大片！",
+            "desc": "开启自由摄像机并暂停游戏画面，可脱离角色视角自由移动镜头，便于截图。",
             "framework_required": "None (Native Console)",
             "source": "https://fallout.fandom.com/wiki/Fallout_4_console_commands"
           },
@@ -7388,17 +7388,17 @@ window.GAMES_DATA = [
         "id": "mod_f4se",
         "title": "Fallout 4 Script Extender (F4SE)",
         "author": "F4SE Team",
-        "category": "底层框架与核心前置",
-        "desc": "辐射4模组底层扩展核心！释放 Papyrus 脚本潜力，Place Everywhere、MCM 等神级模组的绝对前置，次世代版已更新 v0.7.2+ 专用 loader。",
+        "category": "框架 / 前置",
+        "desc": "扩展 Fallout 4 脚本功能的工具，是 Place Everywhere、MCM 等许多 Mod 的前置；次世代更新后需要 0.7.2+ 版本的 loader。",
         "dependencies": [
           "None (独立启动器)"
         ],
         "installPath": "<GameRoot>/",
         "installSteps": [
-          "下载与当前游戏版本完全对应的 F4SE 压缩包 (次世代版下 0.7.2+，降级版下 0.6.23)",
+          "下载与当前游戏版本对应的 F4SE 压缩包（次世代版 0.7.2+，旧版/降级版 0.6.23）",
           "将 f4se_loader.exe 与相关 .dll 复制到 Fallout 4 游戏根目录",
-          "将 Data/ 文件夹拖拽合并进游戏 Data 目录",
-          "以后每次启动游戏直接双击 f4se_loader.exe！"
+          "将 Data/ 文件夹合并进游戏 Data 目录",
+          "之后启动游戏请运行 f4se_loader.exe"
         ],
         "isDirect": true,
         "nexusUrl": "https://www.nexusmods.com/fallout4/mods/42147",
@@ -7413,8 +7413,8 @@ window.GAMES_DATA = [
         "id": "mod_buffout_4",
         "title": "Buffout 4",
         "author": "Ryan",
-        "category": "引擎优化与闪退排错",
-        "desc": "辐射4排错天花板神作！彻底修复武器碎片反弹崩溃、内存溢出闪退，并在崩溃瞬间生成高精度的 Crash Log 文本，明确指出是哪件装备或贴图导致报错！",
+        "category": "引擎修复",
+        "desc": "修复部分引擎 Bug，并在游戏崩溃时生成 Crash Log，辅助排查是哪个 Mod 或资源导致的问题（日志分析仍需人工判断，不保证完全准确）。",
         "dependencies": [
           "F4SE",
           "xSE Plugin Preloader",
@@ -7423,7 +7423,7 @@ window.GAMES_DATA = [
         "installPath": "<GameRoot>/Data/F4SE/Plugins/",
         "installSteps": [
           "使用 MO2 或 Vortex 安装 Buffout 4 及其前置 xSE Plugin Preloader",
-          "若发生闪退，前往 Documents/My Games/Fallout4/F4SE/ 查看 crash-*.log 即可精准破案！"
+          "若发生崩溃，可在 Documents/My Games/Fallout4/F4SE/ 查看 crash-*.log 排查原因"
         ],
         "isDirect": false,
         "nexusUrl": "https://www.nexusmods.com/fallout4/mods/47359",
@@ -7436,8 +7436,8 @@ window.GAMES_DATA = [
         "id": "mod_place_everywhere",
         "title": "Place Everywhere",
         "author": "TheLich",
-        "category": "工坊建造与功能增强",
-        "desc": "垃圾佬造城必备神技！彻底解除工房红圈禁止摆放限制，支持穿插穿模、精准三轴旋转 (按 X/Y/Z)、缩放大小，把庇护山丘打造成赛博堡垒！",
+        "category": "玩法 / 建造",
+        "desc": "工房建造 Mod，解除红圈禁止摆放的限制，支持物体穿插、三轴精确旋转（X/Y/Z）与缩放。",
         "dependencies": [
           "F4SE"
         ],
@@ -7445,7 +7445,7 @@ window.GAMES_DATA = [
         "installSteps": [
           "确保已安装 F4SE",
           "通过模组管理器安装 Place Everywhere",
-          "进入建造模式，按 F1 开关碰撞检测，按 F2 开关贴合吸附！"
+          "进入建造模式后，按 F1 切换碰撞检测，按 F2 切换贴合吸附"
         ],
         "isDirect": false,
         "nexusUrl": "https://www.nexusmods.com/fallout4/mods/9424",
@@ -7458,8 +7458,8 @@ window.GAMES_DATA = [
         "id": "mod_sim_settlements_2",
         "title": "Sim Settlements 2",
         "author": "Sim Settlements Team",
-        "category": "玩法机制全面重构",
-        "desc": "将辐射4变成真正的模拟城市！刁民居民会自动划定商业区、住宅区、工业区自行建房交税，附带数十小时的全新全配音支线主线剧情！",
+        "category": "玩法 / 聚落",
+        "desc": "聚落建造系统重做的 Mod，为 Fallout 4 增加城市模拟玩法，包含主线剧情与多名有配音的 NPC。",
         "dependencies": [
           "Workshop Framework",
           "HUDFramework"
@@ -7468,7 +7468,7 @@ window.GAMES_DATA = [
         "installSteps": [
           "安装前置 Workshop Framework",
           "安装 Sim Settlements 2 及其剧情扩展章节包",
-          "在游戏内建造并拾取【ASAM 传感器】，启动第一块住宅规划区！"
+          "在游戏内建造并拾取【ASAM 传感器】以开始第一块规划区"
         ],
         "isDirect": false,
         "nexusUrl": "https://www.nexusmods.com/fallout4/mods/47976",
@@ -7624,12 +7624,12 @@ window.GAMES_DATA = [
         "name": "避难所新手起飞包",
         "tag": "👑 萌新首选 · 零门槛",
         "badge": "废土首富",
-        "desc": "一键上帝模式 + 10万瓶盖启动资金 + 100个核融合核心 + 负重上限扩充至 50,000，动力装甲跑图无限续航！",
+        "desc": "开启上帝模式 + 获得 10 万瓶盖 + 100 个核聚变核心 + 负重上限提升至 50,000，适合动力装甲长时间探索。",
         "highlights": [
-          "tgm 上帝模式（无限生命/AP/弹药/负重）",
-          "player.additem f 100000（10 万瓶盖财务自由）",
-          "player.additem 75fe4 100（100 个满电核融合核心）",
-          "全动力装甲骨架与 X-01 顶级装甲直接体验"
+          "tgm 上帝模式（角色免疫伤害，行动点与弹药不受限制）",
+          "player.additem f 100000（获得 10 万瓶盖）",
+          "player.additem 75fe4 100（获得 100 个满电核聚变核心）",
+          "负重上限提升，方便携带动力装甲骨架与 X-01 装甲"
         ],
         "code": "; [老L·极客场景套餐] 辐射4 避难所新手起飞包\ntgm\nplayer.additem f 100000\nplayer.additem 75fe4 100\nplayer.modav carryweight 50000"
       }
@@ -7693,18 +7693,18 @@ window.GAMES_DATA = [
       {
         "name": "Carry Weight Increase",
         "category": "QoL",
-        "desc": "大幅增加帕鲁采矿负重，出门一次带回全矿石",
+        "desc": "提高帕鲁的负重上限，减少因超重导致的多次往返运输",
         "url": "https://www.nexusmods.com/palworld/mods/11"
       },
       {
         "name": "Pal IVs",
         "category": "QoL",
-        "desc": "显微镜看帕鲁个体值、被动词条与隐藏属性"
+        "desc": "查看帕鲁的个体值、被动词条与隐藏属性"
       },
       {
         "name": "Map Unlocker",
         "category": "Exploration",
-        "desc": "驱散全地图战争迷雾，探索效率翻倍",
+        "desc": "解锁全地图的战争迷雾，无需实地探索即可查看地图",
         "url": "https://www.nexusmods.com/palworld/mods/16"
       }
     ],
@@ -7750,7 +7750,7 @@ window.GAMES_DATA = [
         "title": "RE-UE4SS - Mod Loader - Debug Tool - Pak Mod Enabler",
         "author": "UE4SS-RE",
         "category": "Core Framework (核心前置)",
-        "desc": "幻兽帕鲁运行全部 Lua 模组、UI 扩展与控制台打字命令的绝对核心前置库，极客必备。",
+        "desc": "幻兽帕鲁运行 Lua 模组、UI 扩展与控制台命令类 Mod 所需的前置库。",
         "dependencies": [
           "None (Native Injector)"
         ],
@@ -8085,13 +8085,13 @@ window.GAMES_DATA = [
       {
         "name": "StarUI Inventory",
         "category": "UI Overhaul",
-        "desc": "颠覆原生垃圾列表，清晰展示物品DPS与价值比",
+        "desc": "优化物品栏界面显示，更清晰地展示物品的 DPS、价值等信息。",
         "url": "https://www.nexusmods.com/starfield/mods/773"
       },
       {
         "name": "Baka Achievement Enabler (SFSE)",
         "category": "Fix",
-        "desc": "用控制台和装MOD照样跳 Steam 成就",
+        "desc": "使用控制台命令或安装 Mod 后，仍可正常获得 Steam 成就。",
         "url": "https://www.nexusmods.com/starfield/mods/658"
       }
     ],
@@ -8132,17 +8132,17 @@ window.GAMES_DATA = [
     ],
     "consoleCategories": [
       {
-        "category": "👑 核心上帝模式与绝对生存 (God Mode & Invulnerability)",
+        "category": "👑 核心上帝模式 (God Mode & Invulnerability)",
         "commands": [
           {
             "id": "sf_tgm",
             "name": {
-              "zh-CN": "完全上帝模式 (TGM - 锁血/无限氧气/无限子弹)",
+              "zh-CN": "开关上帝模式 (tgm)",
               "en": "Toggle God Mode (tgm)"
             },
             "syntax_type": "creation_hex",
             "code": "tgm",
-            "desc": "Bethesda 经典全能神级代码，生命值、耐力氧气槽、飞船护盾与弹药全部锁定无限。",
+            "desc": "开启后角色生命值、氧气与弹药不受限制，飞船护盾也保持满值；再次输入关闭。",
             "framework_required": "None (Native Console)",
             "source": "https://starfieldwiki.net/wiki/Starfield:Console"
           },
@@ -8154,7 +8154,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "creation_hex",
             "code": "tim",
-            "desc": "机体会受到正常伤害并显示残血状态，但生命值降至 1 点时绝不会倒下，保留战斗紧张感。",
+            "desc": "角色仍会正常受到伤害，但生命值不会降到 0 以下而倒下，保留战斗的紧张感。",
             "framework_required": "None (Native Console)",
             "source": "https://starfieldwiki.net/wiki/Starfield:Console"
           },
@@ -8185,7 +8185,7 @@ window.GAMES_DATA = [
         ]
       },
       {
-        "category": "🚀 飞船建造部件无限制与反应堆电能 (Ship Builder Unlimited & Power)",
+        "category": "🚀 飞船维修与部件补给 (Ship Repair & Parts)",
         "commands": [
           {
             "id": "sf_ship_repair",
@@ -8202,7 +8202,7 @@ window.GAMES_DATA = [
         ]
       },
       {
-        "category": "🧬 角色特质修改、背景天赋与洗点 (Traits, Background & Skills)",
+        "category": "🧬 角色外观、特质与等级调整 (Traits, Background & Leveling)",
         "commands": [
           {
             "id": "sf_show_race_menu",
@@ -8219,24 +8219,24 @@ window.GAMES_DATA = [
           {
             "id": "sf_add_trait_hero",
             "name": {
-              "zh-CN": "添加特质：英雄崇拜 (招募忠诚狂热粉丝)",
+              "zh-CN": "添加特质：英雄崇拜 (获得狂热粉丝NPC)",
               "en": "Add Trait: Hero Worshipped"
             },
             "syntax_type": "creation_hex",
             "code": "player.addperk 00227FD9",
-            "desc": "解锁极为滑稽搞笑且忠诚的‘狂热粉丝’NPC随从，他会不断夸赞你并赠送免费小礼物。",
+            "desc": "添加该特质后会获得一位会不定期出现并送礼物的「狂热粉丝」NPC，但他也会频繁打扰你。",
             "framework_required": "None (Native Console)",
             "source": "https://starfieldwiki.net/wiki/Starfield:Hero_Worshipped"
           },
           {
             "id": "sf_add_trait_home",
             "name": {
-              "zh-CN": "添加特质：梦想家园 (奥林匹斯豪宅钥匙)",
+              "zh-CN": "添加特质：梦想家园 (获得Nesoi住宅)",
               "en": "Add Trait: Dream Home"
             },
             "syntax_type": "creation_hex",
             "code": "player.addperk 00227FDF",
-            "desc": "在风景优美的奥林匹斯星系拥有一座两层豪华独栋别墅，专享私密海景停机坪。",
+            "desc": "添加该特质后，可在奥林匹斯星系的 Nesoi 获得一套自有住宅；需以每周 500 信用点的方式偿还共 12.5 万信用点的贷款。",
             "framework_required": "None (Native Console)",
             "source": "https://starfieldwiki.net/wiki/Starfield:Dream_Home_(Trait)"
           },
@@ -8248,7 +8248,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "creation_hex",
             "code": "player.setlevel 60",
-            "desc": "跳过低等级刷怪期，让游戏内高阶装备与传奇武器掉落池全部立刻解锁。",
+            "desc": "将角色等级设置为 60 级，使更高阶的装备与传奇武器在战利品与商店中出现的概率提高。",
             "framework_required": "None (Native Console)",
             "source": "https://starfieldwiki.net/wiki/Starfield:Console"
           }
@@ -8260,60 +8260,60 @@ window.GAMES_DATA = [
           {
             "id": "sf_add_credits_1m",
             "name": {
-              "zh-CN": "获得 1,000,000 信用币 (财富自由秒买名舰)",
+              "zh-CN": "获得 1,000,000 信用币",
               "en": "Add 1,000,000 Credits"
             },
             "syntax_type": "creation_hex",
             "code": "player.additem 0000000F 1000000",
-            "desc": "背包直接入账一百万信用币，随意在霓虹城与新亚特兰蒂斯购买顶级现成星际战舰。",
+            "desc": "向背包增加 1,000,000 信用币。",
             "framework_required": "None (Native Console)",
             "source": "https://starfieldwiki.net/wiki/Starfield:Miscellaneous_Items"
           },
           {
             "id": "sf_add_digipicks",
             "name": {
-              "zh-CN": "获得数码撬棒 x100 (开锁神器随心解谜)",
+              "zh-CN": "获得数码撬棒 x100 (开锁小游戏备用)",
               "en": "Add 100 Digipicks"
             },
             "syntax_type": "creation_hex",
             "code": "player.additem 0000000A 100",
-            "desc": "获取 100 个开锁数码撬棒，无惧任何专家级与大师级保险箱圆环拼图试错。",
+            "desc": "向背包增加 100 个数码撬棒，用于开锁小游戏中的试错消耗。",
             "framework_required": "None (Native Console)",
             "source": "https://starfieldwiki.net/wiki/Starfield:Miscellaneous_Items"
           },
           {
             "id": "sf_carry_weight_max",
             "name": {
-              "zh-CN": "角色随身负重上限提升至 9,999 吨",
+              "zh-CN": "角色随身负重上限提升至 9,999",
               "en": "Set Player Carry Weight to 9,999"
             },
             "syntax_type": "creation_hex",
             "code": "player.setav carryweight 9999",
-            "desc": "将角色随身负重拉至上万点，身上装载几十把重武器与全部矿石亦可健步如飞。",
+            "desc": "将角色负重上限设置为 9,999，基本不会再因超重而减速。",
             "framework_required": "None (Native Console)",
             "source": "https://starfieldwiki.net/wiki/Starfield:Console"
           },
           {
             "id": "sf_pay_bounty",
             "name": {
-              "zh-CN": "一键清除全部星系阵营通缉赏金 (清罪免通缉)",
-              "en": "Clear All Faction Bounties"
+              "zh-CN": "清除当前目标所属阵营的通缉赏金 (player.paycrimegold)",
+              "en": "Clear Faction Bounty"
             },
             "syntax_type": "creation_hex",
             "code": "player.paycrimegold 0 0",
-            "desc": "支付你当前被通缉的、与所瞄准NPC同阵营的赏金（信用币从库存扣除），0 0表示不送监狱且不没收赃物；该命令每次只结清目标所属的一个阵营，并非一键清除全部阵营通缉赏金",
+            "desc": "支付当前目标所属阵营的通缉赏金（信用点从库存中扣除）；0 0 表示不进监狱也不没收赃物。每次只结清目标所属的那一个阵营，不会清除其他阵营的通缉。",
             "framework_required": "None (Native Console)",
             "source": "https://starfieldwiki.net/wiki/Starfield:Console"
           },
           {
             "id": "sf_unlock_target",
             "name": {
-              "zh-CN": "强制解锁准星所指之门/保险箱 (秒开万物)",
+              "zh-CN": "强制解锁准星所指之门/保险箱",
               "en": "Unlock Target Door / Safe"
             },
             "syntax_type": "creation_hex",
             "code": "unlock",
-            "desc": "在控制台开启时用鼠标点击锁住的门或货箱，输入 unlock 即可瞬间物理破解开启。",
+            "desc": "控制台开启时用鼠标点击锁住的门或容器，输入 unlock 即可直接解锁。",
             "framework_required": "None (Native Console)",
             "source": "https://starfieldwiki.net/wiki/Starfield:Console"
           }
@@ -8325,36 +8325,36 @@ window.GAMES_DATA = [
           {
             "id": "sf_weapon_hardtarget",
             "name": {
-              "zh-CN": "获得硬靶高精狙击步枪 (超远距离爆头一击必杀)",
+              "zh-CN": "获得硬靶高精狙击步枪 (Hard Target)",
               "en": "Give Hard Target Sniper Rifle"
             },
             "syntax_type": "creation_hex",
             "code": "player.additem 000546CC 1",
-            "desc": ".50 口径高初速反器材狙击步枪，加装消音器与夜视镜后潜行暴击伤害直接拉满。",
+            "desc": "Combatech 制造的 .50 口径弹药步枪，基础伤害较高。",
             "framework_required": "None (Native Console)",
             "source": "https://starfieldwiki.net/wiki/Starfield:Hard_Target"
           },
           {
             "id": "sf_weapon_inflictor",
             "name": {
-              "zh-CN": "获得瓦鲁恩折磨者粒子束步枪 (神级双属性输出)",
+              "zh-CN": "获得瓦鲁恩折磨者粒子束步枪",
               "en": "Give Va'ruun Inflictor Particle Rifle"
             },
             "syntax_type": "creation_hex",
             "code": "player.additem 0026D8A0 1",
-            "desc": "瓦鲁恩毒蛇信徒秘造神兵，同时造成物理与能量双重属性伤害，全游戏最强 T0 步枪。",
+            "desc": "瓦鲁恩教派制造的粒子束步枪，兼具物理与能量伤害。",
             "framework_required": "None (Native Console)",
             "source": "https://starfieldwiki.net/wiki/Starfield:Va%27ruun_Inflictor"
           },
           {
             "id": "sf_weapon_bigbang",
             "name": {
-              "zh-CN": "获得大爆炸重型粒子束霰弹枪 (近身终极毁灭者)",
+              "zh-CN": "获得大爆炸粒子束霰弹枪 (Big Bang)",
               "en": "Give Big Bang Shotgun"
             },
             "syntax_type": "creation_hex",
             "code": "player.additem 0026D963 1",
-            "desc": "近距离一枪轰杀任何高阶掠夺者与外星异形怪兽，自带扩散粒子灼烧暴击。",
+            "desc": "Combatech 制造的粒子束霰弹枪，近距离伤害较高。",
             "framework_required": "None (Native Console)",
             "source": "https://starfieldwiki.net/wiki/Starfield:Big_Bang"
           },
@@ -8366,7 +8366,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "creation_hex",
             "code": "player.attachmod 000F2012",
-            "desc": "为当前所持武器附加金色传奇词条【煽动】，对生命值全满的目标造成整整 2 倍致命伤害！",
+            "desc": "为当前武器附加传奇词条【煽动】：若目标生命值为满，造成 2 倍伤害。",
             "framework_required": "None (Native Console)",
             "source": "https://starfieldwiki.net/wiki/Starfield:Effects"
           }
@@ -8378,24 +8378,24 @@ window.GAMES_DATA = [
           {
             "id": "sf_suit_starborn",
             "name": {
-              "zh-CN": "获得星裔天相战甲 (十周目终极神级宇航服)",
+              "zh-CN": "获得星裔天相战甲 (NG+1 周目开始获得)",
               "en": "Give Starborn Spacesuit Astra"
             },
             "syntax_type": "creation_hex",
             "code": "player.additem 0012E187 1",
-            "desc": "通关十周目获得的一体化星裔流光战甲，提供极致物理抗性、极寒耐受与自带隐形斗篷。",
+            "desc": "进入新游戏+（NG+1）周目开始时获得的一体式宇航服，各项防护数值均衡且较高。",
             "framework_required": "None (Native Console)",
             "source": "https://starfieldwiki.net/wiki/Starfield:Starborn_Spacesuit_Astra"
           },
           {
             "id": "sf_suit_mantis",
             "name": {
-              "zh-CN": "获得蝠鲼传奇宇航服 (全套太空游侠神装)",
+              "zh-CN": "获得蝠鲼传奇宇航服 (完成蝠鲼基地据点后获得)",
               "en": "Give Mantis Spacesuit"
             },
             "syntax_type": "creation_hex",
             "code": "player.additem 00226299 1",
-            "desc": "蝠鲼秘密基地代代传承的传奇正义宇航服，自带减重与受到近战攻击反弹电弧特效。",
+            "desc": "完成「蝠鲼的巢穴」任务后，在蝠鲼秘密基地获得的全套宇航服之一。",
             "framework_required": "None (Native Console)",
             "source": "https://starfieldwiki.net/wiki/Starfield:Mantis_Spacesuit"
           },
@@ -8426,12 +8426,12 @@ window.GAMES_DATA = [
         ]
       },
       {
-        "category": "🌌 全星系地标探索、重力调控与穿墙 (Star Map, Gravity & Exploration)",
+        "category": "🌌 星图探索与镜头/时间控制 (Star Map, Camera & Time)",
         "commands": [
           {
             "id": "sf_tmm_all",
             "name": {
-              "zh-CN": "星图全部地标与着陆点一键全开 (TMM 1)",
+              "zh-CN": "点亮星图全部地标与着陆点 (TMM 1)",
               "en": "Show All Map Markers (tmm 1)"
             },
             "syntax_type": "creation_hex",
@@ -8460,26 +8460,26 @@ window.GAMES_DATA = [
             },
             "syntax_type": "creation_hex",
             "code": "tm",
-            "desc": "一键隐藏全屏血条、氧气表、指南针与准星，截取好莱坞科幻大片质感的深空照片。",
+            "desc": "隐藏或恢复血条、氧气表、指南针与准星等界面元素，便于截图。",
             "framework_required": "None (Native Console)",
             "source": "https://starfieldwiki.net/wiki/Starfield:Console"
           },
           {
             "id": "sf_kah_enemies",
             "name": {
-              "zh-CN": "击杀视野内所有敌对威胁 (KAH 秒杀全敌)",
+              "zh-CN": "击杀视野内所有敌对目标 (kah)",
               "en": "Kill All Hostiles (kah)"
             },
             "syntax_type": "creation_hex",
             "code": "kah",
-            "desc": "瞬间消灭当前场景中所有处于战斗敌对状态的海盗与外星虫群，和平清理战场。",
+            "desc": "立即杀死当前场景中处于战斗状态的所有敌对目标。",
             "framework_required": "None (Native Console)",
             "source": "https://starfield.fandom.com/wiki/Help_command"
           }
         ]
       },
       {
-        "category": "🛠️ 哨站全工业建材与稀有矿物全满 (Outpost Resources & Exotic Mats)",
+        "category": "🛠️ 哨站建材与稀有矿物补给 (Outpost Resources & Exotic Mats)",
         "commands": [
           {
             "id": "sf_res_iron",
@@ -8537,7 +8537,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "creation_hex",
             "code": "player.additem 000055CC 300",
-            "desc": "恶劣大气环境下密封哨站走廊与太空防护服隔绝层必不可少的高分子密封胶。",
+            "desc": "用于密封哨站走廊与太空服隔绝层的高分子密封材料。",
             "framework_required": "None (Native Console)",
             "source": "https://starfieldwiki.net/wiki/Starfield:Miscellaneous_Items"
           }
@@ -8549,8 +8549,8 @@ window.GAMES_DATA = [
         "id": "sfse_core",
         "title": "Starfield Script Extender (SFSE)",
         "author": "SFSE Team",
-        "category": "Core Framework (核心前置)",
-        "desc": "星空运行全部高阶 UI 模组、飞船构建突破与游戏机制大修的绝对基石前置。原生扩展游戏内存指针；游戏更新后要等作者发新版。",
+        "category": "框架 / 前置",
+        "desc": "扩展 Starfield 脚本能力的工具，是许多 UI 与玩法类 Mod 的前置；游戏更新后需要等待作者更新对应版本。",
         "dependencies": [
           "None (Native Extender)"
         ],
@@ -8572,8 +8572,8 @@ window.GAMES_DATA = [
         "id": "starfield_community_patch",
         "title": "Starfield Community Patch (SFCP)",
         "author": "Starfield Modding Community",
-        "category": "Bug Fixes (全漏洞修复)",
-        "desc": "由全球顶尖 Modder 共同维护的开源综合漏洞修复包，修复了上千处恶性断任务、NPC 漂浮卡死与飞船无法停泊的底层代码 Bug。",
+        "category": "漏洞修复",
+        "desc": "由社区开发者维护的综合性漏洞修复 Mod，用于修复游戏中的任务、NPC 与其他已知问题。",
         "dependencies": [
           "SFSE"
         ],
@@ -8594,8 +8594,8 @@ window.GAMES_DATA = [
         "id": "undelayed_menus",
         "title": "Undelayed Menus",
         "author": "Seb263",
-        "category": "UI / Interface",
-        "desc": "消除打开物品栏、星图与技能界面时长达 0.5 秒的迟钝渐变淡入动画，界面秒开瞬切，操作如丝般顺滑。",
+        "category": "界面",
+        "desc": "移除打开物品栏、星图与技能界面时约 0.5 秒的淡入动画，使菜单响应更快。",
         "dependencies": [
           "None (SWF Override)"
         ],
@@ -8604,7 +8604,7 @@ window.GAMES_DATA = [
         "installSteps": [
           "1. 下载压缩包解压获取 Interface/ 文件夹；",
           "2. 将其放入 Starfield/Data/ 目录下；",
-          "3. 游戏中按 Tab 打开菜单立刻感受零延迟交互。"
+          "3. 游戏中按 Tab 打开菜单即可感受更快的响应速度。"
         ],
         "nexusUrl": "https://www.nexusmods.com/starfield/mods/404",
         "version": "1.0.6",
@@ -8830,12 +8830,12 @@ window.GAMES_DATA = [
         "name": "新手星际启航起飞包",
         "tag": "👑 萌新首选 · 零门槛",
         "badge": "星际起航",
-        "desc": "一键激活 TGM 完全无敌 + 100万信用币启动资金 + 100把数码撬棒 + 随身负重万吨上限，萌新开局直接买下顶级战舰开荒！",
+        "desc": "开启上帝模式 + 获得 100 万信用币 + 100 个数码撬棒 + 负重上限提升至 9,999，方便新手开局。",
         "highlights": [
-          "完全上帝模式，免受恶劣星球伤害",
-          "1,000,000 信用币随心买船",
-          "100 把数码撬棒，见箱就开",
-          "负重上限 9,999 吨，垃圾随便捡"
+          "上帝模式，角色免疫伤害",
+          "1,000,000 信用币，可用于购买飞船",
+          "100 个数码撬棒，方便开锁",
+          "负重上限 9,999，大幅减少负重限制"
         ],
         "code": "-- [老L·极客场景套餐] 星空 新手星际启航起飞包 (原生控制台，未实测)\ntgm\nplayer.additem 0000000F 1000000\nplayer.additem 0000000A 100\nplayer.setav carryweight 9999"
       }
@@ -8916,13 +8916,13 @@ window.GAMES_DATA = [
       {
         "name": "Script Hook V",
         "category": "Core Framework",
-        "desc": "内置全功能修改器与全载具刷出",
+        "desc": "附带 Native Trainer 离线菜单，可用于刷出载具等基础功能。",
         "url": "https://www.dev-c.com/gtav/scripthookv/"
       },
       {
         "name": "NaturalVision Evolved",
         "category": "Graphics",
-        "desc": "电影级好莱坞光影画质大修",
+        "desc": "调整天气、光照与夜景等画面效果。",
         "url": "https://www.razedmods.com/gta-v"
       }
     ],
@@ -8963,17 +8963,17 @@ window.GAMES_DATA = [
     ],
     "consoleCategories": [
       {
-        "category": "👑 经典官方无敌与通缉度调控 (God Mode & Wanted Level Cheats)",
+        "category": "👑 官方秘籍：无敌与通缉等级 (Invincibility & Wanted Level Cheats)",
         "commands": [
           {
             "id": "gta_cheat_painkiller",
             "name": {
-              "zh-CN": "官方经典无敌 5 分钟 (PAINKILLER)",
+              "zh-CN": "无敌状态 5 分钟 (PAINKILLER)",
               "en": "Invincibility for 5 Mins (PAINKILLER)"
             },
             "syntax_type": "rage_cheat",
             "code": "PAINKILLER",
-            "desc": "官方原生秘籍代码，开启 5 分钟绝对锁血无敌状态，任何爆炸枪击高处坠落毫发无损。",
+            "desc": "官方秘籍代码，开启 5 分钟无敌状态，免疫爆炸、枪击和坠落造成的伤害。",
             "framework_required": "None (Native Console)",
             "source": "https://gtabase.com/grand-theft-auto-v/gta-5-cheats-pc-full-list-of-cheat-codes"
           },
@@ -8985,7 +8985,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "rage_cheat",
             "code": "TURTLE",
-            "desc": "立刻回满角色全部血槽与最高级别防弹衣，若身在载具中还会瞬间将汽车彻底修复如初。",
+            "desc": "瞬间回满角色生命值与护甲至最高等级；如果人在载具中，车辆也会被修复。",
             "framework_required": "None (Native Console)",
             "source": "https://gta.fandom.com/wiki/Cheats_in_GTA_V"
           },
@@ -8993,23 +8993,23 @@ window.GAMES_DATA = [
             "id": "gta_cheat_lawyerup",
             "name": {
               "zh-CN": "降低并清除一星通缉度 (LAWYERUP)",
-              "en": "Clear Wanted Level (LAWYERUP)"
+              "en": "Lower Wanted Level (LAWYERUP)"
             },
             "syntax_type": "rage_cheat",
             "code": "LAWYERUP",
-            "desc": "让洛圣都警方降低并撤销当前追捕通缉星级，脱离警用直升机与巡警视野侦测。",
+            "desc": "官方秘籍代码，每次输入可降低一颗通缉星级，连续输入可逐步清空通缉度。",
             "framework_required": "None (Native Console)",
             "source": "https://gtabase.com/grand-theft-auto-v/gta-5-cheats-pc-full-list-of-cheat-codes"
           },
           {
             "id": "gta_cheat_fugitive",
             "name": {
-              "zh-CN": "提升一星通缉等级 (FUGITIVE - 挑衅追逐)",
+              "zh-CN": "提升一星通缉等级 (FUGITIVE)",
               "en": "Raise Wanted Level (FUGITIVE)"
             },
             "syntax_type": "rage_cheat",
             "code": "FUGITIVE",
-            "desc": "为当前角色额外增加一颗通缉星，主动引诱特警防暴车与 FIB 探员展开激烈公路追击。",
+            "desc": "官方秘籍代码，每次输入为角色增加一颗通缉星，引来警方追捕。",
             "framework_required": "None (Native Console)",
             "source": "https://gtabase.com/grand-theft-auto-v/gta-5-cheats-pc-full-list-of-cheat-codes"
           },
@@ -9033,60 +9033,60 @@ window.GAMES_DATA = [
           {
             "id": "gta_cheat_toolup",
             "name": {
-              "zh-CN": "获取全套军火武器库与弹药 (TOOLUP)",
+              "zh-CN": "获取全部武器与弹药 (TOOLUP)",
               "en": "All Weapons & Max Ammo (TOOLUP)"
             },
             "syntax_type": "rage_cheat",
             "code": "TOOLUP",
-            "desc": "瞬间为当前角色配齐手枪、微冲、突击步枪、高精狙击枪、榴弹发射器及黏弹全套装备。",
+            "desc": "官方秘籍代码，给予游戏中全部武器及对应弹药。",
             "framework_required": "None (Native Console)",
             "source": "https://gtabase.com/grand-theft-auto-v/gta-5-cheats-pc-full-list-of-cheat-codes"
           },
           {
             "id": "gta_cheat_highex",
             "name": {
-              "zh-CN": "开启高爆破坏子弹 (HIGHEX - 枪枪爆裂)",
+              "zh-CN": "开启爆炸子弹 (HIGHEX)",
               "en": "Explosive Bullets (HIGHEX)"
             },
             "syntax_type": "rage_cheat",
             "code": "HIGHEX",
-            "desc": "所有打出的子弹命中目标瞬间化为剧烈高爆手雷威力，任何路过车辆一枪直接轰至解体起火。",
+            "desc": "官方秘籍代码，子弹命中目标会产生爆炸，伤害范围更大。",
             "framework_required": "None (Native Console)",
             "source": "https://www.gtaboom.com/GTA_5_Cheats_PC"
           },
           {
             "id": "gta_cheat_incendiary",
             "name": {
-              "zh-CN": "开启炽热燃烧子弹 (INCENDIARY - 火海蔓延)",
+              "zh-CN": "开启燃烧子弹 (INCENDIARY)",
               "en": "Flame Bullets (INCENDIARY)"
             },
             "syntax_type": "rage_cheat",
             "code": "INCENDIARY",
-            "desc": "射出的每一发子弹命中物体与敌人即刻引发熊熊大火，造成持续性灼烧伤害并点燃周围环境。",
+            "desc": "官方秘籍代码，子弹命中目标会引燃并造成持续燃烧伤害。",
             "framework_required": "None (Native Console)",
             "source": "https://www.gtaboom.com/GTA_5_Cheats_PC"
           },
           {
             "id": "gta_cheat_hothands",
             "name": {
-              "zh-CN": "超能爆炸近战拳击 (HOTHANDS - 隔空轰飞)",
+              "zh-CN": "近战攻击附带爆炸 (HOTHANDS)",
               "en": "Explosive Melee Attacks (HOTHANDS)"
             },
             "syntax_type": "rage_cheat",
             "code": "HOTHANDS",
-            "desc": "肉搏挥拳命中目标产生巨大冲击波爆炸，将挡路的警车与路人直接炸飞上几十米高空。",
+            "desc": "官方秘籍代码，近战攻击命中目标会产生爆炸效果。",
             "framework_required": "None (Native Console)",
             "source": "https://www.gtaboom.com/GTA_5_Cheats_PC"
           },
           {
             "id": "gta_cheat_deadeye",
             "name": {
-              "zh-CN": "精准瞄准慢动作三段调节 (DEADEYE)",
-              "en": "Aiming Slomo Matrix (DEADEYE)"
+              "zh-CN": "瞄准慢动作四段调节 (DEADEYE)",
+              "en": "Aiming Slow Motion (DEADEYE)"
             },
             "syntax_type": "rage_cheat",
             "code": "DEADEYE",
-            "desc": "举枪瞄准时自动进入三阶慢动作子弹时间，精准爆头命中移动中的敌方直升机驾驶员。",
+            "desc": "官方秘籍代码，举枪瞄准时进入慢动作，最多可连续输入四次加深效果，第四次输入恢复正常速度。",
             "framework_required": "None (Native Console)",
             "source": "https://www.gtaboom.com/GTA_5_Cheats_PC"
           }
@@ -9103,43 +9103,43 @@ window.GAMES_DATA = [
             },
             "syntax_type": "rage_cheat",
             "code": "COMET",
-            "desc": "在眼前平地直接召唤一辆高性能经典跑车彗星，极速破百，操控手感灵敏敏捷。",
+            "desc": "官方秘籍代码，在角色面前召唤一辆 Comet 跑车。",
             "framework_required": "None (Native Console)",
             "source": "https://www.gtaboom.com/GTA_5_Cheats_PC"
           },
           {
             "id": "gta_cheat_rapidgt",
             "name": {
-              "zh-CN": "召唤疾速 GT 豪华 GT 轿跑 (RAPIDGT)",
+              "zh-CN": "召唤 Rapid GT 跑车 (RAPIDGT)",
               "en": "Spawn Rapid GT Coupe (RAPIDGT)"
             },
             "syntax_type": "rage_cheat",
             "code": "RAPIDGT",
-            "desc": "召唤极具美感的双门豪华硬顶跑车，强劲后驱马力，洛圣都高速公路飙车首选。",
+            "desc": "官方秘籍代码，在角色面前召唤一辆 Rapid GT 跑车。",
             "framework_required": "None (Native Console)",
             "source": "https://www.gtaboom.com/GTA_5_Cheats_PC"
           },
           {
             "id": "gta_cheat_buzzoff",
             "name": {
-              "zh-CN": "召唤秃鹰重型武装直升机 (BUZZOFF)",
+              "zh-CN": "召唤秃鹰武装直升机 (BUZZOFF)",
               "en": "Spawn Buzzard Attack Helicopter (BUZZOFF)"
             },
             "syntax_type": "rage_cheat",
             "code": "BUZZOFF",
-            "desc": "直接生成一架配备追踪火箭弹舱与加特林机枪的军用武装直升机，空中火力压制全场。",
+            "desc": "官方秘籍代码，召唤一架秃鹰武装直升机（配备机枪与导弹）。",
             "framework_required": "None (Native Console)",
             "source": "https://gtabase.com/grand-theft-auto-v/gta-5-cheats-pc-full-list-of-cheat-codes"
           },
           {
             "id": "gta_cheat_barnstorm",
             "name": {
-              "zh-CN": "召唤麦拉德特技双翼飞行机 (BARNSTORM)",
+              "zh-CN": "召唤麦拉德特技飞机 (BARNSTORM)",
               "en": "Spawn Mallard Stunt Plane (BARNSTORM)"
             },
             "syntax_type": "rage_cheat",
             "code": "BARNSTORM",
-            "desc": "召唤一架机动性极强的高速特技飞行器，在洛圣都摩天大楼与桥梁缝隙中穿梭穿桥。",
+            "desc": "官方秘籍代码，在角色面前召唤一架 Mallard 特技飞机。",
             "framework_required": "None (Native Console)",
             "source": "https://www.pcgamer.com/uk/gta-5-cheats/"
           },
@@ -9158,29 +9158,29 @@ window.GAMES_DATA = [
         ]
       },
       {
-        "category": "🏊 角色超自然能力与世界物理 (Super Jump, Fast Run & Skyfall)",
+        "category": "🏃 角色移动能力与世界物理 (Jump, Speed & Physics)",
         "commands": [
           {
             "id": "gta_cheat_hoptoit",
             "name": {
-              "zh-CN": "开启绿巨人超级弹跳 (HOPTOIT - 跃上楼顶)",
-              "en": "Super Jump Leap (HOPTOIT)"
+              "zh-CN": "开启超级跳跃 (HOPTOIT)",
+              "en": "Super Jump (HOPTOIT)"
             },
             "syntax_type": "rage_cheat",
             "code": "HOPTOIT",
-            "desc": "按住跳跃键可直接蓄力腾空跃起十层楼高，跨越矮层建筑屋顶与高架桥围栏。",
+            "desc": "官方秘籍代码，大幅提升角色跳跃高度。",
             "framework_required": "None (Native Console)",
             "source": "https://www.gtaboom.com/GTA_5_Cheats_PC"
           },
           {
             "id": "gta_cheat_catchme",
             "name": {
-              "zh-CN": "开启超级短跑极速疾驰 (CATCHME - 健步如飞)",
-              "en": "Super Fast Sprinting (CATCHME)"
+              "zh-CN": "开启快速奔跑 (CATCHME)",
+              "en": "Fast Running (CATCHME)"
             },
             "syntax_type": "rage_cheat",
             "code": "CATCHME",
-            "desc": "角色奔跑与短跑冲刺速度提升至极限，公路追车甚至能用双腿超越普通代步轿车。",
+            "desc": "官方秘籍代码，大幅提升角色奔跑速度。",
             "framework_required": "None (Native Console)",
             "source": "https://gta.fandom.com/wiki/Cheats_in_GTA_V"
           },
@@ -9192,7 +9192,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "rage_cheat",
             "code": "GOTGILLS",
-            "desc": "在海水与游泳池中如离弦之箭极速穿梭，潜水与避让近海饥饿白鲨游刃有余。",
+            "desc": "官方秘籍代码，大幅提升角色游泳速度。",
             "framework_required": "None (Native Console)",
             "source": "https://gta.fandom.com/wiki/Cheats_in_GTA_V"
           },
@@ -9204,19 +9204,19 @@ window.GAMES_DATA = [
             },
             "syntax_type": "rage_cheat",
             "code": "SKYDIVE",
-            "desc": "立即装备高空跳伞专用降落伞，从乞力耶德山缆车顶端或直升机上一跃而下尽情翱翔。",
+            "desc": "官方秘籍代码，为角色装备一个降落伞。",
             "framework_required": "None (Native Console)",
             "source": "https://gta.fandom.com/wiki/Cheats_in_GTA_V"
           },
           {
             "id": "gta_cheat_skyfall",
             "name": {
-              "zh-CN": "万米高空自由落体跳伞模式 (SKYFALL)",
+              "zh-CN": "高空自由落体 (SKYFALL)",
               "en": "Skyfall from High Altitude (SKYFALL)"
             },
             "syntax_type": "rage_cheat",
             "code": "SKYFALL",
-            "desc": "将角色瞬间传送至洛圣都万米云海高空进行无伞自由落体滑翔俯冲（请确保先开无敌）。",
+            "desc": "官方秘籍代码，将角色传送到高空后进行无伞自由落体，建议配合无敌状态一起使用。",
             "framework_required": "None (Native Console)",
             "source": "https://www.gtaboom.com/GTA_5_Cheats_PC"
           }
@@ -9228,12 +9228,12 @@ window.GAMES_DATA = [
           {
             "id": "gta_cheat_makeitrain",
             "name": {
-              "zh-CN": "切换雷雨暴风雨天气 (MAKEITRAIN)",
-              "en": "Change Weather to Thunderstorm (MAKEITRAIN)"
+              "zh-CN": "切换天气 (MAKEITRAIN)",
+              "en": "Change Weather (MAKEITRAIN)"
             },
             "syntax_type": "rage_cheat",
             "code": "MAKEITRAIN",
-            "desc": "洛圣都天空乌云密布并降下磅礴大雨与轰鸣闪电，路面湿滑极具电影黑色氛围。",
+            "desc": "官方秘籍代码，随机切换洛圣都当前的天气状况。",
             "framework_required": "None (Native Console)",
             "source": "https://www.gtaboom.com/GTA_5_Cheats_PC"
           },
@@ -9252,8 +9252,8 @@ window.GAMES_DATA = [
           {
             "id": "gta_cheat_slowmo",
             "name": {
-              "zh-CN": "全局慢动作电影运镜流速 (SLOWMO - 四段循环)",
-              "en": "Slomo World Matrix (SLOWMO)"
+              "zh-CN": "全局慢动作 (SLOWMO)",
+              "en": "Slow Motion World (SLOWMO)"
             },
             "syntax_type": "rage_cheat",
             "code": "SLOWMO",
@@ -9294,7 +9294,7 @@ window.GAMES_DATA = [
         "title": "Script Hook V",
         "author": "Alexander Blade",
         "category": "Core Framework (核心前置)",
-        "desc": "GTA 5 单机运行所有 ASI 脚本、载具菜单与功能模组的最权威开源前置。自带经典 F4 Native Trainer 离线菜单，包含防线上联机自动切断保护。",
+        "desc": "GTA V 的脚本插件加载库，是运行 ASI 脚本和大多数离线单机 Mod 菜单的前置库。自带 Native Trainer 离线菜单；进入 GTA Online 多人模式时会自动关闭游戏，不能在线上使用。",
         "dependencies": [
           "None (Native DLL)"
         ],
@@ -9304,7 +9304,7 @@ window.GAMES_DATA = [
           "1. 点击下载 ScriptHookV_1.0.3179.0.zip；",
           "2. 打开 GTA 5 安装根目录 (包含 GTA5.exe 的文件夹)；",
           "3. 将 bin/ 目录下的 ScriptHookV.dll、dinput8.dll 和 NativeTrainer.asi 复制到根目录；",
-          "4. 进入单机故事模式按 F4 即可呼出菜单。"
+          "4. 进入单机故事模式按 F4 呼出菜单。"
         ],
         "nexusUrl": "https://www.dev-c.com/gtav/scripthookv/",
         "version": "supports build 1.0.3889.0 / 1.0.1158.13 (current)"
@@ -9314,7 +9314,7 @@ window.GAMES_DATA = [
         "title": "Menyoo PC [SP]",
         "author": "MAFINS",
         "category": "Trainer / Menu",
-        "desc": "功能冠绝全网的顶级单机离线菜单：随心刷出全部线上 DLC 豪车与战机、自定义保镖随从战队、建造自定义赛道飞跃跑道、随时更换任何剧情角色外观！",
+        "desc": "单机离线功能菜单，可以刷出载具（含线上 DLC 载具）、自定义随从、搭建赛道障碍物，并更换剧情角色外观。",
         "dependencies": [
           "ScriptHookV"
         ],
@@ -9324,7 +9324,7 @@ window.GAMES_DATA = [
           "1. 确认已安装 ScriptHookV 前置；",
           "2. 下载压缩包解压获取 menyooStuff 文件夹和 Menyoo.asi；",
           "3. 放入 GTA5 游戏根目录；",
-          "4. 故事模式按 F8 即可打开图形化菜单。"
+          "4. 故事模式下按 F8 打开图形化菜单。"
         ],
         "nexusUrl": "https://github.com/MAFINS/MenyooSP",
         "version": "v1.8.1",
@@ -9336,7 +9336,7 @@ window.GAMES_DATA = [
         "title": "OpenIV",
         "author": "OpenIV Team",
         "category": "Mod Tool (工具软件)",
-        "desc": "安装现实真车包、高清地图画质材质包与真实枪械声音必备的归档编辑工具。独创 mods 文件夹隔离机制，保护游戏原版文件绝对不受污染破坏。",
+        "desc": "RPF 归档编辑工具，用于安装车辆、材质与音效类 Mod。提供 mods 文件夹机制，替换文件时不会修改游戏原始文件。",
         "dependencies": [
           "None (Stand-alone Tool)"
         ],
@@ -9346,7 +9346,7 @@ window.GAMES_DATA = [
           "1. 下载运行 OpenIVSetup.exe 安装工具；",
           "2. 打开 OpenIV 选择 Grand Theft Auto V (Windows)；",
           "3. 点击 Tools -> ASI Manager，全部点击 Install 安装 ASI 驱动；",
-          "4. 所有后续 RPF 模组均放入 mods 文件夹中无损替换。"
+          "4. 后续模组放入 mods 文件夹生效，不会修改原始游戏文件。"
         ],
         "nexusUrl": "https://openiv.com",
         "version": "4.1"
@@ -9355,8 +9355,8 @@ window.GAMES_DATA = [
         "id": "gta_nve_graphics",
         "title": "NaturalVision Evolved",
         "author": "Razed",
-        "category": "Graphics (顶级画质)",
-        "desc": "耗时数年倾力打造的次世代画质圣经，重制全洛圣都天气照明、反射水面、雨天积水倒影与霓虹夜景，赋予老游戏媲美 2026 年大作的电影级真实感！",
+        "category": "Graphics (画面)",
+        "desc": "画面重制类 Mod，调整洛圣都的天气、光照、水面反射与夜景效果。",
         "dependencies": [
           "OpenIV",
           "ScriptHookV"
@@ -9367,7 +9367,7 @@ window.GAMES_DATA = [
           "1. 确保安装好 OpenIV 并启用了 ASI 扩展；",
           "2. 打开 OpenIV 点击 Tools -> Package Installer；",
           "3. 选中下载的 NVE_Installer.oiv 并安装到 'mods folder'；",
-          "4. 启动游戏享受好莱坞大片级视觉盛宴。"
+          "4. 启动游戏查看效果。"
         ],
         "nexusUrl": "https://www.razedmods.com/gta-v"
       }
@@ -9505,30 +9505,31 @@ window.GAMES_DATA = [
       {
         "id": "gta_salvation_bundle",
         "type": "salvation",
-        "name": "六星狂暴大逃杀激战包",
-        "tag": "🛡️ 意难平救赎 · 告别受苦",
-        "badge": "六星激战",
-        "desc": "呼叫秃鹰重型武装直升机 + 开启 HIGHEX 高爆穿甲子弹 + 超能肉搏冲击波 + 锁定六星极限通缉，单挑整座洛圣都军警装甲力量！",
+        "name": "武装直升机追逐套装",
+        "tag": "⚔️ 战斗与追逐向组合",
+        "badge": "武装对抗",
+        "desc": "召唤秃鹰武装直升机，开启高爆子弹 (HIGHEX) 和爆炸近战 (HOTHANDS)，并用两次 FUGITIVE 将通缉等级提高 2 星。",
         "highlights": [
-          "召唤秃鹰武装直升机空中轰炸",
-          "HIGHEX 爆裂子弹枪枪起爆",
-          "超能肉搏拳击隔空轰碎载具",
-          "六星特警坦克封路大围捕"
+          "召唤秃鹰武装直升机",
+          "HIGHEX：子弹命中后产生爆炸",
+          "HOTHANDS：近战攻击附带爆炸",
+          "两次 FUGITIVE 提升 2 星通缉等级"
         ],
         "code": "-- [老L·极客场景套餐] GTA5 六星狂暴大逃杀激战包\nBUZZOFF\nHIGHEX\nHOTHANDS\nFUGITIVE\nFUGITIVE"
       },
       {
         "id": "gta_godmode_bundle",
         "type": "godmode",
-        "name": "超自然空中飞仙终极漫游包",
-        "tag": "⚡ 极客狂欢 · 众神陨落",
-        "badge": "真神漫游",
-        "desc": "万米高空云端自由落体 SKYFALL + 绿巨人十层楼超级跳跃 + 月球低重力微浮力 + 全城圣诞暴风雪，体验前所未见的荒诞洛圣都奇观！",
+        "name": "高空跳跃漫游套装",
+        "tag": "⚡ 探索向组合",
+        "badge": "自由漫游",
+        "desc": "传送到高空自由落体 (SKYFALL)，配合超级跳跃 (HOPTOIT)、月球重力 (FLOATER)、路面打滑 (SNOWDAY) 与 5 分钟无敌 (PAINKILLER) 一起使用，方便在洛圣都到处探索。",
         "highlights": [
-          "万米高空自由落体无伞俯冲",
-          "超级跳跃跃过摩天大楼",
-          "月球低重力飞车漫步",
-          "罕见全城圣诞暴风雪漫延"
+          "SKYFALL：传送至高空后自由落体",
+          "HOPTOIT：大幅提升跳跃高度",
+          "FLOATER：切换为月球低重力",
+          "SNOWDAY：路面变得湿滑打滑",
+          "PAINKILLER：5 分钟无敌状态"
         ],
         "code": "-- [老L·极客场景套餐] GTA5 超自然空中飞仙终极漫游包\nSKYFALL\nHOPTOIT\nFLOATER\nSNOWDAY\nPAINKILLER"
       }
@@ -9643,7 +9644,7 @@ window.GAMES_DATA = [
     ],
     "consoleCategories": [
       {
-        "category": "👑 核心无敌、无限体力与死神之眼 (God Mode, Stamina & Dead Eye)",
+        "category": "👑 核心秘籍合集 (Core Cheats)",
         "commands": [
           {
             "id": "rdr_cheat_freedom",
@@ -9653,7 +9654,7 @@ window.GAMES_DATA = [
             },
             "syntax_type": "rage_cheat",
             "code": "You want freedom",
-            "desc": "官方秘籍短语，降低亚瑟当前的通缉星级。RDR2 游戏内没有真正的『无敌』秘籍（多个权威来源一致确认）。",
+            "desc": "官方秘籍短语，降低亚瑟当前的通缉星级。",
             "framework_required": "None (Native Console)",
             "source": "https://www.shacknews.com/article/108219/full-cheat-codes-list-in-red-dead-redemption-2"
           },
@@ -9661,48 +9662,48 @@ window.GAMES_DATA = [
             "id": "rdr_cheat_flourish",
             "name": {
               "zh-CN": "三核心瞬间回满 (You flourish before you die)",
-              "en": "Max All Bars (You flourish before you die)"
+              "en": "Refill All Bars (You flourish before you die)"
             },
             "syntax_type": "rage_cheat",
             "code": "You flourish before you die",
-            "desc": "立即将生命、体力与死神之眼内侧核心及外侧环槽全部充满至最高数值。",
+            "desc": "官方秘籍短语，立即回满生命、体力与死神之眼三项状态槽。",
             "framework_required": "None (Native Console)",
             "source": "https://www.shacknews.com/article/108219/full-cheat-codes-list-in-red-dead-redemption-2"
           },
           {
             "id": "rdr_cheat_deadeye",
             "name": {
-              "zh-CN": "无限死神之眼子弹时间 (Seek all the bounty of this place)",
+              "zh-CN": "无限死神之眼 (Be greedy only for foresight)",
               "en": "Infinite Dead Eye"
             },
             "syntax_type": "rage_cheat",
             "code": "Be greedy only for foresight",
-            "desc": "开启无限死神之眼模式，随心进入拔枪时缓，一次性标定全屏所有匪徒头部。",
+            "desc": "官方秘籍短语，死神之眼子弹时间效果不再消耗，可持续使用。",
             "framework_required": "None (Native Console)",
             "source": "https://www.powerpyx.com/red-dead-redemption-2-cheats/"
           },
           {
             "id": "rdr_cheat_stealth",
             "name": {
-              "zh-CN": "悄然无声刺杀暗杀 (Death is silence)",
+              "zh-CN": "解锁潜行武器 (Death is silence)",
               "en": "Stealth Weapons (Death is silence)"
             },
             "syntax_type": "rage_cheat",
             "code": "Death is silence",
-            "desc": "配齐印第安飞斧、飞刀、改良弓箭等全套静音潜行暗杀武器库。",
+            "desc": "官方秘籍短语，解锁一套潜行武器：弓、火瓶、飞斧、飞刀与砍刀。",
             "framework_required": "None (Native Console)",
             "source": "https://www.powerpyx.com/red-dead-redemption-2-cheats/"
           }
         ]
       },
       {
-        "category": "💰 亚瑟钱包现金、全金条与全背包升级 (Money, Gold Bars & Legend of East Satchel)",
+        "category": "💰 现金 (Money)",
         "commands": [
           {
             "id": "rdr_cheat_greed",
             "name": {
-              "zh-CN": "获取 $500 现金 (Greed is American virtue)",
-              "en": "Give $500 Cash (Greed is American virtue)"
+              "zh-CN": "获取 $500 现金 (Greed is now a virtue)",
+              "en": "Give $500 Cash (Greed is now a virtue)"
             },
             "syntax_type": "rage_cheat",
             "code": "Greed is now a virtue",
@@ -9713,7 +9714,7 @@ window.GAMES_DATA = [
         ]
       },
       {
-        "category": "🐎 顶级良驹阿拉伯马与默契度拉满 (Horses Spawner & Max Bonding)",
+        "category": "🐎 马匹默契度 (Horse Bonding)",
         "commands": [
           {
             "id": "rdr_cheat_kingdom_horse",
@@ -9723,14 +9724,14 @@ window.GAMES_DATA = [
             },
             "syntax_type": "rage_cheat",
             "code": "My kingdom is a horse",
-            "desc": "官方原生秘籍代码，直接拉升当前坐骑的默契等级，解锁急停与侧向滑行步伐。",
+            "desc": "官方原生秘籍代码，立即提升所有坐骑的默契等级，默契等级越高可解锁更多骑术动作。",
             "framework_required": "None (Native Console)",
             "source": "https://www.pcgamesn.com/red-dead-redemption-2/rdr2-cheats-pc"
           }
         ]
       },
       {
-        "category": "🔫 传奇黑火药军备、稀有枪械与全弹药 (Rare Weapons & Explosive Ammo)",
+        "category": "🔫 武器套装与弹药 (Weapon Sets & Ammo)",
         "commands": [
           {
             "id": "rdr_cheat_simple_life",
@@ -9747,12 +9748,12 @@ window.GAMES_DATA = [
           {
             "id": "rdr_cheat_history_fools",
             "name": {
-              "zh-CN": "获取全套传奇神枪手武器 (History is written by fools)",
-              "en": "Gunslinger Rare Weapons"
+              "zh-CN": "解锁神枪手武器 (History is written by fools)",
+              "en": "Gunslinger Weapons (History is written by fools)"
             },
             "syntax_type": "rage_cheat",
             "code": "History is written by fools",
-            "desc": "官方秘籍短语，获得神枪手武器套装（含双动左轮手枪、双管霰弹枪等决斗相关武器）。",
+            "desc": "官方秘籍短语，解锁 Schofield 左轮手枪、双动左轮手枪与双管霰弹枪。",
             "framework_required": "None (Native Console)",
             "source": "https://www.pcgamesn.com/red-dead-redemption-2/rdr2-cheats-pc"
           },
@@ -9764,36 +9765,36 @@ window.GAMES_DATA = [
             },
             "syntax_type": "rage_cheat",
             "code": "Abundance is the dullest desire",
-            "desc": "随身携带的全部枪弹弹药锁定无限，告别去枪械铺逐盒购买子弹的繁琐。",
+            "desc": "官方秘籍短语，子弹数量变为无限，不会再减少。",
             "framework_required": "None (Native Console)",
             "source": "https://www.shacknews.com/article/108219/full-cheat-codes-list-in-red-dead-redemption-2"
           }
         ]
       },
       {
-        "category": "🌦️ 昼夜天气调控、快速传送与荣誉值 (Honor, Weather & Fast Travel)",
+        "category": "⭐ 荣誉值与通缉等级 (Honor & Wanted Level)",
         "commands": [
           {
             "id": "rdr_cheat_virtue",
             "name": {
-              "zh-CN": "荣誉值一键提升至最高上限 (Virtue unearned is not virtue)",
+              "zh-CN": "提升荣誉值至最高 (Virtue unearned is not virtue)",
               "en": "Max Honor Level (Virtue unearned is not virtue)"
             },
             "syntax_type": "rage_cheat",
             "code": "Virtue unearned is not virtue",
-            "desc": "官方原生秘籍代码，亚瑟声望瞬间升至满额最高级，商店购物享受 50% 半价折扣特惠。",
+            "desc": "官方原生秘籍代码，立即将荣誉值提升至最高等级。",
             "framework_required": "None (Native Console)",
             "source": "https://www.powerpyx.com/red-dead-redemption-2-cheats/"
           },
           {
             "id": "rdr_cheat_punishment",
             "name": {
-              "zh-CN": "提升通缉等级 (You want punishment - 赏金猎人大战)",
-              "en": "Raise Bounty (You want punishment)"
+              "zh-CN": "提升通缉等级 (You want punishment)",
+              "en": "Increase Wanted Level (You want punishment)"
             },
             "syntax_type": "rage_cheat",
             "code": "You want punishment",
-            "desc": "为亚瑟附加悬赏星级，引来全州最精锐的平克顿侦探与猎犬展开生死决战追杀。",
+            "desc": "官方秘籍短语，立即提升当前通缉等级。",
             "framework_required": "None (Native Console)",
             "source": "https://www.shacknews.com/article/108219/full-cheat-codes-list-in-red-dead-redemption-2"
           }
@@ -9826,7 +9827,7 @@ window.GAMES_DATA = [
         "title": "Rampage Trainer",
         "author": "RampageDev",
         "category": "Trainer / Menu",
-        "desc": "大镖客界公认最强单机离线功能菜单：随时召唤上百种马匹、变身为印第安酋长或动物、随身衣柜换装、营地升级与瞬移全图。",
+        "desc": "单机离线功能菜单，提供召唤马匹、变身、更换装扮、营地管理与传送地图等功能。",
         "dependencies": [
           "ScriptHookRDR2"
         ],
@@ -9836,7 +9837,7 @@ window.GAMES_DATA = [
           "1. 确保已安装 ScriptHookRDR2；",
           "2. 下载压缩包解压出 Rampage.asi 和 RampageFiles 文件夹；",
           "3. 放入 RDR2 根目录；",
-          "4. 故事模式按 F5 或 F7 打开 Rampage 高清菜单。"
+          "4. 在故事模式下按 F5 打开菜单。"
         ],
         "nexusUrl": "https://www.nexusmods.com/reddeadredemption2/mods/233",
         "version": "1.6.9",
@@ -9849,7 +9850,7 @@ window.GAMES_DATA = [
         "title": "Lenny's Mod Loader RDR",
         "author": "LMS",
         "category": "Mod Manager",
-        "desc": "彻底告别手动解包 RPF 替换文件的繁琐风险！所有新服饰、枪械高清贴图与声音直接放入 lml/ 文件夹即可自动挂载生效。",
+        "desc": "RPF 模组加载工具，新增的服饰、贴图与音效类模组放入 lml/ 文件夹就能生效，不需要手动解包替换游戏原始文件。",
         "dependencies": [
           "ScriptHookRDR2"
         ],
@@ -9858,7 +9859,7 @@ window.GAMES_DATA = [
         "installSteps": [
           "1. 解压 ModLoader 文件夹内全部文件至 RDR2 根目录；",
           "2. 根目录会自动生成 lml/ 文件夹；",
-          "3. 后续下载的服饰与材质 mod 直接扔进 lml/ 即可。"
+          "3. 后续下载的服饰与材质 mod 放入 lml/ 文件夹。"
         ],
         "nexusUrl": "https://www.rdr2mods.com/downloads/rdr2/tools/76-lennys-mod-loader-rdr/",
         "version": "0.6.8470.31280"
@@ -9868,7 +9869,7 @@ window.GAMES_DATA = [
         "title": "WhyEm's  DLC",
         "author": "WhyEm",
         "category": "Clothing & Customization",
-        "desc": "西部牛仔终极衣柜拓展包：为亚瑟增添上千件精美皮衣、披风、马甲、定制牛皮枪套、罕见发型与传说动物皮毛羽毛装饰！",
+        "desc": "服饰拓展包，新增 2500 多件服装与配饰，包括皮衣、外套与腰带等。",
         "dependencies": [
           "ScriptHookRDR2",
           "Lenny's Mod Loader"
@@ -9879,7 +9880,7 @@ window.GAMES_DATA = [
           "1. 确认已正确安装 LML 模组加载器；",
           "2. 下载压缩包解压获取 WhyEm's DLC 文件夹；",
           "3. 放入 RDR2/lml/ 文件夹内；",
-          "4. 前往捕兽人或裁缝铺即可选购所有独家服饰。"
+          "4. 前往捕兽人或裁缝铺购买新增的服饰。"
         ],
         "nexusUrl": "https://www.nexusmods.com/reddeadredemption2/mods/671",
         "version": "Final",
@@ -10082,7 +10083,7 @@ window.GAMES_DATA = [
         "title": "Stracker's Loader",
         "author": "Stracker",
         "category": "Core Framework (核心前置)",
-        "desc": "怪猎世界冰原运行 nativePC 外部模组、商店补全插件与透视覆层的绝对核心前置库，包含 CRC 绕过修复。",
+        "desc": "怪物猎人世界：冰原运行 nativePC 外部模组、商店补全插件与透视覆层类 Mod 所需的前置加载库，包含 CRC 校验绕过修复。",
         "dependencies": [
           "None (Native DLL)"
         ],
@@ -10105,7 +10106,7 @@ window.GAMES_DATA = [
         "title": "Large Shop Assortment for Consumables and Combo Mats (Iceborne)",
         "author": "MHVuze",
         "category": "Economy / Items",
-        "desc": "将月辰与星辰基地的物资补给所商店彻底重制：所有 4 级神珠、古龙大宝玉、聚魔之地客制材料全部上架，统一标价 1 铜币，告别几百小时枯燥刷珠子！",
+        "desc": "将月辰与星辰基地的道具商店物资替换：所有 4 级装饰品（珠子）、古龙大宝玉、聚魔之地专属材料全部上架，统一标价 1 铜币。",
         "dependencies": [
           "Stracker's Loader"
         ],
@@ -10115,7 +10116,7 @@ window.GAMES_DATA = [
           "1. 确认已安装 Stracker's Loader 前置；",
           "2. 下载压缩包解压获取 nativePC 文件夹；",
           "3. 直接合并覆盖到游戏根目录下；",
-          "4. 到道具屋阿姨处对话即可挑选任何顶级珠子与素材。"
+          "4. 到道具屋阿姨处对话即可购买珠子与素材。"
         ],
         "nexusUrl": "https://www.nexusmods.com/monsterhunterworld/mods/1959",
         "version": "1.02",
@@ -10128,7 +10129,7 @@ window.GAMES_DATA = [
         "title": "SmartHunter",
         "author": "r00telement",
         "category": "UI / Overlay",
-        "desc": "狩猎利器！在屏幕上方优雅悬浮显示怪物真实总血量、当前血百分比、激怒倒计时、麻痹/睡眠积蓄值，以及队伍四人各自输出 DPS 占比统计！",
+        "desc": "在屏幕上方悬浮显示怪物总血量、当前血量百分比、激怒倒计时、麻痹/睡眠积蓄值，以及队伍四人的输出 DPS 占比统计。",
         "dependencies": [
           "None (Stand-alone Memory Overlay)"
         ],
@@ -10146,7 +10147,7 @@ window.GAMES_DATA = [
         "title": "Performance Booster and Plugin Extender",
         "author": "AsteriskAmpersand and Moonbunnie",
         "category": "Performance (性能加速)",
-        "desc": "移除冰原反作弊死循环冗余检测，大幅消除 100% CPU 占用导致的掉帧卡顿。效果因电脑而异，本站没有测过具体帧数。",
+        "desc": "移除游戏里大量未优化、与游戏功能无关的代码来提升性能，CPU 受限的电脑上效果更明显；也让一些更复杂的插件能正常运行。效果因电脑而异，本站没有测过具体帧数。",
         "dependencies": [
           "Stracker's Loader"
         ],
@@ -10155,7 +10156,7 @@ window.GAMES_DATA = [
         "installSteps": [
           "1. 下载压缩包解压出 .dll 插件；",
           "2. 放入 nativePC/plugins/ 目录；",
-          "3. 启动游戏享受极致丝滑 120FPS 狩猎体验。"
+          "3. 启动游戏查看帧率变化（效果因电脑而异）。"
         ],
         "nexusUrl": "https://www.nexusmods.com/monsterhunterworld/mods/3473",
         "version": "1.3",
@@ -10587,7 +10588,7 @@ window.GAMES_DATA = [
         "title": "ModEngine",
         "author": "Katalash",
         "category": "Core Framework (核心前置)",
-        "desc": "只狼外部材质、流派动作替换与参数修改的绝对基石前置。自动拦截文件加载路径，零修改游戏原版文件，极客必备。",
+        "desc": "用于加载外部材质、动作替换与参数修改类 Mod 的前置框架，通过拦截文件加载路径实现，不修改游戏原始文件。",
         "dependencies": [
           "None (Native DLL)"
         ],
@@ -10606,7 +10607,7 @@ window.GAMES_DATA = [
         "title": "Sekiro FPS Unlock and More",
         "author": "uberhalit",
         "category": "Performance / Graphics",
-        "desc": "突破官方恶心的 60 帧锁帧限制，支持 144Hz/240Hz 高刷电竞屏，消除 21:9 带鱼屏黑边，完美支持宽屏原生分辨率与无边框窗口化！",
+        "desc": "解除官方 60 帧的帧率限制，支持 144Hz/240Hz 高刷新率显示器，并支持 21:9 带鱼屏分辨率与无边框窗口模式。",
         "dependencies": [
           "None (Stand-alone Tool)"
         ],
@@ -10614,9 +10615,8 @@ window.GAMES_DATA = [
         "isDirect": true,
         "installSteps": [
           "1. 下载解压获取 SekiroFpsUnlockAndMore.exe；",
-          "2. 先启动只狼游戏，然后双击运行该工具；",
-          "3. 勾选 'Unlock FPS' 并将上限滑块拉至 144 或 240；",
-          "4. 刀光剑影流畅如丝，再无拖影困扰。"
+          "2. 先启动只狼游戏，然后运行该工具；",
+          "3. 勾选 'Unlock FPS' 并将上限滑块调整为 144 或 240。"
         ],
         "nexusUrl": "https://github.com/uberhalit/SekiroFpsUnlockAndMore",
         "version": "1.2.5.2",
@@ -10628,7 +10628,7 @@ window.GAMES_DATA = [
         "title": "Boss Rush",
         "author": "thefifthmatt",
         "category": "Gameplay / Training",
-        "desc": "在任何鬼佛处直接开启所有 Boss 与精英怪独立连战挑战，无需跑图过剧情，随时随地练习弹刀剑圣苇名一心、义父与怨恨之鬼！",
+        "desc": "在鬼佛处开启 Boss 与精英怪的独立连战挑战，无需重新跑图或触发剧情，可直接挑战剑圣苇名一心、义父与怨恨之鬼等首领。",
         "dependencies": [
           "Sekiro Mod Engine"
         ],
@@ -10650,7 +10650,7 @@ window.GAMES_DATA = [
         "title": "Sekiro Resurrection",
         "author": "Ionian",
         "category": "Complete Overhaul (全面大修)",
-        "desc": "享誉魂系圈的顶级战斗大修：重做几乎全 Boss 与杂兵招式逻辑、为狼增加全新流派招式与衍生追击，打刀防反手感登峰造极！",
+        "desc": "战斗系统大修 Mod，重做了大部分 Boss 与杂兵的招式逻辑，为狼新增了新的招式与追击派生，并调整了打刀防反的手感。",
         "dependencies": [
           "Sekiro Mod Engine"
         ],
@@ -10920,7 +10920,7 @@ window.GAMES_DATA = [
         "title": "REFramework",
         "author": "praydog",
         "category": "Core Framework (核心前置)",
-        "desc": "卡普空 RE 引擎游戏绝对核心！集成强大的 ImGui 覆层控制面板、自由运镜摄影机、第一人称视角切换与宽广 FOV 调谐。",
+        "desc": "卡普空 RE 引擎游戏的通用 Mod 框架，提供 ImGui 覆层控制面板、自由视角摄像机、第一人称视角切换与 FOV 调整功能。",
         "dependencies": [
           "None (Native DLL)"
         ],
@@ -10942,7 +10942,7 @@ window.GAMES_DATA = [
         "title": "Fluffy Manager 5000 (Fluffy Mod Manager)",
         "author": "FluffyQuack",
         "category": "Mod Manager",
-        "desc": "生化危机系列公认最强模组安装器：一键安装、启用、禁用上千款角色外观、艾达王特工服、发型与武器贴图替换。",
+        "desc": "生化危机系列的模组管理工具，用于安装、启用或禁用角色外观、艾达王特工服、发型与武器贴图替换类 Mod。",
         "dependencies": [
           "None (Stand-alone Tool)"
         ],
@@ -10952,7 +10952,7 @@ window.GAMES_DATA = [
           "1. 下载解压运行 Modmanager.exe；",
           "2. 在游戏列表选择 'Resident Evil 4 Remake'；",
           "3. 将下载的 .rar/.zip 角色外观模组拖入软件窗口；",
-          "4. 点击滑块切换勾选即可一秒生效启用。"
+          "4. 点击滑块勾选即可启用对应 Mod。"
         ],
         "nexusUrl": "https://www.fluffyquack.com"
       }
@@ -11215,7 +11215,7 @@ window.GAMES_DATA = [
           "en": "Enable Cheat Mode"
         },
         "command": "config.cheat_mode 1",
-        "desc": "激活全部战役指令与大地图全军瞬移特权",
+        "desc": "启用游戏内置作弊模式，解锁后续的作弊类战役指令。",
         "source": "https://mountandblade.fandom.com/wiki/Developer_Console_Mod/Console_Commands"
       },
       {
@@ -11224,7 +11224,7 @@ window.GAMES_DATA = [
           "en": "Add 1,000,000 Gold"
         },
         "command": "campaign.add_gold_to_hero 1000000",
-        "desc": "随意雇佣全大陆雇佣军团与招揽封臣领主",
+        "desc": "给主角增加 1,000,000 第纳尔金币。",
         "source": "https://mountandblade.fandom.com/wiki/Developer_Console_Mod/Console_Commands"
       },
       {
@@ -11233,7 +11233,7 @@ window.GAMES_DATA = [
           "en": "Add 1,000 Renown"
         },
         "command": "campaign.add_renown_to_clan 1000",
-        "desc": "快速跃升 6 级最高家族等级，大幅扩充带兵军力上限",
+        "desc": "为主角家族增加 1000 点声望，声望越高家族等级越高，可带兵规模上限也越大。",
         "source": "https://mountandblade.fandom.com/wiki/Developer_Console_Mod/Console_Commands"
       },
       {
@@ -11242,7 +11242,7 @@ window.GAMES_DATA = [
           "en": "Add 2,000 Influence"
         },
         "command": "campaign.add_influence 2000",
-        "desc": "随意在王国议会推行专制法令与封地分配决议",
+        "desc": "为主角增加 2000 点影响力，用于在王国议会发起或支持决议。",
         "source": "https://mountandblade.fandom.com/wiki/Developer_Console_Mod/Console_Commands"
       }
     ],
@@ -11294,7 +11294,7 @@ window.GAMES_DATA = [
               "en": "Enable Cheat Mode"
             },
             "code": "config.cheat_mode 1",
-            "desc": "激活全部战役指令与大地图全军瞬移特权",
+            "desc": "启用游戏内置作弊模式，解锁后续的作弊类战役指令。",
             "id": "mount-and-blade-2_cmd_1",
             "syntax_type": "gm_command",
             "framework_required": "Native Engine Console",
@@ -11306,7 +11306,7 @@ window.GAMES_DATA = [
               "en": "Add 1,000,000 Gold"
             },
             "code": "campaign.add_gold_to_hero 1000000",
-            "desc": "随意雇佣全大陆雇佣军团与招揽封臣领主",
+            "desc": "给主角增加 1,000,000 第纳尔金币。",
             "id": "mount-and-blade-2_cmd_2",
             "syntax_type": "gm_command",
             "framework_required": "Native Engine Console",
@@ -11318,7 +11318,7 @@ window.GAMES_DATA = [
               "en": "Add 1,000 Renown"
             },
             "code": "campaign.add_renown_to_clan 1000",
-            "desc": "快速跃升 6 级最高家族等级，大幅扩充带兵军力上限",
+            "desc": "为主角家族增加 1000 点声望，声望越高家族等级越高，可带兵规模上限也越大。",
             "id": "mount-and-blade-2_cmd_3",
             "syntax_type": "gm_command",
             "framework_required": "Native Engine Console",
@@ -11330,7 +11330,7 @@ window.GAMES_DATA = [
               "en": "Add 2,000 Influence"
             },
             "code": "campaign.add_influence 2000",
-            "desc": "随意在王国议会推行专制法令与封地分配决议",
+            "desc": "为主角增加 2000 点影响力，用于在王国议会发起或支持决议。",
             "id": "mount-and-blade-2_cmd_4",
             "syntax_type": "gm_command",
             "framework_required": "Native Engine Console",
@@ -11338,11 +11338,11 @@ window.GAMES_DATA = [
           },
           {
             "name": {
-              "zh-CN": "主角全武器与统御技能升满 300 级",
+              "zh-CN": "主角全部技能升至满级 (300)",
               "en": "Max All Skills 300"
             },
             "code": "campaign.set_all_skills_main_hero",
-            "desc": "单手剑、长偃月刀、弓箭与统御谋略全部神级成型",
+            "desc": "将主角的全部技能等级都提升到满级（300 级）。",
             "id": "mount-and-blade-2_cmd_5",
             "syntax_type": "gm_command",
             "framework_required": "Native Engine Console",
@@ -11351,7 +11351,7 @@ window.GAMES_DATA = [
         ]
       },
       {
-        "category": "🛡️ 顶级王牌精锐兵种直接入队 (Elite Troops Spawner)",
+        "category": "🛡️ 精锐兵种直接入队 (Elite Troops Spawner)",
         "commands": [
           {
             "name": {
@@ -11359,7 +11359,7 @@ window.GAMES_DATA = [
               "en": "Elite Cataphract x50"
             },
             "code": "campaign.give_troops imperial_elite_cataphract 50",
-            "desc": "卡拉迪亚陆战最重甲铁壁重骑兵，冲锋践踏一切步兵线",
+            "desc": "帝国重甲具装骑兵，适合正面冲锋的重骑兵单位。",
             "id": "mount-and-blade-2_cmd_6",
             "syntax_type": "gm_command",
             "framework_required": "Native Engine Console",
@@ -11371,7 +11371,7 @@ window.GAMES_DATA = [
               "en": "Fian Champion x50"
             },
             "code": "campaign.give_troops battanian_fian_champion 50",
-            "desc": "全大陆射程最远、伤害最高的超远距离灭世箭雨",
+            "desc": "巴旦尼亚的精英弓箭手兵种，适合远程输出。",
             "id": "mount-and-blade-2_cmd_7",
             "syntax_type": "gm_command",
             "framework_required": "Native Engine Console",
@@ -11379,11 +11379,11 @@ window.GAMES_DATA = [
           },
           {
             "name": {
-              "zh-CN": "调集 50 名库赛特可汗卫队顶级骑射手",
+              "zh-CN": "调集 50 名库赛特可汗卫队 (Khan's Guard)",
               "en": "Khan's Guard x50"
             },
             "code": "campaign.give_troops khuzait_khans_guard 50",
-            "desc": "机动性极强，配偃月刀兼具恐怖近战能力的游击骑射之王",
+            "desc": "库赛特可汗卫队精英骑兵，兼具骑射与近战能力。",
             "id": "mount-and-blade-2_cmd_8",
             "syntax_type": "gm_command",
             "framework_required": "Native Engine Console",
@@ -11395,7 +11395,7 @@ window.GAMES_DATA = [
               "en": "Banner Knight x50"
             },
             "code": "campaign.give_troops vlandian_banner_knight 50",
-            "desc": "超高骑枪冲刺伤害的西欧骑士",
+            "desc": "瓦兰迪亚旗手骑士，擅长骑枪冲锋。",
             "id": "mount-and-blade-2_cmd_9",
             "syntax_type": "gm_command",
             "framework_required": "Native Engine Console",
@@ -11407,7 +11407,7 @@ window.GAMES_DATA = [
               "en": "Heal Main Party"
             },
             "code": "campaign.heal_main_party",
-            "desc": "打完硬仗瞬间满血满员，连续攻城略地不歇气",
+            "desc": "治愈主力部队的全部伤员。",
             "id": "mount-and-blade-2_cmd_10",
             "syntax_type": "gm_command",
             "framework_required": "Native Engine Console",
@@ -11422,7 +11422,7 @@ window.GAMES_DATA = [
         "title": "Harmony",
         "author": "Aragas",
         "category": "核心基础库 (Core Engine)",
-        "desc": "在启动器顺序中必须排在 Native 之上的最核心代码重写补丁。",
+        "desc": "运行时方法补丁库，用于让所有模组使用同一版本的 Harmony 以减少冲突，并提供 Ctrl+Alt+H 调试界面。",
         "dependencies": [
           "None"
         ],
@@ -11443,7 +11443,7 @@ window.GAMES_DATA = [
         "title": "Mod Configuration Menu (MCM)",
         "author": "Aragas",
         "category": "界面交互 (UI / MCM)",
-        "desc": "为骑砍2带来统一的游戏内 MOD 调整界面，自由调节带兵数、结婚率与战场斩首概率。",
+        "desc": "游戏内统一的 Mod 设置菜单框架，支持 MCM 的其他模组可以在这里提供可调整的选项。",
         "dependencies": [
           "Harmony",
           "ButterLib",
@@ -11732,11 +11732,11 @@ window.GAMES_DATA = [
         "commands": [
           {
             "name": {
-              "zh-CN": "增加 500,000 农场流动资金",
-              "en": "Add 500,000 Money"
+              "zh-CN": "将农场资金设为 500,000",
+              "en": "Set Money to 500,000"
             },
             "code": "player_setmoney 500000",
-            "desc": "升级终极温室与豪宅酒窖",
+            "desc": "将当前持有的金钱数值直接设为 500,000。",
             "id": "stardew-valley_cmd_5",
             "syntax_type": "unity_dev",
             "framework_required": "SMAPI",
@@ -11787,14 +11787,14 @@ window.GAMES_DATA = [
         "title": "SMAPI - Stardew Modding API",
         "author": "Pathoschild",
         "category": "核心前置 (Core Engine)",
-        "desc": "星露谷物语唯一的模组加载器，提供控制台终端、自动更新提示与模组冲突保护。",
+        "desc": "星露谷物语的模组加载器，提供控制台终端和模组管理功能。",
         "dependencies": [
           "None"
         ],
         "installPath": "Stardew Valley\\",
         "installSteps": [
           "1. 下载解压运行 install on Windows.bat，按 1 安装；",
-          "2. 将 Steam 启动选项配置为指向 StardewModdingAPI.exe 即可。"
+          "2. 将 Steam 启动选项配置为指向 StardewModdingAPI.exe。"
         ],
         "nexusUrl": "https://www.nexusmods.com/stardewvalley/mods/2400",
         "version": "4.5.2",
@@ -11810,7 +11810,7 @@ window.GAMES_DATA = [
         "title": "CJB Item Spawner",
         "author": "CJBok and Pathoschild",
         "category": "游戏内修改器 (Trainer Mod)",
-        "desc": "游戏中按下 I 键！直接弹出一个精美的分类目录，一键刷出游戏中任意作物、种子、宝石、家具与武器，自由指定品质等级！",
+        "desc": "游戏中按 I 键打开物品菜单，可以按分类浏览并生成作物、种子、宝石、家具与武器等道具，并可指定物品品质。",
         "dependencies": [
           "SMAPI"
         ],
@@ -12497,11 +12497,11 @@ window.GAMES_DATA = [
     "popularCommands": [
       {
         "name": {
-          "zh-CN": "完全无敌模式 (Nodamage)",
+          "zh-CN": "免疫伤害模式 (Nodamage)",
           "en": "No Damage"
         },
         "command": "nodamage",
-        "desc": "潜水服与载具完全免疫一切攻击与利维坦死神撕咬",
+        "desc": "开启后可免疫环境伤害、碰撞和生物攻击，但饥饿、口渴与缺氧仍会正常影响角色；每次重新读档都需要重新输入。",
         "source": "https://subnautica.fandom.com/wiki/Console_Commands_(Subnautica)"
       },
       {
@@ -12510,7 +12510,7 @@ window.GAMES_DATA = [
           "en": "Infinite Oxygen"
         },
         "command": "oxygen",
-        "desc": "深潜马里亚纳海沟永不窒息缺氧",
+        "desc": "开启后潜水不再消耗氧气；但如果氧气已经耗尽，开启也无法避免溺水死亡。",
         "source": "https://subnautica.fandom.com/wiki/Console_Commands_(Subnautica)"
       },
       {
@@ -12524,11 +12524,11 @@ window.GAMES_DATA = [
       },
       {
         "name": {
-          "zh-CN": "建造枪极速秒建 (Fast Build)",
+          "zh-CN": "快速建造 (Fast Build)",
           "en": "Fast Building"
         },
         "command": "fastbuild",
-        "desc": "对准水下基地走廊与多功能舱秒级搭建完工",
+        "desc": "使用建造枪建造舱体和房间时几乎瞬间完成，建议搭配 nocost 命令使用。",
         "source": "https://subnautica.fandom.com/wiki/Console_Commands_(Subnautica)"
       }
     ],
@@ -12578,15 +12578,15 @@ window.GAMES_DATA = [
     },
     "consoleCategories": [
       {
-        "category": "👑 上帝模式与自由建造 (God Mode & Building)",
+        "category": "👑 免疫伤害与自由建造 (No Damage & Building)",
         "commands": [
           {
             "name": {
-              "zh-CN": "完全无敌模式 (Nodamage)",
+              "zh-CN": "免疫伤害模式 (Nodamage)",
               "en": "No Damage"
             },
             "code": "nodamage",
-            "desc": "潜水服与载具完全免疫一切攻击与利维坦死神撕咬",
+            "desc": "开启后可免疫环境伤害、碰撞和生物攻击，但饥饿、口渴与缺氧仍会正常影响角色；每次重新读档都需要重新输入。",
             "id": "subnautica_cmd_1",
             "syntax_type": "unity_dev",
             "framework_required": "Native Engine Console",
@@ -12598,7 +12598,7 @@ window.GAMES_DATA = [
               "en": "Infinite Oxygen"
             },
             "code": "oxygen",
-            "desc": "深潜马里亚纳海沟永不窒息缺氧",
+            "desc": "开启后潜水不再消耗氧气；但如果氧气已经耗尽，开启也无法避免溺水死亡。",
             "id": "subnautica_cmd_2",
             "syntax_type": "unity_dev",
             "framework_required": "Native Engine Console",
@@ -12618,11 +12618,11 @@ window.GAMES_DATA = [
           },
           {
             "name": {
-              "zh-CN": "建造枪极速秒建 (Fast Build)",
+              "zh-CN": "快速建造 (Fast Build)",
               "en": "Fast Building"
             },
             "code": "fastbuild",
-            "desc": "对准水下基地走廊与多功能舱秒级搭建完工",
+            "desc": "使用建造枪建造舱体和房间时几乎瞬间完成，建议搭配 nocost 命令使用。",
             "id": "subnautica_cmd_4",
             "syntax_type": "unity_dev",
             "framework_required": "Native Engine Console",
@@ -12630,11 +12630,11 @@ window.GAMES_DATA = [
           },
           {
             "name": {
-              "zh-CN": "全科技蓝图一键解锁 (Unlock All)",
+              "zh-CN": "解锁全部蓝图 (unlock all)",
               "en": "Unlock All Blueprints"
             },
             "code": "unlock all",
-            "desc": "瞬间解锁独眼巨人号、海虾号装甲与火箭逃生舱全蓝图",
+            "desc": "解锁游戏中的全部蓝图。",
             "id": "subnautica_cmd_5",
             "syntax_type": "unity_dev",
             "framework_required": "Native Engine Console",
@@ -12675,7 +12675,7 @@ window.GAMES_DATA = [
               "en": "Kyanite x20"
             },
             "code": "item kyanite 20",
-            "desc": "熔岩区最珍贵矿石，升级海虾号深度模块必备",
+            "desc": "熔岩区特有矿石，用于升级海虾号 (Prawn Suit) 的深度模块。",
             "id": "subnautica_cmd_8",
             "syntax_type": "unity_dev",
             "framework_required": "Native Engine Console",
@@ -12695,11 +12695,11 @@ window.GAMES_DATA = [
           },
           {
             "name": {
-              "zh-CN": "获取 10 块顶级离子动力电池",
+              "zh-CN": "获取 10 块离子能量电池 (Ion Power Cell)",
               "en": "Ion Power Cell x10"
             },
             "code": "item precursorionpowercell 10",
-            "desc": "外星科技先驱者电池，为交通工具提供更高电力容量",
+            "desc": "用法与普通能量电池相同，电量是普通能量电池的 5 倍，充满电所需时间也是 5 倍。",
             "id": "subnautica_cmd_10",
             "syntax_type": "unity_dev",
             "framework_required": "Native Engine Console",
@@ -12755,14 +12755,14 @@ window.GAMES_DATA = [
         "title": "Tobey's BepInEx Pack for Subnautica",
         "author": "toebeann",
         "category": "核心前置 (Core Engine)",
-        "desc": "Subnautica 2.0 时代现代化模组运行框架，全面接管插件加载。",
+        "desc": "BepInEx 模组框架的 Subnautica 预配置版，用于加载其他 Mod 插件，支持 Windows、macOS 与 Linux。",
         "dependencies": [
           "None"
         ],
         "installPath": "Subnautica\\BepInEx\\",
         "installSteps": [
           "1. 将压缩包解压直接放入 Subnautica 根目录；",
-          "2. 往后把所有 .dll 模组文件直接放入 BepInEx\\plugins 即可。"
+          "2. 之后把其他 .dll 模组文件放入 BepInEx\\plugins 文件夹。"
         ],
         "nexusUrl": "https://www.nexusmods.com/subnautica/mods/1108",
         "version": "5.4.23-pack.3.1.1",
@@ -12778,14 +12778,14 @@ window.GAMES_DATA = [
         "title": "Map",
         "author": "newman55",
         "category": "便民界面 (UI / Navigation)",
-        "desc": "彻底治愈深海迷路恐惧症！在 PDA 界面加入全尺寸海底地形图、实时位置坐标与热能/遗迹标记点。",
+        "desc": "在 PDA 的 Beacon Manager 标签页加入地图，显示海底地形、当前坐标与信标标记点。",
         "dependencies": [
           "BepInEx"
         ],
         "installPath": "Subnautica\\BepInEx\\plugins\\SubnauticaMap\\",
         "installSteps": [
           "1. 将 SubnauticaMap 文件夹放入 BepInEx\\plugins；",
-          "2. 游戏中按 M 键即可呼出实时全景地图。"
+          "2. 游戏中按 M 键打开地图。"
         ],
         "nexusUrl": "https://www.nexusmods.com/subnautica/mods/12",
         "version": "1.5.12",
@@ -13203,7 +13203,7 @@ window.GAMES_DATA = [
           "en": "Enable Dev Commands"
         },
         "command": "devcommands",
-        "desc": "解锁所有后续高级作弊与刷物命令的核心主钥匙",
+        "desc": "激活控制台的开发者/作弊指令权限，后续的作弊与刷物指令需要先执行这个。",
         "source": "https://valheim.fandom.com/wiki/Developer_console"
       },
       {
@@ -13212,7 +13212,7 @@ window.GAMES_DATA = [
           "en": "Debug Mode"
         },
         "command": "debugmode",
-        "desc": "按 Z 键原地飞天漫游、按 K 键秒杀全屏敌人、按 B 键免工作台无材料无限建造！",
+        "desc": "开启调试模式后：Z 键切换飞行，K 键消灭附近的敌人（驯服生物除外），B 键建造不消耗材料且不需要工作台。",
         "source": "https://valheim.fandom.com/wiki/Developer_console"
       },
       {
@@ -13230,7 +13230,7 @@ window.GAMES_DATA = [
           "en": "Explore Full Map"
         },
         "command": "exploremap",
-        "desc": "驱散全九界迷雾，准确定位商人位置与五大 Boss 献祭祭坛",
+        "desc": "揭开整张世界地图的未探索迷雾。",
         "source": "https://valheim.fandom.com/wiki/Developer_console"
       }
     ],
@@ -13288,7 +13288,7 @@ window.GAMES_DATA = [
               "en": "Enable Dev Commands"
             },
             "code": "devcommands",
-            "desc": "解锁所有后续高级作弊与刷物命令的核心主钥匙",
+            "desc": "激活控制台的开发者/作弊指令权限，后续的作弊与刷物指令需要先执行这个。",
             "id": "valheim_cmd_1",
             "syntax_type": "unity_dev",
             "framework_required": "Native Engine Console",
@@ -13300,7 +13300,7 @@ window.GAMES_DATA = [
               "en": "Debug Mode"
             },
             "code": "debugmode",
-            "desc": "按 Z 键原地飞天漫游、按 K 键秒杀全屏敌人、按 B 键免工作台无材料无限建造！",
+            "desc": "开启调试模式后：Z 键切换飞行，K 键消灭附近的敌人（驯服生物除外），B 键建造不消耗材料且不需要工作台。",
             "id": "valheim_cmd_2",
             "syntax_type": "unity_dev",
             "framework_required": "Native Engine Console",
@@ -13308,11 +13308,11 @@ window.GAMES_DATA = [
           },
           {
             "name": {
-              "zh-CN": "无敌上帝模式 (God Mode)",
+              "zh-CN": "上帝模式 (god)",
               "en": "God Mode"
             },
             "code": "god",
-            "desc": "生命锁死，免疫巨魔猛砸与毒雾窒息",
+            "desc": "开启后即使受到超过剩余生命的伤害，生命值也会保持在 1，不会死亡；再次输入可关闭。",
             "id": "valheim_cmd_3",
             "syntax_type": "unity_dev",
             "framework_required": "Native Engine Console",
@@ -13336,7 +13336,7 @@ window.GAMES_DATA = [
               "en": "Explore Full Map"
             },
             "code": "exploremap",
-            "desc": "驱散全九界迷雾，准确定位商人位置与五大 Boss 献祭祭坛",
+            "desc": "揭开整张世界地图的未探索迷雾。",
             "id": "valheim_cmd_5",
             "syntax_type": "unity_dev",
             "framework_required": "Native Engine Console",
@@ -13348,7 +13348,7 @@ window.GAMES_DATA = [
               "en": "Max Running Skill"
             },
             "code": "raiseskill Run 100",
-            "desc": "移动速度极大增强",
+            "desc": "大幅提升角色奔跑技能等级，移动速度随之提升。",
             "id": "valheim_cmd_6",
             "syntax_type": "unity_dev",
             "framework_required": "Native Engine Console",
@@ -13365,7 +13365,7 @@ window.GAMES_DATA = [
               "en": "Black Metal x50"
             },
             "code": "spawn BlackMetal 50",
-            "desc": "平原时代锻造最锋利武器核心黑金属",
+            "desc": "平原时代锻造武器所需的核心金属。",
             "id": "valheim_cmd_7",
             "syntax_type": "unity_dev",
             "framework_required": "Native Engine Console",
@@ -13401,7 +13401,7 @@ window.GAMES_DATA = [
               "en": "Fine Wood x100"
             },
             "code": "spawn FineWood 100",
-            "desc": "打造维京长船与高级家具传送门必备木材",
+            "desc": "打造维京长船、高级家具与传送门所需的木材。",
             "id": "valheim_cmd_10",
             "syntax_type": "unity_dev",
             "framework_required": "Native Engine Console",
@@ -13422,15 +13422,15 @@ window.GAMES_DATA = [
         ]
       },
       {
-        "category": "⚔️ 满级神装武器与狼皮防寒胸甲 (Top Tier Gear)",
+        "category": "⚔️ 满级武器与护甲 (Top Tier Gear)",
         "commands": [
           {
             "name": {
-              "zh-CN": "满级尸鬼之牙绿光神弓 (Draugr Fang Lv4)",
+              "zh-CN": "满级尸鬼之牙弓 (Draugr Fang Lv4)",
               "en": "Draugr Fang Bow"
             },
             "code": "spawn BowDraugrFang 1 4",
-            "desc": "自带持续剧毒伤害的毕业极品战弓",
+            "desc": "带有持续中毒伤害效果的弓。",
             "id": "valheim_cmd_12",
             "syntax_type": "unity_dev",
             "framework_required": "Native Engine Console",
@@ -13442,7 +13442,7 @@ window.GAMES_DATA = [
               "en": "Blackmetal Sword"
             },
             "code": "spawn SwordBlackmetal 1 4",
-            "desc": "近战最高爆发物理伤害单手剑",
+            "desc": "黑金属打造的单手剑，近战武器。",
             "id": "valheim_cmd_13",
             "syntax_type": "unity_dev",
             "framework_required": "Native Engine Console",
@@ -13462,7 +13462,7 @@ window.GAMES_DATA = [
           },
           {
             "name": {
-              "zh-CN": "鹿角重型战锤 (Iron Sledge Lv4)",
+              "zh-CN": "满级铁锤 (Iron Sledge Lv4)",
               "en": "Iron Sledge"
             },
             "code": "spawn SledgeIron 1 4",
@@ -13481,14 +13481,14 @@ window.GAMES_DATA = [
         "title": "BepInExPack_Valheim",
         "author": "Azumatt",
         "category": "核心前置 (Core Engine)",
-        "desc": "几乎所有 Valheim 模组的唯一前置基石。",
+        "desc": "预配置好的 BepInEx 模组框架，是安装其他 Valheim 模组的前置。",
         "dependencies": [
           "None"
         ],
         "installPath": "Valheim\\BepInEx\\",
         "installSteps": [
           "1. 解压放入 Valheim 根目录；",
-          "2. 往后所有模组放进 BepInEx\\plugins 即可。"
+          "2. 之后把其他模组放进 BepInEx\\plugins 文件夹。"
         ],
         "nexusUrl": "https://www.nexusmods.com/valheim/mods/3605",
         "version": "5.4.2360",
@@ -13502,7 +13502,7 @@ window.GAMES_DATA = [
         "title": "Valheim Plus (by Grantapher)",
         "author": "VeronicaWera",
         "category": "体验大修 (Overhaul)",
-        "desc": "将游戏体验提升一个维度的超级神模组！提供箱子自动就近拉取材料冶炼、背包专属装备栏、负重可调节与建筑无支柱下垂限制。",
+        "desc": "游戏体验优化类模组，提供箱子自动取料、专属装备栏、可调节负重上限和建筑无支柱限制等功能，各项功能都可以通过配置文件单独开关。",
         "dependencies": [
           "BepInExPack Valheim"
         ],
@@ -14444,11 +14444,11 @@ window.GAMES_DATA = [
     "popularCommands": [
       {
         "name": {
-          "zh-CN": "无敌上帝模式 (TGM)",
+          "zh-CN": "上帝模式 (TGM)",
           "en": "God Mode"
         },
         "command": "tgm",
-        "desc": "生命、AP、子弹全锁定无限，武器耐久不减",
+        "desc": "开启/关闭上帝模式：生命值无限、弹药无限且无需装弹、可携带无限重量物品",
         "source": "https://fallout.fandom.com/wiki/Fallout:_New_Vegas_console_commands"
       },
       {
@@ -14490,7 +14490,7 @@ window.GAMES_DATA = [
         "commands": [
           {
             "name": {
-              "zh-CN": "无敌上帝模式 (TGM)",
+              "zh-CN": "上帝模式 (TGM)",
               "en": "God Mode"
             },
             "code": "tgm",
@@ -14559,7 +14559,7 @@ window.GAMES_DATA = [
               "en": "Add 500 Bobby Pins"
             },
             "code": "player.additem 0000000a 500",
-            "desc": "秒开废土全部门锁",
+            "desc": "用于撬开锁住的容器与房门。",
             "id": "fallout-new-vegas_cmd_6",
             "syntax_type": "creation_hex",
             "framework_required": "Native Engine Console",
@@ -14576,7 +14576,7 @@ window.GAMES_DATA = [
               "en": "Anti-Materiel Rifle"
             },
             "code": "player.additem 0008f21c 1",
-            "desc": ".50 高爆穿甲弹秒杀死亡爪之王的神枪",
+            "desc": "发射 .50 口径穿甲弹的高伤害狙击步枪。",
             "id": "fallout-new-vegas_cmd_7",
             "syntax_type": "creation_hex",
             "framework_required": "Native Engine Console",
@@ -14636,7 +14636,7 @@ window.GAMES_DATA = [
               "en": "Remnants Power Armor"
             },
             "code": "player.additem 00133166 1",
-            "desc": "前英克雷最高防御力动力装甲",
+            "desc": "英克雷残党专属动力装甲，护甲等级（DT）为 28，并提供 +1 力量和 +15 抗辐射加成。",
             "id": "fallout-new-vegas_cmd_12",
             "syntax_type": "creation_hex",
             "framework_required": "Native Engine Console",
@@ -14650,8 +14650,8 @@ window.GAMES_DATA = [
         "id": "nvse",
         "title": "New Vegas Script Extender (NVSE xNVSE)",
         "author": "xNVSE Team",
-        "category": "核心前置 (Core Engine)",
-        "desc": "新维加斯稳定运行的绝对基石，修复原版内存泄露与物理高帧率跳出问题。",
+        "category": "框架 / 前置",
+        "desc": "扩展 New Vegas 脚本功能的工具，常用于修复内存泄漏等原版问题，是许多 Mod 的前置。",
         "dependencies": [
           "None"
         ],
@@ -14759,14 +14759,14 @@ window.GAMES_DATA = [
         "title": "RimworldHugsLib",
         "author": "UnlimitedHugs",
         "category": "核心前置 (Library)",
-        "desc": "提供全局 Mod 配置选项菜单与新闻热更日志。",
+        "desc": "RimWorld 的 Mod 共享前置库：为依赖它的 Mod 提供设置菜单、版本更新公告，并可在游戏内按 Ctrl+F12 上传日志生成分享链接。",
         "dependencies": [
           "Harmony"
         ],
         "installPath": "RimWorld\\Mods\\HugsLib\\",
         "installSteps": [
-          "1. 放入 Mods 目录并排在 Harmony 与 Core 之后；",
-          "2. 游戏中提供一键排错日志分享链接。"
+          "1. 放入 Mods 目录，加载顺序排在 Harmony 与 Core 之后；",
+          "2. 出错时可在游戏内按 Ctrl+F12 上传日志，把返回的链接发给 Mod 作者排查。"
         ],
         "nexusUrl": "https://github.com/UnlimitedHugs/RimworldHugsLib",
         "version": "12.0.0",
@@ -14956,34 +14956,34 @@ window.GAMES_DATA = [
           "en": "God Mode"
         },
         "command": "godmode on",
-        "desc": "角色生命锁定无敌，饥饿口渴完全不掉",
+        "desc": "开启后角色免疫所有伤害，再次输入可关闭。",
         "source": "https://sonsoftheforest.wiki.gg/wiki/Console_commands"
       },
       {
         "name": {
-          "zh-CN": "背包一键刷满所有物品装备 (Add All Items)",
+          "zh-CN": "背包填满全部物品 (Add All Items)",
           "en": "Add All Items"
         },
         "command": "addallitems",
-        "desc": "瞬间获得全套枪械、手电筒、登山镐与食物补给",
+        "desc": "将游戏中所有物品加入背包，包括武器、工具与消耗品等。",
         "source": "https://sonsoftheforest.wiki.gg/wiki/Console_commands"
       },
       {
         "name": {
-          "zh-CN": "无限原木神技 (Log Hack)",
+          "zh-CN": "无限原木 (Log Hack)",
           "en": "Infinite Logs"
         },
         "command": "loghack on",
-        "desc": "手中木头永远用不完，建基地造庄园最强神技！",
+        "desc": "开启后原木数量无限，可切换木材种类。",
         "source": "https://sonsoftheforest.wiki.gg/wiki/Console_commands"
       },
       {
         "name": {
-          "zh-CN": "蓝图瞬间秒建完成 (Instant Build)",
+          "zh-CN": "蓝图瞬间完成建造 (Instant Build)",
           "en": "Instant Book Build"
         },
         "command": "instantbookbuild",
-        "desc": "打开建筑手册点击任何树屋或木墙直接秒建完工",
+        "desc": "开启后通过建筑手册放置的蓝图会直接完成建造，且不消耗材料。",
         "source": "https://sonsoftheforest.wiki.gg/wiki/Console_commands"
       }
     ],
@@ -15027,7 +15027,7 @@ window.GAMES_DATA = [
     ],
     "consoleCategories": [
       {
-        "category": "👑 官方控制台作弊指令 (Cheatstick Console)",
+        "category": "官方控制台作弊指令 (Cheatstick Console)",
         "commands": [
           {
             "name": {
@@ -15035,7 +15035,7 @@ window.GAMES_DATA = [
               "en": "God Mode"
             },
             "code": "godmode on",
-            "desc": "角色生命锁定无敌，饥饿口渴完全不掉",
+            "desc": "开启后角色免疫所有伤害，再次输入可关闭。",
             "id": "sons-of-the-forest_cmd_1",
             "syntax_type": "gm_command",
             "framework_required": "Native Engine Console",
@@ -15043,11 +15043,11 @@ window.GAMES_DATA = [
           },
           {
             "name": {
-              "zh-CN": "背包一键刷满所有物品装备 (Add All Items)",
+              "zh-CN": "背包填满全部物品 (Add All Items)",
               "en": "Add All Items"
             },
             "code": "addallitems",
-            "desc": "瞬间获得全套枪械、手电筒、登山镐与食物补给",
+            "desc": "将游戏中所有物品加入背包，包括武器、工具与消耗品等。",
             "id": "sons-of-the-forest_cmd_2",
             "syntax_type": "gm_command",
             "framework_required": "Native Engine Console",
@@ -15055,11 +15055,11 @@ window.GAMES_DATA = [
           },
           {
             "name": {
-              "zh-CN": "无限原木神技 (Log Hack)",
+              "zh-CN": "无限原木 (Log Hack)",
               "en": "Infinite Logs"
             },
             "code": "loghack on",
-            "desc": "手中木头永远用不完，建基地造庄园最强神技！",
+            "desc": "开启后原木数量无限，可切换木材种类。",
             "id": "sons-of-the-forest_cmd_3",
             "syntax_type": "gm_command",
             "framework_required": "Native Engine Console",
@@ -15067,11 +15067,11 @@ window.GAMES_DATA = [
           },
           {
             "name": {
-              "zh-CN": "蓝图瞬间秒建完成 (Instant Build)",
+              "zh-CN": "蓝图瞬间完成建造 (Instant Build)",
               "en": "Instant Book Build"
             },
             "code": "instantbookbuild",
-            "desc": "打开建筑手册点击任何树屋或木墙直接秒建完工",
+            "desc": "开启后通过建筑手册放置的蓝图会直接完成建造，且不消耗材料。",
             "id": "sons-of-the-forest_cmd_4",
             "syntax_type": "gm_command",
             "framework_required": "Native Engine Console",
@@ -15083,7 +15083,7 @@ window.GAMES_DATA = [
               "en": "Spawn Shotgun"
             },
             "code": "spawnitem 358",
-            "desc": "直接获取重型泵动散弹枪",
+            "desc": "直接获得一把散弹枪。",
             "id": "sons-of-the-forest_cmd_5",
             "syntax_type": "gm_command",
             "framework_required": "Native Engine Console",
@@ -15095,7 +15095,7 @@ window.GAMES_DATA = [
               "en": "Spawn Katana"
             },
             "code": "spawnitem 367",
-            "desc": "获取近战威力极强的锋利武士刀",
+            "desc": "直接获得一把武士刀，近战武器。",
             "id": "sons-of-the-forest_cmd_6",
             "syntax_type": "gm_command",
             "framework_required": "Native Engine Console",
@@ -15103,11 +15103,11 @@ window.GAMES_DATA = [
           },
           {
             "name": {
-              "zh-CN": "时间强制重置为正午阳光大好",
+              "zh-CN": "设置时间为正午 12 点",
               "en": "Set Noon"
             },
             "code": "settimeofday 12",
-            "desc": "彻底告别漆黑深夜恐惧",
+            "desc": "将游戏内时间设置为中午 12 点。",
             "id": "sons-of-the-forest_cmd_7",
             "syntax_type": "gm_command",
             "framework_required": "Native Engine Console",
@@ -15122,14 +15122,14 @@ window.GAMES_DATA = [
         "title": "RedLoader",
         "author": "ToniMacaroni",
         "category": "核心前置 (Framework)",
-        "desc": "森林之子最新统一的模组加载工具，支持无缝热重载模组。",
+        "desc": "森林之子的模组加载器与 SDK，提供统一的模组配置、UI 框架与调试工具。",
         "dependencies": [
           "None"
         ],
         "installPath": "Sons Of The Forest\\",
         "installSteps": [
           "1. 将 RedLoader 解压覆盖至游戏根目录；",
-          "2. 往后所有模组放入 Mods 目录即可。"
+          "2. 往后所有模组放入 Mods 目录。"
         ],
         "nexusUrl": "https://github.com/ToniMacaroni/RedLoader",
         "version": "0.8.6",
@@ -15310,11 +15310,11 @@ window.GAMES_DATA = [
     "popularCommands": [
       {
         "name": {
-          "zh-CN": "画质渲染比例锁定 100% 锐利",
+          "zh-CN": "渲染分辨率设为 100%（原生）",
           "en": "Screen Percentage"
         },
         "command": "r.ScreenPercentage 100",
-        "desc": "在控制台输入，消除超分模糊呈现原生细腻工业质感",
+        "desc": "将内部渲染分辨率设为输出分辨率的 100%，避免动态分辨率缩放造成的画面模糊。",
         "source": "https://satisfactory.wiki.gg/wiki/Debug_console"
       }
     ],
@@ -15358,15 +15358,15 @@ window.GAMES_DATA = [
     ],
     "consoleCategories": [
       {
-        "category": "👑 官方高级游戏设置与指令 (Advanced Settings)",
+        "category": "官方高级游戏设置与指令 (Advanced Settings)",
         "commands": [
           {
             "name": {
-              "zh-CN": "画质渲染比例锁定 100% 锐利",
+              "zh-CN": "渲染分辨率设为 100%（原生）",
               "en": "Screen Percentage"
             },
             "code": "r.ScreenPercentage 100",
-            "desc": "在控制台输入，消除超分模糊呈现原生细腻工业质感",
+            "desc": "将内部渲染分辨率设为输出分辨率的 100%，避免动态分辨率缩放造成的画面模糊。",
             "id": "satisfactory_cmd_4",
             "syntax_type": "gm_command",
             "framework_required": "Native Engine Console",
@@ -15381,14 +15381,14 @@ window.GAMES_DATA = [
         "title": "Satisfactory Mod Manager",
         "author": "satisfactorymodding",
         "category": "安装器工具 (Installer)",
-        "desc": "一键在线安装全自动微型传送带、智能分流器与结构蓝图工具。",
+        "desc": "卫星工厂的模组管理器：在客户端里选择模组安装，自动下载依赖，并可管理多套模组配置。",
         "dependencies": [
           "None"
         ],
         "installPath": "Satisfactory\\",
         "installSteps": [
-          "1. 运行 SMM 客户端自动检测游戏；",
-          "2. 勾选心仪 MOD 点击 Launch Game 自动生效。"
+          "1. 运行 SMM 客户端，自动检测游戏安装路径；",
+          "2. 勾选所需 MOD 点击 Launch Game 生效。"
         ],
         "nexusUrl": "https://github.com/satisfactorymodding/SatisfactoryModManager",
         "version": "v3.2.0",
@@ -15530,38 +15530,38 @@ window.GAMES_DATA = [
     "popularCommands": [
       {
         "name": {
-          "zh-CN": "开启随身免费创造制造模式 (核心神技)",
+          "zh-CN": "开启免费创造模式 (Cheat Mode)",
           "en": "Free Cheat Mode"
         },
         "command": "/c game.player.cheat_mode = true",
-        "desc": "随身直接免费无限制造所有高级流水线工厂、化工厂与极速蓝带！",
+        "desc": "开启后合成物品免费且不消耗材料。",
         "source": "https://wiki.factorio.com/Console"
       },
       {
         "name": {
-          "zh-CN": "瞬间完成全科技树全部研究",
+          "zh-CN": "解锁并研发所有科技",
           "en": "Research All Tech"
         },
         "command": "/c game.player.force.research_all_technologies()",
-        "desc": "无需任何科技包瓶子，核电、火箭发射仓全科技秒开！",
+        "desc": "立即解锁并完成所有科技的研究，无需消耗科技瓶。",
         "source": "https://wiki.factorio.com/Console"
       },
       {
         "name": {
-          "zh-CN": "随身手工制造速度暴增 100 倍",
+          "zh-CN": "大幅提升手动合成速度",
           "en": "100x Crafting Speed"
         },
         "command": "/c game.player.force.manual_crafting_speed_modifier = 100",
-        "desc": "原本几十秒的手工制作瞬间秒造出炉",
+        "desc": "将手动合成速度加成设置为 100，大幅加快手动制作物品的速度。",
         "source": "https://wiki.factorio.com/Console"
       },
       {
         "name": {
-          "zh-CN": "刷出顶级动力装甲 MK2",
+          "zh-CN": "刷出动力装甲 MK2",
           "en": "Power Armor MK2"
         },
         "command": "/c game.player.insert{name=\"power-armor-mk2\", count=1}",
-        "desc": "拥有最大插槽网格的终极工程师战甲",
+        "desc": "获得动力装甲 MK2，是游戏内护甲插槽格数最多的护甲之一。",
         "source": "https://wiki.factorio.com/Console"
       }
     ],
@@ -15572,15 +15572,15 @@ window.GAMES_DATA = [
     "trainerHotkeys": [],
     "consoleCategories": [
       {
-        "category": "👑 官方 Lua 作弊创造指令 (Lua Cheats)",
+        "category": "官方 Lua 作弊创造指令 (Lua Cheats)",
         "commands": [
           {
             "name": {
-              "zh-CN": "开启随身免费创造制造模式 (核心神技)",
+              "zh-CN": "开启免费创造模式 (Cheat Mode)",
               "en": "Free Cheat Mode"
             },
             "code": "/c game.player.cheat_mode = true",
-            "desc": "随身直接免费无限制造所有高级流水线工厂、化工厂与极速蓝带！",
+            "desc": "开启后合成物品免费且不消耗材料。",
             "id": "factorio_cmd_1",
             "syntax_type": "lua_function",
             "framework_required": "Native Engine Console",
@@ -15588,11 +15588,11 @@ window.GAMES_DATA = [
           },
           {
             "name": {
-              "zh-CN": "瞬间完成全科技树全部研究",
+              "zh-CN": "解锁并研发所有科技",
               "en": "Research All Tech"
             },
             "code": "/c game.player.force.research_all_technologies()",
-            "desc": "无需任何科技包瓶子，核电、火箭发射仓全科技秒开！",
+            "desc": "立即解锁并完成所有科技的研究，无需消耗科技瓶。",
             "id": "factorio_cmd_2",
             "syntax_type": "lua_function",
             "framework_required": "Native Engine Console",
@@ -15600,11 +15600,11 @@ window.GAMES_DATA = [
           },
           {
             "name": {
-              "zh-CN": "随身手工制造速度暴增 100 倍",
+              "zh-CN": "大幅提升手动合成速度",
               "en": "100x Crafting Speed"
             },
             "code": "/c game.player.force.manual_crafting_speed_modifier = 100",
-            "desc": "原本几十秒的手工制作瞬间秒造出炉",
+            "desc": "将手动合成速度加成设置为 100，大幅加快手动制作物品的速度。",
             "id": "factorio_cmd_3",
             "syntax_type": "lua_function",
             "framework_required": "Native Engine Console",
@@ -15612,11 +15612,11 @@ window.GAMES_DATA = [
           },
           {
             "name": {
-              "zh-CN": "刷出顶级动力装甲 MK2",
+              "zh-CN": "刷出动力装甲 MK2",
               "en": "Power Armor MK2"
             },
             "code": "/c game.player.insert{name=\"power-armor-mk2\", count=1}",
-            "desc": "拥有最大插槽网格的终极工程师战甲",
+            "desc": "获得动力装甲 MK2，是游戏内护甲插槽格数最多的护甲之一。",
             "id": "factorio_cmd_4",
             "syntax_type": "lua_function",
             "framework_required": "Native Engine Console",
@@ -15624,11 +15624,11 @@ window.GAMES_DATA = [
           },
           {
             "name": {
-              "zh-CN": "刷出 1000 条极速蓝色传送带",
+              "zh-CN": "刷出 1000 条蓝色传送带",
               "en": "Express Belts x1000"
             },
             "code": "/c game.player.insert{name=\"express-transport-belt\", count=1000}",
-            "desc": "最高吞吐量物流极速传送带",
+            "desc": "获得 1000 条游戏中速度最快的传送带（express-transport-belt）。",
             "id": "factorio_cmd_5",
             "syntax_type": "lua_function",
             "framework_required": "Native Engine Console",
@@ -15636,11 +15636,11 @@ window.GAMES_DATA = [
           },
           {
             "name": {
-              "zh-CN": "秒杀全地图上所有敌对虫群巢穴",
+              "zh-CN": "清除敌对移动单位 (Kill All Enemies)",
               "en": "Kill All Enemies"
             },
             "code": "/c game.forces[\"enemy\"].kill_all_units()",
-            "desc": "瞬间清空地图所有外星异形虫",
+            "desc": "杀死地图上已生成的敌对移动单位（虫子），但不会摧毁虫巢/基地。",
             "id": "factorio_cmd_6",
             "syntax_type": "lua_function",
             "framework_required": "Native Engine Console",
@@ -15654,15 +15654,15 @@ window.GAMES_DATA = [
         "id": "helmod",
         "title": "Helmod: Assistant for planning your factory",
         "author": "Helfima",
-        "category": "量化规划 (Utility)",
-        "desc": "异星工厂量化大师必备！自动计算所需工厂数量、传送带配比与原料输入速率，杜绝流水线卡死。",
+        "category": "生产规划 (Utility)",
+        "desc": "异星工厂生产规划工具，可计算所需原料、产物、机器、模块和信标数量，以及电力产耗。",
         "dependencies": [
           "None"
         ],
         "installPath": "Factorio\\mods\\",
         "installSteps": [
-          "1. 在游戏主菜单 '模组' 选项内直接在线搜索 Helmod 下载；",
-          "2. 游戏中点击左上角放大镜图标即可快速量化计算。"
+          "1. 在游戏主菜单“模组”选项内在线搜索 Helmod 并下载；",
+          "2. 游戏中点击左上角放大镜图标进行计算。"
         ],
         "nexusUrl": "https://mods.factorio.com/mod/helmod",
         "version": "2.3.6",
@@ -16006,7 +16006,7 @@ window.GAMES_DATA = [
           "en": "Yesmen Mode"
         },
         "command": "yesmen",
-        "desc": "所有 AI 领主与教皇无条件同意你的宣战媾和、入赘联姻与无偿宣称！",
+        "desc": "开启后 AI 角色会接受你发出的各类提议（如宣战、联姻、授予头衔等）。再次输入可关闭。",
         "source": "https://ck3.paradoxwikis.com/Console_commands"
       },
       {
@@ -16015,7 +16015,7 @@ window.GAMES_DATA = [
           "en": "Instant Build"
         },
         "command": "instabuild",
-        "desc": "所有城堡、城墙、大教堂与农庄男爵领瞬间落成",
+        "desc": "开启后玩家直属领地内的在建建筑立即完工，新开始的建造改为一天完成，军队也会立即补满。再次输入可关闭。",
         "source": "https://ck3.paradoxwikis.com/Console_commands"
       },
       {
@@ -16024,7 +16024,7 @@ window.GAMES_DATA = [
           "en": "Discover All Eras"
         },
         "command": "discover_all_eras",
-        "desc": "瞬间跨越部落、早期中世纪、盛期中世纪进入晚期中世纪！",
+        "desc": "解锁角色所属文化的全部时代科技革新。",
         "source": "https://ck3.paradoxwikis.com/Console_commands"
       },
       {
@@ -16033,7 +16033,7 @@ window.GAMES_DATA = [
           "en": "Add 50,000 Gold"
         },
         "command": "gold 50000",
-        "desc": "招募全欧洲最强雇佣军骑士团，大肆赏赐封臣封赏",
+        "desc": "给玩家角色增加 50,000 金币，可用于招募雇佣兵或赏赐封臣。",
         "source": "https://ck3.paradoxwikis.com/Console_commands"
       }
     ],
@@ -16077,7 +16077,7 @@ window.GAMES_DATA = [
     ],
     "consoleCategories": [
       {
-        "category": "👑 外交神迹与全时代科技 (Diplomacy & Innovations)",
+        "category": "外交与科技指令 (Diplomacy & Innovations)",
         "commands": [
           {
             "name": {
@@ -16085,7 +16085,7 @@ window.GAMES_DATA = [
               "en": "Yesmen Mode"
             },
             "code": "yesmen",
-            "desc": "所有 AI 领主与教皇无条件同意你的宣战媾和、入赘联姻与无偿宣称！",
+            "desc": "开启后 AI 角色会接受你发出的各类提议（如宣战、联姻、授予头衔等）。再次输入可关闭。",
             "id": "crusader-kings-3_cmd_1",
             "syntax_type": "gm_command",
             "framework_required": "Clausewitz Engine (-debug_mode)",
@@ -16097,7 +16097,7 @@ window.GAMES_DATA = [
               "en": "Instant Build"
             },
             "code": "instabuild",
-            "desc": "所有城堡、城墙、大教堂与农庄男爵领瞬间落成",
+            "desc": "开启后玩家直属领地内的在建建筑立即完工，新开始的建造改为一天完成，军队也会立即补满。再次输入可关闭。",
             "id": "crusader-kings-3_cmd_2",
             "syntax_type": "gm_command",
             "framework_required": "Clausewitz Engine (-debug_mode)",
@@ -16109,7 +16109,7 @@ window.GAMES_DATA = [
               "en": "Discover All Eras"
             },
             "code": "discover_all_eras",
-            "desc": "瞬间跨越部落、早期中世纪、盛期中世纪进入晚期中世纪！",
+            "desc": "解锁角色所属文化的全部时代科技革新。",
             "id": "crusader-kings-3_cmd_3",
             "syntax_type": "gm_command",
             "framework_required": "Clausewitz Engine (-debug_mode)",
@@ -16126,7 +16126,7 @@ window.GAMES_DATA = [
               "en": "Add 50,000 Gold"
             },
             "code": "gold 50000",
-            "desc": "招募全欧洲最强雇佣军骑士团，大肆赏赐封臣封赏",
+            "desc": "给玩家角色增加 50,000 金币，可用于招募雇佣兵或赏赐封臣。",
             "id": "crusader-kings-3_cmd_4",
             "syntax_type": "gm_command",
             "framework_required": "Clausewitz Engine (-debug_mode)",
@@ -16138,7 +16138,7 @@ window.GAMES_DATA = [
               "en": "Add 10,000 Prestige"
             },
             "code": "add_prestige 10000",
-            "desc": "威望等级直接封顶“活着的传奇”，随心创建自定义帝国头衔",
+            "desc": "给玩家角色增加 10,000 点威望。",
             "id": "crusader-kings-3_cmd_5",
             "syntax_type": "gm_command",
             "framework_required": "Clausewitz Engine (-debug_mode)",
@@ -16150,7 +16150,7 @@ window.GAMES_DATA = [
               "en": "Add 5,000 Piety"
             },
             "code": "add_piety 5000",
-            "desc": "虔诚等级达到“圣人”，随时发起自创异端宗教宗教改革",
+            "desc": "给玩家角色增加 5,000 点虔诚。",
             "id": "crusader-kings-3_cmd_6",
             "syntax_type": "gm_command",
             "framework_required": "Clausewitz Engine (-debug_mode)",
@@ -16159,15 +16159,15 @@ window.GAMES_DATA = [
         ]
       },
       {
-        "category": "🧬 帝王三圣天才基因特质 (God Tier Genetics)",
+        "category": "基因与外貌特质 (Genetic & Appearance Traits)",
         "commands": [
           {
             "name": {
-              "zh-CN": "赋予顶级天才特质 (Genius)",
+              "zh-CN": "赋予天才特质 (Genius)",
               "en": "Add Trait Genius"
             },
             "code": "add_trait intellect_good_3",
-            "desc": "外交、军事、管理、谋略、学识全属性各 +5，经验获取暴增",
+            "desc": "外交、军事、管理、谋略、学识各 +5，专精经验获取 +30%。",
             "id": "crusader-kings-3_cmd_7",
             "syntax_type": "gm_command",
             "framework_required": "Clausewitz Engine (-debug_mode)",
@@ -16175,11 +16175,11 @@ window.GAMES_DATA = [
           },
           {
             "name": {
-              "zh-CN": "赋予倾国倾城顶级美貌 (Beautiful)",
+              "zh-CN": "赋予美貌特质 (Beautiful)",
               "en": "Add Trait Beautiful"
             },
             "code": "add_trait beauty_good_3",
-            "desc": "外交 +3，生育力 +30%，全领主好感度大幅攀升",
+            "desc": "外交 +3，生育力 +30%，获得有魅力倾向角色的好感加成。",
             "id": "crusader-kings-3_cmd_8",
             "syntax_type": "gm_command",
             "framework_required": "Clausewitz Engine (-debug_mode)",
@@ -16187,11 +16187,11 @@ window.GAMES_DATA = [
           },
           {
             "name": {
-              "zh-CN": "赋予体魄过人大力士 (Herculean)",
+              "zh-CN": "赋予大力士特质 (Herculean)",
               "en": "Add Trait Herculean"
             },
             "code": "add_trait physique_good_3",
-            "desc": "勇武 +8，健康度极大强化，百病不侵",
+            "desc": "勇武 +8，健康 +1，并获得好感加成，控制体重更容易。",
             "id": "crusader-kings-3_cmd_9",
             "syntax_type": "gm_command",
             "framework_required": "Clausewitz Engine (-debug_mode)",
@@ -16203,7 +16203,7 @@ window.GAMES_DATA = [
               "en": "Younger 10 Years"
             },
             "code": "age -10",
-            "desc": "倒退生理年龄，延长统治盛世",
+            "desc": "角色年龄减少 10 岁。",
             "id": "crusader-kings-3_cmd_10",
             "syntax_type": "gm_command",
             "framework_required": "Clausewitz Engine (-debug_mode)",
@@ -16218,7 +16218,7 @@ window.GAMES_DATA = [
         "title": "Community Flavor Pack",
         "author": "El Tyranos",
         "category": "历史服饰沉浸 (Immersion)",
-        "desc": "极具考究的顶级历史 MOD！补全欧洲、拜占庭、伊斯兰与东亚数千套历史王冠、甲胄与礼服。",
+        "desc": "为角色新增大量 867–1453 年历史服饰与配饰，不改变游戏玩法，可通过游戏规则调整显示程度。",
         "dependencies": [
           "None"
         ],
@@ -16418,25 +16418,25 @@ window.GAMES_DATA = [
           "en": "Instant Construction"
         },
         "command": "ic",
-        "desc": "点击开启！军用工厂、海军造船厂、防空炮与雷达站放置瞬间秒建完工",
+        "desc": "开启后所有建造项目（含舰船）立即完成，对 AI 同样生效。再次输入可关闭。",
         "source": "https://hoi4.paradoxwikis.com/Console_commands"
       },
       {
         "name": {
-          "zh-CN": "瞬间研发全军全工业全部科技",
+          "zh-CN": "瞬间研发全部科技",
           "en": "Research All Tech"
         },
         "command": "research all",
-        "desc": "陆军学说、喷气航母、现代主战坦克与原子弹全谱系秒开！",
+        "desc": "输入 research all 立即完成所有科技的研究。",
         "source": "https://hoi4.paradoxwikis.com/Console_commands"
       },
       {
         "name": {
-          "zh-CN": "彻底消除全图战争迷雾 (FOW)",
+          "zh-CN": "关闭战争迷雾 (FOW)",
           "en": "Remove Fog of War"
         },
         "command": "fow",
-        "desc": "卫星级宏观视野监控全球所有敌军师团移动走向",
+        "desc": "关闭战争迷雾，可看到侦察范围外的地图信息。",
         "source": "https://hoi4.paradoxwikis.com/Console_commands"
       },
       {
@@ -16445,7 +16445,7 @@ window.GAMES_DATA = [
           "en": "Add 2,000 Political Power"
         },
         "command": "pp 2000",
-        "desc": "随意改组内阁法律、指定工业巨头与国家焦点推进",
+        "desc": "给玩家增加 2,000 点政治点数，可用于改组内阁、任命部长与推进国策等。",
         "source": "https://hoi4.paradoxwikis.com/Console_commands"
       }
     ],
@@ -16497,7 +16497,7 @@ window.GAMES_DATA = [
               "en": "Instant Construction"
             },
             "code": "ic",
-            "desc": "点击开启！军用工厂、海军造船厂、防空炮与雷达站放置瞬间秒建完工",
+            "desc": "开启后所有建造项目（含舰船）立即完成，对 AI 同样生效。再次输入可关闭。",
             "id": "hearts-of-iron-4_cmd_1",
             "syntax_type": "gm_command",
             "framework_required": "Clausewitz Engine (-debug_mode)",
@@ -16505,11 +16505,11 @@ window.GAMES_DATA = [
           },
           {
             "name": {
-              "zh-CN": "瞬间研发全军全工业全部科技",
+              "zh-CN": "瞬间研发全部科技",
               "en": "Research All Tech"
             },
             "code": "research all",
-            "desc": "陆军学说、喷气航母、现代主战坦克与原子弹全谱系秒开！",
+            "desc": "输入 research all 立即完成所有科技的研究。",
             "id": "hearts-of-iron-4_cmd_2",
             "syntax_type": "gm_command",
             "framework_required": "Clausewitz Engine (-debug_mode)",
@@ -16517,11 +16517,11 @@ window.GAMES_DATA = [
           },
           {
             "name": {
-              "zh-CN": "彻底消除全图战争迷雾 (FOW)",
+              "zh-CN": "关闭战争迷雾 (FOW)",
               "en": "Remove Fog of War"
             },
             "code": "fow",
-            "desc": "卫星级宏观视野监控全球所有敌军师团移动走向",
+            "desc": "关闭战争迷雾，可看到侦察范围外的地图信息。",
             "id": "hearts-of-iron-4_cmd_3",
             "syntax_type": "gm_command",
             "framework_required": "Clausewitz Engine (-debug_mode)",
@@ -16538,7 +16538,7 @@ window.GAMES_DATA = [
               "en": "Add 2,000 Political Power"
             },
             "code": "pp 2000",
-            "desc": "随意改组内阁法律、指定工业巨头与国家焦点推进",
+            "desc": "给玩家增加 2,000 点政治点数，可用于改组内阁、任命部长与推进国策等。",
             "id": "hearts-of-iron-4_cmd_4",
             "syntax_type": "gm_command",
             "framework_required": "Clausewitz Engine (-debug_mode)",
@@ -16550,7 +16550,7 @@ window.GAMES_DATA = [
               "en": "Add 100 Command Power"
             },
             "code": "cp 100",
-            "desc": "将领特技提拔与空军战术演习随心开启",
+            "desc": "给玩家增加指挥点数（上限 100），用于将领特质培养等用途。",
             "id": "hearts-of-iron-4_cmd_5",
             "syntax_type": "gm_command",
             "framework_required": "Clausewitz Engine (-debug_mode)",
@@ -16562,7 +16562,7 @@ window.GAMES_DATA = [
               "en": "Add 2,000,000 Manpower"
             },
             "code": "manpower 2000000",
-            "desc": "组建数百个精锐机械化重装师团兵员无忧",
+            "desc": "给玩家增加人力（预备役兵力池）。",
             "id": "hearts-of-iron-4_cmd_6",
             "syntax_type": "gm_command",
             "framework_required": "Clausewitz Engine (-debug_mode)",
@@ -16587,11 +16587,11 @@ window.GAMES_DATA = [
         "commands": [
           {
             "name": {
-              "zh-CN": "军械库调入 50,000 支高级步兵武器",
+              "zh-CN": "军械库增加 50,000 件三级步兵装备",
               "en": "Add 50,000 Infantry Rifles"
             },
             "code": "ae 50000 infantry_equipment_3",
-            "desc": "给全军士兵全员换装三代先进单兵半自动突击步枪",
+            "desc": "把 50,000 件三级步兵装备（infantry_equipment_3）加入装备库存，可用于新建或换装部队。",
             "id": "hearts-of-iron-4_cmd_8",
             "syntax_type": "gm_command",
             "framework_required": "Clausewitz Engine (-debug_mode)",
@@ -16599,11 +16599,11 @@ window.GAMES_DATA = [
           },
           {
             "name": {
-              "zh-CN": "军械库调入 5,000 辆现代主战坦克",
+              "zh-CN": "军械库增加 5,000 件现代主战坦克装备",
               "en": "Add 5,000 Modern Tanks"
             },
             "code": "ae 5000 modern_tank_equipment_1",
-            "desc": "武装起数十个横扫战场的钢铁装甲洪流师",
+            "desc": "把 5,000 件现代主战坦克装备（modern_tank_equipment_1）加入装备库存。",
             "id": "hearts-of-iron-4_cmd_9",
             "syntax_type": "gm_command",
             "framework_required": "Clausewitz Engine (-debug_mode)",
@@ -16615,7 +16615,7 @@ window.GAMES_DATA = [
               "en": "Add 100 Nukes"
             },
             "code": "nuke 100",
-            "desc": "配合战略轰炸机夺取制空权实施战略核威慑",
+            "desc": "给玩家增加 100 枚核弹库存。",
             "id": "hearts-of-iron-4_cmd_10",
             "syntax_type": "gm_command",
             "framework_required": "Clausewitz Engine (-debug_mode)",
@@ -16623,11 +16623,11 @@ window.GAMES_DATA = [
           },
           {
             "name": {
-              "zh-CN": "直接吞并目标国家 (Annex)",
+              "zh-CN": "吞并目标国家 (Annex)",
               "en": "Annex Country"
             },
             "code": "annex [TAG]",
-            "desc": "例如 annex FRA 瞬间将法国全境工业与版图纳入直辖",
+            "desc": "对目标国家发起吞并流程，例如 annex FRA 针对法国。",
             "id": "hearts-of-iron-4_cmd_11",
             "syntax_type": "gm_command",
             "framework_required": "Clausewitz Engine (-debug_mode)",
@@ -16641,15 +16641,15 @@ window.GAMES_DATA = [
         "id": "road-to-56",
         "title": "The Road to 56",
         "author": "Road to 56 / deliciousmods",
-        "category": "史诗拓展 (Total Overhaul)",
-        "desc": "钢恐史上最强模组！重做几乎全球所有中小国家的专属国策树，科技线延展至 1956 年冷战黎明。",
+        "category": "全面拓展 (Total Overhaul)",
+        "desc": "钢铁雄心4的大型扩展模组，重做了几乎所有中小国家的专属国策树，并将时间线延伸至 1956 年。",
         "dependencies": [
           "None"
         ],
         "installPath": "%USERPROFILE%\\Documents\\Paradox Interactive\\Hearts of Iron IV\\mod\\",
         "installSteps": [
-          "1. 启动器中添加至 Playset 并启用；",
-          "2. 推荐配合汉化包获得最佳沉浸体验。"
+          "1. 在启动器中添加至 Playset 并启用；",
+          "2. 可配合汉化包使用。"
         ],
         "nexusUrl": "https://steamcommunity.com/sharedfiles/filedetails/?id=820260968",
         "isDirect": false
@@ -16789,34 +16789,34 @@ window.GAMES_DATA = [
           "en": "Instant Build"
         },
         "command": "instant_build",
-        "desc": "戴森球、环形世界、物质解压器与无畏舰秒级落成完工！",
+        "desc": "开启后建筑与升级立即完成，资源仓储上限变为无限，对 AI 帝国同样生效。再次输入可关闭。",
         "source": "https://stellaris.paradoxwikis.com/Console_commands"
       },
       {
         "name": {
-          "zh-CN": "瞬间研发全银河系所有科技与暗物质技术",
+          "zh-CN": "研发除可重复科技外的所有科技",
           "en": "Research All Tech"
         },
         "command": "research_all_technologies 1",
-        "desc": "直接获取天灾飞升、暗物质护盾与快子光矛顶级科技",
+        "desc": "立即研发除可重复科技外的所有科技；参数 1 还包含太空生物与天灾危机相关科技。",
         "source": "https://stellaris.paradoxwikis.com/Console_commands"
       },
       {
         "name": {
-          "zh-CN": "选定舰队无敌上帝模式",
+          "zh-CN": "舰船免疫伤害 (无敌)",
           "en": "Invulnerable Ships"
         },
         "command": "invincible",
-        "desc": "锁死护盾与装甲，硬抗堕落帝国与高维恶魔集火",
+        "desc": "开启后玩家所有舰船不会受到任何伤害。",
         "source": "https://stellaris.paradoxwikis.com/Console_commands"
       },
       {
         "name": {
-          "zh-CN": "瞬间造成 10 万伤害秒杀目标",
+          "zh-CN": "对选中舰队造成 99999 点伤害",
           "en": "Damage Target 99999"
         },
         "command": "damage 99999",
-        "desc": "鼠标选定任何敌方恒星基地或泰坦战舰瞬间打爆",
+        "desc": "对选中舰队内的所有舰船造成 99999 点船体伤害。",
         "source": "https://stellaris.paradoxwikis.com/Console_commands"
       }
     ],
@@ -16860,7 +16860,7 @@ window.GAMES_DATA = [
     ],
     "consoleCategories": [
       {
-        "category": "👑 巨构速建与全宇宙科技 (Mega-Structures & Universal Tech)",
+        "category": "巨构与科技指令 (Mega-Structures & Technology)",
         "commands": [
           {
             "name": {
@@ -16868,7 +16868,7 @@ window.GAMES_DATA = [
               "en": "Instant Build"
             },
             "code": "instant_build",
-            "desc": "戴森球、环形世界、物质解压器与无畏舰秒级落成完工！",
+            "desc": "开启后建筑与升级立即完成，资源仓储上限变为无限，对 AI 帝国同样生效。再次输入可关闭。",
             "id": "stellaris_cmd_1",
             "syntax_type": "gm_command",
             "framework_required": "Clausewitz Engine (-debug_mode)",
@@ -16876,11 +16876,11 @@ window.GAMES_DATA = [
           },
           {
             "name": {
-              "zh-CN": "瞬间研发全银河系所有科技与暗物质技术",
+              "zh-CN": "研发除可重复科技外的所有科技",
               "en": "Research All Tech"
             },
             "code": "research_all_technologies 1",
-            "desc": "直接获取天灾飞升、暗物质护盾与快子光矛顶级科技",
+            "desc": "立即研发除可重复科技外的所有科技；参数 1 还包含太空生物与天灾危机相关科技。",
             "id": "stellaris_cmd_2",
             "syntax_type": "gm_command",
             "framework_required": "Clausewitz Engine (-debug_mode)",
@@ -16888,11 +16888,11 @@ window.GAMES_DATA = [
           },
           {
             "name": {
-              "zh-CN": "选定舰队无敌上帝模式",
+              "zh-CN": "舰船免疫伤害 (无敌)",
               "en": "Invulnerable Ships"
             },
             "code": "invincible",
-            "desc": "锁死护盾与装甲，硬抗堕落帝国与高维恶魔集火",
+            "desc": "开启后玩家所有舰船不会受到任何伤害。",
             "id": "stellaris_cmd_3",
             "syntax_type": "gm_command",
             "framework_required": "Clausewitz Engine (-debug_mode)",
@@ -16900,11 +16900,11 @@ window.GAMES_DATA = [
           },
           {
             "name": {
-              "zh-CN": "瞬间造成 10 万伤害秒杀目标",
+              "zh-CN": "对选中舰队造成 99999 点伤害",
               "en": "Damage Target 99999"
             },
             "code": "damage 99999",
-            "desc": "鼠标选定任何敌方恒星基地或泰坦战舰瞬间打爆",
+            "desc": "对选中舰队内的所有舰船造成 99999 点船体伤害。",
             "id": "stellaris_cmd_4",
             "syntax_type": "gm_command",
             "framework_required": "Clausewitz Engine (-debug_mode)",
@@ -16921,7 +16921,7 @@ window.GAMES_DATA = [
               "en": "Add 50,000 Alloys"
             },
             "code": "alloys 50000",
-            "desc": "支持爆造数十个满编泰坦无畏舰队",
+            "desc": "给玩家增加 50,000 点合金（Alloys）资源。",
             "id": "stellaris_cmd_5",
             "syntax_type": "gm_command",
             "framework_required": "Clausewitz Engine (-debug_mode)",
@@ -16933,7 +16933,7 @@ window.GAMES_DATA = [
               "en": "Add 100,000 Energy"
             },
             "code": "cash 100000",
-            "desc": "全银河自由贸易与维护巨大帝国",
+            "desc": "给玩家增加 100,000 点能量币（Energy）资源。",
             "id": "stellaris_cmd_6",
             "syntax_type": "gm_command",
             "framework_required": "Clausewitz Engine (-debug_mode)",
@@ -16945,7 +16945,7 @@ window.GAMES_DATA = [
               "en": "Add 50,000 Unity"
             },
             "code": "unity 50000",
-            "desc": "点满全部传统飞升天赋树，完成机械飞升或灵能飞升",
+            "desc": "给玩家增加 50,000 点凝聚力（Unity）资源，可用于解锁传统与飞升天赋。",
             "id": "stellaris_cmd_7",
             "syntax_type": "gm_command",
             "framework_required": "Clausewitz Engine (-debug_mode)",
@@ -16957,7 +16957,7 @@ window.GAMES_DATA = [
               "en": "Add 1,000 Influence"
             },
             "code": "influence 1000",
-            "desc": "疯狂圈地铺设前哨基地与主导星际理事会决议",
+            "desc": "给玩家增加 1,000 点影响力（Influence）资源，可用于建立前哨站、参与银河议会决议等。",
             "id": "stellaris_cmd_8",
             "syntax_type": "gm_command",
             "framework_required": "Clausewitz Engine (-debug_mode)",
@@ -16972,14 +16972,14 @@ window.GAMES_DATA = [
         "title": "UI Overhaul Dynamic",
         "author": "Orrie",
         "category": "界面交互大修 (UI Overhaul)",
-        "desc": "群星最强必备 UI 模组！重做星球管理、飞船设计器与科研界面，适合高分辨率大屏幕。",
+        "desc": "重做星球管理、飞船设计器等多个界面，并根据屏幕分辨率自适应调整大小，适合 1080p / 1440p / 4K 等分辨率。",
         "dependencies": [
           "None"
         ],
         "installPath": "%USERPROFILE%\\Documents\\Paradox Interactive\\Stellaris\\mod\\",
         "installSteps": [
           "1. 在 Paradox 启动器中启用；",
-          "2. 保持在模组加载列表最底层以获得最高渲染覆盖优先级。"
+          "2. 保持在模组加载列表最底层以获得更高的渲染覆盖优先级。"
         ],
         "nexusUrl": "https://steamcommunity.com/sharedfiles/filedetails/?id=1623423360",
         "isDirect": false
@@ -19663,20 +19663,20 @@ window.GAMES_DATA = [
     "popularCommands": [
       {
         "name": {
-          "zh-CN": "开启弓箭射击屏幕准星点 (神技)",
+          "zh-CN": "开启弓箭射击准星显示",
           "en": "Show Bow Reticle"
         },
         "command": "wh_pl_showfirecursor 1",
-        "desc": "彻底治愈原版射箭无准星晃动的噩梦，命中率翻倍！",
+        "desc": "在屏幕上显示射箭准星点（原版默认未显示）。",
         "source": "https://www.pcgamingwiki.com/wiki/Kingdom_Come:_Deliverance"
       },
       {
         "name": {
-          "zh-CN": "彻底关闭动态模糊眩晕感",
+          "zh-CN": "关闭动态模糊",
           "en": "Disable Motion Blur"
         },
         "command": "r_motionblur = 0",
-        "desc": "画面更锐利清晰消除头晕",
+        "desc": "关闭动态模糊效果，画面更清晰。",
         "source": "https://www.pcgamingwiki.com/wiki/Kingdom_Come:_Deliverance"
       },
       {
@@ -19685,7 +19685,7 @@ window.GAMES_DATA = [
           "en": "Add 100k Money"
         },
         "command": "cheat_add_money amount:100000",
-        "desc": "买断全拉泰城所有铁匠顶级重型板甲",
+        "desc": "给玩家增加 100,000 格罗申，需先安装 Cheat（CheatMod）模组。",
         "source": "https://www.nexusmods.com/kingdomcomedeliverance/mods/106"
       }
     ],
@@ -19729,15 +19729,15 @@ window.GAMES_DATA = [
     ],
     "consoleCategories": [
       {
-        "category": "👑 原生控制台与神器指令 (Console Commands)",
+        "category": "控制台指令 (Console Commands)",
         "commands": [
           {
             "name": {
-              "zh-CN": "开启弓箭射击屏幕准星点 (神技)",
+              "zh-CN": "开启弓箭射击准星显示",
               "en": "Show Bow Reticle"
             },
             "code": "wh_pl_showfirecursor 1",
-            "desc": "彻底治愈原版射箭无准星晃动的噩梦，命中率翻倍！",
+            "desc": "在屏幕上显示射箭准星点（原版默认未显示）。",
             "id": "kingdom-come-deliverance_cmd_1",
             "syntax_type": "gm_command",
             "framework_required": "Cheat Mod (-devmode)",
@@ -19745,11 +19745,11 @@ window.GAMES_DATA = [
           },
           {
             "name": {
-              "zh-CN": "彻底关闭动态模糊眩晕感",
+              "zh-CN": "关闭动态模糊",
               "en": "Disable Motion Blur"
             },
             "code": "r_motionblur = 0",
-            "desc": "画面更锐利清晰消除头晕",
+            "desc": "关闭动态模糊效果，画面更清晰。",
             "id": "kingdom-come-deliverance_cmd_3",
             "syntax_type": "gm_command",
             "framework_required": "Cheat Mod (-devmode)",
@@ -19761,7 +19761,7 @@ window.GAMES_DATA = [
               "en": "Add 100k Money"
             },
             "code": "cheat_add_money amount:100000",
-            "desc": "买断全拉泰城所有铁匠顶级重型板甲",
+            "desc": "给玩家增加 100,000 格罗申，需先安装 Cheat（CheatMod）模组。",
             "id": "kingdom-come-deliverance_cmd_4",
             "syntax_type": "gm_command",
             "framework_required": "Cheat Mod (-devmode)",
@@ -19773,7 +19773,7 @@ window.GAMES_DATA = [
               "en": "Save Anywhere"
             },
             "code": "cheat_save",
-            "desc": "告别昂贵的施命救主雪利酒，随时随地安全存盘",
+            "desc": "可在游戏允许存档的场合随时使用 F5 快速存档，无需消耗存档用的 Saviour Schnapps 酒；需先安装 Cheat（CheatMod）模组。",
             "id": "kingdom-come-deliverance_cmd_5",
             "syntax_type": "gm_command",
             "framework_required": "Cheat Mod (-devmode)",
@@ -19788,14 +19788,14 @@ window.GAMES_DATA = [
         "title": "Unlimited Saving",
         "author": "EddieShoe and Biosmanager",
         "category": "便民大修 (QoL)",
-        "desc": "天国拯救全球最受欢迎第一神模组！按下 ESC 随时随地点击保存游戏，彻底免除施命药剂消耗与坏档风险。",
+        "desc": "允许在游戏原本允许存档的场合随时存档，无需消耗存档用的 Saviour Schnapps 酒；游戏强制不能存档的节点仍无法存档。",
         "dependencies": [
           "None"
         ],
         "installPath": "Kingdom Come Deliverance\\Mods\\UnlimitedSaving\\",
         "installSteps": [
           "1. 将 UnlimitedSaving 文件夹放入游戏根目录 Mods 文件夹；",
-          "2. 正常进游戏即可生效。"
+          "2. 正常进入游戏即可生效。"
         ],
         "nexusUrl": "https://www.nexusmods.com/kingdomcomedeliverance/mods/1",
         "version": "3.0",
@@ -23733,16 +23733,16 @@ window.GAMES_DATA = [
           "en": "Debug Mode"
         },
         "command": "dm",
-        "desc": "按 Q 键开启上帝锁血模式、按 H 键开启自由飞天、按 ESC 可自由调节白天黑夜时间！",
+        "desc": "开启/关闭调试菜单，解锁飞行、无敌等开发者调试功能，具体操作见游戏内提示。",
         "source": "https://wiki.7d2d.net/game/commands"
       },
       {
         "name": {
-          "zh-CN": "开启创造模式刷物器 (Creative Menu)",
+          "zh-CN": "开启创造模式菜单 (Creative Menu)",
           "en": "Creative Menu"
         },
         "command": "cm",
-        "desc": "输入后游戏中按下键盘 U 键，直接打开包含全游戏所有 5000+ 武器、建材与陷阱的刷物界面！",
+        "desc": "开启/关闭创造模式菜单，可在界面中直接获取游戏内物品。",
         "source": "https://wiki.7d2d.net/game/commands"
       },
       {
@@ -23751,16 +23751,16 @@ window.GAMES_DATA = [
           "en": "Add 500k XP"
         },
         "command": "giveselfxp 500000",
-        "desc": "飞速升级，点满智力科技、枪械大师与建筑专精天赋",
+        "desc": "给玩家角色增加 500,000 点经验值，用于升级技能。",
         "source": "https://wiki.7d2d.net/game/commands"
       },
       {
         "name": {
-          "zh-CN": "立刻在头顶呼叫飞机空投补给",
+          "zh-CN": "生成空投补给 (Spawn Airdrop)",
           "en": "Spawn Airdrop"
         },
         "command": "spawnairdrop",
-        "desc": "空投降落伞直接刷在脚下，获取稀有蓝图与食物药品",
+        "desc": "在附近生成一个空投补给包。",
         "source": "https://wiki.7d2d.net/game/commands"
       }
     ],
@@ -23804,7 +23804,7 @@ window.GAMES_DATA = [
     ],
     "consoleCategories": [
       {
-        "category": "👑 官方调试创造神技 (Debug & Creative Mode)",
+        "category": "调试与创造模式 (Debug & Creative Mode)",
         "commands": [
           {
             "name": {
@@ -23812,7 +23812,7 @@ window.GAMES_DATA = [
               "en": "Debug Mode"
             },
             "code": "dm",
-            "desc": "按 Q 键开启上帝锁血模式、按 H 键开启自由飞天、按 ESC 可自由调节白天黑夜时间！",
+            "desc": "开启/关闭调试菜单，解锁飞行、无敌等开发者调试功能，具体操作见游戏内提示。",
             "id": "7-days-to-die_cmd_1",
             "syntax_type": "unity_dev",
             "framework_required": "Native Engine Console",
@@ -23820,11 +23820,11 @@ window.GAMES_DATA = [
           },
           {
             "name": {
-              "zh-CN": "开启创造模式刷物器 (Creative Menu)",
+              "zh-CN": "开启创造模式菜单 (Creative Menu)",
               "en": "Creative Menu"
             },
             "code": "cm",
-            "desc": "输入后游戏中按下键盘 U 键，直接打开包含全游戏所有 5000+ 武器、建材与陷阱的刷物界面！",
+            "desc": "开启/关闭创造模式菜单，可在界面中直接获取游戏内物品。",
             "id": "7-days-to-die_cmd_2",
             "syntax_type": "unity_dev",
             "framework_required": "Native Engine Console",
@@ -23836,7 +23836,7 @@ window.GAMES_DATA = [
               "en": "Add 500k XP"
             },
             "code": "giveselfxp 500000",
-            "desc": "飞速升级，点满智力科技、枪械大师与建筑专精天赋",
+            "desc": "给玩家角色增加 500,000 点经验值，用于升级技能。",
             "id": "7-days-to-die_cmd_3",
             "syntax_type": "unity_dev",
             "framework_required": "Native Engine Console",
@@ -23844,11 +23844,11 @@ window.GAMES_DATA = [
           },
           {
             "name": {
-              "zh-CN": "立刻在头顶呼叫飞机空投补给",
+              "zh-CN": "生成空投补给 (Spawn Airdrop)",
               "en": "Spawn Airdrop"
             },
             "code": "spawnairdrop",
-            "desc": "空投降落伞直接刷在脚下，获取稀有蓝图与食物药品",
+            "desc": "在附近生成一个空投补给包。",
             "id": "7-days-to-die_cmd_4",
             "syntax_type": "unity_dev",
             "framework_required": "Native Engine Console",
@@ -23856,11 +23856,11 @@ window.GAMES_DATA = [
           },
           {
             "name": {
-              "zh-CN": "秒杀周边视野内所有丧尸 (Kill All)",
+              "zh-CN": "杀死所有实体 (Kill All)",
               "en": "Kill All Zombies"
             },
             "code": "killall",
-            "desc": "血月尸潮瞬间清场解围",
+            "desc": "使当前已生成的所有实体（包括丧尸与动物等）死亡，建议先备份存档。",
             "id": "7-days-to-die_cmd_5",
             "syntax_type": "unity_dev",
             "framework_required": "Native Engine Console",
@@ -23874,15 +23874,15 @@ window.GAMES_DATA = [
         "id": "darkness-falls",
         "title": "Darkness Falls",
         "author": "Khaine",
-        "category": "史诗拓展大修 (Total Overhaul)",
-        "desc": "重做全职业系统（科学家、劳动者、保镖等）、新增激光武器、钛金属工具、恶魔僵尸与巨型地下科研研究所。",
+        "category": "全面拓展 (Total Overhaul)",
+        "desc": "大型总览模组，拉长游戏前期节奏：新增 8 个职业（各带 6 个任务）、巨型丧尸 Behemoth、钛金属装备与新枪械等大量内容。",
         "dependencies": [
           "None"
         ],
         "installPath": "7 Days To Die\\Mods\\",
         "installSteps": [
           "1. 将下载的 Mods 文件夹解压放入 7 Days To Die 根目录覆盖；",
-          "2. 启动游戏时生成专属 Darkness Falls 地图开始游戏。"
+          "2. 启动游戏生成专属 Darkness Falls 地图开始游戏。"
         ],
         "nexusUrl": "https://www.nexusmods.com/7daystodie/mods/235",
         "version": "5.0.1",
@@ -24104,20 +24104,20 @@ window.GAMES_DATA = [
     "popularCommands": [
       {
         "name": {
-          "zh-CN": "一键激活泰克创造模式 (GCM)",
+          "zh-CN": "开启创造模式 (GCM)",
           "en": "Creative Mode"
         },
         "command": "cheat gcm",
-        "desc": "随身全科技树免材料制造、无限负重、双击跳跃自由飞行！",
+        "desc": "开启创造模式：解锁全部科技、免材料即时建造、无限负重，并可双击跳跃进入飞行。再次输入可关闭。",
         "source": "https://ark.wiki.gg/wiki/Console_commands"
       },
       {
         "name": {
-          "zh-CN": "准星对准恐龙瞬间秒级驯服 (DoTame)",
+          "zh-CN": "瞄准目标立即完成驯服 (DoTame)",
           "en": "Instant Tame Target"
         },
         "command": "cheat DoTame",
-        "desc": "准星对准任何霸王龙、南方巨兽龙瞬间完成 100% 驯养！",
+        "desc": "瞄准可驯服的生物后立即完成驯服，效果等同正常驯服；骑乘状态下使用可能导致游戏崩溃。",
         "source": "https://ark.wiki.gg/wiki/Console_commands"
       },
       {
@@ -24126,7 +24126,7 @@ window.GAMES_DATA = [
           "en": "Fly / Walk"
         },
         "command": "cheat fly",
-        "desc": "空中自由航行建家，输入 cheat walk 落地恢复正常",
+        "desc": "空中自由航行建家，输入 cheat walk 落地恢复正常。",
         "source": "https://ark.wiki.gg/wiki/Console_commands"
       },
       {
@@ -24135,7 +24135,7 @@ window.GAMES_DATA = [
           "en": "Add 1,000,000 XP"
         },
         "command": "cheat addexperience 1000000 0 0 0",
-        "desc": "瞬间满级，属性点自由加点",
+        "desc": "给角色增加 1,000,000 点经验值，可用于升级加点。",
         "source": "https://ark.wiki.gg/wiki/Console_commands"
       }
     ],
@@ -24179,15 +24179,15 @@ window.GAMES_DATA = [
     ],
     "consoleCategories": [
       {
-        "category": "👑 上帝创造模式与驯龙神技 (God Mode & Taming)",
+        "category": "创造模式与驯服 (Creative Mode & Taming)",
         "commands": [
           {
             "name": {
-              "zh-CN": "一键激活泰克创造模式 (GCM)",
+              "zh-CN": "开启创造模式 (GCM)",
               "en": "Creative Mode"
             },
             "code": "cheat gcm",
-            "desc": "随身全科技树免材料制造、无限负重、双击跳跃自由飞行！",
+            "desc": "开启创造模式：解锁全部科技、免材料即时建造、无限负重，并可双击跳跃进入飞行。再次输入可关闭。",
             "id": "ark-survival-evolved_cmd_1",
             "syntax_type": "ue_console",
             "framework_required": "Native Engine Console",
@@ -24195,11 +24195,11 @@ window.GAMES_DATA = [
           },
           {
             "name": {
-              "zh-CN": "准星对准恐龙瞬间秒级驯服 (DoTame)",
+              "zh-CN": "瞄准目标立即完成驯服 (DoTame)",
               "en": "Instant Tame Target"
             },
             "code": "cheat DoTame",
-            "desc": "准星对准任何霸王龙、南方巨兽龙瞬间完成 100% 驯养！",
+            "desc": "瞄准可驯服的生物后立即完成驯服，效果等同正常驯服；骑乘状态下使用可能导致游戏崩溃。",
             "id": "ark-survival-evolved_cmd_2",
             "syntax_type": "ue_console",
             "framework_required": "Native Engine Console",
@@ -24211,7 +24211,7 @@ window.GAMES_DATA = [
               "en": "Fly / Walk"
             },
             "code": "cheat fly",
-            "desc": "空中自由航行建家，输入 cheat walk 落地恢复正常",
+            "desc": "空中自由航行建家，输入 cheat walk 落地恢复正常。",
             "id": "ark-survival-evolved_cmd_3",
             "syntax_type": "ue_console",
             "framework_required": "Native Engine Console",
@@ -24223,7 +24223,7 @@ window.GAMES_DATA = [
               "en": "Add 1,000,000 XP"
             },
             "code": "cheat addexperience 1000000 0 0 0",
-            "desc": "瞬间满级，属性点自由加点",
+            "desc": "给角色增加 1,000,000 点经验值，可用于升级加点。",
             "id": "ark-survival-evolved_cmd_4",
             "syntax_type": "ue_console",
             "framework_required": "Native Engine Console",
@@ -24232,15 +24232,15 @@ window.GAMES_DATA = [
         ]
       },
       {
-        "category": "⚔️ 泰克神级武装装备 (Tek Weapons & Armor)",
+        "category": "泰克武装与装备 (Tek Weapons & Armor)",
         "commands": [
           {
             "name": {
-              "zh-CN": "直接获取 1000 块泰克能量元素板",
+              "zh-CN": "直接获取 1000 块泰克能量元素",
               "en": "Add 1,000 Tek Elements"
             },
             "code": "cheat gfi Element 1000 0 0",
-            "desc": "驱动所有泰克发电机、泰克枪与泰克装甲动力",
+            "desc": "驱动泰克发电机、泰克枪械与泰克装甲的动力来源。",
             "id": "ark-survival-evolved_cmd_5",
             "syntax_type": "ue_console",
             "framework_required": "Native Engine Console",
@@ -24248,11 +24248,11 @@ window.GAMES_DATA = [
           },
           {
             "name": {
-              "zh-CN": "直接穿戴最高品质泰克动力装甲全套",
+              "zh-CN": "获取整套泰克装甲 (GiveArmorSet)",
               "en": "Give Tek Armor Set"
             },
             "code": "cheat givearmorset Tek 5",
-            "desc": "自带喷气背包、超音速冲撞狂奔与深海无限呼吸水下头盔",
+            "desc": "获取并自动装备一整套泰克动力装甲，示例使用品质 5，满配品质上限为 20。",
             "id": "ark-survival-evolved_cmd_6",
             "syntax_type": "ue_console",
             "framework_required": "Native Engine Console",
@@ -24260,11 +24260,11 @@ window.GAMES_DATA = [
           },
           {
             "name": {
-              "zh-CN": "刷出满品质泰克步枪",
+              "zh-CN": "刷出高品质泰克步枪",
               "en": "Tek Rifle"
             },
             "code": "cheat gfi TekRifle 1 100 0",
-            "desc": "远程高伤武器，自带热成像瞄准镜，消耗泰克元素作为弹药",
+            "desc": "远程武器，自带热成像瞄准镜，消耗泰克元素作为弹药。",
             "id": "ark-survival-evolved_cmd_7",
             "syntax_type": "ue_console",
             "framework_required": "Native Engine Console",
@@ -24279,14 +24279,14 @@ window.GAMES_DATA = [
         "title": "Structures Plus (S+)",
         "author": "orionsun",
         "category": "建筑体验大修 (Building)",
-        "desc": "方舟历史第一神模组！提供无缝吸附建筑构件、全自动无管道电线水管、保鲜库与恐龙繁殖自动化保姆机。",
+        "desc": "大型建筑优化模组：提供无缝吸附的建筑构件、可隐藏且占用空间更小的电线水管，以及带自动喂养和育雏提示的饲养槽（Nanny）等大量功能。",
         "dependencies": [
           "None"
         ],
         "installPath": "ARK Survival Evolved\\ShooterGame\\Content\\Mods\\",
         "installSteps": [
           "1. 在 Steam 创意工坊订阅或解压放入 Mods 文件夹；",
-          "2. 单人游戏创建界面将 S+ 移入活跃模组列表即可。"
+          "2. 单人游戏创建界面将 S+ 移入活跃模组列表。"
         ],
         "nexusUrl": "https://steamcommunity.com/sharedfiles/filedetails/?id=731604991",
         "isDirect": false
@@ -24840,16 +24840,16 @@ window.GAMES_DATA = [
           "en": "Fill All Commodities"
         },
         "command": "sims.fill_all_commodities",
-        "desc": "饥饿、膀胱、精力、社交、娱乐与卫生瞬间拉至最满！",
+        "desc": "将选中市民的饥饿、膀胱、精力、社交、娱乐与卫生等需求瞬间拉满。",
         "source": "https://www.ea.com/games/the-sims/the-sims-4/pc/how-to-cheat"
       },
       {
         "name": {
-          "zh-CN": "衣柜镜子随时彻底重做五官身材特质",
+          "zh-CN": "随时进入完整捏人模式 (Full CAS Edit)",
           "en": "Full CAS Edit Mode"
         },
         "command": "cas.fulleditmode",
-        "desc": "突破游戏限制，在生活模式中随时进入捏人界面重新整形捏脸",
+        "desc": "在生活模式中随时进入捏人界面，重新编辑外观。",
         "source": "https://www.ea.com/games/the-sims/the-sims-4/pc/how-to-cheat"
       },
       {
@@ -24858,7 +24858,7 @@ window.GAMES_DATA = [
           "en": "Motherlode 50k"
         },
         "command": "motherlode",
-        "desc": "经典传奇代码，家庭账户直接到账 5 万现金",
+        "desc": "家庭资金增加 50,000 模拟币。",
         "source": "https://www.ea.com/games/the-sims/the-sims-4/pc/how-to-cheat"
       }
     ],
@@ -24869,7 +24869,7 @@ window.GAMES_DATA = [
     "trainerHotkeys": [],
     "consoleCategories": [
       {
-        "category": "👑 官方作弊总开关与状态神技 (Testing Cheats & Needs)",
+        "category": "作弊总开关与状态指令 (Testing Cheats & Needs)",
         "commands": [
           {
             "name": {
@@ -24889,7 +24889,7 @@ window.GAMES_DATA = [
               "en": "Fill All Commodities"
             },
             "code": "sims.fill_all_commodities",
-            "desc": "饥饿、膀胱、精力、社交、娱乐与卫生瞬间拉至最满！",
+            "desc": "将选中市民的饥饿、膀胱、精力、社交、娱乐与卫生等需求瞬间拉满。",
             "id": "the-sims-4_cmd_2",
             "syntax_type": "gm_command",
             "framework_required": "Native Engine Console",
@@ -24897,11 +24897,11 @@ window.GAMES_DATA = [
           },
           {
             "name": {
-              "zh-CN": "衣柜镜子随时彻底重做五官身材特质",
+              "zh-CN": "随时进入完整捏人模式 (Full CAS Edit)",
               "en": "Full CAS Edit Mode"
             },
             "code": "cas.fulleditmode",
-            "desc": "突破游戏限制，在生活模式中随时进入捏人界面重新整形捏脸",
+            "desc": "在生活模式中随时进入捏人界面，重新编辑外观。",
             "id": "the-sims-4_cmd_3",
             "syntax_type": "gm_command",
             "framework_required": "Native Engine Console",
@@ -24918,7 +24918,7 @@ window.GAMES_DATA = [
               "en": "Motherlode 50k"
             },
             "code": "motherlode",
-            "desc": "经典传奇代码，家庭账户直接到账 5 万现金",
+            "desc": "家庭资金增加 50,000 模拟币。",
             "id": "the-sims-4_cmd_4",
             "syntax_type": "gm_command",
             "framework_required": "Native Engine Console",
@@ -24926,11 +24926,11 @@ window.GAMES_DATA = [
           },
           {
             "name": {
-              "zh-CN": "直接设定家庭资金为 9,999,999 富豪",
+              "zh-CN": "直接设定家庭资金为 9,999,999",
               "en": "Set Exact Money"
             },
             "code": "money 9999999",
-            "desc": "随心买下微风山庄等最高档豪华海景地皮",
+            "desc": "将家庭资金直接设定为 9,999,999 模拟币。",
             "id": "the-sims-4_cmd_5",
             "syntax_type": "gm_command",
             "framework_required": "Native Engine Console",
@@ -24942,7 +24942,7 @@ window.GAMES_DATA = [
               "en": "Free Real Estate"
             },
             "code": "freerealestate on",
-            "desc": "搬家界面任意豪宅全部零元直接入住",
+            "desc": "开启后，在搬家界面选择房产可免费入住，不收取购置费用。",
             "id": "the-sims-4_cmd_6",
             "syntax_type": "gm_command",
             "framework_required": "Native Engine Console",
@@ -24951,15 +24951,15 @@ window.GAMES_DATA = [
         ]
       },
       {
-        "category": "🏗️ 建筑党终极自由建造 (Master Builder Tools)",
+        "category": "自由建造工具 (Master Builder Tools)",
         "commands": [
           {
             "name": {
-              "zh-CN": "突破网格自由穿模悬空摆放 (神技)",
+              "zh-CN": "突破网格自由摆放物品",
               "en": "Move Objects Anywhere"
             },
             "code": "bb.moveobjects on",
-            "desc": "建筑师必备！按 9 键抬升物品高度、按 0 键下降、按 [ 或 ] 自由放大缩小物品！",
+            "desc": "开启后可自由摆放物体，不受网格限制，用 9/0 键调整高度，用 [ ] 键调整大小。",
             "id": "the-sims-4_cmd_7",
             "syntax_type": "gm_command",
             "framework_required": "Native Engine Console",
@@ -24998,14 +24998,14 @@ window.GAMES_DATA = [
         "title": "MC Command Center (MCCC)",
         "author": "Deaderpool",
         "category": "核心控制中心 (Master Controller)",
-        "desc": "模拟人生4绝对必备的上帝级控制台！点击电脑或市民即可随时调节NPC故事发展、自动结婚生育、调节寿命与瞬间修改任何属性技能。",
+        "desc": "为模拟人生4提供更丰富的游戏控制与 NPC 剧情发展选项的控制中心模组，可通过电脑或市民菜单调整相关设置。",
         "dependencies": [
           "None"
         ],
         "installPath": "%USERPROFILE%\\Documents\\Electronic Arts\\The Sims 4\\Mods\\MC_Command_Center\\",
         "installSteps": [
           "1. 解压放入 Mods 文件夹中的一级子目录；",
-          "2. 游戏选项 -> 其他 -> 勾选 '启用自定义内容与模组' 以及 '允许脚本模组' 并重启游戏。"
+          "2. 游戏选项 -> 其他 -> 勾选“启用自定义内容与模组”以及“允许脚本模组”并重启游戏。"
         ],
         "nexusUrl": "https://deaderpool-mccc.com/downloads.html",
         "version": "2026.6.0",
@@ -25016,14 +25016,14 @@ window.GAMES_DATA = [
         "title": "UI Cheats Extension",
         "author": "weerbesu",
         "category": "便民界面 (UI QoL)",
-        "desc": "告别繁琐控制台代码输入！直接在界面上鼠标左键/右键点击金币栏加钱、点击需求条直接拖拽到满绿、右击职业任务瞬间完成！",
+        "desc": "无需输入控制台代码，直接在界面上点击即可触发作弊：左键点击金钱栏 +$1000，右键点击金钱栏/需求条/技能条可设置数值，右键点击渴望目标或职业任务可直接完成。",
         "dependencies": [
           "None"
         ],
         "installPath": "%USERPROFILE%\\Documents\\Electronic Arts\\The Sims 4\\Mods\\",
         "installSteps": [
           "1. 将 UI_Cheats_Extension.package 和 .ts4script 直接放入 Mods 根目录；",
-          "2. 严禁放入深层子目录以防脚本失效。"
+          "2. 不要放入深层子目录，以防脚本失效。"
         ],
         "nexusUrl": "https://modthesims.info/d/558548",
         "isDirect": false
@@ -25414,11 +25414,11 @@ window.GAMES_DATA = [
     "popularCommands": [
       {
         "name": {
-          "zh-CN": "时间直接调节至正午 12 点阳光明媚",
+          "zh-CN": "时间直接调节至正午 12 点",
           "en": "Set Noon Time"
         },
         "command": "g_set_time 12 00",
-        "desc": "彻底告别漆黑视距不良的漫漫夜路",
+        "desc": "将游戏内时间设置为中午 12 点。",
         "source": "https://modding.scssoft.com/wiki/Documentation/Engine/Console/Commands"
       },
       {
@@ -25427,16 +25427,16 @@ window.GAMES_DATA = [
           "en": "Clear Sunny Weather"
         },
         "command": "g_set_weather 0",
-        "desc": "消除暴雨挡风玻璃视线模糊",
+        "desc": "将天气设置为晴天（weather_index 0）。",
         "source": "https://modding.scssoft.com/wiki/Documentation/Engine/Console/Commands"
       },
       {
         "name": {
-          "zh-CN": "自由摄像机飞天飞行速度调节",
+          "zh-CN": "自由视角摄像机飞行速度设置",
           "en": "Set Fly Speed"
         },
         "command": "g_flyspeed 100",
-        "desc": "加快按 0 视角漫游全欧洲大陆的速度",
+        "desc": "调节自由视角（调试摄像机）的移动速度。",
         "source": "https://modding.scssoft.com/wiki/Documentation/Engine/Configuration_variables"
       }
     ],
@@ -25451,11 +25451,11 @@ window.GAMES_DATA = [
         "commands": [
           {
             "name": {
-              "zh-CN": "时间直接调节至正午 12 点阳光明媚",
+              "zh-CN": "时间直接调节至正午 12 点",
               "en": "Set Noon Time"
             },
             "code": "g_set_time 12 00",
-            "desc": "彻底告别漆黑视距不良的漫漫夜路",
+            "desc": "将游戏内时间设置为中午 12 点。",
             "id": "euro-truck-simulator-2_cmd_2",
             "syntax_type": "gm_command",
             "framework_required": "Native Engine Console",
@@ -25467,7 +25467,7 @@ window.GAMES_DATA = [
               "en": "Clear Sunny Weather"
             },
             "code": "g_set_weather 0",
-            "desc": "消除暴雨挡风玻璃视线模糊",
+            "desc": "将天气设置为晴天（weather_index 0）。",
             "id": "euro-truck-simulator-2_cmd_3",
             "syntax_type": "gm_command",
             "framework_required": "Native Engine Console",
@@ -25475,11 +25475,11 @@ window.GAMES_DATA = [
           },
           {
             "name": {
-              "zh-CN": "自由摄像机飞天飞行速度调节",
+              "zh-CN": "自由视角摄像机飞行速度设置",
               "en": "Set Fly Speed"
             },
             "code": "g_flyspeed 100",
-            "desc": "加快按 0 视角漫游全欧洲大陆的速度",
+            "desc": "调节自由视角（调试摄像机）的移动速度。",
             "id": "euro-truck-simulator-2_cmd_4",
             "syntax_type": "gm_command",
             "framework_required": "Native Engine Console",
@@ -25487,11 +25487,11 @@ window.GAMES_DATA = [
           },
           {
             "name": {
-              "zh-CN": "彻底清空公路 AI 车辆畅享无阻公路",
+              "zh-CN": "关闭路上 AI 车辆 (Disable Traffic)",
               "en": "Disable Traffic"
             },
             "code": "g_traffic 0",
-            "desc": "一键清空高速公路所有慢速卡车，自己畅快飙车",
+            "desc": "将交通流量设为 0，关闭路上的 AI 车辆。",
             "id": "euro-truck-simulator-2_cmd_5",
             "syntax_type": "gm_command",
             "framework_required": "Native Engine Console",
@@ -25506,14 +25506,14 @@ window.GAMES_DATA = [
         "title": "ProMods Europe",
         "author": "ProMods Team",
         "category": "地图大修 (Map Expansion)",
-        "desc": "欧卡2必装天花板地图！重做英国、德国，新增冰岛火山公路、格陵兰岛、西班牙与巴尔干半岛写实地标。",
+        "desc": "大型地图扩展模组，重做英国、德国等地图，并新增多个国家/地区的公路网络。",
         "dependencies": [
           "All Map DLCs"
         ],
         "installPath": "%USERPROFILE%\\Documents\\Euro Truck Simulator 2\\mod\\",
         "installSteps": [
-          "1. 将下载的 7 个 .scs 模组文件直接拖入 Documents\\Euro Truck Simulator 2\\mod 目录；",
-          "2. 游戏中模组管理器依次排布启用即可。"
+          "1. 将下载的 .scs 模组文件直接拖入 Documents\\Euro Truck Simulator 2\\mod 目录；",
+          "2. 游戏中模组管理器依次排布启用。"
         ],
         "nexusUrl": "https://www.promods.net/",
         "isDirect": false
@@ -28915,14 +28915,14 @@ window.GAMES_DATA = [
         "title": "Scarab",
         "author": "fifty-six",
         "category": "安装器工具 (Installer)",
-        "desc": "一键下载、更新与管理空洞骑士上百款模组，支持联机与自制新 DLC 苍白之庭。",
+        "desc": "空洞骑士的模组管理器，用于下载、更新和管理模组。",
         "dependencies": [
           "None"
         ],
         "installPath": "Hollow Knight\\",
         "installSteps": [
-          "1. 运行 Scarab.exe，自动识别空洞骑士 Steam 路径；",
-          "2. 搜索 DebugMod 点击 Install 即可一键装入。"
+          "1. 运行 Scarab.exe，自动识别空洞骑士安装路径；",
+          "2. 搜索对应模组点击 Install 进行安装。"
         ],
         "nexusUrl": "https://github.com/fifty-six/Scarab",
         "version": "2.7.0.0",
@@ -29063,11 +29063,11 @@ window.GAMES_DATA = [
     "popularCommands": [
       {
         "name": {
-          "zh-CN": "金币直接加满至 999",
+          "zh-CN": "增加 999 金币 (Add 999 Gold)",
           "en": "Add 999 Gold"
         },
         "command": "gold add 999",
-        "desc": "在商店中任意买下所有遗物卡牌与移除诅咒",
+        "desc": "给玩家增加 999 金币，可用于在商店购买更多物品。",
         "source": "https://github.com/daviscook477/BaseMod/wiki/Console"
       }
     ],
@@ -29082,11 +29082,11 @@ window.GAMES_DATA = [
         "commands": [
           {
             "name": {
-              "zh-CN": "金币直接加满至 999",
+              "zh-CN": "增加 999 金币 (Add 999 Gold)",
               "en": "Add 999 Gold"
             },
             "code": "gold add 999",
-            "desc": "在商店中任意买下所有遗物卡牌与移除诅咒",
+            "desc": "给玩家增加 999 金币，可用于在商店购买更多物品。",
             "id": "slay-the-spire_cmd_1",
             "syntax_type": "unity_dev",
             "framework_required": "ModTheSpire + BaseMod",
@@ -29098,7 +29098,7 @@ window.GAMES_DATA = [
               "en": "Add Max HP 50"
             },
             "code": "maxhp add 50",
-            "desc": "血量上限极大提升，从容抵御心脏大招",
+            "desc": "永久提升 50 点生命上限。",
             "id": "slay-the-spire_cmd_5",
             "syntax_type": "unity_dev",
             "framework_required": "ModTheSpire + BaseMod",
@@ -29132,8 +29132,8 @@ window.GAMES_DATA = [
         "id": "downfall-expansion",
         "title": "Downfall",
         "author": "Table 9 Studio",
-        "category": "史诗拓展 (Full Expansion)",
-        "desc": "由社区制作并获得官方高度认可的史诗扩展！玩家化身 Boss 恶魔守卫底层，守护高塔阻击冒险者，包含 7 个全新独立反派角色与数百张全新卡牌！",
+        "category": "全新拓展 (Full Expansion)",
+        "desc": "大型扩展模组：新增第五位角色 The Hermit，以及包含 7 个反派角色的全新 Downfall 模式，并带来大量新卡牌、遗物与药水。",
         "dependencies": [
           "BaseMod",
           "ModTheSpire"
@@ -29141,7 +29141,7 @@ window.GAMES_DATA = [
         "installPath": "SlayTheSpire\\mods\\Downfall.jar",
         "installSteps": [
           "1. 创意工坊订阅或放入 mods 目录；",
-          "2. 主菜单选择 Downfall 模式即可开启全新反派视角！"
+          "2. 主菜单选择 Downfall 模式即可体验反派角色。"
         ],
         "nexusUrl": "https://store.steampowered.com/app/1865780/Downfall/",
         "version": "6.0",
@@ -29201,6 +29201,20 @@ window.TRANSLATIONS_DATA = {
     "bundlesEmpty": "这款游戏还没有整理好的指令套餐",
     "modsEmpty": "这款游戏还没有收录 Mod",
     "cmdSource": "来源：{host}",
+    "noConsoleHasBoth": "这款游戏有风灵月影修改器，也有收录的 Mod。",
+    "noConsoleHasTrainer": "这款游戏有风灵月影修改器。",
+    "noConsoleHasMods": "这款游戏有收录的 Mod。",
+    "goToMods": "查看收录的 Mod",
+    "smartFound": "找到《{title}》",
+    "smartNoMatch": "没有找到和「{query}」对应的游戏",
+    "smartListed": "本站收录：{items}",
+    "smartHasCommands": "{n} 条控制台指令",
+    "smartHasMods": "{n} 个 Mod",
+    "smartHasTrainer": "风灵月影修改器",
+    "smartHasNothing": "这款游戏还没有收录指令、Mod 或修改器",
+    "smartFirstCommand": "第一条指令",
+    "smartOpenGame": "查看《{title}》",
+    "favMarkedToast": "已在列表中标出你收藏的 {n} 款游戏",
     "tabSocialCards": "🎨 官方 5 联卡片",
     "consoleStatusAvailable": "官方控制台可用",
     "consoleStatusNone": "官方无内置控制台",
@@ -29264,7 +29278,6 @@ window.TRANSLATIONS_DATA = {
     "copyBundleBtn": "复制整套场景套餐指令",
     "bundleCopiedToast": "场景套餐已复制！按呼出键直接整段粘贴回车即可。",
     "noConsoleTitle": "本游戏官方无原生内置控制台 · 老L避坑指南",
-    "noConsoleDesc": "已为你匹配【风灵月影 FLiNG 修改器】与【N网精选 MOD】",
     "goToTrainers": "⚡ 前往【纯净修改器】专区",
     "btnOpenLazyDoor": "🚀 懒人双击一键开门 (生成 .bat)",
     "activatorTitle": "10秒懒人开门 · 游戏控制台一键激活器",
@@ -29309,12 +29322,12 @@ window.TRANSLATIONS_DATA = {
     "trainerBackupMirror": "直达风灵月影官方页面 (备用)",
     "trainer3StepHint": "极简 3 步：保持单机离线 -> 运行放行指令 -> 解压启动即享",
     "trainerClose": "我知道了",
-    "modModalDirectTitle": "MOD 下载已在浏览器拉起",
-    "modModalOfficialTitle": "转存与官方页面已直达",
-    "modModalDirectBadge": "极速真直连 (免科学上网)",
-    "modModalOfficialBadge": "精选转存 / 官方源",
-    "modModalDirectSubtitle": "文件正在保存中 · 附全中文安装路径与部署指引",
-    "modModalOfficialSubtitle": "已为你直达安全下载源 · 附全中文部署指引",
+    "modModalDirectTitle": "已开始下载作者发布的文件",
+    "modModalOfficialTitle": "已在新标签页打开来源页面",
+    "modModalDirectBadge": "作者发布页",
+    "modModalOfficialBadge": "来源页面",
+    "modModalDirectSubtitle": "文件是作者在 GitHub 上发布的版本，安装步骤见下方",
+    "modModalOfficialSubtitle": "请在来源页面下载，安装步骤见下方",
     "modModalTargetFile": "下载目标文件:",
     "modModalInstallPath": "建议安装路径:",
     "copyPathBtn": "复制路径",
@@ -29327,7 +29340,7 @@ window.TRANSLATIONS_DATA = {
     "modClose": "我知道了",
     "modInstallStepsGuide": "傻瓜安装指引:",
     "modDirectBtn": "⚡ 下载（作者发布的文件）",
-    "modMirrorBtn": "🚀 官方精选转存直达",
+    "modMirrorBtn": "🔗 打开来源页面",
     "modOriginPageBtn": "来源页面",
     "radarTitle": "Steam 补丁变动与 Mod 兼容性避坑雷达",
     "radarMetaDesc": "每天巡检 Steam 上单机游戏的更新时间，提醒 Mod 框架和修改器可能要等适配。",
@@ -29541,6 +29554,20 @@ window.TRANSLATIONS_DATA = {
     "bundlesEmpty": "No command bundles for this game yet",
     "modsEmpty": "No mods are listed for this game yet",
     "cmdSource": "Source: {host}",
+    "noConsoleHasBoth": "This game has a FLiNG trainer and listed mods.",
+    "noConsoleHasTrainer": "This game has a FLiNG trainer.",
+    "noConsoleHasMods": "This game has listed mods.",
+    "goToMods": "See listed mods",
+    "smartFound": "Found: {title}",
+    "smartNoMatch": "No game matches “{query}”",
+    "smartListed": "Listed here: {items}",
+    "smartHasCommands": "{n} console commands",
+    "smartHasMods": "{n} mods",
+    "smartHasTrainer": "FLiNG trainer",
+    "smartHasNothing": "No commands, mods or trainer are listed for this game yet",
+    "smartFirstCommand": "First command",
+    "smartOpenGame": "Open {title}",
+    "favMarkedToast": "Your {n} favorite games are marked in the list",
     "tabSocialCards": "🎨 5-Card Matrix Preview",
     "consoleStatusAvailable": "Official Console Supported",
     "consoleStatusNone": "No official console (use Mods/Trainers)",
@@ -29604,7 +29631,6 @@ window.TRANSLATIONS_DATA = {
     "copyBundleBtn": "Copy Full Bundle Commands",
     "bundleCopiedToast": "Bundle commands copied! Open console and paste to run.",
     "noConsoleTitle": "No Native Console in This Game · L-MOD Guide",
-    "noConsoleDesc": "Matched with FLiNG Trainer & curated Nexus Mods",
     "goToTrainers": "⚡ Go to Clean Trainers",
     "btnOpenLazyDoor": "🚀 1-Click Auto Config (.bat Generator)",
     "activatorTitle": "10s Quick Activator · Console 1-Click Setup",
@@ -29649,12 +29675,12 @@ window.TRANSLATIONS_DATA = {
     "trainerBackupMirror": "FLiNG Official Page (Backup)",
     "trainer3StepHint": "3 Simple Steps: Stay offline -> Run exclusion cmd -> Unzip & play",
     "trainerClose": "Got It",
-    "modModalDirectTitle": "MOD Download Started in Browser",
-    "modModalOfficialTitle": "Official Source & Mirror Direct",
-    "modModalDirectBadge": "High-Speed Direct Mirror",
-    "modModalOfficialBadge": "Curated Mirror / Source",
-    "modModalDirectSubtitle": "File downloading · Full installation path and guide included",
-    "modModalOfficialSubtitle": "Connected to safe source · Full deployment guide included",
+    "modModalDirectTitle": "Downloading the author's release file",
+    "modModalOfficialTitle": "Source page opened in a new tab",
+    "modModalDirectBadge": "Author's release",
+    "modModalOfficialBadge": "Source page",
+    "modModalDirectSubtitle": "The file is the author's release on GitHub; install steps are below",
+    "modModalOfficialSubtitle": "Download it from the source page; install steps are below",
     "modModalTargetFile": "Target File:",
     "modModalInstallPath": "Recommended Install Path:",
     "copyPathBtn": "Copy Path",
@@ -29667,7 +29693,7 @@ window.TRANSLATIONS_DATA = {
     "modClose": "Got It",
     "modInstallStepsGuide": "Installation Guide:",
     "modDirectBtn": "⚡ Download (author's release)",
-    "modMirrorBtn": "🚀 Official Mirror / Source",
+    "modMirrorBtn": "🔗 Open source page",
     "modOriginPageBtn": "Source page",
     "radarTitle": "Steam Patch & Mod Compatibility Radar",
     "radarMetaDesc": "Checks Steam update times for single-player games every day and flags when mod frameworks or trainers may need to catch up.",
@@ -29881,6 +29907,20 @@ window.TRANSLATIONS_DATA = {
     "bundlesEmpty": "這款遊戲還沒有整理好的指令套餐",
     "modsEmpty": "這款遊戲還沒有收錄 Mod",
     "cmdSource": "來源：{host}",
+    "noConsoleHasBoth": "這款遊戲有風靈月影修改器，也有收錄的 Mod。",
+    "noConsoleHasTrainer": "這款遊戲有風靈月影修改器。",
+    "noConsoleHasMods": "這款遊戲有收錄的 Mod。",
+    "goToMods": "查看收錄的 Mod",
+    "smartFound": "找到《{title}》",
+    "smartNoMatch": "沒有找到和「{query}」對應的遊戲",
+    "smartListed": "本站收錄：{items}",
+    "smartHasCommands": "{n} 條控制台指令",
+    "smartHasMods": "{n} 個 Mod",
+    "smartHasTrainer": "風靈月影修改器",
+    "smartHasNothing": "這款遊戲還沒有收錄指令、Mod 或修改器",
+    "smartFirstCommand": "第一條指令",
+    "smartOpenGame": "查看《{title}》",
+    "favMarkedToast": "已在列表中標出你收藏的 {n} 款遊戲",
     "tabSocialCards": "🎨 官方 5 聯卡片",
     "consoleStatusAvailable": "官方控制台可用",
     "consoleStatusNone": "官方無內建控制台",
@@ -29944,7 +29984,6 @@ window.TRANSLATIONS_DATA = {
     "copyBundleBtn": "複製整套場景套餐指令",
     "bundleCopiedToast": "場景套餐已複製！按呼出鍵直接整段貼上 Enter 即可。",
     "noConsoleTitle": "本遊戲官方無原生內置控制台 · 老L避坑指南",
-    "noConsoleDesc": "已為你匹配【風靈月影 FLiNG 修改器】與【N網精選 MOD】",
     "goToTrainers": "⚡ 前往【純淨修改器】專區",
     "btnOpenLazyDoor": "🚀 懶人雙擊一鍵開門 (生成 .bat)",
     "activatorTitle": "10秒懶人開門 · 遊戲控制台一鍵激活器",
@@ -29989,12 +30028,12 @@ window.TRANSLATIONS_DATA = {
     "trainerBackupMirror": "直達風靈月影官方頁面 (備用)",
     "trainer3StepHint": "極簡 3 步：保持單機離線 -> 運行放行指令 -> 解壓啟動即享",
     "trainerClose": "我知道了",
-    "modModalDirectTitle": "MOD 下載已在瀏覽器拉起",
-    "modModalOfficialTitle": "轉存與官方頁面已直達",
-    "modModalDirectBadge": "極速真直連 (免科學上網)",
-    "modModalOfficialBadge": "精選轉存 / 官方源",
-    "modModalDirectSubtitle": "文件正在保存中 · 附全中文安裝路徑與部署指引",
-    "modModalOfficialSubtitle": "已為你直達安全下載源 · 附全中文部署指引",
+    "modModalDirectTitle": "已開始下載作者發布的檔案",
+    "modModalOfficialTitle": "已在新分頁開啟來源頁面",
+    "modModalDirectBadge": "作者發布頁",
+    "modModalOfficialBadge": "來源頁面",
+    "modModalDirectSubtitle": "檔案是作者在 GitHub 上發布的版本，安裝步驟見下方",
+    "modModalOfficialSubtitle": "請在來源頁面下載，安裝步驟見下方",
     "modModalTargetFile": "下載目標文件:",
     "modModalInstallPath": "建議安裝路徑:",
     "copyPathBtn": "複製路徑",
@@ -30007,7 +30046,7 @@ window.TRANSLATIONS_DATA = {
     "modClose": "我知道了",
     "modInstallStepsGuide": "傻瓜安裝指引:",
     "modDirectBtn": "⚡ 下載（作者發布的檔案）",
-    "modMirrorBtn": "🚀 官方精選轉存直達",
+    "modMirrorBtn": "🔗 開啟來源頁面",
     "modOriginPageBtn": "來源頁面",
     "radarTitle": "Steam 補丁變動與 Mod 相容性避坑雷達",
     "radarMetaDesc": "每天巡檢 Steam 上單機遊戲的更新時間，提醒 Mod 框架和修改器可能要等適配。",
@@ -30221,6 +30260,20 @@ window.TRANSLATIONS_DATA = {
     "bundlesEmpty": "このゲームのコマンドセットはまだありません",
     "modsEmpty": "このゲームの Mod はまだ掲載されていません",
     "cmdSource": "出典：{host}",
+    "noConsoleHasBoth": "このゲームには FLiNG トレーナーと掲載 Mod があります。",
+    "noConsoleHasTrainer": "このゲームには FLiNG トレーナーがあります。",
+    "noConsoleHasMods": "このゲームには掲載 Mod があります。",
+    "goToMods": "掲載 Mod を見る",
+    "smartFound": "見つかりました：{title}",
+    "smartNoMatch": "「{query}」に該当するゲームは見つかりませんでした",
+    "smartListed": "掲載内容：{items}",
+    "smartHasCommands": "コンソールコマンド {n} 件",
+    "smartHasMods": "Mod {n} 件",
+    "smartHasTrainer": "FLiNG トレーナー",
+    "smartHasNothing": "このゲームにはまだコマンド・Mod・トレーナーが掲載されていません",
+    "smartFirstCommand": "最初のコマンド",
+    "smartOpenGame": "{title} を開く",
+    "favMarkedToast": "お気に入りの {n} 本をリストで強調表示しました",
     "tabSocialCards": "🎨 公式5連カード",
     "consoleStatusAvailable": "公式コンソール利用可能",
     "consoleStatusNone": "公式コンソール非搭載 (MOD/チート推奨)",
@@ -30284,7 +30337,6 @@ window.TRANSLATIONS_DATA = {
     "copyBundleBtn": "バンドル全コマンドを一括コピー",
     "bundleCopiedToast": "バンドルコマンドをコピーしました！コンソールに貼り付けて実行してください。",
     "noConsoleTitle": "公式コンソール非搭載 · 回避ガイド",
-    "noConsoleDesc": "【FLiNG トレーナー】と【Nexus 厳選MOD】をご案内",
     "goToTrainers": "⚡ 【クリーンチート】へ移動",
     "btnOpenLazyDoor": "🚀 ワンクリック自動設定 (.bat生成)",
     "activatorTitle": "10秒簡単起動 · コンソールワンクリック有効化",
@@ -30329,12 +30381,12 @@ window.TRANSLATIONS_DATA = {
     "trainerBackupMirror": "FLiNG 公式ページへ (予備)",
     "trainer3StepHint": "簡単3ステップ: オフライン維持 -> 除外コマンド実行 -> 解凍して起動",
     "trainerClose": "了解しました",
-    "modModalDirectTitle": "ダウンロードがブラウザで開始されました",
-    "modModalOfficialTitle": "公式ソース・ミラーに接続しました",
-    "modModalDirectBadge": "超高速ダイレクト接続",
-    "modModalOfficialBadge": "厳選ミラー / 公式ソース",
-    "modModalDirectSubtitle": "ダウンロード中 · インストール先パスと導入ガイド付き",
-    "modModalOfficialSubtitle": "安全なダウンロード元へ接続 · 導入手順付き",
+    "modModalDirectTitle": "作者が公開したファイルのダウンロードを開始しました",
+    "modModalOfficialTitle": "出典ページを新しいタブで開きました",
+    "modModalDirectBadge": "作者の公開ページ",
+    "modModalOfficialBadge": "出典ページ",
+    "modModalDirectSubtitle": "ファイルは作者が GitHub で公開したものです。導入手順は下にあります",
+    "modModalOfficialSubtitle": "出典ページからダウンロードしてください。導入手順は下にあります",
     "modModalTargetFile": "対象ファイル:",
     "modModalInstallPath": "推奨インストール先:",
     "copyPathBtn": "パスをコピー",
@@ -30347,7 +30399,7 @@ window.TRANSLATIONS_DATA = {
     "modClose": "了解しました",
     "modInstallStepsGuide": "インストール手順:",
     "modDirectBtn": "⚡ ダウンロード（作者の配布ファイル）",
-    "modMirrorBtn": "🚀 公式ミラー / ソース",
+    "modMirrorBtn": "🔗 出典ページを開く",
     "modOriginPageBtn": "配布ページ",
     "radarTitle": "Steam パッチ変動 & Mod 互換性レーダー",
     "radarMetaDesc": "Steam のシングルプレイゲームの更新日時を毎日チェックし、Mod フレームワークやトレーナーが対応待ちになりそうな時にお知らせします。",
@@ -30561,6 +30613,20 @@ window.TRANSLATIONS_DATA = {
     "bundlesEmpty": "이 게임의 명령어 세트는 아직 없습니다",
     "modsEmpty": "이 게임에 등록된 모드가 아직 없습니다",
     "cmdSource": "출처: {host}",
+    "noConsoleHasBoth": "이 게임에는 FLiNG 트레이너와 등록된 모드가 있습니다.",
+    "noConsoleHasTrainer": "이 게임에는 FLiNG 트레이너가 있습니다.",
+    "noConsoleHasMods": "이 게임에는 등록된 모드가 있습니다.",
+    "goToMods": "등록된 모드 보기",
+    "smartFound": "찾은 게임: {title}",
+    "smartNoMatch": "“{query}”에 해당하는 게임이 없습니다",
+    "smartListed": "등록 항목: {items}",
+    "smartHasCommands": "콘솔 명령어 {n}개",
+    "smartHasMods": "모드 {n}개",
+    "smartHasTrainer": "FLiNG 트레이너",
+    "smartHasNothing": "이 게임에는 아직 등록된 명령어, 모드, 트레이너가 없습니다",
+    "smartFirstCommand": "첫 번째 명령어",
+    "smartOpenGame": "{title} 보기",
+    "favMarkedToast": "즐겨찾기한 게임 {n}개를 목록에 표시했습니다",
     "tabSocialCards": "🎨 공식 5연속 카드",
     "consoleStatusAvailable": "공식 콘솔 사용 가능",
     "consoleStatusNone": "공식 콘솔 없음 (MOD/트레이너 사용)",
@@ -30624,7 +30690,6 @@ window.TRANSLATIONS_DATA = {
     "copyBundleBtn": "시나리오 번들 전체 복사",
     "bundleCopiedToast": "번들 명령어가 복사되었습니다! 콘솔을 열고 붙여넣어 실행하세요.",
     "noConsoleTitle": "공식 네이티브 콘솔 미지원 게임 · L-MOD 가이드",
-    "noConsoleDesc": "【FLiNG 트레이너】와 【Nexus 엄선 모드】를 안내합니다",
     "goToTrainers": "⚡ 【클린 트레이너】 이동",
     "btnOpenLazyDoor": "🚀 1클릭 원스톱 자동설정 (.bat 생성)",
     "activatorTitle": "10초 원터치 오픈 · 게임 콘솔 1클릭 활성화",
@@ -30669,12 +30734,12 @@ window.TRANSLATIONS_DATA = {
     "trainerBackupMirror": "FLiNG 공식 페이지 바로가기 (보조)",
     "trainer3StepHint": "간단 3단계: 오프라인 유지 -> 예외 명령어 실행 -> 압축 해제 후 플레이",
     "trainerClose": "확인했습니다",
-    "modModalDirectTitle": "MOD 다운로드가 브라우저에서 시작되었습니다",
-    "modModalOfficialTitle": "공식 소스 및 미러로 연결되었습니다",
-    "modModalDirectBadge": "초고속 다이렉트 미러",
-    "modModalOfficialBadge": "엄선 미러 / 공식 소스",
-    "modModalDirectSubtitle": "다운로드 진행 중 · 설치 경로 및 단계별 가이드 포함",
-    "modModalOfficialSubtitle": "안전한 다운로드 소스로 연결됨 · 배포 가이드 포함",
+    "modModalDirectTitle": "제작자가 배포한 파일 다운로드를 시작했습니다",
+    "modModalOfficialTitle": "새 탭에서 출처 페이지를 열었습니다",
+    "modModalDirectBadge": "제작자 배포 페이지",
+    "modModalOfficialBadge": "출처 페이지",
+    "modModalDirectSubtitle": "파일은 제작자가 GitHub에 배포한 버전입니다. 설치 방법은 아래에 있습니다",
+    "modModalOfficialSubtitle": "출처 페이지에서 다운로드하세요. 설치 방법은 아래에 있습니다",
     "modModalTargetFile": "다운로드 대상 파일:",
     "modModalInstallPath": "권장 설치 경로:",
     "copyPathBtn": "경로 복사",
@@ -30687,7 +30752,7 @@ window.TRANSLATIONS_DATA = {
     "modClose": "확인했습니다",
     "modInstallStepsGuide": "설치 가이드:",
     "modDirectBtn": "⚡ 다운로드 (제작자 배포 파일)",
-    "modMirrorBtn": "🚀 공식 미러 / 소스 바로가기",
+    "modMirrorBtn": "🔗 출처 페이지 열기",
     "modOriginPageBtn": "원본 페이지",
     "radarTitle": "Steam 패치 변동 & 모드 호환성 레이더",
     "radarMetaDesc": "Steam 싱글 게임의 업데이트 시점을 매일 점검하고, 모드 프레임워크나 트레이너가 대응을 기다려야 할 수 있을 때 알려 드립니다.",
@@ -30901,6 +30966,20 @@ window.TRANSLATIONS_DATA = {
     "bundlesEmpty": "Наборов команд для этой игры пока нет",
     "modsEmpty": "Модов для этой игры пока нет",
     "cmdSource": "Источник: {host}",
+    "noConsoleHasBoth": "Для этой игры есть трейнер FLiNG и моды из списка.",
+    "noConsoleHasTrainer": "Для этой игры есть трейнер FLiNG.",
+    "noConsoleHasMods": "Для этой игры есть моды из списка.",
+    "goToMods": "Смотреть моды",
+    "smartFound": "Найдено: {title}",
+    "smartNoMatch": "Игра по запросу «{query}» не найдена",
+    "smartListed": "На сайте: {items}",
+    "smartHasCommands": "консольных команд: {n}",
+    "smartHasMods": "модов: {n}",
+    "smartHasTrainer": "трейнер FLiNG",
+    "smartHasNothing": "Для этой игры пока нет команд, модов и трейнера",
+    "smartFirstCommand": "Первая команда",
+    "smartOpenGame": "Открыть {title}",
+    "favMarkedToast": "Избранные игры ({n}) отмечены в списке",
     "tabSocialCards": "🎨 5 карточек-гайдов",
     "consoleStatusAvailable": "Официальная консоль доступна",
     "consoleStatusNone": "Консоли нет (используйте моды/трейнеры)",
@@ -30964,7 +31043,6 @@ window.TRANSLATIONS_DATA = {
     "copyBundleBtn": "Скопировать команды набора",
     "bundleCopiedToast": "Команды скопированы! Откройте консоль и вставьте для запуска.",
     "noConsoleTitle": "В этой игре нет встроенной консоли · Гид L-MOD",
-    "noConsoleDesc": "Подобраны трейнеры FLiNG и избранные моды Nexus",
     "goToTrainers": "⚡ Перейти к трейнерам",
     "btnOpenLazyDoor": "🚀 Запуск в 1 клик (Генератор .bat)",
     "activatorTitle": "Запуск за 10 сек · Активатор консоли в 1 клик",
@@ -31009,12 +31087,12 @@ window.TRANSLATIONS_DATA = {
     "trainerBackupMirror": "Официальная страница FLiNG (Зеркало)",
     "trainer3StepHint": "3 шага: Офлайн режим -> Команда исключения -> Распаковать и играть",
     "trainerClose": "Понятно",
-    "modModalDirectTitle": "Загрузка мода запущена в браузере",
-    "modModalOfficialTitle": "Переход на официальный источник и зеркало",
-    "modModalDirectBadge": "Прямое скоростное скачивание",
-    "modModalOfficialBadge": "Избранное зеркало / Источник",
-    "modModalDirectSubtitle": "Файл загружается · Путь установки и руководство включены",
-    "modModalOfficialSubtitle": "Безопасный источник открыт · Руководство по установке доступно",
+    "modModalDirectTitle": "Началась загрузка файла от автора",
+    "modModalOfficialTitle": "Страница источника открыта в новой вкладке",
+    "modModalDirectBadge": "Релиз автора",
+    "modModalOfficialBadge": "Страница источника",
+    "modModalDirectSubtitle": "Файл — релиз автора на GitHub; шаги установки ниже",
+    "modModalOfficialSubtitle": "Скачайте файл со страницы источника; шаги установки ниже",
     "modModalTargetFile": "Целевой файл:",
     "modModalInstallPath": "Путь установки:",
     "copyPathBtn": "Скопировать путь",
@@ -31027,7 +31105,7 @@ window.TRANSLATIONS_DATA = {
     "modClose": "Понятно",
     "modInstallStepsGuide": "Инструкция по установке:",
     "modDirectBtn": "⚡ Скачать (релиз автора)",
-    "modMirrorBtn": "🚀 Официальное зеркало / Источник",
+    "modMirrorBtn": "🔗 Открыть страницу источника",
     "modOriginPageBtn": "Страница мода",
     "radarTitle": "Радар патчей Steam и совместимости модов",
     "radarMetaDesc": "Ежедневно проверяет время обновлений одиночных игр в Steam и предупреждает, когда модам или трейнерам может понадобиться время на адаптацию.",
@@ -31241,6 +31319,20 @@ window.TRANSLATIONS_DATA = {
     "bundlesEmpty": "Für dieses Spiel gibt es noch keine Befehlspakete",
     "modsEmpty": "Für dieses Spiel sind noch keine Mods eingetragen",
     "cmdSource": "Quelle: {host}",
+    "noConsoleHasBoth": "Für dieses Spiel gibt es einen FLiNG-Trainer und eingetragene Mods.",
+    "noConsoleHasTrainer": "Für dieses Spiel gibt es einen FLiNG-Trainer.",
+    "noConsoleHasMods": "Für dieses Spiel sind Mods eingetragen.",
+    "goToMods": "Eingetragene Mods ansehen",
+    "smartFound": "Gefunden: {title}",
+    "smartNoMatch": "Kein Spiel passt zu „{query}“",
+    "smartListed": "Hier eingetragen: {items}",
+    "smartHasCommands": "{n} Konsolenbefehle",
+    "smartHasMods": "{n} Mods",
+    "smartHasTrainer": "FLiNG-Trainer",
+    "smartHasNothing": "Für dieses Spiel sind noch keine Befehle, Mods oder Trainer eingetragen",
+    "smartFirstCommand": "Erster Befehl",
+    "smartOpenGame": "{title} öffnen",
+    "favMarkedToast": "Deine {n} Favoriten sind in der Liste markiert",
     "tabSocialCards": "🎨 5-Karten Matrix",
     "consoleStatusAvailable": "Offizielle Konsole verfügbar",
     "consoleStatusNone": "Keine offizielle Konsole (Mods/Trainer nutzen)",
@@ -31304,7 +31396,6 @@ window.TRANSLATIONS_DATA = {
     "copyBundleBtn": "Gesamtes Paket kopieren",
     "bundleCopiedToast": "Paket-Befehle kopiert! In der Konsole einfügen und Enter drücken.",
     "noConsoleTitle": "Keine native Konsole im Spiel · L-MOD Leitfaden",
-    "noConsoleDesc": "FLiNG-Trainer & kuratierte Nexus-Mods zusammengestellt",
     "goToTrainers": "⚡ Zu sauberen Trainern",
     "btnOpenLazyDoor": "🚀 1-Klick Konfigurator (.bat)",
     "activatorTitle": "10-Sekunden Schnellstarter · Konsolen-Aktivator",
@@ -31349,12 +31440,12 @@ window.TRANSLATIONS_DATA = {
     "trainerBackupMirror": "Offizielle FLiNG-Website (Backup)",
     "trainer3StepHint": "3 Schritte: Offline bleiben -> Ausnahme ausführen -> Entpacken & spielen",
     "trainerClose": "Verstanden",
-    "modModalDirectTitle": "MOD-Download im Browser gestartet",
-    "modModalOfficialTitle": "Direktlink zu Quelle & Mirror geöffnet",
-    "modModalDirectBadge": "Schneller Direktdownload",
-    "modModalOfficialBadge": "Kuratierter Mirror / Original",
-    "modModalDirectSubtitle": "Datei wird heruntergeladen · Pfad und Anleitung inklusive",
-    "modModalOfficialSubtitle": "Sichere Download-Quelle geöffnet · Installationsanleitung verfügbar",
+    "modModalDirectTitle": "Download der Datei des Autors gestartet",
+    "modModalOfficialTitle": "Quellseite in neuem Tab geöffnet",
+    "modModalDirectBadge": "Release des Autors",
+    "modModalOfficialBadge": "Quellseite",
+    "modModalDirectSubtitle": "Die Datei ist das Release des Autors auf GitHub; die Installationsschritte stehen unten",
+    "modModalOfficialSubtitle": "Lade die Datei von der Quellseite herunter; die Installationsschritte stehen unten",
     "modModalTargetFile": "Zieldatei:",
     "modModalInstallPath": "Empfohlener Pfad:",
     "copyPathBtn": "Pfad kopieren",
@@ -31367,7 +31458,7 @@ window.TRANSLATIONS_DATA = {
     "modClose": "Verstanden",
     "modInstallStepsGuide": "Installationsanleitung:",
     "modDirectBtn": "⚡ Download (Release des Autors)",
-    "modMirrorBtn": "🚀 Offizieller Mirror / Quelle",
+    "modMirrorBtn": "🔗 Quellseite öffnen",
     "modOriginPageBtn": "Quellseite",
     "radarTitle": "Steam-Patch- & Mod-Kompatibilitätsradar",
     "radarMetaDesc": "Prüft täglich die Update-Zeitpunkte von Singleplayer-Spielen auf Steam und weist darauf hin, wenn Mod-Frameworks oder Trainer erst nachziehen müssen.",
@@ -31581,6 +31672,20 @@ window.TRANSLATIONS_DATA = {
     "bundlesEmpty": "Aún no hay paquetes de comandos para este juego",
     "modsEmpty": "Aún no hay mods para este juego",
     "cmdSource": "Fuente: {host}",
+    "noConsoleHasBoth": "Este juego tiene un trainer de FLiNG y mods en la lista.",
+    "noConsoleHasTrainer": "Este juego tiene un trainer de FLiNG.",
+    "noConsoleHasMods": "Este juego tiene mods en la lista.",
+    "goToMods": "Ver mods de la lista",
+    "smartFound": "Encontrado: {title}",
+    "smartNoMatch": "Ningún juego coincide con «{query}»",
+    "smartListed": "En el sitio: {items}",
+    "smartHasCommands": "{n} comandos de consola",
+    "smartHasMods": "{n} mods",
+    "smartHasTrainer": "trainer de FLiNG",
+    "smartHasNothing": "Aún no hay comandos, mods ni trainer para este juego",
+    "smartFirstCommand": "Primer comando",
+    "smartOpenGame": "Abrir {title}",
+    "favMarkedToast": "Tus {n} juegos favoritos están marcados en la lista",
     "tabSocialCards": "🎨 Matriz de 5 tarjetas",
     "consoleStatusAvailable": "Consola Oficial Disponible",
     "consoleStatusNone": "Sin consola oficial (usar Mods/Trainers)",
@@ -31644,7 +31749,6 @@ window.TRANSLATIONS_DATA = {
     "copyBundleBtn": "Copiar paquete completo",
     "bundleCopiedToast": "¡Comandos copiados! Abre la consola y pega para ejecutar.",
     "noConsoleTitle": "Juego sin consola nativa oficial · Guía L-MOD",
-    "noConsoleDesc": "Con Trainers de FLiNG y Mods seleccionados de Nexus",
     "goToTrainers": "⚡ Ir a trainers limpios",
     "btnOpenLazyDoor": "🚀 Activador en 1 clic (Generador .bat)",
     "activatorTitle": "Activador en 10 seg · Consola en 1 clic",
@@ -31689,12 +31793,12 @@ window.TRANSLATIONS_DATA = {
     "trainerBackupMirror": "Página oficial de FLiNG (Alternativa)",
     "trainer3StepHint": "3 pasos: Mantente offline -> Ejecuta la exclusión -> Descomprime y juega",
     "trainerClose": "Entendido",
-    "modModalDirectTitle": "Descarga de MOD iniciada en el navegador",
-    "modModalOfficialTitle": "Acceso directo a la página oficial y mirror",
-    "modModalDirectBadge": "Descarga directa de alta velocidad",
-    "modModalOfficialBadge": "Mirror curado / Fuente oficial",
-    "modModalDirectSubtitle": "Descargando archivo · Ruta de instalación y guía incluidas",
-    "modModalOfficialSubtitle": "Conectado a fuente segura · Guía de instalación incluida",
+    "modModalDirectTitle": "Descargando el archivo publicado por el autor",
+    "modModalOfficialTitle": "Página de origen abierta en una pestaña nueva",
+    "modModalDirectBadge": "Publicación del autor",
+    "modModalOfficialBadge": "Página de origen",
+    "modModalDirectSubtitle": "El archivo es la versión publicada por el autor en GitHub; los pasos de instalación están abajo",
+    "modModalOfficialSubtitle": "Descárgalo desde la página de origen; los pasos de instalación están abajo",
     "modModalTargetFile": "Archivo de destino:",
     "modModalInstallPath": "Ruta de instalación recomendada:",
     "copyPathBtn": "Copiar ruta",
@@ -31707,7 +31811,7 @@ window.TRANSLATIONS_DATA = {
     "modClose": "Entendido",
     "modInstallStepsGuide": "Guía de instalación:",
     "modDirectBtn": "⚡ Descargar (versión del autor)",
-    "modMirrorBtn": "🚀 Mirror oficial / Fuente",
+    "modMirrorBtn": "🔗 Abrir página de origen",
     "modOriginPageBtn": "Página de origen",
     "radarTitle": "Radar de parches de Steam y compatibilidad de mods",
     "radarMetaDesc": "Revisa a diario cuándo se actualizan los juegos para un jugador en Steam y avisa cuando los frameworks de mods o los trainers pueden necesitar adaptarse.",

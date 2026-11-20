@@ -501,7 +501,9 @@
         const galleryCon = document.getElementById('games-gallery-container');
         if (galleryCon) {
           // Temporarily show favorited
-          this.toast(`🔍 已为您筛选出 ${favIds.length} 款单机神作收藏！`);
+          const favMsg = (typeof window.t === 'function' && window.t('favMarkedToast') !== 'favMarkedToast')
+            ? window.t('favMarkedToast') : '已在列表中标出你收藏的 {n} 款游戏';
+          this.toast(favMsg.replace('{n}', favIds.length));
           window.location.hash = '#/';
           // Highlight
           setTimeout(() => {

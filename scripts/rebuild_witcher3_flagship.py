@@ -24,12 +24,12 @@ witcher_categories = [
             {
                 "id": "w3_god",
                 "name": {
-                    "zh-CN": "完全无敌上帝模式 (生命与法印锁死)",
+                    "zh-CN": "上帝模式",
                     "en": "God Mode"
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "god",
-                "desc": "杰洛特完全无敌，生命值与昆恩法印锁死不掉血，免疫所有怪物抓击、挥砍、毒素、坠落摔伤与狂猎霜冻，再次输入可解除无敌状态。",
+                "desc": "开启后杰洛特免疫伤害：生命值和昆恩法印护盾锁定，不会被怪物攻击、挥砍、中毒、摔落或狂猎霜冻击破；再次输入指令可关闭。",
                 "framework_required": "None (Native Console)",
                 "source": "https://commands.gg/witcher3/god"
             },
@@ -60,24 +60,24 @@ witcher_categories = [
             {
                 "id": "w3_killall",
                 "name": {
-                    "zh-CN": "秒杀全屏视野敌人",
+                    "zh-CN": "清除视野内敌人",
                     "en": "Kill All Enemies"
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "killall",
-                "desc": "直接蒸发当前战斗视线范围内所有妖灵、狂猎士兵、孽鬼与大型 Boss！",
+                "desc": "清除当前战斗视野范围内的敌人，包括妖灵、狂猎士兵、孽鬼与部分 Boss。",
                 "framework_required": "None (Native Console)",
                 "source": "https://web.archive.org/web/20260518032436/https://primagames.com/tips/witcher-3-next-gen-console-commands-full-list-of-cheats"
             },
             {
                 "id": "w3_witchcraft",
                 "name": {
-                    "zh-CN": "终极宝库一键装填 (全游戏所有道具各注入一份)",
+                    "zh-CN": "添加全部道具各 1 份",
                     "en": "Witchcraft All Items"
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "witchcraft",
-                "desc": "将游戏中包括全部武器、防具、原料、图纸在内的所有物品全部各添加 1 份至背包（执行会略微卡顿，背包负重会剧增）。",
+                "desc": "将游戏中武器、防具、原料、图纸等物品各添加 1 份到背包（执行时可能有短暂卡顿，背包负重会明显增加）。",
                 "framework_required": "None (Native Console)",
                 "source": "https://commands.gg/witcher3/witchcraft"
             },
@@ -90,12 +90,12 @@ witcher_categories = [
             {
                 "id": "w3_setlevel_100",
                 "name": {
-                    "zh-CN": "角色等级直升 100 级满级",
+                    "zh-CN": "角色等级直接设为 100 级",
                     "en": "Set Level 100"
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "setlevel(100)",
-                "desc": "将杰洛特的人物等级直接设定为最高 100 级，直接破除全陶森特与石之心顶级神装的穿戴门槛。",
+                "desc": "将杰洛特的等级直接设为 100 级（游戏等级上限），满足陶森特与石之心部分装备的等级需求。",
                 "framework_required": "None (Native Console)",
                 "source": "https://commands.gg/witcher3/setlevel"
             },
@@ -126,12 +126,12 @@ witcher_categories = [
             {
                 "id": "w3_addskillpoints_50",
                 "name": {
-                    "zh-CN": "获得 50 点技能点数 (点亮全技能树)",
+                    "zh-CN": "获得 50 点技能点",
                     "en": "Add 50 Skill Points"
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "addskillpoints(50)",
-                "desc": "直接增加 50 点未分配能力点数，随心所欲点亮战斗、法印、炼金与突变全技能树！",
+                "desc": "直接增加 50 点未分配的技能点，可用于点出战斗、法印、炼金与突变分支中的更多技能。",
                 "framework_required": "None (Native Console)",
                 "source": "https://commands.gg/witcher3/addskillpoints"
             },
@@ -174,17 +174,17 @@ witcher_categories = [
         ]
     },
     {
-        "category": "💰 财富自由、负重突破与大突变诱发物 (Crowns, Weight & Greater Mutagens)",
+        "category": "💰 金币、负重上限与大突变诱发物 (Crowns, Weight & Greater Mutagens)",
         "commands": [
             {
                 "id": "w3_addmoney_100k",
                 "name": {
-                    "zh-CN": "增加 100,000 克朗金币 (奥森弗特首富)",
+                    "zh-CN": "增加 100,000 克朗金币",
                     "en": "Add 100,000 Crowns"
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "addmoney(100000)",
-                "desc": "随心所欲锻造六大宗师学派神装与陶森特白葡萄庄园全设施扩建升级！",
+                "desc": "增加 100,000 克朗，可用于购买宗师级装备材料或陶森特庄园升级等花费较高的内容。",
                 "framework_required": "None (Native Console)",
                 "source": "https://commands.gg/witcher3/addmoney"
             },
@@ -215,55 +215,55 @@ witcher_categories = [
             {
                 "id": "w3_mutagen_red_greater",
                 "name": {
-                    "zh-CN": "大红突变诱发物 x10 (剑术攻击力暴涨)",
+                    "zh-CN": "大红突变诱发物 x10",
                     "en": "Greater Red Mutagen x10"
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('Greater mutagen red', 10)",
-                "desc": "最稀缺珍贵的大红诱发物，解锁并激活血与酒最强剑术瘾头增伤突变核心！",
+                "desc": "可镶嵌到红色技能格中，每镶嵌一个使相关攻击力提升 10%（最多叠加到 +40%）；也可用于合成对应的突变煎药。",
                 "framework_required": "None (Native Console)",
                 "source": "https://commands.gg/witcher3/items/greater-mutagen-red"
             },
             {
                 "id": "w3_mutagen_blue_greater",
                 "name": {
-                    "zh-CN": "大蓝突变诱发物 x10 (法印强度暴涨)",
+                    "zh-CN": "大蓝突变诱发物 x10",
                     "en": "Greater Blue Mutagen x10"
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('Greater mutagen blue', 10)",
-                "desc": "狮鹫学派法印轰炸流必备，大幅强化阿尔德推力与伊格尼点燃几率！",
+                "desc": "可镶嵌到蓝色技能格中，每镶嵌一个使法印强度提升 10%（最多叠加到 +40%）；也可用于合成对应的突变煎药。",
                 "framework_required": "None (Native Console)",
                 "source": "https://commands.gg/witcher3/items/greater-mutagen-blue"
             },
             {
                 "id": "w3_mutagen_green_greater",
                 "name": {
-                    "zh-CN": "大绿突变诱发物 x10 (最大生命值上限暴涨)",
+                    "zh-CN": "大绿突变诱发物 x10",
                     "en": "Greater Green Mutagen x10"
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('Greater mutagen green', 10)",
-                "desc": "炼金熊学派坦克流核心，搭配协同作用技能让杰洛特血量突破万血！",
+                "desc": "可镶嵌到绿色技能格中，每镶嵌一个使最大生命值提升 150 点（最多叠加到 +600）；也可用于合成对应的突变煎药。",
                 "framework_required": "None (Native Console)",
                 "source": "https://commands.gg/witcher3/items/greater-mutagen-green"
             },
             {
                 "id": "w3_horse_bag_3",
                 "name": {
-                    "zh-CN": "鲍克兰极品马鞍袋 (官方最高等级背包容量上限)",
+                    "zh-CN": "陶森特马鞍袋 (最高等级)",
                     "en": "Beauclair Saddlebags (Max Capacity)"
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('Horse Bag 3')",
-                "desc": "直接获得陶森特极品豪华马鞍袋，将背包负重基准上限永久大幅扩充！",
+                "desc": "获得陶森特马鞍袋，提升杰洛特的背包负重上限；是该类马鞍袋中的最高等级。",
                 "framework_required": "None (Native Console)",
                 "source": "https://commands.gg/witcher3/items/horse-bag-3"
             }
         ]
     },
     {
-        "category": "🌟 次世代版 / 完全版专属神装与特典联动 (Next-Gen Remaster Exclusives & Netflix Rewards)",
+        "category": "🌟 次世代版 / 完全版专属装备与网飞联动 (Next-Gen Remaster Exclusives & Netflix Rewards)",
         "commands": [
             {
                 "id": "w3_white_tiger_armor",
@@ -448,7 +448,7 @@ witcher_categories = [
             {
                 "id": "w3_netflix_armor_1",
                 "name": {
-                    "zh-CN": "极品遗忘狼学派胸甲 (网飞进阶版)",
+                    "zh-CN": "精制遗忘狼学派胸甲 (网飞进阶版)",
                     "en": "Mastercrafted Forgotten Wolven Armor"
                 },
                 "syntax_type": "redengine_cmd",
@@ -460,24 +460,24 @@ witcher_categories = [
             {
                 "id": "w3_netflix_steel_1",
                 "name": {
-                    "zh-CN": "极品遗忘狼学派钢剑",
+                    "zh-CN": "精制遗忘狼学派钢剑",
                     "en": "Mastercrafted Forgotten Wolven Steel Sword"
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('Netflix steel sword 1')",
-                "desc": "极品阶段遗忘狼钢剑，大幅强化亚登与阿尔德法印协同轰炸威力。",
+                "desc": "精制遗忘狼钢剑：+6% 法印强度、+9% 肾上腺素点获取、+15% 暴击伤害加成、+6% 暴击率、+5% 流血几率、+5% 人形与非人类敌人经验加成。",
                 "framework_required": "None (Native Console)",
                 "source": "https://witcher.fandom.com/wiki/Forgotten_Wolven_steel_sword_-_mastercrafted"
             },
             {
                 "id": "w3_netflix_silver_1",
                 "name": {
-                    "zh-CN": "极品遗忘狼学派银剑",
+                    "zh-CN": "精制遗忘狼学派银剑",
                     "en": "Mastercrafted Forgotten Wolven Silver Sword"
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('Netflix silver sword 1')",
-                "desc": "极品阶段遗忘狼银剑，攻击击中受亚登影响的目标必定触发暴击。",
+                "desc": "精制遗忘狼银剑：+9% 法印强度、+4% 肾上腺素点获取、+30% 暴击伤害加成、+13% 暴击率、+8% 流血几率、+6% 怪物经验加成。",
                 "framework_required": "None (Native Console)",
                 "source": "https://witcher.fandom.com/wiki/Legendary_forgotten_Wolven_silver_sword_-_mastercrafted"
             },
@@ -489,7 +489,7 @@ witcher_categories = [
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('gwint_card_roach')",
-                "desc": "CDPR 在次世代版 / 完全版中新加入的官方中立昆特英雄牌，攻击力为 3 点，打出后可自动从牌库拉出同伴支援，自带萝卜鬼畜站房顶插画！",
+                "desc": "次世代版 / 完全版新增的中立昆特牌，战力 3 点，为普通单位卡（非英雄卡），本身没有特殊技能。",
                 "framework_required": "None (Native Console)",
                 "source": "https://witcher.fandom.com/wiki/Roach_(gwent_card)"
             }
@@ -518,7 +518,7 @@ witcher_categories = [
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('Wolf School steel sword 4')",
-                "desc": "凯尔莫罕正统传承至尊钢剑，大幅强化斩击伤害与肾上腺素获取速度。",
+                "desc": "狼学派宗师级钢剑：+11% 法印强度、+11% 肾上腺素点获取、+11% 暴击率、+11% 流血几率、+5% 人形与非人类敌人经验加成。",
                 "framework_required": "None (Native Console)",
                 "source": "https://commands.gg/witcher3/items/wolf-school-steel-sword-4"
             },
@@ -530,7 +530,7 @@ witcher_categories = [
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('Wolf Armor 4')",
-                "desc": "陶森特宗师级铸造大师打造，激活剑油加成与炸弹多重投掷特效！",
+                "desc": "宗师级狼学派胸甲。次世代版套装特效：对流血目标造成的长剑伤害提升（按已穿戴套装件数叠加）；穿满 6 件后，肾上腺素点数会提升单个敌人可叠加的流血层数上限。",
                 "framework_required": "None (Native Console)",
                 "source": "https://commands.gg/witcher3/items/wolf-armor-4"
             },
@@ -573,12 +573,12 @@ witcher_categories = [
             {
                 "id": "w3_netflix_silver_2",
                 "name": {
-                    "zh-CN": "宗师级遗弃狼银剑 (网飞剧版第二季终极神兵)",
+                    "zh-CN": "宗师级遗弃狼银剑 (网飞剧版同款外观)",
                     "en": "Grandmaster Forgotten Wolven Silver Sword"
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('Netflix silver sword 2')",
-                "desc": "次世代专属最高级遗弃狼银剑，亚登与阿尔德法印伤害提升超 300%！",
+                "desc": "宗师级遗弃狼银剑：+10% 法印强度、+7% 肾上腺素点获取、+35% 暴击伤害加成、+15% 暴击率、+10% 流血几率、+10% 怪物经验加成。",
                 "framework_required": "None (Native Console)",
                 "source": "https://witcher.fandom.com/wiki/Grandmaster_forgotten_Wolven_silver_sword"
             },
@@ -590,19 +590,19 @@ witcher_categories = [
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('Netflix steel sword 2')",
-                "desc": "宗师级遗弃狼钢剑，附加高额肾上腺素充能与肢解斩杀几率。",
+                "desc": "宗师级遗弃狼钢剑：+7% 法印强度、+10% 肾上腺素点获取、+20% 暴击伤害加成、+7% 暴击率、+5% 流血几率、+10% 人形与非人类敌人经验加成。",
                 "framework_required": "None (Native Console)",
                 "source": "https://witcher.fandom.com/wiki/Grandmaster_forgotten_Wolven_steel_sword"
             },
             {
                 "id": "w3_netflix_armor_2",
                 "name": {
-                    "zh-CN": "宗师级遗弃狼防具胸甲 (大超同款紧身皮甲战袍)",
+                    "zh-CN": "宗师级遗弃狼防具胸甲 (网飞剧版同款外观)",
                     "en": "Grandmaster Forgotten Wolven Armor"
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('Netflix Armor 2')",
-                "desc": "激活次世代最强套装特效：亚登法印圈内敌人受到伤害时额外产生魔法爆破，药水药效延长！",
+                "desc": "宗师级遗弃狼胸甲：+20% 攻击力、+20% 肾上腺素点获取，以及穿刺、斩击、怪物与元素伤害抗性加成。次世代套装特效：3 件时提升药水持续时间（每件 +7%）；6 件时，受亚登影响的敌人被阿尔德法印击中会额外受到 10% 伤害。",
                 "framework_required": "None (Native Console)",
                 "source": "https://witcher.fandom.com/wiki/Grandmaster_forgotten_Wolven_armor"
             },
@@ -614,7 +614,7 @@ witcher_categories = [
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('Netflix Gloves 2')",
-                "desc": "宗师级遗弃狼护手，提升攻击速度与法印连发韧性。",
+                "desc": "宗师级遗弃狼护手：+12% 阿尔德法印强度，以及穿刺、斩击、怪物与元素伤害抗性加成。",
                 "framework_required": "None (Native Console)",
                 "source": "https://witcher.fandom.com/wiki/Grandmaster_forgotten_Wolven_gauntlets"
             },
@@ -626,7 +626,7 @@ witcher_categories = [
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('Netflix Pants 2')",
-                "desc": "宗师级遗弃狼战裙长裤，兼顾敏捷翻滚与高防御。",
+                "desc": "宗师级遗弃狼战裙：+12% 法印强度，以及斩击、怪物与元素伤害抗性加成。",
                 "framework_required": "None (Native Console)",
                 "source": "https://witcher.fandom.com/wiki/Grandmaster_forgotten_Wolven_trousers"
             },
@@ -638,14 +638,14 @@ witcher_categories = [
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('Netflix Boots 2')",
-                "desc": "宗师级遗弃狼重型皮靴，抗击退与抗元素伤害大幅跃升。",
+                "desc": "宗师级遗弃狼靴子：+12% 亚登法印强度，以及穿刺、钝击、斩击与怪物伤害抗性加成。",
                 "framework_required": "None (Native Console)",
                 "source": "https://witcher.fandom.com/wiki/Grandmaster_forgotten_Wolven_boots"
             }
         ]
     },
     {
-        "category": "🐻 宗师级熊学派全套重装 (Grandmaster Ursine School Set - 拜年重击流)",
+        "category": "🐻 宗师级熊学派全套重甲 (Grandmaster Ursine School Set)",
         "commands": [
             {
                 "id": "w3_gm_bear_silver",
@@ -667,7 +667,7 @@ witcher_categories = [
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('Bear School steel sword 4')",
-                "desc": "重击流对人专属大剑，一刀碎甲打断任何强敌招架！",
+                "desc": "宗师级熊学派钢剑：+22% 肾上腺素点获取、+75% 暴击伤害加成、+5% 暴击率、+14% 肢解几率、+5% 人形与非人类敌人经验加成。",
                 "framework_required": "None (Native Console)",
                 "source": "https://commands.gg/witcher3/items/bear-school-steel-sword-4"
             },
@@ -679,7 +679,7 @@ witcher_categories = [
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('Bear Armor 4')",
-                "desc": "全游戏最坚固的重铠战袍！套装特效有概率无消耗瞬发强效昆恩护盾！",
+                "desc": "宗师级熊学派重甲胸甲：+22% 肾上腺素点获取，以及穿刺、钝击、斩击与怪物伤害抗性加成。套装特效：昆恩护盾破碎时有几率免耗蓝重新生成（每件 +5%，六件时上限 30%）；穿满 6 件后，与昆恩法印相关技能造成的伤害 +200%。",
                 "framework_required": "None (Native Console)",
                 "source": "https://commands.gg/witcher3/items/bear-armor-4"
             },
@@ -703,7 +703,7 @@ witcher_categories = [
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('Bear Pants 4')",
-                "desc": "重型板甲下装，提供极致的怪物抓击伤害抵抗。",
+                "desc": "宗师级熊学派裤子：+11% 肾上腺素点获取，以及穿刺、斩击、怪物与元素伤害抗性加成。",
                 "framework_required": "None (Native Console)",
                 "source": "https://commands.gg/witcher3/items/bear-pants-4"
             },
@@ -715,14 +715,14 @@ witcher_categories = [
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('Bear Boots 4')",
-                "desc": "厚重战靴，彻底免疫被怪物撞击击倒击晕。",
+                "desc": "宗师级熊学派靴子：+11% 肾上腺素点获取，以及穿刺、钝击、斩击与怪物伤害抗性加成。",
                 "framework_required": "None (Native Console)",
                 "source": "https://commands.gg/witcher3/items/bear-boots-4"
             }
         ]
     },
     {
-        "category": "🐱 宗师级猫学派刺客轻装 (Grandmaster Feline School Set - 回旋剑舞流)",
+        "category": "🐱 宗师级猫学派轻甲套装 (Grandmaster Feline School Set)",
         "commands": [
             {
                 "id": "w3_gm_cat_silver",
@@ -732,7 +732,7 @@ witcher_categories = [
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('Lynx School silver sword 4')",
-                "desc": "回旋剑舞流神剑，大幅提升攻击速度、流血概率与暴击几率！",
+                "desc": "宗师级猫学派银剑：+15% 阿尔德法印强度、+10% 暴击率、+15% 流血几率、+10% 肢解几率、+20% 怪物经验加成。",
                 "framework_required": "None (Native Console)",
                 "source": "https://commands.gg/witcher3/items/lynx-school-silver-sword-4"
             },
@@ -744,7 +744,7 @@ witcher_categories = [
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('Lynx School steel sword 4')",
-                "desc": "高暴击轻刃钢剑，面对土匪强盗群直接化身旋风斩绞肉机！",
+                "desc": "宗师级猫学派钢剑：+15% 阿尔德法印强度、+10% 暴击率、+15% 流血几率、+10% 肢解几率、+5% 人形与非人类敌人经验加成。",
                 "framework_required": "None (Native Console)",
                 "source": "https://commands.gg/witcher3/items/lynx-school-steel-sword-4"
             },
@@ -756,7 +756,7 @@ witcher_categories = [
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('Lynx Armor 4')",
-                "desc": "带兜帽的刺客皮甲，后背偷袭伤害翻倍，套装特效强化连续轻击爆发！",
+                "desc": "宗师级猫学派轻甲（带兜帽的刺客皮甲）：+22% 攻击力，以及穿刺、斩击、怪物与元素伤害抗性加成。套装特效：重击命中后 3 秒内快速攻击伤害提升（按已穿戴件数叠加）；穿满 6 件后，背后攻击伤害 +50% 并有几率眩晕目标（消耗 1 点肾上腺素）。",
                 "framework_required": "None (Native Console)",
                 "source": "https://commands.gg/witcher3/items/lynx-armor-4"
             },
@@ -768,7 +768,7 @@ witcher_categories = [
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('Lynx Gloves 4')",
-                "desc": "轻型战斗皮手套，极大增加每次攻击造成的物理攻击力！",
+                "desc": "宗师级猫学派手套：+11% 攻击力，以及穿刺、斩击、怪物与元素伤害抗性加成。",
                 "framework_required": "None (Native Console)",
                 "source": "https://commands.gg/witcher3/items/lynx-gloves-4"
             },
@@ -799,7 +799,7 @@ witcher_categories = [
         ]
     },
     {
-        "category": "🦅 宗师级狮鹫学派法印轰炸流 (Grandmaster Griffin School Set)",
+        "category": "🦅 宗师级狮鹫学派法印套装 (Grandmaster Griffin School Set)",
         "commands": [
             {
                 "id": "w3_gm_griffin_silver",
@@ -833,7 +833,7 @@ witcher_categories = [
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('Gryphon Armor 4')",
-                "desc": "激活最强法印特效：施放法印后 3 秒内施放下一个法印无需消耗活力，伊格尼火烧全场！",
+                "desc": "宗师级狮鹫学派胸甲：+22% 法印强度，以及穿刺、钝击、斩击与怪物伤害抗性加成。套装特效：用耐力施放一次法印后，3 秒内下一个法印施放不消耗耐力；穿满 6 件后亚登陷阱范围 +40%，站在亚登陷阱内时耐力回复与法印强度大幅提升，受到的伤害降低。",
                 "framework_required": "None (Native Console)",
                 "source": "https://commands.gg/witcher3/items/gryphon-armor-4"
             },
@@ -845,7 +845,7 @@ witcher_categories = [
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('Gryphon Gloves 4')",
-                "desc": "宗师级狮鹫手套，全法印强度大幅飙升！",
+                "desc": "宗师级狮鹫学派手套：+11% 法印强度，以及穿刺、斩击、怪物与元素伤害抗性加成。",
                 "framework_required": "None (Native Console)",
                 "source": "https://commands.gg/witcher3/items/gryphon-gloves-4"
             },
@@ -876,7 +876,7 @@ witcher_categories = [
         ]
     },
     {
-        "category": "🐍 师匠级飞狮怪与毒蛇学派神装 (Manticore & Viper School Sets - 瘾头暴击流)",
+        "category": "🐍 飞狮怪与毒蛇学派套装 (Manticore & Viper School Sets)",
         "commands": [
             {
                 "id": "w3_gm_manticore_silver",
@@ -898,7 +898,7 @@ witcher_categories = [
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('Red Wolf School steel sword 1')",
-                "desc": "具有高穿甲与中毒概率的炼金流至尊钢剑！",
+                "desc": "飞狮怪钢剑：+250 护甲穿透、+50% 暴击伤害加成、+5% 暴击率、+10% 流血几率、+5% 人形与非人类敌人经验加成。",
                 "framework_required": "None (Native Console)",
                 "source": "https://witcher.fandom.com/wiki/Manticore_steel_sword"
             },
@@ -910,7 +910,7 @@ witcher_categories = [
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('Red Wolf Armor 1')",
-                "desc": "巫师1初版经典皮甲造型，增加最大毒性上限，完美同时磕下 4 瓶强力煎药！",
+                "desc": "飞狮怪防具胸甲：+5 最大毒性上限，以及穿刺、斩击与怪物伤害抗性加成、+25% 暴击伤害加成。套装特效：暴击率与暴击伤害加成同样作用于炸弹，且炸弹投掷无延迟；穿满 6 件后炼金道具最大携带充能数 +1。",
                 "framework_required": "None (Native Console)",
                 "source": "https://commands.gg/witcher3/items/red-wolf-armor-1"
             },
@@ -953,12 +953,12 @@ witcher_categories = [
             {
                 "id": "w3_viper_silver",
                 "name": {
-                    "zh-CN": "毒蛇剧毒银剑 (石之心绝版神兵)",
+                    "zh-CN": "毒蛇剧毒银剑",
                     "en": "Viper Venomous Silver Sword"
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('EP1 Viper School silver sword')",
-                "desc": "石之心迷宫中隐藏的绝世神兵，攻击敌人必定附加致命剧毒伤害！",
+                "desc": "毒蛇学派银剑：+25% 阿尔德法印强度、+75% 暴击伤害加成、+10% 暴击率、15% 中毒几率、+20% 怪物经验加成。",
                 "framework_required": "None (Native Console)",
                 "source": "https://commands.gg/witcher3/items/ep1-viper-school-silver-sword"
             },
@@ -970,19 +970,19 @@ witcher_categories = [
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('EP1 Viper School steel sword')",
-                "desc": "拍卖行地下金库专属钢剑，高暴击高淬毒高穿甲！",
+                "desc": "毒蛇学派钢剑：+25% 阿尔德法印强度、+75% 暴击伤害加成、+10% 暴击率、15% 中毒几率、+5% 人形与非人类敌人经验加成。",
                 "framework_required": "None (Native Console)",
                 "source": "https://commands.gg/witcher3/items/ep1-viper-school-steel-sword"
             },
             {
                 "id": "w3_viper_armor",
                 "name": {
-                    "zh-CN": "毒蛇学派护甲 (开场 CG 帅气黑皮甲)",
+                    "zh-CN": "毒蛇学派护甲 (开场 CG 同款黑皮甲)",
                     "en": "Viper Armor"
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('EP1 Witcher Armor')",
-                "desc": "与白果园开场 CG 一致的纯黑鳞片皮甲，全毒素免疫与全面抗性极佳！",
+                "desc": "与白果园开场动画同款的黑色鳞甲：+50% 中毒抗性，以及穿刺、斩击、怪物与元素伤害抗性加成。",
                 "framework_required": "None (Native Console)",
                 "source": "https://witcher.fandom.com/wiki/Legendary_Viper_armor"
             },
@@ -1025,53 +1025,53 @@ witcher_categories = [
         ]
     },
     {
-        "category": "🗡️ 绝版传奇神兵与石之心/血与酒不朽圣物 (Legendary Relics & Iconic Blades)",
+        "category": "🗡️ 传奇武器与资料片专属装备 (Legendary Relics & Iconic Blades)",
         "commands": [
             {
                 "id": "w3_aerondight",
                 "name": {
-                    "zh-CN": "湖中之剑 (血与酒湖中仙女最强成长银剑)",
+                    "zh-CN": "湖中之剑 (血与酒成长型银剑)",
                     "en": "Aerondight (Endless Growth)"
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('Aerondight EP2')",
-                "desc": "全游戏最强银剑！每砍一刀充能一层增伤10%，10层必定 100% 暴击且击杀永久永久增加基础物理攻击力！",
+                "desc": "每次命中为该剑叠加一层能量（最多 10 层），每层增伤 10%；满层时攻击必定暴击，若在满层状态下击杀敌人，会永久提升该剑的基础伤害（上限随角色等级提高）。",
                 "framework_required": "None (Native Console)",
                 "source": "https://witcher.fandom.com/wiki/Aerondight"
             },
             {
                 "id": "w3_iris_olgierd_sabre",
                 "name": {
-                    "zh-CN": "爱丽丝 (石之心欧吉尔德赠予血弯刀)",
+                    "zh-CN": "爱丽丝 (欧吉尔德的血弯刀)",
                     "en": "Iris (Olgierd Sabre)"
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('Olgierd Sabre')",
-                "desc": "斩击积蓄赤红能量，重击释放摧毁一切防守的强力冲击波！",
+                "desc": "战斗中会随攻击积蓄能量，剑身变红后使用重击可打出一次威力更强的攻击，但会消耗杰洛特自身部分生命值。",
                 "framework_required": "None (Native Console)",
                 "source": "https://commands.gg/witcher3/items/olgierd-sabre"
             },
             {
                 "id": "w3_caretaker_shovel",
                 "name": {
-                    "zh-CN": "看门人的铲子 (吸血鬼级吸血钝器)",
+                    "zh-CN": "看门人的铲子",
                     "en": "Caretaker Shovel"
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('Caretaker Shovel')",
-                "desc": "欧吉尔德庄园怪异铲子，每次攻击造成的伤害直接按 10% 转化为生命值回复杰洛特！",
+                "desc": "欧吉尔德庄园中的铲子，攻击造成的伤害有 10% 转化为生命值回复给杰洛特。",
                 "framework_required": "None (Native Console)",
                 "source": "https://commands.gg/witcher3/items/caretaker-shovel"
             },
             {
                 "id": "w3_winters_blade",
                 "name": {
-                    "zh-CN": "冬之刃 (克拉奇家传名剑)",
+                    "zh-CN": "冬之刃 (克拉奇家传剑)",
                     "en": "Winter's Blade"
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('q402 Skellige sword 3')",
-                "desc": "附带极高冰冻与破甲属性的史凯利格群岛家族神兵。",
+                "desc": "史凯利格克拉奇家族传剑：+40 护甲穿透、+55% 暴击伤害加成、+10% 冻结几率；次世代版本下伤害会随角色等级自动调整。",
                 "framework_required": "None (Native Console)",
                 "source": "https://witcher.fandom.com/wiki/Winter%27s_Blade"
             },
@@ -1083,31 +1083,31 @@ witcher_categories = [
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('Fate')",
-                "desc": "拥有 3 个符文镶嵌孔的经典极品银剑，法印与暴击加成极高。",
+                "desc": "拥有 3 个符文镶嵌孔的银剑：+2%～10% 伊格尼法印强度、+2%～10% 亚克西法印强度（两者数值相同、随机生成）、+10% 击晕几率。",
                 "framework_required": "None (Native Console)",
                 "source": "https://commands.gg/witcher3/items/fate"
             },
             {
                 "id": "w3_toussaint_steel_3",
                 "name": {
-                    "zh-CN": "陶森特骑士钢剑 (血与酒最强人属性钢剑)",
+                    "zh-CN": "陶森特骑士钢剑",
                     "en": "Toussaint Knight's Steel Sword"
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('Toussaint steel sword 3')",
-                "desc": "高达 +300 护甲穿透，+100% 暴击伤害与 +20% 暴击率，公认最强钢剑！",
+                "desc": "陶森特骑士钢剑：+300 护甲穿透、+30% 昆恩法印强度、+100% 暴击伤害加成、+20% 暴击率、+15% 点燃几率。",
                 "framework_required": "None (Native Console)",
                 "source": "https://commands.gg/witcher3/items/toussaint-steel-sword-3"
             },
             {
                 "id": "w3_vampire_mask_q704",
                 "name": {
-                    "zh-CN": "亨盖得吸血鬼面具 (血与酒暗影长者之穴红面具)",
+                    "zh-CN": "亨盖得吸血鬼面具",
                     "en": "Hen Gaidth Vampire Mask"
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('q704_vampire_mask')",
-                "desc": "暗影长者洞穴中搜寻到的吸血鬼仪式假面，击杀敌人立即按百分比回血！",
+                "desc": "暗影长者之穴中找到的吸血鬼面具；与亨盖得全套装备搭配时，击杀敌人可回复生命值，回复量为已穿戴套装件数 × 最大生命值的 1%。",
                 "framework_required": "None (Native Console)",
                 "source": "https://commands.gg/witcher3/items/q704-vampire-mask"
             },
@@ -1131,7 +1131,7 @@ witcher_categories = [
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('q704 vampire steel sword')",
-                "desc": "亨盖得套装专属吸血钢剑，对人形敌人附带极高暴击与流血吸血特效！",
+                "desc": "亨盖得套装钢剑：+150 护甲穿透、+75% 暴击伤害加成、+15% 暴击率、+15% 流血几率、+15% 眩晕几率。",
                 "framework_required": "None (Native Console)",
                 "source": "https://commands.gg/witcher3/items/q704-vampire-steel-sword"
             },
@@ -1162,29 +1162,29 @@ witcher_categories = [
         ]
     },
     {
-        "category": "🧪 高等炼金魔药与极品吸血煎药 (Superior Potions & Decoctions)",
+        "category": "🧪 高等魔药与炼金药 (Superior Potions & Decoctions)",
         "commands": [
             {
                 "id": "w3_potion_swallow_sup",
                 "name": {
-                    "zh-CN": "高等燕子魔药 (极速持续回血)",
+                    "zh-CN": "高等燕子魔药",
                     "en": "Superior Swallow"
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('Swallow 3')",
-                "desc": "最高等级燕子，高额瞬间生命回复，战斗中保命神药！",
+                "desc": "加速生命值回复，且受到伤害不会打断回复效果；战斗中同样持续回血。",
                 "framework_required": "None (Native Console)",
                 "source": "https://segmentnext.com/witcher-3-item-codes"
             },
             {
                 "id": "w3_potion_thunderbolt_sup",
                 "name": {
-                    "zh-CN": "高等雷霆魔药 (大幅提升攻击力)",
+                    "zh-CN": "高等雷霆魔药",
                     "en": "Superior Thunderbolt"
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('Thunderbolt 3')",
-                "desc": "大幅强化所有攻击的物理伤害，暴风雨天气下攻击必定暴击！",
+                "desc": "延长药效持续时间，并提升攻击力（约 +35%）；暴风雨天气下攻击必定暴击。",
                 "framework_required": "None (Native Console)",
                 "source": "https://segmentnext.com/witcher-3-item-codes"
             },
@@ -1203,31 +1203,31 @@ witcher_categories = [
             {
                 "id": "w3_potion_tawny_owl_sup",
                 "name": {
-                    "zh-CN": "高等黄褐色猫头鹰 (夜间无限恢复活力)",
+                    "zh-CN": "高等黄褐色猫头鹰",
                     "en": "Superior Tawny Owl"
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('Tawny Owl 3')",
-                "desc": "大幅提高战斗中耐力与活力恢复，日落后药效持续时间锁定为永久！",
+                "desc": "加速活力（耐力）回复速度并延长药效持续时间；夜晚期间药效不会过期。",
                 "framework_required": "None (Native Console)",
                 "source": "https://segmentnext.com/witcher-3-item-codes"
             },
             {
                 "id": "w3_dec_ekhidna",
                 "name": {
-                    "zh-CN": "海克娜煎药 (施法翻滚跳跃即回血)",
+                    "zh-CN": "海克娜煎药",
                     "en": "Ekhidna Decoction"
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('Mutagen 21')",
-                "desc": "每当做出消耗活力的动作（放法印、跳跃、回旋斩）时立即回复 10% 生命！",
+                "desc": "做出消耗活力的动作（如施放法印、翻滚）时回复一定生命值。",
                 "framework_required": "None (Native Console)",
                 "source": "https://witcher.fandom.com/wiki/Ekhidna_decoction"
             },
             {
                 "id": "w3_dec_ekimmara",
                 "name": {
-                    "zh-CN": "极品吸血煎药 (艾基马拉煎药)",
+                    "zh-CN": "艾基马拉煎药",
                     "en": "Ekimmara Decoction"
                 },
                 "syntax_type": "redengine_cmd",
@@ -1239,12 +1239,12 @@ witcher_categories = [
             {
                 "id": "w3_dec_troll",
                 "name": {
-                    "zh-CN": "巨魔煎药 (战斗中持续被动回血)",
+                    "zh-CN": "巨魔煎药 (战斗内外持续回血)",
                     "en": "Troll Decoction"
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('Mutagen 12')",
-                "desc": "战斗中与非战斗状态每秒稳定恢复 100 点生命，保命容错极高。",
+                "desc": "战斗内外持续回复生命值；次世代版本下，战斗中每击杀一名敌人额外回复 20 点生命，药效持续 30 分钟。",
                 "framework_required": "None (Native Console)",
                 "source": "https://witcher.fandom.com/wiki/Troll_decoction"
             },
@@ -1256,7 +1256,7 @@ witcher_categories = [
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('Mutagen 1')",
-                "desc": "提高 5% 额外暴击几率，猫学派与瘾头暴击流核心搭配。",
+                "desc": "次世代版本下恒定提升 10% 暴击几率（此前版本为 5%）。",
                 "framework_required": "None (Native Console)",
                 "source": "https://witcher.fandom.com/wiki/Katakan_decoction"
             },
@@ -1275,89 +1275,89 @@ witcher_categories = [
             {
                 "id": "w3_dec_griffin",
                 "name": {
-                    "zh-CN": "大狮鹫煎药 (重击按目标最大生命值百分比扣血)",
+                    "zh-CN": "大狮鹫煎药",
                     "en": "Archgriffin Decoction"
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('Mutagen 4')",
-                "desc": "活力全满时的重击直接按敌方最大生命值的 5% 扣除，越级击杀高级怪利器！",
+                "desc": "若还有剩余活力，重击会消耗全部活力，并在造成普通伤害后额外扣除目标最大生命值 5% 的生命值。",
                 "framework_required": "None (Native Console)",
                 "source": "https://witcher.fandom.com/wiki/Archgriffin_decoction"
             }
         ]
     },
     {
-        "category": "💣 高阶剑油、传奇炸弹与极品符文石 (Superior Oils, Bombs & Greater Runes)",
+        "category": "💣 高级剑油、炸弹与特级符文石 (Superior Oils, Bombs & Greater Runes)",
         "commands": [
             {
                 "id": "w3_oil_specter_sup",
                 "name": {
-                    "zh-CN": "高等残灵生物油 (克制日间妖灵/日间女妖+50%伤害)",
+                    "zh-CN": "高等残灵生物油 (克制妖灵类)",
                     "en": "Superior Specter Oil"
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('Specter Oil 3')",
-                "desc": "对妖灵、女妖等一切灵体生物造成额外 50% 的真实斩击伤害加成！",
+                "desc": "对妖灵等灵体类怪物（Specter）造成的攻击力提升 50%。",
                 "framework_required": "None (Native Console)",
                 "source": "https://commands.gg/witcher3/items/specter-oil-3"
             },
             {
                 "id": "w3_oil_necrophage_sup",
                 "name": {
-                    "zh-CN": "高等食尸生物油 (+50%伤害克制水鬼/水婆婆)",
+                    "zh-CN": "高等食尸生物油 (克制水鬼/食尸鬼类)",
                     "en": "Superior Necrophage Oil"
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('Necrophage Oil 3')",
-                "desc": "大范围清理威伦泥沼水鬼、食尸鬼与孽鬼群必备剑油。",
+                "desc": "对食尸生物（如水鬼、食尸鬼、孽鬼等 Necrophage）造成的攻击力提升 50%。",
                 "framework_required": "None (Native Console)",
                 "source": "https://commands.gg/witcher3/items/necrophage-oil-3"
             },
             {
                 "id": "w3_oil_vampire_sup",
                 "name": {
-                    "zh-CN": "高等吸血鬼油 (陶森特血与酒必带神油)",
+                    "zh-CN": "高等吸血鬼油 (克制吸血鬼类)",
                     "en": "Superior Vampire Oil"
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('Vampire Oil 3')",
-                "desc": "克制卡塔卡恩、蝠翼魔、隐形吸血女妖与狄拉夫狄克森等吸血种族。",
+                "desc": "对吸血鬼类怪物（如卡塔卡恩、蝠翼魔、吸血女妖等 Vampire）造成的攻击力提升 50%。",
                 "framework_required": "None (Native Console)",
                 "source": "https://commands.gg/witcher3/items/vampire-oil-3"
             },
             {
                 "id": "w3_oil_cursed_sup",
                 "name": {
-                    "zh-CN": "高等诅咒生物油 (克制狼人/尸婴/狂猎战犬)",
+                    "zh-CN": "高等诅咒生物油 (克制狼人/尸婴类)",
                     "en": "Superior Cursed Oil"
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('Cursed Oil 3')",
-                "desc": "有效遏制狼人变态的每秒自愈回血机制，重击造成强力破防撕裂！",
+                "desc": "对诅咒类生物（如狼人、尸婴等 Cursed One）造成的攻击力提升 50%。",
                 "framework_required": "None (Native Console)",
                 "source": "https://commands.gg/witcher3/items/cursed-oil-3"
             },
             {
                 "id": "w3_oil_relict_sup",
                 "name": {
-                    "zh-CN": "高等类魔油 (克制林中夫人/煮婆/鹿首精)",
+                    "zh-CN": "高等类魔油 (克制鹿首精/林中夫人类)",
                     "en": "Superior Relict Oil"
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('Relic Oil 3')",
-                "desc": "对鹿首精、地灵、林中三巫妪等远古魔法造物造成毁灭性加成伤害！",
+                "desc": "对远古魔法类生物（Relict，如鹿首精、林中夫人等）造成的攻击力提升 50%。",
                 "framework_required": "None (Native Console)",
                 "source": "https://commands.gg/witcher3/items/relic-oil-3"
             },
             {
                 "id": "w3_bomb_grapeshot_sup",
                 "name": {
-                    "zh-CN": "高等蜂窝炸弹 (一发炸平怪物巢穴)",
+                    "zh-CN": "高等蜂窝炸弹",
                     "en": "Superior Grapeshot"
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('Grapeshot 3', 10)",
-                "desc": "爆破产生密集破片撕裂周围敌人，瞬间摧毁全大陆孽鬼和水鬼巢穴！",
+                "desc": "对爆炸范围内的敌人造成破片与火焰伤害，伤害无视护甲，可摧毁怪物巢穴。",
                 "framework_required": "None (Native Console)",
                 "source": "https://segmentnext.com/witcher-3-item-codes"
             },
@@ -1376,31 +1376,31 @@ witcher_categories = [
             {
                 "id": "w3_bomb_northern_wind_sup",
                 "name": {
-                    "zh-CN": "高等北风炸弹 (绝对冰冻控制强敌)",
+                    "zh-CN": "高等北风炸弹",
                     "en": "Superior Northern Wind"
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('White Frost 3', 10)",
-                "desc": "瞬间冰封半径 5 米内所有敌人数秒，冻结期间受到的伤害暴涨 300%！",
+                "desc": "使爆炸范围内的敌人陷入冰冻（持续约 10 秒），命中冻结目标会造成额外伤害，并有几率直接即死。",
                 "framework_required": "None (Native Console)",
                 "source": "https://segmentnext.com/witcher-3-item-codes"
             },
             {
                 "id": "w3_bomb_dimeritium_sup",
                 "name": {
-                    "zh-CN": "高等阻魔金炸弹 (彻底封印魔法与瞬移技能)",
+                    "zh-CN": "高等阻魔金炸弹",
                     "en": "Superior Dimeritium Bomb"
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('Dwimeritium Bomb 3', 10)",
-                "desc": "扩散阻魔金粉尘，封锁狂猎法师的霜冻传送门与妖灵的虚体潜行！",
+                "desc": "释放阻魔金粉尘，短时间内阻断范围内怪物使用魔法类能力，云雾消散后效果还会再持续一段时间，总持续约 30 秒。",
                 "framework_required": "None (Native Console)",
                 "source": "https://segmentnext.com/witcher-3-item-codes"
             },
             {
                 "id": "w3_rune_chernobog_sup",
                 "name": {
-                    "zh-CN": "极品元素符文石 x10",
+                    "zh-CN": "特级元素符文石 x10",
                     "en": "Greater Elemental Rune x10"
                 },
                 "syntax_type": "redengine_cmd",
@@ -1412,19 +1412,19 @@ witcher_categories = [
             {
                 "id": "w3_glyph_quen_sup",
                 "name": {
-                    "zh-CN": "极品昆恩字印 x10 (+10%昆恩护盾强度)",
+                    "zh-CN": "特级昆恩字印 x10 (+10% 昆恩护盾强度)",
                     "en": "Greater Glyph of Quen x10"
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('Glyph quen greater', 10)",
-                "desc": "防具终极保命镶嵌符文，护甲防具四件插满直接增加 40% 昆恩伤害吸收上限！",
+                "desc": "镶嵌在护甲符文卡槽中的字印，提供 +10% 昆恩法印强度；装备在多件护甲上时效果可叠加。",
                 "framework_required": "None (Native Console)",
                 "source": "https://commands.gg/witcher3/items/glyph-quen-greater"
             }
         ]
     },
     {
-        "category": "🃏 昆特牌全阵营五大势力英雄牌库与秒胜 (Gwent Decks & Instant Win Cheats)",
+        "category": "🃏 昆特牌牌组与对局指令 (Gwent Decks & Match Commands)",
         "commands": [
             {
                 "id": "w3_secretgwint",
@@ -1441,12 +1441,12 @@ witcher_categories = [
             {
                 "id": "w3_wingwint",
                 "name": {
-                    "zh-CN": "当前昆特牌对决立即判定以绝对优势获胜",
+                    "zh-CN": "直接判定当前昆特牌对局获胜",
                     "en": "Instant Win Current Gwent Match"
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "winGwint(true)",
-                "desc": "打牌开局或任意回合中输入，直接触发对方认输结算，无悬念秒赢帕席芬拉大赌局！",
+                "desc": "在对局进行中的任意时刻输入，直接判定当前昆特牌对局获胜（对方直接认输结算）。",
                 "framework_required": "None (Native Console)",
                 "source": "https://commands.gg/witcher3/wingwint"
             },
@@ -1470,7 +1470,7 @@ witcher_categories = [
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('gwint_card_geralt')",
-                "desc": "昆特牌最强单兵金卡之一，不受任何天气与烧灼特殊效果影响。",
+                "desc": "中立近战英雄卡，战力 15 点；作为英雄牌免疫特殊卡牌效果，登场时会额外从牌库中找出并打出萝卜卡。",
                 "framework_required": "None (Native Console)",
                 "source": "https://segmentnext.com/witcher-3-item-codes"
             },
@@ -1482,7 +1482,7 @@ witcher_categories = [
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('gwint_card_ciri')",
-                "desc": "拥有 15 点极高战力的中立英雄牌，压制敌方关键点数战局翻盘神器。",
+                "desc": "中立近战英雄卡，战力 15 点；作为英雄牌免疫特殊卡牌效果，登场时会额外从牌库中找出并打出萝卜卡。",
                 "framework_required": "None (Native Console)",
                 "source": "https://segmentnext.com/witcher-3-item-codes"
             },
@@ -1494,31 +1494,31 @@ witcher_categories = [
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('gwint_card_yennefer')",
-                "desc": "打出后可直接从己方墓地将任意废弃作战卡牌复活拉回战场！",
+                "desc": "中立远程英雄卡，战力 7 点；登场时可从己方墓地选择一张普通单位卡（不含英雄与特殊卡）直接复活打出。",
                 "framework_required": "None (Native Console)",
                 "source": "https://segmentnext.com/witcher-3-item-codes"
             },
             {
                 "id": "w3_card_mysterious_elf",
                 "name": {
-                    "zh-CN": "神秘精灵阿瓦拉克 (0点无敌间谍神卡)",
+                    "zh-CN": "神秘精灵阿瓦拉克 (0点间谍金卡)",
                     "en": "Gwent Card: Avallac'h (0 Pt Spy)"
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('gwint_card_avallach')",
-                "desc": "全昆特牌最强间谍！送给对面 0 点点数，己方直接白嫖抽 2 张新手牌！",
+                "desc": "0 点点数的间谍卡：登场后置于对方场上（计入对方总分），同时可从自己牌库抽 2 张牌；作为英雄牌免疫特殊卡牌效果。",
                 "framework_required": "None (Native Console)",
                 "source": "https://segmentnext.com/witcher-3-item-codes"
             },
             {
                 "id": "w3_card_roach",
                 "name": {
-                    "zh-CN": "萝卜 (次世代新版中立联动牌)",
+                    "zh-CN": "萝卜 (次世代新版中立牌)",
                     "en": "Gwent Card: Roach (Next-Gen)"
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('gwint_card_roach')",
-                "desc": "战力 3 点带自动集结召唤特技的次世代专属中立英雄昆特牌。",
+                "desc": "次世代版 / 完全版新增的中立昆特牌，战力 3 点，为普通单位卡（非英雄卡），本身没有特殊技能。",
                 "framework_required": "None (Native Console)",
                 "source": "https://witcher.fandom.com/wiki/Roach_(gwent_card)"
             }
@@ -1530,24 +1530,24 @@ witcher_categories = [
             {
                 "id": "w3_showallft",
                 "name": {
-                    "zh-CN": "大地图点亮全大陆 100% 快速旅行路标",
+                    "zh-CN": "解锁全部快速旅行路标",
                     "en": "Show All Fast Travel Signposts"
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "ShowAllFT(1)",
-                "desc": "瞬间解锁白果园、威伦、诺维格瑞、群岛与陶森特大地图上全部绿色十字路标！",
+                "desc": "解锁大地图上白果园、威伦、诺维格瑞、史凯利格与陶森特的全部快速旅行路标。",
                 "framework_required": "None (Native Console)",
                 "source": "https://commands.gg/witcher3/showallft"
             },
             {
                 "id": "w3_allowft",
                 "name": {
-                    "zh-CN": "允许在全图任意位置直接快速旅行 (摆脱路标木桩限制)",
+                    "zh-CN": "允许在地图任意位置快速旅行",
                     "en": "Allow Fast Travel Anywhere"
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "AllowFT(1)",
-                "desc": "彻底免去跑路寻桩过程！在深山老林地牢只要按 M 打开地图点击路标即可瞬移！",
+                "desc": "允许在地图上任意已探索位置直接打开地图进行快速旅行，无需先跑到路标旁。",
                 "framework_required": "None (Native Console)",
                 "source": "https://commands.gg/witcher3/allowft"
             },
@@ -1643,12 +1643,12 @@ witcher_categories = [
             {
                 "id": "w3_settime_12",
                 "name": {
-                    "zh-CN": "将世界时间跳转至正午 12:00 (艳阳高照拍照黄金时刻)",
+                    "zh-CN": "将游戏内时间设为正午 12:00",
                     "en": "Set Time to Noon (12:00)"
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "settime(1, 12, 0, 0)",
-                "desc": "将大陆时间定格在正午，光照最强阴影最通透，搭配次世代光追拍照效果拉满！",
+                "desc": "将游戏内时间设置为正午 12 点。",
                 "framework_required": "None (Native Console)",
                 "source": "https://commands.gg/witcher3/settime"
             },
@@ -1667,72 +1667,72 @@ witcher_categories = [
             {
                 "id": "w3_makeitrain",
                 "name": {
-                    "zh-CN": "立即召唤暴雨天气",
+                    "zh-CN": "召唤降雨天气",
                     "en": "Make It Rain"
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "makeitrain",
-                "desc": "呼风唤雨，电闪雷鸣，激发出杰洛特雷霆药水必定暴击的特殊气象被动！",
+                "desc": "将当前天气切换为下雨。",
                 "framework_required": "None (Native Console)",
                 "source": "https://commands.gg/witcher3/makeitrain"
             },
             {
                 "id": "w3_stoprain",
                 "name": {
-                    "zh-CN": "立即驱散阴雨天气 (转为晴空万里)",
+                    "zh-CN": "停止降雨",
                     "en": "Stop Rain"
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "stoprain",
-                "desc": "瞬时驱散漫天阴霾雨滴与雷暴，使视野恢复干爽晴朗。",
+                "desc": "停止当前的降雨天气。",
                 "framework_required": "None (Native Console)",
                 "source": "https://commands.gg/witcher3/stoprain"
             },
             {
                 "id": "w3_weather_storm",
                 "name": {
-                    "zh-CN": "切换为特大暴风暴雨雷电天气",
+                    "zh-CN": "切换为暴风雨天气",
                     "en": "Set Storm Weather"
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "changeweather('WT_Rain_Storm')",
-                "desc": "呼出极度真实逼真的次世代物理级狂风骤雨，树木随风狂摆树叶漫天狂飞！",
+                "desc": "将天气切换为暴风雨。",
                 "framework_required": "None (Native Console)",
                 "source": "https://commands.gg/witcher3/weather"
             },
             {
                 "id": "w3_weather_clear",
                 "name": {
-                    "zh-CN": "切换为极致纯净碧空晴朗天气",
+                    "zh-CN": "切换为晴朗天气",
                     "en": "Set Clear Weather"
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "changeweather('WT_Clear')",
-                "desc": "晴空万里无云，次世代光线追踪全局光照与水面反射表现力最强的气象环境。",
+                "desc": "将天气切换为晴朗无云。",
                 "framework_required": "None (Native Console)",
                 "source": "https://commands.gg/witcher3/weather"
             },
             {
                 "id": "w3_horse_saddle_4",
                 "name": {
-                    "zh-CN": "鲍克兰极品骑兵马鞍 (马匹体力极限扩充)",
+                    "zh-CN": "鲍克兰骑兵马鞍 (提升马匹体力上限)",
                     "en": "Beauclair Cavalry Saddle (Max Stamina)"
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('Horse Saddle 4')",
-                "desc": "为萝卜装备陶森特最高规格骑兵马鞍，长途奔袭疾驰耐力用之不竭！",
+                "desc": "为萝卜装备陶森特骑兵马鞍，提升其体力（耐力）上限。",
                 "framework_required": "None (Native Console)",
                 "source": "https://commands.gg/witcher3/items/horse-saddle-4"
             },
             {
                 "id": "w3_horse_blinders_3",
                 "name": {
-                    "zh-CN": "鲍克兰极品马盲目镜 (彻底免疫怪物惊吓摔下马)",
+                    "zh-CN": "鲍克兰马盲目镜 (+60 惊慌度上限)",
                     "en": "Beauclair Blinders (Anti-Panic)"
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "additem('Horse Blinder 3')",
-                "desc": "将萝卜的惊慌度上限大幅增加，即使被水鬼狼群包围也绝不甩下杰洛特！",
+                "desc": "为萝卜装备陶森特马用眼罩，使其惊慌度上限 +60，更不容易因怪物惊吓而将杰洛特甩下马。",
                 "framework_required": "None (Native Console)",
                 "source": "https://segmentnext.com/witcher-3-item-codes"
             }
@@ -1744,12 +1744,12 @@ witcher_categories = [
             {
                 "id": "w3_ciri_switch",
                 "name": {
-                    "zh-CN": "直接切换操控主角为希里 (Ciri - 瞬移闪烁绝招)",
+                    "zh-CN": "切换操控角色为希里",
                     "en": "Switch Player to Ciri"
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "Ciri",
-                "desc": "在全大陆任何自由行动关卡中直接将当前操控角色无缝切换为时空之女希里，独享绿色瞬移突进与闪烁大招！",
+                "desc": "将当前操控角色切换为希里，可使用她的瞬移突进能力。",
                 "framework_required": "None (Native Console)",
                 "source": "https://commands.gg/witcher3/ciri"
             },
@@ -1768,12 +1768,12 @@ witcher_categories = [
             {
                 "id": "w3_shave",
                 "name": {
-                    "zh-CN": "瞬间剃净杰洛特胡须 (清爽面容)",
+                    "zh-CN": "剃除杰洛特胡须",
                     "en": "Shave Geralt Beard"
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "shave",
-                "desc": "免去寻找理发师的繁琐，随时随地将杰洛特面部胡须剃得干干净净。",
+                "desc": "立即剃除杰洛特的胡须。",
                 "framework_required": "None (Native Console)",
                 "source": "https://commands.gg/witcher3/shave"
             },
@@ -1792,12 +1792,12 @@ witcher_categories = [
             {
                 "id": "w3_dismember",
                 "name": {
-                    "zh-CN": "剑术攻击必定触发慢动作断肢处决特写",
+                    "zh-CN": "开启击杀必定触发断肢效果",
                     "en": "Always Dismember on Kill"
                 },
                 "syntax_type": "redengine_cmd",
                 "code": "dismember",
-                "desc": "开启猎魔人暴虐战斗镜头特写，每次最后一击击杀敌人都必定触发腰斩或削首电影级断肢慢动作！",
+                "desc": "开启后，终结敌人的最后一击会触发慢动作断肢效果。",
                 "framework_required": "None (Native Console)",
                 "source": "https://commands.gg/witcher3/dismember"
             },
@@ -1856,33 +1856,33 @@ witcher_categories = [
 
 witcher_popular = [
     {
-        "name": {"zh-CN": "完全无敌上帝模式 (God Mode)", "en": "God Mode"},
+        "name": {"zh-CN": "上帝模式 (God Mode)", "en": "God Mode"},
         "command": "god",
-        "desc": "杰洛特完全无敌，生命值与昆恩法印锁死，免疫一切物理与魔法伤害。",
+        "desc": "开启后杰洛特免疫伤害，生命值与昆恩法印锁定，不会受到物理与法术伤害。",
         "source": "https://commands.gg/witcher3/god"
     },
     {
         "name": {"zh-CN": "增加金币 (100,000 克朗)", "en": "Add 100,000 Crowns"},
         "command": "addmoney(100000)",
-        "desc": "随心所欲锻造六大宗师学派神装与陶森特庄园改造。",
+        "desc": "增加 100,000 克朗，可用于购买宗师级装备材料或陶森特庄园升级等花费较高的内容。",
         "source": "https://commands.gg/witcher3/addmoney"
     },
     {
-        "name": {"zh-CN": "一键集齐全套昆特牌", "en": "Add All Gwent Cards"},
+        "name": {"zh-CN": "开始一局昆特牌对局", "en": "Add All Gwent Cards"},
         "command": "secretgwint",
-        "desc": "直接集齐所有阵营与中立全套英雄昆特牌。",
+        "desc": "立即开始一局与 AI 对战的昆特牌比赛；不会直接把全部卡牌加入牌库。",
         "source": "https://commands.gg/witcher3/secretgwint"
     },
     {
-        "name": {"zh-CN": "直接获得湖中之剑 (血与酒最强成长银剑)", "en": "Add Aerondight Sword"},
+        "name": {"zh-CN": "直接获得湖中之剑 (血与酒成长型银剑)", "en": "Add Aerondight Sword"},
         "command": "additem('Aerondight EP2')",
-        "desc": "获得永远可成长暴击的陶森特至尊神剑。",
+        "desc": "获得会随战斗表现持续强化基础伤害的银剑（Aerondight）。",
         "source": "https://witcher.fandom.com/wiki/Aerondight"
     },
     {
-        "name": {"zh-CN": "大地图点亮全大陆 100% 快速旅行路标", "en": "Show All Fast Travel"},
+        "name": {"zh-CN": "大地图点亮全部快速旅行路标", "en": "Show All Fast Travel"},
         "command": "ShowAllFT(1)",
-        "desc": "瞬间解锁白果园、威伦、诺维格瑞、群岛与陶森特全部十字路标。",
+        "desc": "瞬间解锁白果园、威伦、诺维格瑞、群岛与陶森特的全部快速旅行路标。",
         "source": "https://commands.gg/witcher3/showallft"
     },
     {
@@ -1899,7 +1899,7 @@ witcher_mods = [
         "title": "The Witcher 3 HD Reworked Project NextGen Edition",
         "author": "Halk Hogan PL",
         "category": "画面材质 (Visuals / Textures)",
-        "desc": "全网公认最强《巫师3》材质MOD！次世代版 / 完全版专属重构，彻底重绘所有岩石、植被、砖墙、木纹与建筑材质，面向次世代 DX12 版。",
+        "desc": "次世代版 / 完全版的材质重制 Mod，重绘岩石、植被、砖墙、木纹等大量场景材质，面向次世代 DX12 版本。",
         "dependencies": [
             "None"
         ],
@@ -1921,7 +1921,7 @@ witcher_mods = [
         "title": "Script Merger (CLASSIC)",
         "author": "AnotherSymbiote",
         "category": "核心排错工具 (Utility / Conflict Resolver)",
-        "desc": "次世代 Mod 必备排错神器！自动检测并一键合并多个 Mod 之间的 WitcherScript 冲突代码，彻底解决游戏启动报 Script Compilation Error 问题。",
+        "desc": "用于检测并合并多个 Mod 之间的 WitcherScript 冲突代码，解决因脚本冲突导致的 Script Compilation Error 报错。",
         "dependencies": [
             "None"
         ],
@@ -1942,7 +1942,7 @@ witcher_mods = [
         "title": "Brothers in Arms - TW3 Bug Fix and Restored Content Collection - Next-Gen",
         "author": "PaulR0013 - MerseyRockoff - konyme",
         "category": "剧情与修复 (Gameplay / Bug Fixes / Cut Content)",
-        "desc": "由全网顶级 Mod 团队数年打磨的旷世神作！修复本体与双 DLC 中数百个原版遗留 Bug、未采用的 NPC 互动对话、截断的过场动画与丢失的任务物品。",
+        "desc": "修复《巫师3》本体与两个资料片中的多个遗留 Bug、未使用的 NPC 对话、被截断的过场动画片段与部分任务物品缺失问题。",
         "dependencies": [
             "Script Merger (若有其他脚本Mod)"
         ],
@@ -1963,7 +1963,7 @@ witcher_mods = [
         "title": "All Quest Objectives On Map",
         "author": "Wolfmark",
         "category": "界面导航 (UI / Map)",
-        "desc": "强迫症玩家必备！同时在大地图上显示所有未完成的主线、支线、猎魔委托与寻宝任务目标点，顺路一次性清空周边任务。",
+        "desc": "在大地图上同时显示所有未完成的主线、支线、猎魔委托与寻宝任务的目标点。",
         "dependencies": [
             "None"
         ],
@@ -1984,7 +1984,7 @@ witcher_mods = [
         "title": "(Next Gen Edition) Friendly HUD",
         "author": "wghost81 aka Wasteland Ghost",
         "category": "界面交互 (UI / Immersion)",
-        "desc": "非战斗状态自动隐藏全部小地图与血条，猎魔人感官开启时在真实 3D 世界中浮现任务标记与罗盘，极致视听沉浸享受。",
+        "desc": "非战斗状态下自动隐藏小地图与血条，猎魔人感官开启时在 3D 场景中显示任务标记与罗盘。",
         "dependencies": [
             "None"
         ],

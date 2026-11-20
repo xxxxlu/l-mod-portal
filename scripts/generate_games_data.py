@@ -57,13 +57,13 @@ TOP_100_GAMES = [
             "source": "https://wiki.redmodding.org/cyber-engine-tweaks/console/console/how-do-i"},
             {"name": {"zh-CN": "提升等级至满级 (60级)", "en": "Set Max Level (60)"}, "command": "Game.SetLevel(\"Level\", 60)", "desc": "将角色人物等级直接拉满",
             "source": "https://wiki.redmodding.org/cyber-engine-tweaks/console/console/how-do-i"},
-            {"name": {"zh-CN": "声望直接拉满 (50级)", "en": "Max Street Cred (50)"}, "command": "Game.SetLevel(\"StreetCred\", 50)", "desc": "解锁夜之城所有武器义体购买权限",
+            {"name": {"zh-CN": "声望直接拉满 (50级)", "en": "Max Street Cred (50)"}, "command": "Game.SetLevel(\"StreetCred\", 50)", "desc": "解锁夜之城对应等级的中间人委托与义体医生商品购买权限",
             "source": "https://wiki.redmodding.org/cyber-engine-tweaks/console/console/how-do-i"},
-            {"name": {"zh-CN": "重置并获取专精点数", "en": "Add Perk Points"}, "command": "PlayerDevelopmentSystem.GetInstance(Game.GetPlayer()):GetDevelopmentData(Game.GetPlayer()):AddDevelopmentPoints(50, gamedataDevelopmentPointType.Primary)", "desc": "增加 50 点核心属性点数",
+            {"name": {"zh-CN": "增加 50 点专精点数", "en": "Add Perk Points"}, "command": "PlayerDevelopmentSystem.GetInstance(Game.GetPlayer()):GetDevelopmentData(Game.GetPlayer()):AddDevelopmentPoints(50, gamedataDevelopmentPointType.Primary)", "desc": "增加 50 点可用于解锁天赋树技能的专精点数（Perk Points）",
             "source": "https://wiki.redmodding.org/cyber-engine-tweaks/console/console/how-do-i"},
-            {"name": {"zh-CN": "添加不朽武士刀【觉】", "en": "Add Satori Katana"}, "command": "Game.AddToInventory(\"Items.Preset_Katana_Saburo\", 1)", "desc": "荒坂三郎随身佩剑，极高暴伤",
+            {"name": {"zh-CN": "添加太刀【觉】", "en": "Add Satori Katana"}, "command": "Game.AddToInventory(\"Items.Preset_Katana_Saburo\", 1)", "desc": "荒坂三郎的佩剑，可向远处敌人跃进攻击并发动居合斩造成流血效果",
             "source": "https://wiki.redmodding.org/cyberpunk-2077-modding/for-mod-creators/references-lists-and-overviews/cheat-sheet-tweak-ids/weapons/iconic-effects-by-weapon"},
-            {"name": {"zh-CN": "添加强尼·银手同款手枪【马洛里安3516】", "en": "Add Malorian Arms 3516"}, "command": "Game.AddToInventory(\"Items.Preset_Silverhand_3516\", 1)", "desc": "强尼·银手经典喷火换弹手枪",
+            {"name": {"zh-CN": "添加强尼·银手同款手枪【马洛里安3516】", "en": "Add Malorian Arms 3516"}, "command": "Game.AddToInventory(\"Items.Preset_Silverhand_3516\", 1)", "desc": "强尼·银手专属手枪，快速近战攻击可点燃敌人，但会消耗枪内剩余全部子弹",
             "source": "https://cyberpunk.fandom.com/wiki/Malorian_Arms_3516_(2077)"}
         ],
         "hasMods": True,
@@ -72,7 +72,7 @@ TOP_100_GAMES = [
             {
                 "name": "Cyber Engine Tweaks",
                 "category": "Core Framework",
-                "desc": "全MOD运行底座与控制台必备",
+                "desc": "提供 Mod 运行环境与游戏内控制台",
                 "url": "https://www.nexusmods.com/cyberpunk2077/mods/107"
             },
             {
@@ -168,11 +168,11 @@ TOP_100_GAMES = [
         "popularCommands": [
             {
                 "name": {
-                    "zh-CN": "完全无敌上帝模式 (God Mode)",
+                    "zh-CN": "上帝模式 (God Mode)",
                     "en": "God Mode"
                 },
                 "command": "god",
-                "desc": "杰洛特完全无敌，生命值与昆恩法印锁死，免疫一切物理与魔法伤害。",
+                "desc": "开启后杰洛特免疫伤害，生命值与昆恩法印锁定，不会受到物理与法术伤害。",
                 "source": "https://commands.gg/witcher3/god"
             },
             {
@@ -181,34 +181,34 @@ TOP_100_GAMES = [
                     "en": "Add 100,000 Crowns"
                 },
                 "command": "addmoney(100000)",
-                "desc": "随心所欲锻造六大宗师学派神装与陶森特庄园改造。",
+                "desc": "增加 100,000 克朗，可用于购买宗师级装备材料或陶森特庄园升级等花费较高的内容。",
                 "source": "https://commands.gg/witcher3/addmoney"
             },
             {
                 "name": {
-                    "zh-CN": "一键集齐全套昆特牌",
+                    "zh-CN": "开始一局昆特牌对局",
                     "en": "Add All Gwent Cards"
                 },
                 "command": "secretgwint",
-                "desc": "直接集齐所有阵营与中立全套英雄昆特牌。",
+                "desc": "立即开始一局与 AI 对战的昆特牌比赛；不会直接把全部卡牌加入牌库。",
                 "source": "https://commands.gg/witcher3/secretgwint"
             },
             {
                 "name": {
-                    "zh-CN": "直接获得湖中之剑 (血与酒最强成长银剑)",
+                    "zh-CN": "直接获得湖中之剑 (血与酒成长型银剑)",
                     "en": "Add Aerondight Sword"
                 },
                 "command": "additem('Aerondight EP2')",
-                "desc": "获得永远可成长暴击的陶森特至尊神剑。",
+                "desc": "获得会随战斗表现持续强化基础伤害的银剑（Aerondight）。",
                 "source": "https://witcher.fandom.com/wiki/Aerondight"
             },
             {
                 "name": {
-                    "zh-CN": "大地图点亮全大陆 100% 快速旅行路标",
+                    "zh-CN": "大地图点亮全部快速旅行路标",
                     "en": "Show All Fast Travel"
                 },
                 "command": "ShowAllFT(1)",
-                "desc": "瞬间解锁白果园、威伦、诺维格瑞、群岛与陶森特全部十字路标。",
+                "desc": "瞬间解锁白果园、威伦、诺维格瑞、群岛与陶森特的全部快速旅行路标。",
                 "source": "https://commands.gg/witcher3/showallft"
             },
             {
@@ -227,7 +227,7 @@ TOP_100_GAMES = [
             {
                 "name": "The Witcher 3 HD Reworked Project NextGen Edition",
                 "category": "Graphics",
-                "desc": "全材质终极 4K 材质画质增强重制",
+                "desc": "4K 材质画质增强重制包。",
                 "url": "https://www.nexusmods.com/witcher3/mods/9963"
             },
             {
@@ -289,7 +289,7 @@ TOP_100_GAMES = [
                     "en": "Add 100,000 Gold"
                 },
                 "command": "Osi.AddGold(GetHostCharacter(), 100000)",
-                "desc": "瞬间化身博德之门巨富，搬空全大陆所有商贩的绝世装备。",
+                "desc": "向背包增加 10 万金币，可用于购买装备和物资。",
                 "source": "https://docs.baldursgate3.game/index.php?title=AddGold"
             },
             {
@@ -298,7 +298,7 @@ TOP_100_GAMES = [
                     "en": "Add 30 Illithid Parasites"
                 },
                 "command": "Osi.TemplateAddTo(\"1ec327be-3b7f-4502-9586-860e057e09ae\", GetHostCharacter(), 30)",
-                "desc": "一次性点满主角与全队所有伙伴的脑池异能潜能。",
+                "desc": "一次性获得 30 个夺心魔寄生虫标本，可用于解锁主角与队友的灵能异能。",
                 "source": "https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen"
             },
             {
@@ -307,7 +307,7 @@ TOP_100_GAMES = [
                     "en": "Add Balduran's Giantslayer"
                 },
                 "command": "Osi.TemplateAddTo(\"7219fca3-5f41-43a0-8253-f4c09d8b6308\", GetHostCharacter(), 1)",
-                "desc": "获取力量加倍并自带巨人体型的最强近战巨剑。",
+                "desc": "获得攻击伤害额外附加两倍力量调整值、并带有「巨人体型」技能的双手巨剑。",
                 "source": "https://bg3.wiki/wiki/Balduran%27s_Giantslayer"
             },
             {
@@ -316,16 +316,16 @@ TOP_100_GAMES = [
                     "en": "Add Helldusk Armour"
                 },
                 "command": "Osi.TemplateAddTo(\"7ae705fd-1cfd-4482-a584-d2e68f9c1262\", GetHostCharacter(), 1)",
-                "desc": "拉斐尔终极重铠，全职业穿戴免熟练项且免疫火伤。",
+                "desc": "获得拉斐尔掉落的重甲，AC 21，任何职业穿戴都视为熟练，并对火焰伤害有抗性。",
                 "source": "https://bg3.wiki/wiki/Helldusk_Armour"
             },
             {
                 "name": {
-                    "zh-CN": "赋予常驻急速术 (动作翻倍且永不疲劳)",
+                    "zh-CN": "赋予常驻急速术 (HASTE)",
                     "en": "Permanent Haste Buff"
                 },
                 "command": "Osi.ApplyStatus(GetHostCharacter(), \"HASTE\", -1)",
-                "desc": "战斗动作常驻翻倍，移动速度翻倍且断专注不虚脱。",
+                "desc": "持续施加急速状态：每回合多一次动作、移动速度提升，且因手动施加不会到期陷入疲乏状态。",
                 "source": "https://docs.baldursgate3.game/index.php?title=ApplyStatus"
             }
         ],
@@ -335,25 +335,25 @@ TOP_100_GAMES = [
             {
                 "name": "Party Limit Begone",
                 "category": "Gameplay",
-                "desc": "允许带齐全部 16 名起源队友一起冒险与对话",
+                "desc": "将队伍人数上限提升至 16，可同时带上所有可招募的同伴",
                 "url": "https://www.nexusmods.com/baldursgate3/mods/327"
             },
             {
                 "name": "5e Spells",
                 "category": "Content",
-                "desc": "补齐官方桌面跑团规则书所有高级法术",
+                "desc": "补充游戏未收录的官方桌面跑团法术",
                 "url": "https://www.nexusmods.com/baldursgate3/mods/125"
             },
             {
                 "name": "Bags Bags Bags",
                 "category": "QoL",
-                "desc": "药剂、卷轴、箭矢自动归类，背包清爽度翻倍",
+                "desc": "药剂、卷轴、箭矢等物品自动归类整理背包",
                 "url": "https://www.nexusmods.com/baldursgate3/mods/880"
             },
             {
                 "name": "Native Camera Tweaks",
                 "category": "Camera",
-                "desc": "支持拉到平视越肩第三人称沉浸式视角",
+                "desc": "支持将镜头拉至平视的越肩第三人称视角",
                 "url": "https://www.nexusmods.com/baldursgate3/mods/945"
             }
         ],
@@ -396,7 +396,7 @@ TOP_100_GAMES = [
             {
                 "name": "Elden Ring Seamless Co-op",
                 "category": "Multiplayer",
-                "desc": "与好友同屏全流程推图、骑马、不因死亡被遣返",
+                "desc": "与好友联机推进全程剧情、骑乘灵马，且不会因死亡被遣返回单人世界",
                 "url": "https://github.com/yuiamoroll/EldenRingSeamlessCoopRelease"
             },
             {
@@ -408,7 +408,7 @@ TOP_100_GAMES = [
             {
                 "name": "Pause the game",
                 "category": "QoL",
-                "desc": "按 P 键真正暂停游戏，上厕所倒水不暴毙",
+                "desc": "按 P 键暂停游戏，适合中途离开时使用",
                 "url": "https://www.nexusmods.com/eldenring/mods/43"
             }
         ],
@@ -467,13 +467,13 @@ TOP_100_GAMES = [
             {
                 "name": "SkyUI",
                 "category": "UI Overhaul",
-                "desc": "彻底重构原生烂UI，PC端键鼠体验天花板",
+                "desc": "优化原版界面，改善 PC 端的鼠标键盘操作体验。",
                 "url": "https://www.nexusmods.com/skyrimspecialedition/mods/12604"
             },
             {
                 "name": "Unofficial Skyrim Special Edition Patch - USSEP",
                 "category": "Bug Fixes",
-                "desc": "非官方万项原版BUG修复大补丁",
+                "desc": "非官方的综合性原版 BUG 修复补丁。",
                 "url": "https://www.nexusmods.com/skyrimspecialedition/mods/266"
             }
         ],
@@ -531,7 +531,7 @@ TOP_100_GAMES = [
             {
                 "name": "Unofficial Fallout 4 Patch - UFO4P",
                 "category": "Bug Fixes",
-                "desc": "B社官方多年未修的数千个恶性BUG综合修复",
+                "desc": "非官方的综合性 BUG 修复补丁，修复大量官方未解决的问题。",
                 "url": "https://www.nexusmods.com/fallout4/mods/4598"
             },
             {
@@ -580,18 +580,18 @@ TOP_100_GAMES = [
             {
                 "name": "Carry Weight Increase",
                 "category": "QoL",
-                "desc": "大幅增加帕鲁采矿负重，出门一次带回全矿石",
+                "desc": "提高帕鲁的负重上限，减少因超重导致的多次往返运输",
                 "url": "https://www.nexusmods.com/palworld/mods/11"
             },
             {
                 "name": "Pal IVs",
                 "category": "QoL",
-                "desc": "显微镜看帕鲁个体值、被动词条与隐藏属性"
+                "desc": "查看帕鲁的个体值、被动词条与隐藏属性"
             },
             {
                 "name": "Map Unlocker",
                 "category": "Exploration",
-                "desc": "驱散全地图战争迷雾，探索效率翻倍",
+                "desc": "解锁全地图的战争迷雾，无需实地探索即可查看地图",
                 "url": "https://www.nexusmods.com/palworld/mods/16"
             }
         ],
@@ -647,13 +647,13 @@ TOP_100_GAMES = [
             {
                 "name": "StarUI Inventory",
                 "category": "UI Overhaul",
-                "desc": "颠覆原生垃圾列表，清晰展示物品DPS与价值比",
+                "desc": "优化物品栏界面显示，更清晰地展示物品的 DPS、价值等信息。",
                 "url": "https://www.nexusmods.com/starfield/mods/773"
             },
             {
                 "name": "Baka Achievement Enabler (SFSE)",
                 "category": "Fix",
-                "desc": "用控制台和装MOD照样跳 Steam 成就",
+                "desc": "使用控制台命令或安装 Mod 后，仍可正常获得 Steam 成就。",
                 "url": "https://www.nexusmods.com/starfield/mods/658"
             }
         ],
@@ -703,13 +703,13 @@ TOP_100_GAMES = [
             {
                 "name": "Script Hook V",
                 "category": "Core Framework",
-                "desc": "内置全功能修改器与全载具刷出",
+                "desc": "附带 Native Trainer 离线菜单，可用于刷出载具等基础功能。",
                 "url": "https://www.dev-c.com/gtav/scripthookv/"
             },
             {
                 "name": "NaturalVision Evolved",
                 "category": "Graphics",
-                "desc": "电影级好莱坞光影画质大修",
+                "desc": "调整天气、光照与夜景等画面效果。",
                 "url": "https://www.razedmods.com/gta-v"
             }
         ],

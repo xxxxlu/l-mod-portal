@@ -11,7 +11,10 @@ Capabilities:
    potential binary breakages, script extender invalidations, and save corruption risks.
 3. Classifies compatibility status (🟢 完美兼容 / 🟡 需更新前置 / 🔴 坏档预警).
 4. Auto-generates player emergency broadcast, rescue & rollback guides.
-5. Updates src/data/games_top100.json and synchronizes to radar.html via build_i18n_matrix.py.
+5. With --update-radar, writes its radar fields through gamedata_guard (owner="radar"):
+   only those fields of the analysed games, in the master data and the GAMES_DATA segment of
+   public/data.js (other fields, trainer fields and TRANSLATIONS_DATA untouched).
+   steam_patch_monitor.py (radar v2) is the regular radar writer; this script's fields overlap.
 """
 
 import os
@@ -24,7 +27,11 @@ import urllib.request
 import urllib.error
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-GAMES_JSON_PATH = os.path.join(BASE_DIR, 'src/data/games_top100.json')
+sys.path.insert(0, os.path.join(BASE_DIR, 'scripts'))
+from gamedata_guard import MASTER_PATH as GAMES_JSON_PATH, load_games_for_edit, write_changed_fields  # noqa: E402
+
+SCRIPT = "ai_patch_analyzer.py"
+OWNED_FIELDS = ("latestSteamPatch", "compatibilityStatus", "radarRiskTitle", "radarRiskDesc", "radarSummary", "steamLastChecked")
 REPORT_PATH = os.path.join(BASE_DIR, 'docs/PATCH_MONITOR_LATEST.md')
 DATA_JS_PATH = os.path.join(BASE_DIR, 'public/data.js')
 
@@ -225,8 +232,7 @@ def run_pipeline(target_game_id=None, update_radar=False, simulate_patch=None, s
     print("🤖 L-MOD Vault - AI Steam 补丁智能分析与预警流水线")
     print("=" * 72)
 
-    with open(GAMES_JSON_PATH, 'r', encoding='utf-8') as f:
-        games = json.load(f)
+    games = load_games_for_edit(SCRIPT)
 
     fetcher = SteamNewsFetcher()
     evaluator = AIPatchEvaluator()
@@ -300,17 +306,10 @@ def run_pipeline(target_game_id=None, update_radar=False, simulate_patch=None, s
     # Save to games_top100.json
     if update_radar and updated_records:
         print(f"\n💾 正在将 {len(updated_records)} 条 AI 研判结果持久化写入 {GAMES_JSON_PATH}...")
-        with open(GAMES_JSON_PATH, 'w', encoding='utf-8') as f:
-            json.dump(games, f, ensure_ascii=False, indent=2)
+        write_changed_fields(SCRIPT, OWNED_FIELDS, games, dry_run=False, owner="radar")
 
         # Generate Latest Report
         generate_report(updated_records)
-
-        # Trigger build_i18n_matrix.py to bundle data.js
-        build_script = os.path.join(BASE_DIR, 'scripts/build_i18n_matrix.py')
-        if os.path.exists(build_script):
-            print("🚀 正在触发 build_i18n_matrix.py 自动编译 public/data.js...")
-            os.system(f"python3 {build_script}")
 
         print("\n✅ [AI Patch Analyzer] 流水线执行成功，所有看板与雷达已同步最新预警！")
     else:

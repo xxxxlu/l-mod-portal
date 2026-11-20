@@ -3,15 +3,24 @@
 enrich_database_v3.py
 全面扩充 100 款单机游戏的真实控制台指令、N网必装 MOD 与风灵月影修改器专区。
 采集各大游戏 Wiki、UESP、NexusMods、FLiNG 真实代码，杜绝通用空洞占位符。
+Writes through gamedata_guard (write_changed_fields): only the fields in OWNED_FIELDS of the
+games it changes, in both the master data and the GAMES_DATA segment of public/data.js
+(radar, trainer and TRANSLATIONS_DATA untouched). The commands and mods it would write are
+older, unchecked versions of content that has since been checked against sources, so the
+guard stops the run without writing anything; the script is kept for its history.
+Usage: python3 scripts/enrich_database_v3.py [--dry-run]
 """
 
 import json
 import os
 import re
 
-DATA_PATH = '/Users/xiaolu/Desktop/work/l-mod-portal/src/data/games_top100.json'
-with open(DATA_PATH, 'r', encoding='utf-8') as f:
-    games = json.load(f)
+from gamedata_guard import load_games_for_edit, write_changed_fields
+
+SCRIPT = "enrich_database_v3.py"
+OWNED_FIELDS = ('consoleCategories', 'consoleEnableGuide', 'consoleShortcut', 'curatedMods', 'hasConsole')
+
+games = load_games_for_edit(SCRIPT)
 
 def fling_slug(title):
     s = title.lower()
@@ -2355,38 +2364,5 @@ for game in games:
             }
         ]
 
-    # Universal FLiNG Trainer official packaging with Security & Whitelist Verification
-    game["trainerInfo"] = {
-        "author": "风灵月影 (FLiNG)",
-        "version": latest_patch,
-        "officialUrl": f"https://flingtrainer.com/trainer/{slug}-trainer/",
-        "cleanMirrorUrl": f"https://flingtrainer.com/trainer/{slug}-trainer/",
-        "safeVerification": {
-            "isCleanVerified": True,
-            "hasBundledAds": False,
-            "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-            "md5CheckSum": "7F89E23B90A1D67489C0F123EA89BC02 (Official Signed)",
-            "powershellExclusionCmd": 'Add-MpPreference -ExclusionPath "D:\\Games\\Trainers"',
-            "troubleshootSteps": [
-                "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-                "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-                "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-                "4. 【运行顺序】建议先启动 Steam / Epic 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-            ]
-        },
-        "hotkeysCategorized": hotkeys
-    }
 
-# Save enriched database to JSON
-with open(DATA_PATH, 'w', encoding='utf-8') as f:
-    json.dump(games, f, ensure_ascii=False, indent=2)
-
-# Save to public/data.js
-PUBLIC_DATA_PATH = '/Users/xiaolu/Desktop/work/l-mod-portal/public/data.js'
-js_content = f"// L-MOD Vault Offline Database (Enriched v3)\nwindow.GAMES_DATA = {json.dumps(games, ensure_ascii=False, indent=2)};\n"
-with open(PUBLIC_DATA_PATH, 'w', encoding='utf-8') as f:
-    f.write(js_content)
-
-print(f"Successfully enriched {len(games)} games with {enriched_count} deep profiles!")
-print(f"JSON updated: {DATA_PATH}")
-print(f"JS updated: {PUBLIC_DATA_PATH}")
+write_changed_fields(SCRIPT, OWNED_FIELDS, games)

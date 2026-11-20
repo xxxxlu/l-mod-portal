@@ -1,11 +1,20 @@
-import json
-import os
+#!/usr/bin/env python3
+"""
+scripts/deep_enrich_witcher3.py
+Writes through gamedata_guard (write_changed_fields): only the fields in OWNED_FIELDS of the
+games it changes, in both the master data and the GAMES_DATA segment of public/data.js
+(radar, trainer and TRANSLATIONS_DATA untouched). The commands and mods it would write are
+older, unchecked versions of content that has since been checked against sources, so the
+guard stops the run without writing anything; the script is kept for its history.
+Usage: python3 scripts/deep_enrich_witcher3.py [--dry-run]
+"""
 
-JSON_PATH = '/Users/xiaolu/Desktop/work/l-mod-portal/src/data/games_top100.json'
-JS_PATH = '/Users/xiaolu/Desktop/work/l-mod-portal/public/data.js'
+from gamedata_guard import load_games_for_edit, write_changed_fields
 
-with open(JSON_PATH, 'r', encoding='utf-8') as f:
-    games = json.load(f)
+SCRIPT = "deep_enrich_witcher3.py"
+OWNED_FIELDS = ('consoleCategories', 'popularCommands', 'curatedMods', 'consoleShortcut', 'consoleEnableGuide')
+
+games = load_games_for_edit(SCRIPT)
 
 witcher_categories = [
     {
@@ -915,49 +924,6 @@ witcher_mods = [
     }
 ]
 
-witcher_trainer = {
-    "author": "风灵月影 (FLiNG)",
-    "version": "Next-Gen v4.04 (次世代官方最新版本全功能修改器)",
-    "officialUrl": "https://flingtrainer.com/trainer/the-witcher-3-wild-hunt-trainer/",
-    "cleanMirrorUrl": "https://flingtrainer.com/trainer/the-witcher-3-wild-hunt-trainer/",
-    "safeVerification": {
-        "isCleanVerified": True,
-        "hasBundledAds": False,
-        "virusTotalRatio": "0/72 Clean (官方直发纯净版)",
-        "md5CheckSum": "D41D8CD98F00B204E9800998ECF8427E (Official Signed)",
-        "powershellExclusionCmd": "Add-MpPreference -ExclusionPath \"D:\\Games\\Trainers\"",
-        "troubleshootSteps": [
-            "1. 【坚决抵制流氓捆绑】请务必通过上方官方绿色按钮前往 FLiNG 官方网站 (flingtrainer.com) 下载原版 Standalone 独立版，坚决不要在任何第三方国内弹窗聚合站下载带捆绑安装器的流氓伪装包；",
-            "2. 【Windows Defender 报毒排错】由于修改器必须调用 Windows 底层 API (WriteProcessMemory) 注入游戏进程修改内存数值，杀毒软件启发式引擎会误报为 HackTool:Win32/GameHack。这是单机修改器的标准机制，官方原版绝不含木马；",
-            "3. 【10秒一键白名单】在电脑 D 盘建立专门的文件夹 (如 D:\\Games\\Trainers)，以管理员权限运行 PowerShell 输入上方的排除指令，之后所有修改器解压在此目录中，即可永久免除杀毒软件误杀删除；",
-            "4. 【运行顺序】建议先启动 Steam / GOG 平台并进入游戏战役主界面，随后以管理员权限右键运行修改器，听到清脆的 'Trainer Activated' 提示音即代表内存挂载成功！"
-        ]
-    },
-    "hotkeysCategorized": [
-        {
-            "category": "⚔️ 战斗与生命 (Combat & Survival)",
-            "items": [
-                {"key": "Num 1", "action": "杰洛特无限生命 (Infinite Health)"},
-                {"key": "Num 2", "action": "无限活力/耐力 (Infinite Stamina)"},
-                {"key": "Num 3", "action": "肾上腺素瞬间全满 (Max Adrenaline)"},
-                {"key": "Num 4", "action": "毒素毒性槽清零 (Zero Toxicity)"},
-                {"key": "Num 5", "action": "无限氧气水下潜水 (Infinite Oxygen)"},
-                {"key": "Num 6", "action": "武器与装备永不磨损 (Indestructible Equipment)"},
-                {"key": "Num 0", "action": "一击必杀 (One Hit Kill)"}
-            ]
-        },
-        {
-            "category": "💰 财富、技能与负重 (Economy, Skills & Inventory)",
-            "items": [
-                {"key": "Ctrl+Num 1", "action": "增加 100,000 克朗金币 (Add 100,000 Money)"},
-                {"key": "Ctrl+Num 2", "action": "物品材料与炸弹不减 (Infinite Items & Bombs)"},
-                {"key": "Ctrl+Num 3", "action": "增加 10 点能力点 (Add 10 Ability Points)"},
-                {"key": "Ctrl+Num 4", "action": "负重上限永久锁定 9999 (Infinite Weight Limit)"},
-                {"key": "Ctrl+Num 5", "action": "昆特牌对决必定获胜 (Always Win Gwent)"}
-            ]
-        }
-    ]
-}
 
 # Update witcher-3
 for g in games:
@@ -965,7 +931,6 @@ for g in games:
         g["consoleCategories"] = witcher_categories
         g["popularCommands"] = witcher_popular
         g["curatedMods"] = witcher_mods
-        g["trainerInfo"] = witcher_trainer
         g["consoleShortcut"] = "~ 键 (波浪键，通过 general.ini 或 Debug Console Enabler 开启)"
         g["consoleEnableGuide"] = {
             "zh-CN": "1. 【修改配置文件开启】在《巫师3》安装根目录进入 bin\\config\\base\\ 文件夹，用记事本打开 general.ini；\n2. 【追加启用参数】在文件末尾 [General] 区块最下方另起一行，添加 DBGConsoleOn=true 并保存退出；\n3. 【呼出控制台】启动游戏进入战役，按下键盘左上角 ~ 键（波浪键）即可呼出顶部控制台输入框，输入下列任意代码回车直接生效！（次世代 Next-Gen v4.04 实测 100% 可用）。",
@@ -973,15 +938,4 @@ for g in games:
         }
         break
 
-with open(JSON_PATH, 'w', encoding='utf-8') as f:
-    json.dump(games, f, ensure_ascii=False, indent=2)
-
-print(f"✅ Successfully updated {JSON_PATH}")
-
-with open(JS_PATH, 'w', encoding='utf-8') as f:
-    f.write('// L-MOD Vault Offline Database (Enriched v3)\n')
-    f.write('window.GAMES_DATA = ')
-    json.dump(games, f, ensure_ascii=False, indent=2)
-    f.write(';\n')
-
-print(f"✅ Successfully synchronized {JS_PATH}")
+write_changed_fields(SCRIPT, OWNED_FIELDS, games)
