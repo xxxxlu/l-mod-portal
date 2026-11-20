@@ -8,7 +8,7 @@ L-MOD Vault 自动化公网可访问性与生产健康度自检巡检工具 (Dep
 核心能力：
 1. 探测公网 URL (或本地开发服务) 的关键端点 HTTP 状态码、响应延迟与 CDN 头；
 2. 校验首页 (index.html)、避坑雷达 (radar.html)、核心包 (data.js)、头像 (avatar.jpg) 与 Favicon；
-3. 全自动深度校验 Top 14 旗舰单机大作的 Hash 路由、深链接、修改器双源直链与 Mod 生态；
+3. 校验 Top 14 旗舰游戏的数据结构与链接（指令要有来源、Mod 要有来源页面、链接必须是 https 且不指向已知不存在的镜像；不按条数计分）；
 4. 模拟真实微信内置浏览器 User-Agent 嗅探与防拦截遮罩组件完整性；
 5. 输出工业级诊断报告与 100 分制健康度评分 (支持 CI/CD 自动化退出码门禁)。
 """
@@ -19,6 +19,7 @@ import sys
 import json
 import time
 import argparse
+import urllib.parse
 import urllib.request
 import urllib.error
 from pathlib import Path
@@ -43,10 +44,159 @@ WECHAT_UA = (
 )
 
 
+# Hosts that are known not to exist / never to be linked (the old "mirror" org returns 404)
+BANNED_LINK_HOSTS = ("github.com/l-mod-vault", "l-mod-vault.github.io", "example.com")
+DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+
+
+def load_games_for_check():
+    """Master data if present, otherwise the GAMES_DATA array of public/data.js."""
+    if GAMES_JSON_PATH.exists():
+        with open(GAMES_JSON_PATH, "r", encoding="utf-8") as f:
+            return json.load(f)
+    data_js_path = PUBLIC_DIR / "data.js"
+    if not data_js_path.exists():
+        return None
+    c = data_js_path.read_text(encoding="utf-8")
+    marker = "window.GAMES_DATA = "
+    idx = c.find(marker)
+    if idx < 0:
+        return None
+    games, _ = json.JSONDecoder().raw_decode(c[idx + len(marker):])
+    return games
+
+
+def link_problem(url):
+    """Static check of one link; returns a reason string or None."""
+    if not isinstance(url, str) or not url.startswith("https://") or len(url.split("/")) < 3 or not url.split("/")[2]:
+        return f"不是 https 链接: {url!r}"
+    if any(h in url for h in BANNED_LINK_HOSTS):
+        return f"指向不存在的镜像: {url}"
+    return None
+
+
+def _nonempty_str(v):
+    return isinstance(v, str) and v.strip() != ""
+
+
+def check_game_structure(g):
+    """Returns (problems, links) for one game. Empty lists are fine; malformed entries are not."""
+    problems, links = [], []
+
+    def add_link(url, where):
+        err = link_problem(url)
+        if err:
+            problems.append(f"{where}: {err}")
+        else:
+            links.append(url)
+
+    cats = g.get("consoleCategories")
+    if not isinstance(cats, list):
+        problems.append("consoleCategories 不是数组")
+        cats = []
+    for ci, cat in enumerate(cats):
+        cmds = cat.get("commands") if isinstance(cat, dict) else None
+        if not isinstance(cat, dict) or not _nonempty_str(cat.get("category")) or not isinstance(cmds, list) or not cmds:
+            problems.append(f"consoleCategories[{ci}] 缺分类名或指令为空")
+            continue
+        for cmd in cmds:
+            name = cmd.get("name") if isinstance(cmd, dict) else None
+            if not isinstance(cmd, dict) or not _nonempty_str(cmd.get("code")) or not (
+                    _nonempty_str(name) or (isinstance(name, dict) and any(_nonempty_str(v) for v in name.values()))):
+                problems.append(f"consoleCategories[{ci}] 有指令缺 code 或 name")
+                continue
+            if not cmd.get("source"):
+                problems.append(f"指令 {cmd.get('id') or cmd.get('code')!r} 没有来源")
+            else:
+                add_link(cmd["source"], f"指令 {cmd.get('id')!r} 的来源")
+
+    for bi, b in enumerate(g.get("scenarioBundles") or []):
+        if not isinstance(b, dict) or not all(_nonempty_str(b.get(k)) for k in ("id", "name", "code")):
+            problems.append(f"scenarioBundles[{bi}] 缺 id / name / code")
+
+    for mi, m in enumerate(g.get("curatedMods") or []):
+        if not isinstance(m, dict) or not all(_nonempty_str(m.get(k)) for k in ("id", "title", "author")):
+            problems.append(f"curatedMods[{mi}] 缺 id / title / author")
+            continue
+        if not m.get("nexusUrl"):
+            problems.append(f"Mod {m.get('id')!r} 没有来源页面链接")
+        else:
+            add_link(m["nexusUrl"], f"Mod {m.get('id')!r}")
+        if m.get("downloadUrl"):
+            add_link(m["downloadUrl"], f"Mod {m.get('id')!r} 的下载链接")
+
+    if g.get("hasTrainer"):
+        tinfo = g.get("trainerInfo") or {}
+        if not tinfo.get("officialUrl"):
+            problems.append("hasTrainer 为真但没有修改器官方页面链接")
+        else:
+            add_link(tinfo["officialUrl"], "修改器官方页面")
+        if tinfo.get("cleanMirrorUrl"):
+            add_link(tinfo["cleanMirrorUrl"], "修改器镜像链接")
+
+    ns = g.get("nexusStats")
+    if ns is not None:
+        if not isinstance(ns, dict) or not (ns.get("totalDownloads") or ns.get("totalMods")):
+            problems.append("nexusStats 存在但没有数字")
+        elif not (isinstance(ns.get("checkedAt"), str) and DATE_RE.match(ns["checkedAt"])):
+            problems.append("nexusStats 没有取数日期 checkedAt")
+
+    return problems, links
+
+
+_LINK_RESULTS = {}
+
+
+def _encode_url(url):
+    """Percent-encode non-ASCII characters (e.g. bg3.wiki titles with accents)."""
+    return urllib.parse.quote(url, safe=":/?#[]@!$&'()*+,;=%~")
+
+
+def _fandom_page_exists(url, timeout):
+    """Fandom answers scripted page requests with 403, but its MediaWiki API is open:
+    ask the API whether the page title exists. None = exists, else an error string."""
+    m = re.match(r"https://([a-z0-9-]+)\.fandom\.com/wiki/([^#?]+)", url)
+    if not m:
+        return "not a fandom page"
+    title = urllib.parse.unquote(m.group(2))
+    api = (f"https://{m.group(1)}.fandom.com/api.php?action=query&format=json&redirects=1&titles="
+           + urllib.parse.quote(title))
+    req = urllib.request.Request(api, headers={"User-Agent": "L-MOD-Vault-Deployment-Verifier/1.0"})
+    with urllib.request.urlopen(req, timeout=timeout) as resp:
+        pages = json.load(resp).get("query", {}).get("pages", {})
+    if not pages or any("missing" in p or "invalid" in p for p in pages.values()):
+        return "wiki page does not exist"
+    return None
+
+
+def probe_link(url, timeout):
+    """Network check of one link; returns an error string or None (each URL asked once).
+    nexusmods.com answers scripted requests with 403 / 429, which still means the page exists;
+    fandom.com pages are checked through the wiki's own API for the same reason."""
+    if url in _LINK_RESULTS:
+        return _LINK_RESULTS[url]
+    timeout = max(timeout, 15.0)
+    try:
+        if ".fandom.com/wiki/" in url:
+            err = _fandom_page_exists(url, timeout)
+        else:
+            req = urllib.request.Request(_encode_url(url), headers={"User-Agent": "L-MOD-Vault-Deployment-Verifier/1.0"}, method="GET")
+            try:
+                with urllib.request.urlopen(req, timeout=timeout) as resp:
+                    err = None if resp.status < 400 else f"HTTP {resp.status}"
+            except urllib.error.HTTPError as e:
+                err = None if (e.code in (403, 429) and "nexusmods.com" in url) else f"HTTP {e.code}"
+    except Exception as e:  # noqa: BLE001
+        err = type(e).__name__
+    _LINK_RESULTS[url] = err
+    return err
+
+
 class DeploymentVerifier:
-    def __init__(self, target_url=None, timeout=5.0):
+    def __init__(self, target_url=None, timeout=5.0, check_links=False):
         self.target_url = target_url.rstrip("/") if target_url else None
         self.timeout = timeout
+        self.check_links = check_links
         self.scores = {
             "endpoints": 0,    # Max 30
             "flagships": 0,    # Max 40
@@ -168,21 +318,16 @@ class DeploymentVerifier:
         print(f"\n  • 核心端点健康得分: {BOLD}{endpoint_pts} / 30{RESET} (合格率: {passed_count}/{len(endpoints)})")
 
     def verify_top14_flagship_games(self):
-        self.log_title("2. Top 14 旗舰单机大作全息数据资产、深链接与下载直链核验")
+        """Top 14: the data must be well-formed and every link must be a real https link.
 
-        all_games = None
-        if GAMES_JSON_PATH.exists():
-            with open(GAMES_JSON_PATH, "r", encoding="utf-8") as f:
-                all_games = json.load(f)
-        else:
-            data_js_path = PUBLIC_DIR / "data.js"
-            if data_js_path.exists():
-                with open(data_js_path, "r", encoding="utf-8") as f:
-                    c = f.read()
-                m = re.search(r'window\.GAMES_DATA\s*=\s*(\[[\s\S]*?\]);', c)
-                if m:
-                    all_games = json.loads(m.group(1))
+        No minimum number of commands, bundles or mods: an empty list is valid. What fails a
+        game is malformed content (a command without code or source, a mod without a link)
+        or a link that is not https / points at a host known to be fake.
+        With --check-links every link is also requested over the network.
+        """
+        self.log_title("2. Top 14 旗舰游戏：数据结构与链接核验（不计条数）")
 
+        all_games = load_games_for_check()
         if not all_games:
             print(f"  {RED}✖ 找不到数据源文件: {GAMES_JSON_PATH} 或 public/data.js{RESET}")
             return
@@ -190,47 +335,36 @@ class DeploymentVerifier:
         top14 = sorted(all_games, key=lambda x: x.get("rank", 999))[:14]
         flagship_pass = 0
 
-        base_web_url = self.target_url if self.target_url else "https://lmod-vault.pages.dev"
-
-        print(f"  {'Rank':<5} {'Game ID':<22} {'类别/指令':<12} {'Mod生态':<8} {'修改器直链':<26} {'深链接状态'}")
-        print(f"  {'-'*88}")
+        print(f"  {'Rank':<5} {'Game ID':<22} {'指令':<6} {'套餐':<4} {'Mod':<4} {'链接':<5} {'状态'}")
+        print(f"  {'-'*72}")
 
         for g in top14:
             rank = g.get("rank", 999)
             gid = g.get("id", "unknown")
-            cats = g.get("consoleCategories", [])
-            cmd_count = sum(len(c.get("commands", [])) for c in cats)
-            mods = g.get("curatedMods", [])
-            tinfo = g.get("trainerInfo") or {}
-            official_t = tinfo.get("officialUrl", "")
-            mirror_t = tinfo.get("cleanMirrorUrl", "")
+            problems, links = check_game_structure(g)
+            if self.check_links:
+                for url in links:
+                    err = probe_link(url, self.timeout)
+                    if err:
+                        problems.append(f"链接打不开 {url} ({err})")
 
-            # Deep Link URLs to test format
-            spa_hash_url = f"{base_web_url}/#/game/{gid}"
-            radar_param_url = f"{base_web_url}/radar.html?game={gid}"
-
-            # Validations
-            cmd_ok = len(cats) >= 4 and cmd_count >= 15
-            mod_urls = [m.get("downloadUrl") or m.get("url") or m.get("nexusUrl") or "" for m in mods]
-            mod_ok = len(mods) >= 3 and all(u.startswith("https://") for u in mod_urls)
-            trainer_ok = (
-                official_t.startswith("https://") and
-                (mirror_t.startswith("https://") if mirror_t else True)
-            )
-
-            all_ok = cmd_ok and mod_ok and trainer_ok
-            if all_ok:
+            cmd_count = sum(len(c.get("commands", [])) for c in (g.get("consoleCategories") or []))
+            if not problems:
                 flagship_pass += 1
                 status_icon = f"{GREEN}✔ PASS{RESET}"
             else:
                 status_icon = f"{RED}✖ FAIL{RESET}"
-
-            trainer_domain = official_t.split("/")[2] if "://" in official_t else "Missing"
-            print(f"  #{rank:<3} {gid:<22} {len(cats)}类/{cmd_count:<4}条 {len(mods):<2}个Mod  {trainer_domain:<26} {status_icon}")
+            print(f"  #{rank:<3} {gid:<22} {cmd_count:<6} {len(g.get('scenarioBundles') or []):<4} "
+                  f"{len(g.get('curatedMods') or []):<4} {len(links):<5} {status_icon}")
+            for prob in problems[:5]:
+                print(f"        {DIM}- {prob}{RESET}")
+            if len(problems) > 5:
+                print(f"        {DIM}- …另有 {len(problems) - 5} 处{RESET}")
 
         pts = round((flagship_pass / len(top14)) * 40, 1)
         self.scores["flagships"] = pts
-        print(f"\n  • 旗舰游戏全息数据资产得分: {BOLD}{pts} / 40{RESET} ({flagship_pass}/{len(top14)} 款全项达标)")
+        mode = "已联网逐个请求链接" if self.check_links else "未联网请求链接（加 --check-links 可逐个请求）"
+        print(f"\n  • 旗舰游戏数据得分: {BOLD}{pts} / 40{RESET} ({flagship_pass}/{len(top14)} 款结构和链接都合格；{mode})")
 
     def verify_wechat_safe_gateway(self):
         self.log_title("3. 微信内置浏览器安全网关 (WeChat Safe Gateway) 拟真探测")
@@ -343,11 +477,12 @@ def main():
     parser.add_argument("url", nargs="?", default=None, help="目标检测公网或本地 URL (例如: https://lmod-vault.pages.dev)")
     parser.add_argument("-u", "--url-flag", dest="url_flag", default=None, help="目标 URL 参数形式")
     parser.add_argument("-t", "--timeout", type=float, default=5.0, help="网络请求超时时间 (秒)")
+    parser.add_argument("--check-links", action="store_true", help="旗舰数据里的每个链接都联网请求一次")
 
     args = parser.parse_args()
     target = args.url or args.url_flag
 
-    verifier = DeploymentVerifier(target_url=target, timeout=args.timeout)
+    verifier = DeploymentVerifier(target_url=target, timeout=args.timeout, check_links=args.check_links)
     verifier.verify_core_endpoints()
     verifier.verify_top14_flagship_games()
     verifier.verify_wechat_safe_gateway()

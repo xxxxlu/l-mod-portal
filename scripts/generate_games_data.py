@@ -53,20 +53,46 @@ TOP_100_GAMES = [
             "es": "Instala Cyber Engine Tweaks (CET) en bin\\x64\\plugins. Presiona ~ en el juego para abrir la consola."
         },
         "popularCommands": [
-            {"name": {"zh-CN": "增加金钱 (100万)", "en": "Add Money (1,000,000)"}, "command": "Game.AddToInventory(\"Items.money\", 1000000)", "desc": "直接增加 1,000,000 欧元现金"},
-            {"name": {"zh-CN": "提升等级至满级 (60级)", "en": "Set Max Level (60)"}, "command": "Game.SetLevel(\"Level\", 60)", "desc": "将角色人物等级直接拉满"},
-            {"name": {"zh-CN": "声望直接拉满 (50级)", "en": "Max Street Cred (50)"}, "command": "Game.SetLevel(\"StreetCred\", 50)", "desc": "解锁夜之城所有武器义体购买权限"},
-            {"name": {"zh-CN": "重置并获取专精点数", "en": "Add Perk Points"}, "command": "Game.GiveDevPoints(\"Primary\", 50)", "desc": "增加 50 点核心属性点数"},
-            {"name": {"zh-CN": "添加不朽武士刀【觉】", "en": "Add Satori Katana"}, "command": "Game.AddToInventory(\"Items.Preset_Katana_Saburo\", 1)", "desc": "荒坂三郎随身佩剑，极高暴伤"},
-            {"name": {"zh-CN": "添加强尼·银手同款手枪【马洛里安3516】", "en": "Add Malorian Arms 3516"}, "command": "Game.AddToInventory(\"Items.Preset_Silverhand_3516\", 1)", "desc": "强尼·银手经典喷火换弹手枪"}
+            {"name": {"zh-CN": "增加金钱 (100万)", "en": "Add Money (1,000,000)"}, "command": "Game.AddToInventory(\"Items.money\", 1000000)", "desc": "直接增加 1,000,000 欧元现金",
+            "source": "https://wiki.redmodding.org/cyber-engine-tweaks/console/console/how-do-i"},
+            {"name": {"zh-CN": "提升等级至满级 (60级)", "en": "Set Max Level (60)"}, "command": "Game.SetLevel(\"Level\", 60)", "desc": "将角色人物等级直接拉满",
+            "source": "https://wiki.redmodding.org/cyber-engine-tweaks/console/console/how-do-i"},
+            {"name": {"zh-CN": "声望直接拉满 (50级)", "en": "Max Street Cred (50)"}, "command": "Game.SetLevel(\"StreetCred\", 50)", "desc": "解锁夜之城所有武器义体购买权限",
+            "source": "https://wiki.redmodding.org/cyber-engine-tweaks/console/console/how-do-i"},
+            {"name": {"zh-CN": "重置并获取专精点数", "en": "Add Perk Points"}, "command": "PlayerDevelopmentSystem.GetInstance(Game.GetPlayer()):GetDevelopmentData(Game.GetPlayer()):AddDevelopmentPoints(50, gamedataDevelopmentPointType.Primary)", "desc": "增加 50 点核心属性点数",
+            "source": "https://wiki.redmodding.org/cyber-engine-tweaks/console/console/how-do-i"},
+            {"name": {"zh-CN": "添加不朽武士刀【觉】", "en": "Add Satori Katana"}, "command": "Game.AddToInventory(\"Items.Preset_Katana_Saburo\", 1)", "desc": "荒坂三郎随身佩剑，极高暴伤",
+            "source": "https://wiki.redmodding.org/cyberpunk-2077-modding/for-mod-creators/references-lists-and-overviews/cheat-sheet-tweak-ids/weapons/iconic-effects-by-weapon"},
+            {"name": {"zh-CN": "添加强尼·银手同款手枪【马洛里安3516】", "en": "Add Malorian Arms 3516"}, "command": "Game.AddToInventory(\"Items.Preset_Silverhand_3516\", 1)", "desc": "强尼·银手经典喷火换弹手枪",
+            "source": "https://cyberpunk.fandom.com/wiki/Malorian_Arms_3516_(2077)"}
         ],
         "hasMods": True,
         "modInstallPath": "Cyberpunk 2077\\archive\\pc\\mod",
         "mustHaveMods": [
-            {"name": "Cyber Engine Tweaks (CET)", "category": "Core Framework", "desc": "全MOD运行底座与控制台必备"},
-            {"name": "REDscript", "category": "Core Framework", "desc": "脚本扩展运行环境"},
-            {"name": "Native Settings UI", "category": "QoL", "desc": "在游戏设置菜单里直接调节MOD参数"},
-            {"name": "Let There Be Flight", "category": "Gameplay", "desc": "载具飞行MOD，在夜之城空中驾驶跑车"}
+            {
+                "name": "Cyber Engine Tweaks",
+                "category": "Core Framework",
+                "desc": "全MOD运行底座与控制台必备",
+                "url": "https://www.nexusmods.com/cyberpunk2077/mods/107"
+            },
+            {
+                "name": "redscript",
+                "category": "Core Framework",
+                "desc": "脚本扩展运行环境",
+                "url": "https://www.nexusmods.com/cyberpunk2077/mods/1511"
+            },
+            {
+                "name": "Native Settings UI",
+                "category": "QoL",
+                "desc": "在游戏设置菜单里直接调节MOD参数",
+                "url": "https://www.nexusmods.com/cyberpunk2077/mods/3518"
+            },
+            {
+                "name": "Let There Be Flight",
+                "category": "Gameplay",
+                "desc": "载具飞行MOD，在夜之城空中驾驶跑车",
+                "url": "https://www.nexusmods.com/cyberpunk2077/mods/5208"
+            }
         ],
         "hasTrainer": True,
         "trainerHotkeys": [
@@ -101,17 +127,10 @@ TOP_100_GAMES = [
             "de": "Native Konsole deaktiviert. UE4SS installieren und F10 drücken für Entwickler-Konsole.",
             "es": "Consola nativa desactivada. Instala UE4SS en b1\\Binaries\\Win64 y presiona F10."
         },
-        "popularCommands": [
-            {"name": {"zh-CN": "显示地图小雷达 (需地图MOD)", "en": "Toggle Mini-Map HUD"}, "command": "M key in-game", "desc": "路痴拯救者必备实时地图"},
-            {"name": {"zh-CN": "虚幻引擎自由视角相机", "en": "Free Camera"}, "command": "toggledebugcamera", "desc": "UE4SS自由移动视角截屏拍照"}
-        ],
+        "popularCommands": [],
         "hasMods": True,
         "modInstallPath": "b1\\Content\\Paks\\~mods",
-        "mustHaveMods": [
-            {"name": "Enhanced Wukong Map (全方位3D实时地图)", "category": "QoL Essential", "desc": "内置全章节地图、宝箱土地庙与Boss标记，路痴必备"},
-            {"name": "No Hit Lag (移除卡肉顿挫感)", "category": "Combat", "desc": "优化打击手感，出棍更丝滑顺畅"},
-            {"name": "Performance Boost / DLSS Tweaks", "category": "Graphics", "desc": "大幅降低卡顿，中低配显卡帧率提升 15-25%"}
-        ],
+        "mustHaveMods": [],
         "hasTrainer": True,
         "trainerHotkeys": [
             {"key": "Num 1", "action": "Infinite Health (无限生命)"},
@@ -147,20 +166,88 @@ TOP_100_GAMES = [
             "es": "Añade DBGConsoleOn=true al final de general.ini. Presiona ~ en el juego."
         },
         "popularCommands": [
-            {"name": {"zh-CN": "无敌模式 (God Mode)", "en": "God Mode"}, "command": "god", "desc": "杰洛特完全无敌，免疫所有物理与魔法伤害"},
-            {"name": {"zh-CN": "增加金币 (100,000克朗)", "en": "Add Money"}, "command": "addmoney(100000)", "desc": "随心所欲锻造宗师装备"},
-            {"name": {"zh-CN": "获得全部昆特牌", "en": "Add All Gwent Cards"}, "command": "secretgwint", "desc": "直接集齐全阵营全套昆特牌"},
-            {"name": {"zh-CN": "升到指定等级 (如100级)", "en": "Set Level"}, "command": "setlevel(100)", "desc": "直接提升人物等级"},
-            {"name": {"zh-CN": "刷取宗师级狼学派套装", "en": "Spawn Grandmaster Wolf Set"}, "command": "additem('Wolf School gear 5')", "desc": "直接获取顶级宗师学派图纸与装备"},
-            {"name": {"zh-CN": "学会全部炼金魔药煎药", "en": "Learn All Recipes"}, "command": "learn_recipes", "desc": "解锁全套雷霆、燕子等高阶魔药"}
+            {
+                "name": {
+                    "zh-CN": "完全无敌上帝模式 (God Mode)",
+                    "en": "God Mode"
+                },
+                "command": "god",
+                "desc": "杰洛特完全无敌，生命值与昆恩法印锁死，免疫一切物理与魔法伤害。",
+                "source": "https://commands.gg/witcher3/god"
+            },
+            {
+                "name": {
+                    "zh-CN": "增加金币 (100,000 克朗)",
+                    "en": "Add 100,000 Crowns"
+                },
+                "command": "addmoney(100000)",
+                "desc": "随心所欲锻造六大宗师学派神装与陶森特庄园改造。",
+                "source": "https://commands.gg/witcher3/addmoney"
+            },
+            {
+                "name": {
+                    "zh-CN": "一键集齐全套昆特牌",
+                    "en": "Add All Gwent Cards"
+                },
+                "command": "secretgwint",
+                "desc": "直接集齐所有阵营与中立全套英雄昆特牌。",
+                "source": "https://commands.gg/witcher3/secretgwint"
+            },
+            {
+                "name": {
+                    "zh-CN": "直接获得湖中之剑 (血与酒最强成长银剑)",
+                    "en": "Add Aerondight Sword"
+                },
+                "command": "additem('Aerondight EP2')",
+                "desc": "获得永远可成长暴击的陶森特至尊神剑。",
+                "source": "https://witcher.fandom.com/wiki/Aerondight"
+            },
+            {
+                "name": {
+                    "zh-CN": "大地图点亮全大陆 100% 快速旅行路标",
+                    "en": "Show All Fast Travel"
+                },
+                "command": "ShowAllFT(1)",
+                "desc": "瞬间解锁白果园、威伦、诺维格瑞、群岛与陶森特全部十字路标。",
+                "source": "https://commands.gg/witcher3/showallft"
+            },
+            {
+                "name": {
+                    "zh-CN": "获取大超同款宗师级遗忘狼防具 (次世代版 / 完全版特供)",
+                    "en": "Add Netflix Wolven Armor"
+                },
+                "command": "additem('Netflix Armor 2')",
+                "desc": "直接注入亨利·卡维尔网飞剧版同款纯黑宗师级遗弃狼战甲。",
+                "source": "https://witcher.fandom.com/wiki/Grandmaster_forgotten_Wolven_armor"
+            }
         ],
         "hasMods": True,
         "modInstallPath": "The Witcher 3\\Mods",
         "mustHaveMods": [
-            {"name": "The Witcher 3 HD Reworked Project NextGen", "category": "Graphics", "desc": "全材质终极 4K 材质画质增强重制"},
-            {"name": "Fast Travel from Anywhere", "category": "QoL", "desc": "无需跑回路标，随时随地开启世界地图传送"},
-            {"name": "No Fall Damage", "category": "QoL", "desc": "移除杰洛特哪怕跳一小格也摔死的设定"},
-            {"name": "Over 9000 Weight Limit", "category": "QoL", "desc": "背包负重上限提升至 9000，狂捡垃圾不超重"}
+            {
+                "name": "The Witcher 3 HD Reworked Project NextGen Edition",
+                "category": "Graphics",
+                "desc": "全材质终极 4K 材质画质增强重制",
+                "url": "https://www.nexusmods.com/witcher3/mods/9963"
+            },
+            {
+                "name": "Fast Travel From Anywhere",
+                "category": "QoL",
+                "desc": "无需跑回路标，随时随地开启世界地图传送",
+                "url": "https://www.nexusmods.com/witcher3/mods/7157"
+            },
+            {
+                "name": "No Fall Damage (CLASSIC)",
+                "category": "QoL",
+                "desc": "移除杰洛特哪怕跳一小格也摔死的设定",
+                "url": "https://www.nexusmods.com/witcher3/mods/352"
+            },
+            {
+                "name": "Over 9000 - Weight limit mod",
+                "category": "QoL",
+                "desc": "背包负重上限提升至 9000，狂捡垃圾不超重",
+                "url": "https://www.nexusmods.com/witcher3/mods/3"
+            }
         ],
         "hasTrainer": True,
         "trainerHotkeys": [
@@ -196,17 +283,79 @@ TOP_100_GAMES = [
             "es": "Instala BG3 Script Extender en bin y activa CreateConsole: true."
         },
         "popularCommands": [
-            {"name": {"zh-CN": "增加金币 (50,000)", "en": "Add Gold"}, "command": "Osi.TemplateAddTo(\"f717cc57-4184-482a-a82f-8a0a4c28e67a\", GetHostCharacter(), 50000)", "desc": "向当前选中角色背包塞入金币"},
-            {"name": {"zh-CN": "增加 1000 经验值", "en": "Add EXP"}, "command": "Osi.AddExperience(GetHostCharacter(), 1000)", "desc": "团队快速升级"},
-            {"name": {"zh-CN": "长休完全恢复状态", "en": "Full Rest Recovery"}, "command": "Osi.RestoreSpellSlots()", "desc": "立即回满全队法术位与技能点"}
+            {
+                "name": {
+                    "zh-CN": "增加金币 (100,000 金币)",
+                    "en": "Add 100,000 Gold"
+                },
+                "command": "Osi.AddGold(GetHostCharacter(), 100000)",
+                "desc": "瞬间化身博德之门巨富，搬空全大陆所有商贩的绝世装备。",
+                "source": "https://docs.baldursgate3.game/index.php?title=AddGold"
+            },
+            {
+                "name": {
+                    "zh-CN": "获得夺心魔寄生虫标本 x30",
+                    "en": "Add 30 Illithid Parasites"
+                },
+                "command": "Osi.TemplateAddTo(\"1ec327be-3b7f-4502-9586-860e057e09ae\", GetHostCharacter(), 30)",
+                "desc": "一次性点满主角与全队所有伙伴的脑池异能潜能。",
+                "source": "https://bg3.wiki/wiki/Mind_Flayer_Parasite_Specimen"
+            },
+            {
+                "name": {
+                    "zh-CN": "获得博德安的巨人杀手巨剑 (传奇双手巨剑)",
+                    "en": "Add Balduran's Giantslayer"
+                },
+                "command": "Osi.TemplateAddTo(\"7219fca3-5f41-43a0-8253-f4c09d8b6308\", GetHostCharacter(), 1)",
+                "desc": "获取力量加倍并自带巨人体型的最强近战巨剑。",
+                "source": "https://bg3.wiki/wiki/Balduran%27s_Giantslayer"
+            },
+            {
+                "name": {
+                    "zh-CN": "获得地狱火全套胸甲 (21AC全职业免熟练)",
+                    "en": "Add Helldusk Armour"
+                },
+                "command": "Osi.TemplateAddTo(\"7ae705fd-1cfd-4482-a584-d2e68f9c1262\", GetHostCharacter(), 1)",
+                "desc": "拉斐尔终极重铠，全职业穿戴免熟练项且免疫火伤。",
+                "source": "https://bg3.wiki/wiki/Helldusk_Armour"
+            },
+            {
+                "name": {
+                    "zh-CN": "赋予常驻急速术 (动作翻倍且永不疲劳)",
+                    "en": "Permanent Haste Buff"
+                },
+                "command": "Osi.ApplyStatus(GetHostCharacter(), \"HASTE\", -1)",
+                "desc": "战斗动作常驻翻倍，移动速度翻倍且断专注不虚脱。",
+                "source": "https://docs.baldursgate3.game/index.php?title=ApplyStatus"
+            }
         ],
         "hasMods": True,
         "modInstallPath": "%LOCALAPPDATA%\\Larian Studios\\Baldur's Gate 3\\Mods",
         "mustHaveMods": [
-            {"name": "Party Limit Begone (解除队友数量上限)", "category": "Gameplay", "desc": "允许带齐全部 16 名起源队友一起冒险与对话"},
-            {"name": "5e Spells (D&D 5E 全法术扩展)", "category": "Content", "desc": "补齐官方桌面跑团规则书所有高级法术"},
-            {"name": "Bags Bags Bags (智能背包分类整理)", "category": "QoL", "desc": "药剂、卷轴、箭矢自动归类，背包清爽度翻倍"},
-            {"name": "Native Camera Tweaks (自由缩放视角)", "category": "Camera", "desc": "支持拉到平视越肩第三人称沉浸式视角"}
+            {
+                "name": "Party Limit Begone",
+                "category": "Gameplay",
+                "desc": "允许带齐全部 16 名起源队友一起冒险与对话",
+                "url": "https://www.nexusmods.com/baldursgate3/mods/327"
+            },
+            {
+                "name": "5e Spells",
+                "category": "Content",
+                "desc": "补齐官方桌面跑团规则书所有高级法术",
+                "url": "https://www.nexusmods.com/baldursgate3/mods/125"
+            },
+            {
+                "name": "Bags Bags Bags",
+                "category": "QoL",
+                "desc": "药剂、卷轴、箭矢自动归类，背包清爽度翻倍",
+                "url": "https://www.nexusmods.com/baldursgate3/mods/880"
+            },
+            {
+                "name": "Native Camera Tweaks",
+                "category": "Camera",
+                "desc": "支持拉到平视越肩第三人称沉浸式视角",
+                "url": "https://www.nexusmods.com/baldursgate3/mods/945"
+            }
         ],
         "hasTrainer": True,
         "trainerHotkeys": [
@@ -244,9 +393,24 @@ TOP_100_GAMES = [
         "hasMods": True,
         "modInstallPath": "ELDEN RING\\Game\\mods (使用 Mod Engine 2)",
         "mustHaveMods": [
-            {"name": "Seamless Co-op (无缝全流程联机大作)", "category": "Multiplayer", "desc": "与好友同屏全流程推图、骑马、不因死亡被遣返"},
-            {"name": "Unlock FPS & Ultrawide Fix", "category": "Performance", "desc": "突破 60 帧锁定，支持 21:9 带鱼屏原生渲染"},
-            {"name": "Pause the Game (单机随时暂停)", "category": "QoL", "desc": "按 P 键真正暂停游戏，上厕所倒水不暴毙"}
+            {
+                "name": "Elden Ring Seamless Co-op",
+                "category": "Multiplayer",
+                "desc": "与好友同屏全流程推图、骑马、不因死亡被遣返",
+                "url": "https://github.com/yuiamoroll/EldenRingSeamlessCoopRelease"
+            },
+            {
+                "name": "Elden Ring Ultrawide Fix (TechieW) + Elden Ring Automatic FPS Unlocker (Apollo_2040)",
+                "category": "Performance",
+                "desc": "突破 60 帧锁定，支持 21:9 带鱼屏原生渲染",
+                "url": "https://www.nexusmods.com/eldenring/mods/7870"
+            },
+            {
+                "name": "Pause the game",
+                "category": "QoL",
+                "desc": "按 P 键真正暂停游戏，上厕所倒水不暴毙",
+                "url": "https://www.nexusmods.com/eldenring/mods/43"
+            }
         ],
         "hasTrainer": True,
         "trainerHotkeys": [
@@ -283,18 +447,35 @@ TOP_100_GAMES = [
             "es": "Presiona ~ (o la tecla bajo ESC) durante el juego."
         },
         "popularCommands": [
-            {"name": {"zh-CN": "上帝无敌模式", "en": "God Mode"}, "command": "tgm", "desc": "血量、法力、耐力无限，免疫坠落伤害"},
-            {"name": {"zh-CN": "穿墙飞天模式", "en": "No Clip"}, "command": "tcl", "desc": "无视地图碰撞体积任意穿行"},
-            {"name": {"zh-CN": "直接获取 100,000 金币", "en": "Add Gold"}, "command": "player.additem 0000000F 100000", "desc": "老滚5传家宝指令，瞬间财务自由"},
-            {"name": {"zh-CN": "一键解锁全部世界地图路标", "en": "Unlock Map Markers"}, "command": "tmm 1", "desc": "全图地标全部点亮可直接传送"},
-            {"name": {"zh-CN": "角色负重上限拉至 10000", "en": "Max Carry Weight"}, "command": "player.modav carryweight 10000", "desc": "再也不愁捡不动龙骨龙鳞"}
+            "tgm",
+            "player.additem 0000000F 100000",
+            "player.setav carryweight 99999",
+            "tcl",
+            "tmm 1",
+            "coc qasmoke",
+            "unlock"
         ],
         "hasMods": True,
         "modInstallPath": "Skyrim Special Edition\\Data",
         "mustHaveMods": [
-            {"name": "SKSE64 (Skyrim Script Extender)", "category": "Core Framework", "desc": "绝大部分现代脚本MOD前置"},
-            {"name": "SkyUI", "category": "UI Overhaul", "desc": "彻底重构原生烂UI，PC端键鼠体验天花板"},
-            {"name": "Unofficial Skyrim Special Edition Patch (USSEP)", "category": "Bug Fixes", "desc": "非官方万项原版BUG修复大补丁"}
+            {
+                "name": "Skyrim Script Extender (SKSE64)",
+                "category": "Core Framework",
+                "desc": "绝大部分现代脚本MOD前置",
+                "url": "https://www.nexusmods.com/skyrimspecialedition/mods/30379"
+            },
+            {
+                "name": "SkyUI",
+                "category": "UI Overhaul",
+                "desc": "彻底重构原生烂UI，PC端键鼠体验天花板",
+                "url": "https://www.nexusmods.com/skyrimspecialedition/mods/12604"
+            },
+            {
+                "name": "Unofficial Skyrim Special Edition Patch - USSEP",
+                "category": "Bug Fixes",
+                "desc": "非官方万项原版BUG修复大补丁",
+                "url": "https://www.nexusmods.com/skyrimspecialedition/mods/266"
+            }
         ],
         "hasTrainer": True,
         "trainerHotkeys": [
@@ -329,17 +510,36 @@ TOP_100_GAMES = [
             "es": "Presiona ~ en el juego."
         },
         "popularCommands": [
-            {"name": {"zh-CN": "上帝无敌模式", "en": "God Mode"}, "command": "tgm", "desc": "无限生命、无限弹药、动力装甲核心不耗电"},
-            {"name": {"zh-CN": "增加瓶盖 (100,000)", "en": "Add Bottle Caps"}, "command": "player.additem 0000000F 100000", "desc": "废土首富专用"},
-            {"name": {"zh-CN": "增加全套聚落建造材料 (各1000)", "en": "Add All Crafting Materials"}, "command": "player.additem 001EC13B 1000", "desc": "一键爆建避难所与定居点"},
-            {"name": {"zh-CN": "穿墙模式", "en": "No Clip"}, "command": "tcl", "desc": "卡在地形或门卡住时穿墙脱困"}
+            "tgm",
+            "player.additem 0000000F 100000",
+            "player.setav carryweight 99999",
+            "setav 349 9999999",
+            "attachmod 001cc2ac",
+            "attachmod 001e7c20",
+            "tcl",
+            "coc RedRocketExt"
         ],
         "hasMods": True,
         "modInstallPath": "Fallout 4\\Data",
         "mustHaveMods": [
-            {"name": "F4SE (Fallout 4 Script Extender)", "category": "Core Framework", "desc": "辐射4模组核心引擎扩展"},
-            {"name": "Unofficial Fallout 4 Patch (UFO4P)", "category": "Bug Fixes", "desc": "B社官方多年未修的数千个恶性BUG综合修复"},
-            {"name": "Place Everywhere", "category": "Settlement Building", "desc": "聚落建房随处摆放，解除红字碰撞限制"}
+            {
+                "name": "Fallout 4 Script Extender (F4SE)",
+                "category": "Core Framework",
+                "desc": "辐射4模组核心引擎扩展",
+                "url": "https://www.nexusmods.com/fallout4/mods/42147"
+            },
+            {
+                "name": "Unofficial Fallout 4 Patch - UFO4P",
+                "category": "Bug Fixes",
+                "desc": "B社官方多年未修的数千个恶性BUG综合修复",
+                "url": "https://www.nexusmods.com/fallout4/mods/4598"
+            },
+            {
+                "name": "Place Everywhere",
+                "category": "Settlement Building",
+                "desc": "聚落建房随处摆放，解除红字碰撞限制",
+                "url": "https://www.nexusmods.com/fallout4/mods/9424"
+            }
         ],
         "hasTrainer": True,
         "trainerHotkeys": [
@@ -373,16 +573,27 @@ TOP_100_GAMES = [
             "de": "Im Chat /adminpassword eingeben für Admin-Befehle.",
             "es": "Introduce /adminpassword en el chat para habilitar comandos de administrador."
         },
-        "popularCommands": [
-            {"name": {"zh-CN": "传送至指定玩家", "en": "Teleport to Player"}, "command": "/teleporttoplayer <PlayerSteamID>", "desc": "大地图快速集合"},
-            {"name": {"zh-CN": "立即全服广播消息", "en": "Broadcast Message"}, "command": "/broadcast <Message>", "desc": "在全服屏幕上方置顶滚动消息"}
-        ],
+        "popularCommands": [],
         "hasMods": True,
         "modInstallPath": "Palworld\\Pal\\Binaries\\Win64\\Mods (基于 UE4SS)",
         "mustHaveMods": [
-            {"name": "Carry Weight Increase", "category": "QoL", "desc": "大幅增加帕鲁采矿负重，出门一次带回全矿石"},
-            {"name": "Pal IVs & Stats Inspector", "category": "QoL", "desc": "显微镜看帕鲁个体值、被动词条与隐藏属性"},
-            {"name": "Map Unlocker", "category": "Exploration", "desc": "驱散全地图战争迷雾，探索效率翻倍"}
+            {
+                "name": "Carry Weight Increase",
+                "category": "QoL",
+                "desc": "大幅增加帕鲁采矿负重，出门一次带回全矿石",
+                "url": "https://www.nexusmods.com/palworld/mods/11"
+            },
+            {
+                "name": "Pal IVs",
+                "category": "QoL",
+                "desc": "显微镜看帕鲁个体值、被动词条与隐藏属性"
+            },
+            {
+                "name": "Map Unlocker",
+                "category": "Exploration",
+                "desc": "驱散全地图战争迷雾，探索效率翻倍",
+                "url": "https://www.nexusmods.com/palworld/mods/16"
+            }
         ],
         "hasTrainer": True,
         "trainerHotkeys": [
@@ -418,16 +629,33 @@ TOP_100_GAMES = [
             "es": "Presiona ~ en el juego."
         },
         "popularCommands": [
-            {"name": {"zh-CN": "上帝无敌模式", "en": "God Mode"}, "command": "tgm", "desc": "无限氧气、无限负重、飞船护盾无限"},
-            {"name": {"zh-CN": "增加信用币 (100,000)", "en": "Add Credits"}, "command": "player.additem 0000000F 100000", "desc": "造最豪华的太空星舰"},
-            {"name": {"zh-CN": "穿墙飞天模式", "en": "No Clip"}, "command": "tcl", "desc": "穿越飞船舱门与地形"}
+            "player.additem 0000000F 1000000",
+            "player.additem 0000000A 100",
+            "tgm",
+            "player.setav carryweight 9999",
+            "tcl"
         ],
         "hasMods": True,
         "modInstallPath": "Starfield\\Data",
         "mustHaveMods": [
-            {"name": "Starfield Script Extender (SFSE)", "category": "Core Framework", "desc": "星空核心脚本前置"},
-            {"name": "StarUI Inventory", "category": "UI Overhaul", "desc": "颠覆原生垃圾列表，清晰展示物品DPS与价值比"},
-            {"name": "Baka Achievement Enabler", "category": "Fix", "desc": "用控制台和装MOD照样跳 Steam 成就"}
+            {
+                "name": "Starfield Script Extender (SFSE)",
+                "category": "Core Framework",
+                "desc": "星空核心脚本前置",
+                "url": "https://www.nexusmods.com/starfield/mods/106"
+            },
+            {
+                "name": "StarUI Inventory",
+                "category": "UI Overhaul",
+                "desc": "颠覆原生垃圾列表，清晰展示物品DPS与价值比",
+                "url": "https://www.nexusmods.com/starfield/mods/773"
+            },
+            {
+                "name": "Baka Achievement Enabler (SFSE)",
+                "category": "Fix",
+                "desc": "用控制台和装MOD照样跳 Steam 成就",
+                "url": "https://www.nexusmods.com/starfield/mods/658"
+            }
         ],
         "hasTrainer": True,
         "trainerHotkeys": [
@@ -462,17 +690,28 @@ TOP_100_GAMES = [
             "es": "Presiona ~ en el modo historia o marca el número en el teléfono."
         },
         "popularCommands": [
-            {"name": {"zh-CN": "5分钟完全无敌 (PAINKILLER)", "en": "Invincibility (5 mins)"}, "command": "PAINKILLER", "desc": "拨号 1-999-724-654-5537"},
-            {"name": {"zh-CN": "最大生命与护甲 (TURTLE)", "en": "Max Health & Armor"}, "command": "TURTLE", "desc": "立刻补满状态并修好当前驾驶的载具"},
-            {"name": {"zh-CN": "刷出武装直升机 (BUZZOFF)", "en": "Spawn Buzzard Attack Chopper"}, "command": "BUZZOFF", "desc": "直接在眼前召唤秃鹰攻击直升机"},
-            {"name": {"zh-CN": "降至零星通缉 (LAWYERUP)", "en": "Lower Wanted Level"}, "command": "LAWYERUP", "desc": "警察立刻取消通缉"}
+            "PAINKILLER",
+            "TURTLE",
+            "TOOLUP",
+            "COMET",
+            "BUZZOFF",
+            "LAWYERUP"
         ],
         "hasMods": True,
         "modInstallPath": "Grand Theft Auto V (使用 OpenIV & ScriptHookV)",
         "mustHaveMods": [
-            {"name": "Script Hook V + Native Trainer", "category": "Core Framework", "desc": "内置全功能修改器与全载具刷出"},
-            {"name": "NaturalVision Evolved (NVE)", "category": "Graphics", "desc": "电影级好莱坞光影画质大修"},
-            {"name": "Real Car Pack", "category": "Vehicles", "desc": "真实兰博基尼、法拉利、保时捷跑车包替换"}
+            {
+                "name": "Script Hook V",
+                "category": "Core Framework",
+                "desc": "内置全功能修改器与全载具刷出",
+                "url": "https://www.dev-c.com/gtav/scripthookv/"
+            },
+            {
+                "name": "NaturalVision Evolved",
+                "category": "Graphics",
+                "desc": "电影级好莱坞光影画质大修",
+                "url": "https://www.razedmods.com/gta-v"
+            }
         ],
         "hasTrainer": True,
         "trainerHotkeys": [

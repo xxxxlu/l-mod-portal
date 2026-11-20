@@ -29,82 +29,7 @@ FLAGSHIP_DATA = {
                 "【剧情Fact生效机理】：救赎包里的 Fact 标志位修改后，建议立刻进行一次快速存档 (F5) 再读档 (F9)，即可瞬间刷新 NPC 状态机与夜之城任务树。"
             ]
         },
-        "scenarioBundles": [
-            {
-                "id": "cp_starter_bundle",
-                "type": "starter",
-                "name": "新手破荒起飞包",
-                "tag": "👑 萌新首选 · 零门槛",
-                "badge": "开荒神装",
-                "desc": "一键激活完全无敌 + 无限耐力狂奔 + 200万启动资金 + 50本技能专精书 + 顶级材料满载，轻松踏平夜之城开局！",
-                "highlights": [
-                    "Game.GodMode(true) 完全无敌抗揍",
-                    "Game.InfiniteStamina(true) 无限耐力不喘气",
-                    "2,000,000 欧元启动现金买空武器店",
-                    "50 本特权书 + 20 本属性技能书点满核心",
-                    "金色 5 阶制造组件与军火弹药全满"
-                ],
-                "code": """-- [老L·极客场景套餐] 赛博朋克2077 新手破荒起飞包 (v2.13，未实测)
-Game.GodMode(true)
-Game.InfiniteStamina(true)
-Game.AddToInventory("Items.money", 2000000)
-Game.AddToInventory("Items.PerkPointSkillbook", 50)
-Game.AddToInventory("Items.AttributePointSkillbook", 20)
-Game.AddToInventory("Items.LegendaryMaterial1", 2000)
-Game.AddToInventory("Items.QuickHackLegendaryMaterial1", 2000)
-Game.AddToInventory("Items.CyberwareMaterial5", 1000)"""
-            },
-            {
-                "id": "cp_salvation_bundle",
-                "type": "salvation",
-                "name": "隐藏结局救赎包",
-                "tag": "💖 意难平救赎 · 剧情党狂喜",
-                "badge": "完美剧情",
-                "desc": "一键注入关键剧情 Fact 标志位！不用纠结油田对话直接解锁天台单挑荒坂塔隐藏死神结局，朱迪/帕南跨性别推倒，瞬开全城快速传送！",
-                "highlights": [
-                    "修复油田对话！天台静默4分钟触发「单挑荒坂塔隐藏死神结局」",
-                    "解锁朱迪恋爱权限 (跨性别男女V皆可推倒潜水)",
-                    "解锁帕南恋爱权限 (跨性别男女V皆可魔蜥浪漫)",
-                    "夜之城全图 150+ 快速旅行数据终端瞬开",
-                    "一键消散 NCPD 全城警星与暴恐机动队通缉"
-                ],
-                "code": """-- [老L·极客场景套餐] 赛博朋克2077 隐藏结局与意难平救赎包 (v2.13，未实测)
-Game.GetQuestsSystem():SetFactStr("sq032_johnny_friend", 1)
-Game.GetQuestsSystem():SetFactStr("fast_travel_all_unlocked", 1)
-Game.GetQuestsSystem():SetFactStr("judy_romanceable", 1)
-Game.GetQuestsSystem():SetFactStr("panam_romanceable", 1)
-Game.GetQuestsSystem():SetFactStr("q115_done", 1)
-Game.GetPreventionSpawnSystem():RequestDespawnPreventionAgents()"""
-            },
-            {
-                "id": "cp_arsenal_bundle",
-                "type": "arsenal",
-                "name": "二周目全神装满配包",
-                "tag": "⚔️ 战力天花板 · 毕业满配",
-                "badge": "不朽神装",
-                "desc": "五大技能树一键拉满60级！打包往日之影黑墙冲锋枪【厄瑞玻斯】+ 荒坂传家太刀【觉】+ 5++远地点时停义体 + 奇美拉核心插件 + 全豪车解锁！",
-                "highlights": [
-                    "猎头/黑客/忍者/破坏/工程五大技能直升 60 级满级",
-                    "终极 5++ 义体：远地点时停 + 黑墙 Canto Mk.6 + 量子调谐器",
-                    "绝版不朽：厄瑞玻斯黑墙枪 + 大力神 3AX + 觉 + 涅槃 + 白虎",
-                    "奇美拉核心插件（爆裂穿透动能高爆 + 终极壁垒200%穿墙）",
-                    "全夜之城所有载具与保时捷911超跑全买断"
-                ],
-                "code": """-- [老L·极客场景套餐] 赛博朋克2077 二周目全神装满配包 (v2.13，未实测)
-local ds = PlayerDevelopmentSystem.GetInstance(Game.GetPlayer()):GetDevelopmentData(Game.GetPlayer()) for _, p in ipairs({"Headhunter", "Netrunner", "Shinobi", "Solo", "Engineer"}) do ds:SetProficiencyLevel(gamedataProficiencyType[p], 60, telemetryLevelGainReason.Gameplay) end
-Game.AddToInventory("Items.AdvancedSandevistanApogeePlusPlus", 1)
-Game.AddToInventory("Items.HauntedCyberdeck_LegendaryPlusPlus", 1)
-Game.AddToInventory("Items.AdvancedTimeBankLegendaryPlusPlus", 1)
-Game.AddToInventory("Items.Preset_Borg4a_HauntedGun", 1)
-Game.AddToInventory("Items.Preset_Hercules_Prototype", 1)
-Game.AddToInventory("Items.Preset_Katana_Saburo", 1)
-Game.AddToInventory("Items.Preset_Knife_Saburo", 1)
-Game.AddToInventory("Items.Preset_Katana_Wakako", 1)
-Game.AddToInventory("Items.ChimeraPowerMod", 1)
-Game.AddToInventory("Items.ChimeraTechMod", 1)
-Game.GetVehicleSystem():EnableAllPlayerVehicles()"""
-            }
-        ],
+        "scenarioBundles": [],
         "batScript": """@echo off
 chcp 65001 >nul
 title 【老L·单机避坑局】赛博朋克2077 CET 呼出键设置
@@ -160,69 +85,7 @@ pause
                 "【UE4SS 前置】：UE4SS 到它的 GitHub 发布页下载。本站的 .bat 会把 mods.txt 里的 ConsoleEnablerMod 从 0 改成 1（改之前另存 mods.txt.bak）；mods.txt 里没有这一行的话要自己加。"
             ]
         },
-        "scenarioBundles": [
-            {
-                "id": "bmw_starter_bundle",
-                "type": "starter",
-                "name": "新手破荒起飞包",
-                "tag": "👑 萌新首选 · 识破无敌",
-                "badge": "轻松通关",
-                "desc": "一键激活 0.4x 子弹时间（识破看破窗口翻倍）+ 20万经验直升 + 99点灵光天赋 + 50万灵蕴财富 + 基础草药矿石满载！",
-                "highlights": [
-                    "slomo 0.4 开启从容子弹时间，手残党秒变动作大师",
-                    "addexp 200000 注入海量经验直升等级",
-                    "addtalentpoint 99 天赋灵光点数拉满，技能树自由点",
-                    "additem 1002 500000 灵蕴财富直接自由",
-                    "allitem 解锁全部初级药材与装备铸造矿石"
-                ],
-                "code": """# [老L·极客场景套餐] 黑神话悟空 新手破荒起飞包
-slomo 0.4
-addexp 200000
-addtalentpoint 99
-additem 1002 500000
-allitem"""
-            },
-            {
-                "id": "bmw_salvation_bundle",
-                "type": "salvation",
-                "name": "隐藏结局救赎包",
-                "tag": "💖 意难平救赎 · 六根圆满",
-                "badge": "真结局必吃",
-                "desc": "一键集齐六根大圣遗物！影神图全妖魔神仙传记全图鉴解锁，全图打坐点与全部章回缩地土地庙瞬开，不漏任何意难平隐藏支线！",
-                "highlights": [
-                    "alllegacy 一键集齐大圣六根遗物，解锁真实圆满轮回真结局",
-                    "allcard 影神图图鉴全开，全妖魔神仙生平图文全览",
-                    "allmedition 1 全图全部章节土地庙打坐蒲团全点亮",
-                    "allmap 解锁全部章回传送与土地庙缩地节点"
-                ],
-                "code": """# [老L·极客场景套餐] 黑神话悟空 隐藏结局救赎与全图鉴包
-alllegacy
-allcard
-allmedition 1
-allmap"""
-            },
-            {
-                "id": "bmw_arsenal_bundle",
-                "type": "arsenal",
-                "name": "二周目全神装满配包",
-                "tag": "⚔️ 战力天花板 · 毕业满配",
-                "badge": "大圣真身",
-                "desc": "全传奇神兵一键拥有（如意金箍棒、三尖两刃枪等）+ 锁子黄金甲大圣神装全套 + 54大妖王精魄化身全解锁 + 上清宝葫芦与极品酒食！",
-                "highlights": [
-                    "allweapon 如意金箍棒、三尖两刃枪、昆棍通天神兵齐聚",
-                    "allequip 凤翅紫金冠、锁子黄金甲、藕丝步云履大圣套装",
-                    "allsoulskill 54大妖王精魄化身与变身神通全解锁",
-                    "allhulu 上清宝葫芦、彩玉葫芦等全品阶神级葫芦",
-                    "allwine 全极品酒食与泡酒物收集齐备"
-                ],
-                "code": """# [老L·极客场景套餐] 黑神话悟空 二周目全神装满配包
-allweapon
-allequip
-allsoulskill
-allhulu
-allwine"""
-            }
-        ],
+        "scenarioBundles": [],
         "batScript": """@echo off
 chcp 65001 >nul
 title 【老L·单机避坑局】黑神话悟空 UE4SS 控制台开关
@@ -313,55 +176,7 @@ additem('Greater mutagen red', 10)
 additem('Greater mutagen blue', 10)
 additem('Greater mutagen green', 10)"""
             },
-            {
-                "id": "w3_salvation_bundle",
-                "type": "salvation",
-                "name": "隐藏结局救赎包",
-                "tag": "💖 意难平救赎 · 拯救爱丽丝",
-                "badge": "真爱救赎",
-                "desc": "一键获取石之心意难平信物【爱丽丝之刀】与【爱丽丝的紫色玫瑰】+ 骑士美德终极神剑【湖女之剑】+ 昆特牌五大势力英雄牌库秒胜！",
-                "highlights": [
-                    "additem('Aerondight EP2') 获得随杀敌永久成长神剑「湖女之剑」",
-                    "additem('Olgierd Sabre') 欧吉尔德爱刀「爱丽丝」充能重击",
-                    "additem('Iris\\'s Rose') 爱丽丝的紫色玫瑰，世间永存信物",
-                    "secretgwint 五大阵营顶级英雄昆特牌全收集",
-                    "winGwint(true) 昆特牌局无脑秒胜，救赎打牌遗憾"
-                ],
-                "code": """// [老L·极客场景套餐] 巫师3次世代版 拯救爱丽丝与完美救赎包 (v4.04，未实测)
-additem('Aerondight EP2')
-additem('Olgierd Sabre')
-additem('Iris\\'s Rose')
-secretgwint
-winGwint(true)"""
-            },
-            {
-                "id": "w3_arsenal_bundle",
-                "type": "arsenal",
-                "name": "二周目全神装满配包",
-                "tag": "⚔️ 战力天花板 · 毕业满配",
-                "badge": "宗师学派",
-                "desc": "杰洛特等级瞬间拉满 100 级！次世代完全版专属【九尾白虎铠甲】+ 宗师级狼/熊/猫/飞狮极品双剑套装 + 湖女之剑顶级毕业！",
-                "highlights": [
-                    "setlevel(100) 杰洛特等级直升 100 级",
-                    "次世代完全版专属联动：九尾白虎铠甲全套",
-                    "宗师级狼学派极品双剑（狼学派信仰）",
-                    "宗师级熊学派极品双剑（拜年重击流核心）",
-                    "宗师级猫学派极品银剑（剑舞回旋流）",
-                    "师匠级飞狮怪银剑（暴击瘾头流）"
-                ],
-                "code": """// [老L·极客场景套餐] 巫师3次世代版 二周目宗师神装满配包 (v4.04，未实测)
-setlevel(100)
-additem('White Tiger Armor')
-additem('White Tiger Boots')
-additem('Wolf School Silver Sword 4')
-additem('Wolf School Steel Sword 4')
-additem('Bear School silver sword 4')
-additem('Bear School steel sword 4')
-additem('Lynx School silver sword 4')
-additem('Red Wolf Silver Sword 1')
-additem('Aerondight EP2')
-additem('Olgierd Sabre')"""
-            }
+
         ],
         "batScript": """@echo off
 chcp 65001 >nul
@@ -426,77 +241,7 @@ pause
                 "【队友满好感时机】：好感度指令 SetAttitude 建议在第一章营地初次对话后使用，不仅能稳稳触发影心、阿斯代伦、盖尔的恋爱事件，还能避开剧情好感锁死。"
             ]
         },
-        "scenarioBundles": [
-            {
-                "id": "bg3_starter_bundle",
-                "type": "starter",
-                "name": "新手破荒起飞包",
-                "tag": "👑 萌新首选 · 费伦首富",
-                "badge": "博德首富",
-                "desc": "一键注入 100,000 金币买空全城商人 + 50 个营地补给包告别长休食物烦恼 + 常驻绝对急速术（每回合动作翻倍）+ 自由飞行能力 + 30只寄生虫！",
-                "highlights": [
-                    "Osi.AddGold(100000) 10万黄金直接变身费伦大陆首富",
-                    "50个营地补给包，长休法术位随时充满",
-                    "常驻绝对急速术 (HASTE)，每回合动作翻倍且不疲劳",
-                    "赋予常驻自由飞行 (FLY)，轻松跨越断崖天堑",
-                    "30只夺心魔寄生虫标本，点满全脑池至尊灵能"
-                ],
-                "code": """-- [老L·极客场景套餐] 博德之门3 新手破荒起飞包 (Patch 7，未实测)
-Osi.AddGold(GetHostCharacter(), 100000)
-Osi.TemplateAddTo("1a95e0c5-59b4-4b5b-98cf-19da6d393796", GetHostCharacter(), 50)
-Osi.ApplyStatus(GetHostCharacter(), "HASTE", -1)
-Osi.ApplyStatus(GetHostCharacter(), "FLY", -1)
-Osi.TemplateAddTo("5d94726a-939b-449e-b9b3-57c2df47b855", GetHostCharacter(), 30)"""
-            },
-            {
-                "id": "bg3_salvation_bundle",
-                "type": "salvation",
-                "name": "隐藏结局救赎包",
-                "tag": "💖 意难平救赎 · 队友全恋爱",
-                "badge": "救赎起源",
-                "desc": "影心、阿斯代伦、盖尔好感度瞬间拉满 100 点！救赎起源角色意难平，赠送星界灌注蝌蚪解锁半夺心魔灵能 + 10张绝对无敌护罩卷轴！",
-                "highlights": [
-                    "影心 (Shadowheart) 好感度拉满 100 点 (极度崇拜，直通白发救赎)",
-                    "阿斯代伦 (Astarion) 好感度拉满 100 点 (解脱吸血鬼衍体束缚)",
-                    "盖尔 (Gale) 好感度拉满 100 点 (解除神之自爆执念)",
-                    "星界灌注蝌蚪解锁半夺心魔至尊灵能与自由飞行",
-                    "无敌护罩卷轴 x10 (范围内全员绝对无敌，死保关键剧情NPC)"
-                ],
-                "code": """-- [老L·极客场景套餐] 博德之门3 队友全满好感与意难平救赎包 (Patch 7，未实测)
-Osi.SetAttitude(GetHostCharacter(), "S_Player_Shadowheart_c7c13742-c166-4fec-bb4b-dc254dc2e080", 100)
-Osi.SetAttitude(GetHostCharacter(), "S_Player_Astarion_c7c13742-c166-4fec-bb4b-dc254dc2e080", 100)
-Osi.SetAttitude(GetHostCharacter(), "S_Player_Gale_ad9af97d-75da-406a-ae13-7071c563f604", 100)
-Osi.TemplateAddTo("02359419-74d7-4632-af82-c5180f1350a4", GetHostCharacter(), 1)
-Osi.TemplateAddTo("7f9b846e-1d5d-4f11-b0db-6e9faea18501", GetHostCharacter(), 10)"""
-            },
-            {
-                "id": "bg3_arsenal_bundle",
-                "type": "arsenal",
-                "name": "二周目全神装满配包",
-                "tag": "⚔️ 战力天花板 · 毕业满配",
-                "badge": "金色传奇",
-                "desc": "博德安巨人杀手巨剑 + 投掷神兵尼鲁纳三叉戟 + 全法系毕业神杖玛科赫什基 + 泰坦重弩 + 21AC免熟练地狱火重装 + 锁死23点属性首饰！",
-                "highlights": [
-                    "博德安的巨人杀手巨剑（传奇双手剑，力量加倍）",
-                    "尼鲁纳三叉戟（投掷流至尊神器，雷鸣自返）",
-                    "玛科赫什基传奇法杖（全法系毕业神杖，免消耗施法）",
-                    "冈特·耶尔传奇重弩（泰坦重弩，恒定加速）",
-                    "全套地狱火传奇重装（21AC 免熟练穿戴与绝对免火伤）",
-                    "体质锁23「高等健康护符」+ 力量锁23「山丘巨人手套」"
-                ],
-                "code": """-- [老L·极客场景套餐] 博德之门3 二周目绝世传奇神兵满配包 (Patch 7，未实测)
-Osi.TemplateAddTo("3b6b2512-cf49-411a-8260-cb56220b0805", GetHostCharacter(), 1)
-Osi.TemplateAddTo("222e43bc-42f0-4667-8495-2be26ec490a4", GetHostCharacter(), 1)
-Osi.TemplateAddTo("a8ff2900-349c-4f76-8d54-159e1ab5a7fa", GetHostCharacter(), 1)
-Osi.TemplateAddTo("0c6aaec8-cbe9-450f-9f79-6a56ec94bb0a", GetHostCharacter(), 1)
-Osi.TemplateAddTo("026fe827-ce47-49f3-855c-e587e91eb3c8", GetHostCharacter(), 1)
-Osi.TemplateAddTo("33734689-d4bc-4676-9d3d-c12e52bca7e0", GetHostCharacter(), 1)
-Osi.TemplateAddTo("fbb8968f-f179-4672-91d1-6677f523c9e6", GetHostCharacter(), 1)
-Osi.TemplateAddTo("b272f04e-eb5d-4a15-b73f-d309074815a5", GetHostCharacter(), 1)
-Osi.TemplateAddTo("9c9b7405-b778-4f05-8946-b333421295db", GetHostCharacter(), 1)
-Osi.TemplateAddTo("d41dfa98-8ec1-4e4b-97e3-0d340b6e9a66", GetHostCharacter(), 20)"""
-            }
-        ],
+        "scenarioBundles": [],
         "batScript": """@echo off
 chcp 65001 >nul
 title 【老L·单机避坑局】博德之门3 Script Extender 控制台开关
@@ -629,27 +374,7 @@ coc qasmoke
 ; 修复卡关任务（以唤醒巨龙为例，定向推进到击杀米尔墨尼尔）：
 setstage MQ104 90"""
             },
-            {
-                "id": "skyrim_godmode_bundle",
-                "type": "godmode",
-                "name": "16大魔神器与全龙吼满配包",
-                "tag": "⚡ 极客狂欢 · 天际真神",
-                "badge": "抓根宝毕业",
-                "desc": "16 件魔神神器直接入库 + 抓根宝全龙吼解锁并免 CD 施放 + 炉火豪宅全材料到账，化身塔洛斯真神！",
-                "highlights": [
-                    "瓦巴杰克、破晓者、莫拉格巴尔之槌全齐",
-                    "全龙吼代码瞬间习得，龙魂拉满",
-                    "炉火三领地豪宅建筑材料（萨维石/粘土/铁矿）全满",
-                    "全魔法派系技能等级提升至 100 级"
-                ],
-                "code": """; [老L·极客场景套餐] 上古卷轴5 16大魔神器与全龙吼满配包
-player.additem 2ac61 1 ; 莫拉格·巴尔之槌
-player.additem 240d2 1 ; 破晓者
-player.additem 2ac6f 1 ; 瓦巴杰克
-player.additem 63b8b 1 ; 黑暗魔经
-player.additem 300300f 200 ; 萨维石
-player.modav shoutrecoverymult 0 ; 龙吼零CD"""
-            }
+
         ],
         "batScript": """@echo off
 chcp 65001 >nul
@@ -705,46 +430,7 @@ player.additem f 100000
 player.additem 75fe4 100
 player.modav carryweight 50000"""
             },
-            {
-                "id": "fo4_salvation_bundle",
-                "type": "salvation",
-                "name": "聚落无限建造与大平地极速清理包",
-                "tag": "🏗️ 废土基建 · 赛博主城",
-                "badge": "无限基建",
-                "desc": "瞬间解除右上角聚落容量预算上限 + 一键拆解全图废墟杂草转化为木材钢铁存入工坊，打造赛博主城！",
-                "highlights": [
-                    "setav 349 9999999 / 348 9999999 建造容量条瞬间清零",
-                    "scrapall 领地极速清理大平地（自动回收千吨建材）",
-                    "各聚落千万钢铁/混凝土/木材一秒到账",
-                    "聚落招募天花板解除"
-                ],
-                "code": """; [老L·极客场景套餐] 辐射4 聚落无限建造指令
-; 走到工坊工作台正前方，按 ~ 点击工作台，输入：
-setav 349 9999999
-setav 348 9999999
-; 极速清理当前领地杂草废墟（使用前请先存档）：
-scrapall"""
-            },
-            {
-                "id": "fo4_godmode_bundle",
-                "type": "godmode",
-                "name": "全传奇双弹附魔与核融合满配包",
-                "tag": "⚡ 极客狂欢 · 废土霸主",
-                "badge": "联邦霸主",
-                "desc": "手持武器直接附魔【双弹 / 爆裂 / 煽动 / 无尽】传奇前缀 + 胖子核弹与高斯步枪满配，横扫废土发光海！",
-                "highlights": [
-                    "attachmod 1cc2a6（直接为当前武器附魔【双弹】词条）",
-                    "attachmod 1e7173（附魔【爆裂】每发额外 15 点面伤爆炸）",
-                    "attachmod 1f04b8（附魔【煽动】对满血目标双倍伤害）",
-                    "迷你核弹与千发 2mm 电磁弹药即刻到账"
-                ],
-                "code": """; [老L·极客场景套餐] 辐射4 传奇武器词条自定义附魔
-; 按 ~ 鼠标左键点击自己扔在地上的武器，输入：
-attachmod 1cc2a6 ; 附魔【双弹 (Two Shot)】
-; 补给 100 发胖子核弹与高斯步枪弹药：
-player.additem e6b2e 100
-player.additem 18abdf 500"""
-            }
+
         ],
         "batScript": """@echo off
 chcp 65001 >nul
