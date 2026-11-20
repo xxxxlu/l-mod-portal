@@ -24,7 +24,8 @@ They now go through write_owned_fields():
   trainer fields to fling_trainer_sync.py: those scripts pass owner="radar" /
   owner="trainer" and may write only that group; no other script can.
 - Content that was checked against sources (CHECKED_FIELDS: commands, popular commands,
-  bundles, curated and must-have mods, Nexus numbers, the console flag) is never
+  bundles, curated and must-have mods, Nexus numbers, the console flag, console guides,
+  pitfall notes and .bat scripts) is never
   replaced by a script: a run that would change it stops. Filling a field a game does
   not have yet with an empty value is allowed. Change checked content in the data,
   with a source, and keep the scripts' literals equal to it.
@@ -53,6 +54,7 @@ OWNER_FIELDS = {"radar": frozenset(RADAR_FIELDS), "trainer": frozenset(TRAINER_F
 CHECKED_FIELDS = frozenset({
     "consoleCategories", "popularCommands", "scenarioBundles", "curatedMods",
     "mustHaveMods", "nexusStats", "hasConsole",
+    "consoleEnableGuide", "pitfallNote", "batScript",
 })
 
 

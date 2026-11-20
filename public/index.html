@@ -2046,8 +2046,8 @@
       setElText('tab-text-social-cards', t('tabSocialCards'));
 
       // Detail Sub-sections
-      setElText('detail-console-guide-title', t('consoleGuideTitle'));
-      setElText('detail-btn-lazy-door', t('btnOpenLazyDoor'));
+      setElText('detail-console-guide-title', consoleGuideTitleFor(activeGame));
+      setElText('detail-btn-lazy-door', lazyDoorLabelFor(activeGame));
       setElText('detail-shortcut-label', t('consoleShortcutLabel'));
       setElText('detail-popular-cmd-title', t('popularCommandsTitle'));
       setElText('detail-mod-path-title', t('modPathTitle'));
@@ -2071,15 +2071,13 @@
       if (hotkeysInput) hotkeysInput.placeholder = t('trainerSearchPlaceholder');
 
       // Modals: Lazy Door
-      setElText('lazy-modal-title', t('activatorTitle'));
       setElText('lazy-modal-tag', t('activatorTag'));
       setElText('lazy-modal-subtitle', t('activatorDesc'));
       setElText('lazy-safe-title', t('activatorSafeNotice'));
       setElText('lazy-safe-desc', t('activatorSafeDesc'));
       setElText('lazy-steps-title', t('activatorGuideTitle'));
-      setElText('lazy-step-1', t('activatorStep1'));
       setElText('lazy-step-2', t('activatorStep2'));
-      setElText('lazy-step-3', t('activatorStep3'));
+      syncConsoleGuideTexts(activeGame);
       setElText('lazy-adapted-label', t('activatorAdapted'));
       setElText('lazy-btn-copy', t('activatorCopyCode'));
       setElText('lazy-btn-download', t('activatorDownloadBat'));
@@ -2733,8 +2731,11 @@
       document.getElementById('detail-shortcut-key').innerText = game.hasConsole
         ? (game.consoleShortcut ? game.consoleShortcut.split(' ')[0] : '~')
         : t('consoleStatusNone');
-      const guideText = (game.consoleEnableGuide && game.consoleEnableGuide[currentLang]) ? game.consoleEnableGuide[currentLang] : (game.consoleEnableGuide?.['zh-CN'] || '在游戏中按 ~ 键开启控制台。');
+      // The guides exist in zh-CN and en: Chinese UIs fall back to zh-CN, the others to English
+      const guides = game.consoleEnableGuide || {};
+      const guideText = guides[currentLang] || (currentLang.startsWith('zh') ? guides['zh-CN'] : guides['en']) || guides['zh-CN'] || guides['en'] || '';
       document.getElementById('detail-enable-guide').innerText = guideText;
+      syncConsoleGuideTexts(game);
       
       // Render Scenario Bundles, Pitfall Notes, Radar Card, and 5-Card Matrix
       renderScenarioBundles(game);
@@ -3812,8 +3813,33 @@
     // ==========================================
     // 10-SECOND LAZY DOOR OPENER MODAL HANDLERS
     // ==========================================
+    // The console block and the .bat modal describe a console only for games that have a native one
+    function hasNoNativeConsole(game) {
+      return !!game && game.hasConsole === false;
+    }
+
+    function consoleGuideTitleFor(game) {
+      if (!hasNoNativeConsole(game)) return t('consoleGuideTitle');
+      return (game.consoleCategories || []).length ? t('consoleGuideTitleViaMod') : t('consoleGuideTitleNoConsole');
+    }
+
+    function lazyDoorLabelFor(game) {
+      return hasNoNativeConsole(game) ? t('btnOpenHelperBat') : t('btnOpenLazyDoor');
+    }
+
+    function syncConsoleGuideTexts(game) {
+      const noConsole = hasNoNativeConsole(game);
+      const put = (id, text) => { const el = document.getElementById(id); if (el && text !== undefined) el.innerText = text; };
+      put('detail-console-guide-title', consoleGuideTitleFor(game));
+      put('detail-btn-lazy-door', lazyDoorLabelFor(game));
+      put('lazy-modal-title', noConsole ? t('helperBatTitle') : t('activatorTitle'));
+      put('lazy-step-1', noConsole ? t('helperBatStep1') : t('activatorStep1'));
+      put('lazy-step-3', noConsole ? t('helperBatStep3') : t('activatorStep3'));
+    }
+
     function openLazyDoorModal() {
       if (!activeGame) return;
+      syncConsoleGuideTexts(activeGame);
       const modal = document.getElementById('lazy-door-modal');
       const card = document.getElementById('lazy-door-card');
       const codePre = document.getElementById('lazy-modal-code');
@@ -3846,20 +3872,21 @@
 
     function downloadBatScript() {
       if (!activeGame) return;
+      const batName = hasNoNativeConsole(activeGame) ? `${activeGame.id}_helper.bat` : `${activeGame.id}_一键开启控制台.bat`;
       if (window.LModTracker) {
-        window.LModTracker.track('download_bat', activeGame.id, `${activeGame.id}_一键开启控制台.bat`);
+        window.LModTracker.track('download_bat', activeGame.id, batName);
       }
       const batCode = activeGame.batScript || generateDynamicBatScript(activeGame);
       const blob = new Blob([batCode], { type: 'text/plain;charset=utf-8' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `${activeGame.id}_一键开启控制台.bat`;
+      a.download = batName;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
-      showToast(t('batDownloadedToast'));
+      showToast(hasNoNativeConsole(activeGame) ? t('helperBatDownloadedToast') : t('batDownloadedToast'));
     }
 
     function copyBatScript() {
@@ -3878,14 +3905,13 @@
       if (currentLang.startsWith('zh')) {
         return `@echo off
 chcp 65001 >nul
-title 【老L·单机避坑局】${locTitle} 控制台排错与激活助手
+title 【老L·单机避坑局】${locTitle} 控制台快捷键提示
 echo ========================================================
-echo   【老L·单机避坑局】《${locTitle}》控制台助手
-echo   纯文本批处理 · 可用记事本查看全部内容
+echo   【老L·单机避坑局】《${locTitle}》控制台快捷键提示
+echo   本脚本只显示下面几行说明，不读取也不修改任何文件
 echo ========================================================
 echo.
-echo [i] 请将本脚本放在游戏安装根目录运行。
-echo [i] 常用控制台呼出快捷键：${shortcut}
+echo [i] 控制台呼出快捷键：${shortcut}
 echo.
 echo ========================================================
 echo  [i] 启动游戏后按下 ${shortcut} 打开控制台，
@@ -3896,14 +3922,13 @@ pause`;
       } else {
         return `@echo off
 chcp 65001 >nul
-title [L-MOD Vault] ${locTitle} Console Setup Helper
+title [L-MOD Vault] ${locTitle} Console Hotkey Note
 echo ========================================================
-echo   [L-MOD Vault] ${locTitle} Console Activator
-echo   Plain-text batch file - open it in Notepad to read every line
+echo   [L-MOD Vault] ${locTitle} Console Hotkey Note
+echo   This script only prints the lines below; it reads and changes no files
 echo ========================================================
 echo.
-echo [i] Please run this batch script inside the game root directory.
-echo [i] Console activation hotkey: ${shortcut}
+echo [i] Console hotkey: ${shortcut}
 echo.
 echo ========================================================
 echo  [i] Launch the game, press ${shortcut} to open the console,

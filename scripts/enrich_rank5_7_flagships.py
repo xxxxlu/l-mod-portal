@@ -22,7 +22,7 @@ ELDEN_RING_DATA = {
     "hasConsole": False,
     "consoleShortcut": "无原生打字终端 (采用 ModEngine2 离线引导 + The Grand Archives CT 表 / FLiNG 修改器)",
     "consoleEnableGuide": {
-        "zh-CN": "【离线启动指南（只在单机离线用）】\n1. 方案一 (ModEngine2 免修改文件)：解压 ModEngine2，将模组放入 /mod 目录，直接双击 launchmod_eldenring.bat 启动，这样启动不加载 EAC，只能离线玩；别带着改过的游戏或存档上线。\n2. 方案二 (替换引导)：进入游戏根目录 Game/，将原版 start_protected_game.exe 重命名为 .bak，将 eldenring.exe 复制一份并重命名为 start_protected_game.exe，新建文本文件 steam_appid.txt 写入 1245620，启动即可离线畅玩。\n3. 方案三 (无缝联机 Seamless Co-op)：该模组使用独立的 .co2 存档，走自己的联机方式、不连官方匹配服务器。它是第三方 Mod，会不会被封号没有人能担保。",
+        "zh-CN": "【离线启动指南（只在单机离线用）】\n1. 方案一 (ModEngine2 免修改文件)：解压 ModEngine2，将模组放入 /mod 目录，直接双击 launchmod_eldenring.bat 启动，这样启动不加载 EAC，只能离线玩；别带着改过的游戏或存档上线。\n2. 方案二 (替换引导)：进入游戏根目录 Game/，将原版 start_protected_game.exe 重命名为 .bak，将 eldenring.exe 复制一份并重命名为 start_protected_game.exe，新建文本文件 steam_appid.txt 写入 1245620，启动后只能离线玩。\n3. 方案三 (无缝联机 Seamless Co-op)：该模组使用独立的 .co2 存档，走自己的联机方式、不连官方匹配服务器。它是第三方 Mod，会不会被封号没有人能担保。",
         "en": "EAC Offline Bypass & ModEngine2 Launch Guide: Launch via launchmod_eldenring.bat or rename start_protected_game.exe and place steam_appid.txt (1245620) to start without Easy Anti-Cheat (offline only). Never take a modded game or save online; nothing here can guarantee you won't be banned."
     },
     "popularCommands": [],
@@ -124,8 +124,8 @@ SKYRIM_SE_DATA = {
     "hasConsole": True,
     "consoleShortcut": "~ (Tilde 键)",
     "consoleEnableGuide": {
-        "zh-CN": "Bethesda Creation 引擎原生提供全功能控制台：\n1. 快捷键：游戏中随时按下键盘左上角【~】键 (波浪键 / ESC下方) 暂停并呼出全屏控制台；\n2. 输入法避坑：若无反应，请在 Windows 任务栏切换为'英语(美国)'美式键盘输入法，或在 Documents/My Games/Skyrim Special Edition/Skyrim.ini 的 [General] 下确认 bAllowConsole=1；\n3. 成就与防闪退：使用控制台或打 Mod 会打上脏标记锁定 Steam 成就，强烈建议安装 SSE Engine Fixes 恢复成就，它还修了一批引擎问题，但不能保证不闪退。\n4. 简写技巧：FormID 开头的多余 0 可省略，如 player.additem 0000000F 10000 可简写为 player.additem f 10000！",
-        "en": "Bethesda Creation Engine Native Console: Press ~ (Tilde) key in-game to toggle. Supports Hex FormIDs, batch (.bat) scripts, quest stage jumping, and free camera."
+        "zh-CN": "Bethesda Creation 引擎原生自带控制台：\n1. 快捷键：游戏中随时按下键盘左上角【~】键 (波浪键 / ESC下方) 暂停并呼出全屏控制台；\n2. 输入法避坑：若无反应，请在 Windows 任务栏切换为'英语(美国)'美式键盘输入法，或在 Documents/My Games/Skyrim Special Edition/Skyrim.ini 的 [General] 下确认 bAllowConsole=1；\n3. 防闪退：想减少意外闪退，可以装 SSE Engine Fixes，它修了一批引擎层面的问题，但不能保证完全不闪退。\n4. 简写技巧：FormID 开头的 0 可以全部省略，比如金币的 FormID 是 0000000F，player.additem 0000000F 10000 可以写成 player.additem f 10000。",
+        "en": "The Bethesda Creation Engine has a full native console:\n1. Hotkey: press ~ (Tilde, below Esc) in-game any time to pause and open the full-screen console.\n2. If it doesn't respond: switch Windows to a US English keyboard layout, or check bAllowConsole=1 under [General] in Documents/My Games/Skyrim Special Edition/Skyrim.ini.\n3. Crash reduction: installing SSE Engine Fixes patches a number of engine-level bugs and can reduce (not guarantee against) crashes.\n4. Shorthand: all leading zeros in a FormID can be dropped — Gold's FormID is 0000000F, so 'player.additem 0000000F 10000' can be written as 'player.additem f 10000'."
     },
     "popularCommands": [
         "tgm",
@@ -762,8 +762,8 @@ FALLOUT_4_DATA = {
     "hasConsole": True,
     "consoleShortcut": "~ (Tilde 键)",
     "consoleEnableGuide": {
-        "zh-CN": "【次世代大更新避坑与控制台开启】\n1. 控制台呼出：游戏中按下【~】(波浪键) 暂停并呼出控制台；\n2. 2024 次世代大更新 (v1.10.980/984) 避坑必看：\n   - 路径一 (次世代原生模式)：若玩次世代新版，必须安装对应次世代分支的 F4SE (v0.7.2+) 与 Address Library Next-Gen，并在 Steam 游戏属性中设置【仅在我启动该游戏时更新】减少后台自动更新（不能保证不被更新）；\n   - 路径二 (经典降级模式)：若想享受数万款旧 Mod，使用【Fallout 4 Downgrader】一键将主程序回退至 1.10.163 黄金稳定版；\n3. 极速批处理 (bat 命令)：在游戏根目录新建文本文件 (如 all_materials.txt)，游戏中只需在控制台输入 bat all_materials，瞬间一次性执行上百条指令！",
-        "en": "Fallout 4 Creation Engine Console: Press ~ (Tilde) to toggle. Next-Gen Update (v1.10.980+) compatible with F4SE v0.7.2+ or use Downgrader to v1.10.163. Supports bat batch scripts and dynamic legendary attachmod enchantments."
+        "zh-CN": "【次世代更新避坑与控制台开启】\n1. 控制台呼出：游戏中按下【~】(波浪键) 暂停并呼出控制台；\n2. 次世代更新 (v1.10.980 起) 避坑必看：\n   - 路径一 (次世代原生模式)：若玩次世代新版，需要装支持次世代更新的 F4SE 版本和对应的 Address Library（旧版本插件要等作者更新后才能用），并在 Steam 游戏属性中设置【仅在我启动该游戏时更新】减少后台自动更新（不能保证不被更新）；\n   - 路径二 (经典降级模式)：若想用老 Mod，可以用 Fallout 4 Downgrader 把主程序回退到次世代更新前的 1.10.163 版本；\n3. 批处理 (bat 命令)：在游戏根目录新建文本文件 (如 all_materials.txt，每行一条指令)，游戏中在控制台输入 bat all_materials 就能按文件内容依次执行里面的指令。",
+        "en": "Next-Gen Update Pitfalls & Console:\n1. Press ~ (Tilde) in-game to pause and open the console.\n2. Next-Gen update (v1.10.980+): if you're on the new build, you need an F4SE version that supports the Next-Gen update plus the matching Address Library (old plugins won't load until their authors update them); in Steam properties set updates to 'Only update this game when I launch it' to cut down background auto-updates (not guaranteed to stop them).\n   If you want to keep using older mods instead, Fallout 4 Downgrader can roll the main executable back to the pre-Next-Gen 1.10.163 build.\n3. Batch files: create a text file in the game's root folder (e.g. all_materials.txt, one command per line); typing 'bat all_materials' in the console runs every command in that file in order."
     },
     "popularCommands": [
         "tgm",
