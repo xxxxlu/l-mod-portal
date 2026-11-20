@@ -34,9 +34,9 @@
 ## 🚀 二、Cloudflare D1 极速上线实操步骤（耗时 < 3 分钟）
 
 工程内已准备好全自动建表与种子数据脚本：
-- 表结构文件：[`database/schema.sql`](file:///Users/xiaolu/Desktop/work/l-mod-portal/database/schema.sql)
-- 种子数据文件：[`database/seed_data.sql`](file:///Users/xiaolu/Desktop/work/l-mod-portal/database/seed_data.sql) (1.9MB / 100款游戏 / 1,093条指令 / 42个场景包)
-- 边缘 API：[`functions/api/games.js`](file:///Users/xiaolu/Desktop/work/l-mod-portal/functions/api/games.js) 与 [`functions/api/radar.js`](file:///Users/xiaolu/Desktop/work/l-mod-portal/functions/api/radar.js)
+- 表结构文件：[`database/schema.sql`](../database/schema.sql)
+- 种子数据文件：[`database/seed_data.sql`](../database/seed_data.sql) （由 `scripts/sync_to_database.py` 生成，不进仓库）
+- 边缘 API：[`functions/api/games.js`](../functions/api/games.js) 与 [`functions/api/radar.js`](../functions/api/radar.js)
 
 ### 第一步：在终端创建 D1 免费数据库
 在项目根目录下执行：
@@ -79,18 +79,34 @@ npx wrangler d1 execute lmod-vault-db --remote --file=database/seed_data.sql
 1. 打开 [supabase.com](https://supabase.com/) 免费注册并创建组织；
 2. 新建项目（区域推荐选择靠近国内的 **Tokyo** 或 **Singapore**）；
 3. 进入左侧菜单的 **SQL Editor**；
-4. 直接复制项目内 [`database/schema.sql`](file:///Users/xiaolu/Desktop/work/l-mod-portal/database/schema.sql) 的内容粘贴运行；
-5. 复制 [`database/seed_data.sql`](file:///Users/xiaolu/Desktop/work/l-mod-portal/database/seed_data.sql) 的内容粘贴运行；
-6. 即可在 **Table Editor** 中直观浏览与编辑 100 款游戏和全部 1,093 条指令！
+4. 直接复制项目内 [`database/schema.sql`](../database/schema.sql) 的内容粘贴运行；
+5. 复制 [`database/seed_data.sql`](../database/seed_data.sql) 的内容粘贴运行；
+6. 即可在 **Table Editor** 中浏览和编辑游戏、指令与套餐。
 
 ---
 
-## 📦 四、本地调试与重新生成数据种子
+## 📦 四、重新生成种子数据并更新线上 D1
 
-若后续通过 `scripts/ai_enrich_engine.py` 或 `games_top100.json` 更新了游戏数据，只需运行：
+游戏数据改了以后（数据源是 `src/data/games_top100.json`，没有它时读 `public/data.js` 的 `GAMES_DATA`），运行：
 
 ```bash
-# 自动重新生成 database/seed_data.sql 并在本地 SQLite 中进行入库验证
+# 生成 database/seed_data.sql，并在本地 SQLite 副本（建表 + 全部迁移）里试灌、检查外键
 python3 scripts/sync_to_database.py
 ```
-终端会输出验证指标并提示一键推送到线上 D1 数据库！
+
+⚠️ **更新线上 D1 前必读**：
+
+- `user_favorites`、`user_radar_subscriptions` 对 `games(id)` 设了 `ON DELETE CASCADE`。**任何删除或 `INSERT OR REPLACE` 游戏行的 SQL 都会连带删掉用户的收藏和订阅。** 种子 SQL 只对游戏行做 upsert（`INSERT ... ON CONFLICT(id) DO UPDATE`）；从数据里删掉的游戏不会自动从 D1 删除，要先处理它的收藏和订阅再手动删。
+- 指令和套餐按游戏重建：数据里删掉的会从 D1 删掉；在后台新增或改过的指令（`admin_audit_logs` 里有记录的）保留不动。后台对游戏行的修改会被数据覆盖，以数据为准。
+- 写生产库前先要站长点头，并按下面的顺序操作：
+
+```bash
+# 1. 整库备份到仓库外的目录（导出里有 users 表，别提交）
+npx wrangler d1 export lmod-vault-db --remote --output <备份目录>/lmod-vault-db-<日期>.sql
+# 2. 演练：把备份灌进本地 SQLite，打开 PRAGMA foreign_keys = ON 后执行 database/seed_data.sql，
+#    确认 users / user_favorites / user_radar_subscriptions 行数不变
+# 3. 正式执行（不带 --remote 只会改本地开发库）
+npx wrangler d1 execute lmod-vault-db --remote --file=database/seed_data.sql
+```
+
+测试：`python3 -m unittest discover -s scripts/tests/db -v`

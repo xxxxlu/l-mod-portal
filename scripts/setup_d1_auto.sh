@@ -82,7 +82,7 @@ echo "==> 步骤 3/4: 正在将 100 款游戏全量结构化数据灌入全球 D
 echo "   -> 执行 database/schema.sql (建表)..."
 $WRANGLER_BIN d1 execute "$DB_NAME" --remote --file=database/schema.sql -y
 
-echo "   -> 执行 database/seed_data.sql (灌入 1,093 条指令与 100 款大作)..."
+echo "   -> 执行 database/seed_data.sql (灌入游戏、指令与套餐)..."
 $WRANGLER_BIN d1 execute "$DB_NAME" --remote --file=database/seed_data.sql -y
 
 # 5. 一键发布部署到 Cloudflare Pages
