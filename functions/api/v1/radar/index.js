@@ -1,56 +1,38 @@
 /**
  * Cloudflare Pages Function: /api/v1/radar
- * Steam Patch Radar games compatibility matrix
+ * Steam 更新雷达：全部有巡检记录的游戏（可按 ?status=red|yellow|green 过滤）。
+ *
+ * 数据来源：public/radar_status.json（每日巡检脚本生成，见 ../../_radar_status.js），不读 D1。
  */
 
+import { loadRadarStatus, radarList, radarUnavailableResponse, RADAR_METHOD_NOTE, RADAR_STATUSES } from '../../_radar_status.js';
+
 export async function onRequestGet(context) {
-  const { request, env } = context;
+  const { request } = context;
   const url = new URL(request.url);
   const statusFilter = url.searchParams.get('status');
+  const wanted = RADAR_STATUSES.includes(statusFilter) ? statusFilter : null;
 
-  const db = env.DB || env.lmod_vault_db;
-  if (!db) {
-    return new Response(JSON.stringify({ code: 50000, message: 'Database binding missing' }), { status: 500 });
-  }
+  const status = await loadRadarStatus(context);
+  if (!status) return radarUnavailableResponse();
 
-  try {
-    let sql = `
-      SELECT id, rank, title, title_zh, steam_app_id, verified_patch, latest_steam_patch,
-             compatibility_status, radar_risk_title, radar_risk_desc, radar_summary, pitfall_note
-      FROM games
-      WHERE steam_app_id IS NOT NULL
-    `;
-    const params = [];
+  const items = radarList(status, wanted);
 
-    if (statusFilter && ['green', 'yellow', 'red'].includes(statusFilter)) {
-      sql += ' AND compatibility_status = ?';
-      params.push(statusFilter);
+  return new Response(JSON.stringify({
+    code: 0,
+    message: 'success',
+    data: {
+      source: 'radar_status.json',
+      updated_at: status.updatedAt,
+      method: RADAR_METHOD_NOTE,
+      filter: wanted || 'all',
+      total: items.length,
+      items
     }
-
-    sql += ' ORDER BY rank ASC';
-
-    const { results } = params.length > 0 ? await db.prepare(sql).bind(...params).all() : await db.prepare(sql).all();
-
-    return new Response(JSON.stringify({
-      code: 0,
-      message: 'success',
-      data: {
-        filter: statusFilter || 'all',
-        total: (results || []).length,
-        items: results || []
-      }
-    }), {
-      headers: {
-        'Content-Type': 'application/json; charset=utf-8',
-        'Cache-Control': 'public, max-age=60, s-maxage=300'
-      }
-    });
-
-  } catch (err) {
-    return new Response(JSON.stringify({
-      code: 50000,
-      message: 'Failed to retrieve radar games',
-      details: err.message
-    }), { status: 500 });
-  }
+  }), {
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+      'Cache-Control': 'public, max-age=60, s-maxage=300'
+    }
+  });
 }

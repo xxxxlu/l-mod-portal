@@ -1,7 +1,13 @@
 /**
  * Cloudflare Pages Function: /api/v1/games
  * Lightweight Catalog Pagination with Edge Projection
+ *
+ * 雷达字段（compatibility_status / radar）来自 public/radar_status.json 的 v2 结果（见 ../../_radar_status.js），
+ * 不再输出 D1 的旧雷达列（verified_patch / latest_steam_patch / radar_risk_title 等）。
+ * compat_status 过滤：red | yellow | green | unchecked（没有巡检记录的游戏）。
  */
+
+import { loadRadarStatus, radarIdsWithStatus, radarUnavailableResponse, withRadar, RADAR_STATUSES } from '../../_radar_status.js';
 
 export async function onRequestGet(context) {
   const { request, env } = context;
@@ -23,10 +29,12 @@ export async function onRequestGet(context) {
     return new Response(JSON.stringify({
       code: 50000,
       message: 'Database binding missing. Ensure D1 is bound in Pages settings.'
-    }), { status: 500 });
+    }), { status: 503 });
   }
 
   try {
+    const radarStatus = await loadRadarStatus(context);
+
     // Dynamic Parameterized SQL Query
     const conditions = [];
     const params = [];
@@ -36,8 +44,21 @@ export async function onRequestGet(context) {
       params.push(genre);
     }
     if (compatStatus && compatStatus !== 'all') {
-      conditions.push('compatibility_status = ?');
-      params.push(compatStatus);
+      if (!RADAR_STATUSES.includes(compatStatus) && compatStatus !== 'unchecked') {
+        return new Response(JSON.stringify({
+          code: 40000,
+          message: 'compat_status must be one of: all, red, yellow, green, unchecked'
+        }), { status: 400, headers: { 'Content-Type': 'application/json; charset=utf-8' } });
+      }
+      if (!radarStatus) return radarUnavailableResponse();
+      // 雷达状态不在 D1 里：把符合条件的 id 作为一个 JSON 数组参数传进去（D1 单条语句最多 100 个绑定参数）
+      if (compatStatus === 'unchecked') {
+        conditions.push('id NOT IN (SELECT value FROM json_each(?))');
+        params.push(JSON.stringify(Object.keys(radarStatus.games)));
+      } else {
+        conditions.push('id IN (SELECT value FROM json_each(?))');
+        params.push(JSON.stringify(radarIdsWithStatus(radarStatus, compatStatus)));
+      }
     }
     if (hasConsole !== null && hasConsole !== undefined) {
       conditions.push('has_console = ?');
@@ -63,8 +84,7 @@ export async function onRequestGet(context) {
     const querySql = `
       SELECT id, rank, title, title_zh, titles_json, developer, release_year, 
              genre, steam_rating, steam_app_id, header_image,
-             has_console, console_shortcut, has_mods, has_trainer,
-             compatibility_status, verified_patch, latest_steam_patch, radar_risk_title
+             has_console, console_shortcut, has_mods, has_trainer
       FROM games
       ${whereClause}
       ${orderClause}
@@ -82,7 +102,7 @@ export async function onRequestGet(context) {
       } catch (e) {}
       const { titles_json, ...rest } = row;
       return {
-        ...rest,
+        ...withRadar(rest, radarStatus),
         titles
       };
     });
@@ -97,7 +117,9 @@ export async function onRequestGet(context) {
         page,
         page_size: pageSize,
         total,
-        has_more: offset + sanitizedResults.length < total
+        has_more: offset + sanitizedResults.length < total,
+        radar_source: radarStatus ? 'radar_status.json' : null,
+        radar_updated_at: radarStatus ? radarStatus.updatedAt : null
       }
     }), {
       headers: {

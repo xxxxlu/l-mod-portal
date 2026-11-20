@@ -1,48 +1,36 @@
 /**
- * Cloudflare Pages Function: /api/radar
- * Real-time Steam Patch Radar status API.
+ * Cloudflare Pages Function: /api/radar（旧版接口，保留路径）
+ * Steam 更新雷达状态。
+ *
+ * 数据来源：public/radar_status.json（每日巡检脚本生成，见 ./_radar_status.js），不读 D1 的旧雷达列。
  */
 
-export async function onRequestGet(context) {
-  const { env } = context;
+import { loadRadarStatus, radarCounts, radarList, RADAR_METHOD_NOTE } from './_radar_status.js';
 
+export async function onRequestGet(context) {
   const corsHeaders = {
     'Access-Control-Allow-Origin': '*',
     'Content-Type': 'application/json; charset=utf-8',
     'Cache-Control': 'public, max-age=30, s-maxage=300'
   };
 
-  try {
-    if (env.DB) {
-      const { results } = await env.DB.prepare(
-        `SELECT id, rank, title, title_zh, steam_app_id, verified_patch, latest_steam_patch,
-                compatibility_status, radar_risk_title, radar_risk_desc, radar_summary, pitfall_note
-         FROM games
-         WHERE steam_app_id IS NOT NULL
-         ORDER BY rank ASC`
-      ).all();
-
-      const counts = { green: 0, yellow: 0, red: 0 };
-      results.forEach(g => {
-        if (g.compatibility_status in counts) {
-          counts[g.compatibility_status]++;
-        }
-      });
-
-      return new Response(JSON.stringify({
-        updated_at: new Date().toISOString(),
-        metrics: counts,
-        total: results.length,
-        games: results
-      }), { headers: corsHeaders });
-    }
-
+  const status = await loadRadarStatus(context);
+  if (!status) {
     return new Response(JSON.stringify({
-      status: 'active',
-      notice: 'D1 binding pending. Live radar fallback to static public/radar.html'
-    }), { headers: corsHeaders });
-
-  } catch (err) {
-    return new Response(JSON.stringify({ error: err.message }), { status: 500, headers: corsHeaders });
+      status: 'unavailable',
+      notice: 'Radar data unavailable (public/radar_status.json missing). See /radar.html for the static radar page.'
+    }), { status: 503, headers: { ...corsHeaders, 'Cache-Control': 'no-store' } });
   }
+
+  const counts = radarCounts(status);
+  const games = radarList(status);
+
+  return new Response(JSON.stringify({
+    source: 'radar_status.json',
+    updated_at: status.updatedAt,
+    method: RADAR_METHOD_NOTE,
+    metrics: { green: counts.green, yellow: counts.yellow, red: counts.red },
+    total: games.length,
+    games
+  }), { headers: corsHeaders });
 }

@@ -515,10 +515,11 @@
               >
             </div>
             <select id="cms-status-filter" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-300 font-mono">
-              <option value="all">全量兼容状态</option>
-              <option value="green">🟢 完美适配</option>
-              <option value="yellow">🟡 部分失效/需注意</option>
-              <option value="red">🔴 高危熔断</option>
+              <option value="all">全部雷达状态</option>
+              <option value="green">🟢 近期平稳</option>
+              <option value="yellow">🟡 留意更新</option>
+              <option value="red">🔴 先别更新</option>
+              <option value="unchecked">⚪ 未巡检</option>
             </select>
           </div>
         </div>
@@ -869,36 +870,36 @@
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div class="glass-card rounded-2xl p-5 border border-slate-800">
             <div class="flex items-center justify-between text-xs text-slate-400 font-mono">
-              <span>完美兼容基准</span>
+              <span>🟢 近期平稳</span>
               <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 neon-emerald"></span>
             </div>
             <div class="mt-3 flex items-baseline gap-2">
               <span id="radar-green-count" class="text-3xl font-extrabold text-emerald-400">--</span>
-              <span class="text-xs text-slate-500 font-mono">/ 100 款游戏</span>
+              <span class="text-xs text-slate-500 font-mono">/ 已巡检游戏</span>
             </div>
             <p class="text-[11px] text-slate-400 mt-1 font-mono">主流指令与前置框架 100% 验证</p>
           </div>
 
           <div class="glass-card rounded-2xl p-5 border border-slate-800">
             <div class="flex items-center justify-between text-xs text-slate-400 font-mono">
-              <span>部分失效 / 需注意</span>
+              <span>🟡 留意更新</span>
               <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
             </div>
             <div class="mt-3 flex items-baseline gap-2">
               <span id="radar-yellow-count" class="text-3xl font-extrabold text-amber-400">--</span>
-              <span class="text-xs text-slate-500 font-mono">/ 100 款游戏</span>
+              <span class="text-xs text-slate-500 font-mono">/ 已巡检游戏</span>
             </div>
             <p class="text-[11px] text-slate-400 mt-1 font-mono">前置扩展（CET/UE4SS）待更新</p>
           </div>
 
           <div class="glass-card rounded-2xl p-5 border border-slate-800">
             <div class="flex items-center justify-between text-xs text-slate-400 font-mono">
-              <span>高危熔断预警</span>
+              <span>🔴 先别更新</span>
               <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span>
             </div>
             <div class="mt-3 flex items-baseline gap-2">
               <span id="radar-red-count" class="text-3xl font-extrabold text-rose-400">--</span>
-              <span class="text-xs text-slate-500 font-mono">/ 100 款游戏</span>
+              <span class="text-xs text-slate-500 font-mono">/ 已巡检游戏</span>
             </div>
             <p class="text-[11px] text-slate-400 mt-1 font-mono">底层引擎大更新，坏档拦截</p>
           </div>
@@ -1009,7 +1010,7 @@
           <div class="p-4 border-b border-slate-800 flex items-center justify-between">
             <h3 class="text-sm font-bold text-white flex items-center gap-2">
               <span class="w-2 h-2 rounded-full bg-purple-400"></span>
-              <span>24 小时巡检审计流水 (patch_radar_logs)</span>
+              <span>Steam 最近更新的游戏（每日巡检结果 · radar_status.json）</span>
             </h3>
             <span class="text-xs text-slate-500 font-mono">D1 持久化审计存证</span>
           </div>
@@ -1789,10 +1790,11 @@
 
         tbody.innerHTML = res.data.games.map(g => {
           const compatPills = {
-            green: '<span class="px-2 py-0.5 rounded-full text-[11px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-mono">🟢 完美适配</span>',
-            yellow: '<span class="px-2 py-0.5 rounded-full text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/20 font-mono">🟡 部分失效</span>',
-            red: '<span class="px-2 py-0.5 rounded-full text-[11px] bg-rose-500/10 text-rose-400 border border-rose-500/20 font-mono">🔴 高危熔断</span>'
+            green: '<span class="px-2 py-0.5 rounded-full text-[11px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-mono">🟢 近期平稳</span>',
+            yellow: '<span class="px-2 py-0.5 rounded-full text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/20 font-mono">🟡 留意更新</span>',
+            red: '<span class="px-2 py-0.5 rounded-full text-[11px] bg-rose-500/10 text-rose-400 border border-rose-500/20 font-mono">🔴 先别更新</span>'
           };
+          const uncheckedPill = '<span class="px-2 py-0.5 rounded-full text-[11px] bg-slate-500/10 text-slate-400 border border-slate-500/20 font-mono">⚪ 未巡检</span>';
 
           return `
             <tr class="hover:bg-slate-800/40 transition">
@@ -1801,7 +1803,7 @@
                 <div class="font-bold text-white text-xs">${escapeHtml(g.title_zh || g.title)}</div>
                 <div class="text-[10px] text-slate-500 font-mono">${escapeHtml(g.title)} (${g.id})</div>
               </td>
-              <td class="py-3 px-4">${compatPills[g.compatibility_status] || g.compatibility_status}</td>
+              <td class="py-3 px-4">${compatPills[g.compatibility_status] || uncheckedPill}</td>
               <td class="py-3 px-4 font-mono text-xs text-slate-200">${escapeHtml(g.verified_patch || '-')}</td>
               <td class="py-3 px-4 font-mono text-xs text-slate-400">${escapeHtml(g.latest_steam_patch || '-')}</td>
               <td class="py-3 px-4 text-center font-mono font-bold text-slate-300">${g.command_count} 条</td>
@@ -1874,7 +1876,7 @@
           });
 
           if (res.code === 0) {
-            showToast('游戏配置更新成功！已即时同步 D1 数据库', 'success');
+            showToast(res.message || '游戏配置更新成功！已即时同步 D1 数据库', 'success');
             document.getElementById('game-edit-modal').classList.add('hidden');
             loadGamesCMS();
             loadRadarStatus();
@@ -2235,9 +2237,9 @@ ${d.simulated_response}`;
 
         tbody.innerHTML = recent_logs.map(log => {
           const statusTags = {
-            green: '<span class="text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">🟢 完美兼容</span>',
-            yellow: '<span class="text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">🟡 需注意</span>',
-            red: '<span class="text-rose-400 bg-rose-500/10 px-2 py-0.5 rounded border border-rose-500/20">🔴 熔断警报</span>'
+            green: '<span class="text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">🟢 近期平稳</span>',
+            yellow: '<span class="text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">🟡 留意更新</span>',
+            red: '<span class="text-rose-400 bg-rose-500/10 px-2 py-0.5 rounded border border-rose-500/20">🔴 先别更新</span>'
           };
 
           return `
@@ -2293,7 +2295,7 @@ ${d.simulated_response}`;
 
         termStatus.textContent = 'SCANNING STEAM API...';
         termStatus.className = 'text-blue-400 animate-pulse';
-        termContent.textContent = `[${new Date().toLocaleTimeString()}] 哨兵巡检启动... 目标: ${game_id}\n正在穿透 Steam CDN 抓取最新官方更新日志与 Build ID...`;
+        termContent.textContent = `[${new Date().toLocaleTimeString()}] 读取每日巡检结果... 目标: ${game_id}`;
 
         try {
           const res = await apiFetch('/radar/inspect', {
@@ -2306,11 +2308,11 @@ ${d.simulated_response}`;
             termStatus.className = 'text-emerald-400 font-bold';
             
             const lines = res.data.results.map(r => 
-              `✓ [${r.title_zh}] Steam AppID:${r.steam_app_id} | 基准:${r.verified_patch} | 最新:${r.latest_steam_patch} | 状态:[${r.status.toUpperCase()}] -> ${r.verdict}`
+              `✓ [${r.title_zh}] Steam AppID:${r.steam_app_id} | ${r.latest_steam_patch || '-'} | 状态:[${String(r.status || '-').toUpperCase()}] -> ${r.verdict}`
             ).join('\n');
 
             termContent.textContent = 
-`[${new Date().toLocaleTimeString()}] 巡检完成！共核验 ${res.data.inspected_count} 款游戏：\n${lines}\n审计日志已持久化归档至 D1 patch_radar_logs。`;
+`[${new Date().toLocaleTimeString()}] ${res.message}\n${lines}`;
             showToast(res.message, 'success');
             loadRadarStatus();
           } else {

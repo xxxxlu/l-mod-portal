@@ -1,121 +1,73 @@
 /**
  * Cloudflare Pages Function: POST /api/v1/admin/radar/inspect
- * On-demand Steam Patch Sentinel Inspection Trigger
+ * 后台「手动巡检」：返回每日巡检的最新结果。
+ *
+ * 以前这里会给每款游戏随机生成 build 号、写「全域验证通过 / 校验一致」并插进 D1 patch_radar_logs——
+ * 那是模拟数据，不是真的巡检。现在真正的巡检只由 GitHub Actions 每天跑 scripts/steam_patch_monitor.py，
+ * 结果在 public/radar_status.json（见 ../../../_radar_status.js）；这里只读它，不写 D1。
+ * 返回字段沿用旧形状，后台终端显示不用改。
  */
 
-import { logAdminAction } from '../_auth.js';
+import { loadRadarStatus, radarDay, radarList, radarEntry, radarListItem, radarUnavailableResponse } from '../../../_radar_status.js';
 
 export async function onRequestPost(context) {
-  const { request, env, data } = context;
-  const db = env.DB || env.lmod_vault_db;
-  const admin = data?.admin || { username: '老L·站长' };
-  const clientIP = request.headers.get('cf-connecting-ip') || '127.0.0.1';
-
-  if (!db) {
-    return new Response(JSON.stringify({ code: 50000, message: 'Database binding missing' }), { status: 500 });
-  }
+  const { request } = context;
 
   try {
-    const { game_id } = await request.json();
-    const targetGameId = (game_id || 'all').trim();
+    const body = await request.json().catch(() => ({}));
+    const targetGameId = String(body.game_id || 'all').trim();
 
-    let targetGames = [];
+    const radarStatus = await loadRadarStatus(context);
+    if (!radarStatus) return radarUnavailableResponse();
 
+    let items;
     if (targetGameId === 'all') {
-      // Query top 10 flagship games
-      const { results } = await db.prepare(
-        `SELECT id, rank, title, title_zh, steam_app_id, verified_patch, latest_steam_patch, compatibility_status
-         FROM games
-         ORDER BY rank ASC
-         LIMIT 10`
-      ).all();
-      targetGames = results || [];
+      items = radarList(radarStatus);
     } else {
-      const single = await db.prepare(
-        `SELECT id, rank, title, title_zh, steam_app_id, verified_patch, latest_steam_patch, compatibility_status
-         FROM games
-         WHERE id = ?`
-      ).bind(targetGameId).first();
-
-      if (!single) {
-        return new Response(JSON.stringify({ code: 40400, message: `Game '${targetGameId}' not found` }), { status: 404 });
+      const entry = radarEntry(radarStatus, targetGameId);
+      if (!entry) {
+        return new Response(JSON.stringify({
+          code: 40400,
+          message: `「${targetGameId}」没有雷达巡检记录（不在 Steam 上，或 id 不存在）`
+        }), { status: 404, headers: { 'Content-Type': 'application/json; charset=utf-8' } });
       }
-      targetGames = [single];
+      items = [radarListItem(targetGameId, entry, radarStatus)];
     }
 
-    const inspectionResults = [];
-    const nowIso = new Date().toISOString();
-
-    for (const g of targetGames) {
-      // Generate simulated / real audit log entry
-      const buildId = Math.floor(13000000 + Math.random() * 2000000).toString();
-      const patchTitle = `${g.title_zh || g.title} Steam Sentinel Auto-Audit`;
-      const status = g.compatibility_status || 'green';
-      const riskTitle = status === 'green' ? '全域验证通过' : (status === 'yellow' ? '注意前置框架版本' : '高危熔断预警');
-      const riskDesc = status === 'green'
-        ? `基准版本 ${g.verified_patch} 与 Steam 客户端版本 ${g.latest_steam_patch} 校验一致，控制台与Mod框架运行稳定。`
-        : `检测到版本偏差或前置框架更新滞后，请指导玩家及时备份存档。`;
-
-      await db.prepare(`
-        INSERT INTO patch_radar_logs (game_id, patch_title, patch_date, build_id, status, risk_title, risk_desc, emergency_broadcast, checked_at)
-        VALUES (?, ?, ?, ?, ?, ?, ?, NULL, ?)
-      `).bind(
-        g.id,
-        patchTitle,
-        nowIso.slice(0, 10),
-        buildId,
-        status,
-        riskTitle,
-        riskDesc,
-        nowIso
-      ).run();
-
-      inspectionResults.push({
-        game_id: g.id,
-        title_zh: g.title_zh || g.title,
-        steam_app_id: g.steam_app_id,
-        status,
-        verified_patch: g.verified_patch,
-        latest_steam_patch: g.latest_steam_patch,
-        build_id: buildId,
-        verdict: riskTitle,
-        checked_at: nowIso
-      });
-    }
-
-    // Update sentinel config last_scan_at
-    await db.prepare(`
-      UPDATE system_settings
-      SET value = json_set(value, '$.last_scan_at', ?), updated_at = CURRENT_TIMESTAMP
-      WHERE key = 'sentinel_config'
-    `).bind(nowIso).run();
-
-    await logAdminAction(db, {
-      action: 'trigger_radar_sentinel',
-      entity: 'patch_radar_logs',
-      entity_id: targetGameId,
-      details: { inspected_count: inspectionResults.length, target: targetGameId },
-      admin_user: admin.username,
-      client_ip: clientIP
-    });
+    const results = items.map(item => ({
+      game_id: item.id,
+      title_zh: item.title_zh,
+      steam_app_id: item.steam_app_id,
+      status: item.compatibility_status,
+      verified_patch: null,
+      latest_steam_patch: item.radar.steam_build_id
+        ? `build ${item.radar.steam_build_id}（${radarDay(item.radar.steam_build_updated_at) || '日期未知'}）`
+        : null,
+      build_id: item.radar.steam_build_id,
+      verdict: item.radar.status_text || item.radar.reason_text,
+      reason: item.radar.reason,
+      checked_at: item.radar.last_checked_at
+    }));
 
     return new Response(JSON.stringify({
       code: 0,
-      message: `Steam 补丁巡检完成：成功巡检 ${inspectionResults.length} 款游戏，日志已归档至 D1`,
+      message: `已读取每日巡检结果（上次巡检 ${radarStatus.updatedAt || '未知'}，共 ${results.length} 款）。` +
+        '实际巡检由 GitHub Actions 每天 UTC 02:00 运行，后台不再生成模拟记录。',
       data: {
         target: targetGameId,
-        inspected_count: inspectionResults.length,
-        timestamp: nowIso,
-        results: inspectionResults
+        inspected_count: results.length,
+        timestamp: radarStatus.updatedAt,
+        source: 'radar_status.json',
+        results
       }
     }), {
-      headers: { 'Content-Type': 'application/json; charset=utf-8' }
+      headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' }
     });
 
   } catch (err) {
     return new Response(JSON.stringify({
       code: 50000,
-      message: 'Failed to execute radar inspection',
+      message: 'Failed to read radar inspection results',
       details: err.message
     }), { status: 500 });
   }

@@ -5,13 +5,24 @@ scripts/render_cards_png.py
 L-MOD Vault 社交矩阵工业级高清出图与首发分发物料总装引擎 (Milestone 2)
 
 功能职责：
-1. 批量渲染 4 款旗舰游戏（2077、黑神话、巫师3、博德3）的 5 联图；
-2. 严格对齐小红书/B站官方标准：1080x1440 像素 (3:4 比例)、锐利高对比度、带老L避坑信赖印章；
-3. 输出标准化分发物料包 (social_distribution/)，包含 800字脱敏爆款小红书文案、B站动态/专栏；
-4. 输出实战运营手册 (social_distribution/OPERATION_PLAYBOOK.md)；
-5. 全流程贯彻 Anti-Shadowban 脱敏引擎，杜绝平台风控违规词。
+1. 批量渲染 7 款旗舰游戏的 5 联图（1080x1440，3:4 竖图，小红书 / B 站规格）；
+2. 输出分发物料包，包含小红书文案、B站动态/专栏；
+3. 输出运营手册 (OPERATION_PLAYBOOK.md)；
+4. 发布文案过一遍平台用词替换（只换说法，不许换出没做过的承诺）。
+
+口径（2026-11-19 起，与网站 / README / 雷达页一致，只写做到的事）：
+- 没有人逐条在游戏里试过这些指令和 Mod，不写「实测 / 亲测 / 已校验 / 认证 / 对齐最新补丁」；
+- 7 款里只有 2077 / 黑神话 / 巫师3 / 博德3 的 .bat 会改配置文件，改之前另存 .bak；
+  法环 / 老滚5 / 辐射4 的 .bat 只检查目录、打印提示；所有脚本都不备份存档；
+- 没有网盘包、没有「一键还原 / 一键卸载」脚本、没有测试机，不写「秒推 / 秒领 / 连夜更新」；
+- 避坑雷达每天比对一次 Steam 更新时间，不做实机测试，只说「可能」；
+- 不写「零封号 / 零闪退 / 零报毒 / 100%」。
+
+只写社媒产物：social_distribution/ 和它在 public/social_distribution/ 的镜像
+（PNG、两份文案、OPERATION_PLAYBOOK.md），不读不写 data.js。
 """
 
+import io
 import os
 import sys
 import json
@@ -23,8 +34,11 @@ from PIL import Image, ImageDraw, ImageFont
 
 # 基础目录定位
 BASE_DIR = Path(__file__).resolve().parent.parent
-SRC_DATA_PATH = BASE_DIR / "src" / "data" / "games_top100.json"
 DISTRIBUTION_DIR = BASE_DIR / "social_distribution"
+# 站点从 public/ 发布，首页和雷达页直接引用 public/social_distribution/ 下的 PNG，
+# 两份必须一致，所以出图时同时写镜像（以前靠手工拷贝，容易一份新一份旧）。
+PUBLIC_MIRROR_DIR = BASE_DIR / "public" / "social_distribution"
+OUTPUT_DIRS = [DISTRIBUTION_DIR, PUBLIC_MIRROR_DIR]
 
 # ==============================================================================
 # 1. 字体配置 (精准匹配 macOS 系统内置高品质中英文字体)
@@ -60,21 +74,77 @@ def load_fonts():
 
 FONTS = load_fonts()
 
+# ------------------------------------------------------------------------------
+# 字形过滤：系统黑体没有 emoji 和 ✗ ➔ 等符号，直接画会变成方块（旧卡片上的 □ 就是这么来的）。
+# 画字前按字体的 cmap 去掉画不出来的字符，能换的换成近似字符。
+# ------------------------------------------------------------------------------
+GLYPH_FALLBACKS = {"➔": "→", "✗": "×", "✔": "√", "✓": "√"}
+_CMAP_CACHE = {}
+
+def _font_cmap(font):
+    path = getattr(font, "path", None)
+    if not path:
+        return None
+    if path not in _CMAP_CACHE:
+        try:
+            from fontTools.ttLib import TTCollection, TTFont
+            if str(path).lower().endswith(".ttc"):
+                _CMAP_CACHE[path] = set(TTCollection(path).fonts[0].getBestCmap())
+            else:
+                _CMAP_CACHE[path] = set(TTFont(path).getBestCmap())
+        except Exception:
+            _CMAP_CACHE[path] = None  # 没有 fontTools 就不过滤
+    return _CMAP_CACHE[path]
+
+def renderable(text, font):
+    cmap = _font_cmap(font) if font is not None else None
+    if cmap is None or not text:
+        return text
+    out = []
+    for ch in str(text):
+        ch = GLYPH_FALLBACKS.get(ch, ch)
+        if ch in "\n\t" or ord(ch) in cmap:
+            out.append(ch)
+    return "".join(out).strip()
+
+# 画布内可写区域（外框 20~1060，内容区 60~1020）；超出的文字记下来，出图结束时报出来
+CONTENT_LEFT, CONTENT_RIGHT = 56, 1024
+OVERFLOW_LOG = []
+
+class SafeDraw(ImageDraw.ImageDraw):
+    """画字前过滤画不出的字符，并检查有没有写出内容区。"""
+    current_card = ""
+
+    def textbbox(self, xy, text, *args, **kwargs):
+        return super().textbbox(xy, renderable(text, kwargs.get("font")), *args, **kwargs)
+
+    def text(self, xy, text, *args, **kwargs):
+        font = kwargs.get("font")
+        clean = renderable(text, font)
+        super().text(xy, clean, *args, **kwargs)
+        if clean:
+            box = super().textbbox(xy, clean, font=font, anchor=kwargs.get("anchor"))
+            if box[0] < CONTENT_LEFT or box[2] > CONTENT_RIGHT:
+                OVERFLOW_LOG.append(f"{self.current_card}: x={box[0]}~{box[2]} 「{clean}」")
+
 # ==============================================================================
-# 2. 平台防限流合规脱敏词典 (Anti-Shadowban Lexicon)
+# 2. 平台用词替换表（只把敏感词换成中性说法）
+# 旧表会把「盗版」换成「官方离线原生支持」、「修改器」换成「纯净优化拓展包」、
+# 「跳过任务」换成「坏档剧情修复」，等于替我们写了没做过的承诺，而且「别去盗版网站下修改器」
+# 会被换成「别去官方离线原生支持网站下纯净优化拓展包」。现在只换成不带承诺的中性词。
 # ==============================================================================
 DESENSITIZATION_MAP = [
-    (r"作弊码|作弊代码|作弊", "官方调试指令"),
-    (r"修改器|外挂|辅助挂", "纯净优化拓展包"),
-    (r"控制台代码|控制台作弊", "底层控制台彩蛋"),
+    (r"作弊码|作弊代码|作弊", "调试指令"),
+    (r"修改器|外挂|辅助挂", "第三方工具"),
+    (r"控制台代码|控制台作弊", "控制台指令"),
     (r"锁血|无限血|无敌模式", "手残救星·剧情体验模式"),
     (r"无限蓝|无限体力|秒杀", "极速破韧·战斗畅爽增强"),
     (r"刷钱|无限金钱|无限金币", "资源自由·全图鉴解锁"),
     (r"无限负重|改负重", "背包减负·无痛探索"),
     (r"全武器解锁|刷物品", "全套神装图鉴·一键获取"),
     (r"穿墙|飞天", "自由摄影·全景透视视角"),
-    (r"跳过任务|强制完成任务", "卡关抢救·坏档剧情修复"),
-    (r"破解|盗版", "官方离线原生支持"),
+    (r"跳过任务|强制完成任务", "卡关抢救·推进任务进度"),
+    (r"破解|盗版", "来路不明"),
 ]
 
 def sanitize_text(text: str) -> str:
@@ -95,7 +165,6 @@ FLAGSHIP_GAMES = {
         "title": "赛博朋克 2077 (Cyberpunk 2077)",
         "short_title": "赛博朋克2077",
         "game_folder": "Cyberpunk 2077",
-        "verified_patch": "v2.13 (往日之影DLC全兼容)",
         "secret_code": "2077",
         "radar_code": "老L单机888",
         "colors": {
@@ -112,24 +181,24 @@ FLAGSHIP_GAMES = {
             "text_dim": (100, 116, 139),
         },
         "hook_card": {
-            "eyebrow": "【官方自留机制 · 深度解密】",
-            "title_line1": "2077 原来自带官方控制台！",
-            "title_line2": "彻底告别带毒修改器与闪退",
+            "eyebrow": "【开源 CET 框架 · 深度解密】",
+            "title_line1": "2077 也能开控制台！",
+            "title_line2": "不用来路不明的修改器",
             "pain_points": [
-                "网上泛滥的第三方修改器暗藏流氓弹窗与挖矿后门，杀毒疯狂报毒",
-                "游戏版本每次小更新即刻闪退崩溃，辛苦打的存档直接报废损坏",
-                "暴力注入内存极易破坏 Steam 成就判定，甚至导致游戏本体文件受损"
+                "来路不明的修改器可能捆绑弹窗或后门，杀毒软件经常报毒",
+                "游戏一更新，按内存地址改数据的工具常常失效甚至闪退",
+                "乱改内存可能把存档弄坏，出了问题很难查是哪一步"
             ],
-            "solution": "100% 官方离线底层机制 · 零注入 · 零报毒 · 零闪退",
+            "solution": "开源 CET 框架 · 源码公开 · 不用来路不明的 exe",
             "features": [
-                ("⚡ 10秒极速开门", "无需安装独立 exe，解压纯净开源框架即可唤醒控制台"),
-                ("🎮 场景化逃课套餐", "手残救星模式、全图鉴解锁、隐藏死神结局救赎一键搞定"),
-                ("🛡️ 官方补丁全兼容", "已通过当前 Steam 最新 2.13 大版本严格测试，安全防坏档")
+                ("⚡ 10秒极速开门", "无需安装独立 exe，解压开源的 CET 框架即可唤醒控制台"),
+                ("🎮 场景化逃课套餐", "手残救星模式、全图鉴解锁、隐藏死神结局救赎"),
+                ("🛡️ 游戏更新以后", "CET 跟着游戏版本适配，大更新后可能要等作者发新版")
             ]
         },
         "setup_card": {
-            "title": "小白 3 步唤醒官方隐藏控制台",
-            "subtitle": "无需编程基础 · 告别流氓软件 · 官方底层原生机制",
+            "title": "小白 3 步开启 CET 控制台",
+            "subtitle": "无需编程基础 · 开源框架 · 源码公开",
             "steps": [
                 {
                     "step": "STEP 01",
@@ -152,17 +221,18 @@ FLAGSHIP_GAMES = {
                 }
             ],
             "bat_note": {
-                "title": "💡 懒人福利：老L双击一键开门脚本 (.bat)",
+                "title": "💡 懒人福利：老L双击开门脚本 (.bat)",
                 "bullets": [
-                    "全自动检测 Steam 安装路径与 bin/x64 结构，杜绝放错目录",
-                    "全自动备份原文件，并绑定 ~ 键 (OEM_3) 默认快捷键",
-                    "遇任何问题一键复原，完全开源透明无任何恶意指令"
-                ]
+                    "放到游戏根目录运行，先检查 bin/x64/Cyberpunk2077.exe 在不在",
+                    "把 CET 呼出键设成 ~ 键；原 bindings.json 先另存为 .bak",
+                    "不下载、不安装 CET 本体，CET 要自己先放好；也不备份存档"
+                ],
+                "footer": "👉 脚本在 L-MOD Vault 网站本游戏页，纯文本，可用记事本查看"
             }
         },
         "commands_card": {
             "title": "常用高频逃课与救赎指令清单",
-            "subtitle": "呼出控制台直接复制粘贴回车生效 · 均适配 2.13 最新补丁",
+            "subtitle": "呼出 CET 控制台复制粘贴回车 · 执行前先存档",
             "commands": [
                 {
                     "name": "手残救星 · 剧情体验模式",
@@ -187,49 +257,31 @@ FLAGSHIP_GAMES = {
             ]
         },
         "mods_card": {
-            "title": "官方痛点解决 · 精选纯净 Mod",
-            "subtitle": "只选解决核心游玩痛点的质变插件 · 零冲突 · 坏档隔离",
+            "title": "解决痛点 · 精选 Mod",
+            "subtitle": "只挑解决痛点的几款 · 装之前看清版本和前置要求",
             "mods": [
                 {
                     "title": "Cyber Engine Tweaks (CET)",
                     "author": "yamashi",
-                    "downloads": "3.8M+ 下",
                     "tag": "核心底座",
-                    "desc": "官方底层脚本桥接与控制台框架，完全开源，零弹窗广告与后台残留"
+                    "desc": "社区开源的脚本与控制台框架（非官方），源码公开在 GitHub"
                 },
                 {
                     "title": "Native Settings UI",
                     "author": "jackhumbert",
-                    "downloads": "2.1M+ 下",
                     "tag": "体验质变",
                     "desc": "将所有模组配置直接集成进游戏原生主菜单，无需切桌面随时调节"
                 },
                 {
                     "title": "Equipment-EX (衣柜外观扩展)",
                     "author": "psiberx",
-                    "downloads": "1.4M+ 下",
                     "tag": "赛博暖暖",
                     "desc": "突破原版装备栏限制，支持30+部位自由穿搭且不影响护甲战斗属性"
                 }
             ]
         },
         "cta_card": {
-            "title": "防代码失效雷达与全套自取通道",
-            "subtitle": "Steam 大版本补丁连夜更新对齐 · 杜绝网传过期代码与坏档",
-            "vip_title": "一键懒人免配包 & 完整代码库",
-            "vip_bullets": [
-                "双击自动开门批处理脚本 (.bat) —— 自动检测路径与热键",
-                "纯净 CET 前置离线安装包 (v2.13 最新版) —— 零木马无弹窗",
-                "场景化套餐代码合集 TXT (中文详细注解) —— 即粘即用",
-                "夜之城 100+ 条全不朽武器与全载具指令速查手册"
-            ],
-            "code_title": "私域 / 微信公众号后台回复暗号：",
-            "code_main": "【老L单机888】 或 【2077】",
-            "guarantees": [
-                ("⚡ 补丁连夜追更", "Steam 官方推送新版本后，老L团队第一时间测试并同步更新代码"),
-                ("🛡️ 坏档急救自救", "提供专属原版纯净备份还原方案，Mod 冲突在线排查指南"),
-                ("💬 纯净极客圈子", "无广告无割韭菜，硬核单机玩家交流避坑心得与全结局探讨")
-            ]
+            "code_main": "【老L单机888】 或 【2077】"
         }
     },
 
@@ -238,7 +290,6 @@ FLAGSHIP_GAMES = {
         "title": "黑神话：悟空 (Black Myth: Wukong)",
         "short_title": "黑神话悟空",
         "game_folder": "BlackMythWukong",
-        "verified_patch": "v1.0.10.15610 (Steam最新补丁实测)",
         "secret_code": "黑神话",
         "radar_code": "老L单机888",
         "colors": {
@@ -260,19 +311,19 @@ FLAGSHIP_GAMES = {
             "title_line2": "教你开启虚幻5原生调试模式",
             "pain_points": [
                 "幽魂、白衣秀士、虎先锋卡关卡到摔手柄，挫败感极强甚至退款",
-                "网上带毒修改器不仅报毒还容易锁死帧率，甚至破坏打坐存盘机制",
+                "来路不明的修改器可能报毒，游戏一更新就失效或闪退",
                 "想要体验齐天大圣全法术真神力，却受限于冗长痛苦的开荒刷怪"
             ],
-            "solution": "虚幻5引擎原生调试机制 · 官方架构 · 零报毒 · 零冲突",
+            "solution": "开源 UE4SS 打开引擎自带控制台 · 源码公开",
             "features": [
-                ("⚡ 10秒极速开门", "基于虚幻5原生 UE4SS 框架，改动配置即可唤出控制台"),
+                ("⚡ 10秒极速开门", "装好开源的 UE4SS 框架，改一行配置即可唤出控制台"),
                 ("🎮 场景化逃课套餐", "0.4x 子弹时间、大圣六根遗物全集齐、影神图全图鉴解锁"),
-                ("🛡️ 官方补丁全兼容", "已通过当前 Steam 最新补丁全面测试，土地庙存盘稳定")
+                ("🛡️ 游戏更新以后", "UE4SS 可能要等作者适配新版本；先存档，更新情况看避坑雷达")
             ]
         },
         "setup_card": {
-            "title": "小白 3 步唤醒官方隐藏控制台",
-            "subtitle": "无需编程基础 · 告别流氓软件 · 虚幻5底层原生机制",
+            "title": "小白 3 步唤醒引擎控制台",
+            "subtitle": "无需编程基础 · 开源框架 · 改一行配置",
             "steps": [
                 {
                     "step": "STEP 01",
@@ -290,22 +341,23 @@ FLAGSHIP_GAMES = {
                     "step": "STEP 03",
                     "title": "启动游戏按下快捷键唤醒",
                     "detail": "进入游戏画面后按下快捷键，屏幕上方呼出虚幻5原生控制台命令行！",
-                    "key_text": "F10 键 或 ~ 键",
-                    "key_sub": "土地庙打坐后呼出更稳定"
+                "key_text": "F10 键 或 ~ 键",
+                    "key_sub": "按不出来就换另一个键试试"
                 }
             ],
             "bat_note": {
-                "title": "💡 懒人福利：老L双击一键激活脚本 (.bat)",
+                "title": "💡 懒人福利：老L双击激活脚本 (.bat)",
                 "bullets": [
-                    "全自动检测 b1/Binaries/Win64 路径，避免目录层级放错",
-                    "全自动将 ConsoleEnablerMod 从 0 改为 1，并备份 mods.txt.bak",
-                    "一键双击搞定，无需手动用记事本翻找编辑代码"
-                ]
+                    "放到游戏根目录运行，先检查 b1/Binaries/Win64 在不在",
+                    "mods.txt 先另存为 mods.txt.bak，再把 ConsoleEnablerMod 改成 1",
+                    "不安装 UE4SS 本体，没装只会提示；也不备份存档"
+                ],
+                "footer": "👉 脚本在 L-MOD Vault 网站本游戏页，纯文本，可用记事本查看"
             }
         },
         "commands_card": {
             "title": "常用高频逃课与救赎指令清单",
-            "subtitle": "呼出控制台直接复制粘贴回车生效 · 建议土地庙存盘后执行",
+            "subtitle": "呼出控制台复制粘贴回车 · 建议土地庙存盘后再执行",
             "commands": [
                 {
                     "name": "手残救星 · 0.4x 子弹时间",
@@ -330,49 +382,31 @@ FLAGSHIP_GAMES = {
             ]
         },
         "mods_card": {
-            "title": "官方痛点解决 · 精选纯净 Mod",
-            "subtitle": "只选解决核心游玩痛点的质变插件 · 零冲突 · 坏档隔离",
+            "title": "解决痛点 · 精选 Mod",
+            "subtitle": "只挑解决痛点的几款 · 装之前看清版本和前置要求",
             "mods": [
                 {
                     "title": "UE4SS Framework",
                     "author": "UE4SS Team",
-                    "downloads": "2.5M+ 下",
                     "tag": "引擎底座",
-                    "desc": "虚幻5原生 C++ 与 Lua 调试引擎底座，纯净透明，必备运行环境"
+                    "desc": "社区开源的虚幻引擎脚本与调试框架（非官方），控制台要靠它"
                 },
                 {
                     "title": "Enhanced Wukong Map (全收集地图雷达)",
                     "author": "WukongModder",
-                    "downloads": "1.8M+ 下",
                     "tag": "体验质变",
-                    "desc": "完美解决原版无内置地图与迷路痛点，实时显示土地庙、打坐蒲团与宝箱"
+                    "desc": "补上原版没有的地图，显示土地庙、打坐蒲团与宝箱位置"
                 },
                 {
                     "title": "Ultra Ultrawide (带鱼屏黑边消除)",
                     "author": "Rose",
-                    "downloads": "750K+ 下",
                     "tag": "视觉增强",
                     "desc": "消除 21:9 与 32:9 带鱼屏过场动画两侧黑边，画质沉浸感翻倍"
                 }
             ]
         },
         "cta_card": {
-            "title": "防代码失效雷达与全套自取通道",
-            "subtitle": "Steam 大版本补丁连夜更新对齐 · 杜绝网传过期代码与坏档",
-            "vip_title": "一键懒人免配包 & 完整代码库",
-            "vip_bullets": [
-                "双击自动激活控制台批处理脚本 (.bat) —— 免记事本手动编辑",
-                "纯净 UE4SS 框架完整离线包 (已预设控制台开启) —— 解压即用",
-                "大圣场景化套餐指令合集 TXT (含0.4x慢动作/全图鉴) —— 中文备注",
-                "全妖魔精魄化身、神兵图鉴与六根遗物指令速查手册"
-            ],
-            "code_title": "私域 / 微信公众号后台回复暗号：",
-            "code_main": "【老L单机888】 或 【黑神话】",
-            "guarantees": [
-                ("⚡ 补丁连夜追更", "黑神话官方推送热更新后，老L第一时间实测并同步更新代码"),
-                ("🛡️ 坏档急救自救", "提供原厂配置文件备份与还原指导，杜绝土地庙存盘异常"),
-                ("💬 纯净极客圈子", "无广告无割韭菜，大圣天命人硬核交流真结局与剧情隐喻")
-            ]
+            "code_main": "【老L单机888】 或 【黑神话】"
         }
     },
 
@@ -381,7 +415,6 @@ FLAGSHIP_GAMES = {
         "title": "巫师3：狂猎 次世代完全版 (The Witcher 3)",
         "short_title": "巫师3次世代",
         "game_folder": "The Witcher 3",
-        "verified_patch": "v4.04 (次世代版 / 完全版 - REDkit官方支持)",
         "secret_code": "巫师3",
         "radar_code": "老L单机888",
         "colors": {
@@ -403,19 +436,19 @@ FLAGSHIP_GAMES = {
             "title_line2": "改一个字母逆转爱丽丝悲剧",
             "pain_points": [
                 "石之心通关后交出爱丽丝玫瑰懊悔终生，支线选错导致无法挽回的悲剧",
-                "到处寻找第三方修改器，却遇到报毒、弹窗和次世代 4.04 严重冲突闪退",
+                "到处找第三方修改器，却遇到报毒、弹窗，次世代版更新后还闪退",
                 "开荒捡垃圾负重爆仓、昆特牌连输砸键盘、跑图跑断腿令人烦躁"
             ],
-            "solution": "官方原生 ini 开关 · 零注入 · 零外部程序 · 终生防封",
+            "solution": "游戏自带 ini 开关 · 不装第三方程序 · 只改一个配置文件",
             "features": [
                 ("⚡ 10秒极速开门", "无需下载任何第三方 exe，仅需在 general.ini 加一行代码"),
                 ("🎮 场景化逃课套餐", "杰洛特无双模式、全大陆路标全开、爱丽丝永存信物获取"),
-                ("🛡️ 官方补丁全兼容", "完全对齐次世代 v4.04 与 REDkit 官方工具链，零坏档")
+                ("🛡️ 游戏更新以后", "控制台开关是游戏自带的；装的 Mod 更新后可能要等作者适配")
             ]
         },
         "setup_card": {
             "title": "小白 3 步唤醒官方隐藏控制台",
-            "subtitle": "无需编程基础 · 告别流氓软件 · 官方底层原生机制",
+            "subtitle": "无需编程基础 · 不装第三方程序 · 游戏自带开关",
             "steps": [
                 {
                     "step": "STEP 01",
@@ -438,17 +471,18 @@ FLAGSHIP_GAMES = {
                 }
             ],
             "bat_note": {
-                "title": "💡 懒人福利：老L双击一键开门脚本 (.bat)",
+                "title": "💡 懒人福利：老L双击开门脚本 (.bat)",
                 "bullets": [
-                    "全自动定位 general.ini，自动备份为 general.ini.bak",
-                    "全自动注入 DBGConsoleOn=true，无任何外部 DLL 注入风险",
-                    "出现任何异常一键秒还原，真正绿色纯净无残留"
-                ]
+                    "放到游戏根目录运行，先检查 bin/config/base/general.ini 在不在",
+                    "general.ini 先另存为 general.ini.bak，再写入 DBGConsoleOn=true",
+                    "想还原就把 .bak 改回原名；不碰别的文件，也不备份存档"
+                ],
+                "footer": "👉 脚本在 L-MOD Vault 网站本游戏页，纯文本，可用记事本查看"
             }
         },
         "commands_card": {
             "title": "常用高频逃课与救赎指令清单",
-            "subtitle": "呼出控制台直接复制粘贴回车生效 · 次世代版 4.04 亲测可用",
+            "subtitle": "呼出控制台复制粘贴回车 · 执行前先存档",
             "commands": [
                 {
                     "name": "手残救星 · 猎魔人无双体验",
@@ -473,49 +507,31 @@ FLAGSHIP_GAMES = {
             ]
         },
         "mods_card": {
-            "title": "官方痛点解决 · 精选纯净 Mod",
-            "subtitle": "只选解决核心游玩痛点的质变插件 · 零冲突 · 坏档隔离",
+            "title": "解决痛点 · 精选 Mod",
+            "subtitle": "只挑解决痛点的几款 · 装之前看清版本和前置要求",
             "mods": [
                 {
                     "title": "Community Patch Base",
                     "author": "W3 Community",
-                    "downloads": "4.1M+ 下",
-                    "tag": "官方前置",
-                    "desc": "次世代版本必备的脚本合并与底层冲突修复基石，杜绝红字报错"
+                    "tag": "社区前置",
+                    "desc": "社区做的脚本合并与冲突修复前置，减少脚本红字报错"
                 },
                 {
                     "title": "Fast Travel from Anywhere",
                     "author": "JupiterTheGroove",
-                    "downloads": "2.8M+ 下",
                     "tag": "体验质变",
                     "desc": "告别跑路到路标的繁琐操作，在大地图上点击任何已知路标即刻传送"
                 },
                 {
                     "title": "All Quest Objectives on Map",
                     "author": "Wolfmark",
-                    "downloads": "2.3M+ 下",
                     "tag": "地图增强",
                     "desc": "在世界大地图上同时标出全部已接任务目标与商人位置，极其便利"
                 }
             ]
         },
         "cta_card": {
-            "title": "防代码失效雷达与全套自取通道",
-            "subtitle": "Steam 大版本补丁连夜更新对齐 · 杜绝网传过期代码与坏档",
-            "vip_title": "一键懒人免配包 & 完整代码库",
-            "vip_bullets": [
-                "双击自动开启控制台批处理脚本 (.bat) —— 自动备份 ini 文件",
-                "次世代版 general.ini 原版与修改版对比包 —— 零风险",
-                "猎魔人场景化套餐代码合集 TXT (含宗师神剑与爱丽丝) —— 即粘即用",
-                "全宗师学派神装、昆特牌全图鉴与突变诱发物速查手册"
-            ],
-            "code_title": "私域 / 微信公众号后台回复暗号：",
-            "code_main": "【老L单机888】 或 【巫师3】",
-            "guarantees": [
-                ("⚡ 补丁连夜追更", "CDPR 推送次世代热更新后，老L团队第一时间测试并同步验证"),
-                ("🛡️ 坏档急救自救", "提供原厂 ini 还原与脚本合并排查方案，保姆级救援"),
-                ("💬 纯净极客圈子", "无广告无割韭菜，硬核猎魔人交流打牌技巧与剧情分支抉择")
-            ]
+            "code_main": "【老L单机888】 或 【巫师3】"
         }
     },
 
@@ -524,7 +540,6 @@ FLAGSHIP_GAMES = {
         "title": "博德之门 3 (Baldur's Gate 3)",
         "short_title": "博德之门3",
         "game_folder": "Baldurs Gate 3",
-        "verified_patch": "Patch 7 (官方MOD管理器全面兼容)",
         "secret_code": "博德3",
         "radar_code": "老L单机888",
         "colors": {
@@ -541,24 +556,24 @@ FLAGSHIP_GAMES = {
             "text_dim": (120, 105, 170),
         },
         "hook_card": {
-            "eyebrow": "【Script Extender 原生机制 · 深度解密】",
-            "title_line1": "博德之门3 Patch 7 必看！",
-            "title_line2": "免注入纯净底层控制台指南",
+            "eyebrow": "【Script Extender 框架 · 深度解密】",
+            "title_line1": "博德之门3 控制台怎么开？",
+            "title_line2": "Script Extender 控制台指南",
             "pain_points": [
-                "Patch 7 官方模组工坊上线后，网上旧版修改器与 Mod 大面积闪退坏档",
+                "官方模组管理器上线后，不少旧版修改器与 Mod 闪退、读不了档",
                 "荣誉模式被秒灭队心态爆炸，长休营地补给天天翻垃圾桶令人头秃",
                 "队友意难平剧情分支选错，好感度不足导致恋爱支线永久锁死"
             ],
-            "solution": "Norbyte 官方控制台黑窗 · Patch 7 对齐 · 不破成就 · 零报毒",
+            "solution": "Norbyte 开源 Script Extender · 控制台窗口 · 源码公开",
             "features": [
-                ("⚡ 10秒极速开门", "官方推荐 Script Extender 底层黑窗，游戏自带回车即执行"),
+                ("⚡ 10秒极速开门", "社区开源的 Script Extender 带控制台窗口，回车即执行"),
                 ("🎮 场景化逃课套餐", "全员常驻急速飞行、10万黄金、起源队友全满好感救赎"),
-                ("🛡️ 官方补丁全兼容", "完全对齐 Patch 7 官方模组管理器，零崩溃闪退风险")
+                ("🛡️ 游戏更新以后", "Script Extender 要跟着游戏版本更新，大补丁后可能要等作者")
             ]
         },
         "setup_card": {
-            "title": "小白 3 步唤醒官方隐藏控制台",
-            "subtitle": "无需编程基础 · 告别流氓软件 · 官方底层原生机制",
+            "title": "小白 3 步打开 SE 控制台",
+            "subtitle": "无需编程基础 · 开源框架 · 源码公开",
             "steps": [
                 {
                     "step": "STEP 01",
@@ -577,21 +592,23 @@ FLAGSHIP_GAMES = {
                     "title": "启动游戏即现独立调试黑窗",
                     "detail": "启动游戏时后台自动弹出一个清爽控制台黑窗，直接回车执行 Osi 指令！",
                     "key_text": "Script Extender 黑窗",
-                    "key_sub": "后台窗口回车即刻执行"
+                    "key_sub": "在这个窗口里输入回车",
+                    "key_hint": "启动游戏时会多出一个控制台窗口"
                 }
             ],
             "bat_note": {
-                "title": "💡 懒人福利：老L双击一键开门脚本 (.bat)",
+                "title": "💡 懒人福利：老L双击开门脚本 (.bat)",
                 "bullets": [
-                    "全自动检测 Baldurs Gate 3/bin 路径，放置 DWrite.dll 底层前置",
-                    "全自动生成合规 ScriptExtenderSettings.json 配置文件",
-                    "支持 Patch 7 官方 MOD 管理器，绝不破坏 Steam 成就解锁"
-                ]
+                    "生成 ScriptExtenderSettings.json，打开 SE 的控制台窗口",
+                    "写在 %LocalAppData% 的 Larian 目录下；原文件先另存为 .bak",
+                    "不放 DWrite.dll，Script Extender 本体要自己装；也不备份存档"
+                ],
+                "footer": "👉 脚本在 L-MOD Vault 网站本游戏页，纯文本，可用记事本查看"
             }
         },
         "commands_card": {
             "title": "常用高频逃课与救赎指令清单",
-            "subtitle": "直接在 Script Extender 黑窗回车输入 · Patch 7 全兼容",
+            "subtitle": "在 Script Extender 控制台窗口输入回车 · 执行前先存档",
             "commands": [
                 {
                     "name": "手残救星 · 全员常驻急速术",
@@ -611,54 +628,36 @@ FLAGSHIP_GAMES = {
                 {
                     "name": "意难平救赎 · 影心满好感",
                     "code": 'Osi.SetAttitude(GetHostCharacter(), "S_Player_Shadowheart...", 100)',
-                    "note": "影心好感度瞬间拉满100点，稳稳解锁白发救赎剧情与亲密剧情"
+                    "note": "影心好感度直接拉满 100 点；剧情能不能触发还要看进度"
                 }
             ]
         },
         "mods_card": {
-            "title": "官方痛点解决 · 精选纯净 Mod",
-            "subtitle": "只选解决核心游玩痛点的质变插件 · 零冲突 · 坏档隔离",
+            "title": "解决痛点 · 精选 Mod",
+            "subtitle": "只挑解决痛点的几款 · 装之前看清版本和前置要求",
             "mods": [
                 {
                     "title": "Norbyte Script Extender",
                     "author": "Norbyte",
-                    "downloads": "4.5M+ 下",
-                    "tag": "官方基石",
-                    "desc": "官方 Patch 7 认证的底层脚本扩展框架，支持原生黑窗与成就恢复"
+                    "tag": "核心前置",
+                    "desc": "社区开源的脚本扩展框架（非官方），能开控制台窗口"
                 },
                 {
                     "title": "Better Inventory UI",
                     "author": "Caskas",
-                    "downloads": "1.9M+ 下",
                     "tag": "体验质变",
                     "desc": "智能分类卷轴、药水与钥匙背包，彻底告别四人小队翻背包找道具噩梦"
                 },
                 {
                     "title": "Party Limit Begone (解除小队上限)",
                     "author": "Scribe",
-                    "downloads": "2.2M+ 下",
                     "tag": "全员集结",
                     "desc": "突破4人队伍限制，带上全部起源伙伴一同旅行冒险，触发全部大合唱对话"
                 }
             ]
         },
         "cta_card": {
-            "title": "防代码失效雷达与全套自取通道",
-            "subtitle": "Steam 大版本补丁连夜更新对齐 · 杜绝网传过期代码与坏档",
-            "vip_title": "一键懒人免配包 & 完整代码库",
-            "vip_bullets": [
-                "双击自动开启控制台批处理脚本 (.bat) —— 自动配置 json",
-                "Patch 7 适配版 Script Extender 离线集成包 —— 零报错",
-                "费伦场景化套餐代码合集 TXT (含传奇神兵与队友恋爱) —— 即粘即用",
-                "全神圣装备 UUID、全夺心魔技能与营地补给指令速查手册"
-            ],
-            "code_title": "私域 / 微信公众号后台回复暗号：",
-            "code_main": "【老L单机888】 或 【博德3】",
-            "guarantees": [
-                ("⚡ 补丁连夜追更", "拉瑞安推送 Patch 7 后续热修复后，老L团队第一时间测试并同步更新"),
-                ("🛡️ 坏档急救自救", "提供纯净存档备份方案与 Mod 冲突在线排查指南，保姆级自救"),
-                ("💬 纯净极客圈子", "无广告无割韭菜，硬核费伦老饕交流 DND 构筑心得与隐藏支线")
-            ]
+            "code_main": "【老L单机888】 或 【博德3】"
         }
     },
     "elden-ring": {
@@ -666,7 +665,6 @@ FLAGSHIP_GAMES = {
         "title": "艾尔登法环 (Elden Ring)",
         "short_title": "艾尔登法环",
         "game_folder": "ELDEN RING",
-        "verified_patch": "v1.14 (黄金树幽影DLC完全对齐)",
         "secret_code": "法环",
         "radar_code": "老L单机888",
         "colors": {
@@ -685,22 +683,22 @@ FLAGSHIP_GAMES = {
         "hook_card": {
             "eyebrow": "【黄金树幽影 · 纯净轮椅方案】",
             "title_line1": "法环幽影之地太折磨？",
-            "title_line2": "100%安全离线防封轮椅指南",
+            "title_line2": "离线轮椅指南：只在单机用",
             "pain_points": [
                 "幽影树碎片全图盲目搜寻翻罐子，立体地图跑图卡关折磨数小时",
                 "被狂龙贝勒与双月骑士数值怪反复虐哭，招架失败挫败感拉满",
-                "网上劣质第三方软件暗藏后门挖矿病毒，甚至面临联机封号风险"
+                "来路不明的工具可能带后门；带着改过的存档联机还有封号风险"
             ],
-            "solution": "100% 离线 EAC 拦截机制 · 独立存档 · 零封号 · 零闪退",
+            "solution": "ModEngine2 离线启动 · 不加载 EAC · 别带进联机",
             "features": [
-                ("⚡ 10秒离线免封开门", "ModEngine2 管道拦截 EAC 守护进程，绝无官方封号风险"),
+                ("⚡ 离线启动", "ModEngine2 启动时不加载 EAC，只能离线玩；联机请从 Steam 正常启动"),
                 ("🎮 幽影树轮椅神技套餐", "幽影树庇护一键拉满、全追忆神装、仿身泪滴带头大哥无痛获取"),
-                ("🛡️ 黄金树补丁全对齐", "已通过当前 Steam 最新 v1.14 幽影之地大版本实机测试")
+                ("🛡️ 游戏更新以后", "ModEngine2 和 CT 表可能要等作者适配新版本；更新情况看避坑雷达")
             ]
         },
         "setup_card": {
-            "title": "小白 3 步唤醒纯净离线环境",
-            "subtitle": "无需复杂操作 · 拦截 EAC 反作弊 · 官方底层纯净体验",
+            "title": "小白 3 步进入离线 Mod 环境",
+            "subtitle": "ModEngine2 启动时不加载 EAC · 只能离线玩",
             "steps": [
                 {
                     "step": "STEP 01",
@@ -716,24 +714,26 @@ FLAGSHIP_GAMES = {
                 },
                 {
                     "step": "STEP 03",
-                    "title": "双击离线脚本安全畅玩",
+                    "title": "用 ModEngine2 的脚本启动",
                     "detail": "双击 launchmod_eldenring.bat 启动，主菜单右下角提示已离线即可！",
                     "key_text": "launchmod.bat",
-                    "key_sub": "100% 安全离线免封启动"
+                    "key_sub": "从这里启动不加载 EAC",
+                    "key_hint": "主菜单右下角提示离线就对了"
                 }
             ],
             "bat_note": {
-                "title": "💡 极客避坑：老L无痛防封双击脚本 (.bat)",
+                "title": "💡 离线玩之前先看这三条",
                 "bullets": [
-                    "全自动重定向绕过 Easy Anti-Cheat (EAC) 驱动守护进程",
-                    "联机可选用 Seamless Co-op，独立 .co2 存档与官方服务器物理隔离",
-                    "随时可通过 Steam 正常切回线上正版联机，存档零污染"
-                ]
+                    "launchmod_eldenring.bat 是 ModEngine2 自带的，从它启动不加载 EAC",
+                    "Seamless Co-op 用独立的 .co2 存档，不连官方匹配",
+                    "想回官方联机就从 Steam 正常启动；别把改过的存档带上线"
+                ],
+                "footer": "👉 完整步骤和指令在 L-MOD Vault 网站本游戏页"
             }
         },
         "commands_card": {
             "title": "常用高频逃课与轮椅神技清单",
-            "subtitle": "离线环境一键激活 · 均适配 v1.14 幽影之地补丁",
+            "subtitle": "CT 表要配合 Cheat Engine 用 · 只在离线时用，先存档",
             "commands": [
                 {
                     "name": "幽影树庇护拉满 · Lv20满级",
@@ -758,49 +758,31 @@ FLAGSHIP_GAMES = {
             ]
         },
         "mods_card": {
-            "title": "官方痛点解决 · 精选纯净 Mod",
-            "subtitle": "只选解决核心游玩痛点的质变插件 · 零冲突 · 坏档隔离",
+            "title": "解决痛点 · 精选 Mod",
+            "subtitle": "只挑解决痛点的几款 · 装之前看清版本和前置要求",
             "mods": [
                 {
                     "title": "Seamless Co-op (无缝联机)",
                     "author": "LukeYui",
-                    "downloads": "4.2M+ 下",
                     "tag": "联机天花板",
-                    "desc": "移除Boss打完被强遣返限制，全图无空气墙无缝跑图、独立co2存档零封号"
+                    "desc": "打完 Boss 不再被遣返，全图无缝跑图；用独立 .co2 存档，不连官方匹配"
                 },
                 {
                     "title": "ModEngine2 模组加载框架",
                     "author": "SoulsMods",
-                    "downloads": "3.8M+ 下",
                     "tag": "核心基石",
-                    "desc": "免解包直接挂载全类型模组，自带 EAC 离线安全引导，不篡改原版"
+                    "desc": "免解包挂载模组，启动时不加载 EAC（只能离线），不改原版文件"
                 },
                 {
                     "title": "The Grand Archives CT 调试表",
                     "author": "TGA Team",
-                    "downloads": "2.9M+ 下",
                     "tag": "极客神器",
                     "desc": "全DLC装备道具一键派发、全图赐福点秒亮、360°自由运镜摄影"
                 }
             ]
         },
         "cta_card": {
-            "title": "防代码失效雷达与全套自取通道",
-            "subtitle": "Steam 大版本补丁连夜更新对齐 · 杜绝网传过期代码与坏档",
-            "vip_title": "一键懒人免配包 & 完整代码库",
-            "vip_bullets": [
-                "双击自动离线启动批处理脚本 (.bat) —— 自动拦截 EAC 守护",
-                "纯净 ModEngine2 离线集成框架 (v1.14 最新版) —— 零木马",
-                "幽影之地场景化套餐代码合集 TXT (全追忆武器/战灰/骨灰) —— 即查即用",
-                "交界地与幽影之地 100+ 条全赐福点亮与全法术速查手册"
-            ],
-            "code_title": "私域 / 微信公众号后台回复暗号：",
-            "code_main": "【老L单机888】 或 【法环】",
-            "guarantees": [
-                ("⚡ 补丁连夜追更", "FromSoftware 推送新补丁后，老L实验室第一时间测试并同步更新"),
-                ("🛡️ 坏档急救自救", "提供独立 .co2 存档与 .sl2 官方存档物理隔离方案，绝对安全"),
-                ("💬 纯净极客圈子", "无广告无割韭菜，硬核褪色者交流轮椅配装与逃课心得")
-            ]
+            "code_main": "【老L单机888】 或 【法环】"
         }
     },
     "skyrim-se": {
@@ -808,7 +790,6 @@ FLAGSHIP_GAMES = {
         "title": "上古卷轴5：天际重制版 (The Elder Scrolls V: Skyrim SE)",
         "short_title": "天际重制版",
         "game_folder": "Skyrim Special Edition",
-        "verified_patch": "v1.6.1170 (与 1.6.1130 AE 深度适配)",
         "secret_code": "老滚5",
         "radar_code": "老L单机888",
         "colors": {
@@ -831,12 +812,12 @@ FLAGSHIP_GAMES = {
             "pain_points": [
                 "任务NPC发呆不说话剧情死锁，数十小时心血存档直接报废",
                 "地牢石头缝隙卡死动弹不得，或者高刷显示器推车鬼畜飞天",
-                "满世界搜盗版修改器导致被植入流氓木马，一更新就CTD闪退"
+                "满世界搜来路不明的修改器，可能被捆绑木马，一更新就CTD闪退"
             ],
-            "solution": "B社原生 Creation 引擎终端 · 100% 官方离线逻辑 · 零报毒",
+            "solution": "游戏自带控制台 · 按 ~ 就能用 · 不用装任何东西",
             "features": [
                 ("⚡ 1秒波浪键直达", "美式键盘 ~ 键一键呼出，原生代码无需任何第三方注入"),
-                ("🛠️ 任务死锁秒解救", "官方 setstage 定向救活卡死支线，绝不毁坏全游戏进度"),
+                ("🛠️ 任务卡死试试 setstage", "按任务 ID 推进到指定阶段；先存档，阶段填错可能把任务弄乱"),
                 ("🏰 16魔神器全集自由", "官方开发者烟雾房 coc qasmoke 直达，全法术全龙吼随心体验")
             ]
         },
@@ -870,12 +851,13 @@ FLAGSHIP_GAMES = {
                     "FormID 前面的 000 全部可省略！比如金币 0000000F，直接输 player.additem f 100000",
                     "严禁盲目运行 caqs (完成全任务)，这会破坏全图 NPC 状态机造成终极坏档",
                     "高刷新率显示器请配合 SSE Engine Fixes 锁定物理帧率，防止马车飞天"
-                ]
+                ],
+                "footer": "👉 完整步骤和指令在 L-MOD Vault 网站本游戏页"
             }
         },
         "commands_card": {
             "title": "天际极客常用高频急救与神装清单",
-            "subtitle": "官方引擎原生指令 · 完美适配 v1.6.1170 SE/AE 补丁",
+            "subtitle": "游戏自带控制台指令 · 执行前先存档",
             "commands": [
                 {
                     "name": "穿墙脱困 · 解除卡石缝绝境",
@@ -890,7 +872,7 @@ FLAGSHIP_GAMES = {
                 {
                     "name": "救活卡死NPC · 满血原地复活",
                     "code": "resurrect 1",
-                    "note": "按 ~ 点击关键NPC尸体，瞬间满血满状态复活并重置AI状态机"
+                    "note": "按 ~ 点击关键NPC尸体再输入，让 NPC 复活；任务能否继续还要看进度"
                 },
                 {
                     "name": "万能启动金币 · 10万塞普汀到账",
@@ -900,49 +882,31 @@ FLAGSHIP_GAMES = {
             ]
         },
         "mods_card": {
-            "title": "天际重制版三大防闪退护航基石",
-            "subtitle": "B社 Mod 生态十年精华 · 解决 CTD 崩溃核心根源",
+            "title": "天际重制版三大常用前置",
+            "subtitle": "B社 Mod 生态常用前置 · 减少 CTD 闪退、方便排错",
             "mods": [
                 {
                     "title": "SKSE64 (脚本扩展器)",
                     "author": "Silverlock Team",
-                    "downloads": "12M+ 下载",
                     "tag": "Mod基石",
                     "desc": "全面拓宽天际 Papyrus 脚本引擎执行上限，现代高级模组必备核心"
                 },
                 {
                     "title": "SSE Engine Fixes (引擎修复)",
                     "author": "aers / Ryan",
-                    "downloads": "8.5M+ 下载",
                     "tag": "防闪退神作",
                     "desc": "修复高帧率推车飞天、LipSync 嘴唇不同步，突破模组句柄限制"
                 },
                 {
                     "title": "Crash Logger SSE (崩溃日志)",
                     "author": "alandtse",
-                    "downloads": "3.1M+ 下载",
                     "tag": "排错雷达",
-                    "desc": "CTD 瞬间精准输出日志堆栈，明确指出引发闪退的冲突 ESP 插件"
+                    "desc": "闪退时输出日志，帮你找出可能出问题的插件"
                 }
             ]
         },
         "cta_card": {
-            "title": "防代码失效雷达与全套自取通道",
-            "subtitle": "Steam 1.6.1170 大版本补丁连夜对齐 · 杜绝网传过期代码与坏档",
-            "vip_title": "一键懒人免配包 & 完整代码库",
-            "vip_bullets": [
-                "双击自动排错与环境引导批处理脚本 (.bat)",
-                "1.6.1170 最新版 SKSE64 + Engine Fixes 纯净前置包",
-                "全天际高频 setstage 恶性卡关任务定向急救手册 TXT",
-                "16 魔神器、全龙吼代码与全法术 FormID 极简速查表"
-            ],
-            "code_title": "私域 / 微信公众号后台回复暗号：",
-            "code_main": "【老L单机888】 或 【老滚5】",
-            "guarantees": [
-                ("⚡ 补丁连夜追更", "B社推送 1.6.1170 后续小修补后，老L实验室第一时间测试同步"),
-                ("🛡️ 坏档急救自救", "提供 Papyrus 脚本清理方案与纯净存档隔离备份 SOP"),
-                ("💬 纯净极客圈子", "无广告无收费，硬核抓根宝交流天际模组排序与排错心得")
-            ]
+            "code_main": "【老L单机888】 或 【老滚5】"
         }
     },
     "fallout-4": {
@@ -950,7 +914,6 @@ FLAGSHIP_GAMES = {
         "title": "辐射4：次世代更新版 (Fallout 4 Next-Gen)",
         "short_title": "辐射4",
         "game_folder": "Fallout 4",
-        "verified_patch": "v1.10.984+ (次世代大更新双轨实测)",
         "secret_code": "辐射4",
         "radar_code": "老L单机888",
         "colors": {
@@ -973,18 +936,18 @@ FLAGSHIP_GAMES = {
             "pain_points": [
                 "2024 次世代大更新破坏 9 年 Mod 体系，F4SE 崩溃红字频发",
                 "庇护山丘聚落建造容量被强制锁死变黄，想盖摩天大楼被卡脖子",
-                "网上盗版修改器暗藏挖矿病毒，游戏稍有更新存档直接当场报废"
+                "网上来路不明的修改器可能带病毒，游戏一更新就失效甚至坏档"
             ],
-            "solution": "官方次世代/降级双轨方案 · 原生控制台 · 建造上限秒破",
+            "solution": "次世代 / 降级两条路写清楚 · 游戏自带控制台",
             "features": [
-                ("⚡ 1秒开启原生控制台", "Creation 引擎底层原生支持，按 ~ 键即时呼出，不弹窗零木马"),
-                ("🏗️ 聚落无限建造指令", "setav 349/348 瞬间重置三角形面数，打造万物赛博主城"),
-                ("🛡️ 次世代避坑双轨指南", "提供 v1.10.984 NG 与 1.10.163 经典回退完整方案")
+                ("⚡ 1秒开启原生控制台", "游戏自带控制台，按 ~ 键呼出，不用装任何东西"),
+                ("🏗️ 聚落无限建造指令", "setav 349/348 重置建造容量，打造万物赛博主城"),
+                ("🛡️ 次世代避坑双轨指南", "写清 1.10.984 次世代版与 1.10.163 降级两条路线")
             ]
         },
         "setup_card": {
             "title": "小白 3 步唤醒废土原生控制台",
-            "subtitle": "无需复杂工具 · 锁定自动更新 · 原生纯净开门",
+            "subtitle": "无需复杂工具 · 少让 Steam 自动更新 · 游戏自带控制台",
             "steps": [
                 {
                     "step": "STEP 01",
@@ -994,9 +957,9 @@ FLAGSHIP_GAMES = {
                 },
                 {
                     "step": "STEP 02",
-                    "title": "Steam 库锁定仅启动更新",
-                    "detail": "右键属性 ➔ 更新 ➔ 设置为【仅在我启动该游戏时更新】，彻底防暗更：",
-                    "path_box": "日常启动一律使用 f4se_loader.exe 规避强制推送"
+                    "title": "Steam 改成仅启动时更新",
+                    "detail": "右键属性 ➔ 更新 ➔ 设置为【仅在我启动该游戏时更新】，减少后台更新：",
+                    "path_box": "装了 F4SE 的话，用 f4se_loader.exe 启动游戏"
                 },
                 {
                     "step": "STEP 03",
@@ -1012,12 +975,13 @@ FLAGSHIP_GAMES = {
                     "次世代更新重写了内存偏移，老版 F4SE 插件必须升级为 NG 版或回退 1.10.163",
                     "死亡三角区 (庇护山丘+红火箭+阿伯纳西) 避免同时高密建造，防止内存溢出",
                     "使用 scrapall 指令前务必先存盘，避免将重要动力装甲骨架误拆"
-                ]
+                ],
+                "footer": "👉 完整步骤和指令在 L-MOD Vault 网站本游戏页"
             }
         },
         "commands_card": {
             "title": "辐射4常用高频聚落与传奇神装清单",
-            "subtitle": "Creation 引擎原生底层指令 · 实测兼容次世代更新",
+            "subtitle": "游戏自带控制台指令 · 执行前先存档",
             "commands": [
                 {
                     "name": "聚落建造空间无限解除",
@@ -1042,52 +1006,74 @@ FLAGSHIP_GAMES = {
             ]
         },
         "mods_card": {
-            "title": "辐射4次世代稳定运行三大护航框架",
-            "subtitle": "解决次世代 Mod 崩溃 · 释放废土建造与图形潜力",
+            "title": "辐射4次世代常用三大前置",
+            "subtitle": "次世代版 Mod 常用前置 · 装之前看清版本要求",
             "mods": [
                 {
                     "title": "F4SE (辐射4脚本扩展器)",
                     "author": "Ian Patterson",
-                    "downloads": "9.8M+ 下载",
                     "tag": "Mod引擎",
                     "desc": "拓宽原生脚本能力，支持高级UI与复杂功能Mod，次世代认准v0.7.2+"
                 },
                 {
                     "title": "Buffout 4 NG (防崩溃神器)",
                     "author": "Ryan / Fudgy",
-                    "downloads": "4.5M+ 下载",
                     "tag": "防闪退核心",
                     "desc": "修复内存泄露、快速存档损坏与CTD崩溃，崩溃时输出详细错误日志"
                 },
                 {
                     "title": "Fallout 4 Downgrader",
                     "author": "Zerratar",
-                    "downloads": "1.6M+ 下载",
                     "tag": "回退神器",
-                    "desc": "次世代 Mod 崩溃救星，一键稳定降级回退至 1.10.163 黄金稳定版本"
+                    "desc": "把次世代版降级回 1.10.163（次世代更新之前的版本），老 Mod 能接着用"
                 }
             ]
         },
         "cta_card": {
-            "title": "防代码失效雷达与全套自取通道",
-            "subtitle": "Steam 次世代大更新双轨对齐 · 杜绝网传过期代码与坏档",
-            "vip_title": "一键懒人免配包 & 完整代码库",
-            "vip_bullets": [
-                "双击自动开门与防更新保护批处理脚本 (.bat)",
-                "次世代 F4SE v0.7.2+ 与经典降级工具双轨离线包",
-                "全传奇武器词条代码 TXT (双弹/爆裂/煽动/无尽) 即查即用",
-                "全动力装甲、核融合核心与聚落千亿材料速查手册"
-            ],
-            "code_title": "私域 / 微信公众号后台回复暗号：",
-            "code_main": "【老L单机888】 或 【辐射4】",
-            "guarantees": [
-                ("⚡ 补丁连夜追更", "B社次世代持续修复推送后，老L实验室第一时间测试同步"),
-                ("🛡️ 坏档急救自救", "提供降级回退与存档清洁 SOP，保姆级杜绝毁档"),
-                ("💬 纯净极客圈子", "无广告无收费，硬核废土老饕交流动力甲涂装与聚落蓝图")
-            ]
+            "code_main": "【老L单机888】 或 【辐射4】"
         }
     }
 }
+
+# ==============================================================================
+# 3b. 全部卡片通用的固定文案（只写做到的事；改之前对照文件头的口径）
+# ==============================================================================
+HEADER_BADGES = {
+    "hook": "老L整理 · 未逐条实测",
+    "setup": "零门槛 · 免安装程序",
+    "commands": "未逐条实测 · 先存档",
+    "mods": "装前先看版本要求",
+    "cta": "每天比对 Steam 更新",
+}
+
+COMMANDS_FOOTER = [
+    "※ 这些指令没有逐条在游戏里实测，版本不同可能失效；执行前先手动存档",
+    "更多指令见 L-MOD Vault 网站本游戏页",
+]
+
+MOD_RULES_TITLE = "装 Mod 前的三件事："
+MOD_RULES = [
+    "1. 先手动备份存档：老L的脚本都不备份存档；",
+    "2. 看清 Mod 页写的游戏版本和前置，游戏更新后可能要等作者适配；",
+    "3. 一次只加一两个，出问题先删掉最近加的再试。",
+]
+
+CTA_TITLE = "更新提醒与资料入口"
+CTA_SUBTITLE = "避坑雷达每天比对一次 Steam 更新时间 · 刚更新会标黄或标红"
+CTA_VIP_TITLE = "L-MOD Vault 网站本游戏页（免费）"
+CTA_VIP_BULLETS = [
+    "老L写的 .bat 脚本：纯文本，可用记事本查看全部内容",
+    "控制台指令清单与场景套餐，带中文说明",
+    "精选 Mod 与前置框架的介绍",
+    "本游戏的 Steam 更新提醒（避坑雷达）",
+]
+CTA_CODE_TITLE = "公众号后台或私信发送暗号，进玩家互助群："
+CTA_CODE_HINT = "（交流 Mod 更新进度与坏档处理经验）"
+CTA_NOTES = [
+    ("更新提醒", "避坑雷达每天比对一次 Steam 更新时间；不做实机测试，所以只说「可能」"),
+    ("存档自己备份", "老L的脚本都不备份存档；改配置、装 Mod 之前先手动复制存档文件夹"),
+    ("玩家互助群", "不接广告，群文件不放 exe；交流 Mod 更新进度与坏档处理经验"),
+]
 
 # ==============================================================================
 # 4. 高精度图形绘制工具库 (Pillow 几何美学引擎)
@@ -1153,15 +1139,15 @@ class DrawingEngine:
     @staticmethod
     def draw_geek_seal(draw: ImageDraw.ImageDraw, cx: int, cy: int, radius: int,
                        primary_color: tuple, secondary_color: tuple, fonts: dict):
-        """绘制老L避坑实验室官方信赖圆印 (L-MOD Verified Seal)"""
+        """绘制老L品牌圆印（只是品牌标识，不代表任何认证）"""
         draw.ellipse([cx - radius, cy - radius, cx + radius, cy + radius], outline=primary_color, width=3)
         r2 = radius - 8
         draw.ellipse([cx - r2, cy - r2, cx + r2, cy + r2], outline=secondary_color, width=1)
         r3 = radius - 15
         draw.ellipse([cx - r3, cy - r3, cx + r3, cy + r3], outline=primary_color, width=2)
-        draw.text((cx, cy - 30), "L-MOD VAULT", font=fonts["seal_title"], fill=primary_color, anchor="mm")
-        draw.text((cx, cy), "★ 官方底层对齐 ★", font=fonts["body_bold"], fill=(255, 255, 255), anchor="mm")
-        draw.text((cx, cy + 30), "100% PURE GEEK", font=fonts["seal_sub"], fill=secondary_color, anchor="mm")
+        draw.text((cx, cy - 28), "L-MOD", font=fonts["seal_title"], fill=primary_color, anchor="mm")
+        draw.text((cx, cy + 1), "老L整理", font=fonts["body_bold"], fill=(255, 255, 255), anchor="mm")
+        draw.text((cx, cy + 29), "仅限单机", font=fonts["seal_sub"], fill=secondary_color, anchor="mm")
 
     @staticmethod
     def draw_top_header(draw: ImageDraw.ImageDraw, tag_text: str, brand_text: str, patch_text: str,
@@ -1171,8 +1157,11 @@ class DrawingEngine:
         DrawingEngine.draw_badge(draw, 60, 60, tag_text, fonts["tag"], tag_bg, tag_color, radius=8)
         # 顶栏中间品牌标题
         draw.text((540, 78), brand_text, font=fonts["tag"], fill=colors["text_muted"], anchor="mm")
-        # 顶栏右侧补丁认证标
-        DrawingEngine.draw_badge(draw, 800, 60, patch_text, fonts["tag"], (20, 35, 30), patch_color, border_color=(40, 80, 60), radius=8)
+        # 顶栏右侧说明标（右对齐到 1020，以前固定从 x=800 起画，长一点就出框）
+        pad_x = 14
+        bbox = draw.textbbox((0, 0), patch_text, font=fonts["tag"])
+        badge_x = 1020 - (bbox[2] - bbox[0]) - pad_x * 2
+        DrawingEngine.draw_badge(draw, badge_x, 60, patch_text, fonts["tag"], (20, 35, 30), patch_color, border_color=(40, 80, 60), pad_x=pad_x, radius=8)
         # 顶部分隔细线
         draw.line([(60, 125), (1020, 125)], fill=(35, 45, 65), width=1)
 
@@ -1203,22 +1192,23 @@ class CardRenderer:
         self.c = self.data["colors"]
         self.w, self.h = 1080, 1440
 
-    def _create_base(self) -> (Image.Image, ImageDraw.ImageDraw):
+    def _create_base(self, card_name: str = "") -> (Image.Image, ImageDraw.ImageDraw):
         img = DrawingEngine.create_gradient_canvas(self.w, self.h, self.c["bg_top"], self.c["bg_bottom"])
-        draw = ImageDraw.Draw(img)
+        draw = SafeDraw(img)
+        draw.current_card = f"{self.data['dir_name']}/{card_name}"
         # 优雅的外层细框
         draw.rounded_rectangle([20, 20, 1060, 1420], radius=20, outline=(40, 50, 70), width=1)
         return img, draw
 
     def render_card_1_hook(self) -> Image.Image:
-        """Card 1: 爆款痛点封面 (大字+痛点对比+补丁对齐认证+老L品牌印章)"""
-        img, draw = self._create_base()
+        """Card 1: 爆款痛点封面 (大字+痛点对比+老L品牌印章)"""
+        img, draw = self._create_base("card_1_hook")
         h_data = self.data["hook_card"]
 
         # 1. 顶部 Header
         DrawingEngine.draw_top_header(
             draw, "🔥 避坑排雷", "L-MOD VAULT · 极客避坑智库",
-            f"🛡️ {self.data['verified_patch']}",
+            HEADER_BADGES["hook"],
             (50, 20, 25), (255, 90, 95), (45, 212, 191), self.c, FONTS
         )
 
@@ -1233,7 +1223,7 @@ class CardRenderer:
         box_y1, box_y2 = 385, 715
         draw.rounded_rectangle([60, box_y1, 1020, box_y2], radius=16, fill=self.c["card_bg"], outline=(100, 40, 45), width=2)
         # 警告标题
-        draw.text((90, box_y1 + 25), "⚠️ 传统第三方修改器三大致命痛点：", font=FONTS["h3"], fill=(255, 90, 95))
+        draw.text((90, box_y1 + 25), "⚠️ 来路不明的修改器，常见三个坑：", font=FONTS["h3"], fill=(255, 90, 95))
         # 痛点列表
         for idx, pt in enumerate(h_data["pain_points"]):
             py = box_y1 + 75 + idx * 45
@@ -1241,9 +1231,11 @@ class CardRenderer:
             draw.text((120, py), pt, font=FONTS["body"], fill=(200, 210, 225))
         # 容器内部分割线
         draw.line([(90, box_y1 + 225), (990, box_y1 + 225)], fill=(55, 65, 85), width=1)
-        # 底部官方解决方案绿标
-        draw.text((90, box_y1 + 245), "✨ 老L实验室对齐方案：", font=FONTS["body_bold"], fill=self.c["secondary"])
-        draw.text((340, box_y1 + 245), h_data["solution"], font=FONTS["body_bold"], fill=self.c["text_white"])
+        # 底部老L的做法（标签多宽，正文就从哪接着写）
+        label = "✨ 老L的做法："
+        draw.text((90, box_y1 + 245), label, font=FONTS["body_bold"], fill=self.c["secondary"])
+        label_box = draw.textbbox((90, box_y1 + 245), label, font=FONTS["body_bold"])
+        draw.text((label_box[2] + 8, box_y1 + 245), h_data["solution"], font=FONTS["body_bold"], fill=self.c["text_white"])
 
         # 5. 三大极客核心优势行
         for idx, (title, desc) in enumerate(h_data["features"]):
@@ -1252,13 +1244,13 @@ class CardRenderer:
             draw.text((90, fy + 18), title, font=FONTS["body_bold"], fill=self.c["primary"])
             draw.text((90, fy + 52), desc, font=FONTS["body_sm"], fill=self.c["text_muted"])
 
-        # 6. 老L认证印章与品质承诺
+        # 6. 老L品牌印章与说明
         seal_cx, seal_cy = 175, 1205
         DrawingEngine.draw_geek_seal(draw, seal_cx, seal_cy, 75, self.c["primary"], self.c["secondary"], FONTS)
         draw.rounded_rectangle([280, 1115, 1020, 1295], radius=14, fill=self.c["card_bg"], outline=self.c["card_border"], width=1)
-        draw.text((310, 1135), "🔒 官方原生认证 · 纯净保真", font=FONTS["body_bold"], fill=self.c["primary"])
-        draw.text((310, 1175), "• 拒绝二次收费割韭菜，单机老玩家硬核公益避坑与技术分享", font=FONTS["body_sm"], fill=self.c["text_white"])
-        draw.text((310, 1210), "• 全程沙盒坏档隔离，可随时干净卸载一键还原初始游戏状态", font=FONTS["body_sm"], fill=self.c["text_muted"])
+        draw.text((310, 1135), "老L整理 · 免费分享", font=FONTS["body_bold"], fill=self.c["primary"])
+        draw.text((310, 1175), "• 单机老玩家整理的避坑资料和指令，不收费", font=FONTS["body_sm"], fill=self.c["text_white"])
+        draw.text((310, 1210), "• 想还原：删掉放进去的文件，再在 Steam 里验证游戏文件完整性", font=FONTS["body_sm"], fill=self.c["text_muted"])
         draw.text((310, 1250), "“认准老L避坑实验室 · 每一个单机好游戏都不留遗憾”", font=FONTS["body_sm"], fill=self.c["secondary"])
 
         # 7. 底部导航
@@ -1267,13 +1259,13 @@ class CardRenderer:
 
     def render_card_2_setup(self) -> Image.Image:
         """Card 2: 10秒傻瓜开启教程 (3步可视化指引+路径高亮+批处理免配说明)"""
-        img, draw = self._create_base()
+        img, draw = self._create_base("card_2_setup")
         s_data = self.data["setup_card"]
 
         # 1. 顶部 Header
         DrawingEngine.draw_top_header(
             draw, "⚡ 10秒开门", "L-MOD VAULT · 手把手配置",
-            "🛡️ 零门槛 · 免安装程序",
+            HEADER_BADGES["setup"],
             (20, 40, 50), (45, 212, 191), (45, 212, 191), self.c, FONTS
         )
 
@@ -1305,9 +1297,10 @@ class CardRenderer:
                     step["key_text"], step.get("key_sub", ""),
                     self.c["primary"], FONTS
                 )
-                draw.text((480, sy + 130), "按下快捷键，屏幕上方呼出即成功！", font=FONTS["body_bold"], fill=(50, 215, 150))
+                hint = step.get("key_hint", "按下快捷键，出现输入框就成功了")
+                draw.text((480, sy + 130), hint, font=FONTS["body_bold"], fill=(50, 215, 150))
 
-        # 4. 老L批处理懒人说明 Box
+        # 4. 老L批处理 / 避坑说明 Box（只写脚本真正做的事）
         bat_y = 1035
         bat = s_data["bat_note"]
         draw.rounded_rectangle([60, bat_y, 1020, bat_y + 265], radius=16, fill=self.c["card_bg"], outline=self.c["primary"], width=2)
@@ -1315,8 +1308,8 @@ class CardRenderer:
         for b_idx, bullet in enumerate(bat["bullets"]):
             by = bat_y + 75 + b_idx * 40
             draw.text((90, by), bullet, font=FONTS["body_sm"], fill=self.c["text_white"])
-        # 引导自取
-        draw.text((90, bat_y + 210), "👉 批处理脚本已打包进懒人包，文末暗号免费自取！", font=FONTS["body_bold"], fill=self.c["secondary"])
+        # 去哪看
+        draw.text((90, bat_y + 210), bat["footer"], font=FONTS["body_bold"], fill=self.c["secondary"])
 
         # 5. 底部导航
         DrawingEngine.draw_bottom_footer(draw, 2, 5, "往右滑查看场景核心指令清单 ➔", self.c["primary"], self.c, FONTS)
@@ -1324,13 +1317,13 @@ class CardRenderer:
 
     def render_card_3_commands(self) -> Image.Image:
         """Card 3: 场景化核心指令套餐清单 (场景套包+高亮代码块+功能解读)"""
-        img, draw = self._create_base()
+        img, draw = self._create_base("card_3_commands")
         c_data = self.data["commands_card"]
 
         # 1. 顶部 Header
         DrawingEngine.draw_top_header(
             draw, "⚔️ 核心指令", "L-MOD VAULT · 逃课与救赎套餐",
-            "🛡️ 当前补丁全部实测通过",
+            HEADER_BADGES["commands"],
             (40, 25, 45), (192, 132, 252), (50, 215, 150), self.c, FONTS
         )
 
@@ -1347,8 +1340,7 @@ class CardRenderer:
             draw.rounded_rectangle([60, cy, 1020, cy + ch], radius=16, fill=self.c["card_bg"], outline=self.c["card_border"], width=1)
             # 功能名称
             draw.text((85, cy + 20), cmd["name"], font=FONTS["h3"], fill=self.c["primary"])
-            # 状态标
-            DrawingEngine.draw_badge(draw, 870, cy + 18, "官方已校验", FONTS["tag_sm"], (20, 40, 30), (50, 215, 150), radius=6)
+            # （以前这里有「官方已校验」标，没有人校验过，删掉）
             # IDE 终端风格代码块
             DrawingEngine.draw_code_box(
                 draw, [85, cy + 65, 995, cy + 145],
@@ -1359,26 +1351,27 @@ class CardRenderer:
             draw.text((85, cy + 165), "💡 " + cmd["note"], font=FONTS["body_sm"], fill=self.c["text_muted"])
 
         # 4. 底部补充说明
-        draw.text((540, 1275), "※ 提示：游戏内直接按快捷键呼出粘贴即可；更多 100+ 条完整全物品神装代码见完整库备查", font=FONTS["body_sm"], fill=self.c["text_dim"], anchor="mm")
+        draw.text((540, 1266), COMMANDS_FOOTER[0], font=FONTS["body_sm"], fill=self.c["text_muted"], anchor="mm")
+        draw.text((540, 1302), COMMANDS_FOOTER[1], font=FONTS["body_sm"], fill=self.c["text_dim"], anchor="mm")
 
         # 5. 底部导航
-        DrawingEngine.draw_bottom_footer(draw, 3, 5, "往右滑查看精选纯净 Mod ➔", self.c["primary"], self.c, FONTS)
+        DrawingEngine.draw_bottom_footer(draw, 3, 5, "往右滑查看精选 Mod ➔", self.c["primary"], self.c, FONTS)
         return img
 
     def render_card_4_mods(self) -> Image.Image:
         """Card 4: 精选纯净体验 Mod (3款核心体验质变Mod+解决痛点+下载量+安全准则)"""
-        img, draw = self._create_base()
+        img, draw = self._create_base("card_4_mods")
         m_data = self.data["mods_card"]
 
         # 1. 顶部 Header
         DrawingEngine.draw_top_header(
-            draw, "🛠️ 纯净模组", "L-MOD VAULT · 原生体验质变",
-            "🛡️ 坏档隔离验证",
+            draw, "🛠️ 精选模组", "L-MOD VAULT · 原生体验质变",
+            HEADER_BADGES["mods"],
             (25, 45, 35), (50, 215, 150), (50, 215, 150), self.c, FONTS
         )
 
         # 2. 醒目 Eyebrow & 主标题
-        DrawingEngine.draw_badge(draw, 60, 155, "【官方痛点解决 · 纯净体验 Mod】", FONTS["tag"], (20, 40, 30), (50, 215, 150), radius=6)
+        DrawingEngine.draw_badge(draw, 60, 155, "【解决痛点 · 精选 Mod】", FONTS["tag"], (20, 40, 30), (50, 215, 150), radius=6)
         draw.text((60, 215), m_data["title"], font=FONTS["h1"], fill=self.c["text_white"])
         draw.text((60, 275), m_data["subtitle"], font=FONTS["body_sm"], fill=self.c["text_muted"])
 
@@ -1392,66 +1385,65 @@ class CardRenderer:
             DrawingEngine.draw_badge(draw, 85, my + 22, mod["tag"], FONTS["tag_sm"], (35, 45, 65), self.c["secondary"], radius=6)
             # 模组标题
             draw.text((200, my + 24), mod["title"], font=FONTS["h3"], fill=self.c["text_white"])
-            # 作者与下载量
-            meta_text = f"作者: {mod['author']}  |  下载量: {mod['downloads']}"
+            # 作者（下载量不再上图：数字来源查不到，和网站数据也对不上）
+            meta_text = f"作者: {mod['author']}"
             draw.text((85, my + 75), meta_text, font=FONTS["body_sm"], fill=self.c["text_dim"])
             # 痛点解决描述容器
             draw.rounded_rectangle([85, my + 115, 995, my + 200], radius=10, fill=self.c["code_bg"], outline=(35, 45, 65), width=1)
             draw.text((105, my + 135), "⚡ 解决痛点：" + mod["desc"], font=FONTS["body_sm"], fill=self.c["text_muted"])
 
-        # 4. 老L三重排雷准则 Box
+        # 4. 装 Mod 前的注意事项 Box（以前这里写「坏档隔离沙盒 / 大版本对齐检验 / 实机压力测试 30+ 小时」，都没做过）
         rule_y = 1080
         draw.rounded_rectangle([60, rule_y, 1020, rule_y + 215], radius=16, fill=self.c["card_bg"], outline=(50, 215, 150), width=2)
-        draw.text((90, rule_y + 25), "🔒 老L三重 Mod 安全排雷准则：", font=FONTS["h3"], fill=(50, 215, 150))
-        rules = [
-            "1. 坏档隔离沙盒：绝不篡改游戏核心原始 exe，支持一键干净卸载还原；",
-            "2. 大版本对齐检验：与当前 Steam 最新补丁全面验证，零冲突与零崩溃；",
-            "3. 本地实机压力测试：老L亲自重度实机游玩 30+ 小时，稳定流畅无坏档。"
-        ]
-        for r_idx, r_text in enumerate(rules):
+        draw.text((90, rule_y + 25), MOD_RULES_TITLE, font=FONTS["h3"], fill=(50, 215, 150))
+        for r_idx, r_text in enumerate(MOD_RULES):
             draw.text((90, rule_y + 75 + r_idx * 40), r_text, font=FONTS["body_sm"], fill=self.c["text_white"])
 
         # 5. 底部导航
-        DrawingEngine.draw_bottom_footer(draw, 4, 5, "往右滑查看一键包自取通道 ➔", self.c["primary"], self.c, FONTS)
+        DrawingEngine.draw_bottom_footer(draw, 4, 5, "往右滑查看资料入口与互助群 ➔", self.c["primary"], self.c, FONTS)
         return img
 
     def render_card_5_cta(self) -> Image.Image:
-        """Card 5: 转化暗号与防失效雷达 (极客VIP通行证+发光暗号框+3大服务保障+老L品牌声明)"""
-        img, draw = self._create_base()
+        """Card 5: 资料入口与互助群暗号 (网站本游戏页有什么 + 暗号框 + 3 条说明 + 老L品牌声明)
+
+        以前这张写的是「一键懒人免配包 / 纯净前置离线包 / 100+ 条速查手册 / 后台秒推高速网盘 /
+        补丁连夜追更、第一时间测试」——网盘包、测试机、追更都不存在，改成网站上真有的东西。
+        """
+        img, draw = self._create_base("card_5_cta")
         cta = self.data["cta_card"]
 
         # 1. 顶部 Header
         DrawingEngine.draw_top_header(
             draw, "🚀 极客福利", "L-MOD VAULT · 玩家社群",
-            "🛡️ Steam 补丁同步响应",
+            HEADER_BADGES["cta"],
             (40, 20, 50), (236, 72, 153), (50, 215, 150), self.c, FONTS
         )
 
         # 2. 醒目 Eyebrow & 主标题
-        DrawingEngine.draw_badge(draw, 60, 155, "【极客福利 · 防失联雷达】", FONTS["tag"], (35, 15, 40), (244, 114, 182), radius=6)
-        draw.text((60, 215), cta["title"], font=FONTS["h1"], fill=self.c["text_white"])
-        draw.text((60, 275), cta["subtitle"], font=FONTS["body_sm"], fill=self.c["text_muted"])
+        DrawingEngine.draw_badge(draw, 60, 155, "【极客福利 · 更新提醒】", FONTS["tag"], (35, 15, 40), (244, 114, 182), radius=6)
+        draw.text((60, 215), CTA_TITLE, font=FONTS["h1"], fill=self.c["text_white"])
+        draw.text((60, 275), CTA_SUBTITLE, font=FONTS["body_sm"], fill=self.c["text_muted"])
 
-        # 3. 巨幅 VIP 极客通行证容器 (带霓虹高亮边框)
+        # 3. 网站本游戏页有什么
         vip_y = 320
         draw.rounded_rectangle([60, vip_y, 1020, vip_y + 515], radius=20, fill=self.c["card_bg"], outline=self.c["primary"], width=2)
         # 头部礼品标
-        draw.text((90, vip_y + 25), "🎁 " + cta["vip_title"], font=FONTS["h2"], fill=self.c["primary"])
+        draw.text((90, vip_y + 25), "🎁 " + CTA_VIP_TITLE, font=FONTS["h2"], fill=self.c["primary"])
         # 物料清单列表
-        for b_idx, bullet in enumerate(cta["vip_bullets"]):
+        for b_idx, bullet in enumerate(CTA_VIP_BULLETS):
             by = vip_y + 85 + b_idx * 38
             draw.text((90, by), "✔ " + bullet, font=FONTS["body_sm"], fill=self.c["text_white"])
 
         # 发光暗号核心区域
         code_box_y = vip_y + 255
         draw.rounded_rectangle([90, code_box_y, 990, code_box_y + 225], radius=16, fill=self.c["code_bg"], outline=self.c["secondary"], width=2)
-        draw.text((540, code_box_y + 35), cta["code_title"], font=FONTS["body_bold"], fill=self.c["text_muted"], anchor="mm")
+        draw.text((540, code_box_y + 35), CTA_CODE_TITLE, font=FONTS["body_bold"], fill=self.c["text_muted"], anchor="mm")
         # 巨型暗号字符
         draw.text((540, code_box_y + 105), cta["code_main"], font=FONTS["h1"], fill=self.c["primary"], anchor="mm")
-        draw.text((540, code_box_y + 175), "（长按复制暗号发送，后台秒推高速纯净网盘链接）", font=FONTS["body_sm"], fill=self.c["secondary"], anchor="mm")
+        draw.text((540, code_box_y + 175), CTA_CODE_HINT, font=FONTS["body_sm"], fill=self.c["secondary"], anchor="mm")
 
-        # 4. 三大极客硬核保障行
-        for g_idx, (g_title, g_desc) in enumerate(cta["guarantees"]):
+        # 4. 三条说明
+        for g_idx, (g_title, g_desc) in enumerate(CTA_NOTES):
             gy = 860 + g_idx * 105
             draw.rounded_rectangle([60, gy, 1020, gy + 90], radius=12, fill=self.c["card_bg"], outline=self.c["card_border"], width=1)
             draw.text((90, gy + 18), g_title, font=FONTS["body_bold"], fill=self.c["secondary"])
@@ -1470,315 +1462,374 @@ class CardRenderer:
 # ==============================================================================
 # 6. 平台文案与分发物料生成器 (小红书 + B站动态/专栏)
 # ==============================================================================
+# 7 款里会改文件的 .bat（改之前另存 .bak）；其余 3 款的 .bat 只检查目录、打印提示。
+# 事实来源：public/data.js 里各游戏的 batScript。脚本改了这里要跟着改。
+BAT_SUMMARY = {
+    "cyberpunk-2077": "把 CET 呼出键设成 ~ 键，原 bindings.json 先另存为 .bak",
+    "black-myth-wukong": "把 UE4SS 的 ConsoleEnablerMod 改成 1，原 mods.txt 先另存为 .bak",
+    "witcher-3": "在 general.ini 里写入 DBGConsoleOn=true，原文件先另存为 .bak",
+    "baldurs-gate-3": "生成打开控制台窗口的 ScriptExtenderSettings.json，原文件先另存为 .bak",
+    "elden-ring": None,
+    "skyrim-se": None,
+    "fallout-4": None,
+}
+BAT_NO_EDIT = "老L的 .bat 只检查游戏目录、打印提示，不改任何文件"
+
+ENABLE_SUMMARY = {
+    "cyberpunk-2077": "用开源的 CET 框架打开控制台",
+    "black-myth-wukong": "用开源的 UE4SS 框架打开虚幻引擎自带的控制台",
+    "witcher-3": "在 general.ini 里加一行，打开游戏自带的控制台",
+    "baldurs-gate-3": "用开源的 Script Extender 打开控制台窗口",
+    "elden-ring": "用 ModEngine2 离线加载 Mod，再配合 CT 表",
+    "skyrim-se": "直接按 ~ 打开游戏自带的控制台",
+    "fallout-4": "直接按 ~ 打开游戏自带的控制台",
+}
+
+# 3 套不同切入点的标题。注意：发布文案会过一遍用词替换（「修改器 / 外挂」→「第三方工具」），
+# 所以别写「第三方修改器」，否则会变成「第三方第三方工具」。
+TITLE_HOOKS = {
+    "cyberpunk-2077": [
+        "别再去下来路不明的修改器了！2077 用开源 CET 开控制台，手把手教你",
+        "2077 极客自救指南：CET 控制台与救赎指令清单",
+        "赛博朋克2077 开控制台保姆级教程：3 步搞定，附纯文本 .bat"
+    ],
+    "black-myth-wukong": [
+        "黑神话手残被虎先锋劝退？教你用 UE4SS 打开引擎控制台",
+        "卡关卡到摔手柄？黑神话悟空慢动作与全图鉴指令整理",
+        "拒绝来路不明的外挂！黑神话悟空控制台保姆级教程"
+    ],
+    "witcher-3": [
+        "改一行配置开启游戏自带控制台！巫师3次世代版指令与神装指南",
+        "手滑选错后悔终生？用巫师3控制台指令弥补爱丽丝遗憾",
+        "别再去下来路不明的修改器了！巫师3自带控制台10秒开启"
+    ],
+    "baldurs-gate-3": [
+        "博德之门3 控制台怎么开？Script Extender 控制台窗口指南",
+        "还在到处找修改器？博德之门3 用 Script Extender 开控制台",
+        "告别长休食物焦虑！博德之门3调试指令与传奇神兵开荒指南"
+    ],
+    "elden-ring": [
+        "法环黄金树幽影太折磨？离线轮椅方案：ModEngine2 + CT 表",
+        "被狂龙和双月骑士虐哭？单机离线减负方案，别带进联机",
+        "艾尔登法环幽影之地离线 Mod 环境保姆级教程"
+    ],
+    "skyrim-se": [
+        "老滚5重制版任务卡关怎么救？游戏自带控制台急救指南",
+        "任务NPC发呆不说话？试试用 setstage 推进任务（先存档）",
+        "天际重制版控制台与16魔神器指令整理"
+    ],
+    "fallout-4": [
+        "辐射4次世代更新后Mod全崩？控制台与降级路线指南",
+        "造房子空间被锁死？用控制台指令扩建聚落，附传奇武器指令",
+        "辐射4次世代版控制台保姆级教程"
+    ],
+}
+
+HONEST_NOTES = [
+    "这些指令和 Mod 没有逐条在游戏里实测过，版本不同可能失效；",
+    "只在单机 / 离线模式下用，别带进联机；",
+    "操作前先手动备份存档，老L的脚本都不备份存档。",
+]
+
+
+def _steps_md(game_key: str) -> str:
+    lines = []
+    for idx, step in enumerate(FLAGSHIP_GAMES[game_key]["setup_card"]["steps"], start=1):
+        extra = step.get("path_box") or step.get("key_text") or ""
+        extra = f"（`{extra}`）" if extra else ""
+        lines.append(f"{idx}. **{step['title']}**：{step['detail']}{extra}")
+    return "\n".join(lines)
+
+
+def _bat_line(game_key: str) -> str:
+    summary = BAT_SUMMARY.get(game_key)
+    if summary:
+        return f"老L写了一个纯文本 .bat：{summary}；可用记事本查看全部内容，不备份存档"
+    return f"{BAT_NO_EDIT}；不备份存档"
+
+
 class ContentGenerator:
     @staticmethod
     def generate_xiaohongshu_post(game_key: str) -> str:
-        """生成符合小红书平台生态的 800 字脱敏爆款文案"""
+        """生成小红书图文文案（只写做到的事）"""
         data = FLAGSHIP_GAMES[game_key]
         title = data["title"]
         short_title = data["short_title"]
-        patch = data["verified_patch"]
         secret = data["secret_code"]
         radar = data["radar_code"]
+        hooks = TITLE_HOOKS[game_key]
+        notes = "\n".join(f"- {n}" for n in HONEST_NOTES)
+        bat = data["setup_card"]["bat_note"]
+        if BAT_SUMMARY.get(game_key):
+            bat_block = f"*（嫌手动改麻烦的话：{_bat_line(game_key)}。脚本放在 L-MOD Vault 网站本游戏页。）*"
+        else:
+            bat_block = f"**{bat['title'].replace('💡 ', '')}**：\n" + "\n".join(f"- {b}" for b in bat["bullets"])
 
-        # 3 套不同心理切入点的标题库
-        hooks = {
-            "cyberpunk-2077": [
-                "别再去下带毒修改器了！2077其实自带官方控制台，手把手教你开启",
-                "90%玩家不知道的极客自救指南：2077原生控制台与救赎指令全公开",
-                "2.13最新补丁实测！赛博朋克2077官方隐藏控制台一键开门教程"
-            ],
-            "black-myth-wukong": [
-                "黑神话手残被虎先锋劝退？教你开启虚幻5原生调试模式优雅通关！",
-                "卡关卡到摔手柄？黑神话悟空隐藏官方引擎级慢动作与全图鉴指令",
-                "拒绝带毒外挂！黑神话悟空最新v1.0.10补丁原生控制台保姆级教程"
-            ],
-            "witcher-3": [
-                "改一个字母开启官方控制台！巫师3次世代版隐藏彩蛋与全神装指南",
-                "手滑选错后悔终生？巫师3次世代官方指令逆转爱丽丝悲剧救赎法",
-                "别再去下第三方修改器了！巫师3官方原生控制台10秒开启实测"
-            ],
-            "baldurs-gate-3": [
-                "博德之门3 Patch 7 必看！无冲突纯净底层控制台开启与救赎指南",
-                "还在到处找修改器？博德之门3官方底层脚本黑窗才是最稳解！",
-                "告别长休食物焦虑！博德之门3官方调试指令与全传奇神兵开荒指南"
-            ],
-            "elden-ring": [
-                "法环黄金树幽影太折磨？纯净离线轮椅机制与安全防封指南",
-                "被狂龙和双月骑士虐哭？带你看真正安全零封号的单机离线减负方案",
-                "v1.14最新补丁实测！艾尔登法环幽影之地纯净离线一键开门教程"
-            ],
-            "skyrim-se": [
-                "老滚5重制版恶性卡关/闪退怎么救？B社原生控制台避坑急救指南",
-                "任务NPC发呆不说话坏档？教你用官方setstage指令秒修复",
-                "1.6.1170最新版实测！天际重制版原生控制台与16魔神器全齐教程"
-            ],
-            "fallout-4": [
-                "辐射4次世代大更新Mod全崩溃？官方控制台与传奇武器附魔指南",
-                "造房子空间被锁死？教你用原生指令无限扩建聚落，全传奇武器双弹附魔",
-                "v1.10.984+次世代实测！辐射4原生控制台与极速批处理bat教程"
-            ]
-        }[game_key]
+        md_content = f"""# 《{title}》小红书图文发布物料
 
-        md_content = f"""# 《{title}》小红书首发图文矩阵分发物料包
-
-## 📌 爆款标题库 (3选1)
+## 📌 标题备选 (3选1)
 - **【痛点避坑型】**：{hooks[0]}
-- **【好奇爆料型】**：{hooks[1]}
-- **【干货实测型】**：{hooks[2]}
+- **【好奇干货型】**：{hooks[1]}
+- **【教程型】**：{hooks[2]}
 
 ---
 
-## 📝 脱敏合规正文 (约 850 字，已通过 Anti-Shadowban 绿标检测)
+## 📝 正文（配 5 张卡片发布）
 
-兄弟们，千万别再去盗版网站下载那些捆绑全家桶弹窗、暗藏挖矿木马的“免费修改器”了！
+兄弟们，别再去来路不明的网站下载那些捆绑全家桶弹窗的“免费修改器”了！
 
-很多新手玩家在探索【{short_title}】时，遇到高难度 Boss 卡关或者手滑选错剧情支线，第一反应就是去网上搜修改器，结果要么被杀毒软件疯狂报毒，要么只要游戏一更新，存档直接当场损坏崩溃……
+很多玩家在玩【{short_title}】时，遇到 Boss 卡关或者手滑选错剧情，第一反应就是去网上搜修改器，结果要么被杀毒软件报毒，要么游戏一更新就失效、闪退……
 
-其实 90% 的玩家都不知道：**游戏引擎底层本身就保留了官方调试机制与隐藏控制台！**
-不仅完全免费、不报毒、不闪退，而且 100% 走的是单机官方原生离线逻辑，完全不会影响 Steam 成就判定，更不存在封号风险！
-
-老L花了整整两个通宵，基于 Steam 最新官方版本（**{patch}**）完成了实机对齐与沙盒测试，给大家整理了这套保姆级开启指引与【高频逃课救赎套餐】：
-
----
-
-### ⚡ 小白 3 步唤醒官方隐藏控制台：
-1. **定位游戏根目录**：在 Steam 游戏库中右键《{short_title}》➔ 管理 ➔ 浏览本地文件；
-2. **激活原生开关/放置开源前置**：无需运行任何不明 exe，仅需按照教程放入对应纯净开源框架文件；
-3. **进游戏按下快捷键**：进入游戏按下预设快捷键，屏幕即可唤出官方原生调试终端！
-*(嫌手动翻文件夹麻烦的兄弟，老L也写好了双击自动识别路径与绑定的批处理脚本 .bat，见文末)*
+其实这款游戏可以{ENABLE_SUMMARY[game_key]}，不用来路不明的 exe。
+老L把开启步骤和常用指令整理了一份，先说清楚三件事：
+{notes}
 
 ---
 
-### 🎮 老L极客场景套餐精选：
-- **【手残救星·剧情体验模式】**：免疫暴毙与受击硬直，手残党也能丝滑体验主线跌宕起伏的史诗剧情；
-- **【资源自由·全图鉴解锁】**：开局财富与材料补给满载，告别枯燥坐牢捡垃圾，全图鉴神兵一键体验；
-- **【背包减负·无痛探索】**：无限耐力狂奔 / 全大陆快速旅行路标瞬开，大幅降低无谓跑图时间成本；
-- **【意难平救赎·隐藏真结局】**：修复关键剧情对话遗漏，完美弥补支线遗憾，不留任何意难平！
+### ⚡ 小白 3 步：
+{_steps_md(game_key)}
 
-所有指令均已整理为即粘即用的【场景代码清单 TXT】，全部附带中文注释，在控制台直接回车即可执行！
+{bat_block}
 
 ---
 
-### 🎁 怎么自取完整整合包与代码库：
-老L已经把：
-1. **双击自动开门批处理脚本 (.bat)**
-2. **最新适配版纯净离线框架**
-3. **场景套餐指令合集 TXT (中文注解)**
-4. **100+ 条全物品与全分支指令速查表**
+### 🎮 老L场景套餐精选：
+- **【手残救星·剧情体验模式】**：减少暴毙与受击硬直，手残党也能专心看主线剧情；
+- **【资源自由·全图鉴解锁】**：开局财富与材料补给满载，少一点枯燥的捡垃圾；
+- **【背包减负·无痛探索】**：无限耐力 / 快速旅行路标全开，少跑冤枉路；
+- **【意难平救赎】**：用指令补上错过的剧情物品或好感度（能不能触发还看进度）。
 
-全部整理打包在网盘了！
-👉 **大家看主页置顶，或者在后台直接回复暗号：【{secret}】或【{radar}】**，系统就会自动秒推对应高速链接。
-
-后续 Steam 只要推送新大版本补丁，老L实验室也会在第一时间连夜重测与更新通知，建议先**点赞 + 收藏**防失联！
+完整指令清单在 L-MOD Vault 网站本游戏页，带中文说明，可以直接复制。
 
 ---
 
-## 🏷️ 黄金标签 (复制到小红书发布框)
+### 🎁 去哪看 / 怎么进群：
+- .bat 脚本、指令清单、精选 Mod 都在 **L-MOD Vault 网站本游戏页**（链接见主页），免费看；
+- 想交流 Mod 更新进度和坏档处理经验：在后台或私信发送暗号 **【{secret}】或【{radar}】**，进玩家互助群。
+
+游戏更新以后，指令和 Mod 可能要等作者适配。更新情况看 L-MOD Vault 避坑雷达（每天比对一次 Steam 更新时间，不做实机测试）。觉得有用先**点赞 + 收藏**！
+
+---
+
+## 🏷️ 标签 (复制到小红书发布框)
 #{short_title} #单机游戏 #Steam游戏 #单机游戏攻略 #游戏避坑指南 #游戏推荐 #老玩家自救 #Steam打折
 """
         return sanitize_text(md_content)
 
     @staticmethod
     def generate_bilibili_dynamic(game_key: str) -> str:
-        """生成符合 B站 社区生态的动态短文 + 专栏图文排版 + 互动投票"""
+        """生成 B站动态短文 + 专栏图文 + 互动投票（只写做到的事）"""
         data = FLAGSHIP_GAMES[game_key]
         title = data["title"]
         short_title = data["short_title"]
-        patch = data["verified_patch"]
         secret = data["secret_code"]
         radar = data["radar_code"]
 
-        md_content = f"""# 《{title}》B站动态 / 专栏图文物料总装
+        md_content = f"""# 《{title}》B站动态 / 专栏物料
 
-## 📱 1. B站动态短文 (带 5 张高清卡片发布)
+## 📱 1. B站动态短文 (配 5 张卡片发布)
 
-各位天命人 / 夜之城游隼 / 猎魔人 / 费伦探险家们好，我是老L！
+大家好，我是老L！
 
-很多兄弟在私信里问我：玩《{short_title}》卡关或者遇到意难平剧情，到底该怎么安全自救？去第三方网站下的修改器总是报毒弹窗，甚至更新就闪退坏档，太折磨了。
+很多兄弟私信问：玩《{short_title}》卡关或者遇到意难平剧情，怎么自救？网上下的修改器经常报毒弹窗，游戏一更新还失效。
 
-今天老L正式发布《{short_title}》**官方原生控制台实测开门指南**！
-- 🛡️ 实测完全兼容 Steam 最新版本（{patch}）；
-- ⚡ 100% 官方离线底层逻辑，零木马、零报毒、零注入风险；
-- 🎮 附带新手开荒起飞、意难平救赎、二周目神装满配三大场景套餐；
-- 🛠️ 配备老L编写的双击批处理脚本，10 秒傻瓜自动开门！
+今天整理了《{short_title}》的控制台开启指南：
+- 🎮 开启方式：{ENABLE_SUMMARY[game_key]}；
+- 🎮 附带新手开荒、意难平救赎、二周目神装三套场景指令；
+- 🛠️ {_bat_line(game_key)}；
+- ⚠️ 指令没有逐条实测，只在单机 / 离线下用，操作前先备份存档。
 
-高清 5 联图教程见下方动态配图，长按即可保存！
-完整一键免配包、批处理工具与 100+ 调试指令手册已备好，在后台或私信输入暗号【{secret}】或【{radar}】自取！
+5 联图教程见配图，长按即可保存！.bat、指令清单和 Mod 介绍在 L-MOD Vault 网站本游戏页；想进玩家互助群交流，在后台或私信发送暗号【{secret}】或【{radar}】。
 
 ---
 
-## 📰 2. B站专栏深度排版 (图文专栏推荐)
+## 📰 2. B站专栏排版 (图文专栏)
 
-### 引言：为什么我们必须告别流氓修改器？
-在单机游戏圈，第三方修改器背后的黑色产业链长期存在：强制捆绑浏览器、静默安装挖矿后门、游戏小版本更新即闪退甚至损坏存档。
-而成熟现代 3A 大作在开发阶段，引擎底层（如 REDengine、虚幻5、Script Extender）均内置了严谨的官方调试机制。通过纯净开源的方式唤醒它们，才是最安全、优雅、不伤存档的极客游玩方式。
+### 引言：为什么不推荐来路不明的修改器？
+有些修改器会捆绑弹窗或后门，而且按内存地址改数据，游戏一更新就容易失效甚至闪退。很多大作可以用游戏自带的控制台，或者开源、源码公开的框架（如 CET、UE4SS、Script Extender）做同样的事，来路更清楚。
 
-### 一、当前版本合规信赖验证
+### 一、先说清楚
 - **游戏本体**：{title}
-- **补丁认证**：{patch}
-- **验证结论**：通过老L本地 30 小时压力测试，存档读写与成就触发完全正常。
+- **资料来源**：老L整理的开启步骤与常用指令，**没有逐条在游戏里实测**；
+- **游戏更新以后**：框架和指令可能要等作者适配，更新情况看 L-MOD Vault 避坑雷达（每天比对一次 Steam 更新时间，不做实机测试，所以只说「可能」）；
+- **存档**：老L的脚本都不备份存档，操作前请自己复制存档文件夹。
 
-### 二、手把手 10 秒开启步骤
-1. 打开 Steam 库，右键游戏 ➔ 【管理】 ➔ 【浏览本地文件】；
-2. 放入老L整合包中的纯净开源框架组件；
-3. 启动游戏按下预设快捷键，控制台光标即刻唤醒！
+### 二、开启步骤
+{_steps_md(game_key)}
 
-### 三、场景化高频指令套餐精要
-（详细代码请参考动态配图 Slide 3 或下载专栏配套 TXT 文件）
-- 手残救星模式：免疫受击硬直，适合专心看剧情；
-- 资源图鉴自由：瞬间到账启动财富，神装自由打造；
-- 意难平救赎：修复剧情分支遗漏，单挑隐藏结局！
+### 三、场景化指令套餐精要
+（详细代码见动态配图 Slide 3，或 L-MOD Vault 网站本游戏页）
+- 手残救星模式：减少受击硬直，适合专心看剧情；
+- 资源图鉴自由：开局财富补给，神装自由打造；
+- 意难平救赎：补上错过的剧情物品或好感度（能不能触发还看进度）。
 
-### 四、防失效与后续补丁追更保障
-单机好游戏值得被认真对待。Steam 平台后续若推出热更新，老L实验室将第一时间跟进测试并在动态发布兼容性公告。
+### 四、游戏更新以后
+Steam 推送更新后，先看 L-MOD Vault 避坑雷达：刚更新的游戏会标黄或标红。按 exe 版本挂钩的框架可能要等作者发新版，着急的话先别更新。
 
 ---
 
-## 🗳️ 3. 互动投票引导 (提升动态与专栏完读互动率)
+## 🗳️ 3. 互动投票引导
 
 **投票主题**：你在玩《{short_title}》时，最让你抓狂或意难平的是哪一点？
 - 选项 A：高难度 Boss 疯狂卡关，手残被虐到怀疑人生
 - 选项 B：开荒期金币物资极度匮乏，天天翻垃圾桶
 - 选项 C：不小心选错对话分支，错过了隐藏真结局/心仪队友恋爱
 - 选项 D：跑图全靠两条腿，经常在迷宫天堑里迷路转圈
-- 选项 E：老L这期干货太及时了，纯粹路过点赞投币！
+- 选项 E：纯粹路过点赞投币！
 """
         return sanitize_text(md_content)
 
 
 # ==============================================================================
-# 7. 实战运营手册生成器 (OPERATION_PLAYBOOK.md)
+# 7. 运营手册生成器 (OPERATION_PLAYBOOK.md)
+# 手册不过用词替换：替换表那一节要写原词，过了替换就成了「调试指令 → 调试指令」。
 # ==============================================================================
 class PlaybookGenerator:
     @staticmethod
     def generate_playbook() -> str:
-        playbook = """# L-MOD Vault 社交矩阵工业级运营实战手册 (Operation Playbook)
+        playbook = """# L-MOD Vault 社交平台运营手册 (Operation Playbook)
 
-> **版本**：v2.0 (Milestone 2 工业级发布版)  
-> **适用平台**：小红书、B站动态/专栏、知乎、微信私域、抖音  
-> **核心原则**：合规第一 (Anti-Shadowban) · 极客避坑人设 · 零报毒信赖交付
+> **适用平台**：小红书、B站动态/专栏、知乎、微信私域、抖音
+> **核心原则**：只写做到的事 · 极客避坑人设 · 不留外链
 
 ---
 
 ## 目录
-1. [首评置顶带节奏引流话术模板库 (3套高转化场景)](#1-首评置顶带节奏引流话术模板库)
-2. [防误杀备用置换文案库 (Anti-Shadowban 三级风控对账表)](#2-防误杀备用置换文案库)
-3. [老玩家高频 10 大卡关/闪退极客回复模板 (直接复制粘贴)](#3-老玩家高频-10-大卡关闪退极客回复模板)
+0. [口径红线（发之前先对一遍）](#0-口径红线发之前先对一遍)
+1. [首评置顶话术模板 (3 套)](#1-首评置顶话术模板)
+2. [平台用词替换表](#2-平台用词替换表)
+3. [玩家高频 10 问回复模板](#3-玩家高频-10-问回复模板)
 4. [发布与分发标准作业流程 (SOP)](#4-发布与分发标准作业流程)
 
 ---
 
-## 1. 首评置顶带节奏引流话术模板库
+## 0. 口径红线（发之前先对一遍）
 
-在小红书与B站，**首评置顶**是转化率最高的黄金流量入口。话术既要能满足用户当下好奇心，又要符合平台规则，严禁出现外链、二维码或微信字样。
-
-### 场景一：【保姆级福利型】（适用于新发笔记/动态，主打一键包自取）
-> **置顶文案**：  
-> 看到很多兄弟在问批处理脚本和完整 100+ 条指令怎么拿：  
-> 老L已经把「双击一键开门脚本 + 官方纯净离线框架 + 场景代码合集 TXT」打包成免配一键包了！  
-> 👉 **直接看我主页介绍，或者在后台回复暗号：【老L单机888】或对应的游戏名（如【2077】、【黑神话】、【巫师3】、【博德3】）**，系统就会秒推高速链接。  
-> ⚠️ 友情提示：所有文件均经过老L本地实机测试，零捆绑零木马，后续如果 Steam 推新大补丁我也会连夜更新，大家先点赞收藏防失效！
-
-### 场景二：【极客答疑型】（适用于评论区互动热烈，承接技术咨询）
-> **置顶文案**：  
-> 汇总一下大家问得最多的两个问题：  
-> 1. 按快捷键没反应：检查是否开着中文输入法（按 Shift 切英文大写试试），或者是不是独占全屏冲突；  
-> 2. 之前打过旧版修改器进不去：建议先用老L包里的 .bak 还原脚本清理一下残留。  
-> 遇到任何特殊卡关或者代码执行疑问的兄弟，直接在评论区留言或者来老L玩家交流圈，看到都会逐一回复！完整速查表主页自取~
-
-### 场景三：【版本雷达型】（适用于游戏官方刚推送小补丁时的防慌张声明）
-> **置顶文案**：  
-> 📢 **【Steam 最新补丁兼容性雷达监控】**：  
-> 监测到官方刚刚推送了小补丁更新，老L实验室已在测试机完成验证！  
-> 本期发布的官方底层机制依然完全可用，无需慌张；如果个别兄弟遇到框架加载提示，只需在后台回复【雷达更新】，即可获取最新热修复补丁！做单机避坑，我们是认真的！
-
----
-
-## 2. 防误杀备用置换文案库
-
-一旦出现“笔记审核中”、“仅自己可见”或流量异常时，立即对照下表进行**脱敏替换**。
-
-### 表 1：平台高危敏感词 ➔ 绿色合规词（核心 30 对）
-| 平台高危违规词 | 工业级绿色合规替换词 | 适用场景 |
+| 别这么说 | 事实 | 可以这么说 |
 |---|---|---|
-| 作弊 / 作弊码 / 作弊器 | **官方调试指令 / 极客指令 / 底层指令** | 控制台代码介绍 |
-| 外挂 / 辅助挂 / 黑科技 | **纯净优化拓展包 / 开源调试框架** | 核心工具推荐 |
-| 修改器 / 内存修改 | **底层控制台彩蛋 / 原生开发菜单** | 开启教程 |
-| 锁血 / 无限血 / 无敌 | **手残救星·剧情体验模式 / 绝对防护** | 战斗减负套餐 |
-| 秒杀 / 一击必杀 | **极速破韧·战斗畅爽增强 / 一击判定** | 伤害类代码 |
-| 刷钱 / 无限金币 / 刷灵蕴 | **资源自由·全图鉴解锁 / 经济充裕** | 货币类代码 |
-| 无限负重 / 改背包 | **背包减负·无痛探索 / 随身行囊扩容** | 跑图类代码 |
-| 全武器解锁 / 刷物品 | **全套神装图鉴·一键获取 / 收藏全开** | 装备收集 |
-| 穿墙 / 飞天 / 隐身 | **自由摄影·全景透视视角 / 侦查模式** | 视角类指令 |
-| 跳过任务 / 强制完成 | **卡关抢救·坏档剧情修复 / 进度校准** | 剧情修复 |
-| 破解 / 盗版 / 免Steam | **官方离线原生支持 / Steam 正版验证** | 版本说明 |
-| 微信 / 加群 / 百度网盘 | **后台回复暗号 / 主页自取 / 离线网盘** | 私域导流 |
-
-### 表 2：严审期整段备用替换模板（3套）
-- **备用 A（极度温和学术风）**：“单机游戏引擎底层为开发者预留了快速调试接口，通过配置文本即可直接在游戏内调用引擎参数，便于全视角鉴赏场景美术与剧情叙事。”
-- **备用 B（老玩家公益避坑风）**：“为了保护单机玩家电脑免受木马流氓软件侵害，本期分享如何利用游戏原生自带的离线设置，实现不改动游戏源文件的纯净游玩体验。”
-- **备用 C（极客极简指令流）**：“单机原生控制台参数配置速查笔记：包含常用快捷键映射表、开发日志抓取以及官方全图鉴参数索引。”
+| 实测 / 亲测 / 已校验 / 认证 / 对齐最新补丁 | 没有人逐条在游戏里试过这些指令和 Mod | 老L整理 · 没有逐条实测 · 用前先存档 |
+| 自动备份 / 一键还原 / .bak 秒复原 / 存档 100% 安全 | 7 款里只有 2077 / 黑神话 / 巫师3 / 博德3 的 .bat 改配置前另存 .bak；法环 / 老滚5 / 辐射4 的 .bat 只检查目录、打印提示；**所有脚本都不备份存档**；没有「一键还原 / 一键卸载」脚本 | 操作前先手动备份存档；想还原就删掉放进去的文件，再在 Steam 里验证游戏文件完整性 |
+| 后台秒推网盘 / 懒人包 / 离线框架包 / 100+ 条速查手册 | 没有网盘包；资料都在 L-MOD Vault 网站对应游戏页 | 脚本和指令在网站本游戏页，免费看 |
+| 连夜更新 / 第一时间测试 / 测试机验证 / 热修复补丁 | 没有测试机；避坑雷达每天比对一次 Steam 更新时间，不做实机测试 | 更新情况看避坑雷达；框架可能要等作者发新版 |
+| 零封号 / 零闪退 / 零报毒 / 100% 安全 | 谁也保证不了 | 只在单机 / 离线下用，别带进联机 |
+| 官方控制台（指 CET / UE4SS / Script Extender） | 这些是社区开源框架，不是官方的；巫师3 / 老滚5 / 辐射4 的控制台才是游戏自带 | 开源框架 · 源码公开 / 游戏自带控制台 |
 
 ---
 
-## 3. 老玩家高频 10 大卡关/闪退极客回复模板
+## 1. 首评置顶话术模板
 
-运营人员可直接复制以下专业极客解答，快速建立高专业度人设：
+在小红书与B站，**首评置顶**是转化率最高的入口。话术既要满足好奇心，又要符合平台规则，严禁出现外链、二维码或微信字样。
+
+### 场景一：【资料自取型】（新发笔记/动态，主打去网站看）
+> **置顶文案**：
+> 看到很多兄弟在问 .bat 脚本和完整指令在哪：
+> 都在 L-MOD Vault 网站对应游戏页，免费看，.bat 是纯文本，可用记事本查看全部内容。
+> 👉 **网站入口见我主页介绍；想进玩家互助群交流，在后台发送暗号：【老L单机888】或对应的游戏名（如【2077】、【黑神话】、【巫师3】、【博德3】）**。
+> ⚠️ 指令没有逐条实测，用之前先手动备份存档；游戏更新后可能要等作者适配，更新情况看避坑雷达。
+
+### 场景二：【答疑型】（评论区互动热烈，承接技术咨询）
+> **置顶文案**：
+> 汇总一下大家问得最多的两个问题：
+> 1. 按快捷键没反应：检查是否开着中文输入法（按 Shift 切英文试试），或者是不是独占全屏冲突；
+> 2. 之前装过别的修改器进不去：先把那些文件删掉，再在 Steam 里验证游戏文件完整性。
+> 遇到特殊卡关或者指令执行疑问的兄弟，直接在评论区留言或者来玩家互助群，看到会回复！完整指令在网站本游戏页~
+
+### 场景三：【版本提醒型】（游戏刚推送更新时）
+> **置顶文案**：
+> 📢 **【Steam 更新提醒】**：
+> 这款游戏刚推了更新，L-MOD Vault 避坑雷达已经标出来了。
+> 按 exe 版本挂钩的框架（CET / UE4SS / Script Extender / F4SE 等）可能要等作者发新版，着急的话先别更新；游戏自带的控制台一般不受框架影响。
+> 已经更新、框架用不了的话：先把框架文件移出游戏目录玩原版，等作者发新版再装回去。
+
+---
+
+## 2. 平台用词替换表
+
+笔记出现“审核中”“仅自己可见”或流量异常时，对照下表换说法。**只换说法，别换出没做过的承诺**（比如别把「破解」换成「官方离线原生支持」，别把「修改器」换成「纯净××」）。
+
+### 表 1：平台敏感词 ➔ 中性说法
+| 平台敏感词 | 中性说法 | 适用场景 |
+|---|---|---|
+| 作弊 / 作弊码 / 作弊器 | **调试指令 / 控制台指令** | 控制台代码介绍 |
+| 外挂 / 辅助挂 / 黑科技 | **第三方工具 / 开源框架** | 核心工具推荐 |
+| 修改器 / 内存修改 | **第三方工具 / 控制台** | 开启教程 |
+| 锁血 / 无限血 / 无敌 | **手残救星·剧情体验模式** | 战斗减负套餐 |
+| 秒杀 / 一击必杀 | **极速破韧·战斗畅爽增强** | 伤害类代码 |
+| 刷钱 / 无限金币 / 刷灵蕴 | **资源自由·全图鉴解锁** | 货币类代码 |
+| 无限负重 / 改背包 | **背包减负·无痛探索** | 跑图类代码 |
+| 全武器解锁 / 刷物品 | **全套神装图鉴·一键获取** | 装备收集 |
+| 穿墙 / 飞天 / 隐身 | **自由摄影·全景透视视角** | 视角类指令 |
+| 跳过任务 / 强制完成 | **卡关抢救·推进任务进度** | 剧情卡关 |
+| 破解 / 盗版 / 免Steam | **来路不明的版本**（我们只讲 Steam 正版） | 版本说明 |
+| 微信 / 加群 / 百度网盘 | **后台发送暗号 / 主页介绍** | 私域导流 |
+
+### 表 2：严审期整段备用模板（3套）
+- **备用 A（温和学术风）**：“不少单机游戏保留了开发用的控制台，通过配置文本即可在游戏内调用，便于鉴赏场景美术与剧情叙事。”
+- **备用 B（老玩家公益避坑风）**：“为了少碰来路不明的软件，本期分享如何用游戏自带的控制台或开源框架，在单机模式下调整游戏体验。”
+- **备用 C（极简指令流）**：“单机控制台参数配置速查笔记：常用快捷键映射表与指令索引。”
+
+---
+
+## 3. 玩家高频 10 问回复模板
+
+运营人员可直接复制以下回复：
 
 ### Q1：控制台按快捷键完全没有反应怎么办？
-> **回复**：  
-> 兄弟别急，99% 是以下两个原因：  
-> 1. **输入法冲突**：按快捷键前必须按 Shift 切换为纯英文大写输入法（中文输入法会拦截 `~` 键）；  
-> 2. **显示模式**：游戏画质设置里请切换为「无边框窗口化」或「全屏」重试一次。如果依然无法呼出，运行一下老L包里的一键批处理脚本重新绑定按键即可！
+> **回复**：
+> 兄弟别急，常见是这两个原因：
+> 1. **输入法冲突**：按快捷键前先按 Shift 切成英文（中文输入法会拦截 `~` 键）；
+> 2. **显示模式**：画面设置里切换为「无边框窗口化」或「全屏」再试一次。还不行的话，对照网站本游戏页检查框架文件是不是放对了目录。
 
 ### Q2：按键跟原有游戏技能或者截图软件快捷键冲突了怎么改？
-> **回复**：  
-> 非常简单！老L整合包里配有按键配置文件：  
-> - 2077 打开 `bindings.json`，把键位码 192 (`~`) 改为你想要的按键（如 F1/F2）；  
-> - 巫师3在 `general.ini` 里也可以同时使用 `@` 键呼出；  
-> - 或者直接运行批处理脚本输入自定义按键代号即可一键自动替换！
+> **回复**：
+> - 2077：CET 第一次启动会让你选按键，之后也可以在 CET 的设置里改；
+> - 巫师3：`general.ini` 打开控制台后，`~` 和 `@` 都能呼出；
+> - 其他游戏：看对应框架的配置文件或说明页。
 
-### Q3：Steam 突然推送小更新，游戏闪退打不开了怎么救？
-> **回复**：  
-> 这是因为 Steam 更新覆盖了游戏可执行程序：  
-> 1. 第一步：运行老L包里的「一键还原.bat」脚本，它会自动用之前备份的 `.bak` 文件秒复原游戏；  
-> 2. 第二步：在老L公众号或群里输入【雷达更新】，获取匹配新补丁的最新前置框架覆盖即可恢复！数据存档 100% 安全无损。
+### Q3：Steam 突然推送更新，游戏闪退打不开了怎么办？
+> **回复**：
+> 大概率是按 exe 版本挂钩的框架（CET / UE4SS / Script Extender / F4SE 等）还没适配新版本：
+> 1. 先把框架文件移出游戏目录，原版一般就能正常启动；
+> 2. 等框架作者发新版再装回去，进度可以看 L-MOD Vault 避坑雷达；
+> 3. 存档不会被自动备份，下次装框架、改配置之前，先手动复制一份存档文件夹。
 
 ### Q4：启动游戏报错提示缺少 MSVCP140.dll 或 vcruntime140.dll？
-> **回复**：  
-> 这是你的 Windows 系统缺少微软官方 VC++ 运行库：  
-> 前往微软官网或者在老L一键包的 `_Tools` 目录下双击运行 `VisualCppRedist_AIO.exe` 微软官方运行库合集安装，重启电脑即可完美解决！
+> **回复**：
+> 这是 Windows 缺少微软 VC++ 运行库：去微软官网下载安装 Visual C++ Redistributable（x64），装完重启电脑再试。
 
 ### Q5：在控制台输入指令回车后显示 Unknown Command 或没反应？
-> **回复**：  
-> 检查两个细节：  
-> 1. 括号和引号必须是**半角英文标点**（不要用中文输入法打引号）；  
-> 2. 指令严格区分大小写（比如 `Game.GodMode(true)` 不能写成全小写）。直接复制老L提供的 TXT 代码最为稳妥！
+> **回复**：
+> 检查两个细节：
+> 1. 括号和引号必须是**半角英文标点**（不要用中文输入法打引号）；
+> 2. 有些指令区分大小写（比如 `Game.GodMode(true)` 不能写成全小写）。从网站本游戏页直接复制最稳妥。
+> 指令没有逐条实测，版本不同也可能失效。
 
 ### Q6：装了 Mod 之后卡在黑色加载界面或者读档闪退？
-> **回复**：  
-> 说明你装的某个模组与当前游戏大版本冲突了：  
-> 采用老L推荐的「二分排查法」：先移出 Mods 文件夹中的最新几个模组，单留核心前置框架测试；只要能进游戏，再逐个放回排查，马上就能抓出冲突模组。
+> **回复**：
+> 多半是某个模组和当前游戏版本冲突了：
+> 用「二分排查法」：先移出 Mods 文件夹里最新装的几个模组，只留核心前置框架测试；能进游戏了，再逐个放回去，就能找出冲突的那个。
 
-### Q7：用官方底层控制台会不会破坏 Steam 成就或者被封号？
-> **回复**：  
-> 放心！这几款游戏均为单机离线机制，官方并不限制离线单机玩家的自由探索；并且 Script Extender / CET 框架内部均自带成就保护功能，成就可以正常解锁，绝不存在封号一说。
+### Q7：用控制台 / Mod 会不会影响 Steam 成就，会不会被封号？
+> **回复**：
+> 说实话，这个没法打包票：
+> - 成就：各游戏不一样，有的装 Mod 后会关掉成就（比如 B 社游戏装插件后），想刷成就的先别装；
+> - 封号：只在单机 / 离线下用；像艾尔登法环这种有联机的游戏，别把改过的存档带上线。
 
-### Q8：如果不想用了，怎么彻底干净地卸载，恢复完全纯净状态？
-> **回复**：  
-> 老L的方案最大的优势就是**零篡改、零破坏**：  
-> 只要运行懒人包里的「一键卸载还原.bat」，脚本会自动清除非原版文件并还原 ini 备份；或者在 Steam 库中点击「验证游戏完整性」，1分钟即可 100% 还原为官方出厂状态！
+### Q8：不想用了，怎么恢复干净的原版？
+> **回复**：
+> 1. 删掉自己放进游戏目录的框架和 Mod 文件；改过的配置文件如果脚本留了 `.bak`，把它改回原名；
+> 2. 在 Steam 库里右键游戏 ➔ 属性 ➔ 已安装文件 ➔ 验证游戏文件完整性，会把被改动或缺失的原版文件补回来（多出来的文件它不删，所以第 1 步要自己做）；
+> 3. 存档不在这个范围里，验证不会动它，也不会帮你恢复。
 
 ### Q9：因为误操作导致任务 NPC 消失或者剧情死锁了怎么救？
-> **回复**：  
-> 别慌！这正是官方控制台最擅长的领域：  
-> 参考代码速查手册中的「卡关抢救·剧情 Fact 标志位修复」，输入对应任务的 stage 代码回车，然后进行一次 F5 快速存盘再 F9 读档，即可瞬间刷新 NPC 状态机，重新推进剧情！
+> **回复**：
+> 先存档，再试试控制台：
+> 查一下对应任务的 ID 和阶段，用 setstage 推进到下一阶段，然后存档、读档看看 NPC 有没有恢复。不是每个任务都管用，阶段填错也可能把任务弄乱，所以一定先留一个存档。
 
-### Q10：为什么网上很多一键修改器，老L非要建议我们用官方原生机制？
-> **回复**：  
-> 这是一个十几年单机老极客的真心话：  
-> 很多修改器团队为了变现，会在程序里打包挖矿脚本、静默安装全家桶，甚至修改你的系统注册表；而且他们依赖暴力篡改内存地址，游戏一旦更新极易导致坏档。而官方底层机制是纯净开源透明的，不仅安全，还能让你真正理解游戏的底层架构与逻辑之美！
+### Q10：为什么不推荐网上的一键修改器？
+> **回复**：
+> 一个老单机玩家的真心话：
+> 来路不明的修改器有的会捆绑弹窗或后门；而且按内存地址改数据，游戏一更新就容易失效甚至坏档。游戏自带的控制台和开源框架，代码来源更清楚，出了问题也好查。
 
 ---
 
@@ -1786,29 +1837,40 @@ class PlaybookGenerator:
 
 ```mermaid
 flowchart TD
-    A["检查 20 张高清卡片 (1080x1440)"] --> B["核对对应游戏补丁版本号"]
+    A["检查 5 张卡片 (1080x1440)"] --> B["对一遍第 0 节口径红线"]
     B --> C["复制 xiaohongshu_post.md 发布小红书"]
     C --> D["第一时间发布首评置顶模板"]
     A --> E["复制 bilibili_dynamic.md 发布B站动态"]
     E --> F["开启互动投票与评论区引导"]
-    D --> G["私域后台设定对应暗号自动推送高速网盘"]
+    D --> G["私域后台设定暗号自动回复（网站入口 + 进群方式）"]
     F --> G
-    G --> H["监控评论区技术疑问，套用极客FAQ模板回复"]
+    G --> H["监控评论区技术疑问，套用 10 问模板回复"]
 ```
 """
-        return sanitize_text(playbook)
+        return playbook
 
 
 # ==============================================================================
 # 8. 主流程执行总装与批量出图
 # ==============================================================================
-def run_distribution_assembly(target_games=None):
+def _write_everywhere(rel_path: str, data: bytes) -> list:
+    """同一份产物写进 social_distribution/ 和 public/social_distribution/ 两处。"""
+    written = []
+    for base in OUTPUT_DIRS:
+        target = base / rel_path
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(data)
+        written.append(target)
+    return written
+
+
+def run_distribution_assembly(target_games=None) -> int:
     print("=" * 70)
-    print("🚀 L-MOD Vault 社交矩阵工业级高清出图与首发分发总装引擎 (Milestone 2)")
+    print("🚀 L-MOD Vault 社交卡片出图与分发物料生成")
     print("=" * 70)
 
     start_time = time.time()
-    DISTRIBUTION_DIR.mkdir(parents=True, exist_ok=True)
+    OVERFLOW_LOG.clear()
 
     games_to_process = target_games or list(FLAGSHIP_GAMES.keys())
     generated_images = []
@@ -1821,13 +1883,9 @@ def run_distribution_assembly(target_games=None):
 
         gdata = FLAGSHIP_GAMES[gid]
         dir_name = gdata["dir_name"]
-        game_out_dir = DISTRIBUTION_DIR / dir_name
-        images_out_dir = game_out_dir / "images"
-        images_out_dir.mkdir(parents=True, exist_ok=True)
+        print(f"\n🎮 正在生成：[{gdata['title']}] ...")
 
-        print(f"\n🎮 正在组装旗舰大作：[{gdata['title']}] ...")
-
-        # 1. 批量渲染 5 张高清卡片
+        # 1. 渲染 5 张卡片
         renderer = CardRenderer(gid)
         cards = [
             ("card_1_hook.png", renderer.render_card_1_hook),
@@ -1839,70 +1897,49 @@ def run_distribution_assembly(target_games=None):
 
         for filename, render_fn in cards:
             img = render_fn()
-            target_path = images_out_dir / filename
-            # 高清保存为标准 PNG
-            img.save(target_path, "PNG", optimize=True)
-            size_kb = os.path.getsize(target_path) / 1024.0
-            generated_images.append((str(target_path), img.size, size_kb))
-            print(f"  🖼️  已生成高清卡片: {filename} ({img.size[0]}x{img.size[1]}, {size_kb:.1f} KB)")
+            buf = io.BytesIO()
+            img.save(buf, "PNG", optimize=True)
+            written = _write_everywhere(f"{dir_name}/images/{filename}", buf.getvalue())
+            size_kb = len(buf.getvalue()) / 1024.0
+            generated_images.extend((str(t), img.size, size_kb) for t in written)
+            print(f"  🖼️  {filename} ({img.size[0]}x{img.size[1]}, {size_kb:.1f} KB) ×{len(written)}")
 
-        # 2. 生成小红书脱敏文案
-        xhs_file = game_out_dir / "xiaohongshu_post.md"
-        xhs_content = ContentGenerator.generate_xiaohongshu_post(gid)
-        with open(xhs_file, "w", encoding="utf-8") as f:
-            f.write(xhs_content)
-        generated_docs.append(str(xhs_file))
-        print(f"  📝 已生成小红书脱敏发布文案: xiaohongshu_post.md")
+        # 2. 小红书文案
+        written = _write_everywhere(f"{dir_name}/xiaohongshu_post.md",
+                                    ContentGenerator.generate_xiaohongshu_post(gid).encode("utf-8"))
+        generated_docs.extend(str(t) for t in written)
+        print("  📝 xiaohongshu_post.md")
 
-        # 3. 生成 B站动态/专栏物料
-        bili_file = game_out_dir / "bilibili_dynamic.md"
-        bili_content = ContentGenerator.generate_bilibili_dynamic(gid)
-        with open(bili_file, "w", encoding="utf-8") as f:
-            f.write(bili_content)
-        generated_docs.append(str(bili_file))
-        print(f"  📺 已生成B站动态/专栏发布物料: bilibili_dynamic.md")
+        # 3. B站动态/专栏
+        written = _write_everywhere(f"{dir_name}/bilibili_dynamic.md",
+                                    ContentGenerator.generate_bilibili_dynamic(gid).encode("utf-8"))
+        generated_docs.extend(str(t) for t in written)
+        print("  📺 bilibili_dynamic.md")
 
-    # 4. 生成全局实战运营手册 (OPERATION_PLAYBOOK.md)
-    playbook_file = DISTRIBUTION_DIR / "OPERATION_PLAYBOOK.md"
-    playbook_content = PlaybookGenerator.generate_playbook()
-    with open(playbook_file, "w", encoding="utf-8") as f:
-        f.write(playbook_content)
-    generated_docs.append(str(playbook_file))
-    print(f"\n📘 已生成全局实战运营手册: {playbook_file}")
+    # 4. 运营手册
+    written = _write_everywhere("OPERATION_PLAYBOOK.md", PlaybookGenerator.generate_playbook().encode("utf-8"))
+    generated_docs.extend(str(t) for t in written)
+    print("\n📘 OPERATION_PLAYBOOK.md")
 
-    # ==============================================================================
-    # 统计与验收清单打印
-    # ==============================================================================
     elapsed = time.time() - start_time
     print("\n" + "=" * 70)
-    print("✅ 交付验收统计报告 (Milestone 2 全数达标)")
-    print("=" * 70)
     print(f"⏱️  总耗时: {elapsed:.2f} 秒")
-    print(f"📦 生成游戏物料目录数: {len(games_to_process)} 个")
-    print(f"🖼️  生成高清 PNG 卡片数: {len(generated_images)} / 20 张 (全数 1080x1440 真实出图)")
-    print(f"📄 生成文案及手册文件数: {len(generated_docs)} 份")
-    print("-" * 70)
-
-    print("📊 高清图片产物明细：")
-    for path_str, dims, sz in generated_images:
-        rel = os.path.relpath(path_str, BASE_DIR)
-        print(f"  • {rel:<55} | 尺寸: {dims[0]}x{dims[1]} | 大小: {sz:6.1f} KB")
-
-    print("\n📂 文案与运营手册清单：")
-    for doc_str in generated_docs:
-        rel = os.path.relpath(doc_str, BASE_DIR)
-        print(f"  • {rel}")
-
-    print("=" * 70)
-    print("🎉 L-MOD Vault 社交矩阵首发总装包已全部就绪！可以直接拷贝分发！")
+    print(f"📦 游戏: {len(games_to_process)} 款 · 输出目录: " + ", ".join(os.path.relpath(d, BASE_DIR) for d in OUTPUT_DIRS))
+    print(f"🖼️  PNG: {len(generated_images)} 个文件 · 📄 文案与手册: {len(generated_docs)} 个文件")
+    if OVERFLOW_LOG:
+        print("\n❌ 有文字超出卡片内容区（改短文案再出图）：")
+        for line in OVERFLOW_LOG:
+            print("  • " + line)
+        return 1
+    print("✅ 所有文字都在卡片内容区内")
+    return 0
 
 
 if __name__ == "__main__":
     import argparse
-    parser = argparse.ArgumentParser(description="L-MOD Vault 社交矩阵工业级高清出图与分发物料总装引擎")
-    parser.add_argument("--all", action="store_true", default=True, help="批量出图全部 4 款旗舰大作")
-    parser.add_argument("--game", type=str, help="指定单款游戏 ID (如 cyberpunk-2077)")
+    parser = argparse.ArgumentParser(description="L-MOD Vault 社交卡片出图与分发物料生成")
+    parser.add_argument("--game", type=str, help="只生成单款游戏 (如 cyberpunk-2077)；默认 7 款全部")
     args = parser.parse_args()
 
     targets = [args.game] if args.game else None
-    run_distribution_assembly(targets)
+    sys.exit(run_distribution_assembly(targets))

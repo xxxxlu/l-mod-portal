@@ -1,7 +1,17 @@
 /**
  * Cloudflare Pages Function: /api/v1/games/:id/download
  * Dynamically stream and compile Windows .bat helper scripts
+ *
+ * 版本信息只写雷达 v2 记录到的 Steam build 和更新日期（public/radar_status.json，见 ../../../_radar_status.js），
+ * 不再写 D1 的 verified_patch（旧数据里带「实测」等没人做过的说法）。
  */
+
+import { loadRadarStatus, radarEntry, radarDay } from '../../../_radar_status.js';
+
+// echo 行里只放安全字符：去掉批处理的特殊符号，防止被当成命令或变量
+function batSafe(text) {
+  return String(text || '').replace(/[&|<>^%!"\r\n]/g, ' ').trim();
+}
 
 export async function onRequestGet(context) {
   const { params, request, env } = context;
@@ -19,7 +29,7 @@ export async function onRequestGet(context) {
   }
 
   try {
-    const game = await db.prepare('SELECT title, title_zh, console_shortcut, verified_patch FROM games WHERE id = ?').bind(gameId).first();
+    const game = await db.prepare('SELECT title, title_zh, console_shortcut FROM games WHERE id = ?').bind(gameId).first();
     if (!game) {
       return new Response('Game not found', { status: 404 });
     }
@@ -39,6 +49,10 @@ export async function onRequestGet(context) {
 
     // If no pre-compiled script, dynamically synthesize an industrial-grade .bat
     if (!scriptContent) {
+      const radar = radarEntry(await loadRadarStatus(context), gameId);
+      const steamLine = radar && radar.steamBuildId
+        ? `Steam build ${batSafe(radar.steamBuildId)}（${radarDay(radar.steamBuildUpdatedAt) || '日期未知'} 更新，${radarDay(radar.steamLastChecked) || '-'} 巡检）`
+        : '暂无巡检记录，以你本机的 Steam 版本为准';
       // Fetch top popular commands for this game
       const { results: popularCmds } = await db.prepare(
         'SELECT name_zh, name_en, code, syntax_type FROM console_commands WHERE game_id = ? ORDER BY is_popular DESC LIMIT 10'
@@ -56,11 +70,11 @@ cls
 echo ==============================================================================
 echo   L-MOD Vault (全球单机游戏模组与避坑智库) 官方自动化辅助
 echo   游戏名称: ${game.title_zh || game.title} (${game.title})
-echo   适配基准: Steam v${game.verified_patch || '最新版'}
+echo   Steam 版本: ${steamLine}
 echo   快捷热键: ${game.console_shortcut || '~ 键'}
 echo ==============================================================================
 echo.
-echo [提示] 正在为你列出已通过 100%% 实机校验的核心指令配置:
+echo [提示] 以下是站内整理的常用指令，不保证适配当前版本；游戏更新后可能失效，操作前先备份存档:
 echo.
 ${cmdLines}
 echo.

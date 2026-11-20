@@ -89,6 +89,17 @@ GENERIC_RISK_DESC = {
     'trainer-behind': '修改器早于当前游戏版本时，部分功能可能失效；用之前先备份存档，等修改器更新后再用更稳妥。',
 }
 
+# public/radar_status.json：给 Cloudflare Functions 读的雷达结果（游戏 id → v2 字段），和 data.js 同时写。
+# Functions 不解析 1.4 MB 的 data.js（免费版 CPU 不够），只读这个小文件。
+# 只放 Functions 回答要用的字段；radarRiskTitle / radarRiskDesc / emergencyAlert 能由下面这些推出来，不重复放。
+RADAR_STATUS_FILENAME = 'radar_status.json'
+RADAR_STATUS_VERSION = 2
+RADAR_STATUS_FIELDS = (
+    'compatibilityStatus', 'radarReason', 'radarStatusText',
+    'steamBuildId', 'steamBuildUpdatedAt', 'steamLastChecked',
+    'latestSteamPatch', 'latestSteamPatchUrl', 'radarFramework', 'radarAdvice', 'radarSummary',
+)
+
 SIMULATED_FRAMEWORK_NAME = 'Mod 框架（演练）'
 
 HTTP_HEADERS = {
@@ -205,6 +216,74 @@ def save_games(games, data_js_path=DATA_JS_PATH, use_master=False):
     js_text = js_text[:a] + json.dumps(games, ensure_ascii=False, indent=2) + js_text[b:]
     with open(data_js_path, 'w', encoding='utf-8') as f:
         f.write(js_text)
+
+
+# ==============================================================================
+# public/radar_status.json（Cloudflare Functions 读的雷达结果）
+# ==============================================================================
+def default_radar_status_path(data_js_path):
+    """和 data.js 放在同一目录：默认 public/radar_status.json；测试用临时 data.js 时自然落在临时目录。"""
+    return os.path.join(os.path.dirname(os.path.abspath(data_js_path)), RADAR_STATUS_FILENAME)
+
+
+def build_radar_status(games):
+    """从 GAMES_DATA 投影出 radar_status.json 的内容。
+
+    - 只收带 steamAppId、且已经有 v2 radarReason 的游戏（旧数据和非 Steam 游戏不收，Functions 当作「没有巡检记录」）。
+    - 值完全照抄 data.js，不重新判定，所以两边永远一致；某款这次没取到时 data.js 保持上次的值，这里也一样。
+    - updatedAt 取各款 steamLastChecked 的最大值（不用「现在」，同样的 data.js 生成同样的文件）。
+    """
+    entries = {}
+    checked = []
+    for game in sorted(games, key=lambda g: (g.get('rank') or 0, g.get('id') or '')):
+        gid = game.get('id')
+        if not gid or not game.get('steamAppId') or game.get('radarReason') not in REASON_STATUS:
+            continue
+        zh_title, en_title = _titles(game)
+        entry = {'rank': game.get('rank'), 'title': en_title, 'titleZh': zh_title, 'steamAppId': game.get('steamAppId')}
+        for key in RADAR_STATUS_FIELDS:
+            value = game.get(key)
+            if value is None and key not in ('radarFramework', 'radarAdvice'):
+                continue  # 缺的字段不写；框架和建议写 null，表示「查过，没有」
+            entry[key] = value
+        entries[gid] = entry
+        last = parse_iso_utc(game.get('steamLastChecked'))
+        if last:
+            checked.append(last)
+    return {
+        'version': RADAR_STATUS_VERSION,
+        'generatedBy': 'scripts/steam_patch_monitor.py',
+        'updatedAt': iso_z(max(checked)) if checked else None,
+        'recentDays': RECENT_DAYS,
+        'genericAdvice': dict(GENERIC_RISK_DESC),
+        'games': entries,
+    }
+
+
+def render_radar_status(status):
+    """一款游戏一行，每天的差异按游戏看得清；整体仍是合法 JSON。"""
+    head = {k: v for k, v in status.items() if k != 'games'}
+    lines = ['{']
+    for key, value in head.items():
+        lines.append(f'  {json.dumps(key)}: {json.dumps(value, ensure_ascii=False)},')
+    lines.append('  "games": {')
+    rows = [f'    {json.dumps(gid)}: {json.dumps(entry, ensure_ascii=False, separators=(",", ":"))}'
+            for gid, entry in status['games'].items()]
+    lines.append(',\n'.join(rows))
+    lines.append('  }')
+    lines.append('}')
+    if not rows:
+        lines.pop(-3)
+    return '\n'.join(lines) + '\n'
+
+
+def write_radar_status(games, path):
+    """写 radar_status.json，返回 (收录款数, 字节数)。"""
+    text = render_radar_status(build_radar_status(games))
+    os.makedirs(os.path.dirname(os.path.abspath(path)), exist_ok=True)
+    with open(path, 'w', encoding='utf-8') as f:
+        f.write(text)
+    return len(json.loads(text)['games']), len(text.encode('utf-8'))
 
 
 # ==============================================================================
@@ -973,7 +1052,11 @@ def parse_args(argv=None):
     p.add_argument('--game', help='只巡检这一款（游戏 id，如 baldurs-gate-3）')
     p.add_argument('--appid', type=int, help='只巡检这个 Steam AppID')
     p.add_argument('--all', action='store_true', help='兼容旧参数；现在默认就是全部带 steamAppId 的游戏')
-    p.add_argument('--update-radar', action='store_true', help='把结果写回 public/data.js 的 GAMES_DATA 段')
+    p.add_argument('--update-radar', action='store_true',
+                   help='把结果写回 public/data.js 的 GAMES_DATA 段，并重新生成 public/radar_status.json')
+    p.add_argument('--radar-status', help='radar_status.json 的路径（默认和 --data-js 同目录）')
+    p.add_argument('--export-radar-status', action='store_true',
+                   help='不巡检、不联网，只按 data.js 现有的雷达字段重新生成 radar_status.json')
     p.add_argument('--output-report', default=REPORT_PATH_DEFAULT, help='Markdown 报告输出路径')
     p.add_argument('--offline', action='store_true', help='不联网；配 --steam-snapshot 用假数据，否则全部算「本次未取到」')
     p.add_argument('--steam-snapshot', help='--offline 用的 Steam 数据快照 JSON（格式见 SnapshotClient）')
@@ -1003,8 +1086,15 @@ def run_monitor(argv=None, log=print):
             return 2
 
     data_js = os.path.abspath(args.data_js)
+    radar_status_path = os.path.abspath(args.radar_status or default_radar_status_path(data_js))
     use_master = data_js == DATA_JS_PATH and os.path.exists(GAMES_JSON_PATH)
     games = load_games(data_js, use_master)
+
+    if args.export_radar_status:
+        count, size = write_radar_status(games, radar_status_path)
+        log(f'💾 已按 {data_js} 重新生成 {radar_status_path}（{count} 款，{size / 1024:.1f} KB）')
+        return 0
+
     targets = select_targets(games, game_id=args.game, appid=args.appid)
     if (args.game or args.appid) and not targets:
         log(f'❌ 找不到要巡检的游戏（--game {args.game} / --appid {args.appid}）；非 Steam 游戏不巡检。')
@@ -1065,8 +1155,10 @@ def run_monitor(argv=None, log=print):
         updated = apply_results(games, results)
         save_games(games, data_js, use_master)
         log(f'💾 已写回 {updated} 款到 {data_js}（未取到的 {counts["missing"]} 款不动）')
+        status_count, status_size = write_radar_status(games, radar_status_path)
+        log(f'💾 Functions 用的雷达结果：{radar_status_path}（{status_count} 款，{status_size / 1024:.1f} KB）')
         if simulate:
-            log('⚠️ 演练数据已写进 data.js，别提交。')
+            log(f'⚠️ 演练数据已写进 data.js 和 {RADAR_STATUS_FILENAME}，别提交。')
     log('=' * 80)
     return 0
 
