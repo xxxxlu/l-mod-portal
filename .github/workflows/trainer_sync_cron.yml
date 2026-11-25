@@ -1,0 +1,61 @@
+name: FLiNG Trainer Sync Cron (风灵月影修改器清单同步)
+
+# 每天从风灵月影官网公开接口同步修改器元数据（功能数 / 热键 / 适配版本 / 更新日期），
+# 更新 public/trainers.json 与 public/data.js 的修改器字段。只读元数据，不下载、不转存任何修改器文件。
+# 和补丁雷达分开跑：雷达那条失败不影响这里。
+
+on:
+  schedule:
+    # 每天 UTC 03:00（北京时间 11:00），错开雷达巡检的 02:00
+    - cron: '0 3 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write   # 用 GITHUB_TOKEN 推的提交不会触发 deploy.yml，需手动派发一次部署
+
+concurrency:
+  group: data-js-writers
+  cancel-in-progress: false
+
+jobs:
+  sync-trainers:
+    name: Sync FLiNG trainer manifest
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Check out repository
+        uses: actions/checkout@v4
+
+      - name: 🐍 Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 🔄 Sync trainer manifest from flingtrainer.com
+        run: python3 scripts/fling_trainer_sync.py --apply
+
+      - name: 🛡️ Data & i18n gates
+        run: |
+          python3 scripts/verify_i18n_dual_pages.py
+          python3 scripts/build_game_aliases.py --check
+
+      - name: 🚀 Commit and push if changed
+        id: push
+        run: |
+          if [ -z "$(git status --porcelain public/trainers.json public/data.js)" ]; then
+            echo "✅ 修改器清单无变化"
+            exit 0
+          fi
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/trainers.json public/data.js
+          git commit -m "chore(trainers): automated FLiNG trainer manifest sync [skip ci]"
+          git pull --rebase
+          git push
+          echo "pushed=true" >> "$GITHUB_OUTPUT"
+
+      - name: 🌐 Redeploy site with the new data
+        if: steps.push.outputs.pushed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy.yml --ref main

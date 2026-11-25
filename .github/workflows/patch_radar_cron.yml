@@ -1,0 +1,158 @@
+name: Steam Patch Sentinel Cron (避坑雷达自动化巡检流水线)
+
+on:
+  schedule:
+    # 每天 UTC 02:00 (北京时间上午 10:00) 自动触发全量对账
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+    inputs:
+      simulate_game:
+        description: '演练：把这款游戏（如 cyberpunk-2077）模拟成刚更新；留空则真实巡检。演练不改 data.js、不推送'
+        required: false
+        default: ''
+      simulate_version:
+        description: '演练公告标题里显示的版本名'
+        required: false
+        default: 'Update 2.5 (Simulated)'
+      simulate_risk:
+        description: '演练风险：red 会产生一个「新变红」并走开单流程；yellow 只亮黄'
+        required: false
+        default: 'red'
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+  actions: write   # 用 GITHUB_TOKEN 推的提交不会触发 deploy.yml，需手动派发一次部署
+
+# 和修改器同步任务（trainer_sync_cron.yml）共用同一把锁：两条流水线都会改 public/data.js 的
+# GAMES_DATA 段并推 main，串行执行才不会互相覆盖/撞车。
+concurrency:
+  group: data-js-writers
+  cancel-in-progress: false
+
+jobs:
+  inspect-steam-patches:
+    name: Run Steam Patch Sentinel & Radar Sync
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🐍 Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 🔍 Execute Steam Patch Sentinel Inspection
+        id: run_monitor
+        env:
+          SIM_GAME: ${{ github.event.inputs.simulate_game }}
+          SIM_VERSION: ${{ github.event.inputs.simulate_version }}
+          SIM_RISK: ${{ github.event.inputs.simulate_risk }}
+        run: |
+          # 默认巡检全部带 steamAppId 的游戏并写回 public/data.js 和 public/radar_status.json；规则见 docs/RADAR_V2_CONTRACT.md 第 2 节。
+          # 演练：报告写到临时目录、不带 --update-radar ⇒ data.js 和 docs/ 都不变，下面的提交推送和派发部署自然跳过，
+          # 只有 check_risk → 开单/评论这一段会走。
+          if [ -n "$SIM_GAME" ]; then
+            REPORT="$RUNNER_TEMP/radar-drill-report.md"
+            echo "🧪 演练：$SIM_GAME（风险 ${SIM_RISK:-red}）"
+            python3 scripts/steam_patch_monitor.py --output-report "$REPORT" \
+              --simulate-patch "$SIM_GAME" --simulate-version "$SIM_VERSION" --simulate-risk "${SIM_RISK:-red}"
+          else
+            REPORT="docs/PATCH_MONITOR_LATEST.md"
+            python3 scripts/steam_patch_monitor.py --update-radar --output-report "$REPORT"
+          fi
+          echo "report=$REPORT" >> "$GITHUB_OUTPUT"
+
+      - name: 🛡️ Run Full E2E I18N & Dual-Page Gate Verification
+        run: |
+          echo "🧪 验证雷达看板与离线数据完整性..."
+          python3 scripts/verify_i18n_dual_pages.py
+
+      - name: 📝 Check Git Diff for Updates
+        id: git_status
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+            echo "⚡ 检测到 Steam 版本变动与数据更新！"
+          else
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+            echo "✅ 本次巡检各游戏版本平稳，无新补丁产生的数据差异。"
+          fi
+
+      - name: 🚨 Check for newly red games
+        id: check_risk
+        env:
+          RADAR_REPORT: ${{ steps.run_monitor.outputs.report }}
+        run: |
+          # 只认报告里的 <!-- radar-new-red: N -->：N > 0 才开单或评论。
+          # 已经红着、build 也没变的游戏不算新变红，不会每天追加评论。
+          NEW_RED=$(sed -n 's/.*<!-- radar-new-red: \([0-9][0-9]*\) -->.*/\1/p' "$RADAR_REPORT" | head -n 1)
+          if [ -z "$NEW_RED" ]; then
+            echo "::warning::报告里没有 radar-new-red 标记，按 0 处理"
+            NEW_RED=0
+          fi
+          echo "new_red=$NEW_RED" >> "$GITHUB_OUTPUT"
+          if [ "$NEW_RED" -gt 0 ]; then
+            echo "high_risk_detected=true" >> "$GITHUB_OUTPUT"
+            echo "🚨 本次新变红 $NEW_RED 款"
+          else
+            echo "high_risk_detected=false" >> "$GITHUB_OUTPUT"
+            echo "✅ 本次没有新变红的游戏"
+          fi
+
+      - name: 🚀 Commit and Push Radar Sync Changes
+        id: push
+        if: steps.git_status.outputs.has_changes == 'true'
+        run: |
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # radar_status.json 是 data.js 雷达字段的投影，给 Cloudflare Functions（AI 助手、/api/v1/radar/*）读，必须同批提交
+          git add public/data.js public/radar_status.json docs/PATCH_MONITOR_LATEST.md
+          git commit -m "chore(radar): automated steam patch sentinel sync [skip ci]"
+          # 推送前先并入最新提交（修改器同步任务 / 人工推送），避免 non-fast-forward 被拒
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
+          echo "pushed=true" >> "$GITHUB_OUTPUT"
+
+      - name: 🌐 Redeploy site with the new radar data
+        if: steps.push.outputs.pushed == 'true' && github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy.yml --ref main
+
+      - name: 📢 Open GitHub Issue on Breaking Patch Alert
+        if: steps.check_risk.outputs.high_risk_detected == 'true'
+        uses: actions/github-script@v7
+        env:
+          RADAR_REPORT: ${{ steps.run_monitor.outputs.report }}
+          SIM_GAME: ${{ github.event.inputs.simulate_game }}
+        with:
+          script: |
+            const fs = require('fs');
+            const reportPath = process.env.RADAR_REPORT || 'docs/PATCH_MONITOR_LATEST.md';
+            let content = '检测到官方突发坏档大更新！请立即启动适配排查。';
+            if (fs.existsSync(reportPath)) {
+              content = fs.readFileSync(reportPath, 'utf8');
+            }
+            const { owner, repo } = context.repo;
+            // 去重：已有未关闭的雷达预警 Issue 时不再新开，改为在那条下面追加本次巡检报告
+            const { data: openAlerts } = await github.rest.issues.listForRepo({
+              owner, repo, labels: 'radar-alert', state: 'open', per_page: 1
+            });
+            if (openAlerts.length > 0) {
+              await github.rest.issues.createComment({
+                owner, repo, issue_number: openAlerts[0].number, body: content
+              });
+              core.info(`Appended report to open radar-alert issue #${openAlerts[0].number}`);
+            } else {
+              await github.rest.issues.create({
+                owner, repo,
+                title: (process.env.SIM_GAME ? '【演练】' : '') + '🚨【紧急避坑预警】Steam 官方推送突发补丁 · 避坑雷达已自动更新预警',
+                body: content,
+                labels: ['radar-alert', 'breaking-patch', 'mod-incompatible']
+              });
+            }

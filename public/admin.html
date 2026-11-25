@@ -1,0 +1,2422 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>L-MOD Vault | 站长专属管理中台 (Admin Console & AI Control Plane)</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            vault: {
+              black: '#08090c',
+              dark: '#0d0f15',
+              card: '#12151e',
+              border: '#1e2433',
+              accent: '#8b5cf6',
+              emerald: '#10b981',
+              amber: '#f59e0b',
+              rose: '#f43f5e'
+            }
+          },
+          fontFamily: {
+            mono: ['JetBrains Mono', 'SF Mono', 'Menlo', 'Consolas', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #08090c; }
+    ::-webkit-scrollbar-thumb { background: #262f40; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #3b465c; }
+    .glass-card {
+      background: rgba(18, 21, 30, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+    }
+    .glass-card-hover:hover {
+      border-color: rgba(139, 92, 246, 0.4);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+    }
+    .cyber-grid {
+      background-size: 40px 40px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    }
+    .neon-glow {
+      box-shadow: 0 0 25px -5px rgba(139, 92, 246, 0.35);
+    }
+    .neon-emerald {
+      box-shadow: 0 0 25px -5px rgba(16, 185, 129, 0.35);
+    }
+  </style>
+</head>
+<body class="bg-vault-black text-slate-200 min-h-screen font-sans antialiased cyber-grid selection:bg-purple-600 selection:text-white">
+
+  <!-- ========================================================================= -->
+  <!-- 1. ZERO TRUST SHIELD AUTH SCREEN (Shown when unauthenticated) -->
+  <!-- ========================================================================= -->
+  <div id="auth-screen" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-vault-black/95 backdrop-blur-2xl">
+    <div class="w-full max-w-md glass-card rounded-2xl p-8 border border-slate-800 shadow-2xl relative overflow-hidden">
+      <!-- Glow ambient background -->
+      <div class="absolute -top-24 -left-24 w-48 h-48 bg-purple-600/20 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-24 -right-24 w-48 h-48 bg-emerald-600/20 rounded-full blur-3xl pointer-events-none"></div>
+
+      <!-- Shield Header -->
+      <div class="text-center mb-8 relative">
+        <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-600 to-indigo-800 text-white mb-4 shadow-xl border border-purple-400/30">
+          <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+          </svg>
+        </div>
+        <h1 class="text-2xl font-bold tracking-tight text-white flex items-center justify-center gap-2">
+          <span>L-MOD</span>
+          <span class="text-xs px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30 uppercase tracking-widest font-mono">Zero Trust</span>
+        </h1>
+        <p class="text-xs text-slate-400 mt-1">站长专属特权通道 · 全栈管理与 AI 控制平面</p>
+      </div>
+
+      <!-- Login Form -->
+      <form id="login-form" class="space-y-4 relative">
+        <!-- Username Field -->
+        <div>
+          <label class="block text-xs font-medium text-slate-300 mb-1.5 font-mono flex items-center justify-between">
+            <span>站长管理账号 (ADMIN USERNAME)</span>
+            <span class="text-[10px] text-purple-400"></span>
+          </label>
+          <input 
+            id="admin-username" 
+            type="text" 
+            value=""
+            placeholder="输入站长账号" 
+            class="w-full bg-slate-950/80 border border-slate-700/80 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 font-mono transition-all"
+            autocomplete="username"
+            required
+          >
+        </div>
+
+        <!-- Password Field -->
+        <div>
+          <label class="block text-xs font-medium text-slate-300 mb-1.5 font-mono flex items-center justify-between">
+            <span>站长专属密码 (PASSWORD)</span>
+            <span class="text-[10px] text-purple-400">HMAC-SHA256 签发</span>
+          </label>
+          <div class="relative">
+            <input 
+              id="admin-passkey" 
+              type="password" 
+              placeholder="输入站长密码" 
+              class="w-full bg-slate-950/80 border border-slate-700/80 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 font-mono transition-all pr-10"
+              autocomplete="current-password"
+              required
+            >
+            <button type="button" id="toggle-pwd-btn" class="absolute right-3 top-2.5 text-slate-400 hover:text-white transition">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+            </button>
+          </div>
+        </div>
+
+
+        <div id="login-error" class="hidden p-3 rounded-lg bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs flex items-center gap-2">
+          <svg class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <span id="login-error-msg">账号或密码错误，特权通道拒绝访问</span>
+        </div>
+
+        <button 
+          type="submit" 
+          id="login-submit-btn" 
+          class="w-full py-3 px-4 rounded-xl font-medium text-sm text-white bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 transition-all shadow-lg shadow-purple-600/30 flex items-center justify-center gap-2"
+        >
+          <span>进入中台控制平面</span>
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </button>
+
+        <div class="pt-2 text-center">
+          <a href="/" class="text-xs text-slate-500 hover:text-slate-300 transition">← 返回 L-MOD Vault 玩家前端</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- 2. ADMIN PORTAL MAIN CONSOLE -->
+  <!-- ========================================================================= -->
+  <div id="admin-app" class="hidden min-h-screen flex flex-col">
+
+    <!-- Top Navigation Header -->
+    <header class="sticky top-0 z-40 bg-vault-dark/80 backdrop-blur-md border-b border-slate-800/80 px-4 lg:px-8 py-3.5 transition-all">
+      <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+        
+        <!-- Brand & Node Status -->
+        <div class="flex items-center gap-3 w-full md:w-auto justify-between md:justify-start">
+          <div class="flex items-center gap-3">
+            <a href="/" class="flex items-center gap-2 group">
+              <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center font-bold text-white text-sm shadow-md">
+                L
+              </div>
+              <div>
+                <span class="font-bold tracking-tight text-white group-hover:text-purple-300 transition text-sm">L-MOD Vault</span>
+                <span class="text-[10px] text-purple-400 block font-mono -mt-1">ADMIN CONTROL PLANE</span>
+              </div>
+            </a>
+            <span class="hidden sm:inline-block text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-mono flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span id="header-edge-node">Cloudflare Edge · D1</span>
+            </span>
+          </div>
+
+          <!-- Mobile Logout Button -->
+          <button id="mobile-logout-btn" class="md:hidden text-xs text-slate-400 hover:text-rose-400 p-2">
+            退出
+          </button>
+        </div>
+
+        <!-- Global Emergency Alert Banner indicator (if active) -->
+        <div id="header-emergency-pill" class="hidden items-center gap-2 px-3 py-1 rounded-full bg-rose-500/15 border border-rose-500/30 text-rose-300 text-xs">
+          <span class="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
+          <span class="font-semibold">全站紧急熔断广播运行中</span>
+        </div>
+
+        <!-- Right Quick Actions -->
+        <div class="hidden md:flex items-center gap-3">
+          <button id="refresh-data-btn" class="text-xs px-3 py-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-300 border border-slate-700/60 transition flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+            <span>刷新数据</span>
+          </button>
+          <div class="h-4 w-[1px] bg-slate-800"></div>
+          <div class="flex items-center gap-2 text-xs text-slate-400 font-mono">
+            <span class="w-2 h-2 rounded-full bg-purple-400"></span>
+            <span id="admin-user-tag">老L·站长 (Super Admin)</span>
+          </div>
+          <button id="open-pwd-modal-btn" class="text-xs px-2.5 py-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-purple-300 border border-purple-500/30 transition flex items-center gap-1 font-mono">
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/></svg>
+            <span>修改密码</span>
+          </button>
+          <button id="logout-btn" class="text-xs px-3 py-1.5 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 text-rose-300 border border-rose-500/30 transition">
+            退出登录
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Navigation Tabs -->
+      <div class="max-w-7xl mx-auto mt-3 flex items-center gap-1 overflow-x-auto pb-1 text-sm border-t border-slate-800/60 pt-2 font-medium">
+        <button data-tab="analytics" class="nav-tab px-4 py-2 rounded-lg text-purple-400 bg-purple-500/10 border border-purple-500/20 flex items-center gap-2 whitespace-nowrap transition">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+          <span>玩家数据大盘 (Telemetry)</span>
+        </button>
+
+        <button data-tab="users" class="nav-tab px-4 py-2 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 flex items-center gap-2 whitespace-nowrap transition">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          <span>用户与收藏</span>
+        </button>
+
+        <button data-tab="feedback" class="nav-tab px-4 py-2 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 flex items-center gap-2 whitespace-nowrap transition">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
+          <span>玩家反馈</span>
+        </button>
+
+        <button data-tab="audit" class="nav-tab px-4 py-2 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 flex items-center gap-2 whitespace-nowrap transition">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>
+          <span>操作日志</span>
+        </button>
+
+        <button data-tab="cms" class="nav-tab px-4 py-2 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 flex items-center gap-2 whitespace-nowrap transition">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+          <span>游戏与指令运维 (Game CMS)</span>
+        </button>
+
+        <button data-tab="trainers" class="nav-tab px-4 py-2 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 flex items-center gap-2 whitespace-nowrap transition">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+          <span>修改器包 (Trainer Packages)</span>
+        </button>
+
+        <button data-tab="ai" class="nav-tab px-4 py-2 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 flex items-center gap-2 whitespace-nowrap transition">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          <span>老L·AI 编排台 (Copilot Studio)</span>
+        </button>
+
+        <button data-tab="radar" class="nav-tab px-4 py-2 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 flex items-center gap-2 whitespace-nowrap transition">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0"/></svg>
+          <span>补丁雷达巡检 (Sentinel Control)</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 lg:p-8 space-y-8">
+
+      <!-- ===================================================================== -->
+      <!-- TAB 1: TELEMETRY & ANALYTICS DASHBOARD -->
+      <!-- ===================================================================== -->
+      <section id="panel-analytics" class="tab-panel space-y-6">
+
+        <!-- Range switch & data scope -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-3">
+          <div>
+            <h1 class="text-lg font-bold text-white">访客统计</h1>
+            <p id="an-meta" class="text-[11px] text-slate-500 font-mono mt-1 leading-relaxed">读取中...</p>
+          </div>
+          <div class="flex items-center gap-1 text-xs font-mono bg-slate-950/70 border border-slate-800 rounded-xl p-1 self-start md:self-auto" aria-label="时间范围">
+            <button type="button" data-range="today" class="an-range-btn px-3 py-1.5 rounded-lg text-slate-400 hover:text-slate-200 transition">今日</button>
+            <button type="button" data-range="7d" class="an-range-btn px-3 py-1.5 rounded-lg text-slate-400 hover:text-slate-200 transition">近 7 天</button>
+            <button type="button" data-range="30d" class="an-range-btn px-3 py-1.5 rounded-lg text-slate-400 hover:text-slate-200 transition">近 30 天</button>
+          </div>
+        </div>
+
+        <div id="an-notice" class="hidden space-y-1.5 p-3 rounded-xl border border-amber-500/30 bg-amber-500/10 text-amber-200 text-xs leading-relaxed"></div>
+
+        <!-- Headline numbers -->
+        <div class="grid grid-cols-2 lg:grid-cols-5 gap-3">
+          <div class="glass-card rounded-2xl p-4 border border-slate-800">
+            <div class="text-[11px] text-slate-400">浏览量 PV</div>
+            <div id="an-pv" class="mt-2 text-3xl font-extrabold text-white tabular-nums">--</div>
+            <div class="mt-1 text-[11px] text-slate-500">打开首页 / 游戏详情 / 雷达页的次数</div>
+          </div>
+          <div class="glass-card rounded-2xl p-4 border border-slate-800">
+            <div class="text-[11px] text-slate-400">访客 UV</div>
+            <div id="an-uv" class="mt-2 text-3xl font-extrabold text-white tabular-nums">--</div>
+            <div id="an-uv-note" class="mt-1 text-[11px] text-slate-500">去重访客（匿名浏览器 ID）</div>
+          </div>
+          <div class="glass-card rounded-2xl p-4 border border-slate-800">
+            <div class="text-[11px] text-slate-400">搜索次数</div>
+            <div id="an-searches" class="mt-2 text-3xl font-extrabold text-white tabular-nums">--</div>
+            <div class="mt-1 text-[11px] text-slate-500">停止输入 1.2 秒后的最终词</div>
+          </div>
+          <div class="glass-card rounded-2xl p-4 border border-slate-800">
+            <div class="text-[11px] text-slate-400">AI 提问</div>
+            <div id="an-ai" class="mt-2 text-3xl font-extrabold text-white tabular-nums">--</div>
+            <div class="mt-1 text-[11px] text-slate-500">只记游戏，不记问题内容</div>
+          </div>
+          <div class="glass-card rounded-2xl p-4 border border-slate-800 col-span-2 lg:col-span-1">
+            <div class="text-[11px] text-slate-400">全部事件</div>
+            <div id="an-events" class="mt-2 text-3xl font-extrabold text-white tabular-nums">--</div>
+            <div class="mt-1 text-[11px] text-slate-500">浏览 + 搜索 + 各种点击</div>
+          </div>
+        </div>
+
+        <!-- 30-day trend -->
+        <div class="glass-card rounded-2xl p-5 border border-slate-800">
+          <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
+            <h2 class="text-sm font-bold text-white">近 30 天 PV / UV</h2>
+            <div class="flex items-center gap-4 text-[11px] text-slate-300 font-mono">
+              <span class="flex items-center gap-1.5"><span class="inline-block w-4 h-[2px] rounded" style="background:#3987e5"></span>PV 浏览量</span>
+              <span class="flex items-center gap-1.5"><span class="inline-block w-4 h-[2px] rounded" style="background:#d95926"></span>UV 当天访客</span>
+              <button type="button" id="an-trend-table-btn" class="px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-300 border border-slate-700/60 transition">表格</button>
+            </div>
+          </div>
+          <div id="an-trend" class="relative select-none"></div>
+          <div id="an-trend-table" class="hidden overflow-x-auto max-h-80 overflow-y-auto mt-2"></div>
+          <p class="mt-2 text-[11px] text-slate-500">v6 上线前只记录互动事件，没有浏览量（PV 为 0）。UV 是当天去重访客。</p>
+        </div>
+
+        <!-- Trainer & Mod -->
+        <div class="glass-card rounded-2xl p-5 border border-slate-800">
+          <h2 class="text-sm font-bold text-white mb-3">修改器与 Mod</h2>
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+            <div class="rounded-xl bg-slate-950/70 border border-slate-800 p-3">
+              <div class="text-[11px] text-slate-400">去风灵月影官网</div>
+              <div id="an-trainer-official" class="mt-1 text-2xl font-bold text-white tabular-nums">--</div>
+              <div class="text-[11px] text-slate-500">点官网链接的次数</div>
+            </div>
+            <div class="rounded-xl bg-slate-950/70 border border-slate-800 p-3">
+              <div class="text-[11px] text-slate-400">本站下载</div>
+              <div id="an-trainer-download" class="mt-1 text-2xl font-bold text-white tabular-nums">--</div>
+              <div class="text-[11px] text-slate-500">从本站下载修改器包</div>
+            </div>
+            <div class="rounded-xl bg-slate-950/70 border border-slate-800 p-3">
+              <div class="text-[11px] text-slate-400">下载失败兜底</div>
+              <div id="an-trainer-fallback" class="mt-1 text-2xl font-bold text-white tabular-nums">--</div>
+              <div class="text-[11px] text-slate-500">预检失败、改跳官网</div>
+            </div>
+            <div class="rounded-xl bg-slate-950/70 border border-slate-800 p-3">
+              <div class="text-[11px] text-slate-400">Mod 点击</div>
+              <div id="an-mod-clicks" class="mt-1 text-2xl font-bold text-white tabular-nums">--</div>
+              <div id="an-mod-kinds" class="text-[11px] text-slate-500">--</div>
+            </div>
+          </div>
+          <div class="mt-4">
+            <div class="text-[11px] text-slate-400 mb-2">兜底原因</div>
+            <div id="an-fallback-reasons" class="space-y-2.5"></div>
+          </div>
+        </div>
+
+        <!-- Sources / pages / searches -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          <div class="glass-card rounded-2xl p-5 border border-slate-800">
+            <h2 class="text-sm font-bold text-white">来源 Top</h2>
+            <p class="text-[11px] text-slate-500 mb-3">外站域名，按访客计</p>
+            <div id="an-referrers" class="space-y-2.5"></div>
+          </div>
+          <div class="glass-card rounded-2xl p-5 border border-slate-800">
+            <h2 class="text-sm font-bold text-white">热门页面</h2>
+            <p class="text-[11px] text-slate-500 mb-3">浏览次数</p>
+            <div id="an-pages" class="space-y-2.5"></div>
+          </div>
+          <div class="glass-card rounded-2xl p-5 border border-slate-800">
+            <h2 class="text-sm font-bold text-white">热搜词</h2>
+            <p class="text-[11px] text-slate-500 mb-3">首页和雷达页的搜索框</p>
+            <div id="an-search-list" class="space-y-2.5 max-h-96 overflow-y-auto pr-1"></div>
+          </div>
+        </div>
+
+        <!-- Hot games -->
+        <div class="glass-card rounded-2xl p-5 border border-slate-800">
+          <h2 class="text-sm font-bold text-white">热门游戏</h2>
+          <p class="text-[11px] text-slate-500 mb-3">访客 = 打开过该游戏详情页的访客；其余列为点击次数</p>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs font-mono">
+              <thead class="text-slate-400 border-b border-slate-800 text-[11px]">
+                <tr>
+                  <th class="py-2 px-2">游戏</th>
+                  <th class="py-2 px-2 text-right">访客</th>
+                  <th class="py-2 px-2 text-right">去官网</th>
+                  <th class="py-2 px-2 text-right">本站下载</th>
+                  <th class="py-2 px-2 text-right">兜底</th>
+                  <th class="py-2 px-2 text-right">Mod</th>
+                  <th class="py-2 px-2 text-right">AI</th>
+                  <th class="py-2 px-2 text-right">复制指令</th>
+                  <th class="py-2 px-2 text-right">.bat</th>
+                </tr>
+              </thead>
+              <tbody id="an-games" class="divide-y divide-slate-800/60 text-slate-300"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Audience -->
+        <div>
+          <p class="text-[11px] text-slate-500 mb-2">以下四项按「访客·天」计：同一访客在不同的天各算一次。</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+            <div class="glass-card rounded-2xl p-5 border border-slate-800">
+              <h2 class="text-sm font-bold text-white mb-3">国家 / 地区</h2>
+              <div id="an-countries" class="space-y-2.5"></div>
+            </div>
+            <div class="glass-card rounded-2xl p-5 border border-slate-800">
+              <h2 class="text-sm font-bold text-white mb-3">设备</h2>
+              <div id="an-devices" class="space-y-2.5"></div>
+            </div>
+            <div class="glass-card rounded-2xl p-5 border border-slate-800">
+              <h2 class="text-sm font-bold text-white mb-3">界面语言</h2>
+              <div id="an-langs" class="space-y-2.5"></div>
+            </div>
+            <div class="glass-card rounded-2xl p-5 border border-slate-800">
+              <h2 class="text-sm font-bold text-white mb-3">站点</h2>
+              <div id="an-sites" class="space-y-2.5"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Copied commands & registered players -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <div class="glass-card rounded-2xl p-5 border border-slate-800">
+            <h2 class="text-sm font-bold text-white mb-3">复制最多的指令</h2>
+            <div id="an-copies" class="space-y-2.5"></div>
+          </div>
+          <div class="glass-card rounded-2xl p-5 border border-slate-800">
+            <h2 class="text-sm font-bold text-white mb-3">注册玩家（今日按北京时间）</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs">
+              <div class="rounded-xl bg-slate-950/70 border border-slate-800 p-3"><div class="text-[11px] text-slate-400">注册总数</div><div id="metric-users-total" class="mt-1 text-xl font-bold text-white tabular-nums">--</div></div>
+              <div class="rounded-xl bg-slate-950/70 border border-slate-800 p-3"><div class="text-[11px] text-slate-400">今日新注册</div><div id="metric-users-today" class="mt-1 text-xl font-bold text-white tabular-nums">--</div></div>
+              <div class="rounded-xl bg-slate-950/70 border border-slate-800 p-3"><div class="text-[11px] text-slate-400">今日登录</div><div id="metric-users-active" class="mt-1 text-xl font-bold text-white tabular-nums">--</div></div>
+              <div class="rounded-xl bg-slate-950/70 border border-slate-800 p-3"><div class="text-[11px] text-slate-400">已设密码</div><div id="metric-users-pwd" class="mt-1 text-xl font-bold text-white tabular-nums">--</div></div>
+              <div class="rounded-xl bg-slate-950/70 border border-slate-800 p-3"><div class="text-[11px] text-slate-400">今日发出验证码</div><div id="metric-otp-today" class="mt-1 text-xl font-bold text-white tabular-nums">--</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sampling switch -->
+        <div class="glass-card rounded-2xl p-5 border border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="text-xs">
+            <h2 class="text-sm font-bold text-white">采样比例</h2>
+            <p class="text-slate-400 mt-1 leading-relaxed">默认 100% 全量记录。流量接近 Cloudflare 免费额度时再调低；按访客抽样，统计数字会按比例放大成估算。</p>
+            <p class="text-slate-500 mt-1">当前：<span id="an-sample-current" class="text-slate-200 font-mono">--</span></p>
+          </div>
+          <div class="flex items-center gap-2 text-xs font-mono shrink-0">
+            <input id="an-sample-input" type="number" min="1" max="100" step="1" class="w-20 bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1.5 text-white" aria-label="采样百分比">
+            <span class="text-slate-400">%</span>
+            <button type="button" id="an-sample-save" class="px-3 py-1.5 rounded-lg bg-purple-600/80 hover:bg-purple-600 text-white transition">保存</button>
+          </div>
+        </div>
+
+        <!-- Raw event stream -->
+        <div class="glass-card rounded-2xl p-5 border border-slate-800">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-3">
+            <div>
+              <h2 class="text-sm font-bold text-white">最近事件明细</h2>
+              <p class="text-[11px] text-slate-500 mt-0.5">明细保留 90 天，之后只留按天汇总。不含 IP。</p>
+            </div>
+            <select id="telemetry-filter-type" class="bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs text-slate-300 font-mono">
+              <option value="all">全部事件</option>
+              <option value="page_view">浏览页面</option>
+              <option value="search_query">搜索</option>
+              <option value="trainer_official_click">去风灵月影官网</option>
+              <option value="trainer_download">本站下载修改器</option>
+              <option value="trainer_fallback">下载兜底跳官网</option>
+              <option value="mod_download_click">Mod 点击</option>
+              <option value="ai_ask">AI 提问</option>
+              <option value="copy_code">复制指令</option>
+              <option value="download_bat">下载 .bat</option>
+              <option value="view_game">看游戏（v6 前）</option>
+            </select>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs font-mono whitespace-nowrap">
+              <thead class="text-slate-400 border-b border-slate-800 text-[11px]">
+                <tr>
+                  <th class="py-2 px-2">时间（北京）</th>
+                  <th class="py-2 px-2">事件</th>
+                  <th class="py-2 px-2">游戏</th>
+                  <th class="py-2 px-2">内容</th>
+                  <th class="py-2 px-2">页面</th>
+                  <th class="py-2 px-2">来源</th>
+                  <th class="py-2 px-2">设备</th>
+                  <th class="py-2 px-2">语言</th>
+                  <th class="py-2 px-2">国家</th>
+                </tr>
+              </thead>
+              <tbody id="telemetry-table-body" class="divide-y divide-slate-800/60 text-slate-300">
+                <tr><td colspan="9" class="text-center py-6 text-slate-500">读取中...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- TAB: USERS & FAVORITES (read-only) -->
+      <!-- ===================================================================== -->
+      <section id="panel-users" class="tab-panel hidden space-y-6">
+        <div id="users-summary" class="grid grid-cols-2 lg:grid-cols-4 gap-3"></div>
+
+        <div class="glass-card rounded-2xl p-5 border border-slate-800">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
+            <div>
+              <h2 class="text-sm font-bold text-white">注册玩家</h2>
+              <p class="text-[11px] text-slate-500 mt-0.5">只读。邮箱打码显示；时间为北京时间。</p>
+            </div>
+            <input id="users-search" type="search" placeholder="搜昵称或邮箱" class="w-full sm:w-56 bg-slate-950 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white placeholder-slate-500">
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs font-mono">
+              <thead class="text-slate-400 border-b border-slate-800 text-[11px]">
+                <tr>
+                  <th class="py-2 px-2 whitespace-nowrap">昵称</th>
+                  <th class="py-2 px-2">邮箱</th>
+                  <th class="py-2 px-2">登录方式</th>
+                  <th class="py-2 px-2">注册时间</th>
+                  <th class="py-2 px-2">最近登录</th>
+                  <th class="py-2 px-2 text-right">收藏</th>
+                  <th class="py-2 px-2 text-right">订阅</th>
+                  <th class="py-2 px-2">状态</th>
+                </tr>
+              </thead>
+              <tbody id="users-table-body" class="divide-y divide-slate-800/60 text-slate-300">
+                <tr><td colspan="8" class="text-center py-6 text-slate-500">读取中...</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div id="users-pager" class="flex items-center justify-end gap-2 mt-3 text-xs font-mono"></div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <div class="glass-card rounded-2xl p-5 border border-slate-800">
+            <h2 class="text-sm font-bold text-white">收藏最多的游戏</h2>
+            <p class="text-[11px] text-slate-500 mb-3">收藏该游戏的玩家数</p>
+            <div id="top-fav-list" class="space-y-2.5"></div>
+          </div>
+          <div class="glass-card rounded-2xl p-5 border border-slate-800">
+            <h2 class="text-sm font-bold text-white">订阅雷达最多的游戏</h2>
+            <p class="text-[11px] text-slate-500 mb-3">订阅补丁雷达提醒的玩家数</p>
+            <div id="top-sub-list" class="space-y-2.5"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- TAB: PLAYER FEEDBACK -->
+      <!-- ===================================================================== -->
+      <section id="panel-feedback" class="tab-panel hidden space-y-6">
+        <div class="glass-card rounded-2xl p-5 border border-slate-800">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-4">
+            <div>
+              <h2 class="text-sm font-bold text-white">玩家反馈</h2>
+              <p class="text-[11px] text-slate-500 mt-0.5">改状态、写处理备注（备注只有后台能看到）。时间为北京时间。</p>
+            </div>
+            <div class="flex flex-wrap items-center gap-1.5 text-xs font-mono">
+              <button type="button" data-feedback-filter="all" class="feedback-filter-btn px-3 py-1.5 rounded-lg border border-transparent text-slate-400 hover:bg-slate-800">全部 <span data-fb-count="all" class="text-slate-500"></span></button>
+              <button type="button" data-feedback-filter="pending" class="feedback-filter-btn px-3 py-1.5 rounded-lg border border-transparent text-slate-400 hover:bg-slate-800">待处理 <span data-fb-count="pending" class="text-slate-500"></span></button>
+              <button type="button" data-feedback-filter="verified" class="feedback-filter-btn px-3 py-1.5 rounded-lg border border-transparent text-slate-400 hover:bg-slate-800">已确认 <span data-fb-count="verified" class="text-slate-500"></span></button>
+              <button type="button" data-feedback-filter="resolved" class="feedback-filter-btn px-3 py-1.5 rounded-lg border border-transparent text-slate-400 hover:bg-slate-800">已解决 <span data-fb-count="resolved" class="text-slate-500"></span></button>
+            </div>
+          </div>
+          <div id="feedback-list-container" class="space-y-3">
+            <div class="text-xs text-slate-500 py-6 text-center font-mono">读取中...</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- TAB: ADMIN AUDIT LOG -->
+      <!-- ===================================================================== -->
+      <section id="panel-audit" class="tab-panel hidden space-y-6">
+        <div class="glass-card rounded-2xl p-5 border border-slate-800">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
+            <div>
+              <h2 class="text-sm font-bold text-white">后台操作日志</h2>
+              <p class="text-[11px] text-slate-500 mt-0.5">admin_audit_logs，最新在前；IP 已打码；时间为北京时间。</p>
+            </div>
+            <select id="audit-action-filter" class="bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs text-slate-300 font-mono">
+              <option value="all">全部操作</option>
+            </select>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs font-mono">
+              <thead class="text-slate-400 border-b border-slate-800 text-[11px]">
+                <tr>
+                  <th class="py-2 px-2">时间</th>
+                  <th class="py-2 px-2">操作</th>
+                  <th class="py-2 px-2">对象</th>
+                  <th class="py-2 px-2">详情</th>
+                  <th class="py-2 px-2">操作人</th>
+                  <th class="py-2 px-2">IP</th>
+                </tr>
+              </thead>
+              <tbody id="audit-table-body" class="divide-y divide-slate-800/60 text-slate-300">
+                <tr><td colspan="6" class="text-center py-6 text-slate-500">读取中...</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div id="audit-pager" class="flex items-center justify-end gap-2 mt-3 text-xs font-mono"></div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- TAB 2: GAME & VAULT CMS -->
+      <!-- ===================================================================== -->
+      <section id="panel-cms" class="tab-panel hidden space-y-6">
+
+        <!-- Game data: D1 games.raw_json is the source; list + editor are rendered by /js/admin-game-editor.js -->
+        <div class="glass-card rounded-2xl p-6 border border-slate-800 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+          <div>
+            <h2 class="text-lg font-bold text-white flex items-center gap-2">
+              <span>游戏数据运维</span>
+              <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-300 font-mono">D1 真源 · 保存即生效</span>
+            </h2>
+            <p class="text-xs text-slate-400 mt-1">这里改的就是网站上显示的内容，保存后刷新网站即可看到。雷达和修改器字段由每天的定时任务维护，编辑器里只读。游戏只能隐藏，不能删除（删除会连带删掉玩家的收藏和订阅）。</p>
+            <p id="cms-games-stats" class="text-[11px] text-slate-500 mt-1 font-mono"></p>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-2 w-full lg:w-auto">
+            <input
+              id="cms-search-input"
+              type="text"
+              placeholder="搜索游戏 (如 2077, 黑神话, 巫师)..."
+              class="flex-1 lg:w-56 bg-slate-950/80 border border-slate-700/80 rounded-xl px-3.5 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-purple-500 font-mono"
+            >
+            <select id="cms-status-filter" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-300 font-mono">
+              <option value="all">全部雷达状态</option>
+              <option value="green">🟢 近期平稳</option>
+              <option value="yellow">🟡 留意更新</option>
+              <option value="red">🔴 先别更新</option>
+              <option value="unchecked">⚪ 未巡检</option>
+            </select>
+            <select id="cms-visibility-filter" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-300 font-mono">
+              <option value="all">公开 + 隐藏</option>
+              <option value="visible">只看公开</option>
+              <option value="hidden">只看已隐藏</option>
+            </select>
+            <button id="cms-new-game-btn" type="button" class="px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold transition">＋ 新增游戏</button>
+          </div>
+        </div>
+
+        <!-- Games Table -->
+        <div class="glass-card rounded-2xl border border-slate-800 overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-slate-950/80 text-slate-400 uppercase font-mono text-[11px] border-b border-slate-800">
+                <tr>
+                  <th class="py-3 px-4">Rank</th>
+                  <th class="py-3 px-4">游戏</th>
+                  <th class="py-3 px-4">雷达</th>
+                  <th class="py-3 px-4 text-center">指令 / 套餐</th>
+                  <th class="py-3 px-4">版本</th>
+                  <th class="py-3 px-4">状态</th>
+                  <th class="py-3 px-4 text-right">操作</th>
+                </tr>
+              </thead>
+              <tbody id="cms-games-tbody" class="divide-y divide-slate-800/60 font-sans">
+                <tr><td colspan="7" class="py-8 text-center text-slate-500 font-mono">加载游戏列表...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- TAB 3: AI COPILOT & SKILLS STUDIO -->
+      <!-- ===================================================================== -->
+      <section id="panel-ai" class="tab-panel hidden space-y-6">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+          <!-- Left Column: AI Persona & Prompt Tune (2 Cols) -->
+          <div class="lg:col-span-2 space-y-6">
+            
+            <div class="glass-card rounded-2xl p-6 border border-slate-800 space-y-5">
+              <div class="flex items-center justify-between border-b border-slate-800/80 pb-4">
+                <div>
+                  <h2 class="text-base font-bold text-white flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-purple-500"></span>
+                    <span>老L·AI 系统提示词与人设调优 (System Prompt)</span>
+                  </h2>
+                  <p class="text-xs text-slate-400 mt-0.5">控制老L·AI 顾问的语气口吻、知识边界与高危坏档拦截逻辑</p>
+                </div>
+                <div class="flex items-center gap-2">
+                  <button id="ai-preset-veteran" class="text-xs px-2.5 py-1 rounded-md bg-purple-500/20 text-purple-300 border border-purple-500/30">资深老炮</button>
+                  <button id="ai-preset-strict" class="text-xs px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 hover:bg-slate-700">极客严谨</button>
+                  <button id="ai-preset-friendly" class="text-xs px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 hover:bg-slate-700">新手向导</button>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-mono text-slate-400 mb-2">系统级 System Prompt (热更新生效)</label>
+                <textarea 
+                  id="ai-system-prompt" 
+                  rows="6" 
+                  class="w-full bg-slate-950/90 border border-slate-700/80 rounded-xl p-4 text-xs text-slate-200 leading-relaxed font-mono focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 resize-none"
+                ></textarea>
+                <div class="flex items-center justify-between mt-2 text-[11px] text-slate-500 font-mono">
+                  <span>支持变量动态插值与安全上下文包裹</span>
+                  <span id="ai-prompt-length">0 字</span>
+                </div>
+              </div>
+
+              <!-- Hyperparameters -->
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+                <div>
+                  <label class="block text-xs font-mono text-slate-400 mb-1.5">语气风格 (Tone)</label>
+                  <select id="ai-tone-select" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-xs text-slate-200 font-mono">
+                    <option value="hardcore_veteran">资深单机老炮 / 严谨避坑顾问</option>
+                    <option value="geek_strict">硬核极客 / 语法零容错</option>
+                    <option value="beginner_guide">新手导师 / 通俗易懂</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-mono text-slate-400 mb-1.5">知识召回阈值 (<span id="ai-recall-val">0.65</span>)</label>
+                  <input type="range" id="ai-recall-slider" min="0.3" max="0.95" step="0.05" value="0.65" class="w-full accent-purple-500">
+                </div>
+
+                <div>
+                  <label class="block text-xs font-mono text-slate-400 mb-1.5">单次最大指令注入数 (<span id="ai-max-cmds-val">6</span> 条)</label>
+                  <input type="range" id="ai-max-cmds-slider" min="2" max="15" step="1" value="6" class="w-full accent-purple-500">
+                </div>
+              </div>
+
+              <div class="pt-4 border-t border-slate-800 flex justify-end">
+                <button id="ai-save-config-btn" class="px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold shadow-lg shadow-purple-600/30 transition flex items-center gap-2">
+                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                  <span>保存 AI 编排配置并全网热更新</span>
+                </button>
+              </div>
+
+            </div>
+
+            <!-- Skills Expansion Capabilities Matrix (4 Agentic Skills + Guards) -->
+            <div class="glass-card rounded-2xl p-6 border border-slate-800 space-y-4">
+              <div class="border-b border-slate-800/80 pb-3 flex items-center justify-between">
+                <div>
+                  <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                    <span>4 大专属 Agentic Skills 技能编排矩阵</span>
+                  </h3>
+                  <p class="text-xs text-slate-400 mt-0.5">控制老L·AI 在推理链中激活的硬核技能与知识库拦截器</p>
+                </div>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">D1 RAG 增强</span>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                <!-- Skill A: Game Vault RAG -->
+                <label class="flex items-start gap-3 p-3 rounded-xl bg-slate-950/60 border border-slate-800 cursor-pointer hover:border-purple-500/40 transition">
+                  <input type="checkbox" id="skill-game-vault-rag" checked class="mt-0.5 accent-purple-500 rounded">
+                  <div>
+                    <span class="font-bold text-purple-300 flex items-center gap-1.5">
+                      <span>技能 A · 游戏指令与模组检索器</span>
+                      <span class="text-[9px] px-1.5 py-0.2 bg-purple-500/20 rounded font-mono">D1 RAG</span>
+                    </span>
+                    <span class="text-[11px] text-slate-400 block mt-0.5">识别游戏需求，秒级从 D1 检索真实底层代码、开启按键与避坑，100% 拒绝幻觉。</span>
+                  </div>
+                </label>
+
+                <!-- Skill B: Patch Sentinel -->
+                <label class="flex items-start gap-3 p-3 rounded-xl bg-slate-950/60 border border-slate-800 cursor-pointer hover:border-purple-500/40 transition">
+                  <input type="checkbox" id="skill-patch-sentinel" checked class="mt-0.5 accent-purple-500 rounded">
+                  <div>
+                    <span class="font-bold text-blue-300 flex items-center gap-1.5">
+                      <span>技能 B · Steam 补丁哨兵巡检</span>
+                      <span class="text-[9px] px-1.5 py-0.2 bg-blue-500/20 rounded font-mono">SENTINEL</span>
+                    </span>
+                    <span class="text-[11px] text-slate-400 block mt-0.5">实时对比基准补丁与 Steam 最新版本，精准通报 Mod 失效与前置框架更新状态。</span>
+                  </div>
+                </label>
+
+                <!-- Skill C: Crash Diagnostic -->
+                <label class="flex items-start gap-3 p-3 rounded-xl bg-slate-950/60 border border-slate-800 cursor-pointer hover:border-purple-500/40 transition">
+                  <input type="checkbox" id="skill-crash-diagnostic" checked class="mt-0.5 accent-purple-500 rounded">
+                  <div>
+                    <span class="font-bold text-amber-300 flex items-center gap-1.5">
+                      <span>技能 C · 游戏报错与崩溃诊断专家</span>
+                      <span class="text-[9px] px-1.5 py-0.2 bg-amber-500/20 rounded font-mono">DIAGNOSTIC</span>
+                    </span>
+                    <span class="text-[11px] text-slate-400 block mt-0.5">识别 0xc0000005、DirectX、EAC、UE4SS、CET 崩溃日志，输出硬核逃课排查法。</span>
+                  </div>
+                </label>
+
+                <!-- Skill D: General Oracle -->
+                <label class="flex items-start gap-3 p-3 rounded-xl bg-slate-950/60 border border-slate-800 cursor-pointer hover:border-purple-500/40 transition">
+                  <input type="checkbox" id="skill-general-oracle" checked class="mt-0.5 accent-purple-500 rounded">
+                  <div>
+                    <span class="font-bold text-emerald-300 flex items-center gap-1.5">
+                      <span>技能 D · 全域单机智库通识问答</span>
+                      <span class="text-[9px] px-1.5 py-0.2 bg-emerald-500/20 rounded font-mono">ORACLE</span>
+                    </span>
+                    <span class="text-[11px] text-slate-400 block mt-0.5">未收录新游、MO2/Vortex 模组工具、画质优化与硬件配置攻略老道解答。</span>
+                  </div>
+                </label>
+
+                <!-- Safety Guards -->
+                <label class="flex items-start gap-3 p-3 rounded-xl bg-slate-950/60 border border-slate-800 cursor-pointer hover:border-purple-500/40 transition">
+                  <input type="checkbox" id="skill-save-guard" checked class="mt-0.5 accent-purple-500 rounded">
+                  <div>
+                    <span class="font-bold text-rose-300 block">高危坏档预防拦截 (Save Guard)</span>
+                    <span class="text-[11px] text-slate-400">金币过亿、直升满级等破坏性指令，强制前置醒目红线警示与存档路径。</span>
+                  </div>
+                </label>
+
+                <label class="flex items-start gap-3 p-3 rounded-xl bg-slate-950/60 border border-slate-800 cursor-pointer hover:border-purple-500/40 transition">
+                  <input type="checkbox" id="skill-syntax-val" checked class="mt-0.5 accent-purple-500 rounded">
+                  <div>
+                    <span class="font-bold text-slate-300 block">语法自检修复 (Syntax Auto-Fix)</span>
+                    <span class="text-[11px] text-slate-400">自动标明并校验 CET Lua / Creation Hex / UE 引擎底层代码语法类型。</span>
+                  </div>
+                </label>
+
+                <label class="flex items-start gap-3 p-3 rounded-xl bg-slate-950/60 border border-slate-800 cursor-pointer hover:border-purple-500/40 transition sm:col-span-2">
+                  <input type="checkbox" id="skill-code-dedup" checked class="mt-0.5 accent-purple-500 rounded">
+                  <div>
+                    <span class="font-bold text-slate-300 block">智能代码查重与精炼 (Code De-dup)</span>
+                    <span class="text-[11px] text-slate-400">比对 D1 库去除相似功能冗余代码，保持 AI 回复高度精炼利落。</span>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Right Column: Model Routing & Cloud Key Manager (1 Col) -->
+          <div class="space-y-6">
+
+            <!-- Model Routing & Cloud Keys -->
+            <div class="glass-card rounded-2xl p-6 border border-slate-800 space-y-4">
+              <div class="flex items-center justify-between border-b border-slate-800/80 pb-3">
+                <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-blue-400"></span>
+                  <span>官方云端大模型与密钥配置</span>
+                </h3>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 border border-blue-500/20">后台统一驱动</span>
+              </div>
+
+              <div class="space-y-3.5 text-xs font-mono">
+                <div>
+                  <label class="block text-slate-400 mb-1">主选大模型 (Primary Route)</label>
+                  <select id="ai-primary-model" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-white">
+                    <option value="gemini-1.5-flash">Google Gemini 1.5 Flash (官方免费高配额 · 1500次/天 · 首选推荐)</option>
+                    <option value="gemini-1.5-pro">Google Gemini 1.5 Pro (官方免费 · 超长上下文)</option>
+                    <option value="gemini-2.0-flash-exp">Google Gemini 2.0 Flash Exp (最新体验版)</option>
+                    <option value="openrouter/free">OpenRouter 免费模型轮换池 (:free 系列)</option>
+                    <option value="deepseek/deepseek-r1:free">OpenRouter: DeepSeek R1 (免费深度思考推理)</option>
+                    <option value="meta-llama/llama-3.3-70b-instruct:free">OpenRouter: Llama 3.3 70B (免费开源神兽)</option>
+                    <option value="deepseek-chat">DeepSeek 官方 API (DeepSeek-V3 深度思考单机专家)</option>
+                    <option value="custom">自定义兼容端点模型 (Custom Route)</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-slate-400 mb-1">备用降级路由 (Fallback)</label>
+                  <select id="ai-fallback-model" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-white">
+                    <option value="openrouter/free">OpenRouter 免费轮换模型 (:free)</option>
+                    <option value="gemini-1.5-flash">Google Gemini 1.5 Flash</option>
+                    <option value="deepseek-chat">DeepSeek-Chat</option>
+                    <option value="local">D1 本地规则引擎 (零延迟兜底)</option>
+                  </select>
+                </div>
+
+                <!-- Google Gemini API Key Input -->
+                <div class="space-y-1">
+                  <div class="flex items-center justify-between text-[11px]">
+                    <span class="text-slate-400">Google Gemini API Key:</span>
+                    <span id="gemini-key-status" class="text-slate-500 text-[10px] flex items-center gap-1">
+                      <span class="w-1.5 h-1.5 rounded-full bg-slate-500"></span>
+                      <span>未检测</span>
+                    </span>
+                  </div>
+                  <input 
+                    id="ai-gemini-key" 
+                    type="password" 
+                    placeholder="AIzaSy... (若保留原密钥留空或保持掩码)" 
+                    class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-xs text-white placeholder-slate-600 font-mono"
+                  >
+                </div>
+
+                <!-- DeepSeek API Key Input -->
+                <div class="space-y-1">
+                  <div class="flex items-center justify-between text-[11px]">
+                    <span class="text-slate-400">DeepSeek API Key:</span>
+                    <span id="deepseek-key-status" class="text-slate-500 text-[10px] flex items-center gap-1">
+                      <span class="w-1.5 h-1.5 rounded-full bg-slate-500"></span>
+                      <span>未检测</span>
+                    </span>
+                  </div>
+                  <input 
+                    id="ai-deepseek-key" 
+                    type="password" 
+                    placeholder="sk-... (若保留原密钥留空或保持掩码)" 
+                    class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-xs text-white placeholder-slate-600 font-mono"
+                  >
+                </div>
+
+                <!-- Custom / OpenRouter OpenAI Compatible Endpoint -->
+                <div id="ai-custom-box" class="pt-2 border-t border-slate-800/80 space-y-2">
+                  <div class="flex items-center justify-between">
+                    <label class="block text-slate-400 text-xs">OpenRouter / 自定义兼容端点</label>
+                    <button 
+                      type="button" 
+                      onclick="window.quickFillOpenRouter()" 
+                      class="text-[10px] text-purple-400 hover:text-purple-300 underline font-sans cursor-pointer"
+                    >
+                      ⚡ 一键填入 OpenRouter 预设
+                    </button>
+                  </div>
+                  <div>
+                    <input 
+                      id="ai-custom-endpoint" 
+                      type="text" 
+                      placeholder="https://openrouter.ai/api/v1/chat/completions" 
+                      class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-xs text-white placeholder-slate-600 font-mono"
+                    >
+                  </div>
+                  <div>
+                    <label class="block text-slate-400 mb-1">OpenRouter / 自定义 API Key</label>
+                    <input 
+                      id="ai-custom-key" 
+                      type="password" 
+                      placeholder="sk-or-v1-... (若保留原密钥留空或保持掩码)" 
+                      class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-xs text-white placeholder-slate-600 font-mono"
+                    >
+                  </div>
+                </div>
+
+                <div class="p-2.5 rounded-lg bg-purple-950/20 border border-purple-500/20 text-[11px] text-purple-300 leading-relaxed font-sans space-y-1">
+                  <div>💡 <b>双擎轮换策略</b>：支持同时填入 Google Gemini 与 OpenRouter 免费 Key。系统会自动优先调用主选模型，遇 429 配额限制自动秒级切换至备选模型，最后由 D1 智库兜底！</div>
+                  <div>🔒 <b>安全保障</b>：密钥全量脱敏存储于 Cloudflare D1 加密系统表，玩家前台只走官方中继代理。</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Interactive AI Sandbox & Diagnostic Simulator -->
+            <div class="glass-card rounded-2xl p-6 border border-slate-800 space-y-4">
+              <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-indigo-400"></span>
+                <span>AI 提示词与技能沙盒测试</span>
+              </h3>
+
+              <div class="space-y-3">
+                <input 
+                  id="ai-test-query" 
+                  type="text" 
+                  value="2077 怎么刷钱和强尼银手手枪？" 
+                  placeholder="输入测试问题..." 
+                  class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-xs text-white placeholder-slate-500 font-mono"
+                >
+                <select id="ai-test-game" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-xs text-white font-mono">
+                  <option value="cyberpunk-2077">Cyberpunk 2077 (赛博朋克 2077)</option>
+                  <option value="black-myth-wukong">Black Myth: Wukong (黑神话: 悟空)</option>
+                  <option value="witcher-3">The Witcher 3: Wild Hunt (巫师 3)</option>
+                  <option value="elden-ring">ELDEN RING (艾尔登法环)</option>
+                  <option value="baldurs-gate-3">Baldurs Gate 3 (博德之门 3)</option>
+                </select>
+
+                <button id="ai-run-test-btn" class="w-full py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold transition flex items-center justify-center gap-1.5 shadow-md shadow-indigo-600/30">
+                  <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/></svg>
+                  <span>运行 4 大 Skills 沙盒测试</span>
+                </button>
+              </div>
+
+              <!-- Output Diagnostic Area -->
+              <div id="ai-test-output" class="hidden p-3 rounded-xl bg-slate-950 border border-slate-800 text-[11px] font-mono space-y-2 max-h-64 overflow-y-auto">
+                <div class="text-purple-400 font-semibold">【4 大 Skills 沙盒执行报告】</div>
+                <div id="ai-test-diagnostics" class="text-slate-300 whitespace-pre-wrap leading-relaxed"></div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- TAB: FLiNG TRAINER PACKAGES (logic in /js/admin-trainers.js) -->
+      <!-- ===================================================================== -->
+      <section id="panel-trainers" class="tab-panel hidden space-y-6">
+
+        <!-- Header + KV storage meter -->
+        <div class="glass-card rounded-2xl p-6 border border-slate-800 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+          <div class="min-w-0">
+            <h2 class="text-lg font-bold text-white flex items-center gap-2 flex-wrap">
+              <span>风灵月影修改器安装包</span>
+              <span id="tp-storage-chip" class="text-xs px-2 py-0.5 rounded-full bg-slate-700/60 text-slate-300 font-mono">读取中…</span>
+            </h2>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+              上传官网原版文件，网站的修改器区会出现「本站下载」，桌面客户端从同一份清单 <code class="text-purple-300">/api/v1/trainers/manifest</code> 读取。
+              SHA-256 在本页浏览器里算好再提交；带反作弊的游戏不提供本站下载。
+            </p>
+          </div>
+          <div class="w-full lg:w-80 shrink-0">
+            <div class="flex items-center justify-between text-xs text-slate-400 font-mono mb-1.5">
+              <span>KV 已用（按文件大小合计）</span>
+              <span id="tp-storage-text">-- / 1 GB</span>
+            </div>
+            <div class="h-2.5 rounded-full bg-slate-800 overflow-hidden">
+              <div id="tp-storage-bar" class="h-full bg-purple-500 transition-all" style="width:0%"></div>
+            </div>
+            <div class="flex items-center justify-between text-[11px] text-slate-500 font-mono mt-1.5">
+              <span id="tp-active-count">上架 -- 个</span>
+              <button id="tp-refresh-btn" type="button" class="text-purple-300 hover:text-purple-200">刷新</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="tp-storage-off" class="hidden p-4 rounded-2xl border border-amber-500/30 bg-amber-500/10 text-xs text-amber-200 leading-relaxed"></div>
+
+        <!-- Upload form -->
+        <div id="tp-upload-card" class="glass-card rounded-2xl p-6 border border-slate-800 space-y-5">
+          <h3 class="text-sm font-bold text-white">上传 / 替换</h3>
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+            <div class="space-y-4">
+              <label class="block text-xs text-slate-400">
+                <span class="block mb-1.5">游戏（来自 trainers.json，只列有风灵月影官网页的）</span>
+                <select id="tp-game-select" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-200 font-mono">
+                  <option value="">加载游戏列表…</option>
+                </select>
+              </label>
+              <div id="tp-game-info" class="hidden p-3 rounded-xl bg-slate-950/70 border border-slate-800 text-xs text-slate-300 space-y-1.5 font-mono"></div>
+              <label class="block text-xs text-slate-400">
+                <span class="block mb-1.5">修改器版本（前台按钮上显示）</span>
+                <input id="tp-trainer-version" type="text" maxlength="120" placeholder="如 v1.03-v2.5+ Plus 46" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-600 font-mono">
+              </label>
+              <label class="block text-xs text-slate-400">
+                <span class="block mb-1.5">游戏版本（可空）</span>
+                <input id="tp-game-version" type="text" maxlength="120" placeholder="如 2.31" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-600 font-mono">
+              </label>
+            </div>
+            <div class="space-y-4">
+              <label class="block text-xs text-slate-400">
+                <span class="block mb-1.5">风灵月影官网页面</span>
+                <input id="tp-page-url" type="url" maxlength="500" placeholder="https://flingtrainer.com/trainer/..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-600 font-mono">
+              </label>
+              <label class="block text-xs text-slate-400">
+                <span class="block mb-1.5">安装包（.zip / .exe / .rar / .7z，不超过 95 MB）</span>
+                <input id="tp-file-input" type="file" accept=".zip,.exe,.rar,.7z" class="block w-full text-xs text-slate-300 file:mr-3 file:px-3 file:py-1.5 file:rounded-lg file:border-0 file:bg-purple-500/20 file:text-purple-200 file:font-mono">
+              </label>
+              <div id="tp-file-info" class="hidden p-3 rounded-xl bg-slate-950/70 border border-slate-800 text-xs text-slate-300 space-y-1 font-mono break-all"></div>
+              <label class="block text-xs text-slate-400">
+                <span class="block mb-1.5">备注（只在后台显示，可空）</span>
+                <input id="tp-note" type="text" maxlength="500" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white font-mono">
+              </label>
+            </div>
+          </div>
+          <div class="flex flex-col sm:flex-row sm:items-center gap-3">
+            <button id="tp-upload-btn" type="button" disabled class="px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 disabled:opacity-40 disabled:cursor-not-allowed text-white text-xs font-bold transition">上传并上架</button>
+            <div class="flex-1 min-w-0">
+              <div id="tp-progress-wrap" class="hidden">
+                <div class="h-2 rounded-full bg-slate-800 overflow-hidden"><div id="tp-progress-bar" class="h-full bg-emerald-500 transition-all" style="width:0%"></div></div>
+              </div>
+              <div id="tp-upload-status" class="text-xs text-slate-400 font-mono mt-1"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Package list -->
+        <div class="glass-card rounded-2xl border border-slate-800 overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-slate-950/80 text-slate-400 font-mono text-[11px] border-b border-slate-800">
+                <tr>
+                  <th class="py-3 px-4">游戏</th>
+                  <th class="py-3 px-4">文件</th>
+                  <th class="py-3 px-4">版本</th>
+                  <th class="py-3 px-4 text-right">大小</th>
+                  <th class="py-3 px-4">SHA-256</th>
+                  <th class="py-3 px-4">状态</th>
+                  <th class="py-3 px-4">上传时间 (UTC)</th>
+                  <th class="py-3 px-4 text-right">操作</th>
+                </tr>
+              </thead>
+              <tbody id="tp-tbody" class="divide-y divide-slate-800/60">
+                <tr><td colspan="8" class="py-8 text-center text-slate-500 font-mono">打开本页签后加载…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- TAB 4: STEAM PATCH RADAR SENTINEL CONTROL -->
+      <!-- ===================================================================== -->
+      <section id="panel-radar" class="tab-panel hidden space-y-6">
+
+        <!-- Sentinel Top Gauges -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div class="glass-card rounded-2xl p-5 border border-slate-800">
+            <div class="flex items-center justify-between text-xs text-slate-400 font-mono">
+              <span>🟢 近期平稳</span>
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 neon-emerald"></span>
+            </div>
+            <div class="mt-3 flex items-baseline gap-2">
+              <span id="radar-green-count" class="text-3xl font-extrabold text-emerald-400">--</span>
+              <span class="text-xs text-slate-500 font-mono">/ 已巡检游戏</span>
+            </div>
+            <p class="text-[11px] text-slate-400 mt-1 font-mono">近期无重大更新</p>
+          </div>
+
+          <div class="glass-card rounded-2xl p-5 border border-slate-800">
+            <div class="flex items-center justify-between text-xs text-slate-400 font-mono">
+              <span>🟡 留意更新</span>
+              <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+            </div>
+            <div class="mt-3 flex items-baseline gap-2">
+              <span id="radar-yellow-count" class="text-3xl font-extrabold text-amber-400">--</span>
+              <span class="text-xs text-slate-500 font-mono">/ 已巡检游戏</span>
+            </div>
+            <p class="text-[11px] text-slate-400 mt-1 font-mono">前置扩展（CET/UE4SS）待更新</p>
+          </div>
+
+          <div class="glass-card rounded-2xl p-5 border border-slate-800">
+            <div class="flex items-center justify-between text-xs text-slate-400 font-mono">
+              <span>🔴 先别更新</span>
+              <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span>
+            </div>
+            <div class="mt-3 flex items-baseline gap-2">
+              <span id="radar-red-count" class="text-3xl font-extrabold text-rose-400">--</span>
+              <span class="text-xs text-slate-500 font-mono">/ 已巡检游戏</span>
+            </div>
+            <p class="text-[11px] text-slate-400 mt-1 font-mono">底层引擎大更新，坏档拦截</p>
+          </div>
+        </div>
+
+        <!-- Emergency Circuit-Breaker Broadcast Control -->
+        <div class="glass-card rounded-2xl p-6 border border-slate-800 space-y-4">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-slate-800/80 pb-4">
+            <div>
+              <h2 class="text-base font-bold text-white flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span>
+                <span>全网紧急熔断跑马灯广播 (Emergency Circuit-Breaker Broadcast)</span>
+              </h2>
+              <p class="text-xs text-slate-400 mt-0.5">当某款大作突发破坏性版本更新时，可后台一键发布全站醒目警示</p>
+            </div>
+            
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input type="checkbox" id="broadcast-enable-toggle" class="sr-only peer">
+              <div class="w-11 h-6 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-rose-600"></div>
+              <span class="ml-3 text-xs font-mono text-slate-300 font-medium" id="broadcast-status-label">未激活</span>
+            </label>
+          </div>
+
+          <!-- Broadcast Form -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs font-mono">
+            <div>
+              <label class="block text-slate-400 mb-1">预警严重等级</label>
+              <select id="broadcast-level-select" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white">
+                <option value="red">🔴 红色高危熔断 (破坏性更新 · 暂停使用修改器)</option>
+                <option value="yellow">🟡 黄色更新注意 (前置框架等待适配 · 建议备份)</option>
+                <option value="info">ℹ️ 蓝色常规公告 (巡检提示 · 官方补丁预告)</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-slate-400 mb-1">关联特定游戏 (可选)</label>
+              <select id="broadcast-game-select" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white">
+                <option value="all">全站全局广播 (全网生效)</option>
+                <option value="cyberpunk-2077">Cyberpunk 2077</option>
+                <option value="black-myth-wukong">Black Myth: Wukong</option>
+                <option value="witcher-3">The Witcher 3: Wild Hunt</option>
+                <option value="baldurs-gate-3">Baldurs Gate 3</option>
+                <option value="elden-ring">ELDEN RING</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-slate-400 mb-1">广播标题</label>
+              <input id="broadcast-title-input" type="text" value="Steam 补丁兼容性高危熔断预警" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-mono text-slate-400 mb-1">广播提示内容 (展示在玩家页面顶部跑马灯)</label>
+            <input id="broadcast-msg-input" type="text" value="检测到最新热更新导致底层钩子失效，请玩家暂缓使用旧版控制台与修改器，务必先行备份存档！" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-xs text-white font-mono">
+          </div>
+
+          <div class="flex justify-end pt-2">
+            <button id="save-broadcast-btn" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-rose-600 to-red-600 hover:from-rose-500 hover:to-red-500 text-white text-xs font-bold shadow-lg shadow-rose-600/30 transition flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/></svg>
+              <span>立即同步/下发熔断广播</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Manual Sentinel Trigger & Live Terminal -->
+        <div class="glass-card rounded-2xl p-6 border border-slate-800 space-y-4">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div>
+              <h2 class="text-base font-bold text-white flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-blue-400"></span>
+                <span>手动触发 Steam 补丁巡检 (Sentinel Dispatcher)</span>
+              </h2>
+              <p class="text-xs text-slate-400 mt-0.5">即时调用 Steam Patch API 与 L-MOD 验证基准进行差分比对</p>
+            </div>
+
+            <div class="flex items-center gap-3">
+              <select id="inspect-target-select" class="bg-slate-950 border border-slate-700 rounded-lg p-2 text-xs text-white font-mono">
+                <option value="all">全量旗舰单机大作 (Top 10 Flagship)</option>
+                <option value="cyberpunk-2077">Cyberpunk 2077 (赛博朋克 2077)</option>
+                <option value="black-myth-wukong">Black Myth: Wukong (黑神话: 悟空)</option>
+                <option value="witcher-3">The Witcher 3: Wild Hunt (巫师 3)</option>
+                <option value="baldurs-gate-3">Baldurs Gate 3 (博德之门 3)</option>
+                <option value="elden-ring">ELDEN RING (艾尔登法环)</option>
+              </select>
+
+              <button id="trigger-inspect-btn" class="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold shadow-md shadow-blue-600/30 transition flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                <span>立即巡检</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Inspection Output Terminal -->
+          <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 font-mono text-xs text-slate-300 space-y-2 max-h-48 overflow-y-auto">
+            <div class="flex items-center justify-between text-slate-500 text-[10px] border-b border-slate-800/80 pb-1.5">
+              <span>SENTINEL AUDIT CONSOLE</span>
+              <span id="inspect-terminal-status">IDLE READY</span>
+            </div>
+            <div id="inspect-terminal-content" class="text-slate-400 leading-relaxed text-[11px]">
+              等待站长发起巡检任务... 哨兵机器人已就绪。
+            </div>
+          </div>
+        </div>
+
+        <!-- 24h Audit Trail Table (patch_radar_logs) -->
+        <div class="glass-card rounded-2xl border border-slate-800 overflow-hidden">
+          <div class="p-4 border-b border-slate-800 flex items-center justify-between">
+            <h3 class="text-sm font-bold text-white flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-purple-400"></span>
+              <span>Steam 最近更新的游戏（每日巡检结果 · radar_status.json）</span>
+            </h3>
+            <span class="text-xs text-slate-500 font-mono">D1 持久化审计存证</span>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs font-mono">
+              <thead class="bg-slate-950/80 text-slate-400 text-[11px] uppercase border-b border-slate-800">
+                <tr>
+                  <th class="py-2.5 px-4">游戏</th>
+                  <th class="py-2.5 px-4">巡检标题 / 补丁</th>
+                  <th class="py-2.5 px-4">Build ID</th>
+                  <th class="py-2.5 px-4">状态</th>
+                  <th class="py-2.5 px-4">风险评估与裁定</th>
+                  <th class="py-2.5 px-4">巡检时间</th>
+                </tr>
+              </thead>
+              <tbody id="radar-logs-tbody" class="divide-y divide-slate-800/60 text-slate-300">
+                <tr><td colspan="6" class="text-center py-6 text-slate-500">正在调取巡检日志...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+  </div>
+
+  <!-- 3. The game editor modal (#game-editor-modal) is created by /js/admin-game-editor.js -->
+
+  <!-- ========================================================================= -->
+  <!-- MODAL: CHANGE ADMIN PASSWORD -->
+  <!-- ========================================================================= -->
+  <div id="password-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-vault-black/85 backdrop-blur-xl font-sans">
+    <div class="w-full max-w-md glass-card rounded-2xl p-6 border border-slate-800 shadow-2xl space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/></svg>
+          </div>
+          <div>
+            <h3 class="text-sm font-bold text-white">修改站长登录密码</h3>
+            <p class="text-[10px] text-slate-400 font-mono">D1 分布式数据库即时同步生效</p>
+          </div>
+        </div>
+        <button id="pwd-modal-close-btn" class="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <form id="change-pwd-form" class="space-y-3.5 text-xs font-mono">
+        <div>
+          <label class="block text-slate-400 mb-1">当前原密码 *</label>
+          <input id="pwd-old-input" type="password" placeholder="输入当前使用的密码" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white" required>
+        </div>
+
+        <div>
+          <label class="block text-slate-400 mb-1">新密码 * (至少 10 位)</label>
+          <input id="pwd-new-input" type="password" placeholder="设置新密码" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white" required minlength="10">
+        </div>
+
+        <div>
+          <label class="block text-slate-400 mb-1">确认新密码 *</label>
+          <input id="pwd-confirm-input" type="password" placeholder="再次输入新密码" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white" required minlength="10">
+        </div>
+
+        <div id="pwd-modal-msg" class="hidden p-2.5 rounded-lg text-xs font-mono"></div>
+
+        <div class="flex justify-end gap-2 pt-2 border-t border-slate-800">
+          <button type="button" id="pwd-cancel-btn" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300">取消</button>
+          <button type="submit" id="pwd-submit-btn" class="px-4 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-500 text-white font-semibold transition">确认修改</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="fixed bottom-6 right-6 z-50 space-y-2 pointer-events-none"></div>
+
+  <!-- ========================================================================= -->
+  <!-- 5. JAVASCRIPT APP LOGIC -->
+  <!-- ========================================================================= -->
+  <!-- Game data list + whole-document editor (absolute path: this page is also served as /admin/) -->
+  <script src="/js/admin-game-editor.js?v=20261123"></script>
+  <script>
+    (function () {
+      'use strict';
+
+      const TOKEN_KEY = 'lmod_admin_token';
+      const API_BASE = '/api/v1/admin';
+
+      // State
+      let authToken = localStorage.getItem(TOKEN_KEY) || '';
+      let adminProfile = null;
+
+      // DOM Elements
+      const authScreen = document.getElementById('auth-screen');
+      const adminApp = document.getElementById('admin-app');
+      const loginForm = document.getElementById('login-form');
+      const adminPasskeyInput = document.getElementById('admin-passkey');
+      const loginErrorBox = document.getElementById('login-error');
+      const loginErrorMsg = document.getElementById('login-error-msg');
+      const togglePwdBtn = document.getElementById('toggle-pwd-btn');
+      const logoutBtn = document.getElementById('logout-btn');
+      const mobileLogoutBtn = document.getElementById('mobile-logout-btn');
+      const refreshDataBtn = document.getElementById('refresh-data-btn');
+
+      // Toast notification utility
+      function showToast(message, type = 'success') {
+        const container = document.getElementById('toast-container');
+        const toast = document.createElement('div');
+        const colors = {
+          success: 'bg-emerald-950/90 border-emerald-500/40 text-emerald-300',
+          error: 'bg-rose-950/90 border-rose-500/40 text-rose-300',
+          info: 'bg-purple-950/90 border-purple-500/40 text-purple-300'
+        };
+
+        toast.className = `p-3 rounded-xl border text-xs font-mono shadow-2xl backdrop-blur-md transition-all duration-300 transform translate-y-4 opacity-0 pointer-events-auto ${colors[type] || colors.info}`;
+        toast.textContent = message;
+        container.appendChild(toast);
+
+        requestAnimationFrame(() => {
+          toast.classList.remove('translate-y-4', 'opacity-0');
+        });
+
+        setTimeout(() => {
+          toast.classList.add('opacity-0', 'translate-y-2');
+          setTimeout(() => toast.remove(), 300);
+        }, 3500);
+      }
+
+      // Authenticated API Fetch Helper
+      async function apiFetch(endpoint, options = {}) {
+        const headers = {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${authToken}`,
+          ...(options.headers || {})
+        };
+
+        const res = await fetch(`${API_BASE}${endpoint}`, {
+          ...options,
+          headers
+        });
+
+        if (res.status === 401 || res.status === 403) {
+          // Token invalid or expired
+          localStorage.removeItem(TOKEN_KEY);
+          authToken = '';
+          showAuthScreen();
+          throw new Error('站长会话已过期，请重新登录认证');
+        }
+
+        return await res.json();
+      }
+
+      // Password visibility toggle
+      togglePwdBtn.addEventListener('click', () => {
+        adminPasskeyInput.type = adminPasskeyInput.type === 'password' ? 'text' : 'password';
+      });
+
+      // Quick Fill Default Credentials
+
+      // Show/Hide Screens
+      function showAuthScreen() {
+        authScreen.classList.remove('hidden');
+        adminApp.classList.add('hidden');
+      }
+
+      function showAdminConsole() {
+        authScreen.classList.add('hidden');
+        adminApp.classList.remove('hidden');
+        loadAllData();
+      }
+
+      // Login submission
+      loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        loginErrorBox.classList.add('hidden');
+        const username = (document.getElementById('admin-username')?.value || 'admin').trim();
+        const passkey = adminPasskeyInput.value.trim();
+        if (!passkey) return;
+
+        try {
+          const res = await fetch(`${API_BASE}/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password: passkey })
+          });
+          const json = await res.json();
+
+          if (res.ok && json.code === 0 && json.data.token) {
+            authToken = json.data.token;
+            localStorage.setItem(TOKEN_KEY, authToken);
+            adminProfile = json.data.admin_profile;
+            showToast('站长特权认证通过，欢迎回到控制中台！', 'success');
+            showAdminConsole();
+          } else {
+            loginErrorBox.classList.remove('hidden');
+            loginErrorMsg.textContent = json.message || '通行口令错误';
+          }
+        } catch (err) {
+          loginErrorBox.classList.remove('hidden');
+          loginErrorMsg.textContent = '登录接口请求失败: ' + err.message;
+        }
+      });
+
+      // Change Password Dialog & Submission
+      const openPwdBtn = document.getElementById('open-pwd-modal-btn');
+      const pwdModal = document.getElementById('password-modal');
+      const closePwdBtn = document.getElementById('pwd-modal-close-btn');
+      const cancelPwdBtn = document.getElementById('pwd-cancel-btn');
+      const changePwdForm = document.getElementById('change-pwd-form');
+      const pwdMsgBox = document.getElementById('pwd-modal-msg');
+
+      if (openPwdBtn && pwdModal) {
+        openPwdBtn.addEventListener('click', () => {
+          pwdModal.classList.remove('hidden');
+          pwdMsgBox.classList.add('hidden');
+          changePwdForm.reset();
+        });
+        closePwdBtn.addEventListener('click', () => pwdModal.classList.add('hidden'));
+        cancelPwdBtn.addEventListener('click', () => pwdModal.classList.add('hidden'));
+
+        changePwdForm.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const old_password = document.getElementById('pwd-old-input').value;
+          const new_password = document.getElementById('pwd-new-input').value;
+          const confirm_password = document.getElementById('pwd-confirm-input').value;
+
+          pwdMsgBox.classList.add('hidden');
+
+          if (new_password !== confirm_password) {
+            pwdMsgBox.className = 'p-2.5 rounded-lg text-xs font-mono bg-rose-500/15 border border-rose-500/30 text-rose-300';
+            pwdMsgBox.textContent = '两次输入的新密码不一致，请核对';
+            pwdMsgBox.classList.remove('hidden');
+            return;
+          }
+
+          try {
+            const res = await apiFetch('/password', {
+              method: 'POST',
+              body: JSON.stringify({ old_password, new_password })
+            });
+
+            if (res.code === 0) {
+              showToast(res.message, 'success');
+              pwdModal.classList.add('hidden');
+            } else {
+              pwdMsgBox.className = 'p-2.5 rounded-lg text-xs font-mono bg-rose-500/15 border border-rose-500/30 text-rose-300';
+              pwdMsgBox.textContent = res.message || '密码修改失败';
+              pwdMsgBox.classList.remove('hidden');
+            }
+          } catch (err) {
+            pwdMsgBox.className = 'p-2.5 rounded-lg text-xs font-mono bg-rose-500/15 border border-rose-500/30 text-rose-300';
+            pwdMsgBox.textContent = err.message;
+            pwdMsgBox.classList.remove('hidden');
+          }
+        });
+      }
+
+      // Logout handler
+      function handleLogout() {
+        localStorage.removeItem(TOKEN_KEY);
+        authToken = '';
+        adminProfile = null;
+        showToast('已退出站长管理中台', 'info');
+        showAuthScreen();
+      }
+      logoutBtn.addEventListener('click', handleLogout);
+      mobileLogoutBtn.addEventListener('click', handleLogout);
+      refreshDataBtn.addEventListener('click', () => {
+        loadAllData();
+        showToast('中台全量数据已刷新', 'info');
+      });
+
+      // Tab Switching
+      const tabs = document.querySelectorAll('.nav-tab');
+      const panels = document.querySelectorAll('.tab-panel');
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          const target = tab.dataset.tab;
+          tabs.forEach(t => {
+            t.classList.remove('text-purple-400', 'bg-purple-500/10', 'border', 'border-purple-500/20');
+            t.classList.add('text-slate-400');
+          });
+          tab.classList.add('text-purple-400', 'bg-purple-500/10', 'border', 'border-purple-500/20');
+          tab.classList.remove('text-slate-400');
+
+          panels.forEach(p => p.classList.add('hidden'));
+          const targetPanel = document.getElementById(`panel-${target}`);
+          if (targetPanel) targetPanel.classList.remove('hidden');
+          if (target === 'analytics') renderTrend(trendData);
+          // Tabs added with the analytics rework refetch when opened, so changes made elsewhere show up
+          if (target === 'users') { loadUsers(); loadTopGames(); }
+          if (target === 'feedback') loadCommunityFeedback();
+          if (target === 'audit') loadAuditLog(1);
+        });
+      });
+
+      // =======================================================================
+      // DATA LOADER
+      // =======================================================================
+      async function loadAllData() {
+        try {
+          await Promise.all([
+            loadSessionAndStats(),
+            loadAnalyticsOverview(),
+            loadTelemetryEvents(),
+            loadCommunityFeedback(),
+            loadUsers(1),
+            loadTopGames(),
+            loadAuditLog(1),
+            loadGamesCMS(),
+            loadAiConfig(),
+            loadRadarStatus()
+          ]);
+        } catch (err) {
+          console.error('Failed to load admin data:', err);
+        }
+      }
+
+      // Check Session
+      async function loadSessionAndStats() {
+        try {
+          const res = await apiFetch('/me');
+          if (res.code === 0 && res.data) {
+            document.getElementById('admin-user-tag').textContent = `${res.data.admin.username || '老L·站长'} (Super Admin)`;
+            const b = res.data.system_stats?.emergency_broadcast;
+            const pill = document.getElementById('header-emergency-pill');
+            if (b && b.enabled) {
+              pill.classList.remove('hidden');
+              pill.classList.add('flex');
+            } else {
+              pill.classList.add('hidden');
+              pill.classList.remove('flex');
+            }
+          }
+        } catch (e) {}
+      }
+
+      // =======================================================================
+      // MODULE 1: VISITOR ANALYTICS · USERS · FEEDBACK · AUDIT LOG
+      // =======================================================================
+      const SERIES = { pv: '#3987e5', uv: '#d95926' }; // validated on the #12151e card surface
+      const EVENT_LABELS = {
+        page_view: '浏览页面', search_query: '搜索', view_game: '看游戏（v6 前）', copy_code: '复制指令',
+        download_bat: '下载 .bat', trainer_official_click: '去风灵月影官网', trainer_download: '本站下载修改器',
+        trainer_fallback: '下载兜底跳官网', mod_download_click: 'Mod 点击', ai_ask: 'AI 提问'
+      };
+      const NOT_RECORDED = '未记录（v6 前的旧数据）';
+      const DEVICE_LABELS = { mobile: '手机', tablet: '平板', desktop: '电脑', '': NOT_RECORDED };
+      const LANG_LABELS = { 'zh-CN': '简体中文', 'zh-TW': '繁體中文', en: 'English', ja: '日本語', ko: '한국어', ru: 'Русский', de: 'Deutsch', es: 'Español', '': NOT_RECORDED };
+      const PAGE_LABELS = { '/': '首页目录', '/#/game/*': '游戏详情页（合计）', '/radar': '补丁雷达页' };
+      const SITE_LABELS = { 'lmod-vault.pages.dev': 'Cloudflare 主站', 'xxxxlu.github.io': 'GitHub Pages 站', '': NOT_RECORDED };
+      const MOD_KIND_LABELS = { direct: '作者直链', page: '来源页', nexus_page: 'N 网原页' };
+      const FALLBACK_LABELS = { timeout: '预检超时', network: '网络错误', missing: '本站文件已下架', http_5xx: '本站服务出错（5xx）', size_mismatch: '文件大小不符' };
+      const FEEDBACK_STATUS = { pending: '待处理', verified: '已确认', resolved: '已解决' };
+      const FEEDBACK_CATEGORY = { bug_report: '报错', mod_request: 'Mod 请求', comment: '留言' };
+      const AUDIT_LABELS = {
+        system_init: '初始化', admin_login_success: '登录成功', admin_login_failed: '登录失败',
+        change_admin_password: '改站长密码', update_game_cms: '改游戏', create_command: '新增指令',
+        update_command: '改指令', delete_command: '删指令', update_ai_config: '改 AI 配置',
+        activate_emergency_broadcast: '开启广播', deactivate_emergency_broadcast: '关闭广播',
+        update_feedback_status: '改反馈状态', update_feedback_note: '反馈备注', update_telemetry_config: '改采样比例'
+      };
+      let regionNames = null;
+      try { regionNames = new Intl.DisplayNames(['zh-CN'], { type: 'region' }); } catch (e) {}
+
+      const fmtNum = (n) => (Number(n) || 0).toLocaleString('zh-CN');
+      function fmtTime(ts) {
+        if (!ts) return '—';
+        const d = new Date(String(ts).replace(' ', 'T') + (String(ts).includes('Z') ? '' : 'Z'));
+        if (isNaN(d)) return String(ts);
+        return d.toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai', hour12: false, year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' });
+      }
+      function countryLabel(cc) {
+        if (!cc || cc === 'Unknown' || cc === 'XX') return '未知';
+        if (cc === 'T1') return 'Tor 网络';
+        try { return regionNames ? `${regionNames.of(cc)} · ${cc}` : cc; } catch (e) { return cc; }
+      }
+      function emptyBlock(text) {
+        return `<div class="text-xs text-slate-500 py-5 text-center">${escapeHtml(text)}</div>`;
+      }
+
+      // Single-hue horizontal bars for ranked lists (value = text ink, bar = magnitude)
+      function renderBarList(elId, rows, opts = {}) {
+        const el = document.getElementById(elId);
+        if (!el) return;
+        if (!rows || rows.length === 0) {
+          el.innerHTML = emptyBlock(opts.empty || '这个时间段没有数据');
+          return;
+        }
+        const max = Math.max(...rows.map(r => r.count)) || 1;
+        el.innerHTML = rows.map(r => `
+          <div class="text-xs" title="${escapeHtml(r.title || r.label)}">
+            <div class="flex items-center justify-between gap-3 mb-1">
+              <span class="truncate ${r.muted ? 'text-slate-500' : 'text-slate-200'}">${escapeHtml(r.label)}</span>
+              <span class="shrink-0 font-mono text-slate-300 tabular-nums">${fmtNum(r.count)}${opts.unit ? ' ' + escapeHtml(opts.unit) : ''}</span>
+            </div>
+            <div class="h-1.5 rounded-full bg-slate-800/80 overflow-hidden">
+              <div class="h-full rounded-full" style="width:${Math.max(2, Math.round(r.count / max * 100))}%;background:${SERIES.pv}"></div>
+            </div>
+          </div>`).join('');
+      }
+
+      // ---- 30-day trend: two lines on one count axis, crosshair tooltip, table view ----
+      let trendData = [];
+      function niceMax(v) {
+        if (v <= 4) return 4;
+        const p = Math.pow(10, Math.floor(Math.log10(v)));
+        const m = v / p;
+        return (m <= 1 ? 1 : m <= 2 ? 2 : m <= 5 ? 5 : 10) * p;
+      }
+      function renderTrend(trend) {
+        trendData = trend || [];
+        const box = document.getElementById('an-trend');
+        const table = document.getElementById('an-trend-table');
+        if (!box) return;
+        if (!trendData.length) {
+          box.innerHTML = emptyBlock('还没有任何访客数据');
+          table.innerHTML = '';
+          return;
+        }
+        const W = Math.max(320, box.clientWidth || 720);
+        const H = 220;
+        const pad = { l: 36, r: 60, t: 12, b: 24 };
+        const iw = W - pad.l - pad.r;
+        const ih = H - pad.t - pad.b;
+        const top = niceMax(Math.max(...trendData.map(d => Math.max(d.pv, d.uv))));
+        const n = trendData.length;
+        const x = i => pad.l + (n === 1 ? iw / 2 : i * iw / (n - 1));
+        const y = v => pad.t + ih * (1 - v / top);
+        const ticks = [0, top / 2, top];
+        const path = key => trendData.map((d, i) => `${i ? 'L' : 'M'}${x(i).toFixed(1)},${y(d[key]).toFixed(1)}`).join(' ');
+        const labelIdx = [...new Set([0, Math.floor((n - 1) / 2), n - 1])];
+        const last = trendData[n - 1];
+        // End labels: nudge apart when the two lines end close together
+        let pvY = y(last.pv), uvY = y(last.uv);
+        if (Math.abs(pvY - uvY) < 12) { if (pvY <= uvY) { pvY -= 6; uvY += 6; } else { pvY += 6; uvY -= 6; } }
+
+        box.innerHTML = `
+          <svg viewBox="0 0 ${W} ${H}" width="100%" height="${H}" role="img" aria-label="近 30 天每日 PV 与 UV 折线图" class="block overflow-visible">
+            ${ticks.map(t => `
+              <line x1="${pad.l}" x2="${W - pad.r}" y1="${y(t)}" y2="${y(t)}" stroke="${t === 0 ? '#383835' : '#2c2c2a'}" stroke-width="1"/>
+              <text x="${pad.l - 6}" y="${y(t) + 3}" text-anchor="end" font-size="10" fill="#898781" font-family="ui-monospace,monospace">${fmtNum(t)}</text>`).join('')}
+            ${labelIdx.map(i => `<text x="${x(i)}" y="${H - 6}" text-anchor="${i === 0 && n > 1 ? 'start' : i === n - 1 && n > 1 ? 'end' : 'middle'}" font-size="10" fill="#898781" font-family="ui-monospace,monospace">${trendData[i].day.slice(5)}</text>`).join('')}
+            <path d="${path('uv')}" fill="none" stroke="${SERIES.uv}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+            <path d="${path('pv')}" fill="none" stroke="${SERIES.pv}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+            ${n === 1 ? `<circle cx="${x(0)}" cy="${y(last.pv)}" r="4" fill="${SERIES.pv}" stroke="#12151e" stroke-width="2"/><circle cx="${x(0)}" cy="${y(last.uv)}" r="4" fill="${SERIES.uv}" stroke="#12151e" stroke-width="2"/>` : ''}
+            <text x="${x(n - 1) + 6}" y="${pvY + 3}" font-size="10" fill="#c3c2b7" font-family="ui-monospace,monospace">PV ${fmtNum(last.pv)}</text>
+            <text x="${x(n - 1) + 6}" y="${uvY + 3}" font-size="10" fill="#c3c2b7" font-family="ui-monospace,monospace">UV ${fmtNum(last.uv)}</text>
+            <line id="an-cross" x1="0" x2="0" y1="${pad.t}" y2="${pad.t + ih}" stroke="#c3c2b7" stroke-width="1" stroke-dasharray="3 3" visibility="hidden"/>
+            <rect id="an-hit" x="${pad.l - 8}" y="0" width="${iw + 16}" height="${H}" fill="transparent" tabindex="0" aria-label="移动查看每日数值"/>
+          </svg>
+          <div id="an-tip" class="hidden absolute z-10 pointer-events-none rounded-lg border border-slate-700 bg-slate-950/95 px-3 py-2 text-[11px] font-mono shadow-xl"></div>`;
+
+        const hit = document.getElementById('an-hit');
+        const cross = document.getElementById('an-cross');
+        const tip = document.getElementById('an-tip');
+        const show = (i) => {
+          const d = trendData[i];
+          cross.setAttribute('x1', x(i)); cross.setAttribute('x2', x(i));
+          cross.setAttribute('visibility', 'visible');
+          tip.textContent = '';
+          const head = document.createElement('div');
+          head.className = 'text-slate-400 mb-1';
+          head.textContent = d.day + (d.day === trendData[n - 1].day ? '（今天，进行中）' : '');
+          tip.appendChild(head);
+          [['pv', 'PV 浏览量'], ['uv', 'UV 访客'], ['events', '全部事件']].forEach(([k, name]) => {
+            const row = document.createElement('div');
+            row.className = 'flex items-center gap-2';
+            const key = document.createElement('span');
+            key.className = 'inline-block w-3 h-[2px] rounded';
+            key.style.background = SERIES[k] || 'transparent';
+            const val = document.createElement('strong');
+            val.className = 'text-white tabular-nums';
+            val.textContent = fmtNum(d[k]);
+            const lab = document.createElement('span');
+            lab.className = 'text-slate-400';
+            lab.textContent = name;
+            row.append(key, val, lab);
+            tip.appendChild(row);
+          });
+          tip.classList.remove('hidden');
+          const bw = box.clientWidth;
+          const px = x(i) * (bw / W);
+          tip.style.left = Math.min(Math.max(0, px + 10), Math.max(0, bw - tip.offsetWidth)) + 'px';
+          tip.style.top = '8px';
+        };
+        const nearest = (clientX) => {
+          const r = hit.ownerSVGElement.getBoundingClientRect();
+          const sx = (clientX - r.left) * (W / r.width);
+          return Math.max(0, Math.min(n - 1, Math.round(n === 1 ? 0 : (sx - pad.l) / (iw / (n - 1)))));
+        };
+        let focusIdx = n - 1;
+        hit.addEventListener('pointermove', e => show(nearest(e.clientX)));
+        hit.addEventListener('pointerleave', () => { cross.setAttribute('visibility', 'hidden'); tip.classList.add('hidden'); });
+        hit.addEventListener('focus', () => show(focusIdx));
+        hit.addEventListener('blur', () => { cross.setAttribute('visibility', 'hidden'); tip.classList.add('hidden'); });
+        hit.addEventListener('keydown', e => {
+          if (e.key === 'ArrowLeft') focusIdx = Math.max(0, focusIdx - 1);
+          else if (e.key === 'ArrowRight') focusIdx = Math.min(n - 1, focusIdx + 1);
+          else return;
+          e.preventDefault();
+          show(focusIdx);
+        });
+
+        table.innerHTML = `
+          <table class="w-full text-left text-xs font-mono">
+            <thead class="text-slate-400 border-b border-slate-800 text-[11px]"><tr><th class="py-1.5 px-2">日期</th><th class="py-1.5 px-2 text-right">PV</th><th class="py-1.5 px-2 text-right">UV</th><th class="py-1.5 px-2 text-right">全部事件</th></tr></thead>
+            <tbody class="divide-y divide-slate-800/60 text-slate-300">
+              ${trendData.slice().reverse().map(d => `<tr><td class="py-1.5 px-2">${escapeHtml(d.day)}</td><td class="py-1.5 px-2 text-right tabular-nums">${fmtNum(d.pv)}</td><td class="py-1.5 px-2 text-right tabular-nums">${fmtNum(d.uv)}</td><td class="py-1.5 px-2 text-right tabular-nums">${fmtNum(d.events)}</td></tr>`).join('')}
+            </tbody>
+          </table>`;
+      }
+      document.getElementById('an-trend-table-btn').addEventListener('click', () => {
+        document.getElementById('an-trend-table').classList.toggle('hidden');
+      });
+      window.addEventListener('resize', debounce(() => {
+        if (!document.getElementById('panel-analytics').classList.contains('hidden')) renderTrend(trendData);
+      }, 200));
+
+      // ---- Overview ----
+      let currentRange = '7d';
+      document.querySelectorAll('.an-range-btn').forEach(btn => {
+        btn.addEventListener('click', () => loadAnalyticsOverview(btn.dataset.range));
+      });
+
+      function setText(id, value) {
+        const el = document.getElementById(id);
+        if (el) el.textContent = value;
+      }
+
+      async function loadAnalyticsOverview(range) {
+        if (range) currentRange = range;
+        document.querySelectorAll('.an-range-btn').forEach(b => {
+          const on = b.dataset.range === currentRange;
+          b.classList.toggle('bg-purple-500/20', on);
+          b.classList.toggle('text-purple-200', on);
+          b.classList.toggle('text-slate-400', !on);
+        });
+
+        const res = await apiFetch(`/analytics/overview?range=${currentRange}`);
+        const notice = document.getElementById('an-notice');
+        if (res.code !== 0 || !res.data) {
+          notice.classList.remove('hidden');
+          notice.textContent = '统计接口出错：' + (res.details || res.message || '未知错误');
+          return;
+        }
+        const d = res.data;
+        const s = d.summary;
+        const m = d.maintenance || {};
+
+        // Scope line
+        const rangeText = d.days === 1 ? `今天（${d.today}）` : `${d.start_day} 至 ${d.today}`;
+        const maintText = m.error
+          ? `汇总未执行：${m.error}`
+          : `已汇总到 ${m.rolled_through || '—'}` +
+            ((m.rolled_days && m.rolled_days.length) ? ` · 本次汇总 ${m.rolled_days.length} 天` : '') +
+            (m.purged_rows ? ` · 清理过期明细 ${fmtNum(m.purged_rows)} 条` : '');
+        setText('an-meta', `${rangeText} · 北京时间 · 采样 ${Math.round(d.sample_rate * 100)}% · 明细保留 ${d.retention_days} 天 · ${maintText}`);
+
+        // Honest notices
+        const notes = [];
+        if (d.seed_rows_excluded > 0) notes.push(`已排除 ${fmtNum(d.seed_rows_excluded)} 条非真实访客的数据：migration_v3 在 2026-10-27 写入的演示事件（会话 ID 以 sess_ 开头）和测试事件。所有数字都不含它们；清理办法见上线笔记。`);
+        if (d.sample_rate < 1) notes.push(`当前采样 ${Math.round(d.sample_rate * 100)}%：数字是按采样比例放大后的估算。`);
+        if (!s.uv_exact) notes.push('这个时间段事件太多，UV 改为按天累加（同一访客多天会重复计），是上限不是去重值。');
+        if (s.events === 0) notes.push('这个时间段还没有记录到任何访客数据。');
+        notice.innerHTML = notes.map(t => `<div>${escapeHtml(t)}</div>`).join('');
+        notice.classList.toggle('hidden', notes.length === 0);
+
+        setText('an-pv', fmtNum(s.pv));
+        setText('an-uv', (s.uv_exact ? '' : '≤') + fmtNum(s.uv));
+        setText('an-uv-note', s.uv_exact ? '去重访客（匿名浏览器 ID）' : '按天累加的上限');
+        setText('an-searches', fmtNum(s.searches));
+        setText('an-ai', fmtNum(s.ai_ask));
+        setText('an-events', fmtNum(s.events));
+        setText('an-trainer-official', fmtNum(s.trainer_official));
+        setText('an-trainer-download', fmtNum(s.trainer_download));
+        setText('an-trainer-fallback', fmtNum(s.trainer_fallback));
+        setText('an-mod-clicks', fmtNum(s.mod_clicks));
+        setText('an-mod-kinds', d.top.mod_kinds.length
+          ? d.top.mod_kinds.map(k => `${MOD_KIND_LABELS[k.kind] || k.kind} ${fmtNum(k.count)}`).join(' · ')
+          : '还没有点击');
+
+        renderTrend(d.trend);
+        renderBarList('an-fallback-reasons', d.top.fallback_reasons.map(r => ({ label: FALLBACK_LABELS[r.reason] || r.reason || '未注明原因', title: r.reason, count: r.count })), { empty: '这个时间段没有兜底' });
+        renderBarList('an-referrers', d.top.referrers.map(r => ({ label: r.host === '(direct)' ? '直接打开 / 无来源' : r.host, count: r.count, muted: r.host === '(direct)' })), { empty: '这个时间段没有浏览记录' });
+        renderBarList('an-pages', d.top.pages.map(p => ({ label: PAGE_LABELS[p.path] || p.path, title: p.path, count: p.count })), { empty: '这个时间段没有浏览记录' });
+        renderBarList('an-search-list', d.top.searches.map(q => ({ label: q.query, count: q.count })), { empty: '这个时间段没有人搜索', unit: '次' });
+        renderBarList('an-countries', d.top.countries.map(c => ({ label: countryLabel(c.country), count: c.count })));
+        renderBarList('an-devices', d.top.devices.map(c => ({ label: DEVICE_LABELS[c.device] || c.device, count: c.count, muted: c.device === '' })));
+        renderBarList('an-langs', d.top.langs.map(c => ({ label: LANG_LABELS[c.lang] || c.lang, count: c.count, muted: c.lang === '' })));
+        renderBarList('an-sites', d.top.sites.map(c => ({ label: SITE_LABELS[c.site] || c.site, title: c.site, count: c.count, muted: c.site === '' })));
+        renderBarList('an-copies', d.top.copies.map(c => ({ label: c.code.split('\n')[0], title: c.code, count: c.count })), { empty: '这个时间段没有人复制指令', unit: '次' });
+
+        const gamesBody = document.getElementById('an-games');
+        const cell = v => `<td class="py-2 px-2 text-right tabular-nums ${v ? 'text-slate-200' : 'text-slate-600'}">${fmtNum(v)}</td>`;
+        gamesBody.innerHTML = d.games.length
+          ? d.games.map(g => `
+              <tr class="hover:bg-slate-800/30">
+                <td class="py-2 px-2"><span class="text-slate-200">${escapeHtml(g.title || g.game_id)}</span> <span class="text-slate-500">${g.title ? escapeHtml(g.game_id) : ''}</span></td>
+                ${cell(g.visitors)}${cell(g.trainer_official)}${cell(g.trainer_download)}${cell(g.trainer_fallback)}${cell(g.mod_click)}${cell(g.ai_ask)}${cell(g.copy_code)}${cell(g.download_bat)}
+              </tr>`).join('')
+          : `<tr><td colspan="9">${emptyBlock('这个时间段没有游戏相关的访问')}</td></tr>`;
+
+        const u = d.users_summary || {};
+        setText('metric-users-total', fmtNum(u.total_registered));
+        setText('metric-users-today', fmtNum(u.today_registered));
+        setText('metric-users-active', fmtNum(u.today_active));
+        setText('metric-users-pwd', fmtNum(u.password_set_count));
+        setText('metric-otp-today', fmtNum(u.otp_sent_today));
+
+        setText('an-sample-current', `${Math.round(d.sample_rate * 100)}%`);
+        const sampleInput = document.getElementById('an-sample-input');
+        if (document.activeElement !== sampleInput) sampleInput.value = Math.round(d.sample_rate * 100);
+      }
+
+      document.getElementById('an-sample-save').addEventListener('click', async () => {
+        const pct = Number(document.getElementById('an-sample-input').value);
+        if (!Number.isFinite(pct) || pct < 1 || pct > 100) {
+          showToast('采样比例要在 1 到 100 之间', 'error');
+          return;
+        }
+        if (pct < 100 && !confirm(`确认把采样调到 ${pct}%？之后只记录约 ${pct}% 的访客，统计数字会变成估算。`)) return;
+        try {
+          const res = await apiFetch('/analytics/config', { method: 'POST', body: JSON.stringify({ sample_rate: pct / 100 }) });
+          showToast(res.message || (res.code === 0 ? '已保存' : '保存失败'), res.code === 0 ? 'success' : 'error');
+          if (res.code === 0) loadAnalyticsOverview();
+        } catch (e) {
+          showToast(e.message, 'error');
+        }
+      });
+
+      // ---- Raw event stream ----
+      async function loadTelemetryEvents() {
+        const type = document.getElementById('telemetry-filter-type').value;
+        const res = await apiFetch(`/analytics/events?page=1&page_size=30&event_type=${encodeURIComponent(type)}`);
+        const tbody = document.getElementById('telemetry-table-body');
+        if (res.code !== 0 || !res.data || res.data.events.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="9">${emptyBlock('没有事件')}</td></tr>`;
+          return;
+        }
+        tbody.innerHTML = res.data.events.map(e => `
+          <tr class="hover:bg-slate-800/30 ${e.is_seed ? 'opacity-50' : ''}">
+            <td class="py-2 px-2 text-slate-500 whitespace-nowrap">${escapeHtml(fmtTime(e.created_at))}</td>
+            <td class="py-2 px-2 whitespace-nowrap">${escapeHtml(EVENT_LABELS[e.event_type] || e.event_type)}${e.is_seed ? ' <span class="text-[10px] px-1 rounded bg-slate-800 text-slate-400">演示数据</span>' : ''}</td>
+            <td class="py-2 px-2 text-slate-300">${escapeHtml(e.game_id || '—')}</td>
+            <td class="py-2 px-2 text-slate-200 truncate max-w-[14rem]" title="${escapeHtml(e.target_payload || '')}">${escapeHtml(e.target_payload || '—')}</td>
+            <td class="py-2 px-2 text-slate-400 truncate max-w-[10rem]" title="${escapeHtml(e.page_path || '')}">${escapeHtml(e.page_path || '—')}</td>
+            <td class="py-2 px-2 text-slate-400">${escapeHtml(e.referrer_host || '—')}</td>
+            <td class="py-2 px-2 text-slate-400">${escapeHtml(e.device_type ? (DEVICE_LABELS[e.device_type] || e.device_type) : '—')}</td>
+            <td class="py-2 px-2 text-slate-400">${escapeHtml(e.ui_lang || '—')}</td>
+            <td class="py-2 px-2 text-slate-400">${escapeHtml(e.client_country || '—')}</td>
+          </tr>`).join('');
+      }
+      document.getElementById('telemetry-filter-type').addEventListener('change', loadTelemetryEvents);
+
+      // ---- Users (read-only) ----
+      let usersPage = 1;
+      function renderPager(elId, page, totalPages, onGo) {
+        const el = document.getElementById(elId);
+        if (!el) return;
+        if (!totalPages || totalPages <= 1) { el.innerHTML = ''; return; }
+        el.innerHTML = `
+          <button type="button" data-go="${page - 1}" ${page <= 1 ? 'disabled' : ''} class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 disabled:opacity-40">上一页</button>
+          <span class="text-slate-400">${page} / ${totalPages}</span>
+          <button type="button" data-go="${page + 1}" ${page >= totalPages ? 'disabled' : ''} class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 disabled:opacity-40">下一页</button>`;
+        el.querySelectorAll('button[data-go]').forEach(b => b.addEventListener('click', () => onGo(Number(b.dataset.go))));
+      }
+
+      async function loadUsers(page = usersPage) {
+        usersPage = page;
+        const q = document.getElementById('users-search').value.trim();
+        const res = await apiFetch(`/users?page=${page}&page_size=20&q=${encodeURIComponent(q)}`);
+        const tbody = document.getElementById('users-table-body');
+        if (res.code !== 0 || !res.data) {
+          tbody.innerHTML = `<tr><td colspan="8">${emptyBlock('用户接口出错：' + (res.details || res.message || ''))}</td></tr>`;
+          return;
+        }
+        const sm = res.data.summary || {};
+        document.getElementById('users-summary').innerHTML = [
+          ['注册用户', sm.users], ['有收藏的用户', sm.users_with_favorites], ['收藏总数', sm.favorites], ['雷达订阅总数', sm.subscriptions]
+        ].map(([label, v]) => `
+          <div class="glass-card rounded-2xl p-4 border border-slate-800">
+            <div class="text-[11px] text-slate-400">${label}</div>
+            <div class="mt-1 text-2xl font-bold text-white tabular-nums">${fmtNum(v)}</div>
+          </div>`).join('');
+        const items = res.data.items || [];
+        tbody.innerHTML = items.length
+          ? items.map(u => `
+              <tr class="hover:bg-slate-800/30">
+                <td class="py-2 px-2 text-slate-200">${escapeHtml(u.nickname || '—')}</td>
+                <td class="py-2 px-2 text-slate-300">${escapeHtml(u.email_masked || '—')}</td>
+                <td class="py-2 px-2 text-slate-400">${escapeHtml(u.provider || '—')}${u.has_password ? ' · 已设密码' : ''}</td>
+                <td class="py-2 px-2 text-slate-400 whitespace-nowrap">${escapeHtml(fmtTime(u.created_at))}</td>
+                <td class="py-2 px-2 text-slate-400 whitespace-nowrap">${escapeHtml(fmtTime(u.last_login_at))}</td>
+                <td class="py-2 px-2 text-right tabular-nums">${fmtNum(u.favorites)}</td>
+                <td class="py-2 px-2 text-right tabular-nums">${fmtNum(u.subscriptions)}</td>
+                <td class="py-2 px-2 ${u.status === 'active' ? 'text-slate-400' : 'text-amber-300'}">${escapeHtml(u.status === 'active' ? '正常' : u.status)}</td>
+              </tr>`).join('')
+          : `<tr><td colspan="8">${emptyBlock(q ? '没有匹配的用户' : '还没有注册用户')}</td></tr>`;
+        renderPager('users-pager', res.data.page, res.data.total_pages, loadUsers);
+      }
+      document.getElementById('users-search').addEventListener('input', debounce(() => loadUsers(1), 400));
+
+      async function loadTopGames() {
+        const res = await apiFetch('/users/top-games');
+        if (res.code !== 0 || !res.data) return;
+        const shape = g => ({ label: g.title || g.game_id, title: g.game_id, count: g.players });
+        renderBarList('top-fav-list', res.data.favorites.map(shape), { empty: '还没有玩家收藏游戏', unit: '人' });
+        renderBarList('top-sub-list', res.data.subscriptions.map(shape), { empty: '还没有玩家订阅雷达', unit: '人' });
+      }
+
+      // ---- Feedback: status filter, handling note ----
+      let currentFeedbackFilter = 'all';
+      let feedbackNotesAvailable = true;
+      async function loadCommunityFeedback(status) {
+        if (status) currentFeedbackFilter = status;
+        document.querySelectorAll('.feedback-filter-btn').forEach(b => {
+          const on = b.dataset.feedbackFilter === currentFeedbackFilter;
+          b.classList.toggle('bg-slate-800', on);
+          b.classList.toggle('text-purple-300', on);
+          b.classList.toggle('border-slate-700', on);
+          b.classList.toggle('text-slate-400', !on);
+        });
+        const res = await apiFetch(`/feedback?status=${currentFeedbackFilter}&page=1&page_size=50`);
+        const container = document.getElementById('feedback-list-container');
+        if (res.code !== 0 || !res.data) {
+          container.innerHTML = emptyBlock('反馈接口出错：' + (res.details || res.message || ''));
+          return;
+        }
+        const c = res.data.status_counts || {};
+        const all = (c.pending || 0) + (c.verified || 0) + (c.resolved || 0);
+        document.querySelectorAll('[data-fb-count]').forEach(el => {
+          const k = el.dataset.fbCount;
+          el.textContent = String(k === 'all' ? all : (c[k] || 0));
+        });
+        feedbackNotesAvailable = res.data.notes_available !== false;
+        const items = res.data.items || [];
+        if (!items.length) {
+          container.innerHTML = emptyBlock(currentFeedbackFilter === 'all' ? '还没有玩家反馈' : '这个状态下没有反馈');
+          return;
+        }
+        const statusClass = { pending: 'text-amber-300 bg-amber-500/10 border-amber-500/20', verified: 'text-blue-300 bg-blue-500/10 border-blue-500/20', resolved: 'text-emerald-300 bg-emerald-500/10 border-emerald-500/20' };
+        container.innerHTML = items.map(fb => `
+          <div class="p-4 rounded-xl bg-slate-950/70 border border-slate-800 space-y-3 ${fb.is_seed ? 'opacity-70' : ''}">
+            <div class="flex items-center gap-2 text-[11px] font-mono flex-wrap">
+              <span class="px-2 py-0.5 rounded border ${statusClass[fb.status] || 'text-slate-300 border-slate-700'}">${escapeHtml(FEEDBACK_STATUS[fb.status] || fb.status)}</span>
+              ${fb.is_seed ? '<span class="px-2 py-0.5 rounded bg-slate-800 text-slate-400 border border-slate-700">演示数据（migration_v3）</span>' : ''}
+              <span class="text-slate-500">#${fb.id}</span>
+              <span class="text-purple-300">${escapeHtml(fb.game_title || fb.game_id || '通用反馈')}</span>
+              <span class="text-slate-400">${escapeHtml(FEEDBACK_CATEGORY[fb.category] || fb.category || '')}</span>
+              <span class="text-slate-400">· ${escapeHtml(fb.player_nickname || '匿名')}${fb.is_registered ? '（注册玩家）' : ''}</span>
+              ${fb.email_masked ? `<span class="text-slate-400">${escapeHtml(fb.email_masked)}</span> <a href="mailto:${escapeHtml(fb.contact_email)}" class="text-purple-300 underline underline-offset-2">写邮件</a>` : ''}
+              <span class="text-slate-500">${escapeHtml(fb.player_ip_country || '')} · ${escapeHtml(fmtTime(fb.created_at))}</span>
+            </div>
+            <div class="text-xs text-slate-200 leading-relaxed whitespace-pre-wrap">${escapeHtml(fb.content)}</div>
+            ${fb.admin_note ? `<div class="text-xs text-slate-300 bg-slate-900/80 border border-slate-800 rounded-lg px-3 py-2"><span class="text-slate-500">处理备注（${escapeHtml(fmtTime(fb.handled_at))}）：</span>${escapeHtml(fb.admin_note)}</div>` : ''}
+            <div class="flex flex-col sm:flex-row sm:items-start gap-2">
+              <select id="fb-status-${fb.id}" class="bg-slate-900 border border-slate-700 rounded-lg px-2 py-1.5 text-xs text-slate-200 font-mono shrink-0" aria-label="状态">
+                ${Object.entries(FEEDBACK_STATUS).map(([k, v]) => `<option value="${k}" ${fb.status === k ? 'selected' : ''}>${v}</option>`).join('')}
+              </select>
+              ${feedbackNotesAvailable
+                ? `<textarea id="fb-note-${fb.id}" rows="1" maxlength="1000" placeholder="处理备注（只有后台能看到）" class="flex-1 bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs text-slate-200 placeholder-slate-500">${escapeHtml(fb.admin_note || '')}</textarea>`
+                : '<span class="flex-1 text-[11px] text-slate-500 self-center">数据库还没执行 migration v6，暂时只能改状态</span>'}
+              <button type="button" onclick="window.saveFeedback(${fb.id})" class="px-3 py-1.5 rounded-lg bg-purple-600/80 hover:bg-purple-600 text-white text-xs font-mono shrink-0">保存</button>
+            </div>
+          </div>`).join('');
+      }
+
+      window.saveFeedback = async function (id) {
+        const status = document.getElementById(`fb-status-${id}`).value;
+        const noteEl = document.getElementById(`fb-note-${id}`);
+        try {
+          const res = feedbackNotesAvailable
+            ? await apiFetch('/feedback/note', { method: 'POST', body: JSON.stringify({ id, status, note: noteEl ? noteEl.value : '' }) })
+            : await apiFetch('/feedback/status', { method: 'POST', body: JSON.stringify({ id, status }) });
+          showToast(res.message || (res.code === 0 ? '已保存' : '保存失败'), res.code === 0 ? 'success' : 'error');
+          if (res.code === 0) loadCommunityFeedback();
+        } catch (e) {
+          showToast(e.message, 'error');
+        }
+      };
+
+      document.querySelectorAll('.feedback-filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => loadCommunityFeedback(btn.dataset.feedbackFilter));
+      });
+
+      // ---- Admin audit log ----
+      let auditPage = 1;
+      async function loadAuditLog(page = auditPage) {
+        auditPage = page;
+        const select = document.getElementById('audit-action-filter');
+        const action = select.value || 'all';
+        const res = await apiFetch(`/audit?page=${page}&page_size=30&action=${encodeURIComponent(action)}`);
+        const tbody = document.getElementById('audit-table-body');
+        if (res.code !== 0 || !res.data) {
+          tbody.innerHTML = `<tr><td colspan="6">${emptyBlock('日志接口出错：' + (res.details || res.message || ''))}</td></tr>`;
+          return;
+        }
+        const keep = select.value;
+        select.innerHTML = '<option value="all">全部操作</option>' + (res.data.actions || []).map(a =>
+          `<option value="${escapeHtml(a.action)}">${escapeHtml(AUDIT_LABELS[a.action] || a.action)}（${a.count}）</option>`).join('');
+        select.value = keep;
+        const items = res.data.items || [];
+        tbody.innerHTML = items.length
+          ? items.map(a => `
+              <tr class="hover:bg-slate-800/30 align-top">
+                <td class="py-2 px-2 text-slate-500 whitespace-nowrap">${escapeHtml(fmtTime(a.created_at))}</td>
+                <td class="py-2 px-2 whitespace-nowrap"><span class="text-slate-200">${escapeHtml(AUDIT_LABELS[a.action] || a.action)}</span><div class="text-[10px] text-slate-500">${escapeHtml(a.action)}</div></td>
+                <td class="py-2 px-2 text-slate-400">${escapeHtml([a.entity, a.entity_id].filter(Boolean).join(' / ') || '—')}</td>
+                <td class="py-2 px-2 text-slate-300 max-w-md"><div class="line-clamp-2 break-all" title="${escapeHtml(a.details || '')}">${escapeHtml(a.details || '—')}</div></td>
+                <td class="py-2 px-2 text-slate-400 whitespace-nowrap">${escapeHtml(a.admin_user || '—')}</td>
+                <td class="py-2 px-2 text-slate-500 whitespace-nowrap">${escapeHtml(a.client_ip || '—')}</td>
+              </tr>`).join('')
+          : `<tr><td colspan="6">${emptyBlock('没有操作记录')}</td></tr>`;
+        renderPager('audit-pager', res.data.page, res.data.total_pages, loadAuditLog);
+      }
+      document.getElementById('audit-action-filter').addEventListener('change', () => loadAuditLog(1));
+
+      // =======================================================================
+      // MODULE 2: GAME DATA (D1 games.raw_json is the source; see /js/admin-game-editor.js)
+      // =======================================================================
+      window.LmodAdminApi = { apiFetch, showToast };
+
+      async function loadGamesCMS() {
+        if (window.LmodGameEditor) await window.LmodGameEditor.loadList();
+      }
+
+      document.getElementById('cms-search-input').addEventListener('input', debounce(loadGamesCMS, 300));
+      document.getElementById('cms-status-filter').addEventListener('change', loadGamesCMS);
+      document.getElementById('cms-visibility-filter').addEventListener('change', loadGamesCMS);
+      document.getElementById('cms-new-game-btn').addEventListener('click', () => {
+        if (window.LmodGameEditor) window.LmodGameEditor.openCreate();
+      });
+
+      // =======================================================================
+      // MODULE 3: AI COPILOT & AGENTIC SKILLS STUDIO
+      // =======================================================================
+      async function loadAiConfig() {
+        const res = await apiFetch('/ai/config');
+        if (res.code !== 0 || !res.data) return;
+
+        const cfg = res.data;
+        const promptEl = document.getElementById('ai-system-prompt');
+        promptEl.value = cfg.system_prompt || '';
+        document.getElementById('ai-prompt-length').textContent = `${promptEl.value.length} 字`;
+        document.getElementById('ai-tone-select').value = cfg.tone || 'hardcore_veteran';
+        document.getElementById('ai-recall-slider').value = cfg.recall_threshold || 0.65;
+        document.getElementById('ai-recall-val').textContent = cfg.recall_threshold || 0.65;
+        document.getElementById('ai-max-cmds-slider').value = cfg.max_context_commands || 6;
+        document.getElementById('ai-max-cmds-val').textContent = cfg.max_context_commands || 6;
+        let pModel = cfg.primary_model || 'gemini-1.5-flash';
+        if (pModel === 'gemini-2.5-flash') pModel = 'gemini-1.5-flash';
+        document.getElementById('ai-primary-model').value = pModel;
+        document.getElementById('ai-fallback-model').value = cfg.fallback_model || 'openrouter/free';
+
+        // 4 大专属 Skills 矩阵回填
+        const skills = cfg.skills || {};
+        document.getElementById('skill-game-vault-rag').checked = skills.game_vault_rag !== false;
+        document.getElementById('skill-patch-sentinel').checked = skills.patch_sentinel !== false;
+        document.getElementById('skill-crash-diagnostic').checked = skills.crash_diagnostic !== false;
+        document.getElementById('skill-general-oracle').checked = skills.general_oracle !== false;
+        document.getElementById('skill-save-guard').checked = skills.save_backup_guard !== false;
+        document.getElementById('skill-syntax-val').checked = skills.syntax_validator !== false;
+        document.getElementById('skill-code-dedup').checked = skills.code_dedup !== false;
+
+        // 密钥与端点回填与状态展示
+        const geminiInput = document.getElementById('ai-gemini-key');
+        geminiInput.value = cfg.gemini_api_key || '';
+        const geminiStatus = document.getElementById('gemini-key-status');
+        if (cfg.has_gemini_key) {
+          geminiStatus.className = 'text-emerald-400 text-[10px] font-semibold flex items-center gap-1';
+          geminiStatus.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span><span>已挂载 (${cfg.is_gemini_env ? '环境变量' : 'D1系统表'})</span>`;
+        } else {
+          geminiStatus.className = 'text-slate-500 text-[10px] flex items-center gap-1';
+          geminiStatus.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-slate-500"></span><span>未挂载 (走本地兜底)</span>`;
+        }
+
+        const deepseekInput = document.getElementById('ai-deepseek-key');
+        deepseekInput.value = cfg.deepseek_api_key || '';
+        const deepseekStatus = document.getElementById('deepseek-key-status');
+        if (cfg.has_deepseek_key) {
+          deepseekStatus.className = 'text-emerald-400 text-[10px] font-semibold flex items-center gap-1';
+          deepseekStatus.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span><span>已挂载 (${cfg.is_deepseek_env ? '环境变量' : 'D1系统表'})</span>`;
+        } else {
+          deepseekStatus.className = 'text-slate-500 text-[10px] flex items-center gap-1';
+          deepseekStatus.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-slate-500"></span><span>未挂载</span>`;
+        }
+
+        document.getElementById('ai-custom-endpoint').value = cfg.custom_endpoint || '';
+        document.getElementById('ai-custom-key').value = cfg.custom_api_key || '';
+      }
+
+      window.quickFillOpenRouter = function () {
+        document.getElementById('ai-custom-endpoint').value = 'https://openrouter.ai/api/v1/chat/completions';
+        document.getElementById('ai-primary-model').value = 'openrouter/free';
+        document.getElementById('ai-custom-key').focus();
+        showToast('已填入 OpenRouter 官方规范端点，请在下方填入 sk-or-v1-... 密钥并保存', 'info');
+      };
+
+      document.getElementById('ai-system-prompt').addEventListener('input', (e) => {
+        document.getElementById('ai-prompt-length').textContent = `${e.target.value.length} 字`;
+      });
+      document.getElementById('ai-recall-slider').addEventListener('input', (e) => {
+        document.getElementById('ai-recall-val').textContent = e.target.value;
+      });
+      document.getElementById('ai-max-cmds-slider').addEventListener('input', (e) => {
+        document.getElementById('ai-max-cmds-val').textContent = e.target.value;
+      });
+
+      // Prompt presets
+      document.getElementById('ai-preset-veteran').addEventListener('click', () => {
+        document.getElementById('ai-system-prompt').value = '你是由 L-MOD Vault 官方研发的‘老L’——全球单机游戏底层指令与避坑智库首席顾问。你精通 CET Lua、UE4SS、Creation Engine 控制台语法与反作弊机制。你的回答风格：言简意赅、老练严谨、绝不废话、直击痛点。遇到破坏存档或与补丁冲突的高危指令，必须第一时间发出红色预警并给出备份方案。';
+        document.getElementById('ai-tone-select').value = 'hardcore_veteran';
+      });
+      document.getElementById('ai-preset-strict').addEventListener('click', () => {
+        document.getElementById('ai-system-prompt').value = '你是由 L-MOD Vault 打造的极客代码自检引擎。回答专注于纯净可执行代码、语法参数类型、引擎版本依赖分析，绝无多余口语化寒暄，零幻觉代码。';
+        document.getElementById('ai-tone-select').value = 'geek_strict';
+      });
+      document.getElementById('ai-preset-friendly').addEventListener('click', () => {
+        document.getElementById('ai-system-prompt').value = '我是老L，你的单机游戏避坑小助手。我会一步步教你如何呼出控制台、输入代码、并提醒你注意存档安全，小白也能轻松通关！';
+        document.getElementById('ai-tone-select').value = 'beginner_guide';
+      });
+
+      // Save AI Config
+      document.getElementById('ai-save-config-btn').addEventListener('click', async () => {
+        const system_prompt = document.getElementById('ai-system-prompt').value.trim();
+        const tone = document.getElementById('ai-tone-select').value;
+        const recall_threshold = parseFloat(document.getElementById('ai-recall-slider').value);
+        const max_context_commands = parseInt(document.getElementById('ai-max-cmds-slider').value, 10);
+        const primary_model = document.getElementById('ai-primary-model').value;
+        const fallback_model = document.getElementById('ai-fallback-model').value;
+
+        const gemini_api_key = document.getElementById('ai-gemini-key').value.trim();
+        const deepseek_api_key = document.getElementById('ai-deepseek-key').value.trim();
+        const custom_endpoint = document.getElementById('ai-custom-endpoint').value.trim();
+        const custom_api_key = document.getElementById('ai-custom-key').value.trim();
+
+        const skills = {
+          game_vault_rag: document.getElementById('skill-game-vault-rag').checked,
+          patch_sentinel: document.getElementById('skill-patch-sentinel').checked,
+          crash_diagnostic: document.getElementById('skill-crash-diagnostic').checked,
+          general_oracle: document.getElementById('skill-general-oracle').checked,
+          save_backup_guard: document.getElementById('skill-save-guard').checked,
+          syntax_validator: document.getElementById('skill-syntax-val').checked,
+          code_dedup: document.getElementById('skill-code-dedup').checked,
+          downgrade_wizard: true
+        };
+
+        try {
+          const res = await apiFetch('/ai/config', {
+            method: 'POST',
+            body: JSON.stringify({
+              system_prompt,
+              tone,
+              recall_threshold,
+              max_context_commands,
+              primary_model,
+              fallback_model,
+              gemini_api_key,
+              deepseek_api_key,
+              custom_endpoint,
+              custom_api_key,
+              skills
+            })
+          });
+
+          if (res.code === 0) {
+            showToast('老L·AI 官方智能体人设、模型路由与 4 大专属 Skills 编排已热更新！', 'success');
+            await loadAiConfig(); // 刷新脱敏状态与挂载指示灯
+          } else {
+            showToast(res.message || '更新失败', 'error');
+          }
+        } catch (e) {
+          showToast(e.message, 'error');
+        }
+      });
+
+      // AI Sandbox Test
+      document.getElementById('ai-run-test-btn').addEventListener('click', async () => {
+        const query = document.getElementById('ai-test-query').value.trim();
+        const game_id = document.getElementById('ai-test-game').value;
+        const outputBox = document.getElementById('ai-test-output');
+        const diagBox = document.getElementById('ai-test-diagnostics');
+
+        outputBox.classList.remove('hidden');
+        diagBox.textContent = '老L·AI 沙盒正在加载 D1 智库上下文并执行 4 大专属技能拦截链...';
+
+        try {
+          const res = await apiFetch('/ai/test', {
+            method: 'POST',
+            body: JSON.stringify({ query, game_id })
+          });
+
+          if (res.code === 0 && res.data) {
+            const d = res.data;
+            const sa = d.skills_audit;
+            diagBox.textContent = 
+`🎯 【技能 A · Game Vault RAG】: ${sa.game_vault_rag.status}
+   └─ ${sa.game_vault_rag.verdict}
+📡 【技能 B · Steam 补丁哨兵】: ${sa.patch_sentinel.status}
+   └─ ${sa.patch_sentinel.verdict}
+💥 【技能 C · 崩溃诊断专家】: ${sa.crash_diagnostic.status}
+   └─ ${sa.crash_diagnostic.verdict}
+🎮 【技能 D · 单机通识常识】: ${sa.general_oracle.status}
+   └─ ${sa.general_oracle.verdict}
+🛡️ 【高危坏档防御守卫】: ${sa.save_backup_guard.status} (${sa.save_backup_guard.verdict})
+🤖 【模型路由执行】: ${d.active_model_route}
+
+💬 模拟生成回答:
+${d.simulated_response}`;
+          } else {
+            diagBox.textContent = '测试失败: ' + (res.message || '未知错误');
+          }
+        } catch (e) {
+          diagBox.textContent = '请求异常: ' + e.message;
+        }
+      });
+
+      // =======================================================================
+      // MODULE 4: PATCH RADAR SENTINEL CONTROL
+      // =======================================================================
+      async function loadRadarStatus() {
+        const res = await apiFetch('/radar/status');
+        if (res.code !== 0 || !res.data) return;
+
+        const { radar_metrics, emergency_broadcast, recent_logs } = res.data;
+
+        document.getElementById('radar-green-count').textContent = radar_metrics.green || 0;
+        document.getElementById('radar-yellow-count').textContent = radar_metrics.yellow || 0;
+        document.getElementById('radar-red-count').textContent = radar_metrics.red || 0;
+
+        // Emergency Broadcast controls
+        if (emergency_broadcast) {
+          document.getElementById('broadcast-enable-toggle').checked = Boolean(emergency_broadcast.enabled);
+          document.getElementById('broadcast-status-label').textContent = emergency_broadcast.enabled ? '🚨 广播运行中' : '未激活';
+          document.getElementById('broadcast-level-select').value = emergency_broadcast.level || 'yellow';
+          document.getElementById('broadcast-title-input').value = emergency_broadcast.title || '';
+          document.getElementById('broadcast-msg-input').value = emergency_broadcast.message || '';
+          if (emergency_broadcast.target_game_id) {
+            document.getElementById('broadcast-game-select').value = emergency_broadcast.target_game_id;
+          }
+        }
+
+        // Recent Logs Table
+        const tbody = document.getElementById('radar-logs-tbody');
+        if (recent_logs.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="6" class="text-center py-6 text-slate-500">暂无巡检记录</td></tr>';
+          return;
+        }
+
+        tbody.innerHTML = recent_logs.map(log => {
+          const statusTags = {
+            green: '<span class="text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">🟢 近期平稳</span>',
+            yellow: '<span class="text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">🟡 留意更新</span>',
+            red: '<span class="text-rose-400 bg-rose-500/10 px-2 py-0.5 rounded border border-rose-500/20">🔴 先别更新</span>'
+          };
+
+          return `
+            <tr class="hover:bg-slate-800/30">
+              <td class="py-2.5 px-4 font-bold text-white">${escapeHtml(log.game_title_zh || log.game_id)}</td>
+              <td class="py-2.5 px-4 text-slate-300">${escapeHtml(log.patch_title)}</td>
+              <td class="py-2.5 px-4 text-slate-400 font-mono">${log.build_id || '-'}</td>
+              <td class="py-2.5 px-4">${statusTags[log.status] || log.status}</td>
+              <td class="py-2.5 px-4 text-slate-300 max-w-xs truncate" title="${escapeHtml(log.risk_desc || '')}">${escapeHtml(log.risk_title || '')}</td>
+              <td class="py-2.5 px-4 text-slate-500 font-mono">${(log.checked_at || '').slice(0, 16)}</td>
+            </tr>
+          `;
+        }).join('');
+      }
+
+      // Save Emergency Broadcast
+      document.getElementById('save-broadcast-btn').addEventListener('click', async () => {
+        const enabled = document.getElementById('broadcast-enable-toggle').checked;
+        const level = document.getElementById('broadcast-level-select').value;
+        const target_game_id = document.getElementById('broadcast-game-select').value;
+        const title = document.getElementById('broadcast-title-input').value.trim();
+        const message = document.getElementById('broadcast-msg-input').value.trim();
+
+        try {
+          const res = await apiFetch('/radar/broadcast', {
+            method: 'POST',
+            body: JSON.stringify({
+              enabled,
+              level,
+              target_game_id,
+              title,
+              message
+            })
+          });
+
+          if (res.code === 0) {
+            showToast(res.message, enabled ? 'error' : 'success');
+            loadSessionAndStats();
+            loadRadarStatus();
+          } else {
+            showToast(res.message || '广播更新失败', 'error');
+          }
+        } catch (e) {
+          showToast(e.message, 'error');
+        }
+      });
+
+      // Manual Sentinel Trigger
+      document.getElementById('trigger-inspect-btn').addEventListener('click', async () => {
+        const game_id = document.getElementById('inspect-target-select').value;
+        const termContent = document.getElementById('inspect-terminal-content');
+        const termStatus = document.getElementById('inspect-terminal-status');
+
+        termStatus.textContent = 'SCANNING STEAM API...';
+        termStatus.className = 'text-blue-400 animate-pulse';
+        termContent.textContent = `[${new Date().toLocaleTimeString()}] 读取每日巡检结果... 目标: ${game_id}`;
+
+        try {
+          const res = await apiFetch('/radar/inspect', {
+            method: 'POST',
+            body: JSON.stringify({ game_id })
+          });
+
+          if (res.code === 0 && res.data) {
+            termStatus.textContent = 'AUDIT COMPLETED';
+            termStatus.className = 'text-emerald-400 font-bold';
+            
+            const lines = res.data.results.map(r => 
+              `✓ [${r.title_zh}] Steam AppID:${r.steam_app_id} | ${r.latest_steam_patch || '-'} | 状态:[${String(r.status || '-').toUpperCase()}] -> ${r.verdict}`
+            ).join('\n');
+
+            termContent.textContent = 
+`[${new Date().toLocaleTimeString()}] ${res.message}\n${lines}`;
+            showToast(res.message, 'success');
+            loadRadarStatus();
+          } else {
+            termStatus.textContent = 'FAILED';
+            termStatus.className = 'text-rose-400 font-bold';
+            termContent.textContent = '巡检执行失败: ' + (res.message || '未知错误');
+          }
+        } catch (e) {
+          termStatus.textContent = 'ERROR';
+          termStatus.className = 'text-rose-400';
+          termContent.textContent = '巡检网络异常: ' + e.message;
+        }
+      });
+
+      // Utility Helpers
+      function escapeHtml(str) {
+        if (!str) return '';
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      }
+
+      function debounce(fn, wait) {
+        let t;
+        return function (...args) {
+          clearTimeout(t);
+          t = setTimeout(() => fn.apply(this, args), wait);
+        };
+      }
+
+      // Initialize App on DOM Ready
+      if (authToken) {
+        // Attempt fast verify
+        apiFetch('/me')
+          .then(res => {
+            if (res.code === 0) {
+              showAdminConsole();
+            } else {
+              showAuthScreen();
+            }
+          })
+          .catch(() => showAuthScreen());
+      } else {
+        showAuthScreen();
+      }
+
+    })();
+  </script>
+  <script src="/js/admin-trainers.js" defer></script>
+</body>
+</html>

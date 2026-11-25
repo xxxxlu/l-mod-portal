@@ -1,0 +1,2488 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <!-- Anti-Flicker & Theme Synchronizer -->
+  <script>
+    (function () {
+      try {
+        const saved = localStorage.getItem('lmod_theme');
+        if (saved === 'light') {
+          document.documentElement.classList.remove('dark');
+          document.documentElement.classList.add('light');
+        } else {
+          document.documentElement.classList.add('dark');
+          document.documentElement.classList.remove('light');
+        }
+      } catch (e) {
+        document.documentElement.classList.add('dark');
+      }
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Steam 补丁变动与 Mod 兼容性避坑雷达 | L-MOD Vault</title>
+  <!-- SEO & Standard Meta -->
+  <meta name="description" content="每天巡检 Steam 上单机游戏的更新时间，提醒 Mod 框架和修改器可能要等适配。">
+  <meta name="keywords" content="Steam补丁,Mod兼容性,坏档避坑,次世代更新回退,SKSE更新,博德之门3补丁,艾尔登法环防封,L-MOD Radar">
+  <meta name="author" content="L-MOD Team">
+  <meta name="theme-color" content="#0a0b0e">
+
+  <!-- Open Graph / WeChat / QQ / Discord -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://lmod-vault.pages.dev/radar.html">
+  <meta property="og:site_name" content="L-MOD Vault Radar">
+  <meta property="og:title" content="Steam 补丁变动与 Mod 兼容性避坑雷达 | L-MOD Vault">
+  <meta property="og:description" content="每天巡检 Steam 上单机游戏的更新时间，提醒 Mod 框架和修改器可能要等适配。">
+  <meta property="og:image" content="https://lmod-vault.pages.dev/avatar.jpg">
+  <meta property="og:image:width" content="600">
+  <meta property="og:image:height" content="600">
+  <meta property="og:image:alt" content="L-MOD Radar Emblem">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Steam 补丁变动与 Mod 兼容性避坑雷达 | L-MOD Vault">
+  <meta name="twitter:description" content="每天巡检 Steam 上单机游戏的更新时间，提醒 Mod 框架和修改器可能要等适配。">
+  <meta name="twitter:image" content="https://lmod-vault.pages.dev/avatar.jpg">
+
+  <!-- Favicon & Touch Icons -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="apple-touch-icon" href="avatar.jpg">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Display"', '"SF Pro Text"', '"PingFang SC"', '"Hiragino Sans GB"', '"Microsoft YaHei"', 'sans-serif'],
+            mono: ['"SF Mono"', '"JetBrains Mono"', 'Menlo', 'Consolas', 'monospace']
+          },
+          colors: {
+            radar: {
+              bg: '#0a0b0e',
+              card: '#12141a',
+              cardHover: '#181b24',
+              border: 'rgba(255, 255, 255, 0.08)',
+              green: '#10b981',
+              amber: '#f59e0b',
+              red: '#ef4444',
+              cyan: '#06b6d4',
+              blue: '#3b82f6'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    :root {
+      --radar-bg: #f8fafc;
+      --radar-surface: #ffffff;
+      --radar-card: #ffffff;
+      --radar-card-hover: #f1f5f9;
+      --radar-border: rgba(0, 0, 0, 0.08);
+      --radar-text: #0f172a;
+      --radar-text-muted: #64748b;
+    }
+
+    html.dark {
+      --radar-bg: #0a0b0e;
+      --radar-surface: #0c0d12;
+      --radar-card: #12141a;
+      --radar-card-hover: #181b24;
+      --radar-border: rgba(255, 255, 255, 0.08);
+      --radar-text: #e2e8f0;
+      --radar-text-muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+    html, body {
+      background-color: var(--radar-bg);
+      color: var(--radar-text);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+    /* WeChat and mobile smooth scrolling */
+    body {
+      -webkit-overflow-scrolling: touch;
+      overflow-x: hidden;
+    }
+    /* Scrollbars */
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.2);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+    /* Ticker animation */
+    @keyframes marquee {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+    .animate-marquee {
+      display: inline-flex;
+      white-space: nowrap;
+      animation: marquee 32s linear infinite;
+    }
+    .animate-marquee:hover {
+      animation-play-state: paused;
+    }
+    /* Custom glow */
+    .glow-green {
+      box-shadow: 0 0 20px -3px rgba(16, 185, 129, 0.25);
+    }
+    .glow-amber {
+      box-shadow: 0 0 20px -3px rgba(245, 158, 11, 0.25);
+    }
+    .glow-red {
+      box-shadow: 0 0 20px -3px rgba(239, 68, 68, 0.35);
+    }
+    /* Backdrop blur fallback */
+    .glass-panel {
+      background: rgba(18, 20, 26, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+    /* Drawer animation */
+    .drawer-backdrop {
+      transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .drawer-content {
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+  </style>
+</head>
+<body class="selection:bg-[#A855F7]/30 selection:text-blue-200">
+
+  <!-- WeChat Legacy Thumbnail Sniffer -->
+  <img src="avatar.jpg" alt="L-MOD Radar" style="position:absolute;left:-9999px;top:-9999px;width:300px;height:300px;opacity:0;pointer-events:none;" />
+
+  <!-- ======================================================== -->
+  <!-- WECHAT SAFE GATEWAY BANNER (微信防拦截 & 浏览器拉起指引) -->
+  <!-- ======================================================== -->
+  <div id="wechat-safe-banner" class="hidden fixed top-0 left-0 right-0 z-[100] transform -translate-y-full transition-transform duration-500 ease-out">
+    <div class="bg-gradient-to-r from-amber-950/95 via-zinc-900/95 to-amber-900/95 backdrop-blur-xl border-b border-amber-500/30 text-amber-100 px-4 py-2.5 shadow-2xl">
+      <div class="max-w-7xl mx-auto flex items-center justify-between gap-3 text-xs sm:text-sm">
+        <div class="flex items-center space-x-2.5 min-w-0">
+          <span class="w-6 h-6 rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-300 flex items-center justify-center shrink-0 animate-pulse text-xs">💡</span>
+          <div class="truncate">
+            <span class="font-bold text-amber-200">【防拦截指引】</span>
+            <span class="opacity-95">为保证避坑雷达与 Mod 正常下载，建议点击右上角</span>
+            <span class="inline-flex items-center px-1.5 py-0.5 rounded bg-amber-500/30 text-amber-100 font-mono font-bold mx-1">···</span>
+            <span class="opacity-95">选择</span>
+            <span class="font-semibold text-white underline decoration-amber-400 decoration-2 underline-offset-2">【在浏览器打开】</span>
+          </div>
+        </div>
+        <div class="flex items-center space-x-2 shrink-0">
+          <div class="hidden sm:flex items-center text-amber-300/80 text-[11px] font-mono">
+            <span>点击右上角</span>
+            <svg class="w-3.5 h-3.5 ml-1 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
+          </div>
+          <button onclick="dismissWeChatBanner()" class="p-1 rounded-full hover:bg-white/10 text-amber-300/80 hover:text-white transition-colors" title="关闭指引">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- 1. TOP EMERGENCY BROADCAST BANNER (顶部紧急广播条)        -->
+  <!-- ======================================================== -->
+  <div class="sticky top-0 z-40 bg-gradient-to-r from-red-950/90 via-zinc-900/95 to-amber-950/90 backdrop-blur-md border-b border-white/10 text-xs py-2 px-4 shadow-lg overflow-hidden">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-3">
+      
+      <!-- Live Indicator Badge -->
+      <div class="flex items-center space-x-2 shrink-0 bg-red-500/20 text-red-300 px-2.5 py-1 rounded-full border border-red-500/30 font-mono font-semibold text-[11px]">
+        <span class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+        </span>
+        <span id="ticker-badge-text">更新提醒</span>
+      </div>
+
+      <!-- Marquee Ticker -->
+      <div class="relative flex-1 overflow-hidden h-5 cursor-pointer" onclick="scrollAlerts()">
+        <div class="animate-marquee items-center space-x-8 text-zinc-300 font-medium tracking-wide" id="ticker-track">
+          <!-- Filled from GAMES_DATA by renderTicker() -->
+          <span class="flex items-center space-x-1.5"><span>每天巡检 Steam 更新，有需要留意的游戏会在这里提醒</span></span>
+        </div>
+      </div>
+
+      <!-- Quick Action: Back to Main Vault -->
+      <a href="/" class="shrink-0 flex items-center space-x-1 text-zinc-400 hover:text-white transition-colors bg-white/5 hover:bg-white/10 px-2.5 py-1 rounded-full text-[11px] border border-white/5">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+        <span id="ticker-back-text">返回 L-MOD 主库</span>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- 2. RADAR HEADER & BRAND SECTION                         -->
+  <!-- ======================================================== -->
+  <header class="relative border-b border-zinc-200/80 dark:border-white/[0.08] bg-white/90 dark:bg-[#0c0d12]/90 backdrop-blur-xl py-8 px-4 sm:px-8 transition-colors">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-6">
+      
+      <!-- Brand & Title -->
+      <div class="space-y-2">
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-blue-500 via-indigo-600 to-emerald-400 p-0.5 shadow-lg shadow-[#A855F7]/20 flex items-center justify-center">
+            <div class="w-full h-full bg-white dark:bg-[#0e1017] rounded-[14px] flex items-center justify-center text-lg shadow-sm">
+              📡
+            </div>
+          </div>
+          <div>
+            <div class="flex items-center space-x-2">
+              <h1 class="text-xl sm:text-2xl font-black tracking-tight text-zinc-900 dark:text-white flex items-center gap-2">
+                <span id="radar-header-title">Steam 补丁变动与 Mod 兼容性避坑雷达</span>
+              </h1>
+              <span class="bg-[#A855F7]/20 text-[#A855F7] text-[10px] font-mono px-2 py-0.5 rounded-full border border-[#A855F7]/30 font-bold uppercase tracking-wider" id="radar-header-version">v4.0 独立看板</span>
+            </div>
+            <p class="text-xs text-zinc-500 dark:text-zinc-400 flex items-center gap-2 pt-0.5">
+              <span id="radar-header-powered">L-MOD Vault 出品</span>
+              <span class="text-zinc-600">·</span>
+              <span class="text-emerald-400 flex items-center gap-1 font-mono">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
+                <span id="radar-header-live">每天巡检一次 Steam 更新</span>
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Actions / Community Gateway -->
+      <div class="flex items-center flex-wrap gap-2.5">
+        <button onclick="copyGroupSecretCode()" class="flex items-center space-x-2 bg-gradient-to-r from-amber-500/20 to-orange-500/20 hover:from-amber-500/30 hover:to-orange-500/30 text-amber-300 border border-amber-500/30 px-3.5 py-2 rounded-xl text-xs font-semibold shadow-sm transition-all cursor-pointer">
+          <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+          <span id="radar-group-code-label">进避坑互助群暗号:</span>
+          <span class="font-mono font-extrabold text-amber-300">【老L单机888】</span>
+        </button>
+
+        <!-- Custom Theme Switcher Button for Radar -->
+        <button 
+          onclick="toggleTheme()" 
+          id="theme-toggle-btn" 
+          title="切换白天 / 夜间模式 (跟随当前设备)"
+          class="flex items-center justify-center w-9 h-9 rounded-xl bg-zinc-100 hover:bg-zinc-200 dark:bg-white/5 dark:hover:bg-white/10 text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-white/10 shadow-sm transition-all cursor-pointer"
+        >
+          <!-- Sun Icon (for Dark mode) -->
+          <svg class="w-4 h-4 hidden dark:block text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+          <!-- Moon Icon (for Light mode) -->
+          <svg class="w-4 h-4 block dark:hidden text-zinc-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+        </button>
+
+        <!-- Custom Language Dropdown for Radar -->
+        <div class="relative" id="custom-lang-dropdown">
+          <button 
+            onclick="toggleLangDropdown(event)" 
+            class="flex items-center space-x-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-white/5 hover:bg-white/10 text-zinc-200 border border-white/10 transition-colors cursor-pointer"
+            id="lang-trigger-btn"
+          >
+            <span id="current-lang-flag">🇨🇳</span>
+            <span id="current-lang-name">简体中文</span>
+            <svg class="w-3.5 h-3.5 text-zinc-400 transition-transform duration-200" id="lang-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </button>
+
+          <div 
+            id="lang-menu" 
+            class="hidden absolute right-0 mt-2 w-48 bg-[#12141a] rounded-2xl shadow-2xl border border-white/10 p-1.5 z-50 text-xs backdrop-blur-xl animate-in fade-in zoom-in-95 duration-100"
+          >
+            <div class="px-3 py-1.5 text-[10px] text-zinc-400 font-bold border-b border-white/5 mb-1" id="lang-menu-title">
+              选择语言 · Select Language
+            </div>
+            <div class="space-y-0.5">
+              <button onclick="selectLanguage('zh-CN', '🇨🇳', '简体中文')" class="lang-option w-full flex items-center justify-between px-3 py-2 rounded-xl text-left hover:bg-white/10 transition-colors text-zinc-200" data-lang="zh-CN">
+                <span class="flex items-center space-x-2"><span>🇨🇳</span><span>简体中文</span></span>
+                <span class="lang-check text-[#A855F7] font-bold">✓</span>
+              </button>
+              <button onclick="selectLanguage('en', '🇺🇸', 'English')" class="lang-option w-full flex items-center justify-between px-3 py-2 rounded-xl text-left hover:bg-white/10 transition-colors text-zinc-200" data-lang="en">
+                <span class="flex items-center space-x-2"><span>🇺🇸</span><span>English</span></span>
+                <span class="lang-check hidden text-[#A855F7] font-bold">✓</span>
+              </button>
+              <button onclick="selectLanguage('zh-TW', '🇭🇰', '繁體中文')" class="lang-option w-full flex items-center justify-between px-3 py-2 rounded-xl text-left hover:bg-white/10 transition-colors text-zinc-200" data-lang="zh-TW">
+                <span class="flex items-center space-x-2"><span>🇭🇰</span><span>繁體中文</span></span>
+                <span class="lang-check hidden text-[#A855F7] font-bold">✓</span>
+              </button>
+              <button onclick="selectLanguage('ja', '🇯🇵', '日本語')" class="lang-option w-full flex items-center justify-between px-3 py-2 rounded-xl text-left hover:bg-white/10 transition-colors text-zinc-200" data-lang="ja">
+                <span class="flex items-center space-x-2"><span>🇯🇵</span><span>日本語</span></span>
+                <span class="lang-check hidden text-[#A855F7] font-bold">✓</span>
+              </button>
+              <button onclick="selectLanguage('ko', '🇰🇷', '한국어')" class="lang-option w-full flex items-center justify-between px-3 py-2 rounded-xl text-left hover:bg-white/10 transition-colors text-zinc-200" data-lang="ko">
+                <span class="flex items-center space-x-2"><span>🇰🇷</span><span>한국어</span></span>
+                <span class="lang-check hidden text-[#A855F7] font-bold">✓</span>
+              </button>
+              <button onclick="selectLanguage('ru', '🇷🇺', 'Русский')" class="lang-option w-full flex items-center justify-between px-3 py-2 rounded-xl text-left hover:bg-white/10 transition-colors text-zinc-200" data-lang="ru">
+                <span class="flex items-center space-x-2"><span>🇷🇺</span><span>Русский</span></span>
+                <span class="lang-check hidden text-[#A855F7] font-bold">✓</span>
+              </button>
+              <button onclick="selectLanguage('de', '🇩🇪', 'Deutsch')" class="lang-option w-full flex items-center justify-between px-3 py-2 rounded-xl text-left hover:bg-white/10 transition-colors text-zinc-200" data-lang="de">
+                <span class="flex items-center space-x-2"><span>🇩🇪</span><span>Deutsch</span></span>
+                <span class="lang-check hidden text-[#A855F7] font-bold">✓</span>
+              </button>
+              <button onclick="selectLanguage('es', '🇪🇸', 'Español')" class="lang-option w-full flex items-center justify-between px-3 py-2 rounded-xl text-left hover:bg-white/10 transition-colors text-zinc-200" data-lang="es">
+                <span class="flex items-center space-x-2"><span>🇪🇸</span><span>Español</span></span>
+                <span class="lang-check hidden text-[#A855F7] font-bold">✓</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- L-MOD AI COPILOT BADGE -->
+        <button 
+          id="radar-ai-btn"
+          type="button"
+          onclick="window.LMOD_AI_COPILOT && window.LMOD_AI_COPILOT.openDrawer()"
+          title="老L · AI 游戏智库顾问 (快捷键: Cmd+K / Ctrl+K)"
+          class="flex items-center space-x-1.5 bg-gradient-to-r from-purple-500/15 via-violet-500/15 to-pink-500/15 hover:from-purple-500/25 hover:to-pink-500/25 text-purple-700 dark:text-purple-300 px-3.5 py-2 rounded-xl text-xs font-bold border border-purple-500/30 dark:border-purple-400/30 shadow-sm transition-all cursor-pointer"
+        >
+          <span class="text-sm">🤖</span>
+          <span class="tracking-tight" id="radar-ai-btn-text">AI 顾问</span>
+          <span class="hidden sm:inline text-[9px] font-mono px-1 py-0.5 rounded bg-purple-500/20 text-purple-300">⌘K</span>
+        </button>
+
+        <a href="/" class="flex items-center space-x-2 bg-white/5 hover:bg-white/10 text-zinc-200 border border-white/10 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all">
+          <svg class="w-4 h-4 text-[#A855F7]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+          <span id="radar-return-btn-text">返回 L-MOD 主库</span>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ======================================================== -->
+  <!-- 3. THREE-COLOR RADAR METRIC CARDS (状态三色指示灯系统)   -->
+  <!-- ======================================================== -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-8 pt-6 pb-4">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3.5">
+      
+      <!-- Card 1: Green Compatible -->
+      <div onclick="filterByStatus('green')" class="cursor-pointer group relative overflow-hidden bg-white dark:bg-[#12141a] hover:bg-slate-50 dark:hover:bg-[#161922] p-4 rounded-2xl border border-emerald-500/30 dark:border-emerald-500/20 hover:border-emerald-500/50 transition-all shadow-sm glow-green">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs font-medium text-emerald-400 flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span id="metric-green-title">近期平稳</span>
+          </span>
+          <span class="text-[10px] bg-emerald-500/10 text-emerald-300 px-2 py-0.5 rounded font-mono" id="metric-green-tag">无提醒</span>
+        </div>
+        <div class="flex items-baseline space-x-2">
+          <span class="text-2xl sm:text-3xl font-black font-mono text-emerald-400" id="stat-green">—</span>
+          <span class="text-xs text-zinc-400" id="metric-green-unit">款游戏</span>
+        </div>
+        <p class="text-[11px] text-zinc-400 mt-1 line-clamp-1" id="metric-green-desc">近 14 天没有新版本，修改器也没落后于近 90 天的更新</p>
+      </div>
+
+      <!-- Card 2: Amber Need Update -->
+      <div onclick="filterByStatus('yellow')" class="cursor-pointer group relative overflow-hidden bg-white dark:bg-[#12141a] hover:bg-slate-50 dark:hover:bg-[#161922] p-4 rounded-2xl border border-amber-500/30 dark:border-amber-500/20 hover:border-amber-500/50 transition-all shadow-sm glow-amber">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs font-medium text-amber-400 flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+            <span id="metric-yellow-title">留意更新</span>
+          </span>
+          <span class="text-[10px] bg-amber-500/10 text-amber-300 px-2 py-0.5 rounded font-mono" id="metric-yellow-tag">可能要等适配</span>
+        </div>
+        <div class="flex items-baseline space-x-2">
+          <span class="text-2xl sm:text-3xl font-black font-mono text-amber-400" id="stat-yellow">—</span>
+          <span class="text-xs text-zinc-400" id="metric-yellow-unit">款游戏</span>
+        </div>
+        <p class="text-[11px] text-zinc-400 mt-1 line-clamp-1" id="metric-yellow-desc">14 天内刚更新，或近 90 天的更新后修改器还没跟上</p>
+      </div>
+
+      <!-- Card 3: Red · framework hooks the exe, hold the update -->
+      <div onclick="filterByStatus('red')" class="cursor-pointer group relative overflow-hidden bg-white dark:bg-[#12141a] hover:bg-slate-50 dark:hover:bg-[#161922] p-4 rounded-2xl border border-red-500/30 dark:border-red-500/20 hover:border-red-500/50 transition-all shadow-sm glow-red">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs font-medium text-red-400 flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+            <span id="metric-red-title">先别更新</span>
+          </span>
+          <span class="text-[10px] bg-red-500/10 text-red-300 px-2 py-0.5 rounded font-mono" id="metric-red-tag">框架可能要等适配</span>
+        </div>
+        <div class="flex items-baseline space-x-2">
+          <span class="text-2xl sm:text-3xl font-black font-mono text-red-400" id="stat-red">—</span>
+          <span class="text-xs text-zinc-400" id="metric-red-unit">款游戏</span>
+        </div>
+        <p class="text-[11px] text-zinc-400 mt-1 line-clamp-1" id="metric-red-desc">刚更新，常用 Mod 框架按 exe 版本挂钩，可能要等作者发新版</p>
+      </div>
+
+      <!-- Card 4: Radar Status / Inspection Info -->
+      <div class="relative overflow-hidden bg-white dark:bg-[#12141a] p-4 rounded-2xl border border-zinc-200/80 dark:border-white/5 shadow-sm">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs font-medium text-cyan-400 flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
+            <span id="metric-inspection-title">巡检范围</span>
+          </span>
+          <span class="text-[10px] bg-cyan-500/10 text-cyan-300 px-2 py-0.5 rounded font-mono" id="metric-inspection-tag">每天</span>
+        </div>
+        <div class="flex items-baseline space-x-2">
+          <span class="text-2xl sm:text-3xl font-black font-mono text-cyan-400" id="stat-tracked">—</span>
+          <span class="text-xs text-zinc-400" id="metric-inspection-unit">款已巡检</span>
+        </div>
+        <p class="text-[11px] text-zinc-400 mt-1 line-clamp-1" id="metric-inspection-desc">每天比对 Steam 公共分支的更新时间</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- 4. SEARCH & MULTI-DIMENSIONAL FILTER CONTROLS           -->
+  <!-- ======================================================== -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-8 py-4">
+    <div class="bg-white dark:bg-[#12141a] rounded-2xl p-4 sm:p-5 border border-zinc-200/80 dark:border-white/[0.08] space-y-4 shadow-sm dark:shadow-xl">
+      
+      <!-- Top Row: Search Input + Quick Reset -->
+      <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+        <div class="relative flex-1">
+          <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-zinc-400">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+          </div>
+          <input 
+            type="text" 
+            id="radar-search" 
+            oninput="handleSearch(this.value)"
+            placeholder="搜索游戏名称、中文别名、Steam AppID (如 1245620)、底层引擎..."
+            class="w-full bg-slate-50 dark:bg-[#0a0b0e] text-zinc-900 dark:text-white text-xs sm:text-sm pl-10 pr-10 py-2.5 rounded-xl border border-zinc-200 dark:border-white/10 focus:border-[#A855F7] focus:outline-none focus:ring-1 focus:ring-[#A855F7] placeholder-zinc-400 dark:placeholder-zinc-500 transition-all"
+          />
+          <button 
+            id="clear-search-btn" 
+            onclick="clearSearch()" 
+            class="hidden absolute inset-y-0 right-0 pr-3 flex items-center text-zinc-400 hover:text-white"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+          </button>
+        </div>
+
+        <!-- Sort Select -->
+        <div class="flex items-center space-x-2 shrink-0">
+          <span class="text-xs text-zinc-400 whitespace-nowrap hidden sm:inline" id="radar-sort-label">排序方式:</span>
+          <select 
+            id="sort-select" 
+            onchange="handleSort(this.value)"
+            class="bg-slate-50 dark:bg-[#0a0b0e] text-zinc-900 dark:text-white text-xs py-2.5 px-3 rounded-xl border border-zinc-200 dark:border-white/10 focus:border-[#A855F7] focus:outline-none cursor-pointer"
+          >
+            <option value="risk-desc" id="opt-risk-desc">⚠️ 风险优先 (红 / 黄置顶)</option>
+            <option value="rank-asc" id="opt-rank-asc">👑 游戏排名 (Rank 1 ~ 100)</option>
+            <option value="compatible-first" id="opt-compat-first">🟢 平稳优先</option>
+            <option value="name-asc" id="opt-name-asc">🔤 游戏名称 (A-Z)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Filter Row: Status Pills & Engine Pills -->
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 pt-1 border-t border-white/5">
+        
+        <!-- Status Filter Pills -->
+        <div class="flex items-center flex-wrap gap-1.5" id="status-pills">
+          <span class="text-xs text-zinc-400 mr-1 font-medium" id="radar-filter-status-label">雷达状态:</span>
+          <button onclick="setStatusFilter('all')" class="status-pill active px-3 py-1 rounded-full text-xs font-medium bg-[#A855F7] text-white transition-all cursor-pointer" data-status="all" id="pill-status-all">全部</button>
+          <button onclick="setStatusFilter('green')" class="status-pill px-3 py-1 rounded-full text-xs font-medium bg-white/5 text-emerald-400 hover:bg-emerald-500/10 border border-emerald-500/20 transition-all cursor-pointer" data-status="green" id="pill-status-green">🟢 近期平稳</button>
+          <button onclick="setStatusFilter('yellow')" class="status-pill px-3 py-1 rounded-full text-xs font-medium bg-white/5 text-amber-400 hover:bg-amber-500/10 border border-amber-500/20 transition-all cursor-pointer" data-status="yellow" id="pill-status-yellow">🟡 留意更新</button>
+          <button onclick="setStatusFilter('red')" class="status-pill px-3 py-1 rounded-full text-xs font-medium bg-white/5 text-red-400 hover:bg-red-500/10 border border-red-500/20 transition-all cursor-pointer" data-status="red" id="pill-status-red">🔴 先别更新</button>
+          <button onclick="setStatusFilter('unchecked')" class="status-pill px-3 py-1 rounded-full text-xs font-medium bg-white/5 text-zinc-400 hover:bg-zinc-500/10 border border-zinc-500/20 transition-all cursor-pointer" data-status="unchecked" id="pill-status-unchecked">⚪ 未巡检</button>
+        </div>
+
+        <!-- Flagship & Engine Tags -->
+        <div class="flex items-center flex-wrap gap-1.5" id="engine-pills">
+          <span class="text-xs text-zinc-400 mr-1 font-medium" id="radar-filter-engine-label">专区/引擎:</span>
+          <button onclick="setEngineFilter('all')" class="engine-pill active px-2.5 py-1 rounded-full text-xs bg-white/10 text-white cursor-pointer" data-engine="all" id="pill-engine-all">全部</button>
+          <button onclick="setEngineFilter('flagship')" class="engine-pill px-2.5 py-1 rounded-full text-xs bg-white/5 text-purple-300 hover:bg-purple-500/20 border border-purple-500/30 cursor-pointer" data-engine="flagship" id="pill-engine-flagship">👑 Top 7 旗舰深度</button>
+          <button onclick="setEngineFilter('REDengine')" class="engine-pill px-2.5 py-1 rounded-full text-xs bg-white/5 text-zinc-300 hover:bg-white/10 cursor-pointer" data-engine="REDengine">REDengine</button>
+          <button onclick="setEngineFilter('Unreal')" class="engine-pill px-2.5 py-1 rounded-full text-xs bg-white/5 text-zinc-300 hover:bg-white/10 cursor-pointer" data-engine="Unreal" id="pill-engine-unreal">虚幻引擎</button>
+          <button onclick="setEngineFilter('Creation')" class="engine-pill px-2.5 py-1 rounded-full text-xs bg-white/5 text-zinc-300 hover:bg-white/10 cursor-pointer" data-engine="Creation" id="pill-engine-creation">B社引擎</button>
+          <button onclick="setEngineFilter('FromSoft')" class="engine-pill px-2.5 py-1 rounded-full text-xs bg-white/5 text-zinc-300 hover:bg-white/10 cursor-pointer" data-engine="FromSoft" id="pill-engine-fromsoft">魂系引擎</button>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- 5. RADAR CARDS GRID CONTAINER                            -->
+  <!-- ======================================================== -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-8 py-4 mb-20">
+    
+    <!-- Filter Result Count / Alert Bar -->
+    <div class="flex items-center justify-between mb-4 text-xs text-zinc-400">
+      <div>
+        <span><span id="radar-count-matched">共匹配到</span> <strong class="text-white font-mono" id="results-count">0</strong> <span id="radar-count-unit">款游戏</span></span>
+        <span id="active-filter-desc" class="ml-2 text-zinc-500"></span>
+      </div>
+      <div class="flex items-center space-x-2 text-[11px]">
+        <span class="inline-block w-2 h-2 rounded-full bg-emerald-500"></span><span id="legend-text-compat">平稳</span>
+        <span class="inline-block w-2 h-2 rounded-full bg-amber-500 ml-2"></span><span id="legend-text-warn">留意</span>
+        <span class="inline-block w-2 h-2 rounded-full bg-red-500 ml-2"></span><span id="legend-text-broken">先别更新</span>
+        <span class="inline-block w-2 h-2 rounded-full bg-zinc-400 ml-2"></span><span id="legend-text-unchecked">未巡检</span>
+      </div>
+    </div>
+
+    <!-- Cards Grid -->
+    <div id="radar-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+      <!-- Injected by JavaScript -->
+    </div>
+
+    <!-- Empty State -->
+    <div id="radar-empty" class="hidden text-center py-16 space-y-4">
+      <div class="w-16 h-16 mx-auto rounded-full bg-white/5 flex items-center justify-center text-3xl text-zinc-500">
+        🔍
+      </div>
+      <h3 class="text-base font-bold text-zinc-300" id="radar-empty-title">未找到符合条件的游戏</h3>
+      <p class="text-xs text-zinc-500 max-w-sm mx-auto" id="radar-empty-desc">请尝试更换搜索关键字，或重置状态与引擎筛选条件。</p>
+      <button onclick="resetAllFilters()" id="radar-empty-reset-btn" class="px-4 py-2 rounded-xl bg-[#A855F7] hover:bg-[#A855F7] text-white text-xs font-semibold">
+        重置全部筛选
+      </button>
+    </div>
+
+  </main>
+
+  <!-- ======================================================== -->
+  <!-- 6. EXPANDABLE EMERGENCY RESCUE DRAWER / MODAL           -->
+  <!-- ======================================================== -->
+  <div id="drawer-container" class="fixed inset-0 z-50 pointer-events-none transition-all duration-300">
+    
+    <!-- Semi-transparent Backdrop -->
+    <div 
+      id="drawer-backdrop" 
+      onclick="closeGameDrawer()" 
+      class="drawer-backdrop absolute inset-0 bg-black/75 backdrop-blur-sm opacity-0 transition-opacity"
+    ></div>
+
+    <!-- Drawer Panel (Mobile Bottom Sheet / Desktop Right Drawer) -->
+    <div 
+      id="drawer-panel"
+      class="drawer-content absolute inset-x-0 bottom-0 md:inset-y-0 md:left-auto md:right-0 md:w-[620px] max-h-[92vh] md:max-h-full bg-white dark:bg-[#101218] border-t md:border-t-0 md:border-l border-zinc-200 dark:border-white/10 rounded-t-[28px] md:rounded-t-none md:rounded-l-[28px] shadow-2xl flex flex-col overflow-hidden translate-y-full md:translate-y-0 md:translate-x-full transition-transform pointer-events-auto"
+    >
+      <!-- Mobile Pull Bar Indicator -->
+      <div class="md:hidden pt-3 pb-1 flex justify-center cursor-pointer" onclick="closeGameDrawer()">
+        <div class="w-10 h-1.5 bg-zinc-600 rounded-full"></div>
+      </div>
+
+      <!-- Drawer Header -->
+      <div class="px-6 py-4 border-b border-white/[0.08] flex items-center justify-between shrink-0 bg-[#14161f]">
+        <div class="flex items-center space-x-3">
+          <span id="drawer-status-pill" class="text-xs px-2.5 py-1 rounded-full font-bold font-mono"></span>
+          <div class="text-xs font-mono text-zinc-400">
+            <span>AppID: </span><span id="drawer-appid" class="text-white font-bold"></span>
+          </div>
+        </div>
+        <button 
+          onclick="closeGameDrawer()" 
+          class="w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 text-zinc-400 hover:text-white flex items-center justify-center transition-colors cursor-pointer"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
+
+      <!-- Drawer Scrollable Body -->
+      <div class="flex-1 overflow-y-auto p-6 space-y-6" id="drawer-body">
+        
+        <!-- Game Title Banner -->
+        <div class="space-y-1">
+          <div class="flex items-center space-x-2">
+            <span class="bg-[#A855F7]/20 text-[#A855F7] text-[10px] font-mono px-2 py-0.5 rounded font-bold" id="drawer-rank"></span>
+            <span class="text-xs text-zinc-400" id="drawer-engine"></span>
+          </div>
+          <h2 class="text-xl sm:text-2xl font-black text-zinc-900 dark:text-white" id="drawer-title"></h2>
+          <p class="text-xs text-zinc-400" id="drawer-entitle"></p>
+        </div>
+
+        <!-- Section 1: Radar check result (reason, Steam build time, last check, framework, news) -->
+        <div class="bg-[#181a24] rounded-2xl p-4 sm:p-5 border border-white/5 space-y-3">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-xs font-bold text-zinc-300 uppercase tracking-wider flex items-center gap-1.5">
+              <span id="drawer-patch-check-title">🔍 巡检结果</span>
+            </span>
+            <span class="hidden text-[11px] font-mono text-zinc-400 bg-white/5 px-2 py-0.5 rounded border border-white/10" id="drawer-patch"></span>
+          </div>
+          <p class="text-sm font-bold" id="drawer-reason"></p>
+          <p class="text-xs text-zinc-300 leading-relaxed" id="drawer-summary"></p>
+
+          <!-- Radar facts -->
+          <dl class="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1.5 text-xs bg-black/20 rounded-xl p-3 border border-white/5" id="drawer-facts"></dl>
+
+          <!-- Risk Box -->
+          <div id="drawer-risk-box" class="p-3.5 rounded-xl border space-y-1">
+            <div class="flex items-center gap-1.5 text-xs font-bold" id="drawer-risk-title"></div>
+            <p class="text-xs leading-relaxed" id="drawer-risk-desc"></p>
+          </div>
+
+          <p class="text-[11px] text-zinc-500 leading-relaxed" id="drawer-rule-note">判定规则：Steam 公共分支 14 天内有新版本亮黄；常用 Mod 框架按 exe 版本挂钩的亮红（Steam 的更新时间分不出改没改 exe，所以只说「可能」）；近 90 天内有更新、而修改器比它早的也亮黄。公告只展示，不参与判定。</p>
+        </div>
+
+        <!-- Section 2: Exclusive Rescue / Downgrade Plan -->
+        <div class="bg-[#181a24] rounded-2xl p-4 sm:p-5 border border-white/5 space-y-4">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-amber-400 uppercase tracking-wider flex items-center gap-1.5">
+              <span id="drawer-rescue-title">🛠️ 老L救砖 / 降级 / 避坑方案</span>
+            </span>
+            <span class="text-[11px] text-zinc-400" id="drawer-rescue-sub">通用建议，操作前先备份存档</span>
+          </div>
+
+          <div class="space-y-2 text-xs text-zinc-700 dark:text-zinc-300 leading-relaxed" id="drawer-rescue-steps">
+            <!-- Injected -->
+          </div>
+
+          <!-- Code Box for Bat script preview -->
+          <div class="space-y-2">
+            <div class="flex items-center justify-between text-[11px] text-zinc-400">
+              <span class="font-mono" id="drawer-bat-title">控制台脚本 (.bat) / 常用指令:</span>
+              <button onclick="copyDrawerBat()" id="drawer-btn-copy-bat" class="text-[#A855F7] hover:text-purple-300 font-semibold cursor-pointer">一键复制代码</button>
+            </div>
+            <div class="bg-[#0b0c10] rounded-xl p-3.5 border border-white/10 font-mono text-xs text-emerald-400 overflow-x-auto relative">
+              <pre class="whitespace-pre" id="drawer-code-pre"></pre>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 2.5: 5-Card High-Definition Matrix Preview (1080x1440 HD) -->
+        <div id="drawer-cards-section" class="bg-[#181a24] rounded-2xl p-4 sm:p-5 border border-purple-500/30 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-purple-300 uppercase tracking-wider flex items-center gap-1.5">
+              <span id="drawer-matrix-title">🎨 官方 5 联 1080×1440 高清避坑卡片 (实装)</span>
+            </span>
+            <span class="text-[10px] bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded font-mono font-bold" id="drawer-matrix-tag">社交媒体矩阵</span>
+          </div>
+          <p class="text-[11px] text-zinc-400" id="drawer-matrix-desc">已就绪首发 5 联高清卡片，点击任意卡片查看大图：</p>
+          <div id="drawer-cards-scroll" class="flex space-x-3 overflow-x-auto pb-2 no-scrollbar">
+            <!-- Injected by openGameDrawer() -->
+          </div>
+        </div>
+
+        <!-- Section 3: Community Secret Code Conversion Card -->
+        <div class="relative overflow-hidden bg-gradient-to-br from-zinc-900 via-zinc-900 to-black rounded-2xl p-5 border border-amber-500/30 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-amber-400 flex items-center gap-1.5">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+              <span id="drawer-secret-card-title">【老L·单机避坑局】玩家互助群</span>
+            </span>
+            <span class="text-[10px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-full font-mono" id="drawer-secret-card-tag">公益·零广告</span>
+          </div>
+          <p class="text-xs text-zinc-300 leading-relaxed" id="drawer-secret-card-desc">
+            游戏更新后 Mod 用不了或存档出问题？保存避坑暗号，在公众号后台或私信发送，可以进互助群和其他玩家交流处理办法。
+          </p>
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-black/50 p-3 rounded-xl border border-white/5">
+            <div class="flex items-center space-x-2">
+              <span class="text-xs text-zinc-400" id="drawer-secret-card-label">进群暗号:</span>
+              <span class="text-sm font-mono font-black text-amber-400" id="drawer-secret-code">【老L单机888】</span>
+            </div>
+            <button onclick="copyCurrentSecretCode()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-zinc-950 font-bold text-xs transition-all shadow-md flex items-center justify-center gap-1 cursor-pointer">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+              <span id="drawer-btn-copy-code-text">复制暗号</span>
+            </button>
+          </div>
+          <div class="text-[11px] text-zinc-500 flex items-center justify-between pt-1">
+            <span id="drawer-secret-tip-1">💡 进群发送暗号：交流 Mod 更新进度与坏档处理经验</span>
+            <span id="drawer-secret-tip-2">群文件不放 exe</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Drawer Footer Actions -->
+      <div class="px-6 py-4 border-t border-white/[0.08] bg-[#14161f] flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 shrink-0">
+        <a 
+          id="drawer-main-vault-link"
+          href="#"
+          class="flex-1 px-4 py-2.5 rounded-xl bg-[#A855F7] hover:bg-[#A855F7] text-white font-bold text-xs text-center transition-all flex items-center justify-center gap-2 shadow-lg shadow-[#A855F7]/20"
+        >
+          <span id="drawer-cta-main-text">🎮 进入 L-MOD 主库查看完整代码与场景套餐</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- 7. GLOBAL TOAST NOTIFICATION                             -->
+  <!-- ======================================================== -->
+  <div id="toast" class="fixed top-20 left-1/2 -translate-x-1/2 z-50 transform -translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+    <div class="bg-zinc-900/95 text-white text-xs font-semibold px-4 py-2.5 rounded-full shadow-2xl border border-white/20 flex items-center space-x-2 backdrop-blur-md">
+      <span class="text-emerald-400">✓</span>
+      <span id="toast-text">已复制！</span>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- 8. DATA SCRIPT INCLUSION & RADAR APP LOGIC              -->
+  <!-- ======================================================== -->
+  <script src="data.js?v=20261124b"></script>
+  <!-- Live game data from D1 (/api/v1/catalog); the data.js snapshot above renders first -->
+  <script src="js/catalog-live.js?v=20261123"></script>
+  <!-- L-MOD Vault Modern API & Telemetry Client -->
+  <script src="js/vault-client.js"></script>
+  <!-- L-MOD AI Copilot -->
+  <script src="ai_copilot.js?v=20261124"></script>
+  <!-- L-MOD Stealth Admin Gateway (Ctrl+Shift+L / 5-Clicks) -->
+  <script src="js/admin-stealth.js"></script>
+  <script>
+    // ========================================================
+    // RADAR GUIDES (engine label + how-to steps + helper .bat)
+    // Status / reason / dates come only from GAMES_DATA radar fields
+    // written by scripts/steam_patch_monitor.py — never from here.
+    // ========================================================
+    const RADAR_GUIDES = {
+      "cyberpunk-2077": {
+        engine: "REDengine 4",
+        rescueSteps: [
+          "1. 游戏更新后先确认 Cyber Engine Tweaks (CET) 已出支持当前游戏版本的构建（以 CET 发布页为准）。",
+          "2. 将框架解压至 bin/x64/ 目录，进入游戏按 ~ 键呼出（注意关闭 CapsLock 并切英文输入法）。",
+          "3. 2.0 起专精树已重构，别用网上旧版的 SetLevel 代码；剧情 Fact 修改后先 F5 存档再 F9 读档。"
+        ],
+        batPreview: `@echo off
+chcp 65001 >nul
+title 【老L·单机避坑局】赛博朋克2077 控制台环境检查
+echo [*] 正在核验 Cyberpunk 2077 游戏根目录...
+if not exist "bin\\x64\\Cyberpunk2077.exe" (
+    echo [!] 错误: 请将本脚本放在赛博朋克2077安装根目录下运行！
+    pause
+    exit /b
+)
+echo [√] 已找到游戏主程序。
+echo [i] 常用呼出热键: ~ (波浪键)
+echo [i] 专精指令请认准: Game.SetProficiencyLevel(...)
+pause`,
+        en: {
+          rescueSteps: [
+            "1. After a game update, check that Cyber Engine Tweaks (CET) has a build for the current game version (see the CET release page).",
+            "2. Extract the framework into bin/x64/, then press ~ in game to open it (turn off Caps Lock and switch to an English keyboard layout).",
+            "3. Perk trees were reworked in 2.0, so skip old SetLevel commands from the web; after editing quest facts, quicksave with F5 and reload with F9."
+          ],
+          batPreview: `@echo off
+chcp 65001 >nul
+title [L-MOD Vault] Cyberpunk 2077 console check
+echo [*] Checking the Cyberpunk 2077 install folder...
+if not exist "bin\\x64\\Cyberpunk2077.exe" (
+    echo [!] Run this script from the Cyberpunk 2077 install folder.
+    pause
+    exit /b
+)
+echo [√] Game executable found.
+echo [i] Console hotkey: ~ (tilde)
+echo [i] Proficiency command: Game.SetProficiencyLevel(...)
+pause`
+        }
+      },
+      "black-myth-wukong": {
+        engine: "Unreal Engine 5 (UE5)",
+        engineZh: "虚幻引擎 5 (UE5)",
+        rescueSteps: [
+          "1. 从 UE4SS 的 GitHub 发布页下载，别用来路不明的打包版。",
+          "2. 在 UE4SS 的 mods.txt 里把 ConsoleEnablerMod 设为 1，开启控制台。",
+          "3. 游戏中按 ~ 呼出，输入 slomo 0.4 可开启慢动作。"
+        ],
+        batPreview: `@echo off
+chcp 65001 >nul
+title 【老L·单机避坑局】黑神话悟空 控制台环境检查
+echo [*] 正在检查 b1\\Binaries\\Win64 目录...
+if not exist "b1\\Binaries\\Win64\\b1-Win64-Shipping.exe" (
+    echo [!] 请将本脚本置于黑神话悟空安装根目录下！
+    pause
+    exit /b
+)
+echo [√] 已找到游戏主程序。
+echo [i] 装好 UE4SS 并开启 ConsoleEnablerMod 后，进游戏按 ~ 输入指令。
+pause`,
+        en: {
+          rescueSteps: [
+            "1. Download UE4SS from its GitHub releases page, not from repacks of unknown origin.",
+            "2. In UE4SS's mods.txt, set ConsoleEnablerMod to 1 to enable the console.",
+            "3. Press ~ in game; slomo 0.4 turns on slow motion."
+          ],
+          batPreview: `@echo off
+chcp 65001 >nul
+title [L-MOD Vault] Black Myth: Wukong console check
+echo [*] Checking b1\\Binaries\\Win64...
+if not exist "b1\\Binaries\\Win64\\b1-Win64-Shipping.exe" (
+    echo [!] Put this script in the Black Myth: Wukong install folder.
+    pause
+    exit /b
+)
+echo [√] Game executable found.
+echo [i] With UE4SS installed and ConsoleEnablerMod enabled, press ~ in game to type commands.
+pause`
+        }
+      },
+      "witcher-3": {
+        engine: "REDengine 3",
+        rescueSteps: [
+          "1. 进入 bin/config/base/ 目录，使用记事本打开 general.ini。",
+          "2. 在 [General] 段落末尾另起一行，写入 DBGConsoleOn=true 并保存。",
+          "3. 进游戏按 ~ 键呼出；石之心通关后输入 additem('Iris\\'s Rose') 可永远保留爱丽丝玫瑰。"
+        ],
+        batPreview: `@echo off
+chcp 65001 >nul
+title 【老L·单机避坑局】巫师3次世代版 原生控制台一键激活
+set "INI_FILE=bin\\config\\base\\general.ini"
+if not exist "%INI_FILE%" (
+    echo [!] 未找到 %INI_FILE%，请确认脚本位于巫师3根目录下！
+    pause
+    exit /b
+)
+findstr /i "DBGConsoleOn=true" "%INI_FILE%" >nul
+if %errorlevel% equ 0 (
+    echo [√] general.ini 已成功开启 DBGConsoleOn=true！
+) else (
+    echo DBGConsoleOn=true >> "%INI_FILE%"
+    echo [√] 成功写入 DBGConsoleOn=true！
+)
+echo [*] 进游戏按 ~ 键即可使用控制台。
+pause`,
+        en: {
+          rescueSteps: [
+            "1. Open bin/config/base/general.ini in Notepad.",
+            "2. Add a new line DBGConsoleOn=true at the end of the [General] section and save.",
+            "3. Press ~ in game; after finishing Hearts of Stone, additem('Iris\\'s Rose') keeps Iris's rose for good."
+          ],
+          batPreview: `@echo off
+chcp 65001 >nul
+title [L-MOD Vault] The Witcher 3 Next-Gen: enable the native console
+set "INI_FILE=bin\\config\\base\\general.ini"
+if not exist "%INI_FILE%" (
+    echo [!] %INI_FILE% not found. Run this script from The Witcher 3 install folder.
+    pause
+    exit /b
+)
+findstr /i "DBGConsoleOn=true" "%INI_FILE%" >nul
+if %errorlevel% equ 0 (
+    echo [√] general.ini already has DBGConsoleOn=true.
+) else (
+    echo DBGConsoleOn=true >> "%INI_FILE%"
+    echo [√] Added DBGConsoleOn=true.
+)
+echo [*] Press ~ in game to use the console.
+pause`
+        }
+      },
+      "baldurs-gate-3": {
+        engine: "Divinity 4.0",
+        rescueSteps: [
+          "1. 游戏更新后先确认 BG3 Script Extender 已出支持当前游戏版本的构建（以 Norbyte 的发布页为准）。",
+          "2. Patch 7 起官方接管了加载顺序，老版 ModFixer 要从 Mods 目录彻底删掉。",
+          "3. 在 Script Extender 配置里开启控制台后，启动游戏会弹出调试窗口，可在里面输入 Osi 指令。"
+        ],
+        batPreview: `@echo off
+chcp 65001 >nul
+title 【老L·单机避坑局】博德之门3 环境检查
+echo [*] 正在检查 Baldur's Gate 3 / bin 目录...
+if not exist "bin\\bg3.exe" (
+    echo [!] 请将脚本放在博德之门3游戏根目录运行！
+    pause
+    exit /b
+)
+echo [√] 已找到游戏主程序。
+echo [i] 请确认 Script Extender 已更新到当前游戏版本，并删除旧版 ModFixer。
+pause`,
+        en: {
+          rescueSteps: [
+            "1. After a game update, check that BG3 Script Extender has a build for the current game version (see Norbyte's release page).",
+            "2. Since Patch 7 the game manages load order itself; delete old ModFixer from the Mods folder completely.",
+            "3. With the console enabled in the Script Extender config, a debug window opens when the game starts; type Osi commands there."
+          ],
+          batPreview: `@echo off
+chcp 65001 >nul
+title [L-MOD Vault] Baldur's Gate 3 check
+echo [*] Checking the Baldur's Gate 3 bin folder...
+if not exist "bin\\bg3.exe" (
+    echo [!] Run this script from the Baldur's Gate 3 install folder.
+    pause
+    exit /b
+)
+echo [√] Game executable found.
+echo [i] Make sure Script Extender matches the current game version, and remove old ModFixer.
+pause`
+        }
+      },
+      "elden-ring": {
+        engine: "FromSoftware proprietary engine",
+        engineZh: "FromSoftware 专有引擎",
+        rescueSteps: [
+          "1. ModEngine2 只用于离线单机：把 Mod 放进它的 mod 目录，用它自带的启动脚本启动。",
+          "2. 游戏有 EAC 反作弊，带 Mod 或修改器时不要联机，否则可能被封号。",
+          "3. 想联机就先移除全部 Mod，用原版启动。"
+        ],
+        batPreview: `@echo off
+chcp 65001 >nul
+title 【老L·单机避坑局】艾尔登法环 Mod 环境检查
+if not exist "Game\\eldenring.exe" (
+    echo [!] 请将脚本放在 ELDEN RING 根目录下运行！
+    pause
+    exit /b
+)
+echo [√] 已找到游戏主程序。
+echo [i] 带 Mod 只在离线模式玩，联机前先移除 Mod。
+pause`,
+        en: {
+          rescueSteps: [
+            "1. Use ModEngine2 for offline play only: put mods in its mod folder and start the game with its own launch script.",
+            "2. The game uses EAC anti-cheat. Don't play online with mods or trainers, or you may be banned.",
+            "3. To play online, remove all mods and launch the unmodded game."
+          ],
+          batPreview: `@echo off
+chcp 65001 >nul
+title [L-MOD Vault] Elden Ring mod check
+if not exist "Game\\eldenring.exe" (
+    echo [!] Run this script from the ELDEN RING install folder.
+    pause
+    exit /b
+)
+echo [√] Game executable found.
+echo [i] Play offline with mods; remove them before going online.
+pause`
+        }
+      },
+      "skyrim-se": {
+        engine: "Creation Engine 1",
+        rescueSteps: [
+          "1. 游戏更新后先确认 SKSE64 和 Address Library 已出对应当前游戏版本的构建（以 SKSE 官网为准）。",
+          "2. 打开 Documents/My Games/Skyrim Special Edition/Skyrim.ini 确认 bAllowConsole=1。",
+          "3. 任务卡住别用 caqs，用 setstage <QuestID> <Stage> 定向推进；FormID 前导零可省略。"
+        ],
+        batPreview: `@echo off
+chcp 65001 >nul
+title 【老L·单机避坑局】上古卷轴5 环境检查
+if not exist "SkyrimSE.exe" (
+    echo [!] 请置于 Skyrim Special Edition 根目录下运行！
+    pause
+    exit /b
+)
+echo [√] 已找到游戏主程序。
+echo [i] 请确认 SKSE64 与 Address Library 对应当前游戏版本。
+pause`,
+        en: {
+          rescueSteps: [
+            "1. After a game update, check that SKSE64 and Address Library have builds for the current game version (see the SKSE site).",
+            "2. Open Documents/My Games/Skyrim Special Edition/Skyrim.ini and make sure bAllowConsole=1.",
+            "3. If a quest is stuck, don't use caqs; advance it with setstage <QuestID> <Stage>. Leading zeros in FormIDs can be left out."
+          ],
+          batPreview: `@echo off
+chcp 65001 >nul
+title [L-MOD Vault] Skyrim Special Edition check
+if not exist "SkyrimSE.exe" (
+    echo [!] Run this script from the Skyrim Special Edition install folder.
+    pause
+    exit /b
+)
+echo [√] Game executable found.
+echo [i] Make sure SKSE64 and Address Library match the current game version.
+pause`
+        }
+      },
+      "fallout-4": {
+        engine: "Creation Engine 1",
+        rescueSteps: [
+          "1. F4SE 已支持次世代版：游戏更新后先到 F4SE 官网下对应版本，作者没跟进的老插件先禁用。",
+          "2. 在 Steam 库右键 Fallout 4 -> 属性 -> 更新 -> 设置为【仅在我启动该游戏时更新】。",
+          "3. 工坊无限建造空间：按 ~ 点中工作台输入 setav 349 9999999 与 setav 348 9999999 即可。"
+        ],
+        batPreview: `@echo off
+chcp 65001 >nul
+title 【老L·单机避坑局】辐射4 环境检查
+if not exist "Fallout4.exe" (
+    echo [!] 请置于 Fallout 4 根目录下运行！
+    pause
+    exit /b
+)
+echo [√] 已找到游戏主程序。
+echo [i] 更新游戏后记得同步更新 F4SE 与插件。
+echo [i] 带 F4SE 插件玩时用 f4se_loader.exe 启动。
+pause`,
+        en: {
+          rescueSteps: [
+            "1. F4SE supports the next-gen update: after a game update, get the matching build from the F4SE site and disable old plugins their authors haven't updated.",
+            "2. In your Steam library, right-click Fallout 4 -> Properties -> Updates -> \"Only update this game when I launch it\".",
+            "3. Unlimited workshop build space: press ~, click the workbench, then enter setav 349 9999999 and setav 348 9999999."
+          ],
+          batPreview: `@echo off
+chcp 65001 >nul
+title [L-MOD Vault] Fallout 4 check
+if not exist "Fallout4.exe" (
+    echo [!] Run this script from the Fallout 4 install folder.
+    pause
+    exit /b
+)
+echo [√] Game executable found.
+echo [i] After a game update, update F4SE and your plugins too.
+echo [i] Launch with f4se_loader.exe when using F4SE plugins.
+pause`
+        }
+      },
+      "palworld": {
+        engine: "Unreal Engine 5 (UE5)",
+        engineZh: "虚幻引擎 5 (UE5)",
+        rescueSteps: [
+          "1. 用 Mod 前先备份本地存档。",
+          "2. 联机存档或专用服务器上别随意改帕鲁数值，容易触发服务器校验。"
+        ],
+        batPreview: `@echo off
+echo [i] 幻兽帕鲁：用 Mod 前先备份存档。
+pause`,
+        en: {
+          rescueSteps: [
+            "1. Back up your local saves before using mods.",
+            "2. On co-op saves or dedicated servers, don't edit Pal stats freely; it can trip the server's checks."
+          ],
+          batPreview: `@echo off
+echo [i] Palworld: back up your saves before using mods.
+pause`
+        }
+      },
+      "starfield": {
+        engine: "Creation Engine 2",
+        rescueSteps: [
+          "1. 游戏更新后先确认 SFSE 已出对应版本，再在 StarfieldCustom.ini 确认 bInvalidateExistingFiles=1。"
+        ],
+        batPreview: `@echo off
+echo [i] 星空：游戏更新后先确认 SFSE 已出对应版本。
+pause`,
+        en: {
+          rescueSteps: [
+            "1. After a game update, check that SFSE has a matching build, then make sure StarfieldCustom.ini has bInvalidateExistingFiles=1."
+          ],
+          batPreview: `@echo off
+echo [i] Starfield: after a game update, check that SFSE has a matching build.
+pause`
+        }
+      },
+      "gta-v": {
+        engine: "RAGE Engine",
+        engineZh: "RAGE 引擎",
+        rescueSteps: [
+          "1. 带 Mod 只玩故事模式，别进 GTA Online，否则可能被 BattlEye 封禁。",
+          "2. 游戏更新后先确认 ScriptHookV 已出对应版本。"
+        ],
+        batPreview: `@echo off
+echo [i] GTA V：带 Mod 只玩故事模式，别进 GTA Online。
+pause`,
+        en: {
+          rescueSteps: [
+            "1. Use mods in Story Mode only; don't go into GTA Online, or BattlEye may ban you.",
+            "2. After a game update, check that ScriptHookV has a matching build."
+          ],
+          batPreview: `@echo off
+echo [i] GTA V: use mods in Story Mode only and stay out of GTA Online.
+pause`
+        }
+      },
+      "rdr2": {
+        engine: "RAGE Engine",
+        engineZh: "RAGE 引擎",
+        rescueSteps: [
+          "1. 确认 ScriptHookRDR2.dll 与 dinput8.dll 放入游戏根目录。",
+          "2. 带 Mod 时不要进入线上模式 (Red Dead Online)。",
+          "3. 游戏更新后先确认 ScriptHookRDR2 已出对应版本。"
+        ],
+        batPreview: `@echo off
+chcp 65001 >nul
+title 【老L·单机避坑局】荒野大镖客2 环境检查
+if not exist "RDR2.exe" (
+    echo [!] 请置于 Red Dead Redemption 2 根目录下运行！
+    pause
+    exit /b
+)
+echo [√] 已找到游戏主程序。
+echo [i] 带 Mod 时别进线上模式 (Red Dead Online)。
+pause`,
+        en: {
+          rescueSteps: [
+            "1. Put ScriptHookRDR2.dll and dinput8.dll in the game folder.",
+            "2. Don't go into Red Dead Online with mods installed.",
+            "3. After a game update, check that ScriptHookRDR2 has a matching build."
+          ],
+          batPreview: `@echo off
+chcp 65001 >nul
+title [L-MOD Vault] Red Dead Redemption 2 check
+if not exist "RDR2.exe" (
+    echo [!] Run this script from the Red Dead Redemption 2 install folder.
+    pause
+    exit /b
+)
+echo [√] Game executable found.
+echo [i] Stay out of Red Dead Online with mods installed.
+pause`
+        }
+      },
+      "monster-hunter-world": {
+        engine: "MT Framework",
+        rescueSteps: [
+          "1. 确认 Stracker's Loader 的 dtdata.dll 与 hid.dll 放入 Monster Hunter World 根目录。",
+          "2. 游戏更新后先确认 Stracker's Loader 已出对应版本。"
+        ],
+        batPreview: `@echo off
+chcp 65001 >nul
+title 【老L·单机避坑局】怪物猎人世界 环境检查
+if not exist "MonsterHunterWorld.exe" (
+    echo [!] 请置于 Monster Hunter: World 根目录下运行！
+    pause
+    exit /b
+)
+echo [√] 已找到游戏主程序。
+pause`,
+        en: {
+          rescueSteps: [
+            "1. Put Stracker's Loader's dtdata.dll and hid.dll in the Monster Hunter: World folder.",
+            "2. After a game update, check that Stracker's Loader has a matching build."
+          ],
+          batPreview: `@echo off
+chcp 65001 >nul
+title [L-MOD Vault] Monster Hunter: World check
+if not exist "MonsterHunterWorld.exe" (
+    echo [!] Run this script from the Monster Hunter: World install folder.
+    pause
+    exit /b
+)
+echo [√] Game executable found.
+pause`
+        }
+      },
+      "sekiro": {
+        engine: "FromSoftware proprietary engine",
+        engineZh: "FromSoftware 专有引擎",
+        rescueSteps: [
+          "1. 确认 dinput8.dll 和 modengine.ini 位于 sekiro.exe 同级目录。",
+          "2. 模型与画质 Mod 放入 mods/ 文件夹，路径避免中文字符；目录名要与 modengine.ini 中的 modOverrideDirectory 一致。"
+        ],
+        batPreview: `@echo off
+chcp 65001 >nul
+title 【老L·单机避坑局】只狼 环境检查
+if not exist "sekiro.exe" (
+    echo [!] 请置于 Sekiro 根目录下运行！
+    pause
+    exit /b
+)
+echo [√] 已找到游戏主程序。
+pause`,
+        en: {
+          rescueSteps: [
+            "1. Make sure dinput8.dll and modengine.ini are next to sekiro.exe.",
+            "2. Put model and graphics mods in the mods/ folder, keep non-ASCII characters out of the path, and keep the folder name the same as modOverrideDirectory in modengine.ini."
+          ],
+          batPreview: `@echo off
+chcp 65001 >nul
+title [L-MOD Vault] Sekiro check
+if not exist "sekiro.exe" (
+    echo [!] Run this script from the Sekiro install folder.
+    pause
+    exit /b
+)
+echo [√] Game executable found.
+pause`
+        }
+      },
+      "re4-remake": {
+        engine: "RE Engine",
+        rescueSteps: [
+          "1. 将 REFramework 的 dinput8.dll 放入 re4.exe 根目录。",
+          "2. 启动游戏自动生成 reframework 文件夹，按 Insert 键呼出菜单。",
+          "3. 服装与武器 Mod 通过 Fluffy Mod Manager 管理；游戏更新后先确认 REFramework 已出对应版本。"
+        ],
+        batPreview: `@echo off
+chcp 65001 >nul
+title 【老L·单机避坑局】生化危机4重制版 环境检查
+if not exist "re4.exe" (
+    echo [!] 请置于 Resident Evil 4 Remake 根目录下运行！
+    pause
+    exit /b
+)
+echo [√] 已找到游戏主程序。
+echo [i] 装好 REFramework 后进游戏按 Insert 呼出菜单。
+pause`,
+        en: {
+          rescueSteps: [
+            "1. Put REFramework's dinput8.dll next to re4.exe.",
+            "2. The game creates a reframework folder on first launch; press Insert to open the menu.",
+            "3. Manage outfit and weapon mods with Fluffy Mod Manager; after a game update, check that REFramework has a matching build."
+          ],
+          batPreview: `@echo off
+chcp 65001 >nul
+title [L-MOD Vault] Resident Evil 4 Remake check
+if not exist "re4.exe" (
+    echo [!] Run this script from the Resident Evil 4 Remake install folder.
+    pause
+    exit /b
+)
+echo [√] Game executable found.
+echo [i] With REFramework installed, press Insert in game to open its menu.
+pause`
+        }
+      }
+    };
+
+    // Guide text by UI language: zh-CN / zh-TW read the Chinese text; every other language reads
+    // the English text (Chinese only if a guide has no English yet). `engineKey` is always the
+    // English engine name so the engine filter works in every language.
+    function localizedGuide(guide, game) {
+      const zhUi = currentLang === 'zh-CN' || currentLang === 'zh-TW';
+      const shortcut = game.consoleShortcut || (zhUi ? '~（波浪键）' : '~ (Tilde)');
+      if (!guide) {
+        const fallbackEngine = engineFromDeveloper(game);
+        if (zhUi) {
+          const zhTitle = (game.titles && game.titles['zh-CN']) || game.title;
+          return {
+            engine: fallbackEngine, engineKey: fallbackEngine,
+            rescueSteps: [
+              `1. Steam 库 → ${zhTitle} → 属性 → 已安装文件，可以打开游戏目录。`,
+              `2. 控制台快捷键：${shortcut}。`,
+              `3. 做关键任务或改剧情标志前，先备份存档。`
+            ],
+            batPreview: `@echo off\nchcp 65001 >nul\ntitle 【老L·单机避坑局】${zhTitle} 小提示\necho [i] 控制台快捷键：${shortcut}\necho [i] 用 Mod 或修改器前先备份存档。\npause`
+          };
+        }
+        return {
+          engine: fallbackEngine, engineKey: fallbackEngine,
+          rescueSteps: [
+            `1. Steam -> ${game.title} -> Properties -> Installed Files.`,
+            `2. Shortcut: ${shortcut}.`,
+            `3. Back up save files before key quests or modifying facts.`
+          ],
+          batPreview: `@echo off\nchcp 65001 >nul\ntitle [L-MOD Vault] ${game.title} Quick Tips\necho [i] Shortcut: ${shortcut}\necho [i] Back up your saves before using mods or trainers.\npause`
+        };
+      }
+      const en = guide.en || {};
+      return {
+        engine: zhUi ? (guide.engineZh || guide.engine) : guide.engine,
+        engineKey: guide.engine,
+        rescueSteps: zhUi ? guide.rescueSteps : (en.rescueSteps || guide.rescueSteps),
+        batPreview: zhUi ? guide.batPreview : (en.batPreview || guide.batPreview)
+      };
+    }
+
+    // Engine label only (never a status): developers whose games all share one engine family.
+    function engineFromDeveloper(game) {
+      const dev = (game.developer || '').toLowerCase();
+      if (dev.includes('fromsoftware')) return 'FromSoft Engine';
+      if (dev.includes('cd projekt')) return 'REDengine';
+      if (dev.includes('bethesda game studios')) return 'Creation Engine';
+      return null;
+    }
+
+    // ========================================================
+    // RADAR FIELD HELPERS
+    // ========================================================
+    const RADAR_REASONS = {
+      'recent-update-hooks': 'red',
+      'recent-update': 'yellow',
+      'trainer-behind': 'yellow',
+      'quiet': 'green'
+    };
+    const RADAR_STATUSES = ['green', 'yellow', 'red'];
+
+    function escapeHtml(value) {
+      return String(value == null ? '' : value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function safeUrl(value) {
+      if (typeof value !== 'string') return null;
+      const url = value.trim();
+      return /^https?:\/\//i.test(url) ? url : null;
+    }
+
+    function fillTemplate(text, vars) {
+      return String(text).replace(/\{(\w+)\}/g, (m, k) => (vars && vars[k] != null ? vars[k] : m));
+    }
+
+    // ISO strings from the radar. New ones end in Z; legacy steamLastChecked has no zone,
+    // so it is read as UTC and shown as a date only.
+    function parseRadarDate(value) {
+      if (!value || typeof value !== 'string') return null;
+      let raw = value.trim().replace(' ', 'T').replace(/(\.\d{3})\d+/, '$1');
+      if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) raw += 'T00:00:00';
+      const hasZone = /([zZ]|[+-]\d{2}:?\d{2})$/.test(raw);
+      const d = new Date(hasZone ? raw : raw + 'Z');
+      if (isNaN(d.getTime())) return null;
+      return { date: d, dateOnly: !hasZone };
+    }
+
+    function pad2(n) { return n < 10 ? '0' + n : String(n); }
+
+    function formatRadarDate(value) {
+      const p = parseRadarDate(value);
+      if (!p) return null;
+      const d = p.date;
+      const day = p.dateOnly
+        ? `${d.getUTCFullYear()}-${pad2(d.getUTCMonth() + 1)}-${pad2(d.getUTCDate())}`
+        : `${d.getFullYear()}-${pad2(d.getMonth() + 1)}-${pad2(d.getDate())}`;
+      const text = p.dateOnly ? day : `${day} ${pad2(d.getHours())}:${pad2(d.getMinutes())}`;
+      const days = Math.floor((Date.now() - d.getTime()) / 86400000);
+      let rel = '';
+      if (days <= 0) rel = t('radarToday', '今天');
+      else rel = fillTemplate(t('radarDaysAgo', '{n} 天前'), { n: days });
+      return { text, rel, full: `${text} · ${rel}`, iso: value, time: d.getTime() };
+    }
+
+    // ========================================================
+    // GLOBAL STATE & I18N ENGINE
+    // ========================================================
+    let allGames = [];
+    let filteredGames = [];
+    let currentStatusFilter = 'all';
+    let currentEngineFilter = 'all';
+    let currentSearchQuery = '';
+    let currentSortMode = 'risk-desc';
+    let activeDrawerGame = null;
+
+    let currentLang = localStorage.getItem('lmod_lang') || 'zh-CN';
+    let translations = window.TRANSLATIONS_DATA || {};
+
+    const LANG_CONFIG = {
+      'zh-CN': { flag: '🇨🇳', name: '简体中文' },
+      'en':    { flag: '🇺🇸', name: 'English' },
+      'zh-TW': { flag: '🇭🇰', name: '繁體中文' },
+      'ja':    { flag: '🇯🇵', name: '日本語' },
+      'ko':    { flag: '🇰🇷', name: '한국어' },
+      'ru':    { flag: '🇷🇺', name: 'Русский' },
+      'de':    { flag: '🇩🇪', name: 'Deutsch' },
+      'es':    { flag: '🇪🇸', name: 'Español' }
+    };
+
+    function t(key, fallback = '') {
+      if (translations[currentLang] && translations[currentLang][key]) {
+        return translations[currentLang][key];
+      }
+      if (translations['zh-CN'] && translations['zh-CN'][key]) {
+        return translations['zh-CN'][key];
+      }
+      return fallback;
+    }
+
+    function toggleLangDropdown(event) {
+      if (event) event.stopPropagation();
+      const menu = document.getElementById('lang-menu');
+      const chevron = document.getElementById('lang-chevron');
+      if (!menu) return;
+      const isHidden = menu.classList.contains('hidden');
+      if (isHidden) {
+        menu.classList.remove('hidden');
+        if (chevron) chevron.classList.add('rotate-180');
+      } else {
+        menu.classList.add('hidden');
+        if (chevron) chevron.classList.remove('rotate-180');
+      }
+    }
+
+    function closeLangDropdown() {
+      const menu = document.getElementById('lang-menu');
+      const chevron = document.getElementById('lang-chevron');
+      if (menu && !menu.classList.contains('hidden')) {
+        menu.classList.add('hidden');
+        if (chevron) chevron.classList.remove('rotate-180');
+      }
+    }
+
+    document.addEventListener('click', (e) => {
+      const dd = document.getElementById('custom-lang-dropdown');
+      if (dd && !dd.contains(e.target)) {
+        closeLangDropdown();
+      }
+    });
+
+    function selectLanguage(langCode, flag, name) {
+      currentLang = langCode;
+      localStorage.setItem('lmod_lang', langCode);
+
+      const flagEl = document.getElementById('current-lang-flag');
+      const nameEl = document.getElementById('current-lang-name');
+      if (flagEl) flagEl.textContent = flag;
+      if (nameEl) nameEl.textContent = name;
+
+      document.querySelectorAll('.lang-option').forEach(btn => {
+        const btnLang = btn.getAttribute('data-lang');
+        const check = btn.querySelector('.lang-check');
+        if (btnLang === langCode) {
+          if (check) check.classList.remove('hidden');
+          btn.classList.add('text-[#A855F7]', 'font-semibold');
+        } else {
+          if (check) check.classList.add('hidden');
+          btn.classList.remove('text-[#A855F7]', 'font-semibold');
+        }
+      });
+
+      closeLangDropdown();
+      renderRadarUI();
+      updateMetrics();
+      applyFilters();
+      if (activeDrawerGame) {
+        openGameDrawer(activeDrawerGame);
+      }
+      showToast(`${t('toastLangSwitched', '语言已切换至')} ${name}`);
+    }
+
+    function initLanguage() {
+      if (window.TRANSLATIONS_DATA) {
+        translations = window.TRANSLATIONS_DATA;
+      }
+      const savedLang = localStorage.getItem('lmod_lang') || 'zh-CN';
+      currentLang = LANG_CONFIG[savedLang] ? savedLang : 'zh-CN';
+      const cfg = LANG_CONFIG[currentLang] || LANG_CONFIG['zh-CN'];
+
+      const flagEl = document.getElementById('current-lang-flag');
+      const nameEl = document.getElementById('current-lang-name');
+      if (flagEl) flagEl.textContent = cfg.flag;
+      if (nameEl) nameEl.textContent = cfg.name;
+
+      document.querySelectorAll('.lang-option').forEach(btn => {
+        const btnLang = btn.getAttribute('data-lang');
+        const check = btn.querySelector('.lang-check');
+        if (btnLang === currentLang) {
+          if (check) check.classList.remove('hidden');
+          btn.classList.add('text-[#A855F7]', 'font-semibold');
+        } else {
+          if (check) check.classList.add('hidden');
+          btn.classList.remove('text-[#A855F7]', 'font-semibold');
+        }
+      });
+    }
+
+    // ========================================================
+    // UPDATE-ALERT MARQUEE (built from GAMES_DATA radar fields)
+    // ========================================================
+    function buildTickerItems() {
+      const items = [];
+      if (!Array.isArray(allGames)) return items;
+      allGames.forEach(g => {
+        const meta = getGameCompatibility(g);
+        // Contract 7.2: only red goes on the ticker (yellow stays on the cards).
+        let text = null;
+        if (!meta.legacy && meta.reason === 'recent-update-hooks') {
+          text = fillTemplate(t('radarTickerRecentUpdateHooks', '刚更新，{framework} 可能要等适配，先别更新'), { framework: meta.frameworkName });
+        } else if (meta.legacy && meta.status === 'red') {
+          // Old radar output (before the v2 monitor runs): keep the colour, drop its wording.
+          text = t('radarTickerLegacy', '旧版巡检提示留意，可能误报，以 Steam 更新时间为准');
+        }
+        if (!text) return;
+        const localizedTitle = (g.titles && g.titles[currentLang]) ? g.titles[currentLang] : g.title;
+        const isRed = meta.status === 'red';
+        items.push({
+          id: g.id,
+          rank: g.rank,
+          isRed,
+          color: isRed ? 'text-red-400' : 'text-amber-400',
+          tag: `${isRed ? '🔴' : '🟡'}【${localizedTitle}】`,
+          text
+        });
+      });
+      items.sort((a, b) => (a.isRed === b.isRed ? a.rank - b.rank : (a.isRed ? -1 : 1)));
+      return items;
+    }
+
+    function renderTicker() {
+      const track = document.getElementById('ticker-track');
+      if (!track) return;
+      const items = buildTickerItems();
+
+      let listHtml;
+      if (items.length > 0) {
+        listHtml = items.map(item => `
+          <span class="flex items-center space-x-1.5 cursor-pointer hover:text-white" onclick="event.stopPropagation(); openGameDrawerById('${escapeHtml(item.id)}')">
+            <span class="${item.color} font-bold">${escapeHtml(item.tag)}</span>
+            <span>${escapeHtml(item.text)}</span>
+          </span>
+        `).join('<span class="text-zinc-600">|</span>');
+      } else {
+        const lastRun = latestRadarCheck();
+        const suffix = lastRun ? ` · ${t('radarFieldLastChecked', '上次巡检')} ${lastRun.text}` : '';
+        listHtml = `<span class="flex items-center space-x-1.5"><span class="text-emerald-400 font-bold">🟢</span><span>${escapeHtml(t('radarTickerEmpty', '目前没有需要提醒的游戏更新') + suffix)}</span></span>`;
+      }
+      // Clone once for continuous seamless marquee loop
+      track.innerHTML = listHtml + '<span class="text-zinc-600">|</span>' + listHtml;
+    }
+
+    // ========================================================
+    // RENDER FULL RADAR UI (STATIC & LABELS)
+    // ========================================================
+    function renderRadarUI() {
+      // 1. Ticker Header
+      const tickBadge = document.getElementById('ticker-badge-text');
+      if (tickBadge) tickBadge.innerText = t('radarEmergencyBroadcast', '更新提醒');
+      const tickBack = document.getElementById('ticker-back-text');
+      if (tickBack) tickBack.innerText = t('returnMainVault', '返回 L-MOD 主库');
+      renderTicker();
+
+      // 2. Header Brand
+      const hTitle = document.getElementById('radar-header-title');
+      if (hTitle) hTitle.innerText = t('radarTitle', 'Steam 补丁变动与 Mod 兼容性避坑雷达');
+      const hVer = document.getElementById('radar-header-version');
+      if (hVer) hVer.innerText = t('radarVersionBadge', 'v4.0 独立看板');
+      const hPow = document.getElementById('radar-header-powered');
+      if (hPow) hPow.innerText = t('radarSubtitle', 'L-MOD Vault 出品');
+      const hLive = document.getElementById('radar-header-live');
+      if (hLive) hLive.innerText = t('radarInspectingLive', '每天巡检一次 Steam 更新');
+      const hGroup = document.getElementById('radar-group-code-label');
+      if (hGroup) hGroup.innerText = t('radarSecretGroupBtn', '进避坑互助群暗号:');
+      const hRet = document.getElementById('radar-return-btn-text');
+      if (hRet) hRet.innerText = t('returnMainVault', '返回 L-MOD 主库');
+      const aiBtn = document.getElementById('radar-ai-btn');
+      if (aiBtn) aiBtn.title = t('headerAiBtnTitle', '老L · AI 游戏智库顾问 (快捷键: Cmd+K / Ctrl+K)');
+      const aiText = document.getElementById('radar-ai-btn-text');
+      if (aiText) aiText.innerText = t('headerAiBtnText', 'AI 顾问');
+
+      const menuTitle = document.getElementById('lang-menu-title');
+      if (menuTitle) menuTitle.innerText = t('selectLanguage', '选择语言 · Select Language');
+
+      // 3. Metric Cards
+      const mgTitle = document.getElementById('metric-green-title');
+      if (mgTitle) mgTitle.innerText = t('statusCompatible', '近期平稳');
+      const mgTag = document.getElementById('metric-green-tag');
+      if (mgTag) mgTag.innerText = t('statusCompatibleTag', '无提醒');
+      const mgUnit = document.getElementById('metric-green-unit');
+      if (mgUnit) mgUnit.innerText = t('metricGreenUnit', '款游戏');
+      const mgDesc = document.getElementById('metric-green-desc');
+      if (mgDesc) mgDesc.innerText = t('statusCompatibleDesc', '近 14 天没有新版本，修改器也没落后于近 90 天的更新');
+
+      const myTitle = document.getElementById('metric-yellow-title');
+      if (myTitle) myTitle.innerText = t('statusWarning', '留意更新');
+      const myTag = document.getElementById('metric-yellow-tag');
+      if (myTag) myTag.innerText = t('statusWarningTag', '可能要等适配');
+      const myUnit = document.getElementById('metric-yellow-unit');
+      if (myUnit) myUnit.innerText = t('metricYellowUnit', '款游戏');
+      const myDesc = document.getElementById('metric-yellow-desc');
+      if (myDesc) myDesc.innerText = t('statusWarningDesc', '14 天内刚更新，或近 90 天的更新后修改器还没跟上');
+
+      const mrTitle = document.getElementById('metric-red-title');
+      if (mrTitle) mrTitle.innerText = t('statusBroken', '先别更新');
+      const mrTag = document.getElementById('metric-red-tag');
+      if (mrTag) mrTag.innerText = t('statusBrokenTag', '框架可能要等适配');
+      const mrUnit = document.getElementById('metric-red-unit');
+      if (mrUnit) mrUnit.innerText = t('metricRedUnit', '款游戏');
+      const mrDesc = document.getElementById('metric-red-desc');
+      if (mrDesc) mrDesc.innerText = t('statusBrokenDesc', '刚更新，常用 Mod 框架按 exe 版本挂钩，可能要等作者发新版');
+
+      const miTitle = document.getElementById('metric-inspection-title');
+      if (miTitle) miTitle.innerText = t('statusInspection', '巡检范围');
+      const miTag = document.getElementById('metric-inspection-tag');
+      if (miTag) miTag.innerText = t('metricInspectionTag', '每天');
+      const miUnit = document.getElementById('metric-inspection-unit');
+      if (miUnit) miUnit.innerText = t('metricInspectionUnit', '款已巡检');
+      // metric-inspection-desc is filled by updateMetrics() (last run + unchecked count)
+
+      // 4. Search & Filters
+      const sInput = document.getElementById('radar-search');
+      if (sInput) sInput.placeholder = t('radarSearchPlaceholder', '搜索游戏名称、Steam AppID (如 1245620)、底层引擎...');
+
+      const sSort = document.getElementById('radar-sort-label');
+      if (sSort) sSort.innerText = t('sortLabel', '排序方式:');
+      const oRisk = document.getElementById('opt-risk-desc');
+      if (oRisk) oRisk.innerText = t('sortRiskDesc', '⚠️ 风险优先 (红 / 黄置顶)');
+      const oRank = document.getElementById('opt-rank-asc');
+      if (oRank) oRank.innerText = t('sortRankAsc', '👑 游戏排名 (Rank 1 ~ 100)');
+      const oComp = document.getElementById('opt-compat-first');
+      if (oComp) oComp.innerText = t('sortCompatibleFirst', '🟢 平稳优先');
+      const oName = document.getElementById('opt-name-asc');
+      if (oName) oName.innerText = t('sortNameAsc', '🔤 游戏名称 (A-Z)');
+
+      const fStatus = document.getElementById('radar-filter-status-label');
+      if (fStatus) fStatus.innerText = t('filterCompatLabel', '雷达状态:');
+      const pStatAll = document.getElementById('pill-status-all');
+      if (pStatAll) pStatAll.innerText = t('filterEngineAll', '全部');
+      const pStatGreen = document.getElementById('pill-status-green');
+      if (pStatGreen) pStatGreen.innerText = t('statusCompatibleShort', '🟢 近期平稳');
+      const pStatYellow = document.getElementById('pill-status-yellow');
+      if (pStatYellow) pStatYellow.innerText = t('statusWarningShort', '🟡 留意更新');
+      const pStatRed = document.getElementById('pill-status-red');
+      if (pStatRed) pStatRed.innerText = t('statusBrokenShort', '🔴 先别更新');
+      const pStatUnchecked = document.getElementById('pill-status-unchecked');
+      if (pStatUnchecked) pStatUnchecked.innerText = t('statusUncheckedShort', '⚪ 未巡检');
+
+      const fEngine = document.getElementById('radar-filter-engine-label');
+      if (fEngine) fEngine.innerText = t('filterEngineLabel', '专区/引擎:');
+      const pEngAll = document.getElementById('pill-engine-all');
+      if (pEngAll) pEngAll.innerText = t('filterEngineAll', '全部');
+      const pEngFlag = document.getElementById('pill-engine-flagship');
+      if (pEngFlag) pEngFlag.innerText = t('filterEngineFlagship', '👑 Top 7 旗舰深度');
+      const pEngUE = document.getElementById('pill-engine-unreal');
+      if (pEngUE) pEngUE.innerText = t('filterEngineUE', '虚幻引擎');
+      const pEngCreation = document.getElementById('pill-engine-creation');
+      if (pEngCreation) pEngCreation.innerText = t('filterEngineBethesda', 'B社引擎');
+      const pEngFrom = document.getElementById('pill-engine-fromsoft');
+      if (pEngFrom) pEngFrom.innerText = t('filterEngineFromSoft', '魂系引擎');
+
+      // 5. Results Count & Legend
+      const rMatched = document.getElementById('radar-count-matched');
+      if (rMatched) rMatched.innerText = t('matchedGamesCount', '共匹配到');
+      const rUnit = document.getElementById('radar-count-unit');
+      if (rUnit) rUnit.innerText = t('gamesUnit', '款游戏');
+      const legCompat = document.getElementById('legend-text-compat');
+      if (legCompat) legCompat.innerText = t('legendCompatible', '平稳');
+      const legWarn = document.getElementById('legend-text-warn');
+      if (legWarn) legWarn.innerText = t('legendWarning', '留意');
+      const legBroken = document.getElementById('legend-text-broken');
+      if (legBroken) legBroken.innerText = t('legendBroken', '先别更新');
+      const legUnchecked = document.getElementById('legend-text-unchecked');
+      if (legUnchecked) legUnchecked.innerText = t('legendUnchecked', '未巡检');
+
+      // 6. Empty State
+      const empTitle = document.getElementById('radar-empty-title');
+      if (empTitle) empTitle.innerText = t('emptyTitle', '未找到符合条件的游戏');
+      const empDesc = document.getElementById('radar-empty-desc');
+      if (empDesc) empDesc.innerText = t('emptyDesc', '请尝试更换搜索关键字，或重置状态与引擎筛选条件。');
+      const empReset = document.getElementById('radar-empty-reset-btn');
+      if (empReset) empReset.innerText = t('resetFiltersBtn', '重置全部筛选');
+
+      // 7. Drawer Static Elements
+      const dPatchCheck = document.getElementById('drawer-patch-check-title');
+      if (dPatchCheck) dPatchCheck.innerText = '🔍 ' + t('drawerPatchCheckTitle', '巡检结果');
+      const dRule = document.getElementById('drawer-rule-note');
+      if (dRule) dRule.innerText = t('radarRuleNote', '判定规则：Steam 公共分支 14 天内有新版本亮黄；常用 Mod 框架按 exe 版本挂钩的亮红（Steam 的更新时间分不出改没改 exe，所以只说「可能」）；近 90 天内有更新、而修改器比它早的也亮黄。公告只展示，不参与判定。');
+      const dRescueTitle = document.getElementById('drawer-rescue-title');
+      if (dRescueTitle) dRescueTitle.innerText = t('drawerSafeGuide', '🛠️ 老L救砖 / 降级 / 避坑方案');
+      const dRescueSub = document.getElementById('drawer-rescue-sub');
+      if (dRescueSub) dRescueSub.innerText = t('drawerOfflineMechanism', '通用建议，操作前先备份存档');
+      const dBatTitle = document.getElementById('drawer-bat-title');
+      if (dBatTitle) dBatTitle.innerText = t('drawerBatLabel', '控制台脚本 (.bat) / 常用指令:');
+      const dCopyBat = document.getElementById('drawer-btn-copy-bat');
+      if (dCopyBat) dCopyBat.innerText = t('drawerCopyBatBtn', '一键复制代码');
+
+      const dMatrixTitle = document.getElementById('drawer-matrix-title');
+      if (dMatrixTitle) dMatrixTitle.innerText = t('drawerCardsSectionTitle', '🎨 官方 5 联 1080×1440 高清避坑卡片 (实装)');
+      const dMatrixTag = document.getElementById('drawer-matrix-tag');
+      if (dMatrixTag) dMatrixTag.innerText = t('drawerMatrixTag', '社交媒体矩阵');
+      const dMatrixDesc = document.getElementById('drawer-matrix-desc');
+      if (dMatrixDesc) dMatrixDesc.innerText = t('drawerCardsSectionDesc', '已就绪首发 5 联高清卡片，点击任意卡片查看大图：');
+
+      const dSecTitle = document.getElementById('drawer-secret-card-title');
+      if (dSecTitle) dSecTitle.innerText = t('drawerSecretCardTitle', '【老L·单机避坑局】玩家互助群');
+      const dSecTag = document.getElementById('drawer-secret-card-tag');
+      if (dSecTag) dSecTag.innerText = t('drawerSecretCardTag', '公益·零广告');
+      const dSecDesc = document.getElementById('drawer-secret-card-desc');
+      if (dSecDesc) dSecDesc.innerText = t('drawerSecretCardDesc', '游戏更新后 Mod 用不了或存档出问题？保存避坑暗号，在公众号后台或私信发送，可以进互助群和其他玩家交流处理办法。');
+      const dSecLabel = document.getElementById('drawer-secret-card-label');
+      if (dSecLabel) dSecLabel.innerText = t('drawerSecretCodeLabel', '进群暗号:');
+      const dCopyCode = document.getElementById('drawer-btn-copy-code-text');
+      if (dCopyCode) dCopyCode.innerText = t('drawerCopyCodeBtn', '复制暗号');
+      const dTip1 = document.getElementById('drawer-secret-tip-1');
+      if (dTip1) dTip1.innerText = t('drawerSecretTips1', '💡 进群发送暗号：交流 Mod 更新进度与坏档处理经验');
+      const dTip2 = document.getElementById('drawer-secret-tip-2');
+      if (dTip2) dTip2.innerText = t('drawerSecretTips2', '群文件不放 exe');
+      const dMainBtn = document.getElementById('drawer-cta-main-text');
+      if (dMainBtn) dMainBtn.innerText = t('drawerMainVaultBtn', '🎮 进入 L-MOD 主库查看完整代码与场景套餐');
+
+      const dlModalText = document.getElementById('image-modal-download-text');
+      if (dlModalText) dlModalText.innerText = t('downloadOriginalImage', '下载 1080×1440 原图');
+    }
+
+    // ========================================================
+    // RADAR STATE (reads only GAMES_DATA radar fields)
+    // ========================================================
+    // status: 'red' | 'yellow' | 'green' | 'unchecked'
+    //   - radarReason present            → v2 monitor output, wording by reason
+    //   - only compatibilityStatus       → legacy monitor output, colour kept, wording neutral
+    //   - neither / no steamAppId        → not checked (never shown as green)
+    function getGameCompatibility(game) {
+      const guide = RADAR_GUIDES[game.id] || null;
+      const localGuide = localizedGuide(guide, game);
+      const appId = Number(game.steamAppId) || 0;
+      const isZh = currentLang === 'zh-CN';
+
+      const fw = (game.radarFramework && typeof game.radarFramework === 'object' && game.radarFramework.name)
+        ? { name: String(game.radarFramework.name), url: safeUrl(game.radarFramework.url) }
+        : null;
+      const frameworkName = fw ? fw.name : t('radarFieldFramework', 'Mod 框架');
+      const vars = { framework: frameworkName };
+
+      let status = 'unchecked';
+      let reason = null;
+      let legacy = false;
+      if (appId > 0) {
+        if (RADAR_REASONS[game.radarReason]) {
+          reason = game.radarReason;
+          status = RADAR_REASONS[reason];
+        } else if (RADAR_STATUSES.includes(game.compatibilityStatus)) {
+          status = game.compatibilityStatus;
+          legacy = true;
+        }
+      }
+
+      let statusText, summary, riskTitle, riskDesc;
+      let advice = null;
+      if (reason) {
+        const R = {
+          'quiet': ['radarReasonQuiet', 'radarSummaryQuiet', 'radarRiskTitleQuiet', 'radarRiskDescQuiet'],
+          'recent-update': ['radarReasonRecentUpdate', 'radarSummaryRecentUpdate', 'radarRiskTitleRecentUpdate', 'radarRiskDescRecentUpdate'],
+          'trainer-behind': ['radarReasonTrainerBehind', 'radarSummaryTrainerBehind', 'radarRiskTitleTrainerBehind', 'radarRiskDescTrainerBehind'],
+          'recent-update-hooks': ['radarReasonRecentUpdateHooks', 'radarSummaryRecentUpdateHooks', 'radarRiskTitleRecentUpdateHooks', 'radarRiskDescRecentUpdateHooks']
+        }[reason];
+        statusText = fillTemplate(t(R[0]), vars);
+        summary = fillTemplate(t(R[1]), vars);
+        riskTitle = fillTemplate(t(R[2]), vars);
+        riskDesc = fillTemplate(t(R[3]), vars);
+        // The monitor writes these three in Simplified Chinese (riskDesc may carry the
+        // framework's own after-update advice); other languages use the page copy above.
+        if (isZh) {
+          if (game.radarSummary) summary = String(game.radarSummary);
+          if (game.radarRiskTitle) riskTitle = String(game.radarRiskTitle);
+          if (game.radarRiskDesc) riskDesc = String(game.radarRiskDesc);
+        }
+        // Contract 7.5: radarAdvice = framework's afterUpdate {zh-CN, en} or null.
+        // zh-CN / zh-TW UIs show zh-CN, every other UI shows en; null → generic advice above.
+        if (game.radarAdvice && typeof game.radarAdvice === 'object') {
+          const zhUi = currentLang === 'zh-CN' || currentLang === 'zh-TW';
+          const pick = zhUi ? game.radarAdvice['zh-CN'] : game.radarAdvice['en'];
+          if (typeof pick === 'string' && pick.trim()) advice = pick.trim();
+        }
+      } else if (legacy) {
+        statusText = status === 'red' ? t('radarLegacyRed') : status === 'yellow' ? t('radarLegacyYellow') : t('radarLegacyGreen');
+        summary = t('radarSummaryLegacy');
+        riskTitle = t('radarRiskTitleLegacy');
+        riskDesc = t('radarRiskDescLegacy');
+      } else {
+        statusText = appId > 0 ? t('radarUncheckedSteam', '⚪ 还没有巡检记录') : t('radarUncheckedNonSteam', '⚪ 不在 Steam 上，不巡检');
+        summary = appId > 0 ? t('radarSummaryUncheckedSteam') : t('radarSummaryNonSteam');
+        riskTitle = t('radarRiskTitleUnchecked');
+        riskDesc = t('radarRiskDescUnchecked');
+      }
+
+      const shortText = status === 'green' ? t('statusCompatibleShort', '🟢 近期平稳') :
+                        status === 'yellow' ? t('statusWarningShort', '🟡 留意更新') :
+                        status === 'red' ? t('statusBrokenShort', '🔴 先别更新') :
+                        t('statusUncheckedShort', '⚪ 未巡检');
+
+      const newsUrl = safeUrl(game.latestSteamPatchUrl) || (appId > 0 ? `https://store.steampowered.com/news/app/${appId}` : null);
+
+      return {
+        status,
+        reason,
+        legacy,
+        statusText,
+        shortText,
+        summary,
+        riskTitle,
+        riskDesc: advice || riskDesc,
+        advice,
+        framework: fw,
+        // Contract 7.6: trainer date comes from the existing trainerInfo.lastUpdated.
+        trainerUpdated: reason === 'trainer-behind' && game.trainerInfo ? formatRadarDate(game.trainerInfo.lastUpdated) : null,
+        frameworkName,
+        buildId: game.steamBuildId ? String(game.steamBuildId) : null,
+        buildUpdated: formatRadarDate(game.steamBuildUpdatedAt),
+        lastChecked: status === 'unchecked' ? null : formatRadarDate(game.steamLastChecked),
+        newsTitle: game.latestSteamPatch ? String(game.latestSteamPatch) : null,
+        newsUrl,
+        engine: localGuide.engine,
+        engineKey: localGuide.engineKey,
+        rescueSteps: localGuide.rescueSteps,
+        batPreview: localGuide.batPreview
+      };
+    }
+
+    function latestRadarCheck() {
+      let best = null;
+      (allGames || []).forEach(g => {
+        const meta = getGameCompatibility(g);
+        if (meta.lastChecked && (!best || meta.lastChecked.time > best.time)) best = meta.lastChecked;
+      });
+      return best;
+    }
+
+    const STATUS_STYLES = {
+      green:     { border: 'border-emerald-500/20 hover:border-emerald-500/40', badge: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30', dot: 'bg-emerald-500', text: 'text-emerald-500 dark:text-emerald-400', pill: 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' },
+      yellow:    { border: 'border-amber-500/20 hover:border-amber-500/40',     badge: 'bg-amber-500/10 text-amber-400 border-amber-500/30',       dot: 'bg-amber-500',   text: 'text-amber-500 dark:text-amber-400',   pill: 'bg-amber-500/20 text-amber-400 border border-amber-500/30' },
+      red:       { border: 'border-red-500/30 hover:border-red-500/50',         badge: 'bg-red-500/15 text-red-400 border-red-500/40',             dot: 'bg-red-500',     text: 'text-red-500 dark:text-red-400',       pill: 'bg-red-500/25 text-red-400 border border-red-500/40' },
+      unchecked: { border: 'border-zinc-500/20 hover:border-zinc-500/40',       badge: 'bg-zinc-500/10 text-zinc-400 border-zinc-500/30',          dot: 'bg-zinc-400',    text: 'text-zinc-500 dark:text-zinc-400',     pill: 'bg-zinc-500/20 text-zinc-300 border border-zinc-500/30' }
+    };
+
+    function radarFactsHtml(meta, opts) {
+      const dash = '<span class="text-zinc-500">—</span>';
+      const link = (url, label, cls) => url
+        ? `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="${cls} hover:underline">${escapeHtml(label)} ↗</a>`
+        : escapeHtml(label);
+      const build = meta.buildUpdated
+        ? `<span title="${escapeHtml(meta.buildUpdated.iso)}">${escapeHtml(meta.buildUpdated.full)}</span>${opts.showBuildId && meta.buildId ? ` <span class="text-zinc-500">· build ${escapeHtml(meta.buildId)}</span>` : ''}`
+        : dash;
+      const checked = meta.lastChecked
+        ? `<span title="${escapeHtml(meta.lastChecked.iso)}">${escapeHtml(meta.lastChecked.full)}</span>`
+        : dash;
+      const framework = meta.framework
+        ? link(meta.framework.url, meta.framework.name, 'text-[#A855F7]')
+        : `<span class="text-zinc-500">${escapeHtml(t('radarNoFramework', '暂无资料'))}</span>`;
+      const news = meta.newsUrl
+        ? link(meta.newsUrl, meta.newsTitle || t('radarViewNews', 'Steam 公告页'), 'text-sky-500 dark:text-sky-400')
+        : dash;
+      const rows = [
+        [t('radarFieldBuildUpdated', 'Steam 最近更新'), build]
+      ];
+      if (meta.reason === 'trainer-behind') {
+        rows.push([t('radarFieldTrainerUpdated', '修改器更新'), meta.trainerUpdated
+          ? `<span class="text-amber-500 dark:text-amber-400" title="${escapeHtml(meta.trainerUpdated.iso)}">${escapeHtml(meta.trainerUpdated.full)}</span>`
+          : dash]);
+      }
+      rows.push(
+        [t('radarFieldLastChecked', '上次巡检'), checked],
+        [t('radarFieldFramework', 'Mod 框架'), framework],
+        [t('radarFieldLatestNews', '最新公告'), news]
+      );
+      return rows.map(([label, value]) => `
+        <dt class="${opts.labelClass}">${escapeHtml(label)}</dt>
+        <dd class="${opts.valueClass} min-w-0 truncate">${value}</dd>
+      `).join('');
+    }
+
+    // ========================================================
+    // RENDER FUNCTIONS
+    // ========================================================
+    function renderRadarCards() {
+      const grid = document.getElementById('radar-grid');
+      const empty = document.getElementById('radar-empty');
+      const countEl = document.getElementById('results-count');
+      const filterDescEl = document.getElementById('active-filter-desc');
+
+      if (!grid) return;
+
+      countEl.innerText = filteredGames.length;
+
+      // Filter description label
+      let desc = [];
+      if (currentStatusFilter !== 'all') {
+        const statusMap = {
+          green: t('statusCompatibleShort', '🟢 近期平稳'),
+          yellow: t('statusWarningShort', '🟡 留意更新'),
+          red: t('statusBrokenShort', '🔴 先别更新'),
+          unchecked: t('statusUncheckedShort', '⚪ 未巡检')
+        };
+        desc.push(statusMap[currentStatusFilter]);
+      }
+      if (currentEngineFilter !== 'all') {
+        desc.push(currentEngineFilter === 'flagship' ? t('filterEngineFlagship', '👑 Top 7 旗舰深度') : currentEngineFilter);
+      }
+      if (currentSearchQuery) {
+        desc.push(`"${currentSearchQuery}"`);
+      }
+      filterDescEl.innerText = desc.length > 0 ? `(${desc.join(' · ')})` : '';
+
+      if (filteredGames.length === 0) {
+        grid.innerHTML = '';
+        empty.classList.remove('hidden');
+        return;
+      }
+
+      empty.classList.add('hidden');
+
+      grid.innerHTML = filteredGames.map(game => {
+        const meta = getGameCompatibility(game);
+        const localizedTitle = (game.titles && game.titles[currentLang]) ? game.titles[currentLang] : game.title;
+        const secretCode = game.radarSecretCode || '老L单机888';
+        const style = STATUS_STYLES[meta.status] || STATUS_STYLES.unchecked;
+        const riskHeader = meta.legacy ? meta.riskTitle
+          : meta.reason === 'recent-update-hooks' ? t('cardRiskBroken', '🚨 框架可能要等适配')
+          : t('cardRiskWarning', '⚠️ 留意更新');
+
+        return `
+          <div
+            onclick="openGameDrawerById('${escapeHtml(game.id)}')"
+            data-radar-status="${meta.status}"
+            class="group relative overflow-hidden bg-white dark:bg-[#12141a] hover:bg-slate-50 dark:hover:bg-[#161822] rounded-2xl p-5 border ${style.border} transition-all duration-200 cursor-pointer flex flex-col justify-between shadow-sm dark:shadow-lg"
+          >
+            <!-- Top Status & Rank Row -->
+            <div class="space-y-3">
+              <div class="flex items-center justify-between gap-2">
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-mono font-semibold border ${style.badge}">
+                  <span class="w-2 h-2 rounded-full ${style.dot} ${meta.status === 'red' ? 'animate-ping' : ''}"></span>
+                  <span>${escapeHtml(meta.shortText)}</span>
+                </span>
+                <span class="text-xs font-mono text-zinc-500 font-bold">#${game.rank}</span>
+              </div>
+
+              <!-- Title & Meta -->
+              <div>
+                <h3 class="text-base sm:text-lg font-black text-zinc-900 dark:text-white group-hover:text-[#A855F7] dark:group-hover:text-purple-400 transition-colors line-clamp-1">
+                  ${escapeHtml(localizedTitle)}
+                </h3>
+                <div class="flex items-center space-x-2 text-xs text-zinc-400 pt-0.5">
+                  <span class="truncate max-w-[180px]">${escapeHtml(game.title)}</span>
+                  <span class="text-zinc-600">·</span>
+                  <span class="font-mono text-zinc-400 shrink-0">AppID:${escapeHtml(game.steamAppId || '---')}</span>
+                </div>
+              </div>
+
+              <!-- Reason & verdict -->
+              <div class="space-y-1 pt-1">
+                <p class="text-xs font-bold ${style.text}">${escapeHtml(meta.statusText)}</p>
+                <p class="text-xs text-zinc-600 dark:text-zinc-300 line-clamp-2 leading-relaxed">${escapeHtml(meta.summary)}</p>
+              </div>
+
+              <!-- Warning Box preview if Red / Yellow -->
+              ${(meta.status === 'red' || meta.status === 'yellow') ? `
+                <div class="p-2.5 rounded-xl ${meta.status === 'red' ? 'bg-red-50 text-red-700 border border-red-200 dark:bg-red-950/40 dark:text-red-300 dark:border-red-500/30' : 'bg-amber-50 text-amber-800 border border-amber-200 dark:bg-amber-950/40 dark:text-amber-300 dark:border-amber-500/30'} text-xs space-y-0.5">
+                  <div class="font-bold flex items-center gap-1">
+                    <span>${escapeHtml(riskHeader)}</span>
+                  </div>
+                  <p class="text-[11px] line-clamp-2 opacity-90">${escapeHtml(meta.riskDesc)}</p>
+                </div>
+              ` : ''}
+
+              <!-- Radar facts -->
+              <dl class="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-[11px] pt-1">
+                ${radarFactsHtml(meta, { showBuildId: false, labelClass: 'text-zinc-500 whitespace-nowrap', valueClass: 'font-mono text-zinc-700 dark:text-zinc-300' })}
+              </dl>
+            </div>
+
+            <!-- Card Bottom Bar: Rescue CTA -->
+            <div class="flex items-center justify-between pt-4 mt-3 border-t border-zinc-200/80 dark:border-white/5 text-xs">
+              <span class="text-[#A855F7] group-hover:text-purple-300 font-semibold flex items-center gap-1">
+                <span>${t('viewRescueGuide', '查看避坑方案')}</span>
+                <svg class="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+              </span>
+              <span class="text-[11px] text-zinc-400 font-mono">
+                ${t('secretCodePrefix', '暗号:')} <strong class="text-amber-400">【${escapeHtml(secretCode)}】</strong>
+              </span>
+            </div>
+
+          </div>
+        `;
+      }).join('');
+    }
+
+    // ========================================================
+    // EXPANDABLE DRAWER CONTROLS
+    // ========================================================
+    function openGameDrawerById(gameId) {
+      const game = allGames.find(g => g.id === gameId);
+      if (!game) return;
+      openGameDrawer(game);
+    }
+
+    function openGameDrawer(game) {
+      activeDrawerGame = game;
+      const meta = getGameCompatibility(game);
+      const localizedTitle = (game.titles && game.titles[currentLang]) ? game.titles[currentLang] : game.title;
+      const secretCode = game.radarSecretCode || '老L单机888';
+
+      // Fill in details
+      document.getElementById('drawer-rank').innerText = `RANK #${game.rank}`;
+      document.getElementById('drawer-engine').innerText = meta.engine ? `${t('engineLabel', '引擎')}: ${meta.engine}` : '';
+      document.getElementById('drawer-title').innerText = localizedTitle;
+      document.getElementById('drawer-entitle').innerText = `${game.title} · ${game.developer || ''} (${game.releaseYear || ''})`;
+      document.getElementById('drawer-appid').innerText = game.steamAppId || '---';
+
+      const style = STATUS_STYLES[meta.status] || STATUS_STYLES.unchecked;
+
+      // Status pill
+      const pill = document.getElementById('drawer-status-pill');
+      pill.innerText = meta.shortText;
+      pill.className = `text-xs px-2.5 py-1 rounded-full font-bold font-mono ${style.pill}`;
+
+      // Build id badge (only when the radar has one)
+      const patchBadge = document.getElementById('drawer-patch');
+      patchBadge.innerText = meta.buildId ? `build ${meta.buildId}` : '';
+      patchBadge.classList.toggle('hidden', !meta.buildId);
+
+      // Reason, summary and radar facts
+      const reasonEl = document.getElementById('drawer-reason');
+      reasonEl.innerText = meta.statusText;
+      reasonEl.className = `text-sm font-bold ${style.text}`;
+      document.getElementById('drawer-summary').innerText = meta.summary;
+      document.getElementById('drawer-facts').innerHTML = radarFactsHtml(meta, {
+        showBuildId: false,
+        labelClass: 'text-zinc-500 whitespace-nowrap',
+        valueClass: 'text-zinc-200 font-mono'
+      });
+
+      // Risk box
+      const riskBox = document.getElementById('drawer-risk-box');
+      const riskTitle = document.getElementById('drawer-risk-title');
+      const riskDesc = document.getElementById('drawer-risk-desc');
+      riskTitle.innerText = meta.riskTitle;
+      if (meta.advice) {
+        const cjk = currentLang === 'zh-CN' || currentLang === 'zh-TW' || currentLang === 'ja';
+        riskDesc.innerText = `${t('radarFieldAdvice', '更新后怎么办')}${cjk ? '：' : ': '}${meta.advice}`;
+      } else {
+        riskDesc.innerText = meta.riskDesc;
+      }
+
+      if (meta.status === 'red') {
+        riskBox.className = 'p-3.5 rounded-xl border bg-red-950/40 border-red-500/30 text-red-300 space-y-1';
+      } else if (meta.status === 'yellow') {
+        riskBox.className = 'p-3.5 rounded-xl border bg-amber-950/40 border-amber-500/30 text-amber-300 space-y-1';
+      } else if (meta.status === 'green') {
+        riskBox.className = 'p-3.5 rounded-xl border bg-emerald-950/30 border-emerald-500/30 text-emerald-300 space-y-1';
+      } else {
+        riskBox.className = 'p-3.5 rounded-xl border bg-white/5 border-white/10 text-zinc-300 space-y-1';
+      }
+
+      // Rescue steps
+      const stepsContainer = document.getElementById('drawer-rescue-steps');
+      stepsContainer.innerHTML = meta.rescueSteps.map(step => `
+        <div class="flex items-start space-x-2">
+          <span class="text-[#A855F7] font-bold shrink-0">▸</span>
+          <span>${escapeHtml(step)}</span>
+        </div>
+      `).join('');
+
+      // Bat script
+      document.getElementById('drawer-code-pre').innerText = meta.batPreview;
+
+      // Populate 5 Cards if Flagship
+      const RADAR_FLAGSHIP_FOLDERS = {
+        'cyberpunk-2077': '01_cyberpunk-2077',
+        'black-myth-wukong': '02_black-myth-wukong',
+        'witcher-3': '03_witcher-3',
+        'baldurs-gate-3': '04_baldurs-gate-3',
+        'elden-ring': '05_elden-ring',
+        'skyrim-se': '06_skyrim-se',
+        'fallout-4': '07_fallout-4'
+      };
+      const cardsSec = document.getElementById('drawer-cards-section');
+      const cardsScroll = document.getElementById('drawer-cards-scroll');
+      const folder = RADAR_FLAGSHIP_FOLDERS[game.id];
+
+      if (folder && cardsSec && cardsScroll) {
+        cardsSec.classList.remove('hidden');
+        const cardMetas = [
+          { num: 1, name: 'hook', title: t('slide1Title', 'Slide 1 · 痛点避坑卡') },
+          { num: 2, name: 'setup', title: t('slide2Title', 'Slide 2 · 控制台设置卡') },
+          { num: 3, name: 'commands', title: t('slide3Title', 'Slide 3 · 场景套餐卡') },
+          { num: 4, name: 'mods', title: t('slide4Title', 'Slide 4 · 护航模组卡') },
+          { num: 5, name: 'cta', title: t('slide5Title', 'Slide 5 · 避坑雷达自取卡') }
+        ];
+        cardsScroll.innerHTML = cardMetas.map(m => {
+          const imgUrl = `social_distribution/${folder}/images/card_${m.num}_${m.name}.png`;
+          return `
+            <div class="shrink-0 w-32 space-y-1.5 cursor-pointer group" onclick="openImageModal('${imgUrl}', '《${localizedTitle}》${m.title}')">
+              <div class="relative overflow-hidden rounded-xl border border-white/10 group-hover:border-purple-500/50 transition-all bg-black aspect-[3/4]">
+                <img src="${imgUrl}" alt="${m.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+              </div>
+              <div class="text-[10px] text-zinc-300 truncate text-center">${m.title}</div>
+            </div>
+          `;
+        }).join('');
+      } else if (cardsSec) {
+        cardsSec.classList.add('hidden');
+      }
+
+      // Secret code
+      document.getElementById('drawer-secret-code').innerText = `【${secretCode}】`;
+
+      // Main vault link
+      const vaultLink = document.getElementById('drawer-main-vault-link');
+      vaultLink.href = `index.html#/game/${game.id}`;
+
+      // Show drawer
+      const container = document.getElementById('drawer-container');
+      const backdrop = document.getElementById('drawer-backdrop');
+      const panel = document.getElementById('drawer-panel');
+
+      container.classList.remove('pointer-events-none');
+      backdrop.classList.remove('opacity-0');
+      backdrop.classList.add('opacity-100');
+
+      panel.classList.remove('translate-y-full', 'md:translate-x-full');
+      panel.classList.add('translate-y-0', 'md:translate-x-0');
+
+      // Update URL hash without jumping
+      history.replaceState(null, '', `#game-${game.id}`);
+    }
+
+    function closeGameDrawer() {
+      const container = document.getElementById('drawer-container');
+      const backdrop = document.getElementById('drawer-backdrop');
+      const panel = document.getElementById('drawer-panel');
+
+      backdrop.classList.remove('opacity-100');
+      backdrop.classList.add('opacity-0');
+
+      panel.classList.remove('translate-y-0', 'md:translate-x-0');
+      panel.classList.add('translate-y-full', 'md:translate-x-full');
+
+      setTimeout(() => {
+        container.classList.add('pointer-events-none');
+      }, 300);
+
+      activeDrawerGame = null;
+      history.replaceState(null, '', window.location.pathname);
+    }
+
+    // ESC to close drawer
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeGameDrawer();
+    });
+
+    // ========================================================
+    // SEARCH & FILTER LOGIC
+    // ========================================================
+    function handleSearch(val) {
+      if (window.LModTracker) window.LModTracker.trackSearch(val);
+      currentSearchQuery = val.trim().toLowerCase();
+      document.getElementById('clear-search-btn').classList.toggle('hidden', currentSearchQuery.length === 0);
+      applyFilters();
+    }
+
+    function clearSearch() {
+      document.getElementById('radar-search').value = '';
+      currentSearchQuery = '';
+      document.getElementById('clear-search-btn').classList.add('hidden');
+      applyFilters();
+    }
+
+    function setStatusFilter(status) {
+      currentStatusFilter = status;
+      document.querySelectorAll('#status-pills .status-pill').forEach(btn => {
+        if (btn.getAttribute('data-status') === status) {
+          btn.classList.add('active', 'bg-[#A855F7]', 'text-white');
+          btn.classList.remove('bg-white/5');
+        } else {
+          btn.classList.remove('active', 'bg-[#A855F7]', 'text-white');
+          btn.classList.add('bg-white/5');
+        }
+      });
+      applyFilters();
+    }
+
+    function filterByStatus(status) {
+      setStatusFilter(status);
+      window.scrollTo({ top: 380, behavior: 'smooth' });
+    }
+
+    function setEngineFilter(engine) {
+      currentEngineFilter = engine;
+      document.querySelectorAll('#engine-pills .engine-pill').forEach(btn => {
+        if (btn.getAttribute('data-engine') === engine) {
+          btn.classList.add('active', 'bg-white/20', 'text-white');
+          btn.classList.remove('bg-white/5');
+        } else {
+          btn.classList.remove('active', 'bg-white/20', 'text-white');
+          btn.classList.add('bg-white/5');
+        }
+      });
+      applyFilters();
+    }
+
+    function handleSort(mode) {
+      currentSortMode = mode;
+      applyFilters();
+    }
+
+    function resetAllFilters() {
+      clearSearch();
+      setStatusFilter('all');
+      setEngineFilter('all');
+      document.getElementById('sort-select').value = 'risk-desc';
+      currentSortMode = 'risk-desc';
+      applyFilters();
+    }
+
+    function applyFilters() {
+      filteredGames = allGames.filter(game => {
+        const meta = getGameCompatibility(game);
+        const zhTitle = (game.titles && game.titles['zh-CN']) ? game.titles['zh-CN'].toLowerCase() : '';
+        const locTitle = (game.titles && game.titles[currentLang]) ? game.titles[currentLang].toLowerCase() : '';
+        const enTitle = (game.title || '').toLowerCase();
+        const appId = String(game.steamAppId || '');
+        const dev = (game.developer || '').toLowerCase();
+        const engine = (meta.engineKey || '').toLowerCase();
+
+        // 1. Status Filter
+        if (currentStatusFilter !== 'all' && meta.status !== currentStatusFilter) {
+          return false;
+        }
+
+        // 2. Engine / Flagship Filter
+        if (currentEngineFilter === 'flagship') {
+          if (game.rank > 7) return false;
+        } else if (currentEngineFilter !== 'all') {
+          if (!engine.includes(currentEngineFilter.toLowerCase())) return false;
+        }
+
+        // 3. Search Query (multilingual match)
+        if (currentSearchQuery) {
+          const matchTitle = zhTitle.includes(currentSearchQuery) || 
+                             locTitle.includes(currentSearchQuery) || 
+                             enTitle.includes(currentSearchQuery);
+          const matchAppId = appId.includes(currentSearchQuery);
+          const matchDev = dev.includes(currentSearchQuery);
+          const matchEngine = engine.includes(currentSearchQuery);
+          if (!matchTitle && !matchAppId && !matchDev && !matchEngine) {
+            return false;
+          }
+        }
+
+        return true;
+      });
+
+      // 4. Sort
+      filteredGames.sort((a, b) => {
+        const metaA = getGameCompatibility(a);
+        const metaB = getGameCompatibility(b);
+
+        if (currentSortMode === 'risk-desc') {
+          const scoreMap = { red: 3, yellow: 2, green: 1, unchecked: 0 };
+          const diff = scoreMap[metaB.status] - scoreMap[metaA.status];
+          if (diff !== 0) return diff;
+          return a.rank - b.rank;
+        } else if (currentSortMode === 'compatible-first') {
+          const scoreMap = { green: 3, yellow: 2, red: 1, unchecked: 0 };
+          const diff = scoreMap[metaB.status] - scoreMap[metaA.status];
+          if (diff !== 0) return diff;
+          return a.rank - b.rank;
+        } else if (currentSortMode === 'rank-asc') {
+          return a.rank - b.rank;
+        } else if (currentSortMode === 'name-asc') {
+          return a.title.localeCompare(b.title);
+        }
+        return 0;
+      });
+
+      renderRadarCards();
+    }
+
+    // ========================================================
+    // CLIPBOARD HELPERS (WECHAT-COMPATIBLE FALLBACK)
+    // ========================================================
+    function copyText(text, successMsg) {
+      const msg = successMsg || t('toastCopied', '已复制！');
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+          showToast(msg);
+        }).catch(() => {
+          fallbackCopyText(text, msg);
+        });
+      } else {
+        fallbackCopyText(text, msg);
+      }
+    }
+
+    function fallbackCopyText(text, successMsg) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.top = '0';
+      ta.style.left = '0';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      try {
+        document.execCommand('copy');
+        showToast(successMsg);
+      } catch (e) {
+        showToast('Ctrl+C / Cmd+C');
+      }
+      document.body.removeChild(ta);
+    }
+
+    function showToast(text) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-text').innerText = text;
+      toast.classList.remove('-translate-y-20', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('-translate-y-20', 'opacity-0');
+      }, 2500);
+    }
+
+    function copyGroupSecretCode() {
+      copyText('老L单机888', t('toastSecretCopied', '进群暗号已复制！在公众号后台或私信发送即可'));
+    }
+
+    function copyCurrentSecretCode() {
+      if (!activeDrawerGame) return;
+      const code = activeDrawerGame.radarSecretCode || '老L单机888';
+      copyText(code, t('toastSecretCopied', '进群暗号已复制！在公众号后台或私信发送即可'));
+    }
+
+    function copyDrawerBat() {
+      if (!activeDrawerGame) return;
+      const meta = getGameCompatibility(activeDrawerGame);
+      copyText(meta.batPreview, t('toastBatCopied', '批处理脚本代码已复制！新建文本改名为 .bat 即可运行'));
+    }
+
+    function scrollAlerts() {
+      // Pause or jump
+    }
+
+    // ========================================================
+    // INITIALIZATION & URL ROUTING
+    // ========================================================
+    function updateMetrics() {
+      let green = 0, yellow = 0, red = 0, unchecked = 0;
+      allGames.forEach(g => {
+        const meta = getGameCompatibility(g);
+        if (meta.status === 'green') green++;
+        else if (meta.status === 'yellow') yellow++;
+        else if (meta.status === 'red') red++;
+        else unchecked++;
+      });
+      const statG = document.getElementById('stat-green');
+      if (statG) statG.innerText = green;
+      const statY = document.getElementById('stat-yellow');
+      if (statY) statY.innerText = yellow;
+      const statR = document.getElementById('stat-red');
+      if (statR) statR.innerText = red;
+      const statTracked = document.getElementById('stat-tracked');
+      if (statTracked) statTracked.innerText = green + yellow + red;
+
+      const miDesc = document.getElementById('metric-inspection-desc');
+      if (miDesc) {
+        const lastRun = latestRadarCheck();
+        const parts = [];
+        if (lastRun) parts.push(`${t('radarFieldLastChecked', '上次巡检')} ${lastRun.text}`);
+        else parts.push(t('statusInspectionDesc', '每天比对 Steam 公共分支的更新时间'));
+        if (unchecked > 0) parts.push(fillTemplate(t('radarUncheckedCount', '{n} 款未巡检'), { n: unchecked }));
+        miDesc.innerText = parts.join(' · ');
+        miDesc.title = t('statusInspectionDesc', '每天比对 Steam 公共分支的更新时间');
+      }
+    }
+
+    function handleUrlParams() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const gameParam = urlParams.get('game');
+      const hash = window.location.hash.replace('#game-', '').replace('#', '');
+      const targetId = gameParam || hash;
+
+      if (targetId) {
+        setTimeout(() => {
+          openGameDrawerById(targetId);
+        }, 150);
+      }
+    }
+
+    // ==========================================
+    // IMAGE MODAL PREVIEW HANDLER
+    // ==========================================
+    function openImageModal(src, title) {
+      const modal = document.getElementById('image-modal');
+      const img = document.getElementById('image-modal-img');
+      const titleEl = document.getElementById('image-modal-title');
+      const dl = document.getElementById('image-modal-download');
+      if (!modal || !img) return;
+
+      img.src = src;
+      if (titleEl) titleEl.innerText = title || '1080×1440 HD Card';
+      if (dl) {
+        dl.href = src;
+        dl.setAttribute('download', src.split('/').pop());
+      }
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeImageModal() {
+      const modal = document.getElementById('image-modal');
+      if (!modal) return;
+      modal.classList.remove('flex');
+      modal.classList.add('hidden');
+    }
+
+    function initWeChatCheck() {
+      const ua = (navigator.userAgent || '').toLowerCase();
+      const isWeChat = ua.includes('micromessenger') || window.location.search.includes('wechat=1') || window.location.search.includes('wx=1');
+      const banner = document.getElementById('wechat-safe-banner');
+      if (!banner) return;
+      if (isWeChat) {
+        if (sessionStorage.getItem('lmod_wx_dismissed') === '1') return;
+        banner.classList.remove('hidden');
+        requestAnimationFrame(() => {
+          banner.classList.remove('-translate-y-full');
+          banner.classList.add('translate-y-0');
+        });
+      }
+    }
+
+    function dismissWeChatBanner() {
+      const banner = document.getElementById('wechat-safe-banner');
+      if (banner) {
+        banner.classList.remove('translate-y-0');
+        banner.classList.add('-translate-y-full');
+        setTimeout(() => {
+          banner.classList.add('hidden');
+        }, 450);
+        sessionStorage.setItem('lmod_wx_dismissed', '1');
+      }
+    }
+
+    function initTheme() {
+      const savedTheme = localStorage.getItem('lmod_theme');
+      if (savedTheme) {
+        applyTheme(savedTheme);
+      } else {
+        applyTheme('dark');
+      }
+    }
+
+    function toggleTheme() {
+      const isDark = document.documentElement.classList.contains('dark');
+      const newTheme = isDark ? 'light' : 'dark';
+      localStorage.setItem('lmod_theme', newTheme);
+      applyTheme(newTheme);
+    }
+
+    function applyTheme(theme) {
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+      const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+      if (metaThemeColor) {
+        metaThemeColor.setAttribute('content', theme === 'dark' ? '#0a0b0e' : '#f8fafc');
+      }
+    }
+
+    function initRadar() {
+      initTheme();
+      if (window.GAMES_DATA) {
+        allGames = window.GAMES_DATA;
+      } else if (window.GAMES_DATABASE) {
+        allGames = window.GAMES_DATABASE;
+      }
+      initLanguage();
+      renderRadarUI();
+      updateMetrics();
+      applyFilters();
+      handleUrlParams();
+      initWeChatCheck();
+      if (window.LModTracker) window.LModTracker.trackPageView();
+      refreshCatalogFromApi();
+    }
+
+    // 游戏内容的真源是 D1：先用 data.js 快照渲染，再向 /api/v1/catalog 要最新目录，有变化才重画。
+    // 雷达字段仍以快照为准（和 radar_status.json 同批发布，见 js/catalog-live.js）；接口不可用就一直用快照。
+    function refreshCatalogFromApi() {
+      if (!window.LmodCatalog) return;
+      window.LmodCatalog.refresh(allGames).then(changed => {
+        if (!changed) return;
+        renderTicker();
+        updateMetrics();
+        applyFilters();
+        if (activeDrawerGame) {
+          if (allGames.indexOf(activeDrawerGame) !== -1) openGameDrawer(activeDrawerGame);
+          else closeGameDrawer();
+        } else {
+          handleUrlParams(); // ?game= 指向快照里没有的新游戏 → 现在能打开了
+        }
+      });
+    }
+
+    window.addEventListener('DOMContentLoaded', initRadar);
+</script>
+  <!-- High-Definition Image Preview Modal -->
+  <div id="image-modal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden items-center justify-center p-4 transition-all" onclick="closeImageModal()">
+    <div class="relative max-w-4xl max-h-[95vh] flex flex-col items-center" onclick="event.stopPropagation()">
+      <button onclick="closeImageModal()" class="absolute -top-10 right-0 text-white/70 hover:text-white p-2 cursor-pointer">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+      <img id="image-modal-img" src="" alt="Card Preview" class="max-h-[82vh] rounded-2xl shadow-2xl border border-white/20 object-contain">
+      <div class="mt-3 flex items-center space-x-3 text-xs">
+        <span id="image-modal-title" class="text-white font-bold"></span>
+        <a id="image-modal-download" href="#" download class="px-4 py-1.5 rounded-full bg-[#A855F7] hover:bg-[#A855F7] text-white font-semibold transition-all"><span id="image-modal-download-text">下载 1080×1440 原图</span></a>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

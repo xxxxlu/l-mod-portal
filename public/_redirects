@@ -1,0 +1,11 @@
+# ==============================================================================
+# Cloudflare Pages Clean Redirects & Rewrites for L-MOD Vault
+# Production Safe: No circular 308 rewrites with Clean URLs
+# ==============================================================================
+
+# 1. Clean root & aliases
+/home           /                 301
+/index          /                 301
+
+# 2. SPA Dynamic Fallback for deep links
+/*              /index.html       200

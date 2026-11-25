@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GameVaultEntry",
+  "description": "Master schema for full game profile entries in L-MOD Vault games_top100.json.",
+  "type": "object",
+  "required": [
+    "id",
+    "rank",
+    "title",
+    "titles",
+    "developer",
+    "releaseYear",
+    "genre",
+    "steamRating",
+    "hasConsole",
+    "consoleShortcut",
+    "consoleEnableGuide",
+    "popularCommands",
+    "hasMods",
+    "modInstallPath",
+    "hasTrainer",
+    "trainerInfo",
+    "consoleCategories",
+    "curatedMods"
+  ],
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9_-]+$" },
+    "rank": { "type": "integer", "minimum": 1, "maximum": 100 },
+    "title": { "type": "string" },
+    "titles": {
+      "type": "object",
+      "required": ["en", "zh-CN"]
+    },
+    "developer": { "type": "string" },
+    "releaseYear": { "type": "integer", "minimum": 1990 },
+    "genre": { "type": "string" },
+    "steamRating": { "type": "string" },
+    "hasConsole": { "type": "boolean" },
+    "consoleShortcut": { "type": "string" },
+    "consoleEnableGuide": {
+      "type": "object",
+      "required": ["zh-CN", "en"]
+    },
+    "popularCommands": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "object",
+        "required": ["name", "command", "desc"]
+      }
+    },
+    "hasMods": { "type": "boolean" },
+    "modInstallPath": { "type": "string" },
+    "hasTrainer": { "type": "boolean" },
+    "trainerInfo": { "$ref": "trainer_info.schema.json" },
+    "consoleCategories": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["category", "commands"],
+        "properties": {
+          "category": { "type": "string" },
+          "commands": {
+            "type": "array",
+            "items": { "$ref": "game_command.schema.json" }
+          }
+        }
+      }
+    },
+    "curatedMods": {
+      "type": "array",
+      "items": { "$ref": "curated_mod.schema.json" }
+    }
+  }
+}
