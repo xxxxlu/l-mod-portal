@@ -134,7 +134,7 @@ jobs:
           script: |
             const fs = require('fs');
             const reportPath = process.env.RADAR_REPORT || 'docs/PATCH_MONITOR_LATEST.md';
-            let content = '检测到官方突发坏档大更新！请立即启动适配排查。';
+            let content = '补丁雷达有新变红的游戏，但没找到本次巡检报告（docs/PATCH_MONITOR_LATEST.md）。';
             if (fs.existsSync(reportPath)) {
               content = fs.readFileSync(reportPath, 'utf8');
             }
@@ -151,7 +151,7 @@ jobs:
             } else {
               await github.rest.issues.create({
                 owner, repo,
-                title: (process.env.SIM_GAME ? '【演练】' : '') + '🚨【紧急避坑预警】Steam 官方推送突发补丁 · 避坑雷达已自动更新预警',
+                title: (process.env.SIM_GAME ? '【演练】' : '') + '补丁雷达：有游戏刚更新，常用 Mod 框架可能要等适配',
                 body: content,
                 labels: ['radar-alert', 'breaking-patch', 'mod-incompatible']
               });
