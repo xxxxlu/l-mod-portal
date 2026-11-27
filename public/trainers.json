@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "generatedAt": "2026-11-23T11:48:33+00:00",
+ "generatedAt": "2026-11-27T11:55:42+00:00",
  "source": "flingtrainer.com 公开 WordPress 接口（只读元数据，不转存文件）",
  "author": "风灵月影 (FLiNG)",
  "games": {
@@ -4130,11 +4130,11 @@
    "title": "Crusader Kings III Trainer",
    "url": "https://flingtrainer.com/trainer/crusader-kings-iii-trainer/",
    "matchedBy": "slug",
-   "modified": "2026-10-10T08:42:00",
+   "modified": "2026-11-26T20:44:41",
    "optionsCount": 23,
-   "gameVersion": "v1.0-v1.20+",
+   "gameVersion": "v1.0-v1.21+",
    "platforms": [],
-   "lastUpdated": "2026-10-10",
+   "lastUpdated": "2026-11-26",
    "antiCheat": false,
    "offlineOnly": false,
    "hotkeys": [

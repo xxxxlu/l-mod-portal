@@ -16230,9 +16230,9 @@ window.GAMES_DATA = [
     "trainerInfo": {
       "author": "风灵月影 (FLiNG)",
       "officialUrl": "https://flingtrainer.com/trainer/crusader-kings-iii-trainer/",
-      "version": "v1.0-v1.20+",
+      "version": "v1.0-v1.21+",
       "optionsCount": 23,
-      "lastUpdated": "2026-10-10",
+      "lastUpdated": "2026-11-26",
       "platforms": [],
       "antiCheat": false,
       "offlineOnly": false,
