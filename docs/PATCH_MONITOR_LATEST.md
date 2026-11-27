@@ -1,8 +1,8 @@
 # 📡 补丁雷达巡检报告
 
-<!-- radar-new-red: 1 -->
+<!-- radar-new-red: 0 -->
 
-- 巡检时间：`2026-11-26T10:31:46Z`（UTC）
+- 巡检时间：`2026-11-27T10:35:24Z`（UTC）
 - 范围：99 款带 Steam AppID 的游戏（非 Steam 游戏不巡检）
 - 规则：Steam 公共分支 build 发布时间 ≤ 14 天算「刚更新」；框架资料 `hooksExe` 为 true 才亮红；build ≤ 90 天且修改器早于它超过 1 天亮黄。公告只展示，不参与判定。
 - 没取到 build 信息的游戏，雷达字段保持上次的值不动；只是公告没取到的照常判定，公告标题和链接保留上次的值。
@@ -11,48 +11,40 @@
 
 | 🔴 红 | 🟡 黄 | 🟢 绿 | ⚪ 本次未取到 | 🚨 新变红 |
 |:---:|:---:|:---:|:---:|:---:|
-| 2 | 29 | 68 | 0 | 1 |
+| 2 | 29 | 68 | 0 | 0 |
 
-原因码：`recent-update-hooks` 2 · `recent-update` 15 · `trainer-behind` 14 · `quiet` 68
+原因码：`recent-update-hooks` 2 · `recent-update` 16 · `trainer-behind` 13 · `quiet` 68
 
-## 🚨 新变红（1）
+## 🚨 新变红（0）
 
-这次是红灯，并且上次不是红灯、或者上次的 build 和这次不一样：
-
-- **#60 杀手：暗杀世界** · AppID `1659040` · build `26758069`（2026-11-26）· 框架 [Simple Mod Framework](https://github.com/atampy25/simple-mod-framework) · 上次 `green` / build `26301025`
-
-可直接转发的提醒（只写事实）：
-
-```text
-《杀手：暗杀世界》Steam 于 2026-11-26 更新。Simple Mod Framework 可能要等作者发新版才能用，带 Mod 玩的先别更新：Steam 库里右键游戏 → 属性 → 更新 → 改成「仅在启动时更新」。
-```
+本次没有新变红的游戏。
 
 ## 🔴 红灯（2）
 
 | # | 游戏 | 原因 | Steam build | 发布时间 (UTC) | 框架 | 新变红 |
 |:---:|:---|:---|:---|:---|:---|:---:|
-| 60 | 杀手：暗杀世界 | `recent-update-hooks` | `26758069` | 2026-11-26T10:05:20Z | [Simple Mod Framework](https://github.com/atampy25/simple-mod-framework) | 是 |
+| 60 | 杀手：暗杀世界 | `recent-update-hooks` | `26758069` | 2026-11-26T10:05:20Z | [Simple Mod Framework](https://github.com/atampy25/simple-mod-framework) |  |
 | 74 | 腐蚀 (本地自建服) | `recent-update-hooks` | `26898638` | 2026-11-25T03:24:10Z | [Oxide (uMod)](https://umod.org/games/rust) |  |
 
 ## 🟡 黄灯（29）
 
 | # | 游戏 | 原因 | Steam build | 发布时间 (UTC) | 修改器更新 | 框架 / hooksExe |
 |:---:|:---|:---|:---|:---|:---|:---|
-| 3 | 巫师 3：狂猎 (次世代版 / 完全版) | `trainer-behind` | `26238013` | 2026-10-29T10:59:52Z | 2024-05-22 | — / `false` |
+| 3 | 巫师 3：狂猎 (次世代版 / 完全版) | `recent-update` | `26940956` | 2026-11-26T12:59:11Z | 2024-05-22 | — / `false` |
 | 4 | 博德之门 3 | `trainer-behind` | `25605617` | 2026-09-29T14:55:18Z | 2025-04-16 | [BG3 Script Extender](https://github.com/Norbyte/bg3se) / `true` |
 | 5 | 艾尔登法环 | `trainer-behind` | `25827938` | 2026-10-20T07:00:45Z | 2026-01-02 | [Mod Engine 2](https://github.com/soulsmods/ModEngine2) / `null` |
 | 8 | 幻兽帕鲁 | `trainer-behind` | `25246127` | 2026-09-15T03:01:22Z | 2026-07-10 | [UE4SS Experimental (Palworld)](https://steamcommunity.com/sharedfiles/filedetails/?id=3625223587) / `false` |
 | 15 | 骑马与砍杀 2：霸主 | `trainer-behind` | `26566465` | 2026-11-11T15:29:46Z | 2026-08-10 | [Harmony (Bannerlord.Harmony)](https://github.com/BUTR/Bannerlord.Harmony) / `false` |
 | 17 | 泰拉瑞亚 | `recent-update` | `26902183` | 2026-11-24T19:15:44Z | 2026-09-16 | [tModLoader](https://github.com/tModLoader/tModLoader) / `false` |
 | 18 | 霍格沃茨之遗 | `trainer-behind` | `26175237` | 2026-11-05T16:02:27Z | 2025-12-16 | — / `false` |
-| 21 | 英灵神殿 | `recent-update` | `26870846` | 2026-11-25T09:48:52Z | 2026-09-23 | [BepInExPack Valheim](https://github.com/BepInEx/BepInEx) / `false` |
+| 21 | 英灵神殿 | `recent-update` | `26948984` | 2026-11-26T14:05:53Z | 2026-09-23 | [BepInExPack Valheim](https://github.com/BepInEx/BepInEx) / `false` |
 | 24 | 消逝的光芒 2 | `recent-update` | `26889205` | 2026-11-25T13:00:57Z | 2026-10-22 | — / `false` |
 | 30 | 幸福工厂 | `recent-update` | `26728002` | 2026-11-18T16:22:51Z | 2026-06-07 | [Satisfactory Mod Loader (SML)](https://docs.ficsit.app/satisfactory-modding/latest/) / `false` |
 | 31 | 异星工厂 | `recent-update` | `26700955` | 2026-11-23T14:36:23Z | — | — / `false` |
 | 32 | 城市：天际线 | `recent-update` | `25432556` | 2026-11-24T08:59:00Z | — | — / `false` |
 | 33 | 文明 6 | `recent-update` | `26595377` | 2026-11-19T18:59:18Z | 2022-12-22 | — / `false` |
 | 34 | 十字军之王 3 | `recent-update` | `26785313` | 2026-11-19T14:45:41Z | 2026-10-10 | — / `false` |
-| 35 | 钢铁雄心 4 | `recent-update` | `26733403` | 2026-11-19T13:59:46Z | 2026-06-14 | — / `false` |
+| 35 | 钢铁雄心 4 | `recent-update` | `26921304` | 2026-11-26T12:59:45Z | 2026-06-14 | — / `false` |
 | 36 | 群星 | `recent-update` | `26639410` | 2026-11-23T13:55:42Z | 2026-06-26 | — / `false` |
 | 37 | 全面战争：战锤 3 | `recent-update` | `26810549` | 2026-11-20T12:03:21Z | 2026-09-29 | — / `false` |
 | 38 | 全面战争：三国 | `trainer-behind` | `25370317` | 2026-09-17T14:04:42Z | 2025-12-06 | — / `false` |
@@ -88,12 +80,12 @@
 |:---:|:---|:---:|:---|:---|:---|:---|:---|
 | 1 | 赛博朋克 2077 | 🟢 | `quiet` | `26161058` | 2026-10-23T13:33:24Z | 2026-10-28 | [REDstreams – Cyberpunk: Edgerunners 2](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1847286114045127) |
 | 2 | 黑神话：悟空 | 🟢 | `quiet` | `21393610` | 2026-01-14T07:57:07Z | 2025-10-17 | [Black Myth: Wukong — 30% Off Coming Soon](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1840310314337994) |
-| 3 | 巫师 3：狂猎 (次世代版 / 完全版) | 🟡 | `trainer-behind` | `26238013` | 2026-10-29T10:59:52Z | 2024-05-22 | [Patch 5.01 is live!](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1846018067929400) |
+| 3 | 巫师 3：狂猎 (次世代版 / 完全版) | 🟡 | `recent-update` | `26940956` | 2026-11-26T12:59:11Z | 2024-05-22 | [Patch 5.02 for The Witcher 3: Wild Hunt…](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1850460852985444) |
 | 4 | 博德之门 3 | 🟡 | `trainer-behind` | `25605617` | 2026-09-29T14:55:18Z | 2025-04-16 | [Hotfix #36 Now Live!](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1827626365770693) |
 | 5 | 艾尔登法环 | 🟡 | `trainer-behind` | `25827938` | 2026-10-20T07:00:45Z | 2026-01-02 | [Alexander, Warrior Jar Artisan Keycap h…](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1847920302237841) |
 | 6 | 上古卷轴 5：天际重制版 | 🟢 | `quiet` | `24914197` | 2026-08-27T14:00:09Z | 2023-12-05 | [Celebrate 15 Years of Skyrim with the A…](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849192144180604) |
 | 7 | 辐射 4 | 🟢 | `quiet` | `24564252` | 2026-08-18T14:00:28Z | 2024-04-29 | [Happy Fallout Day!](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1847286114037070) |
-| 8 | 幻兽帕鲁 | 🟡 | `trainer-behind` | `25246127` | 2026-09-15T03:01:22Z | 2026-07-10 | [Please Nominate Palworld for the "Just …](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849827110442979) |
+| 8 | 幻兽帕鲁 | 🟡 | `trainer-behind` | `25246127` | 2026-09-15T03:01:22Z | 2026-07-10 | [Palworld × Dune: Awakening Steam Bundle…](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1850460852986596) |
 | 9 | 星空 | 🟢 | `quiet` | `23518663` | 2026-06-11T15:00:15Z | 2026-04-28 | [New worlds to explore with Starfield Cr…](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1835236783563685) |
 | 10 | 侠盗猎车手 5 | 🟢 | `quiet` | `24129523` | 2026-07-14T09:01:57Z | 2024-09-19 | [Take Down the Kortz Center and More Hig…](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1848664643345005) |
 | 11 | 荒野大镖客：救赎 2 | 🟢 | `quiet` | `13773296` | 2024-03-19T10:12:09Z | 2024-03-20 | [A Bustling Frontier Benefits All Roles …](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1833968530900662) |
@@ -102,15 +94,15 @@
 | 14 | 生化危机 4 重制版 | 🟢 | `quiet` | `22377325` | 2026-03-31T01:02:33Z | 2026-02-04 | [Resident Evil Veronica Store Page now o…](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1834602721197786) |
 | 15 | 骑马与砍杀 2：霸主 | 🟡 | `trainer-behind` | `26566465` | 2026-11-11T15:29:46Z | 2026-08-10 | [Patch Notes - WS v1.3.7 / BL v1.5.7](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849192144179132) |
 | 16 | 星露谷物语 | 🟢 | `quiet` | `16826371` | 2024-12-22T00:19:35Z | 2024-04-07 | [Stardew Valley Merchandise Spotlight](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849827110433709) |
-| 17 | 泰拉瑞亚 | 🟡 | `recent-update` | `26902183` | 2026-11-24T19:15:44Z | 2026-09-16 | [Terraria 1.4.6: Crossplay Phase One Lau…](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849827110446549) |
+| 17 | 泰拉瑞亚 | 🟡 | `recent-update` | `26902183` | 2026-11-24T19:15:44Z | 2026-09-16 | [Terraria State of the Game - November 2…](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1850460852986815) |
 | 18 | 霍格沃茨之遗 | 🟡 | `trainer-behind` | `26175237` | 2026-11-05T16:02:27Z | 2025-12-16 | [WB Games Celebrates Black Friday Saving…](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849827110443178) |
 | 19 | 深海迷航 | 🟢 | `quiet` | `20241558` | 2025-10-03T21:32:59Z | 2021-05-12 | [Subnautica Free Weekend & Series Sale](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1828894815555876) |
 | 20 | 黑暗之魂 3 | 🟢 | `quiet` | `10167187` | 2023-01-12T09:00:58Z | 2023-01-15 | [ELDEN RING NIGHTREIGN - Official Pre-Or…](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1791580425958667) |
-| 21 | 英灵神殿 | 🟡 | `recent-update` | `26870846` | 2026-11-25T09:48:52Z | 2026-09-23 | [Vote For Valheim in the Steam Awards!](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1850460852981078) |
+| 21 | 英灵神殿 | 🟡 | `recent-update` | `26948984` | 2026-11-26T14:05:53Z | 2026-09-23 | [Hotfix 1.0.31](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1850460852985647) |
 | 22 | 生化危机 8：村庄 | 🟢 | `quiet` | `22373341` | 2026-03-31T01:03:35Z | 2026-02-04 | [Resident Evil Veronica Store Page now o…](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1834602721197803) |
 | 23 | 消逝的光芒 | 🟢 | `quiet` | `24076292` | 2026-07-07T12:09:25Z | 2022-09-02 | [Steam Halloween Sale X Dying Light now …](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1847286114046170) |
 | 24 | 消逝的光芒 2 | 🟡 | `recent-update` | `26889205` | 2026-11-25T13:00:57Z | 2026-10-22 | [CLAIM YOUR REWARDS Halloween Showdown 2…](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849458702689537) |
-| 25 | 辐射：新维加斯 | 🟢 | `quiet` | `1510068` | 2018-05-08T22:34:07Z | — | [Fallout Discounted for Steam Holiday De…](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/3819571572127262350) |
+| 25 | 辐射：新维加斯 | 🟢 | `quiet` | `1510068` | 2018-05-08T22:34:07Z | — | [Fallout Discounted for Steam Holiday De…](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1478591738298709850) |
 | 26 | 边缘世界 | 🟢 | `quiet` | `23969874` | 2026-06-30T17:12:35Z | — | [It's RimWorld's birthday!](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1847286114046348) |
 | 27 | 僵尸毁灭工程 | 🟢 | `quiet` | `26486631` | 2026-11-09T14:03:25Z | — | [42.22.2 STABLE Released](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1848664643355564) |
 | 28 | 森林 | 🟢 | `quiet` | `20229486` | 2025-10-03T17:00:09Z | — | [Unity security update](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1811772772517783) |
@@ -120,18 +112,18 @@
 | 32 | 城市：天际线 | 🟡 | `recent-update` | `25432556` | 2026-11-24T08:59:00Z | — | [Estates & Escapes is out now!](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849827110445409) |
 | 33 | 文明 6 | 🟡 | `recent-update` | `26595377` | 2026-11-19T18:59:18Z | 2022-12-22 | [Black Friday Deals on the Best of 2K.*](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849827110443060) |
 | 34 | 十字军之王 3 | 🟡 | `recent-update` | `26785313` | 2026-11-19T14:45:41Z | 2026-10-10 | [Update 1.21.0.3](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849827110428649) |
-| 35 | 钢铁雄心 4 | 🟡 | `recent-update` | `26733403` | 2026-11-19T13:59:46Z | 2026-06-14 | [Hearts of Iron IV \| To the Bitter End i…](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849827110428488) |
-| 36 | 群星 | 🟡 | `recent-update` | `26639410` | 2026-11-23T13:55:42Z | 2026-06-26 | [Stellaris: Willpower now available!](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849827110441822) |
+| 35 | 钢铁雄心 4 | 🟡 | `recent-update` | `26921304` | 2026-11-26T12:59:45Z | 2026-06-14 | [Hearts of Iron IV \| Patch 1.20.1 & Stud…](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1850460852985445) |
+| 36 | 群星 | 🟡 | `recent-update` | `26639410` | 2026-11-23T13:55:42Z | 2026-06-26 | [Blorg Jumbo Plushie LIMITED EDITION \| M…](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1850460852985848) |
 | 37 | 全面战争：战锤 3 | 🟡 | `recent-update` | `26810549` | 2026-11-20T12:03:21Z | 2026-09-29 | [Black Friday Sale NOW ON!](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849458702690712) |
 | 38 | 全面战争：三国 | 🟡 | `trainer-behind` | `25370317` | 2026-09-17T14:04:42Z | 2025-12-06 | [Black Friday Sale NOW ON!](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849458702690723) |
-| 39 | 龙之信条 2 | 🟢 | `quiet` | `26256634` | 2026-11-03T23:59:39Z | 2026-11-10 | [Delicious in Dungeon × Dragon's Dogma 2…](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1848557880477490) |
+| 39 | 龙之信条 2 | 🟢 | `quiet` | `26256634` | 2026-11-03T23:59:39Z | 2026-11-10 | [Cast your vote for the Steam Awards 202…](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1850460852987853) |
 | 40 | 装甲核心 6：境界天火 | 🟢 | `quiet` | `21034069` | 2025-12-16T07:03:12Z | 2023-12-24 | [Release Note for 2025/12/16](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1818752592134841) |
 | 41 | 对马岛之魂：导演剪辑版 | 🟢 | `quiet` | `23879181` | 2026-07-08T09:07:57Z | 2024-05-19 | [Improved DualSense Edge support for Gho…](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1836506165580043) |
 | 42 | 战神 4 | 🟢 | `quiet` | `11168363` | 2023-05-22T17:15:18Z | 2022-01-22 | [God of War (2018) Available for Up To 6…](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/6250522009517172772) |
 | 43 | 漫威蜘蛛侠：重制版 | 🟢 | `quiet` | `23986256` | 2026-07-08T09:10:12Z | 2023-06-22 | [Improved DualSense Edge support for Mar…](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1836506165580047) |
 | 44 | 地平线：零之曙光 | 🟢 | `quiet` | `8040161` | 2022-01-26T10:02:24Z | 2020-11-25 | [Horizon Forbidden West Complete Edition…](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/5686430301718251854) |
 | 45 | 往日不再 | 🟢 | `quiet` | `19221447` | 2025-07-21T19:21:03Z | 2025-04-26 | [Days Gone Beta Branch Option](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1813674388912015) |
-| 46 | 死亡搁浅：导演剪辑版 | 🟢 | `quiet` | `13300582` | 2024-01-29T10:48:49Z | 2022-05-11 | [DEATH STRANDING COLLECTION AVAILABLE NOW](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849827110430898) |
+| 46 | 死亡搁浅：导演剪辑版 | 🟢 | `quiet` | `13300582` | 2024-01-29T10:48:49Z | 2022-05-11 | [STEAM AWARDS - DEATH STRANDING 2: ON TH…](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1850460852985784) |
 | 47 | 底特律：化身为人 | 🟢 | `quiet` | `12158144` | 2023-09-28T07:41:26Z | — | [Nominate us for the Labor of Love Steam…](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1784506359154638) |
 | 48 | 天国：拯救 | 🟢 | `quiet` | `22623230` | 2026-04-14T15:01:15Z | 2019-07-18 | [Experience the music of Kingdom Come: D…](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1845383656386437) |
 | 49 | 骑马与砍杀：战团 | 🟢 | `quiet` | `23983102` | 2026-07-02T11:33:58Z | — | [Viking Conquest 2.072](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1836506165567784) |
@@ -144,7 +136,7 @@
 | 57 | 生化奇兵：无限 | 🟢 | `quiet` | `10404041` | 2023-02-09T00:21:02Z | — | [Cozy Up with 2K: The Autumn Sale is Liv…](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1845383656383072) |
 | 58 | 羞辱 2 | 🟢 | `quiet` | `17576867` | 2025-03-18T15:00:51Z | 2020-05-13 | [Free Content for Dishonored 2 & Death o…](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/3244179105161288005) |
 | 59 | 掠食 | 🟢 | `quiet` | `5297220` | 2020-07-23T14:00:32Z | 2021-01-10 | [Prey: Mooncrash – Typhon Hunter Availab…](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/2416641943191178150) |
-| 60 | 杀手：暗杀世界 | 🔴 | `recent-update-hooks` | `26758069` | 2026-11-26T10:05:20Z | 2026-11-07 | [Nominate HITMAN World of Assassination …](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1850460852981912) |
+| 60 | 杀手：暗杀世界 | 🔴 | `recent-update-hooks` | `26758069` | 2026-11-26T10:05:20Z | 2026-11-07 | [Play The Mission & Get a Reward in 007 …](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1850460852988913) |
 | 61 | 刺客信条：奥德赛 | 🟢 | `quiet` | `17083392` | 2025-02-04T14:00:22Z | 2020-11-28 | [AC Black Flag Resynced out now!](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1837955055363115) |
 | 62 | 刺客信条：英灵殿 | 🟡 | `trainer-behind` | `26142239` | 2026-11-05T13:57:12Z | 2022-12-10 | [Assassin’s Creed Valhalla - Title Updat…](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1848664643341476) |
 | 63 | 刺客信条：起源 | 🟢 | `quiet` | `16965472` | 2025-01-14T14:00:25Z | 2024-01-29 | [AC Black Flag Resynced out now!](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1837955055363117) |
@@ -165,9 +157,9 @@
 | 78 | 模拟人生 4 | 🟢 | `quiet` | `25966929` | 2026-10-27T17:00:04Z | — | [Retirement Never Looked So Good](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849827110443386) |
 | 79 | 动物园之星 | 🟢 | `quiet` | `23333923` | 2026-05-28T14:00:02Z | 2020-12-16 | [Planet Zoo 2 - OUT NOW! 💚💚](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1846018067944132) |
 | 80 | 侏罗纪世界：进化 2 | 🟢 | `quiet` | `18857191` | 2025-06-19T10:00:04Z | 2023-05-11 | [Jurassic World Evolution 3 is 33% off!](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1835236783574267) |
-| 81 | 欧洲卡车模拟 2 | 🟡 | `recent-update` | `26765198` | 2026-11-18T18:10:44Z | — | [Isle of Ireland: Galway](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849827110424837) |
+| 81 | 欧洲卡车模拟 2 | 🟡 | `recent-update` | `26765198` | 2026-11-18T18:10:44Z | — | [Iceland: Community Spotlight](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1850460852986112) |
 | 82 | 雪地奔驰 | 🟡 | `trainer-behind` | `26218478` | 2026-11-02T09:55:58Z | 2022-12-28 | [Steam Awards 2026](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849827110443142) |
-| 83 | 极限竞速：地平线 5 | 🟢 | `quiet` | `21856128` | 2026-02-17T15:57:39Z | — | [Reward Car Build - November 20th](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849827110432680) |
+| 83 | 极限竞速：地平线 5 | 🟢 | `quiet` | `21856128` | 2026-02-17T15:57:39Z | — | [Get Ready for Some Turbo-powered Perfor…](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1850460852985969) |
 | 84 | 神力科莎 | 🟢 | `quiet` | `14923034` | 2024-07-03T20:16:12Z | — | [Assetto Corsa EVO is OUT NOW in Steam E…](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1789039014339855) |
 | 85 | BeamNG.drive | 🟡 | `recent-update` | `26758896` | 2026-11-19T09:04:14Z | — | [Hotfixes for v0.40 Released](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1847286114029423) |
 | 86 | 女神异闻录 5 皇家版 | 🟢 | `quiet` | `15515071` | 2024-09-06T00:09:16Z | 2024-09-13 | [Persona Anime Broadcast Sale](https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1840310314352081) |
